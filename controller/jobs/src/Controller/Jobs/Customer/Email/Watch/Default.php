@@ -192,7 +192,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 
 				if( isset( $config['stock'] ) && $config['stock'] == 1 ||
 					isset( $config['price'] ) && $config['price'] == 1 &&
-					$price !== false && $config['price-value'] > $price->getValue()
+					$price !== false && $config['pricevalue'] > $price->getValue()
 				) {
 					$result[$id] = $products[$refId];
 				}

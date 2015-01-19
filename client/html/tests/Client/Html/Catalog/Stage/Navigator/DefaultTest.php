@@ -40,7 +40,7 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends MW_Unittest_Testca
 	public function testGetHeader()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-pos' => 1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -56,7 +56,7 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends MW_Unittest_Testca
 	public function testGetBody()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-pos' => 1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -73,7 +73,7 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends MW_Unittest_Testca
 	public function testModifyHeader()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-pos' => 1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
@@ -86,7 +86,7 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends MW_Unittest_Testca
 	public function testModifyBody()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-pos' => 1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';

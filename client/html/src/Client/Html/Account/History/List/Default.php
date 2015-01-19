@@ -67,7 +67,7 @@ class Client_Html_Account_History_List_Default
 	{
 		$view = $this->getView();
 
-		if( $view->param( 'h-action', 'list' ) != 'list' ) {
+		if( $view->param( 'his_action', 'list' ) != 'list' ) {
 			return '';
 		}
 
@@ -118,7 +118,7 @@ class Client_Html_Account_History_List_Default
 	{
 		$view = $this->getView();
 
-		if( $view->param( 'h-action', 'list' ) != 'list' ) {
+		if( $view->param( 'his_action', 'list' ) != 'list' ) {
 			return '';
 		}
 

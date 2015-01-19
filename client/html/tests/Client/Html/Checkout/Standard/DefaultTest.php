@@ -51,7 +51,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'payment';
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c-step' => 'address' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c_step' => 'address' ) );
 		$view->addHelper( 'param', $helper );
 
 		$this->_object->setView( $view );

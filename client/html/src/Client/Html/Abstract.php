@@ -359,7 +359,7 @@ abstract class Client_Html_Abstract
 
 		foreach( $params as $key => $value )
 		{
-			if( in_array( $key[0], $prefixes ) && $key[1] === '-' ) {
+			if( in_array( $key[0], $prefixes ) && $key[1] === '_' ) {
 				$list[$key] = $value;
 			}
 		}

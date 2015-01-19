@@ -38,8 +38,8 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 		$this->_view = TestHelper::getView( 'unitperf' );
 
 		$param = array(
-			'f-catalog-id' => $catalogItem->getId(),
-			'd-product-id' => $productItem->getId()
+			'f_catid' => $catalogItem->getId(),
+			'd_prodid' => $productItem->getId()
 		);
 		$helper = new MW_View_Helper_Parameter_Default( $this->_view, $param );
 		$this->_view->addHelper( 'param', $helper );

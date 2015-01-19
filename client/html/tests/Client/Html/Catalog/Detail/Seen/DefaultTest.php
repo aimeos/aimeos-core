@@ -62,7 +62,7 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends MW_Unittest_Testcase
 	public function testProcess()
 	{
 		$view = $this->_object->getView();
-		$param = array( 'd-product-id' => $this->_getProductItem()->getId() );
+		$param = array( 'd_prodid' => $this->_getProductItem()->getId() );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );

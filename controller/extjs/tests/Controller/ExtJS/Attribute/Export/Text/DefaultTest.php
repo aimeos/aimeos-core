@@ -93,24 +93,23 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends MW_Unittest_Tes
 			throw new Exception( 'Unable to remove test export directory' );
 		}
 
-
 		$this->assertEquals( 'Language ID', $lines[0][0] );
 		$this->assertEquals( 'Text', $lines[0][6] );
 
-		$this->assertEquals( 'de', $lines[7][0] );
-		$this->assertEquals( 'color', $lines[7][1] );
-		$this->assertEquals( 'red', $lines[7][2] );
-		$this->assertEquals( 'default', $lines[7][3] );
-		$this->assertEquals( 'name', $lines[7][4] );
-		$this->assertEquals( '', $lines[7][6] );
+		$this->assertEquals( 'de', $lines[8][0] );
+		$this->assertEquals( 'color', $lines[8][1] );
+		$this->assertEquals( 'red', $lines[8][2] );
+		$this->assertEquals( 'default', $lines[8][3] );
+		$this->assertEquals( 'name', $lines[8][4] );
+		$this->assertEquals( '', $lines[8][6] );
 
 
-		$this->assertEquals( '', $lines[123][0] );
-		$this->assertEquals( 'width', $lines[123][1] );
-		$this->assertEquals( '29', $lines[123][2] );
-		$this->assertEquals( 'default', $lines[123][3] );
-		$this->assertEquals( 'name', $lines[123][4] );
-		$this->assertEquals( '29', $lines[123][6] );
+		$this->assertEquals( '', $lines[153][0] );
+		$this->assertEquals( 'width', $lines[153][1] );
+		$this->assertEquals( '29', $lines[153][2] );
+		$this->assertEquals( 'default', $lines[153][3] );
+		$this->assertEquals( 'name', $lines[153][4] );
+		$this->assertEquals( '29', $lines[153][6] );
 	}
 
 

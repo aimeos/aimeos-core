@@ -6,7 +6,7 @@
  */
 
 $enc = $this->encoder();
-$prodid = $this->param( 'd-product-id' );
+$prodid = $this->param( 'd_prodid' );
 $params = $this->get( 'actionsParams', array() );
 $login = ( $this->get( 'actionsUserId', '' ) ? 0 : 1 );
 
@@ -46,9 +46,9 @@ $favConfig = $this->config( 'client/html/account/favorite/url/config', array() )
 $list = $this->config( 'client/html/catalog/detail/actions/list', array( 'pin', 'watch', 'favorite' ) );
 
 $urls = array(
-	'pin' => $this->url( $pinTarget, $pinController, $pinAction, array( 'pin-action' => 'add', 'pin-id' => $prodid ) + $params, $pinConfig ),
-	'watch' => $this->url( $watchTarget, $watchController, $watchAction, array( 'watch-action' => 'add', 'watch-id' => $prodid ) + $params, $watchConfig ),
-	'favorite' => $this->url( $favTarget, $favController, $favAction, array( 'fav-action' => 'add', 'fav-id' => $prodid ) + $params, $favConfig ),
+	'pin' => $this->url( $pinTarget, $pinController, $pinAction, array( 'pin_action' => 'add', 'pin_id' => $prodid ) + $params, $pinConfig ),
+	'watch' => $this->url( $watchTarget, $watchController, $watchAction, array( 'wat_action' => 'add', 'wat_id' => $prodid ) + $params, $watchConfig ),
+	'favorite' => $this->url( $favTarget, $favController, $favAction, array( 'fav_action' => 'add', 'fav_id' => $prodid ) + $params, $favConfig ),
 );
 
 ?>

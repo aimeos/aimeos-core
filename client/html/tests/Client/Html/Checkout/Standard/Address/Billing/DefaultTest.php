@@ -85,8 +85,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-billing-option' => 'null',
-			'ca-billing' => array(
+			'ca_billingoption' => 'null',
+			'ca_billing' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -114,8 +114,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-billing-option' => 'null',
-			'ca-billing' => array(
+			'ca_billingoption' => 'null',
+			'ca_billing' => array(
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
 				'order.base.address.address1' => 'mystreet 1',
@@ -150,8 +150,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-billing-option' => 'null',
-			'ca-billing' => array(
+			'ca_billingoption' => 'null',
+			'ca_billing' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -184,8 +184,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view->addHelper( 'config', $helper );
 
 		$param = array(
-			'ca-billing-option' => 'null',
-			'ca-billing' => array(
+			'ca_billingoption' => 'null',
+			'ca_billing' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -231,7 +231,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-billing-option' => $customer->getId() );
+		$param = array( 'ca_billingoption' => $customer->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -249,7 +249,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-billing-option' => -1 );
+		$param = array( 'ca_billingoption' => -1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 

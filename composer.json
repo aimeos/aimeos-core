@@ -27,7 +27,8 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*"
+		"ext-zip": "*",
+		"aimeos/extinstaller": "dev-master"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",

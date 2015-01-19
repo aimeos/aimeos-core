@@ -120,7 +120,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		if( ( $url = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $this->content( $url ); ?>" />
 <?php		endif; ?>
-<?php		$params = array( 'd-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '_', strip_tags( $product->getName() ) ) ); ?>
+<?php		$params = array( 'd_prodid' => $product->getProductId(), 'd_name' => $enc->url( $product->getName( 'url' ) ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
@@ -139,7 +139,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php			foreach( $attributes as $attribute ) : ?>
 							<li class="attr-item">
 <?php					if( $modify ) : ?>
-<?php						$params = array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ); ?>
+<?php						$params = array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity(), 'b_attrconfcode' => $attribute->getCode() ); ?>
 								<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params, array(), $basketConfig ) ); ?>">
 <?php					endif; ?>
 									<span class="sign">−</span>
@@ -157,13 +157,13 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="quantity">
 <?php		if( $modify && ( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) == 0 ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams, array(), $basketConfig ) ); ?>">−</a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() - 1 ) + $backParams, array(), $basketConfig ) ); ?>">−</a>
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
-						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
-						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams, array(), $basketConfig ) ); ?>">+</a>
+						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
+						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() + 1 ) + $backParams, array(), $basketConfig ) ); ?>">+</a>
 <?php		else : ?>	
 <?php 			echo $enc->html( $product->getQuantity() ); ?>
 <?php		endif; ?>
@@ -172,7 +172,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ) ); ?></td>
 <?php		if( $modify && ( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) == 0 ) : ?>
 					<td class="action">
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'delete', 'b_position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 <?php		endif; ?>
 				</tr>

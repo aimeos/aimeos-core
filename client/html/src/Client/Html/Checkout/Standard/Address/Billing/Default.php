@@ -188,7 +188,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		try
 		{
 			// only start if there's something to do
-			if( $view->param( 'ca-billing-option', null ) === null ) {
+			if( $view->param( 'ca_billingoption', null ) === null ) {
 				return;
 			}
 
@@ -215,9 +215,9 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$disable = $view->config( 'client/html/common/address/billing/disable-new', false );
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
 
-			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' && $disable === false ) // new address
+			if( ( $option = $view->param( 'ca_billingoption', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
-				$params = $view->param( 'ca-billing', array() );
+				$params = $view->param( 'ca_billing', array() );
 				$invalid = $this->_checkFields( $params );
 
 				if( count( $invalid ) > 0 )
@@ -247,7 +247,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 				$invalid = array();
 				$addr = $item->getPaymentAddress();
-				$params = $view->param( 'ca-billing-' . $option, array() );
+				$params = $view->param( 'ca_billing_' . $option, array() );
 
 				if( !empty( $params ) )
 				{

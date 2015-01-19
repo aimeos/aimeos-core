@@ -169,11 +169,11 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_Default
 		$view = $this->getView();
 
 		// only start if there's something to do
-		if( ( $option = $view->param( 'cs-option-terms', null ) ) === null ) {
+		if( ( $option = $view->param( 'cs_option_terms', null ) ) === null ) {
 			return;
 		}
 
-		if( ( $option = $view->param( 'cs-option-terms-value', 0 ) ) != 1 )
+		if( ( $option = $view->param( 'cs_option_terms_value', 0 ) ) != 1 )
 		{
 			$view->standardStepActive = 'summary';
 			$view->termsError = true;

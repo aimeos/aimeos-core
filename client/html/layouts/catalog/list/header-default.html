@@ -18,7 +18,7 @@ $catItems = $this->get( 'listCatPath', array() );
 <?php	foreach( $catItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
 <meta name="description" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
 <?php	endforeach; ?>
-<?php elseif( ( $search = $this->param( 'f-search-text', null ) ) != null ) : /// Product search hint with user provided search string (%1$s) ?>
+<?php elseif( ( $search = $this->param( 'f_search', null ) ) != null ) : /// Product search hint with user provided search string (%1$s) ?>
 <title><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Result for "%1$s"' ), strip_tags( $search ) ) ); ?></title>
 <?php endif; ?>
 <meta name="application-name" content="Arcavias" />

@@ -27,7 +27,7 @@ catch( Exception $e )
 	}
 }
 
-$serviceOption = $this->param( 'c-delivery-option', $orderServiceId );
+$serviceOption = $this->param( 'c_deliveryoption', $orderServiceId );
 
 $deliveryCss = array();
 foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
@@ -43,9 +43,9 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Please choose your delivery method' ), $enc::TRUST ); ?></p>
 	<form method="POST" action="<?php echo $enc->attr( $this->get( 'standardUrlNext' ) ); ?>">
 <?php foreach( $services as $id => $service ) : ?>
-		<div id="c-delivery-<?php echo $enc->attr( $id ); ?>" class="item item-service">
-			<label class="description" for="c-delivery-option-<?php echo $enc->attr( $id ); ?>">
-				<input class="option" type="radio" id="c-delivery-option-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c-delivery-option' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
+		<div id="c_delivery-<?php echo $enc->attr( $id ); ?>" class="item item-service">
+			<label class="description" for="c_deliveryoption-<?php echo $enc->attr( $id ); ?>">
+				<input class="option" type="radio" id="c_deliveryoption-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_deliveryoption' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 <?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
 <?php		if( $servicePrices[$id]->getValue() > 0 ) : /// Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s) ?>
@@ -73,9 +73,9 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 				<li class="form-item <?php echo $enc->attr( $key ) . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="delivery-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $key ) ); ?></label>
 <?php			switch( $attribute->getType() ) : case 'string':
-					?><input type="text" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c-delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c-delivery/' . $id . '/' . $key, $value ) ); ?>" />
+					?><input type="text" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" />
 <?php				break; case 'select':
-					?><select id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c-delivery', $id, $key ) ) ); ?>">
+					?><select id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
 						<option value="<?php echo $enc->attr( $option ); ?>"><?php $code = $key . ':' . $option; echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></option>
 <?php					endforeach; ?>

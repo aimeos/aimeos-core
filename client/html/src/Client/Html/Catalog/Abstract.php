@@ -29,15 +29,11 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _addAttributeFilterByParam( array $params, MW_Common_Criteria_Interface $filter )
 	{
-		$attrids = ( isset( $params['f-attr-id'] ) ? $params['f-attr-id'] : array() );
-
-		if( is_string( $attrids ) && $attrids !== '' ) {
-			$attrids = explode( ' ', $attrids );
-		}
+		$attrids = ( isset( $params['f_attrid'] ) ? (array) $params['f_attrid'] : array() );
 
 		if( !empty( $attrids ) )
 		{
-			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
+			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array_keys( $attrids ) );
 			$expr = array(
 				$filter->getConditions(),
 				$filter->compare( '==', $func, count( $attrids ) ),
@@ -90,8 +86,8 @@ abstract class Client_Html_Catalog_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
-		$text = ( isset( $params['f-search-text'] ) ? (string) $params['f-search-text'] : '' );
-		$catid = ( isset( $params['f-catalog-id'] ) ? (string) $params['f-catalog-id'] : '' );
+		$text = ( isset( $params['f_search'] ) ? (string) $params['f_search'] : '' );
+		$catid = ( isset( $params['f_catid'] ) ? (string) $params['f_catid'] : '' );
 
 		if( $catid == '' && $catfilter === true )
 		{
@@ -207,7 +203,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListPageByParam( array $params )
 	{
-		return ( isset( $params['l-page'] ) && $params['l-page'] > 0 ? (int) $params['l-page'] : 1 );
+		return ( isset( $params['l_page'] ) && $params['l_page'] > 0 ? (int) $params['l_page'] : 1 );
 	}
 
 
@@ -242,7 +238,7 @@ abstract class Client_Html_Catalog_Abstract
 		 *
 		 * The value must be an integer number from 1 to 100. Negative values as
 		 * well as values above 100 are not allowed. The value can be overwritten
-		 * per request if the "l-size" parameter is part of the URL.
+		 * per request if the "l_size" parameter is part of the URL.
 		 *
 		 * @param integer Number of products
 		 * @since 2014.03
@@ -253,7 +249,7 @@ abstract class Client_Html_Catalog_Abstract
 		 */
 		$defaultSize = $this->_getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
 
-		$size = ( isset( $params['l-size'] ) ? (int) $params['l-size'] : $defaultSize );
+		$size = ( isset( $params['l_size'] ) ? (int) $params['l_size'] : $defaultSize );
 		return ( $size < 1 || $size > 100 ? $defaultSize : $size );
 	}
 
@@ -279,7 +275,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListSortByParam( array $params, &$sortdir )
 	{
-		$sortation = ( isset( $params['f-sort'] ) ? (string) $params['f-sort'] : 'relevance' );
+		$sortation = ( isset( $params['f_sort'] ) ? (string) $params['f_sort'] : 'relevance' );
 
 		$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
 		$sort = ltrim( $sortation, '-' );

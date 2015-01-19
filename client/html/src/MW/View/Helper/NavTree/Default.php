@@ -65,8 +65,8 @@ class MW_View_Helper_NavTree_Default
 		$class .= ( isset( $path[ $item->getId() ] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
 
-		$params['a-name'] = str_replace( ' ', '_', $item->getName() );
-		$params['f-catalog-id'] = $id;
+		$params['f_name'] = $enc->url( $item->getName( 'url' ) );
+		$params['f_catid'] = $id;
 
 		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
 

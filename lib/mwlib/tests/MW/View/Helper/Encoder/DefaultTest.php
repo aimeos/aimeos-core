@@ -115,4 +115,28 @@ class MW_View_Helper_Encoder_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 'a ]]&gt;&lt;b&gt;text&lt;/b&gt;', $enc->xml( 'a ]]><b>text</b>' ) );
 	}
+
+
+	public function testTransformUrl()
+	{
+		$enc = $this->_object->transform();
+
+		$this->assertEquals( '__-', $enc->url( ' _-' ) );
+	}
+
+
+	public function testTransformUrlSpecial()
+	{
+		$enc = $this->_object->transform();
+
+		$this->assertEquals( '%5C%27%22%3B%23%2B%7E%2A%24%25%2F%28%29%3D%3F%26', $enc->url( '\\\'";#+~*$%/()=?&' ) );
+	}
+
+
+	public function testTransformUrlHtml()
+	{
+		$enc = $this->_object->transform();
+
+		$this->assertEquals( 'test', $enc->url( '<p>test</p>' ) );
+	}
 }

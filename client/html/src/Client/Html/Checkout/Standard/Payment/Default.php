@@ -190,11 +190,11 @@ class Client_Html_Checkout_Standard_Payment_Default
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			// only start if there's something to do
-			if( ( $serviceId = $view->param( 'c-payment-option', null ) ) !== null )
+			if( ( $serviceId = $view->param( 'c_paymentoption', null ) ) !== null )
 			{
 				$serviceCtrl = Controller_Frontend_Factory::createController( $context, 'service' );
 
-				$attributes = $view->param( 'c-payment/' . $serviceId, array() );
+				$attributes = $view->param( 'c_payment/' . $serviceId, array() );
 				$errors = $serviceCtrl->checkServiceAttributes( 'payment', $serviceId, $attributes );
 
 				foreach( $errors as $key => $msg )

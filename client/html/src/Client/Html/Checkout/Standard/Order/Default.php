@@ -209,7 +209,7 @@ class Client_Html_Checkout_Standard_Order_Default
 		try
 		{
 			// only start if there's something to do
-			if( ( $option = $view->param( 'cs-order', null ) ) === null
+			if( ( $option = $view->param( 'cs_order', null ) ) === null
 				|| $view->get( 'standardStepActive' ) !== null
 			) {
 				return;

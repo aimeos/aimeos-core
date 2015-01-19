@@ -21,7 +21,7 @@ $params = $this->get( 'stageParams', array() );
 		<ol>
 <?php if( isset( $this->stageCatPath ) ) : ?>
 <?php	foreach( (array) $this->stageCatPath as $cat ) : ?>
-<?php		$params['f-catalog-id'] = $cat->getId(); ?>
+<?php		$params['f_catid'] = $cat->getId(); ?>
 			<li><a href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params, array( $cat->getName() ), $listConfig ) ); ?>"><?php echo $enc->html( $cat->getName() ); ?></a></li>
 <?php	endforeach; ?>
 <?php else : ?>

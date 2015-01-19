@@ -80,8 +80,8 @@ class Client_Html_Account_Watch_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'watch-action' => 'add',
-			'watch-id' => 321,
+			'wat_action' => 'add',
+			'wat_id' => 321,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -122,8 +122,8 @@ class Client_Html_Account_Watch_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'watch-action' => 'edit',
-			'watch-id' => 321,
+			'wat_action' => 'edit',
+			'wat_id' => 321,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -168,8 +168,8 @@ class Client_Html_Account_Watch_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'watch-action' => 'delete',
-			'watch-id' => 321,
+			'wat_action' => 'delete',
+			'wat_id' => 321,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
