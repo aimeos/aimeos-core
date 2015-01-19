@@ -106,7 +106,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 <?php	if( ( $image = reset( $media ) ) !== false && ( $url = $image->getUrl() ) != '' ) : ?>
 		<img src="<?php echo $this->content( $url ); ?>" />
 <?php	endif; ?>
-<?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => str_replace( ' ', '_', strip_tags( $product->getName() ) ) ); ?>
+<?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => $enc->url( $product->getName( 'url' ) ) ); ?>
 		<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php	echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 		</a>

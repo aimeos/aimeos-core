@@ -23,7 +23,7 @@ $position = $this->get( 'itemPosition', 0 );
 <div class="catalog-list-items">
 	<ul class="list-items"><!--
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
-<?php	$params = array( 'd_name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd_prodid' => $id, 'l_pos' => $position++ ); ?>
+<?php	$params = array( 'd_name' => $enc->url( $productItem->getName( 'url' ) ), 'd_prodid' => $id, 'l_pos' => $position++ ); ?>
 	--><li class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">

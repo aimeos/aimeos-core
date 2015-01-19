@@ -131,21 +131,10 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetBodySearchAttributeList()
+	public function testGetBodySearchAttribute()
 	{
 		$view = $this->_object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => array( -1, -2 ) ) );
-		$view->addHelper( 'param', $helper );
-
-		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
-	}
-
-
-	public function testGetBodySearchAttributeString()
-	{
-		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => '-1 -2' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();

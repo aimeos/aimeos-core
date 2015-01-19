@@ -29,15 +29,11 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _addAttributeFilterByParam( array $params, MW_Common_Criteria_Interface $filter )
 	{
-		$attrids = ( isset( $params['f_attrid'] ) ? $params['f_attrid'] : array() );
-
-		if( is_string( $attrids ) && $attrids !== '' ) {
-			$attrids = explode( ' ', $attrids );
-		}
+		$attrids = ( isset( $params['f_attrid'] ) ? (array) $params['f_attrid'] : array() );
 
 		if( !empty( $attrids ) )
 		{
-			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
+			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array_keys( $attrids ) );
 			$expr = array(
 				$filter->getConditions(),
 				$filter->compare( '==', $func, count( $attrids ) ),

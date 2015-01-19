@@ -225,6 +225,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 
 				if( ( $count = count( $products ) ) > 1 )
 				{
+					$enc = $this->_view->encoder();
 					$listPos = array_search( $pid, array_keys( $products ) );
 
 					$target = $view->config( 'client/html/catalog/detail/url/target' );
@@ -236,7 +237,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					{
 						$param = array(
 							'd_prodid' => $product->getId(),
-							'd_name' => $product->getName(),
+							'd_name' => $enc->url( $product->getName( 'url ') ),
 							'l_pos' => $pos - 1
 						);
 						$view->navigationPrev = $view->url( $target, $controller, $action, $param, array(), $config );
@@ -246,7 +247,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					{
 						$param = array(
 							'd_prodid' => $product->getId(),
-							'd_name' => $product->getName(),
+							'd_name' => $enc->url( $product->getName( 'url' ) ),
 							'l_pos' => $pos + 1
 						);
 						$view->navigationNext = $view->url( $target, $controller, $action, $param, array(), $config );

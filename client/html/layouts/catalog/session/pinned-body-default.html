@@ -115,7 +115,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 	</h2>
 	<ul class="pinned-items"> 
 <?php foreach( $pinList as $id => $productItem ) : ?>
-<?php	$params = array( 'd_name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd_prodid' => $id ); ?>
+<?php	$params = array( 'd_name' => $enc->url( $productItem->getName( 'url' ) ), 'd_prodid' => $id ); ?>
 		<li class="pinned-item">
 			<a class="modify" href="<?php echo $this->url( $pinTarget, $pinController, $pinAction, array( 'pin_action' => 'delete', 'pin_id' => $id ) + $pinParams, array(), $pinConfig ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">

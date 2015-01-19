@@ -5,6 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
@@ -48,7 +50,7 @@ $vatFormat = $this->translate( 'client/html', 'Incl. %1$s%% VAT' );
 <?php		if( $price->getTaxrate() > 0 ) { echo ', ' . strip_tags( sprintf( $vatFormat, $this->number( $price->getTaxrate() ) ) ); } ?>
 <?php	endif; ?>
 
-<?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => str_replace( ' ', '_', strip_tags( $product->getName() ) ) ); ?>
+<?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => $enc->url( $product->getName( 'url' ) ) ); ?>
 <?php	echo $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ); ?>
 
 <?php endforeach; ?>
