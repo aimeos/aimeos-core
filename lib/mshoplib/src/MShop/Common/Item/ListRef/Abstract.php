@@ -156,13 +156,13 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 
 
 	/**
-	 * Returns the localized name of the item or the internal label if no name is available.
+	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
-	 * @return string Name or label of the item
+	 * @return string Specified text type or label of the item
 	 */
-	public function getName()
+	public function getName( $type = 'name' )
 	{
-		$items = $this->getRefItems( 'text', 'name' );
+		$items = $this->getRefItems( 'text', $type );
 
 		if ( ( $item = reset( $items ) ) !== false ) {
 			return $item->getContent();
