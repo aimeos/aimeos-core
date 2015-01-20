@@ -389,7 +389,6 @@ class MShop_Customer_Manager_Address_Default
 	}
 
 
-
 	/**
 	 * Returns the config path for retrieving the configuration values.
 	 *
