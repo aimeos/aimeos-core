@@ -48,6 +48,9 @@ class MW_Container_Content_Gzip
 		if( ( $this->_fh = @gzopen( $resource, 'rb' . $level ) ) === false
 			&& ( $this->_fh = gzopen( $resource, 'wb' ) ) === false
 		) {
+echo 'file: ' . $resource . "\n";
+echo 'is file: ' . ( is_file($resource) ? 'yes' : 'no' ) . "\n";
+echo 'perms: ' . sprintf('%o', fileperms($resource)) . "\n";
 			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
