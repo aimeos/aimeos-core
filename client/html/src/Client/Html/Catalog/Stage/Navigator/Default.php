@@ -225,7 +225,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 
 				if( ( $count = count( $products ) ) > 1 )
 				{
-					$enc = $this->_view->encoder();
+					$enc = $view->encoder();
 					$listPos = array_search( $pid, array_keys( $products ) );
 
 					$target = $view->config( 'client/html/catalog/detail/url/target' );

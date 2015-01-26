@@ -147,6 +147,20 @@ return array(
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
+					array(
+						'label' => 'Demo url/de: Schwarz',
+						'content' => 'Schwarz',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Black',
+						'content' => 'Black',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
 				),
 				'media' => array(
 					array(
@@ -176,6 +190,20 @@ return array(
 						'label' => 'Demo name/en: Small print',
 						'content' => 'Small print',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Kleiner Aufdruck',
+						'content' => 'Kleiner_Aufdruck',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Small print',
+						'content' => 'small_print',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -214,6 +242,20 @@ return array(
 						'label' => 'Demo name/en: Large print',
 						'content' => 'Large print',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Grosser Aufdruck',
+						'content' => 'Grosser_Aufdruck',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Large print',
+						'content' => 'large_print',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -272,6 +314,20 @@ return array(
 						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
+					array(
+						'label' => 'Demo url/de: Blau',
+						'content' => 'Blau',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Blue',
+						'content' => 'blue',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
 				),
 				'media' => array(
 					array(
@@ -296,6 +352,18 @@ return array(
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
+					array(
+						'label' => 'Demo url: Width 32', 'content' => 'Weite_32',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Width 32', 'content' => 'width_32',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
 				),
 			),
 			array(
@@ -307,6 +375,18 @@ return array(
 					array(
 						'label' => 'Demo name: Length 34', 'content' => '34',
 						'type' => 'name', 'languageid' => null, 'status' => 1,
+						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Length 34', 'content' => 'Länge_34',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Length 34', 'content' => 'length_34',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -328,16 +408,26 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Beige',
-						'content' => 'Beige',
+						'label' => 'Demo name/de: Beige', 'content' => 'Beige',
 						'type' => 'name', 'languageid' => 'de', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 					array(
-						'label' => 'Demo name/en: Beige',
-						'content' => 'Beige',
+						'label' => 'Demo name/en: Beige', 'content' => 'Beige',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Beige', 'content' => 'Beige',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Beige', 'content' => 'beige',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -365,6 +455,18 @@ return array(
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
+					array(
+						'label' => 'Demo url: Width 33', 'content' => 'Weite_33',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Width 33', 'content' => 'width_33',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
 				),
 			),
 			array(
@@ -376,6 +478,18 @@ return array(
 					array(
 						'label' => 'Demo name: Length 36', 'content' => '36',
 						'type' => 'name', 'languageid' => null, 'status' => 1,
+						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Length 36', 'content' => 'Länge_36',
+						'type' => 'url', 'languageid' => null, 'status' => 1,
+						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url: Length 36', 'content' => 'length_36',
+						'type' => 'url', 'languageid' => null, 'status' => 1,
 						'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -394,6 +508,13 @@ return array(
 				'label' => 'Demo name/de: Demoartikel mit Auswahl',
 				'content' => 'Demoartikel mit Auswahl',
 				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo url/de: Demoartikel mit Auswahl',
+				'content' => 'Demoartikel_mit_Auswahl',
+				'type' => 'url', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -525,6 +646,20 @@ return array(
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
+					array(
+						'label' => 'Demo url/de: Kleines Etikett',
+						'content' => 'Kleines_Etikett',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Small sticker',
+						'content' => 'small_sticker',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
 				),
 				'price' => array(
 					array(
@@ -560,6 +695,20 @@ return array(
 						'label' => 'Demo name/en: Large sticker',
 						'content' => 'Large sticker',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Grosses Etikett',
+						'content' => 'Grosses_Etikett',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Large sticker',
+						'content' => 'large_sticker',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
@@ -615,6 +764,13 @@ return array(
 				'label' => 'Demo name/de: Demoartikel mit Bundle',
 				'content' => 'Demoartikel mit Bundle',
 				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo url/de: Demoartikel mit Bundle',
+				'content' => 'Demoartikel_mit_Bundle',
+				'type' => 'url', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),

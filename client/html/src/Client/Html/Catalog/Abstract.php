@@ -33,7 +33,7 @@ abstract class Client_Html_Catalog_Abstract
 
 		if( !empty( $attrids ) )
 		{
-			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array_keys( $attrids ) );
+			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( array_keys( $attrids ) ) );
 			$expr = array(
 				$filter->getConditions(),
 				$filter->compare( '==', $func, count( $attrids ) ),

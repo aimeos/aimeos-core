@@ -721,6 +721,34 @@ abstract class MShop_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the site coditions for the search request
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string[] Sorted list of criteria keys
+	 * @param array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 * @param array $siteIds List of site IDs that should be used for searching
+	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Interface
+	 * @since 2015.01
+	 */
+	protected function _getSearchSiteConditions( MW_Common_Criteria_Interface $search, array $keys, array $attributes, array $siteIds )
+	{
+		$cond = array();
+		$sep = $this->_getKeySeparator();
+
+		foreach( $keys as $key )
+		{
+			$name = $key . $sep . 'siteid';
+
+			if( isset( $attributes[$name] ) ) {
+				$cond[] = $search->compare( '==', $name, $siteIds );
+			}
+		}
+
+		return $cond;
+	}
+
+
+	/**
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
 	 * @param MW_DB_Connection_Interface $conn Database connection
@@ -751,13 +779,9 @@ abstract class MShop_Common_Manager_Abstract
 			if( $key !== $basekey ) {
 				$joins = array_merge( $joins, $this->_getJoins( $attributes, $key ) );
 			}
-
-			$name = $key . $sep . 'siteid';
-
-			if( isset( $attributes[$name] ) ) {
-				$cond[] = $search->compare( '==', $name, $siteIds );
-			}
 		}
+
+		$cond = $this->_getSearchSiteConditions( $search, $keys, $attributes, $siteIds );
 
 		if( $conditions !== null ) {
 			$cond[] = $conditions;

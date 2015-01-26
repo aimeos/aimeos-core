@@ -28,7 +28,7 @@
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
 		"ext-zip": "*",
-		"aimeos/extinstaller": "dev-master"
+		"aimeos/aimeos-extinstaller": "dev-master"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",
