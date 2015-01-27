@@ -52,10 +52,10 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 		$this->_export( $container );
 
-		foreach( $container as $content ) {
+/*		foreach( $container as $content ) {
 			$files[] = $content->getResource();
 		}
-
+*/
 		$this->_createSitemapIndex( $container, $files );
 
 		$container->close();
