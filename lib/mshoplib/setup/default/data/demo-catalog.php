@@ -15,6 +15,12 @@ return array(
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 		array(
+			'label' => 'Demo url/de: Start', 'content' => 'Start',
+			'type' => 'url', 'languageid' => 'de', 'status' => 1,
+			'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
+		),
+		array(
 			'label' => 'Demo short/de: Dies ist der Kurztext',
 			'content' => 'Dies ist der Kurztext für die Hauptkategorie ihres neuen Webshops.',
 			'type' => 'short', 'languageid' => 'de', 'status' => 1,

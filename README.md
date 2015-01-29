@@ -5,6 +5,8 @@
 [![Total Downloads](https://poser.pugx.org/arcavias/arcavias-core/downloads.svg)](https://packagist.org/packages/arcavias/arcavias-core)
 [![License](https://poser.pugx.org/arcavias/arcavias-core/license.svg)](https://packagist.org/packages/arcavias/arcavias-core)
 
+[![Aimeos demo](http://aimeos.org/fileadmin/user_upload/demo.jpg)](http://demo.aimeos.org/)
+
 ## What is Arcavias core?
 
 Arcavias is an open source e-commerce framework for web shops consisting of the e-commerce library, the administration interface and different front-ends. It's a modular stack that offers an unmatched combination of flexibility and speed.
