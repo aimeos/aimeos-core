@@ -33,7 +33,7 @@ abstract class MShop_Customer_Manager_Abstract
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-customer' );
 
-		/** mshop/customer/manager/default/salt
+		/** mshop/customer/manager/salt
 		 * Password salt for all customer passwords of the installation
 		 *
 		 * The default password salt is used if no user-specific salt can be
@@ -45,41 +45,10 @@ abstract class MShop_Customer_Manager_Abstract
 		 * @since 2014.03
 		 * @category Developer
 		 * @category User
-		 * @see mshop/customer/manager/default/password-helper
+		 * @see mshop/customer/manager/password/name
+		 * @sse mshop/customer/manager/password/options
 		 */
-		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/default/salt', 'mshop' );
-
-		/** mshop/customer/manager/default/password/name
-		 * Last part of the name for building the password helper item
-		 *
-		 * The password helper encode given passwords and salts using the
-		 * implemented hashing method in the required format. String format and
-		 * hash algorithm needs to be the same when comparing the encoded
-		 * password to the one provided by the user after login.
-		 *
-		 * @param string Name of the password helper implementation
-		 * @since 2015.01
-		 * @category Developer
-		 * @see mshop/customer/manager/default/salt
-		 */
-		$name = $context->getConfig()->get( 'mshop/customer/manager/default/password/name', 'Default' );
-
-		/** mshop/customer/manager/default/password/options
-		 * List of options used by the password helper classes
-		 *
-		 * Each hash method may need an arbitrary number of options specific
-		 * for the hash method. This may include the number of iterations the
-		 * method is applied or the separator between salt and password.
-		 *
-		 * @param string Associative list of key/value pairs
-		 * @since 2015.01
-		 * @category Developer
-		 * @see mshop/customer/manager/default/password/name
-		 */
-		$options = $context->getConfig()->get( 'mshop/customer/manager/default/password/options', array() );
-
-		$this->_helper = $this->_createPasswordHelper( $name, $options );
-
+		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/salt', 'mshop' );
 	}
 
 
@@ -140,22 +109,58 @@ abstract class MShop_Customer_Manager_Abstract
 			$this->_addressManager = $this->getSubManager( 'address' );
 		}
 
+		$helper = $this->_getPasswordHelper();
 		$address = $this->_addressManager->createItem();
 
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->_salt, $this->_helper );
+		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->_salt, $helper );
 	}
 
 
 	/**
-	 * Returns a password helper object for the given name.
+	 * Returns a password helper object based on the configuration.
 	 *
-	 * @param string $name Last part of the password helper class name
-	 * @param array Associative list of key/value pairs of options specific for the hashing method
 	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
 	 * @throws MShop_Exception If the name is invalid or the class isn't found
 	 */
-	protected function _createPasswordHelper( $name, $options )
+	protected function _getPasswordHelper()
 	{
+		if( $this->_helper ) {
+			return $this->_helper;
+		}
+
+		$config = $this->_getContext()->getConfig();
+
+		/** mshop/customer/manager/password/name
+		 * Last part of the name for building the password helper item
+		 *
+		 * The password helper encode given passwords and salts using the
+		 * implemented hashing method in the required format. String format and
+		 * hash algorithm needs to be the same when comparing the encoded
+		 * password to the one provided by the user after login.
+		 *
+		 * @param string Name of the password helper implementation
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/customer/manager/salt
+		 * @see mshop/customer/manager/password/options
+		 */
+		$name = $config->get( 'mshop/customer/manager/password/name', 'Default' );
+
+		/** mshop/customer/manager/password/options
+		 * List of options used by the password helper classes
+		 *
+		 * Each hash method may need an arbitrary number of options specific
+		 * for the hash method. This may include the number of iterations the
+		 * method is applied or the separator between salt and password.
+		 *
+		 * @param string Associative list of key/value pairs
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/customer/manager/password/name
+		 * @sse mshop/customer/manager/salt
+		 */
+		$options = $config->get( 'mshop/customer/manager/password/options', array() );
+
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'MShop_Common_Item_Helper_Password_' . $name : '<not a string>';
@@ -174,6 +179,8 @@ abstract class MShop_Customer_Manager_Abstract
 		if( !( $helper instanceof $iface ) ) {
 			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
+
+		$this->_helper = $helper;
 
 		return $helper;
 	}
