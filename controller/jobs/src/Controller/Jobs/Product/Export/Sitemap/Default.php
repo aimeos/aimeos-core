@@ -47,15 +47,9 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	 */
 	public function run()
 	{
-		$files = array();
 		$container = $this->_createContainer();
 
-		$this->_export( $container );
-
-/*		foreach( $container as $content ) {
-			$files[] = $content->getResource();
-		}
-*/
+		$files = $this->_export( $container );
 		$this->_createSitemapIndex( $container, $files );
 
 		$container->close();

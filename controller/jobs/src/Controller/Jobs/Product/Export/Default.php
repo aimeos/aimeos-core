@@ -62,7 +62,7 @@ class Controller_Jobs_Product_Export_Default
 	protected function _addItems( MW_Container_Content_Interface $content, array $items )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/default/template-items
 		 * Relative path to the XML items template of the product site map job controller.
 		 *
@@ -91,7 +91,7 @@ class Controller_Jobs_Product_Export_Default
 		$view = $this->_getContext()->getView();
 
 		$view->exportItems = $items;
-		
+
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 	}
 
@@ -104,7 +104,7 @@ class Controller_Jobs_Product_Export_Default
 	protected function _createContainer()
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/location
 		 * Directory where the generated site maps should be placed into
 		 *
@@ -122,7 +122,7 @@ class Controller_Jobs_Product_Export_Default
 		 * @see controller/jobs/product/export/max-query
 		 */
 		$location = $config->get( 'controller/jobs/product/export/location', sys_get_temp_dir() );
-	
+
 		/** controller/jobs/product/export/default/container/type
 		 * List of file container options for the export files
 		 *
@@ -188,7 +188,7 @@ class Controller_Jobs_Product_Export_Default
 	protected function _createContent( MW_Container_Interface $container, $filenum )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/default/template-header
 		 * Relative path to the XML site map header template of the product site map job controller.
 		 *
@@ -213,13 +213,13 @@ class Controller_Jobs_Product_Export_Default
 		 */
 		$tplconf = 'controller/jobs/product/export/default/template-header';
 		$default = 'product/export/items-header-default.xml';
-		
+
 		$view = $this->_getContext()->getView();
-		
+
 		$content = $container->create( $this->_getFilename( $filenum ) );
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 		$container->add( $content );
-	
+
 		return $content;
 	}
 
@@ -232,7 +232,7 @@ class Controller_Jobs_Product_Export_Default
 	protected function _closeContent( MW_Container_Content_Interface $content )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/default/template-footer
 		 * Relative path to the XML site map footer template of the product site map job controller.
 		 *
@@ -257,9 +257,9 @@ class Controller_Jobs_Product_Export_Default
 		 */
 		$tplconf = 'controller/jobs/product/export/default/template-footer';
 		$default = 'product/export/items-footer-default.xml';
-		
+
 		$view = $this->_getContext()->getView();
-		
+
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 	}
 
@@ -268,44 +268,49 @@ class Controller_Jobs_Product_Export_Default
 	 * Exports the products into the given container
 	 * 
 	 * @param MW_Container_Interface $container Container object
+	 * @return array List of content (file) names
 	 */
 	protected function _export( MW_Container_Interface $container )
 	{
 		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
-		
+
 		$domains = $this->_getConfig( 'domains', $default );
 		$maxItems = $this->_getConfig( 'max-items', 10000 );
 		$maxQuery = $this->_getConfig( 'max-query', 1000 );
-		
+
 		$start = 0; $filenum = 1;
-		$files = array();
-		
+		$names = array();
+
 		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
-		
+
 		$search = $productManager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$search->setSlice( 0, $maxQuery );
-		
+
 		$content = $this->_createContent( $container, $filenum );
-		
+		$names[] = $content->getResource();
+
 		do
 		{
 			$items = $productManager->searchItems( $search, $domains );
 			$this->_addItems( $content, $items );
-		
+
 			$count = count( $items );
 			$start += $count;
 			$search->setSlice( $start, $maxQuery );
-				
+
 			if( $start + $maxQuery > $maxItems * $filenum )
 			{
 				$this->_closeContent( $content );
 				$content = $this->_createContent( $container, ++$filenum );
+				$names[] = $content->getResource();
 			}
 		}
 		while( $count >= $search->getSliceSize() );
-		
+
 		$this->_closeContent( $content );
+
+		return $names;
 	}
 
 
