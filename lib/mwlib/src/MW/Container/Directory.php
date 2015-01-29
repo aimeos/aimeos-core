@@ -152,7 +152,7 @@ class MW_Container_Directory
 	 */
 	function valid()
 	{
-		if( $this->_resource->isDot() ) {
+		while( $this->_resource->isDot() ) {
 			$this->next();
 		}
 

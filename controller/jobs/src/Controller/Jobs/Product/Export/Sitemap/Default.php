@@ -47,15 +47,9 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	 */
 	public function run()
 	{
-		$files = array();
 		$container = $this->_createContainer();
 
-		$this->_export( $container );
-
-		foreach( $container as $content ) {
-			$files[] = $content->getResource();
-		}
-
+		$files = $this->_export( $container );
 		$this->_createSitemapIndex( $container, $files );
 
 		$container->close();
@@ -205,7 +199,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 	/**
 	 * Creates a new site map content object
-	 * 
+	 *
 	 * @param MW_Container_Interface $container Container object
 	 * @param integer $filenum New file number
 	 * @return MW_Container_Content_Interface New content object
@@ -251,7 +245,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 	/**
 	 * Closes the site map content object
-	 * 
+	 *
 	 * @param MW_Container_Content_Interface $content
 	 */
 	protected function _closeContent( MW_Container_Content_Interface $content )
@@ -291,7 +285,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 	/**
 	 * Adds the content for the site map index file
-	 * 
+	 *
 	 * @param MW_Container_Interface $container File container object
 	 * @param array $files List of generated site map file names
 	 */
@@ -335,7 +329,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 	/**
 	 * Returns the configuration value for the given name
-	 * 
+	 *
 	 * @param string $name One of "domain", "max-items" or "max-query"
 	 * @param mixed $default Default value if name is unknown
 	 * @return mixed Configuration value
@@ -400,7 +394,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 	/**
 	 * Returns the file name for the new content file
-	 * 
+	 *
 	 * @param integer $number Current file number
 	 * @return string New file name
 	 */
