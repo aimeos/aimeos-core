@@ -49,7 +49,7 @@ class MW_Container_Content_GzipTest extends MW_Unittest_Testcase
 		$file->add( 'test text' );
 		$file->close();
 
-		$expected = '1f8b08000000000000032';
+		$expected = '1f8b080000000000';
 		$actual = file_get_contents( $file->getResource() );
 
 		unlink( $file->getResource() );
