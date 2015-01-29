@@ -26,10 +26,7 @@ class MShop_Common_Item_Helper_Password_BcryptTest extends MW_Unittest_Testcase
 	{
 		$object = new MShop_Common_Item_Helper_Password_Bcrypt( array() );
 
-		$this->assertEquals(
-			'$2y$10$c2FsdF9zYWx0X3NhbHRfcuNJSf6HFyF2qPGZDWvEXBLuTtcAslWdq',
-			$object->encode( 'unittest', 'salt_salt_salt_salt_salt' )
-		);
+		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
 	}
 
 
@@ -37,10 +34,7 @@ class MShop_Common_Item_Helper_Password_BcryptTest extends MW_Unittest_Testcase
 	{
 		$object = new MShop_Common_Item_Helper_Password_Bcrypt( array( 'cost' => 5 ) );
 
-		$this->assertEquals(
-			'$2y$05$c2FsdF9zYWx0X3NhbHRfcuHzU2BI0BC7YakW47ir/Ddzn0/D/gNqS',
-			$object->encode( 'unittest', 'salt_salt_salt_salt_salt' )
-		);
+		$this->assertStringStartsWith( '$2y$05$', $object->encode( 'unittest' ) );
 	}
 
 

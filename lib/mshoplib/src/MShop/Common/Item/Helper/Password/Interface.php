@@ -26,7 +26,9 @@ interface MShop_Common_Item_Helper_Password_Interface
 	/**
 	 * Returns the hashed password.
 	 *
+	 * @param string $password Clear text password string
+	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt );
+	public function encode( $password, $salt = null );
 }

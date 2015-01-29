@@ -33,9 +33,11 @@ class MShop_Common_Item_Helper_Password_Default implements MShop_Common_Item_Hel
 	/**
 	 * Returns the hashed password.
 	 *
+	 * @param string $password Clear text password string
+	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt )
+	public function encode( $password, $salt = null )
 	{
 		$format = ( isset( $this->_options['format'] ) ? $this->_options['format'] : '%1$s%2$s' );
 
