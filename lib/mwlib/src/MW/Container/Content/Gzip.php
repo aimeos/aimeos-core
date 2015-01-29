@@ -44,9 +44,6 @@ class MW_Container_Content_Gzip
 		}
 
 		$level = $this->_getOption( 'gzip-level', 5 );
-echo 'file: ' . $resource . "\n";
-echo 'is file: ' . ( is_file($resource) ? 'yes' : 'no' ) . "\n";
-echo 'perms: ' . sprintf('%o', fileperms($resource)) . "\n";
 
 		if( ( $this->_fh = @gzopen( $resource, 'rb' . $level ) ) === false
 			&& ( $this->_fh = gzopen( $resource, 'wb' ) ) === false

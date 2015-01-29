@@ -4,8 +4,6 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
-echo 'short_open_tag:' . PHP_EOL;
-var_dump( ini_get('short_open_tag'));
 
 
 /**
