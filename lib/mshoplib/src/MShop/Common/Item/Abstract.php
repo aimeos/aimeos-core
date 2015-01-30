@@ -242,4 +242,15 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 			throw new MShop_Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
 		}
 	}
+
+
+	/**
+	 * Returns the raw value list.
+	 *
+	 * @return array Associative list of key/value pairs
+	 */
+	protected function _getRawValues()
+	{
+		return $this->_values;
+	}
 }

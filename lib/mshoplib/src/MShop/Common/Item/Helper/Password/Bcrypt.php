@@ -37,15 +37,13 @@ class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Help
 	/**
 	 * Returns the hashed password.
 	 *
+	 * @param string $password Clear text password string
+	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt )
+	public function encode( $password, $salt = null )
 	{
 		$options = $this->_options;
-
-		if( $salt !== null ) {
-			$options += array( 'salt' => $salt );
-		}
 
 		return password_hash( $password, PASSWORD_BCRYPT, $options );
 	}
