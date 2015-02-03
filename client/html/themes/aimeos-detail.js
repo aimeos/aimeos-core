@@ -115,11 +115,13 @@ AimeosCatalogDetail = {
 			zoomWindowOffetx: 10
 		};
 		
+		/* Difficult to scroll down on small mobile devices if image occupies the whole screen
 		if( item.offset().left + item.outerWidth() + options.zoomWindowWidth + options.zoomWindowOffetx > $(window).width() ) {
 			options.zoomType = 'inner';
 			options.cursor = 'crosshair';
 			options.zoomLevel = 1; // behaves strange on other levels
 		}
+		 */
 	
 		item.elevateZoom(options);
 	},
@@ -208,7 +210,7 @@ AimeosCatalogDetail = {
 				list.push( $(this).data("zoom-image") );
 			});
 			
-			$.fn.prettyPhoto({ allow_resize: true, social_tools: false });
+			$.fn.prettyPhoto({ allow_resize: false, social_tools: false });
 			$.prettyPhoto.open(list);
 		});
 	},

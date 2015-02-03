@@ -1451,10 +1451,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	text-transform: uppercase;
 	text-align: left;
 	font-weight: normal;
-	font-size: 1em;
-	line-height: 2em;
-	height: 2em;
-	padding: 0 1em;
+	padding: 0.5em 1em;
 	color: #555;
 }
 
