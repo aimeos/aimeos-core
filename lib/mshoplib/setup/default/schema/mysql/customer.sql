@@ -78,7 +78,7 @@ CONSTRAINT "unq_mscus_sid_code"
 	UNIQUE ("siteid", "code")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEY "idx_mscus_langid" ON "mshop_customer" ("langid");
+CREATE INDEX "idx_mscus_langid" ON "mshop_customer" ("langid");
 
 CREATE INDEX "idx_mscus_sid_st_ln_fn" ON "mshop_customer" ("siteid", "status", "lastname", "firstname");
 
@@ -88,13 +88,13 @@ CREATE INDEX "idx_mscus_sid_st_post_ci" ON "mshop_customer" ("siteid", "status",
 
 CREATE INDEX "idx_mscus_sid_lastname" ON "mshop_customer" ("siteid", "lastname");
 
-CREATE INDEX "idx_mscus_sid_lastname" ON "mshop_customer" ("siteid", "address1");
+CREATE INDEX "idx_mscus_sid_address1" ON "mshop_customer" ("siteid", "address1");
 
-CREATE INDEX "idx_mscus_sid_lastname" ON "mshop_customer" ("siteid", "city");
+CREATE INDEX "idx_mscus_sid_city" ON "mshop_customer" ("siteid", "city");
 
-CREATE INDEX "idx_mscus_sid_lastname" ON "mshop_customer" ("siteid", "postal");
+CREATE INDEX "idx_mscus_sid_postal" ON "mshop_customer" ("siteid", "postal");
 
-CREATE INDEX "idx_mscus_sid_lastname" ON "mshop_customer" ("siteid", "email");
+CREATE INDEX "idx_mscus_sid_email" ON "mshop_customer" ("siteid", "email");
 
 
 --
@@ -180,7 +180,7 @@ CREATE INDEX "idx_mscusad_sid_city" ON "mshop_customer_address" ("siteid", "city
 
 CREATE INDEX "idx_mscusad_sid_addr1" ON "mshop_customer_address" ("siteid", "address1");
 
-CREATE INDEX "idx_mscusad_sid_rid" ON "mshop_customer_address" ("siteid", "email");
+CREATE INDEX "idx_mscusad_sid_email" ON "mshop_customer_address" ("siteid", "email");
 
 
 --
