@@ -432,7 +432,7 @@ class Controller_ExtJS_Media_Default
 		$perms = $config->get( 'controller/extjs/media/default/upload/dirperms', 0775 );
 		$dir .= DIRECTORY_SEPARATOR . $relativeDir;
 
-		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false )
+		if( is_dir( $dir ) === false && @mkdir( $dir, $perms, true ) === false )
 		{
 			$msg = sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms );
 			throw new Controller_ExtJS_Exception( $msg );

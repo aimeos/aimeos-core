@@ -48,6 +48,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 	public function run()
 	{
 		$context = $this->_getContext();
+		$controller = Controller_Common_Order_Factory::createController( $context );
 		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
 		$manager = MShop_Factory::createManager( $context, 'order' );
 
@@ -66,7 +67,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 		 * @since 2014.07
 		 * @category User
 		 */
-		$days = $context->getConfig()->get( 'controller/jobs/order/cleanup/unpaid/keep-days', 30 );
+		$days = $context->getConfig()->get( 'controller/jobs/order/cleanup/unpaid/keep-days', 3 );
 		$limit = date( 'Y-m-d H:i:s', time() - 86400 * $days );
 
 		$search = $manager->createSearch();
@@ -83,7 +84,9 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 			$baseIds = array();
 			$items = $manager->searchItems( $search );
 
-			foreach( $items as $item ) {
+			foreach( $items as $item )
+			{
+				$controller->unblock( $item );
 				$baseIds[] = $item->getBaseId();
 			}
 
