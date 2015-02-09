@@ -60,6 +60,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 
 		$name = 'ControllerJobsOrderCleanupUnpaidDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'classes/controller/common/order/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
@@ -72,8 +73,14 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
+		$orderCntlStub = $this->getMockBuilder( 'Controller_Common_Order_Default' )
+		->setMethods( array( 'unblock' ) )
+		->setConstructorArgs( array( $context ) )
+		->getMock();
+
 
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		Controller_Common_Order_Factory::injectController( 'Controller_Common_Order_' . $name, $orderCntlStub );
 
 
 		$orderItem = $orderManagerStub->createItem();
@@ -88,6 +95,8 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 			->will( $this->returnValue( array( $orderItem->getId() => $orderItem ) ) );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'deleteItems' );
+
+		$orderCntlStub->expects( $this->once() )->method( 'unblock' );
 
 
 		$object = new Controller_Jobs_Order_Cleanup_Unpaid_Default( $context, $arcavias );
