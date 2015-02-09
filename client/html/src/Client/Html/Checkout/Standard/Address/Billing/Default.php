@@ -196,23 +196,26 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 
-			/** client/html/common/address/billing/disable-new
+			/** client/html/checkout/standard/address/billing/disable-new
 			 * Disables the option to enter a new billing address for an order
 			 *
 			 * Besides the main billing address, customers can usually enter a new
 			 * billing address as well. To suppress displaying the form fields for
 			 * a billing address, you can set this configuration option to "1".
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/billing/disable-new" starting from 2014-03.
+			 *
 			 * @param boolean A value of "1" to disable, "0" enables the billing address form
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/billing/salutations
-			 * @see client/html/common/address/billing/mandatory
-			 * @see client/html/common/address/billing/optional
-			 * @see client/html/common/address/billing/hidden
+			 * @see client/html/checkout/standard/address/billing/salutations
+			 * @see client/html/checkout/standard/address/billing/mandatory
+			 * @see client/html/checkout/standard/address/billing/optional
+			 * @see client/html/checkout/standard/address/billing/hidden
 			 */
-			$disable = $view->config( 'client/html/common/address/billing/disable-new', false );
+			$disable = $view->config( 'client/html/checkout/standard/address/billing/disable-new', false );
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
 
 			if( ( $option = $view->param( 'ca_billingoption', 'null' ) ) === 'null' && $disable === false ) // new address
@@ -293,7 +296,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	{
 		$view = $this->getView();
 
-		/** client/html/common/address/billing/mandatory
+		/** client/html/checkout/standard/address/billing/mandatory
 		 * List of billing address input fields that are required
 		 *
 		 * You can configure the list of billing address fields that are
@@ -317,20 +320,23 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * * order.base.address.email
 		 * * order.base.address.website
 		 *
+		 * Until 2015-02, the configuration option was available as
+		 * "client/html/common/address/billing/mandatory" starting from 2014-03.
+		 *
 		 * @param array List of field keys
-		 * @since 2014.03
+		 * @since 2015.02
 		 * @category User
 		 * @category Developer
-		 * @see client/html/common/address/billing/disable-new
-		 * @see client/html/common/address/billing/salutations
-		 * @see client/html/common/address/billing/optional
-		 * @see client/html/common/address/billing/hidden
-		 * @see client/html/common/address/countries
-		 * @see client/html/common/address/validate
+		 * @see client/html/checkout/standard/address/billing/disable-new
+		 * @see client/html/checkout/standard/address/billing/salutations
+		 * @see client/html/checkout/standard/address/billing/optional
+		 * @see client/html/checkout/standard/address/billing/hidden
+		 * @see client/html/checkout/standard/address/countries
+		 * @see client/html/checkout/standard/address/validate
 		 */
-		$mandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
+		$mandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
 
-		/** client/html/common/address/billing/optional
+		/** client/html/checkout/standard/address/billing/optional
 		 * List of billing address input fields that are optional
 		 *
 		 * You can configure the list of billing address fields that
@@ -354,20 +360,23 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * * order.base.address.email
 		 * * order.base.address.website
 		 *
+		 * Until 2015-02, the configuration option was available as
+		 * "client/html/common/address/billing/optional" starting from 2014-03.
+		 *
 		 * @param array List of field keys
-		 * @since 2014.03
+		 * @since 2015.02
 		 * @category User
 		 * @category Developer
-		 * @see client/html/common/address/billing/disable-new
-		 * @see client/html/common/address/billing/salutations
-		 * @see client/html/common/address/billing/mandatory
-		 * @see client/html/common/address/billing/hidden
-		 * @see client/html/common/address/countries
-		 * @see client/html/common/address/validate
+		 * @see client/html/checkout/standard/address/billing/disable-new
+		 * @see client/html/checkout/standard/address/billing/salutations
+		 * @see client/html/checkout/standard/address/billing/mandatory
+		 * @see client/html/checkout/standard/address/billing/hidden
+		 * @see client/html/checkout/standard/address/countries
+		 * @see client/html/checkout/standard/address/validate
 		 */
-		$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
+		$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
 
-		/** client/html/common/address/validate
+		/** client/html/checkout/standard/address/validate
 		 * List of regular expressions to validate the data of the address fields
 		 *
 		 * To validate the address input data of the customer, an individual
@@ -400,22 +409,25 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * To validate e.g the postal/zip code, you can define a regular
 		 * expression like this if you want to allow only digits:
 		 *
-		 *  client/html/common/address/validate/postal = '/^[0-9]+$/'
+		 *  client/html/checkout/standard/address/validate/postal = '/^[0-9]+$/'
 		 *
 		 * Several regular expressions can be defined line this:
 		 *
-		 *  client/html/common/address/validate = array(
+		 *  client/html/checkout/standard/address/validate = array(
 		 *      'postal' = '/^[0-9]+$/',
 		 *      'vatid' = '/^[A-Z]{2}[0-9]{8}$/',
 		 *  )
 		 *
+		 * Until 2015-02, the configuration option was available as
+		 * "client/html/common/address/billing/validate" starting from 2014-09.
+		 *
 		 * @param array Associative list of field names and regular expressions
 		 * @since 2014.09
 		 * @category Developer
-		 * @see client/html/common/address/billing/mandatory
-		 * @see client/html/common/address/billing/optional
+		 * @see client/html/checkout/standard/address/billing/mandatory
+		 * @see client/html/checkout/standard/address/billing/optional
 		 */
-		$regex = $view->config( 'client/html/common/address/validate', array() );
+		$regex = $view->config( 'client/html/checkout/standard/address/validate', array() );
 
 		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
@@ -495,7 +507,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$view->billingLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			/** client/html/common/address/billing/hidden
+			/** client/html/checkout/standard/address/billing/hidden
 			 * List of billing address input fields that are optional and should be hidden
 			 *
 			 * You can configure the list of billing address fields that
@@ -521,17 +533,20 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			 *
 			 * Caution: Only hide fields that don't require any input
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/billing/hidden" starting from 2014-03.
+			 *
 			 * @param array List of field keys
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/billing/disable-new
-			 * @see client/html/common/address/billing/salutations
-			 * @see client/html/common/address/billing/mandatory
-			 * @see client/html/common/address/billing/optional
-			 * @see client/html/common/address/countries
+			 * @see client/html/checkout/standard/address/billing/disable-new
+			 * @see client/html/checkout/standard/address/billing/salutations
+			 * @see client/html/checkout/standard/address/billing/mandatory
+			 * @see client/html/checkout/standard/address/billing/optional
+			 * @see client/html/checkout/standard/address/countries
 			 */
-			$hidden = $view->config( 'client/html/common/address/billing/hidden', array() );
+			$hidden = $view->config( 'client/html/checkout/standard/address/billing/hidden', array() );
 
 			if( count( $view->get( 'addressLanguages', array() ) ) === 1 ) {
 				$hidden[] = 'order.base.address.languageid';
@@ -539,7 +554,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 			$salutations = array( 'company', 'mr', 'mrs' );
 
-			/** client/html/common/address/billing/salutations
+			/** client/html/checkout/standard/address/billing/salutations
 			 * List of salutions the customer can select from for the billing address
 			 *
 			 * The following salutations are available:
@@ -554,20 +569,23 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			 * more difficult because you have to adapt a few areas in the source
 			 * code.
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/billing/salutations" starting from 2014-03.
+			 *
 			 * @param array List of available salutation codes
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/billing/disable-new
-			 * @see client/html/common/address/billing/mandatory
-			 * @see client/html/common/address/billing/optional
-			 * @see client/html/common/address/billing/hidden
-			 * @see client/html/common/address/countries
+			 * @see client/html/checkout/standard/address/billing/disable-new
+			 * @see client/html/checkout/standard/address/billing/mandatory
+			 * @see client/html/checkout/standard/address/billing/optional
+			 * @see client/html/checkout/standard/address/billing/hidden
+			 * @see client/html/checkout/standard/address/countries
 			 */
-			$view->billingSalutations = $view->config( 'client/html/common/address/billing/salutations', $salutations );
+			$view->billingSalutations = $view->config( 'client/html/checkout/standard/address/billing/salutations', $salutations );
 
-			$view->billingMandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
-			$view->billingOptional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
+			$view->billingMandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
+			$view->billingOptional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
 			$view->billingHidden = $hidden;
 
 			$this->_cache = $view;

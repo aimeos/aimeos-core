@@ -5,7 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Account_History_Order_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_context;
@@ -22,7 +22,7 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 		$this->_context = clone TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Account_History_Detail_Default( $this->_context, $paths );
+		$this->_object = new Client_Html_Account_History_Order_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -56,7 +56,7 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 		$param = array(
-			'his_action' => 'detail',
+			'his_action' => 'order',
 			'his_id' => $this->_getOrderItem( $customer->getId() )->getId()
 		);
 
@@ -65,7 +65,7 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<div class="account-history-detail common-summary">', $output );
+		$this->assertStringStartsWith( '<div class="account-history-order common-summary">', $output );
 	}
 
 

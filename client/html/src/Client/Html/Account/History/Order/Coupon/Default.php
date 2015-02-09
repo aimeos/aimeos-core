@@ -9,12 +9,12 @@
 
 
 /**
- * Default implementation of order detail coupon HTML client.
+ * Default implementation of history order coupon HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Account_History_Detail_Coupon_Default
+class Client_Html_Account_History_Order_Coupon_Default
 	extends Client_Html_Common_Summary_Coupon_Default
 {
 }

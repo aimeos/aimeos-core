@@ -290,7 +290,7 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			$view->addressLanguages = $languages;
 
-			/** client/html/common/address/countries
+			/** client/html/checkout/standard/address/countries
 			 * List of available countries that that users can select from in the front-end
 			 *
 			 * This configration option is used whenever a list of countries is
@@ -309,18 +309,21 @@ class Client_Html_Checkout_Standard_Address_Default
 			 * country ID (order.base.address.languageid) to the "mandatory" or
 			 * "optional" configuration option for billing and delivery addresses.
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/countries" starting from 2014-03.
+			 *
 			 * @param array List of two letter ISO country codes
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/billing/mandatory
-			 * @see client/html/common/address/billing/optional
-			 * @see client/html/common/address/delivery/mandatory
-			 * @see client/html/common/address/delivery/optional
+			 * @see client/html/checkout/standard/address/billing/mandatory
+			 * @see client/html/checkout/standard/address/billing/optional
+			 * @see client/html/checkout/standard/address/delivery/mandatory
+			 * @see client/html/checkout/standard/address/delivery/optional
 			 */
-			$view->addressCountries = $view->config( 'client/html/common/address/countries', array() );
+			$view->addressCountries = $view->config( 'client/html/checkout/standard/address/countries', array() );
 
-			/** client/html/common/address/states
+			/** client/html/checkout/standard/address/states
 			 * List of available states that that users can select from in the front-end
 			 *
 			 * This configration option is used whenever a list of states is
@@ -353,16 +356,19 @@ class Client_Html_Checkout_Standard_Address_Default
 			 * You also need to add order.base.address.countryid as well because
 			 * it is required to display the states that belong to this country.
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/states" starting from 2014-09.
+			 *
 			 * @param array Multi-dimensional list ISO country codes and state codes/names
-			 * @since 2014.09
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/billing/mandatory
-			 * @see client/html/common/address/billing/optional
-			 * @see client/html/common/address/delivery/mandatory
-			 * @see client/html/common/address/delivery/optional
+			 * @see client/html/checkout/standard/address/billing/mandatory
+			 * @see client/html/checkout/standard/address/billing/optional
+			 * @see client/html/checkout/standard/address/delivery/mandatory
+			 * @see client/html/checkout/standard/address/delivery/optional
 			 */
-			$view->addressStates = $view->config( 'client/html/common/address/states', array() );
+			$view->addressStates = $view->config( 'client/html/checkout/standard/address/states', array() );
 
 
 			$this->_cache = $view;

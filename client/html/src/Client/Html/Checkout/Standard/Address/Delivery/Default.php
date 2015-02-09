@@ -206,23 +206,26 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
-			/** client/html/common/address/delivery/disable-new
+			/** client/html/checkout/standard/address/delivery/disable-new
 			 * Disables the option to enter a different delivery address for an order
 			 *
 			 * Besides the billing address, customers can usually enter a different
 			 * delivery address as well. To suppress displaying the form fields for
 			 * a delivery address, you can set this configuration option to "1".
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/delivery/disable-new" starting from 2014-03.
+			 *
 			 * @param boolean A value of "1" to disable, "0" enables the delivery address form
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/delivery/salutations
-			 * @see client/html/common/address/delivery/mandatory
-			 * @see client/html/common/address/delivery/optional
-			 * @see client/html/common/address/delivery/hidden
+			 * @see client/html/checkout/standard/address/delivery/salutations
+			 * @see client/html/checkout/standard/address/delivery/mandatory
+			 * @see client/html/checkout/standard/address/delivery/optional
+			 * @see client/html/checkout/standard/address/delivery/hidden
 			 */
-			$disable = $view->config( 'client/html/common/address/delivery/disable-new', false );
+			$disable = $view->config( 'client/html/checkout/standard/address/delivery/disable-new', false );
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
 			if( ( $option = $view->param( 'ca_deliveryoption', 'null' ) ) === 'null' && $disable === false ) // new address
@@ -296,7 +299,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	{
 		$view = $this->getView();
 
-		/** client/html/common/address/delivery/mandatory
+		/** client/html/checkout/standard/address/delivery/mandatory
 		 * List of delivery address input fields that are required
 		 *
 		 * You can configure the list of delivery address fields that are
@@ -320,20 +323,23 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		 * * order.base.address.email
 		 * * order.base.address.website
 		 *
+		 * Until 2015-02, the configuration option was available as
+		 * "client/html/common/address/delivery/mandatory" starting from 2014-03.
+		 *
 		 * @param array List of field keys
-		 * @since 2014.03
+		 * @since 2015.02
 		 * @category User
 		 * @category Developer
-		 * @see client/html/common/address/delivery/disable-new
-		 * @see client/html/common/address/delivery/salutations
-		 * @see client/html/common/address/delivery/optional
-		 * @see client/html/common/address/delivery/hidden
-		 * @see client/html/common/address/countries
-		 * @see client/html/common/address/validate
+		 * @see client/html/checkout/standard/address/delivery/disable-new
+		 * @see client/html/checkout/standard/address/delivery/salutations
+		 * @see client/html/checkout/standard/address/delivery/optional
+		 * @see client/html/checkout/standard/address/delivery/hidden
+		 * @see client/html/checkout/standard/address/countries
+		 * @see client/html/checkout/standard/address/validate
 		 */
-		$mandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+		$mandatory = $view->config( 'client/html/checkout/standard/address/delivery/mandatory', $this->_mandatory );
 
-		/** client/html/common/address/delivery/optional
+		/** client/html/checkout/standard/address/delivery/optional
 		 * List of delivery address input fields that are optional
 		 *
 		 * You can configure the list of delivery address fields that
@@ -357,25 +363,28 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		 * * order.base.address.email
 		 * * order.base.address.website
 		 *
+		 * Until 2015-02, the configuration option was available as
+		 * "client/html/common/address/delivery/optional" starting from 2014-03.
+		 *
 		 * @param array List of field keys
-		 * @since 2014.03
+		 * @since 2015.02
 		 * @category User
 		 * @category Developer
-		 * @see client/html/common/address/delivery/disable-new
-		 * @see client/html/common/address/delivery/salutations
-		 * @see client/html/common/address/delivery/mandatory
-		 * @see client/html/common/address/delivery/hidden
-		 * @see client/html/common/address/countries
-		 * @see client/html/common/address/validate
+		 * @see client/html/checkout/standard/address/delivery/disable-new
+		 * @see client/html/checkout/standard/address/delivery/salutations
+		 * @see client/html/checkout/standard/address/delivery/mandatory
+		 * @see client/html/checkout/standard/address/delivery/hidden
+		 * @see client/html/checkout/standard/address/countries
+		 * @see client/html/checkout/standard/address/validate
 		 */
-		$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
+		$optional = $view->config( 'client/html/checkout/standard/address/delivery/optional', $this->_optional );
 
-		/** client/html/common/address/validate
+		/** client/html/checkout/standard/address/validate
 		 *
-		 * @see client/html/common/address/delivery/mandatory
-		 * @see client/html/common/address/delivery/optional
+		 * @see client/html/checkout/standard/address/delivery/mandatory
+		 * @see client/html/checkout/standard/address/delivery/optional
 		 */
-		$regex = $view->config( 'client/html/common/address/validate', array() );
+		$regex = $view->config( 'client/html/checkout/standard/address/validate', array() );
 
 		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
@@ -456,7 +465,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			/** client/html/common/address/delivery/hidden
+			/** client/html/checkout/standard/address/delivery/hidden
 			 * List of delivery address input fields that are optional
 			 *
 			 * You can configure the list of delivery address fields that
@@ -482,17 +491,20 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			 *
 			 * Caution: Only hide fields that don't require any input
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/delivery/hidden" starting from 2014-03.
+			 *
 			 * @param array List of field keys
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/delivery/disable-new
-			 * @see client/html/common/address/delivery/salutations
-			 * @see client/html/common/address/delivery/mandatory
-			 * @see client/html/common/address/delivery/optional
-			 * @see client/html/common/address/countries
+			 * @see client/html/checkout/standard/address/delivery/disable-new
+			 * @see client/html/checkout/standard/address/delivery/salutations
+			 * @see client/html/checkout/standard/address/delivery/mandatory
+			 * @see client/html/checkout/standard/address/delivery/optional
+			 * @see client/html/checkout/standard/address/countries
 			 */
-			$hidden = $view->config( 'client/html/common/address/delivery/hidden', array() );
+			$hidden = $view->config( 'client/html/checkout/standard/address/delivery/hidden', array() );
 
 			if( count( $view->get( 'addressLanguages', array() ) ) === 1 ) {
 				$hidden[] = 'order.base.address.languageid';
@@ -500,7 +512,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 			$salutations = array( 'company', 'mr', 'mrs' );
 
-			/** client/html/common/address/delivery/salutations
+			/** client/html/checkout/standard/address/delivery/salutations
 			 * List of salutions the customer can select from for the delivery address
 			 *
 			 * The following salutations are available:
@@ -515,20 +527,23 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			 * more difficult because you have to adapt a few areas in the source
 			 * code.
 			 *
+			 * Until 2015-02, the configuration option was available as
+			 * "client/html/common/address/delivery/salutations" starting from 2014-03.
+			 *
 			 * @param array List of available salutation codes
-			 * @since 2014.03
+			 * @since 2015.02
 			 * @category User
 			 * @category Developer
-			 * @see client/html/common/address/delivery/disable-new
-			 * @see client/html/common/address/delivery/mandatory
-			 * @see client/html/common/address/delivery/optional
-			 * @see client/html/common/address/delivery/hidden
-			 * @see client/html/common/address/countries
+			 * @see client/html/checkout/standard/address/delivery/disable-new
+			 * @see client/html/checkout/standard/address/delivery/mandatory
+			 * @see client/html/checkout/standard/address/delivery/optional
+			 * @see client/html/checkout/standard/address/delivery/hidden
+			 * @see client/html/checkout/standard/address/countries
 			 */
-			$view->deliverySalutations = $view->config( 'client/html/common/address/delivery/salutations', $salutations );
+			$view->deliverySalutations = $view->config( 'client/html/checkout/standard/address/delivery/salutations', $salutations );
 
-			$view->deliveryMandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
-			$view->deliveryOptional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
+			$view->deliveryMandatory = $view->config( 'client/html/checkout/standard/address/delivery/mandatory', $this->_mandatory );
+			$view->deliveryOptional = $view->config( 'client/html/checkout/standard/address/delivery/optional', $this->_optional );
 			$view->deliveryHidden = $hidden;
 
 

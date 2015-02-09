@@ -63,17 +63,17 @@ class Client_Html_Account_History_Default
 	 * @category Developer
 	 */
 
-	/** client/html/account/history/detail/name
-	 * Name of the detail part used by the account history client implementation
+	/** client/html/account/history/order/name
+	 * Name of the order part used by the account history client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Detail_Myname".
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
-	 * @since 2014.03
+	 * @since 2015.02
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'list', 'detail' );
+	private $_subPartNames = array( 'list', 'order' );
 
 
 	/**

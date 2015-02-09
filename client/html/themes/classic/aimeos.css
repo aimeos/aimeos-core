@@ -1424,8 +1424,8 @@
 }
 
 .checkout-confirm-basic,
-.account-history-detail-service,
-.account-history-detail-basket {
+.account-history-order-service,
+.account-history-order-basket {
 	padding: 0px 10px 10px 10px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -1814,14 +1814,14 @@
 
 /* Checkout summary */
 .checkout-standard-summary h3,
-.account-history-detail h3 {
+.account-history-order h3 {
 	display: inline-block;
 	font-size: 1em;
 	margin: 0;
 }
 
 .checkout-standard-summary a:hover,
-.account-history-detail a:hover {
+.account-history-order a:hover {
 	text-decoration: underline;
 }
 
@@ -1932,11 +1932,11 @@
 	content: ": ";
 }
 
-.account-history-detail h2 {
+.account-history-order h2 {
 	margin: 5px 10px;
 }
 
-.account-history-detail .modify {
+.account-history-order .modify {
 	float: right;
 	margin: 5px 10px;
 }

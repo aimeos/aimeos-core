@@ -9,12 +9,12 @@
 
 
 /**
- * Default implementation of account service detail HTML client.
+ * Default implementation of history order service HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Account_History_Detail_Service_Default
+class Client_Html_Account_History_Order_Service_Default
 	extends Client_Html_Common_Summary_Service_Default
 {
 }

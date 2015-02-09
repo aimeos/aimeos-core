@@ -9,12 +9,12 @@
 
 
 /**
- * Default implementation of order history basket HTML client.
+ * Default implementation of history order detail HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Account_History_Detail_Basket_Default
+class Client_Html_Account_History_Order_Detail_Default
 	extends Client_Html_Common_Summary_Detail_Default
 {
 	private $_cache;
