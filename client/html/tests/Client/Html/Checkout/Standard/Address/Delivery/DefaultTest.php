@@ -175,7 +175,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$config = $this->_context->getConfig();
-		$config->set( 'client/html/common/address/validate/postal', '/^[0-9]{5}$/' );
+		$config->set( 'client/html/checkout/standard/address/validate/postal', '/^[0-9]{5}$/' );
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 

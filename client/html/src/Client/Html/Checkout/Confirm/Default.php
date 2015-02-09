@@ -84,7 +84,18 @@ class Client_Html_Checkout_Confirm_Default
 	 * @since 2014.07
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'intro', 'basic', 'retry' );
+
+	/** client/html/checkout/confirm/order/name
+	 * Name of the order part used by the checkout confirm client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Order_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2015.02
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'intro', 'basic', 'retry', 'order' );
 	private $_cache;
 
 
