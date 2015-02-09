@@ -1424,6 +1424,8 @@
 }
 
 .checkout-confirm-basic,
+.checkout-confirm-order-service,
+.checkout-confirm-order-basket,
 .account-history-order-service,
 .account-history-order-basket {
 	padding: 0px 10px 10px 10px;
@@ -1814,6 +1816,7 @@
 
 /* Checkout summary */
 .checkout-standard-summary h3,
+.checkout-confirm-order h3,
 .account-history-order h3 {
 	display: inline-block;
 	font-size: 1em;
@@ -1932,6 +1935,7 @@
 	content: ": ";
 }
 
+.checkout-confirm-order h2,
 .account-history-order h2 {
 	margin: 5px 10px;
 }

@@ -1657,6 +1657,8 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 }
 
 .checkout-confirm-basic,
+.checkout-confirm-order-service,
+.checkout-confirm-order-detail,
 .account-history-order-service,
 .account-history-order-detail {
 	padding: 0 1em 1em 1em;
@@ -2057,6 +2059,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 /* Checkout summary */
 .checkout-standard-summary h3,
+.checkout-confirm-order h3,
 .account-history-order h3 {
 	display: inline-block;
 	font-size: 1em;
@@ -2166,6 +2169,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	content: ": ";
 }
 
+.checkout-confirm-order h2,
 .account-history-order h2 {
 	margin: 0.5em 0;
 }
