@@ -16,7 +16,7 @@ $basketConfig = $this->config( 'client/html/basket/standard/url/config', array()
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
-$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
+$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( 'absoluteUri' => 1 ) );
 
 /** client/html/common/summary/detail/product/attribute/types
  * List of attribute type codes that should be displayed in the basket along with their product

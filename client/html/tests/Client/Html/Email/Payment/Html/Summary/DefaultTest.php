@@ -77,7 +77,7 @@ class Client_Html_Email_Payment_Html_Summary_DefaultTest extends MW_Unittest_Tes
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary content-block">', $output );
 		$this->assertContains( '<div class="common-summary-address container">', $output );
 		$this->assertContains( '<div class="common-summary-service container">', $output );
 		$this->assertContains( '<div class="common-summary-coupon container">', $output );
