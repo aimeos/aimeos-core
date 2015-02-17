@@ -24,7 +24,7 @@ $title = $this->translate( 'client/html', 'E-mail notification' );
  * @category User
  * @see client/html/email/from-email
  */
-if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/themes/elegance/images/arcavias.png' ) ) != '' )
+if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/themes/elegance/images/aimeos.png' ) ) != '' )
 {
 	$filename = basename( $logo );
 
@@ -34,6 +34,14 @@ if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/themes/elega
 		$finfo = new finfo( FILEINFO_MIME_TYPE );
 		$mimetype = $finfo->file( $logo );
 	}
+}
+
+$path = $this->config( 'client/html/common/template/baseurl', 'client/html/themes/elegance' );
+$filename = $path . DIRECTORY_SEPARATOR . 'common.css';
+$content = '';
+
+if( file_exists( $filename ) !== false ) {
+	$content = file_get_contents( $filename );
 }
 
 ?>
@@ -73,6 +81,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .aimeos .common-summary {
 	clear: both;
 }
+
+<?php echo $content; ?>
+
 		</style>
 		<div class="aimeos">
 <?php if( $content !== false ) : ?>

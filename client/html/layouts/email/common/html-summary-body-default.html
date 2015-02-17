@@ -6,17 +6,7 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-$path = $this->config( 'client/html/common/template/baseurl', 'client/html/lib/classic' );
-$filename = $path . DIRECTORY_SEPARATOR . 'common.css';
-$content = '';
-
-if( file_exists( $filename ) !== false ) {
-	$content = file_get_contents( $filename );
-}
 ?>
-<style type="text/css">
-<?php echo $content; ?>
-</style>
 <div class="common-summary content-block">
 <?php echo $this->get( 'summaryBody' ); ?>
 </div>
