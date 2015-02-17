@@ -57,7 +57,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
 		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );
 		$this->_mail = ( isset( $this->_mail ) ? clone $this->_mail : null );
-		$this->_view = ( isset( $this->_view ) ? clone $this->_view : null );
+		// view is always cloned
 
 		foreach( $this->_i18n as $locale => $object ) {
 			$this->_i18n[$locale] = clone $this->_i18n[$locale];
