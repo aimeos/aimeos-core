@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
-class Client_Html_Account_Favorite_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_FactoryTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_templatePaths;
