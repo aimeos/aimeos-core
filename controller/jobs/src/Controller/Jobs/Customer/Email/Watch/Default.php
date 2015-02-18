@@ -108,11 +108,17 @@ class Controller_Jobs_Customer_Email_Watch_Default
 
 
 			$prodSearch = $productManager->createSearch( true );
+
+			$stockExpr = array(
+				$prodSearch->compare( '==', 'product.stock.stocklevel', null ),
+				$prodSearch->compare( '>', 'product.stock.stocklevel', 0 ),
+			);
+
 			$expr = array(
 				$prodSearch->compare( '==', 'product.id', $prodIds ),
 				$prodSearch->getConditions(),
 				$prodSearch->compare( '==', 'product.stock.warehouseid', $whItem->getId() ),
-				$prodSearch->compare( '>', 'product.stock.stocklevel', 0 ),
+				$prodSearch->combine( '||', $stockExpr ),
 			);
 			$prodSearch->setConditions( $prodSearch->combine( '&&', $expr ) );
 			$prodSearch->setSlice( 0, 0x7fffffff );
