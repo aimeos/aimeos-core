@@ -13,89 +13,6 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( 'absoluteUri' => 1 ) );
 
 ?>
-<style type="text/css">
-.aimeos .header {
-	border-radius: 0.5em;
-	-moz-border-radius: 0.5em;
-	-webkit-border-radius: 0.5em;
-}
-
-
-/* Common summary */
-.common-summary .content {
-	margin: 10px;
-}
-
-.common-summary .header,
-.common-summary-detail .header {
-	background-color: #679CB8;
-	padding: 5px 10px;
-}
-
-.common-summary-detail h2 {
-	font-weight: bold;
-	font-size: 1em;
-	color: #FFFFFF;
-}
-
-.common-summary-detail .product {
-	border-bottom: solid 1px #689DB9;
-	margin: 0.5em;
-}
-
-.common-summary-detail img {
-	float: left;
-	max-width: 60px;
-	max-height: 80px;
-	overflow: hidden;
-	margin-right: 1em;
-	font-weight: bold;
-}
-
-.common-summary-detail .product-name {
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 133%;
-	margin: 0.5em 0;
-	display: block;
-}
-
-.common-summary-detail .price-item {
-	margin: 0.5em 0;
-}
-
-.common-summary-detail .price-item .quantity,
-.common-summary-detail .price-item .value,
-.common-summary-detail .price-item .costs,
-.common-summary-detail .price-item .rebate,
-.common-summary-detail .price-item .rebatepercent,
-.common-summary-detail .price-item .taxrate {
-	display: inline-block;
-	margin: 0.25em 0;
-	min-width: 5em;
-}
-
-.common-summary-detail .price-item:first-child .quantity,
-.common-summary-detail .price-item .rebate,
-.common-summary-detail .price-item .taxrate {
-	display: none;
-}
-
-.common-summary-detail .price-item:first-child .taxrate {
-	display: inline-block;
-	padding: 0 1em;
-}
-
-.common-summary-detail .price-item .value {
-	font-weight: bold;
-}
-
-.common-summary-detail .price-item .rebatepercent {
-	font-weight: bold;
-	font-size: 120%;
-	color: #FF0000;
-}
-</style>
 <div class="common-summary-detail common-summary container">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
@@ -130,5 +47,6 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 <?php endforeach; ?>
 			</tbody>
 		</table>
+	</div>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>

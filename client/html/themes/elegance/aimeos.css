@@ -742,13 +742,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	padding: 0.5em;
 }
 
-.catalog-list .price-item .rebatepercent {
-	background-color: #A03030;
-	padding: 0em 0.25em;
-	margin-left: 2em;
-	color: #FFF;
-}
-
 /* Stock level */
 .catalog-list .stock {
 	padding: 0.5em 1em;
@@ -857,15 +850,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 
 /* Product details */
-
-.catalog-detail .header {
-	border-bottom: solid 1px #B0A060;
-	font-weight: bold;
-	font-size: 1em;
-	line-height: 2em;
-	height: 2em;
-	padding: 0 1em;
-}
 
 /* Product images */
 .catalog-detail-image {
@@ -1131,13 +1115,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-detail-basket .price-item .rebate,
 .catalog-detail-basket .price-item .taxrate {
 	display: none;
-}
-
-.catalog-detail-basket .price-item .rebatepercent {
-	background-color: #A03030;
-	padding: 0em 0.25em;
-	margin-left: 2em;
-	color: #FFF;
 }
 
 .catalog-detail-basket .price-item .taxrate {

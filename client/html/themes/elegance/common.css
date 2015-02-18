@@ -50,6 +50,13 @@
 	display: none;
 }
 
+.aimeos .price-item .rebatepercent {
+	background-color: #A03030;
+	padding: 0em 0.25em;
+	margin-left: 2em;
+	color: #FFF;
+}
+
 
 /* Common summary */
 .common-summary .error,
