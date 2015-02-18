@@ -5,6 +5,11 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
+.aimeos a:link,
+.aimeos a:visited {
+	color: #B0A060;
+}
+
 .aimeos li.attr-item,
 .aimeos li.form-item {
 	list-style: none;
