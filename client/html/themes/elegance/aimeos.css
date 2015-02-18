@@ -739,18 +739,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 /* price list */
 .catalog-list .price-list {
-	font-weight: normal;
-	text-align: left;
 	padding: 0.5em;
-	color: #555;
-}
-
-.catalog-list .price-item {
-	display: none;
-}
-
-.catalog-list .price-item:first-child {
-	display: block;
 }
 
 .catalog-list .price-item .rebatepercent {
@@ -758,13 +747,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	padding: 0em 0.25em;
 	margin-left: 2em;
 	color: #FFF;
-}
-
-.catalog-list .price-item .quantity,
-.catalog-list .price-item .rebate,
-.catalog-list .price-item .costs,
-.catalog-list .price-item .taxrate {
-	display: none;
 }
 
 /* Stock level */
@@ -1103,9 +1085,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-detail-basket .price {
 	display: none;
 	color: #555;
-}
-
-.catalog-detail-basket .price-item {
 }
 
 .catalog-detail-basket .price-item:first-child {
@@ -1510,87 +1489,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	text-align: left;
 	overflow: hidden;
 	text-transform: uppercase
-}
-
-.account-watch .price-list,
-.account-favorite .price-list,
-.basket-related-bought .price-list,
-.catalog-detail-bought .price-list,
-.catalog-detail-bundle .price-list,
-.catalog-detail-suggest .price-list,
-.catalog-session-seen .price-list,
-.catalog-session-pinned .price-list {
-	font-weight: normal;
-	text-align: left;
-	color: #555;
-	height: 1em;
-	padding: 0;
-	margin: 0;
-}
-
-.account-watch .price-item,
-.account-favorite .price-item,
-.basket-related-bought .price-item,
-.catalog-detail-bought .price-item,
-.catalog-detail-bundle .price-item,
-.catalog-detail-suggest .price-item,
-.catalog-session-seen .price-item,
-.catalog-session-pinned .price-item {
-	display: none;
-}
-
-.account-watch .price-item:first-child,
-.account-favorite .price-item:first-child,
-.basket-related-bought .price-item:first-child,
-.catalog-detail-bought .price-item:first-child,
-.catalog-detail-bundle .price-item:first-child,
-.catalog-detail-suggest .price-item:first-child,
-.catalog-session-seen .price-item:first-child,
-.catalog-session-pinned .price-item:first-child {
-	display: block;
-}
-
-.account-watch .price-item:first-child .quantity,
-.account-watch .price-item:first-child .rebatepercent,
-.account-watch .price-item:first-child .rebate,
-.account-watch .price-item:first-child .costs,
-.account-watch .price-item:first-child .taxrate,
-.account-favorite .price-item:first-child .quantity,
-.account-favorite .price-item:first-child .rebatepercent,
-.account-favorite .price-item:first-child .rebate,
-.account-favorite .price-item:first-child .costs,
-.account-favorite .price-item:first-child .taxrate,
-.basket-related-bought .price-item:first-child .quantity,
-.basket-related-bought .price-item:first-child .rebatepercent,
-.basket-related-bought .price-item:first-child .rebate,
-.basket-related-bought .price-item:first-child .costs,
-.basket-related-bought .price-item:first-child .taxrate,
-.catalog-detail-bought .price-item:first-child .quantity,
-.catalog-detail-bought .price-item:first-child .rebatepercent,
-.catalog-detail-bought .price-item:first-child .rebate,
-.catalog-detail-bought .price-item:first-child .costs,
-.catalog-detail-bought .price-item:first-child .taxrate,
-.catalog-detail-bundle .price-item:first-child .quantity,
-.catalog-detail-bundle .price-item:first-child .rebatepercent,
-.catalog-detail-bundle .price-item:first-child .rebate,
-.catalog-detail-bundle .price-item:first-child .costs,
-.catalog-detail-bundle .price-item:first-child .taxrate,
-.catalog-detail-suggest .price-item:first-child .quantity,
-.catalog-detail-suggest .price-item:first-child .rebatepercent,
-.catalog-detail-suggest .price-item:first-child .rebate,
-.catalog-detail-suggest .price-item:first-child .costs,
-.catalog-detail-suggest .price-item:first-child .taxrate,
-.catalog-session-seen .price-item:first-child .quantity,
-.catalog-session-seen .price-item:first-child .rebatepercent,
-.catalog-session-seen .price-item:first-child .rebate,
-.catalog-session-seen .price-item:first-child .costs,
-.catalog-session-seen .price-item:first-child .taxrate,
-.catalog-session-pinned .price-item:first-child .quantity,
-.catalog-session-pinned .price-item:first-child .rebatepercent,
-.catalog-session-pinned .price-item:first-child .rebate,
-.catalog-session-pinned .price-item:first-child .costs,
-.catalog-session-pinned .price-item:first-child .taxrate {
-	display: none;
 }
 
 .account-watch .modify,

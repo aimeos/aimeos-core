@@ -96,27 +96,39 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 	color: #FF0000;
 }
 </style>
-<div class="common-summary-detail common-summary content-block">
+<div class="common-summary-detail common-summary container">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
 	</div>
+	<div class="basket">
+		<table>
+			<thead>
+				<tr>
+					<th class="details"></th>
+				</tr>
+			</thead>
+			<tbody>
 <?php foreach( $this->extProducts as $product ) : ?>
-	<div class="product container">
+				<tr class="product">
+					<td class="details">
 <?php	$media = $product->getRefItems( 'media', 'default', 'default' ); ?>
-<?php	if( ( $image = reset( $media ) ) !== false && ( $url = $image->getUrl() ) != '' ) : ?>
-		<img src="<?php echo $this->content( $url ); ?>" />
+<?php	if( ( $image = reset( $media ) ) !== false && ( $url = $image->getPreview() ) != '' ) : ?>
+						<img src="<?php echo $this->content( $url ); ?>" />
 <?php	endif; ?>
 <?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => $enc->url( $product->getName( 'url' ) ) ); ?>
-		<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
+						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php	echo $enc->html( $product->getName(), $enc::TRUST ); ?>
-		</a>
+						</a>
 <?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
 <?php	if( ( $price = reset( $prices ) ) !== false ) : ?>
-		<div class="price-list">
+						<div class="price-list">
 <?php		echo $this->price( array( $price ) ); ?>
-		</div>
+						</div>
 <?php	endif; ?>
-	</div>
+					</td>
+				</tr>
 <?php endforeach; ?>
+			</tbody>
+		</table>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>

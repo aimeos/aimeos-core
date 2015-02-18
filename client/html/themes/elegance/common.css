@@ -26,6 +26,30 @@
 	width: 98%;
 }
 
+.aimeos .price-list {
+	font-weight: normal;
+	text-align: left;
+	color: #555;
+	height: 1em;
+	padding: 0;
+	margin: 0;
+}
+
+.aimeos .price-item {
+	display: none;
+}
+
+.aimeos .price-item:first-child {
+	display: block;
+}
+
+.aimeos .price-item:first-child .quantity,
+.aimeos .price-item:first-child .rebate,
+.aimeos .price-item:first-child .costs,
+.aimeos .price-item:first-child .taxrate {
+	display: none;
+}
+
 
 /* Common summary */
 .common-summary .error,
