@@ -83,7 +83,7 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends MW_Unittest_Testca
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary-detail common-summary container">', $output );
 		$this->assertContains( 'Cafe Noire Cappuccino', $output );
 		$this->assertContains( 'Cafe Noire Expresso', $output );
 	}
