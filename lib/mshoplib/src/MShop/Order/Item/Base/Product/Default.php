@@ -609,7 +609,7 @@ class MShop_Order_Item_Base_Product_Default
 
 		$items = $product->getRefItems( 'media', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
-			$this->setMediaUrl( $item->getUrl() );
+			$this->setMediaUrl( $item->getPreview() );
 		}
 
 		$this->setModified();
