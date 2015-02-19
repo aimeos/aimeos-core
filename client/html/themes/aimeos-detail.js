@@ -90,12 +90,17 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
  * Aimeos catalog detail actions
  */
 AimeosCatalogDetail = {
-	
+
 	/**
 	 * Initializes the image zoom for big images given in the item parameter within the container
 	 */
 	zoomImage: function(item, container) {
-	
+
+		// No zoom on small mobile devices
+		if( item.offset().left + item.outerWidth() + container.width() + 10 > $(window).width() ) {
+			return;
+		}
+
 		var options = {
 			responsive: true,
 			scrollZoom: true,
@@ -114,31 +119,23 @@ AimeosCatalogDetail = {
 			zoomWindowPosition: 1,
 			zoomWindowOffetx: 10
 		};
-		
-		/* Difficult to scroll down on small mobile devices if image occupies the whole screen
-		if( item.offset().left + item.outerWidth() + options.zoomWindowWidth + options.zoomWindowOffetx > $(window).width() ) {
-			options.zoomType = 'inner';
-			options.cursor = 'crosshair';
-			options.zoomLevel = 1; // behaves strange on other levels
-		}
-		 */
-	
+
 		item.elevateZoom(options);
 	},
-	
-	
+
+
 	/**
 	 * Initializes the slider for the thumbnail gallery (small images)
 	 */
 	setupThumbnailSlider: function() {
-	
+
 		$(".catalog-detail-image").each( function(idx,e) {
 			var dir = "left";
-	
+
 			if( $(e).data("dir") === "vertical" && $(e).outerWidth() >= $(".image-single .item", e).outerWidth() + $(".thumbs", e).outerWidth() ) {
 				dir = "down";
 			}
-	
+
 			$(".thumbs", this).carouFredSel({
 				responsive: false,
 				circular: false,
@@ -158,15 +155,15 @@ AimeosCatalogDetail = {
 			});
 		});
 	},
-	
-	
+
+
 	/**
 	 * Enables image zoom for first image by default
 	 */
 	setupFirstImageZoom: function() {
-	
+
 		$(".catalog-detail-image .image-single").each( function() {
-			
+
 			if(window.location.hash) {
 				AimeosCatalogDetail.zoomImage( $(window.location.hash), $(this) );
 			} else {
@@ -174,48 +171,48 @@ AimeosCatalogDetail = {
 			}
 		});
 	},
-	
-	
+
+
 	/**
 	 * Displays the big image and highlight thumbnail after it was selected
 	 */
 	setupImageSwap: function() {
-	
+
 		$(".catalog-detail-image").on("click", ".thumbs .item", {}, function(event) {
-			
+
 			var imageId = this.href.split("#").pop();
 			var container = $(".image-single", event.delegateTarget);
-		
+
 			$(".zoomContainer").remove();
 			AimeosCatalogDetail.zoomImage($("#" + imageId), container);
 			window.location.hash = '#' + imageId;
-			
+
 			$(".thumbs .item", event.delegateTarget).removeClass("selected");
 			$(this).addClass("selected");
-			
+
 			return false;
 		});
 	},
-	
-	
+
+
 	/**
 	 * Opens the lightbox with big images
 	 */
 	setupImageLightbox: function() {
-	
+
 		$(".catalog-detail-image .image-single").on("click", ".item", {}, function(event) {
-		
+
 			var list = [];
 			$(".item", event.delegateTarget).each(function() {
 				list.push( $(this).data("zoom-image") );
 			});
-			
+
 			$.fn.prettyPhoto({ allow_resize: false, social_tools: false });
 			$.prettyPhoto.open(list);
 		});
 	},
-	
-	
+
+
 	/**
 	 * Evaluates the product variant dependencies.
 	 * 
@@ -234,55 +231,55 @@ AimeosCatalogDetail = {
 	 * because it's an integer bitmap.
 	 */
 	setupSelectionDependencies: function() {
-	
+
 		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
-		
+
 			var elem = $(this);
 			var index = elem.data("index");
 			var value = elem.find(".select-option:checked").val();
-			
+
 			var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
 			var prodDeps = $(event.delegateTarget).data("proddeps") || {}; // {"<prodid>":["attrid",...],...}
 			var attrMap = {}, attrList = [];
-		
-			
+
+
 			if( typeof index === "undefined" ) {
 				throw new Error( "HTML select node has no attribute data-index" );
 			}
-			
-		
+
+
 			// Retrieves the list of available attribute ID => product ID
 			// combinations for the selected value
 			if( attrDeps.hasOwnProperty(value) ) {
-		
+
 				for( var i=0; i<attrDeps[value].length; i++ ) {
-					
+
 					var prodId = attrDeps[value][i];
-		
+
 					if( prodDeps.hasOwnProperty(prodId) ) {
-		
+
 						for( var j=0; j<prodDeps[prodId].length; j++ ) {
 							attrMap[prodDeps[prodId][j]] = prodId;
 						}
 					}
 				}
 			}
-		
-		
+
+
 			$(".select-list", event.delegateTarget).each(function(i, select) {
-				
+
 				if( event.currentTarget == select ) {
 					return;
 				}
-		
+
 				$(this).find(".select-option").each(function(i, option) {
-					
+
 					var opt = $(option);
 					var val = opt.val();
 					var by = opt.data("by") || {};
 					var disabled = opt.data("disabled") || 0;
-					
-					
+
+
 					// Sets or removes the disabled bits in the bitmap of the
 					// .select-option and by which .select-list it was disabled.
 					// Each option can be disabled by multiple dependencies and
@@ -294,40 +291,40 @@ AimeosCatalogDetail = {
 						disabled &= ~(2<<index);
 						delete by[index];
 					}
-					
+
 					if( disabled > 0 ) {
 						opt.attr("disabled", "disabled");
 					} else {
 						opt.removeAttr("disabled");
 					}
-		
+
 					opt.data("disabled", disabled);
 					opt.data("by", by);
 				});
 			});
 		});
 	},
-	
-	
+
+
 	/**
 	 * Displays the associated stock level, price items and attributes for the selected product variant
 	 */
 	setupSelectionContent: function() {
-	
+
 		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
-	
+
 			var map = {}, len = 0;
 			var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
-	
-			
+
+
 			$(".select-option:checked", event.delegateTarget).each(function(i, option) {
-			
+
 				var value = $(option).val();
-	
+
 				if( value !== "" && attrDeps.hasOwnProperty(value) ) {
-	
+
 					for( var i=0; i<attrDeps[value].length; i++ ) {
-						
+
 						if( map.hasOwnProperty(attrDeps[value][i]) ) {
 							map[attrDeps[value][i]]++;
 						} else {
@@ -335,33 +332,33 @@ AimeosCatalogDetail = {
 						}
 					}
 				}
-				
+
 				len++;
 			});
-			
-			
+
+
 			for( var prodId in map ) {
-				
+
 				if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
-	
+
 					var parent = $(".catalog-detail-basket");
 					var newPrice = $(".price-prodid-" + prodId, parent);
 					var newStock = $(".stock-prodid-" + prodId, parent);
-					
+
 					if( newPrice.length === 0 ) {
 						newPrice = $(".price-main", parent);
 					}
-	
+
 					if( newStock.length === 0 ) {
 						newStock = $(".stockitem:first-child", parent);
 					}
-					
+
 					$(".price", parent).removeClass("price-actual");
 					newPrice.addClass("price-actual");
-					
+
 					$(".stockitem", parent).removeClass("stock-actual");
 					newStock.addClass("stock-actual");
-					
+
 					if( parent.data("reqstock") && newStock.hasClass("stock-out") ) {
 						$(".addbasket .btn-action", parent).addClass("btn-disabled").attr("disabled", "disabled");
 					} else {
@@ -369,24 +366,24 @@ AimeosCatalogDetail = {
 					}
 				}
 			}
-			
+
 			$(".catalog-detail-additional .attributes .subproduct-actual").removeClass("subproduct-actual");
 			$(".catalog-detail-additional .attributes .subproduct-" + prodId).addClass("subproduct-actual");
 		});
 	},
-		
-		
+
+
 	/**
 	 * Checks if all required variant attributes are selected
 	 */
 	setupVariantCheck: function() {
-	
+
 		$(".catalog-detail-basket").on("click", ".addbasket .btn-action", {}, function(event) {
-			
+
 			var result = true;
-	
+
 			$(".selection .select-item", event.delegateTarget).each( function() {
-				
+
 				if( $(".select-list", this).val() != '' || $(".select-option:checked", this).length > 0 ) {
 					$(this).removeClass("error");
 				} else {
@@ -394,125 +391,125 @@ AimeosCatalogDetail = {
 					result = false;
 				}
 			});
-			
+
 			return result;
 		});
 	},
-	
-	
+
+
 	/**
 	 * Initializes the slide in/out for block prices
 	 */
 	setupBlockPriceSlider: function() {
-	
+
 		$(".catalog-detail-basket .price-item:not(.price-item:first-child)").hide();
-		
+
 	    $(".catalog-detail-basket .price").on("click", function(ev) {
 	        $(".price-item:not(.price-item:first-child)", this).slideToggle();
 	    	$(".price-item:first-child", ev.delegateTarget).toggleClass("toggle-js");
 	    });
 	},
-	
-		
+
+
 	/**
 	 * Initializes the slide in/out for additional content
 	 */
 	setupAdditionalContentSlider: function() {
-	
+
 		$(".catalog-detail-additional .content").hide();
-	
+
 		$(".catalog-detail-additional .additional-box").on("click", ".header", function(ev) {
 	        $(".content", ev.delegateTarget).slideToggle();
 	    	$(".header", ev.delegateTarget).toggleClass("toggle-js");
 	    });
 	},
-	
-	
+
+
 	/**
 	 * Adds a product to the favorite list without page reload
 	 */
 	setupFavoriteAction: function() {
-	
+
 		$(".catalog-detail-actions .actions-button-favorite").on("click", function(ev) {
-		
+
 		    if($(this).data("login")) {
 		        return true;
 		    }
-		
+
 		    Aimeos.createOverlay();
-		
+
 		    $.get($(this).attr("href"), function(data) {
-		
+
 		        var doc = document.createElement("html");
 		        doc.innerHTML = data;
-		
+
 		        Aimeos.createContainer($(".account-favorite", doc));
 		    });
-		
+
 		    return false;
 		});
 	},
-	
-	
+
+
 	/**
 	 * Adds a product to the watch list without page reload
 	 */
 	setupWatchAction: function() {
-	
+
 		$(".catalog-detail-actions .actions-button-watch").on("click", function(ev) {
-		
+
 		    if($(this).data("login")) {
 		        return true;
 		    }
-		
+
 		    Aimeos.createOverlay();
-		
+
 		    $.get($(this).attr("href"), function(data) {
-		
+
 		        var doc = document.createElement("html");
 		        doc.innerHTML = data;
-		
+
 		        Aimeos.createContainer($(".account-watch", doc));
 		    });
-		
+
 		    return false;
 		});
 	},
-	
-	
+
+
 	/**
 	 * Adds products to the basket without page reload
 	 */
 	setupBasketAdd: function(data) {
-	
+
 		$(".catalog-detail-basket form").on("submit", function(ev) {
-		
+
 		    Aimeos.createOverlay();
 		    $.post($(this).attr("action"), $(this).serialize(), function(data) {
 		        Aimeos.createContainer(AimeosBasketStandard.updateBasket(data));
 		    });
-		
+
 		    return false;
 		});
 	},
-	
-	
+
+
 	/**
 	 * Initializes the catalog detail actions
 	 */
 	init: function() {
-		
+
 		this.setupBlockPriceSlider();
 		this.setupAdditionalContentSlider();
-	
+
 		this.setupFirstImageZoom();
 		this.setupThumbnailSlider();
 		this.setupImageLightbox();
 		this.setupImageSwap();
-		
+
 		this.setupFavoriteAction();
 		this.setupWatchAction();
-		
+
 		this.setupSelectionDependencies();
 		this.setupSelectionContent();
 		this.setupVariantCheck();
