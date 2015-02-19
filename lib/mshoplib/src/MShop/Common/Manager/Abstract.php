@@ -220,7 +220,7 @@ abstract class MShop_Common_Manager_Abstract
 		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
-		$object->setConditions( $object->compare( '>', $domain . '.status', 0 ) );
+		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
 
 		$dbm->release( $conn, $dbname );
 
