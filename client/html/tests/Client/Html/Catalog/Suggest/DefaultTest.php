@@ -5,7 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Suggest_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_context;
@@ -22,7 +22,7 @@ class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
 		$this->_context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Simple( $this->_context, $paths );
+		$this->_object = new Client_Html_Catalog_Suggest_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -54,15 +54,8 @@ class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 
-		$this->assertNotEquals( array(), $this->_object->getView()->listTextItems );
+		$this->assertNotEquals( array(), $this->_object->getView()->suggestTextItems );
 		$this->assertRegExp( '#"name":"Unterpro#smU', $output );
-	}
-
-
-	public function testGetSubClient()
-	{
-		$client = $this->_object->getSubClient( 'items', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
 
