@@ -179,7 +179,10 @@ class Client_Html_Catalog_Detail_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		if( ( $html = $this->_getCached( 'body', $uid ) ) === null )
+		$prefixes = array( 'd' );
+		$confkey = 'client/html/catalog/detail';
+
+		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$context = $this->_getContext();
 			$view = $this->getView();
@@ -242,7 +245,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$this->_setCached( 'body', $uid, $html, $tags, $expire );
+			$this->_setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
@@ -263,9 +266,11 @@ class Client_Html_Catalog_Detail_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		if( ( $html = $this->_getCached( 'header', $uid ) ) === null )
+		$prefixes = array( 'd' );
+		$confkey = 'client/html/catalog/detail';
+
+		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
 			$view = $this->getView();
 
 			try
@@ -304,11 +309,11 @@ class Client_Html_Catalog_Detail_Default
 
 				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-				$this->_setCached( 'header', $uid, $html, $tags, $expire );
+				$this->_setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
-				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -352,17 +357,17 @@ class Client_Html_Catalog_Detail_Default
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -371,67 +376,6 @@ class Client_Html_Catalog_Detail_Default
 
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
-		}
-	}
-
-
-	/**
-	 * Returns the cache entry for the given unique ID and type.
-	 *
-	 * @param string $type Type of the cache entry, i.e. "body" or "header"
-	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
-	 * @return string Cached entry or empty string if not available
-	 */
-	protected function _getCached( $type, $uid )
-	{
-		if( !isset( $this->_cache ) )
-		{
-			$context = $this->_getContext();
-			$config = $context->getConfig()->get( 'client/html/catalog/detail', array() );
-
-			$keys = array(
-				'body' => $this->_getParamHash( array( 'd' ), $uid . ':catalog:detail-body', $config ),
-				'header' => $this->_getParamHash( array( 'd' ), $uid . ':catalog:detail-header', $config ),
-			);
-
-			$entries = $context->getCache()->getList( $keys );
-			$this->_cache = array();
-
-			foreach( $keys as $key => $hash ) {
-				$this->_cache[$key] = ( array_key_exists( $hash, $entries ) ? $entries[$hash] : null );
-			}
-		}
-
-		return ( array_key_exists( $type, $this->_cache ) ? $this->_cache[$type] : null );
-	}
-
-
-	/**
-	 * Returns the cache entry for the given type and unique ID.
-	 *
-	 * @param string $type Type of the cache entry, i.e. "body" or "header"
-	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
-	 * @param string $value Value string that should be stored for the given key
-	 * @param array $tags List of tag strings that should be assoicated to the
-	 * 	given value in the cache
-	 * @param string|null $expire Date/time string in "YYYY-MM-DD HH:mm:ss"
-	 * 	format when the cache entry expires
-	 */
-	protected function _setCached( $type, $uid, $value, array $tags, $expire )
-	{
-		$context = $this->_getContext();
-
-		try
-		{
-			$config = $context->getConfig()->get( 'client/html/catalog/detail', array() );
-			$key = $this->_getParamHash( array( 'd' ), $uid . ':catalog:detail-' . $type, $config );
-
-			$context->getCache()->set( $key, $value, array_unique( $tags ), $expire );
-		}
-		catch( Exception $e )
-		{
-			$msg = sprintf( 'Unable to set cache entry: %1$s', $e->getMessage() );
-			$context->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
 		}
 	}
 

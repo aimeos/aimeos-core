@@ -38,7 +38,7 @@ abstract class Client_Html_Basket_Abstract
 	 * @return mixed Value associated to the requested key. If no value for the
 	 *	key is found in the cache, the given default value is returned
 	 */
-	protected function _getCached( $key, $default = null )
+	protected function _getBasketCached( $key, $default = null )
 	{
 		return $this->_getContext()->getSession()->get( $key, $default );
 	}
@@ -50,7 +50,7 @@ abstract class Client_Html_Basket_Abstract
 	 * @param string $key Path the cache entry should be stored in
 	 * @param mixed $value Value stored in the cache for the path
 	 */
-	protected function _setCached( $key, $value )
+	protected function _setBasketCached( $key, $value )
 	{
 		$context = $this->_getContext();
 

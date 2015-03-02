@@ -19,6 +19,7 @@ abstract class Client_Html_Abstract
 {
 	private $_tags;
 	private $_view;
+	private $_cache;
 	private $_clients;
 	private $_context;
 	private $_subclients;
@@ -322,6 +323,19 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Returns the minimal expiration date.
+	 *
+	 * @param string|null $first First expiration date or null
+	 * @param string|null $second Second expiration date or null
+	 * @return string|null Expiration date
+	 */
+	protected function _expires( $first, $second )
+	{
+		return ( $first !== null ? ( $second !== null ? min( $first, $second ) : $first ) : $second );
+	}
+
+
+	/**
 	 * Returns the parameters used by the html client.
 	 *
 	 * @param array $params Associative list of all parameters
@@ -487,66 +501,67 @@ abstract class Client_Html_Abstract
 
 
 	/**
-	 * Tests if the output of the sub-clients is cachable.
+	 * Returns the cache entry for the given unique ID and type.
 	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @param string $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
-	 * @return boolean True if the output can be cached, false if not
-	 * @deprecated Not used anymore, caching is done internally
-	 * @todo 2015.03 Remove method from API
+	 * @param string $type Type of the cache entry, i.e. "body" or "header"
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array $prefixes List of prefixes of all parameters that are relevant for generating the output
+	 * @param string $confkey Configuration key prefix that matches all relevant settings for the component
+	 * @return string Cached entry or empty string if not available
 	 */
-	protected function _isCachable( $what, $confpath, array $default )
+	protected function _getCached( $type, $uid, array $prefixes, $confkey )
 	{
-		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		if( !isset( $this->_cache ) )
 		{
-			if( $subclient->isCachable( $what ) === false ) {
-				return false;
+			$context = $this->_getContext();
+			$config = $context->getConfig()->get( $confkey, array() );
+
+			$keys = array(
+				'body' => $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':body', $config ),
+				'header' => $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':header', $config ),
+			);
+
+			$entries = $context->getCache()->getList( $keys );
+			$this->_cache = array();
+
+			foreach( $keys as $key => $hash ) {
+				$this->_cache[$key] = ( array_key_exists( $hash, $entries ) ? $entries[$hash] : null );
 			}
 		}
 
-		return true;
+		return ( array_key_exists( $type, $this->_cache ) ? $this->_cache[$type] : null );
 	}
 
 
 	/**
-	 * Returns the minimal expiration date.
+	 * Returns the cache entry for the given type and unique ID.
 	 *
-	 * @param string|null $first First expiration date or null
-	 * @param string|null $second Second expiration date or null
-	 * @return string|null Expiration date
+	 * @param string $type Type of the cache entry, i.e. "body" or "header"
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array $prefixes List of prefixes of all parameters that are relevant for generating the output
+	 * @param string $confkey Configuration key prefix that matches all relevant settings for the component
+	 * @param string $value Value string that should be stored for the given key
+	 * @param array $tags List of tag strings that should be assoicated to the
+	 * 	given value in the cache
+	 * @param string|null $expire Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format when the cache entry expires
 	 */
-	protected function _expires( $first, $second )
+	protected function _setCached( $type, $uid, array $prefixes, $confkey, $value, array $tags, $expire )
 	{
-		return ( $first !== null ? ( $second !== null ? min( $first, $second ) : $first ) : $second );
-	}
+		$context = $this->_getContext();
 
-
-	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 *
-	 * @param string $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
-	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
-	 * @deprecated Implement _getSubClientNames() to use process() from abstract class instead
-	 * @todo 2015.03 Remove method from API
-	 */
-	protected function _process( $confpath, array $default )
-	{
-		$view = $this->getView();
-
-		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		try
 		{
-			$subclient->setView( $view );
+			$config = $context->getConfig()->get( $confkey, array() );
+			$key = $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':' . $type, $config );
 
-			if( $subclient->process() === false ) {
-				return false;
-			}
+			$context->getCache()->set( $key, $value, array_unique( $tags ), $expire );
 		}
-
-		return true;
+		catch( Exception $e )
+		{
+			$msg = sprintf( 'Unable to set cache entry: %1$s', $e->getMessage() );
+			$context->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
+		}
 	}
 
 

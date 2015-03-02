@@ -84,7 +84,7 @@ class Client_Html_Basket_Mini_Default
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 
-		if( ( $html = $this->_getCached( $key ) ) === null )
+		if( ( $html = $this->_getBasketCached( $key ) ) === null )
 		{
 			try
 			{
@@ -143,7 +143,7 @@ class Client_Html_Basket_Mini_Default
 			$default = 'basket/mini/body-default.html';
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-			$this->_setCached( $key, $html );
+			$this->_setBasketCached( $key, $html );
 		}
 		else
 		{
@@ -171,7 +171,7 @@ class Client_Html_Basket_Mini_Default
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
 
-		if( ( $html = $this->_getCached( $key ) ) === null )
+		if( ( $html = $this->_getBasketCached( $key ) ) === null )
 		{
 			try
 			{
@@ -208,7 +208,7 @@ class Client_Html_Basket_Mini_Default
 				$default = 'basket/mini/header-default.html';
 
 				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-				$this->_setCached( $key, $html );
+				$this->_setBasketCached( $key, $html );
 			}
 			catch( Exception $e )
 			{
