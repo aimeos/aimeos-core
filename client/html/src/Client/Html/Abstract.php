@@ -17,17 +17,6 @@
 abstract class Client_Html_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
-	/**
-	 * @deprecated Not used as caching is done internally
-	 * @todo 2015.03 Remove constants
-	 */
-	const CACHE_BODY = 1;
-	/**
-	 * @deprecated Not used as caching is done internally
-	 * @todo 2015.03 Remove constants
-	 */
-	const CACHE_HEADER = 2;
-
 	private $_tags;
 	private $_view;
 	private $_clients;
@@ -62,20 +51,6 @@ abstract class Client_Html_Abstract
 		}
 
 		return $this->_view;
-	}
-
-
-	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 * @deprecated Not used anymore, caching is done internally
-	 * @todo 2015.03 Remove method from API
-	 */
-	public function isCachable( $what )
-	{
-		return false;
 	}
 
 

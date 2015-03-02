@@ -57,14 +57,6 @@ interface Client_Html_Interface
 	public function setView( MW_View_Interface $view );
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what );
-
-	/**
 	 * Modifies the cached body content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
