@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-17 07:43+0000\n"
-"Last-Translator: jerzys <jerzy.skalski@gmail.com>\n"
+"PO-Revision-Date: 2015-01-27 11:34+0000\n"
+"Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/arcavias-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,7 @@ msgid ""
 "%16$s\n"
 "%17$s\n"
 "%18$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/account/watch/body-default.html:90
@@ -551,7 +551,7 @@ msgstr "Nie znaleziono produktu <span class=\"searchstring\">\"%1$s\"</span>. Pr
 #: src/Client/Html/Abstract.php:506
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Nie określono typu \"%1$s/%2$s\" w \"%3$s\""
 
 #: src/Client/Html/Abstract.php:61
 #, php-format
@@ -965,7 +965,7 @@ msgstr "Nie można zapisać adresu klienta \"%1$s\": %2$s"
 #: src/Client/Html/Catalog/List/Default.php:366
 #, php-format
 msgid "Unable to set cache entry: %1$s"
-msgstr ""
+msgstr "Nie można wstawić do pamięci podręcznej: %1$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 msgid ""

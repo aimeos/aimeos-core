@@ -1,0 +1,1189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# danijel marinovic <danijel06@gmail.com>, 2015
+# Mario Domonji <mario.mk.gromovi@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2015-02-18 21:16+0000\n"
+"Last-Translator: Mario Domonji <mario.mk.gromovi@gmail.com>\n"
+"Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/arcavias-core/language/sr_RS/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr_RS\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: layouts/common/summary/detail-body-default.html:253
+#: layouts/basket/mini/main-body-default.html:29
+#, php-format
+msgid "%1$d article"
+msgid_plural "%1$d articles"
+msgstr[0] "%1$d proizvod"
+msgstr[1] "%1$d proizvoda"
+msgstr[2] "%1$d proizvoda"
+
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s), vatid (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. vatid (%13$s), language (%14$s),
+#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
+#. (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s), vatid (%18$s)
+#: layouts/common/summary/address-body-default.html:38
+#: layouts/common/summary/address-body-default.html:94
+#: layouts/email/common/text-summary-address-body-default.html:28
+#: layouts/email/common/text-summary-address-body-default.html:78
+#: layouts/checkout/standard/address-delivery-body-default.html:70
+#: layouts/checkout/standard/address-billing-body-default.html:60
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s %3$s %4$s %5$s\n"
+"%6$s %7$s\n"
+"%8$s\n"
+"%9$s %10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+"%14$s\n"
+"%15$s\n"
+"%16$s\n"
+"%17$s\n"
+"%18$s\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
+
+#. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/account/watch/body-default.html:90
+#: layouts/account/favorite/body-default.html:90
+#: layouts/catalog/list/promo-body-default.html:17
+#: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/pinned-body-default.html:89
+#: layouts/catalog/detail/suggest-body-default.html:18
+#: layouts/catalog/detail/seen-body-default.html:16
+#: layouts/catalog/detail/bought-body-default.html:17
+#: layouts/common/summary/detail-body-default.html:68
+#: layouts/basket/related/bought-body-default.html:16
+#: layouts/basket/mini/main-body-default.html:23
+#: layouts/email/watch/text-detail-body-default.html:19
+#: layouts/email/common/text-summary-detail-body-default.html:55
+#: layouts/checkout/standard/payment-body-default.html:38
+#: layouts/checkout/standard/delivery-body-default.html:38
+#: src/MW/View/Helper/Price/Default.php:78
+#, php-format
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:25
+#: src/MW/View/Helper/Price/Default.php:82
+#, php-format
+msgid "%1$s %2$s off"
+msgstr "%1$s %2$s popusta"
+
+#. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
+#. value (%2$s) and currency (%3$s)
+#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#, php-format
+msgid "%1$s ( %4$s%2$s%3$s )"
+msgstr "%1$s ( %4$s%2$s%3$s )"
+
+#: layouts/account/history/list-body-default.html:82
+#: layouts/account/history/list-body-default.html:97
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s na %2$s"
+
+#. / Percent format with value (%1$s) and % sign
+#: layouts/account/watch/body-default.html:92
+#: layouts/account/favorite/body-default.html:92
+#: layouts/catalog/list/promo-body-default.html:19
+#: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/pinned-body-default.html:91
+#: layouts/catalog/detail/suggest-body-default.html:20
+#: layouts/catalog/detail/seen-body-default.html:18
+#: layouts/catalog/detail/bought-body-default.html:19
+#: layouts/basket/related/bought-body-default.html:18
+#, php-format
+msgid "%1$s%%"
+msgstr "%1$s%%"
+
+#. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
+#. (%3$s)
+#: layouts/checkout/standard/payment-body-default.html:52
+#: layouts/checkout/standard/delivery-body-default.html:52
+#, php-format
+msgid "%1$s%3$s + %2$s%3$s"
+msgstr "%1$s%3$s + %2$s%3$s"
+
+#: layouts/basket/standard/coupon-body-default.html:30
+msgid "+"
+msgstr "+"
+
+#. / Price shipping format with shipping / payment cost value (%1$s) and
+#. currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:22
+#: src/MW/View/Helper/Price/Default.php:80
+#, php-format
+msgid "+ %1$s %2$s/item"
+msgstr "+ %1$s %2$s/stavka"
+
+#: layouts/email/common/text-summary-detail-body-default.html:91
+msgid "+ Payment costs"
+msgstr "+ Troškovi plaćanja"
+
+#: layouts/email/common/text-summary-detail-body-default.html:89
+#: layouts/email/common/text-summary-detail-body-default.html:99
+msgid "+ Shipping"
+msgstr "+ Dostava"
+
+#. / Rebate percent format with rebate percent value (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:28
+#: src/MW/View/Helper/Price/Default.php:84
+#, php-format
+msgid "-%1$s%%"
+msgstr "-%1$s%%"
+
+#: layouts/catalog/detail/basket-body-default.html:32
+msgid "Add to basket"
+msgstr "Dodaj u korpu"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:143
+#: layouts/checkout/standard/address-delivery-body-default.html:257
+#: layouts/checkout/standard/address-billing-body-default.html:133
+#: layouts/checkout/standard/address-billing-body-default.html:247
+msgid "Additional"
+msgstr "Dodatno"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:147
+#: layouts/checkout/standard/address-delivery-body-default.html:261
+#: layouts/checkout/standard/address-billing-body-default.html:137
+#: layouts/checkout/standard/address-billing-body-default.html:251
+msgid "Additional 2"
+msgstr "Dodatno 2"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:196
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:247
+#, php-format
+msgid "Address with ID \"%1$s\" not found"
+msgstr "Adresa sa ID \"%1$s\" nije pronađena"
+
+#: layouts/common/summary/address-body-default.html:19
+msgid "Addresses"
+msgstr "Adrese"
+
+#: layouts/email/common/html-legal-body-default.html:12
+#: layouts/email/common/text-legal-body-default.html:10
+msgid ""
+"All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
+"\n"
+"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
+msgstr "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n\nThis email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
+
+#: layouts/catalog/detail/basic-body-default.html:16
+msgid "Article no.:"
+msgstr "Br. proizvoda:"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:226
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:270
+#, php-format
+msgid "At least one billing address part is missing or invalid"
+msgstr "Barem jedan deo adrese racuna je pogresan ili nedostaje"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:236
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:269
+#, php-format
+msgid "At least one delivery address part is missing or invalid"
+msgstr "Barem jedan deo adrese za isporuku je pogresan ili nedostaje"
+
+#: layouts/basket/standard/body-default.html:41
+#: layouts/checkout/standard/address-body-default.html:17
+#: layouts/checkout/standard/payment-body-default.html:92
+#: layouts/checkout/standard/summary-body-default.html:18
+#: layouts/checkout/standard/delivery-body-default.html:92
+msgid "Back"
+msgstr "Nazad"
+
+#: layouts/basket/standard/body-default.html:36
+#: layouts/basket/mini/body-default.html:90
+#: layouts/checkout/standard/body-default.html:27
+msgid "Basket"
+msgstr "Korpa"
+
+#: layouts/common/summary/address-body-default.html:22
+#: layouts/email/common/text-summary-address-body-default.html:17
+#: layouts/checkout/standard/address-billing-body-default.html:45
+msgid "Billing address"
+msgstr "Adresa za račun"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:431
+#, php-format
+msgid "Billing address part \"%1$s\" is invalid"
+msgstr "Deo \"%1$s\" adrese racuna je pogresan"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:456
+#, php-format
+msgid "Billing address part \"%1$s\" is missing"
+msgstr "Deo \"%1$s\" adrese racuna nedostaje"
+
+#: layouts/checkout/standard/summary-body-default.html:19
+msgid "Buy now"
+msgstr "Kupi sada"
+
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:233
+#, php-format
+msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
+msgstr "Kategorija sa  ID \"%1$s\" nije ispod ID \"%2$s\""
+
+#: layouts/common/summary/address-body-default.html:24
+#: layouts/common/summary/address-body-default.html:80
+#: layouts/common/summary/detail-body-default.html:78
+#: layouts/common/summary/service-body-default.html:18
+#: layouts/common/summary/service-body-default.html:52
+#: layouts/common/summary/coupon-body-default.html:20
+msgid "Change"
+msgstr "Promeni"
+
+#: layouts/checkout/confirm/retry-body-default.html:23
+msgid "Change payment"
+msgstr "Promeniti nacin placanja"
+
+#: layouts/catalog/detail/additional-attribute-body-default.html:15
+msgid "Characteristics"
+msgstr "Karakteristike"
+
+#: layouts/basket/standard/body-default.html:45
+msgid "Checkout"
+msgstr "Odjaviti"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:155
+#: layouts/checkout/standard/address-delivery-body-default.html:269
+#: layouts/checkout/standard/address-billing-body-default.html:145
+#: layouts/checkout/standard/address-billing-body-default.html:259
+msgid "City"
+msgstr "Grad"
+
+#: src/Client/Html/Common/Factory/Abstract.php:66
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr "Klasa \"%1$s\" nije implementirana \"%2$s\""
+
+#: src/Client/Html/Abstract.php:342
+#: src/Client/Html/Common/Factory/Abstract.php:167
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klasa \"%1$s\" ne implementira interfejs \"%2$s\""
+
+#: src/Client/Html/Abstract.php:336
+#: src/Client/Html/Common/Factory/Abstract.php:161
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Klasa \"%1$s\" nije dostupna"
+
+#: src/Client/Html/Common/Factory/Abstract.php:60
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Klasa \"%1$s\" nije pronadjena"
+
+#: layouts/account/history/detail-body-default.html:17
+#: layouts/account/history/detail-body-default.html:21
+msgid "Close"
+msgstr "Zatvoriti"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:127
+#: layouts/checkout/standard/address-delivery-body-default.html:241
+#: layouts/checkout/standard/address-billing-body-default.html:117
+#: layouts/checkout/standard/address-billing-body-default.html:231
+msgid "Company"
+msgstr "Kompanija"
+
+#: layouts/checkout/confirm/body-default.html:19
+msgid "Confirmation"
+msgstr "Potvrda"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:160
+#: layouts/checkout/standard/address-delivery-body-default.html:278
+#: layouts/checkout/standard/address-billing-body-default.html:150
+#: layouts/checkout/standard/address-billing-body-default.html:264
+msgid "Country"
+msgstr "Zemlja"
+
+#: layouts/common/summary/coupon-body-default.html:22
+#: layouts/basket/standard/coupon-body-default.html:24
+msgid "Coupon codes"
+msgstr "Kod kupona"
+
+#: layouts/common/summary/coupon-body-default.html:17
+#: layouts/email/common/text-summary-coupon-body-default.html:11
+msgid "Coupons"
+msgstr "Kuponi"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:245
+#, php-format
+msgid "Customer with ID \"%1$s\" not found"
+msgstr "Kupac sa ID \"%1$s\" nije pornaden"
+
+#. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
+#. and last name (%3$s)
+#: layouts/email/common/html-salutation-body-default.html:19
+#: layouts/email/common/text-salutation-body-default.html:17
+#, php-format
+msgid "Dear %1$s %2$s %3$s"
+msgstr "Dragi %1$s %2$s %3$s"
+
+#: layouts/email/common/html-salutation-body-default.html:30
+#: layouts/email/common/text-salutation-body-default.html:28
+msgid "Dear Sir or Madam"
+msgstr "Postovani Gospodine ili Gospodjo"
+
+#: layouts/account/history/list-body-default.html:110
+#: layouts/email/common/text-summary-service-body-default.html:14
+msgid "Delivery"
+msgstr "Isporuka"
+
+#: layouts/common/summary/address-body-default.html:78
+#: layouts/email/common/text-summary-address-body-default.html:67
+#: layouts/checkout/standard/address-delivery-body-default.html:51
+msgid "Delivery address"
+msgstr "Adresa Isporuke"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:391
+#, php-format
+msgid "Delivery address part \"%1$s\" is invalid"
+msgstr "Deo \"%1$s\" adrese za isporuku je pogresan"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:417
+#, php-format
+msgid "Delivery address part \"%1$s\" is missing"
+msgstr "Deo \"%1$s\" adrese za isporuku nedostaje"
+
+#: layouts/catalog/detail/additional-text-body-default.html:18
+msgid "Description"
+msgstr "Opis"
+
+#: layouts/common/summary/detail-body-default.html:80
+#: layouts/email/watch/html-detail-body-default.html:101
+msgid "Details"
+msgstr "Detalji"
+
+#: layouts/catalog/detail/additional-download-body-default.html:19
+msgid "Downloads"
+msgstr "Preuzimanje"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:197
+#: layouts/checkout/standard/address-delivery-body-default.html:315
+#: layouts/checkout/standard/address-billing-body-default.html:187
+#: layouts/checkout/standard/address-billing-body-default.html:301
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#. / E-mail HTML title
+#: layouts/email/common/html-body-default.html:12
+msgid "E-mail notification"
+msgstr "E-mail obavestenje"
+
+#: layouts/account/favorite/body-default.html:103
+msgid "Favorite products"
+msgstr "Omiljeni proizvodi"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:205
+#: layouts/checkout/standard/address-delivery-body-default.html:323
+#: layouts/checkout/standard/address-billing-body-default.html:195
+#: layouts/checkout/standard/address-billing-body-default.html:309
+msgid "Fax"
+msgstr "Fax"
+
+#: layouts/checkout/standard/address-body-default.html:13
+msgid "Fields with an * are mandatory"
+msgstr "Polja sa * su obavezna"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:131
+#: layouts/checkout/standard/address-delivery-body-default.html:245
+#: layouts/checkout/standard/address-billing-body-default.html:121
+#: layouts/checkout/standard/address-billing-body-default.html:235
+msgid "First name"
+msgstr "Ime"
+
+#: layouts/catalog/filter/search-body-default.html:89
+msgid "Go"
+msgstr "Kreni"
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:163
+#, php-format
+msgid ""
+"I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and "
+"conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
+"href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
+"policy\">privacy policy</a>"
+msgstr "Prihvatam <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">uslove </a> i <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">zaštitu privatnosti</a>"
+
+#: layouts/account/watch/body-default.html:161
+msgid "If back in stock"
+msgstr "Ako se pojavi na stanju"
+
+#: layouts/account/watch/body-default.html:155
+msgid "If price decreases"
+msgstr "Ako pojeftini"
+
+#. / E-mail outro
+#: layouts/email/common/text-outro-body-default.html:9
+#: layouts/email/common/html-outro-body-default.html:11
+msgid "If you have any questions, please reply to this e-mail"
+msgstr "Ako imate kakvih pitanja , molim vas postavite ga na ovaj E-mail"
+
+#. / Tax rate format with tax rate in percent (%1$s)
+#: layouts/common/summary/detail-body-default.html:234
+#: layouts/email/watch/text-detail-body-default.html:31
+#: layouts/email/common/text-summary-detail-body-default.html:104
+#: src/MW/View/Helper/Price/Default.php:86
+#, php-format
+msgid "Incl. %1$s%% VAT"
+msgstr "Uklj.. %1$s%% PDV"
+
+#: layouts/common/summary/detail-body-default.html:244
+#: layouts/email/common/text-summary-detail-body-default.html:95
+#: layouts/email/common/text-summary-detail-body-default.html:107
+msgid "Included rebates"
+msgstr "Ukljuceni rabati"
+
+#: src/Client/Html/Checkout/Update/Factory.php:72
+#: src/Client/Html/Checkout/Confirm/Factory.php:72
+#: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Locale/Select/Factory.php:72
+#: src/Client/Html/Email/Watch/Factory.php:72
+#: src/Client/Html/Email/Payment/Factory.php:72
+#: src/Client/Html/Email/Delivery/Factory.php:72
+#: src/Client/Html/Basket/Standard/Factory.php:72
+#: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Basket/Related/Factory.php:71
+#: src/Client/Html/Account/Watch/Factory.php:72
+#: src/Client/Html/Account/Favorite/Factory.php:72
+#: src/Client/Html/Account/History/Factory.php:72
+#: src/Client/Html/Catalog/Stock/Factory.php:72
+#: src/Client/Html/Catalog/Session/Factory.php:72
+#: src/Client/Html/Catalog/Filter/Factory.php:72
+#: src/Client/Html/Catalog/Stage/Factory.php:72
+#: src/Client/Html/Catalog/Detail/Factory.php:72
+#: src/Client/Html/Catalog/List/Factory.php:72
+#: src/Client/Html/Catalog/Count/Factory.php:72
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Nedozvoljen karakter u imenu klase \"%1$s\""
+
+#: src/Client/Html/Abstract.php:299 src/Client/Html/Abstract.php:327
+#, php-format
+msgid "Invalid characters in client name \"%1$s\""
+msgstr "Nedozvoljen karakter u imenu klienta \"%1$s\""
+
+#: src/Client/Html/Common/Factory/Abstract.php:54
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr "Pogrešno ime klase \"%1$s\""
+
+#: src/Client/Html/Common/Factory/Abstract.php:86
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Pogrešan domen \"%1$s\""
+
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
+#, php-format
+msgid "Invalid process response from service provider with code \"%1$s\""
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:185
+#: layouts/checkout/standard/address-delivery-body-default.html:303
+#: layouts/checkout/standard/address-billing-body-default.html:175
+#: layouts/checkout/standard/address-billing-body-default.html:289
+msgid "Language"
+msgstr "Jezik"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:135
+#: layouts/checkout/standard/address-delivery-body-default.html:249
+#: layouts/checkout/standard/address-billing-body-default.html:125
+#: layouts/checkout/standard/address-billing-body-default.html:239
+msgid "Last name"
+msgstr "Prezime"
+
+#: layouts/catalog/session/seen-body-default.html:14
+msgid "Last seen"
+msgstr "Poslednje gledano"
+
+#: layouts/catalog/list/pagination-body-default.html:27
+msgid "Name"
+msgstr "Ime"
+
+#: layouts/catalog/stage/navigator-body-default.html:19
+#: layouts/checkout/standard/address-body-default.html:18
+#: layouts/checkout/standard/payment-body-default.html:93
+#: layouts/checkout/standard/delivery-body-default.html:93
+msgid "Next"
+msgstr "Sledece"
+
+#: layouts/catalog/list/head-body-default.html:51
+#, php-format
+msgid ""
+"No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
+"try again with a different keyword."
+msgstr ""
+
+#: src/Client/Html/Abstract.php:506
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#: src/Client/Html/Abstract.php:61
+#, php-format
+msgid "No view available"
+msgstr "Pregled nije moguc"
+
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
+#, php-format
+msgid "Number of coupon codes exceeds the limit"
+msgstr "Broj kodova kupona prekoracuje limit"
+
+#: src/MW/View/Helper/Price/Default.php:44
+#, php-format
+msgid "Object doesn't implement \"%1$s\""
+msgstr ""
+
+#: layouts/account/watch/body-default.html:149
+msgid "One month"
+msgstr "Jedan mesec"
+
+#: layouts/email/watch/text-intro-body-default.html:8
+#: layouts/email/watch/html-intro-body-default.html:9
+msgid "One or more products you are watching have been updated."
+msgstr "Jedan ili vise prozivoda koje gledate su azurirani"
+
+#: layouts/account/watch/body-default.html:147
+msgid "One week"
+msgstr "Jedna nedelja"
+
+#: layouts/checkout/standard/summary-option-body-default.html:12
+msgid "Options"
+msgstr "Opcije"
+
+#: layouts/account/history/list-body-default.html:96
+#: layouts/checkout/confirm/basic-body-default.html:16
+msgid "Order ID"
+msgstr "ID porudzbine"
+
+#: layouts/account/history/list-body-default.html:100
+msgid "Order channel"
+msgstr "Kanal Porudzbine"
+
+#: layouts/account/history/detail-body-default.html:18
+#: layouts/email/common/text-summary-detail-body-default.html:59
+#: layouts/checkout/confirm/basic-body-default.html:12
+msgid "Order details"
+msgstr "Detalji porudzbine"
+
+#: layouts/account/history/list-body-default.html:88
+msgid "Order history"
+msgstr "Historija porudzbine"
+
+#: src/Client/Html/Account/History/Detail/Default.php:241
+#, php-format
+msgid "Order with ID \"%1$s\" not found"
+msgstr "Porudzbina pod ID \"%1$s\" nije pronadena"
+
+#: layouts/catalog/detail/bought-body-default.html:24
+msgid "Other customers also bought"
+msgstr "Druge musterije su kupile i"
+
+#: layouts/account/watch/body-default.html:112
+#: layouts/account/watch/body-default.html:182
+#: layouts/account/favorite/body-default.html:112
+#: layouts/account/favorite/body-default.html:150
+#: layouts/catalog/list/pagination-body-default.html:54
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "Stranica %1$d od %2$d"
+
+#: layouts/account/history/list-body-default.html:105
+#: layouts/email/common/text-summary-service-body-default.html:39
+#: layouts/checkout/standard/order-payment-body-default.html:24
+msgid "Payment"
+msgstr "Placanje"
+
+#: layouts/common/summary/detail-body-default.html:217
+msgid "Payment costs"
+msgstr "Cena placanja"
+
+#: layouts/checkout/confirm/basic-body-default.html:20
+msgid "Payment status"
+msgstr "Status placanja"
+
+#: layouts/catalog/session/pinned-body-default.html:96
+msgid "Pinned products"
+msgstr "Zakačeni proizvodi"
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
+msgid "Please accept the terms and conditions"
+msgstr "Molimo Vas da prihvatite uslove"
+
+#: layouts/checkout/standard/summary-body-default.html:13
+msgid "Please check your order"
+msgstr "Molimo Vas da proverite svoju porudzbinu"
+
+#: layouts/checkout/standard/delivery-body-default.html:43
+msgid "Please choose your delivery method"
+msgstr "Molimo vas da izaberete metod isporuke"
+
+#: layouts/checkout/standard/payment-body-default.html:43
+msgid "Please choose your payment method"
+msgstr "Molimo Vas da izaberete metod placanja"
+
+#: layouts/catalog/filter/search-body-default.html:11
+msgid "Please enter at least three characters"
+msgstr "Molimo unesite barem tri znaka"
+
+#: layouts/catalog/detail/basket-selection-body-default.html:30
+msgid "Please select"
+msgstr "Molimo odaberite"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:151
+#: layouts/checkout/standard/address-delivery-body-default.html:265
+#: layouts/checkout/standard/address-billing-body-default.html:141
+#: layouts/checkout/standard/address-billing-body-default.html:255
+msgid "Postal code"
+msgstr "Postanski broj"
+
+#: layouts/catalog/stage/navigator-body-default.html:16
+msgid "Previous"
+msgstr "Prijasnje"
+
+#: layouts/catalog/list/pagination-body-default.html:35
+#: layouts/common/summary/detail-body-default.html:88
+#: layouts/email/common/text-summary-detail-body-default.html:74
+msgid "Price"
+msgstr "Cena"
+
+#: layouts/checkout/standard/order-payment-body-default.html:28
+#: layouts/checkout/standard/order-payment-body-default.html:37
+msgid "Proceed"
+msgstr "Nastavi"
+
+#: layouts/basket/related/bought-body-default.html:23
+msgid "Products you might be also interested in"
+msgstr "Proizvodi koji bi Vas mogli zanimati"
+
+#: layouts/common/summary/detail-body-default.html:87
+#: layouts/email/common/text-summary-detail-body-default.html:72
+msgid "Quantity"
+msgstr "kolicina"
+
+#: layouts/basket/related/body-default.html:18
+msgid "Related"
+msgstr "Povezan"
+
+#: layouts/catalog/list/pagination-body-default.html:45
+msgid "Relevance"
+msgstr "Važnost"
+
+#. / Product search hint with user provided search string (%1$s)
+#: layouts/catalog/list/header-default.html:22
+#, php-format
+msgid "Result for \"%1$s\""
+msgstr "Reazultati za \"%1$s\""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:118
+#: layouts/checkout/standard/address-delivery-body-default.html:232
+#: layouts/checkout/standard/address-billing-body-default.html:108
+#: layouts/checkout/standard/address-billing-body-default.html:222
+msgid "Salutation"
+msgstr "Pozdrav"
+
+#: layouts/catalog/list/head-body-default.html:48
+#, php-format
+msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
+msgid_plural ""
+"Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
+"articles)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:162
+#: layouts/checkout/standard/address-delivery-body-default.html:280
+#: layouts/checkout/standard/address-billing-body-default.html:152
+#: layouts/checkout/standard/address-billing-body-default.html:266
+msgid "Select country"
+msgstr "Odabrati zemlju"
+
+#: layouts/locale/select/currency-body-default.html:18
+msgid "Select currency"
+msgstr "Odabrati valutu"
+
+#: layouts/locale/select/language-body-default.html:15
+msgid "Select language"
+msgstr "Odabrati jezik"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:120
+#: layouts/checkout/standard/address-delivery-body-default.html:234
+#: layouts/checkout/standard/address-billing-body-default.html:110
+#: layouts/checkout/standard/address-billing-body-default.html:224
+msgid "Select salutation"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:173
+#: layouts/checkout/standard/address-delivery-body-default.html:291
+#: layouts/checkout/standard/address-billing-body-default.html:163
+#: layouts/checkout/standard/address-billing-body-default.html:277
+msgid "Select state"
+msgstr "Odabrati drzavu"
+
+#: layouts/email/common/text-summary-detail-body-default.html:82
+msgid "Service fees"
+msgstr "Naplata usluge"
+
+#: layouts/common/summary/service-body-default.html:13
+msgid "Services"
+msgstr "Usluga"
+
+#: layouts/common/summary/detail-body-default.html:209
+msgid "Shipping"
+msgstr "Slanje"
+
+#: layouts/catalog/filter/body-default.html:114
+msgid "Show"
+msgstr "Pokazati"
+
+#: layouts/catalog/list/quote-body-default.html:19
+msgid "Show all quotes"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:43
+msgid "Sort by:"
+msgstr "Sortiraj po:"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:171
+#: layouts/checkout/standard/address-delivery-body-default.html:273
+#: layouts/checkout/standard/address-delivery-body-default.html:289
+#: layouts/checkout/standard/address-billing-body-default.html:161
+#: layouts/checkout/standard/address-billing-body-default.html:275
+msgid "State"
+msgstr "Drzava"
+
+#. / Stock string composition with warehouse name (%1$s, normally left out)
+#. and stock level string (%2$s)
+#: layouts/catalog/stock/body-default.html:45
+#, php-format
+msgid "Stock: %1$s, %2$s"
+msgstr "Stanje: %1$s, %2$s"
+
+#. / Stock string composition with warehouse name (%1$s, normally left out),
+#. stock level string (%2$s) and back in stock date (%3$s)
+#: layouts/catalog/stock/body-default.html:47
+#, php-format
+msgid "Stock: %1$s, %2$s, back on %3$s"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:139
+#: layouts/checkout/standard/address-delivery-body-default.html:253
+#: layouts/checkout/standard/address-billing-body-default.html:129
+#: layouts/checkout/standard/address-billing-body-default.html:243
+msgid "Street"
+msgstr "Ulica"
+
+#: layouts/common/summary/detail-body-default.html:202
+#: layouts/email/common/text-summary-detail-body-default.html:87
+#: layouts/email/common/text-summary-detail-body-default.html:97
+msgid "Sub-total"
+msgstr ""
+
+#: layouts/catalog/detail/suggest-body-default.html:25
+msgid "Suggested products"
+msgstr "Predlozeni proizvodi"
+
+#: layouts/common/summary/detail-body-default.html:89
+#: layouts/email/common/text-summary-detail-body-default.html:76
+msgid "Sum"
+msgstr "Zbir"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:201
+#: layouts/checkout/standard/address-delivery-body-default.html:319
+#: layouts/checkout/standard/address-billing-body-default.html:191
+#: layouts/checkout/standard/address-billing-body-default.html:305
+msgid "Telephone"
+msgstr "Telefon"
+
+#: src/Client/Html/Abstract.php:478
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr ""
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:159
+msgid "Terms and conditions"
+msgstr "Uslovi koriscenja"
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/text-intro-body-default.html:11
+#: layouts/email/payment/html-intro-body-default.html:12
+#, php-format
+msgid "Thank you for your order %1$s from %2$s."
+msgstr ""
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/4/text-intro-body-default.html:11
+#: layouts/email/payment/4/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"Thank you for your order %1$s from %2$s.\n"
+"\n"
+"The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
+msgstr ""
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/6/text-intro-body-default.html:11
+#: layouts/email/payment/6/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"Thank you for your order %1$s from %2$s.\n"
+"\n"
+"We received the payment and will care about your order immediately."
+msgstr ""
+
+#: layouts/checkout/confirm/5/intro-body-default.html:12
+msgid ""
+"Thank you for your order and authorizing the payment.\n"
+"An e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#: layouts/checkout/confirm/6/intro-body-default.html:12
+msgid ""
+"Thank you for your order.\n"
+"We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/text-intro-body-default.html:11
+#: layouts/email/delivery/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"The delivery status of your order %1$s from %2$s has been changed to "
+"\"%3$s\"."
+msgstr "Status isporuke za vasu porudzbinu %1$s od %2$s je promenjen  na \"%3$s\""
+
+#: layouts/checkout/confirm/1/intro-body-default.html:12
+msgid ""
+"The order was canceled.\n"
+"Do you wish to retry your order?"
+msgstr ""
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/6/text-intro-body-default.html:11
+#: layouts/email/delivery/6/html-intro-body-default.html:12
+#, php-format
+msgid "The parcel for your order %1$s from %2$s could not be delivered."
+msgstr ""
+
+#: layouts/checkout/confirm/4/intro-body-default.html:12
+msgid ""
+"The payment confirmation for your order is still pending.\n"
+"You will get an e-mail as soon as the payment is authorized."
+msgstr ""
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/3/text-intro-body-default.html:11
+#: layouts/email/payment/3/html-intro-body-default.html:12
+#, php-format
+msgid "The payment for your order %1$s from %2$s has been refunded."
+msgstr ""
+
+#: layouts/account/watch/body-default.html:150
+msgid "Three month"
+msgstr "Tri meseca"
+
+#: layouts/account/watch/body-default.html:145
+msgid "Time frame"
+msgstr "Vremenski period"
+
+#: layouts/catalog/list/promo-body-default.html:24
+msgid "Top seller"
+msgstr "Naj prodavaniji"
+
+#: layouts/common/summary/detail-body-default.html:225
+#: layouts/email/common/text-summary-detail-body-default.html:93
+#: layouts/email/common/text-summary-detail-body-default.html:101
+msgid "Total"
+msgstr "Ukupno"
+
+#: layouts/common/summary/detail-body-default.html:252
+msgid "Total quantity"
+msgstr "Ukupna kolicina"
+
+#: layouts/checkout/confirm/retry-body-default.html:24
+msgid "Try again"
+msgstr "Pokusaj opet"
+
+#: layouts/account/watch/body-default.html:148
+msgid "Two weeks"
+msgstr "Dve nedelje"
+
+#: src/Client/Html/Common/Decorator/Abstract.php:49
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
+#, php-format
+msgid "Unable to save address for customer \"%1$s\": %2$s"
+msgstr ""
+
+#: src/Client/Html/Catalog/Filter/Default.php:360
+#: src/Client/Html/Catalog/Stage/Default.php:357
+#: src/Client/Html/Catalog/Detail/Default.php:422
+#: src/Client/Html/Catalog/List/Default.php:366
+#, php-format
+msgid "Unable to set cache entry: %1$s"
+msgstr ""
+
+#: layouts/checkout/confirm/2/intro-body-default.html:12
+msgid ""
+"Unfortunately, the payment for your order was refused.\n"
+"Do you wish to retry?"
+msgstr ""
+
+#: layouts/basket/standard/body-default.html:43
+msgid "Update"
+msgstr "Azuriraj"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:193
+#: layouts/checkout/standard/address-delivery-body-default.html:311
+#: layouts/checkout/standard/address-billing-body-default.html:183
+#: layouts/checkout/standard/address-billing-body-default.html:297
+msgid "Vat ID"
+msgstr "PDV ID"
+
+#: layouts/account/watch/body-default.html:166
+msgid "Watch"
+msgstr "Gledaj"
+
+#: layouts/account/watch/body-default.html:103
+#: layouts/email/watch/text-detail-body-default.html:38
+msgid "Watched products"
+msgstr "Gledani prozivodi"
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/7/text-intro-body-default.html:11
+#: layouts/email/delivery/7/html-intro-body-default.html:12
+#, php-format
+msgid "We received the returned parcel for your order %1$s from %2$s."
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:209
+#: layouts/checkout/standard/address-delivery-body-default.html:327
+#: layouts/checkout/standard/address-billing-body-default.html:199
+#: layouts/checkout/standard/address-billing-body-default.html:313
+msgid "Web site"
+msgstr "Web stranica"
+
+#: layouts/account/watch/body-default.html:125
+#: layouts/account/favorite/body-default.html:124
+#: layouts/catalog/session/pinned-body-default.html:105
+#: layouts/common/summary/detail-body-default.html:155
+#: layouts/basket/standard/coupon-body-default.html:39
+msgid "X"
+msgstr "X"
+
+#: layouts/account/history/list-body-default.html:81
+#: layouts/catalog/stock/body-default.html:48
+#: layouts/email/delivery/7/text-intro-body-default.html:15
+#: layouts/email/delivery/7/html-intro-body-default.html:16
+#: layouts/email/delivery/6/text-intro-body-default.html:15
+#: layouts/email/delivery/6/html-intro-body-default.html:16
+#: layouts/email/delivery/3/text-intro-body-default.html:15
+#: layouts/email/delivery/3/html-intro-body-default.html:16
+#: layouts/email/delivery/text-intro-body-default.html:15
+#: layouts/email/delivery/html-intro-body-default.html:16
+#: layouts/email/payment/4/text-intro-body-default.html:17
+#: layouts/email/payment/4/html-intro-body-default.html:18
+#: layouts/email/payment/6/text-intro-body-default.html:17
+#: layouts/email/payment/6/html-intro-body-default.html:18
+#: layouts/email/payment/3/text-intro-body-default.html:15
+#: layouts/email/payment/3/html-intro-body-default.html:16
+#: layouts/email/payment/text-intro-body-default.html:15
+#: layouts/email/payment/html-intro-body-default.html:16
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:20
+msgid "You are here:"
+msgstr "Vi ste ovde"
+
+#: layouts/checkout/standard/order-payment-body-default.html:25
+msgid "You will now be forwarded to the next step"
+msgstr "Necete biti prosledeni na sledeci korak"
+
+#. / Delivery e-mail subject with order ID
+#. / Payment e-mail subject with order ID
+#: layouts/email/delivery/header-default.html:9
+#: layouts/email/payment/header-default.html:9
+#, php-format
+msgid "Your order %1$s"
+msgstr "Vasa porudzbina%1$s"
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/3/text-intro-body-default.html:11
+#: layouts/email/delivery/3/html-intro-body-default.html:12
+#, php-format
+msgid "Your order %1$s from %2$s has been dispatched."
+msgstr "Vasa porudzbina %1$s od %2$s je poslana"
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:28
+msgid "Your search result"
+msgstr "Vasi rezultati pretrage"
+
+#. / Product notification e-mail subject
+#: layouts/email/watch/header-default.html:9
+msgid "Your watched products"
+msgstr "Vasi gledani proizvodi"
+
+#: layouts/checkout/standard/address-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Address/Default.php:12
+#, php-format
+msgid "address"
+msgstr "adresa"
+
+#: layouts/common/summary/service-body-default.html:16
+#: layouts/checkout/standard/delivery-body-default.html:42
+#: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+#, php-format
+msgid "delivery"
+msgstr "isporuka"
+
+#. / Price quantity format with quantity (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:16
+#: src/MW/View/Helper/Price/Default.php:76
+#, php-format
+msgid "from %1$s"
+msgstr "od %1$s"
+
+#: layouts/common/summary/address-body-default.html:131
+#: layouts/email/common/text-summary-address-body-default.html:115
+#: layouts/checkout/standard/address-delivery-body-default.html:55
+msgid "like billing address"
+msgstr "isto kao adresa za račun"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:219
+#: layouts/checkout/standard/address-billing-body-default.html:209
+msgid "new address"
+msgstr "nova adresa"
+
+#: layouts/checkout/standard/order-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Order/Default.php:12
+#, php-format
+msgid "order"
+msgstr "porudzbina"
+
+#: layouts/common/summary/service-body-default.html:50
+#: layouts/checkout/standard/payment-body-default.html:42
+#: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+#, php-format
+msgid "payment"
+msgstr "placanje"
+
+#. / code for "product is in stock"
+#: layouts/catalog/stock/body-default.html:56
+msgid "stock-high"
+msgstr "zalihe-puno"
+
+#. / code for "only a few products are available"
+#: layouts/catalog/stock/body-default.html:54
+msgid "stock-low"
+msgstr "zalihe-malo"
+
+#. / code for "product is out of stock"
+#: layouts/catalog/stock/body-default.html:52
+msgid "stock-out"
+msgstr "zalihe-nema"
+
+#. / code for "product is available (without stock limit)"
+#: layouts/catalog/stock/body-default.html:58
+msgid "stock-unlimited"
+msgstr "zalihe-neograničene"
+
+#: layouts/checkout/standard/summary-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+#, php-format
+msgid "summary"
+msgstr "rezime"
+
+#: layouts/catalog/list/pagination-body-default.html:25
+msgid "▲ Name"
+msgstr "▲ Ime"
+
+#: layouts/catalog/list/pagination-body-default.html:33
+msgid "▲ Price"
+msgstr "▲ Cena"
+
+#: layouts/account/watch/body-default.html:113
+#: layouts/account/watch/body-default.html:183
+#: layouts/account/favorite/body-default.html:113
+#: layouts/account/favorite/body-default.html:151
+#: layouts/catalog/list/pagination-body-default.html:55
+msgid "▶"
+msgstr "▶"
+
+#: layouts/account/watch/body-default.html:114
+#: layouts/account/watch/body-default.html:184
+#: layouts/account/favorite/body-default.html:114
+#: layouts/account/favorite/body-default.html:152
+#: layouts/catalog/list/pagination-body-default.html:56
+msgid "▶▶"
+msgstr "▶▶"
+
+#: layouts/catalog/list/pagination-body-default.html:23
+msgid "▼ Name"
+msgstr "▼ Ime"
+
+#: layouts/catalog/list/pagination-body-default.html:31
+msgid "▼ Price"
+msgstr "▼ Cena"
+
+#: layouts/account/watch/body-default.html:111
+#: layouts/account/watch/body-default.html:181
+#: layouts/account/favorite/body-default.html:111
+#: layouts/account/favorite/body-default.html:149
+#: layouts/catalog/list/pagination-body-default.html:53
+msgid "◀"
+msgstr "◀"
+
+#: layouts/account/watch/body-default.html:110
+#: layouts/account/watch/body-default.html:180
+#: layouts/account/favorite/body-default.html:110
+#: layouts/account/favorite/body-default.html:148
+#: layouts/catalog/list/pagination-body-default.html:52
+msgid "◀◀"
+msgstr "◀◀"

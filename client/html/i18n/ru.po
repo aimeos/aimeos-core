@@ -6,15 +6,15 @@
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
 # Dimitri <doleiynyk@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2014
-# nsendetzky <n.sendetzky@metaways.de>, 2014
+# nsendetzky, 2014
+# nsendetzky, 2014
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-12 09:08+0000\n"
+"PO-Revision-Date: 2014-11-11 11:46+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -642,7 +642,7 @@ msgstr "Статус оплаты"
 
 #: layouts/catalog/session/pinned-body-default.html:96
 msgid "Pinned products"
-msgstr "Закреплённые товары"
+msgstr "Отмеченные товары"
 
 #: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
 msgid "Please accept the terms and conditions"
@@ -705,7 +705,7 @@ msgstr "Связанный"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
-msgstr "рейтинг"
+msgstr "рейтингу"
 
 #. / Product search hint with user provided search string (%1$s)
 #: layouts/catalog/list/header-default.html:22

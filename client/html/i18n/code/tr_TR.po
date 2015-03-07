@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Metal <meteoramic@yahoo.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-02-14 11:55+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr_TR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Şirket"
+
+#. Address salutation
+msgid "mr"
+msgstr "Bay"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Hanım"
+
+#. Address salutation
+msgid "miss"
+msgstr "Bayan"
+
+#. Product attribute
+msgid "size"
+msgstr "Ebat"
+
+#. Product attribute
+msgid "length"
+msgstr "Uzunluk"
+
+#. Product attribute
+msgid "width"
+msgstr "Genişlik"
+
+#. Product attribute
+msgid "color"
+msgstr "Renk"
+
+#. Product attribute
+msgid "option"
+msgstr "Seçenek"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "tekrarlandı"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "tamamlanmadı"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "silindi"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "iptal edildi"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "reddedildi"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "geri ödendi"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "beklemede"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "yetkilendirilmiş"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "teslim alındı"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "tamamlanmadı"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "silindi"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "beklemede"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "devam etmekte"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "sevk edildi"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "teslim edildi"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "kayıp"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "reddedildi"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "geri döndü"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "Hesap sahibi"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "Hesap numarası"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr "Banka kodu"
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "Banka adı"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "depo:varsayılan"
+
+#. Favorite action
+msgid "favorite"
+msgstr "favori"
+
+#. Pin action
+msgid "pin"
+msgstr "sabitle"
+
+#. Watch action
+msgid "watch"
+msgstr "izle"

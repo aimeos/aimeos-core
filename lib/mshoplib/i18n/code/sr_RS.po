@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Mario Domonji <mario.mk.gromovi@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-02-16 19:30+0000\n"
+"Last-Translator: Mario Domonji <mario.mk.gromovi@gmail.com>\n"
+"Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/arcavias-core/language/sr_RS/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr_RS\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Fali adresa racuna"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Fali adresa dostave"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "Adresa za račun nije dozvoljena"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Adresa za dostavu nije dozvoljena"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Fali opcija plaćanja"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Fali opcija dostave"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Opcija plaćanja nije dozvoljena"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Opcija dostave nije dozvoljena"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Izvinite, barem jedan proizvod ne postoji više. Molimo Vas da ga uklonite iz korpe da nastavite"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Izvinite, barem jedan proizvod je isključen. Molimo Vas da ga uklonite iz korpe da nastavite"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Izvinite, barem jedan proizvod više nije dostupan. Molimo Vas da ga uklonite iz korpe da nastavite"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "Cena barem jednog proizvoda se u međuvremenu promenila i automatski je ažurirana"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Izvinite, barem jedan proizvod više nije na stanju. Molimo Vas da ga uklonite iz korpe da nastavite"

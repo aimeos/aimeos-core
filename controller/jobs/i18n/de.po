@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2013-2014
+# Janosch Ott <janosch.ott@bluewin.ch>, 2015
+# nsendetzky, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-10 20:42+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2015-02-24 08:34+0000\n"
+"Last-Translator: Janosch Ott <janosch.ott@bluewin.ch>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +75,7 @@ msgstr "Controllerpfad ist leer"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:39
 msgid "Creates bought together product suggestions"
-msgstr ""
+msgstr "Erstellt Vorschläge für zusammen gekaufte Produkte"
 
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
@@ -176,7 +177,7 @@ msgstr "Methode \"%1$s\" nicht verfügbar"
 #: src/Controller/Jobs/Abstract.php:82
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Für das Item \"%1$s/%2$s\" in \"%3$s\" wurde kein Typ gefunden"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
 #, php-format
@@ -205,7 +206,7 @@ msgstr "E-Mail-Benachrichtigungen für Produkte"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:28
 msgid "Products bought together"
-msgstr ""
+msgstr "Zusammen gekaufte Produkte"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"

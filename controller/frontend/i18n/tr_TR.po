@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Metal <meteoramic@yahoo.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2015-02-15 17:08+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr_TR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/Controller/Frontend/Basket/Default.php:442
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr "\"%1$s\" ID'li ürünü eklemeye izin verilmiyor"
+
+#: src/Controller/Frontend/Basket/Default.php:851
+#, php-format
+msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
+msgstr "Mevcut nitelik ID'ler \"%1$s\" verilen nitelik ID'ler \"%2$s\" ile eşleşmiyor"
+
+#: src/Controller/Frontend/Basket/Default.php:157
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
+msgstr "\"%1$d\" konumundaki sepet öğesi değiştirilemez"
+
+#: src/Controller/Frontend/Basket/Default.php:131
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
+msgstr "\"%1$d\" konumundaki sepet öğesi manuel olarak silinemez"
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:66
+#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:60
+#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Factory.php:84
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Sınıf \"%1$s\" mevcut değil"
+
+#: src/Controller/Frontend/Factory.php:63
+#, php-format
+msgid "Controller path is empty"
+msgstr "Denetleyici yolu boş"
+
+#: src/Controller/Frontend/Basket/Default.php:202
+#: src/Controller/Frontend/Basket/Default.php:249
+#, php-format
+msgid "Coupon code \"%1$s\" is invalid"
+msgstr "\"%1$s\" kupon kodu geçersiz"
+
+#: src/Controller/Frontend/Basket/Default.php:217
+#, php-format
+msgid "Coupon code \"%1$s\" is not allowed"
+msgstr "\"%1$s\" kupon koduna izin verilmiyor"
+
+#: src/Controller/Frontend/Basket/Default.php:670
+#, php-format
+msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
+msgstr "\"%2$s\" ID'li ürün için geçersiz \"%1$s\" referanslar"
+
+#: src/Controller/Frontend/Basket/Default.php:781
+#, php-format
+msgid "Invalid address properties, please check your input"
+msgstr "Geçersiz adres özellikleri, girişinizi kontrol edin"
+
+#: src/Controller/Frontend/Order/Factory.php:62
+#: src/Controller/Frontend/Service/Factory.php:62
+#: src/Controller/Frontend/Basket/Factory.php:63
+#: src/Controller/Frontend/Common/Factory/Abstract.php:54
+#: src/Controller/Frontend/Catalog/Factory.php:63
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "\"%1$s\" sınıf adında geçersiz karakterler"
+
+#: src/Controller/Frontend/Factory.php:75
+#, php-format
+msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:86
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Geçersiz domain \"%1$s\""
+
+#: src/Controller/Frontend/Factory.php:90
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Geçersiz fabrika \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:286
+#, php-format
+msgid "Invalid value for address type \"%1$s\""
+msgstr "\"%1$s\" adres türü için geçersiz değer"
+
+#: src/Controller/Frontend/Basket/Default.php:955
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr "Domain \"%1$s\" ve kod \"%2$s\" için liste türü bulunamadı"
+
+#: src/Controller/Frontend/Basket/Default.php:1057
+#, php-format
+msgid "No article found for selected attributes and product ID \"%1$s\""
+msgstr "Seçilen nitelikler ve \"%1$s\" ürün ID'si için makale bulunamadı"
+
+#: src/Controller/Frontend/Basket/Default.php:922
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "\"%1$s\" kodlu ürün bulunamadı"
+
+#: src/Controller/Frontend/Basket/Default.php:699
+#, php-format
+msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
+msgstr "\"%1$s\" ürün ID'si ve \"%2$s\" depo için stok mevcut değil"
+
+#: src/Controller/Frontend/Basket/Default.php:1029
+#, php-format
+msgid "No unique article found for selected attributes and product ID \"%1$s\""
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:493
+#, php-format
+msgid "One or more items aren't available for the chosen locale"
+msgstr "Seçilen yerel ayar için bir ya da daha fazla öğe mevcut değil"
+
+#: src/Controller/Frontend/Basket/Default.php:224
+#, php-format
+msgid "Requirements for coupon code \"%1$s\" aren't met"
+msgstr "\"%1$s\" kupon kodu için gereksinimler karşılanmıyor"
+
+#: src/Controller/Frontend/Service/Default.php:175
+#, php-format
+msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
+msgstr "Tür \"%1$s\" ve ID \"%2$s\" ID için servis öğesi bulunamadı"
+
+#: src/Controller/Frontend/Basket/Default.php:378
+#: src/Controller/Frontend/Basket/Default.php:414
+#, php-format
+msgid "There are not enough products \"%1$s\" in stock"
+msgstr "Stokta yeterli ürün \"%1$s\" yok"
+
+#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
+#, php-format
+msgid "Unable to call method \"%1$s::%2$s\""
+msgstr ""
+
+#: src/Controller/Frontend/Service/Default.php:69
+#, php-format
+msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
+msgstr "\"%2$s\" ID'li servis için sağlayıcı \"%1$s\" oluşturulamıyor"
+
+#: src/Controller/Frontend/Basket/Default.php:315
+#, php-format
+msgid "Unknown attributes \"%1$s\""
+msgstr "Bilinmeyen nitelikler \"%1$s\""

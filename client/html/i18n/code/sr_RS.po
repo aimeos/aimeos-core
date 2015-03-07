@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# danijel marinovic <danijel06@gmail.com>, 2015
+# Mario Domonji <mario.mk.gromovi@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-02-16 19:29+0000\n"
+"Last-Translator: Mario Domonji <mario.mk.gromovi@gmail.com>\n"
+"Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/arcavias-core/language/sr_RS/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr_RS\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Firma"
+
+#. Address salutation
+msgid "mr"
+msgstr "gosp"
+
+#. Address salutation
+msgid "mrs"
+msgstr "gosp"
+
+#. Address salutation
+msgid "miss"
+msgstr "gdica"
+
+#. Product attribute
+msgid "size"
+msgstr "Veličina"
+
+#. Product attribute
+msgid "length"
+msgstr "Dužina"
+
+#. Product attribute
+msgid "width"
+msgstr "Širina"
+
+#. Product attribute
+msgid "color"
+msgstr "boja"
+
+#. Product attribute
+msgid "option"
+msgstr "Opcija"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "ponovljeno"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "nezavršeno"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "obrisano"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "prekinuto"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odbijeno"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refundirano"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "na čekanju"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "odobreno"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "primljeno"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "nezavrseno"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "obrisano"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "cekanje"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "u napretku"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "poslano"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "isporuceno"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "izgubljeno"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odbijeno"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "vraćeno"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "vlasnik računa"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "broj računa"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr "broj banke"
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "ime banke"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "skladiste:zadano"
+
+#. Favorite action
+msgid "favorite"
+msgstr "omiljen"
+
+#. Pin action
+msgid "pin"
+msgstr "pin"
+
+#. Watch action
+msgid "watch"
+msgstr "gledanje"

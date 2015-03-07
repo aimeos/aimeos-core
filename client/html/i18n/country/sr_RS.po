@@ -1,0 +1,769 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# danijel marinovic <danijel06@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-02-16 20:22+0000\n"
+"Last-Translator: danijel marinovic <danijel06@gmail.com>\n"
+"Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/arcavias-core/language/sr_RS/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr_RS\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "AD"
+msgstr "andora"
+
+msgid "AE"
+msgstr "Ujedinjeni Arapski Emirati"
+
+msgid "AF"
+msgstr "Afganistan"
+
+msgid "AG"
+msgstr ""
+
+msgid "AI"
+msgstr ""
+
+msgid "AL"
+msgstr "Albanija"
+
+msgid "AM"
+msgstr "Armenija"
+
+msgid "AO"
+msgstr "Angola"
+
+msgid "AQ"
+msgstr "Antartika"
+
+msgid "AR"
+msgstr "Argentina"
+
+msgid "AS"
+msgstr ""
+
+msgid "AT"
+msgstr "Austrija"
+
+msgid "AU"
+msgstr "Australija"
+
+msgid "AW"
+msgstr "Aruba"
+
+msgid "AX"
+msgstr ""
+
+msgid "AZ"
+msgstr "Azerbejdzan"
+
+msgid "BA"
+msgstr "Bosna i Hercegovina"
+
+msgid "BB"
+msgstr "Barbados"
+
+msgid "BD"
+msgstr "Banglades"
+
+msgid "BE"
+msgstr "Belgija"
+
+msgid "BF"
+msgstr ""
+
+msgid "BG"
+msgstr "Bugarska"
+
+msgid "BH"
+msgstr "Bahrain"
+
+msgid "BI"
+msgstr ""
+
+msgid "BJ"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BM"
+msgstr "Bermuda"
+
+msgid "BN"
+msgstr ""
+
+msgid "BO"
+msgstr ""
+
+msgid "BQ"
+msgstr ""
+
+msgid "BR"
+msgstr "Brazil"
+
+msgid "BS"
+msgstr "Bahami"
+
+msgid "BT"
+msgstr ""
+
+msgid "BV"
+msgstr ""
+
+msgid "BW"
+msgstr ""
+
+msgid "BY"
+msgstr "Belorusija"
+
+msgid "BZ"
+msgstr ""
+
+msgid "CA"
+msgstr "Kanada"
+
+msgid "CC"
+msgstr ""
+
+msgid "CD"
+msgstr ""
+
+msgid "CF"
+msgstr "Centralna Africka Republika"
+
+msgid "CG"
+msgstr "Kongo"
+
+msgid "CH"
+msgstr "Svajcarska"
+
+msgid "CI"
+msgstr "Obala Slonovace"
+
+msgid "CK"
+msgstr ""
+
+msgid "CL"
+msgstr "Cile"
+
+msgid "CM"
+msgstr "Kamerun"
+
+msgid "CN"
+msgstr "Kina"
+
+msgid "CO"
+msgstr "Kolumbija"
+
+msgid "CR"
+msgstr "Kosta Rika"
+
+msgid "CU"
+msgstr "Kuba"
+
+msgid "CV"
+msgstr ""
+
+msgid "CW"
+msgstr ""
+
+msgid "CX"
+msgstr ""
+
+msgid "CY"
+msgstr "Kipar"
+
+msgid "CZ"
+msgstr "Ceska Republika"
+
+msgid "DE"
+msgstr "Nemacka"
+
+msgid "DJ"
+msgstr "Djibuti"
+
+msgid "DK"
+msgstr "Danska"
+
+msgid "DM"
+msgstr ""
+
+msgid "DO"
+msgstr "Dominikanska Republika"
+
+msgid "DZ"
+msgstr ""
+
+msgid "EC"
+msgstr "Ekvador"
+
+msgid "EE"
+msgstr "Estonija"
+
+msgid "EG"
+msgstr "Egipat"
+
+msgid "EH"
+msgstr "Zapadna Sahara"
+
+msgid "ER"
+msgstr "Eritreja"
+
+msgid "ES"
+msgstr "Spanski"
+
+msgid "ET"
+msgstr "Etiopija"
+
+msgid "FI"
+msgstr "Finska"
+
+msgid "FJ"
+msgstr "Fidi"
+
+msgid "FK"
+msgstr ""
+
+msgid "FM"
+msgstr "Mikronezija"
+
+msgid "FO"
+msgstr ""
+
+msgid "FR"
+msgstr "Francuska"
+
+msgid "GA"
+msgstr ""
+
+msgid "GB"
+msgstr "Ujednjeno Kraljevstvo"
+
+msgid "GD"
+msgstr ""
+
+msgid "GE"
+msgstr ""
+
+msgid "GF"
+msgstr ""
+
+msgid "GG"
+msgstr ""
+
+msgid "GH"
+msgstr "Gana"
+
+msgid "GI"
+msgstr "Gibraltar"
+
+msgid "GL"
+msgstr "Grenland"
+
+msgid "GM"
+msgstr "Gambija"
+
+msgid "GN"
+msgstr "Gvineja"
+
+msgid "GP"
+msgstr "Gvadalupe"
+
+msgid "GQ"
+msgstr ""
+
+msgid "GR"
+msgstr "Grcka"
+
+msgid "GS"
+msgstr ""
+
+msgid "GT"
+msgstr "Gvatemala"
+
+msgid "GU"
+msgstr ""
+
+msgid "GW"
+msgstr ""
+
+msgid "GY"
+msgstr ""
+
+msgid "HK"
+msgstr "Hong Kong"
+
+msgid "HM"
+msgstr ""
+
+msgid "HN"
+msgstr "Honduras"
+
+msgid "HR"
+msgstr "Hrvatska"
+
+msgid "HT"
+msgstr "Haiti"
+
+msgid "HU"
+msgstr "Madarska"
+
+msgid "ID"
+msgstr "Indonezija"
+
+msgid "IE"
+msgstr "Irska"
+
+msgid "IL"
+msgstr "Izrael"
+
+msgid "IM"
+msgstr ""
+
+msgid "IN"
+msgstr "Indija"
+
+msgid "IO"
+msgstr ""
+
+msgid "IQ"
+msgstr "Irak"
+
+msgid "IR"
+msgstr "Iran"
+
+msgid "IS"
+msgstr "Island"
+
+msgid "IT"
+msgstr "Italija"
+
+msgid "JE"
+msgstr ""
+
+msgid "JM"
+msgstr "Jamajka"
+
+msgid "JO"
+msgstr "Jordan"
+
+msgid "JP"
+msgstr "Japan"
+
+msgid "KE"
+msgstr ""
+
+msgid "KG"
+msgstr "Kirgistan"
+
+msgid "KH"
+msgstr "Kamboda"
+
+msgid "KI"
+msgstr ""
+
+msgid "KM"
+msgstr ""
+
+msgid "KN"
+msgstr ""
+
+msgid "KP"
+msgstr ""
+
+msgid "KR"
+msgstr "Koreja, Republika"
+
+msgid "KW"
+msgstr "Kuvajt"
+
+msgid "KY"
+msgstr "Kajmanska Ostrva"
+
+msgid "KZ"
+msgstr "Kazahstan"
+
+msgid "LA"
+msgstr ""
+
+msgid "LB"
+msgstr "Libanon"
+
+msgid "LC"
+msgstr ""
+
+msgid "LI"
+msgstr "Lihtenstajn"
+
+msgid "LK"
+msgstr "Sri Lanka"
+
+msgid "LR"
+msgstr ""
+
+msgid "LS"
+msgstr ""
+
+msgid "LT"
+msgstr "Litva"
+
+msgid "LU"
+msgstr "Luksemburg"
+
+msgid "LV"
+msgstr "Latvija"
+
+msgid "LY"
+msgstr "Libija"
+
+msgid "MA"
+msgstr "Maroko"
+
+msgid "MC"
+msgstr "Monako"
+
+msgid "MD"
+msgstr ""
+
+msgid "ME"
+msgstr "Crna Gora"
+
+msgid "MF"
+msgstr ""
+
+msgid "MG"
+msgstr "Madagaskar"
+
+msgid "MH"
+msgstr "Marsalova Ostrva"
+
+msgid "MK"
+msgstr "Makedonija"
+
+msgid "ML"
+msgstr "Mali"
+
+msgid "MM"
+msgstr ""
+
+msgid "MN"
+msgstr "Mongolija"
+
+msgid "MO"
+msgstr "Makao"
+
+msgid "MP"
+msgstr ""
+
+msgid "MQ"
+msgstr ""
+
+msgid "MR"
+msgstr ""
+
+msgid "MS"
+msgstr ""
+
+msgid "MT"
+msgstr "Malta"
+
+msgid "MU"
+msgstr ""
+
+msgid "MV"
+msgstr "Maldivi"
+
+msgid "MW"
+msgstr ""
+
+msgid "MX"
+msgstr "Meksiko"
+
+msgid "MY"
+msgstr "Malazija"
+
+msgid "MZ"
+msgstr "Mozambija"
+
+msgid "NA"
+msgstr ""
+
+msgid "NC"
+msgstr ""
+
+msgid "NE"
+msgstr "Niger"
+
+msgid "NF"
+msgstr ""
+
+msgid "NG"
+msgstr "Nigerija"
+
+msgid "NI"
+msgstr "Nikaragva"
+
+msgid "NL"
+msgstr "Holandija"
+
+msgid "NO"
+msgstr "Norveska"
+
+msgid "NP"
+msgstr "Nepal"
+
+msgid "NR"
+msgstr ""
+
+msgid "NU"
+msgstr ""
+
+msgid "NZ"
+msgstr "Novi Zeland"
+
+msgid "OM"
+msgstr "Oman"
+
+msgid "PA"
+msgstr "Panama"
+
+msgid "PE"
+msgstr "Peru"
+
+msgid "PF"
+msgstr "Francuska Polinezija"
+
+msgid "PG"
+msgstr ""
+
+msgid "PH"
+msgstr "Filipini"
+
+msgid "PK"
+msgstr "Pakistan"
+
+msgid "PL"
+msgstr "Poljska"
+
+msgid "PM"
+msgstr ""
+
+msgid "PN"
+msgstr ""
+
+msgid "PR"
+msgstr "Puerto Riko"
+
+msgid "PS"
+msgstr "Palestina,Drzava"
+
+msgid "PT"
+msgstr "Portugal"
+
+msgid "PW"
+msgstr ""
+
+msgid "PY"
+msgstr "Paragvaj"
+
+msgid "QA"
+msgstr "Katar"
+
+msgid "RE"
+msgstr ""
+
+msgid "RO"
+msgstr "Rumunija"
+
+msgid "RS"
+msgstr "Srbija"
+
+msgid "RU"
+msgstr "Ruska Federacija"
+
+msgid "RW"
+msgstr ""
+
+msgid "SA"
+msgstr "Saudijska Arabija"
+
+msgid "SB"
+msgstr "Solomonova Ostrva"
+
+msgid "SC"
+msgstr ""
+
+msgid "SD"
+msgstr "Sudan"
+
+msgid "SE"
+msgstr "Svedska"
+
+msgid "SG"
+msgstr "Singapur"
+
+msgid "SH"
+msgstr ""
+
+msgid "SI"
+msgstr "Slovenija"
+
+msgid "SJ"
+msgstr ""
+
+msgid "SK"
+msgstr "Slovacka"
+
+msgid "SL"
+msgstr ""
+
+msgid "SM"
+msgstr ""
+
+msgid "SN"
+msgstr "Senegal"
+
+msgid "SO"
+msgstr "Somalija"
+
+msgid "SR"
+msgstr ""
+
+msgid "SS"
+msgstr "Juzni Sudan"
+
+msgid "ST"
+msgstr ""
+
+msgid "SV"
+msgstr ""
+
+msgid "SX"
+msgstr ""
+
+msgid "SY"
+msgstr ""
+
+msgid "SZ"
+msgstr "Svajcarska"
+
+msgid "TC"
+msgstr ""
+
+msgid "TD"
+msgstr "Cad"
+
+msgid "TF"
+msgstr "Francuske Juzne Teritorije"
+
+msgid "TG"
+msgstr ""
+
+msgid "TH"
+msgstr "Tajland"
+
+msgid "TJ"
+msgstr "Tadjikistan"
+
+msgid "TK"
+msgstr ""
+
+msgid "TL"
+msgstr ""
+
+msgid "TM"
+msgstr "Turkmenistan"
+
+msgid "TN"
+msgstr "Tunis"
+
+msgid "TO"
+msgstr ""
+
+msgid "TR"
+msgstr "Turska"
+
+msgid "TT"
+msgstr ""
+
+msgid "TV"
+msgstr ""
+
+msgid "TW"
+msgstr "Tajvan"
+
+msgid "TZ"
+msgstr "Tanzanija, Ujedinjena Republika"
+
+msgid "UA"
+msgstr "Ukrajina"
+
+msgid "UG"
+msgstr "Uganda"
+
+msgid "UM"
+msgstr ""
+
+msgid "US"
+msgstr "Ujedinjene Republike"
+
+msgid "UY"
+msgstr "Urugvaj"
+
+msgid "UZ"
+msgstr "Uzbekistan"
+
+msgid "VA"
+msgstr "Vatikan"
+
+msgid "VC"
+msgstr ""
+
+msgid "VE"
+msgstr ""
+
+msgid "VG"
+msgstr "Devicanska Ostrva,Britanija"
+
+msgid "VI"
+msgstr "devicanska Ostrva,Amerika"
+
+msgid "VN"
+msgstr "Vijetnam"
+
+msgid "VU"
+msgstr ""
+
+msgid "WF"
+msgstr ""
+
+msgid "WS"
+msgstr ""
+
+msgid "YE"
+msgstr "Jemen"
+
+msgid "YT"
+msgstr ""
+
+msgid "ZA"
+msgstr "JuznoAfricka Republika"
+
+msgid "ZM"
+msgstr "Zambija"
+
+msgid "ZW"
+msgstr "Zimbabve"
