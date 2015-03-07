@@ -242,8 +242,6 @@ class Client_Html_Catalog_Detail_Basket_Default
 				$view->basketProductIds = $prodIds;
 			}
 
-			$view->basketParams = $this->_getClientParams( $view->param() );
-
 			$this->_cache = $view;
 		}
 
