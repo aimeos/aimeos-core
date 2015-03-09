@@ -121,11 +121,11 @@ class Controller_ExtJS_JsonRpc
 	 */
 	public function process( array $reqparams, $inputstream )
 	{
-		if( isset( $reqparams['method'] ) ) {
-			return $this->_processRequest( $reqparams );
+		if( isset( $reqparams['jsonrpc'] ) || !isset( $reqparams['method'] ) ) {
+			return $this->_processStream( $inputstream );
 		}
 
-		return $this->_processStream( $inputstream );
+		return $this->_processRequest( $reqparams );
 	}
 
 
