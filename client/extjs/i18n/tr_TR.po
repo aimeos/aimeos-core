@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-02-14 13:40+0000\n"
+"PO-Revision-Date: 2015-03-07 17:24+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -128,12 +128,12 @@ msgstr "Mevcut metinler"
 
 #: src/panel/product/stock/ItemUi.js:95
 msgid "Back in stock"
-msgstr ""
+msgstr "Stoktlarda"
 
 #: src/panel/order/OrderItemUi.js:35 src/panel/order/product/ListUi.js:71
 #: src/panel/order/coupon/ListUi.js:97 src/panel/order/service/ListUi.js:71
 msgid "Base ID"
-msgstr ""
+msgstr "Baz ID"
 
 #: src/panel/plugin/ItemUi.js:20 src/panel/cache/ItemUi.js:23
 #: src/panel/job/ItemUi.js:22 src/panel/attribute/ItemUi.js:38
@@ -259,7 +259,7 @@ msgstr "Dosya yüklenemedi. Lütfen sistem yöneticinize bildirin."
 
 #: src/panel/coupon/code/ListUi.js:54 src/panel/coupon/code/ItemUi.js:66
 msgid "Count"
-msgstr ""
+msgstr "Numara"
 
 #: src/panel/order/address/DeliveryItemUi.js:89
 #: src/panel/order/address/ItemUi.js:104
@@ -361,7 +361,7 @@ msgstr "Tarih"
 
 #: src/panel/product/stock/ListUiSmall.js:100
 msgid "Date back"
-msgstr ""
+msgstr "Stoğa gireceği tarih"
 
 #: src/panel/cache/ListUiSmall.js:45 src/panel/AbstractListUi.js:155
 #: src/panel/ConfigUi.js:46 src/elements/exportlanguage.js:159
@@ -479,7 +479,7 @@ msgstr "Hata"
 
 #: src/panel/cache/ListUiSmall.js:90 src/panel/cache/ItemUi.js:60
 msgid "Expires"
-msgstr ""
+msgstr "Sona eriyor"
 
 #: src/panel/AbstractListUi.js:161 src/elements/exportlanguage.js:328
 msgid "Export"
@@ -491,7 +491,7 @@ msgstr "Dışa aktarma başarılı"
 
 #: src/panel/log/ListUiSmall.js:59
 msgid "Facility"
-msgstr ""
+msgstr "Kategori"
 
 #: src/panel/media/ItemUi.js:100
 msgid "File URL"
@@ -560,7 +560,7 @@ msgstr "İçe aktar"
 
 #: src/panel/text/ItemUi.js:79
 msgid "Internal name"
-msgstr ""
+msgstr "İç ad"
 
 #: src/panel/plugin/ItemUi.js:87 src/panel/job/ItemUi.js:61
 #: src/panel/attribute/ItemUi.js:96 src/panel/catalog/ItemUi.js:72
@@ -572,7 +572,7 @@ msgstr ""
 #: src/panel/locale/language/ItemUi.js:73 src/panel/service/ItemUi.js:85
 #: src/panel/media/ItemUi.js:92
 msgid "Internal name (required)"
-msgstr ""
+msgstr "İç ad (gerekli)"
 
 #: src/panel/AbstractTreeUi.js:299
 #, python-brace-format
@@ -904,33 +904,33 @@ msgstr "Lütfen verilerinizi tekrar kontrol edin"
 
 #: src/panel/coupon/code/ListUi.js:104
 msgid "Please save the coupon first before you can add codes"
-msgstr ""
+msgstr "Kodları ekleyebilmek için lütfen önce kuponu kaydedin"
 
 #: src/panel/ListItemListUi.js:87
 msgid ""
 "Please select an item on the right side and add it via drag and drop to this"
 " list."
-msgstr ""
+msgstr "Lütfen sağ tarafta bir öğe seçin ve sürükleyip bırakma yöntemiyle listeye ekleyin"
 
 #: src/panel/plugin/ListUi.js:32 src/elements/domain.js:51
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: src/panel/plugin/type/ListUi.js:34
 msgid "Plugin type"
-msgstr ""
+msgstr "Plugin tipi"
 
 #. : Plugin type item panel title with type label ({0}) and site code ({1)}
 #: src/panel/plugin/type/ItemUi.js:22
 #, python-brace-format
 msgid "Plugin type: {0} ({1})"
-msgstr ""
+msgstr "Plugin tipi: {0} ({1})"
 
 #. : Plugin item panel title with attribute label ({0}) and site code ({1)}
 #: src/panel/plugin/ItemUi.js:127
 #, python-brace-format
 msgid "Plugin: {0} ({1})"
-msgstr ""
+msgstr "Plugin: {0} ({1})"
 
 #: src/panel/plugin/ListUi.js:84 src/panel/plugin/ItemUi.js:90
 #: src/panel/attribute/ListUiSmall.js:84 src/panel/attribute/ListUi.js:79
@@ -938,7 +938,7 @@ msgstr ""
 #: src/panel/locale/ItemUi.js:75 src/panel/service/ListUi.js:85
 #: src/panel/service/ItemUi.js:88
 msgid "Position"
-msgstr ""
+msgstr "Pozisyon"
 
 #: src/panel/order/address/DeliveryItemUi.js:77
 #: src/panel/order/address/ItemUi.js:92
@@ -1017,7 +1017,7 @@ msgstr "Ürün miktarı"
 
 #: src/panel/order/coupon/ListUi.js:154
 msgid "Product rebate"
-msgstr ""
+msgstr "Ürün indirimi"
 
 #: src/panel/product/stock/ItemUi.js:21
 msgid "Product stock"
@@ -1093,7 +1093,7 @@ msgstr "İlgili sipariş ID"
 
 #: src/panel/log/ListUiSmall.js:95
 msgid "Request"
-msgstr ""
+msgstr "Talep"
 
 #: src/panel/job/ListUiSmall.js:96
 msgid "Result"
@@ -1165,7 +1165,7 @@ msgstr "Servisler"
 
 #: src/panel/locale/site/ListUi.js:27 src/panel/order/OrderItemUi.js:39
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: src/panel/order/ListUi.js:119
 msgid "Sorry, adding orders manually is currently not implemented"
@@ -1364,7 +1364,7 @@ msgstr "Yükleme başarılı"
 
 #: src/panel/product/UsedByProductListUi.js:29
 msgid "Used by"
-msgstr ""
+msgstr "Tarafından kullanılan"
 
 #: src/panel/cache/ListUiSmall.js:82 src/panel/cache/ItemUi.js:55
 #: src/panel/ConfigUi.js:76
@@ -1376,7 +1376,7 @@ msgstr "Değer"
 #: src/panel/order/address/DeliveryItemUi.js:45
 #: src/panel/order/address/ItemUi.js:60
 msgid "Vat ID"
-msgstr ""
+msgstr "Vergi Numarası"
 
 #: src/panel/product/stock/ListUiSmall.js:82
 #: src/panel/product/stock/ItemUi.js:69
@@ -1434,84 +1434,84 @@ msgstr "yeni"
 
 #: src/elements/paymentstatus.js:48
 msgid "pay:authorized"
-msgstr ""
+msgstr "Yetkili"
 
 #: src/elements/paymentstatus.js:44
 msgid "pay:canceled"
-msgstr ""
+msgstr "İptal edildi"
 
 #: src/elements/paymentstatus.js:43
 msgid "pay:deleted"
-msgstr ""
+msgstr "Silindi"
 
 #: src/elements/paymentstatus.js:47
 msgid "pay:pending"
-msgstr ""
+msgstr "Bekliyor"
 
 #: src/elements/paymentstatus.js:49
 msgid "pay:received"
-msgstr ""
+msgstr "Alındı"
 
 #: src/elements/paymentstatus.js:46
 msgid "pay:refund"
-msgstr ""
+msgstr "Geri ödeme"
 
 #: src/elements/paymentstatus.js:45
 msgid "pay:refused"
-msgstr ""
+msgstr "Reddedildi"
 
 #: src/elements/paymentstatus.js:42
 msgid "pay:unfinished"
-msgstr ""
+msgstr "Tamamlanmadı"
 
 #: src/elements/deliverystatus.js:43
 msgid "stat:deleted"
-msgstr ""
+msgstr "Silindi"
 
 #: src/elements/deliverystatus.js:47
 msgid "stat:delivered"
-msgstr ""
+msgstr "Teslim edildi"
 
 #: src/elements/deliverystatus.js:46
 msgid "stat:dispatched"
-msgstr ""
+msgstr "Sevk edildi"
 
 #: src/elements/deliverystatus.js:48
 msgid "stat:lost"
-msgstr ""
+msgstr "Kayıp"
 
 #: src/elements/deliverystatus.js:44
 msgid "stat:pending"
-msgstr ""
+msgstr "Bekliyor"
 
 #: src/elements/deliverystatus.js:45
 msgid "stat:progress"
-msgstr ""
+msgstr "Devam etmekte"
 
 #: src/elements/deliverystatus.js:49
 msgid "stat:refused"
-msgstr ""
+msgstr "Reddedildi"
 
 #: src/elements/deliverystatus.js:50
 msgid "stat:returned"
-msgstr ""
+msgstr "Geri döndü"
 
 #: src/elements/deliverystatus.js:42
 msgid "stat:unfinished"
-msgstr ""
+msgstr "Tamamlanmadı"
 
 #: src/elements/status.js:46
 msgid "status:archive"
-msgstr ""
+msgstr "Arşivlendi"
 
 #: src/elements/status.js:48
 msgid "status:disabled"
-msgstr ""
+msgstr "Devre dışı bırakıldı"
 
 #: src/elements/status.js:49
 msgid "status:enabled"
-msgstr ""
+msgstr "Etkinleştirildi"
 
 #: src/elements/status.js:47
 msgid "status:review"
-msgstr ""
+msgstr "İncelemede"

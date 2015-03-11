@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-02-14 13:33+0000\n"
+"PO-Revision-Date: 2015-03-08 11:18+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Önbellek nesnesi mevcut değil"
 #: src/MShop/Catalog/Manager/Default.php:521
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "ID \"%1$s\" için katalog düğümü bulunamadı"
 
 #: src/MShop/Catalog/Manager/Default.php:461
 #, php-format
@@ -72,7 +72,7 @@ msgstr "Mevcut servisler için kontroller başarısız oldu"
 #: src/MShop/Catalog/Item/Default.php:257
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "\"%1$d\" dizinli alt düğüm mevcut değil"
 
 #: src/MAdmin/Common/Manager/Abstract.php:118
 #: src/MShop/Service/Manager/Abstract.php:41
@@ -87,7 +87,7 @@ msgstr ""
 #: src/MShop/Coupon/Manager/Default.php:694
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/MAdmin/Common/Manager/Abstract.php:112 src/MAdmin/Factory.php:90
 #: src/MShop/Service/Manager/Abstract.php:35
@@ -173,7 +173,7 @@ msgstr "Son eklenen veritabanı kaydının ID'si mevcut değil"
 #: src/MShop/Context/Item/Default.php:173
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" için uluslararasılaştırma nesnesi mevcut değil"
 
 #: src/MShop/Common/Item/Abstract.php:224
 #: src/MShop/Common/Item/Abstract.php:228
@@ -206,13 +206,13 @@ msgstr ""
 #: src/MShop/Locale/Item/Currency/Default.php:94
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" ISO para birimi kodunda geçersiz karakterler"
 
 #: src/MShop/Locale/Item/Language/Default.php:97
 #: src/MShop/Product/Item/Tag/Default.php:56
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" ISO dil kodunda geçersiz karakterler"
 
 #: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
@@ -243,7 +243,7 @@ msgstr ""
 #: src/MShop/Price/Manager/Factory.php:39
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" class adında geçersiz karakterler"
 
 #: src/MShop/Order/Item/Abstract.php:161
 #: src/MShop/Common/Item/Abstract.php:195
@@ -264,12 +264,12 @@ msgstr ""
 #: src/MShop/Plugin/Manager/Default.php:190
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" domain adında geçersiz karakterler"
 
 #: src/MShop/Common/Item/Address/Abstract.php:463
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" e-mail adresinde geçersiz karakterler"
 
 #: src/MAdmin/Common/Manager/Abstract.php:102
 #: src/MShop/Common/Manager/Abstract.php:356
@@ -277,29 +277,29 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:572
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" yönetici adında geçersiz karakterler"
 
 #: src/MAdmin/Factory.php:76 src/MShop/Factory.php:77
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "\"%2$s\" içindeki \"%1$s\" yönetici adında geçersiz karakterler"
 
 #: src/MShop/Price/Item/Default.php:395
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" fiyatında geçersiz karakterler"
 
 #: src/MShop/Service/Manager/Default.php:580
 #: src/MShop/Plugin/Manager/Default.php:197
 #: src/MShop/Coupon/Manager/Default.php:679
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" tedarikçi adında geçersiz karakterler"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:351
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" satın alma tarihinde geçersiz karakterler"
 
 #: src/MShop/Coupon/Provider/FreeShipping.php:37
 #: src/MShop/Coupon/Provider/PercentRebate.php:37
@@ -312,12 +312,12 @@ msgstr ""
 #: src/MAdmin/Factory.php:96 src/MShop/Factory.php:97
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Geçersiz fabrika \"%1$s\""
 
 #: src/MShop/Media/Item/Default.php:196
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Geçersiz MIME türü \"%1$s\""
 
 #: src/MShop/Order/Manager/Base/Default.php:570
 #, php-format
@@ -327,7 +327,7 @@ msgstr ""
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Geçersiz web site URL'si \"%1$s\""
 
 #: src/MShop/Common/Manager/Decorator/Sitecheck.php:53
 #, php-format
@@ -348,7 +348,7 @@ msgstr ""
 #: src/MAdmin/Cache/Manager/Default.php:385
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" ID'li öğe bulunamadı"
 
 #: src/MShop/Common/Manager/Abstract.php:626
 #, php-format
@@ -358,7 +358,7 @@ msgstr ""
 #: src/MAdmin/Job/Manager/Default.php:359
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" ID'li görev bulunamadı"
 
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #, php-format
@@ -394,7 +394,7 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:211
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Yerel nesne mevcut değil"
 
 #: src/MShop/Order/Manager/Base/Abstract.php:54
 #, php-format
@@ -404,27 +404,27 @@ msgstr ""
 #: src/MAdmin/Log/Manager/Default.php:371
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" ID'li oturum girişi bulunamadı"
 
 #: src/MShop/Context/Item/Default.php:237
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Giriş yönetici nesnesi mevcut değil"
 
 #: src/MShop/Context/Item/Default.php:289
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Mail nesnesi mevcut değil"
 
 #: src/MAdmin/Factory.php:81 src/MShop/Factory.php:82
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Yönetici yolu \"%1$s\" geçersiz"
 
 #: src/MAdmin/Factory.php:64 src/MShop/Factory.php:65
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Yönetici yolu boş"
 
 #: src/MShop/Locale/Manager/Site/Default.php:616
 #, php-format
@@ -444,7 +444,7 @@ msgstr ""
 #: src/MShop/Service/Provider/Decorator/Costs.php:80
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Eksik yapılandırma \"%1$s\""
 
 #: src/MShop/Common/Item/Abstract.php:177
 #, php-format
@@ -466,12 +466,12 @@ msgstr ""
 #: src/MShop/Coupon/Provider/Abstract.php:173
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" kodlu hiçbir ürün bulunamadı"
 
 #: src/MShop/Product/Manager/Stock/Default.php:676
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" kodlu hiçbir depo bulunamadı"
 
 #: src/MAdmin/Cache/Manager/Default.php:284
 #: src/MAdmin/Job/Manager/Default.php:161
@@ -526,7 +526,7 @@ msgstr ""
 #: src/MAdmin/Cache/Manager/None.php:87
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operasyon desteklenmiyor"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:262
 #, php-format
@@ -578,7 +578,7 @@ msgstr ""
 #: src/MShop/Service/Provider/Delivery/Default.php:358
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Yapılandırma için parametre \"%1$s\" mevcut değil"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:523
 #, php-format
@@ -611,11 +611,11 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:500
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Ekspres: Yanlış alıcı emaili \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:642
 msgid "Payment costs"
-msgstr ""
+msgstr "Ödeme maliyetleri"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:105
 #, php-format
@@ -637,7 +637,7 @@ msgstr ""
 #: src/MShop/Price/Manager/Abstract.php:44
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Fiyat öğesi mevcut değil"
 
 #: src/MShop/Order/Item/Base/Abstract.php:78
 #, php-format
@@ -649,7 +649,7 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:84
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Verilen özelliklerle eşleşen ürün bulunamadı"
 
 #: src/MShop/Order/Item/Base/Default.php:239
 #: src/MShop/Order/Item/Base/Default.php:316
@@ -660,12 +660,12 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Sepetteki ürünler mevcut değil"
 
 #: src/MShop/Plugin/Provider/Order/ProductStock.php:94
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Ürünler stokta tükenmiştir"
 
 #: src/MShop/Order/Item/Default.php:270
 #, php-format
@@ -677,7 +677,7 @@ msgstr ""
 #: src/MShop/Coupon/Manager/Default.php:675
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" içinde tedarikçi mevcut değil"
 
 #: src/MShop/Order/Item/Base/Product/Default.php:337
 #, php-format
@@ -705,7 +705,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Arama yapılandırması mevcut değil"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:207
 #, php-format
@@ -731,7 +731,7 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:263
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Oturum nesnesi mevcut değil"
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:33
 #, php-format
@@ -750,7 +750,7 @@ msgstr ""
 #: src/MShop/Locale/Manager/Default.php:122
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Kod \"%1$s\" için site bulunamadı"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:99
 #, php-format
@@ -760,7 +760,7 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:73
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Maksimum ürün miktarı %1$d ' dır"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:111
 #, php-format
@@ -770,17 +770,17 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:111
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Maksimum ürün değeri %1$s'dir"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:88
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Tüm ürünlerin maksimum miktarı %1$d 'dir"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:127
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Tüm ürünlerin maksimum değeri %1$s 'dir"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:93
 #, php-format
@@ -801,7 +801,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:802
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Toplam sonuç değeri bulunamadı"
 
 #: src/MShop/Locale/Manager/Site/Default.php:551
 #, php-format
@@ -821,7 +821,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:124
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Bilinmeyene arama anahtarı \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:243
 #, php-format
@@ -840,4 +840,4 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:315
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Görünüm nesnesi mevcut değil"

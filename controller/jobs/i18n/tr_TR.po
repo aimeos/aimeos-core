@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-02-14 12:28+0000\n"
+"PO-Revision-Date: 2015-03-07 16:25+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -26,11 +26,11 @@ msgstr "Yönetici arayüz görevleri"
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
 "configurable amount of time"
-msgstr ""
+msgstr "Sevkiyattan veya yapılandırılabilir bir zaman zarfından sonra siparişlerin yetkili ödemeleri çekilecektir"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
 msgid "Batch update of payment/delivery status"
-msgstr ""
+msgstr "Ödeme/teslimat durumunun toplu güncellemesi"
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:28
 msgid "Cache cleanup"
@@ -38,78 +38,78 @@ msgstr "Önbellek temizleme"
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
 msgid "Capture authorized payments"
-msgstr ""
+msgstr "Yetkili ödemeleri çek"
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:28
 msgid "Catalog index optimization"
-msgstr ""
+msgstr "Katalog dizin optimizasyonu"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:28
 msgid "Catalog index rebuild"
-msgstr ""
+msgstr "Katalog dizin yeniden oluşturma"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:169
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:163
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" mevcut değil"
 
 #: src/Controller/Jobs/Factory.php:58
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Class \"%1$s\" bulunamadı"
 
 #: src/Controller/Jobs/Factory.php:41
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Denetleyici yolu boş"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:39
 msgid "Creates bought together product suggestions"
-msgstr ""
+msgstr "Beraber satın alınan ürün önerileri oluşturur"
 
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
-msgstr ""
+msgstr "Başarıyla itfa edilmiş kuponları geçersiz kılar"
 
 #: src/Controller/Jobs/Order/Product/Stock/Default.php:40
 msgid "Decreases the stock levels of products in completed orders"
-msgstr ""
+msgstr "Tamamlanan siparişlerdeki ürünlerin stok seviyelerini azaltır"
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
-msgstr ""
+msgstr "Bitmemiş siparişleri siler ve onların ürünlerini ve kupon kodlarını kullanılabilir hale getirir"
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
 msgid "Deletes unpaid orders to keep the database clean"
-msgstr ""
+msgstr "Veritabanını temiz tutmak için ödenmemiş siparişleri siler"
 
 #: src/Controller/Jobs/Order/Product/Stock/Default.php:29
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:29
 msgid "Deprecated: Use \"Remove unfinised orders\""
-msgstr ""
+msgstr "Önerilmiyor: \"Bitmemiş siparişleri kaldır\" kullan"
 
 #: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
 msgid "Deprecated: Use order/service/delivery"
-msgstr ""
+msgstr "Önerilmiyor: Sipariş/servis/teslimat kullan"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:39
 msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr ""
+msgstr "Toplu güncelleştirmeleri kullanan ödeme veya teslimat servisi sağlayıcılarını çalıştırır"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:39
 msgid ""
 "Executes the jobs created by the admin interface, e.g. the text exports"
-msgstr ""
+msgstr "Yönetici arayüzü tarafından oluşturulan işleri yürütür, örn. metin dışa aktarma"
 
 #: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
@@ -131,124 +131,124 @@ msgstr ""
 #: src/Controller/Jobs/Product/Bought/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" class adında geçersiz karakterler"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" iş adında geçersiz karakterler"
 
 #: src/Controller/Jobs/Factory.php:49
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "\"%2$s\" içinde geçersiz denetleyici \"%1$s\""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Geçersiz domain \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:64
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Geçersiz fabrika \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
 #, php-format
 msgid "Invalid job method \"%1$s\""
-msgstr ""
+msgstr "Geçersiz iş metodu \"%1$s\""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:222
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
-msgstr ""
+msgstr "Domain \"%1$s\" ve kod \"%2$s\" için liste türü bulunamadı"
 
 #: src/Controller/Jobs/Admin/Log/Default.php:28
 msgid "Log cleanup"
-msgstr ""
+msgstr "Günlük temizleme"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
-msgstr ""
+msgstr "Metot \"%1$s\" mevcut değil"
 
 #: src/Controller/Jobs/Abstract.php:82
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için tür öğesi bulunamadı"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
 #, php-format
 msgid "No warehouse \"%1$s\" found"
-msgstr ""
+msgstr "Depo \"%1$s\" bulunamadı"
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
 msgid "Optimizes the catalog index for searching products"
-msgstr ""
+msgstr "Arama ürünleri için katalog dizinini optimize eder"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
 msgid "Order delivery related e-mails"
-msgstr ""
+msgstr "Sipariş teslimatıyla ilgili e-mailler"
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:28
 msgid "Order payment related e-mails"
-msgstr ""
+msgstr "Sipariş ödemesiyle ilgili e-mailler"
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
 msgid "Process order delivery services"
-msgstr ""
+msgstr "Sipariş dağıtım hizmetlerini işleme tabi tut"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
 msgid "Product notification e-mails"
-msgstr ""
+msgstr "Ürün bildirim e-mailleri"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:28
 msgid "Products bought together"
-msgstr ""
+msgstr "Beraber satın alınan ürünler"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"
-msgstr ""
+msgstr "Arama ürünleri için katalog dizinini yeniden oluşturur"
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:39
 msgid "Removes the expired entries from the cache"
-msgstr ""
+msgstr "Süresi dolan girişleri önbellekten kaldırır"
 
 #: src/Controller/Jobs/Admin/Log/Default.php:39
 msgid ""
 "Removes the old log entries from the database and archives them (optional)"
-msgstr ""
+msgstr "Eski günlük girişlerini veri tabanından kaldırır ve arşivler (isteğe bağlı)"
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
 msgid "Removes unfinished orders"
-msgstr ""
+msgstr "bitmemiş siparişleri kaldırır"
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
 msgid "Removes unpaid orders"
-msgstr ""
+msgstr "Ödenmemiş siparişleri kaldırır"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
 msgid "Sends e-mails for watched products"
-msgstr ""
+msgstr "İzlenen ürünler için e-mailler gönderir"
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39
 msgid "Sends order confirmation or payment status update e-mails"
-msgstr ""
+msgstr "Sipariş doğrulama veya ödeme durum güncelleme e-mailleri gönderir"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:39
 msgid "Sends order delivery status update e-mails"
-msgstr ""
+msgstr "Sipariş teslimat durumu güncelleme e-mailleri gönderir"
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:39
 msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr ""
+msgstr "ERP sistemine veya lojistik ortağa ödenen siparişleri gönderir"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
-msgstr ""
+msgstr "Fabrika metodu \"%1$s\" çağrılamıyor"
 
 #: src/Controller/Jobs/Common/Decorator/Abstract.php:51
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Metot \"%1$s\" çağrılamıyor"

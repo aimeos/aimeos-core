@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-02-15 17:08+0000\n"
+"PO-Revision-Date: 2015-03-07 16:30+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "\"%1$d\" konumundaki sepet öğesi manuel olarak silinemez"
 #: src/Controller/Frontend/Common/Factory/Abstract.php:165
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:159
@@ -89,7 +89,7 @@ msgstr "\"%1$s\" sınıf adında geçersiz karakterler"
 #: src/Controller/Frontend/Factory.php:75
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr " \"%2$s\" içindeki \"%1$s\" denetleyici adında geçersiz karakterler"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #, php-format
@@ -129,7 +129,7 @@ msgstr "\"%1$s\" ürün ID'si ve \"%2$s\" depo için stok mevcut değil"
 #: src/Controller/Frontend/Basket/Default.php:1029
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
-msgstr ""
+msgstr "Seçilmiş nitelikler ve \"%1$s\" ürün ID'si için benzersiz makale bulunamadı"
 
 #: src/Controller/Frontend/Basket/Default.php:493
 #, php-format
@@ -155,7 +155,7 @@ msgstr "Stokta yeterli ürün \"%1$s\" yok"
 #: src/Controller/Frontend/Common/Decorator/Abstract.php:50
 #, php-format
 msgid "Unable to call method \"%1$s::%2$s\""
-msgstr ""
+msgstr "Metot \"%1$s::%2$s\" çağrılamıyor"
 
 #: src/Controller/Frontend/Service/Default.php:69
 #, php-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-02-14 13:06+0000\n"
+"PO-Revision-Date: 2015-03-08 11:18+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #, php-format
 msgid "%1$d article"
 msgid_plural "%1$d articles"
-msgstr[0] ""
+msgstr[0] "%1$d madde"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -70,7 +70,7 @@ msgid ""
 "%16$s\n"
 "%17$s\n"
 "%18$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/account/watch/body-default.html:90
@@ -105,7 +105,7 @@ msgstr ""
 #: layouts/catalog/detail/basket-attribute-body-default.html:32
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
-msgstr ""
+msgstr "%1$s ( %4$s%2$s%3$s )"
 
 #: layouts/account/history/list-body-default.html:82
 #: layouts/account/history/list-body-default.html:97
@@ -125,7 +125,7 @@ msgstr ""
 #: layouts/basket/related/bought-body-default.html:18
 #, php-format
 msgid "%1$s%%"
-msgstr ""
+msgstr "%1$s%%"
 
 #. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
 #. (%3$s)
@@ -133,7 +133,7 @@ msgstr ""
 #: layouts/checkout/standard/delivery-body-default.html:52
 #, php-format
 msgid "%1$s%3$s + %2$s%3$s"
-msgstr ""
+msgstr "%1$s%3$s + %2$s%3$s"
 
 #: layouts/basket/standard/coupon-body-default.html:30
 msgid "+"
@@ -145,7 +145,7 @@ msgstr "+"
 #: src/MW/View/Helper/Price/Default.php:80
 #, php-format
 msgid "+ %1$s %2$s/item"
-msgstr ""
+msgstr "+ %1$s %2$s/öğe"
 
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
@@ -197,23 +197,23 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr ""
+msgstr "Sevk edilen tüm gönderiler web sitemizde yer alan ve siparişinizi verdiğinizde kabul etmiş sayıldığınız hüküm ve koşullara tabidir,.\n\nBu e-mail gizli bilgi içermektedir ve sadece hitap edilen kişinin kullanımı içindir. Eğer bu kişi siz değilseniz lütfen bu maile cevap verin ve daha sonra ekleriyle beraber bu e-maili silin."
 
 #: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
-msgstr ""
+msgstr "Madde no.:"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:226
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:270
 #, php-format
 msgid "At least one billing address part is missing or invalid"
-msgstr ""
+msgstr "En az bir fatura adresi bölümü eksik veya geçersiz"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:236
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:269
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
-msgstr ""
+msgstr "En az bir teslimat adresi bölümü eksik veya geçersiz"
 
 #: layouts/basket/standard/body-default.html:41
 #: layouts/checkout/standard/address-body-default.html:17
@@ -285,24 +285,24 @@ msgstr "Şehir"
 #: src/Client/Html/Common/Factory/Abstract.php:66
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" \"%2$s\" uygulamıyor"
 
 #: src/Client/Html/Abstract.php:342
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Client/Html/Abstract.php:336
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" mevcut değil"
 
 #: src/Client/Html/Common/Factory/Abstract.php:60
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Class \"%1$s\" bulunamadı"
 
 #: layouts/account/history/detail-body-default.html:17
 #: layouts/account/history/detail-body-default.html:21
@@ -497,12 +497,12 @@ msgstr ""
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Geçersiz class adı \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Geçersiz domain \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
 #, php-format
@@ -604,7 +604,7 @@ msgstr "Sipariş geçmişi"
 #: src/Client/Html/Account/History/Detail/Default.php:241
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" ID'li sipariş bulunamadı"
 
 #: layouts/catalog/detail/bought-body-default.html:24
 msgid "Other customers also bought"
@@ -816,7 +816,7 @@ msgstr "Önerilen ürünler"
 #: layouts/common/summary/detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:76
 msgid "Sum"
-msgstr ""
+msgstr "Toplam"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:201
 #: layouts/checkout/standard/address-delivery-body-default.html:319
@@ -840,7 +840,7 @@ msgstr "Hükümler ve koşullar"
 #: layouts/email/payment/html-intro-body-default.html:12
 #, php-format
 msgid "Thank you for your order %1$s from %2$s."
-msgstr ""
+msgstr "%2$s 'dan %1$s siparişiniz için teşekkür ederiz."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -851,7 +851,7 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
-msgstr ""
+msgstr "%2$s 'dan %1$s siparişiniz için teşekkür ederiz.\n\nNihai ödeme tarafımızdan tahsil edilene kadar sipariş beklemede. Eğer peşin ödemeyi seçtiyseniz, lütfen ücreti %1$s sipariş ID'nizi referans olarak ekleyerek banka hesabımıza transfer edin."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -862,19 +862,19 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
-msgstr ""
+msgstr "%2$s 'dan %1$s siparişiniz için teşekkür ederiz.\n\nÖdemeyi aldık ve derhal siparişinizle alakalı işlemlerle ilgileneceğiz."
 
 #: layouts/checkout/confirm/5/intro-body-default.html:12
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Siparişiniz ve ödeme yetkilendirmeniz için teşekkür ederiz.\nÖnümüzdeki birkaç dakika içinde tarafınıza sipariş detaylarını içeren bir e-mail gönderilecek."
 
 #: layouts/checkout/confirm/6/intro-body-default.html:12
 msgid ""
 "Thank you for your order.\n"
 "We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Siparişiniz için teşekkür ederiz.\nÖdemenizi aldık ve önümüzdeki birkaç dakika içinde tarafınıza sipariş detaylarını içeren bir e-mail gönderilecek."
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -884,13 +884,13 @@ msgstr ""
 msgid ""
 "The delivery status of your order %1$s from %2$s has been changed to "
 "\"%3$s\"."
-msgstr ""
+msgstr "%2$s 'dan %1$s siparişinizin teslimat durumu  \"%3$s\" 'a değiştirildi."
 
 #: layouts/checkout/confirm/1/intro-body-default.html:12
 msgid ""
 "The order was canceled.\n"
 "Do you wish to retry your order?"
-msgstr ""
+msgstr "Sipariş iptal edildi.\nSiparişinizi tekrar denemek ister misiniz?"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -898,13 +898,13 @@ msgstr ""
 #: layouts/email/delivery/6/html-intro-body-default.html:12
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
-msgstr ""
+msgstr "%2$s 'den %1$s siparişiniz için parsel teslim edilemedi."
 
 #: layouts/checkout/confirm/4/intro-body-default.html:12
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr ""
+msgstr "Siparişiniz için ödeme onayı hala bekliyor.\nÖdeme yetkilendirildiğinde bir e-mail alacaksınız."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -912,7 +912,7 @@ msgstr ""
 #: layouts/email/payment/3/html-intro-body-default.html:12
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
-msgstr ""
+msgstr "%2$s 'dan %1$s siparişinizin ödemesi iade edilmiştir."
 
 #: layouts/account/watch/body-default.html:150
 msgid "Three month"
@@ -924,7 +924,7 @@ msgstr "Zaman aralığı"
 
 #: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
-msgstr ""
+msgstr "Popüler ürünler"
 
 #: layouts/common/summary/detail-body-default.html:225
 #: layouts/email/common/text-summary-detail-body-default.html:93
@@ -947,12 +947,12 @@ msgstr "İki hafta"
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Metot \"%1$s\" çağrılamıyor"
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
-msgstr ""
+msgstr "Müşteri \"%1$s\" için adresler kaydedilemiyor: %2$s"
 
 #: src/Client/Html/Catalog/Filter/Default.php:360
 #: src/Client/Html/Catalog/Stage/Default.php:357
@@ -960,13 +960,13 @@ msgstr ""
 #: src/Client/Html/Catalog/List/Default.php:366
 #, php-format
 msgid "Unable to set cache entry: %1$s"
-msgstr ""
+msgstr "önbellek girdisi ayarlanamadı: %1$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 msgid ""
 "Unfortunately, the payment for your order was refused.\n"
 "Do you wish to retry?"
-msgstr ""
+msgstr "Maalesef siparişinizin ödemesi reddedildi.\nTekrar denemek ister misiniz?"
 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
@@ -977,7 +977,7 @@ msgstr "Güncelle"
 #: layouts/checkout/standard/address-billing-body-default.html:183
 #: layouts/checkout/standard/address-billing-body-default.html:297
 msgid "Vat ID"
-msgstr ""
+msgstr "Vergi Numarası"
 
 #: layouts/account/watch/body-default.html:166
 msgid "Watch"
@@ -994,7 +994,7 @@ msgstr "İzlenen ürünler"
 #: layouts/email/delivery/7/html-intro-body-default.html:12
 #, php-format
 msgid "We received the returned parcel for your order %1$s from %2$s."
-msgstr ""
+msgstr "%2$s 'dan siparişiniz %1$s için geri dönen parseli teslim aldık."
 
 #: layouts/checkout/standard/address-delivery-body-default.html:209
 #: layouts/checkout/standard/address-delivery-body-default.html:327
@@ -1054,7 +1054,7 @@ msgstr "Siparişiniz %1$s"
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
-msgstr ""
+msgstr "%2$s 'dan siparişiniz %1$s sevk edildi."
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:28
 msgid "Your search result"
@@ -1083,7 +1083,7 @@ msgstr "teslimat"
 #: src/MW/View/Helper/Price/Default.php:76
 #, php-format
 msgid "from %1$s"
-msgstr ""
+msgstr "%1$s 'dan"
 
 #: layouts/common/summary/address-body-default.html:131
 #: layouts/email/common/text-summary-address-body-default.html:115
@@ -1112,22 +1112,22 @@ msgstr "ödeme"
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56
 msgid "stock-high"
-msgstr ""
+msgstr "Ürün çok sayıda mevcut"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:54
 msgid "stock-low"
-msgstr ""
+msgstr "Yalnızca birkaç tane mevcut"
 
 #. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 msgid "stock-out"
-msgstr ""
+msgstr "Ürün tükendi"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:58
 msgid "stock-unlimited"
-msgstr "stok-sınırsız"
+msgstr "Ürün sınırsız sayıda mevcut"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12

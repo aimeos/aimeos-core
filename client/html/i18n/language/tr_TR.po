@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-02-15 15:59+0000\n"
+"PO-Revision-Date: 2015-03-07 19:23+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -34,541 +34,541 @@ msgid "af"
 msgstr "Afrikanca"
 
 msgid "ak"
-msgstr ""
+msgstr "Akan"
 
 msgid "am"
-msgstr ""
+msgstr "Amharca"
 
 msgid "an"
-msgstr ""
+msgstr "Aragonca"
 
 msgid "ar"
-msgstr ""
+msgstr "Arapça"
 
 msgid "as"
-msgstr ""
+msgstr "Assamca"
 
 msgid "av"
-msgstr ""
+msgstr "Avarca"
 
 msgid "ay"
-msgstr ""
+msgstr "Aymaraca"
 
 msgid "az"
-msgstr ""
+msgstr "Azerice"
 
 msgid "ba"
-msgstr ""
+msgstr "Başkurtça"
 
 msgid "be"
-msgstr ""
+msgstr "Beyaz Rusça"
 
 msgid "bg"
-msgstr ""
+msgstr "Bulgarca"
 
 msgid "bh"
-msgstr ""
+msgstr "Biharice"
 
 msgid "bi"
-msgstr ""
+msgstr "Bislama"
 
 msgid "bm"
-msgstr ""
+msgstr "Bambara"
 
 msgid "bn"
-msgstr ""
+msgstr "Bengalce"
 
 msgid "bo"
-msgstr ""
+msgstr "Tibetçe"
 
 msgid "br"
-msgstr ""
+msgstr "Bretonca"
 
 msgid "bs"
-msgstr ""
+msgstr "Boşnakça"
 
 msgid "ca"
-msgstr ""
+msgstr "Katalanca"
 
 msgid "ce"
-msgstr ""
+msgstr "Çeçence"
 
 msgid "ch"
-msgstr ""
+msgstr "Chamorro"
 
 msgid "co"
-msgstr ""
+msgstr "Korsikaca"
 
 msgid "cr"
-msgstr ""
+msgstr "Cree"
 
 msgid "cs"
-msgstr ""
+msgstr "Çekçe"
 
 msgid "cu"
-msgstr ""
+msgstr "Kilise Slavcası"
 
 msgid "cv"
-msgstr ""
+msgstr "Çuvaşça"
 
 msgid "cy"
-msgstr ""
+msgstr "Galce"
 
 msgid "da"
-msgstr ""
+msgstr "Danca"
 
 msgid "de"
-msgstr ""
+msgstr "Almanca"
 
 msgid "dv"
-msgstr ""
+msgstr "Maldivce"
 
 msgid "dz"
-msgstr ""
+msgstr "Dzongkha"
 
 msgid "ee"
-msgstr ""
+msgstr "Ewe"
 
 msgid "el"
-msgstr ""
+msgstr ".Yunanca"
 
 msgid "en"
-msgstr ""
+msgstr "İngilizce"
 
 msgid "eo"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "es"
-msgstr ""
+msgstr "İspanyolca"
 
 msgid "et"
-msgstr ""
+msgstr "Estonca"
 
 msgid "eu"
-msgstr ""
+msgstr "Baskça"
 
 msgid "fa"
-msgstr ""
+msgstr "Farsça"
 
 msgid "ff"
-msgstr ""
+msgstr "Fula"
 
 msgid "fi"
-msgstr ""
+msgstr "Fince"
 
 msgid "fj"
-msgstr ""
+msgstr "Fijice"
 
 msgid "fo"
-msgstr ""
+msgstr "Faroece"
 
 msgid "fr"
-msgstr ""
+msgstr "Fransızca"
 
 msgid "fy"
-msgstr ""
+msgstr "Frizce"
 
 msgid "ga"
-msgstr ""
+msgstr "İrlandaca"
 
 msgid "gd"
-msgstr ""
+msgstr "İskoç Galcesi"
 
 msgid "gl"
-msgstr ""
+msgstr "Galiçyaca"
 
 msgid "gn"
-msgstr ""
+msgstr "Guarani"
 
 msgid "gu"
-msgstr ""
+msgstr "Gucerat"
 
 msgid "gv"
-msgstr ""
+msgstr "Manksça"
 
 msgid "ha"
-msgstr ""
+msgstr "Hausaca"
 
 msgid "he"
-msgstr ""
+msgstr "İbranice"
 
 msgid "hi"
-msgstr ""
+msgstr "Hintçe"
 
 msgid "ho"
-msgstr ""
+msgstr "Hiri motu"
 
 msgid "hr"
-msgstr ""
+msgstr "Hırvatça"
 
 msgid "ht"
-msgstr ""
+msgstr "Haiti Creole"
 
 msgid "hu"
-msgstr ""
+msgstr "Macarca"
 
 msgid "hy"
-msgstr ""
+msgstr "Ermenice"
 
 msgid "hz"
-msgstr ""
+msgstr "Hereroca"
 
 msgid "ia"
-msgstr ""
+msgstr "İnterlingua"
 
 msgid "id"
-msgstr ""
+msgstr "Endonezyaca"
 
 msgid "ie"
-msgstr ""
+msgstr "Interlingue"
 
 msgid "ig"
-msgstr ""
+msgstr "Igbo"
 
 msgid "ii"
-msgstr ""
+msgstr "Yi"
 
 msgid "ik"
-msgstr ""
+msgstr "Inupiak"
 
 msgid "io"
-msgstr ""
+msgstr "İdo"
 
 msgid "is"
-msgstr ""
+msgstr "İzlandaca"
 
 msgid "it"
-msgstr ""
+msgstr "İtalyanca"
 
 msgid "iu"
-msgstr ""
+msgstr "İnuitçe"
 
 msgid "ja"
-msgstr ""
+msgstr "Japonca"
 
 msgid "jv"
-msgstr ""
+msgstr "Cavaca"
 
 msgid "ka"
-msgstr ""
+msgstr "Gürcüce"
 
 msgid "kg"
-msgstr ""
+msgstr "Kongoca"
 
 msgid "ki"
-msgstr ""
+msgstr "Kikuyu"
 
 msgid "kj"
-msgstr ""
+msgstr "Kuanyama"
 
 msgid "kk"
-msgstr ""
+msgstr "Kazakça"
 
 msgid "kl"
-msgstr ""
+msgstr "Grönlandca"
 
 msgid "km"
-msgstr ""
+msgstr "Khmerce"
 
 msgid "kn"
-msgstr ""
+msgstr "Kannadaca"
 
 msgid "ko"
-msgstr ""
+msgstr "Korece"
 
 msgid "kr"
-msgstr ""
+msgstr "Kanuri"
 
 msgid "ks"
-msgstr ""
+msgstr "Keşmirce"
 
 msgid "ku"
-msgstr ""
+msgstr "Kürtçe"
 
 msgid "kv"
-msgstr ""
+msgstr "Komi"
 
 msgid "kw"
-msgstr ""
+msgstr "Kernevekçe"
 
 msgid "ky"
-msgstr ""
+msgstr "Kırgızca"
 
 msgid "la"
-msgstr ""
+msgstr "Latince"
 
 msgid "lb"
-msgstr ""
+msgstr "Lüksemburgca"
 
 msgid "lg"
-msgstr ""
+msgstr "Luganda"
 
 msgid "li"
-msgstr ""
+msgstr "Limburgca"
 
 msgid "ln"
-msgstr ""
+msgstr "Lingala"
 
 msgid "lo"
-msgstr ""
+msgstr "Laoca"
 
 msgid "lt"
-msgstr ""
+msgstr "Litvanca"
 
 msgid "lu"
-msgstr ""
+msgstr "Luba-Katanga"
 
 msgid "lv"
-msgstr ""
+msgstr "Letonca"
 
 msgid "mg"
-msgstr ""
+msgstr "Malgaşça"
 
 msgid "mh"
-msgstr ""
+msgstr "Marshall"
 
 msgid "mi"
-msgstr ""
+msgstr "Maorice"
 
 msgid "mk"
-msgstr ""
+msgstr "Makedonca"
 
 msgid "ml"
-msgstr ""
+msgstr "Malayalam"
 
 msgid "mn"
-msgstr ""
+msgstr "Moğolca"
 
 msgid "mo"
-msgstr ""
+msgstr "Moldovaca"
 
 msgid "mr"
-msgstr ""
+msgstr "Marathi"
 
 msgid "ms"
-msgstr ""
+msgstr "Malayca"
 
 msgid "mt"
-msgstr ""
+msgstr "Maltaca"
 
 msgid "my"
-msgstr ""
+msgstr "Birmanya"
 
 msgid "na"
-msgstr ""
+msgstr "Nauruca"
 
 msgid "nb"
-msgstr ""
+msgstr "Norveççe Bokmal"
 
 msgid "nd"
-msgstr ""
+msgstr "Kuzey Ndebele"
 
 msgid "ne"
-msgstr ""
+msgstr "Nepalce"
 
 msgid "ng"
-msgstr ""
+msgstr "Ndonga"
 
 msgid "nl"
-msgstr ""
+msgstr "Flemenkçe"
 
 msgid "nn"
-msgstr ""
+msgstr "Norveççe Nynorsk"
 
 msgid "no"
-msgstr ""
+msgstr "Norveççe"
 
 msgid "nr"
-msgstr ""
+msgstr "Güney Ndebele"
 
 msgid "nv"
-msgstr ""
+msgstr "Navajo"
 
 msgid "ny"
-msgstr ""
+msgstr "Çevaca"
 
 msgid "oc"
-msgstr ""
+msgstr "Oksitanca"
 
 msgid "oj"
-msgstr ""
+msgstr "Ojibva"
 
 msgid "om"
-msgstr ""
+msgstr "Oromo"
 
 msgid "or"
-msgstr ""
+msgstr "Oriya"
 
 msgid "os"
-msgstr ""
+msgstr "Osetçe"
 
 msgid "pa"
-msgstr ""
+msgstr "Pencapça"
 
 msgid "pi"
-msgstr ""
+msgstr "Pali"
 
 msgid "pl"
-msgstr ""
+msgstr "Lehçe"
 
 msgid "ps"
-msgstr ""
+msgstr "Peştuca"
 
 msgid "pt"
-msgstr ""
+msgstr "Portekizce"
 
 msgid "qu"
-msgstr ""
+msgstr "Keçuva"
 
 msgid "rm"
-msgstr ""
+msgstr "Romansça"
 
 msgid "rn"
-msgstr ""
+msgstr "Kirundi"
 
 msgid "ro"
-msgstr ""
+msgstr "Rumence"
 
 msgid "ru"
-msgstr ""
+msgstr "Rusça"
 
 msgid "rw"
-msgstr ""
+msgstr "Ruandaca"
 
 msgid "sa"
-msgstr ""
+msgstr "Sanskritçe"
 
 msgid "sc"
-msgstr ""
+msgstr "Sardunyaca"
 
 msgid "sd"
-msgstr ""
+msgstr "Sindice"
 
 msgid "se"
-msgstr ""
+msgstr "Kuzey Sami"
 
 msgid "sg"
-msgstr ""
+msgstr "Sango"
 
 msgid "si"
-msgstr ""
+msgstr "Seylanca"
 
 msgid "sk"
-msgstr ""
+msgstr "Slovakça"
 
 msgid "sl"
-msgstr ""
+msgstr "Slovence"
 
 msgid "sm"
-msgstr ""
+msgstr "Samoaca"
 
 msgid "sn"
-msgstr ""
+msgstr "Shona"
 
 msgid "so"
-msgstr ""
+msgstr "Somalice"
 
 msgid "sq"
-msgstr ""
+msgstr "Arnavutça"
 
 msgid "sr"
-msgstr ""
+msgstr "Sırpça"
 
 msgid "ss"
-msgstr ""
+msgstr "Swati"
 
 msgid "st"
-msgstr ""
+msgstr "Sotho"
 
 msgid "su"
-msgstr ""
+msgstr "Sundaca"
 
 msgid "sv"
-msgstr ""
+msgstr "İsveççe"
 
 msgid "sw"
-msgstr ""
+msgstr "Svahilice"
 
 msgid "ta"
-msgstr ""
+msgstr "Tamilce"
 
 msgid "te"
-msgstr ""
+msgstr "Telugu"
 
 msgid "tg"
-msgstr ""
+msgstr "Tacikçe"
 
 msgid "th"
-msgstr ""
+msgstr "Taylandca"
 
 msgid "ti"
-msgstr ""
+msgstr "Tigrince"
 
 msgid "tk"
-msgstr ""
+msgstr "Türkmence"
 
 msgid "tl"
-msgstr ""
+msgstr "Tagalogca"
 
 msgid "tn"
-msgstr ""
+msgstr "Tsvana"
 
 msgid "to"
-msgstr ""
+msgstr "Tongan"
 
 msgid "tr"
 msgstr "Türkçe"
 
 msgid "ts"
-msgstr ""
+msgstr "Tsonga"
 
 msgid "tt"
-msgstr ""
+msgstr "Tatarca"
 
 msgid "tw"
-msgstr ""
+msgstr "Tvi"
 
 msgid "ty"
-msgstr ""
+msgstr "Tahitice"
 
 msgid "ug"
-msgstr ""
+msgstr "Uygurca"
 
 msgid "uk"
-msgstr ""
+msgstr "Ukraynaca"
 
 msgid "ur"
-msgstr ""
+msgstr "Urduca"
 
 msgid "uz"
-msgstr ""
+msgstr "Özbekçe"
 
 msgid "ve"
-msgstr ""
+msgstr "Venda"
 
 msgid "vi"
-msgstr ""
+msgstr "Vietnamca"
 
 msgid "vo"
-msgstr ""
+msgstr "Volapük"
 
 msgid "wa"
-msgstr ""
+msgstr "Valonca"
 
 msgid "wo"
-msgstr ""
+msgstr "Volofça"
 
 msgid "xh"
-msgstr ""
+msgstr "Zosa"
 
 msgid "yi"
-msgstr ""
+msgstr "Yidce"
 
 msgid "yo"
-msgstr ""
+msgstr "Yorubaca"
 
 msgid "za"
-msgstr ""
+msgstr "Zhuang"
 
 msgid "zh"
 msgstr "Çince"
