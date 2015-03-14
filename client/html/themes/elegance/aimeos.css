@@ -1003,7 +1003,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 /* Product detail, social section */
 .catalog-detail-social {
 	float: right;
-	margin: 1% 2%;
+	margin: 2%;
 }
 
 .catalog-detail-social .social-button {
@@ -1035,7 +1035,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 /* Product detail, action buttions */
 .catalog-detail-actions {
 	float: left;
-	margin: 1% 2%;
+	margin: 2%;
 }
 
 .catalog-detail-actions .actions-button {
@@ -1063,7 +1063,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 /* Product detail, basket section */
 .catalog-detail-basket {
-	margin: 1% 2%;
+	margin: 1% 0;
 	clear: right;
 }
 
@@ -1261,6 +1261,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-detail-additional {
 	width: 100%;
 	clear: both;
+	padding: 1% 0;
 }
 
 .catalog-detail-additional .header {
