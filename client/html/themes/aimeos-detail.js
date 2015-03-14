@@ -207,7 +207,7 @@ AimeosCatalogDetail = {
 				list.push( $(this).data("zoom-image") );
 			});
 
-			$.fn.prettyPhoto({ allow_resize: false, social_tools: false });
+			$.fn.prettyPhoto({ horizontal_padding: 0, social_tools: false });
 			$.prettyPhoto.open(list);
 		});
 	},
