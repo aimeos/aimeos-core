@@ -60,10 +60,27 @@ class MShop_Customer_Item_Default
 			}
 		}
 
+		// set modified flag to false
+		$address->setId( $this->getId() );
+
 		$this->_billingaddress = $address;
 		$this->_values = $values;
 		$this->_helper = $helper;
 		$this->_salt = $salt;
+	}
+
+
+	/**
+	 * Sets the new ID of the item.
+	 *
+	 * @param string|null $id ID of the item
+	 */
+	public function setId( $id )
+	{
+		parent::setId( $id );
+
+		// set modified flag
+		$this->_billingaddress->setId( $this->getId() );
 	}
 
 
