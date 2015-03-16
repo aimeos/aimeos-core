@@ -118,6 +118,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$customer->setStatus( $dataset['status'] );
 			$customer->setPaymentAddress( $address );
 			$customer->setPassword( ( isset( $dataset['password'] ) ? $dataset['password'] : '' ) );
+			$customer->setBirthday( ( isset( $dataset['birthday'] ) ? $dataset['birthday'] : null ) );
 
 			$customerManager->saveItem( $customer );
 			$parentIds[ $key ] = $customer->getId();
