@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-03-08 11:18+0000\n"
+"PO-Revision-Date: 2015-03-18 17:01+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr "Curl başlatılamadı"
 msgid ""
 "DOM tree of XML response from delivery provider could not be converted to "
 "XML string"
-msgstr ""
+msgstr "Teslimat sağlayıcıdan XML yanıtının DOM ağacı XML dizisine dönüştürülemedi"
 
 #: src/MShop/Context/Item/Default.php:154
 #, php-format
@@ -194,14 +194,14 @@ msgstr "Geçersiz ISO dil kodu \"%1$s\""
 #: src/MShop/Coupon/Manager/Default.php:516
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "\"%1$s\" içinde ID \"%2$s\" için arama sonucu olarak geçersiz JSON: %3$s"
 
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:363
 #, php-format
 msgid ""
 "Invalid JSON as result of search for order service attribute with ID "
 "\"%1$d\""
-msgstr ""
+msgstr "\"%1$d\" ID'li sipariş hizmeti niteliği için arama sonucu olarak geçersiz JSON"
 
 #: src/MShop/Locale/Item/Currency/Default.php:94
 #, php-format
@@ -219,7 +219,7 @@ msgstr "\"%1$s\" ISO dil kodunda geçersiz karakterler"
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
 " of type \"%1$s\"."
-msgstr ""
+msgstr "Sağlayıcı yapılandırması için nitelik içinde geçersiz karakterler mevcut. Nitelik belirtilen \"%1$s\" veri türü ile eşleşmiyor."
 
 #: src/MAdmin/Cache/Manager/Factory.php:37
 #: src/MAdmin/Job/Manager/Factory.php:37 src/MAdmin/Log/Manager/Factory.php:37
@@ -251,12 +251,12 @@ msgstr "\"%1$s\" class adında geçersiz karakterler"
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "\"%1$s\" tarihinde geçersiz karakterler mevcut. ISO formatı \"YYYY-MM-DD hh:mm:ss\" gerekli."
 
 #: src/MShop/Customer/Item/Default.php:306
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "\"%1$s\" tarihinde geçersiz karakterler. ISO formatı \"YYYY-MM-DD\" gerekli."
 
 #: src/MAdmin/Common/Manager/Abstract.php:94
 #: src/MShop/Service/Manager/Default.php:572
@@ -307,7 +307,7 @@ msgstr "\"%1$s\" satın alma tarihinde geçersiz karakterler"
 #: src/MShop/Coupon/Provider/FixedRebate.php:39
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" kupon sağlayıcı için geçersiz yapılandırma, \"%2$s\" gerekiyor"
 
 #: src/MAdmin/Factory.php:96 src/MShop/Factory.php:97
 #, php-format
@@ -322,7 +322,7 @@ msgstr "Geçersiz MIME türü \"%1$s\""
 #: src/MShop/Order/Manager/Base/Default.php:570
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Geçersiz serileştirilmiş sepet.  \"%1$s\" \"%2$s\" döner"
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
@@ -332,18 +332,18 @@ msgstr "Geçersiz web site URL'si \"%1$s\""
 #: src/MShop/Common/Manager/Decorator/Sitecheck.php:53
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Öğe silinemez. Öğrenin site ID'si mevcut site ID'sinden farklı."
 
 #: src/MShop/Catalog/Manager/Index/Default.php:410
 #, php-format
 msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
-msgstr ""
+msgstr "Öğe saveItem() metodu kullanılarak kaydedilemedi. Öğe ID'si mevcut değil."
 
 #: src/MShop/Common/Manager/ListRef/Abstract.php:141
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "\"%1$s\" domain içinde başvurulan öğe bulunamadı: %2$s"
 
 #: src/MAdmin/Cache/Manager/Default.php:385
 #, php-format
@@ -353,7 +353,7 @@ msgstr "\"%1$s\" ID'li öğe bulunamadı"
 #: src/MShop/Common/Manager/Abstract.php:626
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" içinde \"%2$s\" ID'li öğe bulunamadı"
 
 #: src/MAdmin/Job/Manager/Default.php:359
 #, php-format
@@ -363,33 +363,33 @@ msgstr "\"%1$s\" ID'li görev bulunamadı"
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" içinde \"%2$s\" ID'li liste öğesi bulunamadı"
 
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:436
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" ID'li nitelik öğesi için liste türü mevcut değil"
 
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:479
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" ID'li fiyat öğesi için liste türü mevcut değil"
 
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:445
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:648
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" ID'li metin öğesi için liste türü mevcut değil"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Teslimat sağlayıcıdan \"%1$s\" XML yanıtının yüklemesi başarısız oldu"
 
 #: src/MShop/Locale/Manager/Default.php:585
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Site \"%1$s\" için yerel öğesi bulunamadı"
 
 #: src/MShop/Context/Item/Default.php:211
 #, php-format
@@ -399,7 +399,7 @@ msgstr "Yerel nesne mevcut değil"
 #: src/MShop/Order/Manager/Base/Abstract.php:54
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Kilit bayrağı \"%1$d\" izin verilen aralıkta değil"
 
 #: src/MAdmin/Log/Manager/Default.php:371
 #, php-format
@@ -429,7 +429,7 @@ msgstr "Yönetici yolu boş"
 #: src/MShop/Locale/Manager/Site/Default.php:616
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Yerel site yöneticisi için \"%1$s\" metodu mevcut değil"
 
 #: src/MShop/Service/Provider/Abstract.php:174
 #: src/MShop/Service/Provider/Decorator/Abstract.php:236
@@ -439,7 +439,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Decorator/Abstract.php:48
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Sağlayıcı için \"%1$s\" metodu mevcut değil"
 
 #: src/MShop/Service/Provider/Decorator/Costs.php:80
 #, php-format
@@ -449,19 +449,19 @@ msgstr "Eksik yapılandırma \"%1$s\""
 #: src/MShop/Common/Item/Abstract.php:177
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Öğe için yeni ID \"%1$s\", eski ID \"%2$s\" ile farklılık gösteriyor"
 
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
-msgstr ""
+msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insertItem()\" metodunu kullanmayı deneyin."
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:196
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "\"%1$s\" ürün ID'si veya \"%2$s\" ürün kodu için hiçbir fiyat mevcut değil"
 
 #: src/MShop/Coupon/Provider/Abstract.php:173
 #, php-format
@@ -521,7 +521,7 @@ msgstr "\"%1$s\" kodlu hiçbir depo bulunamadı"
 #: src/MShop/Price/Manager/Default.php:271
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Nesne gerekli olan \"%1$s\" türünden değil"
 
 #: src/MAdmin/Cache/Manager/None.php:87
 #, php-format
@@ -533,45 +533,45 @@ msgstr "Operasyon desteklenmiyor"
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "Teslimat sağlayıcının XML yanıtındaki sipariş ID'si olan \"%1$s\", siparişin kayıtlı fatura ID'si olan \"%2$s\" ile farklılık gösteriyor"
 
 #: src/MShop/Order/Manager/Base/Default.php:680
 #: src/MShop/Service/Provider/Delivery/Default.php:292
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" sipariş ID'li sipariş temel öğesi bulunamadı"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:250
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "Teslimat sağlayıcıya gönderilen sipariş bilgisi XML yanıtına göre \"%1$s\" koduyla reddedildi "
 
 #: src/MShop/Order/Item/Abstract.php:177
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Sipariş teslimat durumu \"%1$s\" izin verilen aralıkta değil"
 
 #: src/MShop/Order/Item/Abstract.php:193
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Sipariş ödeme durumu \"%1$s\" izin verilen aralıkta değil"
 
 #: src/MShop/Order/Item/Base/Product/Default.php:435
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Sipariş ürün konumu  \"%1$s\" 0'dan büyük olmalıdır"
 
 #: src/MShop/Order/Item/Abstract.php:213
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Sipariş türü \"%1$s\" izin verilen aralıkta değil"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:269
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "\"%1$s\" ID'li sipariş  \"%2$s\" koduyla reddedildi: %3$s"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:116
 #: src/MShop/Service/Provider/Delivery/Default.php:151
@@ -583,12 +583,12 @@ msgstr "Yapılandırma için parametre \"%1$s\" mevcut değil"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:523
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" ID ve \"%2$s\" durumlu yinelenen işlem"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:359
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Geçersiz istek \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:205
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:238
@@ -596,17 +596,17 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:316
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" sipariş ID'si için ödeme işlem ID'si mevcut değil"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:477
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" sipariş ID'si için talep \"%2$s\" ile başarısız oldu"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: \"%2$s\" sipariş ID'si için yanlış ödeme tutarı \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:500
 #, php-format
@@ -620,19 +620,19 @@ msgstr "Ödeme maliyetleri"
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:105
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Lütfen sepetinizdeki ürünlerin fiyatlarına göz atın"
 
 #: src/MShop/Price/Item/Default.php:320
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Fiyat eklenemiyor.  Fiyat öğesinin para birimi ID'si \"%1$s\" ve şu anda kullanılan para birimi ID'si \"%2$s\" eşleşmiyor."
 
 #: src/MShop/Price/Manager/Abstract.php:49
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Verilen miktar olan \"%1$d\" için fiyat mevcut değil"
 
 #: src/MShop/Price/Manager/Abstract.php:44
 #, php-format
@@ -644,7 +644,7 @@ msgstr "Fiyat öğesi mevcut değil"
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "Ürün gerekli tüm değerleri içermiyor. Öğe için ürün kodu mevcut değil."
 
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:84
 #, php-format
@@ -655,7 +655,7 @@ msgstr "Verilen özelliklerle eşleşen ürün bulunamadı"
 #: src/MShop/Order/Item/Base/Default.php:316
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "\"%1$d\" dizi anahtarlı ürün mevcut değil"
 
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
@@ -670,7 +670,7 @@ msgstr "Ürünler stokta tükenmiştir"
 #: src/MShop/Order/Item/Default.php:270
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "\"%1$s\" özellik adı izin verilen aralıkta değil"
 
 #: src/MShop/Service/Manager/Default.php:576
 #: src/MShop/Plugin/Manager/Default.php:184
@@ -682,12 +682,12 @@ msgstr "\"%1$s\" içinde tedarikçi mevcut değil"
 #: src/MShop/Order/Item/Base/Product/Default.php:337
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
+msgstr "Miktar pozitif bir tam sayı olmalı ve %1$d aşmamalıdır"
 
 #: src/MShop/Service/Provider/Abstract.php:303
 #, php-format
 msgid "Required attribute \"%1$s\" in provider configuration not available"
-msgstr ""
+msgstr "Sağlayıcı konfigürasyonundaki gerekli nitelik \"%1$s\" mevcut değil"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:68
 #: src/MShop/Common/Manager/Type/Abstract.php:72
@@ -697,7 +697,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" için arama yapılandırması mevcut değil"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:64
 #: src/MShop/Common/Manager/List/Abstract.php:39
@@ -710,23 +710,23 @@ msgstr "Arama yapılandırması mevcut değil"
 #: src/MShop/Service/Provider/Delivery/Default.php:207
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Teslimat sağlayıcısına sipariş gönderimi \"%1$s\" HTTP durumu ile başarısız oldu"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:201
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Teslimat sağlayıcısına sipariş gönderimi başarısız oldu: \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Default.php:421
 #: src/MShop/Order/Item/Base/Service/Abstract.php:45
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" türü servis mevcut değil."
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:749
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" sipariş temel ID'si için ödeme hizmeti sağlayıcısı bulunamadı"
 
 #: src/MShop/Context/Item/Default.php:263
 #, php-format
@@ -738,14 +738,14 @@ msgstr "Oturum nesnesi mevcut değil"
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Sitesi eklenemiyor. Sitenin site ID'si üst sitenin site ID'sinden farklı."
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:61
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Sitesi taşınamaz. Sitenin site ID'si mevcut site ID'sinden, varolan üst sitenin site ID'sinden veya yeni üst sitenin site ID'sinden farklı."
 
 #: src/MShop/Locale/Manager/Default.php:122
 #, php-format
@@ -755,7 +755,7 @@ msgstr "Kod \"%1$s\" için site bulunamadı"
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:99
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Maksimum sepet değeri olan %1$s aşıldı"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:73
 #, php-format
@@ -765,7 +765,7 @@ msgstr "Maksimum ürün miktarı %1$d ' dır"
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:111
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Maksimum ürün miktarı olan %1$d aşıldı"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:111
 #, php-format
@@ -785,17 +785,17 @@ msgstr "Tüm ürünlerin maksimum değeri %1$s 'dir"
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:93
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "%1$s olan minimum sepet değerine ulaşılmadı"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:105
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "%1$d olan minimum ürün miktarına ulaşılmadı"
 
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" anahtarlı yapılandırma seçeneğinin türü \"%2$s\" olmalıdır"
 
 #: src/MShop/Locale/Manager/Default.php:899
 #: src/MShop/Common/Manager/Abstract.php:802
@@ -806,17 +806,17 @@ msgstr "Toplam sonuç değeri bulunamadı"
 #: src/MShop/Locale/Manager/Site/Default.php:551
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "\"%2$s\" içindeki \"%1$s\" kodlu ağaç kökü bulunamadı"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:199
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "\"%2$s\" içinde \"%1$s\" ID'li tür öğesi bulunamadı"
 
 #: src/MShop/Service/Provider/Abstract.php:255
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Kamusal tatiller sıralanamıyor: \"%1$s\""
 
 #: src/MShop/Common/Manager/Abstract.php:124
 #, php-format
@@ -828,14 +828,14 @@ msgstr "Bilinmeyene arama anahtarı \"%1$s\""
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "Teslimat sağlayıcıdan XML yanıtının doğrulaması \"%1$s\" şemasına karşı başarısız oldu"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:324
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed: %2$s"
-msgstr ""
+msgstr "Teslimat sağlayıcıdan XML yanıtının doğrulaması \"%1$s\" şemasına karşı başarısız oldu: %2$s"
 
 #: src/MShop/Context/Item/Default.php:315
 #, php-format

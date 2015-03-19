@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-03-08 11:18+0000\n"
+"PO-Revision-Date: 2015-03-18 15:37+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/arcavias-core/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgstr "%1$s %2$s"
 #: src/MW/View/Helper/Price/Default.php:82
 #, php-format
 msgid "%1$s %2$s off"
-msgstr ""
+msgstr "%1$s %2$s indirim"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
@@ -111,7 +111,7 @@ msgstr "%1$s ( %4$s%2$s%3$s )"
 #: layouts/account/history/list-body-default.html:97
 #, php-format
 msgid "%1$s at %2$s"
-msgstr ""
+msgstr "%1$s, %2$s tarihinde"
 
 #. / Percent format with value (%1$s) and % sign
 #: layouts/account/watch/body-default.html:92
@@ -252,7 +252,7 @@ msgstr "Şimdi satın al"
 #: src/Client/Html/Catalog/Filter/Tree/Default.php:233
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" ID'li kategori \"%2$s\" ID'nin altında değil"
 
 #: layouts/common/summary/address-body-default.html:24
 #: layouts/common/summary/address-body-default.html:80
@@ -438,7 +438,7 @@ msgstr "<a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"
 
 #: layouts/account/watch/body-default.html:161
 msgid "If back in stock"
-msgstr ""
+msgstr "Stoğa girdiğinde"
 
 #: layouts/account/watch/body-default.html:155
 msgid "If price decreases"
@@ -457,13 +457,13 @@ msgstr "Herhangi bir sorunuz varsa lütfen bu maili cevaplayın"
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
-msgstr ""
+msgstr "%1$s%% KDV dahil"
 
 #: layouts/common/summary/detail-body-default.html:244
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
-msgstr ""
+msgstr "Dahil indirimler"
 
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
@@ -487,12 +487,12 @@ msgstr ""
 #: src/Client/Html/Catalog/Count/Factory.php:72
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "%1$s\" class adında geçersiz karakterler"
 
 #: src/Client/Html/Abstract.php:299 src/Client/Html/Abstract.php:327
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" istemci adında geçersiz karakterler"
 
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
@@ -507,7 +507,7 @@ msgstr "Geçersiz domain \"%1$s\""
 #: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" kodlu servis sağlayıcısından geçersiz işlem yanıtı"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:185
 #: layouts/checkout/standard/address-delivery-body-default.html:303
@@ -543,12 +543,12 @@ msgstr "Sonraki"
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
-msgstr ""
+msgstr "<span class=\"searchstring\">\"%1$s\"</span> için hiç bir madde bulunamadı. Lütfen farklı bir anahtar kelime ile tekrar deneyin."
 
 #: src/Client/Html/Abstract.php:506
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için hiçbir tür öğesi bulunamadı"
 
 #: src/Client/Html/Abstract.php:61
 #, php-format
@@ -563,7 +563,7 @@ msgstr "Kupon kodu sayısı limiti aşıyor"
 #: src/MW/View/Helper/Price/Default.php:44
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
-msgstr ""
+msgstr "Nesne \"%1$s\" uygulamıyor"
 
 #: layouts/account/watch/body-default.html:149
 msgid "One month"
@@ -617,7 +617,7 @@ msgstr "Diğer müşteriler şunları da aldı"
 #: layouts/catalog/list/pagination-body-default.html:54
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Toplam %2$d sayfadan %1$d.'si"
 
 #: layouts/account/history/list-body-default.html:105
 #: layouts/email/common/text-summary-service-body-default.html:39
@@ -681,7 +681,7 @@ msgstr "Fiyat"
 #: layouts/checkout/standard/order-payment-body-default.html:28
 #: layouts/checkout/standard/order-payment-body-default.html:37
 msgid "Proceed"
-msgstr ""
+msgstr "Devam et"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
@@ -698,7 +698,7 @@ msgstr "İlgili"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
-msgstr ""
+msgstr "İlgi"
 
 #. / Product search hint with user provided search string (%1$s)
 #: layouts/catalog/list/header-default.html:22
@@ -719,7 +719,7 @@ msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d arti
 msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
-msgstr[0] ""
+msgstr[0] "<span class=\"searchstring\">\"%1$s\"</span> için arama sonuçları (%2$d madde)"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:162
 #: layouts/checkout/standard/address-delivery-body-default.html:280
@@ -748,7 +748,7 @@ msgstr "Selamlama seç"
 #: layouts/checkout/standard/address-billing-body-default.html:163
 #: layouts/checkout/standard/address-billing-body-default.html:277
 msgid "Select state"
-msgstr ""
+msgstr "Bir Eyalet seçin"
 
 #: layouts/email/common/text-summary-detail-body-default.html:82
 msgid "Service fees"
@@ -768,7 +768,7 @@ msgstr "Göster"
 
 #: layouts/catalog/list/quote-body-default.html:19
 msgid "Show all quotes"
-msgstr ""
+msgstr "Tüm değerlendirmeleri göster"
 
 #: layouts/catalog/list/pagination-body-default.html:43
 msgid "Sort by:"
@@ -780,7 +780,7 @@ msgstr "Sıralama ölçütü"
 #: layouts/checkout/standard/address-billing-body-default.html:161
 #: layouts/checkout/standard/address-billing-body-default.html:275
 msgid "State"
-msgstr ""
+msgstr "Eyalet"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out)
 #. and stock level string (%2$s)
@@ -794,7 +794,7 @@ msgstr "Stok: %1$s, %2$s"
 #: layouts/catalog/stock/body-default.html:47
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
-msgstr ""
+msgstr "Stok: %1$s, %2$s, tekrar mevcut %3$s"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:139
 #: layouts/checkout/standard/address-delivery-body-default.html:253
