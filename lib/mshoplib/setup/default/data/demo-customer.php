@@ -11,7 +11,7 @@ return array(
 		'company' => 'Test company', 'vatid' => 'DE999999999', 'title' => '', 'firstname' => 'Test', 'lastname' => 'User',
 		'address1' => 'Test street', 'address2' => '1', 'address3' => '', 'postal' => '1000',
 		'city' => 'Test city', 'state' => '', 'langid' => 'en', 'countryid' => 'DE',
-		'telephone' => '', 'email' => 'me@localhost', 'telefax' => '', 'website' => '',
-		'birthday' => null, 'password' => 'test', 'vtime' => null, 'status' => 1,
+		'telephone' => '', 'email' => 'demo@example.com', 'telefax' => '', 'website' => '',
+		'birthday' => null, 'password' => 'testdemo', 'vtime' => null, 'status' => 1,
 	),
 );
