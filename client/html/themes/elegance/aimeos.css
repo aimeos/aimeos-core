@@ -1684,12 +1684,24 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	color: #D0D0D0;
 	border-bottom: solid 8px #D0D0D0;
 }
+
 .checkout-standard .steps .current {
 	color: #555;
 	border-bottom: solid 8px #555;
 }
+
 .checkout-standard .steps .order {
 	display: none;
+}
+
+.checkout-standard .steps .active:after {
+	background-image: url("media/check.png");
+	background-repeat: no-repeat;
+	display: inline-block;
+	content: "";
+	width: 1em;
+	height: 1em;
+	margin: 0 0.5em;
 }
 
 .checkout-standard .step {
@@ -1877,6 +1889,11 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .checkout-standard .form-list .error select {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
+}
+
+.checkout-standard .form-list .success input,
+.checkout-standard .form-list .success select {
+	background-color: #bbffbb;
 }
 
 .checkout-standard .item-service .form-list {
