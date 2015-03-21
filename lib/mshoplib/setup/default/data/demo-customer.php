@@ -12,6 +12,6 @@ return array(
 		'address1' => 'Test street', 'address2' => '1', 'address3' => '', 'postal' => '1000',
 		'city' => 'Test city', 'state' => '', 'langid' => 'en', 'countryid' => 'DE',
 		'telephone' => '', 'email' => 'demo@example.com', 'telefax' => '', 'website' => '',
-		'birthday' => null, 'password' => 'testdemo', 'vtime' => null, 'status' => 1,
+		'birthday' => null, 'password' => 'test', 'vtime' => null, 'status' => 1,
 	),
 );
