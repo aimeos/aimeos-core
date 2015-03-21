@@ -123,7 +123,10 @@ class MShop_Service_Provider_Payment_DirectDebit
 			$attributeItems[] = $ordBaseAttrItem;
 
 			$value = $attrItem->getValue();
-			$attrItem->setValue( str_repeat( 'X', strlen( $value ) - 3 ) . substr( $value, -3 ) );
+			$len = strlen( $value );
+			$xstr = ( $len > 3 ? str_repeat( 'X', $len - 3 ) : '' );
+
+			$attrItem->setValue( $xstr . substr( $value, -3 ) );
 		}
 
 		$orderServiceItem->setAttributes( $attributeItems );
