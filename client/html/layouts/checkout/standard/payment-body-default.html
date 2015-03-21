@@ -69,7 +69,8 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 		if( isset( $serviceAttributes[$id] ) ) :
 			?><ul class="form-list">
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
-<?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
+<?php			$value = ( isset( $orderService ) && ( ( $value = $orderService->getAttribute( $key . '/hidden' ) ) !== null || ( $value = $orderService->getAttribute( $key ) ) !== null ) ? $value : $attribute->getDefault() ); ?>
+
 				<li class="form-item <?php echo $enc->attr( $key ) . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="payment-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $key ) ); ?></label><?php
 				switch( $attribute->getType() ) : case 'string':
