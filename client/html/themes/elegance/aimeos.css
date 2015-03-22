@@ -2040,7 +2040,9 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 .account-history-list li.attr-item {
 	display: inline-block;
-	margin: 0.25em 1em;
+	padding: 0.25em 1em;
+	margin: 0;
+	width: 50%;
 }
 
 .account-history-list li.attr-item .name,
