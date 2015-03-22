@@ -402,6 +402,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	public function testGetAddress()
 	{
 		foreach( $this->_addresses as $type => $address ) {
+			$address->setId(null);
 			$this->_object->setAddress( $address, $type );
 		}
 
@@ -423,10 +424,13 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$address = $orderAddressManager->createItem();
 
 		$result = $this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
-		$this->assertEquals($address, $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT));
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
+		$item = $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
 
-		$this->assertTrue($this->_object->isModified());
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
+		$this->assertEquals($result, $item);
+		$this->assertEquals(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item->getType());
+		$this->assertTrue($item->isModified());
+		$this->assertNull($item->getId());
 	}
 
 
@@ -448,6 +452,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	public function testGetService()
 	{
 		foreach( $this->_services as $type => $service ) {
+			$service->setId(null);
 			$this->_object->setService( $service, $type );
 		}
 
@@ -470,9 +475,13 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$service = $orderServiceManager->createItem();
 
 		$result = $this->_object->setService($service, $type);
-		$this->assertEquals($service, $this->_object->getService($type));
+		$item = $this->_object->getService($type);
+
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $result );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertEquals($result, $item);
+		$this->assertEquals($type, $item->getType());
+		$this->assertTrue($item->isModified());
+		$this->assertNull($item->getId());
 	}
 
 
