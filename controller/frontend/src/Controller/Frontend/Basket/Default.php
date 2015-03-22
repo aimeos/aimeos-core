@@ -828,6 +828,7 @@ class Controller_Frontend_Basket_Default
 		}
 
 		$errors = $address->fromArray( $map );
+		$address->setId( null ); // enforce new item and don't update existing one in order
 
 		if( count( $errors ) > 0 )
 		{

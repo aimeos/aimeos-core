@@ -432,6 +432,7 @@ class MShop_Customer_Manager_Default
 
 			if( $id !== null ) {
 				$stmt->bind( 28, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$billingAddress->setId( $id ); // enforce ID to be present
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 28, $date ); // Creation time
