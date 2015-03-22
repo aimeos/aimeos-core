@@ -113,6 +113,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getPaymentAddress(), $itemSaved->getPaymentAddress() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
+		$this->assertEquals( $itemSaved->getPaymentAddress()->getId(), $itemSaved->getId() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -126,6 +127,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getPaymentAddress(), $itemUpd->getPaymentAddress() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
+		$this->assertEquals( $itemUpd->getPaymentAddress()->getId(), $itemUpd->getId() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
