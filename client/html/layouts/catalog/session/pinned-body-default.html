@@ -9,7 +9,7 @@ $enc = $this->encoder();
 $pinParams = $this->get( 'pinnedParams', array() );
 $pinList = $this->get( 'pinnedProductItems', array() );
 
-/** client/html/account/pinned/url/target
+/** client/html/catalog/session/pinned/url/target
  * Destination of the URL where the controller specified in the URL is known
  *
  * The destination can be a page ID like in a content management system or the
@@ -19,13 +19,13 @@ $pinList = $this->get( 'pinnedProductItems', array() );
  * @param string Destination of the URL
  * @since 2014.09
  * @category Developer
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/action
- * @see client/html/account/pinned/url/config
+ * @see client/html/catalog/session/pinned/url/controller
+ * @see client/html/catalog/session/pinned/url/action
+ * @see client/html/catalog/session/pinned/url/config
  */
-$pinTarget = $this->config( 'client/html/account/pinned/url/target' );
+$pinTarget = $this->config( 'client/html/catalog/session/pinned/url/target' );
 
-/** client/html/account/pinned/url/controller
+/** client/html/catalog/session/pinned/url/controller
  * Name of the controller whose action should be called
  *
  * In Model-View-Controller (MVC) applications, the controller contains the methods
@@ -35,13 +35,13 @@ $pinTarget = $this->config( 'client/html/account/pinned/url/target' );
  * @param string Name of the controller
  * @since 2014.09
  * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/action
- * @see client/html/account/pinned/url/config
+ * @see client/html/catalog/session/pinned/url/target
+ * @see client/html/catalog/session/pinned/url/action
+ * @see client/html/catalog/session/pinned/url/config
  */
-$pinController = $this->config( 'client/html/account/pinned/url/controller', 'catalog' );
+$pinController = $this->config( 'client/html/catalog/session/pinned/url/controller', 'catalog' );
 
-/** client/html/account/pinned/url/action
+/** client/html/catalog/session/pinned/url/action
  * Name of the action that should create the output
  *
  * In Model-View-Controller (MVC) applications, actions are the methods of a
@@ -51,13 +51,13 @@ $pinController = $this->config( 'client/html/account/pinned/url/controller', 'ca
  * @param string Name of the action
  * @since 2014.09
  * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/config
+ * @see client/html/catalog/session/pinned/url/target
+ * @see client/html/catalog/session/pinned/url/controller
+ * @see client/html/catalog/session/pinned/url/config
  */
-$pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
+$pinAction = $this->config( 'client/html/catalog/session/pinned/url/action', 'detail' );
 
-/** client/html/account/pinned/url/config
+/** client/html/catalog/session/pinned/url/config
  * Associative list of configuration options used for generating the URL
  *
  * You can specify additional options as key/value pairs used when generating
@@ -73,12 +73,12 @@ $pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
  * @param string Associative list of configuration options
  * @since 2014.09
  * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/action
+ * @see client/html/catalog/session/pinned/url/target
+ * @see client/html/catalog/session/pinned/url/controller
+ * @see client/html/catalog/session/pinned/url/action
  * @see client/html/url/config
  */
-$pinConfig = $this->config( 'client/html/account/pinned/url/config', array() );
+$pinConfig = $this->config( 'client/html/catalog/session/pinned/url/config', array() );
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
