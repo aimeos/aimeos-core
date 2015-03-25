@@ -17,5 +17,6 @@ return array (
 		array ( 'typeid' => 'plugin/order', 'label' => 'Checks for necessary basket limits', 'provider' => 'BasketLimits', 'config' => array("min-products" => 1, "max-products" => 100, "min-value" => array("EUR" => "1.00"), "max-value" => array("EUR" => "10000.00")), 'position' => 6, 'status' => 0 ),
 		array ( 'typeid' => 'plugin/order', 'label' => 'Limits maximum amount of products', 'provider' => 'ProductLimit', 'config' => array("single-number-max" => 10, "total-number-max" => 100, "single-value-max" => array("EUR" => "1000.00"), "total-value-max" => array("EUR" => "10000.00")), 'position' => 7, 'status' => 0 ),
 		array ( 'typeid' => 'plugin/order', 'label' => 'Free shipping above threshold', 'provider' => 'Shipping', 'config' => array("threshold" => array ("EUR" =>"1.00" )), 'position' => 8, 'status' => 0 ),
+		array ( 'typeid' => 'plugin/order', 'label' => 'Coupon update', 'provider' => 'Coupon', 'config' => array(), 'position' => 100, 'status' => 1 ),
 	)
 );
