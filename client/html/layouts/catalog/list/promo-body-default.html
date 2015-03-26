@@ -48,7 +48,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 				</div>
 				<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 				<div class="price-list">
-<?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
+<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
 				</div>
 			</a>
 		</li><!--
