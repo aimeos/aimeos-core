@@ -13,6 +13,7 @@
  *
  * @package MW
  * @subpackage View
+ * @deprecated 2016.01
  */
 class MW_View_Helper_Price_Default
 	extends MW_View_Helper_Abstract
