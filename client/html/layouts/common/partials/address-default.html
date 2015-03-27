@@ -48,31 +48,31 @@ $enc = $this->encoder();
 <?php	endforeach; ?>
 		</select>
 	</li>
-	<li class="form-item firstname <?php echo ( isset( $css['order.base.address.firstname'] ) ? join( ' ', $css['order.base.address.firstname'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.firstname' ); ?>>
+	<li class="form-item firstname <?php echo ( isset( $css['order.base.address.firstname'] ) ? join( ' ', $css['order.base.address.firstname'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.firstname' ); ?>">
 		<label for="address-<?php echo $type ?>-firstname<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'First name' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-firstname<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.firstname' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.firstname' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'First name' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.firstname' ); ?> />
 	</li>
-	<li class="form-item lastname <?php echo ( isset( $css['order.base.address.lastname'] ) ? join( ' ', $css['order.base.address.lastname'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.lastname' ); ?>>
+	<li class="form-item lastname <?php echo ( isset( $css['order.base.address.lastname'] ) ? join( ' ', $css['order.base.address.lastname'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.lastname' ); ?>">
 		<label for="address-<?php echo $type ?>-lastname<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Last name' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-lastname<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.lastname' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.lastname' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Last name' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.lastname' ); ?> />
 	</li>
-	<li class="form-item company <?php echo ( isset( $css['order.base.address.company'] ) ? join( ' ', $css['order.base.address.company'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.company' ); ?>>
+	<li class="form-item company <?php echo ( isset( $css['order.base.address.company'] ) ? join( ' ', $css['order.base.address.company'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.company' ); ?>">
 		<label for="address-<?php echo $type ?>-company<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Company' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-company<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.company' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.company' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Company' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.company' ); ?> />
 	</li>
-	<li class="form-item address1 <?php echo ( isset( $css['order.base.address.address1'] ) ? join( ' ', $css['order.base.address.address1'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address1' ); ?>>
+	<li class="form-item address1 <?php echo ( isset( $css['order.base.address.address1'] ) ? join( ' ', $css['order.base.address.address1'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address1' ); ?>">
 		<label for="address-<?php echo $type ?>-address1<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Street' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-address1<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.address1' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.address1' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Street' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.address1' ); ?> />
 	</li>
-	<li class="form-item address2 <?php echo ( isset( $css['order.base.address.address2'] ) ? join( ' ', $css['order.base.address.address2'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address2' ); ?>>
+	<li class="form-item address2 <?php echo ( isset( $css['order.base.address.address2'] ) ? join( ' ', $css['order.base.address.address2'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address2' ); ?>">
 		<label for="address-<?php echo $type ?>-address2<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Additional' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-address2<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.address2' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.address2' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Additional' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.address2' ); ?> />
 	</li>
-	<li class="form-item address3 <?php echo ( isset( $css['order.base.address.address3'] ) ? join( ' ', $css['order.base.address.address3'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address3' ); ?>>
+	<li class="form-item address3 <?php echo ( isset( $css['order.base.address.address3'] ) ? join( ' ', $css['order.base.address.address3'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.address3' ); ?>">
 		<label for="address-<?php echo $type ?>-address3<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Additional 2' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-address3<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.address3' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.address3' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Additional 2' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.address3' ); ?> />
 	</li>
-	<li class="form-item city <?php echo ( isset( $css['order.base.address.city'] ) ? join( ' ', $css['order.base.address.city'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.city' ); ?>>
+	<li class="form-item city <?php echo ( isset( $css['order.base.address.city'] ) ? join( ' ', $css['order.base.address.city'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.city' ); ?>">
 		<label for="address-<?php echo $type ?>-city<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-city<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.city' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'City' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.city' ); ?> />
 	</li>
@@ -91,7 +91,7 @@ $enc = $this->encoder();
 		</select>
 	</li>
 <?php	endif; ?>
-	<li class="form-item postal <?php echo ( isset( $css['order.base.address.postal'] ) ? join( ' ', $css['order.base.address.postal'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.postal' ); ?>>
+	<li class="form-item postal <?php echo ( isset( $css['order.base.address.postal'] ) ? join( ' ', $css['order.base.address.postal'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.postal' ); ?>">
 		<label for="address-<?php echo $type ?>-postal<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Postal code' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-postal<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.postal' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.postal' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'Postal code' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.postal' ); ?> />
 	</li>
@@ -114,23 +114,23 @@ $enc = $this->encoder();
 <?php	endforeach; ?>
 		</select>
 	</li>
-	<li class="form-item vatid <?php echo ( isset( $css['order.base.address.vatid'] ) ? join( ' ', $css['order.base.address.vatid'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.vatid' ); ?>>
+	<li class="form-item vatid <?php echo ( isset( $css['order.base.address.vatid'] ) ? join( ' ', $css['order.base.address.vatid'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.vatid' ); ?>">
 		<label for="address-<?php echo $type ?>-vatid<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-vatid<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.vatid' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'GB999999973' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.vatid' ); ?> />
 	</li>
-	<li class="form-item email <?php echo ( isset( $css['order.base.address.email'] ) ? join( ' ', $css['order.base.address.email'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.email', '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/' ); ?>>
+	<li class="form-item email <?php echo ( isset( $css['order.base.address.email'] ) ? join( ' ', $css['order.base.address.email'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.email', '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/' ); ?>">
 		<label for="address-<?php echo $type ?>-email<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>
 		</label><input type="email" id="address-<?php echo $type ?>-email<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.email' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.email' ) ); ?>" placeholder="name@example.com" <?php echo $disablefcn( $css, 'order.base.address.email' ); ?> />
 	</li>
-	<li class="form-item telephone <?php echo ( isset( $css['order.base.address.telephone'] ) ? join( ' ', $css['order.base.address.telephone'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.telephone' ); ?>>
+	<li class="form-item telephone <?php echo ( isset( $css['order.base.address.telephone'] ) ? join( ' ', $css['order.base.address.telephone'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.telephone' ); ?>">
 		<label for="address-<?php echo $type ?>-telephone<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Telephone' ), $enc::TRUST ); ?>
 		</label><input type="tel" id="address-<?php echo $type ?>-telephone<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.telephone' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.telephone' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', '+1 123 456 7890' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.telephone' ); ?> />
 	</li>
-	<li class="form-item telefax <?php echo ( isset( $css['order.base.address.telefax'] ) ? join( ' ', $css['order.base.address.telefax'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.telefax' ); ?>>
+	<li class="form-item telefax <?php echo ( isset( $css['order.base.address.telefax'] ) ? join( ' ', $css['order.base.address.telefax'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.telefax' ); ?>">
 		<label for="address-<?php echo $type ?>-telefax<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Fax' ), $enc::TRUST ); ?>
 		</label><input type="tel" id="address-<?php echo $type ?>-telefax<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.telefax' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.telefax' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', '+1 123 456 7890' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.telefax' ); ?> />
 	</li>
-	<li class="form-item website <?php echo ( isset( $css['order.base.address.website'] ) ? join( ' ', $css['order.base.address.website'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.website', '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#' ); ?>>
+	<li class="form-item website <?php echo ( isset( $css['order.base.address.website'] ) ? join( ' ', $css['order.base.address.website'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.website', '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#' ); ?>">
 		<label for="address-<?php echo $type ?>-website<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Web site' ), $enc::TRUST ); ?>
 		</label><input type="url" id="address-<?php echo $type ?>-website<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.website' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.website' ) ); ?>" placeholder="http://example.com" <?php echo $disablefcn( $css, 'order.base.address.website' ); ?> />
 	</li>
