@@ -39,14 +39,14 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 ?>
 <div class="checkout-standard-address-billing">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Billing address' ), $enc::TRUST ); ?></h2>
-<?php if( isset( $this->addressCustomerItem )  ) : ?>
+<?php if( isset( $this->addressPaymentItem )  ) : ?>
 	<div class="item-address">
 		<div class="header">
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billingoption' ) ) ); ?>" value="<?php echo $enc->attr( $this->addressCustomerItem->getId() ); ?>" <?php echo ( $billingOption == $this->addressCustomerItem->getId() ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billingoption' ) ) ); ?>" value="<?php echo $enc->attr( $this->addressPaymentItem->getAddressId() ); ?>" <?php echo ( $billingOption == $this->addressPaymentItem->getAddressId() ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
-		$addr = $this->addressCustomerItem->getPaymentAddress();
-		$id = $this->addressCustomerItem->getId();
+		$addr = $this->addressPaymentItem;
+		$id = $this->addressPaymentItem->getAddressId();
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

@@ -50,11 +50,11 @@ foreach( $this->get( 'deliveryHidden', array() ) as $name ) {
 			<div class="values"><span class="value value-like"><?php echo $enc->html( $this->translate( 'client/html', 'like billing address' ), $enc::TRUST ); ?></span></div>
 		</div>
 	</div>
-<?php foreach( $this->get( 'addressCustomerAddressItems', array() ) as $id => $addr ) : ?>
+<?php foreach( $this->get( 'addressDeliveryItems', array() ) as $id => $addr ) : ?>
 	<div class="item-address">
 		<div class="header">
 			<a class="modify minibutton" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'step' => 'address', 'ca_delivery_delete' => $id ), array(), $config ) ); ?>">X</a>
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_deliveryoption' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getId() ); ?>" <?php echo ( $deliveryOption == $id ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_deliveryoption' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getAddressId() ); ?>" <?php echo ( $deliveryOption == $id ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
