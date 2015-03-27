@@ -269,6 +269,8 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			if( ( $item = reset( $items ) ) !== false )
 			{
+				$deliveryAddressItems = array();
+
 				$orderAddressManager = MShop_Factory::createManager( $context, 'order/base/address' );
 				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
 
