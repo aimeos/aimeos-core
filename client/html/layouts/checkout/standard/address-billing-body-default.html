@@ -133,7 +133,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 		 * @category User
 		 */
 ?>
-<?=		$this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php if( $this->config( 'client/html/common/address/billing/disable-new', false ) === false ) : ?>
@@ -167,7 +167,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 			'css' => $paymentCss,
 		);
 ?>
-<?=		$this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>

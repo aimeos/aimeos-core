@@ -40,15 +40,15 @@ $format = array(
 	$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 ?>
 <div class="price-item">
-	<span class="quantity"><?= $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>
-	<span class="value"><?= $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
+	<span class="quantity"><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>
+	<span class="value"><?php echo $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
 <?php if( $rebate > 0 ) : ?>
-	<span class="rebate"><?= $enc->html( sprintf( $format['rebate'], $this->number( $rebate ), $currency ), $enc::TRUST ); ?></span>
-	<span class="rebatepercent"><?= $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / ( $priceItem->getValue() + $rebate ) ), 0 ) ), $enc::TRUST ); ?></span>
+	<span class="rebate"><?php echo $enc->html( sprintf( $format['rebate'], $this->number( $rebate ), $currency ), $enc::TRUST ); ?></span>
+	<span class="rebatepercent"><?php echo $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / ( $priceItem->getValue() + $rebate ) ), 0 ) ), $enc::TRUST ); ?></span>
 <?php endif; ?>
 <?php if( $costs > 0 ) : ?>
-	<span class="costs"><?= $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ); ?></span>
+	<span class="costs"><?php echo $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ); ?></span>
 <?php endif; ?>
-	<span class="taxrate"><?= $enc->html( sprintf( $format['taxrate'], $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ); ?></span>
+	<span class="taxrate"><?php echo $enc->html( sprintf( $format['taxrate'], $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ); ?></span>
 </div>
 <?php endforeach; ?>
