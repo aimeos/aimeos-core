@@ -783,15 +783,15 @@ AimeosCheckoutStandard = {
 	 */
 	setupMandatoryCheck: function() {
 
-	    $(".checkout-standard .mandatory").on("blur", "input,select", function(ev) {
+	    $(".checkout-standard .form-item").on("blur", "input,select", function(ev) {
 	        var value = $(this).val();
+	        var node = $(ev.delegateTarget);
+	    	var regex = new RegExp(node.data('regex'));
 
-	        if(value !== "") {
-	            $(ev.delegateTarget).addClass("success");
-	            $(ev.delegateTarget).removeClass("error");
+	        if((value != '' && value.match(regex)) || (value == '' && !node.hasClass("mandatory"))) {
+	        	node.removeClass("error").addClass("success");
 	        } else {
-	            $(ev.delegateTarget).removeClass("success");
-	            $(ev.delegateTarget).addClass("error");
+	        	node.removeClass("success").addClass("error");
 	        }
 	    });
 
