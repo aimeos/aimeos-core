@@ -54,9 +54,23 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-address-billing">', $output );
+		$this->assertRegexp( '/form-item city.*form-item postal/smU', $output );
 
 		$this->assertGreaterThan( 0, count( $view->billingMandatory ) );
 		$this->assertGreaterThan( 0, count( $view->billingOptional ) );
+	}
+
+
+	public function testGetBodyAddressEU()
+	{
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.html' );
+
+		$view = TestHelper::getView( 'unittest', $config );
+		$this->_object->setView( $view );
+
+		$output = $this->_object->getBody();
+		$this->assertRegexp( '/form-item postal.*form-item city/smU', $output );
 	}
 
 
