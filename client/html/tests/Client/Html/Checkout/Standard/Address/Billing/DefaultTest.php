@@ -49,6 +49,9 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testGetBody()
 	{
+		$customer = $this->_getCustomerItem();
+		$this->_context->setUserId( $customer->getId() );
+
 		$view = TestHelper::getView();
 		$this->_object->setView( $view );
 
@@ -232,15 +235,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testProcessExistingAddress()
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
-		$search = $customerManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
-		$result = $customerManager->searchItems( $search );
-
-		if( ( $customer = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer item not found' );
-		}
-
+		$customer = $this->_getCustomerItem();
 		$this->_context->setUserId( $customer->getId() );
 
 		$view = TestHelper::getView();
@@ -271,5 +266,27 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->process();
+	}
+
+
+	/**
+	 * Returns the customer item for the given code
+	 *
+	 * @param string $code Unique customer code
+	 * @throws Exception If no customer item is found
+	 * @return MShop_Customer_Item_Interface Customer item object
+	 */
+	protected function _getCustomerItem( $code = 'UTC001' )
+	{
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customer = reset( $result ) ) === false ) {
+			throw new Exception( 'Customer item not found' );
+		}
+
+		return $customer;
 	}
 }
