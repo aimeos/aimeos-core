@@ -118,7 +118,7 @@ $enc = $this->encoder();
 		<label for="address-<?php echo $type ?>-vatid<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
 		</label><input type="text" id="address-<?php echo $type ?>-vatid<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.vatid' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', 'GB999999973' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.vatid' ); ?> />
 	</li>
-	<li class="form-item email <?php echo ( isset( $css['order.base.address.email'] ) ? join( ' ', $css['order.base.address.email'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.email', '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/' ); ?>">
+	<li class="form-item email <?php echo ( isset( $css['order.base.address.email'] ) ? join( ' ', $css['order.base.address.email'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.email', '^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$' ); ?>">
 		<label for="address-<?php echo $type ?>-email<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>
 		</label><input type="email" id="address-<?php echo $type ?>-email<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.email' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.email' ) ); ?>" placeholder="name@example.com" <?php echo $disablefcn( $css, 'order.base.address.email' ); ?> />
 	</li>
@@ -130,7 +130,7 @@ $enc = $this->encoder();
 		<label for="address-<?php echo $type ?>-telefax<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Fax' ), $enc::TRUST ); ?>
 		</label><input type="tel" id="address-<?php echo $type ?>-telefax<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.telefax' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.telefax' ) ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html', '+1 123 456 7890' ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.telefax' ); ?> />
 	</li>
-	<li class="form-item website <?php echo ( isset( $css['order.base.address.website'] ) ? join( ' ', $css['order.base.address.website'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.website', '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#' ); ?>">
+	<li class="form-item website <?php echo ( isset( $css['order.base.address.website'] ) ? join( ' ', $css['order.base.address.website'] ) : '' ); ?>" data-regex="<?php echo $testfcn( $regex, 'order.base.address.website', '^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$' ); ?>">
 		<label for="address-<?php echo $type ?>-website<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Web site' ), $enc::TRUST ); ?>
 		</label><input type="url" id="address-<?php echo $type ?>-website<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.website' ) ) ); ?>" value="<?php echo $enc->attr( $testfcn( $addr, 'order.base.address.website' ) ); ?>" placeholder="http://example.com" <?php echo $disablefcn( $css, 'order.base.address.website' ); ?> />
 	</li>
