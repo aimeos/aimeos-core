@@ -49,7 +49,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<title>Kaffee</title>', $output );
+		$this->assertStringStartsWith( '	<title>Kaffee</title>', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 4, count( $tags ) );
 	}
