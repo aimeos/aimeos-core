@@ -114,6 +114,17 @@ class Client_Html_Catalog_List_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'f', 'l' );
+
+		/** client/html/catalog/list
+		 * All parameters defined for the catalog list component and its subparts
+		 *
+		 * This returns all settings related to the filter component.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog#list
+		 */
 		$confkey = 'client/html/catalog/list';
 
 		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )

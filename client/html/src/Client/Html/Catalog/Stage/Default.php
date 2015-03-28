@@ -104,6 +104,17 @@ class Client_Html_Catalog_Stage_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'f' );
+
+		/** client/html/catalog/stage
+		 * All parameters defined for the catalog stage component and its subparts
+		 *
+		 * This returns all settings related to the stage component.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog#stage
+		 */
 		$confkey = 'client/html/catalog/stage';
 
 		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )

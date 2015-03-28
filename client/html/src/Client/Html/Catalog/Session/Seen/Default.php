@@ -68,6 +68,16 @@ class Client_Html_Catalog_Session_Seen_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 
+		/** client/html/catalog/session/seen
+		 * All parameters defined for the catalog session seen subpart
+		 *
+		 * This returns all settings related to the catalog session seen subpart.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog#session
+		 */
 		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-body', $config );
 

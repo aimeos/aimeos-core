@@ -68,6 +68,16 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 
+		/** client/html/catalog/session/pinned
+		 * All parameters defined for the catalog session pinned subpart
+		 *
+		 * This returns all settings related to the catalog session pinned subpart.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog/session#pinned
+		 */
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
 
