@@ -39,7 +39,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 <?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
 <?php	if( ( $price = reset( $prices ) ) !== false ) : ?>
 						<div class="price-list">
-<?php		echo $this->price( array( $price ) ); ?>
+<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => array( $price ) ) ); ?>
 						</div>
 <?php	endif; ?>
 					</td>

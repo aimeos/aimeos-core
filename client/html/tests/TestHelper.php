@@ -63,6 +63,9 @@ class TestHelper
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
 
+		$helper = new MW_View_Helper_Partial_Default( $view, $config, array( dirname(__DIR__) => array( 'layouts' ) ) );
+		$view->addHelper( 'partial', $helper );
+
 		return $view;
 	}
 

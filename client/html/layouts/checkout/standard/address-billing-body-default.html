@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 $enc = $this->encoder();
@@ -15,14 +16,11 @@ try {
 
 $billingDefault = ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' );
 $billingOption = $this->param( 'ca_billingoption', ( isset( $addrArray['order.base.address.addressid'] ) && $addrArray['order.base.address.addressid'] != '' ? $addrArray['order.base.address.addressid'] : $billingDefault ) );
-$billingSalutation = $this->param( 'ca_billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
-$billingCountry = $this->param( 'ca_billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
-$billingState = $this->param( 'ca_billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) );
 
 $billingSalutations = $this->get( 'billingSalutations', array() );
 $billingCountries = $this->get( 'addressCountries', array() );
 $billingStates = $this->get( 'addressStates', array() );
-$billingLanguage = $this->get( 'billingLanguage', 'en' );
+$billingLanguages = $this->get( 'addressLanguages', array() );
 
 $paymentCssAll = array();
 
@@ -38,19 +36,17 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 	$paymentCssAll[$name][] = 'hidden';
 }
 
-$allFields = array_keys( $paymentCssAll );
-
 ?>
 <div class="checkout-standard-address-billing">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Billing address' ), $enc::TRUST ); ?></h2>
-<?php if( isset( $this->addressCustomerItem )  ) : ?>
+<?php if( isset( $this->addressPaymentItem )  ) : ?>
 	<div class="item-address">
 		<div class="header">
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billingoption' ) ) ); ?>" value="<?php echo $enc->attr( $this->addressCustomerItem->getId() ); ?>" <?php echo ( $billingOption == $this->addressCustomerItem->getId() ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billingoption' ) ) ); ?>" value="<?php echo $enc->attr( $this->addressPaymentItem->getAddressId() ); ?>" <?php echo ( $billingOption == $this->addressPaymentItem->getAddressId() ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
-		$addr = $this->addressCustomerItem->getPaymentAddress();
-		$id = $this->addressCustomerItem->getId();
+		$addr = $this->addressPaymentItem;
+		$id = $this->addressPaymentItem->getAddressId();
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
@@ -94,112 +90,50 @@ $allFields = array_keys( $paymentCssAll );
 ?>
 			</div>
 		</div>
-		<ul class="form-list">
 <?php
-	$paymentCss = $paymentCssAll;
-	if( $billingOption == $id )
-	{
-		foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
-			$paymentCss[$name][] = 'error';
+		$paymentCss = $paymentCssAll;
+		if( $billingOption == $id )
+		{
+			foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
+				$paymentCss[$name][] = 'error';
+			}
 		}
-	}
+
+		$addrValues = $addr->toArray();
+
+		if( !isset( $addrValues['order.base.address.languageid'] ) || $addrValues['order.base.address.languageid'] == '' ) {
+			$addrValues['order.base.address.languageid'] = $this->get( 'billingLanguage', 'en' );
+		}
+
+		$values = array(
+			'address' => $addrValues,
+			'salutations' => $billingSalutations,
+			'languages' => $billingLanguages,
+			'countries' => $billingCountries,
+			'states' => $billingStates,
+			'type' => 'billing',
+			'css' => $paymentCss,
+			'id' => $id,
+		);
+
+		/** client/html/common/partials/address
+		 * Relative path to the address partial template file
+		 *
+		 * Partials are templates which are reused in other templates and generate
+		 * reoccuring blocks filled with data from the assigned values. The address
+		 * partial creates an HTML block with input fields for address forms.
+		 *
+		 * The partial template files are usually stored in the layouts/partials/ folder
+		 * of the core or the extensions. The configured path to the partial file must
+		 * be relative to the layouts/ folder, e.g. "partials/address-default.html". 
+		 *
+		 * @param string Relative path to the template file
+		 * @since 2015.04
+		 * @category Developer
+		 * @category User
+		 */
 ?>
-			<li class="form-item salutation <?php echo ( isset( $paymentCss['order.base.address.salutation'] ) ? join( ' ', $paymentCss['order.base.address.salutation'] ) : '' ); ?>">
-				<label for="address-billing-salutation-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Salutation' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-salutation-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.salutation' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select salutation' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingSalutations as $salutation ) : ?>
-					<option value="<?php echo $enc->attr( $salutation ); ?>" <?php echo ( $salutation == $addr->getSalutation() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/code', $salutation ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-			<li class="form-item company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
-				<label for="address-billing-company-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Company' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-company-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.company' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getCompany() ); ?>" <?php echo ( in_array( 'order.base.address.company', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item firstname <?php echo ( isset( $paymentCss['order.base.address.firstname'] ) ? join( ' ', $paymentCss['order.base.address.firstname'] ) : '' ); ?>">
-				<label for="address-billing-firstname-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'First name' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-firstname-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.firstname' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getFirstname() ); ?>" <?php echo ( in_array( 'order.base.address.firstname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item lastname <?php echo ( isset( $paymentCss['order.base.address.lastname'] ) ? join( ' ', $paymentCss['order.base.address.lastname'] ) : '' ); ?>">
-				<label for="address-billing-lastname-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Last name' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-lastname-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.lastname' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getLastname() ); ?>" <?php echo ( in_array( 'order.base.address.lastname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address1 <?php echo ( isset( $paymentCss['order.base.address.address1'] ) ? join( ' ', $paymentCss['order.base.address.address1'] ) : '' ); ?>">
-				<label for="address-billing-address1-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Street' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address1-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.address1' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getAddress1() ); ?>" <?php echo ( in_array( 'order.base.address.address1', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address2 <?php echo ( isset( $paymentCss['order.base.address.address2'] ) ? join( ' ', $paymentCss['order.base.address.address2'] ) : '' ); ?>">
-				<label for="address-billing-address2-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Additional' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address2-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.address2' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getAddress2() ); ?>" <?php echo ( in_array( 'order.base.address.address2', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address3 <?php echo ( isset( $paymentCss['order.base.address.address3'] ) ? join( ' ', $paymentCss['order.base.address.address3'] ) : '' ); ?>">
-				<label for="address-billing-address3-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Additional 2' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address3-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.address3' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getAddress3() ); ?>" <?php echo ( in_array( 'order.base.address.address3', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item postal <?php echo ( isset( $paymentCss['order.base.address.postal'] ) ? join( ' ', $paymentCss['order.base.address.postal'] ) : '' ); ?>">
-				<label for="address-billing-postal-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Postal code' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-postal-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.postal' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getPostal() ); ?>" <?php echo ( in_array( 'order.base.address.postal', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item city <?php echo ( isset( $paymentCss['order.base.address.city'] ) ? join( ' ', $paymentCss['order.base.address.city'] ) : '' ); ?>">
-				<label for="address-billing-city-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-city-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getCity() ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-<?php	if( count( $billingCountries ) > 1 ) : ?>
-			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
-				<label for="address-billing-countryid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-countryid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingCountries as $countryId ) : ?>
-					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $countryId === $addr->getCountryId() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-<?php	endif; ?>
-<?php	if( count( $billingStates ) > 1 ) : ?>
-			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
-				<label for="address-billing-state-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-state-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingStates as $countryCode => $stateList ) : ?>
-					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
-<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
-						<option value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $addr->getState() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
-<?php		endforeach; ?>
-					</optgroup>
-<?php	endforeach; ?>
-				</select>
-			</li>
-<?php	endif; ?>
-			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-				<label for="address-billing-languageid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-languageid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.languageid' ) ) ); ?>">
-<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
-					<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo ( $languageId === $addr->getLanguageId() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/language', $languageId ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-			<li class="form-item vatid <?php echo ( isset( $paymentCss['order.base.address.vatid'] ) ? join( ' ', $paymentCss['order.base.address.vatid'] ) : '' ); ?>">
-				<label for="address-billing-vatid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-vatid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getVatId() ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
-				<label for="address-billing-email-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>
-				</label><input type="email" id="address-billing-email-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.email' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getEmail() ); ?>" <?php echo ( in_array( 'order.base.address.email', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item telephone <?php echo ( isset( $paymentCss['order.base.address.telephone'] ) ? join( ' ', $paymentCss['order.base.address.telephone'] ) : '' ); ?>">
-				<label for="address-billing-telephone-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Telephone' ), $enc::TRUST ); ?>
-				</label><input type="tel" id="address-billing-telephone-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.telephone' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getTelephone() ); ?>" <?php echo ( in_array( 'order.base.address.telephone', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item telefax <?php echo ( isset( $paymentCss['order.base.address.telefax'] ) ? join( ' ', $paymentCss['order.base.address.telefax'] ) : '' ); ?>">
-				<label for="address-billing-telefax-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Fax' ), $enc::TRUST ); ?>
-				</label><input type="tel" id="address-billing-telefax-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.telefax' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getTelefax() ); ?>" <?php echo ( in_array( 'order.base.address.telefax', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item website <?php echo ( isset( $paymentCss['order.base.address.website'] ) ? join( ' ', $paymentCss['order.base.address.website'] ) : '' ); ?>">
-				<label for="address-billing-website-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Web site' ), $enc::TRUST ); ?>
-				</label><input type="url" id="address-billing-website-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing_' . $id, 'order.base.address.website' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getWebsite() ); ?>" <?php echo ( in_array( 'order.base.address.website', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-		</ul>
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php if( $this->config( 'client/html/common/address/billing/disable-new', false ) === false ) : ?>
@@ -208,112 +142,32 @@ $allFields = array_keys( $paymentCssAll );
 			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billingoption' ) ) ); ?>" value="null" <?php echo ( $billingOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $enc->html( $this->translate( 'client/html', 'new address' ), $enc::TRUST ); ?></span></div>
 		</div>
-		<ul class="form-list">
 <?php
-	$paymentCss = $paymentCssAll;
-	if( $billingOption == 'null' )
-	{
-		foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
-			$paymentCss[$name][] = 'error';
+		$paymentCss = $paymentCssAll;
+		if( $billingOption == 'null' )
+		{
+			foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
+				$paymentCss[$name][] = 'error';
+			}
 		}
-	}
+
+		$addrValues = array_merge( $addrArray, $this->param( 'ca_billing', array() ) );
+
+		if( !isset( $addrValues['order.base.address.languageid'] ) || $addrValues['order.base.address.languageid'] == '' ) {
+			$addrValues['order.base.address.languageid'] = $this->get( 'billingLanguage', 'en' );
+		}
+
+		$values = array(
+			'address' => $addrValues,
+			'salutations' => $billingSalutations,
+			'languages' => $billingLanguages,
+			'countries' => $billingCountries,
+			'states' => $billingStates,
+			'type' => 'billing',
+			'css' => $paymentCss,
+		);
 ?>
-			<li class="form-item salutation <?php echo ( isset( $paymentCss['order.base.address.salutation'] ) ? join( ' ', $paymentCss['order.base.address.salutation'] ) : '' ); ?>">
-				<label for="address-billing-salutation"><?php echo $enc->html( $this->translate( 'client/html', 'Salutation' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-salutation" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.salutation' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select salutation' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingSalutations as $salutation ) : ?>
-					<option value="<?php echo $enc->attr( $salutation ); ?>" <?php echo ( $billingSalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/code', $salutation ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-			<li class="form-item company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
-				<label for="address-billing-company"><?php echo $enc->html( $this->translate( 'client/html', 'Company' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-company" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.company' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.company', ( isset( $addrArray['order.base.address.company'] ) ? $addrArray['order.base.address.company'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.company', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item firstname <?php echo ( isset( $paymentCss['order.base.address.firstname'] ) ? join( ' ', $paymentCss['order.base.address.firstname'] ) : '' ); ?>">
-				<label for="address-billing-firstname"><?php echo $enc->html( $this->translate( 'client/html', 'First name' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-firstname" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.firstname' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.firstname', ( isset( $addrArray['order.base.address.firstname'] ) ? $addrArray['order.base.address.firstname'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.firstname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item lastname <?php echo ( isset( $paymentCss['order.base.address.lastname'] ) ? join( ' ', $paymentCss['order.base.address.lastname'] ) : '' ); ?>">
-				<label for="address-billing-lastname"><?php echo $enc->html( $this->translate( 'client/html', 'Last name' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-lastname" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.lastname' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.lastname', ( isset( $addrArray['order.base.address.lastname'] ) ? $addrArray['order.base.address.lastname'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.lastname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address1 <?php echo ( isset( $paymentCss['order.base.address.address1'] ) ? join( ' ', $paymentCss['order.base.address.address1'] ) : '' ); ?>">
-				<label for="address-billing-address1"><?php echo $enc->html( $this->translate( 'client/html', 'Street' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address1" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.address1' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.address1', ( isset( $addrArray['order.base.address.address1'] ) ? $addrArray['order.base.address.address1'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.address1', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address2 <?php echo ( isset( $paymentCss['order.base.address.address2'] ) ? join( ' ', $paymentCss['order.base.address.address2'] ) : '' ); ?>">
-				<label for="address-billing-address2"><?php echo $enc->html( $this->translate( 'client/html', 'Additional' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address2" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.address2' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.address2', ( isset( $addrArray['order.base.address.address2'] ) ? $addrArray['order.base.address.address2'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.address2', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item address3 <?php echo ( isset( $paymentCss['order.base.address.address3'] ) ? join( ' ', $paymentCss['order.base.address.address3'] ) : '' ); ?>">
-				<label for="address-billing-address3"><?php echo $enc->html( $this->translate( 'client/html', 'Additional 2' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-address3" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.address3' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.address3', ( isset( $addrArray['order.base.address.address3'] ) ? $addrArray['order.base.address.address3'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.address3', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item postal <?php echo ( isset( $paymentCss['order.base.address.postal'] ) ? join( ' ', $paymentCss['order.base.address.postal'] ) : '' ); ?>">
-				<label for="address-billing-postal"><?php echo $enc->html( $this->translate( 'client/html', 'Postal code' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-postal" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.postal' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.postal', ( isset( $addrArray['order.base.address.postal'] ) ? $addrArray['order.base.address.postal'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.postal', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item city <?php echo ( isset( $paymentCss['order.base.address.city'] ) ? join( ' ', $paymentCss['order.base.address.city'] ) : '' ); ?>">
-				<label for="address-billing-city"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-city" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-<?php	if( count( $billingCountries ) > 1 ) : ?>
-			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
-				<label for="address-billing-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-countryid" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingCountries as $countryId ) : ?>
-					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $countryId === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-<?php	endif; ?>
-<?php	if( count( $billingStates ) > 1 ) : ?>
-			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
-				<label for="address-billing-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
-<?php	foreach( $billingStates as $countryCode => $stateList ) : ?>
-					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
-<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
-						<option class="<?php echo $countryCode; ?>" value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $billingState ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
-<?php		endforeach; ?>
-					</optgroup>
-<?php	endforeach; ?>
-				</select>
-			</li>
-<?php	endif; ?>
-			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-				<label for="address-billing-languageid"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
-				</label><select id="address-billing-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.languageid' ) ) ); ?>">
-<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
-					<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/language', $languageId ) ); ?></option>
-<?php	endforeach; ?>
-				</select>
-			</li>
-			<li class="form-item vatid <?php echo ( isset( $paymentCss['order.base.address.vatid'] ) ? join( ' ', $paymentCss['order.base.address.vatid'] ) : '' ); ?>">
-				<label for="address-billing-vatid"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-vatid" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.vatid', ( isset( $addrArray['order.base.address.vatid'] ) ? $addrArray['order.base.address.vatid'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
-				<label for="address-billing-email"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>
-				</label><input type="email" id="address-billing-email" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.email' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.email', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item telephone <?php echo ( isset( $paymentCss['order.base.address.telephone'] ) ? join( ' ', $paymentCss['order.base.address.telephone'] ) : '' ); ?>">
-				<label for="address-billing-telephone"><?php echo $enc->html( $this->translate( 'client/html', 'Telephone' ), $enc::TRUST ); ?>
-				</label><input type="tel" id="address-billing-telephone" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.telephone' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.telephone', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item telefax <?php echo ( isset( $paymentCss['order.base.address.telefax'] ) ? join( ' ', $paymentCss['order.base.address.telefax'] ) : '' ); ?>">
-				<label for="address-billing-telefax"><?php echo $enc->html( $this->translate( 'client/html', 'Fax' ), $enc::TRUST ); ?>
-				</label><input type="tel" id="address-billing-telefax" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.telefax' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.telefax', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-			<li class="form-item website <?php echo ( isset( $paymentCss['order.base.address.website'] ) ? join( ' ', $paymentCss['order.base.address.website'] ) : '' ); ?>">
-				<label for="address-billing-website"><?php echo $enc->html( $this->translate( 'client/html', 'Web site' ), $enc::TRUST ); ?>
-				</label><input type="url" id="address-billing-website" name="<?php echo $enc->attr( $this->formparam( array( 'ca_billing', 'order.base.address.website' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca_billing/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.website', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
-		</ul>
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>

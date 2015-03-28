@@ -19,6 +19,23 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 $position = $this->get( 'itemPosition', 0 );
 
+
+/** client/html/common/partials/price
+ * Relative path to the price partial template file
+ *
+ * Partials are templates which are reused in other templates and generate
+ * reoccuring blocks filled with data from the assigned values. The price
+ * partial creates an HTML block for a list of price items.
+ *
+ * The partial template files are usually stored in the layouts/partials/ folder
+ * of the core or the extensions. The configured path to the partial file must
+ * be relative to the layouts/ folder, e.g. "partials/price-default.html". 
+ *
+ * @param string Relative path to the template file
+ * @since 2015.04
+ * @category Developer
+ */
+
 ?>
 <div class="catalog-list-items">
 	<ul class="list-items"><!--
@@ -47,7 +64,7 @@ $position = $this->get( 'itemPosition', 0 );
 			</div>
 			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 			<div class="price-list">
-<?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
+<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
 			</div>
 <?php	echo $this->get( 'itemsBody' ); ?>
 		</a>

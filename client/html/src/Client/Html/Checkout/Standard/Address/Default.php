@@ -269,14 +269,28 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			if( ( $item = reset( $items ) ) !== false )
 			{
-				$view->addressCustomerItem = $item;
+				$deliveryAddressItems = array();
 
+				$orderAddressManager = MShop_Factory::createManager( $context, 'order/base/address' );
 				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
 
 				$search = $customerAddressManager->createSearch();
 				$search->setConditions( $search->compare( '==', 'customer.address.refid', $item->getId() ) );
 
-				$view->addressCustomerAddressItems = $customerAddressManager->searchItems( $search );
+				foreach( $customerAddressManager->searchItems( $search ) as $id => $address )
+				{
+					$deliveryAddressItem = $orderAddressManager->createItem();
+					$deliveryAddressItem->copyFrom( $address );
+
+					$deliveryAddressItems[$id] = $deliveryAddressItem;
+				}
+
+				$paymentAddressItem = $orderAddressManager->createItem();
+				$paymentAddressItem->copyFrom( $item->getPaymentAddress() );
+
+				$view->addressCustomerItem = $item;
+				$view->addressPaymentItem = $paymentAddressItem;
+				$view->addressDeliveryItems = $deliveryAddressItems;
 			}
 
 

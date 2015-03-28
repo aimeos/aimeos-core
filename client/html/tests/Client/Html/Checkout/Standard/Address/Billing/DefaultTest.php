@@ -49,14 +49,31 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testGetBody()
 	{
+		$customer = $this->_getCustomerItem();
+		$this->_context->setUserId( $customer->getId() );
+
 		$view = TestHelper::getView();
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-address-billing">', $output );
+		$this->assertRegexp( '/form-item city.*form-item postal/smU', $output );
 
 		$this->assertGreaterThan( 0, count( $view->billingMandatory ) );
 		$this->assertGreaterThan( 0, count( $view->billingOptional ) );
+	}
+
+
+	public function testGetBodyAddressEU()
+	{
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.html' );
+
+		$view = TestHelper::getView( 'unittest', $config );
+		$this->_object->setView( $view );
+
+		$output = $this->_object->getBody();
+		$this->assertRegexp( '/form-item postal.*form-item city/smU', $output );
 	}
 
 
@@ -179,7 +196,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$config = $this->_context->getConfig();
-		$config->set( 'client/html/checkout/standard/address/validate/postal', '/^[0-9]{5}$/' );
+		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
@@ -218,15 +235,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testProcessExistingAddress()
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
-		$search = $customerManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
-		$result = $customerManager->searchItems( $search );
-
-		if( ( $customer = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer item not found' );
-		}
-
+		$customer = $this->_getCustomerItem();
 		$this->_context->setUserId( $customer->getId() );
 
 		$view = TestHelper::getView();
@@ -257,5 +266,27 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->process();
+	}
+
+
+	/**
+	 * Returns the customer item for the given code
+	 *
+	 * @param string $code Unique customer code
+	 * @throws Exception If no customer item is found
+	 * @return MShop_Customer_Item_Interface Customer item object
+	 */
+	protected function _getCustomerItem( $code = 'UTC001' )
+	{
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customer = reset( $result ) ) === false ) {
+			throw new Exception( 'Customer item not found' );
+		}
+
+		return $customer;
 	}
 }
