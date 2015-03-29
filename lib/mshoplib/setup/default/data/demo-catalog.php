@@ -51,10 +51,10 @@ return array(
 	),
 	'media' => array(
 		array(
-			'label' => 'Demo: home.png', 'mimetype' => 'image/png',
-			'url' => 'https://demo.arcavias.com/images/demo/catalog/home.png',
-			'preview' => 'https://demo.arcavias.com/images/demo/catalog/home.png',
-			'type' => 'default', 'languageid' => null, 'status' => 1,
+			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
+			'url' => 'http://demo.aimeos.org/media/stage.jpg',
+			'preview' => 'http://demo.aimeos.org/media/stage.jpg',
+			'type' => 'stage', 'languageid' => null, 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
