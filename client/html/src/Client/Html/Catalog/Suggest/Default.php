@@ -87,7 +87,7 @@ class Client_Html_Catalog_Suggest_Default
 			return;
 		}
 
-		/** client/html/catalog/suggest/sidefaultemplate-body
+		/** client/html/catalog/suggest/default/template-body
 		 * Relative path to the HTML body template of the catalog suggest client.
 		 *
 		 * The template file contains the HTML code and processing instructions
@@ -109,7 +109,6 @@ class Client_Html_Catalog_Suggest_Default
 		 * @since 2015.02
 		 * @category Developer
 		 * @see client/html/catalog/suggest/default/template-header
-		 * @see client/html/catalog/list/simple/template-header
 		 */
 		$tplconf = 'client/html/catalog/suggest/default/template-body';
 		$default = 'catalog/suggest/body-default.html';
@@ -167,7 +166,6 @@ class Client_Html_Catalog_Suggest_Default
 		 * @since 2015.02
 		 * @category Developer
 		 * @see client/html/catalog/suggest/default/template-body
-		 * @see client/html/catalog/list/simple/template-header
 		 */
 		$tplconf = 'client/html/catalog/suggest/default/template-header';
 		$default = 'catalog/suggest/header-default.html';

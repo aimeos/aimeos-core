@@ -8,6 +8,26 @@
 
 $enc = $this->encoder();
 
+/** client/html/common/address/delivery/disable-new
+ * Disables the billing address form for a new address
+ *
+ * Normally, customers are allowed to enter new delivery addresses in the
+ * checkout process which are stored in the current order. For registered
+ * customers they are also added to the list of delivery addresses in their
+ * profile.
+ *
+ * You can disable the address form for the new delivery address by this setting
+ * if it shouldn't be allowed to add another delivery address.
+ *
+ * @param boolean True to disable the "new delivery address" form, false to allow a new address
+ * @since 2014.03
+ * @category Developer
+ * @category User
+ * @see client/html/common/address/billing/disable-new
+ */
+$disablenew = $this->config( 'client/html/common/address/delivery/disable-new', false );
+
+
 $target = $this->config( 'client/html/checkout/standard/url/target' );
 $controller = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 $action = $this->config( 'client/html/checkout/standard/url/action', 'index' );
@@ -128,7 +148,7 @@ foreach( $this->get( 'deliveryHidden', array() ) as $name ) {
 <?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
 	</div>
 <?php endforeach; ?>
-<?php if( $this->config( 'client/html/common/address/delivery/disable-new', false ) === false ) : ?>
+<?php if( $disablenew === false ) : ?>
 	<div class="item-address item-new" data-option="<?php echo $enc->attr( $deliveryOption ); ?>">
 		<div class="header">
 			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca_deliveryoption' ) ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
