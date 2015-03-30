@@ -74,6 +74,17 @@ class Client_Html_Catalog_List_Default
 	 * @category Developer
 	 */
 
+	/** client/html/catalog/list/quote/name
+	 * Name of the quote part used by the catalog list client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Catalog_List_Quote_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.03
+	 * @category Developer
+	 */
+
 	/** client/html/catalog/list/pagination/name
 	 * Name of the pagination part used by the catalog list client implementation
 	 *
@@ -95,7 +106,7 @@ class Client_Html_Catalog_List_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'head', 'promo', 'pagination', 'items', 'pagination' );
+	private $_subPartNames = array( 'head', 'quote', 'promo', 'pagination', 'items', 'pagination' );
 
 	private $_tags = array();
 	private $_expire;
