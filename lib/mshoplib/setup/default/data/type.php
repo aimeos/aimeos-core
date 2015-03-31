@@ -132,7 +132,7 @@ return array (
 		array( 'domain' => 'catalog', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
-		array( 'domain' => 'catalog', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'quote', 'label' => 'Quote', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'url', 'label' => 'URL segment', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'meta-keyword', 'label' => 'Meta keywords', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'meta-description', 'label' => 'Meta description', 'status' => 1 ),
