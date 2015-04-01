@@ -41,8 +41,6 @@ class MW_Communication_Curl implements MW_Communication_Interface
 			curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
 			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );   // return data as string
-			curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );   // allow redirects
-			curl_setopt( $curl, CURLOPT_MAXREDIRS, 1 );   // maximum amount of redirects
 
 			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 
