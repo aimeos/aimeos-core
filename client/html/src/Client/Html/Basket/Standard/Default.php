@@ -390,6 +390,7 @@ class Client_Html_Basket_Standard_Default
 				'attrvarid' => array_filter( (array) $view->param( 'b_attrvarid', array() ) ),
 				'attrconfid' => array_filter( (array) $view->param( 'b_attrconfid', array() ) ),
 				'attrhideid' => array_filter( (array) $view->param( 'b_attrhideid', array() ) ),
+				'attrcustid' => array_filter( (array) $view->param( 'b_attrcustid', array() ) ),
 				'warehouse' => $view->param( 'b_warehouse', 'default' ),
 			);
 		}
@@ -416,6 +417,7 @@ class Client_Html_Basket_Standard_Default
 			( isset( $values['attrvarid'] ) ? array_filter( (array) $values['attrvarid'] ) : array() ),
 			( isset( $values['attrconfid'] ) ? array_filter( (array) $values['attrconfid'] ) : array() ),
 			( isset( $values['attrhideid'] ) ? array_filter( (array) $values['attrhideid'] ) : array() ),
+			( isset( $values['attrcustid'] ) ? array_filter( (array) $values['attrcustid'] ) : array() ),
 			( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
 		);
 	}

@@ -76,11 +76,14 @@ class Controller_Frontend_Basket_Default
 	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
 	 * 	selection of products but are stored together with the product (e.g. for configurable products)
 	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @param array $customAttributeValues Associative list of attribute IDs and arbitrary values that should be stored
+	 * 	along with the product in the order
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
 	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
-		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), $warehouse = 'default' )
+		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), array $customAttributeValues = array(),
+		$warehouse = 'default' )
 	{
 		$this->_checkCategory( $prodid );
 
@@ -111,6 +114,7 @@ class Controller_Frontend_Basket_Default
 
 		$attr = array_merge( $attr, $this->_createOrderProductAttributes( $price, $prodid, $quantity, $configAttributeIds, 'config' ) );
 		$attr = array_merge( $attr, $this->_createOrderProductAttributes( $price, $prodid, $quantity, $hiddenAttributeIds, 'hidden' ) );
+		$attr = array_merge( $attr, $this->_createOrderProductAttributes( $price, $prodid, $quantity, array_keys( $customAttributeValues ), 'custom', $customAttributeValues ) );
 
 		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
@@ -779,7 +783,7 @@ class Controller_Frontend_Basket_Default
 	 * @return array List of items implementing MShop_Order_Item_Product_Attribute_Interface
 	 */
 	protected function _createOrderProductAttributes( MShop_Price_Item_Interface $price, $prodid, $quantity,
-		array $attributeIds, $type )
+		array $attributeIds, $type, array $attributeValues = array() )
 	{
 		if( empty( $attributeIds ) ) {
 			return array();
@@ -794,7 +798,7 @@ class Controller_Frontend_Basket_Default
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$orderProductAttributeManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
 
-		foreach( $this->_getAttributes( $attributeIds ) as $attrItem )
+		foreach( $this->_getAttributes( $attributeIds ) as $id => $attrItem )
 		{
 			$prices = $attrItem->getRefItems( 'price', 'default', 'default' );
 
@@ -805,6 +809,10 @@ class Controller_Frontend_Basket_Default
 			$item = $orderProductAttributeManager->createItem();
 			$item->copyFrom( $attrItem );
 			$item->setType( $type );
+
+			if( isset( $attributeValues[$id] ) ) {
+				$item->setValue( $attributeValues[$id] );
+			}
 
 			$list[] = $item;
 		}

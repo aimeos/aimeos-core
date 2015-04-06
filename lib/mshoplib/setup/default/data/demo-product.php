@@ -277,6 +277,28 @@ return array(
 					),
 				),
 			),
+			array(
+				'code' => 'demo-print-text', 'label' => 'Demo: Text for print',
+				'type' => 'text', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo url/de: Kleiner Aufdruck',
+						'content' => 'Text_Aufdruck',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Small print',
+						'content' => 'print_text',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
 		),
 		'property' => array(
 			array( 'type' => 'package-length', 'languageid' => null, 'value' => '20.00' ),

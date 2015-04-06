@@ -46,12 +46,14 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
 	 * 	selection of products but are stored together with the product (e.g. for configurable products)
 	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @param array $customAttributeValues Associative list of attribute IDs and arbitrary values that should be stored
+	 * 	along with the product in the order
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
-	 * @return void
 	 */
 	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
-		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), $warehouse = 'default' );
+		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), array $customAttributeValues = array(),
+		$warehouse = 'default' );
 
 
 	/**

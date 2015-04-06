@@ -62,7 +62,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'default' );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'default' );
 		$item2 = $this->_object->get()->getProduct( 1 );
 		$this->_object->deleteProduct( 0 );
 
@@ -119,7 +119,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), 'default' );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), array(), 'default' );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -280,6 +280,33 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductCustomAttribute()
+	{
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $attributeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.code', 'custom' ),
+			$search->compare( '==', 'attribute.type.code', 'date' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attributes = $attributeManager->searchItems( $search );
+
+		if( ( $attrItem = reset( $attributes ) ) === false ) {
+			throw new Exception( 'Attribute not found' );
+		}
+
+		$attrValues = array( $attrItem->getId() => '2000-01-01' );
+
+		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array(), array(), $attrValues );
+		$basket = $this->_object->get();
+
+		$this->assertEquals( 1, count( $basket->getProducts() ) );
+		$this->assertEquals( '2000-01-01', $basket->getProduct( 0 )->getAttribute( 'date' ) );
+	}
+
+
 	public function testAddProductAttributeNotAssigned()
 	{
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
@@ -327,7 +354,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), 'unit_warehouse3' );
+			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
@@ -353,7 +380,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), 'unit_warehouse2' );
+			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse2' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
@@ -484,7 +511,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$this->assertEquals( 2, $this->_object->get()->getProduct( 0 )->getQuantity() );
 		$this->assertEquals( 'IJKL', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -580,7 +607,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );
@@ -646,7 +673,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );

@@ -12,6 +12,7 @@ return array (
 		array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'option', 'label' => 'Option', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
 	),
 
 	'attribute/list/type' => array (
@@ -87,6 +88,7 @@ return array (
 		array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'hidden', 'label' => 'Hidden', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'custom', 'label' => 'Custom value', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
