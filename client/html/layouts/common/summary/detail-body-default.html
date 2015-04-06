@@ -152,6 +152,16 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>
+<?php		if( ( $attributes = $product->getAttributes( 'custom' ) ) !== array() ) : ?>
+						<ul class="attr-list attr-list-custom">
+<?php			foreach( $attributes as $attribute ) : ?>
+							<li class="attr-item">
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
+							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity">

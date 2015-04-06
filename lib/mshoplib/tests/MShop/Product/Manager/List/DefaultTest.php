@@ -330,12 +330,12 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertArrayHasKey( 'media', $result );
 		$this->assertArrayNotHasKey( 'price', $result );
 
-		$this->assertEquals( 11, count( $result['attribute'] ) );
+		$this->assertEquals( 12, count( $result['attribute'] ) );
 		$this->assertEquals( 8, count( $result['media'] ) );
 
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
-		$this->assertEquals( 37, $total );
+		$this->assertEquals( 38, $total );
 	}
 
 

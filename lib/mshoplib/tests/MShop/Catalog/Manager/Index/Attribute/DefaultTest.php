@@ -77,7 +77,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search = $this->_object->createSearch( true );
 		$result = $this->_object->aggregate( $search, 'catalog.index.attribute.id' );
 
-		$this->assertEquals( 11, count( $result ) );
+		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 4, $result[ $item->getId() ] );
 	}

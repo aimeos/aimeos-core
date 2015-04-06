@@ -77,6 +77,16 @@ $enc = $this->encoder();
 		</li>
 <?php endforeach; ?>
 	</ul>
+	<ul class="selection">
+<?php foreach( $this->get( 'attributeCustomItems', array() ) as $id => $attribute ) : ?>
+		<li class="select-item <?php echo $enc->attr( $attribute->getCode() ); ?>">
+			<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getType() ) ); ?></div>
+			<div class="select-value">
+				<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrcustid', $id ) ) ); ?>" type="text" value="" placeholder="<?php echo $enc->attr( $attribute->getName() ); ?>" />
+			</div>
+		</li>
+<?php endforeach; ?>
+	</ul>
 <?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrhideid', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
 <?php endforeach; ?>

@@ -222,6 +222,42 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetBodyAddCustomAttribute()
+	{
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+
+		$search = $attrManager->createSearch();
+		$expr = array(
+				$search->compare( '==', 'attribute.code', 'custom' ),
+				$search->compare( '==', 'attribute.domain', 'product' ),
+				$search->compare( '==', 'attribute.type.code', 'date' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $attrManager->searchItems( $search, array() );
+
+		if( ( $attribute = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute' );
+		}
+
+		$view = $this->_object->getView();
+		$param = array(
+				'b_action' => 'add',
+				'b_prodid' => $this->_getProductItem( 'U:TESTP' )->getId(),
+				'b_quantity' => 1,
+				'b_attrcustid' => array( $attribute->getId() => '2000-01-01' ),
+				'b_warehouse' => 'default',
+		);
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->process();
+		$output = $this->_object->getBody();
+
+		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">2000-01-01</span>.*</li>#smU', $output );
+	}
+
+
 	public function testGetBodyEditSingle()
 	{
 		$this->_addProduct( 'CNE', 2, 'default' );
