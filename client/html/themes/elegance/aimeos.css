@@ -1768,8 +1768,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 }
 
 .checkout-standard .item-service .description h2,
-.checkout-standard .item-service .description p,
-.checkout-standard .item-service .icons {
+.checkout-standard .item-service .description p {
 	margin: 0 1em;
 }
 
@@ -1780,6 +1779,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 .checkout-standard .item-service .icons img {
 	max-height: 4em;
+	margin: 0 1em;
 }
 
 .checkout-standard .item-service .option {
