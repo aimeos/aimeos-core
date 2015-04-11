@@ -306,6 +306,17 @@
 	display: none;
 }
 
+.catalog-filter-tree .media-list {
+	display: inline-block;
+	margin: 0px 0.5em;
+}
+
+.catalog-filter-tree .media-item img {
+	vertical-align: top;
+	height: 1.25em;
+	width: 1.25em;
+}
+
 .catalog-filter-tree .disabled > .cat-item,
 .catalog-filter-tree .disabled > .cat-item:link,
 .catalog-filter-tree .disabled > .cat-item:visited,

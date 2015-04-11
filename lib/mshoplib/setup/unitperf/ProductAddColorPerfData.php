@@ -133,7 +133,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 		$attrTypeItem = $this->_getTypeItem( 'attribute/type', 'product', 'color' );
 		$mediaTypeItem = $this->_getTypeItem( 'media/type', 'attribute', 'default' );
-		$attrListTypeItem = $this->_getTypeItem( 'attribute/list/type', 'media', 'default' );
+		$attrListTypeItem = $this->_getTypeItem( 'attribute/list/type', 'media', 'icon' );
 
 
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );

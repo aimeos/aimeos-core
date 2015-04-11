@@ -23,6 +23,7 @@ class MW_View_Helper_NavTree_Default
 	private $_action;
 	private $_config;
 	private $_encoder;
+	private $_contentUrl;
 
 
 	/**
@@ -38,6 +39,7 @@ class MW_View_Helper_NavTree_Default
 		$this->_controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
 		$this->_action = $view->config( 'client/html/catalog/list/url/action', 'list' );
 		$this->_config = $view->config( 'client/html/catalog/list/url/config', array() );
+		$this->_contentUrl = $this->config( 'client/html/common/content/baseurl' );
 
 		$this->_encoder = $view->encoder();
 	}
@@ -70,8 +72,17 @@ class MW_View_Helper_NavTree_Default
 
 		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
 
-		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" ><!--
-			--><a class="cat-item" href="' . $url . '"><span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span></a>';
+		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" >';
+		$output .= '<a class="cat-item" href="' . $url . '"><div class="media-list">';
+
+		foreach( $item->getListItems( 'media', 'icon' ) as $listItem )
+		{
+			if( ( $mediaItem = $listItem->getRefItem() ) !== null ) {
+				$output .= $this->media( $mediaItem, $this->_contentUrl, array( 'class' => 'media-item' ) );
+			}
+		}
+
+		$output .= '</div><span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span></a>';
 
 		$children = $item->getChildren();
 

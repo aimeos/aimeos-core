@@ -51,11 +51,19 @@ return array(
 	),
 	'media' => array(
 		array(
+			'label' => 'Demo: Home icon', 'mimetype' => 'image/png',
+			'url' => 'http://demo.aimeos.org/media/home.png',
+			'preview' => 'http://demo.aimeos.org/media/home.png',
+			'type' => 'default', 'languageid' => null, 'status' => 1,
+			'list-type' => 'icon', 'list-position' => 0, 'list-config' => array(),
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
+		),
+		array(
 			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
 			'url' => 'http://demo.aimeos.org/media/stage.jpg',
 			'preview' => 'http://demo.aimeos.org/media/stage.jpg',
-			'type' => 'stage', 'languageid' => null, 'status' => 1,
-			'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+			'type' => 'default', 'languageid' => null, 'status' => 1,
+			'list-type' => 'stage', 'list-position' => 0, 'list-config' => array(),
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 	),
