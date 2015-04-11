@@ -645,6 +645,7 @@ class Controller_Frontend_Basket_Default
 					$this->_getValue( $attrIds, 'variant', array() ),
 					$this->_getValue( $attrIds, 'config', array() ),
 					$this->_getValue( $attrIds, 'hidden', array() ),
+					$this->_getValue( $attrIds, 'custom', array() ),
 					$product->getWarehouseCode()
 				);
 
