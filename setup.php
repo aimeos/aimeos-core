@@ -80,9 +80,14 @@ try
 		}
 	}
 
-	$site = 'default';
-	if( count( $params ) > 0 && ( $site = end( $params ) ) === false ) {
-		usage();
+	$site = $parent = 'default';
+
+	if( ( $site = array_shift( $params ) ) === null ) {
+		$site = 'default';
+	}
+
+	if( ( $parent = array_shift( $params ) ) === null ) {
+		$parent = $site;
 	}
 
 	spl_autoload_register( 'setup_autoload' );
@@ -92,7 +97,7 @@ try
 	$arcavias = new Arcavias( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
-	$taskPaths = $arcavias->getSetupPaths( $site );
+	$taskPaths = $arcavias->getSetupPaths( $parent );
 
 	$includePaths = $taskPaths;
 	$includePaths[] = get_include_path();

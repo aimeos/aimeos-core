@@ -18,7 +18,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleData' );
+		return array( 'MShopAddLocaleLangCurData' );
 	}
 
 
@@ -29,7 +29,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopSetLocale' );
+		return array( 'MShopAddLocaleData' );
 	}
 
 
@@ -59,32 +59,36 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 		// Set editor for further tasks
 		$this->_additional->setEditor( 'core:unittest' );
 
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
 
-		if( ( $testdata = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
-		}
+		if( $this->_additional->getConfig()->get( 'setup/site' ) === 'unittest' )
+		{
+			$ds = DIRECTORY_SEPARATOR;
+			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional );
+			if( ( $testdata = include( $filename ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			}
 
-		$this->_cleanupSites( $localeManager );
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional );
 
-		$siteIds = array();
-		if( isset( $testdata['locale/site'] ) ) {
-			$siteIds = $this->_addLocaleSiteData( $localeManager, $testdata['locale/site'] );
-		}
+			$this->_cleanupSites( $localeManager );
 
-		if( isset( $testdata['locale/currency'] ) ) {
-			$this->_addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
-		}
+			$siteIds = array();
+			if( isset( $testdata['locale/site'] ) ) {
+				$siteIds = $this->_addLocaleSiteData( $localeManager, $testdata['locale/site'] );
+			}
 
-		if( isset( $testdata['locale/language'] ) ) {
-			$this->_addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
-		}
+			if( isset( $testdata['locale/currency'] ) ) {
+				$this->_addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
+			}
 
-		if( isset( $testdata['locale'] ) ) {
-			$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
+			if( isset( $testdata['locale/language'] ) ) {
+				$this->_addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
+			}
+
+			if( isset( $testdata['locale'] ) ) {
+				$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
+			}
 		}
 	}
 

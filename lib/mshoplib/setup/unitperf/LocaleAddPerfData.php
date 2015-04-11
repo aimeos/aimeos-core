@@ -18,7 +18,7 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleData' );
+		return array( 'MShopAddLocaleLangCurData' );
 	}
 
 
@@ -29,7 +29,7 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopSetLocale' );
+		return array( 'MShopAddLocaleData' );
 	}
 
 
@@ -61,35 +61,35 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 		$this->_additional->setEditor( 'unitperf:core' );
 
 
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
-
-		if( ( $testdata = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
-		}
-
-
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional );
-		$localeSiteManager = $localeManager->getSubManager( 'site' );
-		$siteIds = array();
-
-
-		$search = $localeSiteManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
-
-		foreach( $localeSiteManager->searchItems( $search ) as $site )
+		if( $this->_additional->getConfig()->get( 'setup/site' ) === 'unitperf' )
 		{
-			$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-			$localeSiteManager->deleteItem( $site->getId() );
-		}
+			$ds = DIRECTORY_SEPARATOR;
+			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
 
+			if( ( $testdata = include( $filename ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			}
 
-		if( isset( $testdata['locale/site'] ) ) {
-			$siteIds = $this->_addLocaleSiteData( $localeManager, $testdata['locale/site'] );
-		}
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional );
+			$localeSiteManager = $localeManager->getSubManager( 'site' );
+			$siteIds = array();
 
-		if( isset( $testdata['locale'] ) ) {
-			$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
+			$search = $localeSiteManager->createSearch();
+			$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
+
+			foreach( $localeSiteManager->searchItems( $search ) as $site )
+			{
+				$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
+				$localeSiteManager->deleteItem( $site->getId() );
+			}
+
+			if( isset( $testdata['locale/site'] ) ) {
+				$siteIds = $this->_addLocaleSiteData( $localeManager, $testdata['locale/site'] );
+			}
+
+			if( isset( $testdata['locale'] ) ) {
+				$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
+			}
 		}
 	}
 }
