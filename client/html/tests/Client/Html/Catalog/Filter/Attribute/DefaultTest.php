@@ -54,13 +54,28 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertContains( '<fieldset class="attr-size">', $output );
-		$this->assertContains( '<fieldset class="attr-length">', $output );
-		$this->assertContains( '<fieldset class="attr-width">', $output );
-		$this->assertContains( '<fieldset class="attr-color">', $output );
+		$regex = '/<fieldset class="attr-color">.*<fieldset class="attr-length">.*<fieldset class="attr-size">.*<fieldset class="attr-width">/smu';
+		$this->assertRegexp( $regex, $output );
 
 		$this->assertEquals( 2, count( $tags ) );
 		$this->assertEquals( null, $expire );
+	}
+
+
+	public function testGetBodyAttributeOrder()
+	{
+		$view = $this->_object->getView();
+
+		$conf = new MW_Config_Array();
+		$conf->set( 'client/html/catalog/filter/attribute/types', array( 'color', 'width', 'length' ) );
+		$helper = new MW_View_Helper_Config_Default( $view, $conf );
+		$view->addHelper( 'config', $helper );
+
+		$output = $this->_object->getBody();
+		$regex = '/<fieldset class="attr-color">.*<fieldset class="attr-width">.*<fieldset class="attr-length">/smu';
+
+		$this->assertNotContains( '<fieldset class="attr-size">', $output );
+		$this->assertRegexp( $regex, $output );
 	}
 
 
