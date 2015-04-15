@@ -68,6 +68,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             name : 'service.code',
                             allowBlank : false,
                             maxLength : 32,
+                            regex : /^[^ \t\n]+$/,
                             emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
