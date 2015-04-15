@@ -209,6 +209,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
+			$item->setLabel( $entry['label'] );
 			$item->setTypeId( $this->_getTypeId( 'price/type', $domain, $entry['type'] ) );
 			$item->setCurrencyId( $entry['currencyid'] );
 			$item->setQuantity( $entry['quantity'] );

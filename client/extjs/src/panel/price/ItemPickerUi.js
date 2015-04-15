@@ -69,7 +69,6 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
                 header : MShop.I18n.dt('client/extjs', 'Label'),
                 id : 'reflabel',
                 width : 100,
-                hidden : true,
                 renderer : this.refColumnRenderer.createDelegate(this, ["price.label"], true)
             },
             {

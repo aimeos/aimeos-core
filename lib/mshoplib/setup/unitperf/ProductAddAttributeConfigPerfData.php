@@ -203,6 +203,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 			{
 				$priceItem->setId( null );
 				$priceItem->setValue( $price );
+				$priceItem->setLabel( $option );
 				$priceManager->saveItem( $priceItem );
 
 				$listItem->setId( null );
