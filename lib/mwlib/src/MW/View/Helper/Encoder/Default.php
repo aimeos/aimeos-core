@@ -39,10 +39,15 @@ class MW_View_Helper_Encoder_Default
 	 *
 	 * @param string $value Attribute string
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
+	 * @param string $replace Replace whitespace characters by given string
 	 * @return string Escaped attribute string
 	 */
-	public function attr( $value, $trust = self::TAINT )
+	public function attr( $value, $trust = self::TAINT, $replace = '' )
 	{
+		if( $replace != '' ) {
+			$value = str_replace( " \v\t\r\n\f", $replace, $value );
+		}
+
 		return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
 	}
 
@@ -88,7 +93,7 @@ class MW_View_Helper_Encoder_Default
 	 * @param string $value URI/URL string
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
 	 * @param boolean $strip Stip HTML tags if they are part of the input
-	 * @param array $replace Associative list of characters or strings that should be replaced 
+	 * @param array $replace Associative list of characters or strings that should be replaced
 	 * @return string Escaped URI/URL string
 	 */
 	public function url( $value, $trust = self::TAINT, $strip = true, $replace = array( ' ' => '_' ) )

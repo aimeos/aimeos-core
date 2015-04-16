@@ -74,7 +74,7 @@ $params = $this->param(); unset( $params['target'] );
 	<div class="attribute-lists"><!--
 <?php	foreach( $attrMap as $attrType => $attributes ) : ?>
 <?php		if( !empty( $attributes ) ) : ?>
---><fieldset class="attr-<?php echo $enc->attr( $attrType ); ?>">
+--><fieldset class="attr-<?php echo $enc->attr( $attrType, $enc::TAINT, '-' ); ?>">
 		<legend><?php echo $enc->html( $this->translate( 'client/html/code', $attrType ), $enc::TRUST ); ?></legend>
 		<ul class="attr-list"><!--
 <?php			foreach( $attributes as $id => $attribute ) : ?>
