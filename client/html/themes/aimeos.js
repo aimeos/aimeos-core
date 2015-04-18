@@ -579,18 +579,6 @@ AimeosCatalogFilter = {
 
 
 	/**
-	 * Submits the form when clicking on filter attribute input fields
-	 */
-	setupAttributeInputSubmit: function() {
-
-		$(".catalog-filter-attribute input.attr-item").on("click", function() {
-			$(this).parents(".catalog-filter form").submit();
-			$(".catalog-list").fadeTo(1000, 0.5);
-		});
-	},
-
-
-	/**
 	 * Initialize the catalog filter actions
 	 */
 	init: function() {
