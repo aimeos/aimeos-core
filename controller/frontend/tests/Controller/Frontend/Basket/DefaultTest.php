@@ -929,17 +929,6 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCheckLocaleProductError()
-	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
-
-		$this->_context->getLocale()->setCurrencyId( 'CHF' );
-
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		new Controller_Frontend_Basket_Default( $this->_context );
-	}
-
-
 	/**
 	 * @param string $company
 	 */
