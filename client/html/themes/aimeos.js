@@ -589,7 +589,6 @@ AimeosCatalogFilter = {
 		this.setupListFadeout();
 
 		this.setupAttributeItemSubmit();
-		this.setupAttributeInputSubmit();
 
 		this.setupFormChecks();
 		this.setupSearchAutocompletion();
