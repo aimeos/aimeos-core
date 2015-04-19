@@ -504,8 +504,6 @@ class Controller_Frontend_Basket_Default
 
 	/**
 	 * Checks for a locale mismatch and migrates the products to the new basket if necessary.
-	 *
-	 * @throws Controller_Basket_Exception If one or more products couldn't migrated
 	 */
 	protected function _checkLocale()
 	{
@@ -542,15 +540,6 @@ class Controller_Frontend_Basket_Default
 		}
 
 		$session->set( 'arcavias/basket/locale', $localeKey );
-
-		if( !empty( $errors ) )
-		{
-			$msg = $context->getI18n()->dt(
-				'controller/frontend',
-				sprintf( 'One or more items aren\'t available for the chosen locale' )
-			);
-			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
-		}
 	}
 
 
