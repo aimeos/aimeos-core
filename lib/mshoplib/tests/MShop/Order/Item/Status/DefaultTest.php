@@ -124,6 +124,29 @@ class MShop_Order_Item_Status_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Status_Default();
+
+		$list = array(
+			'order.status.id' => 1,
+			'order.status.parentid' => 2,
+			'order.status.type' => MShop_Order_Item_Status_Abstract::STATUS_PAYMENT,
+			'order.status.value' => 'value',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.status.id'], $item->getId());
+		$this->assertEquals($list['order.status.parentid'], $item->getParentId());
+		$this->assertEquals($list['order.status.type'], $item->getType());
+		$this->assertEquals($list['order.status.value'], $item->getValue());
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

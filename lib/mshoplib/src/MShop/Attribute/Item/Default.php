@@ -200,6 +200,35 @@ class MShop_Attribute_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'attribute.domain': $this->setDomain( $value ); break;
+				case 'attribute.code': $this->setCode( $value ); break;
+				case 'attribute.status': $this->setStatus( $value ); break;
+				case 'attribute.typeid': $this->setTypeId( $value ); break;
+				case 'attribute.position': $this->setPosition( $value ); break;
+				case 'attribute.label': $this->setLabel( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

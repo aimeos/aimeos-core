@@ -141,6 +141,28 @@ class MShop_Locale_Item_Language_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Locale_Item_Language_Default();
+
+		$list = array(
+				'locale.language.id' => 'de',
+				'locale.language.code' => 'de',
+				'locale.language.label' => 'test item',
+				'locale.language.status' => 1,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['locale.language.id'], $item->getId());
+		$this->assertEquals($list['locale.language.code'], $item->getCode());
+		$this->assertEquals($list['locale.language.label'], $item->getLabel());
+		$this->assertEquals($list['locale.language.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

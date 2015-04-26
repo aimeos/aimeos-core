@@ -123,15 +123,37 @@ class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Supplier_Item_Default();
+
+		$list = array(
+			'supplier.id' => 1,
+			'supplier.code' => 'test',
+			'supplier.label' => 'test item',
+			'supplier.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['supplier.id'], $item->getId());
+		$this->assertEquals($list['supplier.code'], $item->getCode());
+		$this->assertEquals($list['supplier.label'], $item->getLabel());
+		$this->assertEquals($list['supplier.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
 
-		$this->assertEquals( 541, $arrayObject['supplier.id'] );
-		$this->assertEquals( 99, $arrayObject['supplier.siteid'] );
-		$this->assertEquals( 'unitObject', $arrayObject['supplier.label'] );
-		$this->assertEquals( 'unitCode', $arrayObject['supplier.code'] );
-		$this->assertEquals( 4, $arrayObject['supplier.status'] );
+		$this->assertEquals( $this->_object->getId(), $arrayObject['supplier.id'] );
+		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['supplier.siteid'] );
+		$this->assertEquals( $this->_object->getLabel(), $arrayObject['supplier.label'] );
+		$this->assertEquals( $this->_object->getCode(), $arrayObject['supplier.code'] );
+		$this->assertEquals( $this->_object->getStatus(), $arrayObject['supplier.status'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['supplier.ctime'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['supplier.mtime'] );
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['supplier.editor'] );

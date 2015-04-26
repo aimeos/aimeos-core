@@ -197,6 +197,35 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( $item->getCode(), $this->_object->getValue() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Service_Attribute_Default();
+
+		$list = array(
+			'order.base.service.attribute.id' => 1,
+			'order.base.service.attribute.attrid' => 2,
+			'order.base.service.attribute.ordservid' => 3,
+			'order.base.service.attribute.type' => 'delivery',
+			'order.base.service.attribute.code' => 'test',
+			'order.base.service.attribute.value' => 'value',
+			'order.base.service.attribute.name' => 'test item',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.service.attribute.id'], $item->getId());
+		$this->assertEquals($list['order.base.service.attribute.attrid'], $item->getAttributeId());
+		$this->assertEquals($list['order.base.service.attribute.ordservid'], $item->getServiceId());
+		$this->assertEquals($list['order.base.service.attribute.type'], $item->getType());
+		$this->assertEquals($list['order.base.service.attribute.code'], $item->getCode());
+		$this->assertEquals($list['order.base.service.attribute.value'], $item->getValue());
+		$this->assertEquals($list['order.base.service.attribute.name'], $item->getName());
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

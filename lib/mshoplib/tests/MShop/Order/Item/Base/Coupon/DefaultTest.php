@@ -127,6 +127,29 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Coupon_Default();
+
+		$list = array(
+			'order.base.coupon.id' => 1,
+			'order.base.coupon.baseid' => 2,
+			'order.base.coupon.productid' => 3,
+			'order.base.coupon.code' => 'test',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.coupon.id'], $item->getId());
+		$this->assertEquals($list['order.base.coupon.baseid'], $item->getBaseId());
+		$this->assertEquals($list['order.base.coupon.productid'], $item->getProductId());
+		$this->assertEquals($list['order.base.coupon.code'], $item->getCode());
+	}
+
+
 	public function testToArray()
 	{
 		$array = $this->_object->toArray();

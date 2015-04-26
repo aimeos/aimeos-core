@@ -190,6 +190,37 @@ class MShop_Service_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Service_Item_Default();
+
+		$list = array(
+			'service.id' => 1,
+			'service.typeid' => 2,
+			'service.code' => 'test',
+			'service.label' => 'test item',
+			'service.provider' => 'PayPal',
+			'service.config' => array('test'),
+			'service.position' => 3,
+			'service.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['service.id'], $item->getId());
+		$this->assertEquals($list['service.typeid'], $item->getTypeId());
+		$this->assertEquals($list['service.code'], $item->getCode());
+		$this->assertEquals($list['service.label'], $item->getLabel());
+		$this->assertEquals($list['service.provider'], $item->getProvider());
+		$this->assertEquals($list['service.position'], $item->getPosition());
+		$this->assertEquals($list['service.config'], $item->getConfig());
+		$this->assertEquals($list['service.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

@@ -254,6 +254,54 @@ class MShop_Customer_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+		$addr = $this->getPaymentAddress();
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'customer.label': $this->setLabel( $value ); break;
+				case 'customer.code': $this->setCode( $value ); break;
+				case 'customer.birthday': $this->setBirthday( $value ); break;
+				case 'customer.status': $this->setStatus( $value ); break;
+				case 'customer.password': $this->setPassword( $value ); break;
+				case 'customer.dateverified': $this->setDateVerified( $value ); break;
+				case 'customer.salutation': $addr->setSalutation( $value ); break;
+				case 'customer.company': $addr->setCompany( $value ); break;
+				case 'customer.vatid': $addr->setVatID( $value ); break;
+				case 'customer.title': $addr->setTitle( $value ); break;
+				case 'customer.firstname': $addr->setFirstname( $value ); break;
+				case 'customer.lastname': $addr->setLastname( $value ); break;
+				case 'customer.address1': $addr->setAddress1( $value ); break;
+				case 'customer.address2': $addr->setAddress2( $value ); break;
+				case 'customer.address3': $addr->setAddress3( $value ); break;
+				case 'customer.postal': $addr->setPostal( $value ); break;
+				case 'customer.city': $addr->setCity( $value ); break;
+				case 'customer.state': $addr->setState( $value ); break;
+				case 'customer.languageid': $addr->setLanguageId( $value ); break;
+				case 'customer.countryid': $addr->setCountryId( $value ); break;
+				case 'customer.telephone': $addr->setTelephone( $value ); break;
+				case 'customer.email': $addr->setEmail( $value ); break;
+				case 'customer.telefax': $addr->setTelefax( $value ); break;
+				case 'customer.website': $addr->setWebsite( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return array Associative list of item properties and their values

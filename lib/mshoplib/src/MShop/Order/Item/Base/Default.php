@@ -665,6 +665,33 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.id': $this->setId( $value ); break;
+				case 'order.base.comment': $this->setComment( $value ); break;
+				case 'order.base.customerid': $this->setCustomerId( $value ); break;
+				case 'order.base.status': $this->setStatus( $value ); break;
+				case 'order.base.languageid': $this->_locale->setLanguageId( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

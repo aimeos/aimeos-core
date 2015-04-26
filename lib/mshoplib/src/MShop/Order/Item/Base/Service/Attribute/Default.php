@@ -201,6 +201,35 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.service.attribute.attrid': $this->setAttributeId( $value ); break;
+				case 'order.base.service.attribute.ordservid': $this->setServiceId( $value ); break;
+				case 'order.base.service.attribute.type': $this->setType( $value ); break;
+				case 'order.base.service.attribute.name': $this->setName( $value ); break;
+				case 'order.base.service.attribute.code': $this->setCode( $value ); break;
+				case 'order.base.service.attribute.value': $this->setValue( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

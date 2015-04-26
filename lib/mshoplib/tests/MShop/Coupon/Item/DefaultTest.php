@@ -158,6 +158,31 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Coupon_Item_Default();
+
+		$list = array(
+			'coupon.id' => 1,
+			'coupon.config' => array('test'),
+			'coupon.label' => 'test item',
+			'coupon.provider' => 'test',
+			'coupon.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['coupon.id'], $item->getId());
+		$this->assertEquals($list['coupon.config'], $item->getConfig());
+		$this->assertEquals($list['coupon.label'], $item->getLabel());
+		$this->assertEquals($list['coupon.provider'], $item->getProvider());
+		$this->assertEquals($list['coupon.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
@@ -173,6 +198,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['coupon.mtime']);
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['coupon.editor']);
 	}
+
 
 	public function testIsModified()
 	{

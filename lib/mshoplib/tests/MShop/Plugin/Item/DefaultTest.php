@@ -169,6 +169,33 @@ class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Plugin_Item_Default();
+
+		$list = array(
+			'plugin.id' => 1,
+			'plugin.typeid' => 2,
+			'plugin.label' => 'test item',
+			'plugin.provider' => 'FreeShipping',
+			'plugin.config' => array('test'),
+			'plugin.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['plugin.id'], $item->getId());
+		$this->assertEquals($list['plugin.typeid'], $item->getTypeId());
+		$this->assertEquals($list['plugin.label'], $item->getLabel());
+		$this->assertEquals($list['plugin.provider'], $item->getProvider());
+		$this->assertEquals($list['plugin.config'], $item->getConfig());
+		$this->assertEquals($list['plugin.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

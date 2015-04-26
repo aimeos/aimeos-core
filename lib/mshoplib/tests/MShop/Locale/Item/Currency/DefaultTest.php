@@ -140,6 +140,29 @@ class MShop_Locale_Item_Currency_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Locale_Item_Currency_Default();
+
+		$list = array(
+			'locale.currency.id' => 'EUR',
+			'locale.currency.code' => 'EUR',
+			'locale.currency.label' => 'test item',
+			'locale.currency.status' => 1,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['locale.currency.id'], $item->getId());
+		$this->assertEquals($list['locale.currency.code'], $item->getCode());
+		$this->assertEquals($list['locale.currency.label'], $item->getLabel());
+		$this->assertEquals($list['locale.currency.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

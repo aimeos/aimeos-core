@@ -306,6 +306,43 @@ class MShop_Order_Item_Base_Service_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.service.baseid': $this->setBaseId( $value ); break;
+				case 'order.base.service.code': $this->setCode( $value ); break;
+				case 'order.base.service.serviceid': $this->setServiceId( $value ); break;
+				case 'order.base.service.name': $this->setName( $value ); break;
+				case 'order.base.service.mediaurl': $this->setMediaUrl( $value ); break;
+				case 'order.base.service.type': $this->setType( $value ); break;
+				case 'order.base.service.price': $this->setValue( $value ); break;
+				case 'order.base.service.costs': $this->setCosts( $value ); break;
+				case 'order.base.service.rebate': $this->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $this->setTaxRate( $value ); break;
+				case 'order.base.service.price': $this->_price->setValue( $value ); break;
+				case 'order.base.service.costs': $this->_price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $this->_price->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $this->_price->setTaxRate( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values.

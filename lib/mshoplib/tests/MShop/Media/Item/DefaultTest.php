@@ -217,6 +217,38 @@ class MShop_Media_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Media_Item_Default();
+
+		$list = array(
+			'media.id' => 1,
+			'media.domain' => 'product',
+			'media.label' => 'test item',
+			'media.languageid' => 'de',
+			'media.typeid' => 2,
+			'media.mimetype' => 'image/jpeg',
+			'media.preview' => 'preview.jpg',
+			'media.url' => 'image.jpg',
+			'media.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['media.id'], $item->getId());
+		$this->assertEquals($list['media.domain'], $item->getDomain());
+		$this->assertEquals($list['media.label'], $item->getLabel());
+		$this->assertEquals($list['media.languageid'], $item->getLanguageId());
+		$this->assertEquals($list['media.typeid'], $item->getTypeId());
+		$this->assertEquals($list['media.mimetype'], $item->getMimetype());
+		$this->assertEquals($list['media.preview'], $item->getPreview());
+		$this->assertEquals($list['media.url'], $item->getUrl());
+		$this->assertEquals($list['media.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

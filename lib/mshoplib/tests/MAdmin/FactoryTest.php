@@ -21,7 +21,7 @@ class MAdmin_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateManagerEmpty()
 	{
 		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), "\t\n" );
+		MAdmin_Factory::createManager( TestHelper::getContext(), "\n" );
 	}
 
 

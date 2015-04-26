@@ -208,6 +208,74 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_address, $this->_object->getPaymentAddress() );
 	}
 
+
+	public function testFromArray()
+	{
+		$address = new MShop_Common_Item_Address_Default('common.address.');
+		$item = new MShop_Customer_Item_Default($address);
+
+		$list = array(
+			'customer.id' => 1,
+			'customer.code' => '12345ABCDEF',
+			'customer.label' => 'unitObject',
+			'customer.birthday' => '2010-01-01',
+			'customer.status' => 1,
+			'customer.password' => '',
+			'customer.dateverified' => null,
+			'customer.company' => 'unitCompany',
+			'customer.vatid' => 'DE999999999',
+			'customer.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'customer.title' => 'Dr.',
+			'customer.firstname' => 'firstunit',
+			'customer.lastname' => 'lastunit',
+			'customer.address1' => 'unit str.',
+			'customer.address2' => ' 166',
+			'customer.address3' => '4.OG',
+			'customer.postal' => '22769',
+			'customer.city' => 'Hamburg',
+			'customer.state' => 'Hamburg',
+			'customer.countryid' => 'DE',
+			'customer.languageid' => 'de',
+			'customer.telephone' => '05554433221',
+			'customer.email' => 'unit.test@metaways.de',
+			'customer.telefax' => '05554433222',
+			'customer.website' => 'www.metaways.de',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['customer.id'], $item->getId());
+		$this->assertEquals($list['customer.code'], $item->getCode());
+		$this->assertEquals($list['customer.label'], $item->getLabel());
+		$this->assertEquals($list['customer.birthday'], $item->getBirthday());
+		$this->assertEquals($list['customer.status'], $item->getStatus());
+		$this->assertEquals($list['customer.password'], $item->getPassword());
+		$this->assertEquals($list['customer.dateverified'], $item->getDateVerified());
+
+		$address = $item->getPaymentAddress();
+		$this->assertEquals( $list['customer.company'], $address->getCompany() );
+		$this->assertEquals( $list['customer.vatid'], $address->getVatID() );
+		$this->assertEquals( $list['customer.salutation'], $address->getSalutation() );
+		$this->assertEquals( $list['customer.title'], $address->getTitle() );
+		$this->assertEquals( $list['customer.firstname'], $address->getFirstname() );
+		$this->assertEquals( $list['customer.lastname'], $address->getLastname() );
+		$this->assertEquals( $list['customer.address1'], $address->getAddress1() );
+		$this->assertEquals( $list['customer.address2'], $address->getAddress2() );
+		$this->assertEquals( $list['customer.address3'], $address->getAddress3() );
+		$this->assertEquals( $list['customer.postal'], $address->getPostal() );
+		$this->assertEquals( $list['customer.city'], $address->getCity() );
+		$this->assertEquals( $list['customer.state'], $address->getState() );
+		$this->assertEquals( $list['customer.countryid'], $address->getCountryId() );
+		$this->assertEquals( $list['customer.languageid'], $address->getLanguageId() );
+		$this->assertEquals( $list['customer.telephone'], $address->getTelephone() );
+		$this->assertEquals( $list['customer.email'], $address->getEmail() );
+		$this->assertEquals( $list['customer.telefax'], $address->getTelefax() );
+		$this->assertEquals( $list['customer.website'], $address->getWebsite() );
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

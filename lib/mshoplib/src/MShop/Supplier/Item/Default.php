@@ -110,6 +110,32 @@ class MShop_Supplier_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'supplier.code': $this->setCode( $value ); break;
+				case 'supplier.label': $this->setLabel( $value ); break;
+				case 'supplier.status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -118,8 +144,8 @@ class MShop_Supplier_Item_Default
 	{
 		$list = parent::toArray();
 
-		$list['supplier.label'] = $this->getLabel();
 		$list['supplier.code'] = $this->getCode();
+		$list['supplier.label'] = $this->getLabel();
 		$list['supplier.status'] = $this->getStatus();
 
 		return $list;
