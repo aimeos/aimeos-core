@@ -36,7 +36,7 @@ class MW_View_Helper_Content_Default
 			$baseurl = $view->config( 'client/html/common/content/baseurl' );
 		}
 
-		$this->_baseurl = rtrim( $baseurl, '/' ) . '/';
+		$this->_baseurl = rtrim( $baseurl, '/' );
 		$this->_enc = $view->encoder();
 	}
 
