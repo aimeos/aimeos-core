@@ -104,7 +104,8 @@ class Controller_ExtJS_Price_Default
 		$total = 0;
 		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
 
-		if( isset( $params->domain ) && isset( $params->parentid ) && $allprices == false )
+		if( isset( $params->domain ) && isset( $params->parentid )
+			&& ( !isset( $params->options->showall ) || $params->options->showall == false ) )
 		{
 			$listManager = MShop_Factory::createManager( $this->_getContext(), $params->domain . '/list' );
 			$criteria = $listManager->createSearch();
@@ -171,6 +172,7 @@ class Controller_ExtJS_Price_Default
 					array( "type" => "string","name" => "domain","optional" => true ),
 					array( "type" => "string","name" => "label","optional" => true ),
 					array( "type" => "integer","name" => "parentid","optional" => true ),
+					array( "type" => "array","name" => "options","optional" => true ),
 				),
 				"returns" => "array",
 			),

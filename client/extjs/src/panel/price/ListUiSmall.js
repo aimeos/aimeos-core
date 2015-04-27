@@ -22,6 +22,10 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }]
     },
 
+    storeConfig : {
+    	'listall' : MShop.Config.get('client/extjs/panel/price/listuismall/listall', false )
+    },
+
     getColumns : function() {
 
         // make sure type store gets loaded in same batch as this grid data
