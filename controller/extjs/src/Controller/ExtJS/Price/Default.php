@@ -76,28 +76,6 @@ class Controller_ExtJS_Price_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
-		/** controller/extjs/price/show-all
-		 * Display prices of all items of the same domain in the admin interface
-		 *
-		 * By default, only the prices for the specific product, attribute or
-		 * services associated to that items are shown in the price list views.
-		 * This reduces to probability to associate a price to multiple items
-		 * by accident but also prevents shop owners to use this for conveniance.
-		 *
-		 * When you set this option to "1", all prices of the same domain will
-		 * be listed, e.g. all product prices. You can filter this prices in the
-		 * list view and search for prices with specific properties. If a price
-		 * is associated to more than one product, attribute or service, it will
-		 * change for all items at once when one of the price properties is
-		 * adapted.
-		 *
-		 * @param boolean True or "1" to show all prices, false or "0" otherwise
-		 * @category Developer
-		 * @catefory User
-		 * @since 2015.05
-		 */
-		$allprices = $this->_getContext()->getConfig()->get( 'controller/extjs/price/show-all', false );
-
 		$this->_checkParams( $params, array( 'site' ) );
 		$this->_setLocale( $params->site );
 

@@ -202,10 +202,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
             root : 'items',
             totalProperty : 'total',
             idProperty : this.idProperty,
-            sortInfo : this.sortInfo,
-            baseParams : {
-            	test: true
-            }
+            sortInfo : this.sortInfo
         }, this.storeConfig));
 
         // make sure site param gets set for read/write actions
