@@ -216,7 +216,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 			switch( $key )
 			{
 				case 'order.base.service.attribute.attrid': $this->setAttributeId( $value ); break;
-				case 'order.base.service.attribute.ordservid': $this->setServiceId( $value ); break;
+				case 'order.base.service.attribute.serviceid': $this->setServiceId( $value ); break;
 				case 'order.base.service.attribute.type': $this->setType( $value ); break;
 				case 'order.base.service.attribute.name': $this->setName( $value ); break;
 				case 'order.base.service.attribute.code': $this->setCode( $value ); break;
@@ -239,7 +239,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 		$list = parent::toArray();
 
 		$list['order.base.service.attribute.attrid'] = $this->getAttributeId();
-		$list['order.base.service.attribute.ordservid'] = $this->getServiceId();
+		$list['order.base.service.attribute.serviceid'] = $this->getServiceId();
 		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();

@@ -687,6 +687,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			}
 		}
 
+		unset( $list['order.base.siteid'] );
+		unset( $list['order.base.ctime'] );
+		unset( $list['order.base.mtime'] );
+		unset( $list['order.base.editor'] );
+
 		return $unknown;
 	}
 

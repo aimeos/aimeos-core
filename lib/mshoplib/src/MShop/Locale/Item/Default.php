@@ -235,6 +235,11 @@ class MShop_Locale_Item_Default
 	public function fromArray( array $list )
 	{
 		$unknown = array();
+
+		if( isset( $list['locale.siteid'] ) ) {
+			$this->setSiteId( $list['locale.siteid'] );
+		}
+
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
@@ -262,6 +267,7 @@ class MShop_Locale_Item_Default
 	{
 		$list = parent::toArray();
 
+		$list['locale.siteid'] = $this->getSiteId();
 		$list['locale.languageid'] = $this->getLanguageId();
 		$list['locale.currencyid'] = $this->getCurrencyId();
 		$list['locale.position'] = $this->getPosition();
