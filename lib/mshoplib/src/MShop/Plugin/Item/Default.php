@@ -196,6 +196,35 @@ class MShop_Plugin_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'plugin.typeid': $this->setTypeId( $value ); break;
+				case 'plugin.label': $this->setLabel( $value ); break;
+				case 'plugin.provider': $this->setProvider( $value ); break;
+				case 'plugin.config': $this->setConfig( $value ); break;
+				case 'plugin.status': $this->setStatus( $value ); break;
+				case 'plugin.position': $this->setPosition( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

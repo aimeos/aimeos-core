@@ -190,6 +190,37 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Default();
+
+		$list = array(
+			'order.id' => 1,
+			'order.type' => MShop_Order_Item_Abstract::TYPE_WEB,
+			'order.baseid' => 2,
+			'order.relatedid' => 3,
+			'order.statusdelivery' => 4,
+			'order.statuspayment' => 5,
+			'order.datepayment' => '2000-01-01 00:00:00',
+			'order.datedelivery' => '2001-01-01 00:00:00',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.id'], $item->getId());
+		$this->assertEquals($list['order.type'], $item->getType());
+		$this->assertEquals($list['order.baseid'], $item->getBaseId());
+		$this->assertEquals($list['order.relatedid'], $item->getRelatedId());
+		$this->assertEquals($list['order.statusdelivery'], $item->getDeliveryStatus());
+		$this->assertEquals($list['order.statuspayment'], $item->getPaymentStatus());
+		$this->assertEquals($list['order.datepayment'], $item->getDatePayment());
+		$this->assertEquals($list['order.datedelivery'], $item->getDateDelivery());
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

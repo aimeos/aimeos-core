@@ -98,15 +98,15 @@ class MShop_Product_Item_Property_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( 44, $this->_object->getTypeId() );
 	}
-	
+
 	public function testSetTypeId()
 	{
 		$this->_object->setTypeId(33);
 		$this->assertTrue( $this->_object->isModified() );
-	
+
 		$this->assertEquals( 33, $this->_object->getTypeId() );
 	}
-	
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'width', $this->_object->getType() );
@@ -139,6 +139,29 @@ class MShop_Product_Item_Property_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
+
+
+	public function testFromArray()
+	{
+		$item = new MShop_Product_Item_Property_Default();
+
+		$list = array(
+			'product.property.parentid' => 1,
+			'product.property.typeid' => 2,
+			'product.property.languageid' => 'de',
+			'product.property.value' => 'value',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['product.property.parentid'], $item->getParentId());
+		$this->assertEquals($list['product.property.typeid'], $item->getTypeId());
+		$this->assertEquals($list['product.property.languageid'], $item->getLanguageId());
+		$this->assertEquals($list['product.property.value'], $item->getValue());
+	}
+
 
 	public function testToArray()
 	{

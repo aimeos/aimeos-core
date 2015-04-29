@@ -199,6 +199,35 @@ class MShop_Text_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'text.languageid': $this->setLanguageId( $value ); break;
+				case 'text.typeid': $this->setTypeId( $value ); break;
+				case 'text.label': $this->setLabel( $value ); break;
+				case 'text.domain': $this->setDomain( $value ); break;
+				case 'text.content': $this->setContent( $value ); break;
+				case 'text.status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

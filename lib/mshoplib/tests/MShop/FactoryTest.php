@@ -28,7 +28,7 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateManagerEmpty()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), "\t\n" );
+		MShop_Factory::createManager( TestHelper::getContext(), "\n" );
 	}
 
 

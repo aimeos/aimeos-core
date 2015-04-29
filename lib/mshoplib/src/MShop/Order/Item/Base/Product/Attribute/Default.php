@@ -203,6 +203,35 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.product.attribute.attrid': $this->setAttributeId( $value ); break;
+				case 'order.base.product.attribute.productid': $this->setProductId( $value ); break;
+				case 'order.base.product.attribute.type': $this->setType( $value ); break;
+				case 'order.base.product.attribute.code': $this->setCode( $value ); break;
+				case 'order.base.product.attribute.value': $this->setValue( $value ); break;
+				case 'order.base.product.attribute.name': $this->setName( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return array Associative list of item properties and their values

@@ -189,18 +189,46 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Text_Item_Default();
+
+		$list = array(
+			'text.id' => 1,
+			'text.typeid' => 2,
+			'text.languageid' => 'de',
+			'text.label' => 'test item',
+			'text.domain' => 'product',
+			'text.content' => 'test content',
+			'text.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['text.id'], $item->getId());
+		$this->assertEquals($list['text.typeid'], $item->getTypeId());
+		$this->assertEquals($list['text.languageid'], $item->getLanguageId());
+		$this->assertEquals($list['text.label'], $item->getLabel());
+		$this->assertEquals($list['text.domain'], $item->getDomain());
+		$this->assertEquals($list['text.content'], $item->getContent());
+		$this->assertEquals($list['text.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$data = $this->_object->toArray();
 
-		$this->assertEquals( 10, $data['text.id'] );
-		$this->assertEquals( 99, $data['text.siteid'] );
-		$this->assertEquals( 'de', $data['text.languageid'] );
-		$this->assertEquals( 1, $data['text.typeid'] );
-		$this->assertEquals( 'unittest label', $data['text.label'] );
-		$this->assertEquals( 'product', $data['text.domain'] );
-		$this->assertEquals( 'unittest text', $data['text.content'] );
-		$this->assertEquals( 2, $data['text.status'] );
+		$this->assertEquals( $this->_object->getId(), $data['text.id'] );
+		$this->assertEquals( $this->_object->getSiteId(), $data['text.siteid'] );
+		$this->assertEquals( $this->_object->getLanguageId(), $data['text.languageid'] );
+		$this->assertEquals( $this->_object->getTypeId(), $data['text.typeid'] );
+		$this->assertEquals( $this->_object->getLabel(), $data['text.label'] );
+		$this->assertEquals( $this->_object->getDomain(), $data['text.domain'] );
+		$this->assertEquals( $this->_object->getContent(), $data['text.content'] );
+		$this->assertEquals( $this->_object->getStatus(), $data['text.status'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $data['text.ctime'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $data['text.mtime'] );
 		$this->assertEquals( $this->_object->getEditor(), $data['text.editor'] );

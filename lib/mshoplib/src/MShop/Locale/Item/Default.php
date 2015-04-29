@@ -227,6 +227,38 @@ class MShop_Locale_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+
+		if( isset( $list['locale.siteid'] ) ) {
+			$this->setSiteId( $list['locale.siteid'] );
+		}
+
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'locale.languageid': $this->setLanguageId( $value ); break;
+				case 'locale.currencyid': $this->setCurrencyId( $value ); break;
+				case 'locale.position': $this->setPosition( $value ); break;
+				case 'locale.status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -235,6 +267,7 @@ class MShop_Locale_Item_Default
 	{
 		$list = parent::toArray();
 
+		$list['locale.siteid'] = $this->getSiteId();
 		$list['locale.languageid'] = $this->getLanguageId();
 		$list['locale.currencyid'] = $this->getCurrencyId();
 		$list['locale.position'] = $this->getPosition();

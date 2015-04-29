@@ -229,6 +229,36 @@ class MShop_Product_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'product.typeid': $this->setTypeId( $value ); break;
+				case 'product.code': $this->setCode( $value ); break;
+				case 'product.label': $this->setLabel( $value ); break;
+				case 'product.status': $this->setStatus( $value ); break;
+				case 'product.suppliercode': $this->setSupplierCode( $value ); break;
+				case 'product.datestart': $this->setDateStart( $value ); break;
+				case 'product.dateend': $this->setDateEnd( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

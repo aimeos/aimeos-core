@@ -188,6 +188,41 @@ class MShop_Attribute_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Attribute_Item_Default();
+
+		$list = array(
+			'attribute.id' => 1,
+			'attribute.siteid' => 2,
+			'attribute.code' => 'test',
+			'attribute.domain' => 'product',
+			'attribute.status' => '0',
+			'attribute.typeid' => 3,
+			'attribute.type' => 'testtype',
+			'attribute.label' => 'test attribute',
+			'attribute.position' => 10,
+			'attribute.ctime' => '2000-01-01 00:00:00',
+			'attribute.mtime' => '2001-01-01 00:00:00',
+			'attribute.editor' => 'test',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array('attribute.type' => 'testtype'), $unknown);
+
+		$this->assertEquals($list['attribute.id'], $item->getId());
+		$this->assertEquals($list['attribute.code'], $item->getCode());
+		$this->assertEquals($list['attribute.domain'], $item->getDomain());
+		$this->assertEquals($list['attribute.status'], $item->getStatus());
+		$this->assertEquals($list['attribute.typeid'], $item->getTypeId());
+		$this->assertEquals($list['attribute.label'], $item->getLabel());
+		$this->assertEquals($list['attribute.position'], $item->getPosition());
+		$this->assertNull($item->getSiteId());
+		$this->assertNull($item->getType());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

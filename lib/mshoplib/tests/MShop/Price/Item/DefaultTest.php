@@ -272,6 +272,41 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Price_Item_Default();
+
+		$list = array(
+			'price.id' => 1,
+			'price.typeid' => 2,
+			'price.label' => 'test item',
+			'price.currencyid' => 'EUR',
+			'price.quantity' => 3,
+			'price.value' => '10.00',
+			'price.costs' => '5.00',
+			'price.rebate' => '2.00',
+			'price.taxrate' => '20.00',
+			'price.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['price.id'], $item->getId());
+		$this->assertEquals($list['price.typeid'], $item->getTypeId());
+		$this->assertEquals($list['price.label'], $item->getLabel());
+		$this->assertEquals($list['price.currencyid'], $item->getCurrencyId());
+		$this->assertEquals($list['price.quantity'], $item->getQuantity());
+		$this->assertEquals($list['price.value'], $item->getValue());
+		$this->assertEquals($list['price.costs'], $item->getCosts());
+		$this->assertEquals($list['price.rebate'], $item->getRebate());
+		$this->assertEquals($list['price.taxrate'], $item->getTaxrate());
+		$this->assertEquals($list['price.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

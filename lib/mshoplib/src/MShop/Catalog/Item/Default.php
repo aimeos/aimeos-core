@@ -211,6 +211,34 @@ class MShop_Catalog_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'catalog.id': $this->_node->setId( $value ); break;
+				case 'catalog.code': $this->_node->setCode( $value ); break;
+				case 'catalog.label': $this->_node->setLabel( $value ); break;
+				case 'catalog.status': $this->_node->setStatus( $value ); break;
+				case 'catalog.config': $this->setConfig( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the public values of the node as array.
 	 *
 	 * @return array Assciative list of key/value pairs

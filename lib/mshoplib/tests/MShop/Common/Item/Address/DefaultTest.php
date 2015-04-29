@@ -416,7 +416,9 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		);
 
 		$object = new MShop_Common_Item_Address_Default( 'common.address.' );
-		$object->fromArray( $list );
+		$unknown = $object->fromArray( $list );
+
+		$this->assertEquals(array(), $unknown);
 
 		$this->assertEquals( $list['common.address.id'], $object->getId() );
 		$this->assertEquals( $list['common.address.refid'], $object->getRefId() );

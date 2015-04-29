@@ -134,6 +134,31 @@ class MShop_Product_Item_Stock_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Product_Item_Stock_Default();
+
+		$list = array(
+			'product.stock.id' => 1,
+			'product.stock.productid' => 2,
+			'product.stock.warehouseid' => 3,
+			'product.stock.stocklevel' => 10,
+			'product.stock.dateback' => '2000-01-01 00:00:00',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['product.stock.id'], $item->getId());
+		$this->assertEquals($list['product.stock.productid'], $item->getProductId());
+		$this->assertEquals($list['product.stock.warehouseid'], $item->getWarehouseId());
+		$this->assertEquals($list['product.stock.stocklevel'], $item->getStocklevel());
+		$this->assertEquals($list['product.stock.dateback'], $item->getDateBack());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

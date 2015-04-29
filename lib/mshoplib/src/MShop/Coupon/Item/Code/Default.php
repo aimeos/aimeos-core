@@ -167,6 +167,34 @@ class MShop_Coupon_Item_Code_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'coupon.code.count': $this->setCount( $value ); break;
+				case 'coupon.code.code': $this->setCode( $value ); break;
+				case 'coupon.code.couponid': $this->setCouponId( $value ); break;
+				case 'coupon.code.datestart': $this->setDateStart( $value ); break;
+				case 'coupon.code.dateend': $this->setDateEnd( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

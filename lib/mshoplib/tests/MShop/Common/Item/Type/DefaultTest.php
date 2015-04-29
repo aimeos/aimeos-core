@@ -129,6 +129,30 @@ class MShop_Common_Item_Type_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Common_Item_Type_Default('common.type.');
+
+		$list = array(
+			'common.type.id' => 8,
+			'common.type.code' => 'test',
+			'common.type.domain' => 'testDomain',
+			'common.type.label' => 'test item',
+			'common.type.status' => 1,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['common.type.id'], $item->getId());
+		$this->assertEquals($list['common.type.code'], $item->getCode());
+		$this->assertEquals($list['common.type.domain'], $item->getDomain());
+		$this->assertEquals($list['common.type.label'], $item->getLabel());
+		$this->assertEquals($list['common.type.status'], $item->getStatus());
+	}
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

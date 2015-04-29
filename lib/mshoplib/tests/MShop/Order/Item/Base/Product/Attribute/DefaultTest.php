@@ -201,6 +201,34 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Product_Attribute_Default();
+
+		$list = array(
+			'order.base.product.attribute.id' => 1,
+			'order.base.product.attribute.attrid' => 2,
+			'order.base.product.attribute.productid' => 3,
+			'order.base.product.attribute.type' => 'variant',
+			'order.base.product.attribute.code' => 'test',
+			'order.base.product.attribute.value' => 'value',
+			'order.base.product.attribute.name' => 'test item',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.product.attribute.id'], $item->getId());
+		$this->assertEquals($list['order.base.product.attribute.attrid'], $item->getAttributeId());
+		$this->assertEquals($list['order.base.product.attribute.productid'], $item->getProductId());
+		$this->assertEquals($list['order.base.product.attribute.type'], $item->getType());
+		$this->assertEquals($list['order.base.product.attribute.code'], $item->getCode());
+		$this->assertEquals($list['order.base.product.attribute.value'], $item->getValue());
+		$this->assertEquals($list['order.base.product.attribute.name'], $item->getName());
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

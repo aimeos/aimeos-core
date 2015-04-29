@@ -216,6 +216,37 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertSame( $obj, $this->_object->getRefItem() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Common_Item_List_Default('common.list.');
+
+		$list = array(
+			'common.list.id' => 8,
+			'common.list.parentid' => 2,
+			'common.list.typeid' => 8,
+			'common.list.domain' => 'testDomain',
+			'common.list.refid' => 'unitId',
+			'common.list.config' => array( 'cnt' => '40' ),
+			'common.list.position' => 7,
+			'common.list.status' => 1,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['common.list.id'], $item->getId());
+		$this->assertEquals($list['common.list.parentid'], $item->getParentId());
+		$this->assertEquals($list['common.list.typeid'], $item->getTypeId());
+		$this->assertEquals($list['common.list.domain'], $item->getDomain());
+		$this->assertEquals($list['common.list.refid'], $item->getRefId());
+		$this->assertEquals($list['common.list.config'], $item->getConfig());
+		$this->assertEquals($list['common.list.position'], $item->getPosition());
+		$this->assertEquals($list['common.list.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$expected = array(

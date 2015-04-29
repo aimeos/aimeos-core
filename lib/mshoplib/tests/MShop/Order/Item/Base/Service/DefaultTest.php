@@ -279,6 +279,33 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Service_Default(new MShop_Price_Item_Default());
+
+		$list = array(
+			'order.base.service.id' => 1,
+			'order.base.service.baseid' => 2,
+			'order.base.service.serviceid' => 3,
+			'order.base.service.code' => 'test',
+			'order.base.service.name' => 'test item',
+			'order.base.service.type' => 'delivery',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.service.id'], $item->getId());
+		$this->assertEquals($list['order.base.service.baseid'], $item->getBaseId());
+		$this->assertEquals($list['order.base.service.serviceid'], $item->getServiceId());
+		$this->assertEquals($list['order.base.service.code'], $item->getCode());
+		$this->assertEquals($list['order.base.service.name'], $item->getName());
+		$this->assertEquals($list['order.base.service.type'], $item->getType());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

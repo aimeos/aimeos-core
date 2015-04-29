@@ -475,6 +475,53 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( true, $this->_object->isModified() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Product_Default(new MShop_Price_Item_Default());
+
+		$list = array(
+			'order.base.product.id' => 1,
+			'order.base.product.baseid' => 2,
+			'order.base.product.productid' => 3,
+			'order.base.product.prodcode' => 'test',
+			'order.base.product.name' => 'test item',
+			'order.base.product.suppliercode' => 'testsup',
+			'order.base.product.prodcode' => 'test',
+			'order.base.product.mediaurl' => '/path/to/image.jpg',
+			'order.base.product.position' => 4,
+			'order.base.product.quantity' => 5,
+			'order.base.product.status' => 0,
+			'order.base.product.flags' => 1,
+			'order.base.product.price' => '10.00',
+			'order.base.product.costs' => '5.00',
+			'order.base.product.rebate' => '2.00',
+			'order.base.product.taxrate' => '20.00',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.product.id'], $item->getId());
+		$this->assertEquals($list['order.base.product.baseid'], $item->getBaseId());
+		$this->assertEquals($list['order.base.product.productid'], $item->getProductId());
+		$this->assertEquals($list['order.base.product.prodcode'], $item->getProductCode());
+		$this->assertEquals($list['order.base.product.name'], $item->getName());
+		$this->assertEquals($list['order.base.product.suppliercode'], $item->getSupplierCode());
+		$this->assertEquals($list['order.base.product.prodcode'], $item->getProductCode());
+		$this->assertEquals($list['order.base.product.mediaurl'], $item->getMediaUrl());
+		$this->assertEquals($list['order.base.product.position'], $item->getPosition());
+		$this->assertEquals($list['order.base.product.quantity'], $item->getQuantity());
+		$this->assertEquals($list['order.base.product.status'], $item->getStatus());
+		$this->assertEquals($list['order.base.product.flags'], $item->getFlags());
+		$this->assertEquals($list['order.base.product.price'], $item->getPrice()->getValue());
+		$this->assertEquals($list['order.base.product.costs'], $item->getPrice()->getCosts());
+		$this->assertEquals($list['order.base.product.rebate'], $item->getPrice()->getRebate());
+		$this->assertEquals($list['order.base.product.taxrate'], $item->getPrice()->getTaxRate());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

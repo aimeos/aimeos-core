@@ -27,7 +27,7 @@ class MShop_Product_Item_Property_Default
 	public function __construct( array $values = array( ) )
 	{
 		parent::__construct( 'product.property.', $values );
-		
+
 		$this->_values = $values;
 	}
 
@@ -93,8 +93,8 @@ class MShop_Product_Item_Property_Default
 	{
 		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
 	}
-	
-	
+
+
 	/**
 	 * Sets the new type of the product property item
 	 *
@@ -104,11 +104,11 @@ class MShop_Product_Item_Property_Default
 	{
 		$id = (int) $id;
 		if ( $id === $this->getTypeId() ) { return; }
-	
+
 		$this->_values['typeid'] = (int) $id;
 		$this->setModified();
 	}
-	
+
 
 	/**
 	 * Returns the value of the property item.
@@ -144,6 +144,33 @@ class MShop_Product_Item_Property_Default
 	public function getType()
 	{
 		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+	}
+
+
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'product.property.parentid': $this->setParentId( $value ); break;
+				case 'product.property.typeid': $this->setTypeId( $value ); break;
+				case 'product.property.languageid': $this->setLanguageId( $value ); break;
+				case 'product.property.value': $this->setValue( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
 	}
 
 

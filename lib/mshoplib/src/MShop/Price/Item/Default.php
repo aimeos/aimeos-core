@@ -360,6 +360,39 @@ class MShop_Price_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'price.typeid': $this->setTypeId( $value ); break;
+				case 'price.currencyid': $this->setCurrencyId( $value ); break;
+				case 'price.domain': $this->setDomain( $value ); break;
+				case 'price.quantity': $this->setQuantity( $value ); break;
+				case 'price.value': $this->setValue( $value ); break;
+				case 'price.costs': $this->setCosts( $value ); break;
+				case 'price.rebate': $this->setRebate( $value ); break;
+				case 'price.taxrate': $this->setTaxRate( $value ); break;
+				case 'price.status': $this->setStatus( $value ); break;
+				case 'price.label': $this->setLabel( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return array Associative list of item properties and their values

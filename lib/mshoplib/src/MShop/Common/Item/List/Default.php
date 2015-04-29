@@ -307,6 +307,38 @@ class MShop_Common_Item_List_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case $this->_prefix . 'parentid': $this->setParentId( $value ); break;
+				case $this->_prefix . 'typeid': $this->setTypeId( $value ); break;
+				case $this->_prefix . 'domain': $this->setDomain( $value ); break;
+				case $this->_prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->_prefix . 'datestart': $this->setDateStart( $value ); break;
+				case $this->_prefix . 'dateend': $this->setDateEnd( $value ); break;
+				case $this->_prefix . 'config': $this->setConfig( $value ); break;
+				case $this->_prefix . 'position': $this->setPosition( $value ); break;
+				case $this->_prefix . 'status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

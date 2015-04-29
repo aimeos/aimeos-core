@@ -163,6 +163,30 @@ class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Catalog_Item_Default(new MW_Tree_Node_Default());
+
+		$list = array(
+			'catalog.id' => 1,
+			'catalog.code' => 'test',
+			'catalog.config' => array('test'),
+			'catalog.label' => 'test item',
+			'catalog.status' => '0',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['catalog.id'], $item->getId());
+		$this->assertEquals($list['catalog.code'], $item->getCode());
+		$this->assertEquals($list['catalog.config'], $item->getConfig());
+		$this->assertEquals($list['catalog.status'], $item->getStatus());
+		$this->assertEquals($list['catalog.label'], $item->getLabel());
+	}
+
+
 	public function testToArray()
 	{
 		$values = $this->_object->toArray();

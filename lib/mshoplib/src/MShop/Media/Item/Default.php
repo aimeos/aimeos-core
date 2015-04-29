@@ -252,6 +252,37 @@ class MShop_Media_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'media.domain': $this->setDomain( $value ); break;
+				case 'media.label': $this->setLabel( $value ); break;
+				case 'media.languageid': $this->setLanguageId( $value ); break;
+				case 'media.mimetype': $this->setMimeType( $value ); break;
+				case 'media.typeid': $this->setTypeId( $value ); break;
+				case 'media.url': $this->setUrl( $value ); break;
+				case 'media.preview': $this->setPreview( $value ); break;
+				case 'media.status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
