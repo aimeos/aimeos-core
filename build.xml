@@ -96,6 +96,12 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
+		<confdoc keyprefix="client/extjs" wikiprefix="Configuration/Core" keyparts="1"
+			outfile="${coredir}/misc/confdoc/core-client-extjs.wiki">
+			<fileset dir="${coredir}/client/extjs" expandsymboliclinks="true" >
+				<include name="src/**/*.js" />
+			</fileset>
+		</confdoc>
 		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/client/html/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
