@@ -1,0 +1,768 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2013-04-09 08:38+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "AD"
+msgstr ""
+
+msgid "AE"
+msgstr ""
+
+msgid "AF"
+msgstr ""
+
+msgid "AG"
+msgstr ""
+
+msgid "AI"
+msgstr ""
+
+msgid "AL"
+msgstr ""
+
+msgid "AM"
+msgstr ""
+
+msgid "AO"
+msgstr ""
+
+msgid "AQ"
+msgstr ""
+
+msgid "AR"
+msgstr ""
+
+msgid "AS"
+msgstr ""
+
+msgid "AT"
+msgstr ""
+
+msgid "AU"
+msgstr ""
+
+msgid "AW"
+msgstr ""
+
+msgid "AX"
+msgstr ""
+
+msgid "AZ"
+msgstr ""
+
+msgid "BA"
+msgstr ""
+
+msgid "BB"
+msgstr ""
+
+msgid "BD"
+msgstr ""
+
+msgid "BE"
+msgstr ""
+
+msgid "BF"
+msgstr ""
+
+msgid "BG"
+msgstr ""
+
+msgid "BH"
+msgstr ""
+
+msgid "BI"
+msgstr ""
+
+msgid "BJ"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BM"
+msgstr ""
+
+msgid "BN"
+msgstr ""
+
+msgid "BO"
+msgstr ""
+
+msgid "BQ"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "BS"
+msgstr ""
+
+msgid "BT"
+msgstr ""
+
+msgid "BV"
+msgstr ""
+
+msgid "BW"
+msgstr ""
+
+msgid "BY"
+msgstr ""
+
+msgid "BZ"
+msgstr ""
+
+msgid "CA"
+msgstr ""
+
+msgid "CC"
+msgstr ""
+
+msgid "CD"
+msgstr ""
+
+msgid "CF"
+msgstr ""
+
+msgid "CG"
+msgstr ""
+
+msgid "CH"
+msgstr ""
+
+msgid "CI"
+msgstr ""
+
+msgid "CK"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CM"
+msgstr ""
+
+msgid "CN"
+msgstr ""
+
+msgid "CO"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "CU"
+msgstr ""
+
+msgid "CV"
+msgstr ""
+
+msgid "CW"
+msgstr ""
+
+msgid "CX"
+msgstr ""
+
+msgid "CY"
+msgstr ""
+
+msgid "CZ"
+msgstr ""
+
+msgid "DE"
+msgstr ""
+
+msgid "DJ"
+msgstr ""
+
+msgid "DK"
+msgstr ""
+
+msgid "DM"
+msgstr ""
+
+msgid "DO"
+msgstr ""
+
+msgid "DZ"
+msgstr ""
+
+msgid "EC"
+msgstr ""
+
+msgid "EE"
+msgstr ""
+
+msgid "EG"
+msgstr ""
+
+msgid "EH"
+msgstr ""
+
+msgid "ER"
+msgstr ""
+
+msgid "ES"
+msgstr ""
+
+msgid "ET"
+msgstr ""
+
+msgid "FI"
+msgstr ""
+
+msgid "FJ"
+msgstr ""
+
+msgid "FK"
+msgstr ""
+
+msgid "FM"
+msgstr ""
+
+msgid "FO"
+msgstr ""
+
+msgid "FR"
+msgstr ""
+
+msgid "GA"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "GD"
+msgstr ""
+
+msgid "GE"
+msgstr ""
+
+msgid "GF"
+msgstr ""
+
+msgid "GG"
+msgstr ""
+
+msgid "GH"
+msgstr ""
+
+msgid "GI"
+msgstr ""
+
+msgid "GL"
+msgstr ""
+
+msgid "GM"
+msgstr ""
+
+msgid "GN"
+msgstr ""
+
+msgid "GP"
+msgstr ""
+
+msgid "GQ"
+msgstr ""
+
+msgid "GR"
+msgstr ""
+
+msgid "GS"
+msgstr ""
+
+msgid "GT"
+msgstr ""
+
+msgid "GU"
+msgstr ""
+
+msgid "GW"
+msgstr ""
+
+msgid "GY"
+msgstr ""
+
+msgid "HK"
+msgstr ""
+
+msgid "HM"
+msgstr ""
+
+msgid "HN"
+msgstr ""
+
+msgid "HR"
+msgstr ""
+
+msgid "HT"
+msgstr ""
+
+msgid "HU"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "IE"
+msgstr ""
+
+msgid "IL"
+msgstr ""
+
+msgid "IM"
+msgstr ""
+
+msgid "IN"
+msgstr ""
+
+msgid "IO"
+msgstr ""
+
+msgid "IQ"
+msgstr ""
+
+msgid "IR"
+msgstr ""
+
+msgid "IS"
+msgstr ""
+
+msgid "IT"
+msgstr ""
+
+msgid "JE"
+msgstr ""
+
+msgid "JM"
+msgstr ""
+
+msgid "JO"
+msgstr ""
+
+msgid "JP"
+msgstr ""
+
+msgid "KE"
+msgstr ""
+
+msgid "KG"
+msgstr ""
+
+msgid "KH"
+msgstr ""
+
+msgid "KI"
+msgstr ""
+
+msgid "KM"
+msgstr ""
+
+msgid "KN"
+msgstr ""
+
+msgid "KP"
+msgstr ""
+
+msgid "KR"
+msgstr ""
+
+msgid "KW"
+msgstr ""
+
+msgid "KY"
+msgstr ""
+
+msgid "KZ"
+msgstr ""
+
+msgid "LA"
+msgstr ""
+
+msgid "LB"
+msgstr ""
+
+msgid "LC"
+msgstr ""
+
+msgid "LI"
+msgstr ""
+
+msgid "LK"
+msgstr ""
+
+msgid "LR"
+msgstr ""
+
+msgid "LS"
+msgstr ""
+
+msgid "LT"
+msgstr ""
+
+msgid "LU"
+msgstr ""
+
+msgid "LV"
+msgstr ""
+
+msgid "LY"
+msgstr ""
+
+msgid "MA"
+msgstr ""
+
+msgid "MC"
+msgstr ""
+
+msgid "MD"
+msgstr ""
+
+msgid "ME"
+msgstr ""
+
+msgid "MF"
+msgstr ""
+
+msgid "MG"
+msgstr ""
+
+msgid "MH"
+msgstr ""
+
+msgid "MK"
+msgstr ""
+
+msgid "ML"
+msgstr ""
+
+msgid "MM"
+msgstr ""
+
+msgid "MN"
+msgstr ""
+
+msgid "MO"
+msgstr ""
+
+msgid "MP"
+msgstr ""
+
+msgid "MQ"
+msgstr ""
+
+msgid "MR"
+msgstr ""
+
+msgid "MS"
+msgstr ""
+
+msgid "MT"
+msgstr ""
+
+msgid "MU"
+msgstr ""
+
+msgid "MV"
+msgstr ""
+
+msgid "MW"
+msgstr ""
+
+msgid "MX"
+msgstr ""
+
+msgid "MY"
+msgstr ""
+
+msgid "MZ"
+msgstr ""
+
+msgid "NA"
+msgstr ""
+
+msgid "NC"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "NF"
+msgstr ""
+
+msgid "NG"
+msgstr ""
+
+msgid "NI"
+msgstr ""
+
+msgid "NL"
+msgstr ""
+
+msgid "NO"
+msgstr ""
+
+msgid "NP"
+msgstr ""
+
+msgid "NR"
+msgstr ""
+
+msgid "NU"
+msgstr ""
+
+msgid "NZ"
+msgstr ""
+
+msgid "OM"
+msgstr ""
+
+msgid "PA"
+msgstr ""
+
+msgid "PE"
+msgstr ""
+
+msgid "PF"
+msgstr ""
+
+msgid "PG"
+msgstr ""
+
+msgid "PH"
+msgstr ""
+
+msgid "PK"
+msgstr ""
+
+msgid "PL"
+msgstr ""
+
+msgid "PM"
+msgstr ""
+
+msgid "PN"
+msgstr ""
+
+msgid "PR"
+msgstr ""
+
+msgid "PS"
+msgstr ""
+
+msgid "PT"
+msgstr ""
+
+msgid "PW"
+msgstr ""
+
+msgid "PY"
+msgstr ""
+
+msgid "QA"
+msgstr ""
+
+msgid "RE"
+msgstr ""
+
+msgid "RO"
+msgstr ""
+
+msgid "RS"
+msgstr ""
+
+msgid "RU"
+msgstr ""
+
+msgid "RW"
+msgstr ""
+
+msgid "SA"
+msgstr ""
+
+msgid "SB"
+msgstr ""
+
+msgid "SC"
+msgstr ""
+
+msgid "SD"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SG"
+msgstr ""
+
+msgid "SH"
+msgstr ""
+
+msgid "SI"
+msgstr ""
+
+msgid "SJ"
+msgstr ""
+
+msgid "SK"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SM"
+msgstr ""
+
+msgid "SN"
+msgstr ""
+
+msgid "SO"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "SS"
+msgstr ""
+
+msgid "ST"
+msgstr ""
+
+msgid "SV"
+msgstr ""
+
+msgid "SX"
+msgstr ""
+
+msgid "SY"
+msgstr ""
+
+msgid "SZ"
+msgstr ""
+
+msgid "TC"
+msgstr ""
+
+msgid "TD"
+msgstr ""
+
+msgid "TF"
+msgstr ""
+
+msgid "TG"
+msgstr ""
+
+msgid "TH"
+msgstr ""
+
+msgid "TJ"
+msgstr ""
+
+msgid "TK"
+msgstr ""
+
+msgid "TL"
+msgstr ""
+
+msgid "TM"
+msgstr ""
+
+msgid "TN"
+msgstr ""
+
+msgid "TO"
+msgstr ""
+
+msgid "TR"
+msgstr ""
+
+msgid "TT"
+msgstr ""
+
+msgid "TV"
+msgstr ""
+
+msgid "TW"
+msgstr ""
+
+msgid "TZ"
+msgstr ""
+
+msgid "UA"
+msgstr ""
+
+msgid "UG"
+msgstr ""
+
+msgid "UM"
+msgstr ""
+
+msgid "US"
+msgstr ""
+
+msgid "UY"
+msgstr ""
+
+msgid "UZ"
+msgstr ""
+
+msgid "VA"
+msgstr ""
+
+msgid "VC"
+msgstr ""
+
+msgid "VE"
+msgstr ""
+
+msgid "VG"
+msgstr ""
+
+msgid "VI"
+msgstr ""
+
+msgid "VN"
+msgstr ""
+
+msgid "VU"
+msgstr ""
+
+msgid "WF"
+msgstr ""
+
+msgid "WS"
+msgstr ""
+
+msgid "YE"
+msgstr ""
+
+msgid "YT"
+msgstr ""
+
+msgid "ZA"
+msgstr ""
+
+msgid "ZM"
+msgstr ""
+
+msgid "ZW"
+msgstr ""
