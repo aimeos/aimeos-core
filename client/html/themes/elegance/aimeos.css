@@ -1814,6 +1814,14 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	font-size: 100%;
 }
 
+.checkout-standard .button-group {
+	display: none;
+}
+
+.checkout-standard > section:last-child .button-group {
+	display: block;
+}
+
 /* Checkout address */
 .checkout-standard-address h2 {
 	padding: 1%;

@@ -61,5 +61,7 @@ $stepActive = $this->get( 'standardStepActive', false );
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
+	<form method="<?php echo $enc->attr( $this->get( 'standardMethod', 'POST' ) ); ?>" action="<?php echo $enc->attr( $this->get( 'standardUrlNext' ) ); ?>">
 <?php echo $this->get( 'standardBody' ); ?>
+	</form>
 </section>
