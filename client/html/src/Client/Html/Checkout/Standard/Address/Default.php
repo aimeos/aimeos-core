@@ -93,8 +93,10 @@ class Client_Html_Checkout_Standard_Address_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive', 'address' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $step != 'address' && !( in_array( 'address', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -144,8 +146,10 @@ class Client_Html_Checkout_Standard_Address_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $step != 'address' && !( in_array( 'address', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 

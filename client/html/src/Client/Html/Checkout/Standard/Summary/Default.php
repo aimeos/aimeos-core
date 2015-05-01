@@ -124,8 +124,41 @@ class Client_Html_Checkout_Standard_Summary_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
 
-		if( $view->get( 'standardStepActive' ) != 'summary' ) {
+		/** client/html/checkout/standard/onepage
+		 * Shows all named checkout subparts at once for a one page checkout
+		 *
+		 * Normally, the checkout process is divided into several steps for entering
+		 * addresses, select delivery and payment options as well as showing the
+		 * summary page. This enables dependencies between two steps like showing
+		 * delivery options based on the address entered by the customer. Furthermore,
+		 * this is good way to limit the amount of information displayed which is
+		 * preferred by mobile users.
+		 *
+		 * Contrary to that, a one page checkout displays all information on only
+		 * one page and customers get an immediate overview of which information
+		 * they have to enter and what options they can select from. This is an
+		 * advantage if only a very limited amount of information must be entered
+		 * or if there are almost no options to choose from and no dependencies
+		 * between exist.
+		 *
+		 * Using this config options, shop developers are able to define which
+		 * checkout subparts are combined to a one page view. Simply add the names
+		 * of all checkout subparts to the list. Available checkout subparts for
+		 * a one page checkout are:
+		 * * address
+		 * * delivery
+		 * * payment
+		 * * summary
+		 *
+		 * @param array List of checkout subparts name
+		 * @since 2015.05
+		 * @category Developer
+		 */
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
+
+		if( $step != 'summary' && !( in_array( 'summary', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -175,8 +208,10 @@ class Client_Html_Checkout_Standard_Summary_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive' ) != 'summary' ) {
+		if( $step != 'summary' && !( in_array( 'summary', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
