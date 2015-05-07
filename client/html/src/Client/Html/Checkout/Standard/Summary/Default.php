@@ -124,8 +124,10 @@ class Client_Html_Checkout_Standard_Summary_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive' ) != 'summary' ) {
+		if( $step != 'summary' && !( in_array( 'summary', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -175,8 +177,10 @@ class Client_Html_Checkout_Standard_Summary_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive' ) != 'summary' ) {
+		if( $step != 'summary' && !( in_array( 'summary', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 

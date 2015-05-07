@@ -107,6 +107,32 @@ class MShop_Order_Item_Status_Default
 	}
 
 
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.status.parentid': $this->setParentId( $value ); break;
+				case 'order.status.type': $this->setType( $value ); break;
+				case 'order.status.value': $this->setValue( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
 
 	/**
 	* Returns the item values as array.

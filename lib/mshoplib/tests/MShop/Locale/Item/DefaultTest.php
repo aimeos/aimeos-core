@@ -197,6 +197,32 @@ class MShop_Locale_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Locale_Item_Default();
+
+		$list = array(
+			'locale.id' => 1,
+			'locale.siteid' => 2,
+			'locale.languageid' => 'de',
+			'locale.currencyid' => 'EUR',
+			'locale.position' => 10,
+			'locale.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['locale.id'], $item->getId());
+		$this->assertEquals($list['locale.siteid'], $item->getSiteId());
+		$this->assertEquals($list['locale.languageid'], $item->getLanguageId());
+		$this->assertEquals($list['locale.currencyid'], $item->getCurrencyId());
+		$this->assertEquals($list['locale.position'], $item->getPosition());
+		$this->assertEquals($list['locale.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

@@ -147,6 +147,29 @@ class MShop_Coupon_Item_Code_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Coupon_Item_Code_Default();
+
+		$list = array(
+			'coupon.code.id' => 1,
+			'coupon.code.couponid' => 2,
+			'coupon.code.code' => 'test',
+			'coupon.code.count' => 100,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['coupon.code.id'], $item->getId());
+		$this->assertEquals($list['coupon.code.couponid'], $item->getCouponId());
+		$this->assertEquals($list['coupon.code.code'], $item->getCode());
+		$this->assertEquals($list['coupon.code.count'], $item->getCount());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

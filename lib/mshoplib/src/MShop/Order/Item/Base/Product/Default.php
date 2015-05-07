@@ -544,6 +544,45 @@ class MShop_Order_Item_Base_Product_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.product.baseid': $this->setBaseId( $value ); break;
+				case 'order.base.product.ordprodid': $this->setOrderProductId( $value ); break;
+				case 'order.base.product.type': $this->setType( $value ); break;
+				case 'order.base.product.suppliercode': $this->setSupplierCode( $value ); break;
+				case 'order.base.product.productid': $this->setProductId( $value ); break;
+				case 'order.base.product.prodcode': $this->setProductCode( $value ); break;
+				case 'order.base.product.name': $this->setName( $value ); break;
+				case 'order.base.product.mediaurl': $this->setMediaUrl( $value ); break;
+				case 'order.base.product.position': $this->setPosition( $value ); break;
+				case 'order.base.product.quantity': $this->setQuantity( $value ); break;
+				case 'order.base.product.status': $this->setStatus( $value ); break;
+				case 'order.base.product.flags': $this->setFlags( $value ); break;
+				case 'order.base.product.price': $this->_price->setValue( $value ); break;
+				case 'order.base.product.costs': $this->_price->setCosts( $value ); break;
+				case 'order.base.product.rebate': $this->_price->setRebate( $value ); break;
+				case 'order.base.product.taxrate': $this->_price->setTaxRate( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as associative list.
 	 *
 	 * @return array Associative list of item properties and their values

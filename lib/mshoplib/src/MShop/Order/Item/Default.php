@@ -238,6 +238,36 @@ class MShop_Order_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.baseid': $this->setBaseId( $value ); break;
+				case 'order.type': $this->setType( $value ); break;
+				case 'order.statusdelivery': $this->setDeliveryStatus( $value ); break;
+				case 'order.statuspayment': $this->setPaymentStatus( $value ); break;
+				case 'order.datepayment': $this->setDatePayment( $value ); break;
+				case 'order.datedelivery': $this->setDateDelivery( $value ); break;
+				case 'order.relatedid': $this->setRelatedId( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

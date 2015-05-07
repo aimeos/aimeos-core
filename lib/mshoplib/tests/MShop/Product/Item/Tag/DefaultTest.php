@@ -126,6 +126,29 @@ class MShop_Product_Item_Tag_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Product_Item_Tag_Default();
+
+		$list = array(
+			'product.tag.id' => 1,
+			'product.tag.typeid' => 2,
+			'product.tag.label' => 'test item',
+			'product.tag.languageid' => 'de',
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['product.tag.id'], $item->getId());
+		$this->assertEquals($list['product.tag.typeid'], $item->getTypeId());
+		$this->assertEquals($list['product.tag.label'], $item->getLabel());
+		$this->assertEquals($list['product.tag.languageid'], $item->getLanguageId());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

@@ -97,21 +97,7 @@ class Controller_ExtJS_Locale_Language_Default
 		$total = 0;
 		$search = $manager->createSearch();
 
-		/** controller/extjs/locale/language/default/showall
-		 * Displays all available languages in lists instead of only the used ones
-		 *
-		 * By default, all available languages are shown in the lists displaying
-		 * languages in the administration interface, e.g. in text or media panels.
-		 * The content of these lists can be limited to the languages used by the
-		 * locales created for a site. This can help editors to manage content
-		 * faster.
-		 *
-		 * @param boolean True for all languages, false for only the ones used by existing locales
-		 * @since 2014.03
-		 * @category Developer
-		 * @category User
-		 */
-		if( !$this->_getContext()->getConfig()->get( 'controller/extjs/locale/language/default/showall', true ) )
+		if( isset( $params->options->showall ) && $params->options->showall == false )
 		{
 			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 
@@ -169,6 +155,7 @@ class Controller_ExtJS_Locale_Language_Default
 					array( "type" => "integer","name" => "limit","optional" => true ),
 					array( "type" => "string","name" => "sort","optional" => true ),
 					array( "type" => "string","name" => "dir","optional" => true ),
+					array( "type" => "array","name" => "options","optional" => true ),
 				),
 				"returns" => "array",
 			),

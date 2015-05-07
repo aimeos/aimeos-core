@@ -48,17 +48,14 @@ class MShopConfigDocTask extends Task
 	 */
 	public function main()
 	{
-		$result = array();
+		$result = $options = array();
 
 		if( !isset( $this->_file ) && count( $this->_filesets ) == 0 ) {
 			throw new BuildException( "Missing either a nested fileset or attribute 'file' set" );
 		}
 
-		if( !isset( $this->_optfile ) || ( $string = file_get_contents( $this->_optfile ) ) === false ) {
-			throw new BuildException( sprintf( 'Unable to open optfile "%1$s"', $this->_optfile ) );
-		}
-
-		if( ( $options = unserialize( $string ) ) === false ) {
+		if( isset( $this->_optfile ) && ( $string = file_get_contents( $this->_optfile ) ) !== false
+			&& ( $options = unserialize( $string ) ) === false ) {
 			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $this->_optfile ) );
 		}
 

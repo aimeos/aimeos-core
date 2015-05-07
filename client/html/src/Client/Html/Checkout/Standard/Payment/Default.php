@@ -70,8 +70,10 @@ class Client_Html_Checkout_Standard_Payment_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive' ) != 'payment' ) {
+		if( $step != 'payment' && !( in_array( 'payment', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -121,8 +123,10 @@ class Client_Html_Checkout_Standard_Payment_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive' ) != 'payment' ) {
+		if( $step != 'payment' && !( in_array( 'payment', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 

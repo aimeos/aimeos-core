@@ -26,7 +26,7 @@ class MShop_Product_Item_Tag_Default
 	public function __construct( array $values = array( ) )
 	{
 		parent::__construct('product.tag.', $values);
-		
+
 		$this->_values = $values;
 	}
 
@@ -116,6 +116,32 @@ class MShop_Product_Item_Tag_Default
 	public function getType()
 	{
 		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+	}
+
+
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'product.tag.typeid': $this->setTypeId( $value ); break;
+				case 'product.tag.languageid': $this->setLanguageId( $value ); break;
+				case 'product.tag.label': $this->setLabel( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
 	}
 
 

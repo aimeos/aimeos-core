@@ -331,17 +331,20 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
 			$provider->injectGlobalConfigBE( $config );
 
-			$view->paymentForm = $provider->process( $orderItem );
+			if( ( $form = $provider->process( $orderItem ) ) === null )
+			{
+				$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
+				throw new Client_Html_Exception( $msg );
+			}
+
+			$view->standardUrlNext = $form->getUrl();
+			$view->standardMethod = $form->getMethod();
+			$view->standardOrderParams = $form->getValues();
 		}
 		catch( MShop_Order_Exception $e )
 		{
-			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $confirmUrl, 'REDIRECT' );
-		}
-
-		if( !isset( $view->paymentForm ) || $view->paymentForm === null )
-		{
-			$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
-			throw new Client_Html_Exception( $msg );
+			$view->standardUrlNext = $confirmUrl;
+			$view->standardMethod = 'REDIRECT';
 		}
 
 		parent::process();

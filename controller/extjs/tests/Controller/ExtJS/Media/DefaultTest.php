@@ -342,6 +342,7 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 					array( "type" => "integer","name" => "limit","optional" => true ),
 					array( "type" => "string","name" => "sort","optional" => true ),
 					array( "type" => "string","name" => "dir","optional" => true ),
+					array( "type" => "array","name" => "options","optional" => true ),
 				),
 				"returns" => "array",
 			),

@@ -120,6 +120,29 @@ class MShop_Product_Item_Stock_Warehouse_DefaultTest extends MW_Unittest_Testcas
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Product_Item_Stock_Warehouse_Default();
+
+		$list = array(
+			'product.stock.warehouse.id' => 1,
+			'product.stock.warehouse.code' => 'test',
+			'product.stock.warehouse.label' => 'test item',
+			'product.stock.warehouse.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['product.stock.warehouse.id'], $item->getId());
+		$this->assertEquals($list['product.stock.warehouse.code'], $item->getCode());
+		$this->assertEquals($list['product.stock.warehouse.label'], $item->getLabel());
+		$this->assertEquals($list['product.stock.warehouse.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

@@ -49,9 +49,9 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
-		$view->standardStepActive = 'payment';
+		$view->standardStepActive = 'address';
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c_step' => 'address' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c_step' => 'payment' ) );
 		$view->addHelper( 'param', $helper );
 
 		$this->_object->setView( $view );
@@ -59,6 +59,76 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertStringStartsWith( '<section class="aimeos checkout-standard">', $output );
 		$this->assertRegExp( '#<ol class="steps">.*<li class="step.*>.*</li>.*</ol>#smU', $output );
+		$this->assertContains( '<section class="checkout-standard-address', $output );
+		$this->assertNotContains( '<section class="checkout-standard-delivery', $output );
+		$this->assertNotContains( '<section class="checkout-standard-payment', $output );
+		$this->assertNotContains( '<section class="checkout-standard-summary', $output );
+		$this->assertNotContains( '<section class="checkout-standard-order', $output );
+	}
+
+
+	public function testGetBodyOnepage()
+	{
+		$view = TestHelper::getView();
+
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/checkout/standard/onepage', array( 'address', 'delivery', 'payment', 'summary' ) );
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$this->_object->setView( $view );
+		$output = $this->_object->getBody();
+
+		$this->assertContains( '<section class="checkout-standard-address', $output );
+		$this->assertContains( '<section class="checkout-standard-delivery', $output );
+		$this->assertContains( '<section class="checkout-standard-payment', $output );
+		$this->assertContains( '<section class="checkout-standard-summary', $output );
+		$this->assertNotContains( '<section class="checkout-standard-order', $output );
+	}
+
+
+	public function testGetBodyOnepagePartitial()
+	{
+		$view = TestHelper::getView();
+		$view->standardStepActive = 'delivery';
+
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/checkout/standard/onepage', array( 'delivery', 'payment' ) );
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$this->_object->setView( $view );
+		$output = $this->_object->getBody();
+
+		$this->assertContains( '<section class="checkout-standard-delivery', $output );
+		$this->assertContains( '<section class="checkout-standard-payment', $output );
+		$this->assertNotContains( '<section class="checkout-standard-address', $output );
+		$this->assertNotContains( '<section class="checkout-standard-summary', $output );
+		$this->assertNotContains( '<section class="checkout-standard-order', $output );
+	}
+
+
+	public function testGetBodyOnepageDifferentStep()
+	{
+		$view = TestHelper::getView();
+		$view->standardStepActive = 'address';
+
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/checkout/standard/onepage', array( 'delivery', 'payment' ) );
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$this->_object->setView( $view );
+		$output = $this->_object->getBody();
+
+		$this->assertContains( '<section class="checkout-standard-address', $output );
+		$this->assertNotContains( '<section class="checkout-standard-delivery', $output );
+		$this->assertNotContains( '<section class="checkout-standard-payment', $output );
+		$this->assertNotContains( '<section class="checkout-standard-summary', $output );
+		$this->assertNotContains( '<section class="checkout-standard-order', $output );
 	}
 
 

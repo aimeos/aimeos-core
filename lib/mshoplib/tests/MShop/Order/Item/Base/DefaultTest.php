@@ -231,6 +231,31 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+
+	public function testFromArray()
+	{
+		$item = new MShop_Order_Item_Base_Default(new MShop_Price_Item_Default(), new MShop_Locale_Item_Default());
+
+		$list = array(
+			'order.base.id' => 1,
+			'order.base.comment' => 'test comment',
+			'order.base.languageid' => 'de',
+			'order.base.customerid' => 3,
+			'order.base.status' => 4,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['order.base.id'], $item->getId());
+		$this->assertEquals($list['order.base.customerid'], $item->getCustomerId());
+		$this->assertEquals($list['order.base.languageid'], $item->getLocale()->getLanguageId());
+		$this->assertEquals($list['order.base.comment'], $item->getComment());
+		$this->assertEquals($list['order.base.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

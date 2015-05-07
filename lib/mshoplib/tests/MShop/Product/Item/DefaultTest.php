@@ -223,6 +223,36 @@ class MShop_Product_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MShop_Product_Item_Default();
+
+		$list = array(
+			'product.id' => 1,
+			'product.typeid' => 2,
+			'product.label' => 'test item',
+			'product.code' => 'test',
+			'product.suppliercode' => 'testsup',
+			'product.datestart' => '2000-01-01 00:00:00',
+			'product.dateend' => '2001-01-01 00:00:00',
+			'product.status' => 0,
+		);
+
+		$unknown = $item->fromArray($list);
+
+		$this->assertEquals(array(), $unknown);
+
+		$this->assertEquals($list['product.id'], $item->getId());
+		$this->assertEquals($list['product.typeid'], $item->getTypeId());
+		$this->assertEquals($list['product.code'], $item->getCode());
+		$this->assertEquals($list['product.label'], $item->getLabel());
+		$this->assertEquals($list['product.suppliercode'], $item->getSuppliercode());
+		$this->assertEquals($list['product.datestart'], $item->getDateStart());
+		$this->assertEquals($list['product.dateend'], $item->getDateEnd());
+		$this->assertEquals($list['product.status'], $item->getStatus());
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();

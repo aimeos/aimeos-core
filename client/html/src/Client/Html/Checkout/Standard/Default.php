@@ -402,9 +402,6 @@ class Client_Html_Checkout_Standard_Default
 			$cConfig = $view->config( 'client/html/checkout/standard/url/config', array() );
 
 
-			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
-			$view->standardSteps = $steps;
-
 			/** client/html/checkout/standard/url/step-active
 			 * Name of the checkout process step to jump to if no previous step requires attention
 			 *
@@ -429,9 +426,50 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/default/subparts
 			 */
 			$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
+
+			/** client/html/checkout/standard/onepage
+			 * Shows all named checkout subparts at once for a one page checkout
+			 *
+			 * Normally, the checkout process is divided into several steps for entering
+			 * addresses, select delivery and payment options as well as showing the
+			 * summary page. This enables dependencies between two steps like showing
+			 * delivery options based on the address entered by the customer. Furthermore,
+			 * this is good way to limit the amount of information displayed which is
+			 * preferred by mobile users.
+			 *
+			 * Contrary to that, a one page checkout displays all information on only
+			 * one page and customers get an immediate overview of which information
+			 * they have to enter and what options they can select from. This is an
+			 * advantage if only a very limited amount of information must be entered
+			 * or if there are almost no options to choose from and no dependencies
+			 * between exist.
+			 *
+			 * Using this config options, shop developers are able to define which
+			 * checkout subparts are combined to a one page view. Simply add the names
+			 * of all checkout subparts to the list. Available checkout subparts for
+			 * a one page checkout are:
+			 * * address
+			 * * delivery
+			 * * payment
+			 * * summary
+			 *
+			 * @param array List of checkout subparts name
+			 * @since 2015.05
+			 * @category Developer
+			 */
+			$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
+			$onestep = array_shift( $onepage ); // keep the first one page step
+
+			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+			$steps = array_diff( $steps, $onepage ); // remove all remaining steps in $onepage
+
+			// use first step if default step isn't available
 			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
 
 			$current = $view->param( 'c_step', $default );
+			// use $onestep if current step isn't available due to one page layout
+			$current = ( !in_array( $current, $steps ) ? $onestep : $current );
+
 			$cpos = $cpos = array_search( $current, $steps );
 
 			if( !isset( $view->standardStepActive )
@@ -442,6 +480,7 @@ class Client_Html_Checkout_Standard_Default
 			}
 
 			$activeStep = $view->standardStepActive;
+			$view->standardSteps = $steps;
 
 
 			$step = null;
@@ -461,9 +500,8 @@ class Client_Html_Checkout_Standard_Default
 			if( ( $nextStep = array_shift( $steps ) ) !== null ) {
 				$param = array( 'c_step' => $nextStep );
 				$view->standardUrlNext = $view->url( $cTarget, $cCntl, $cAction, $param, array(), $cConfig );
-			} else {
-				$view->standardUrlNext = '';
 			}
+			// don't overwrite $view->standardUrlNext so order step URL is used
 
 
 			$this->_cache = $view;

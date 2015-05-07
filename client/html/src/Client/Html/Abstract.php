@@ -203,6 +203,7 @@ abstract class Client_Html_Abstract
 	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
 		$listIface = 'MShop_Common_Item_ListRef_Interface';
+		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
 		$expires = array();
 
 		if( $tagAll === true ) {
@@ -218,7 +219,7 @@ abstract class Client_Html_Abstract
 			foreach( $item->getListItems() as $listitem )
 			{
 				if( $tagAll === true ) {
-					$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
+					$tags[] = str_replace( '/', '_', $listitem->getDomain() ) . '-' . $listitem->getRefId();
 				}
 
 				if( ( $date = $listitem->getDateEnd() ) !== null ) {
