@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MW
  * @subpackage Logger
  */
@@ -16,9 +17,10 @@
  */
 class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_stmt = null;
-	private $_loglevel = MW_Logger_Abstract::ERR;
-	private $_requestid = null;
+	private $_stmt;
+	private $_loglevel;
+	private $_requestid;
+	private $_facilities;
 
 
 	/**
@@ -28,12 +30,16 @@ class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 	 *		INSERT INTO logtable (facility, logtime, priority, message, requestid) VALUES (?, ?, ?, ?, ?)
 	 *
 	 * @param MW_DB_Statement_Interface $stmt Database statement object for inserting data
-	 * @param integer $loglevel Minimum log level, messages with a less important log level will be discarded
+	 * @param integer $priority Minimum priority for logging
+	 * @param string|null $requestid Unique identifier for the request so multiple log entries which belong together can be found faster
+	 * @param array|null $facilities Facilities for which messages should be logged
 	 */
-	public function __construct( MW_DB_Statement_Interface $stmt, $loglevel = MW_Logger_Abstract::ERR, $requestid = null )
+	public function __construct( MW_DB_Statement_Interface $stmt, $loglevel = MW_Logger_Abstract::ERR,
+		$requestid = null, array $facilities = null )
 	{
 		$this->_stmt = $stmt;
 		$this->_loglevel = $loglevel;
+		$this->_facilities = $facilities;
 
 		if( $requestid === null ) {
 			$requestid = md5( php_uname('n') . getmypid() . date( 'Y-m-d H:i:s' ) );
@@ -54,7 +60,8 @@ class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel )
+		if( $priority <= $this->_loglevel
+			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
 		{
 			$this->_checkLogLevel( $priority );
 

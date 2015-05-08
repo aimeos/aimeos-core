@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Test class for MW_Logger_Zend.
- *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  */
+
+
 class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 {
 	private $_object;
@@ -31,6 +32,7 @@ class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
+		@unlink( "error.log" );
 	}
 
 
@@ -53,11 +55,29 @@ class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 			throw new Exception( 'Unable to open file "error.log"' );
 		}
 
-		unlink( "error.log" );
 		ini_restore( "error_log" );
 
 		foreach( $content as $line ) {
 			$this->assertRegExp( '/\[[^\]]+\] <message> \[[^\]]+\] .+test/', $line, $line );
+		}
+	}
+
+
+	public function testLogFacility()
+	{
+		if( defined( 'HHVM_VERSION' ) ) {
+			$this->markTestSkipped( 'Hiphop VM does not support ini settings yet' );
+		}
+
+		ini_set( "error_log", "error.log" );
+
+		$this->_object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG, array('test') );
+		$this->_object->log( 'info test', MW_Logger_Abstract::INFO, 'info' );
+
+		ini_restore( "error_log" );
+
+		if( file_exists( 'error.log' ) ) {
+			throw new Exception( 'File "error.log" should not be created' );
 		}
 	}
 
