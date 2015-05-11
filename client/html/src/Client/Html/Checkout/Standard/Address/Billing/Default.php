@@ -507,10 +507,11 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
-				$view->billingLanguage = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
+				$langid = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
 			} catch( Exception $e ) {
-				$view->billingLanguage = $context->getLocale()->getLanguageId();
+				$langid = $view->param( 'ca_billing/order.base.address.languageid', $context->getLocale()->getLanguageId() );
 			}
+			$view->billingLanguage = $langid;
 
 			/** client/html/checkout/standard/address/billing/hidden
 			 * List of billing address input fields that are optional and should be hidden
