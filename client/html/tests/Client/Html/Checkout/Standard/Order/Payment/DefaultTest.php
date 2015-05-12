@@ -82,8 +82,8 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 		$this->_object->process();
 
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
-		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
+		$this->assertEquals( 'http://baseurl/checkout/confirm/', $view->standardUrlNext );
+		$this->assertEquals( 'REDIRECT', $view->standardMethod );
 	}
 
 
@@ -114,8 +114,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
-		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
-		$this->assertEquals( 'paymenturl', $view->paymentForm->getUrl() );
+		$this->assertEquals( 'REDIRECT', $view->standardMethod );
+		$this->assertEquals( 'paymenturl', $view->standardUrlNext );
 	}
 }

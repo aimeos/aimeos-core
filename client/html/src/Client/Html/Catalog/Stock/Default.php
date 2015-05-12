@@ -218,7 +218,7 @@ class Client_Html_Catalog_Stock_Default
 			 * @param string Key for sorting
 			 * @since 2014.03
 			 * @category Developer
-			 * @see client/html/catalog/stock/low
+			 * @see client/html/catalog/stock/level/low
 			 */
 			$sortkey = $context->getConfig()->get( 'client/html/catalog/stock/sort', 'product.stock.warehouseid' );
 			$productIds = $view->param( 's_prodid' );

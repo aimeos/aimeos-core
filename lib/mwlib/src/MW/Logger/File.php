@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MW
  * @subpackage Logger
  */
@@ -16,23 +17,26 @@
  */
 class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_loglevel = MW_Logger_Abstract::ERR;
 	private $_stream;
+	private $_loglevel;
+	private $_facilities;
 
 
 	/**
 	 * Initializes the logger object.
 	 *
 	 * @param string $filename Log file name
-	 * @param integer $priority Default priority
+	 * @param integer $priority Minimum priority for logging
+	 * @param array|null $facilities Facilities for which messages should be logged
 	 */
-	public function __construct( $filename, $priority = MW_Logger_Abstract::ERR )
+	public function __construct( $filename, $priority = MW_Logger_Abstract::ERR, array $facilities = null )
 	{
 		if ( !$this->_stream = fopen( $filename, 'a', false ) ) {
 			throw new MW_Logger_Exception( sprintf( 'Unable to open file "%1$s" for appending' ), $filename );
 		}
 
 		$this->_loglevel = $priority;
+		$this->_facilities = $facilities;
 	}
 
 
@@ -47,9 +51,9 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel )
+		if( $priority <= $this->_loglevel
+			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
 		{
-
 			$this->_checkLogLevel( $priority );
 
 			if( !is_scalar( $message ) ) {

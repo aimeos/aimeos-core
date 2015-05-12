@@ -205,12 +205,30 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 * @category Developer
 			 * @see client/html/catalog/filter/tree/levels-always
 			 * @see client/html/catalog/filter/tree/levels-only
+			 * @see client/html/catalog/filter/tree/domains
 			 */
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
 			$currentid = (string) $view->param( 'f_catid', '' );
 
-			/** @todo Make referenced domains configurable */
-			$ref = array( 'text', 'media', 'attribute' );
+			/** client/html/catalog/filter/tree/domains
+			 * List of domain names whose items should be fetched with the filter categories
+			 *
+			 * The templates rendering the categories in the catalog filter usually
+			 * add the images and texts associated to each item. If you want to
+			 * display additional content, you can configure your own list of
+			 * domains (attribute, media, price, product, text, etc. are domains)
+			 * whose items are fetched from the storage. Please keep in mind that
+			 * the more domains you add to the configuration, the more time is
+			 * required for fetching the content!
+			 *
+			 * @param array List of domain item names
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/filter/tree/startid
+			 * @see client/html/catalog/filter/tree/levels-always
+			 * @see client/html/catalog/filter/tree/levels-only
+			 */
+			$ref = $view->config( 'client/html/catalog/filter/tree/domains', array( 'text', 'media' ) );
 
 
 			if( $currentid != '' )
@@ -272,6 +290,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 * @category Developer
 			 * @see client/html/catalog/filter/tree/startid
 			 * @see client/html/catalog/filter/tree/levels-only
+			 * @see client/html/catalog/filter/tree/domains
 			 */
 			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-always' ) ) != null ) {
 				$expr = $search->combine( '||', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
@@ -296,6 +315,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 * @category Developer
 			 * @see client/html/catalog/filter/tree/startid
 			 * @see client/html/catalog/filter/tree/levels-always
+			 * @see client/html/catalog/filter/tree/domains
 			 */
 			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-only' ) ) != null ) {
 				$expr = $search->combine( '&&', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );

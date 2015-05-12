@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MW
  * @subpackage Logger
  */
@@ -16,17 +17,20 @@
  */
 class MW_Logger_Errorlog extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_loglevel = MW_Logger_Abstract::ERR;
+	private $_loglevel;
+	private $_facilities;
 
 
 	/**
 	 * Initializes the logger object.
 	 *
 	 * @param integer Log level from MW_Logger_Abstract
+	 * @param array|null $facilities Facilities for which messages should be logged
 	 */
-	public function __construct( $loglevel = MW_Logger_Abstract::ERR )
+	public function __construct( $loglevel = MW_Logger_Abstract::ERR, array $facilities = null )
 	{
 		$this->_loglevel = $loglevel;
+		$this->_facilities = $facilities;
 	}
 
 
@@ -41,7 +45,8 @@ class MW_Logger_Errorlog extends MW_Logger_Abstract implements MW_Logger_Interfa
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel )
+		if( $priority <= $this->_loglevel
+			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
 		{
 			switch( $priority )
 			{

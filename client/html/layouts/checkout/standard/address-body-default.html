@@ -11,11 +11,9 @@ $enc = $this->encoder();
 <section class="checkout-standard-address">
 	<h1><?php echo $enc->html( $this->translate( 'client/html', 'address' ), $enc::TRUST ); ?></h1>
 	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Fields with an * are mandatory' ), $enc::TRUST ); ?></p>
-	<form method="POST" action="<?php echo $enc->attr( $this->get( 'standardUrlNext' ) ); ?>">
 <?php echo $this->get( 'addressBody' ); ?>
-		<div class="button-group">
-			<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
-			<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Next' ), $enc::TRUST ); ?></button>
-		</div>
-	</form>
+	<div class="button-group">
+		<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Next' ), $enc::TRUST ); ?></button>
+	</div>
 </section>

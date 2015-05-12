@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Test class for MW_Logger_File.
- *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  */
+
+
 class MW_Logger_FileTest extends MW_Unittest_Testcase
 {
 	private $_object;
@@ -132,5 +133,13 @@ class MW_Logger_FileTest extends MW_Unittest_Testcase
 		}
 
 		$this->assertEquals( '<auth>', $msg[0] );
+	}
+
+	public function testFacilityLimited()
+	{
+		$this->_object = new MW_Logger_File( $this->_filename, MW_Logger_Abstract::ERR, array( 'test' ) );
+		$this->_object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
+
+		$this->assertEquals( '', file_get_contents( $this->_filename ) );
 	}
 }

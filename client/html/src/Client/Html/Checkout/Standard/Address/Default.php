@@ -93,8 +93,10 @@ class Client_Html_Checkout_Standard_Address_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive', 'address' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $step != 'address' && !( in_array( 'address', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -144,8 +146,10 @@ class Client_Html_Checkout_Standard_Address_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$view = $this->getView();
+		$step = $view->get( 'standardStepActive' );
+		$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $step != 'address' && !( in_array( 'address', $onepage ) && in_array( $step, $onepage ) ) ) {
 			return '';
 		}
 
@@ -269,14 +273,28 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			if( ( $item = reset( $items ) ) !== false )
 			{
-				$view->addressCustomerItem = $item;
+				$deliveryAddressItems = array();
 
+				$orderAddressManager = MShop_Factory::createManager( $context, 'order/base/address' );
 				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
 
 				$search = $customerAddressManager->createSearch();
 				$search->setConditions( $search->compare( '==', 'customer.address.refid', $item->getId() ) );
 
-				$view->addressCustomerAddressItems = $customerAddressManager->searchItems( $search );
+				foreach( $customerAddressManager->searchItems( $search ) as $id => $address )
+				{
+					$deliveryAddressItem = $orderAddressManager->createItem();
+					$deliveryAddressItem->copyFrom( $address );
+
+					$deliveryAddressItems[$id] = $deliveryAddressItem;
+				}
+
+				$paymentAddressItem = $orderAddressManager->createItem();
+				$paymentAddressItem->copyFrom( $item->getPaymentAddress() );
+
+				$view->addressCustomerItem = $item;
+				$view->addressPaymentItem = $paymentAddressItem;
+				$view->addressDeliveryItems = $deliveryAddressItems;
 			}
 
 
@@ -285,7 +303,7 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			$languages = array();
 			foreach( $locales as $locale ) {
-				$languages[] = $locale->getLanguageId();
+				$languages[ $locale->getLanguageId() ] = $locale->getLanguageId();
 			}
 
 			$view->addressLanguages = $languages;

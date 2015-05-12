@@ -18,7 +18,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array( 'MShopAddLocaleLangCurData' );
 	}
 
 
@@ -29,7 +29,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -43,7 +43,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Adds locale data.
+	 * Creates new locale data if necessary
 	 */
 	protected function _process()
 	{
@@ -52,34 +52,40 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding locale language and currency data', 0 );
-		$this->_status( '' );
+		$this->_msg( 'Adding locale data if not yet present', 0 );
 
 
-		$ds = DIRECTORY_SEPARATOR;
+		// Set editor for further tasks
+		$this->_additional->setEditor( 'core:setup' );
+
+
+		$code = $this->_additional->getConfig()->get( 'setup/site', 'default' );
+
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$siteManager = $localeManager->getSubManager( 'site' );
 
+		try
+		{
+			$siteItem = $siteManager->createItem();
+			$siteItem->setLabel( $code );
+			$siteItem->setCode( $code );
 
-		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'language.php';
-
-		if( ( $data = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			$siteManager->insertItem( $siteItem );
+		}
+		catch( MW_DB_Exception $e ) // already in the database
+		{
+			$this->_status( 'OK' );
+			return;
 		}
 
-		if( isset( $data['locale/language'] ) ) {
-			$this->_addLocaleLanguageData( $localeManager, $data['locale/language'] );
-		}
+		$localeItem = $localeManager->createItem();
+		$localeItem->setSiteId( $siteItem->getId() );
+		$localeItem->setLanguageId( 'en' );
+		$localeItem->setCurrencyId( 'EUR' );
 
+		$localeManager->saveItem( $localeItem, false );
 
-		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'currency.php';
-
-		if( ( $data = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
-		}
-
-		if( isset( $data['locale/currency'] ) ) {
-			$this->_addLocaleCurrencyData( $localeManager, $data['locale/currency'] );
-		}
+		$this->_status( 'done' );
 	}
 
 

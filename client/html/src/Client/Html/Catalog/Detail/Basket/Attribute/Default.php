@@ -194,6 +194,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 			}
 
 			$view->attributeConfigItems = $attributeTypes;
+			$view->attributeCustomItems = $view->detailProductItem->getRefItems( 'attribute', null, 'custom' );
 			$view->attributeHiddenItems = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
 
 			$this->_cache = $view;

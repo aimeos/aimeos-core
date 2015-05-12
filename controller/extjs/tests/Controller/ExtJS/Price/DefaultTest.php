@@ -206,6 +206,7 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 					array( "type" => "string", "name" => "domain", "optional" => true ),
 					array( "type" => "string", "name" => "label", "optional" => true ),
 					array( "type" => "integer", "name" => "parentid", "optional" => true ),
+					array( "type" => "array","name" => "options","optional" => true ),
 				),
 				"returns" => "array",
 			),

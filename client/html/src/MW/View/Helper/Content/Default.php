@@ -36,7 +36,7 @@ class MW_View_Helper_Content_Default
 			$baseurl = $view->config( 'client/html/common/content/baseurl' );
 		}
 
-		$this->_baseurl = rtrim( $baseurl, '/' ) . '/';
+		$this->_baseurl = rtrim( $baseurl, '/' );
 		$this->_enc = $view->encoder();
 	}
 
@@ -50,7 +50,7 @@ class MW_View_Helper_Content_Default
 	public function transform( $url )
 	{
 		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data', 4 ) !== 0 ) {
-			$url = $this->_baseurl . $url;
+			$url = $this->_baseurl . ( $url && $url[0] === '/' ? $url : '/' . $url );
 		}
 
 		return $this->_enc->attr( $url );

@@ -9,7 +9,6 @@ $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
 $basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
-$basketParams = $this->get( 'basketParams', array() );
 
 $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', true );
 $enc = $this->encoder();
@@ -18,10 +17,10 @@ $enc = $this->encoder();
 <div class="catalog-detail-basket" data-reqstock="<?php echo $reqstock; ?>">
 <?php if( isset( $this->detailProductItem ) ) : ?>
 	<div class="price price-main price-actual price-prodid-<?php echo $this->detailProductItem->getId(); ?>">
-<?php	echo $this->price( $this->detailProductItem->getRefItems( 'price', 'default', 'default' ) ); ?>
+<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $this->detailProductItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
 	</div>
 <?php endif; ?>
-	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams, array(), $basketConfig ) ); ?>">
+	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <?php echo $this->get( 'basketBody' ); ?>
 		<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', $this->get( 'basketProductIds', array() ) ) ); ?>"></div>
 		<div class="addbasket">

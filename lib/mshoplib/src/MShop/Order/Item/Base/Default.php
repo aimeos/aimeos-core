@@ -367,10 +367,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'setAddress.before', $address );
 
-		// enforce that the type is the same as the given one
-		$address->setType( $domain );
+		$address = clone $address;
+		$address->setType( $domain ); // enforce that the type is the same as the given one
+		$address->setId( null ); // enforce saving as new item
 
-		$this->_addresses[$domain] = clone $address;
+		$this->_addresses[$domain] = $address;
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'setAddress.after', $address );
@@ -438,10 +439,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'setService.before', $service );
 
-		// enforce that the type is the same as the given one
-		$service->setType( $type );
+		$service = clone $service;
+		$service->setType( $type ); // enforce that the type is the same as the given one
+		$service->setId( null ); // enforce saving as new item
 
-		$this->_services[$type] = clone $service;
+		$this->_services[$type] = $service;
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'setService.after', $service );

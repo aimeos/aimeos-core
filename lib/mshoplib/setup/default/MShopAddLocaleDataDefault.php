@@ -18,7 +18,7 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleData' );
+		return array( 'MShopAddLocaleLangCurData' );
 	}
 
 
@@ -29,7 +29,7 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopSetLocale' );
+		return array( 'MShopAddLocaleData' );
 	}
 
 
@@ -56,23 +56,29 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 		$this->_status( '' );
 
 
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = dirname( __FILE__ ) . $ds . 'data'. $ds . 'locale.php';
-
-		if( ( $data = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
-		}
+		// Set editor for further tasks
+		$this->_additional->setEditor( 'core:setup' );
 
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
-		$siteIds = array();
+		if( $this->_additional->getConfig()->get( 'setup/site', 'default' ) === 'default' )
+		{
+			$ds = DIRECTORY_SEPARATOR;
+			$filename = dirname( __FILE__ ) . $ds . 'data'. $ds . 'locale.php';
 
-		if( isset( $data['locale/site'] ) ) {
-			$siteIds = $this->_addLocaleSiteData( $localeManager, $data['locale/site'] );
-		}
+			if( ( $data = include( $filename ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			}
 
-		if( isset( $data['locale'] ) ) {
-			$this->_addLocaleData( $localeManager, $data['locale'], $siteIds );
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
+			$siteIds = array();
+
+			if( isset( $data['locale/site'] ) ) {
+				$siteIds = $this->_addLocaleSiteData( $localeManager, $data['locale/site'] );
+			}
+
+			if( isset( $data['locale'] ) ) {
+				$this->_addLocaleData( $localeManager, $data['locale'], $siteIds );
+			}
 		}
 	}
 }

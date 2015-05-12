@@ -37,8 +37,8 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			endif; ?>
 				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 				<div class="price-list">
-<?php			echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
-			</div>
+<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+				</div>
 			</a>
 		</li>
 <?php		endif; ?>

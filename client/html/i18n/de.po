@@ -5,16 +5,17 @@
 # Translators:
 # cmann <c.mann@metaways.de>, 2013
 # cmann <c.mann@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2012-2013
-# nsendetzky <n.sendetzky@metaways.de>, 2013-2014
-# nsendetzky <n.sendetzky@metaways.de>, 2012-2013
+# Janosch Ott <janosch.ott@bluewin.ch>, 2015
+# nsendetzky, 2012-2013
+# nsendetzky, 2013-2014
+# nsendetzky, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-10 20:42+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2015-02-24 08:33+0000\n"
+"Last-Translator: Janosch Ott <janosch.ott@bluewin.ch>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -553,7 +554,7 @@ msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leide
 #: src/Client/Html/Abstract.php:506
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Für das Item \"%1$s/%2$s\" in \"%3$s\" wurde kein Typ gefunden"
 
 #: src/Client/Html/Abstract.php:61
 #, php-format
@@ -613,7 +614,7 @@ msgstr "Bestellung mit ID \"%1$s\" nicht gefunden"
 
 #: layouts/catalog/detail/bought-body-default.html:24
 msgid "Other customers also bought"
-msgstr ""
+msgstr "Andere Kunden kauften auch"
 
 #: layouts/account/watch/body-default.html:112
 #: layouts/account/watch/body-default.html:182
@@ -675,7 +676,7 @@ msgstr "PLZ"
 
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
-msgstr ""
+msgstr "Vorher"
 
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
@@ -690,7 +691,7 @@ msgstr "Weiter"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
-msgstr ""
+msgstr "Produkte, die sie auch interessieren könnten"
 
 #: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:72
@@ -699,7 +700,7 @@ msgstr "Anzahl"
 
 #: layouts/basket/related/body-default.html:18
 msgid "Related"
-msgstr ""
+msgstr "Verwandte Produkte"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"

@@ -156,6 +156,7 @@ abstract class Controller_ExtJS_Abstract
 					array( "type" => "integer","name" => "limit","optional" => true ),
 					array( "type" => "string","name" => "sort","optional" => true ),
 					array( "type" => "string","name" => "dir","optional" => true ),
+					array( "type" => "array","name" => "options","optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -261,7 +262,7 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	protected function _clearCache( array $ids )
 	{
-		$domain = str_replace( '_', '/', strtolower( $this->_name ) );
+		$domain = strtolower( $this->_name );
 		$tags = array( $domain );
 
 		foreach( $ids as $id ) {

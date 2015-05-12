@@ -6,22 +6,22 @@
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
 # Dimitri <doleiynyk@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2014
-# nsendetzky <n.sendetzky@metaways.de>, 2014
+# nsendetzky, 2014
+# nsendetzky, 2014
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-12 09:08+0000\n"
+"PO-Revision-Date: 2014-11-11 11:46+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: layouts/common/summary/detail-body-default.html:253
 #: layouts/basket/mini/main-body-default.html:29
@@ -31,6 +31,7 @@ msgid_plural "%1$d articles"
 msgstr[0] "%1$d товар"
 msgstr[1] "%1$d товара"
 msgstr[2] "%1$d товаров"
+msgstr[3] "%1$d товаров"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -642,7 +643,7 @@ msgstr "Статус оплаты"
 
 #: layouts/catalog/session/pinned-body-default.html:96
 msgid "Pinned products"
-msgstr "Закреплённые товары"
+msgstr "Отмеченные товары"
 
 #: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
 msgid "Please accept the terms and conditions"
@@ -705,7 +706,7 @@ msgstr "Связанный"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
-msgstr "рейтинг"
+msgstr "рейтингу"
 
 #. / Product search hint with user provided search string (%1$s)
 #: layouts/catalog/list/header-default.html:22
@@ -729,6 +730,7 @@ msgid_plural ""
 msgstr[0] "Результат поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождение)"
 msgstr[1] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
 msgstr[2] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
+msgstr[3] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:162
 #: layouts/checkout/standard/address-delivery-body-default.html:280

@@ -68,45 +68,99 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 				throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 			}
 
-
-			foreach( $data as $entry )
-			{
-				$item = $manager->createItem();
-				$item->setCode( $entry['code'] );
-				$item->setLabel( $entry['label'] );
-				$item->setBirthday( $entry['birthday'] );
-				$item->setPassword( $entry['password'] );
-				$item->setStatus( $entry['status'] );
-				$item->setDateVerified( $entry['vtime'] );
-
-				$addr = $item->getPaymentAddress();
-				$addr->setTitle( $entry['title'] );
-				$addr->setSalutation( $entry['salutation'] );
-				$addr->setCompany( $entry['company'] );
-				$addr->setVatID( $entry['vatid'] );
-				$addr->setFirstname( $entry['firstname'] );
-				$addr->setLastname( $entry['lastname'] );
-				$addr->setAddress1( $entry['address1'] );
-				$addr->setAddress2( $entry['address2'] );
-				$addr->setAddress3( $entry['address3'] );
-				$addr->setPostal( $entry['postal'] );
-				$addr->setCity( $entry['city'] );
-				$addr->setState( $entry['state'] );
-				$addr->setLanguageId( $entry['langid'] );
-				$addr->setCountryId( $entry['countryid'] );
-				$addr->setTelephone( $entry['telephone'] );
-				$addr->setEmail( $entry['email'] );
-				$addr->setTelefax( $entry['telefax'] );
-				$addr->setWebsite( $entry['website'] );
-
-				$manager->saveItem( $item );
-			}
+			$this->_saveCustomerItems( $data );
 
 			$this->_status( 'added' );
 		}
 		else
 		{
 			$this->_status( 'removed' );
+		}
+	}
+
+
+	/**
+	 * Stores the customer items
+	 *
+	 * @param array $data List of arrays containing the customer properties
+	 */
+	protected function _saveCustomerItems( array $data )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'customer' );
+
+		foreach( $data as $entry )
+		{
+			$item = $manager->createItem();
+			$item->setCode( $entry['code'] );
+			$item->setLabel( $entry['label'] );
+			$item->setBirthday( $entry['birthday'] );
+			$item->setPassword( $entry['password'] );
+			$item->setStatus( $entry['status'] );
+			$item->setDateVerified( $entry['vtime'] );
+
+			$addr = $item->getPaymentAddress();
+			$addr->setTitle( $entry['title'] );
+			$addr->setSalutation( $entry['salutation'] );
+			$addr->setCompany( $entry['company'] );
+			$addr->setVatID( $entry['vatid'] );
+			$addr->setFirstname( $entry['firstname'] );
+			$addr->setLastname( $entry['lastname'] );
+			$addr->setAddress1( $entry['address1'] );
+			$addr->setAddress2( $entry['address2'] );
+			$addr->setAddress3( $entry['address3'] );
+			$addr->setPostal( $entry['postal'] );
+			$addr->setCity( $entry['city'] );
+			$addr->setState( $entry['state'] );
+			$addr->setLanguageId( $entry['langid'] );
+			$addr->setCountryId( $entry['countryid'] );
+			$addr->setTelephone( $entry['telephone'] );
+			$addr->setEmail( $entry['email'] );
+			$addr->setTelefax( $entry['telefax'] );
+			$addr->setWebsite( $entry['website'] );
+
+			$manager->saveItem( $item );
+
+			if( isset( $entry['delivery'] ) ) {
+				$this->_saveAddressItems( $entry['delivery'], $item->getId() );
+			}
+		}
+	}
+
+
+	/**
+	 * Stores the customer items
+	 *
+	 * @param array $data List of arrays containing the customer properties
+	 * @param string $id Unique ID of the customer item
+	 */
+	protected function _saveAddressItems( array $data, $id )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'customer/address' );
+
+		foreach( $data as $entry )
+		{
+			$addr = $manager->createItem();
+			$addr->setRefId( $id );
+			$addr->setTitle( $entry['title'] );
+			$addr->setSalutation( $entry['salutation'] );
+			$addr->setCompany( $entry['company'] );
+			$addr->setVatID( $entry['vatid'] );
+			$addr->setFirstname( $entry['firstname'] );
+			$addr->setLastname( $entry['lastname'] );
+			$addr->setAddress1( $entry['address1'] );
+			$addr->setAddress2( $entry['address2'] );
+			$addr->setAddress3( $entry['address3'] );
+			$addr->setPostal( $entry['postal'] );
+			$addr->setCity( $entry['city'] );
+			$addr->setState( $entry['state'] );
+			$addr->setLanguageId( $entry['langid'] );
+			$addr->setCountryId( $entry['countryid'] );
+			$addr->setTelephone( $entry['telephone'] );
+			$addr->setEmail( $entry['email'] );
+			$addr->setTelefax( $entry['telefax'] );
+			$addr->setWebsite( $entry['website'] );
+
+			$manager->saveItem( $addr );
 		}
 	}
 }

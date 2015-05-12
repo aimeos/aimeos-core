@@ -9,8 +9,42 @@
 $index = 0;
 $enc = $this->encoder();
 $attributes = $this->get( 'selectionAttributeItems', array() );
+$contentUrl = $this->config( 'client/html/common/content/baseurl' );
 $prodDeps = json_encode( $this->get( 'selectionProductDependencies', new stdClass() ) );
 $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdClass() ) );
+
+
+/** client/html/catalog/detail/basket/selection/type/length
+ * Layout type for the product length selection
+ *
+ * This option determines the displayed selection method for the "length"
+ * product variant attribute.
+ *
+ * Note: Up to 2015.03 this option was available as
+ * client/html/catalog/detail/basket/selection/length
+ *
+ * @param string Layout type, e.g. "select" or "radio"
+ * @since 2015.04
+ * @category Developer
+ * @category User
+ * @see client/html/catalog/detail/basket/selection/type/width
+ */
+
+/** client/html/catalog/detail/basket/selection/type/width
+ * Layout type for the product width selection
+ *
+ * This option determines the displayed selection method for the "width"
+ * product variant attribute.
+ *
+ * Note: Up to 2015.03 this option was available as
+ * client/html/catalog/detail/basket/selection/width
+ *
+ * @param string Layout type, e.g. "select" or "radio"
+ * @since 2015.04
+ * @category Developer
+ * @category User
+ * @see client/html/catalog/detail/basket/selection/type/length
+ */
 
 ?>
 <div class="catalog-detail-basket-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
@@ -18,13 +52,13 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 <?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
 <?php	if( !empty( $prices ) ) : ?>
 	<div class="price price-prodid-<?php echo $prodid; ?>">
-<?php		echo $this->price( $prices ); ?>
+<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $prices ) ); ?>
 	</div>
 <?php	endif; ?>
 <?php endforeach; ?>
 	<ul class="selection">
 <?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $code => $attrIds ) : asort( $attrIds ); ?>
-<?php	$layout = $this->config( 'client/html/catalog/detail/basket/selection/' . $code, 'select' ); ?>
+<?php	$layout = $this->config( 'client/html/catalog/detail/basket/selection/type/' . $code, 'select' ); ?>
 		<li class="select-item <?php echo $enc->attr( $layout ) . ' ' . $enc->attr( $code ); ?>">
 			<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
 			<div class="select-value">
@@ -33,7 +67,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 <?php		foreach( $attrIds as $attrId => $position ) : ?>
 <?php			if( isset( $attributes[$attrId] ) ) : ?>
 					<li class="select-entry">
-						<input class="select-option" id="option-<?php echo $enc->attr( $attrId ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" type="radio" value="<?php echo $enc->attr( $attrId ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
+						<input class="select-option" id="option-<?php echo $enc->attr( $attrId ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" type="radio" value="<?php echo $enc->attr( $attrId ); ?>" />
 						<label class="select-label" for="option-<?php echo $enc->attr( $attrId ); ?>"><!--
 <?php
 					foreach( $attributes[$attrId]->getListItems( 'media', 'default' ) as $listItem )

@@ -81,6 +81,16 @@ class Client_Html_Basket_Mini_Default
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
+		/** client/html/basket/mini
+		 * All parameters defined for the small basket component and its subparts
+		 *
+		 * This returns all settings related to the small basket component.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/basket#mini
+		 */
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 

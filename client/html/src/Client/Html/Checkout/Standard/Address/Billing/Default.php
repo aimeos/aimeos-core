@@ -409,14 +409,19 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * To validate e.g the postal/zip code, you can define a regular
 		 * expression like this if you want to allow only digits:
 		 *
-		 *  client/html/checkout/standard/address/validate/postal = '/^[0-9]+$/'
+		 *  client/html/checkout/standard/address/validate/postal = '^[0-9]+$'
 		 *
 		 * Several regular expressions can be defined line this:
 		 *
 		 *  client/html/checkout/standard/address/validate = array(
-		 *      'postal' = '/^[0-9]+$/',
-		 *      'vatid' = '/^[A-Z]{2}[0-9]{8}$/',
+		 *      'postal' = '^[0-9]+$',
+		 *      'vatid' = '^[A-Z]{2}[0-9]{8}$',
 		 *  )
+		 *
+		 * Don't add any delimiting characters like slashes (/) to the beginning
+		 * or the end of the regular expression. They will be added automatically.
+		 * Any slashes inside the expression must be escaped by backlashes,
+		 * i.e. "\/".
 		 *
 		 * Until 2015-02, the configuration option was available as
 		 * "client/html/common/address/billing/validate" starting from 2014-09.
@@ -438,7 +443,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			{
 				$name = substr( $key, 19 );
 
-				if( isset( $regex[$name] ) && preg_match( $regex[$name], $value ) !== 1 )
+				if( isset( $regex[$name] ) && preg_match( '/'.$regex[$name].'/', $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is invalid' );
 					$invalid[$key] = sprintf( $msg, $name );
@@ -502,10 +507,11 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
-				$view->billingLanguage = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
+				$langid = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
 			} catch( Exception $e ) {
-				$view->billingLanguage = $context->getLocale()->getLanguageId();
+				$langid = $view->param( 'ca_billing/order.base.address.languageid', $context->getLocale()->getLanguageId() );
 			}
+			$view->billingLanguage = $langid;
 
 			/** client/html/checkout/standard/address/billing/hidden
 			 * List of billing address input fields that are optional and should be hidden

@@ -74,7 +74,7 @@ $params = $this->param(); unset( $params['target'] );
 	<div class="attribute-lists"><!--
 <?php	foreach( $attrMap as $attrType => $attributes ) : ?>
 <?php		if( !empty( $attributes ) ) : ?>
---><fieldset class="attr-<?php echo $enc->attr( $attrType ); ?>">
+--><fieldset class="attr-<?php echo $enc->attr( $attrType, $enc::TAINT, '-' ); ?>">
 		<legend><?php echo $enc->html( $this->translate( 'client/html/code', $attrType ), $enc::TRUST ); ?></legend>
 		<ul class="attr-list"><!--
 <?php			foreach( $attributes as $id => $attribute ) : ?>
@@ -83,7 +83,7 @@ $params = $this->param(); unset( $params['target'] );
 				<label class="attr-name" for="attr-<?php echo $enc->attr( $id ); ?>"><!--
 					--><div class="media-list"><!--
 <?php
-					foreach( $attribute->getListItems( 'media', 'default' ) as $listItem )
+					foreach( $attribute->getListItems( 'media', 'icon' ) as $listItem )
 					{
 						if( ( $item = $listItem->getRefItem() ) !== null ) {
 							echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--';

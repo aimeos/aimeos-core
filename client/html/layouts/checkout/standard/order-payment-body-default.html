@@ -6,18 +6,8 @@
  */
 
 $enc = $this->encoder();
-
-if( isset( $this->paymentForm ) )
-{
-	$url = $this->paymentForm->getUrl();
-	$method = $this->paymentForm->getMethod();
-	$params = $this->paymentForm->getValues();
-}
-else
-{
-	$url = $method = '';
-	$params = array();
-}
+$url = $this->get( 'standardUrlNext' );
+$method = $this->get( 'standardMethod' );
 
 ?>
 <div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
@@ -28,14 +18,12 @@ else
 		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
 	</noscript>
 <?php elseif( $method && $url ) : ?>
-	<form method="<?php echo $enc->attr( $method ); ?>" action="<?php echo $enc->attr( $url ); ?>">
-<?php	foreach( $params as $key => $value ) : ?>
-		<input type="hidden" name="<?php echo $enc->attr( $key ); ?>" value="<?php echo $enc->attr( $value ); ?>" />
+<?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $value ) : ?>
+	<input type="hidden" name="<?php echo $enc->attr( $key ); ?>" value="<?php echo $enc->attr( $value ); ?>" />
 <?php	endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
-		<noscript>
-			<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
-		</noscript>
-	</form>
+	<noscript>
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
+	</noscript>
 <?php endif; ?>
 </div>

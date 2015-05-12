@@ -10,10 +10,10 @@ $prodid = $this->param( 'd_prodid' );
 $params = $this->get( 'actionsParams', array() );
 $login = ( $this->get( 'actionsUserId', '' ) ? 0 : 1 );
 
-$pinTarget = $this->config( 'client/html/account/pinned/url/target' );
-$pinController = $this->config( 'client/html/account/pinned/url/controller', 'catalog' );
-$pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
-$pinConfig = $this->config( 'client/html/account/pinned/url/config', array() );
+$pinTarget = $this->config( 'client/html/catalog/session/pinned/url/target' );
+$pinController = $this->config( 'client/html/catalog/session/pinned/url/controller', 'catalog' );
+$pinAction = $this->config( 'client/html/catalog/session/pinned/url/action', 'detail' );
+$pinConfig = $this->config( 'client/html/catalog/session/pinned/url/config', array() );
 
 $watchTarget = $this->config( 'client/html/account/watch/url/target' );
 $watchController = $this->config( 'client/html/account/watch/url/controller', 'account' );

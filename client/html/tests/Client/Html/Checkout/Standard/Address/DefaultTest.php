@@ -60,6 +60,9 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 
 	public function testGetBody()
 	{
+		$item = $this->_getCustomerItem();
+		$this->_context->setUserId( $item->getId() );
+
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'address';
 		$view->standardSteps = array( 'address', 'after' );
@@ -101,5 +104,27 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 	public function testProcess()
 	{
 		$this->_object->process();
+	}
+
+
+	/**
+	 * Returns the customer item for the given code
+	 *
+	 * @param string $code Unique customer code
+	 * @throws Exception If no customer item is found
+	 * @return MShop_Customer_Item_Interface Customer item object
+	 */
+	protected function _getCustomerItem( $code = 'UTC001' )
+	{
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customer = reset( $result ) ) === false ) {
+			throw new Exception( 'Customer item not found' );
+		}
+
+		return $customer;
 	}
 }

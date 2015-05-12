@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Maurice Lourens <mlourens@gmail.com>, 2015
+# Sten Pelzer <pelzersten@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-05-07 13:52+0000\n"
+"Last-Translator: Sten Pelzer <pelzersten@gmail.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Organisatie"
+
+#. Address salutation
+msgid "mr"
+msgstr "Dhr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Mevr"
+
+#. Address salutation
+msgid "miss"
+msgstr "Mej"
+
+#. Product attribute
+msgid "size"
+msgstr "Grootte"
+
+#. Product attribute
+msgid "length"
+msgstr "Lengte"
+
+#. Product attribute
+msgid "width"
+msgstr "Breedte"
+
+#. Product attribute
+msgid "color"
+msgstr "Kleur"
+
+#. Product attribute
+msgid "option"
+msgstr "Optie"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "herhaald"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefoon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "onafgemaakt"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "verwijderd"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "geannuleerd"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "geweigert"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "Terug gestort"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "in behandeling"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "bevoegd"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "ontvangen"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "onafgemaakt"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "verwijderd"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "in behandeling"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "in behandeling"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "verzonden"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "afgeleverd"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "zoek geraakt"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "geweigerd"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "geretouneerd"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "Account eigenaar"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "Account nummer"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "Bank naam"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr ""
+
+#. Favorite action
+msgid "favorite"
+msgstr "favoriet"
+
+#. Pin action
+msgid "pin"
+msgstr "pin"
+
+#. Watch action
+msgid "watch"
+msgstr ""

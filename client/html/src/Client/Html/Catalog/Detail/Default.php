@@ -180,6 +180,17 @@ class Client_Html_Catalog_Detail_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'd' );
+
+		/** client/html/catalog/detail
+		 * All parameters defined for the catalog detail component and its subparts
+		 *
+		 * This returns all settings related to the detail component.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog#detail
+		 */
 		$confkey = 'client/html/catalog/detail';
 
 		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )

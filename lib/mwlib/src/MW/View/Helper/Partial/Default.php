@@ -27,6 +27,7 @@ class MW_View_Helper_Partial_Default
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
 	 * @param MW_Config_Interface $config Configuration object
+	 * @param array $paths Associative list of base path / relative paths combinations
 	 */
 	public function __construct( MW_View_Interface $view, MW_Config_Interface $config, array $paths )
 	{

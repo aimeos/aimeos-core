@@ -68,6 +68,16 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 
+		/** client/html/catalog/session/pinned
+		 * All parameters defined for the catalog session pinned subpart
+		 *
+		 * This returns all settings related to the catalog session pinned subpart.
+		 * Please refer to the single settings for details.
+		 *
+		 * @param array Associative list of name/value settings
+		 * @category Developer
+		 * @see client/html/catalog/session#pinned
+		 */
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
 
@@ -289,7 +299,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			$default = array( 'media', 'price', 'text' );
 			$domains = $config->get( 'client/html/catalog/domains', $default );
 
-			/** client/html/catalog/detail/pinned/domains
+			/** client/html/catalog/session/pinned/domains
 			 * A list of domain names whose items should be available in the pinned view template for the product
 			 *
 			 * The templates rendering product details usually add the images,
@@ -300,14 +310,17 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 * Please keep in mind that the more domains you add to the configuration,
 			 * the more time is required for fetching the content!
 			 *
+			 * From 2014.09 to 2015.03, this setting was available as
+			 * client/html/catalog/detail/pinned/domains
+			 *
 			 * @param array List of domain names
-			 * @since 2014.09
+			 * @since 2015.04
 			 * @category Developer
 			 * @see client/html/catalog/domains
 			 * @see client/html/catalog/list/domains
 			 * @see client/html/catalog/detail/domains
 			 */
-			$domains = $config->get( 'client/html/catalog/detail/pinned/domains', $domains );
+			$domains = $config->get( 'client/html/catalog/session/pinned/domains', $domains );
 
 			$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
 

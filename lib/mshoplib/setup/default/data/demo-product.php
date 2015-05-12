@@ -168,7 +168,7 @@ return array(
 						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
 						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
 						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-type' => 'icon', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 				),
@@ -277,6 +277,28 @@ return array(
 					),
 				),
 			),
+			array(
+				'code' => 'demo-print-text', 'label' => 'Demo: Text for print',
+				'type' => 'text', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo url/de: Kleiner Aufdruck',
+						'content' => 'Text_Aufdruck',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Small print',
+						'content' => 'print_text',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
 		),
 		'property' => array(
 			array( 'type' => 'package-length', 'languageid' => null, 'value' => '20.00' ),
@@ -335,7 +357,7 @@ return array(
 						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
 						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
 						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-type' => 'icon', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 				),
@@ -438,7 +460,7 @@ return array(
 						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
 						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
 						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+						'list-type' => 'icon', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 				),

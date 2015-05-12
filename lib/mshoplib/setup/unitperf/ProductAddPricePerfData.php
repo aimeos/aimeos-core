@@ -114,7 +114,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 				for( $i = 0; $i < 3; $i++ )
 				{
 					$priceItem->setId( null );
-					$priceItem->setLabel( 'from ' . (1 + $i * 5) );
+					$priceItem->setLabel( $item->getLabel() . ': from ' . (1 + $i * 5) );
 					$priceItem->setQuantity( 1 + $i * 5 );
 					$priceItem->setValue( $price - $i * 10 );
 					$priceItem->setRebate( $i * 10 );

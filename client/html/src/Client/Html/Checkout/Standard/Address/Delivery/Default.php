@@ -395,7 +395,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			{
 				$name = substr( $key, 19 );
 
-				if( isset( $regex[$name] ) && preg_match( $regex[$name], $value ) !== 1 )
+				if( isset( $regex[$name] ) && preg_match( '/'.$regex[$name].'/', $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is invalid' );
 					$invalid[$key] = sprintf( $msg, $name );
@@ -460,10 +460,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
-				$view->deliveryLanguage = $basketCntl->get()->getAddress( 'delivery' )->getLanguageId();
+				$langid = $basketCntl->get()->getAddress( 'delivery' )->getLanguageId();
 			} catch( Exception $e ) {
-				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
+				$langid = $view->param( 'ca_delivery/order.base.address.languageid', $context->getLocale()->getLanguageId() );
 			}
+			$view->deliveryLanguage = $langid;
 
 			/** client/html/checkout/standard/address/delivery/hidden
 			 * List of delivery address input fields that are optional

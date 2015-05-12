@@ -187,7 +187,7 @@ class Client_Html_Catalog_Stage_Image_Default
 
 			foreach( array_reverse( $catPath ) as $catItem )
 			{
-				$mediaItems = $catItem->getRefItems( 'media', 'stage', 'default' );
+				$mediaItems = $catItem->getRefItems( 'media', 'default', 'stage' );
 
 				if( !empty( $mediaItems ) ) {
 					break;

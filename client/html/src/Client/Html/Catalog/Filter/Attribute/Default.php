@@ -183,27 +183,85 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		if( !isset( $this->_cache ) )
 		{
 			$attrMap = array();
+
+			/** client/html/catalog/filter/attribute/types
+			 * List of attribute types that should be displayed in this order in the catalog filter
+			 *
+			 * The attribute section in the catalog filter component can display
+			 * all attributes a visitor can use to reduce the listed products
+			 * to those that contains one or more attributes. By default, all
+			 * available attributes will be displayed and ordered by their
+			 * attribute type.
+			 *
+			 * With this setting, you can limit the attribute types to only thoses
+			 * whose names are part of the setting value. Furthermore, a particular
+			 * order for the attribute types can be enforced that is different
+			 * from the standard order.
+			 *
+			 * @param array List of attribute type codes
+			 * @since 2015.05
+			 * @category User
+			 * @category Developer
+			 * @see client/html/catalog/filter/attribute/domains
+			 */
+			$attrTypes = $view->config( 'client/html/catalog/filter/attribute/types', array() );
+
 			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
-
 			$search = $manager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.domain', 'product' ),
-				$search->getConditions(),
-			);
+
+			$expr = array();
+			if( !empty( $attrTypes ) ) {
+				$expr[] = $search->compare( '==', 'attribute.type.code', $attrTypes );
+			}
+
+			$expr[] = $search->compare( '==', 'attribute.domain', 'product' );
+			$expr[] = $search->getConditions();
+
+			$sort = array( $search->sort( '+', 'attribute.position' ) );
+
 			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$sort = array(
-				$search->sort( '+', 'attribute.type.code' ),
-				$search->sort( '+', 'attribute.position' ),
-			);
 			$search->setSortations( $sort );
-			$search->setSlice( 0, 1000 );
 
-			/** @todo Make referenced domains configurable */
-			$attributes = $manager->searchItems( $search, array( 'text', 'media' ) );
+			/** client/html/catalog/filter/attribute/domains
+			 * List of domain names whose items should be fetched with the filter attributes
+			 *
+			 * The templates rendering the attributes in the catalog filter usually
+			 * add the images and texts associated to each item. If you want to
+			 * display additional content, you can configure your own list of
+			 * domains (attribute, media, price, product, text, etc. are domains)
+			 * whose items are fetched from the storage. Please keep in mind that
+			 * the more domains you add to the configuration, the more time is
+			 * required for fetching the content!
+			 *
+			 * @param array List of domain item names
+			 * @since 2015.05
+			 * @category Developer
+			 * @see client/html/catalog/filter/attribute/types
+			 */
+			$domains = $view->config( 'client/html/catalog/filter/attribute/domains', array( 'text', 'media' ) );
+
+			$attributes = $manager->searchItems( $search, $domains );
 
 			foreach( $attributes as $id => $item ) {
 				$attrMap[ $item->getType() ][$id] = $item;
+			}
+
+			if( !empty( $attrTypes ) )
+			{
+				$sortedMap = array();
+
+				foreach( $attrTypes as $type )
+				{
+					if( isset( $attrMap[$type] ) ) {
+						$sortedMap[$type] = $attrMap[$type];
+					}
+				}
+
+				$attrMap = $sortedMap;
+			}
+			else
+			{
+				ksort( $attrMap );
 			}
 
 			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
