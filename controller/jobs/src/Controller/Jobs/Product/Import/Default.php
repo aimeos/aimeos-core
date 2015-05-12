@@ -1,0 +1,411 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ * @package Controller
+ * @subpackage Jobs
+ */
+
+
+/**
+ * Job controller for product imports.
+ *
+ * @package Controller
+ * @subpackage Jobs
+ */
+class Controller_Jobs_Product_Import_Default
+	extends Controller_Jobs_Abstract
+	implements Controller_Jobs_Interface
+{
+	/**
+	 * Returns the localized name of the job.
+	 *
+	 * @return string Name of the job
+	 */
+	public function getName()
+	{
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product import' );
+	}
+
+
+	/**
+	 * Returns the localized description of the job.
+	 *
+	 * @return string Description of the job
+	 */
+	public function getDescription()
+	{
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Imports new and updates existing products' );
+	}
+
+
+	/**
+	 * Executes the job.
+	 *
+	 * @throws Controller_Jobs_Exception If an error occurs
+	 */
+	public function run()
+	{
+		$container = $this->_createContainer();
+		$this->_import( $container );
+		$container->close();
+	}
+
+
+	/**
+	 * Adds the given products to the content object for the site map file
+	 *
+	 * @param MW_Container_Content_Interface $content File content object
+	 * @param MShop_Product_Item_Interface[] $items List of product items
+	 */
+	protected function _addItems( MW_Container_Content_Interface $content, array $items )
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/default/template-items
+		 * Relative path to the XML items template of the product site map job controller.
+		 *
+		 * The template file contains the XML code and processing instructions
+		 * to generate the site map files. The configuration string is the path
+		 * to the template file relative to the layouts directory (usually in
+		 * controller/jobs/layouts).
+		 *
+		 * You can overwrite the template file configuration in extensions and
+		 * provide alternative templates. These alternative templates should be
+		 * named like the default one but with the string "default" replaced by
+		 * an unique name. You may use the name of your project for this. If
+		 * you've implemented an alternative client class as well, "default"
+		 * should be replaced by the name of the new class.
+		 *
+		 * @param string Relative path to the template creating XML code for the site map items
+		 * @since 2015.01
+		 * @category Developer
+		 * @see client/html/account/favorite/default/template-header
+		 * @see controller/jobs/product/import/default/template-footer
+		 * @see controller/jobs/product/import/default/template-index
+		 */
+		$tplconf = 'controller/jobs/product/import/default/template-items';
+		$default = 'product/import/items-body-default.xml';
+
+		$view = $this->_getContext()->getView();
+
+		$view->importItems = $items;
+
+		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+	}
+
+
+	/**
+	 * Creates a new container for the site map file
+	 *
+	 * @return MW_Container_Interface Container object
+	 */
+	protected function _createContainer()
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/location
+		 * Directory where the generated site maps should be placed into
+		 *
+		 * You have to configure a directory for the generated files on your
+		 * server that is writeable by the process generating the files, e.g.
+		 *
+		 * /var/www/your/import/path
+		 *
+		 * @param string Absolute directory to store the imported files into
+		 * @since 2015.01
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/default/container/options
+		 * @see controller/jobs/product/import/max-items
+		 * @see controller/jobs/product/import/max-query
+		 */
+		$location = $config->get( 'controller/jobs/product/import/location', sys_get_temp_dir() );
+
+		/** controller/jobs/product/import/default/container/type
+		 * List of file container options for the import files
+		 *
+		 * The generated files are stored using container/content objects from
+		 * the core.
+		 *
+		 * @param string Container name
+		 * @since 2015.01
+		 * @category Developer
+		 * @see controller/jobs/product/import/default/container/content
+		 * @see controller/jobs/product/import/default/container/options
+		 * @see controller/jobs/product/import/location
+		 * @see controller/jobs/product/import/max-items
+		 * @see controller/jobs/product/import/max-query
+		*/
+		$container = $config->get( 'controller/jobs/product/import/default/container/type', 'Directory' );
+
+		/** controller/jobs/product/import/default/container/content
+		 * List of file container options for the import files
+		 *
+		 * The generated files are stored using container/content objects from
+		 * the core.
+		 *
+		 * @param array Associative list of option name/value pairs
+		 * @since 2015.01
+		 * @category Developer
+		 * @see controller/jobs/product/import/default/container/type
+		 * @see controller/jobs/product/import/default/container/options
+		 * @see controller/jobs/product/import/location
+		 * @see controller/jobs/product/import/max-items
+		 * @see controller/jobs/product/import/max-query
+		 */
+		$content = $config->get( 'controller/jobs/product/import/default/container/content', 'Binary' );
+
+		/** controller/jobs/product/import/default/container/options
+		 * List of file container options for the import files
+		 *
+		 * The generated files are stored using container/content objects from
+		 * the core.
+		 *
+		 * @param array Associative list of option name/value pairs
+		 * @since 2015.01
+		 * @category Developer
+		 * @see controller/jobs/product/import/default/container/type
+		 * @see controller/jobs/product/import/default/container/content
+		 * @see controller/jobs/product/import/location
+		 * @see controller/jobs/product/import/max-items
+		 * @see controller/jobs/product/import/max-query
+		 */
+		$options = $config->get( 'controller/jobs/product/import/default/container/options', array() );
+
+		return MW_Container_Factory::getContainer( $location, $container, $content, $options );
+	}
+
+
+	/**
+	 * Creates a new site map content object
+	 *
+	 * @param MW_Container_Interface $container Container object
+	 * @param integer $filenum New file number
+	 * @return MW_Container_Content_Interface New content object
+	 */
+	protected function _createContent( MW_Container_Interface $container, $filenum )
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/default/template-header
+		 * Relative path to the XML site map header template of the product site map job controller.
+		 *
+		 * The template file contains the XML code and processing instructions
+		 * to generate the site map header. The configuration string is the path
+		 * to the template file relative to the layouts directory (usually in
+		 * controller/jobs/layouts).
+		 *
+		 * You can overwrite the template file configuration in extensions and
+		 * provide alternative templates. These alternative templates should be
+		 * named like the default one but with the string "default" replaced by
+		 * an unique name. You may use the name of your project for this. If
+		 * you've implemented an alternative client class as well, "default"
+		 * should be replaced by the name of the new class.
+		 *
+		 * @param string Relative path to the template creating XML code for the site map header
+		 * @since 2015.01
+		 * @category Developer
+		 * @see controller/jobs/product/import/default/template-items
+		 * @see controller/jobs/product/import/default/template-footer
+		 * @see controller/jobs/product/import/default/template-index
+		 */
+		$tplconf = 'controller/jobs/product/import/default/template-header';
+		$default = 'product/import/items-header-default.xml';
+
+		$view = $this->_getContext()->getView();
+
+		$content = $container->create( $this->_getFilename( $filenum ) );
+		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+		$container->add( $content );
+
+		return $content;
+	}
+
+
+	/**
+	 * Closes the site map content object
+	 *
+	 * @param MW_Container_Content_Interface $content
+	 */
+	protected function _closeContent( MW_Container_Content_Interface $content )
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/default/template-footer
+		 * Relative path to the XML site map footer template of the product site map job controller.
+		 *
+		 * The template file contains the XML code and processing instructions
+		 * to generate the site map footer. The configuration string is the path
+		 * to the template file relative to the layouts directory (usually in
+		 * controller/jobs/layouts).
+		 *
+		 * You can overwrite the template file configuration in extensions and
+		 * provide alternative templates. These alternative templates should be
+		 * named like the default one but with the string "default" replaced by
+		 * an unique name. You may use the name of your project for this. If
+		 * you've implemented an alternative client class as well, "default"
+		 * should be replaced by the name of the new class.
+		 *
+		 * @param string Relative path to the template creating XML code for the site map footer
+		 * @since 2015.01
+		 * @category Developer
+		 * @see controller/jobs/product/import/default/template-header
+		 * @see controller/jobs/product/import/default/template-items
+		 * @see controller/jobs/product/import/default/template-index
+		 */
+		$tplconf = 'controller/jobs/product/import/default/template-footer';
+		$default = 'product/import/items-footer-default.xml';
+
+		$view = $this->_getContext()->getView();
+
+		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+	}
+
+
+	/**
+	 * Imports the products into the given container
+	 *
+	 * @param MW_Container_Interface $container Container object
+	 * @return array List of content (file) names
+	 */
+	protected function _import( MW_Container_Interface $container )
+	{
+		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
+
+		$domains = $this->_getConfig( 'domains', $default );
+		$maxItems = $this->_getConfig( 'max-items', 10000 );
+		$maxQuery = $this->_getConfig( 'max-query', 1000 );
+
+		$start = 0; $filenum = 1;
+		$names = array();
+
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+
+		$search = $productManager->createSearch( true );
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, $maxQuery );
+
+		$content = $this->_createContent( $container, $filenum );
+		$names[] = $content->getResource();
+
+		do
+		{
+			$items = $productManager->searchItems( $search, $domains );
+			$this->_addItems( $content, $items );
+
+			$count = count( $items );
+			$start += $count;
+			$search->setSlice( $start, $maxQuery );
+
+			if( $start + $maxQuery > $maxItems * $filenum )
+			{
+				$this->_closeContent( $content );
+				$content = $this->_createContent( $container, ++$filenum );
+				$names[] = $content->getResource();
+			}
+		}
+		while( $count >= $search->getSliceSize() );
+
+		$this->_closeContent( $content );
+
+		return $names;
+	}
+
+
+	/**
+	 * Returns the configuration value for the given name
+	 *
+	 * @param string $name One of "domain", "max-items" or "max-query"
+	 * @param mixed $default Default value if name is unknown
+	 * @return mixed Configuration value
+	 */
+	protected function _getConfig( $name, $default = null )
+	{
+		$config = $this->_getContext()->getConfig();
+
+		switch( $name )
+		{
+			case 'domain':
+				/** controller/jobs/product/import/domains
+				 * List of associated items from other domains that should be imported too
+				 *
+				 * Products consist not only of the base data but also of texts, media
+				 * files, prices, attrbutes and other details. Those information is
+				 * associated to the products via their lists. Using the "domains" option
+				 * you can make more or less associated items available in the template.
+				 *
+				 * @param array List of domain names
+				 * @since 2015.01
+				 * @category Developer
+				 * @category User
+				 * @see controller/jobs/product/import/default/container/type
+				 * @see controller/jobs/product/import/default/container/content
+				 * @see controller/jobs/product/import/default/container/options
+				 * @see controller/jobs/product/import/location
+				 * @see controller/jobs/product/import/max-items
+				 * @see controller/jobs/product/import/max-query
+				 */
+				return $config->get( 'controller/jobs/product/import/domains', $default );
+
+			case 'max-items':
+				/** controller/jobs/product/import/max-items
+				 * Maximum number of imported products per file
+				 *
+				 * Limits the number of imported products per file as the memory
+				 * consumption of processing big files is rather high. Splitting
+				 * the data into several files that can also be processed in
+				 * parallel is able to speed up importing the files again.
+				 *
+				 * @param integer Number of products entries per file
+				 * @since 2015.01
+				 * @category Developer
+				 * @category User
+				 * @see controller/jobs/product/import/default/container/type
+				 * @see controller/jobs/product/import/default/container/content
+				 * @see controller/jobs/product/import/default/container/options
+				 * @see controller/jobs/product/import/location
+				 * @see controller/jobs/product/import/max-query
+				 * @see controller/jobs/product/import/domains
+				 */
+				return $config->get( 'controller/jobs/product/import/max-items', $default );
+
+			case 'max-query':
+				/** controller/jobs/product/import/max-query
+				 * Maximum number of products per query
+				 *
+				 * The products are fetched from the database in bunches for efficient
+				 * retrieval. The higher the value, the lower the total time the database
+				 * is busy finding the records. Higher values also means that record
+				 * updates in the tables need to wait longer and the memory consumption
+				 * of the PHP process is higher.
+				 *
+				 * @param integer Number of products per query
+				 * @since 2015.01
+				 * @category Developer
+				 * @see controller/jobs/product/import/default/container/type
+				 * @see controller/jobs/product/import/default/container/content
+				 * @see controller/jobs/product/import/default/container/options
+				 * @see controller/jobs/product/import/location
+				 * @see controller/jobs/product/import/max-items
+				 * @see controller/jobs/product/import/domains
+				 */
+				return $config->get( 'controller/jobs/product/import/max-query', $default );
+		}
+
+		return $default;
+	}
+
+
+	/**
+	 * Returns the file name for the new content file
+	 *
+	 * @param integer $number Current file number
+	 * @return string New file name
+	 */
+	protected function _getFilename( $number )
+	{
+		return sprintf( 'aimeos-products-%d.xml', $number );
+	}
+}
