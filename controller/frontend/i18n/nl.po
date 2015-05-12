@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Maurice Lourens <mlourens@gmail.com>, 2015
+# Sten Pelzer <pelzersten@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2013-04-08 20:02+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-05-07 12:52+0000\n"
+"Last-Translator: Sten Pelzer <pelzersten@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +22,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:442
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
-msgstr ""
+msgstr "U mag product ID  \"%1$s\"  niet toevoegen"
 
 #: src/Controller/Frontend/Basket/Default.php:851
 #, php-format
@@ -48,23 +50,23 @@ msgstr ""
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" niet beschikbaar"
 
 #: src/Controller/Frontend/Factory.php:63
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Controller pad is leeg"
 
 #: src/Controller/Frontend/Basket/Default.php:202
 #: src/Controller/Frontend/Basket/Default.php:249
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
-msgstr ""
+msgstr "Coupon code \"%1$s\" is ongeldig"
 
 #: src/Controller/Frontend/Basket/Default.php:217
 #, php-format
 msgid "Coupon code \"%1$s\" is not allowed"
-msgstr ""
+msgstr "Coupon code \"%1$s\" is ongeldig"
 
 #: src/Controller/Frontend/Basket/Default.php:670
 #, php-format
@@ -74,7 +76,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:781
 #, php-format
 msgid "Invalid address properties, please check your input"
-msgstr ""
+msgstr "Ongeldige adres eigenschappen, controleer uw invoer alstublieft."
 
 #: src/Controller/Frontend/Order/Factory.php:62
 #: src/Controller/Frontend/Service/Factory.php:62
@@ -93,7 +95,7 @@ msgstr ""
 #: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Foutief domein \"%1$s\""
 
 #: src/Controller/Frontend/Factory.php:90
 #, php-format
@@ -103,7 +105,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:286
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
-msgstr ""
+msgstr "Ongeldige waarde voor adres type \"%1$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:955
 #, php-format
@@ -118,12 +120,12 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:922
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Geen product met code \"%1$s\" gevonden"
 
 #: src/Controller/Frontend/Basket/Default.php:699
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
-msgstr ""
+msgstr "Geen voorraad voor product ID \"%1$s\" en magazijn \"%2$s\" beschikbaar"
 
 #: src/Controller/Frontend/Basket/Default.php:1029
 #, php-format
@@ -138,7 +140,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:224
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
-msgstr ""
+msgstr "De voorwaarden voor coupon code \"%1$s\" worden niet voldaan."
 
 #: src/Controller/Frontend/Service/Default.php:175
 #, php-format
@@ -149,7 +151,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:414
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
-msgstr ""
+msgstr "Er zijn niet genoeg producten \"%1$s\" op voorraad"
 
 #: src/Controller/Frontend/Common/Decorator/Abstract.php:50
 #, php-format
@@ -164,4 +166,4 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:315
 #, php-format
 msgid "Unknown attributes \"%1$s\""
-msgstr ""
+msgstr "Onbekende attributen \"%1$s\""

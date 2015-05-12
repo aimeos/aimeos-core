@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Maurice Lourens <mlourens@gmail.com>, 2015
+# Sten Pelzer <pelzersten@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2013-04-08 20:02+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-05-07 13:57+0000\n"
+"Last-Translator: Sten Pelzer <pelzersten@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +22,7 @@ msgstr ""
 #: src/MShop/Order/Item/Base/Default.php:349
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adres voor domein \"%1$s\" niet beschikbaar"
 
 #: src/MShop/Common/Item/Address/Abstract.php:644
 #, php-format
@@ -40,7 +42,7 @@ msgstr ""
 #: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Winkelmandje is leeg."
 
 #: src/MShop/Context/Item/Default.php:102
 #, php-format
@@ -60,7 +62,7 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:64
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Controles voor beschikbare adressen in het winkelmandje is mislukt."
 
 #: src/MShop/Plugin/Provider/Order/ServicesAvailable.php:64
 #, php-format
@@ -101,23 +103,23 @@ msgstr ""
 #: src/MShop/Coupon/Manager/Default.php:686
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Klasse \"%1$s\" is niet beschikbaar."
 
 #: src/MShop/Common/Item/Abstract.php:209
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Code mag niet langer zijn dan 32 karakters."
 
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:87
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Configuratie ongeldig"
 
 #: src/MShop/Common/Manager/List/Abstract.php:350
 #: src/MShop/Common/Manager/List/Abstract.php:429
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Configuratie niet beschikbaar"
 
 #: src/MShop/Context/Item/Default.php:128
 #, php-format
@@ -138,7 +140,7 @@ msgstr ""
 #: src/MShop/Service/Provider/Delivery/Default.php:155
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curl kon niet worden geinitialiseerd"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:328
 #, php-format
@@ -155,7 +157,7 @@ msgstr ""
 #: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Dubbele coupon code: \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:44
@@ -242,7 +244,7 @@ msgstr ""
 #: src/MShop/Price/Manager/Factory.php:39
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in klasse naam \"%1$s\""
 
 #: src/MShop/Order/Item/Abstract.php:161
 #: src/MShop/Common/Item/Abstract.php:195
@@ -263,12 +265,12 @@ msgstr ""
 #: src/MShop/Plugin/Manager/Default.php:190
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in domein naam \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:463
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in email adres: \"%1$s\""
 
 #: src/MAdmin/Common/Manager/Abstract.php:102
 #: src/MShop/Common/Manager/Abstract.php:356
@@ -276,29 +278,29 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:572
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in manager naam \"%1$s\""
 
 #: src/MAdmin/Factory.php:76 src/MShop/Factory.php:77
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Ongeldige karakters in manager naam \"%1$s\" in \"%2$s\""
 
 #: src/MShop/Price/Item/Default.php:395
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in prijs \"%1$s\""
 
 #: src/MShop/Service/Manager/Default.php:580
 #: src/MShop/Plugin/Manager/Default.php:197
 #: src/MShop/Coupon/Manager/Default.php:679
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in leverancier naam \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:351
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in aankoopdatum \"%1$s\""
 
 #: src/MShop/Coupon/Provider/FreeShipping.php:37
 #: src/MShop/Coupon/Provider/PercentRebate.php:37
@@ -326,12 +328,12 @@ msgstr ""
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Ongeldige website URL \"%1$s\""
 
 #: src/MShop/Common/Manager/Decorator/Sitecheck.php:53
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Item kan niet worden verwijderd. Site ID van het item verschilt van de huidige site ID."
 
 #: src/MShop/Catalog/Manager/Index/Default.php:410
 #, php-format
@@ -342,17 +344,17 @@ msgstr ""
 #: src/MShop/Common/Manager/ListRef/Abstract.php:141
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Item waarnaar wordt verwezen in domein \"%1$s\" niet gevonden: %2$s"
 
 #: src/MAdmin/Cache/Manager/Default.php:385
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Item met ID \"%1$s\" niet gevonden"
 
 #: src/MShop/Common/Manager/Abstract.php:626
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Item met ID \"%2$s\" in \"%1$s\" niet gevonden"
 
 #: src/MAdmin/Job/Manager/Default.php:359
 #, php-format
@@ -362,7 +364,7 @@ msgstr ""
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Lijst item met ID \"%2$s\" in \"%1$s\" niet gevonden"
 
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:436
 #, php-format
@@ -372,13 +374,13 @@ msgstr ""
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:479
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Lijst type voor de prijs van het item met ID \"%1$s\" niet beschikbaar"
 
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:445
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:648
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Lijsttype voor tekst van item met ID \"%1$s\" niet beschikbaar"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #, php-format
@@ -413,7 +415,7 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:289
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Mail object niet beschikbaar"
 
 #: src/MAdmin/Factory.php:81 src/MShop/Factory.php:82
 #, php-format
@@ -438,7 +440,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Decorator/Abstract.php:48
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Methode \"%1$s\" voor leverancier niet beschikbaar"
 
 #: src/MShop/Service/Provider/Decorator/Costs.php:80
 #, php-format
@@ -448,7 +450,7 @@ msgstr ""
 #: src/MShop/Common/Item/Abstract.php:177
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Nieuwe ID \"%1$s\" voor item verschilt van oude ID \"%2$s\""
 
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #, php-format
@@ -460,17 +462,17 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:196
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Geen prijs voor product ID \"%1$s\" of product code \"%2$s\" beschikbaar"
 
 #: src/MShop/Coupon/Provider/Abstract.php:173
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Geen product met code \"%1$s\" gevonden"
 
 #: src/MShop/Product/Manager/Stock/Default.php:676
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Geen magazijn met code \"%1$s\" gevonden"
 
 #: src/MAdmin/Cache/Manager/Default.php:284
 #: src/MAdmin/Job/Manager/Default.php:161
@@ -570,24 +572,24 @@ msgstr ""
 #: src/MShop/Service/Provider/Delivery/Default.php:269
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Order met ID \"%1$s\" was afgewezen met code \"%2$s\": %3$s"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:116
 #: src/MShop/Service/Provider/Delivery/Default.php:151
 #: src/MShop/Service/Provider/Delivery/Default.php:358
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parameter \"%1$s\" voor configuratie niet beschikbaar"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:523
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Dubbele transactie met ID \"%1$s\" en status \"%2$s\" "
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:359
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Ongeldige aanvraag \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:205
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:238
@@ -600,43 +602,43 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:477
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Expres: Aanvraag voor order ID \"%1$s\" mislukt met \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Verkeerd bedrag \"%1$s\" voor order ID \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:500
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Verkeerd ontvanger-email \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:642
 msgid "Payment costs"
-msgstr ""
+msgstr "Betaal kosten"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:105
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Neem alstublieft een kijkje naar de prijzen van de producten in uw winkelmandje"
 
 #: src/MShop/Price/Item/Default.php:320
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Prijs kan niet worden toegevoegd. Valuta ID \"%1$s\" van het prijs-item en het huidig gebruikte valuta \"%2$s\" komen niet overeen."
 
 #: src/MShop/Price/Manager/Abstract.php:49
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Prijs voor de gegeven hoeveelheid \"%1$d\" niet beschikbaar"
 
 #: src/MShop/Price/Manager/Abstract.php:44
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Prijs item niet beschikbaar"
 
 #: src/MShop/Order/Item/Base/Abstract.php:78
 #, php-format
@@ -659,12 +661,12 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Producten in winkelmandje niet beschikbaar"
 
 #: src/MShop/Plugin/Provider/Order/ProductStock.php:94
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Producten niet op voorraad"
 
 #: src/MShop/Order/Item/Default.php:270
 #, php-format
@@ -676,12 +678,12 @@ msgstr ""
 #: src/MShop/Coupon/Manager/Default.php:675
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Leverancier in \"%1$s\" niet beschikbaar"
 
 #: src/MShop/Order/Item/Base/Product/Default.php:337
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
+msgstr "Hoeveelheid moet een positief getal zijn en mag niet hoger zijn dan %1$d"
 
 #: src/MShop/Service/Provider/Abstract.php:303
 #, php-format
@@ -730,7 +732,7 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:263
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Sessie object niet beschikbaar"
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:33
 #, php-format
@@ -749,47 +751,47 @@ msgstr ""
 #: src/MShop/Locale/Manager/Default.php:122
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Site voor code \"%1$s\" niet gevonden"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:99
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "De maximum winkelmand-waarde van %1$s is overschreden"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:73
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Het maximaal aantal voor het product is %1$d"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:111
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "De maximum hoeveelheid producten van %1$d is overschreden"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:111
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "De maximum product-waarde is %1$s"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:88
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "De maximum hoeveelheid van alle producten is %1$d"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:127
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "De maximum waarde van alle producten is %1$s"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:93
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "De minimum winkelmand-waarde van %1$s is niet bereikt"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:105
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "De minimum product hoeveelheid van %1$d is niet bereikt"
 
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
@@ -810,7 +812,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Type/Abstract.php:199
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Type item met ID \"%1$s\" in \"%2$s\" niet gevonden"
 
 #: src/MShop/Service/Provider/Abstract.php:255
 #, php-format

@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: layouts/common/summary/detail-body-default.html:253
 #: layouts/basket/mini/main-body-default.html:29
@@ -31,6 +31,7 @@ msgid_plural "%1$d articles"
 msgstr[0] "%1$d товар"
 msgstr[1] "%1$d товара"
 msgstr[2] "%1$d товаров"
+msgstr[3] "%1$d товаров"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -729,6 +730,7 @@ msgid_plural ""
 msgstr[0] "Результат поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождение)"
 msgstr[1] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
 msgstr[2] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
+msgstr[3] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:162
 #: layouts/checkout/standard/address-delivery-body-default.html:280

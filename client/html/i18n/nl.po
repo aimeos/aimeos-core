@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bram Verhaegh <bram@beech.it>, 2015
+# Maurice Lourens <mlourens@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-04-28 21:25+0000\n"
-"Last-Translator: Bram Verhaegh <bram@beech.it>\n"
+"PO-Revision-Date: 2015-05-07 07:16+0000\n"
+"Last-Translator: Maurice Lourens <mlourens@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -228,13 +229,13 @@ msgstr ""
 #: layouts/basket/mini/body-default.html:90
 #: layouts/checkout/standard/body-default.html:27
 msgid "Basket"
-msgstr ""
+msgstr "Mandje"
 
 #: layouts/common/summary/address-body-default.html:22
 #: layouts/email/common/text-summary-address-body-default.html:17
 #: layouts/checkout/standard/address-billing-body-default.html:45
 msgid "Billing address"
-msgstr ""
+msgstr "Factuur adres"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:431
 #, php-format
@@ -248,7 +249,7 @@ msgstr ""
 
 #: layouts/checkout/standard/summary-body-default.html:19
 msgid "Buy now"
-msgstr ""
+msgstr "Koop nu"
 
 #: src/Client/Html/Catalog/Filter/Tree/Default.php:233
 #, php-format
@@ -262,11 +263,11 @@ msgstr ""
 #: layouts/common/summary/service-body-default.html:52
 #: layouts/common/summary/coupon-body-default.html:20
 msgid "Change"
-msgstr ""
+msgstr "Aanpassen"
 
 #: layouts/checkout/confirm/retry-body-default.html:23
 msgid "Change payment"
-msgstr ""
+msgstr "Pas betaling aan"
 
 #: layouts/catalog/detail/additional-attribute-body-default.html:15
 msgid "Characteristics"
@@ -274,14 +275,14 @@ msgstr ""
 
 #: layouts/basket/standard/body-default.html:45
 msgid "Checkout"
-msgstr ""
+msgstr "Afrekenen"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:155
 #: layouts/checkout/standard/address-delivery-body-default.html:269
 #: layouts/checkout/standard/address-billing-body-default.html:145
 #: layouts/checkout/standard/address-billing-body-default.html:259
 msgid "City"
-msgstr ""
+msgstr "Stad"
 
 #: src/Client/Html/Common/Factory/Abstract.php:66
 #, php-format
@@ -308,35 +309,35 @@ msgstr ""
 #: layouts/account/history/detail-body-default.html:17
 #: layouts/account/history/detail-body-default.html:21
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:127
 #: layouts/checkout/standard/address-delivery-body-default.html:241
 #: layouts/checkout/standard/address-billing-body-default.html:117
 #: layouts/checkout/standard/address-billing-body-default.html:231
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #: layouts/checkout/confirm/body-default.html:19
 msgid "Confirmation"
-msgstr ""
+msgstr "Bevestiging"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:160
 #: layouts/checkout/standard/address-delivery-body-default.html:278
 #: layouts/checkout/standard/address-billing-body-default.html:150
 #: layouts/checkout/standard/address-billing-body-default.html:264
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: layouts/common/summary/coupon-body-default.html:22
 #: layouts/basket/standard/coupon-body-default.html:24
 msgid "Coupon codes"
-msgstr ""
+msgstr "Coupon code"
 
 #: layouts/common/summary/coupon-body-default.html:17
 #: layouts/email/common/text-summary-coupon-body-default.html:11
 msgid "Coupons"
-msgstr ""
+msgstr "Coupon"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:245
 #, php-format
@@ -354,18 +355,18 @@ msgstr ""
 #: layouts/email/common/html-salutation-body-default.html:30
 #: layouts/email/common/text-salutation-body-default.html:28
 msgid "Dear Sir or Madam"
-msgstr ""
+msgstr "Geachte heer of mevrouw"
 
 #: layouts/account/history/list-body-default.html:110
 #: layouts/email/common/text-summary-service-body-default.html:14
 msgid "Delivery"
-msgstr ""
+msgstr "Bezorging"
 
 #: layouts/common/summary/address-body-default.html:78
 #: layouts/email/common/text-summary-address-body-default.html:67
 #: layouts/checkout/standard/address-delivery-body-default.html:51
 msgid "Delivery address"
-msgstr ""
+msgstr "Bezorg adres"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:391
 #, php-format
@@ -379,54 +380,54 @@ msgstr ""
 
 #: layouts/catalog/detail/additional-text-body-default.html:18
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: layouts/common/summary/detail-body-default.html:80
 #: layouts/email/watch/html-detail-body-default.html:101
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: layouts/catalog/detail/additional-download-body-default.html:19
 msgid "Downloads"
-msgstr ""
+msgstr "Downloads"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:197
 #: layouts/checkout/standard/address-delivery-body-default.html:315
 #: layouts/checkout/standard/address-billing-body-default.html:187
 #: layouts/checkout/standard/address-billing-body-default.html:301
 msgid "E-Mail"
-msgstr ""
+msgstr "E-mail"
 
 #. / E-mail HTML title
 #: layouts/email/common/html-body-default.html:12
 msgid "E-mail notification"
-msgstr ""
+msgstr "E-mail notificatie"
 
 #: layouts/account/favorite/body-default.html:103
 msgid "Favorite products"
-msgstr ""
+msgstr "Favoriete producten"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:205
 #: layouts/checkout/standard/address-delivery-body-default.html:323
 #: layouts/checkout/standard/address-billing-body-default.html:195
 #: layouts/checkout/standard/address-billing-body-default.html:309
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: layouts/checkout/standard/address-body-default.html:13
 msgid "Fields with an * are mandatory"
-msgstr ""
+msgstr "Velden met een * zijn verplicht"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:131
 #: layouts/checkout/standard/address-delivery-body-default.html:245
 #: layouts/checkout/standard/address-billing-body-default.html:121
 #: layouts/checkout/standard/address-billing-body-default.html:235
 msgid "First name"
-msgstr ""
+msgstr "Voornaam"
 
 #: layouts/catalog/filter/search-body-default.html:89
 msgid "Go"
-msgstr ""
+msgstr "Ga"
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:163
 #, php-format
@@ -439,17 +440,17 @@ msgstr ""
 
 #: layouts/account/watch/body-default.html:161
 msgid "If back in stock"
-msgstr ""
+msgstr "Wanneer weer op voorraad"
 
 #: layouts/account/watch/body-default.html:155
 msgid "If price decreases"
-msgstr ""
+msgstr "Als de prijs daalt"
 
 #. / E-mail outro
 #: layouts/email/common/text-outro-body-default.html:9
 #: layouts/email/common/html-outro-body-default.html:11
 msgid "If you have any questions, please reply to this e-mail"
-msgstr ""
+msgstr "Als u een vraag heeft, reageer dan op deze mail"
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #: layouts/common/summary/detail-body-default.html:234
@@ -458,13 +459,13 @@ msgstr ""
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
-msgstr ""
+msgstr "Incl. %1$s%% BTW"
 
 #: layouts/common/summary/detail-body-default.html:244
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
-msgstr ""
+msgstr "Kortingen zijn verrekend"
 
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
@@ -515,29 +516,29 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:175
 #: layouts/checkout/standard/address-billing-body-default.html:289
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:135
 #: layouts/checkout/standard/address-delivery-body-default.html:249
 #: layouts/checkout/standard/address-billing-body-default.html:125
 #: layouts/checkout/standard/address-billing-body-default.html:239
 msgid "Last name"
-msgstr ""
+msgstr "Achternaam"
 
 #: layouts/catalog/session/seen-body-default.html:14
 msgid "Last seen"
-msgstr ""
+msgstr "Laatst gezien"
 
 #: layouts/catalog/list/pagination-body-default.html:27
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: layouts/catalog/stage/navigator-body-default.html:19
 #: layouts/checkout/standard/address-body-default.html:18
 #: layouts/checkout/standard/payment-body-default.html:93
 #: layouts/checkout/standard/delivery-body-default.html:93
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 #: layouts/catalog/list/head-body-default.html:51
 #, php-format
@@ -554,7 +555,7 @@ msgstr ""
 #: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
-msgstr ""
+msgstr "Geen weergave beschikbaar"
 
 #: src/Client/Html/Basket/Standard/Coupon/Default.php:211
 #, php-format
@@ -568,7 +569,7 @@ msgstr ""
 
 #: layouts/account/watch/body-default.html:149
 msgid "One month"
-msgstr ""
+msgstr "Een maand"
 
 #: layouts/email/watch/text-intro-body-default.html:8
 #: layouts/email/watch/html-intro-body-default.html:9
@@ -577,16 +578,16 @@ msgstr ""
 
 #: layouts/account/watch/body-default.html:147
 msgid "One week"
-msgstr ""
+msgstr "Een week"
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
 msgid "Options"
-msgstr ""
+msgstr "Opties"
 
 #: layouts/account/history/list-body-default.html:96
 #: layouts/checkout/confirm/basic-body-default.html:16
 msgid "Order ID"
-msgstr ""
+msgstr "Aankoop ID"
 
 #: layouts/account/history/list-body-default.html:100
 msgid "Order channel"
@@ -596,11 +597,11 @@ msgstr ""
 #: layouts/email/common/text-summary-detail-body-default.html:59
 #: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order details"
-msgstr ""
+msgstr "Aankoop details"
 
 #: layouts/account/history/list-body-default.html:88
 msgid "Order history"
-msgstr ""
+msgstr "Aankoop geschiedenis "
 
 #: src/Client/Html/Account/History/Detail/Default.php:241
 #, php-format
@@ -624,7 +625,7 @@ msgstr ""
 #: layouts/email/common/text-summary-service-body-default.html:39
 #: layouts/checkout/standard/order-payment-body-default.html:24
 msgid "Payment"
-msgstr ""
+msgstr "Betaling"
 
 #: layouts/common/summary/detail-body-default.html:217
 msgid "Payment costs"
@@ -632,7 +633,7 @@ msgstr ""
 
 #: layouts/checkout/confirm/basic-body-default.html:20
 msgid "Payment status"
-msgstr ""
+msgstr "Betalings status"
 
 #: layouts/catalog/session/pinned-body-default.html:96
 msgid "Pinned products"
@@ -667,22 +668,22 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:141
 #: layouts/checkout/standard/address-billing-body-default.html:255
 msgid "Postal code"
-msgstr ""
+msgstr "Postcode"
 
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
-msgstr ""
+msgstr "Prijs"
 
 #: layouts/checkout/standard/order-payment-body-default.html:28
 #: layouts/checkout/standard/order-payment-body-default.html:37
 msgid "Proceed"
-msgstr ""
+msgstr "Doorgaan"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
@@ -691,11 +692,11 @@ msgstr ""
 #: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
-msgstr ""
+msgstr "Aantal"
 
 #: layouts/basket/related/body-default.html:18
 msgid "Related"
-msgstr ""
+msgstr "Gerelateerde"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
@@ -728,15 +729,15 @@ msgstr[1] ""
 #: layouts/checkout/standard/address-billing-body-default.html:152
 #: layouts/checkout/standard/address-billing-body-default.html:266
 msgid "Select country"
-msgstr ""
+msgstr "Selecteer land"
 
 #: layouts/locale/select/currency-body-default.html:18
 msgid "Select currency"
-msgstr ""
+msgstr "Selecteer valuta"
 
 #: layouts/locale/select/language-body-default.html:15
 msgid "Select language"
-msgstr ""
+msgstr "Selecteer taal"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:120
 #: layouts/checkout/standard/address-delivery-body-default.html:234
@@ -762,11 +763,11 @@ msgstr ""
 
 #: layouts/common/summary/detail-body-default.html:209
 msgid "Shipping"
-msgstr ""
+msgstr "Bezorging"
 
 #: layouts/catalog/filter/body-default.html:114
 msgid "Show"
-msgstr ""
+msgstr "Toon"
 
 #: layouts/catalog/list/quote-body-default.html:19
 msgid "Show all quotes"
@@ -774,7 +775,7 @@ msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:43
 msgid "Sort by:"
-msgstr ""
+msgstr "Sortering"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:171
 #: layouts/checkout/standard/address-delivery-body-default.html:273
@@ -782,7 +783,7 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:161
 #: layouts/checkout/standard/address-billing-body-default.html:275
 msgid "State"
-msgstr ""
+msgstr "Provincie / Staat"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out)
 #. and stock level string (%2$s)
@@ -803,17 +804,17 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:129
 #: layouts/checkout/standard/address-billing-body-default.html:243
 msgid "Street"
-msgstr ""
+msgstr "Straat"
 
 #: layouts/common/summary/detail-body-default.html:202
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
-msgstr ""
+msgstr "Subtotaal"
 
 #: layouts/catalog/detail/suggest-body-default.html:25
 msgid "Suggested products"
-msgstr ""
+msgstr "Aanbevolen producten"
 
 #: layouts/common/summary/detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:76
@@ -825,7 +826,7 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:191
 #: layouts/checkout/standard/address-billing-body-default.html:305
 msgid "Telephone"
-msgstr ""
+msgstr "Telefoon"
 
 #: src/Client/Html/Abstract.php:478
 #, php-format
@@ -918,7 +919,7 @@ msgstr ""
 
 #: layouts/account/watch/body-default.html:150
 msgid "Three month"
-msgstr ""
+msgstr "Drie maanden"
 
 #: layouts/account/watch/body-default.html:145
 msgid "Time frame"
@@ -932,19 +933,19 @@ msgstr ""
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
-msgstr ""
+msgstr "Totaal"
 
 #: layouts/common/summary/detail-body-default.html:252
 msgid "Total quantity"
-msgstr ""
+msgstr "Totaal aantal"
 
 #: layouts/checkout/confirm/retry-body-default.html:24
 msgid "Try again"
-msgstr ""
+msgstr "Probeer opnieuw"
 
 #: layouts/account/watch/body-default.html:148
 msgid "Two weeks"
-msgstr ""
+msgstr "Twee weken"
 
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
@@ -972,7 +973,7 @@ msgstr ""
 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
-msgstr ""
+msgstr "Bijwerken"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:193
 #: layouts/checkout/standard/address-delivery-body-default.html:311
@@ -1071,14 +1072,14 @@ msgstr ""
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
 #, php-format
 msgid "address"
-msgstr ""
+msgstr "adres"
 
 #: layouts/common/summary/service-body-default.html:16
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
 #, php-format
 msgid "delivery"
-msgstr ""
+msgstr "Bezorging"
 
 #. / Price quantity format with quantity (%1$s)
 #: layouts/email/watch/text-detail-body-default.html:16
@@ -1096,20 +1097,20 @@ msgstr ""
 #: layouts/checkout/standard/address-delivery-body-default.html:219
 #: layouts/checkout/standard/address-billing-body-default.html:209
 msgid "new address"
-msgstr ""
+msgstr "Nieuw adres"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
 #, php-format
 msgid "order"
-msgstr ""
+msgstr "Bestelling"
 
 #: layouts/common/summary/service-body-default.html:50
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
 #, php-format
 msgid "payment"
-msgstr ""
+msgstr "Betaling"
 
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56
