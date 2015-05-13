@@ -1,0 +1,355 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ * @package Controller
+ * @subpackage Jobs
+ */
+
+
+/**
+ * Job controller for CSV product imports.
+ *
+ * @package Controller
+ * @subpackage Jobs
+ */
+class Controller_Jobs_Product_Import_Csv_Default
+	extends Controller_Jobs_Product_Import_Csv_Abstract
+	implements Controller_Jobs_Interface
+{
+	/**
+	 * Returns the localized name of the job.
+	 *
+	 * @return string Name of the job
+	 */
+	public function getName()
+	{
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product import CSV' );
+	}
+
+
+	/**
+	 * Returns the localized description of the job.
+	 *
+	 * @return string Description of the job
+	 */
+	public function getDescription()
+	{
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Imports new and updates existing products from CSV files' );
+	}
+
+
+	/**
+	 * Executes the job.
+	 *
+	 * @throws Controller_Jobs_Exception If an error occurs
+	 */
+	public function run()
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/csv/default/domains
+		 * List of item domain names that should be retrieved along with the product items
+		 *
+		 * @param array Associative list of MShop item domain names
+		 * @since 2015.05
+		 * @category Developer
+		 */
+		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
+		$domains = $config->get( 'controller/jobs/product/import/csv/default/domains', $default );
+
+		/** controller/jobs/product/import/csv/default/mapping
+		 * List of mappings between the position in the CSV file and item keys
+		 *
+		 * @param array Associative list of key/position pairs
+		 * @since 2015.05
+		 * @category Developer
+		 */
+		$default = $this->_getDefaultMapping();
+		$mappings = $config->get( 'controller/jobs/product/import/csv/default/mapping', $default );
+
+		/** controller/jobs/product/import/csv/default/max-size
+		 * Maximum number of CSV rows to import at once
+		 *
+		 * @param integer Number of rows
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 */
+		$maxcnt = $config->get( 'controller/jobs/product/import/csv/default/max-size', 1000 );
+
+
+		$processor = $this->_getProcessors( $mappings );
+
+		$container = $this->_getContainer();
+
+		foreach( $container as $content )
+		{
+			while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
+			{
+				$products = $this->_getProducts( array_keys( $data ), $domains );
+				$this->_saveProducts( $products, $data, $mappings, $processor );
+
+				unset( $products, $data );
+			}
+		}
+
+		$container->close();
+	}
+
+
+	/**
+	 * Opens and returns the container which includes the product data
+	 *
+	 * @return MW_Container_Interface Container object
+	 */
+	protected function _getContainer()
+	{
+		$config = $this->_getContext()->getConfig();
+
+		/** controller/jobs/product/import/csv/default/location
+		 * File or directory where the content is stored which should be imported
+		 *
+		 * @param string Absolute file or directory path
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/default/container/type
+		 * @see controller/jobs/product/import/csv/default/container/content
+		 * @see controller/jobs/product/import/csv/default/container/options
+		*/
+		$location = $config->get( 'controller/jobs/product/import/csv/default/location', '.' );
+
+		/** controller/jobs/product/import/csv/default/container/type
+		 * Nave of the container type to read the data from
+		 *
+		 * @param string Container type name
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/default/location
+		 * @see controller/jobs/product/import/csv/default/container/content
+		 * @see controller/jobs/product/import/csv/default/container/options
+		*/
+		$container = $config->get( 'controller/jobs/product/import/csv/default/container/type', 'Directory' );
+
+		/** controller/jobs/product/import/csv/default/container/content
+		 * Name of the content type inside the container to read the data from
+		 *
+		 * @param array Content type name
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/default/location
+		 * @see controller/jobs/product/import/csv/default/container/type
+		 * @see controller/jobs/product/import/csv/default/container/options
+		*/
+		$content = $config->get( 'controller/jobs/product/import/csv/default/container/content', 'CSV' );
+
+		/** controller/jobs/product/import/csv/default/container/options
+		 * List of file container options for the site map files
+		 *
+		 * @param array Associative list of option name/value pairs
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/default/location
+		 * @see controller/jobs/product/import/csv/default/container/content
+		 * @see controller/jobs/product/import/csv/default/container/type
+		*/
+		$options = $config->get( 'controller/jobs/product/import/csv/default/container/options', array() );
+
+		return MW_Container_Factory::getContainer( $location, $container, $content, $options );
+	}
+
+
+	/**
+	 * Returns the rows from the CSV file up to the maximum count
+	 *
+	 * @param MW_Container_Content_Interface $content CSV content object
+	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
+	 * @return array List of arrays with product codes as keys and list of values from the CSV file
+	 */
+	protected function _getData( MW_Container_Content_Interface $content, $maxcnt )
+	{
+		$count = 0;
+		$data = array();
+
+		while( $content->valid() && $count++ < $maxcnt )
+		{
+			$row = $content->current();
+			$data[ $row[0] ] = $row;
+			$content->next();
+		}
+
+		return $data;
+	}
+
+
+	/**
+	 * Returns the default mapping for the CSV fields to the domain item keys
+	 *
+	 * Example:
+	 *  'item' => array(
+	 *  	0 => 'product.code', // e.g. unique EAN code
+	 *  	1 => 'product.label', // UTF-8 encoded text, also used as product name
+	 *  ),
+	 *  'text' => array(
+	 *  	3 => 'text.type', // e.g. "short" for short description
+	 *  	4 => 'text.content', // UTF-8 encoded text
+	 *  ),
+	 *  'media' => array(
+	 *  	5 => 'media.url', // relative URL of the product image on the server
+	 *  ),
+	 *  'price' => array(
+	 *  	6 => 'price.value', // price with decimals separated by a dot, no thousand separator
+	 *  	7 => 'price.taxrate', // tax rate with decimals separated by a dot
+	 *  ),
+	 *  'attribute' => array(
+	 *  	8 => 'attribute.type', // e.g. "size", "length", "width", "color", etc.
+	 *  	9 => 'attribute.code', // code of an existing attribute, new ones will be created automatically
+	 *  ),
+	 *  'product' => array(
+	 *  	10 => 'product.code', // e.g. EAN code of another product
+	 *  	11 => 'product.list.type', // e.g. "suggestion" for suggested product
+	 *  ),
+	 *
+	 * @return array Associative list of domains as keys ("item" is special for the product itself) and a list of
+	 * 	positions and the domain item keys as values.
+	 */
+	protected function _getDefaultMapping()
+	{
+		return array(
+			'item' => array(
+				0 => 'product.code',
+				1 => 'product.label',
+				2 => 'product.type',
+				3 => 'product.status',
+			),
+			'text' => array(
+				4 => 'text.type',
+				5 => 'text.content',
+				6 => 'text.type',
+				7 => 'text.content',
+			),
+			'media' => array(
+				8 => 'media.url',
+			),
+			'price' => array(
+				9 => 'price.quantity',
+				10 => 'price.value',
+				11 => 'price.taxrate',
+			),
+			'attribute' => array(
+				12 => 'attribute.type',
+				13 => 'attribute.code',
+			),
+			'product' => array(
+				14 => 'product.code',
+				15 => 'product.list.type',
+			),
+		);
+	}
+
+	/**
+	 * Returns the processor object for saving the product related information
+	 *
+	 * @return Controller_Jobs_Product_Import_Csv_Processor_Interface Processor object
+	 */
+	protected function _getProcessors( array $mappings )
+	{
+		if( isset( $mappings['item'] ) ) {
+			unset( $mappings['item'] );
+		}
+
+		$context = $this->_getContext();
+		$iface = 'Controller_Jobs_Product_Import_Csv_Processor_Interface';
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Done( $context, array() );
+
+		foreach( $mappings as $name => $mapping )
+		{
+			if( ctype_alnum( $name ) === false )
+			{
+				$classname = is_string($name) ? 'Controller_Jobs_Product_Import_Csv_Processor_' . $name : '<not a string>';
+				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			}
+
+			$classname = 'Controller_Jobs_Product_Import_Csv_Processor_' . ucfirst( $name );
+
+			if( class_exists( $classname ) === false ) {
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			}
+
+			$object = new $classname( $context, $mapping, $object );
+
+			if( !( $object instanceof $iface ) ) {
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			}
+		}
+
+		return $object;
+	}
+
+
+	protected function _saveProducts( array $products, array $data, array $mappings,
+		Controller_Jobs_Product_Import_Csv_Processor_Interface $processor )
+	{
+		if( !isset( $mappings['item'] ) || !is_array( $mappings['item'] ) )
+		{
+			$msg = sprintf( 'Required mapping key "%1$s" is missing or contains no array', 'item' );
+			throw new Controller_Jobs_Exception( $msg );
+		}
+
+		$context = $this->_getContext();
+		$manager = MShop_Factory::createManager( $context, 'product' );
+
+		foreach( $data as $code => $list )
+		{
+			$manager->begin();
+
+			try
+			{
+				$map = array();
+
+				if( isset( $products[$code] ) ) {
+					$product = $products[$code];
+				} else {
+					$product = $manager->createItem();
+				}
+
+				foreach( $mappings['item'] as $idx => $key )
+				{
+					if( !isset( $list[$idx] ) )
+					{
+						$msg = sprintf( 'No field for "%1$s" in CSV at position "%2$d"', $key, $idx );
+						throw new Controller_Jobs_Exception( $msg );
+					}
+
+					$map[$key] = $list[$idx];
+				}
+
+				$typecode = ( isset( $map['product.type'] ) ? $map['product.type'] : 'default' );
+				$map['product.typeid'] = $this->_getTypeId( 'product/type', 'product', $typecode );
+
+				$product->fromArray( $map );
+				$manager->saveItem( $product );
+
+				$remaining = $processor->process( $product, $list );
+
+				if( !empty( $remaining ) ) {
+					$context->getLogger()->log( 'Not imported: ' . print_r( $remaining, true ) );
+				}
+
+				$manager->commit();
+			}
+			catch( Exception $e )
+			{
+				$msg = sprintf( 'Unable to import product with code "%1$s": %2$s', $code, $e->getMessage() );
+				$context->getLogger()->log( $msg );
+
+				$manager->rollback();
+			}
+		}
+	}
+}
