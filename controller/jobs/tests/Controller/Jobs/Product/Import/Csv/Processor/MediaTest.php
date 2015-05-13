@@ -40,7 +40,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	}
 
 
-	public function testSave()
+	public function testProcess()
 	{
 		$mapping = array(
 			0 => 'media.languageid',
@@ -63,7 +63,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -93,7 +93,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	}
 
 
-	public function testSaveMultiple()
+	public function testProcessMultiple()
 	{
 		$mapping = array(
 			0 => 'media.url',
@@ -112,7 +112,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -131,7 +131,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	}
 
 
-	public function testSaveUpdate()
+	public function testProcessUpdate()
 	{
 		$mapping = array(
 			0 => 'media.url',
@@ -148,11 +148,11 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$result = $object->save( $product, $dataUpdate );
+		$result = $object->process( $product, $dataUpdate );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -168,7 +168,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	}
 
 
-	public function testSaveDelete()
+	public function testProcessDelete()
 	{
 		$mapping = array(
 			0 => 'media.url',
@@ -181,12 +181,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, array(), $this->_endpoint );
-		$result = $object->save( $product, array() );
+		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -198,7 +198,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	}
 
 
-	public function testSaveEmpty()
+	public function testProcessEmpty()
 	{
 		$mapping = array(
 			0 => 'media.url',
@@ -213,7 +213,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );

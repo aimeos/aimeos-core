@@ -34,5 +34,5 @@ interface Controller_Jobs_Product_Import_Csv_Processor_Interface
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function save( MShop_Product_Item_Interface $product, array $data );
+	public function process( MShop_Product_Item_Interface $product, array $data );
 }

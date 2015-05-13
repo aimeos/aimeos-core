@@ -40,7 +40,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 	}
 
 
-	public function testSave()
+	public function testProcess()
 	{
 		$mapping = array(
 			0 => 'text.type',
@@ -61,7 +61,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -90,7 +90,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 	}
 
 
-	public function testSaveMultiple()
+	public function testProcessMultiple()
 	{
 		$mapping = array(
 			0 => 'text.type',
@@ -117,7 +117,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -143,7 +143,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 	}
 
 
-	public function testSaveUpdate()
+	public function testProcessUpdate()
 	{
 		$mapping = array(
 			0 => 'text.type',
@@ -163,11 +163,11 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$result = $object->save( $product, $dataUpdate );
+		$result = $object->process( $product, $dataUpdate );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -184,7 +184,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 	}
 
 
-	public function testSaveDelete()
+	public function testProcessDelete()
 	{
 		$mapping = array(
 			0 => 'text.type',
@@ -199,12 +199,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, array(), $this->_endpoint );
-		$result = $object->save( $product, array() );
+		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -216,7 +216,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 	}
 
 
-	public function testSaveEmpty()
+	public function testProcessEmpty()
 	{
 		$mapping = array(
 			0 => 'text.type',
@@ -235,7 +235,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_TextTest extends MW_Unittest_
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );

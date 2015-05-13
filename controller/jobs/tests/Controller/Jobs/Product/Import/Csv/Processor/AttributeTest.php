@@ -28,7 +28,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	}
 
 
-	public function testSaved()
+	public function testProcess()
 	{
 		$mapping = array(
 			0 => 'attribute.type',
@@ -57,7 +57,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -85,7 +85,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	}
 
 
-	public function testSaveUpdate()
+	public function testProcessUpdate()
 	{
 		$mapping = array(
 			0 => 'attribute.type',
@@ -105,11 +105,11 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$result = $object->save( $product, $dataUpdate );
+		$result = $object->process( $product, $dataUpdate );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -126,7 +126,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	}
 
 
-	public function testSaveDelete()
+	public function testProcessDelete()
 	{
 		$mapping = array(
 			0 => 'attribute.type',
@@ -141,12 +141,12 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, array(), $this->_endpoint );
-		$result = $object->save( $product, array() );
+		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );
@@ -158,7 +158,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	}
 
 
-	public function testSaveEmpty()
+	public function testProcessEmpty()
 	{
 		$mapping = array(
 			0 => 'attribute.type',
@@ -177,7 +177,7 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		$product = $this->_create( 'job_csv_test' );
 
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->save( $product, $data );
+		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 		$this->_delete( $product );

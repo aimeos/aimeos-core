@@ -335,7 +335,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 				$product->fromArray( $map );
 				$manager->saveItem( $product );
 
-				$remaining = $processor->save( $product, $list );
+				$remaining = $processor->process( $product, $list );
 
 				if( !empty( $remaining ) ) {
 					$context->getLogger()->log( 'Not imported: ' . print_r( $remaining, true ) );

@@ -42,11 +42,11 @@ class Controller_Jobs_Product_Import_Csv_Processor_DoneTest extends MW_Unittest_
 	}
 
 
-	public function testSave()
+	public function testProcess()
 	{
 		$product = MShop_Factory::createManager( $this->_context, 'product' )->createItem();
 
-		$result = $this->_object->save( $product, array( 'test' ) );
+		$result = $this->_object->process( $product, array( 'test' ) );
 
 		$this->assertEquals( array( 'test' ), $result );
 	}

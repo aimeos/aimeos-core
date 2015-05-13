@@ -25,7 +25,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Media
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function save( MShop_Product_Item_Interface $product, array $data )
+	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
 		$listManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'media' );
@@ -73,7 +73,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Media
 				$listManager->deleteItem( $listItem->getId() );
 			}
 
-			$remaining = $this->_getObject()->save( $product, $data );
+			$remaining = $this->_getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
