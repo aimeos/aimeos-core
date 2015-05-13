@@ -249,6 +249,10 @@ class Controller_Jobs_Product_Import_Csv_Default
 				14 => 'product.code',
 				15 => 'product.list.type',
 			),
+			'property' => array(
+				16 => 'product.property.type',
+				17 => 'product.property.value',
+			),
 		);
 	}
 

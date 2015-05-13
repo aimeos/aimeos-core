@@ -68,9 +68,11 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$this->_object->run();
 
 		$result = $this->_get( $prodcodes, array_merge( $delete, $nondelete ) );
+		$properties = $this->_getProperties( array_keys( $result ) );
 		$this->_delete( $prodcodes, $delete, $nondelete );
 
 		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 2, count( $properties ) );
 
 		foreach( $result as $product ) {
 			$this->assertEquals( 5, count( $product->getListItems() ) );
@@ -88,9 +90,11 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$this->_object->run();
 
 		$result = $this->_get( $prodcodes, array_merge( $delete, $nondelete ) );
+		$properties = $this->_getProperties( array_keys( $result ) );
 		$this->_delete( $prodcodes, $delete, $nondelete );
 
 		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 2, count( $properties ) );
 
 		foreach( $result as $product ) {
 			$this->assertEquals( 5, count( $product->getListItems() ) );
@@ -164,5 +168,17 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$search->setConditions( $search->compare( '==', 'product.code', $prodcodes ) );
 
 		return $productManager->searchItems( $search, $domains );
+	}
+
+
+	protected function _getProperties( array $prodids )
+	{
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context )->getSubManager( 'property' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodids ) );
+		$search->setSortations( array( $search->sort( '+', 'product.property.type.code' ) ) );
+
+		return $manager->searchItems( $search );
 	}
 }
