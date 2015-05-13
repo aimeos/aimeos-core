@@ -55,4 +55,78 @@ class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 		$this->assertNotSame( $cntl, $new );
 	}
 
+
+	public function testAddDecoratorsInvalidName()
+	{
+		$decorators = array( '$' );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+
+		$this->setExpectedException('Controller_Jobs_Exception');
+		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, $decorators, 'Test_' );
+	}
+
+
+	public function testAddDecoratorsInvalidClass()
+	{
+		$decorators = array( 'Test' );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+
+		$this->setExpectedException('Controller_Jobs_Exception');
+		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, $decorators, 'Test_' );
+	}
+
+
+	public function testAddDecoratorsInvalidInterface()
+	{
+		$decorators = array( 'Test' );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+
+		$this->setExpectedException('Controller_Jobs_Exception');
+		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl,
+			$decorators, 'Controller_Jobs_Common_Decorator_' );
+	}
+
+
+	public function testAddControllerDecoratorsInvalidDomain()
+	{
+		$decorators = array( 'Test' );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+
+		$this->setExpectedException('Controller_Jobs_Exception');
+		Controller_Jobs_Common_Factory_TestAbstract::addControllerDecoratorsPublic( $this->_context, $this->_arcavias,
+			$cntl, '' );
+	}
+
+
+	public function testAddControllerDecoratorsExcludes()
+	{
+		$decorators = array( 'Test' );
+		$this->_context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array('test') );
+		$this->_context->getConfig()->set( 'controller/jobs/common/decorators/default', array('test') );
+
+		$this->setExpectedException('Controller_Jobs_Exception');
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+	}
+}
+
+
+class Controller_Jobs_Common_Factory_TestAbstract
+	extends Controller_Jobs_Common_Factory_Abstract
+{
+	public static function addDecoratorsPublic( MShop_Context_Item_Interface $context, Arcavias $arcavias,
+		Controller_Jobs_Interface $controller, array $decorators, $classprefix )
+	{
+		self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
+	}
+
+	public static function addControllerDecoratorsPublic( MShop_Context_Item_Interface $context, Arcavias $arcavias,
+		Controller_Jobs_Interface $controller, $domain )
+	{
+		self::_addControllerDecorators( $context, $arcavias, $controller, $domain );
+	}
+}
+
+
+class Controller_Jobs_Common_Decorator_Test
+{
 }

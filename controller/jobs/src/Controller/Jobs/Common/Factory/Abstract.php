@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Common_Factory_Abstract
+abstract class Controller_Jobs_Common_Factory_Abstract
 {
 	private static $_objects = array();
 
