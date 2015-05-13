@@ -26,7 +26,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$this->_context = TestHelper::getContext();
 		$this->_arcavias = TestHelper::getArcavias();
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/default/location', __DIR__ . '/_testfiles' );
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles' );
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
 	}
 
@@ -64,6 +64,12 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$prodcodes = array( 'job_csv_test', 'job_csv_test2' );
 		$nondelete = array( 'attribute', 'product' );
 		$delete = array( 'media', 'price', 'text' );
+
+		$convert = array(
+			1 => 'Text/LatinUTF8',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/converter', $convert );
 
 		$this->_object->run();
 
@@ -105,6 +111,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 	public function testRunProcessorInvalidPosition()
 	{
 		$prodcodes = array( 'job_csv_test', 'job_csv_test2' );
+
 		$mapping = array(
 			'item' => array(
 				0 => 'product.code',
@@ -123,7 +130,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 			),
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/default/mapping', $mapping );
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
 		$this->_object->run();
 
