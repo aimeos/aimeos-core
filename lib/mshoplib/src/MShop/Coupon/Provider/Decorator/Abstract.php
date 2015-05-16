@@ -28,6 +28,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Coupon_Item_Interface $couponItem Coupon item with configuration for the provider
 	 * @param string $code Coupon code entered by the customer
+	 * @param MShop_Coupon_Provider_Interface $provider Coupon provider interface
 	 */
 	public function __construct(MShop_Context_Item_Interface $context,
 		MShop_Coupon_Item_Interface $couponItem, $code, MShop_Coupon_Provider_Interface $provider )
