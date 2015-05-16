@@ -65,7 +65,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	protected function _addItems( MW_Container_Content_Interface $content, array $items )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/sitemap/changefreq
 		 * Change frequency of the products
 		 *
@@ -113,7 +113,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 * @param string Relative path to the template creating XML code for the site map items
 		 * @since 2015.01
 		 * @category Developer
-		 * @see client/html/account/favorite/default/template-header
+		 * @see controller/jobs/product/export/sitemap/default/template-header
 		 * @see controller/jobs/product/export/sitemap/default/template-footer
 		 * @see controller/jobs/product/export/sitemap/default/template-index
 		 */
@@ -124,7 +124,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 
 		$view->siteItems = $items;
 		$view->siteFreq = $changefreq;
-		
+
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 	}
 
@@ -137,7 +137,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	protected function _createContainer()
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/sitemap/location
 		 * Directory where the generated site maps should be placed into
 		 *
@@ -166,14 +166,14 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 * @since 2015.01
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/export/sitemap/default/container/options
+		 * @see controller/jobs/product/export/sitemap/container/options
 		 * @see controller/jobs/product/export/sitemap/max-items
 		 * @see controller/jobs/product/export/sitemap/max-query
 		 * @see controller/jobs/product/export/sitemap/changefreq
 		 */
 		$location = $config->get( 'controller/jobs/product/export/sitemap/location', sys_get_temp_dir() );
-	
-		/** controller/jobs/product/export/sitemap/default/container/options
+
+		/** controller/jobs/product/export/sitemap/container/options
 		 * List of file container options for the site map files
 		 *
 		 * The directory and the generated site map files are stored using
@@ -191,8 +191,8 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 * @see controller/jobs/product/export/sitemap/max-query
 		 * @see controller/jobs/product/export/sitemap/changefreq
 		*/
-		$options = $config->get( 'controller/jobs/product/export/sitemap/default/container/options', array() );
-	
+		$options = $config->get( 'controller/jobs/product/export/sitemap/container/options', array() );
+
 		return MW_Container_Factory::getContainer( $location, 'Directory', 'Gzip', $options );
 	}
 
@@ -207,7 +207,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	protected function _createContent( MW_Container_Interface $container, $filenum )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/sitemap/default/template-header
 		 * Relative path to the XML site map header template of the product site map job controller.
 		 *
@@ -232,13 +232,13 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 */
 		$tplconf = 'controller/jobs/product/export/sitemap/default/template-header';
 		$default = 'product/export/sitemap-items-header-default.xml';
-		
+
 		$view = $this->_getContext()->getView();
-		
+
 		$content = $container->create( $this->_getFilename( $filenum ) );
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 		$container->add( $content );
-	
+
 		return $content;
 	}
 
@@ -251,7 +251,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	protected function _closeContent( MW_Container_Content_Interface $content )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/sitemap/default/template-footer
 		 * Relative path to the XML site map footer template of the product site map job controller.
 		 *
@@ -276,9 +276,9 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 */
 		$tplconf = 'controller/jobs/product/export/sitemap/default/template-footer';
 		$default = 'product/export/sitemap-items-footer-default.xml';
-		
+
 		$view = $this->_getContext()->getView();
-		
+
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 	}
 
@@ -292,7 +292,7 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 	protected function _createSitemapIndex( MW_Container_Interface $container, array $files )
 	{
 		$config = $this->_getContext()->getConfig();
-		
+
 		/** controller/jobs/product/export/sitemap/default/template-index
 		 * Relative path to the XML site map index template of the product site map job controller.
 		 *
@@ -317,10 +317,10 @@ class Controller_Jobs_Product_Export_Sitemap_Default
 		 */
 		$tplconf = 'controller/jobs/product/export/sitemap/default/template-index';
 		$default = 'product/export/sitemap-index-default.xml';
-		
+
 		$view = $this->_getContext()->getView();
 		$view->siteFiles = $files;
-		
+
 		$content = $container->create( 'aimeos-sitemap-index.xml' );
 		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
 		$container->add( $content );
