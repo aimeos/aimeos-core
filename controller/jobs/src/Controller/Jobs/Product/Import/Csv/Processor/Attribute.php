@@ -18,7 +18,23 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute
 	extends Controller_Jobs_Product_Import_Csv_Processor_Abstract
 	implements Controller_Jobs_Product_Import_Csv_Processor_Interface
 {
-	private $_attributes = array();
+	private $_cache;
+
+
+	/**
+	 * Initializes the object
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
+	 * @param Controller_Jobs_Product_Import_Csv_Processor_Interface $object Decorated processor
+	 */
+	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
+		Controller_Jobs_Product_Import_Csv_Processor_Interface $object = null )
+	{
+		parent::__construct( $context, $mapping, $object );
+
+		$this->_cache = new Controller_Jobs_Product_Import_Csv_Cache_Attribute( $context );
+	}
 
 
 	/**
@@ -39,7 +55,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute
 		try
 		{
 			$pos = 0;
-			$delete = array();
+			$delete = $attrcodes = array();
 			$map = $this->_getMappedData( $data );
 			$listItems = $product->getListItems( 'attribute' );
 
@@ -117,19 +133,10 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute
 	 */
 	protected function _getAttributeItem( $code, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'attribute.code', $code ),
-			$search->compare( '==', 'attribute.type.code', $type ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $manager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false )
+		if( ( $item = $this->_cache->get( $code, $type ) ) === null )
 		{
+			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+
 			$item = $manager->createItem();
 			$item->setTypeId( $this->_getTypeId( 'attribute/type', 'product', $type ) );
 			$item->setCode( $code );
@@ -137,6 +144,8 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute
 			$item->setStatus( 1 );
 
 			$manager->saveItem( $item );
+
+			$this->_cache->set( $item );
 		}
 
 		return $item;

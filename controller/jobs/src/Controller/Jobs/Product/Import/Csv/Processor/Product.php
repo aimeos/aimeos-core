@@ -18,6 +18,25 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 	extends Controller_Jobs_Product_Import_Csv_Processor_Abstract
 	implements Controller_Jobs_Product_Import_Csv_Processor_Interface
 {
+	private $_cache;
+
+
+	/**
+	 * Initializes the object
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
+	 * @param Controller_Jobs_Product_Import_Csv_Processor_Interface $object Decorated processor
+	 */
+	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
+		Controller_Jobs_Product_Import_Csv_Processor_Interface $object = null )
+	{
+		parent::__construct( $context, $mapping, $object );
+
+		$this->_cache = new Controller_Jobs_Product_Import_Csv_Cache_Product( $context );
+	}
+
+
 	/**
 	 * Saves the product related data to the storage
 	 *
@@ -31,14 +50,16 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 		$listManager = MShop_Factory::createManager( $context, 'product/list' );
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
+		$this->_cache->set( $product );
+
 		$manager->begin();
 
 		try
 		{
 			$pos = 0;
 			$delete = $prodcodes = array();
+			$map = $this->_getMappedData( $data );
 			$listItems = $product->getListItems( 'product' );
-			$map = $this->_getMappedProductData( $data, $prodcodes );
 
 			foreach( $listItems as $listId => $listItem )
 			{
@@ -56,7 +77,6 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 			}
 
 			$listManager->deleteItems( $delete );
-			$products = $this->_getProducts( $prodcodes, array() );
 
 			foreach( $map as $pos => $list )
 			{
@@ -64,7 +84,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 					continue;
 				}
 
-				if( !isset( $products[ $list['product.code'] ] ) )
+				if( ( $prodid = $this->_cache->get( $list['product.code'] ) ) === null )
 				{
 					$msg = 'No product for code "%1$s" available when importing product with code "%2$s"';
 					$context->getLogger()->log( sprintf( $msg, $list['product.code'], $product->getCode() ) );
@@ -75,8 +95,8 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
 				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'product', $typecode );
-				$list['product.list.refid'] = $products[ $list['product.code'] ]->getId();
 				$list['product.list.parentid'] = $product->getId();
+				$list['product.list.refid'] = $prodid;
 				$list['product.list.domain'] = 'product';
 				$list['product.list.position'] = $pos;
 
@@ -95,38 +115,5 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product
 		}
 
 		return $remaining;
-	}
-
-
-	/**
-	 * Returns the chunked data with text and product list properties in each chunk
-	 *
-	 * @param array $data List of CSV fields with position as key and domain item key as value
-	 * @param array &$prodcodes List that will contain the found product codes afterwards
-	 * @return array List of associative arrays containing the chunked properties
-	 */
-	protected function _getMappedProductData( array &$data, array &$prodcodes )
-	{
-		$idx = 0;
-		$map = array();
-
-		foreach( $this->_getMapping() as $pos => $key )
-		{
-			if( isset( $map[$idx][$key] ) ) {
-				$idx++;
-			}
-
-			if( isset( $data[$pos] ) )
-			{
-				if( $key === 'product.code' && $data[$pos] !== '' ) {
-					$prodcodes[] = $data[$pos];
-				}
-
-				$map[$idx][$key] = $data[$pos];
-				unset( $data[$pos] );
-			}
-		}
-
-		return $map;
 	}
 }
