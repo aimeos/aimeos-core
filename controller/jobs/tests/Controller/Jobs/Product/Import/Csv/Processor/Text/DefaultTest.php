@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest_Testcase
+class Controller_Jobs_Product_Import_Csv_Processor_Text_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_endpoint;
@@ -43,26 +43,24 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	public function testProcess()
 	{
 		$mapping = array(
-			0 => 'media.languageid',
-			1 => 'media.label',
-			2 => 'media.mimetype',
-			3 => 'media.preview',
-			4 => 'media.url',
-			5 => 'media.status',
+			0 => 'text.type',
+			1 => 'text.content',
+			2 => 'text.label',
+			3 => 'text.languageid',
+			4 => 'text.status',
 		);
 
 		$data = array(
-			0 => 'de',
-			1 => 'test image',
-			2 => 'image/jpeg',
-			3 => 'path/to/preview',
-			4 => 'path/to/file',
-			5 => 1,
+			0 => 'name',
+			1 => 'Job CSV test',
+			2 => 'test text',
+			3 => 'de',
+			4 => 1,
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -77,41 +75,48 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 
 		$this->assertEquals( 1, $listItem->getStatus() );
 		$this->assertEquals( 0, $listItem->getPosition() );
-		$this->assertEquals( 'media', $listItem->getDomain() );
+		$this->assertEquals( 'text', $listItem->getDomain() );
 		$this->assertEquals( 'default', $listItem->getType() );
 
 		$refItem = $listItem->getRefItem();
 
 		$this->assertEquals( 1, $refItem->getStatus() );
-		$this->assertEquals( 'default', $refItem->getType() );
+		$this->assertEquals( 'name', $refItem->getType() );
 		$this->assertEquals( 'product', $refItem->getDomain() );
-		$this->assertEquals( 'test image', $refItem->getLabel() );
-		$this->assertEquals( 'image/jpeg', $refItem->getMimetype() );
-		$this->assertEquals( 'path/to/preview', $refItem->getPreview() );
-		$this->assertEquals( 'path/to/file', $refItem->getUrl() );
+		$this->assertEquals( 'test text', $refItem->getLabel() );
+		$this->assertEquals( 'Job CSV test', $refItem->getContent() );
 		$this->assertEquals( 'de', $refItem->getLanguageId() );
+		$this->assertEquals( 1, $refItem->getStatus() );
 	}
 
 
 	public function testProcessMultiple()
 	{
 		$mapping = array(
-			0 => 'media.url',
-			1 => 'media.url',
-			2 => 'media.url',
-			3 => 'media.url',
+			0 => 'text.type',
+			1 => 'text.content',
+			2 => 'text.type',
+			3 => 'text.content',
+			4 => 'text.type',
+			5 => 'text.content',
+			6 => 'text.type',
+			7 => 'text.content',
 		);
 
 		$data = array(
-			0 => 'path/to/0',
-			1 => 'path/to/1',
-			2 => 'path/to/2',
-			3 => 'path/to/3',
+			0 => 'name',
+			1 => 'Job CSV test',
+			2 => 'short',
+			3 => 'Short: Job CSV test',
+			4 => 'long',
+			5 => 'Long: Job CSV test',
+			6 => 'long',
+			7 => 'Long: Job CSV test 2',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -120,12 +125,19 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 
 		$pos = 0;
 		$listItems = $product->getListItems();
+		$expected = array(
+			0 => array( 'name', 'Job CSV test' ),
+			1 => array( 'short', 'Short: Job CSV test' ),
+			2 => array( 'long', 'Long: Job CSV test' ),
+			3 => array( 'long', 'Long: Job CSV test 2' ),
+		);
 
 		$this->assertEquals( 4, count( $listItems ) );
 
 		foreach( $listItems as $listItem )
 		{
-			$this->assertEquals( $data[$pos], $listItem->getRefItem()->getUrl() );
+			$this->assertEquals( $expected[$pos][0], $listItem->getRefItem()->getType() );
+			$this->assertEquals( $expected[$pos][1], $listItem->getRefItem()->getContent() );
 			$pos++;
 		}
 	}
@@ -134,20 +146,23 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	public function testProcessUpdate()
 	{
 		$mapping = array(
-			0 => 'media.url',
+			0 => 'text.type',
+			1 => 'text.content',
 		);
 
 		$data = array(
-			0 => 'path/to/file',
+			0 => 'name',
+			1 => 'Job CSV test',
 		);
 
 		$dataUpdate = array(
-			0 => 'path/to/new',
+			0 => 'short',
+			1 => 'Short: Job CSV test',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -164,28 +179,31 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$this->assertEquals( 1, count( $listItems ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
 
-		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
+		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );
+		$this->assertEquals( 'Short: Job CSV test', $listItem->getRefItem()->getContent() );
 	}
 
 
 	public function testProcessDelete()
 	{
 		$mapping = array(
-			0 => 'media.url',
+			0 => 'text.type',
+			1 => 'text.content',
 		);
 
 		$data = array(
-			0 => '/path/to/file',
+			0 => 'name',
+			1 => 'Job CSV test',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, array(), $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, array(), $this->_endpoint );
 		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -201,18 +219,22 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 	public function testProcessEmpty()
 	{
 		$mapping = array(
-			0 => 'media.url',
-			1 => 'media.url',
+			0 => 'text.type',
+			1 => 'text.content',
+			2 => 'text.type',
+			3 => 'text.content',
 		);
 
 		$data = array(
-			0 => 'path/to/file',
-			1 => '',
+			0 => 'name',
+			1 => 'Job CSV test',
+			2 => '',
+			3 => '',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -250,13 +272,13 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 
 	protected function _delete( MShop_Product_Item_Interface $product )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$listManager = $manager->getSubManager( 'list' );
 
-		foreach( $product->getListItems('media') as $listItem )
+		foreach( $product->getListItems('text') as $listItem )
 		{
-			$mediaManager->deleteItem( $listItem->getRefItem()->getId() );
+			$textManager->deleteItem( $listItem->getRefItem()->getId() );
 			$listManager->deleteItem( $listItem->getId() );
 		}
 
@@ -271,7 +293,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_MediaTest extends MW_Unittest
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 
-		$result = $manager->searchItems( $search, array('media') );
+		$result = $manager->searchItems( $search, array('text') );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No product item for code "%1$s"', $code ) );

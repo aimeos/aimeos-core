@@ -361,18 +361,21 @@ class Controller_Jobs_Product_Import_Csv_Default
 		}
 
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$iface = 'Controller_Jobs_Product_Import_Csv_Processor_Interface';
 		$object = new Controller_Jobs_Product_Import_Csv_Processor_Done( $context, array() );
 
-		foreach( $mappings as $name => $mapping )
+		foreach( $mappings as $type => $mapping )
 		{
-			if( ctype_alnum( $name ) === false )
+			$name = $config->get( 'classes/controller/jobs/product/import/csv/processor/' . $type . '/name', 'Default' );
+
+			if( ctype_alnum( $type ) === false )
 			{
-				$classname = is_string($name) ? 'Controller_Jobs_Product_Import_Csv_Processor_' . $name : '<not a string>';
+				$classname = is_string($name) ? 'Controller_Jobs_Product_Import_Csv_Processor_' . $type . '_' . $name : '<not a string>';
 				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$classname = 'Controller_Jobs_Product_Import_Csv_Processor_' . ucfirst( $name );
+			$classname = 'Controller_Jobs_Product_Import_Csv_Processor_' . ucfirst( $type ) . '_' . $name;
 
 			if( class_exists( $classname ) === false ) {
 				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );

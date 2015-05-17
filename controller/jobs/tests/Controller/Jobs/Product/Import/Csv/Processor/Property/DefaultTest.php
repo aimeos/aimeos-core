@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Unittest_Testcase
+class Controller_Jobs_Property_Import_Csv_Processor_Property_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_endpoint;
@@ -31,55 +31,44 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	public function testProcess()
 	{
 		$mapping = array(
-			0 => 'attribute.type',
-			1 => 'attribute.code',
-			2 => 'product.list.type',
-			3 => 'attribute.type',
-			4 => 'attribute.code',
-			5 => 'product.list.type',
-			6 => 'attribute.type',
-			7 => 'attribute.code',
-			8 => 'product.list.type',
+			0 => 'product.property.type',
+			1 => 'product.property.value',
+			2 => 'product.property.languageid',
+			3 => 'product.property.type',
+			4 => 'product.property.value',
 		);
 
 		$data = array(
-			0 => 'length',
-			1 => '30',
-			2 => 'variant',
-			3 => 'width',
-			4 => '29',
-			5 => 'variant',
-			6 => 'color',
-			7 => 'white',
-			8 => 'variant',
+			0 => 'package-weight',
+			1 => '3.00',
+			2 => 'de',
+			3 => 'package-width',
+			4 => '50',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Property_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
+		$items = $this->_getProperties( $product->getId() );
 		$this->_delete( $product );
 
 
 		$pos = 0;
-		$listItems = $product->getListItems();
 		$expected = array(
-			array( 'variant', 'length', '30' ),
-			array( 'variant', 'width', '29' ),
-			array( 'variant', 'color', 'white' ),
+			array( 'package-weight', '3.00', 'de' ),
+			array( 'package-width', '50', null ),
 		);
 
-		$this->assertEquals( 3, count( $listItems ) );
+		$this->assertEquals( 2, count( $items ) );
 
-		foreach( $listItems as $listItem )
+		foreach( $items as $item )
 		{
-			$this->assertEquals( 1, $listItem->getStatus() );
-			$this->assertEquals( 'attribute', $listItem->getDomain() );
-			$this->assertEquals( $expected[$pos][0], $listItem->getType() );
-			$this->assertEquals( $expected[$pos][1], $listItem->getRefItem()->getType() );
-			$this->assertEquals( $expected[$pos][2], $listItem->getRefItem()->getCode() );
+			$this->assertEquals( $expected[$pos][0], $item->getType() );
+			$this->assertEquals( $expected[$pos][1], $item->getValue() );
+			$this->assertEquals( $expected[$pos][2], $item->getLanguageId() );
 			$pos++;
 		}
 	}
@@ -88,23 +77,23 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 	public function testProcessUpdate()
 	{
 		$mapping = array(
-			0 => 'attribute.type',
-			1 => 'attribute.code',
+			0 => 'product.property.type',
+			1 => 'product.property.value',
 		);
 
 		$data = array(
-			0 => 'length',
-			1 => '30',
+			0 => 'package-weight',
+			1 => '3.00',
 		);
 
 		$dataUpdate = array(
-			0 => 'width',
-			1 => '29',
+			0 => 'package-height',
+			1 => '10',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Property_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -112,80 +101,78 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		$result = $object->process( $product, $dataUpdate );
 
 		$product = $this->_get( 'job_csv_test' );
+		$items = $this->_getProperties( $product->getId() );
 		$this->_delete( $product );
 
 
-		$listItems = $product->getListItems();
-		$listItem = reset( $listItems );
+		$item = reset( $items );
 
-		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertEquals( 1, count( $items ) );
+		$this->assertInstanceOf( 'MShop_Product_Item_Property_Interface', $item );
 
-		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );
-		$this->assertEquals( '29', $listItem->getRefItem()->getCode() );
+		$this->assertEquals( 'package-height', $item->getType() );
+		$this->assertEquals( '10', $item->getValue() );
 	}
 
 
 	public function testProcessDelete()
 	{
 		$mapping = array(
-			0 => 'attribute.type',
-			1 => 'attribute.code',
+			0 => 'product.property.type',
+			1 => 'product.property.value',
 		);
 
 		$data = array(
-			0 => 'length',
-			1 => '30',
+			0 => 'package-weight',
+			1 => '3.00',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Property_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, array(), $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Property_Default( $this->_context, array(), $this->_endpoint );
 		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
+		$items = $this->_getProperties( $product->getId() );
 		$this->_delete( $product );
 
 
-		$listItems = $product->getListItems();
-
-		$this->assertEquals( 0, count( $listItems ) );
+		$this->assertEquals( 0, count( $items ) );
 	}
 
 
 	public function testProcessEmpty()
 	{
 		$mapping = array(
-			0 => 'attribute.type',
-			1 => 'attribute.code',
-			2 => 'attribute.type',
-			3 => 'attribute.code',
+			0 => 'product.property.type',
+			1 => 'product.property.value',
+			2 => 'product.property.type',
+			3 => 'product.property.value',
 		);
 
 		$data = array(
 			0 => '',
 			1 => '',
-			2 => 'length',
-			3 => '30',
+			2 => 'package-weight',
+			3 => '3.00',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Property_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
+		$items = $this->_getProperties( $product->getId() );
 		$this->_delete( $product );
 
 
-		$listItems = $product->getListItems();
-
-		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertEquals( 1, count( $items ) );
 	}
 
 
@@ -239,5 +226,17 @@ class Controller_Jobs_Attribute_Import_Csv_Processor_AttributeTest extends MW_Un
 		}
 
 		return $item;
+	}
+
+
+	protected function _getProperties( $prodid )
+	{
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context )->getSubManager( 'property' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodid ) );
+		$search->setSortations( array( $search->sort( '+', 'product.property.type.code' ) ) );
+
+		return $manager->searchItems( $search );
 	}
 }

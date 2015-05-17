@@ -6,12 +6,18 @@
  */
 
 
-class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unittest_Testcase
+class Controller_Jobs_Product_Import_Csv_Processor_Price_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_endpoint;
 
 
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function setUp()
 	{
 		MShop_Factory::setCache( true );
@@ -21,6 +27,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 	}
 
 
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function tearDown()
 	{
 		MShop_Factory::setCache( false );
@@ -31,26 +43,83 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 	public function testProcess()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
-			1 => 'product.code',
-			2 => 'product.list.type',
-			3 => 'product.code',
-			4 => 'product.list.type',
-			5 => 'product.code',
+			0 => 'price.type',
+			1 => 'price.label',
+			2 => 'price.currencyid',
+			3 => 'price.quantity',
+			4 => 'price.value',
+			5 => 'price.costs',
+			6 => 'price.rebate',
+			7 => 'price.taxrate',
+			8 => 'price.status',
 		);
 
 		$data = array(
 			0 => 'default',
-			1 => 'CNC',
-			2 => 'default',
-			3 => 'CNE',
-			4 => 'suggestion',
-			5 => 'CNE',
+			1 => 'EUR 1.00',
+			2 => 'EUR',
+			3 => 5,
+			4 => '1.00',
+			5 => '0.20',
+			6 => '0.10',
+			7 => '20.00',
+			8 => 1,
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertEquals( 1, count( $listItems ) );
+
+		$this->assertEquals( 1, $listItem->getStatus() );
+		$this->assertEquals( 0, $listItem->getPosition() );
+		$this->assertEquals( 'price', $listItem->getDomain() );
+		$this->assertEquals( 'default', $listItem->getType() );
+
+		$refItem = $listItem->getRefItem();
+
+		$this->assertEquals( 1, $refItem->getStatus() );
+		$this->assertEquals( 'default', $refItem->getType() );
+		$this->assertEquals( 'product', $refItem->getDomain() );
+		$this->assertEquals( 'EUR 1.00', $refItem->getLabel() );
+		$this->assertEquals( 5, $refItem->getQuantity() );
+		$this->assertEquals( '1.00', $refItem->getValue() );
+		$this->assertEquals( '0.20', $refItem->getCosts() );
+		$this->assertEquals( '0.10', $refItem->getRebate() );
+		$this->assertEquals( '20.00', $refItem->getTaxrate() );
+		$this->assertEquals( 1, $refItem->getStatus() );
+	}
+
+
+	public function testProcessMultiple()
+	{
+		$mapping = array(
+			0 => 'price.value',
+			1 => 'price.value',
+			2 => 'price.value',
+			3 => 'price.value',
+		);
+
+		$data = array(
+			0 => '1.00',
+			1 => '2.00',
+			2 => '3.00',
+			3 => '4.00',
+		);
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -59,20 +128,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 
 		$pos = 0;
 		$listItems = $product->getListItems();
-		$expected = array(
-			array( 'default', 'CNC' ),
-			array( 'default', 'CNE' ),
-			array( 'suggestion', 'CNE' ),
-		);
 
-		$this->assertEquals( 3, count( $listItems ) );
+		$this->assertEquals( 4, count( $listItems ) );
 
 		foreach( $listItems as $listItem )
 		{
-			$this->assertEquals( 1, $listItem->getStatus() );
-			$this->assertEquals( 'product', $listItem->getDomain() );
-			$this->assertEquals( $expected[$pos][0], $listItem->getType() );
-			$this->assertEquals( $expected[$pos][1], $listItem->getRefItem()->getCode() );
+			$this->assertEquals( $data[$pos], $listItem->getRefItem()->getValue() );
 			$pos++;
 		}
 	}
@@ -81,23 +142,20 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 	public function testProcessUpdate()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
-			1 => 'product.code',
+			0 => 'price.value',
 		);
 
 		$data = array(
-			0 => 'default',
-			1 => 'CNC',
+			0 => '1.00',
 		);
 
 		$dataUpdate = array(
-			0 => 'default',
-			1 => 'CNE',
+			0 => '2.00',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -114,30 +172,28 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 		$this->assertEquals( 1, count( $listItems ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
 
-		$this->assertEquals( 'CNE', $listItem->getRefItem()->getCode() );
+		$this->assertEquals( '2.00', $listItem->getRefItem()->getValue() );
 	}
 
 
 	public function testProcessDelete()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
-			1 => 'product.code',
+			0 => 'price.value',
 		);
 
 		$data = array(
-			0 => 'default',
-			1 => 'CNC',
+			0 => '1.00',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product( $this->_context, array(), $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, array(), $this->_endpoint );
 		$result = $object->process( $product, array() );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -153,22 +209,18 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 	public function testProcessEmpty()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
-			1 => 'product.code',
-			2 => 'product.list.type',
-			3 => 'product.code',
+			0 => 'price.value',
+			1 => 'price.value',
 		);
 
 		$data = array(
-			0 => '',
+			0 => '1.00',
 			1 => '',
-			2 => 'default',
-			3 => 'CNE',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
 
-		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->_get( 'job_csv_test' );
@@ -206,10 +258,13 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 
 	protected function _delete( MShop_Product_Item_Interface $product )
 	{
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$listManager = $manager->getSubManager( 'list' );
 
-		foreach( $product->getListItems('product') as $listItem ) {
+		foreach( $product->getListItems('price') as $listItem )
+		{
+			$priceManager->deleteItem( $listItem->getRefItem()->getId() );
 			$listManager->deleteItem( $listItem->getId() );
 		}
 
@@ -224,7 +279,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_ProductTest extends MW_Unitte
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 
-		$result = $manager->searchItems( $search, array('product') );
+		$result = $manager->searchItems( $search, array('price') );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No product item for code "%1$s"', $code ) );

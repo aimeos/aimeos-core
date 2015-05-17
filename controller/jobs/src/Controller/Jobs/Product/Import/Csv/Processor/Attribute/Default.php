@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Import_Csv_Processor_Attribute
+class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 	extends Controller_Jobs_Product_Import_Csv_Processor_Abstract
 	implements Controller_Jobs_Product_Import_Csv_Processor_Interface
 {
