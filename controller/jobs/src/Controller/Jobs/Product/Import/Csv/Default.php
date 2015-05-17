@@ -133,19 +133,22 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 * Converts the CSV field data using the available converter objects
 	 *
 	 * @param array $convlist Associative list of CSV field indexes and converter objects
-	 * @param array $list Associative list of CSV field indexes and their data
+	 * @param array $data Associative list of product codes and lists of CSV field indexes and their data
 	 * @return array Associative list of CSV field indexes and their converted data
 	 */
-	protected function _convertData( array $convlist, array $list )
+	protected function _convertData( array $convlist, array $data )
 	{
 		foreach( $convlist as $idx => $converter )
 		{
-			if( isset( $list[$idx] ) ) {
-				$list[$idx] = $converter->translate( $list[$idx] );
+			foreach( $data as $code => $list )
+			{
+				if( isset( $list[$idx] ) ) {
+					$data[$code][$idx] = $converter->translate( $list[$idx] );
+				}
 			}
 		}
 
-		return $list;
+		return $data;
 	}
 
 

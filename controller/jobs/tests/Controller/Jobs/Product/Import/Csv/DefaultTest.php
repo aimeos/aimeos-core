@@ -26,7 +26,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$this->_context = TestHelper::getContext();
 		$this->_arcavias = TestHelper::getArcavias();
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles' );
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
 	}
 
@@ -135,6 +135,31 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		$this->_object->run();
 
 		$this->_delete( $prodcodes, array( 'text', 'media' ), array() );
+	}
+
+
+	public function testRunProcessorInvalidMapping()
+	{
+		$mapping = array(
+			'media' => array(
+					8 => 'media.url',
+			),
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->_object->run();
+	}
+
+
+	public function testRunProcessorInvalidData()
+	{
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
+		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
+
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->_object->run();
 	}
 
 
