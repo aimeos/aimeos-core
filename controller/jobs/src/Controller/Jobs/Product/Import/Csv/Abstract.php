@@ -34,6 +34,7 @@ class Controller_Jobs_Product_Import_Csv_Abstract
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
+		$search->setSlice( 0, count( $codes ) );
 
 		foreach( $manager->searchItems( $search, $domains ) as $item ) {
 			$result[ $item->getCode() ] = $item;
