@@ -52,7 +52,7 @@ class Controller_Jobs_Product_Import_Csv_Abstract
 		$object = new $classname( $context );
 
 		if( !( $object instanceof $iface ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
 		return $object;
@@ -91,7 +91,7 @@ class Controller_Jobs_Product_Import_Csv_Abstract
 			$object = new $classname( $context, $mapping, $object );
 
 			if( !( $object instanceof $iface ) ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
