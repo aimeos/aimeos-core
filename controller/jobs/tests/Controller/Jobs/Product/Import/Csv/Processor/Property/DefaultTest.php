@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Property_Import_Csv_Processor_Property_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Product_Import_Csv_Processor_Property_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_endpoint;

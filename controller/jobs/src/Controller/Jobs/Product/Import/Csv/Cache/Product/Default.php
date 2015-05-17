@@ -14,8 +14,9 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Import_Csv_Cache_Product
+class Controller_Jobs_Product_Import_Csv_Cache_Product_Default
 	extends Controller_Jobs_Product_Import_Csv_Cache_Abstract
+	implements Controller_Jobs_Product_Import_Csv_Cache_Interface
 {
 	private $_prodmap = array();
 
@@ -24,9 +25,10 @@ class Controller_Jobs_Product_Import_Csv_Cache_Product
 	 * Returns the product ID for the given code
 	 *
 	 * @param string $code Product code
+	 * @param string|null $type Attribute type
 	 * @return string|null Product ID or null if not found
 	 */
-	public function get( $code )
+	public function get( $code, $type = null )
 	{
 		if( isset( $this->_prodmap[$code] ) ) {
 			return $this->_prodmap[$code];
@@ -50,9 +52,9 @@ class Controller_Jobs_Product_Import_Csv_Cache_Product
 	/**
 	 * Adds the product ID to the cache
 	 *
-	 * @param MShop_Product_Item_Interface $item Product object
+	 * @param MShop_Common_Item_Interface $item Product object
 	 */
-	public function set( MShop_Product_Item_Interface $item )
+	public function set( MShop_Common_Item_Interface $item )
 	{
 		$this->_prodmap[ $item->getCode() ] = $item->getId();
 	}

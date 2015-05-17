@@ -33,7 +33,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 	{
 		parent::__construct( $context, $mapping, $object );
 
-		$this->_cache = new Controller_Jobs_Product_Import_Csv_Cache_Attribute( $context );
+		$this->_cache = $this->_getCache( 'attribute' );
 	}
 
 

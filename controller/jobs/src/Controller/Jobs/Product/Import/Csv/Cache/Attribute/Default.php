@@ -14,8 +14,9 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Import_Csv_Cache_Attribute
+class Controller_Jobs_Product_Import_Csv_Cache_Attribute_Default
 	extends Controller_Jobs_Product_Import_Csv_Cache_Abstract
+	implements Controller_Jobs_Product_Import_Csv_Cache_Interface
 {
 	private $_attributes = array();
 
@@ -38,12 +39,12 @@ class Controller_Jobs_Product_Import_Csv_Cache_Attribute
 	 * Returns the attribute item for the given code and type
 	 *
 	 * @param string $code Attribute code
-	 * @param string $type Attribute type
+	 * @param string|null $type Attribute type
 	 * @return MShop_Attribute_Item_Interface|null Attribute object or null if not found
 	 */
-	public function get( $code, $type )
+	public function get( $code, $type = null )
 	{
-		if( isset( $this->_attributes[$code][$type] ) ) {
+		if( isset( $this->_attributes[$code] ) && isset( $this->_attributes[$code][$type] ) ) {
 			return $this->_attributes[$code][$type];
 		}
 
@@ -69,10 +70,16 @@ class Controller_Jobs_Product_Import_Csv_Cache_Attribute
 	/**
 	 * Adds the attribute item to the cache
 	 *
-	 * @param MShop_Attribute_Item_Interface $item Attribute object
+	 * @param MShop_Common_Item_Interface $item Attribute object
 	 */
-	public function set( MShop_Attribute_Item_Interface $item )
+	public function set( MShop_Common_Item_Interface $item )
 	{
-		$this->_attributes[ $item->getCode() ][ $item->getType() ] = $item;
+		$code = $item->getCode();
+
+		if( !isset( $this->_attributes[$code] ) || !is_array( $this->_attributes[$code] ) ) {
+			$this->_attributes[$code] = array();
+		}
+
+		$this->_attributes[$code][ $item->getType() ] = $item;
 	}
 }

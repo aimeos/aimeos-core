@@ -21,6 +21,45 @@ class Controller_Jobs_Product_Import_Csv_Abstract
 
 
 	/**
+	 * Returns the cache object for the given type
+	 *
+	 * @param string $type Type of the cached data
+	 * @param string|null Name of the cache implementation
+	 * @return Controller_Jobs_Product_Import_Csv_Cache_Interface Cache object
+	 */
+	protected function _getCache( $type, $name = null )
+	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$iface = 'Controller_Jobs_Product_Import_Csv_Cache_Interface';
+
+		if( $name === null ) {
+			$name = $config->get( 'classes/controller/jobs/product/import/csv/cache/' . $type . '/name', 'Default' );
+		}
+
+		if( ctype_alnum( $type ) === false || ctype_alnum( $name ) === false )
+		{
+			$classname = is_string($name) ? 'Controller_Jobs_Product_Import_Csv_Cache_' . $type . '_' . $name : '<not a string>';
+			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
+
+		$classname = 'Controller_Jobs_Product_Import_Csv_Cache_' . ucfirst( $type ) . '_' . $name;
+
+		if( class_exists( $classname ) === false ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+		}
+
+		$object = new $classname( $context );
+
+		if( !( $object instanceof $iface ) ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+		}
+
+		return $object;
+	}
+
+
+	/**
 	 * Returns the processor object for saving the product related information
 	 *
 	 * @param array $mapping Associative list of processor types as keys and index/data mappings as values
