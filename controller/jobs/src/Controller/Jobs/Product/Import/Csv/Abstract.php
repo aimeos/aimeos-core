@@ -21,6 +21,46 @@ class Controller_Jobs_Product_Import_Csv_Abstract
 
 
 	/**
+	 * Returns the processor object for saving the product related information
+	 *
+	 * @param array $mapping Associative list of processor types as keys and index/data mappings as values
+	 * @return Controller_Jobs_Product_Import_Csv_Processor_Interface Processor object
+	 */
+	protected function _getProcessors( array $mappings )
+	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$iface = 'Controller_Jobs_Product_Import_Csv_Processor_Interface';
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Done( $context, array() );
+
+		foreach( $mappings as $type => $mapping )
+		{
+			$name = $config->get( 'classes/controller/jobs/product/import/csv/processor/' . $type . '/name', 'Default' );
+
+			if( ctype_alnum( $type ) === false )
+			{
+				$classname = is_string($name) ? 'Controller_Jobs_Product_Import_Csv_Processor_' . $type . '_' . $name : '<not a string>';
+				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			}
+
+			$classname = 'Controller_Jobs_Product_Import_Csv_Processor_' . ucfirst( $type ) . '_' . $name;
+
+			if( class_exists( $classname ) === false ) {
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			}
+
+			$object = new $classname( $context, $mapping, $object );
+
+			if( !( $object instanceof $iface ) ) {
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			}
+		}
+
+		return $object;
+	}
+
+
+	/**
 	 * Returns the product items for the given codes
 	 *
 	 * @param array $codes List of product codes
