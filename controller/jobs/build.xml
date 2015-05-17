@@ -8,7 +8,15 @@
 		<exec command="${bindir}phpunit --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
-	
+
+	<target name="testperf" description="Executes performance tests">
+		<echo msg="Executing performance tests" />
+		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
+		<delete file="tests/controller-jobs-jperf.xml" quiet="true" failonerror="false" />
+		<exec command="${bindir}phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --repeat 3"
+			  dir="tests" checkreturn="true" logoutput="true"/>
+	</target>
+
 	<target name="coverage" description="Generates the code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />

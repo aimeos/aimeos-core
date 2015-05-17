@@ -58,6 +58,7 @@
 	</target>
 
 	<target name="testperf" description="Executes performance tests">
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mwlib" />
