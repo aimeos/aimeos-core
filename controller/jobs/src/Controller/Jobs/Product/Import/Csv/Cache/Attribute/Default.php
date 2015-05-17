@@ -31,7 +31,11 @@ class Controller_Jobs_Product_Import_Csv_Cache_Attribute_Default
 		parent::__construct( $context );
 
 		$manager = MShop_Factory::createManager( $context, 'attribute' );
-		$this->_attributes = $manager->searchItems( $manager->createSearch() );
+		$result = $manager->searchItems( $manager->createSearch() );
+
+		foreach( $result as $id => $item ) {
+			$this->_attributes[ $item->getCode() ][ $item->getType() ] = $item;
+		}
 	}
 
 
