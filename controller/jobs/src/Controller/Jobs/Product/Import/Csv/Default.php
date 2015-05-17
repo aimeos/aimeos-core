@@ -364,6 +364,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	protected function _import( array $products, array $data, array $mapping,
 		Controller_Jobs_Product_Import_Csv_Processor_Interface $processor )
 	{
+		$errors = 0;
 		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
@@ -401,7 +402,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 				$context->getLogger()->log( $msg );
 
 				$manager->rollback();
+				$errors++;
 			}
+		}
+
+		if( $errors > 0 ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Failed products during import: %1$d', $errors ) );
 		}
 	}
 }
