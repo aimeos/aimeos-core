@@ -640,8 +640,8 @@ AimeosCatalogList = {
 			}
 		});
 
-		$(".catalog-list-items .product").on("click", ".media-list", function(ev) {
-			window.location.href = $(this, ev.delegateTarget).attr('href');
+		$(".catalog-list-items .product .media-list a").on("click", function(ev) {
+			window.location.href = $(this).attr('href');
 		});
 	},
 
