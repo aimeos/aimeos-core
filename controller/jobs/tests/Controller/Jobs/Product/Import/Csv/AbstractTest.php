@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Product_Import_Csv_AbstractTest extends MW_Unittest_Testcase
 {
-	private $object;
+	private $_object;
 
 
 	protected function setUp()
