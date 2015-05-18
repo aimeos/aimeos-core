@@ -155,6 +155,41 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 	public function testRunProcessorInvalidData()
 	{
+		$mapping = array(
+			'item' => array(
+				0 => 'product.code',
+				1 => 'product.label',
+				2 => 'product.type',
+			),
+			'text' => array(
+				3 => 'text.type',
+				4 => 'text.content',
+			),
+			'media' => array(
+				5 => 'media.url',
+				6 => 'product.list.type',
+			),
+			'price' => array(
+				7 => 'price.type',
+				8 => 'price.value',
+				9 => 'price.taxrate',
+			),
+			'attribute' => array(
+				10 => 'attribute.type',
+				11 => 'attribute.code',
+			),
+			'product' => array(
+				12 => 'product.code',
+				13 => 'product.list.type',
+			),
+			'property' => array(
+				14 => 'product.property.type',
+				15 => 'product.property.value',
+			),
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+
 		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
 
@@ -189,6 +224,16 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 			$productManager->deleteItem( $product->getId() );
 		}
+
+
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+
+		$search = $attrManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.code', 'import-test' ) );
+
+		$result = $attrManager->searchItems( $search );
+
+		$attrManager->deleteItems( array_keys( $result ) );
 	}
 
 
