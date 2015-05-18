@@ -609,7 +609,7 @@ AimeosCatalogList = {
 	 */
 	setupImageSwitch: function() {
 
-		$(".aimeos .product .media-list").on("mouseenter", function() {
+		$(".catalog-list-items .product .media-list").on("mouseenter", function() {
 			var list = $(".media-item", this);
 
 			if( list.length > 1 ) {
@@ -627,7 +627,7 @@ AimeosCatalogList = {
 			}
 		});
 
-		$(".aimeos .product .media-list").on("mouseleave", function() {
+		$(".catalog-list-items .product .media-list").on("mouseleave", function() {
 			var list = $(".media-item", this);
 
 			if( list.length > 1 ) {
@@ -640,8 +640,8 @@ AimeosCatalogList = {
 			}
 		});
 
-		$(".aimeos .product").on("click", function() {
-			window.location.href = $(this).attr('href');
+		$(".catalog-list-items .product").on("click", ".media-list", function(ev) {
+			window.location.href = $(this, ev.delegateTarget).attr('href');
 		});
 	},
 
