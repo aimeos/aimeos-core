@@ -65,6 +65,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/max-size
+		 * @see controller/jobs/product/import/csv/backup
 		 */
 		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
 		$domains = $config->get( 'controller/jobs/product/import/csv/domains', $default );
@@ -93,6 +94,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/max-size
+		 * @see controller/jobs/product/import/csv/backup
 		 */
 		$default = $this->_getDefaultMapping();
 		$mappings = $config->get( 'controller/jobs/product/import/csv/mapping', $default );
@@ -135,6 +137,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/max-size
+		 * @see controller/jobs/product/import/csv/backup
 		 */
 		$converters = $config->get( 'controller/jobs/product/import/csv/converter', array() );
 
@@ -154,8 +157,39 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/backup
 		 */
 		$maxcnt = $config->get( 'controller/jobs/product/import/csv/max-size', 1000 );
+
+		/** controller/jobs/product/import/csv/backup
+		 * Name of the backup for sucessfully imported files
+		 *
+		 * After a CSV file was imported successfully, you can move it to another
+		 * location, so it won't be imported again and isn't overwritten by the
+		 * next file that is stored at the same location in the file system.
+		 *
+		 * You should use an absolute path to be sure but can be relative path
+		 * if you absolutely know from where the job will be executed from. The
+		 * name of the new backup location can contain placeholders understood
+		 * by the PHP strftime() function to create dynamic paths, e.g. "backup/%Y-%m-%d"
+		 * which would create "backup/2000-01-01". For more information about the
+		 * strftime() placeholders, please have a look into the PHP documenation of
+		 * the {@link http://php.net/manual/en/function.strftime.php strftime() function}.
+		 *
+		 * '''Note:''' If no backup name is configured, the file or directory
+		 * won't be moved away. Please make also sure that the parent directory
+		 * and the new directory are writable so the file or directory could be
+		 * moved.
+		 *
+		 * @param integer Name of the backup file, optionally with date/time placeholders
+		 * @since 2015.05
+		 * @category Developer
+		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/mapping
+		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/max-size
+		 */
+		$backup = $config->get( 'controller/jobs/product/import/csv/backup' );
 
 
 		if( !isset( $mappings['item'] ) || !is_array( $mappings['item'] ) )
@@ -183,10 +217,15 @@ class Controller_Jobs_Product_Import_Csv_Default
 			}
 		}
 
+		$path = $container->getName();
 		$container->close();
 
 		if( $errors > 0 ) {
 			throw new Controller_Jobs_Exception( sprintf( 'Failed products during import: %1$d', $errors ) );
+		}
+
+		if( !empty( $backup ) && @rename( $path, strftime( $backup ) ) === false ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Unable to move imported file' ) );
 		}
 	}
 

@@ -43,6 +43,10 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 		MShop_Factory::clear();
 
 		$this->_object = null;
+
+		if( file_exists( 'tmp/import.zip' ) ) {
+			unlink( 'tmp/import.zip' );
+		}
 	}
 
 
@@ -192,6 +196,42 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
+
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->_object->run();
+	}
+
+
+	public function testRunBackup()
+	{
+		$config = $this->_context->getConfig();
+		$config->set( 'controller/jobs/product/import/csv/container/type', 'Zip' );
+		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/import.zip' );
+		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/test-%Y-%m-%d.zip' );
+
+		if( copy( __DIR__ . '/_testfiles/import.zip', 'tmp/import.zip' ) === false ) {
+			throw new Exception( 'Unable to copy test file' );
+		}
+
+		$this->_object->run();
+
+		$filename = strftime( 'tmp/test-%Y-%m-%d.zip' );
+		$this->assertTrue( file_exists( $filename ) );
+
+		unlink( $filename );
+	}
+
+
+	public function testRunBackupInvalid()
+	{
+		$config = $this->_context->getConfig();
+		$config->set( 'controller/jobs/product/import/csv/container/type', 'Zip' );
+		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/import.zip' );
+		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/notexist/import.zip' );
+
+		if( copy( __DIR__ . '/_testfiles/import.zip', 'tmp/import.zip' ) === false ) {
+			throw new Exception( 'Unable to copy test file' );
+		}
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		$this->_object->run();
