@@ -87,8 +87,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 				if( ( $prodid = $this->_cache->get( $list['product.code'] ) ) === null )
 				{
 					$msg = 'No product for code "%1$s" available when importing product with code "%2$s"';
-					$context->getLogger()->log( sprintf( $msg, $list['product.code'], $product->getCode() ) );
-					continue;
+					throw new Controller_Jobs_Exception( sprintf( $msg, $list['product.code'], $product->getCode() ) );
 				}
 
 				$listItem = $listManager->createItem();

@@ -379,6 +379,8 @@ class Controller_Jobs_Product_Import_Csv_Default
 
 		foreach( $data as $code => $list )
 		{
+			$remaining = array();
+
 			$manager->begin();
 
 			try
@@ -399,10 +401,6 @@ class Controller_Jobs_Product_Import_Csv_Default
 
 				$remaining = $processor->process( $product, $list );
 
-				if( !empty( $remaining ) ) {
-					$context->getLogger()->log( 'Not imported: ' . print_r( $remaining, true ) );
-				}
-
 				$manager->commit();
 			}
 			catch( Exception $e )
@@ -413,6 +411,10 @@ class Controller_Jobs_Product_Import_Csv_Default
 				$context->getLogger()->log( $msg );
 
 				$errors++;
+			}
+
+			if( !empty( $remaining ) ) {
+				$context->getLogger()->log( 'Not imported: ' . print_r( $remaining, true ) );
 			}
 		}
 
