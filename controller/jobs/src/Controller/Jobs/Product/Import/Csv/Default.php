@@ -53,6 +53,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 		/** controller/jobs/product/import/csv/domains
 		 * List of item domain names that should be retrieved along with the product items
 		 *
+		 * For efficient processing, the items associated to the products can be
+		 * fetched to, minimizing the number of database queries required. To be
+		 * most effective, the list of item domain names should be used in the
+		 * mapping configuration too, so the retrieved items will be used during
+		 * the import.
+		 *
 		 * @param array Associative list of MShop item domain names
 		 * @since 2015.05
 		 * @category Developer
@@ -66,7 +72,22 @@ class Controller_Jobs_Product_Import_Csv_Default
 		/** controller/jobs/product/import/csv/mapping
 		 * List of mappings between the position in the CSV file and item keys
 		 *
-		 * @param array Associative list of key/position pairs
+		 * The importer have to know which data is at which position in the CSV
+		 * file. Therefore, you need to specify a mapping between each position
+		 * and the MShop domain item key (e.g. "product.code") it represents.
+		 *
+		 * You can use all domain item keys which are used in the fromArray()
+		 * methods of the item classes. The "*.type" item keys will be
+		 * automatically converted to their "*.typeid" representation. You only
+		 * need to make sure that the corresponding type is available in the
+		 * database.
+		 *
+		 * These mappings are grouped together by their processor names, which
+		 * are responsible for importing the data, e.g. all mappings in "item"
+		 * will be processed by the base product importer while the mappings in
+		 * "text" will be imported by the text processor.
+		 *
+		 * @param array Associative list of processor names and lists of key/position pairs
 		 * @since 2015.05
 		 * @category Developer
 		 * @see controller/jobs/product/import/csv/domains
@@ -79,6 +100,35 @@ class Controller_Jobs_Product_Import_Csv_Default
 		/** controller/jobs/product/import/csv/converter
 		 * List of converter names for the values at the position in the CSV file
 		 *
+		 * Not all data in the CSV file is already in the required format. Maybe
+		 * the text encoding isn't UTF-8, the date is not in ISO format or something
+		 * similar. In order to convert the data before it's imported, you can
+		 * specify a list of converter objects that should be applied to the data
+		 * from the CSV file.
+		 *
+		 * To each field in the CSV file, you can apply one or more converters,
+		 * e.g. to encode a Latin text to UTF8 for the second CSV field:
+		 *
+		 *  array( 1 => 'Text/LatinUTF8' )
+		 *
+		 * Similarly, you can also apply several converters at once to the same
+		 * field:
+		 *
+		 *  array( 1 => array( 'Text/LatinUTF8', 'DateTime/EnglishISO' ) )
+		 *
+		 * It would convert the data of the second CSV field first to UTF-8 and
+		 * afterwards try to translate it to an ISO date format.
+		 *
+		 * The available converter objects are named "MW_Convert_<type>_<conversion>"
+		 * where <type> is the data type and <conversion> the way of the conversion.
+		 * In the configuration, the type and conversion must be separated by a
+		 * slash (<type>/<conversion>).
+		 *
+		 * '''Note:''' Keep in mind that the position of the CSV fields start at
+		 * zero (0). If you only need to convert a few fields, you don't have to
+		 * configure all fields. Only specify the positions in the array you
+		 * really need!
+		 *
 		 * @param array Associative list of position/converter name (or list of names) pairs
 		 * @since 2015.05
 		 * @category Developer
@@ -90,6 +140,13 @@ class Controller_Jobs_Product_Import_Csv_Default
 
 		/** controller/jobs/product/import/csv/max-size
 		 * Maximum number of CSV rows to import at once
+		 *
+		 * It's more efficient to read and import more than one row at a time
+		 * to speed up the import. Usually, the bigger the chunk that is imported
+		 * at once, the less time the importer will need. The downside is that
+		 * the amount of memory required by the import process will increase as
+		 * well. Therefore, it's a trade-off between memory consumption and
+		 * import speed.
 		 *
 		 * @param integer Number of rows
 		 * @since 2015.05
@@ -169,6 +226,17 @@ class Controller_Jobs_Product_Import_Csv_Default
 		/** controller/jobs/product/import/csv/location
 		 * File or directory where the content is stored which should be imported
 		 *
+		 * You need to configure the file or directory that acts as container
+		 * for the CSV files that should be imported. It should be an absolute
+		 * path to be sure but can be relative path if you absolutely know from
+		 * where the job will be executed from.
+		 *
+		 * The path can point to any supported container format as long as the
+		 * content is in CSV format, e.g.
+		 * * Directory container / CSV file
+		 * * Zip container / compressed CSV file
+		 * * PHPExcel container / PHPExcel sheet
+		 *
 		 * @param string Absolute file or directory path
 		 * @since 2015.05
 		 * @category Developer
@@ -181,6 +249,16 @@ class Controller_Jobs_Product_Import_Csv_Default
 
 		/** controller/jobs/product/import/csv/container/type
 		 * Nave of the container type to read the data from
+		 *
+		 * The container type tells the importer how it should retrieve the data.
+		 * There are currently three container types that support the necessary
+		 * CSV content:
+		 * * Directory
+		 * * Zip
+		 * * PHPExcel
+		 *
+		 * '''Note:''' for the PHPExcel container, you need to install the
+		 * "ai-container" extension.
 		 *
 		 * @param string Container type name
 		 * @since 2015.05
@@ -195,6 +273,14 @@ class Controller_Jobs_Product_Import_Csv_Default
 		/** controller/jobs/product/import/csv/container/content
 		 * Name of the content type inside the container to read the data from
 		 *
+		 * The content type must always be a CSV-like format and there are
+		 * currently two format types that are supported:
+		 * * CSV
+		 * * PHPExcel
+		 *
+		 * '''Note:''' for the PHPExcel content type, you need to install the
+		 * "ai-container" extension.
+		 *
 		 * @param array Content type name
 		 * @since 2015.05
 		 * @category Developer
@@ -206,7 +292,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 		$content = $config->get( 'controller/jobs/product/import/csv/container/content', 'CSV' );
 
 		/** controller/jobs/product/import/csv/container/options
-		 * List of file container options for the site map files
+		 * List of file container options for the product import files
+		 *
+		 * Some container/content type allow you to hand over additional settings
+		 * for configuration. Please have a look at the article about
+		 * {@link http://aimeos.org/docs/Developers/Utility/Create_and_read_files container/content files}
+		 * for more information.
 		 *
 		 * @param array Associative list of option name/value pairs
 		 * @since 2015.05
