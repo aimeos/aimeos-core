@@ -47,6 +47,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 */
 	public function run()
 	{
+		$errors = 0;
 		$config = $this->_getContext()->getConfig();
 
 		/** controller/jobs/product/import/csv/domains
@@ -119,13 +120,17 @@ class Controller_Jobs_Product_Import_Csv_Default
 			{
 				$data = $this->_convertData( $convlist, $data );
 				$products = $this->_getProducts( array_keys( $data ), $domains );
-				$this->_import( $products, $data, $mappings['item'], $processor );
+				$errors += $this->_import( $products, $data, $mappings['item'], $processor );
 
 				unset( $products, $data );
 			}
 		}
 
 		$container->close();
+
+		if( $errors > 0 ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Failed products during import: %1$d', $errors ) );
+		}
 	}
 
 
@@ -362,6 +367,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 * @param array $data Associative list of import data as index/value pairs
 	 * @param array $mappings Associative list of positions and domain item keys
 	 * @param Controller_Jobs_Product_Import_Csv_Processor_Interface $processor
+	 * @return integer Number of products that couldn't be imported
 	 * @throws Controller_Jobs_Exception
 	 */
 	protected function _import( array $products, array $data, array $mapping,
@@ -401,16 +407,15 @@ class Controller_Jobs_Product_Import_Csv_Default
 			}
 			catch( Exception $e )
 			{
+				$manager->rollback();
+
 				$msg = sprintf( 'Unable to import product with code "%1$s": %2$s', $code, $e->getMessage() );
 				$context->getLogger()->log( $msg );
 
-				$manager->rollback();
 				$errors++;
 			}
 		}
 
-		if( $errors > 0 ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Failed products during import: %1$d', $errors ) );
-		}
+		return $errors;
 	}
 }
