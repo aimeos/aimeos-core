@@ -247,6 +247,49 @@ class Controller_Jobs_Product_Import_Csv_Processor_Text_DefaultTest extends MW_U
 	}
 
 
+	public function testProcessListtypes()
+	{
+		$mapping = array(
+			0 => 'text.type',
+			1 => 'text.content',
+			2 => 'product.list.type',
+			3 => 'text.type',
+			4 => 'text.content',
+			5 => 'product.list.type',
+		);
+
+		$data = array(
+			0 => 'name',
+			1 => 'test name',
+			2 => 'test',
+			3 => 'short',
+			4 => 'test short',
+			5 => 'default',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/text/listtypes', array( 'default' ) );
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Text_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+
+		$this->assertEquals( 'default', $listItem->getType() );
+		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );
+		$this->assertEquals( 'test short', $listItem->getRefItem()->getContent() );
+	}
+
+
 	protected function _create( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

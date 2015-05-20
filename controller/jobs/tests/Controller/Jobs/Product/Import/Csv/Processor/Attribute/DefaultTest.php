@@ -189,6 +189,49 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_DefaultTest extends
 	}
 
 
+	public function testProcessListtypes()
+	{
+		$mapping = array(
+			0 => 'attribute.type',
+			1 => 'attribute.code',
+			2 => 'product.list.type',
+			3 => 'attribute.type',
+			4 => 'attribute.code',
+			5 => 'product.list.type',
+		);
+
+		$data = array(
+			0 => 'length',
+			1 => '32',
+			2 => 'custom',
+			3 => 'width',
+			4 => '30',
+			5 => 'default',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/attribute/listtypes', array( 'default' ) );
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+
+		$this->assertEquals( 'default', $listItem->getType() );
+		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );
+		$this->assertEquals( '30', $listItem->getRefItem()->getCode() );
+	}
+
+
 	protected function _create( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

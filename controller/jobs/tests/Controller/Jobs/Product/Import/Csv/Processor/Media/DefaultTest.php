@@ -225,6 +225,44 @@ class Controller_Jobs_Product_Import_Csv_Processor_Media_DefaultTest extends MW_
 	}
 
 
+	public function testProcessListtypes()
+	{
+		$mapping = array(
+			0 => 'media.url',
+			1 => 'product.list.type',
+			2 => 'media.url',
+			3 => 'product.list.type',
+		);
+
+		$data = array(
+			0 => 'path/to/file',
+			1 => 'download',
+			2 => 'path/to/file2',
+			3 => 'default',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/media/listtypes', array( 'default' ) );
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Media_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+
+		$this->assertEquals( 'default', $listItem->getType() );
+		$this->assertEquals( 'path/to/file2', $listItem->getRefItem()->getUrl() );
+	}
+
+
 	protected function _create( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

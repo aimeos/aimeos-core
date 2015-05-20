@@ -19,6 +19,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 	implements Controller_Jobs_Product_Import_Csv_Processor_Interface
 {
 	private $_cache;
+	private $_listTypes;
 
 
 	/**
@@ -32,6 +33,26 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 		Controller_Jobs_Product_Import_Csv_Processor_Interface $object = null )
 	{
 		parent::__construct( $context, $mapping, $object );
+
+		/** controller/jobs/product/import/csv/processor/attribute/listtypes
+		 * Names of the product list types for attributes that are updated or removed
+		 *
+		 * If you want to associate attribute items manually via the administration
+		 * interface to products and don't want these to be touched during the
+		 * import, you can specify the product list types for these attributes
+		 * that shouldn't be updated or removed.
+		 *
+		 * @param array|null List of product list type names or null for all
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/processor/media/listtypes
+		 * @see controller/jobs/product/import/csv/processor/product/listtypes
+		 * @see controller/jobs/product/import/csv/processor/price/listtypes
+		 * @see controller/jobs/product/import/csv/processor/text/listtypes
+		 */
+		$this->_listTypes = $context->getConfig()->get( 'controller/jobs/product/import/csv/processor/attribute/listtypes');
 
 		$this->_cache = $this->_getCache( 'attribute' );
 	}
@@ -57,7 +78,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 			$pos = 0;
 			$delete = $attrcodes = array();
 			$map = $this->_getMappedData( $data );
-			$listItems = $product->getListItems( 'attribute' );
+			$listItems = $product->getListItems( 'attribute', $this->_listTypes );
 
 			foreach( $listItems as $listId => $listItem )
 			{
@@ -89,7 +110,9 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['attribute.code'] === '' || $list['attribute.type'] === '' ) {
+				if( $list['attribute.code'] === '' || $list['attribute.type'] === '' || isset( $list['product.list.type'] )
+					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+				) {
 					continue;
 				}
 

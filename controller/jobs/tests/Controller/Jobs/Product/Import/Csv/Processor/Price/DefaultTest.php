@@ -233,6 +233,44 @@ class Controller_Jobs_Product_Import_Csv_Processor_Price_DefaultTest extends MW_
 	}
 
 
+	public function testProcessListtypes()
+	{
+		$mapping = array(
+			0 => 'price.value',
+			1 => 'product.list.type',
+			2 => 'price.value',
+			3 => 'product.list.type',
+		);
+
+		$data = array(
+			0 => '1.00',
+			1 => 'test',
+			2 => '2.00',
+			3 => 'default',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/price/listtypes', array( 'default' ) );
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Price_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+
+		$this->assertEquals( 'default', $listItem->getType() );
+		$this->assertEquals( '2.00', $listItem->getRefItem()->getValue() );
+	}
+
+
 	protected function _create( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

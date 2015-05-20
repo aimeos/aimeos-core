@@ -181,6 +181,44 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_DefaultTest extends M
 	}
 
 
+	public function testProcessListtypes()
+	{
+		$mapping = array(
+			0 => 'product.list.type',
+			1 => 'product.code',
+			2 => 'product.list.type',
+			3 => 'product.code',
+		);
+
+		$data = array(
+			0 => 'bought-together',
+			1 => 'CNC',
+			2 => 'default',
+			3 => 'CNE',
+		);
+
+		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/product/listtypes', array( 'default' ) );
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Jobs_Product_Import_Csv_Processor_Product_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$listItems = $product->getListItems();
+		$listItem = reset( $listItems );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+
+		$this->assertEquals( 'default', $listItem->getType() );
+		$this->assertEquals( 'CNE', $listItem->getRefItem()->getCode() );
+	}
+
+
 	protected function _create( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

@@ -18,6 +18,43 @@ class Controller_Jobs_Product_Import_Csv_Processor_Text_Default
 	extends Controller_Jobs_Product_Import_Csv_Processor_Abstract
 	implements Controller_Jobs_Product_Import_Csv_Processor_Interface
 {
+	private $_listTypes;
+
+
+	/**
+	 * Initializes the object
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
+	 * @param Controller_Jobs_Product_Import_Csv_Processor_Interface $object Decorated processor
+	 */
+	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
+			Controller_Jobs_Product_Import_Csv_Processor_Interface $object = null )
+	{
+		parent::__construct( $context, $mapping, $object );
+
+		/** controller/jobs/product/import/csv/processor/text/listtypes
+		 * Names of the product list types for texts that are updated or removed
+		 *
+		 * If you want to associate text items manually via the administration
+		 * interface to products and don't want these to be touched during the
+		 * import, you can specify the product list types for these texts
+		 * that shouldn't be updated or removed.
+		 *
+		 * @param array|null List of product list type names or null for all
+		 * @since 2015.05
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/processor/attribute/listtypes
+		 * @see controller/jobs/product/import/csv/processor/media/listtypes
+		 * @see controller/jobs/product/import/csv/processor/price/listtypes
+		 * @see controller/jobs/product/import/csv/processor/product/listtypes
+		 */
+		$this->_listTypes = $context->getConfig()->get( 'controller/jobs/product/import/csv/processor/text/listtypes' );
+	}
+
+
 	/**
 	 * Saves the product related data to the storage
 	 *
@@ -38,7 +75,9 @@ class Controller_Jobs_Product_Import_Csv_Processor_Text_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( !isset( $list['text.content'] ) || $list['text.content'] == '' ) {
+				if( $list['text.content'] === '' || $list['text.content'] === '' || isset( $list['product.list.type'] )
+					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+				) {
 					continue;
 				}
 
