@@ -24,7 +24,7 @@ interface MShop_Common_Item_ListRef_Interface
 	 * returned by this method.
 	 *
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
-	 * @param string|null $type Name of the list type
+	 * @param array|string|null $type Name/Names of the list item type or null for all
 	 * @return array List of items implementing MShop_Common_Item_List_Interface
 	 */
 	public function getListItems( $domain, $type = null );
@@ -36,8 +36,8 @@ interface MShop_Common_Item_ListRef_Interface
 	 * returned by this method.
 	 *
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
-	 * @param string|null $type Name of the item type
-	 * @param string|null $listtype Name of the list item type
+	 * @param array|string|null $type Name/Names of the item type or null for all
+	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */
 	public function getRefItems( $domain, $type = null, $listtype = null );

@@ -47,7 +47,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	 * returned by this method.
 	 *
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
-	 * @param string|null $type Name of the list type or null for all
+	 * @param array|string|null $type Name/Names of the list item type or null for all
 	 * @return array List of items implementing MShop_Common_Item_List_Interface
 	 */
 	public function getListItems( $domain = null, $type = null )
@@ -86,10 +86,11 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 		{
 			$list = array();
 			$iface = 'MShop_Common_Item_Typeid_Interface';
+			$listTypes = ( is_array( $type ) ? $type : array( $type ) );
 
 			foreach( $this->_listItems[$domain] as $id => $item )
 			{
-				if( $item instanceof $iface && $type === $item->getType() ) {
+				if( $item instanceof $iface && in_array( $item->getType(), $listTypes ) ) {
 					$list[$id] = $item;
 				}
 			}
@@ -111,8 +112,8 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	 * returned by this method.
 	 *
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
-	 * @param string|null $type Name of the item type
-	 * @param string|null $listtype Name of the list item type
+	 * @param array|string|null $type Name/Names of the item type or null for all
+	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */
 	public function getRefItems( $domain, $type = null, $listtype = null )
@@ -123,14 +124,16 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 
 		$list = array();
 		$iface = 'MShop_Common_Item_List_Interface';
+		$types = ( is_array( $type ) ? $type : array( $type ) );
+		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
 		foreach( $this->_listItems[$domain] as $listItem )
 		{
 			$refId = $listItem->getRefId();
 
 			if( isset( $this->_refItems[$domain][$refId] ) && $listItem instanceof $iface
-				&& ( $type === null || $type === $this->_refItems[$domain][$refId]->getType() )
-				&& ( $listtype === null || $listtype === $listItem->getType() )
+				&& ( $type === null || in_array( $this->_refItems[$domain][$refId]->getType(), $types ) )
+				&& ( $listtype === null || in_array( $listItem->getType(), $listtypes ) )
 			) {
 				$list[$refId] = $this->_refItems[$domain][$refId];
 				$list[$refId]->_position = $listItem->getPosition();

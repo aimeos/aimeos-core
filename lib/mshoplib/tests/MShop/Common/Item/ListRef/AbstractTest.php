@@ -125,6 +125,15 @@ class MShop_Common_Item_ListRef_AbstractTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetListItemsWithTypes()
+	{
+		$result = $this->_object->getListItems( 'text', array( 'test' ) );
+		$expected = array( $this->_listItem1->getId() => $this->_listItem1 );
+
+		$this->assertEquals( $expected, $result );
+	}
+
+
 	public function testGetListItemsWithRefItems()
 	{
 		$result = $this->_object->getListItems( 'text' );
@@ -165,6 +174,19 @@ class MShop_Common_Item_ListRef_AbstractTest extends MW_Unittest_Testcase
 		$expected = array(
 			$this->_textItem2->getId() => $this->_textItem2,
 			$this->_textItem1->getId() => $this->_textItem1,
+		);
+
+		$this->assertEquals( $expected, $result );
+		$this->assertEquals( array(), $this->_object->getRefItems( 'text', 'undefined' ) );
+	}
+
+
+	public function testGetRefItemsWithTypes()
+	{
+		$result = $this->_object->getRefItems( 'text', array( 'name' ) );
+		$expected = array(
+				$this->_textItem2->getId() => $this->_textItem2,
+				$this->_textItem1->getId() => $this->_textItem1,
 		);
 
 		$this->assertEquals( $expected, $result );
