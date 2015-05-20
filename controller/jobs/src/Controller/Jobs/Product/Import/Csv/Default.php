@@ -424,6 +424,10 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 *  	12 => 'product.property.type', // e.g. "package-weight"
 	 *  	13 => 'product.property.value', // arbitrary value for the corresponding type
 	 *  ),
+	 *  'catalog' => array(
+	 *  	14 => 'catalog.code', // e.g. Unique category code
+	 *  	15 => 'catalog.list.type', // e.g. "promotion" for top seller products
+	 *  ),
 	 *
 	 * @return array Associative list of domains as keys ("item" is special for the product itself) and a list of
 	 * 	positions and the domain item keys as values.
@@ -452,16 +456,20 @@ class Controller_Jobs_Product_Import_Csv_Default
 				11 => 'price.taxrate',
 			),
 			'attribute' => array(
-				12 => 'attribute.type',
-				13 => 'attribute.code',
+				12 => 'attribute.code',
+				13 => 'attribute.type',
 			),
 			'product' => array(
 				14 => 'product.code',
 				15 => 'product.list.type',
 			),
 			'property' => array(
-				16 => 'product.property.type',
-				17 => 'product.property.value',
+				16 => 'product.property.value',
+				17 => 'product.property.type',
+			),
+			'catalog' => array(
+				18 => 'catalog.code',
+				19 => 'catalog.list.type',
 			),
 		);
 	}
