@@ -75,7 +75,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Media_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['media.url'] === '' || $list['media.url'] === '' || isset( $list['product.list.type'] )
+				if( !isset( $list['media.url'] ) || $list['media.url'] === '' || isset( $list['product.list.type'] )
 					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;

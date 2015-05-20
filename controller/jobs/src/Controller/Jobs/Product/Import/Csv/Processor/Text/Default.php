@@ -75,7 +75,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Text_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['text.content'] === '' || $list['text.content'] === '' || isset( $list['product.list.type'] )
+				if( !isset( $list['text.content'] ) || $list['text.content'] === '' || isset( $list['product.list.type'] )
 					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;

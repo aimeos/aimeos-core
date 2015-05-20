@@ -97,11 +97,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 						&& ( !isset( $map[$pos]['product.list.type'] ) || isset( $map[$pos]['product.list.type'] )
 						&& $map[$pos]['product.list.type'] === $listItem->getType() )
 					) {
-						unset( $map[$pos] );
+						$pos++;
 						continue;
 					}
 				}
 
+				$listItems[$listId] = null;
 				$delete[] = $listId;
 				$pos++;
 			}
@@ -120,7 +121,9 @@ class Controller_Jobs_Product_Import_Csv_Processor_Attribute_Default
 				$attrItem->fromArray( $list );
 				$manager->saveItem( $attrItem );
 
-				$listItem = $listManager->createItem();
+				if( ( $listItem = array_shift( $listItems ) ) === null ) {
+					$listItem = $listManager->createItem();
+				}
 
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
 				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'attribute', $typecode );
