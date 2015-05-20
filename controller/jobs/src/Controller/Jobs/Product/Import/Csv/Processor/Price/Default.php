@@ -100,9 +100,8 @@ class Controller_Jobs_Product_Import_Csv_Processor_Price_Default
 				$list['product.list.parentid'] = $product->getId();
 				$list['product.list.refid'] = $refItem->getId();
 				$list['product.list.domain'] = 'price';
-				$list['product.list.position'] = $pos;
 
-				$listItem->fromArray( $this->_addListItemDefaults( $list ) );
+				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
 				$listManager->saveItem( $listItem );
 			}
 

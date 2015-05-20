@@ -128,9 +128,8 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 				$list['product.list.parentid'] = $product->getId();
 				$list['product.list.refid'] = $prodid;
 				$list['product.list.domain'] = 'product';
-				$list['product.list.position'] = $pos;
 
-				$listItem->fromArray( $this->_addListItemDefaults( $list ) );
+				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
 				$listManager->saveItem( $listItem );
 			}
 

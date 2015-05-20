@@ -43,10 +43,15 @@ class Controller_Jobs_Product_Import_Csv_Processor_Abstract
 	 * Adds the list item default values and returns the resulting array
 	 *
 	 * @param array $list Associative list of domain item keys and their values, e.g. "product.list.status" => 1
+	 * @param integer $pos Computed position of the list item in the associated list of items
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addListItemDefaults( array $list )
+	protected function _addListItemDefaults( array $list, $pos )
 	{
+		if( !isset( $list['product.list.position'] ) ) {
+			$list['product.list.position'] = $pos;
+		}
+
 		if( !isset( $list['product.list.status'] ) ) {
 			$list['product.list.status'] = 1;
 		}
