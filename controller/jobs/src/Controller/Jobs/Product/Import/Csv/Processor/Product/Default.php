@@ -86,7 +86,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 		try
 		{
 			$pos = 0;
-			$delete = $prodcodes = array();
+			$delete = array();
 			$map = $this->_getMappedData( $data );
 			$listItems = $product->getListItems( 'product', $this->_listTypes );
 
@@ -97,10 +97,11 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 				if( isset( $map[$pos] ) && ( !isset( $map[$pos]['product.code'] )
 					|| ( $refItem !== null && $map[$pos]['product.code'] === $refItem->getCode() ) )
 				) {
-					unset( $map[$pos] );
+					$pos++;
 					continue;
 				}
 
+				$listItems[$listId] = null;
 				$delete[] = $listId;
 				$pos++;
 			}
@@ -109,7 +110,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['product.code'] === '' || isset( $list['product.list.type'] )
+				if( !isset( $map[$pos]['product.code'] ) || $list['product.code'] === '' || isset( $list['product.list.type'] )
 					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;
@@ -121,7 +122,9 @@ class Controller_Jobs_Product_Import_Csv_Processor_Product_Default
 					throw new Controller_Jobs_Exception( sprintf( $msg, $list['product.code'], $product->getCode() ) );
 				}
 
-				$listItem = $listManager->createItem();
+				if( ( $listItem = array_shift( $listItems ) ) === null ) {
+					$listItem = $listManager->createItem();
+				}
 
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
 				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'product', $typecode );

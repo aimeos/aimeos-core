@@ -75,7 +75,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Price_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['price.value'] === '' || $list['price.value'] === '' || isset( $list['product.list.type'] )
+				if( !isset( $list['price.value'] ) || $list['price.value'] === '' || isset( $list['product.list.type'] )
 					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;

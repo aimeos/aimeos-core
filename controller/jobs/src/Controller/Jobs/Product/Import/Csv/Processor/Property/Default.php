@@ -54,11 +54,12 @@ class Controller_Jobs_Product_Import_Csv_Processor_Property_Default
 							&& $map[$pos]['product.property.languageid'] === $item->getLanguageId()
 						)
 					) {
-						unset( $map[$pos] );
+						$pos++;
 						continue;
 					}
 				}
 
+				$items[$id] = null;
 				$delete[] = $id;
 				$pos++;
 			}
@@ -67,9 +68,7 @@ class Controller_Jobs_Product_Import_Csv_Processor_Property_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( !isset( $list['product.property.type'] ) || $list['product.property.type'] == ''
-					|| !isset( $list['product.property.value'] ) || $list['product.property.value'] == ''
-				) {
+				if( $list['product.property.type'] == '' || $list['product.property.value'] == '' ) {
 					continue;
 				}
 
@@ -77,7 +76,10 @@ class Controller_Jobs_Product_Import_Csv_Processor_Property_Default
 				$list['product.property.typeid'] = $this->_getTypeId( 'product/property/type', 'product/property', $typecode );
 				$list['product.property.parentid'] = $product->getId();
 
-				$item = $manager->createItem();
+				if( ( $item = array_shift( $items ) ) === null ) {
+					$item = $manager->createItem();
+				}
+
 				$item->fromArray( $list );
 				$manager->saveItem( $item );
 			}

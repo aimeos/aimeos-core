@@ -240,6 +240,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 	protected function _delete( array $prodcodes, array $delete, array $nondelete )
 	{
+		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->_context )->getSubmanager( 'list' );
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$listManager = $productManager->getSubManager( 'list' );
 
@@ -263,6 +264,12 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 			}
 
 			$productManager->deleteItem( $product->getId() );
+
+			$search = $catListManager->createSearch();
+			$search->setConditions( $search->compare( '==', 'catalog.list.refid', $id ) );
+			$result = $catListManager->searchItems( $search );
+
+			$catListManager->deleteItems( array_keys( $result ) );
 		}
 
 
