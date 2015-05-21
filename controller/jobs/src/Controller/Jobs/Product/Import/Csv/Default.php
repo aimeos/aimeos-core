@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Product_Import_Csv_Default
-	extends Controller_Jobs_Product_Import_Csv_Abstract
+	extends Controller_Common_Product_Import_Csv_Abstract
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -49,8 +49,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 	{
 		$errors = 0;
 		$config = $this->_getContext()->getConfig();
+		$domains = array( 'attribute', 'media', 'price', 'product', 'text' );
+		$mappings = $this->_getDefaultMapping();
 
-		/** controller/jobs/product/import/csv/domains
+
+		/** controller/common/product/import/csv/domains
 		 * List of item domain names that should be retrieved along with the product items
 		 *
 		 * For efficient processing, the items associated to the products can be
@@ -62,15 +65,33 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of MShop item domain names
 		 * @since 2015.05
 		 * @category Developer
+		 * @see controller/common/product/import/csv/mapping
+		 * @see controller/common/product/import/csv/converter
+		 * @see controller/common/product/import/csv/max-size
+		 */
+		$domains = $config->get( 'controller/common/product/import/csv/domains', $domains );
+
+		/** controller/jobs/product/import/csv/domains
+		 * List of item domain names that should be retrieved along with the product items
+		 *
+		 * This configuration setting overwrites the shared option
+		 * "controller/common/product/import/csv/domains" if you need a
+		 * specific setting for the job controller. Otherwise, you should
+		 * use the shared option for consistency.
+		 *
+		 * @param array Associative list of MShop item domain names
+		 * @since 2015.05
+		 * @category Developer
+		 * @see controller/common/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/max-size
 		 * @see controller/jobs/product/import/csv/backup
 		 */
-		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
-		$domains = $config->get( 'controller/jobs/product/import/csv/domains', $default );
+		$domains = $config->get( 'controller/jobs/product/import/csv/domains', $domains );
 
-		/** controller/jobs/product/import/csv/mapping
+
+		/** controller/common/product/import/csv/mapping
 		 * List of mappings between the position in the CSV file and item keys
 		 *
 		 * The importer have to know which data is at which position in the CSV
@@ -91,15 +112,33 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of processor names and lists of key/position pairs
 		 * @since 2015.05
 		 * @category Developer
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/converter
+		 * @see controller/common/product/import/csv/max-size
+		 */
+		$mappings = $config->get( 'controller/common/product/import/csv/mapping', $mappings );
+
+		/** controller/jobs/product/import/csv/mapping
+		 * List of mappings between the position in the CSV file and item keys
+		 *
+		 * This configuration setting overwrites the shared option
+		 * "controller/common/product/import/csv/mapping" if you need a
+		 * specific setting for the job controller. Otherwise, you should
+		 * use the shared option for consistency.
+		 *
+		 * @param array Associative list of processor names and lists of key/position pairs
+		 * @since 2015.05
+		 * @category Developer
+		 * @see controller/common/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/max-size
 		 * @see controller/jobs/product/import/csv/backup
 		 */
-		$default = $this->_getDefaultMapping();
-		$mappings = $config->get( 'controller/jobs/product/import/csv/mapping', $default );
+		$mappings = $config->get( 'controller/jobs/product/import/csv/mapping', $mappings );
 
-		/** controller/jobs/product/import/csv/converter
+
+		/** controller/common/product/import/csv/converter
 		 * List of converter names for the values at the position in the CSV file
 		 *
 		 * Not all data in the CSV file is already in the required format. Maybe
@@ -134,6 +173,24 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of position/converter name (or list of names) pairs
 		 * @since 2015.05
 		 * @category Developer
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/mapping
+		 * @see controller/common/product/import/csv/max-size
+		 */
+		$converters = $config->get( 'controller/common/product/import/csv/converter', array() );
+
+		/** controller/jobs/product/import/csv/converter
+		 * List of converter names for the values at the position in the CSV file
+		 *
+		 * This configuration setting overwrites the shared option
+		 * "controller/common/product/import/csv/converter" if you need a
+		 * specific setting for the job controller. Otherwise, you should
+		 * use the shared option for consistency.
+		 *
+		 * @param array Associative list of position/converter name (or list of names) pairs
+		 * @since 2015.05
+		 * @category Developer
+		 * @see controller/common/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/max-size
@@ -141,7 +198,8 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 */
 		$converters = $config->get( 'controller/jobs/product/import/csv/converter', array() );
 
-		/** controller/jobs/product/import/csv/max-size
+
+		/** controller/common/product/import/csv/max-size
 		 * Maximum number of CSV rows to import at once
 		 *
 		 * It's more efficient to read and import more than one row at a time
@@ -154,12 +212,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param integer Number of rows
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/jobs/product/import/csv/domains
-		 * @see controller/jobs/product/import/csv/mapping
-		 * @see controller/jobs/product/import/csv/converter
-		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/mapping
+		 * @see controller/common/product/import/csv/converter
 		 */
-		$maxcnt = $config->get( 'controller/jobs/product/import/csv/max-size', 1000 );
+		$maxcnt = $config->get( 'controller/common/product/import/csv/max-size', 1000 );
+
 
 		/** controller/jobs/product/import/csv/backup
 		 * Name of the backup for sucessfully imported files
@@ -227,29 +285,6 @@ class Controller_Jobs_Product_Import_Csv_Default
 		if( !empty( $backup ) && @rename( $path, strftime( $backup ) ) === false ) {
 			throw new Controller_Jobs_Exception( sprintf( 'Unable to move imported file' ) );
 		}
-	}
-
-
-	/**
-	 * Converts the CSV field data using the available converter objects
-	 *
-	 * @param array $convlist Associative list of CSV field indexes and converter objects
-	 * @param array $data Associative list of product codes and lists of CSV field indexes and their data
-	 * @return array Associative list of CSV field indexes and their converted data
-	 */
-	protected function _convertData( array $convlist, array $data )
-	{
-		foreach( $convlist as $idx => $converter )
-		{
-			foreach( $data as $code => $list )
-			{
-				if( isset( $list[$idx] ) ) {
-					$data[$code][$idx] = $converter->translate( $list[$idx] );
-				}
-			}
-		}
-
-		return $data;
 	}
 
 
@@ -353,163 +388,17 @@ class Controller_Jobs_Product_Import_Csv_Default
 
 
 	/**
-	 * Returns the list of converter objects based on the given converter map
-	 *
-	 * @param array $convmap List of converter names for the values at the position in the CSV file
-	 * @return array Associative list of positions and converter objects
-	 */
-	protected function _getConverterList( array $convmap )
-	{
-		$convlist = array();
-
-		foreach( $convmap as $idx => $name ) {
-			$convlist[$idx] = MW_Convert_Factory::createConverter( $name );
-		}
-
-		return $convlist;
-	}
-
-
-	/**
-	 * Returns the rows from the CSV file up to the maximum count
-	 *
-	 * @param MW_Container_Content_Interface $content CSV content object
-	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
-	 * @return array List of arrays with product codes as keys and list of values from the CSV file
-	 */
-	protected function _getData( MW_Container_Content_Interface $content, $maxcnt )
-	{
-		$count = 0;
-		$data = array();
-
-		while( $content->valid() && $count++ < $maxcnt )
-		{
-			$row = $content->current();
-			$data[ $row[0] ] = $row;
-			$content->next();
-		}
-
-		return $data;
-	}
-
-
-	/**
-	 * Returns the default mapping for the CSV fields to the domain item keys
-	 *
-	 * Example:
-	 *  'item' => array(
-	 *  	0 => 'product.code', // e.g. unique EAN code
-	 *  	1 => 'product.label', // UTF-8 encoded text, also used as product name
-	 *  ),
-	 *  'text' => array(
-	 *  	3 => 'text.type', // e.g. "short" for short description
-	 *  	4 => 'text.content', // UTF-8 encoded text
-	 *  ),
-	 *  'media' => array(
-	 *  	5 => 'media.url', // relative URL of the product image on the server
-	 *  ),
-	 *  'price' => array(
-	 *  	6 => 'price.value', // price with decimals separated by a dot, no thousand separator
-	 *  	7 => 'price.taxrate', // tax rate with decimals separated by a dot
-	 *  ),
-	 *  'attribute' => array(
-	 *  	8 => 'attribute.type', // e.g. "size", "length", "width", "color", etc.
-	 *  	9 => 'attribute.code', // code of an existing attribute, new ones will be created automatically
-	 *  ),
-	 *  'product' => array(
-	 *  	10 => 'product.code', // e.g. EAN code of another product
-	 *  	11 => 'product.list.type', // e.g. "suggestion" for suggested product
-	 *  ),
-	 *  'property' => array(
-	 *  	12 => 'product.property.type', // e.g. "package-weight"
-	 *  	13 => 'product.property.value', // arbitrary value for the corresponding type
-	 *  ),
-	 *  'catalog' => array(
-	 *  	14 => 'catalog.code', // e.g. Unique category code
-	 *  	15 => 'catalog.list.type', // e.g. "promotion" for top seller products
-	 *  ),
-	 *
-	 * @return array Associative list of domains as keys ("item" is special for the product itself) and a list of
-	 * 	positions and the domain item keys as values.
-	 */
-	protected function _getDefaultMapping()
-	{
-		return array(
-			'item' => array(
-				0 => 'product.code',
-				1 => 'product.label',
-				2 => 'product.type',
-				3 => 'product.status',
-			),
-			'text' => array(
-				4 => 'text.type',
-				5 => 'text.content',
-				6 => 'text.type',
-				7 => 'text.content',
-			),
-			'media' => array(
-				8 => 'media.url',
-			),
-			'price' => array(
-				9 => 'price.quantity',
-				10 => 'price.value',
-				11 => 'price.taxrate',
-			),
-			'attribute' => array(
-				12 => 'attribute.code',
-				13 => 'attribute.type',
-			),
-			'product' => array(
-				14 => 'product.code',
-				15 => 'product.list.type',
-			),
-			'property' => array(
-				16 => 'product.property.value',
-				17 => 'product.property.type',
-			),
-			'catalog' => array(
-				18 => 'catalog.code',
-				19 => 'catalog.list.type',
-			),
-		);
-	}
-
-
-	/**
-	 * Returns the mapped and converted data from the CSV line
-	 * @param array $mapping List of domain item keys with the CSV field position as key
-	 * @param array $list List of CSV fields with the CSV field position as key
-	 * @return Associative list of domain item keys and the converted values
-	 */
-	protected function _getMappedData( array $mapping, array $list )
-	{
-		$map = array();
-
-		foreach( $mapping as $idx => $key )
-		{
-			if( !isset( $list[$idx] ) ) {
-				break;
-			}
-
-			$map[$key] = $list[$idx];
-		}
-
-		return $map;
-	}
-
-
-	/**
 	 * Imports the CSV data and creates new products or updates existing ones
 	 *
 	 * @param array $products List of products items implementing MShop_Product_Item_Interface
 	 * @param array $data Associative list of import data as index/value pairs
 	 * @param array $mappings Associative list of positions and domain item keys
-	 * @param Controller_Jobs_Product_Import_Csv_Processor_Interface $processor
+	 * @param Controller_Common_Product_Import_Csv_Processor_Interface $processor Processor object
 	 * @return integer Number of products that couldn't be imported
 	 * @throws Controller_Jobs_Exception
 	 */
 	protected function _import( array $products, array $data, array $mapping,
-		Controller_Jobs_Product_Import_Csv_Processor_Interface $processor )
+		Controller_Common_Product_Import_Csv_Processor_Interface $processor )
 	{
 		$errors = 0;
 		$context = $this->_getContext();
