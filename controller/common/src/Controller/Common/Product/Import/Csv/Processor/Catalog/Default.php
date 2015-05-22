@@ -34,7 +34,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	{
 		parent::__construct( $context, $mapping, $object );
 
-		/** controller/jobs/product/import/csv/processor/catalog/listtypes
+		/** controller/common/product/import/csv/processor/catalog/listtypes
 		 * Names of the catalog list types that are updated or removed
 		 *
 		 * If you want to associate product items to categories manually via the
@@ -46,14 +46,14 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 		 * @since 2015.05
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/import/csv/domains
-		 * @see controller/jobs/product/import/csv/processor/attribute/listtypes
-		 * @see controller/jobs/product/import/csv/processor/media/listtypes
-		 * @see controller/jobs/product/import/csv/processor/price/listtypes
-		 * @see controller/jobs/product/import/csv/processor/product/listtypes
-		 * @see controller/jobs/product/import/csv/processor/text/listtypes
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/processor/attribute/listtypes
+		 * @see controller/common/product/import/csv/processor/media/listtypes
+		 * @see controller/common/product/import/csv/processor/price/listtypes
+		 * @see controller/common/product/import/csv/processor/product/listtypes
+		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/jobs/product/import/csv/processor/catalog/listtypes' );
+		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/catalog/listtypes' );
 
 		$this->_cache = $this->_getCache( 'catalog' );
 	}

@@ -34,7 +34,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 	{
 		parent::__construct( $context, $mapping, $object );
 
-		/** controller/jobs/product/import/csv/processor/product/listtypes
+		/** controller/common/product/import/csv/processor/product/listtypes
 		 * Names of the product list types that are updated or removed
 		 *
 		 * Aimeos offers associated items like "bought together" products that
@@ -52,14 +52,15 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 		 * @since 2015.05
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/import/csv/domains
-		 * @see controller/jobs/product/import/csv/processor/attribute/listtypes
-		 * @see controller/jobs/product/import/csv/processor/media/listtypes
-		 * @see controller/jobs/product/import/csv/processor/price/listtypes
-		 * @see controller/jobs/product/import/csv/processor/text/listtypes
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/processor/attribute/listtypes
+		 * @see controller/common/product/import/csv/processor/catalog/listtypes
+		 * @see controller/common/product/import/csv/processor/media/listtypes
+		 * @see controller/common/product/import/csv/processor/price/listtypes
+		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
 		$default = array( 'default', 'suggestion' );
-		$key = 'controller/jobs/product/import/csv/processor/product/listtypes';
+		$key = 'controller/common/product/import/csv/processor/product/listtypes';
 		$this->_listTypes = $context->getConfig()->get( $key, $default );
 
 		$this->_cache = $this->_getCache( 'product' );

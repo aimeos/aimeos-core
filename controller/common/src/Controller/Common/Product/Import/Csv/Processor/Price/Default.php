@@ -33,7 +33,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 	{
 		parent::__construct( $context, $mapping, $object );
 
-		/** controller/jobs/product/import/csv/processor/price/listtypes
+		/** controller/common/product/import/csv/processor/price/listtypes
 		 * Names of the product list types for prices that are updated or removed
 		 *
 		 * If you want to associate price items manually via the administration
@@ -45,13 +45,14 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 		 * @since 2015.05
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/import/csv/domains
-		 * @see controller/jobs/product/import/csv/processor/attribute/listtypes
-		 * @see controller/jobs/product/import/csv/processor/media/listtypes
-		 * @see controller/jobs/product/import/csv/processor/product/listtypes
-		 * @see controller/jobs/product/import/csv/processor/text/listtypes
+		 * @see controller/common/product/import/csv/domains
+		 * @see controller/common/product/import/csv/processor/attribute/listtypes
+		 * @see controller/common/product/import/csv/processor/catalog/listtypes
+		 * @see controller/common/product/import/csv/processor/media/listtypes
+		 * @see controller/common/product/import/csv/processor/product/listtypes
+		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/jobs/product/import/csv/processor/price/listtypes' );
+		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/price/listtypes' );
 	}
 
 
