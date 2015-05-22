@@ -196,7 +196,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/max-size
 		 * @see controller/jobs/product/import/csv/backup
 		 */
-		$converters = $config->get( 'controller/jobs/product/import/csv/converter', array() );
+		$converters = $config->get( 'controller/jobs/product/import/csv/converter', $converters );
 
 
 		/** controller/common/product/import/csv/max-size
@@ -231,7 +231,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * name of the new backup location can contain placeholders understood
 		 * by the PHP strftime() function to create dynamic paths, e.g. "backup/%Y-%m-%d"
 		 * which would create "backup/2000-01-01". For more information about the
-		 * strftime() placeholders, please have a look into the PHP documenation of
+		 * strftime() placeholders, please have a look into the PHP documentation of
 		 * the {@link http://php.net/manual/en/function.strftime.php strftime() function}.
 		 *
 		 * '''Note:''' If no backup name is configured, the file or directory
