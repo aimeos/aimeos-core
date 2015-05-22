@@ -331,7 +331,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * * Zip
 		 * * PHPExcel
 		 *
-		 * '''Note:''' for the PHPExcel container, you need to install the
+		 * '''Note:''' For the PHPExcel container, you need to install the
 		 * "ai-container" extension.
 		 *
 		 * @param string Container type name
@@ -423,7 +423,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 				$typecode = ( isset( $map['product.type'] ) ? $map['product.type'] : 'default' );
 				$map['product.typeid'] = $this->_getTypeId( 'product/type', 'product', $typecode );
 
-				$product->fromArray( $map );
+				$product->fromArray( $this->_addItemDefaults( $map ) );
 				$manager->saveItem( $product );
 
 				$remaining = $processor->process( $product, $list );
@@ -446,5 +446,21 @@ class Controller_Jobs_Product_Import_Csv_Default
 		}
 
 		return $errors;
+	}
+
+
+	/**
+	 * Adds the product item default values and returns the resulting array
+	 *
+	 * @param array $list Associative list of domain item keys and their values, e.g. "product.status" => 1
+	 * @return array Given associative list enriched by default values if they were not already set
+	 */
+	protected function _addItemDefaults( array $list )
+	{
+		if( !isset( $list['product.status'] ) ) {
+			$list['product.status'] = 1;
+		}
+
+		return $list;
 	}
 }
