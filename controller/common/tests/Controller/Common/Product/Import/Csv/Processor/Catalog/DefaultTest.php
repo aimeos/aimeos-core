@@ -219,7 +219,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			3 => 'job_csv_test',
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/catalog/listtypes', array( 'default' ) );
+		$this->_context->getConfig()->set( 'controller/common/product/import/csv/processor/catalog/listtypes', array( 'default' ) );
 
 		$category = $this->_create( 'job_csv_test' );
 

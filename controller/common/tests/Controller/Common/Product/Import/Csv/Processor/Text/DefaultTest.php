@@ -267,7 +267,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_DefaultTest extends MW
 			5 => 'default',
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/text/listtypes', array( 'default' ) );
+		$this->_context->getConfig()->set( 'controller/common/product/import/csv/processor/text/listtypes', array( 'default' ) );
 
 		$product = $this->_create( 'job_csv_test' );
 

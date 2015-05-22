@@ -197,7 +197,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_DefaultTest extends
 			3 => 'CNE',
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/processor/product/listtypes', array( 'default' ) );
+		$this->_context->getConfig()->set( 'controller/common/product/import/csv/processor/product/listtypes', array( 'default' ) );
 
 		$product = $this->_create( 'job_csv_test' );
 
