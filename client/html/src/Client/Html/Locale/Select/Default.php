@@ -217,28 +217,6 @@ class Client_Html_Locale_Select_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 */
-	public function process()
-	{
-		$view = $this->getView();
-		$session = $this->_getContext()->getSession();
-
-		if( ( $languageId = $view->param( 'loc_languageid' ) ) !== null ) {
-			$session->set( 'arcavias/locale/languageid', $languageId );
-		}
-
-		if( ( $currencyId = $view->param( 'loc_currencyid' ) ) !== null ) {
-			$session->set( 'arcavias/locale/currencyId', $currencyId );
-		}
-
-		parent::process();
-	}
-
-
-	/**
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of HTML client names
