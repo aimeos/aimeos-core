@@ -276,7 +276,7 @@ class Client_Html_Locale_Select_Default
 			$manager = MShop_Factory::createManager( $context, 'locale' );
 
 			$search = $manager->createSearch( true );
-			$search->setSortations( array( $search->sort( '-', 'locale.position' ) ) );
+			$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 
 			foreach( $manager->searchItems( $search ) as $item )
 			{
