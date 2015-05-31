@@ -170,18 +170,6 @@ class Client_Html_Locale_Select_Language_Default
 		$config = $context->getConfig();
 		$session = $context->getSession();
 
-		/** client/html/locale/select/language/param-name
-		 * Name of the parameter that contains the language ID value
-		 *
-		 * Frameworks and applications normally use its own predefined parameter
-		 * that contains the current language ID if they are multi-language
-		 * capable. To adapt the Aimeos parameter name to the already used name,
-		 * you are able to configure it by using this setting.
-		 *
-		 * @param string Parameter name for language ID
-		 * @since 2015.06
-		 * @see client/html/locale/select/currency/param-name
-		 */
 		$name = $config->get( 'client/html/locale/select/language/param-name', 'loc_languageid' );
 
 		if( ( $languageId = $view->param( $name ) ) !== null ) {

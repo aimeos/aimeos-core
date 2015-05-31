@@ -170,18 +170,6 @@ class Client_Html_Locale_Select_Currency_Default
 		$config = $context->getConfig();
 		$session = $context->getSession();
 
-		/** client/html/locale/select/currency/param-name
-		 * Name of the parameter that contains the currency ID value
-		 *
-		 * Frameworks and applications normally use its own predefined parameter
-		 * that contains the current currency ID if they already support multiple
-		 * currencies. To adapt the Aimeos parameter name to the already used name,
-		 * you are able to configure it by using this setting.
-		 *
-		 * @param string Parameter name for currency ID
-		 * @since 2015.06
-		 * @see client/html/locale/select/language/param-name
-		 */
 		$name = $config->get( 'client/html/locale/select/currency/param-name', 'loc_currencyid' );
 
 		if( ( $currencyId = $view->param( $name ) ) !== null ) {

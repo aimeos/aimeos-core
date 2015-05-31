@@ -1,14 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 $enc = $this->encoder();
 
+$map = $this->get( 'selectMap', array() );
 $params = $this->get( 'selectParams', array() );
 $langId = $this->get( 'selectLanguageId', 'en' );
+$currencyId = $this->get( 'selectCurrencyId', 'EUR' );
 
 /** client/html/locale/select/language/url/config
  * Associative list of configuration options used for generating the URL
@@ -29,17 +32,16 @@ $langId = $this->get( 'selectLanguageId', 'en' );
  */
 $config = $this->config( 'client/html/locale/select/language/url/config', array() );
 
-$paramname = $this->config( 'client/html/locale/select/language/param-name', 'loc_languageid' );
-
 ?>
 <div class="locale-select-language">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Select language' ); ?></h2>
 	<ul class="select-menu">
 		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/html/language', $langId ); ?></a>
 			<ul class="select-dropdown">
-<?php	foreach( $this->get( 'selectItems', array() ) as $lang => $list ) : ?>
+<?php	foreach( $map as $lang => $list ) : ?>
+<?php		$locParams = ( isset( $list[$currencyId] ) ? (array) $list[$currencyId] : (array) reset( $list ) ); ?>
 				<li class="select-item <?php echo ( $lang === $langId ? 'active' : '' ); ?>">
-					<a href="<?php echo $enc->attr( $this->url( $this->param( 'target' ), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, array( $paramname => $lang ) ), array(), $config ) ); ?>">
+					<a href="<?php echo $enc->attr( $this->url( $this->param( 'target' ), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, $locParams ), array(), $config ) ); ?>">
 <?php		echo $enc->html( $this->translate( 'client/html/language', $lang ), $enc::TRUST ); ?>
 					</a>
 				</li>

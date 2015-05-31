@@ -241,18 +241,51 @@ class Client_Html_Locale_Select_Default
 		{
 			$map = array();
 			$context = $this->_getContext();
+			$config = $context->getConfig();
 			$locale = $context->getLocale();
+
+			/** client/html/locale/select/language/param-name
+			 * Name of the parameter that contains the language ID value
+			 *
+			 * Frameworks and applications normally use its own predefined parameter
+			 * that contains the current language ID if they are multi-language
+			 * capable. To adapt the Aimeos parameter name to the already used name,
+			 * you are able to configure it by using this setting.
+			 *
+			 * @param string Parameter name for language ID
+			 * @since 2015.06
+			 * @see client/html/locale/select/currency/param-name
+			 */
+			$langname = $config->get( 'client/html/locale/select/language/param-name', 'loc_languageid' );
+
+			/** client/html/locale/select/currency/param-name
+			 * Name of the parameter that contains the currency ID value
+			 *
+			 * Frameworks and applications normally use its own predefined parameter
+			 * that contains the current currency ID if they already support multiple
+			 * currencies. To adapt the Aimeos parameter name to the already used name,
+			 * you are able to configure it by using this setting.
+			 *
+			 * @param string Parameter name for currency ID
+			 * @since 2015.06
+			 * @see client/html/locale/select/language/param-name
+			 */
+			$curname = $config->get( 'client/html/locale/select/currency/param-name', 'loc_currencyid' );
+
 
 			$manager = MShop_Factory::createManager( $context, 'locale' );
 
 			$search = $manager->createSearch( true );
 			$search->setSortations( array( $search->sort( '-', 'locale.position' ) ) );
 
-			foreach( $manager->searchItems( $search ) as $item ) {
-				$map[ $item->getLanguageId() ][ $item->getCurrencyId() ] = $item;
+			foreach( $manager->searchItems( $search ) as $item )
+			{
+				$curId = $item->getCurrencyId();
+				$langId = $item->getLanguageId();
+				$map[$langId][$curId] = array( $langname => $langId, $curname => $curId );
 			}
 
-			$view->selectItems = $map;
+			$view->selectMap = $map;
 			$view->selectLanguageId = $locale->getLanguageId();
 			$view->selectCurrencyId = $locale->getCurrencyId();
 			$view->selectParams = $this->_getClientParams( $view->param(), array( 'f', 'l', 'd' ) );

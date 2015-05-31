@@ -56,9 +56,12 @@ class Client_Html_Locale_Select_Currency_DefaultTest extends MW_Unittest_Testcas
 		$view = $this->_object->getView();
 		$view->selectCurrencyId = 'EUR';
 		$view->selectLanguageId = 'de';
-		$view->selectItems = array(
-			'de' => array( 'EUR' => $item, 'CHF' => $item ),
-			'en' => array( 'USD' => $item ),
+		$view->selectMap = array(
+			'de' => array(
+				'EUR' => array( 'loc_languageid' => 'de', 'loc_currencyid' => 'EUR' ),
+				'CHF' => array( 'loc_languageid' => 'de', 'loc_currencyid' => 'CHF' ),
+			),
+			'en' => array( 'USD' => array( 'loc_languageid' => 'en', 'loc_currencyid' => 'USD' ) ),
 		);
 
 		$tags = array();
