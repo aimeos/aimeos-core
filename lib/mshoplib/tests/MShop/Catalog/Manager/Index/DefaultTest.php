@@ -168,7 +168,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 7, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 9, $cntTextA );
+		$this->assertEquals( 10, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -204,7 +204,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$prodText = $this->_getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals( 'Unterproduct 3', $prodText );
+		$this->assertEquals( '16 discs', $prodText );
 		$this->assertEquals( 'XL', $attrText );
 	}
 

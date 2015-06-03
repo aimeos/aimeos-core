@@ -16,6 +16,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Catalog_Manager_Index_Text_Interface
 {
+	private $_langIds;
+
 	private $_searchConfig = array(
 		'catalog.index.text.id' => array(
 			'code'=>'catalog.index.text.id',
@@ -78,6 +80,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$this->_setResourceName( 'db-product' );
 
 		$site = $context->getLocale()->getSitePath();
+		$this->_langIds = $this->_getLanguageIds( $site );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
@@ -455,14 +458,20 @@ class MShop_Catalog_Manager_Index_Text_Default
 					}
 				}
 
-				$names = $item->getRefItems( 'text', 'name' );
+				$nameList = array();
+				foreach( $item->getRefItems( 'text', 'name' ) as $refItem ) {
+					$nameList[ $refItem->getLanguageId() ] = $refItem;
+				}
 
-				if( empty( $names ) )
+				foreach( $this->_langIds as $langId )
 				{
-					$this->_saveText(
-						$stmt, $parentId, $siteid, null, $locale->getLanguageId(), 'default',
-						'name', 'product', $item->getLabel(), $date, $editor
-					);
+					if( !isset( $nameList[$langId] ) )
+					{
+						$this->_saveText(
+							$stmt, $parentId, $siteid, null, $langId, 'default',
+							'name', 'product', $item->getLabel(), $date, $editor
+						);
+					}
 				}
 			}
 
@@ -733,5 +742,27 @@ class MShop_Catalog_Manager_Index_Text_Default
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Returns the configured langauge IDs for the given sites
+	 *
+	 * @param array $siteIds List of site IDs
+	 * @return array List of language IDs
+	 */
+	protected function _getLanguageIds( array $siteIds )
+	{
+		$list = array();
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'locale' );
+
+		$search = $manager->createSearch( true );
+		$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
+
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$list[ $item->getLanguageId() ] = null;
+		}
+
+		return array_keys( $list );
 	}
 }
