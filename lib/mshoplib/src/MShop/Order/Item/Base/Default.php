@@ -318,10 +318,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'deleteProduct.before', $position );
 
+		$product = $this->_products[$position];
 		unset($this->_products[$position]);
 		$this->_modified = true;
 
-		$this->_notifyListeners( 'deleteProduct.after', $position );
+		$this->_notifyListeners( 'deleteProduct.after', $product );
 	}
 
 
@@ -383,18 +384,21 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
-	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
+	 * @param string $type Address type defined in MShop_Order_Item_Base_Address_Abstract
 	 */
-	public function deleteAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )
+	public function deleteAddress( $type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )
 	{
-		$this->_notifyListeners( 'deleteAddress.before', $domain );
-
-		if( isset( $this->_addresses[$domain] ) ) {
-			unset( $this->_addresses[$domain] );
-			$this->_modified = true;
+		if( !isset( $this->_addresses[$type] ) ) {
+			throw new MShop_Order_Exception( sprintf( 'Address of type "%1$s" not available', $type ) );
 		}
 
-		$this->_notifyListeners( 'deleteAddress.after', $domain );
+		$this->_notifyListeners( 'deleteAddress.before', $type );
+
+		$address = $this->_addresses[$type];
+		unset( $this->_addresses[$type] );
+		$this->_modified = true;
+
+		$this->_notifyListeners( 'deleteAddress.after', $address );
 	}
 
 
@@ -457,14 +461,17 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function deleteService( $type )
 	{
-		$this->_notifyListeners( 'deleteService.before', $type );
-
-		if( isset( $this->_services[$type] ) ) {
-			unset( $this->_services[$type] );
-			$this->_modified = true;
+		if( !isset( $this->_services[$type] ) ) {
+			throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
 		}
 
-		$this->_notifyListeners( 'deleteService.after', $type );
+		$this->_notifyListeners( 'deleteService.before', $type );
+
+		$service = $this->_services[$type];
+		unset( $this->_services[$type] );
+		$this->_modified = true;
+
+		$this->_notifyListeners( 'deleteService.after', $service );
 	}
 
 
@@ -545,7 +552,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 			$this->_modified = true;
 
-			$this->_notifyListeners( 'deleteCoupon.after' );
+			$this->_notifyListeners( 'deleteCoupon.after', $code );
 		}
 
 		return $products;
@@ -555,7 +562,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
-	 * @param integer $what Test for the specifice type of completeness
+	 * @param integer $what Test for the specific type of completeness
 	 * @throws MShop_Order_Exception if there are no products in the basket
 	 */
 	public function check( $what = MShop_Order_Item_Base_Abstract::PARTS_ALL )
