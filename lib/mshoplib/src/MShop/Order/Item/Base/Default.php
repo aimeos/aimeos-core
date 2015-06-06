@@ -313,7 +313,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function deleteProduct( $position )
 	{
 		if( !array_key_exists( $position, $this->_products ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $position ) );
+			return;
 		}
 
 		$this->_notifyListeners( 'deleteProduct.before', $position );
@@ -389,7 +389,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function deleteAddress( $type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )
 	{
 		if( !isset( $this->_addresses[$type] ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Address of type "%1$s" not available', $type ) );
+			return;
 		}
 
 		$this->_notifyListeners( 'deleteAddress.before', $type );
@@ -462,7 +462,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function deleteService( $type )
 	{
 		if( !isset( $this->_services[$type] ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
+			return;
 		}
 
 		$this->_notifyListeners( 'deleteService.before', $type );
