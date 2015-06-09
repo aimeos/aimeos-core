@@ -100,8 +100,10 @@ class TestHelper
 
 	protected static function _createView( MW_Config_Interface $config )
 	{
-		$view = new MW_View_Default();
+		$tmplpaths = self::getArcavias()->getCustomPaths( 'client/html' );
+		$tmplpaths[ dirname(__DIR__) ] = array( 'layouts' );
 
+		$view = new MW_View_Default();
 
 		$trans = new MW_Translation_None( 'de_DE' );
 		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
@@ -127,6 +129,9 @@ class TestHelper
 
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
+
+		$helper = new MW_View_Helper_Partial_Default( $view, $config, $tmplpaths );
+		$view->addHelper( 'partial', $helper );
 
 		return $view;
 	}

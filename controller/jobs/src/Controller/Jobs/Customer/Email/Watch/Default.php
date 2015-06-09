@@ -185,24 +185,32 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	public function getProducts( array $listItems, array $products )
 	{
 		$result = array();
+		$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
 
 		foreach( $listItems as $id => $listItem )
 		{
-			$refId = $listItem->getRefId();
-			$config = $listItem->getConfig();
-
-			if( isset( $products[$refId] ) )
+			try
 			{
-				$prices = $products[$refId]->getRefItems( 'price', 'default', 'default' );
-				$price = reset( $prices );
+				$refId = $listItem->getRefId();
+				$config = $listItem->getConfig();
 
-				if( isset( $config['stock'] ) && $config['stock'] == 1 ||
-					isset( $config['price'] ) && $config['price'] == 1 &&
-					$price !== false && $config['pricevalue'] > $price->getValue()
-				) {
-					$result[$id] = $products[$refId];
+				if( isset( $products[$refId] ) )
+				{
+					$prices = $products[$refId]->getRefItems( 'price', 'default', 'default' );
+					$currencyId = ( isset( $config['currency'] ) ? $config['currency'] : null );
+
+					$price = $priceManager->getLowestPrice( $priceList, 1, $currencyId );
+
+					if( isset( $config['stock'] ) && $config['stock'] == 1 ||
+						isset( $config['price'] ) && $config['price'] == 1 &&
+						isset( $config['pricevalue'] ) && $config['pricevalue'] > $price->getValue()
+					) {
+						$result[$id]['item'] = $products[$refId];
+						$result[$id]['price'] = $price;
+					}
 				}
 			}
+			catch( Exception $e ) { ; } // no price available
 		}
 
 		return $result;
