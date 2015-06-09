@@ -78,10 +78,10 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends MW_Unittest_Testc
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
 			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
-			->setMethods( array( 'getProducts' ) )
+			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'getProducts' )
+		$object->expects( $this->once() )->method( '_getListProducts' )
 			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
@@ -107,10 +107,10 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends MW_Unittest_Testc
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
 			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
-			->setMethods( array( 'getProducts' ) )
+			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'getProducts' )
+		$object->expects( $this->once() )->method( '_getListProducts' )
 			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
