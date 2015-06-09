@@ -199,7 +199,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 					$prices = $products[$refId]->getRefItems( 'price', 'default', 'default' );
 					$currencyId = ( isset( $config['currency'] ) ? $config['currency'] : null );
 
-					$price = $priceManager->getLowestPrice( $priceList, 1, $currencyId );
+					$price = $priceManager->getLowestPrice( $prices, 1, $currencyId );
 
 					if( isset( $config['stock'] ) && $config['stock'] == 1 ||
 						isset( $config['price'] ) && $config['price'] == 1 &&
