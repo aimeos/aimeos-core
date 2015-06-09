@@ -418,9 +418,6 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->deleteProduct(1);
 		$this->assertSame($this->_products, $this->_object->getProducts());
 		$this->assertTrue($this->_object->isModified());
-
-		$this->setExpectedException('MShop_Order_Exception');
-		$this->_object->deleteProduct( -1 );
 	}
 
 
