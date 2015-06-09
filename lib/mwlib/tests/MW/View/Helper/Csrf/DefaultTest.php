@@ -63,4 +63,13 @@ class MW_View_Helper_Csrf_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( $expected, $this->_object->transform()->formfield() );
 	}
+
+
+	public function testTransformFormfieldNone()
+	{
+		$view = new MW_View_Default();
+		$object = new MW_View_Helper_Csrf_Default( $view, 'cname', '' );
+
+		$this->assertEquals( '', $object->transform()->formfield() );
+	}
 }

@@ -20,6 +20,7 @@ class MW_View_Helper_Csrf_Default
 {
 	private $_name;
 	private $_value;
+	private $_formfield = '';
 
 
 	/**
@@ -35,6 +36,10 @@ class MW_View_Helper_Csrf_Default
 
 		$this->_name = $name;
 		$this->_value = $value;
+
+		if( $value != '' ) {
+			$this->_formfield = '<input type="hidden" name="' . $this->_name . '" value="' . $this->_value . '" />';
+		}
 	}
 
 
@@ -78,6 +83,6 @@ class MW_View_Helper_Csrf_Default
 	 */
 	public function formfield()
 	{
-		return '<input type="hidden" name="' . $this->_name . '" value="' . $this->_value . '" />';
+		return $this->_formfield;
 	}
 }
