@@ -18,6 +18,9 @@ class MShop_Catalog_Manager_Index_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Catalog_Manager_Index_Interface
 {
+	private $_submanagers;
+
+
 	/**
 	 * Initializes the manager instance.
 	 *
@@ -27,6 +30,8 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
+
+		$this->_subManagers = $this->_getSubManagers();
 	}
 
 
@@ -75,7 +80,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		if( empty( $ids ) ) { return; }
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->_subManagers as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
 	}
@@ -282,7 +287,7 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->_subManagers as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -295,7 +300,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach ( $this->_getSubManagers() as $submanager ) {
+		foreach ( $this->_subManagers as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
 	}
@@ -309,7 +314,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanupIndex( $timestamp )
 	{
-		foreach ( $this->_getSubManagers() as $submanager ) {
+		foreach ( $this->_subManagers as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -511,7 +516,7 @@ class MShop_Catalog_Manager_Index_Default
 
 				$this->deleteItems( array_keys( $products ) );
 
-				foreach ( $this->_getSubManagers() as $submanager ) {
+				foreach ( $this->_subManagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
 				}
 
@@ -540,8 +545,8 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _saveSubProducts( array $items )
 	{
 		$context = $this->_getContext();
-		
-		// Including "text" and "price" messes up the sortation 
+
+		// Including "text" and "price" messes up the sortation
 		$default = array( 'attribute', 'product' );
 		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/subdomains', $default );
 		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
@@ -607,7 +612,7 @@ class MShop_Catalog_Manager_Index_Default
 
 		// Execute only the sub-managers which correspond to one of the given domains
 		// This will prevent adding product names of sub-products which messes up the sortation
-		foreach( $this->_getSubManagers() as $domain => $submanager )
+		foreach( $this->_subManagers as $domain => $submanager )
 		{
 			if( in_array( $domain, $domains ) ) {
 				$submanagers[$domain] = $submanager;
