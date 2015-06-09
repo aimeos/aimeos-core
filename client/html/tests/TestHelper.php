@@ -66,6 +66,9 @@ class TestHelper
 		$helper = new MW_View_Helper_Partial_Default( $view, $config, array( dirname(__DIR__) => array( 'layouts' ) ) );
 		$view->addHelper( 'partial', $helper );
 
+		$helper = new MW_View_Helper_Csrf_Default( $view, '_csrf_token', '_csrf_value' );
+		$view->addHelper( 'csrf', $helper );
+
 		return $view;
 	}
 
