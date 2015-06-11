@@ -33,7 +33,13 @@ class Client_Html_Email_Watch_DefaultTest extends MW_Unittest_Testcase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
 
-		self::$_productItems = $manager->searchItems( $search, array( 'text', 'price', 'media' ) );
+		foreach( $manager->searchItems( $search, array( 'text', 'price', 'media' ) ) as $id => $product )
+		{
+			$prices = $product->getRefItems( 'price', 'default', 'default' );
+
+			self::$_productItems[$id]['price'] = reset( $prices );
+			self::$_productItems[$id]['item'] = $product;
+		}
 	}
 
 

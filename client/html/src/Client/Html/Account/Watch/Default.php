@@ -304,6 +304,7 @@ class Client_Html_Account_Watch_Default
 								'pricevalue' => $view->param( 'wat_pricevalue', '0.00' ),
 								'price' => $view->param( 'wat_price', 0 ),
 								'stock' => $view->param( 'wat_stock', 0 ),
+								'currency' => $context->getLocale()->getCurrencyId(),
 							);
 							$time = time() + ( $config['timeframe'] + 1 ) * 86400;
 

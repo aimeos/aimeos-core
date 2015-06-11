@@ -73,13 +73,16 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends MW_Unittest_Testc
 		$this->_context->setMail( $mailStub );
 
 
+		$product = $this->_getProductItem();
+		$prices = $product->getRefItems( 'price', 'default', 'default' );
+
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
 			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
-			->setMethods( array( 'getProducts' ) )
+			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( array( -1 => $this->_getProductItem() ) ) );
+		$object->expects( $this->once() )->method( '_getListProducts' )
+			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
 		$object->run();
@@ -99,13 +102,16 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends MW_Unittest_Testc
 		$this->_context->setMail( $mailStub );
 
 
+		$product = $this->_getProductItem();
+		$prices = $product->getRefItems( 'price', 'default', 'default' );
+
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
 			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
-			->setMethods( array( 'getProducts' ) )
+			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( array( -1 => $this->_getProductItem() ) ) );
+		$object->expects( $this->once() )->method( '_getListProducts' )
+			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
 		$object->run();
@@ -117,7 +123,7 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends MW_Unittest_Testc
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
-		$items = $manager->searchItems( $search );
+		$items = $manager->searchItems( $search, array( 'media', 'price', 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No product item with code "CNC" found' );
