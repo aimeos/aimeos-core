@@ -54,6 +54,17 @@ abstract class MW_View_Helper_Abstract
 
 
 	/**
+	 * Sets a new view object for changing views afterwards
+	 *
+	 * @param MW_View_Interface $view View object
+	 */
+	public function setView( MW_View_Interface $view )
+	{
+		$this->_view = $view;
+	}
+
+
+	/**
 	 * Returns the view object.
 	 *
 	 * @return MW_View_Interface View object
