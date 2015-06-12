@@ -72,8 +72,14 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __clone()
 	{
-		foreach( $this->_helper as $name => $helper ) {
-			$this->_helper[$name] = clone $helper;
+		foreach( $this->_helper as $name => $helper )
+		{
+			$helper = clone $helper;
+
+			// reset view so view helpers will use the current one (for translation, etc.)
+			$helper->setView( $this );
+
+			$this->_helper[$name] = $helper;
 		}
 	}
 
