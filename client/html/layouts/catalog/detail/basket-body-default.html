@@ -21,6 +21,7 @@ $enc = $this->encoder();
 	</div>
 <?php endif; ?>
 	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
+<?php echo $this->csrf()->formfield(); ?>
 <?php echo $this->get( 'basketBody' ); ?>
 		<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', $this->get( 'basketProductIds', array() ) ) ); ?>"></div>
 		<div class="addbasket">

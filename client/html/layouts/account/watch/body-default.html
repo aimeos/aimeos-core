@@ -139,6 +139,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			<form class="watch-details" method="POST" action="<?php echo $this->url( $watchTarget, $watchController, $watchAction, $watchParams, array(), $watchConfig ); ?>">
 				<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'wat_action' ) ) ); ?>" value="edit" />
 				<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'wat_id' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+<?php echo $this->csrf()->formfield(); ?>
 				<ul class="form-list">
 <?php			$config = $listItem->getConfig(); ?>
 <?php			$timeframe = ( isset( $config['timeframe'] ) ? (int) $config['timeframe'] : 7 ); ?>
