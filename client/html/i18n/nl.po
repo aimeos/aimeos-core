@@ -5,13 +5,14 @@
 # Translators:
 # Bram Verhaegh <bram@beech.it>, 2015
 # Maurice Lourens <mlourens@gmail.com>, 2015
+# Yves Vermeulen <tmastar@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2015-05-07 07:16+0000\n"
-"Last-Translator: Maurice Lourens <mlourens@gmail.com>\n"
+"PO-Revision-Date: 2015-06-04 11:35+0000\n"
+"Last-Translator: Yves Vermeulen <tmastar@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/arcavias-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,12 +152,12 @@ msgstr "+ %1$s %2$s/item"
 
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
-msgstr ""
+msgstr "+ Betaalkosten"
 
 #: layouts/email/common/text-summary-detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:99
 msgid "+ Shipping"
-msgstr ""
+msgstr "+ Verzendkosten"
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #: layouts/email/watch/text-detail-body-default.html:28
@@ -167,7 +168,7 @@ msgstr ""
 
 #: layouts/catalog/detail/basket-body-default.html:32
 msgid "Add to basket"
-msgstr ""
+msgstr "Toevoegen aan winkelmandje"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:143
 #: layouts/checkout/standard/address-delivery-body-default.html:257
@@ -187,11 +188,11 @@ msgstr ""
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:247
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Adres met ID \"%1$s\" niet gevonden"
 
 #: layouts/common/summary/address-body-default.html:19
 msgid "Addresses"
-msgstr ""
+msgstr "Adressen"
 
 #: layouts/email/common/html-legal-body-default.html:12
 #: layouts/email/common/text-legal-body-default.html:10
@@ -203,7 +204,7 @@ msgstr ""
 
 #: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
-msgstr ""
+msgstr "Artikel nr.:"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:226
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:270
@@ -907,7 +908,7 @@ msgstr ""
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr ""
+msgstr "De betaling voor uw bestelling staat nog in wacht. U ontvangt een e-mail zodra de betaling is ontvangen."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -915,7 +916,7 @@ msgstr ""
 #: layouts/email/payment/3/html-intro-body-default.html:12
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
-msgstr ""
+msgstr "De betaling van uw bestelling %1$s van %2$s is terug gestort."
 
 #: layouts/account/watch/body-default.html:150
 msgid "Three month"
@@ -927,7 +928,7 @@ msgstr ""
 
 #: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
-msgstr ""
+msgstr "Top verkoper"
 
 #: layouts/common/summary/detail-body-default.html:225
 #: layouts/email/common/text-summary-detail-body-default.html:93
@@ -955,7 +956,7 @@ msgstr ""
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
-msgstr ""
+msgstr "Kon het adres van de klant niet opslaan  \"%1$s\": %2$s"
 
 #: src/Client/Html/Catalog/Filter/Default.php:360
 #: src/Client/Html/Catalog/Stage/Default.php:357
@@ -963,13 +964,13 @@ msgstr ""
 #: src/Client/Html/Catalog/List/Default.php:366
 #, php-format
 msgid "Unable to set cache entry: %1$s"
-msgstr ""
+msgstr "Kon dit niet aan de cache toevoegen: %1$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 msgid ""
 "Unfortunately, the payment for your order was refused.\n"
 "Do you wish to retry?"
-msgstr ""
+msgstr "Helaas is de betaling van uw bestelling geweigerd. Wil je opnieuw proberen?"
 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
@@ -980,16 +981,16 @@ msgstr "Bijwerken"
 #: layouts/checkout/standard/address-billing-body-default.html:183
 #: layouts/checkout/standard/address-billing-body-default.html:297
 msgid "Vat ID"
-msgstr ""
+msgstr "BTW"
 
 #: layouts/account/watch/body-default.html:166
 msgid "Watch"
-msgstr ""
+msgstr "Bekijk"
 
 #: layouts/account/watch/body-default.html:103
 #: layouts/email/watch/text-detail-body-default.html:38
 msgid "Watched products"
-msgstr ""
+msgstr "Bekeken producten"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -997,7 +998,7 @@ msgstr ""
 #: layouts/email/delivery/7/html-intro-body-default.html:12
 #, php-format
 msgid "We received the returned parcel for your order %1$s from %2$s."
-msgstr ""
+msgstr "We hebben het teruggestuurde pakket van uw bestelling %1$s van %2$s ontvangen."
 
 #: layouts/checkout/standard/address-delivery-body-default.html:209
 #: layouts/checkout/standard/address-delivery-body-default.html:327
@@ -1041,7 +1042,7 @@ msgstr "U bent hier:"
 
 #: layouts/checkout/standard/order-payment-body-default.html:25
 msgid "You will now be forwarded to the next step"
-msgstr ""
+msgstr "Je zal nu doorgestuurd worden naar de volgende stap"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -1049,7 +1050,7 @@ msgstr ""
 #: layouts/email/payment/header-default.html:9
 #, php-format
 msgid "Your order %1$s"
-msgstr ""
+msgstr "Uw order %1$s"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -1057,16 +1058,16 @@ msgstr ""
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
-msgstr ""
+msgstr "Uw bestelling %1$s van %2$s is verstuurd."
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:28
 msgid "Your search result"
-msgstr ""
+msgstr "Uw zoekresultaten"
 
 #. / Product notification e-mail subject
 #: layouts/email/watch/header-default.html:9
 msgid "Your watched products"
-msgstr ""
+msgstr "Uw bekeken producten"
 
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
