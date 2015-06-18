@@ -382,7 +382,7 @@ class Client_Html_Basket_Standard_Default
 		$products = (array) $view->param( 'b_prod', array() );
 		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 
-		if( ( $prodid = $view->param( 'b_prodid', null ) ) !== null )
+		if( ( $prodid = $view->param( 'b_prodid', '' ) ) !== '' )
 		{
 			$products[] = array(
 				'prodid' => $prodid,
@@ -410,13 +410,13 @@ class Client_Html_Basket_Standard_Default
 	protected function _addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
 	{
 		$controller->addProduct(
-			( isset( $values['prodid'] ) ? $values['prodid'] : null ),
-			( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+			( isset( $values['prodid'] ) ? (string) $values['prodid'] : '' ),
+			( isset( $values['quantity'] ) ? (int) $values['quantity'] : 1 ),
 			$options,
 			( isset( $values['attrvarid'] ) ? array_filter( (array) $values['attrvarid'] ) : array() ),
 			( isset( $values['attrconfid'] ) ? array_filter( (array) $values['attrconfid'] ) : array() ),
 			( isset( $values['attrhideid'] ) ? array_filter( (array) $values['attrhideid'] ) : array() ),
-			( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
+			( isset( $values['warehouse'] ) ? (string) $values['warehouse'] : 'default' )
 		);
 	}
 
@@ -450,10 +450,10 @@ class Client_Html_Basket_Standard_Default
 		$products = (array) $view->param( 'b_prod', array() );
 		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 
-		if( ( $positon = $view->param( 'b_position', null ) ) !== null )
+		if( ( $position = $view->param( 'b_position', '' ) ) !== '' )
 		{
 			$products[] = array(
-				'position' => $positon,
+				'position' => $position,
 				'quantity' => $view->param( 'b_quantity', 1 ),
 				'attrconf-code' => array_filter( (array) $view->param( 'b_attrconfcode', array() ) )
 			);
@@ -462,8 +462,8 @@ class Client_Html_Basket_Standard_Default
 		foreach( $products as $values )
 		{
 			$controller->editProduct(
-				( isset( $values['position'] ) ? $values['position'] : null ),
-				( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+				( isset( $values['position'] ) ? (int) $values['position'] : 0 ),
+				( isset( $values['quantity'] ) ? (int) $values['quantity'] : 1 ),
 				$options,
 				( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
 			);
