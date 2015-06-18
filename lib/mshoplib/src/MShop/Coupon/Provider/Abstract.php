@@ -284,7 +284,7 @@ abstract class MShop_Coupon_Provider_Abstract
 				$taxrates[$taxrate] = $manager->createItem();
 			}
 
-			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
+			$taxrates[$taxrate]->addItem( $price );
 		}
 		catch( Exception $e ) { ; } // if delivery service isn't available
 
@@ -297,7 +297,7 @@ abstract class MShop_Coupon_Provider_Abstract
 				$taxrates[$taxrate] = $manager->createItem();
 			}
 
-			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
+			$taxrates[$taxrate]->addItem( $price );
 		}
 		catch( Exception $e ) { ; } // if payment service isn't available
 
