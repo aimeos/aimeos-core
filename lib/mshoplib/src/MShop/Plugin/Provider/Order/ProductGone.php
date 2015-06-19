@@ -16,10 +16,8 @@
  */
 class MShop_Plugin_Provider_Order_ProductGone
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -42,14 +40,8 @@ class MShop_Plugin_Provider_Order_ProductGone
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$context = $this->_getContext();
-		$logger = $context->getLogger();
-
-		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
-
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
+		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Order_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
@@ -62,7 +54,7 @@ class MShop_Plugin_Provider_Order_ProductGone
 			$productIds[] = $pr->getProductId();
 		}
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );

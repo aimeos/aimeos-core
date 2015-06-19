@@ -17,10 +17,8 @@
  */
 class MShop_Plugin_Provider_Order_Shipping
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -45,11 +43,6 @@ class MShop_Plugin_Provider_Order_Shipping
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$context = $this->_getContext();
-		$logger = $context->getLogger();
-
-		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
-
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
@@ -72,7 +65,7 @@ class MShop_Plugin_Provider_Order_Shipping
 			return true;
 		}
 
-		$sum = MShop_Factory::createManager( $context, 'price' )->createItem();
+		$sum = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product ) {
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );

@@ -16,10 +16,8 @@
  */
 class MShop_Plugin_Provider_Order_Autofill
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -42,10 +40,15 @@ class MShop_Plugin_Provider_Order_Autofill
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
+		$class = 'MShop_Order_Item_Base_Interface';
+		if( !( $order instanceof $class ) ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		}
+
+
 		$context = $this->_getContext();
 		$services = $order->getServices();
 		$addresses = $order->getAddresses();
-
 
 		if( ( $userid = $context->getUserId() ) !== null
 			&& $this->_getConfigValue( 'autofill.useorder', true ) == true

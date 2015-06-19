@@ -16,10 +16,8 @@
  */
 class MShop_Plugin_Provider_Order_ProductPrice
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *

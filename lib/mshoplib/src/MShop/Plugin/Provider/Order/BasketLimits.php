@@ -16,10 +16,8 @@
  */
 class MShop_Plugin_Provider_Order_BasketLimits
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -42,23 +40,20 @@ class MShop_Plugin_Provider_Order_BasketLimits
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$context = $this->_getContext();
-		$logger = $context->getLogger();
+		$class = 'MShop_Order_Item_Base_Interface';
+		if( !( $order instanceof $class ) ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		}
 
-		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
-
-		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) )
-		{
-			$logger->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
+		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) {
 			return true;
 		}
 
-		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Provider_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
-		}
+		$context = $this->_getContext();
 
-		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) { return true; }
+		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) ) {
+			return true;
+		}
 
 
 		$count = 0;

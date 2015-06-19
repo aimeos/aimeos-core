@@ -16,7 +16,7 @@
  */
 class MShop_Plugin_Provider_Order_Coupon
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Interface
+	implements MShop_Plugin_Provider_Factory_Interface
 {
 	protected static $_lock = false;
 
@@ -45,22 +45,18 @@ class MShop_Plugin_Provider_Order_Coupon
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$notAvailable = array();
-		$context = $this->_getContext();
-		$context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
-
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
-			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Exception( sprintf( $msg, get_class( $order ), $class ) );
+		if( !( $order instanceof $class ) ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
+
+		$notAvailable = array();
 
 		if( self::$_lock === false )
 		{
 			self::$_lock = true;
 
-			$couponManager = MShop_Factory::createManager( $context, 'coupon' );
+			$couponManager = MShop_Factory::createManager( $this->_getContext(), 'coupon' );
 
 			foreach( $order->getCoupons() as $code => $products )
 			{

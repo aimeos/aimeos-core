@@ -14,7 +14,8 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_Example implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_Example
+	implements MShop_Plugin_Provider_Factory_Interface
 {
 	/**
 	 * Initializes the plugin instance
