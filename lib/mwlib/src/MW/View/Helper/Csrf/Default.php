@@ -38,7 +38,7 @@ class MW_View_Helper_Csrf_Default
 		$this->_value = $value;
 
 		if( $value != '' ) {
-			$this->_formfield = '<input type="hidden" name="' . $this->_name . '" value="' . $this->_value . '" />';
+			$this->_formfield = '<input class="csrf-token" type="hidden" name="' . $this->_name . '" value="' . $this->_value . '" />';
 		}
 	}
 

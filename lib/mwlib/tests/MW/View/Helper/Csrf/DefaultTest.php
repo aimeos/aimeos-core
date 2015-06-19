@@ -59,7 +59,7 @@ class MW_View_Helper_Csrf_DefaultTest extends MW_Unittest_Testcase
 
 	public function testTransformFormfield()
 	{
-		$expected = '<input type="hidden" name="cname" value="cvalue" />';
+		$expected = '<input class="csrf-token" type="hidden" name="cname" value="cvalue" />';
 
 		$this->assertEquals( $expected, $this->_object->transform()->formfield() );
 	}
