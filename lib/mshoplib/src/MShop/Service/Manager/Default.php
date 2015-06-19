@@ -565,11 +565,11 @@ class MShop_Service_Manager_Default
 	 */
 	public function getProvider( MShop_Service_Item_Interface $item )
 	{
-		$domain = ucwords( $item->getType() );
+		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
 
-		if ( ctype_alnum( $domain ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+		if ( ctype_alnum( $type ) === false ) {
+			throw new MShop_Service_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null ) {
@@ -581,7 +581,7 @@ class MShop_Service_Manager_Default
 		}
 
 		$interface = 'MShop_Service_Provider_Factory_Interface';
-		$classname = 'MShop_Service_Provider_' . $domain . '_' . $provider;
+		$classname = 'MShop_Service_Provider_' . $type . '_' . $provider;
 
 		if ( class_exists( $classname ) === false ) {
 			throw new MShop_Service_Exception(sprintf( 'Class "%1$s" not available', $classname ) );
