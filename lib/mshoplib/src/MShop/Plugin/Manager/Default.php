@@ -104,6 +104,18 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-plugin' );
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
@@ -120,18 +132,6 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	 * Initializes the object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-		$this->_setResourceName( 'db-plugin' );
-	}
-
-
-	/**
 	 * Creates a new plugin object.
 	 *
 	 * @return MShop_Plugin_Item_Interface New plugin object
@@ -144,91 +144,207 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	* Registers plugins to the given publisher.
-	*
-	* @param MW_Observer_Publisher_Interface $publisher Publisher object
-	*/
-	public function register(MW_Observer_Publisher_Interface $publisher, $domain)
+	 * Creates a criteria object for searching.
+	 *
+	 * @param boolean $default Prepopulate object with default criterias
+	 * @return MW_Common_Criteria_Interface
+	 */
+	public function createSearch( $default = false )
 	{
-		if( !empty( $this->_plugins ) )
-		{
-			foreach( $this->_plugins as $plugin ) {
-				$plugin->register( $publisher );
-			}
-
-			return;
+		if( $default === true ) {
+			return parent::_createSearch('plugin');
 		}
 
-		$search = $this->createSearch( true );
-
-		$expr = array(
-			$search->compare( '==', 'plugin.type.code', $domain ),
-			$search->getConditions(),
-		);
-
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
-
-		$pluginItems = $this->searchItems( $search );
-
-		$interface = 'MShop_Plugin_Provider_Interface';
-		$context = $this->_getContext();
-
-		foreach( $pluginItems as $pluginItem )
-		{
-			$domain = $pluginItem->getType();
-			$providernames = explode( ',', $pluginItem->getProvider() );
-
-			if( ( $providername = array_shift( $providernames ) ) === null )
-			{
-				$msg = sprintf( 'Provider in "%1$s" not available', $providernames );
-				throw new MShop_Service_Exception( $msg );
-			}
-
-			if( ctype_alnum( $domain ) === false )
-			{
-				$msg = sprintf( 'Invalid characters in domain name "%1$s"', $domain );
-				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
-				continue;
-			}
-
-			if( ctype_alnum( $providername ) === false )
-			{
-				$msg = sprintf( 'Invalid characters in provider name "%1$s"', $providername );
-				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
-				continue;
-			}
+		return parent::createSearch();
+	}
 
 
-			$classname = 'MShop_Plugin_Provider_' . ucfirst( $domain ) . '_' . $providername;
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		/** mshop/plugin/manager/default/item/delete
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the plugin database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/plugin/manager/default/item/insert
+		 * @see mshop/plugin/manager/default/item/update
+		 * @see mshop/plugin/manager/default/item/newid
+		 * @see mshop/plugin/manager/default/item/search
+		 * @see mshop/plugin/manager/default/item/count
+		 */
+		$path = 'mshop/plugin/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+	}
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = sprintf( 'Class "%1$s" not available', $classname );
-				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
-				continue;
-			}
 
-			$provider = new $classname( $context, $pluginItem );
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		/** classes/plugin/manager/submanagers
+		 * List of manager names that can be instantiated by the plugin manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'classes/plugin/manager/submanagers';
 
-			if( ( $provider instanceof $interface ) === false )
-			{
-				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-				throw new MShop_Service_Exception( $msg );
-			}
+		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+	}
 
 
-			$provider = $this->_addPluginDecorators( $pluginItem, $provider, $providernames );
+	/**
+	 * Returns a new manager for plugin extensions
+	 *
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g types, lists etc.
+	 */
+	public function getSubManager( $manager, $name = null )
+	{
+		/** classes/plugin/manager/name
+		 * Class name of the used plugin manager implementation
+		 *
+		 * Each default plugin manager can be replaced by an alternative imlementation.
+		 * To use this implementation, you have to set the last part of the class
+		 * name as configuration value so the manager factory knows which class it
+		 * has to instantiate.
+		 *
+		 * For example, if the name of the default class is
+		 *
+		 *  MShop_Plugin_Manager_Default
+		 *
+		 * and you want to replace it with your own version named
+		 *
+		 *  MShop_Plugin_Manager_Myplugin
+		 *
+		 * then you have to set the this configuration option:
+		 *
+		 *  classes/plugin/manager/name = Myplugin
+		 *
+		 * The value is the last part of your own class name and it's case sensitive,
+		 * so take care that the configuration value is exactly named like the last
+		 * part of the class name.
+		 *
+		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
+		 * characters are possible! You should always start the last part of the class
+		 * name with an upper case character and continue only with lower case characters
+		 * or numbers. Avoid chamel case names like "MyPlugin"!
+		 *
+		 * @param string Last part of the class name
+		 * @since 2014.03
+		 * @category Developer
+		 */
 
-			$config = $context->getConfig();
-			$decorators = $config->get( 'mshop/plugin/provider/' . $pluginItem->getType() . '/decorators', array() );
+		/** mshop/plugin/manager/decorators/excludes
+		 * Excludes decorators added by the "common" option from the plugin manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "mshop/common/manager/decorators/default" before they are wrapped
+		 * around the plugin manager.
+		 *
+		 *  mshop/plugin/manager/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * "mshop/common/manager/decorators/default" for the plugin manager.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/plugin/manager/decorators/global
+		 * @see mshop/plugin/manager/decorators/local
+		 */
 
-			$provider = $this->_addPluginDecorators( $pluginItem, $provider, $decorators );
+		/** mshop/plugin/manager/decorators/global
+		 * Adds a list of globally available decorators only to the plugin manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("MShop_Common_Manager_Decorator_*") around the plugin manager.
+		 *
+		 *  mshop/plugin/manager/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Common_Manager_Decorator_Decorator1" only to the plugin controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/plugin/manager/decorators/excludes
+		 * @see mshop/plugin/manager/decorators/local
+		 */
 
+		/** mshop/plugin/manager/decorators/local
+		 * Adds a list of local decorators only to the plugin manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("MShop_Common_Manager_Decorator_*") around the plugin manager.
+		 *
+		 *  mshop/plugin/manager/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "MShop_Common_Manager_Decorator_Decorator2" only to the plugin
+		 * controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/plugin/manager/decorators/excludes
+		 * @see mshop/plugin/manager/decorators/global
+		 */
 
-			$this->_plugins[$pluginItem->getId()] = $provider;
-			$provider->register( $publisher );
-		}
+		return $this->_getSubManager( 'plugin', $manager, $name );
 	}
 
 
@@ -243,6 +359,109 @@ class MShop_Plugin_Manager_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		return $this->_getItem( 'plugin.id', $id, $ref );
+	}
+
+
+	/**
+	 * Returns the plugin provider which is responsible for the plugin item.
+	 *
+	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 * @return MShop_Plugin_Provider_Interface Returns the decoratad plugin provider object
+	 * @throws MShop_Plugin_Exception If provider couldn't be found
+	 */
+	public function getProvider( MShop_Plugin_Item_Interface $item )
+	{
+		$type = ucwords( $item->getType() );
+		$names = explode( ',', $item->getProvider() );
+
+		if ( ctype_alnum( $type ) === false ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
+		}
+
+		if( ( $provider = array_shift( $names ) ) === null ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+		}
+
+		if ( ctype_alnum( $provider ) === false ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
+		}
+
+		$interface = 'MShop_Plugin_Provider_Factory_Interface';
+		$classname = 'MShop_Plugin_Provider_' . $type . '_' . $provider;
+
+		if ( class_exists( $classname ) === false ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		}
+
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$provider = new $classname( $context, $item );
+
+		if( ( $provider instanceof $interface ) === false )
+		{
+			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
+			throw new MShop_Plugin_Exception( $msg );
+		}
+
+		/** mshop/plugin/provider/order/decorators
+		 * Adds a list of decorators to all order plugin provider objects automatcally
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap decorators
+		 * ("MShop_Plugin_Provider_Decorator_*") around the order provider.
+		 *
+		 *  mshop/plugin/provider/order/decorators = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Plugin_Provider_Decorator_Decorator1" to all order provider
+		 * objects.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/plugin/provider/order/decorators
+		 */
+		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', array() );
+
+		$provider = $this->_addPluginDecorators( $item, $provider, $names );
+		return $this->_addPluginDecorators( $item, $provider, $decorators );
+	}
+
+
+	/**
+	 * Registers plugins to the given publisher.
+	 *
+	 * @param MW_Observer_Publisher_Interface $publisher Publisher object
+	 * @param string $type Unique plugin type code
+	 */
+	public function register( MW_Observer_Publisher_Interface $publisher, $type )
+	{
+		if( !isset( $this->_plugins[$type] ) )
+		{
+			$search = $this->createSearch( true );
+
+			$expr = array(
+				$search->compare( '==', 'plugin.type.code', $type ),
+				$search->getConditions(),
+			);
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
+
+			$this->_plugins[$type] = array();
+
+			foreach( $this->searchItems( $search ) as $item ) {
+				$this->_plugins[$type][ $item->getId() ] = $this->getProvider( $item );
+			}
+		}
+
+		foreach( $this->_plugins[$type] as $plugin ) {
+			$plugin->register( $publisher );
+		}
 	}
 
 
@@ -405,48 +624,12 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		/** mshop/plugin/manager/default/item/delete
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the plugin database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/plugin/manager/default/item/insert
-		 * @see mshop/plugin/manager/default/item/update
-		 * @see mshop/plugin/manager/default/item/newid
-		 * @see mshop/plugin/manager/default/item/search
-		 * @see mshop/plugin/manager/default/item/count
-		 */
-		$path = 'mshop/plugin/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
-	}
-
-
-	/**
 	 * Searches for plugin items matching the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
 	 *
-	 * @return array List of plugin items implementing MShop_Service_Item_Interface
+	 * @return array List of plugin items implementing MShop_Plugin_Item_Interface
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
@@ -608,53 +791,6 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	 * Creates a criteria object for searching.
-	 *
-	 * @param boolean $default Prepopulate object with default criterias
-	 * @return MW_Common_Criteria_Interface
-	 */
-	public function createSearch( $default = false )
-	{
-		if( $default === true ) {
-			return parent::_createSearch('plugin');
-		}
-
-		return parent::createSearch();
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		/** classes/plugin/manager/submanagers
-		 * List of manager names that can be instantiated by the plugin manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$path = 'classes/plugin/manager/submanagers';
-
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
-	}
-
-
-	/**
 	 * Creates a new plugin object.
 	 *
 	 * @return MShop_Plugin_Item_Interface New plugin object
@@ -662,127 +798,5 @@ class MShop_Plugin_Manager_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Plugin_Item_Default( $values );
-	}
-
-
-	/**
-	 * Returns a new manager for plugin extensions
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g types, lists etc.
-	 */
-	public function getSubManager( $manager, $name = null )
-	{
-		/** classes/plugin/manager/name
-		 * Class name of the used plugin manager implementation
-		 *
-		 * Each default plugin manager can be replaced by an alternative imlementation.
-		 * To use this implementation, you have to set the last part of the class
-		 * name as configuration value so the manager factory knows which class it
-		 * has to instantiate.
-		 *
-		 * For example, if the name of the default class is
-		 *
-		 *  MShop_Plugin_Manager_Default
-		 *
-		 * and you want to replace it with your own version named
-		 *
-		 *  MShop_Plugin_Manager_Myplugin
-		 *
-		 * then you have to set the this configuration option:
-		 *
-		 *  classes/plugin/manager/name = Myplugin
-		 *
-		 * The value is the last part of your own class name and it's case sensitive,
-		 * so take care that the configuration value is exactly named like the last
-		 * part of the class name.
-		 *
-		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
-		 * characters are possible! You should always start the last part of the class
-		 * name with an upper case character and continue only with lower case characters
-		 * or numbers. Avoid chamel case names like "MyPlugin"!
-		 *
-		 * @param string Last part of the class name
-		 * @since 2014.03
-		 * @category Developer
-		 */
-
-		/** mshop/plugin/manager/decorators/excludes
-		 * Excludes decorators added by the "common" option from the plugin manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to remove a decorator added via
-		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the plugin manager.
-		 *
-		 *  mshop/plugin/manager/decorators/excludes = array( 'decorator1' )
-		 *
-		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
-		 * "mshop/common/manager/decorators/default" for the plugin manager.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/plugin/manager/decorators/global
-		 * @see mshop/plugin/manager/decorators/local
-		 */
-
-		/** mshop/plugin/manager/decorators/global
-		 * Adds a list of globally available decorators only to the plugin manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the plugin manager.
-		 *
-		 *  mshop/plugin/manager/decorators/global = array( 'decorator1' )
-		 *
-		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the plugin controller.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/plugin/manager/decorators/excludes
-		 * @see mshop/plugin/manager/decorators/local
-		 */
-
-		/** mshop/plugin/manager/decorators/local
-		 * Adds a list of local decorators only to the plugin manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the plugin manager.
-		 *
-		 *  mshop/plugin/manager/decorators/local = array( 'decorator2' )
-		 *
-		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the plugin
-		 * controller.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/plugin/manager/decorators/excludes
-		 * @see mshop/plugin/manager/decorators/global
-		 */
-
-		return $this->_getSubManager( 'plugin', $manager, $name );
 	}
 }
