@@ -15,19 +15,9 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Order_Example
+	extends MShop_Plugin_Provider_Order_Abstract
 	implements MShop_Plugin_Provider_Factory_Interface
 {
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-	}
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *

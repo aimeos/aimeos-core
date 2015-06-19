@@ -15,11 +15,10 @@
  * @subpackage Plugin
  */
 abstract class MShop_Plugin_Provider_Decorator_Abstract
+	extends MShop_Plugin_Provider_Order_Abstract
 	implements MShop_Plugin_Provider_Decorator_Interface
 {
 	private $_object;
-	private $_context;
-	private $_item;
 
 
 	/**
@@ -32,9 +31,9 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item,
 		MShop_Plugin_Provider_Interface $provider )
 	{
+		parent::__construct( $context, $item );
+
 		$this->_object = $provider;
-		$this->_context = $context;
-		$this->_item = $item;
 	}
 
 
