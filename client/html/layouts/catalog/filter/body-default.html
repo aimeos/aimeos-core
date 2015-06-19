@@ -97,9 +97,6 @@ $enc = $this->encoder();
 	<nav>
 		<h1><?php echo $enc->html( $this->translate( 'client/html', 'Filter' ), $enc::TRUST ); ?></h1>
 		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $listParams, array(), $listConfig ) ); ?>">
-<!-- catalog.filter.csrf -->
-<?php echo $this->csrf()->formfield(); ?>
-<!-- catalog.filter.csrf -->
 <?php echo $this->get( 'filterBody' ); ?>
 		</form>
 	</nav>
