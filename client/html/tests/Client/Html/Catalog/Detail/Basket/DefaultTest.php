@@ -55,6 +55,23 @@ class Client_Html_Catalog_Detail_Basket_DefaultTest extends MW_Unittest_Testcase
 		$this->assertStringStartsWith( '<div class="catalog-detail-basket', $output );
 	}
 
+
+	public function testGetBodyCsrf()
+	{
+		$view = $this->_object->getView();
+		$view->detailProductItem = $this->_getProductItem();
+
+		$output = $this->_object->getBody( 1 );
+		$output = str_replace( '_csrf_value', '_csrf_new', $output );
+
+		$this->assertContains( '<input class="csrf-token" type="hidden" name="_csrf_token" value="_csrf_new" />', $output );
+
+		$output = $this->_object->modifyBody( $output, 1 );
+
+		$this->assertContains( '<input class="csrf-token" type="hidden" name="_csrf_token" value="_csrf_value" />', $output );
+	}
+
+
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );

@@ -281,6 +281,21 @@ class Client_Html_Catalog_Filter_Default
 
 
 	/**
+	 * Modifies the cached body content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @return string Modified body content
+	 */
+	public function modifyBody( $content, $uid )
+	{
+		$content = parent::modifyBody( $content, $uid );
+
+		return $this->_replaceSection( $content, $this->getView()->csrf()->formfield(), 'catalog.filter.csrf' );
+	}
+
+
+	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
