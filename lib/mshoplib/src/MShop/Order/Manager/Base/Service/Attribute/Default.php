@@ -171,7 +171,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		$cfgkey = 'mshop/order/manager/base/service/attribute/default/aggregate';
 		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.service.attribute' ) );
 	}
-	
+
 
 	/**
 	 * Removes old entries from the storage.
@@ -358,9 +358,8 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					$row['value'] = json_decode( $row['value'], true );
-					if( is_null( $row['value'] ) ) {
-						throw new MShop_Order_Exception( sprintf( 'Invalid JSON as result of search for order service attribute with ID "%1$d"', $row['id'] ) );
+					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
+						$row['value'] = $value;
 					}
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}

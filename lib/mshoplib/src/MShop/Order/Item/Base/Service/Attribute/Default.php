@@ -162,7 +162,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Returns the value of the service attribute item.
 	 *
-	 * @return mixed Service attribute item value.
+	 * @return string|array Service attribute item value
 	 */
 	public function getValue()
 	{
@@ -173,7 +173,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Sets a new value for the service item.
 	 *
-	 * @param string $value service attribute item value
+	 * @param string|array $value service attribute item value
 	 */
 	public function setValue( $value )
 	{

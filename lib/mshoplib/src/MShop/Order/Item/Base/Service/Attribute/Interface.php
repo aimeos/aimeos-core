@@ -95,14 +95,14 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	/**
 	 * Returns the value of the service attribute item.
 	 *
-	 * @return string service attribute item value
+	 * @return string|array Service attribute item value
 	 */
 	public function getValue();
 
 	/**
 	 * Sets a new value for the service attribute item.
 	 *
-	 * @param string $value service attribute item value
+	 * @param string|array $value Service attribute item value
 	 * @return void
 	 */
 	public function setValue( $value );

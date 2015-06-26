@@ -80,14 +80,14 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	/**
 	 * Returns the value of the product attribute.
 	 *
-	 * @return string Value of the product attribute
+	 * @return string|array Value of the product attribute
 	 */
 	public function getValue();
 
 	/**
 	 * Sets the value of the product attribute.
 	 *
-	 * @param string $value Value of the product attribute
+	 * @param string|array $value Value of the product attribute
 	 * @return void
 	 */
 	public function setValue($value);

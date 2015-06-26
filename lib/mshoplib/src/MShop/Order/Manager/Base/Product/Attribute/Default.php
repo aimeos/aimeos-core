@@ -171,7 +171,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		$cfgkey = 'mshop/order/manager/base/product/attribute/default/aggregate';
 		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.product.attribute' ) );
 	}
-	
+
 
 	/**
 	 * Removes old entries from the storage.
@@ -478,7 +478,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false ) {
+				while( ( $row = $results->fetch() ) !== false )
+				{
+					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
+						$row['value'] = $value;
+					}
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}
 			}

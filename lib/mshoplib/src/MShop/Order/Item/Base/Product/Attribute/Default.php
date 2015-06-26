@@ -139,7 +139,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	/**
 	 * Returns the value of the product attribute.
 	 *
-	 * @return string Value of the product attribute
+	 * @return string|array Value of the product attribute
 	 */
 	public function getValue()
 	{
@@ -150,13 +150,13 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	/**
 	 * Sets the value of the product attribute.
 	 *
-	 * @param string $value Value of the product attribute
+	 * @param string|array $value Value of the product attribute
 	 */
 	public function setValue($value)
 	{
 		if ( $value == $this->getValue() ) { return; }
 
-		$this->_values['value'] = (string) $value;
+		$this->_values['value'] = $value;
 		$this->setModified();
 	}
 
