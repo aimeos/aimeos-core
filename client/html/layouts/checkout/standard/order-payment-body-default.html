@@ -5,9 +5,15 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$testfcn = function( $list, $key, $default = '' ) {
+	return ( isset( $list[$key] ) ? $list[$key] : $default );
+};
+
 $enc = $this->encoder();
 $url = $this->get( 'standardUrlNext' );
 $method = $this->get( 'standardMethod' );
+
+$regex = $this->config( 'client/html/checkout/standard/order/payment/validate', array() );
 
 ?>
 <div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
@@ -18,9 +24,21 @@ $method = $this->get( 'standardMethod' );
 		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
 	</noscript>
 <?php elseif( $method && $url ) : ?>
-<?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $value ) : ?>
-	<input type="hidden" name="<?php echo $enc->attr( $key ); ?>" value="<?php echo $enc->attr( $value ); ?>" />
+<?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
+<?php		if( !$item->isPublic() ) : ?>
+		<input name="<?php echo $enc->attr( $key ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
+<?php		endif; ?>
 <?php	endforeach; ?>
+	<ul class="form-list">
+<?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
+<?php		if( $item->isPublic() ) : ?>
+		<li class="form-item <?php echo $key . ( $item->isRequired() ? ' mandatory' : ' optional' ); ?>" data-regex="<?php echo $testfcn( $regex, $key ); ?>">
+			<label for="order-payment-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?>
+			</label><input id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $item->getInternalCode() ); ?>" type="text" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
+		</li>
+<?php		endif; ?>
+<?php	endforeach; ?>
+	</ul>
 <?php echo $this->get( 'paymentBody' ); ?>
 	<noscript>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
