@@ -75,10 +75,10 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 		$this->_object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
-		$this->assertEquals( 'abc', $item->getAttribute( 'test.code' ) );
-		$this->assertEquals( 123, $item->getAttribute( 'test.number' ) );
-		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.code' )->getType() );
-		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.number' )->getType() );
+		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'delivery' ) );
+		$this->assertEquals( 123, $item->getAttribute( 'test.number', 'delivery' ) );
+		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.code', 'delivery' )->getType() );
+		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.number', 'delivery' )->getType() );
 	}
 
 }

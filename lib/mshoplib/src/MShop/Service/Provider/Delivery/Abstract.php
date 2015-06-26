@@ -38,6 +38,6 @@ implements MShop_Service_Provider_Delivery_Interface
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		$this->_setConfigFE( $orderServiceItem, $attributes, 'delivery' );
+		$this->_setAttributes( $orderServiceItem, $attributes, 'delivery' );
 	}
 }

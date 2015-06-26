@@ -210,7 +210,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$orderItem = $this->_object->updateSync( $response );
 		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $orderItem );
 
-		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
+		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager('service')->getSubManager('attribute');
 

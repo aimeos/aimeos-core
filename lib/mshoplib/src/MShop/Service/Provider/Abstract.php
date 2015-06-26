@@ -394,28 +394,72 @@ implements MShop_Service_Provider_Interface
 
 
 	/**
+	 * Returns the order item for the given ID.
+	 *
+	 * @param string $id Unique order ID
+	 * @return MShop_Order_Item_Interface $item Order object
+	 */
+	protected function _getOrder( $id )
+	{
+		return MShop_Factory::createManager( $this->_context, 'order' )->getItem( $id );
+	}
+
+
+	/**
+	 * Returns the base order which is equivalent to the basket.
+	 *
+	 * @param string $baseId Order base ID stored in the order item
+	 * @param integer $parts Bitmap of the basket parts that should be loaded
+	 * @return MShop_Order_Item_Base_Interface Basket, optional with addresses, products, services and coupons
+	 */
+	protected function _getOrderBase( $baseId, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
+	{
+		return MShop_Factory::createManager( $this->_context, 'order/base' )->load( $baseId, $parts );
+	}
+
+
+	/**
+	 * Saves the order item.
+	 *
+	 * @param MShop_Order_Item_Interface $item Order object
+	 */
+	protected function _saveOrder( MShop_Order_Item_Interface $item )
+	{
+		MShop_Factory::createManager( $this->_context, 'order' )->saveItem( $item );
+	}
+
+
+	/**
+	 * Saves the base order which is equivalent to the basket and its dependent objects.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $base Order base object with associated items
+	 * @param integer $parts Bitmap of the basket parts that should be stored
+	 */
+	protected function _saveOrderBase( MShop_Order_Item_Base_Interface $base, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
+	{
+		MShop_Factory::createManager( $this->_context, 'order/base' )->store( $base, $parts );
+	}
+
+
+	/**
 	 * Sets the attributes in the given service item.
 	 *
 	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 */
-	protected function _setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
+	protected function _setAttributes( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
 	{
 		$manager = MShop_Factory::createManager( $this->_context, 'order/base/service/attribute' );
 
-		$attributeItems = array();
 		foreach( $attributes as $key => $value )
 		{
-			$ordBaseAttrItem = $manager->createItem();
-			$ordBaseAttrItem->setCode( $key );
-			$ordBaseAttrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$ordBaseAttrItem->setType( $type );
+			$item = $manager->createItem();
+			$item->setCode( $key );
+			$item->setValue( $value );
+			$item->setType( $type );
 
-			$attributeItems[] = $ordBaseAttrItem;
+			$orderServiceItem->setAttributeItem( $item );
 		}
-
-		$orderServiceItem->setAttributes( $attributeItems );
 	}
-
 }

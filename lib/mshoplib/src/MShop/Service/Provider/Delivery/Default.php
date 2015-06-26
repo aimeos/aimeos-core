@@ -69,18 +69,6 @@ class MShop_Service_Provider_Delivery_Default
 
 
 	/**
-	 * Initializes a new service provider object using the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
-	 */
-	public function __construct(MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem)
-	{
-		parent::__construct( $context, $serviceItem );
-	}
-
-
-	/**
 	 * Sends the order details to the ERP system for further processing.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object to process
@@ -281,18 +269,7 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function buildXML( MShop_Order_Item_Interface $invoice )
 	{
-		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
-		$criteria = $orderBaseManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.id', $invoice->getBaseId() ) );
-		$result = $orderBaseManager->searchItems( $criteria );
-
-		if( ( $base = reset( $result ) ) === false )
-		{
-			throw new MShop_Order_Exception( sprintf(
-				'Order base item with order ID "%1$s" not found', $invoice->getId()
-			) );
-		}
-
+		$base = $this->_getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
 
 		try
 		{
@@ -302,30 +279,33 @@ class MShop_Service_Provider_Delivery_Default
 			$orderitem = $dom->createElement( 'orderitem');
 
 			$this->_buildXMLHeader( $invoice, $base, $dom, $orderitem );
-			$this->_buildXMLService( $orderBaseManager, $base, $dom, $orderitem );
-			$this->_buildXMLPrice( $orderBaseManager, $base, $dom, $orderitem );
-			$this->_buildXMLProducts( $orderBaseManager, $base, $dom, $orderitem );
-			$this->_buildXMLAddresses( $orderBaseManager, $base, $dom, $orderitem );
-			$this->_buildXMLAdditional( $orderBaseManager, $base, $dom, $orderitem );
+			$this->_buildXMLService( $base, $dom, $orderitem );
+			$this->_buildXMLPrice( $base, $dom, $orderitem );
+			$this->_buildXMLProducts( $base, $dom, $orderitem );
+			$this->_buildXMLAddresses( $base, $dom, $orderitem );
+			$this->_buildXMLAdditional( $base, $dom, $orderitem );
 
 			$orderlist->appendChild( $orderitem );
 			$dom->appendChild( $orderlist );
 		}
 		catch( DOMException $e )
 		{
-			throw new MShop_Service_Exception(
-					sprintf( 'Creating XML file with order data for delivery provider failed: %1$s', $e->getMessage() ), 0, $e );
+			$msg = 'Creating XML file with order data for delivery provider failed: %1$s';
+			throw new MShop_Service_Exception( sprintf( $msg, $e->getMessage() ), 0, $e );
 		}
 
 		$requestXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
 
-		if( $dom->schemaValidate( $requestXSD ) !== true ) {
-			throw new MShop_Service_Exception(
-				sprintf('Validation of XML response from delivery provider against schema "%1$s" failed: %2$s', $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA);
+		if( $dom->schemaValidate( $requestXSD ) !== true )
+		{
+			$msg = 'Validation of XML response from delivery provider against schema "%1$s" failed: %2$s';
+			throw new MShop_Service_Exception( sprintf( $msg, $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA );
 		}
 
-		if ( ( $xml = $dom->saveXML() ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'DOM tree of XML response from delivery provider could not be converted to XML string' ), parent::ERR_XML );
+		if ( ( $xml = $dom->saveXML() ) === false )
+		{
+			$msg = 'DOM tree of XML response from delivery provider could not be converted to XML string';
+			throw new MShop_Service_Exception( sprintf( $msg ), parent::ERR_XML );
 		}
 
 		return $xml;
@@ -353,9 +333,10 @@ class MShop_Service_Provider_Delivery_Default
 
 		$config = $this->getServiceItem()->getConfig();
 
-		if( !isset( $config['default.project'] ) ) {
-			throw new MShop_Service_Exception(
-				sprintf( 'Parameter "%1$s" for configuration not available', "project" ), parent::ERR_TEMP );
+		if( !isset( $config['default.project'] ) )
+		{
+			$msg = 'Parameter "%1$s" for configuration not available';
+			throw new MShop_Service_Exception( sprintf( $msg, "project" ), parent::ERR_TEMP );
 		}
 
 		$this->_appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );
@@ -376,22 +357,14 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the delivery/payment item to the XML object
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order base manager object
 	 * @param MShop_Order_Item_Base_Interface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLService( MShop_Common_Manager_Interface $orderBaseManager,
-	MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function _buildXMLService( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
-		$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
-		$criteria = $orderServiceManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $base->getId() ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.service.type' ) ) );
-		$services = $orderServiceManager->searchItems( $criteria );
-
-		foreach( $services as $service )
+		foreach( $base->getServices() as $service )
 		{
 			switch( $service->getType() )
 			{
@@ -410,19 +383,13 @@ class MShop_Service_Provider_Delivery_Default
 					$this->_appendChildCDATA( 'code', $service->getCode(), $dom, $paymentitem );
 					$this->_appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
 
-					$orderServiceAttrManager = $orderServiceManager->getSubManager( 'attribute' );
-					$criteria = $orderServiceAttrManager->createSearch();
-					$criteria->setConditions(
-						$criteria->compare( '==', 'order.base.service.attribute.serviceid', $service->getId() ) );
-					$criteria->setSortations( array( $criteria->sort( '+', 'order.base.service.attribute.code' ) ) );
-					$attributes = $orderServiceAttrManager->searchItems( $criteria );
-
 					$fieldlist = $dom->createElement( 'fieldlist' );
-					foreach( $attributes as $attribute )
+					foreach( $service->getAttributes() as $attribute )
 					{
 						$fielditem = $dom->createElement( 'fielditem' );
 						$this->_appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );
 						$this->_appendChildCDATA( 'value', $attribute->getValue(), $dom, $fielditem );
+						$this->_appendChildCDATA( 'type', $attribute->getType(), $dom, $fielditem );
 						$fieldlist->appendChild( $fielditem );
 					}
 
@@ -437,14 +404,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the price item to the XML object
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order base manager object
 	 * @param MShop_Order_Item_Base_Interface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLPrice( MShop_Common_Manager_Interface $orderBaseManager,
-		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function _buildXMLPrice( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$price = $base->getPrice();
 		$total = $price->getValue() + $price->getCosts();
@@ -462,36 +427,16 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the product list to the XML object
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order base manager object
 	 * @param MShop_Order_Item_Base_Interface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLProducts( MShop_Common_Manager_Interface $orderBaseManager,
-		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function _buildXMLProducts( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
-		$criteria = $orderProductManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $base->getId() ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.product.position' ) ) );
-		$allproducts = $orderProductManager->searchItems( $criteria );
-
-		$products = $childproducts = array();
-		foreach( $allproducts as $product )
-		{
-			if( $product->getOrderProductId() === null )
-			{
-				$products[] = $product;
-				continue;
-			}
-
-			$childproducts[ $product->getOrderProductId() ][] = $product;
-		}
-
 		$productlist = $dom->createElement( 'productlist' );
 
-		foreach( $products as $product )
+		foreach( $base->getProducts() as $product )
 		{
 			$price = $product->getPrice();
 			$total = $price->getValue() + $price->getCosts();
@@ -511,7 +456,7 @@ class MShop_Service_Provider_Delivery_Default
 			$productitem->appendChild( $priceitem );
 
 			if( $product->getType() === 'bundle' ) {
-				$this->_buildXMLChildList( $product, $childproducts[ $product->getId() ], $dom, $productitem );
+				$this->_buildXMLChildList( $product, $product->getProducts(), $dom, $productitem );
 			}
 
 			$productlist->appendChild( $productitem );
@@ -562,24 +507,16 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the address list to the XML object
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order base manager object
 	 * @param MShop_Order_Item_Base_Interface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLAddresses( MShop_Common_Manager_Interface $orderBaseManager,
-		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function _buildXMLAddresses( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
-		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
-		$criteria = $orderAddressManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $base->getId() ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.address.type' ) ) );
-		$addresses = $orderAddressManager->searchItems( $criteria );
-
 		$addresslist = $dom->createElement( 'addresslist' );
 
-		foreach( $addresses as $address ) {
+		foreach( $base->getAddresses() as $address ) {
 			$this->_buildXMLAddress( $address, $dom, $addresslist );
 		}
 
@@ -624,28 +561,20 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the "additional" section to the XML object
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order base manager object
 	 * @param MShop_Order_Item_Base_Interface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLAdditional( MShop_Common_Manager_Interface $orderBaseManager,
-		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function _buildXMLAdditional( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
-		$orderCouponManager = $orderBaseManager->getSubManager( 'coupon' );
-		$criteria = $orderCouponManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $base->getId() ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.coupon.code' ) ) );
-		$coupons = $orderCouponManager->searchItems( $criteria );
-
 		$additional = $dom->createElement( 'additional' );
 		$this->_appendChildCDATA( 'comment', '', $dom, $additional );
 
 		$couponItem = $dom->createElement( 'discount' );
 
-		foreach( $coupons as $coupon ) {
-			$this->_appendChildCDATA( 'code', $coupon->getCode(), $dom, $couponItem );
+		foreach( $base->getCoupons() as $code => $products ) {
+			$this->_appendChildCDATA( 'code', $code, $dom, $couponItem );
 		}
 
 		$additional->appendChild( $couponItem );

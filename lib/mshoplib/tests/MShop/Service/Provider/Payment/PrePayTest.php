@@ -95,9 +95,9 @@ class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
 		$this->_object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
-		$this->assertEquals( 'abc', $item->getAttribute( 'test.code' ) );
-		$this->assertEquals( 123, $item->getAttribute( 'test.number' ) );
-		$this->assertEquals( 'payment', $item->getAttributeItem( 'test.code' )->getType() );
-		$this->assertEquals( 'payment', $item->getAttributeItem( 'test.number' )->getType() );
+		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'payment' ) );
+		$this->assertEquals( 123, $item->getAttribute( 'test.number', 'payment' ) );
+		$this->assertEquals( 'payment', $item->getAttributeItem( 'test.code', 'payment' )->getType() );
+		$this->assertEquals( 'payment', $item->getAttributeItem( 'test.number', 'payment' )->getType() );
 	}
 }

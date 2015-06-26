@@ -176,7 +176,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		$this->_setConfigFE( $orderServiceItem, $attributes, 'payment' );
+		$this->_setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}
 
 

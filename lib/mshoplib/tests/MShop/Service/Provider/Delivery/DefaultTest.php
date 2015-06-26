@@ -179,38 +179,47 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 							<fielditem>
 								<name><![CDATA[ACOWNER]]></name>
 								<value><![CDATA[test user]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[ACSTRING]]></name>
 								<value><![CDATA[9876543]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[NAME]]></name>
 								<value><![CDATA[CreditCard]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[REFID]]></name>
 								<value><![CDATA[12345678]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[TXDATE]]></name>
 								<value><![CDATA[2009-08-18]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[X-ACCOUNT]]></name>
 								<value><![CDATA[Kraft02]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[X-STATUS]]></name>
 								<value><![CDATA[9]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[ogone-alias-name]]></name>
 								<value><![CDATA[aliasName]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
 								<name><![CDATA[ogone-alias-value]]></name>
 								<value><![CDATA[aliasValue]]></value>
+								<type><![CDATA[payment]]></type>
 							</fielditem>
 						</fieldlist>
 					</paymentitem>

@@ -108,28 +108,20 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		parent::setConfigFE( $orderServiceItem, $attributes );
+		$this->_setAttributes( $orderServiceItem, $attributes, 'payment' );
 
-		$attributeItems = $orderServiceItem->getAttributes();
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
-
-		if( ( $attrItem = $orderServiceItem->getAttributeItem( 'directdebit.accountno' ) ) !== null )
+		if( ( $attrItem = $orderServiceItem->getAttributeItem( 'directdebit.accountno', 'payment' ) ) !== null )
 		{
-			$ordBaseAttrItem = $manager->createItem();
-			$ordBaseAttrItem->setType( $attrItem->getType() . '/hidden' );
-			$ordBaseAttrItem->setCode( $attrItem->getCode() . '/hidden' );
-			$ordBaseAttrItem->setValue( $attrItem->getValue() );
-
-			$attributeItems[] = $ordBaseAttrItem;
+			$attrList = array( $attrItem->getCode() => $attrItem->getValue() );
+			$this->_setAttributes( $orderServiceItem, $attrList, 'payment/hidden' );
 
 			$value = $attrItem->getValue();
 			$len = strlen( $value );
 			$xstr = ( $len > 3 ? str_repeat( 'X', $len - 3 ) : '' );
 
 			$attrItem->setValue( $xstr . substr( $value, -3 ) );
+			$orderServiceItem->setAttributeItem( $attrItem );
 		}
-
-		$orderServiceItem->setAttributes( $attributeItems );
 	}
 
 
