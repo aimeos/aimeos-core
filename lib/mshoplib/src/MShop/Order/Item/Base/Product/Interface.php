@@ -243,18 +243,27 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code code of the product attribute item.
+	 * @param string $code code of the product attribute item
+	 * @param string $type Type of the product attribute item
 	 * @return string|null Value of the attribute item for the ordered product and the given code
 	 */
-	public function getAttribute( $code );
+	public function getAttribute( $code, $type = '' );
 
 	/**
 	 * Returns the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code code of the product attribute item.
+	 * @param string $code code of the product attribute item
+	 * @param string $type Type of the product attribute item
 	 * @return MShop_Order_Item_Base_Product_Attribute_Interface|null Attribute item for the ordered product and the given code
 	 */
-	public function getAttributeItem( $code );
+	public function getAttributeItem( $code, $type = '' );
+
+	/**
+	 * Adds or replaces the attribute item in the list of product attributes.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Attribute_Interface $item Product attribute item
+	 */
+	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Interface $item );
 
 	/**
 	 * Returns the list of attribute items for the ordered product.
