@@ -461,7 +461,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	public function testSetAttributeItem()
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$item = $attManager->createItem();
 		$item->setCode( 'test_code' );

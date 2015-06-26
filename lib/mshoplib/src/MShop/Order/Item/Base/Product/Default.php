@@ -533,9 +533,9 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Attribute_Interface $item Service attribute item
+	 * @param MShop_Order_Item_Base_Product_Attribute_Interface $item Service attribute item
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Service_Attribute_Interface $item )
+	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Interface $item )
 	{
 		$this->_getAttributeMap();
 
