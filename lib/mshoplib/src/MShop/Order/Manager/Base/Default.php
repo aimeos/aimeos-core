@@ -648,15 +648,16 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
-	 * Creates a new basket containing all items from the order excluding the coupons.
-	 * The items will be marked as new and modified so an additional order is
-	 * stored when the basket is saved.
+	 * Creates a new basket containing the items from the order excluding the coupons.
+	 * If the last parameter is ture, the items will be marked as new and
+	 * modified so an additional order is stored when the basket is saved.
 	 *
 	 * @param integer $id Base ID of the order to load
+	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
 	 * @return MShop_Order_Item_Base_Interface Basket including all items
 	 */
-	public function load( $id, $fresh = false )
+	public function load( $id, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL, $fresh = false )
 	{
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.id', $id ) );
@@ -705,9 +706,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$localeItem->setSiteId($row['siteid']);
 
 		if( $fresh === false ) {
-			$basket = $this->_load( $id, $price, $localeItem, $row );
+			$basket = $this->_load( $id, $price, $localeItem, $row, $parts );
 		} else {
-			$basket = $this->_loadFresh( $id, $price, $localeItem, $row );
+			$basket = $this->_loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
 
 		return $basket;
@@ -715,18 +716,32 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
-	 * Saves the complete basket to the storage including all items attached.
+	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket object containing all information
+	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Interface $basket )
+	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL )
 	{
 		$this->saveItem( $basket );
 
-		$this->_storeProducts( $basket );
-		$this->_storeCoupons( $basket );
-		$this->_storeAddresses( $basket );
-		$this->_storeServices( $basket );
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
+			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
+		) {
+			$this->_storeProducts( $basket );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
+			$this->_storeCoupons( $basket );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+			$this->_storeAddresses( $basket );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+			$this->_storeServices( $basket );
+		}
 	}
 
 
@@ -789,6 +804,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 			if( $item->getOrderProductId() === null )
 			{
+				ksort( $subProducts ); // bring the array into the right order because it's reversed
 				$item->setProducts( $subProducts );
 				$products[ $item->getPosition() ] = $item;
 
@@ -824,6 +840,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $id ) );
+		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.address.type' ) ) );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -855,6 +872,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $id ) );
+		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.coupon.code' ) ) );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -891,6 +909,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $id ) );
+		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.service.type' ) ) );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -1048,18 +1067,34 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	/**
 	 * Load the basket item for the given ID.
 	 *
-	 * @param integer $id Order base ID
-	 * @param MShop_Price_Item $price
-	 * @param MShop_Locale_Item $localeItem
+	 * @param integer $id Unique order base ID
+	 * @param MShop_Price_Item $price Price object with total order value
+	 * @param MShop_Locale_Item $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
+	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _load( $id, $price, $localeItem, $row )
+	protected function _load( $id, $price, $localeItem, $row, $parts )
 	{
-		$products = $this->_loadProducts( $id, false );
-		$addresses = $this->_loadAddresses( $id, false );
-		$services = $this->_loadServices( $id, false );
-		$coupons = $this->_loadCoupons ( $id, false, $products );
+		$products = $coupons = $addresses = $services = array();
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
+			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
+		) {
+			$products = $this->_loadProducts( $id, false );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
+			$coupons = $this->_loadCoupons ( $id, false, $products );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+			$addresses = $this->_loadAddresses( $id, false );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+			$services = $this->_loadServices( $id, false );
+		}
 
 		$basket =  $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
@@ -1070,17 +1105,29 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	/**
 	 * Create a new basket item as a clone from an existing order ID.
 	 *
-	 * @param integer $id Order base ID
-	 * @param MShop_Price_Item $price
-	 * @param MShop_Locale_Item $localeItem
+	 * @param integer $id Unique order base ID
+	 * @param MShop_Price_Item $price Price object with total order value
+	 * @param MShop_Locale_Item $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
+	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _loadFresh( $id, $price, $localeItem, $row )
+	protected function _loadFresh( $id, $price, $localeItem, $row, $parts )
 	{
-		$products = $this->_loadProducts( $id, true );
-		$addresses = $this->_loadAddresses( $id, true );
-		$services = $this->_loadServices( $id, true );
+		$products = $addresses = $services = array();
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT ) {
+			$products = $this->_loadProducts( $id, true );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+			$addresses = $this->_loadAddresses( $id, true );
+		}
+
+		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+			$services = $this->_loadServices( $id, true );
+		}
+
 
 		$basket =  $this->_createItem( $price, $localeItem, $row );
 		$basket->setId( null );
