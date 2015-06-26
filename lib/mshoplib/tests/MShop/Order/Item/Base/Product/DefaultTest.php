@@ -386,12 +386,19 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 
 		$attrItem002 = $attManager->createItem();
 		$attrItem002->setCode( 'code_002');
+		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002');
 
 		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->_object->getAttribute( 'code_001' );
 		$this->assertEquals( 'value_001', $result );
+
+		$result = $this->_object->getAttribute( 'code_002', 'test_002' );
+		$this->assertEquals( 'value_002', $result );
+
+		$result = $this->_object->getAttribute( 'code_002' );
+		$this->assertEquals( null, $result );
 
 		$result = $this->_object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
@@ -413,12 +420,19 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 
 		$attrItem002 = $attManager->createItem();
 		$attrItem002->setCode( 'code_002');
+		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002');
 
 		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->_object->getAttributeItem( 'code_001' );
 		$this->assertEquals( 'value_001', $result->getValue() );
+
+		$result = $this->_object->getAttributeItem( 'code_002', 'test_002' );
+		$this->assertEquals( 'value_002', $result->getValue() );
+
+		$result = $this->_object->getAttributeItem( 'code_002' );
+		$this->assertEquals( null, $result );
 
 		$result = $this->_object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
@@ -442,6 +456,31 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	public function testGetAttributesInvalidType()
 	{
 		$this->assertEquals( array(), $this->_object->getAttributes( 'invalid' ) );
+	}
+
+	public function testSetAttributeItem()
+	{
+		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
+
+		$item = $attManager->createItem();
+		$item->setCode( 'test_code' );
+		$item->setType( 'test_type' );
+		$item->setValue( 'test_value' );
+
+		$this->_object->setAttributeItem( $item );
+
+		$this->assertEquals( true, $this->_object->isModified() );
+		$this->assertEquals( 'test_value', $this->_object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+
+		$item = $attManager->createItem();
+		$item->setCode( 'test_code' );
+		$item->setType( 'test_type' );
+		$item->setValue( 'test_value2' );
+
+		$this->_object->setAttributeItem( $item );
+
+		$this->assertEquals( 'test_value2', $this->_object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
 	}
 
 	public function testSetAttributes()

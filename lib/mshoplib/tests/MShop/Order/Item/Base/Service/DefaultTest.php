@@ -35,7 +35,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_attribute = array( new MShop_Order_Item_Base_Service_Attribute_Default( $attrValues ) );
+		$this->_attribute = array( 'UnitCode' => new MShop_Order_Item_Base_Service_Attribute_Default( $attrValues ) );
 
 		$this->_values = array(
 			'id' => 1,
@@ -185,17 +185,24 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
-		$attrItem001->setCode( 'code_001');
-		$attrItem001->setValue( 'value_001');
+		$attrItem001->setCode( 'code_001' );
+		$attrItem001->setValue( 'value_001' );
 
 		$attrItem002 = $attManager->createItem();
-		$attrItem002->setCode( 'code_002');
-		$attrItem002->setValue( 'value_002');
+		$attrItem002->setCode( 'code_002' );
+		$attrItem002->setType( 'test_002' );
+		$attrItem002->setValue( 'value_002' );
 
 		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->_object->getAttribute( 'code_001' );
 		$this->assertEquals( 'value_001', $result );
+
+		$result = $this->_object->getAttribute( 'code_002', 'test_002' );
+		$this->assertEquals( 'value_002', $result );
+
+		$result = $this->_object->getAttribute( 'code_002' );
+		$this->assertEquals( null, $result );
 
 		$result = $this->_object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
@@ -217,6 +224,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 		$attrItem002 = $attManager->createItem();
 		$attrItem002->setCode( 'code_002');
+		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002');
 
 		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
@@ -224,12 +232,18 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->getAttributeItem( 'code_001' );
 		$this->assertEquals( 'value_001', $result->getValue() );
 
-		$result = $this->_object->getAttribute( 'code_003' );
+		$result = $this->_object->getAttributeItem( 'code_002', 'test_002' );
+		$this->assertEquals( 'value_002', $result->getValue() );
+
+		$result = $this->_object->getAttributeItem( 'code_002' );
+		$this->assertEquals( null, $result );
+
+		$result = $this->_object->getAttributeItem( 'code_003' );
 		$this->assertEquals( null, $result );
 
 		$this->_object->setAttributes( array() );
 
-		$result = $this->_object->getAttribute( 'code_001' );
+		$result = $this->_object->getAttributeItem( 'code_001' );
 		$this->assertEquals( null, $result );
 	}
 
@@ -246,6 +260,31 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetAttributesInvalidType()
 	{
 		$this->assertEquals( array(), $this->_object->getAttributes( 'invalid' ) );
+	}
+
+	public function testSetAttributeItem()
+	{
+		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
+
+		$item = $attManager->createItem();
+		$item->setCode( 'test_code' );
+		$item->setType( 'test_type' );
+		$item->setValue( 'test_value' );
+
+		$this->_object->setAttributeItem( $item );
+
+		$this->assertEquals( true, $this->_object->isModified() );
+		$this->assertEquals( 'test_value', $this->_object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+
+		$item = $attManager->createItem();
+		$item->setCode( 'test_code' );
+		$item->setType( 'test_type' );
+		$item->setValue( 'test_value2' );
+
+		$this->_object->setAttributeItem( $item );
+
+		$this->assertEquals( 'test_value2', $this->_object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
 	}
 
 	public function testSetAttributes()
