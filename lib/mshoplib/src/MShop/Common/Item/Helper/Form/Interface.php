@@ -53,8 +53,8 @@ interface MShop_Common_Item_Helper_Form_Interface
 	/**
 	 * Returns the value for the given key.
 	 *
-	 * @param string $key Key of value
-	 * @return mixed Value for the given key
+	 * @param string $key Unique key
+	 * @return MW_Common_Criteria_Attribute_Interface Attribute item for the given key
 	 */
 	public function getValue( $key );
 
@@ -62,17 +62,16 @@ interface MShop_Common_Item_Helper_Form_Interface
 	/**
 	 * Sets the value for the key.
 	 *
-	 * @param string $key Key of value
-	 * @param string $value Value for the given key
-	 * @return void
+	 * @param string $key Unique key
+	 * @param MW_Common_Criteria_Attribute_Interface $value Attribute item for the given key
 	 */
-	public function setValue( $key, $value );
+	public function setValue( $key, MW_Common_Criteria_Attribute_Interface $value );
 
 
 	/**
-	 * Returns the all key/ value pairs.
+	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/ value pairs
+	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Interface
 	 */
 	public function getValues();
 }

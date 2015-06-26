@@ -21,10 +21,38 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_values = array(
-			'name' => 'unittest',
-			'site' => 'de',
-			'language' => 'de',
-			'domain' => 'testDomain',
+			'name' => new MW_Common_Criteria_Attribute_Default( array(
+				'code' => 'name',
+				'internalcode' => 'name',
+				'type' => 'string',
+				'internaltype' => 'string',
+				'label' => 'Name',
+				'default' => 'unittest',
+			) ),
+			'site' => new MW_Common_Criteria_Attribute_Default( array(
+				'code' => 'site',
+				'internalcode' => 'site',
+				'type' => 'string',
+				'internaltype' => 'string',
+				'label' => 'Site',
+				'default' => 'de',
+			) ),
+			'language' => new MW_Common_Criteria_Attribute_Default( array(
+				'code' => 'language',
+				'internalcode' => 'language',
+				'type' => 'string',
+				'internaltype' => 'string',
+				'label' => 'Language',
+				'default' => 'de',
+			) ),
+			'language' => new MW_Common_Criteria_Attribute_Default( array(
+				'code' => 'domain',
+				'internalcode' => 'domain',
+				'type' => 'string',
+				'internaltype' => 'string',
+				'label' => 'Domain',
+				'default' => 'testDomain',
+			) ),
 		);
 
 		$this->_object = new MShop_Common_Item_Helper_Form_Default( 'http://www.example.com', 'post', $this->_values );
@@ -68,12 +96,21 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetValue()
 	{
-		$this->assertEquals( 'unittest', $this->_object->getValue( 'name' ) );
+		$this->assertEquals( 'unittest', $this->_object->getValue( 'name' )->getDefault() );
 	}
 
 	public function testSetValue()
 	{
-		$this->_object->setValue( 'name', 'test' );
-		$this->assertEquals( 'test', $this->_object->getValue( 'name' ) );
+		$item = new MW_Common_Criteria_Attribute_Default( array(
+			'code' => 'name',
+			'internalcode' => 'name',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'label' => 'Name',
+			'default' => 'test',
+		) );
+
+		$this->_object->setValue( 'name', $item );
+		$this->assertEquals( 'test', $this->_object->getValue( 'name' )->getDefault() );
 	}
 }

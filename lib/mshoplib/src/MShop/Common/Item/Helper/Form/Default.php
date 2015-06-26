@@ -26,11 +26,12 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param array $values Initial values, including the form parameters 
-	 * ( key/ value pairs )
+	 * @param array $values Form parameters implementing MW_Common_Criteria_Attribute_Interface
 	 */
 	public function __construct( $url = '', $method = '', array $values = array() )
 	{
+		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
+
 		$this->_url = $url;
 		$this->_method = $method;
 		$this->_values = $values;
@@ -84,35 +85,35 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	/**
 	 * Returns the value for the given key.
 	 *
-	 * @param string $key key of value
-	 * @return mixed Value for the given key
+	 * @param string $key Unique key
+	 * @return MW_Common_Criteria_Attribute_Interface Attribute item for the given key
 	 */
 	public function getValue( $key )
 	{
-		if( !isset( $this->_values[ $key ] ) ) {
+		if( !isset( $this->_values[$key] ) ) {
 			return null;
 		}
 
-		return $this->_values[ $key ];
+		return $this->_values[$key];
 	}
 
 
 	/**
 	 * Sets the value for the key.
 	 *
-	 * @param string $key Key of value
-	 * @param string $value Value for the given key
+	 * @param string $key Unique key
+	 * @param MW_Common_Criteria_Attribute_Interface $value Attribute item for the given key
 	 */
-	public function setValue( $key, $value )
+	public function setValue( $key, MW_Common_Criteria_Attribute_Interface $value )
 	{
-		$this->_values[ $key ] = (string) $value;
+		$this->_values[$key] = $value;
 	}
 
 
 	/**
-	 * Returns the all key/ value pairs.
+	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/ value pairs
+	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Interface
 	 */
 	public function getValues()
 	{
