@@ -30,10 +30,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
 	{
-		parent::__construct($context, $item);
+		parent::__construct( $context, $item );
 
-		$this->_orderAttrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product/attribute' );
-
+		$this->_orderAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
 		$this->_type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
@@ -113,45 +112,25 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	* @param Array $properties List of item properties to be converted
 	* @return Array List of attributes
 	*/
-	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product , array $properties )
+	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();
 		$itemProperties = $item->toArray();
 
-		foreach( $properties as $current )
+		foreach( $properties as $code )
 		{
-			if( array_key_exists( $current, $itemProperties )
-				&& ( $new = $this->_createAttribute( $product, $current, $itemProperties[$current] ) ) !== null
+			if( array_key_exists( $code, $itemProperties )
+				&& $product->getAttribute( $code, $this->_type ) === null
 			) {
+				$new = $this->_orderAttrManager->createItem();
+				$new->setCode( $code );
+				$new->setType( $this->_type );
+				$new->setValue( $itemProperties[$code] );
+
 				$attributeList[] = $new;
 			}
 		}
 
 		return $attributeList;
 	}
-
-
-	/**
-	* Creates an attribute with given values for code, type, name and value
-	*
-	* @param String $code Value for attribute code
-	* @param String $value Value for attribute value
-	* @param String $name Optional value for attribute name
-	* @return MShop_Order_Item_Base_Product_Attribute_Interface Newly created attribte item
-	*/
-	protected function _createAttribute( MShop_Order_Item_Base_Product_Interface $product, $code, $value, $name = null )
-	{
-		if( $product->getAttribute( $code ) !== null ) {
-			return null;
-		}
-
-		$new = $this->_orderAttrManager->createItem();
-		$new->setCode( $code );
-		$new->setType( $this->_type );
-		$new->setName( $name );
-		$new->setValue( $value );
-
-		return $new;
-	}
-
 }

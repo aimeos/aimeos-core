@@ -239,7 +239,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 		$this->assertEquals( 'U:TESTPSUB01', $basket->getProduct( 0 )->getProductCode() );
-		$this->assertEquals( 'xs', $basket->getProduct( 0 )->getAttribute( 'size' ) );
+		$this->assertEquals( 'xs', $basket->getProduct( 0 )->getAttribute( 'size', 'config' ) );
 	}
 
 
@@ -276,7 +276,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$this->assertEquals( 'hidden', $attribute->getType() );
-		$this->assertEquals( '29', $product->getAttribute( 'width' ) );
+		$this->assertEquals( '29', $product->getAttribute( 'width', 'hidden' ) );
 	}
 
 
@@ -303,7 +303,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$basket = $this->_object->get();
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
-		$this->assertEquals( '2000-01-01', $basket->getProduct( 0 )->getAttribute( 'date' ) );
+		$this->assertEquals( '2000-01-01', $basket->getProduct( 0 )->getAttribute( 'date', 'custom' ) );
 	}
 
 
