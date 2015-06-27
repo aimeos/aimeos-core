@@ -26,7 +26,7 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 <?php elseif( $method && $url ) : ?>
 <?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
 <?php		if( !$item->isPublic() ) : ?>
-		<input name="<?php echo $enc->attr( $key ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
+		<input name="<?php echo $enc->attr( $item->getInternalCode() ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
 <?php		endif; ?>
 <?php	endforeach; ?>
 	<ul class="form-list">
