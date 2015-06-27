@@ -60,6 +60,30 @@ msgstr "Mr"
 msgid "mrs"
 msgstr "Mrs"
 
+#. Omnipay service provider
+msgid "omnipay.firstname"
+msgstr "First name"
+
+#. Omnipay service provider
+msgid "omnipay.lastname"
+msgstr "Last name"
+
+#. Omnipay service provider
+msgid "omnipay.cardno"
+msgstr "Credit card number"
+
+#. Omnipay service provider
+msgid "omnipay.ccv"
+msgstr "Verfification number"
+
+#. Omnipay service provider
+msgid "omnipay.expirymonth"
+msgstr "Expiry month"
+
+#. Omnipay service provider
+msgid "omnipay.expiryyear"
+msgstr "Expiry year"
+
 #. Product attribute
 msgid "option"
 msgstr "Option"
