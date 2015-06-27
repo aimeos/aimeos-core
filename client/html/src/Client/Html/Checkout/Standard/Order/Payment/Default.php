@@ -340,6 +340,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			$view->standardUrlNext = $form->getUrl();
 			$view->standardMethod = $form->getMethod();
 			$view->standardOrderParams = $form->getValues();
+			$view->standardPaymentExternal = $form->getExternal();
 		}
 		catch( MShop_Order_Exception $e )
 		{
