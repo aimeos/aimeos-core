@@ -155,6 +155,30 @@ msgstr "BIC (Bankleitzahl)"
 msgid "directdebit.bankname"
 msgstr "Name der Bank"
 
+#. Omnipay service provider
+msgid "omnipay.firstname"
+msgstr "Vorname"
+
+#. Omnipay service provider
+msgid "omnipay.lastname"
+msgstr "Nachname"
+
+#. Omnipay service provider
+msgid "omnipay.cardno"
+msgstr "Kreditkartennummer"
+
+#. Omnipay service provider
+msgid "omnipay.cvv"
+msgstr "Sicherheitscode"
+
+#. Omnipay service provider
+msgid "omnipay.expirymonth"
+msgstr "Ablaufmonat"
+
+#. Omnipay service provider
+msgid "omnipay.expiryyear"
+msgstr "Ablaufjahr"
+
 #. Warehouse code
 msgid "warehouse:default"
 msgstr " "

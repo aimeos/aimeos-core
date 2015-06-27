@@ -73,7 +73,7 @@ msgid "omnipay.cardno"
 msgstr "Credit card number"
 
 #. Omnipay service provider
-msgid "omnipay.ccv"
+msgid "omnipay.cvv"
 msgstr "Verfification number"
 
 #. Omnipay service provider
