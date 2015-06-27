@@ -48,14 +48,16 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 <?php		if( $item->isPublic() ) : ?>
 		<li class="form-item <?php echo $key . ( $item->isRequired() ? ' mandatory' : ' optional' ); ?>" data-regex="<?php echo $testfcn( $regex, $key ); ?>">
 			<label for="order-payment-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
-				switch( $item->getType() ) : case 'string':
-				?><input type="text" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
-					break; case 'select':
+				switch( $item->getType() ) : case 'select':
 				?><select id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>">
 <?php					foreach( (array) $item->getDefault() as $option ) : ?>
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php echo $enc->html( $option ); ?></option>
 <?php					endforeach; ?>
-				</select>
+				</select><?php
+					break; case 'number':
+				?><input type="number" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+					break; default:
+				?><input type="text" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
 <?php			endswitch; ?>
 		</li>
 <?php		endif; ?>
