@@ -365,7 +365,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 
 		$order = $this->_getOrder( $additional['invoice'] );
-		$baseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
+		$baseItem = $this->_getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
 		$this->_checkIPN( $baseItem, $additional );

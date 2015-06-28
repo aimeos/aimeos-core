@@ -178,33 +178,4 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	{
 		$this->_setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}
-
-
-	/**
-	 * Sets or adds a attribute value to the list of service payment items.
-	 *
-	 * @param array &$attributes Associative array of existing service attributes code/item pairs
-	 * @param string $code Payment attribute code
-	 * @param string $value Payment attribute value
-	 * @param integer $serviceId Order service ID this attributes should be added to
-	 * $param string $type Attribute type, e.g. 'payment' or 'delivery'
-	 */
-	protected function _setValue( array &$attributes, $code, $value, $serviceId, $type = '' )
-	{
-		if( isset( $attributes[ $code ] ) )
-		{
-			$attributes[ $code ]->setValue( utf8_encode( $value ) );
-			return;
-		}
-
-		$attributeManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
-
-		$item = $attributeManager->createItem();
-		$item->setType( $type );
-		$item->setCode( $code );
-		$item->setValue( utf8_encode( $value ) );
-		$item->setServiceId( $serviceId );
-
-		$attributes[ $code ] = $item;
-	}
 }
