@@ -183,28 +183,36 @@ class MShop_Service_Provider_Payment_OmniPay
 			'card' => $additional,
 		);
 
-		$provider = $this->_getProvider();
-		$response = $provider->purchase( $data )->send();
-
-		if( $response->isSuccessful() )
+		try
 		{
-			$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
-			$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
+			$provider = $this->_getProvider();
+			$response = $provider->purchase( $data )->send();
 
-			$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
-			$this->_saveOrderBase( $baseItem );
+			if( $response->isSuccessful() )
+			{
+				$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
+				$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
+
+				$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
+				$this->_saveOrderBase( $baseItem );
+			}
+			else
+			{
+				$status = MShop_Order_Item_Abstract::PAY_REFUSED;
+				$errmsg = $response->getMessage();
+			}
 		}
-		else
+		catch( Exception $e )
 		{
 			$status = MShop_Order_Item_Abstract::PAY_REFUSED;
-			$errmsg = $response->getMessage();
+			$errmsg = $e->getMessage();
 		}
 
 		$order->setPaymentStatus( $status );
 		$this->_saveOrder( $order );
 
 		return $order;
-	}
+}
 
 
 	/**
