@@ -51,6 +51,7 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 			<label for="order-payment-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
 				switch( $item->getType() ) : case 'select':
 				?><select id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>">
+					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Please select' ) ); ?></option>
 <?php					foreach( (array) $item->getDefault() as $option ) : ?>
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php echo $enc->html( $option ); ?></option>
 <?php					endforeach; ?>
