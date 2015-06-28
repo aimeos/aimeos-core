@@ -23,6 +23,7 @@ $testfcn = function( $list, $key, $default = '' ) {
 	return ( isset( $list[$key] ) ? $list[$key] : $default );
 };
 
+$noinput = true;
 $enc = $this->encoder();
 $url = $this->get( 'standardUrlNext' );
 $method = $this->get( 'standardMethod' );
@@ -45,7 +46,7 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 <?php	endforeach; ?>
 	<ul class="form-list">
 <?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
-<?php		if( $item->isPublic() ) : ?>
+<?php		if( $item->isPublic() ) : $noinput = false; ?>
 		<li class="form-item <?php echo $key . ( $item->isRequired() ? ' mandatory' : ' optional' ); ?>" data-regex="<?php echo $testfcn( $regex, $key ); ?>">
 			<label for="order-payment-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
 				switch( $item->getType() ) : case 'select':
@@ -64,8 +65,12 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 <?php	endforeach; ?>
 	</ul>
 <?php echo $this->get( 'paymentBody' ); ?>
+<?php	if( $noinput ) : ?>
 	<noscript>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 	</noscript>
+<?php	else : ?>
+	<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
+<?php	endif; ?>
 <?php endif; ?>
 </div>
