@@ -249,6 +249,7 @@ class Client_Html_Checkout_Confirm_Default
 
 		try
 		{
+			$errmsg = null;
 			$params = $this->getView()->param();
 			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 
@@ -270,7 +271,7 @@ class Client_Html_Checkout_Confirm_Default
 					{
 						$provider = $serviceManager->getProvider( $serviceItem );
 
-						if( ( $orderItem = $provider->updateSync( $params ) ) !== null )
+						if( ( $orderItem = $provider->updateSync( $params, $errmsg ) ) !== null )
 						{
 							if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
 								&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
@@ -292,6 +293,13 @@ class Client_Html_Checkout_Confirm_Default
 				$search->setSlice( $start );
 			}
 			while( $count >= $search->getSliceSize() );
+
+
+			if( $errmsg )
+			{
+				$view = $this->getView();
+				$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + array( $errmsg );
+			}
 
 
 			parent::process();
