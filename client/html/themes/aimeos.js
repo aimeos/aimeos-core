@@ -790,20 +790,25 @@ AimeosCheckoutStandard = {
 			var retval = true;
 			var nodes = [];
 
-			$(".checkout-standard .item-new, .item-service")
-				.has(".header,label").has("input:checked") // combining in one has() doesn't work
-				.find(".form-list .mandatory").each(function() {
+			var testfn = function(idx, element) {
 
-				var value = $(this).find("input,select").val();
+				var elem = $(element);
+				var value = elem.find("input,select").val();
 
 				if(value === null || value.trim() === "") {
-					$(this).addClass("error");
-					nodes.push(this);
+					elem.addClass("error");
+					nodes.push(element);
 					retval = false;
 				} else {
-					$(this).removeClass("error");
+					elem.removeClass("error");
 				}
-			});
+			};
+
+			$(".checkout-standard .item-new, .item-service")
+				.has(".header,label").has("input:checked") // combining in one has() doesn't work
+				.find(".form-list .mandatory").each(testfn);
+
+			$(".checkout-standard-order-payment .form-list .mandatory").each(testfn);
 
 			if( nodes.length !== 0 ) {
 				$('html, body').animate({
