@@ -821,15 +821,15 @@ AimeosCheckoutStandard = {
 	 */
 	setupPaymentRedirect: function() {
 
-		var aimeos_checkout_form = $(".checkout-standard-order-payment > form").first();
+		var form = $("form").first();
+		var node = $(".checkout-standard-order-payment", form);
 
-		if(aimeos_checkout_form.length === 0 || aimeos_checkout_form.submit() === false) {
-			$(".checkout-standard-order-payment").first().each(function(index, element) {
-				var url = $(element).data("url");
-				if(url) {
-					window.location = url;
-				}
-			});
+		if(node.length > 0 && node.has(".mandatory") === false
+			&& node.has(".optional") === false && form.submit() === false
+		) {
+			if(node.data("url")) {
+				window.location = node.data("url");
+			}
 		}
 	},
 
