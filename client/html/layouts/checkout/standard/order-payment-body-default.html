@@ -33,12 +33,13 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 ?>
 <div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
-	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
 <?php if( $method === 'REDIRECT' ) : ?>
+	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
 	<noscript>
 		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
 	</noscript>
 <?php elseif( $method && $url ) : ?>
+	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Please enter your payment details' ), $enc::TRUST ); ?></p>
 <?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
 <?php		if( !$item->isPublic() ) : ?>
 		<input name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
@@ -71,7 +72,9 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 	</noscript>
 <?php	else : ?>
-	<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
+	<div class="button-group">
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
+	</div>
 <?php	endif; ?>
 <?php endif; ?>
 </div>
