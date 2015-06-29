@@ -16,10 +16,9 @@
  */
 class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_Form_Interface
 {
-	private $_url;
-	private $_method;
-	private $_values;
-	private $_external;
+	private $_url = '';
+	private $_method = '';
+	private $_values = array();
 
 
 	/**
@@ -28,38 +27,14 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
 	 * @param array $values Form parameters implementing MW_Common_Criteria_Attribute_Interface
-	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 */
-	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
+	public function __construct( $url = '', $method = '', array $values = array() )
 	{
 		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
 
-		$this->_url = (string) $url;
-		$this->_external = (bool) $external;
-		$this->_method = (string) $method;
+		$this->_url = $url;
+		$this->_method = $method;
 		$this->_values = $values;
-	}
-
-
-	/**
-	 * Returns if the URL points to an external site.
-	 *
-	 * @return boolean True if URL points to an external site, false if it stays on the same site
-	 */
-	public function getExternal()
-	{
-		return $this->_external;
-	}
-
-
-	/**
-	 * Sets if the URL points to an external site.
-	 *
-	 * @param boolean $value True if URL points to an external site, false if it stays on the same site
-	 */
-	public function setExternal( $value )
-	{
-		$this->_external = (bool) $value;
 	}
 
 

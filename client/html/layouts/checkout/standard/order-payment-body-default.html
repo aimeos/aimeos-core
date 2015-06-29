@@ -6,19 +6,6 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-if( $this->get( 'standardPaymentExternal', true ) )
-{
-	$namefcn = function( $view, $key ) {
-		return $key;
-	};
-}
-else
-{
-	$namefcn = function( $view, $key ) {
-		return $view->formparam( array( $key ) );
-	};
-}
-
 $testfcn = function( $list, $key, $default = '' ) {
 	return ( isset( $list[$key] ) ? $list[$key] : $default );
 };
@@ -42,7 +29,7 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Please enter your payment details' ), $enc::TRUST ); ?></p>
 <?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
 <?php		if( !$item->isPublic() ) : ?>
-		<input name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
+		<input name="<?php echo $enc->attr( $item->getInternalCode() ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
 <?php		endif; ?>
 <?php	endforeach; ?>
 	<ul class="form-list">
@@ -51,16 +38,16 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 		<li class="form-item <?php echo $key . ( $item->isRequired() ? ' mandatory' : ' optional' ); ?>" data-regex="<?php echo $testfcn( $regex, $key ); ?>">
 			<label for="order-payment-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
 				switch( $item->getType() ) : case 'select':
-				?><select id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>">
+				?><select id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $item->getInternalCode() ); ?>">
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Please select' ) ); ?></option>
 <?php					foreach( (array) $item->getDefault() as $option ) : ?>
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php echo $enc->html( $option ); ?></option>
 <?php					endforeach; ?>
 				</select><?php
 					break; case 'number':
-				?><input type="number" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				?><input type="number" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $item->getInternalCode() ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
 					break; default:
-				?><input type="text" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
+				?><input type="text" id="order-payment-<?php echo $key; ?>" name="<?php echo $enc->attr( $item->getInternalCode() ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
 <?php			endswitch; ?>
 		</li>
 <?php		endif; ?>
