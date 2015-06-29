@@ -33,7 +33,7 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 ?>
 <div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
-<?php if( $method === 'REDIRECT' ) : ?>
+<?php if( $method !== 'POST' ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
 	<noscript>
 		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
