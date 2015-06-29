@@ -392,6 +392,7 @@ Ext.onReady(function() {
             layout : 'fit',
             border : false,
             tbar : [
+                '<a href="https://aimeos.org" target="_blank"><img class="icon-update" src="https://aimeos.org/update" /></a>',
                 '->',
                 MShop.i18n.available ? {
                     xtype : 'MShop.elements.siteLanguage.combo'
