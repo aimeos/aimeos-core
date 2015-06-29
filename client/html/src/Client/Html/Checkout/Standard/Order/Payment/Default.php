@@ -320,7 +320,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$updateUrl = $view->url( $target, $controller, $action, array(), array(), $config );
 
 
-		$config = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $updateUrl );
+		$conf = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $updateUrl );
 
 
 		try
@@ -329,7 +329,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 
 			$manager = MShop_Factory::createManager( $context, 'service' );
 			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
-			$provider->injectGlobalConfigBE( $config );
+			$provider->injectGlobalConfigBE( $conf );
 
 			if( ( $form = $provider->process( $orderItem ) ) === null )
 			{
