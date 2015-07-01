@@ -387,8 +387,8 @@ Ext.onReady(function() {
 
     var type = (MShop.config.update && MShop.config.update.type ? MShop.config.update.type : 'custom');
     var version = (MShop.config.update && MShop.config.update.version ? MShop.config.update.version : '');
-    var updateurl = 'https://aimeos.org/update?type=' + type + '&version' + version;
-    var checkurl = 'https://aimeos.org/check?type=' + type + '&version' + version;
+    var updateurl = 'https://aimeos.org/update?type=' + type + '&version=' + version;
+    var checkurl = 'https://aimeos.org/check?type=' + type + '&version=' + version;
 
     // build interface
     new Ext.Viewport({
@@ -397,7 +397,7 @@ Ext.onReady(function() {
             layout : 'fit',
             border : false,
             tbar : [
-                '<a href="' + updateurl + '" target="_blank"><img class="icon-update" src="' + checkurl + ''" /></a>',
+                '<a href="' + updateurl + '" target="_blank"><img class="icon-update" src="' + checkurl + '" /></a>',
                 '->',
                 MShop.i18n.available ? {
                     xtype : 'MShop.elements.siteLanguage.combo'
