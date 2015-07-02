@@ -286,8 +286,8 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_msordbaprat_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_msordbaprat_ordprodid_code"
-	UNIQUE ("ordprodid", "code"),
+CONSTRAINT "unq_msordbaprat_opid_type_code"
+	UNIQUE ("ordprodid", "type", "code"),
 CONSTRAINT "fk_msordbaprat_ordprodid"
 	FOREIGN KEY ("ordprodid")
 	REFERENCES "mshop_order_base_product" ("id")
@@ -380,8 +380,8 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_msordbaseat_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_msordbaseat_ordservid_code"
-	UNIQUE ("ordservid", "code"),
+CONSTRAINT "unq_msordbaseat_osid_type_code"
+	UNIQUE ("ordservid", "type", "code"),
 CONSTRAINT "fk_msordbaseat_ordservid"
 	FOREIGN KEY ("ordservid")
 	REFERENCES "mshop_order_base_service" ("id")
