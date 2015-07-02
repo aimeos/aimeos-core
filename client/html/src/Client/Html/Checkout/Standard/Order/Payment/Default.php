@@ -344,7 +344,6 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		catch( MShop_Order_Exception $e )
 		{
 			$view->standardUrlNext = $confirmUrl;
-			$view->standardMethod = 'REDIRECT';
 		}
 
 		parent::process();

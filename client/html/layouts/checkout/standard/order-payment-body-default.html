@@ -12,20 +12,19 @@ $testfcn = function( $list, $key, $default = '' ) {
 
 $noinput = true;
 $enc = $this->encoder();
-$url = $this->get( 'standardUrlNext' );
-$method = $this->get( 'standardMethod' );
+$params = $this->get( 'standardOrderParams', array() );
 
 $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', array() );
 
 ?>
-<div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
+<div class="checkout-standard-order-payment">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
-<?php if( $method !== 'POST' ) : ?>
+<?php if( empty( $params ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
-	<noscript>
-		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
-	</noscript>
-<?php elseif( $method && $url ) : ?>
+	<div class="button-group">
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
+	</div>
+<?php else : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Please enter your payment details' ), $enc::TRUST ); ?></p>
 <?php	foreach( $this->get( 'standardOrderParams', array() ) as $key => $item ) : ?>
 <?php		if( !$item->isPublic() ) : ?>
@@ -54,14 +53,6 @@ $regex = $this->config( 'client/html/checkout/standard/order/payment/validate', 
 <?php	endforeach; ?>
 	</ul>
 <?php echo $this->get( 'paymentBody' ); ?>
-<?php	if( $noinput ) : ?>
-	<noscript>
-		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
-	</noscript>
-<?php	else : ?>
-	<div class="button-group">
-		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
-	</div>
-<?php	endif; ?>
+	<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 </div>

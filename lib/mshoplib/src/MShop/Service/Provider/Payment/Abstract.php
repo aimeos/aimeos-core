@@ -153,7 +153,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	{
 		$url = $this->_getConfigValue( array( 'payment.url-success' ) );
 
-		return new MShop_Common_Item_Helper_Form_Default( $url, 'REDIRECT', array() );
+		return new MShop_Common_Item_Helper_Form_Default( $url, 'POST', array() );
 	}
 
 

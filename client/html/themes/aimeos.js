@@ -829,10 +829,8 @@ AimeosCheckoutStandard = {
 		var form = $("form").first();
 		var node = $(".checkout-standard-order-payment", form);
 
-		if(node.length > 0 && node.has(".mandatory").length == 0 && node.has(".optional").length == 0
-			&& form.attr("action") && form.submit() === false && node.data("url")
-		) {
-			window.location = node.data("url");
+		if(node.length > 0 && node.has(".mandatory").length == 0 && node.has(".optional").length == 0 && form.attr("action") != '' ) {
+			form.submit();
 		}
 	},
 
