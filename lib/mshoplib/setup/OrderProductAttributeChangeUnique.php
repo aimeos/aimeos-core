@@ -12,7 +12,7 @@
 class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'CREATE UNIQUE INDEX "unq_msordbaprat_opid_type_code" ON "mshop_order_base_service_attr" ("ordprodid","type","code")',
+		'CREATE UNIQUE INDEX "unq_msordbaprat_opid_type_code" ON "mshop_order_base_product_attr" ("ordprodid","type","code")',
 		'DROP INDEX "unq_msordbaprat_ordprodid_code" ON "mshop_order_base_product_attr"',
 	);
 
