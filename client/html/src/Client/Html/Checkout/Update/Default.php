@@ -212,6 +212,7 @@ class Client_Html_Checkout_Update_Default
 			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
 			$start = 0;
+			$errmsg = $response = null;
 
 			do
 			{
@@ -221,7 +222,7 @@ class Client_Html_Checkout_Update_Default
 				{
 					$provider = $serviceManager->getProvider( $serviceItem );
 
-					if( ( $orderItem = $provider->updateSync( $view->param() ) ) !== null )
+					if( ( $orderItem = $provider->updateSync( $view->param(), $errmsg, $response ) ) !== null )
 					{
 						// Update stock, coupons, etc.
 						$orderCntl->update( $orderItem );
@@ -235,6 +236,7 @@ class Client_Html_Checkout_Update_Default
 			}
 			while( $count >= $search->getSliceSize() );
 
+			$view->updateMessage = $response;
 
 			parent::process();
 		}
@@ -242,7 +244,7 @@ class Client_Html_Checkout_Update_Default
 		{
 			$view->updateHttpCode = 500;
 			$view->updateHttpString = 'HTTP/1.1 500 Error updating order status';
-			$view->updateError = $e->getMessage();
+			$view->updateMessage = $e->getMessage();
 
 			$msg = "Updating order status failed: %1\$s\n%2\$s";
 			$context->getLogger()->log( sprintf( $msg, $e->getMessage(), print_r( $view->param(), true ) ) );

@@ -337,10 +337,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 *
 	 * @param mixed $additional Update information whose format depends on the payment provider
 	 * @param string|null &$errmsg Error message shown to the user
+	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
-	public function updateSync( $additional, &$errmsg = null )
+	public function updateSync( $additional, &$errmsg = null, &$response = null )
 	{
 		if( isset( $additional['token'] ) && isset( $additional['PayerID'] ) && isset( $additional['orderid'] ) ) {
 			return $this->_doExpressCheckoutPayment( $additional );
