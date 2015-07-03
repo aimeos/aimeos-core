@@ -2016,6 +2016,12 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .checkout-standard-order {
 	padding: 0 0 0 1em;
 }
+
+.checkout-standard-order .form-list .mandatory {
+	font-weight: bold;
+	display: list-item;
+}
+
 .checkout-standard-order-payment {
 	text-align: center;
 }
