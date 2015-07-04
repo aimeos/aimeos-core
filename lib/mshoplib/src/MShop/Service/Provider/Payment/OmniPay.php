@@ -326,14 +326,12 @@ class MShop_Service_Provider_Payment_OmniPay
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
-		$provider = $this->_getProvider();
-
 		// off-site payment
 		if( $provider->supportsCompletePurchase() ) {
-			return $this->_processOffsite( $provider, $order );
+			return $this->_processOffsite( $order );
 		}
 
-		return $this->_processOnsite( $provider, $order );
+		return $this->_processOnsite( $order );
 	}
 
 
@@ -423,12 +421,11 @@ class MShop_Service_Provider_Payment_OmniPay
 	/**
 	 * Process off-site payments where credit card data is entered and processed at the payment gateway.
 	 *
-	 * @param \Omnipay\Common\GatewayInterface $provider Gateway provider object
 	 * @param MShop_Order_Item_Interface $order Order object
 	 * @throws MShop_Service_Exception If URL for redirect to gateway site isn't available
 	 * @return MShop_Common_Item_Helper_Form_Interface Form helper object
 	 */
-	protected function _processOffsite( \Omnipay\Common\GatewayInterface $provider, MShop_Order_Item_Interface $order )
+	protected function _processOffsite( \MShop_Order_Item_Interface $order )
 	{
 		$list = $carddata = array();
 		$baseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
@@ -470,6 +467,8 @@ class MShop_Service_Provider_Payment_OmniPay
 
 		try
 		{
+			$provider = $this->_getProvider();
+
 			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) && $provider->supportsAuthorize() ) {
 				$response = $provider->authorize( $data )->send();
 			} else {
@@ -511,11 +510,10 @@ class MShop_Service_Provider_Payment_OmniPay
 	/**
 	 * Process on-site payments where credit card data is entered and processed at the shop site.
 	 *
-	 * @param \Omnipay\Common\GatewayInterface $provider Gateway provider object
 	 * @param MShop_Order_Item_Interface $order Order object
 	 * @return MShop_Common_Item_Helper_Form_Interface Form helper object
 	 */
-	protected function _processOnsite( \Omnipay\Common\GatewayInterface $provider, MShop_Order_Item_Interface $order )
+	protected function _processOnsite( MShop_Order_Item_Interface $order )
 	{
 		$list = array();
 		$baseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
