@@ -22,10 +22,10 @@ class MShop_Service_Provider_Payment_OmniPay
 	implements MShop_Service_Provider_Payment_Interface
 {
 	private $_beConfig = array(
-		'omnipay.provider' => array(
-			'code' => 'omnipay.provider',
-			'internalcode'=> 'omnipay.provider',
-			'label'=> 'Payment provider',
+		'omnipay.type' => array(
+			'code' => 'omnipay.type',
+			'internalcode'=> 'omnipay.type',
+			'label'=> 'Payment provider type',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
@@ -383,9 +383,9 @@ class MShop_Service_Provider_Payment_OmniPay
 	 */
 	public function updateSync( $additional, &$errmsg = null, &$response = null )
 	{
-		$type = $this->_getConfigValue( array( 'omnipay.provider' ) );
+		$type = $this->_getProviderType();
 
-		if( !isset( $additional['orderid'] ) || !isset( $additional['provider'] ) || $type !== $additional['provider'] ) {
+		if( !isset( $additional['orderid'] ) || !isset( $additional['type'] ) || $type !== $additional['type'] ) {
 			return null;
 		}
 
@@ -409,12 +409,23 @@ class MShop_Service_Provider_Payment_OmniPay
 	{
 		if( !isset( $this->_provider ) )
 		{
-			$this->_provider = Omnipay::create( $this->_getConfigValue( array( 'omnipay.provider' ) ) );
+			$this->_provider = Omnipay::create( $this->_getProviderType() );
 			$this->_provider->setTestMode( (bool) $this->_getConfigValue( array( 'omnipay.testmode' ), false ) );
 			$this->_provider->initialize( $this->getServiceItem()->getConfig() );
 		}
 
 		return $this->_provider;
+	}
+
+
+	/**
+	 * Returns the Omnipay gateway provider name.
+	 *
+	 * @return string Gateway provider name
+	 */
+	protected function _getProviderType()
+	{
+		return $this->_getConfigValue( array( 'omnipay.type' ) );
 	}
 
 
@@ -699,7 +710,7 @@ class MShop_Service_Provider_Payment_OmniPay
 	protected function _getPaymentUrls( $orderid )
 	{
 		$list = array();
-		$type = $this->_getConfigValue( array( 'omnipay.provider' ) );
+		$type = $this->_getProviderType();
 
 		$pairs = array(
 			'returnUrl' => array( 'payment.url-success' ),
@@ -711,7 +722,7 @@ class MShop_Service_Provider_Payment_OmniPay
 		{
 			$url = $this->_getConfigValue( $cfgkeys );
 			$char = ( strpos( $url, '?' ) !== false ? '&' : '?' );
-			$list[$key] = $url . $char . 'orderid=' . $orderid . '&provider=' . $type;
+			$list[$key] = $url . $char . 'orderid=' . $orderid . '&type=' . $type;
 		}
 
 		return $list;
