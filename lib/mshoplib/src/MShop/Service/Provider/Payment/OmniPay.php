@@ -97,6 +97,96 @@ class MShop_Service_Provider_Payment_OmniPay
 			'default'=> '',
 			'required'=> true
 		),
+		'billing.company' => array(
+			'code' => 'billing.company',
+			'internalcode'=> 'company',
+			'label'=> 'Company',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.address1' => array(
+			'code' => 'billing.address1',
+			'internalcode'=> 'billingAddress1',
+			'label'=> 'Street',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.address2' => array(
+			'code' => 'billing.address2',
+			'internalcode'=> 'billingAddress2',
+			'label'=> 'Additional',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.city' => array(
+			'code' => 'billing.city',
+			'internalcode'=> 'billingCity',
+			'label'=> 'City',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.postal' => array(
+			'code' => 'billing.postal',
+			'internalcode'=> 'billingPostcode',
+			'label'=> 'Zip code',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.state' => array(
+			'code' => 'billing.state',
+			'internalcode'=> 'billingState',
+			'label'=> 'State',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.countryid' => array(
+			'code' => 'billing.countryid',
+			'internalcode'=> 'billingCountry',
+			'label'=> 'Country',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.telephone' => array(
+			'code' => 'billing.telephone',
+			'internalcode'=> 'billingPhone',
+			'label'=> 'Telephone',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
+		'billing.email' => array(
+			'code' => 'billing.email',
+			'internalcode'=> 'email',
+			'label'=> 'E-Mail',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+			'public' => false,
+		),
 	);
 
 	private $_provider;
@@ -349,6 +439,19 @@ class MShop_Service_Provider_Payment_OmniPay
 
 			$carddata['firstName'] = $address->getFirstname();
 			$carddata['lastName'] = $address->getLastname();
+
+			if( $this->getConfigValue( array( 'omnipay.address' ) ) )
+			{
+				$carddata['billingAddress1'] = $address->getAddress1();
+				$carddata['billingAddress2'] = $address->getAddress2();
+				$carddata['billingCity'] = $address->getCity();
+				$carddata['billingPostcode'] = $address->getPostal();
+				$carddata['billingState'] = $address->getState();
+				$carddata['billingCountry'] = $address->getCountryId();
+				$carddata['billingPhone'] = $address->getTelephone();
+				$carddata['company'] = $address->getCompany();
+				$carddata['email'] = $address->getEmail();
+			}
 		}
 		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
 
@@ -424,6 +527,19 @@ class MShop_Service_Provider_Payment_OmniPay
 
 			$this->_feConfig['omnipay.firstname']['default'] = $address->getFirstname();
 			$this->_feConfig['omnipay.lastname']['default'] = $address->getLastname();
+
+			if( $this->getConfigValue( array( 'omnipay.address' ) ) )
+			{
+				$this->_feConfig['billing.address1']['default'] = $address->getAddress1();
+				$this->_feConfig['billing.address2']['default'] = $address->getAddress2();
+				$this->_feConfig['billing.city']['default'] = $address->getCity();
+				$this->_feConfig['billing.postal']['default'] = $address->getPostal();
+				$this->_feConfig['billing.state']['default'] = $address->getState();
+				$this->_feConfig['billing.country']['default'] = $address->getCountryId();
+				$this->_feConfig['billing.telephone']['default'] = $address->getTelephone();
+				$this->_feConfig['billing.company']['default'] = $address->getCompany();
+				$this->_feConfig['billing.email']['default'] = $address->getEmail();
+			}
 		}
 		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
 
