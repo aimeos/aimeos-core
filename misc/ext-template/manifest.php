@@ -14,7 +14,7 @@ return array(
 	),
 	'i18n' => array(
 		'client/html' => 'client/html/i18n',
-		'custom' => 'lib/custom/i18n',
+		'mshop' => 'lib/custom/i18n',
 		'controller/frontend' => 'controller/frontend/i18n',
 		'controller/extjs' => 'controller/extjs/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
