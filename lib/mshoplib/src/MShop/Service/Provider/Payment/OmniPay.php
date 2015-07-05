@@ -596,7 +596,7 @@ class MShop_Service_Provider_Payment_OmniPay
 		{
 			$provider = $this->_getProvider();
 
-			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) )
+			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) && $provider->supportsCompleteAuthorize() )
 			{
 				$response = $provider->completeAuthorize( $additional )->send();
 				$status = MShop_Order_Item_Abstract::PAY_AUTHORIZED;
