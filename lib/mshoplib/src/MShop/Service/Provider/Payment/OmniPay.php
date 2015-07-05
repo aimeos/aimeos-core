@@ -326,6 +326,8 @@ class MShop_Service_Provider_Payment_OmniPay
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
+		$provider = $this->_getProvider();
+
 		// off-site payment
 		if( $provider->supportsCompletePurchase() ) {
 			return $this->_processOffsite( $order );
