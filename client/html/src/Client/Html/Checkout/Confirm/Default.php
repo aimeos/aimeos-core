@@ -417,7 +417,7 @@ class Client_Html_Checkout_Confirm_Default
 
 			$provider = $serviceManager->getProvider( $serviceItem );
 
-			$param = array( 'code' => $service->getCode(), 'orderid' => $orderid );
+			$param = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
 			$urls = array(
 				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
 				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
