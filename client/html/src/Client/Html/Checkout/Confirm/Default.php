@@ -410,7 +410,7 @@ class Client_Html_Checkout_Confirm_Default
 
 			if( ( $serviceItem = reset( $result ) ) === false )
 			{
-				$msg = sprintf( 'No payment service for code "%1$s" found', $view->param( 'code' ) );
+				$msg = sprintf( 'No service for code "%1$s" found', $view->param( 'code' ) );
 				throw new Client_Html_Exception( $msg );
 			}
 
@@ -421,20 +421,19 @@ class Client_Html_Checkout_Confirm_Default
 			$urls = array(
 				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
 				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
+				'client.ipaddress' => $view->request()->getClientAddress(),
 			);
 			$provider->injectGlobalConfigBE( $urls );
 
 			try
 			{
-				if( ( $orderItem = $provider->updateSync( $view->param() ) ) !== null )
+				if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody() ) ) !== null )
 				{
 					if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
 						&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
 					) {
 						$provider->query( $orderItem );
 					}
-
-					break;
 				}
 			}
 			catch( MShop_Service_Exception $e )

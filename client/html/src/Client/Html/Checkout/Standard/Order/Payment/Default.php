@@ -326,7 +326,8 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			$param = array( 'code' => $service->getCode(), 'orderid' => $orderItem->getId() );
 			$urls = array(
 				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
-				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, array(), array(), $configUpdate ),
+				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
+				'client.ipaddress' => $view->request()->getClientAddress(),
 			);
 			$provider->injectGlobalConfigBE( $urls );
 

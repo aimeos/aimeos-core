@@ -209,34 +209,33 @@ class Client_Html_Checkout_Update_Default
 			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 			$search = $serviceManager->createSearch();
-			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
+			$search->setConditions( $search->compare( '==', 'service.code', $view->param( 'code' ) ) );
 
-			$start = 0;
-			$errmsg = $response = null;
+			$result = $serviceManager->searchItems( $search );
 
-			do
+			if( ( $serviceItem = reset( $result ) ) === false )
 			{
-				$serviceItems = $serviceManager->searchItems( $search );
+				$msg = sprintf( 'No service for code "%1$s" found', $view->param( 'code' ) );
+				throw new Client_Html_Exception( $msg );
+			}
 
-				foreach( $serviceItems as $serviceItem )
+			$response = null;
+			$provider = $serviceManager->getProvider( $serviceItem );
+
+			try
+			{
+				if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody(), $response ) ) !== null )
 				{
-					$provider = $serviceManager->getProvider( $serviceItem );
-
-					if( ( $orderItem = $provider->updateSync( $view->param(), $errmsg, $response ) ) !== null )
-					{
-						// Update stock, coupons, etc.
-						$orderCntl->update( $orderItem );
-						break 2;
-					}
+					// Update stock, coupons, etc.
+					$orderCntl->update( $orderItem );
 				}
 
-				$count = count( $serviceItems );
-				$start += $count;
-				$search->setSlice( $start );
+				$view->updateMessage = $response;
 			}
-			while( $count >= $search->getSliceSize() );
-
-			$view->updateMessage = $response;
+			catch( MShop_Service_Exception $e )
+			{
+				$view->updateMessage = $e->getMessage();
+			}
 
 			parent::process();
 		}
@@ -246,8 +245,10 @@ class Client_Html_Checkout_Update_Default
 			$view->updateHttpString = 'HTTP/1.1 500 Error updating order status';
 			$view->updateMessage = $e->getMessage();
 
-			$msg = "Updating order status failed: %1\$s\n%2\$s";
-			$context->getLogger()->log( sprintf( $msg, $e->getMessage(), print_r( $view->param(), true ) ) );
+			$body = $view->request()->getBody();
+			$params = print_r( $view->param(), true );
+			$msg = "Updating order status failed: %1\$s\n%2\$s\n%3\$s";
+			$context->getLogger()->log( sprintf( $msg, $e->getMessage(), $params, $body ) );
 		}
 	}
 
