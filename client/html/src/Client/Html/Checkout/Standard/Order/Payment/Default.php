@@ -170,6 +170,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$basket = $view->orderBasket;
 		$orderItem = $view->orderItem;
 		$context = $this->_getContext();
+		$config = array( 'absoluteUri' => true, 'namespace' => false );
 
 
 		/** client/html/checkout/confirm/url/target
@@ -241,7 +242,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/url/config
 		 */
-		$configConfirm = $view->config( 'client/html/checkout/confirm/url/config', array( 'absoluteUri' => true ) );
+		$configConfirm = $view->config( 'client/html/checkout/confirm/url/config', $config );
 
 
 		/** client/html/checkout/update/url/target
@@ -313,7 +314,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/url/config
 		 */
-		$configUpdate = $view->config( 'client/html/checkout/update/url/config', array( 'absoluteUri' => true ) );
+		$configUpdate = $view->config( 'client/html/checkout/update/url/config', $config );
 
 
 		try
