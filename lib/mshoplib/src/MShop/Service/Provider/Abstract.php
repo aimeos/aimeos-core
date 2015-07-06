@@ -191,13 +191,13 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @param string|null &$errmsg Error message shown to the user
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
-	public function updateSync( $additional, &$errmsg = null, &$response = null )
+	public function updateSync( array $params = array(), $body = null, &$response = null )
 	{
 		return null;
 	}

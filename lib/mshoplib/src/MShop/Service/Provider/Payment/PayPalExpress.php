@@ -175,13 +175,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderid = $order->getId();
 		$orderBaseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
 
-		$returnUrl = $this->_getConfigValue( array( 'payment.url-success' ) );
-		$returnUrl .= ( strpos( $returnUrl, '?' ) !== false ? '&' : '?' ) . 'orderid=' . $orderid;
-
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $returnUrl;
+		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ) );
 		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 
 		$urlQuery = http_build_query( $values, '', '&' );
@@ -335,24 +332,24 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @param string|null &$errmsg Error message shown to the user
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
-	public function updateSync( $additional, &$errmsg = null, &$response = null )
+	public function updateSync( array $params = array(), $body = null, &$response = null )
 	{
-		if( isset( $additional['token'] ) && isset( $additional['PayerID'] ) && isset( $additional['orderid'] ) ) {
-			return $this->_doExpressCheckoutPayment( $additional );
+		if( isset( $params['token'] ) && isset( $params['PayerID'] ) && isset( $params['orderid'] ) ) {
+			return $this->_doExpressCheckoutPayment( $params );
 		}
 
 		//tid from ipn
-		if( !isset( $additional['txn_id'] ) ) {
+		if( !isset( $params['txn_id'] ) ) {
 			return null;
 		}
 
-		$urlQuery = http_build_query( $additional, '', '&' );
+		$urlQuery = http_build_query( $params, '', '&' );
 
 		//validation
 		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
@@ -365,20 +362,20 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		}
 
 
-		$order = $this->_getOrder( $additional['invoice'] );
+		$order = $this->_getOrder( $params['invoice'] );
 		$baseItem = $this->_getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
-		$this->_checkIPN( $baseItem, $additional );
+		$this->_checkIPN( $baseItem, $params );
 
-		$status = array( 'PAYMENTSTATUS' => $additional['payment_status'] );
+		$status = array( 'PAYMENTSTATUS' => $params['payment_status'] );
 
-		if( isset( $additional['pending_reason'] ) ) {
-			$status['PENDINGREASON'] = $additional['pending_reason'];
+		if( isset( $params['pending_reason'] ) ) {
+			$status['PENDINGREASON'] = $params['pending_reason'];
 		}
 
-		$this->_setAttributes( $serviceItem, array( $additional['txn_id'] => $additional['payment_status'] ), 'payment/paypal/txn' );
-		$this->_setAttributes( $serviceItem, array( 'TRANSACTIONID' => $additional['txn_id'] ), 'payment/paypal' );
+		$this->_setAttributes( $serviceItem, array( $params['txn_id'] => $params['payment_status'] ), 'payment/paypal/txn' );
+		$this->_setAttributes( $serviceItem, array( 'TRANSACTIONID' => $params['txn_id'] ), 'payment/paypal' );
 		$this->_saveOrderBase( $baseItem );
 
 		$this->_setPaymentStatus( $order, $status );
@@ -411,20 +408,20 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Begins paypalexpress transaction and saves transaction id.
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
+	 * @param mixed $params Update information whose format depends on the payment provider
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 */
-	protected function _doExpressCheckoutPayment( $additional )
+	protected function _doExpressCheckoutPayment( $params )
 	{
-		$order = $this->_getOrder( $additional['orderid'] );
+		$order = $this->_getOrder( $params['orderid'] );
 		$baseid = $order->getBaseId();
 		$baseItem = $this->_getOrderBase( $baseid );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
 		$values = $this->_getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
-		$values['TOKEN'] = $additional['token'];
-		$values['PAYERID'] = $additional['PayerID'];
+		$values['TOKEN'] = $params['token'];
+		$values['PAYERID'] = $params['PayerID'];
 		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update', 'payment.url-success' ) );
@@ -434,7 +431,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$attributes = array( 'PAYERID' => $additional['PayerID'] );
+		$attributes = array( 'PAYERID' => $params['PayerID'] );
 
 		if( isset( $rvals['TRANSACTIONID'] ) )
 		{
@@ -487,31 +484,31 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Checks if IPN message from paypal is valid.
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket
-	 * @param array $additional
+	 * @param array $params
 	 * @todo 2016.03 Remove $baseManager parameter
 	 */
-	protected function _checkIPN( $basket, $additional )
+	protected function _checkIPN( $basket, $params )
 	{
 		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
 
-		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $additional['receiver_email'] )
+		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $params['receiver_email'] )
 		{
-			$msg = sprintf( 'PayPal Express: Wrong receiver email "%1$s"', $additional['receiver_email'] );
+			$msg = sprintf( 'PayPal Express: Wrong receiver email "%1$s"', $params['receiver_email'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
 		$price = $basket->getPrice();
 		$amount = $price->getValue() + $price->getCosts();
-		if( $amount != $additional['payment_amount'] )
+		if( $amount != $params['payment_amount'] )
 		{
-			$msg = sprintf( 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"', $additional['payment_amount'], $additional['invoice'] );
+			$msg = sprintf( 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"', $params['payment_amount'], $params['invoice'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
 		$search = $attrManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'order.base.service.attribute.code', $additional['txn_id'] ),
-			$search->compare( '==', 'order.base.service.attribute.value', $additional['payment_status'] ),
+			$search->compare( '==', 'order.base.service.attribute.code', $params['txn_id'] ),
+			$search->compare( '==', 'order.base.service.attribute.value', $params['payment_status'] ),
 		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -519,7 +516,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if ( ( $attr = reset( $results ) ) !== false )
 		{
-			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $additional['txn_id'], $additional['txn_status'] );
+			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $params['txn_id'], $params['txn_status'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 	}

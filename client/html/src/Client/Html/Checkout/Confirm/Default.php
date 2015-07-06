@@ -247,6 +247,8 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		$view = $this->getView();
 		$context = $this->_getContext();
+		$orderid = $context->getSession()->get( 'arcavias/orderid' );
+		$config = array( 'absoluteUri' => true, 'namespace' => false );
 
 
 		/** client/html/checkout/confirm/url/target
@@ -263,7 +265,7 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/checkout/confirm/url/config
 		 */
-		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$targetConfirm = $view->config( 'client/html/checkout/confirm/url/target' );
 
 		/** client/html/checkout/confirm/url/controller
 		 * Name of the controller whose action should be called
@@ -278,8 +280,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/confirm/url/target
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/checkout/confirm/url/config
-		*/
-		$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		 */
+		$cntlConfirm = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
 
 		/** client/html/checkout/confirm/url/action
 		 * Name of the action that should create the output
@@ -294,8 +296,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/confirm/url/target
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/config
-		*/
-		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		 */
+		$actionConfirm = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
 
 		/** client/html/checkout/confirm/url/config
 		 * Associative list of configuration options used for generating the URL
@@ -317,10 +319,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/url/config
-		*/
-		$config = $view->config( 'client/html/checkout/confirm/url/config', array( 'absoluteUri' => true ) );
-
-		$confirmUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+		 */
+		$configConfirm = $view->config( 'client/html/checkout/confirm/url/config', $config );
 
 
 		/** client/html/checkout/update/url/target
@@ -336,8 +336,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/checkout/update/url/config
-		*/
-		$target = $view->config( 'client/html/checkout/update/url/target' );
+		 */
+		$targetUpdate = $view->config( 'client/html/checkout/update/url/target' );
 
 		/** client/html/checkout/update/url/controller
 		 * Name of the controller whose action should be called
@@ -352,8 +352,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/update/url/target
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/checkout/update/url/config
-		*/
-		$controller = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		 */
+		$cntlUpdate = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
 
 		/** client/html/checkout/update/url/action
 		 * Name of the action that should create the output
@@ -368,8 +368,8 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/update/url/target
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/config
-		*/
-		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		 */
+		$actionUpdate = $view->config( 'client/html/checkout/update/url/action', 'update' );
 
 		/** client/html/checkout/update/url/config
 		 * Associative list of configuration options used for generating the URL
@@ -391,65 +391,56 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/url/config
-		*/
-		$config = $view->config( 'client/html/checkout/update/url/config', array( 'absoluteUri' => true ) );
+		 */
+		$configUpdate = $view->config( 'client/html/checkout/update/url/config', $config );
 
-		$updateUrl = $view->url( $target, $controller, $action, array(), array(), $config );
-
-
-		$conf = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $updateUrl );
 
 		try
 		{
-			$errmsg = null;
-			$params = $view->param();
-			$orderid = $context->getSession()->get( 'arcavias/orderid' );
-
 			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 			$search = $serviceManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'service.type.code', 'payment' ) );
-			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
+			$expr = array(
+				$search->compare( '==', 'service.code', $view->param( 'code' ) ),
+				$search->compare( '==', 'service.type.code', 'payment' ),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$start = 0;
+			$result = $serviceManager->searchItems( $search );
 
-			do
+			if( ( $serviceItem = reset( $result ) ) === false )
 			{
-				$serviceItems = $serviceManager->searchItems( $search );
-
-				foreach( $serviceItems as $serviceItem )
-				{
-					try
-					{
-						$provider = $serviceManager->getProvider( $serviceItem );
-						$provider->injectGlobalConfigBE( $conf );
-
-						if( ( $orderItem = $provider->updateSync( $params, $errmsg ) ) !== null )
-						{
-							if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
-								&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
-							) {
-								$provider->query( $orderItem );
-							}
-
-							break 2;
-						}
-					}
-					catch( Exception $e )
-					{
-						$msg = 'Updating order ID "%1$s" failed: %2$s';
-						$context->getLogger()->log( sprintf( $msg, $orderid, $e->getMessage() ) );
-					}
-				}
-				$count = count( $serviceItems );
-				$start += $count;
-				$search->setSlice( $start );
+				$msg = sprintf( 'No payment service for code "%1$s" found', $view->param( 'code' ) );
+				throw new Client_Html_Exception( $msg );
 			}
-			while( $count >= $search->getSliceSize() );
 
 
-			if( $errmsg ) {
-				$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + array( $errmsg );
+			$provider = $serviceManager->getProvider( $serviceItem );
+
+			$param = array( 'code' => $service->getCode(), 'orderid' => $orderid );
+			$urls = array(
+				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
+				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
+			);
+			$provider->injectGlobalConfigBE( $urls );
+
+			try
+			{
+				if( ( $orderItem = $provider->updateSync( $view->param() ) ) !== null )
+				{
+					if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
+						&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
+					) {
+						$provider->query( $orderItem );
+					}
+
+					break;
+				}
+			}
+			catch( MShop_Service_Exception $e )
+			{
+				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+				$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 			}
 
 

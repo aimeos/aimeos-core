@@ -186,7 +186,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/checkout/confirm/url/config
 		 */
-		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$targetConfirm = $view->config( 'client/html/checkout/confirm/url/target' );
 
 		/** client/html/checkout/confirm/url/controller
 		 * Name of the controller whose action should be called
@@ -202,7 +202,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/checkout/confirm/url/config
 		 */
-		$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$cntlConfirm = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
 
 		/** client/html/checkout/confirm/url/action
 		 * Name of the action that should create the output
@@ -218,7 +218,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/config
 		 */
-		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$actionConfirm = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
 
 		/** client/html/checkout/confirm/url/config
 		 * Associative list of configuration options used for generating the URL
@@ -241,9 +241,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/url/config
 		 */
-		$config = $view->config( 'client/html/checkout/confirm/url/config', array( 'absoluteUri' => true ) );
-
-		$confirmUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+		$configConfirm = $view->config( 'client/html/checkout/confirm/url/config', array( 'absoluteUri' => true ) );
 
 
 		/** client/html/checkout/update/url/target
@@ -260,7 +258,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/checkout/update/url/config
 		 */
-		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$targetUpdate = $view->config( 'client/html/checkout/update/url/target' );
 
 		/** client/html/checkout/update/url/controller
 		 * Name of the controller whose action should be called
@@ -276,7 +274,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/checkout/update/url/config
 		 */
-		$controller = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$cntlUpdate = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
 
 		/** client/html/checkout/update/url/action
 		 * Name of the action that should create the output
@@ -292,7 +290,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/config
 		 */
-		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$actionUpdate = $view->config( 'client/html/checkout/update/url/action', 'update' );
 
 		/** client/html/checkout/update/url/config
 		 * Associative list of configuration options used for generating the URL
@@ -315,12 +313,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/url/config
 		 */
-		$config = $view->config( 'client/html/checkout/update/url/config', array( 'absoluteUri' => true ) );
-
-		$updateUrl = $view->url( $target, $controller, $action, array(), array(), $config );
-
-
-		$conf = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $updateUrl );
+		$configUpdate = $view->config( 'client/html/checkout/update/url/config', array( 'absoluteUri' => true ) );
 
 
 		try
@@ -329,7 +322,13 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 
 			$manager = MShop_Factory::createManager( $context, 'service' );
 			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
-			$provider->injectGlobalConfigBE( $conf );
+
+			$param = array( 'code' => $service->getCode(), 'orderid' => $orderItem->getId() );
+			$urls = array(
+				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
+				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, array(), array(), $configUpdate ),
+			);
+			$provider->injectGlobalConfigBE( $urls );
 
 			if( ( $form = $provider->process( $orderItem ) ) === null )
 			{
@@ -343,7 +342,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		}
 		catch( MShop_Order_Exception $e )
 		{
-			$view->standardUrlNext = $confirmUrl;
+			$view->standardUrlNext = $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, array(), array(), $configConfirm );
 		}
 
 		parent::process();
