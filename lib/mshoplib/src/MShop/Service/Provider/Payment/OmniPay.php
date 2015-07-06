@@ -31,6 +31,15 @@ class MShop_Service_Provider_Payment_OmniPay
 			'default'=> '',
 			'required'=> true,
 		),
+		'omnipay.capture' => array(
+			'code' => 'omnipay.capture',
+			'internalcode'=> 'omnipay.capture',
+			'label'=> 'Capture payments immediately',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '1',
+			'required'=> false,
+		),
 		'omnipay.testmode' => array(
 			'code' => 'omnipay.testmode',
 			'internalcode'=> 'omnipay.testmode',
@@ -326,10 +335,8 @@ class MShop_Service_Provider_Payment_OmniPay
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
-		$provider = $this->_getProvider();
-
 		// off-site payment
-		if( $provider->supportsCompletePurchase() ) {
+		if( $this->_getProvider()->supportsCompletePurchase() ) {
 			return $this->_processOffsite( $order );
 		}
 
@@ -378,27 +385,34 @@ class MShop_Service_Provider_Payment_OmniPay
 	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @param string|null &$errmsg Error message shown to the user
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 */
-	public function updateSync( $additional, &$errmsg = null, &$response = null )
+	public function updateSync( array $params = array(), $body = null, &$response = null )
 	{
-		$type = $this->_getProviderType();
-
-		if( !isset( $additional['orderid'] ) || !isset( $additional['type'] ) || $type !== $additional['type'] ) {
+		if( !isset( $params['orderid'] ) ) {
 			return null;
 		}
 
-		$provider = $this->_getProvider();
-
 		// off-site payment
-		if( $provider->supportsCompletePurchase() ) {
-			return $this->_updateSyncOffsite( $additional, $errmsg, $response );
+		if( $this->_getProvider()->supportsCompletePurchase() ) {
+			return $this->_updateSyncOffsite( $params, $body, $response );
 		}
 
-		return $this->_updateSyncOnsite( $additional, $errmsg, $response );
+		return $this->_updateSyncOnsite( $params, $body, $response );
+	}
+
+
+	/**
+	 * Returns the IP address of the customer.
+	 *
+	 * @return string IP address of the customer
+	 */
+	protected function _getClientIP()
+	{
+		return '';
 	}
 
 
@@ -412,7 +426,7 @@ class MShop_Service_Provider_Payment_OmniPay
 		if( !isset( $this->_provider ) )
 		{
 			$this->_provider = Omnipay::create( $this->_getProviderType() );
-			$this->_provider->setTestMode( (bool) $this->_getConfigValue( array( 'omnipay.testmode' ), false ) );
+			$this->_provider->setTestMode( (bool) $this->_getValue( 'testmode', false ) );
 			$this->_provider->initialize( $this->getServiceItem()->getConfig() );
 		}
 
@@ -427,7 +441,35 @@ class MShop_Service_Provider_Payment_OmniPay
 	 */
 	protected function _getProviderType()
 	{
-		return $this->_getConfigValue( array( 'omnipay.type' ) );
+		return $this->_getValue( 'type' );
+	}
+
+
+	/**
+	 * Returns the required URLs
+	 *
+	 * @return array List of the Omnipay URL name as key and the URL string as value
+	 */
+	protected function _getPaymentUrls()
+	{
+		return array(
+			'returnUrl' => $this->_getConfigValue( array( 'payment.url-success' ) ),
+			'cancelUrl' => $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) ),
+			'notifyUrl' => $this->_getConfigValue( array( 'payment.url-update' ) ),
+		);
+	}
+
+
+	/**
+	 * Returns the value for the given configuration key
+	 *
+	 * @param string $key Configuration key name
+	 * @param mixed $default Default value if no configuration is found
+	 * @return string Configuration value
+	 */
+	protected function _getValue( $key, $default = null )
+	{
+		return $this->_getConfigValue( array( 'omnipay.' . $key ), $default );
 	}
 
 
@@ -438,7 +480,7 @@ class MShop_Service_Provider_Payment_OmniPay
 	 * @throws MShop_Service_Exception If URL for redirect to gateway site isn't available
 	 * @return MShop_Common_Item_Helper_Form_Interface Form helper object
 	 */
-	protected function _processOffsite( \MShop_Order_Item_Interface $order )
+	protected function _processOffsite( MShop_Order_Item_Interface $order )
 	{
 		$list = $carddata = array();
 		$baseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
@@ -450,7 +492,7 @@ class MShop_Service_Provider_Payment_OmniPay
 			$carddata['firstName'] = $address->getFirstname();
 			$carddata['lastName'] = $address->getLastname();
 
-			if( $this->getConfigValue( array( 'omnipay.address' ) ) )
+			if( $this->_getValue( 'address' ) )
 			{
 				$carddata['billingAddress1'] = $address->getAddress1();
 				$carddata['billingAddress2'] = $address->getAddress2();
@@ -466,23 +508,22 @@ class MShop_Service_Provider_Payment_OmniPay
 		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
 
 		$desc = $this->_getContext()->getI18n()->dt( 'mshop', 'Order %1$s' );
-		$orderid = $order->getId();
 
 		$data = array(
 			'token' => '',
-			'clientIp' => '',
 			'card' => $carddata,
-			'transactionId' => $orderid,
+			'clientIp' => $this->_getClientIP(),
+			'transactionId' => $order->getId(),
 			'amount' => $baseItem->getPrice()->getValue(),
 			'currency' => $baseItem->getLocale()->getCurrencyId(),
 			'description' => sprintf( $desc, $order->getId() ),
-		) + $this->_getPaymentUrls( $orderid );
+		) + $this->_getPaymentUrls();
 
 		try
 		{
 			$provider = $this->_getProvider();
 
-			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) && $provider->supportsAuthorize() ) {
+			if( $provider->supportsAuthorize() && $this->_getValue( 'authorize', false ) ) {
 				$response = $provider->authorize( $data )->send();
 			} else {
 				$response = $provider->purchase( $data )->send();
@@ -490,13 +531,12 @@ class MShop_Service_Provider_Payment_OmniPay
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( 'Omnipay error: ' . $e->getMessage() );
-			throw new MShop_Service_Exception( sprintf( 'An error occured during processing the payment' ) );
+			throw new MShop_Service_Exception( $e->getMessage() );
 		}
 
 		if( !$response->isRedirect() )
 		{
-			$msg = 'Redirect was expected for off-site credit card input: ';
+			$msg = 'Redirect was expected for off-site credit card input: %1$s';
 			throw new MShop_Service_Exception( sprintf( $msg, $response->getRedirectUrl() ) );
 		}
 
@@ -529,8 +569,8 @@ class MShop_Service_Provider_Payment_OmniPay
 	protected function _processOnsite( MShop_Order_Item_Interface $order )
 	{
 		$list = array();
+		$urls = $this->_getPaymentUrls();
 		$baseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
-		$urls = $this->_getPaymentUrls( $order->getId() );
 
 		try
 		{
@@ -539,7 +579,7 @@ class MShop_Service_Provider_Payment_OmniPay
 			$this->_feConfig['omnipay.firstname']['default'] = $address->getFirstname();
 			$this->_feConfig['omnipay.lastname']['default'] = $address->getLastname();
 
-			if( $this->getConfigValue( array( 'omnipay.address' ) ) )
+			if( $this->_getValue( 'address' ) )
 			{
 				$this->_feConfig['billing.address1']['default'] = $address->getAddress1();
 				$this->_feConfig['billing.address2']['default'] = $address->getAddress2();
@@ -562,74 +602,60 @@ class MShop_Service_Provider_Payment_OmniPay
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
-		$list['omnipay.orderid'] = new MW_Common_Criteria_Attribute_Default( array(
-			'code' => 'omnipay.orderid',
-			'internalcode'=> 'orderid',
-			'label'=> 'Order ID',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> $order->getId(),
-			'public'=> false,
-		) );
-
-		return new MShop_Common_Item_Helper_Form_Default( $urls['returnUrl'], 'POST', $list, false );
+		return new MShop_Common_Item_Helper_Form_Default( $urls['returnUrl'], 'POST', $list );
 	}
 
 
 	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @param string|null &$errmsg Error message shown to the user
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface Order item if update was successful
 	 */
-	protected function _updateSyncOffsite( $additional, &$errmsg = null, &$response = null )
+	protected function _updateSyncOffsite( array $params, $body, &$response )
 	{
-		$order = $this->_getOrder( $additional['orderid'] );
+		if( !isset( $params['orderid'] ) ) {
+			return null;
+		}
+
+		$order = $this->_getOrder( $params['orderid'] );
 		$baseItem = $this->_getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
-		$additional['transactionId'] = $order->getId();
-		$additional['amount'] = $baseItem->getPrice()->getValue();
-		$additional['currency'] = $baseItem->getLocale()->getCurrencyId();
+		$params['transactionId'] = $order->getId();
+		$params['amount'] = $baseItem->getPrice()->getValue();
+		$params['currency'] = $baseItem->getLocale()->getCurrencyId();
 
-		try
+		$provider = $this->_getProvider();
+
+		if( $provider->supportsCompleteAuthorize() && $this->_getValue( 'authorize', false ) )
 		{
-			$provider = $this->_getProvider();
+			$response = $provider->completeAuthorize( $params )->send();
+			$status = MShop_Order_Item_Abstract::PAY_AUTHORIZED;
+		}
+		else
+		{
+			$response = $provider->completePurchase( $params )->send();
+			$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
+		}
 
-			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) && $provider->supportsCompleteAuthorize() )
-			{
-				$response = $provider->completeAuthorize( $additional )->send();
-				$status = MShop_Order_Item_Abstract::PAY_AUTHORIZED;
-			}
-			else
-			{
-				$response = $provider->completePurchase( $additional )->send();
-				$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
-			}
-
-			if( $response->isSuccessful() )
-			{
-				$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
-				$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
-				$this->_saveOrderBase( $baseItem );
-			}
-			else
-			{
-				$status = MShop_Order_Item_Abstract::PAY_REFUSED;
-				$errmsg = $response->getMessage();
-			}
+		if( $response->isSuccessful() )
+		{
+			$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
+			$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
+			$this->_saveOrderBase( $baseItem );
 
 			$order->setPaymentStatus( $status );
 			$this->_saveOrder( $order );
-			$response = 'success';
 		}
-		catch( Exception $e )
+		else
 		{
-			$this->_getContext()->getLogger()->log( 'Omnipay exception: ' . $e->getMessage() );
-			$response = 'failed';
-			return null;
+			$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUSED );
+			$this->_saveOrder( $order );
+
+			throw new MShop_Service_Exception( $e->getMessage() );
 		}
 
 		return $order;
@@ -639,94 +665,63 @@ class MShop_Service_Provider_Payment_OmniPay
 	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @param string|null &$errmsg Error message shown to the user
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @return MShop_Order_Item_Interface Order item if update was successful
 	 */
-	protected function _updateSyncOnsite( $additional, &$errmsg = null, &$response = null )
+	protected function _updateSyncOnsite( array $params, $body, &$response )
 	{
-		$order = $this->_getOrder( $additional['orderid'] );
+		if( !isset( $params['orderid'] ) ) {
+			return null;
+		}
+
+		$order = $this->_getOrder( $params['orderid'] );
 		$baseItem = $this->_getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
 		$desc = $this->_getContext()->getI18n()->dt( 'mshop', 'Order %1$s' );
-		$orderid = $order->getId();
 
 		$data = array(
 			'token' => '',
-			'clientIp' => '',
-			'card' => $additional,
-			'transactionId' => $orderid,
+			'card' => $params,
+			'clientIp' => $this->_getClientIP(),
+			'transactionId' => $params['orderid'],
 			'amount' => $baseItem->getPrice()->getValue(),
 			'currency' => $baseItem->getLocale()->getCurrencyId(),
 			'description' => sprintf( $desc, $order->getId() ),
-		) + $this->_getPaymentUrls( $orderid );
+		) + $this->_getPaymentUrls( $params['orderid'] );
 
-		try
+		$provider = $this->_getProvider();
+
+		if( $provider->supportsAuthorize() && $this->_getValue( 'authorize', false ) )
 		{
-			$provider = $this->_getProvider();
-
-			if( $this->_getConfigValue( array( 'omnipay.authorize' ), false ) && $provider->supportsAuthorize() )
-			{
-				$response = $provider->authorize( $data )->send();
-				$status = MShop_Order_Item_Abstract::PAY_AUTHORIZED;
-			}
-			else
-			{
-				$response = $provider->purchase( $data )->send();
-				$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
-			}
-
-			if( $response->isSuccessful() )
-			{
-				$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
-				$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
-				$this->_saveOrderBase( $baseItem );
-			}
-			else
-			{
-				$status = MShop_Order_Item_Abstract::PAY_REFUSED;
-				$errmsg = $response->getMessage();
-			}
+			$response = $provider->authorize( $data )->send();
+			$status = MShop_Order_Item_Abstract::PAY_AUTHORIZED;
 		}
-		catch( Exception $e )
+		else
 		{
-			$status = MShop_Order_Item_Abstract::PAY_REFUSED;
-			$errmsg = $e->getMessage();
+			$response = $provider->purchase( $data )->send();
+			$status = MShop_Order_Item_Abstract::PAY_RECEIVED;
 		}
 
-		$order->setPaymentStatus( $status );
-		$this->_saveOrder( $order );
+		if( $response->isSuccessful() )
+		{
+			$attr = array( 'TRANSACTIONID' => $response->getTransactionReference() );
+			$this->_setAttributes( $serviceItem, $attr, 'payment/omnipay' );
+			$this->_saveOrderBase( $baseItem );
+
+			$order->setPaymentStatus( $status );
+			$this->_saveOrder( $order );
+		}
+		else
+		{
+			$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUSED );
+			$this->_saveOrder( $order );
+
+			throw new MShop_Service_Exception( $response->getMessage() );
+		}
 
 		return $order;
-	}
-
-
-	/**
-	 * Returns the required URLs
-	 *
-	 * @param string $orderid Unique order ID
-	 * @return array List of the Omnipay URL name as key and the URL string as value
-	 */
-	protected function _getPaymentUrls( $orderid )
-	{
-		$list = array();
-		$type = $this->_getProviderType();
-
-		$pairs = array(
-			'returnUrl' => array( 'payment.url-success' ),
-			'cancelUrl' => array( 'payment.url-cancel', 'payment.url-success' ),
-			'notifyUrl' => array( 'payment.url-update' ),
-		);
-
-		foreach( $pairs as $key => $cfgkeys )
-		{
-			$url = $this->_getConfigValue( $cfgkeys );
-			$char = ( strpos( $url, '?' ) !== false ? '&' : '?' );
-			$list[$key] = $url . $char . 'orderid=' . $orderid . '&type=' . $type;
-		}
-
-		return $list;
 	}
 }
