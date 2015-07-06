@@ -26,7 +26,8 @@ class MW_View_Helper_Request_Default
 	 * Initializes the request view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param string $baseUrl URL which acts as base for all constructed URLs
+	 * @param string $body Request body content
+	 * @param string $clientaddr Client IP address
 	 */
 	public function __construct( $view, $body, $clientaddr )
 	{
