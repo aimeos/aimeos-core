@@ -219,15 +219,15 @@ class Client_Html_Checkout_Update_Default
 				throw new Client_Html_Exception( $msg );
 			}
 
-			$response = null;
 			$provider = $serviceManager->getProvider( $serviceItem );
 
 			try
 			{
-				if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody(), $response ) ) !== null )
-				{
-					// Update stock, coupons, etc.
-					$orderCntl->update( $orderItem );
+				$response = null;
+				$body = $view->request()->getBody();
+
+				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response ) ) !== null ) {
+					$orderCntl->update( $orderItem ); // Update stock, coupons, etc.
 				}
 
 				$view->updateMessage = $response;
