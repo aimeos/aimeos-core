@@ -26,7 +26,7 @@ $enc = $this->encoder();
 $public = $hidden = array();
 $params = $this->get( 'standardOrderParams', array() );
 
-foreach( params as $key => $item )
+foreach( $params as $key => $item )
 {
 	if( $item->isPublic() ) {
 		$public[$key] = $item;
@@ -65,11 +65,11 @@ foreach( params as $key => $item )
  * @category Developer
  * @see client/html/checkout/standard/address/validate
  */
-$defaultRegex = array( 'payment.cardno' = '^[0-9]{16,19}$', 'payment.cvv' = '^[0-9]{3}$' );
+$defaultRegex = array( 'payment.cardno' => '^[0-9]{16,19}$', 'payment.cvv' => '^[0-9]{3}$' );
 $regex = $this->config( 'client/html/checkout/standard/process/validate', $defaultRegex );
 
 ?>
-<div class="checkout-standard-process">
+<section class="checkout-standard-process">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
 <?php if( empty( $public ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
@@ -106,4 +106,4 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 	</div>
-</div>
+</section>

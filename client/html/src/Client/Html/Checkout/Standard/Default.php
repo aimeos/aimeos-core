@@ -106,7 +106,18 @@ class Client_Html_Checkout_Standard_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order' );
+
+	/** client/html/checkout/standard/process/name
+	 * Name of the process part used by the checkout standard client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Process_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2015.07
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order', 'process' );
 	private $_cache;
 
 

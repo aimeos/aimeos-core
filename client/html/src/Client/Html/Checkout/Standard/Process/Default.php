@@ -183,7 +183,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	{
 		$view = $this->getView();
 
-		if( !in_array( $view->get( 'standardStepActive' ), array( 'order', 'process' ) ) ) {
+		if( !in_array( $view->param( 'c_step' ), array( 'order', 'process' ) ) ) {
 			return;
 		}
 
@@ -195,30 +195,39 @@ class Client_Html_Checkout_Standard_Process_Default
 		try
 		{
 			$orderItem = MShop_Factory::createManager( $context, 'order' )->getItem( $orderid );
-			$serviceItem = $this->_getServiceItem( $view->param( 'code' ) );
 
-
-			$provider = $serviceManager->getProvider( $serviceItem );
-
-			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
-			$urls = array(
-				'payment.url-self' => $this->_getUrlSelf( $params + array( 'c_step' => 'process' ), array() ),
-				'payment.url-success' => $this->_getUrlConfirm( $params, $config ),
-				'payment.url-update' => $this->_getUrlConfirm( $params, $config ),
-				'client.ipaddress' => $view->request()->getClientAddress(),
-			);
-			$provider->injectGlobalConfigBE( $urls );
-
-			if( ( $form = $provider->process( $orderItem, $view->param() ) ) === null )
+			if( ( $code = $this->_getOrderServiceCode( $orderItem->getBaseId() ) ) !== null )
 			{
-				$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
-				throw new Client_Html_Exception( $msg );
-			}
+				$serviceItem = $this->_getServiceItem( $code );
 
-			$view->standardUrlNext = $form->getUrl();
-			$view->standardMethod = $form->getMethod();
-			$view->standardOrderParams = $form->getValues();
-			$view->standardUrlExternal = $form->getExternal();
+				$serviceManager = MShop_Factory::createManager( $context, 'service' );
+				$provider = $serviceManager->getProvider( $serviceItem );
+
+				$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
+				$urls = array(
+					'payment.url-self' => $this->_getUrlSelf( $view, $params + array( 'c_step' => 'process' ), array() ),
+					'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
+					'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+					'client.ipaddress' => $view->request()->getClientAddress(),
+				);
+				$provider->injectGlobalConfigBE( $urls );
+
+				if( ( $form = $provider->process( $orderItem, $view->param() ) ) === null )
+				{
+					$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
+					throw new Client_Html_Exception( $msg );
+				}
+
+				$view->standardUrlNext = $form->getUrl();
+				$view->standardMethod = $form->getMethod();
+				$view->standardOrderParams = $form->getValues();
+				$view->standardUrlExternal = $form->getExternal();
+			}
+			else
+			{
+				$view->standardUrlNext = $this->_getUrlConfirm( $view, array(), array() );
+				$view->standardMethod = 'GET';
+			}
 
 
 			parent::process();
@@ -249,6 +258,31 @@ class Client_Html_Checkout_Standard_Process_Default
 
 
 	/**
+	 * Returns the payment service code from the order with the given base ID.
+	 *
+	 * @param string $baseid ID of the order base item
+	 * @return string|null Code of the service item or null if not found
+	 */
+	protected function _getOrderServiceCode( $baseid )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'order.base.service.baseid', $baseid ),
+			$search->compare( '==', 'order.base.service.type', MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) !== false ) {
+			return $item->getCode();
+		}
+	}
+
+
+	/**
 	 * Returns the payment service item for the given code.
 	 *
 	 * @param string $code Unique service code
@@ -257,7 +291,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 */
 	protected function _getServiceItem( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $context, 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
@@ -270,7 +304,7 @@ class Client_Html_Checkout_Standard_Process_Default
 
 		if( ( $serviceItem = reset( $result ) ) === false )
 		{
-			$msg = sprintf( 'No service for code "%1$s" found', $view->param( 'code' ) );
+			$msg = sprintf( 'No service for code "%1$s" found', $code );
 			throw new Client_Html_Exception( $msg );
 		}
 
@@ -370,7 +404,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		*/
 		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
 
-		return $view->url( $target, $cntl, $action, $param, array(), $config );
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
 	}
 
 
@@ -455,7 +489,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		*/
 		$config = $view->config( 'client/html/checkout/standard/url/config', $config );
 
-		return $view->url( $target, $cntl, $action, $param, array(), $config );
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
 	}
 
 
@@ -540,6 +574,6 @@ class Client_Html_Checkout_Standard_Process_Default
 		*/
 		$config = $view->config( 'client/html/checkout/update/url/config', $config );
 
-		return $view->url( $target, $cntl, $action, $param, array(), $config );
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
 	}
 }
