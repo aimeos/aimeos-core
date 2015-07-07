@@ -97,6 +97,7 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	private $_subPartNames = array( 'intro', 'basic', 'retry', 'order' );
 	private $_cache;
+	private $_orderItem;
 
 
 	/**
@@ -247,7 +248,7 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		$view = $this->getView();
 		$context = $this->_getContext();
-		$orderid = $context->getSession()->get( 'arcavias/orderid' );
+		$session = $context->getSession();
 		$config = array( 'absoluteUri' => true, 'namespace' => false );
 
 
@@ -417,7 +418,7 @@ class Client_Html_Checkout_Confirm_Default
 
 			$provider = $serviceManager->getProvider( $serviceItem );
 
-			$param = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
+			$param = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
 			$urls = array(
 				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
 				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
@@ -425,35 +426,28 @@ class Client_Html_Checkout_Confirm_Default
 			);
 			$provider->injectGlobalConfigBE( $urls );
 
-			try
+			if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody() ) ) !== null )
 			{
-				if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody() ) ) !== null )
-				{
-					if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
-						&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
-					) {
-						$provider->query( $orderItem );
-					}
+				if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
+					&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
+				) {
+					$provider->query( $orderItem );
 				}
+
+				$this->_orderItem = $orderItem;
 			}
-			catch( MShop_Service_Exception $e )
+			else
 			{
-				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
-				$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+				return;
 			}
 
 
 			parent::process();
 
 
-			$orderManager = MShop_Factory::createManager( $context, 'order' );
-			$orderItem = $orderManager->getItem( $orderid );
-
 			// Clear basket and cache
 			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
-				$session = $context->getSession();
-
 				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
@@ -513,11 +507,18 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$context = $this->_getContext();
-			$orderid = $context->getSession()->get( 'arcavias/orderid' );
-			$orderManager = MShop_Factory::createManager( $context, 'order' );
+			if( !isset( $this->_orderItem ) )
+			{
+				$context = $this->_getContext();
+				$orderid = $context->getSession()->get( 'arcavias/orderid' );
+				$orderManager = MShop_Factory::createManager( $context, 'order' );
 
-			$view->confirmOrderItem = $orderManager->getItem( $orderid );
+				$view->confirmOrderItem = $orderManager->getItem( $orderid );
+			}
+			else
+			{
+				$view->confirmOrderItem = $this->_orderItem;
+			}
 
 			$this->_cache = $view;
 		}
