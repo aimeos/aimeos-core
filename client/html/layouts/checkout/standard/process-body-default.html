@@ -69,7 +69,7 @@ $defaultRegex = array( 'payment.cardno' => '^[0-9]{16,19}$', 'payment.cvv' => '^
 $regex = $this->config( 'client/html/checkout/standard/process/validate', $defaultRegex );
 
 ?>
-<section class="checkout-standard-process">
+<div class="checkout-standard-process">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
 <?php if( empty( $public ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
@@ -107,4 +107,4 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 	</div>
-</section>
+</div>
