@@ -56,7 +56,7 @@
 		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
             <fileset dir="./i18n">
                 <include name="*.po" />
-                <include name="daa/*.po" />
+                <include name="code/*.po" />
             </fileset>
         </foreach>
 	</target>
