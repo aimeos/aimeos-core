@@ -97,7 +97,6 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	private $_subPartNames = array( 'intro', 'basic', 'retry', 'order' );
 	private $_cache;
-	private $_orderItem;
 
 
 	/**
@@ -434,7 +433,7 @@ class Client_Html_Checkout_Confirm_Default
 					$provider->query( $orderItem );
 				}
 
-				$this->_orderItem = $orderItem;
+				$view->confirmOrderItem = $orderItem;
 			}
 			else
 			{
@@ -505,20 +504,13 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->_cache ) && !isset( $view->confirmOrderItem ) )
 		{
-			if( !isset( $this->_orderItem ) )
-			{
-				$context = $this->_getContext();
-				$orderid = $context->getSession()->get( 'arcavias/orderid' );
-				$orderManager = MShop_Factory::createManager( $context, 'order' );
+			$context = $this->_getContext();
+			$orderid = $context->getSession()->get( 'arcavias/orderid' );
+			$orderManager = MShop_Factory::createManager( $context, 'order' );
 
-				$view->confirmOrderItem = $orderManager->getItem( $orderid );
-			}
-			else
-			{
-				$view->confirmOrderItem = $this->_orderItem;
-			}
+			$view->confirmOrderItem = $orderManager->getItem( $orderid );
 
 			$this->_cache = $view;
 		}
