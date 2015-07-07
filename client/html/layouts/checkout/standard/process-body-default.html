@@ -24,7 +24,7 @@ $testfcn = function( $list, $key, $default = '' ) {
 
 $enc = $this->encoder();
 $public = $hidden = array();
-$params = $this->get( 'standardOrderParams', array() );
+$params = $this->get( 'standardProcessParams', array() );
 
 foreach( $params as $key => $item )
 {
@@ -103,6 +103,7 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 <?php if( empty( $public ) ) : ?>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 <?php else : ?>
+		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 	</div>

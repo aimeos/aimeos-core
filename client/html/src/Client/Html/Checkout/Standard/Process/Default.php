@@ -220,7 +220,7 @@ class Client_Html_Checkout_Standard_Process_Default
 
 				$view->standardUrlNext = $form->getUrl();
 				$view->standardMethod = $form->getMethod();
-				$view->standardOrderParams = $form->getValues();
+				$view->standardProcessParams = $form->getValues();
 				$view->standardUrlExternal = $form->getExternal();
 			}
 			else
@@ -228,6 +228,8 @@ class Client_Html_Checkout_Standard_Process_Default
 				$view->standardUrlNext = $this->_getUrlConfirm( $view, array(), array() );
 				$view->standardMethod = 'GET';
 			}
+
+			$view->standardUrlPayment = $this->_getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
 
 
 			parent::process();
