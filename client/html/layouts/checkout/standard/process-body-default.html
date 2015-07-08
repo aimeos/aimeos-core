@@ -69,12 +69,14 @@ $defaultRegex = array( 'payment.cardno' => '^[0-9]{16,19}$', 'payment.cvv' => '^
 $regex = $this->config( 'client/html/checkout/standard/process/validate', $defaultRegex );
 
 ?>
-<div class="checkout-standard-process">
+<section class="checkout-standard-process">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
-<?php if( empty( $public ) ) : ?>
-	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
-<?php else : ?>
+<?php if( !empty( $this->get( 'standardErrorList', array() ) ) ) : ?>
+	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Processing the payment failed' ), $enc::TRUST ); ?></p>
+<?php elseif( !empty( $public ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Please enter your payment details' ), $enc::TRUST ); ?></p>
+<?php else : ?>
+	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
 <?php endif; ?>
 <?php foreach( $hidden as $key => $item ) : ?>
 	<input name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" type="hidden" value="<?php echo $enc->attr( $item->getDefault() ); ?>" />
@@ -91,20 +93,23 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 <?php				endforeach; ?>
 				</select><?php
 				break; case 'number':
-				?><input type="number" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" data-regex="<?php echo $enc->attr( $testfcn( $regex, $key ) ); ?>" /><?php
+				?><input type="number" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
 				break; default:
-				?><input type="text" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" data-regex="<?php echo $enc->attr( $testfcn( $regex, $key ) ); ?>" />
+				?><input type="text" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
 <?php		endswitch; ?>
 		</li>
 <?php endforeach; ?>
 	</ul>
-<?php echo $this->get( 'paymentBody' ); ?>
+<?php echo $this->get( 'processBody' ); ?>
 	<div class="button-group">
-<?php if( empty( $public ) ) : ?>
-		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
-<?php else : ?>
+<?php if( !empty( $this->get( 'standardErrorList', array() ) ) ) : ?>
+		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Try again' ), $enc::TRUST ); ?></button>
+<?php elseif( !empty( $public ) ) : ?>
 		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Pay now' ), $enc::TRUST ); ?></button>
+<?php else : ?>
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 	</div>
-</div>
+</section>

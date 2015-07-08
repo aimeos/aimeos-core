@@ -508,7 +508,7 @@ class Client_Html_Checkout_Standard_Default
 				$view->standardUrlBack = $view->url( $bTarget, $bCntl, $bAction, array(), array(), $bConfig );
 			}
 
-			if( ( $nextStep = array_shift( $steps ) ) !== null ) {
+			if( !isset( $view->standardUrlNext ) && ( $nextStep = array_shift( $steps ) ) !== null ) {
 				$param = array( 'c_step' => $nextStep );
 				$view->standardUrlNext = $view->url( $cTarget, $cCntl, $cAction, $param, array(), $cConfig );
 			}

@@ -229,8 +229,6 @@ class Client_Html_Checkout_Standard_Process_Default
 				$view->standardMethod = 'GET';
 			}
 
-			$view->standardUrlPayment = $this->_getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
-
 
 			parent::process();
 		}
@@ -256,6 +254,8 @@ class Client_Html_Checkout_Standard_Process_Default
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
+
+		$view->standardUrlPayment = $this->_getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
 	}
 
 
