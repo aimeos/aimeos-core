@@ -219,14 +219,15 @@ class Client_Html_Checkout_Update_Default
 				throw new Client_Html_Exception( $msg );
 			}
 
+			$response = null;
+			$headers = array();
 			$provider = $serviceManager->getProvider( $serviceItem );
 
 			try
 			{
-				$response = null;
 				$body = $view->request()->getBody();
 
-				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response ) ) !== null ) {
+				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response, $headers ) ) !== null ) {
 					$orderCntl->update( $orderItem ); // Update stock, coupons, etc.
 				}
 
@@ -237,12 +238,15 @@ class Client_Html_Checkout_Update_Default
 				$view->updateMessage = $e->getMessage();
 			}
 
+			if( !empty( $headers ) ) {
+				$view->updateHttpHeaders = $headers;
+			}
+
 			parent::process();
 		}
 		catch( Exception $e )
 		{
-			$view->updateHttpCode = 500;
-			$view->updateHttpString = 'HTTP/1.1 500 Error updating order status';
+			$view->updateHttpHeaders = array( 'HTTP/1.1 500 Error updating order status' );
 			$view->updateMessage = $e->getMessage();
 
 			$body = $view->request()->getBody();

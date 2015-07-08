@@ -24,6 +24,7 @@ $testfcn = function( $list, $key, $default = '' ) {
 
 $enc = $this->encoder();
 $public = $hidden = array();
+$errors = $this->get( 'standardErrorList', array() );
 $params = $this->get( 'standardProcessParams', array() );
 
 foreach( $params as $key => $item )
@@ -71,7 +72,7 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 ?>
 <div class="checkout-standard-process">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
-<?php if( !empty( $this->get( 'standardErrorList', array() ) ) ) : ?>
+<?php if( !empty( $errors ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Processing the payment failed' ), $enc::TRUST ); ?></p>
 <?php elseif( !empty( $public ) ) : ?>
 	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'Please enter your payment details' ), $enc::TRUST ); ?></p>
@@ -102,7 +103,7 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 	</ul>
 <?php echo $this->get( 'processBody' ); ?>
 	<div class="button-group">
-<?php if( !empty( $this->get( 'standardErrorList', array() ) ) ) : ?>
+<?php if( !empty( $errors ) ) : ?>
 		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Try again' ), $enc::TRUST ); ?></button>
 <?php elseif( !empty( $public ) ) : ?>
