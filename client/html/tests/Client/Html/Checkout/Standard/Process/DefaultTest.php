@@ -1,11 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
-class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Checkout_Standard_Process_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_context;
@@ -22,7 +23,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->_context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Order_Payment_Default( $this->_context, $paths );
+		$this->_object = new Client_Html_Checkout_Standard_Process_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -49,10 +50,10 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testGetBody()
 	{
-		$this->_object->getView()->paymentForm = new MShop_Common_Item_Helper_Form_Default( '', 'POST', array() );
+		$this->_object->getView()->standardStepActive = 'process';
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-order-payment">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-process">', $output );
 	}
 
 
@@ -72,48 +73,72 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testProcessNoService()
 	{
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$view = $this->_object->getView();
+		$param = array( 'c_step' => 'process' );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
 
-		$view = TestHelper::getView();
-		$view->orderBasket = $basketCntl->get();
-		$view->orderItem = $orderManager->createItem();
-		$this->_object->setView( $view );
+		$orderid = $this->_getOrder( '2008-02-15 12:34:56' )->getId();
+		$this->_context->getSession()->set( 'arcavias/orderid', $orderid );
 
-		$this->_object->process();
+		$paths = TestHelper::getHtmlTemplatePaths();
+		$mock = $this->getMockBuilder( 'Client_Html_Checkout_Standard_Process_Default' )
+			->setConstructorArgs( array( $this->_context, $paths ) )
+			->setMethods( array( '_getOrderServiceCode' ) )
+			->getMock();
 
-		$this->assertEquals( 'http://baseurl/checkout/confirm/', $view->standardUrlNext );
+		$mock->expects( $this->once() )->method( '_getOrderServiceCode' )
+			->will( $this->returnValue( null ) );
+
+		$mock->setView( $view );
+		$mock->process();
+
+		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
+		$this->assertEquals( 0, count( $view->get( 'standardProcessParams', array() ) ) );
+		$this->assertEquals( 'GET', $view->standardMethod );
+		$this->assertEquals( 'http://baseurl/checkout/standard/?c_step=payment', $view->standardUrlPayment );
 	}
 
 
-	public function testProcessPrePay()
+	public function testProcessPaypal()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$view = $this->_object->getView();
+		$param = array( 'c_step' => 'process' );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
 
-		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.code', 'unitpaymentcode' ) );
-		$result = $serviceManager->searchItems( $search );
-
-		if( ( $serviceItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No service item found' );
-		}
-
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$basketCntl->setService( 'payment', $serviceItem->getId() );
-
-		$orderItem = $orderManager->createItem();
-		$orderItem->setId( -1 );
-
-		$view = TestHelper::getView();
-		$view->orderItem = $orderItem;
-		$view->orderBasket = $basketCntl->get();
-		$this->_object->setView( $view );
+		$orderid = $this->_getOrder( '2011-09-17 16:14:32' )->getId();
+		$this->_context->getSession()->set( 'arcavias/orderid', $orderid );
 
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertEquals( 'POST', $view->standardMethod );
-		$this->assertEquals( 'paymenturl', $view->standardUrlNext );
+		$this->assertEquals( array(), $view->standardProcessParams );
+		$this->assertEquals( true, $view->standardUrlExternal );
+		$this->assertEquals( 'http://baseurl/checkout/standard/?c_step=payment', $view->standardUrlPayment );
+	}
+
+
+	public function testProcessNoStep()
+	{
+		$this->assertNull( $this->_object->process() );
+	}
+
+
+	protected function _getOrder( $date )
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+
+		$search = $orderManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );
+
+		$result = $orderManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No order found' );
+		}
+
+		return $item;
 	}
 }

@@ -121,7 +121,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	{
 		$view = $this->getView();
 
-		if( !in_array( $view->get( 'standardStepActive' ), array( 'order', 'process' ) ) ) {
+		if( !in_array( $view->param( 'standardStepActive' ), array( 'order', 'process' ) ) ) {
 			return '';
 		}
 
