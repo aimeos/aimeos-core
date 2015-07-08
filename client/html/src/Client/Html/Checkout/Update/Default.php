@@ -221,7 +221,16 @@ class Client_Html_Checkout_Update_Default
 
 			$response = null;
 			$headers = array();
+			$config = array( 'absoluteUri' => true, 'namespace' => false );
 			$provider = $serviceManager->getProvider( $serviceItem );
+
+			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $view->param( 'orderid' ) );
+			$urls = array(
+				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
+				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+			);
+			$urls['payment.url-self'] = $urls['payment.url-update'];
+			$provider->injectGlobalConfigBE( $urls );
 
 			try
 			{
@@ -265,5 +274,43 @@ class Client_Html_Checkout_Update_Default
 	protected function _getSubClientNames()
 	{
 		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Returns the URL to the confirm page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
+	}
+
+
+	/**
+	 * Returns the URL to the update page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$config = $view->config( 'client/html/checkout/update/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
 	}
 }
