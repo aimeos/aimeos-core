@@ -1733,8 +1733,9 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	counter-increment: step;
 }
 
-.checkout-standard .form-list .mandatory label {
+.checkout-standard .form-list .mandatory {
 	font-weight: bold;
+	display: list-item;
 }
 
 .checkout-standard .form-list .mandatory label:after {
@@ -1880,11 +1881,6 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 
 .checkout-standard-address .form-list .form-item { 
 	display: none; 
-}
-
-.checkout-standard-address .form-list .mandatory {
-	font-weight: bold;
-	display: list-item;
 }
 
 .checkout-standard-address .form-list .optional {
