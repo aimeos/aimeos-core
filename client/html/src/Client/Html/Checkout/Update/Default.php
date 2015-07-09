@@ -255,7 +255,23 @@ class Client_Html_Checkout_Update_Default
 		}
 		catch( Exception $e )
 		{
-			$view->updateHttpHeaders = array( 'HTTP/1.1 500 Error updating order status' );
+			/** client/html/checkout/standard/update/http-error
+			 * HTTP header sent for failed attempts to update the order status
+			 *
+			 * This HTTP header is returned to the remote system if the status
+			 * update failed due to an error in the application. This header is
+			 * not sent if e.g. a payment was refused by the payment gateway!
+			 * It should be one of the 5xx HTTP headers.
+			 *
+			 * @param array List of valid HTTP headers
+			 * @since 2015.07
+			 * @category Developer
+			 * @see client/html/checkout/standard/update/http-success
+			 */
+			$default = array( 'HTTP/1.1 500 Error updating order status' );
+			$headerList = $context->getConfig()->get( 'client/html/checkout/standard/update/http-error', $default );
+
+			$view->updateHttpHeaders = $headerList;
 			$view->updateMessage = $e->getMessage();
 
 			$body = $view->request()->getBody();
