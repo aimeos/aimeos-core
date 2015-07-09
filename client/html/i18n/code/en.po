@@ -60,30 +60,6 @@ msgstr "Mr"
 msgid "mrs"
 msgstr "Mrs"
 
-#. Omnipay service provider
-msgid "payment.firstname"
-msgstr "First name"
-
-#. Omnipay service provider
-msgid "payment.lastname"
-msgstr "Last name"
-
-#. Omnipay service provider
-msgid "payment.cardno"
-msgstr "Credit card number"
-
-#. Omnipay service provider
-msgid "payment.cvv"
-msgstr "Verfification number"
-
-#. Omnipay service provider
-msgid "payment.expirymonth"
-msgstr "Expiry month"
-
-#. Omnipay service provider
-msgid "payment.expiryyear"
-msgstr "Expiry year"
-
 #. Product attribute
 msgid "option"
 msgstr "Option"
@@ -99,6 +75,22 @@ msgstr "repeated"
 #. Order type value
 msgid "order:web"
 msgstr "internet"
+
+#. Product property package-height
+msgid "package-height"
+msgstr "Package height"
+
+#. Product property package-length
+msgid "package-length"
+msgstr "Package length"
+
+#. Product property package-weight
+msgid "package-weight"
+msgstr "Package weight"
+
+#. Product property package-width
+msgid "package-width"
+msgstr "Package width"
 
 #. Payment status value
 msgid "pay:-1"
@@ -131,6 +123,30 @@ msgstr "authorized"
 #. Payment status value
 msgid "pay:6"
 msgstr "received"
+
+#. Omnipay service provider
+msgid "payment.cardno"
+msgstr "Credit card number"
+
+#. Omnipay service provider
+msgid "payment.cvv"
+msgstr "Verfification number"
+
+#. Omnipay service provider
+msgid "payment.expirymonth"
+msgstr "Expiry month"
+
+#. Omnipay service provider
+msgid "payment.expiryyear"
+msgstr "Expiry year"
+
+#. Omnipay service provider
+msgid "payment.firstname"
+msgstr "First name"
+
+#. Omnipay service provider
+msgid "payment.lastname"
+msgstr "Last name"
 
 #. Pin action
 #, fuzzy
@@ -188,19 +204,3 @@ msgstr ""
 #. Product attribute
 msgid "width"
 msgstr "Width"
-
-#. Product property package-length
-msgid "package-length"
-msgstr "Package length"
-
-#. Product property package-width
-msgid "package-width"
-msgstr "Package width"
-
-#. Product property package-height
-msgid "package-height"
-msgstr "Package height"
-
-#. Product property package-weight
-msgid "package-weight"
-msgstr "Package weight"

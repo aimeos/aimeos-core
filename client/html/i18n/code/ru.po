@@ -6,17 +6,16 @@
 # Translators:
 # Translators:
 # Translators:
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias Core\n"
+"Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-07-22 09:59+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
+"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -155,6 +154,30 @@ msgstr "Код банка"
 msgid "directdebit.bankname"
 msgstr "Название банка"
 
+#. Omnipay service provider
+msgid "payment.firstname"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.lastname"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.cardno"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.cvv"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.expirymonth"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.expiryyear"
+msgstr ""
+
 #. Warehouse code
 msgid "warehouse:default"
 msgstr "склад:стандартный"
@@ -170,3 +193,19 @@ msgstr "отметить"
 #. Watch action
 msgid "watch"
 msgstr "следить"
+
+#. Product property package-length
+msgid "package-length"
+msgstr ""
+
+#. Product property package-width
+msgid "package-width"
+msgstr ""
+
+#. Product property package-height
+msgid "package-height"
+msgstr ""
+
+#. Product property package-weight
+msgid "package-weight"
+msgstr ""

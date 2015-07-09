@@ -6,17 +6,16 @@
 # Translators:
 # Translators:
 # Translators:
-# nsendetzky, 2013
-# nsendetzky, 2013-2014
+# Aimeos <aimeos@aimeos.org>, 2015
 # nsendetzky, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias Core\n"
+"Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-07-20 11:54+0000\n"
-"Last-Translator: nsendetzky\n"
-"Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
+"PO-Revision-Date: 2015-07-09 22:38+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: German (http://www.transifex.com/p/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -194,3 +193,19 @@ msgstr "Merken"
 #. Watch action
 msgid "watch"
 msgstr "Beobachten"
+
+#. Product property package-length
+msgid "package-length"
+msgstr "Paketlänge"
+
+#. Product property package-width
+msgid "package-width"
+msgstr "Paketbreite"
+
+#. Product property package-height
+msgid "package-height"
+msgstr "Pakethöhe"
+
+#. Product property package-weight
+msgid "package-weight"
+msgstr "Paketgewicht"

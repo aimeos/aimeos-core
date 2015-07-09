@@ -7,12 +7,12 @@
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias Core\n"
+"Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-12 09:06+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
+"POT-Creation-Date: 2015-07-09 23:55+0200\n"
+"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,9 +55,9 @@ msgstr "Перестроение индекса каталога"
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:163
+#: src/Controller/Jobs/Admin/Job/Default.php:81
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Недоступен класс \"%1$s\""
@@ -71,6 +71,10 @@ msgstr "Не найден класс \"%1$s\""
 #, php-format
 msgid "Controller path is empty"
 msgstr "Путь к контроллеру"
+
+#: src/Controller/Jobs/Product/Export/Sitemap/Default.php:39
+msgid "Creates a product site map for search engines"
+msgstr ""
 
 #: src/Controller/Jobs/Product/Bought/Default.php:39
 msgid "Creates bought together product suggestions"
@@ -112,24 +116,40 @@ msgid ""
 "Executes the jobs created by the admin interface, e.g. the text exports"
 msgstr "Запускает задания, созданные администратором, например, экспорт текстов"
 
-#: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
+#: src/Controller/Jobs/Product/Export/Default.php:39
+msgid "Exports all available products"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:282
+#, php-format
+msgid "Failed products during import: %1$d"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:39
+msgid "Imports new and updates existing products from CSV files"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
 #: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
+#: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
+#: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Async/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Payment/Factory.php:71
-#: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
-#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:71
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Factory.php:71
-#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:71
+#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
+#: src/Controller/Jobs/Product/Bought/Factory.php:71
+#: src/Controller/Jobs/Product/Import/Csv/Factory.php:71
+#: src/Controller/Jobs/Product/Export/Sitemap/Factory.php:71
+#: src/Controller/Jobs/Product/Export/Factory.php:71
+#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
+#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Admin/Cache/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
 #: src/Controller/Jobs/Admin/Log/Factory.php:71
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
-#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
-#: src/Controller/Jobs/Common/Factory/Abstract.php:55
-#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
-#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
-#: src/Controller/Jobs/Product/Bought/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые символы в названии класса \"%1$s\""
@@ -159,7 +179,7 @@ msgstr "Недопустимая фабрика \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Недопустимый метод задания \"%1$s\""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:222
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:296
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Не найден тип списка для домена \"%1$s\" и код \"%2$s\""
@@ -173,12 +193,12 @@ msgstr "Очистка журнала"
 msgid "Method \"%1$s\" not available"
 msgstr "Недоступен метод \"%1$s\""
 
-#: src/Controller/Jobs/Abstract.php:82
+#: src/Controller/Jobs/Abstract.php:120
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr "Не найдено типа элементов для \"%1$s/%2$s\" в \"%3$s\""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:324
 #, php-format
 msgid "No warehouse \"%1$s\" found"
 msgstr "Не найдено склада \"%1$s\""
@@ -199,9 +219,21 @@ msgstr "Письма относительно платежей по заказа
 msgid "Process order delivery services"
 msgstr "Обработка служб доставки заказов"
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
+#: src/Controller/Jobs/Product/Export/Default.php:28
+msgid "Product export"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:28
+msgid "Product import CSV"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:33
 msgid "Product notification e-mails"
 msgstr "Письма уведомления о товарах"
+
+#: src/Controller/Jobs/Product/Export/Sitemap/Default.php:28
+msgid "Product site map"
+msgstr ""
 
 #: src/Controller/Jobs/Product/Bought/Default.php:28
 msgid "Products bought together"
@@ -228,7 +260,12 @@ msgstr "Удаление незавершённых заказов"
 msgid "Removes unpaid orders"
 msgstr "Удаление неоплаченных заказов"
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:255
+#, php-format
+msgid "Required mapping key \"%1$s\" is missing or contains no array"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:44
 msgid "Sends e-mails for watched products"
 msgstr "Отсылка писем об отслеживаемых товарах"
 
@@ -244,6 +281,11 @@ msgstr "Отправка писем об обновлении статуса д�
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr "Отправка оплаченных заказов в систему ERP или партнёру по логистике"
 
+#: src/Controller/Jobs/Abstract.php:92
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr ""
+
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
@@ -253,3 +295,23 @@ msgstr "Невозможно вызвать метод фабрики \"%1$s\""
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Невозможно вызвать метод \"%1$s\""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:437
+#, php-format
+msgid "Unable to import product with code \"%1$s\": %2$s"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:286
+#, php-format
+msgid "Unable to move imported file"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Export/Default.php:409
+#, php-format
+msgid "aimeos-products-%d.xml"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Export/Sitemap/Default.php:403
+#, php-format
+msgid "aimeos-sitemap-%d.xml"
+msgstr ""
