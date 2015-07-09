@@ -12,6 +12,7 @@
 class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 
 
 	/**
@@ -22,10 +23,10 @@ class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$serviceItem = MShop_Service_Manager_Factory::createManager( $context )->createItem();
+		$this->_context = TestHelper::getContext();
+		$serviceItem = MShop_Service_Manager_Factory::createManager( $this->_context )->createItem();
 
-		$this->_object = new Test_MShop_Service_Provider_Abstract( $context, $serviceItem );
+		$this->_object = new Test_MShop_Service_Provider_Abstract( $this->_context, $serviceItem );
 	}
 
 	/**
@@ -59,10 +60,40 @@ class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCheckConfigBE()
+	{
+		$this->assertEquals( array(), $this->_object->checkConfigBE( array() ) );
+	}
+
+
 	public function testGetConfigValue()
 	{
 		$this->_object->injectGlobalConfigBE( array( 'payment.url-success' => 'https://url.to/ok' ) );
 		$this->assertEquals( 'https://url.to/ok', $this->_object->getConfigValue( array( 'payment.url-success' ) ) );
+	}
+
+
+	public function testQuery()
+	{
+		$item = MShop_Order_Manager_Factory::createManager( $this->_context )->createItem();
+
+		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->_object->query( $item );
+	}
+
+
+	public function testUpdateAsync()
+	{
+		$this->assertFalse( $this->_object->updateAsync() );
+	}
+
+
+	public function testUpdateSync()
+	{
+		$response = null; $header = array();
+		$result = $this->_object->updateSync( array(), 'body', $response, $header );
+
+		$this->assertEquals( null, $result );
 	}
 }
 

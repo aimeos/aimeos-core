@@ -23,6 +23,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->_object = new Client_Html_Checkout_Standard_Default( $this->_context, $paths );
+		$this->_object->setView( TestHelper::getView() );
 	}
 
 
@@ -40,7 +41,6 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$this->_object->setView( TestHelper::getView() );
 		$output = $this->_object->getHeader();
 		$this->assertNotNull( $output );
 	}
@@ -48,13 +48,12 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
-		$view = TestHelper::getView();
+		$view = $this->_object->getView();
 		$view->standardStepActive = 'address';
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c_step' => 'payment' ) );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
 		$output = $this->_object->getBody();
 
 		$this->assertStringStartsWith( '<section class="aimeos checkout-standard">', $output );
@@ -69,7 +68,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyOnepage()
 	{
-		$view = TestHelper::getView();
+		$view = $this->_object->getView();
 
 		$config = $this->_context->getConfig();
 		$config->set( 'client/html/checkout/standard/onepage', array( 'address', 'delivery', 'payment', 'summary' ) );
@@ -77,7 +76,6 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$this->_object->setView( $view );
 		$output = $this->_object->getBody();
 
 		$this->assertContains( '<section class="checkout-standard-address', $output );
@@ -90,7 +88,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyOnepagePartitial()
 	{
-		$view = TestHelper::getView();
+		$view = $this->_object->getView();
 		$view->standardStepActive = 'delivery';
 
 		$config = $this->_context->getConfig();
@@ -99,7 +97,6 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$this->_object->setView( $view );
 		$output = $this->_object->getBody();
 
 		$this->assertContains( '<section class="checkout-standard-delivery', $output );
@@ -112,7 +109,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyOnepageDifferentStep()
 	{
-		$view = TestHelper::getView();
+		$view = $this->_object->getView();
 		$view->standardStepActive = 'address';
 
 		$config = $this->_context->getConfig();
@@ -121,7 +118,6 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$this->_object->setView( $view );
 		$output = $this->_object->getBody();
 
 		$this->assertContains( '<section class="checkout-standard-address', $output );
@@ -150,5 +146,11 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
+	}
+
+
+	public function testProcess()
+	{
+		$this->_object->process();
 	}
 }

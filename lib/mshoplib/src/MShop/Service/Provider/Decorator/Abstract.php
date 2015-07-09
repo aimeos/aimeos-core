@@ -235,7 +235,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = call_user_func_array( array( $this->_object, $name ), $param) ) === false ) {
+		if ( ( $result = @call_user_func_array( array( $this->_object, $name ), $param ) ) === null ) {
 			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 
