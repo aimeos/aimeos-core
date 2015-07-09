@@ -1,14 +1,14 @@
 {
-	"name": "arcavias/arcavias-core",
+	"name": "aimeos/aimeos-core",
 	"description": "e-commerce framework for web shops, portals and market places",
-	"homepage": "http://www.arcavias.com/en",
+	"homepage": "https://aimeos.org/",
 	"license": "LGPL-3.0",
 	"keywords": ["e-commerce", "shop", "portal", "market place"],
 	"support": {
-		"source": "https://github.com/Arcavias/arcavias-core",
-		"issues": "https://bugs.arcavias.com",
-		"forum": "https://forum.arcavias.com",
-		"wiki": "https://docs.arcavias.com"
+		"source": "https://github.com/aimeos/aimeos-core",
+		"issues": "https://github.com/aimeos/aimeos-core/issues",
+		"forum": "https://aimeos.org/help",
+		"wiki": "https://aimeos.org/docs"
 	},
 	"repositories": [
 		{
