@@ -20,6 +20,8 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends MW_Unittest_Test
 	 */
 	protected function setUp()
 	{
+		MShop_Factory::setCache( true );
+
 		$this->_context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
@@ -37,6 +39,7 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends MW_Unittest_Test
 	protected function tearDown()
 	{
 		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
+		MShop_Factory::setCache( false );
 		unset( $this->_object );
 	}
 
@@ -102,6 +105,13 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends MW_Unittest_Test
 
 	public function testProcessPaypal()
 	{
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
+			->setConstructorArgs( array( $this->_context ) )
+			->setMethods( array( 'store' ) )
+			->getMock();
+
+		MShop_Factory::injectManager( $this->_context, 'order/base', $mock );
+
 		$view = $this->_object->getView();
 		$param = array( 'c_step' => 'process' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
