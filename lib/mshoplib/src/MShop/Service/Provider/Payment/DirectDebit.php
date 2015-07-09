@@ -130,13 +130,14 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 * separately isn't supported or not configured by the shop owner.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param array $params Request parameter if available
 	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( MShop_Order_Item_Interface $order )
+	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
 
-		return parent::process( $order );
+		return parent::process( $order, $params );
 	}
 }

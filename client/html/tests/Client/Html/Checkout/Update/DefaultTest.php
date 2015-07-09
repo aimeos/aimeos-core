@@ -20,7 +20,9 @@ class Client_Html_Checkout_Update_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Update_Default( TestHelper::getContext(), $paths );
+		$this->_context = TestHelper::getContext();
+
+		$this->_object = new Client_Html_Checkout_Update_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -66,6 +68,38 @@ class Client_Html_Checkout_Update_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProcess()
 	{
+		$params = array(
+			'code' => 'paypalexpress',
+			'orderid' => $this->_getOrder( '2011-09-17 16:14:32' )->getId(),
+		);
+
+		$view = $this->_object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, $params );
+		$view->addHelper( 'param', $helper );
+
 		$this->_object->process();
+	}
+
+
+	public function testProcessNoService()
+	{
+		$this->_object->process();
+	}
+
+
+	protected function _getOrder( $date )
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+
+		$search = $orderManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );
+
+		$result = $orderManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No order found' );
+		}
+
+		return $item;
 	}
 }

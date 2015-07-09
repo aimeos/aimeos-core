@@ -219,14 +219,24 @@ class Client_Html_Checkout_Update_Default
 				throw new Client_Html_Exception( $msg );
 			}
 
+			$response = null;
+			$headers = array();
+			$config = array( 'absoluteUri' => true, 'namespace' => false );
 			$provider = $serviceManager->getProvider( $serviceItem );
+
+			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $view->param( 'orderid' ) );
+			$urls = array(
+				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
+				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+			);
+			$urls['payment.url-self'] = $urls['payment.url-update'];
+			$provider->injectGlobalConfigBE( $urls );
 
 			try
 			{
-				$response = null;
 				$body = $view->request()->getBody();
 
-				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response ) ) !== null ) {
+				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response, $headers ) ) !== null ) {
 					$orderCntl->update( $orderItem ); // Update stock, coupons, etc.
 				}
 
@@ -237,12 +247,15 @@ class Client_Html_Checkout_Update_Default
 				$view->updateMessage = $e->getMessage();
 			}
 
+			if( !empty( $headers ) ) {
+				$view->updateHttpHeaders = $headers;
+			}
+
 			parent::process();
 		}
 		catch( Exception $e )
 		{
-			$view->updateHttpCode = 500;
-			$view->updateHttpString = 'HTTP/1.1 500 Error updating order status';
+			$view->updateHttpHeaders = array( 'HTTP/1.1 500 Error updating order status' );
 			$view->updateMessage = $e->getMessage();
 
 			$body = $view->request()->getBody();
@@ -261,5 +274,43 @@ class Client_Html_Checkout_Update_Default
 	protected function _getSubClientNames()
 	{
 		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Returns the URL to the confirm page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
+	}
+
+
+	/**
+	 * Returns the URL to the update page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$config = $view->config( 'client/html/checkout/update/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
 	}
 }

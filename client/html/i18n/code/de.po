@@ -156,27 +156,27 @@ msgid "directdebit.bankname"
 msgstr "Name der Bank"
 
 #. Omnipay service provider
-msgid "omnipay.firstname"
+msgid "payment.firstname"
 msgstr "Vorname"
 
 #. Omnipay service provider
-msgid "omnipay.lastname"
+msgid "payment.lastname"
 msgstr "Nachname"
 
 #. Omnipay service provider
-msgid "omnipay.cardno"
+msgid "payment.cardno"
 msgstr "Kreditkartennummer"
 
 #. Omnipay service provider
-msgid "omnipay.cvv"
+msgid "payment.cvv"
 msgstr "Sicherheitscode"
 
 #. Omnipay service provider
-msgid "omnipay.expirymonth"
+msgid "payment.expirymonth"
 msgstr "Ablaufmonat"
 
 #. Omnipay service provider
-msgid "omnipay.expiryyear"
+msgid "payment.expiryyear"
 msgstr "Ablaufjahr"
 
 #. Warehouse code

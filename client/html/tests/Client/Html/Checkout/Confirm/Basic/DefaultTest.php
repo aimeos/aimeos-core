@@ -51,7 +51,7 @@ class Client_Html_Checkout_Confirm_Basic_DefaultTest extends MW_Unittest_Testcas
 		$manager = MShop_Order_Manager_Factory::createManager( $this->_context );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'paypal' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'paypalexpress' ) );
 
 		$items = $manager->searchItems( $search );
 		if( ( $item = reset( $items ) ) === false ) {

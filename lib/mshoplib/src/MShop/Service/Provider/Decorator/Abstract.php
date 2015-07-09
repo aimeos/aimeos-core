@@ -204,12 +204,13 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 * @param array $params Associative list of request parameters
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
+	 * @param array &$header Response headers for notification requests
 	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
-	public function updateSync( array $params = array(), $body = null, &$response = null )
+	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
-		return $this->_object->updateSync( $params, $body, $response );
+		return $this->_object->updateSync( $params, $body, $response, $header );
 	}
 
 
@@ -234,7 +235,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = call_user_func_array( array( $this->_object, $name ), $param) ) === false ) {
+		if ( ( $result = @call_user_func_array( array( $this->_object, $name ), $param ) ) === null ) {
 			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 

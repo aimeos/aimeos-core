@@ -97,7 +97,6 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	private $_subPartNames = array( 'intro', 'basic', 'retry', 'order' );
 	private $_cache;
-	private $_orderItem;
 
 
 	/**
@@ -249,152 +248,6 @@ class Client_Html_Checkout_Confirm_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$config = array( 'absoluteUri' => true, 'namespace' => false );
-
-
-		/** client/html/checkout/confirm/url/target
-		 * Destination of the URL where the controller specified in the URL is known
-		 *
-		 * The destination can be a page ID like in a content management system or the
-		 * module of a software development framework. This "target" must contain or know
-		 * the controller that should be called by the generated URL.
-		 *
-		 * @param string Destination of the URL
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/confirm/url/controller
-		 * @see client/html/checkout/confirm/url/action
-		 * @see client/html/checkout/confirm/url/config
-		 */
-		$targetConfirm = $view->config( 'client/html/checkout/confirm/url/target' );
-
-		/** client/html/checkout/confirm/url/controller
-		 * Name of the controller whose action should be called
-		 *
-		 * In Model-View-Controller (MVC) applications, the controller contains the methods
-		 * that create parts of the output displayed in the generated HTML page. Controller
-		 * names are usually alpha-numeric.
-		 *
-		 * @param string Name of the controller
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/confirm/url/target
-		 * @see client/html/checkout/confirm/url/action
-		 * @see client/html/checkout/confirm/url/config
-		 */
-		$cntlConfirm = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
-
-		/** client/html/checkout/confirm/url/action
-		 * Name of the action that should create the output
-		 *
-		 * In Model-View-Controller (MVC) applications, actions are the methods of a
-		 * controller that create parts of the output displayed in the generated HTML page.
-		 * Action names are usually alpha-numeric.
-		 *
-		 * @param string Name of the action
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/confirm/url/target
-		 * @see client/html/checkout/confirm/url/controller
-		 * @see client/html/checkout/confirm/url/config
-		 */
-		$actionConfirm = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-
-		/** client/html/checkout/confirm/url/config
-		 * Associative list of configuration options used for generating the URL
-		 *
-		 * You can specify additional options as key/value pairs used when generating
-		 * the URLs, like
-		 *
-		 *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
-		 *
-		 * The available key/value pairs depend on the application that embeds the e-commerce
-		 * framework. This is because the infrastructure of the application is used for
-		 * generating the URLs. The full list of available config options is referenced
-		 * in the "see also" section of this page.
-		 *
-		 * @param string Associative list of configuration options
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/confirm/url/target
-		 * @see client/html/checkout/confirm/url/controller
-		 * @see client/html/checkout/confirm/url/action
-		 * @see client/html/url/config
-		 */
-		$configConfirm = $view->config( 'client/html/checkout/confirm/url/config', $config );
-
-
-		/** client/html/checkout/update/url/target
-		 * Destination of the URL where the controller specified in the URL is known
-		 *
-		 * The destination can be a page ID like in a content management system or the
-		 * module of a software development framework. This "target" must contain or know
-		 * the controller that should be called by the generated URL.
-		 *
-		 * @param string Destination of the URL
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/update/url/controller
-		 * @see client/html/checkout/update/url/action
-		 * @see client/html/checkout/update/url/config
-		 */
-		$targetUpdate = $view->config( 'client/html/checkout/update/url/target' );
-
-		/** client/html/checkout/update/url/controller
-		 * Name of the controller whose action should be called
-		 *
-		 * In Model-View-Controller (MVC) applications, the controller contains the methods
-		 * that create parts of the output displayed in the generated HTML page. Controller
-		 * names are usually alpha-numeric.
-		 *
-		 * @param string Name of the controller
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/update/url/target
-		 * @see client/html/checkout/update/url/action
-		 * @see client/html/checkout/update/url/config
-		 */
-		$cntlUpdate = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
-
-		/** client/html/checkout/update/url/action
-		 * Name of the action that should create the output
-		 *
-		 * In Model-View-Controller (MVC) applications, actions are the methods of a
-		 * controller that create parts of the output displayed in the generated HTML page.
-		 * Action names are usually alpha-numeric.
-		 *
-		 * @param string Name of the action
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/update/url/target
-		 * @see client/html/checkout/update/url/controller
-		 * @see client/html/checkout/update/url/config
-		 */
-		$actionUpdate = $view->config( 'client/html/checkout/update/url/action', 'update' );
-
-		/** client/html/checkout/update/url/config
-		 * Associative list of configuration options used for generating the URL
-		 *
-		 * You can specify additional options as key/value pairs used when generating
-		 * the URLs, like
-		 *
-		 *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
-		 *
-		 * The available key/value pairs depend on the application that embeds the e-commerce
-		 * framework. This is because the infrastructure of the application is used for
-		 * generating the URLs. The full list of available config options is referenced
-		 * in the "see also" section of this page.
-		 *
-		 * @param string Associative list of configuration options
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/update/url/target
-		 * @see client/html/checkout/update/url/controller
-		 * @see client/html/checkout/update/url/action
-		 * @see client/html/url/config
-		 */
-		$configUpdate = $view->config( 'client/html/checkout/update/url/config', $config );
-
 
 		try
 		{
@@ -418,12 +271,14 @@ class Client_Html_Checkout_Confirm_Default
 
 			$provider = $serviceManager->getProvider( $serviceItem );
 
-			$param = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
+			$config = array( 'absoluteUri' => true, 'namespace' => false );
+			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
 			$urls = array(
-				'payment.url-success' => $view->url( $targetConfirm, $cntlConfirm, $actionConfirm, $param, array(), $configConfirm ),
-				'payment.url-update' => $view->url( $targetUpdate, $cntlUpdate, $actionUpdate, $param, array(), $configUpdate ),
+				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
+				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
 				'client.ipaddress' => $view->request()->getClientAddress(),
 			);
+			$urls['payment.url-self'] = $urls['payment.url-success'];
 			$provider->injectGlobalConfigBE( $urls );
 
 			if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody() ) ) !== null )
@@ -434,7 +289,7 @@ class Client_Html_Checkout_Confirm_Default
 					$provider->query( $orderItem );
 				}
 
-				$this->_orderItem = $orderItem;
+				$view->confirmOrderItem = $orderItem;
 			}
 			else
 			{
@@ -496,6 +351,44 @@ class Client_Html_Checkout_Confirm_Default
 
 
 	/**
+	 * Returns the URL to the confirm page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
+	}
+
+
+	/**
+	 * Returns the URL to the update page.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $params Parameters that should be part of the URL
+	 * @param array $config Default URL configuration
+	 * @return string URL string
+	 */
+	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	{
+		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$config = $view->config( 'client/html/checkout/update/url/config', $config );
+
+		return $view->url( $target, $cntl, $action, $params, array(), $config );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
@@ -507,17 +400,13 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			if( !isset( $this->_orderItem ) )
+			if( !isset( $view->confirmOrderItem ) )
 			{
 				$context = $this->_getContext();
 				$orderid = $context->getSession()->get( 'arcavias/orderid' );
 				$orderManager = MShop_Factory::createManager( $context, 'order' );
 
 				$view->confirmOrderItem = $orderManager->getItem( $orderid );
-			}
-			else
-			{
-				$view->confirmOrderItem = $this->_orderItem;
 			}
 
 			$this->_cache = $view;

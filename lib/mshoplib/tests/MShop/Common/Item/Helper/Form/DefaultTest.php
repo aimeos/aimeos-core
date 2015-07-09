@@ -67,6 +67,17 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends MW_Unittest_Testcase
 		unset( $this->_object, $this->_values );
 	}
 
+	public function testGetExternal()
+	{
+		$this->assertEquals( true, $this->_object->getExternal() );
+	}
+
+	public function testSetExternal()
+	{
+		$this->_object->setExternal( false );
+		$this->assertEquals( false, $this->_object->getExternal() );
+	}
+
 	public function testGetUrl()
 	{
 		$this->assertEquals( 'http://www.example.com', $this->_object->getUrl() );

@@ -42,7 +42,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
+		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$output = $this->_object->getHeader();
 		$this->assertNotNull( $output );
@@ -51,7 +51,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
+		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos checkout-confirm">', $output );
@@ -74,22 +74,35 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProcess()
 	{
+		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+
+		$view = $this->_object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'code' => 'paypalexpress' ) );
+		$view->addHelper( 'param', $helper );
+
 		$this->_object->process();
 	}
 
 
-	protected function _getOrderId()
+	public function testProcessNoCode()
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'order' );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
-		$search->setSlice( 0, 1 );
-		$result = $manager->searchItems( $search );
+		$this->_object->process();
+	}
 
-		if( ( $order = reset( $result ) ) === false ) {
+
+	protected function _getOrder( $date )
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+
+		$search = $orderManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );
+
+		$result = $orderManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No order found' );
 		}
 
-		return $order->getId();
+		return $item;
 	}
 }
