@@ -84,6 +84,12 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testProcessNoCode()
+	{
+		$this->_object->process();
+	}
+
+
 	protected function _getOrder( $date )
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );

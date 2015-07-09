@@ -272,7 +272,7 @@ class Client_Html_Checkout_Confirm_Default
 			$provider = $serviceManager->getProvider( $serviceItem );
 
 			$config = array( 'absoluteUri' => true, 'namespace' => false );
-			$param = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
+			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
 			$urls = array(
 				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
 				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
