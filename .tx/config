@@ -1,58 +1,68 @@
 [main]
 host = https://www.transifex.com
-type = PO
 
-[arcavias-core.client-extjs]
+[aimeos-core.client-extjs]
 file_filter = client/extjs/i18n/<lang>.po
 source_file = client/extjs/i18n/core-client-extjs.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-extjs-ext]
-file_filter = client/extjs/i18n/ext/<lang>.po    
+[aimeos-core.client-extjs-ext]
+file_filter = client/extjs/i18n/ext/<lang>.po
 source_file = client/extjs/i18n/ext/core-client-extjs-ext.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-html]
+[aimeos-core.client-html]
 file_filter = client/html/i18n/<lang>.po
 source_file = client/html/i18n/core-client-html.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-html-code]
+[aimeos-core.client-html-code]
 file_filter = client/html/i18n/code/<lang>.po
 source_file = client/html/i18n/code/core-client-html-code.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-html-country]
+[aimeos-core.client-html-country]
 file_filter = client/html/i18n/country/<lang>.po
 source_file = client/html/i18n/country/core-client-html-country.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-html-language]
+[aimeos-core.client-html-language]
 file_filter = client/html/i18n/language/<lang>.po
 source_file = client/html/i18n/language/core-client-html-language.pot
 source_lang = en
+type = PO
 
-[arcavias-core.client-html-currency]
+[aimeos-core.client-html-currency]
 file_filter = client/html/i18n/currency/<lang>.po
 source_file = client/html/i18n/currency/core-client-html-currency.pot
 source_lang = en
+type = PO
 
-[arcavias-core.controller-frontend]
+[aimeos-core.controller-frontend]
 file_filter = controller/frontend/i18n/<lang>.po
 source_file = controller/frontend/i18n/core-controller-frontend.pot
 source_lang = en
+type = PO
 
-[arcavias-core.controller-jobs]
+[aimeos-core.controller-jobs]
 file_filter = controller/jobs/i18n/<lang>.po
 source_file = controller/jobs/i18n/core-controller-jobs.pot
 source_lang = en
+type = PO
 
-[arcavias-core.lib-mshoplib]
+[aimeos-core.lib-mshop]
 file_filter = lib/mshoplib/i18n/<lang>.po
 source_file = lib/mshoplib/i18n/core-mshop.pot
 source_lang = en
+type = PO
 
-[arcavias-core.lib-mshoplib-code]
+[aimeos-core.lib-mshop-code]
 file_filter = lib/mshoplib/i18n/code/<lang>.po
 source_file = lib/mshoplib/i18n/code/core-mshop-code.pot
 source_lang = en
+type = PO
