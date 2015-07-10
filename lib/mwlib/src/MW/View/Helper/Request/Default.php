@@ -29,7 +29,7 @@ class MW_View_Helper_Request_Default
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
 	 */
-	public function __construct( $view, $body, $clientaddr )
+	public function __construct( $view, $body = '', $clientaddr = '' )
 	{
 		parent::__construct( $view );
 
