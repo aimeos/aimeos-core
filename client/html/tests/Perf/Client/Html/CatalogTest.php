@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
 class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase

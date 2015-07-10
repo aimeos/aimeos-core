@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.arcavias.com/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
 class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framework_TestCase

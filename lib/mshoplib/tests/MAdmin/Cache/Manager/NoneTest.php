@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
 class MAdmin_Cache_Manager_NoneTest extends MW_Unittest_Testcase

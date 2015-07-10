@@ -2,7 +2,7 @@
 
 /**
 * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
-* @license LGPLv3, http://www.arcavias.com/en/license
+* @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
 * @version $Id: ProductTagChangeTypeidNotNull.php 14628 2011-12-29 13:29:43Z nsendetzky $
 */
 

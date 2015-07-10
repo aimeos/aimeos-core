@@ -2,7 +2,7 @@
 -- MShop log database definitions and descriptions
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
--- License LGPLv3, http://www.arcavias.com/en/license
+-- License LGPLv3, http://opensource.org/licenses/LGPL-3.0
 --
 
 
