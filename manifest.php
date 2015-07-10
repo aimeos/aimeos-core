@@ -26,7 +26,6 @@ return array(
 			'controller/frontend/config/controller',
 			'controller/extjs/config/controller',
 			'config',
-			'client/extjs/config',
 		),
 	),
 	'i18n' => array(
