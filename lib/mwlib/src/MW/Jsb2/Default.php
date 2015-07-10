@@ -66,10 +66,6 @@ class MW_Jsb2_Default
 				$packageFileTime = 0;
 				$timestamp = 0;
 
-				if( DIRECTORY_SEPARATOR !== '/' ) {
-					$packageFileFilesystem = str_replace( '/', DIRECTORY_SEPARATOR, $packageFileFilesystem );
-				}
-
 				if( is_file( $packageFileFilesystem ) ) {
 					$packageFileTime = filemtime( $packageFileFilesystem );
 				}
@@ -142,10 +138,6 @@ class MW_Jsb2_Default
 
 				$packageDir = dirname( $packageFile );
 
-				if( DIRECTORY_SEPARATOR !== '/' ) {
-					$packageDir = str_replace( '/', DIRECTORY_SEPARATOR, $packageDir );
-				}
-
 				if( !is_dir( $packageDir ) )
 				{
 					if( mkdir( $packageDir, $dirpermission, true ) === false ) {
@@ -178,10 +170,6 @@ class MW_Jsb2_Default
 		{
 			$filename = $basePath . $singleFile->path . $singleFile->text;
 
-			if( DIRECTORY_SEPARATOR !== '/' ) {
-				$filename = str_replace( '/', DIRECTORY_SEPARATOR, $filename );
-			}
-
 			if( !is_file( $filename ) || ( $fileTime = filemtime( $filename ) ) === false ) {
 				throw new MW_Jsb2_Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
 			}
@@ -204,14 +192,9 @@ class MW_Jsb2_Default
 	protected function _minify( $package, $debug, $permissions )
 	{
 		$content = '';
-		$ds = DIRECTORY_SEPARATOR;
 
 		foreach( $this->_getFilenames( $package, $this->_basePath ) as $filename )
 		{
-			if( $ds !== '/' ) {
-				$filename = str_replace( '/', $ds, $filename );
-			}
-
 			if( ( $content .= file_get_contents( $filename ) ) === false ) {
 				throw new MW_Jsb2_Exception( sprintf( 'Unable to get content of file "%1$s"', $filename ) );
 			}
@@ -222,10 +205,6 @@ class MW_Jsb2_Default
 		}
 
 		$pkgFileName = $this->_basePath . $this->_deployDir . $package->file;
-
-		if( $ds !== '/' ) {
-			$pkgFileName = str_replace( '/', $ds, $pkgFileName );
-		}
 
 		if( file_put_contents( $pkgFileName, $content ) === false ) {
 			throw new MW_Jsb2_Exception( sprintf( 'Unable to create package file "%1$s"', $pkgFileName ) );
@@ -279,7 +258,6 @@ class MW_Jsb2_Default
 	protected function _getFilenames( $package, $prePath = '' )
 	{
 		$filenames = array();
-		$ds = DIRECTORY_SEPARATOR;
 
 		foreach( $package->fileIncludes as $include )
 		{
@@ -289,10 +267,6 @@ class MW_Jsb2_Default
 
 			$filename = $include->path . $include->text;
 			$absfilename = $this->_basePath . $filename;
-
-			if( $ds !== '/' ) {
-				$absfilename = str_replace( '/', $ds, $absfilename );
-			}
 
 			if( !file_exists( $absfilename ) ) {
 				throw new MW_Jsb2_Exception( sprintf( 'File does not exists: "%1$s"', $absfilename ) );
