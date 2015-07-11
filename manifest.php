@@ -7,7 +7,7 @@
 
 
 return array(
-	'name' => 'arcavias-core',
+	'name' => 'aimeos-core',
 	'depends' => array(),
 	'include' => array(
 		'lib/mshoplib/src',
