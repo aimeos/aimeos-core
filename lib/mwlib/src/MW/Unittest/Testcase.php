@@ -69,9 +69,8 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 			parent::assertInternalType( $expected, $actual, $message );
 		}
 		else {
-			parent::assertType( $expected, $actual, $message );
+			self::assertType( $expected, $actual, $message );
 		}
-
 	}
 
 
@@ -107,7 +106,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 			parent::assertEmpty( $actual, $message );
 		}
 		else {
-			$this->assertThat($actual, $this->isEmpty(), $message);
+			self::assertThat($actual, self::isEmpty(), $message);
 		}
 	}
 }

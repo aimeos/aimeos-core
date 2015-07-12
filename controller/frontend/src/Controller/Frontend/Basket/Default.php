@@ -353,7 +353,7 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Old order product from basket
 	 * @param string $productId Unique ID of the product item that belongs to the order product
-	 * @param integer $position Position of the old order product in the basket
+	 * @param integer $quantity Number of products to add to the basket
 	 * @param array $options Associative list of options
 	 * @param string $warehouse Warehouse code for retrieving the stock level
 	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
@@ -395,7 +395,7 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $product Old order product from basket
 	 * @param MShop_Product_Item_Interface $productItem Product item that belongs to the order product
-	 * @param integer $quantity New order quantity
+	 * @param integer $quantity New product quantity
 	 * @param integer $position Position of the old order product in the basket
 	 * @param array Associative list of options
 	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
