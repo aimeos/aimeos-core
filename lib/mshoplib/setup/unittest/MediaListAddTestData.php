@@ -145,7 +145,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -180,7 +180,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$urls = array();
 		foreach( $testdata['media/list'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) == false ) {
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 

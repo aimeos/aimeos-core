@@ -186,7 +186,7 @@ class MShop_Plugin_Provider_Order_Autofill
 
 		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
 
-		if( !isset( $services[$type] ) && $this->_getConfigValue( 'autofill.delivery', false ) == true
+		if( !isset( $services[$type] ) && (bool) $this->_getConfigValue( 'autofill.delivery', false ) === true
 			&& ( ( $item = $this->_getServiceItem( $order, $type, $this->_getConfigValue( 'autofill.deliverycode' ) ) ) !== null
 			|| ( $item = $this->_getServiceItem( $order, $type ) ) !== null )
 		) {
@@ -196,7 +196,7 @@ class MShop_Plugin_Provider_Order_Autofill
 
 		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
 
-		if( !isset( $services[$type] ) && $this->_getConfigValue( 'autofill.payment', false ) == true
+		if( !isset( $services[$type] ) && (bool) $this->_getConfigValue( 'autofill.payment', false ) === true
 			&& ( ( $item = $this->_getServiceItem( $order, $type, $this->_getConfigValue( 'autofill.paymentcode' ) ) ) !== null
 			|| ( $item = $this->_getServiceItem( $order, $type ) ) !== null )
 		) {

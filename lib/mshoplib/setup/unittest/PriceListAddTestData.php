@@ -90,7 +90,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$codes = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref customer are set wrong "%1$s"', $dataset ) );
 			}
 

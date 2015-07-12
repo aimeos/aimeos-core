@@ -53,7 +53,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
-		if ( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
+		if ( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 

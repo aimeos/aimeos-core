@@ -84,7 +84,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 		$prodcode = array();
 		foreach( $testdata['product/stock'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos+1 ) ) == false ) {
+			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos+1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for prodid are set wrong "%1$s"', $dataset['prodid'] ) );
 			}
 
