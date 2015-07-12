@@ -22,7 +22,7 @@ class Client_Html_Factory
 	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
 	 * @param string $type Type of the client, e.g 'account/favorite' for Client_Html_Account_Favorite_Default
-	 * @param string $name Client name (default: "Default")
+	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Interface HTML client implementing Client_Html_Interface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
 	 */

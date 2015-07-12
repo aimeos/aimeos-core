@@ -22,7 +22,7 @@ class Client_Html_Basket_Related_Factory
 	 *
 	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
-	 * @param string $name Client name (default: "Default")
+	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Interface Filter part implementing Client_Html_Interface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
 	 */
