@@ -602,7 +602,7 @@ class MShop_Locale_Manager_Language_Default
 	public function createSearch( $default = false )
 	{
 		if ( $default === true ) {
-			return parent::_createSearch( 'locale.language' );
+			return $this->_createSearch( 'locale.language' );
 		}
 
 		return parent::createSearch();

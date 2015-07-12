@@ -214,7 +214,7 @@ class Client_Html_Checkout_Standard_Process_Default
 
 				if( ( $form = $provider->process( $orderItem, $view->param() ) ) === null )
 				{
-					$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
+					$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $serviceItem->getCode() );
 					throw new Client_Html_Exception( $msg );
 				}
 

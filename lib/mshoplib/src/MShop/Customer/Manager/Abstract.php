@@ -74,7 +74,7 @@ abstract class MShop_Customer_Manager_Abstract
 	public function createSearch($default = false)
 	{
 		if( $default === true ) {
-			return parent::_createSearch('customer');
+			return $this->_createSearch('customer');
 		}
 
 		return parent::createSearch();

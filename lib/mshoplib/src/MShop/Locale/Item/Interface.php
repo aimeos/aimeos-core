@@ -34,6 +34,14 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 
 
 	/**
+	 * Returns the list site IDs of the whole site subtree.
+	 *
+	 * @return array List of site IDs
+	 */
+	public function getSiteSubTree();
+
+
+	/**
 	 * Sets the identifier of the shop instance.
 	 *
 	 * @param integer ID of the shop instance.

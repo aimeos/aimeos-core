@@ -608,7 +608,7 @@ class MShop_Locale_Manager_Currency_Default
 	public function createSearch( $default = false )
 	{
 		if ( $default === true ) {
-			return parent::_createSearch( 'locale.currency' );
+			return $this->_createSearch( 'locale.currency' );
 		}
 
 		return parent::createSearch();

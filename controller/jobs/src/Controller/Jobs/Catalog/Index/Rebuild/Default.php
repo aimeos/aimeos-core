@@ -53,7 +53,13 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 		$context->getLocale()->setLanguageId( null );
 		$context->getLocale()->setCurrencyId( null );
 
+		$iface = 'MShop_Catalog_Manager_Index_Interface';
 		$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
+
+		if( !( $manager instanceof $iface ) ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+		}
+
 		$manager->rebuildIndex();
 		$manager->cleanupIndex( $timestamp );
 	}

@@ -151,7 +151,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setKeyParts( $keyparts )
 	{
-		$this->_keyparts = $keyparts;
+		$this->_keyparts = (int) $keyparts;
 	}
 
 

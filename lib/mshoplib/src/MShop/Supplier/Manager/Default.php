@@ -623,7 +623,7 @@ class MShop_Supplier_Manager_Default
 	public function createSearch($default = false)
 	{
 		if ($default) {
-			return parent::_createSearch('supplier');
+			return $this->_createSearch('supplier');
 		}
 
 		return parent::createSearch();

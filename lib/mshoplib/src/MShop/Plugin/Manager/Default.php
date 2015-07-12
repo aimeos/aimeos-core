@@ -152,7 +152,7 @@ class MShop_Plugin_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return parent::_createSearch('plugin');
+			return $this->_createSearch('plugin');
 		}
 
 		return parent::createSearch();

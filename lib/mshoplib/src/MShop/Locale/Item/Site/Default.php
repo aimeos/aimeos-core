@@ -43,7 +43,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getSiteId()
 	{
-		return (int) parent::getId();
+		return (int) $this->getId();
 	}
 
 

@@ -12,6 +12,7 @@
 class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 {
 	private $_context;
+	private $_arcavias;
 
 
 	/**

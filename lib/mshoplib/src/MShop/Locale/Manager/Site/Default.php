@@ -669,7 +669,7 @@ class MShop_Locale_Manager_Site_Default
 	public function createSearch( $default = false )
 	{
 		if ( $default === true ) {
-			$search = parent::_createSearch('locale.site');
+			$search = $this->_createSearch('locale.site');
 		} else {
 			$search = parent::createSearch();
 		}

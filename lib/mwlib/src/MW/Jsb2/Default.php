@@ -46,7 +46,7 @@ class MW_Jsb2_Default
 	 * Returns the list of URLs for packages files with given filter.
 	 *
 	 * @param string $type Specific filetypes to create output
-	 * @param strig $param URL version string with %s placeholder for the file time
+	 * @param strig $version URL version string with %s placeholder for the file time
 	 * @return array List of URLs for the package files
 	 */
 	public function getUrls( $type, $version = '?v=%s' )

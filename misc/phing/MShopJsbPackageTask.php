@@ -81,7 +81,7 @@ class MShopJsbPackageTask extends Task
 	 * Prints the message for the current task.
 	 *
 	 * @param string $msg Current message
-	 * @param integer $level Indent level of the message (default: 0 )
+	 * @param string $status Status string
 	 */
 	protected function _msg( $msg, $status = '' )
 	{
