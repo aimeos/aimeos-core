@@ -48,7 +48,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function main()
 	{
-		$result = $options = array();
+		$options = array();
 
 		if( !isset( $this->_file ) && count( $this->_filesets ) == 0 ) {
 			throw new BuildException( "Missing either a nested fileset or attribute 'file' set" );
@@ -179,7 +179,6 @@ class MShopConfigDocTask extends Task
 		}
 
 		$date = date( 'c' );
-		$keyprefix = $this->_keyprefix;
 		$wikiprefix = $this->_wikiprefix;
 		$prefixlen = strlen( $this->_keyprefix ) + 1;
 		$matches = $sections = array();
@@ -242,13 +241,15 @@ class MShopConfigDocTask extends Task
 			{
 				$data .= "\n== Description ==\n";
 
-				foreach( $list['long'] as $desc ) {
+				foreach( $list['long'] as $desc )
+				{
+					if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $desc ) ) === null ) {
+						throw new BuildException( 'Unable to compile link regex' );
+					}
+
 					$data .= "\n" . str_replace( array( '<', '>', '&' ), array( '&lt;', '&gt;', '&amp;' ), $desc );
 				}
 
-				if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $desc ) ) === null ) {
-					throw new BuildException( 'Unable to compile link regex' );
-				}
 			}
 
 			if( isset( $list['see'] ) )

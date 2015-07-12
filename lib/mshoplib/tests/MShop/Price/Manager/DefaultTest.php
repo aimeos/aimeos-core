@@ -248,7 +248,7 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		$item->setValue( '1.00' );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$lowest = $this->_object->getLowestPrice( array( $item ), 1, 'USD' );
+		$this->_object->getLowestPrice( array( $item ), 1, 'USD' );
 	}
 
 

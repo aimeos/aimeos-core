@@ -419,7 +419,6 @@ class MShop_Catalog_Manager_Index_Text_Default
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$context = $this->_getContext();
-		$locale = $context->getLocale();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );

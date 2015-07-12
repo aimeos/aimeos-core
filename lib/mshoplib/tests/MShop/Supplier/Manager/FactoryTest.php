@@ -28,13 +28,13 @@ class MShop_Supplier_Manager_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateManagerInvalidName()
 	{
 		$this->setExpectedException('MShop_Supplier_Exception');
-		$manager = MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
+		MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$manager = MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 }

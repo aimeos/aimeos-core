@@ -50,9 +50,6 @@ class Client_Html_Locale_Select_Currency_DefaultTest extends MW_Unittest_Testcas
 
 	public function testGetBody()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
-		$item = $manager->createItem();
-
 		$view = $this->_object->getView();
 		$view->selectCurrencyId = 'EUR';
 		$view->selectLanguageId = 'de';

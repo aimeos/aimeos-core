@@ -45,8 +45,6 @@ class MShopJsbPackageTask extends Task
 
 		$this->_msg( 'Generating JSB2 packages' );
 
-		$abslen = strlen( $this->_projectPath );
-
 		foreach( $this->_arcavias->getCustomPaths( 'client/extjs' ) as $base => $paths )
 		{
 			foreach( $paths as $path )

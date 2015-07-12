@@ -89,23 +89,20 @@ class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 
 	public function testAddControllerDecoratorsInvalidDomain()
 	{
-		$decorators = array( 'Test' );
 		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
 		$this->setExpectedException('Controller_Jobs_Exception');
-		Controller_Jobs_Common_Factory_TestAbstract::addControllerDecoratorsPublic( $this->_context, $this->_arcavias,
-			$cntl, '' );
+		Controller_Jobs_Common_Factory_TestAbstract::addControllerDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, '' );
 	}
 
 
 	public function testAddControllerDecoratorsExcludes()
 	{
-		$decorators = array( 'Test' );
 		$this->_context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array('test') );
 		$this->_context->getConfig()->set( 'controller/jobs/common/decorators/default', array('test') );
 
 		$this->setExpectedException('Controller_Jobs_Exception');
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+		Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 	}
 }
 

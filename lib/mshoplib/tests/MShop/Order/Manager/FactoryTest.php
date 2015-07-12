@@ -28,13 +28,13 @@ class MShop_Order_Manager_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateManagerInvalidName()
 	{
 		$this->setExpectedException('MShop_Order_Exception');
-		$manager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext(), '%^&');
+		MShop_Order_Manager_Factory::createManager(TestHelper::getContext(), '%^&');
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext(), 'test' );
+		MShop_Order_Manager_Factory::createManager( TestHelper::getContext(), 'test' );
 	}
 }

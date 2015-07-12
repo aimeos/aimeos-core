@@ -343,7 +343,7 @@ class MShop_Service_Provider_Delivery_Default
 		$this->_appendChildCDATA( 'type', $invoice->getType(), $dom, $orderitem );
 		$this->_appendChildCDATA( 'datetime', $pdate, $dom, $orderitem );
 
-		if ( $invoice->getRelatedId() != null ) {
+		if ( $invoice->getRelatedId() !== null ) {
 			$this->_appendChildCDATA( 'relatedid', $invoice->getRelatedId(), $dom, $orderitem );
 		}
 

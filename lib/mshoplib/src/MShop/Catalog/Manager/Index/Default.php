@@ -31,7 +31,7 @@ class MShop_Catalog_Manager_Index_Default
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
 
-		$this->_subManagers = $this->_getSubManagers();
+		$this->_submanagers = $this->_getSubManagers();
 	}
 
 
@@ -80,7 +80,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		if( empty( $ids ) ) { return; }
 
-		foreach( $this->_subManagers as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
 	}
@@ -287,7 +287,7 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 
-		foreach( $this->_subManagers as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -300,7 +300,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach ( $this->_subManagers as $submanager ) {
+		foreach ( $this->_submanagers as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
 	}
@@ -314,7 +314,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanupIndex( $timestamp )
 	{
-		foreach ( $this->_subManagers as $submanager ) {
+		foreach ( $this->_submanagers as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -516,7 +516,7 @@ class MShop_Catalog_Manager_Index_Default
 
 				$this->deleteItems( array_keys( $products ) );
 
-				foreach ( $this->_subManagers as $submanager ) {
+				foreach ( $this->_submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
 				}
 
@@ -612,7 +612,7 @@ class MShop_Catalog_Manager_Index_Default
 
 		// Execute only the sub-managers which correspond to one of the given domains
 		// This will prevent adding product names of sub-products which messes up the sortation
-		foreach( $this->_subManagers as $domain => $submanager )
+		foreach( $this->_submanagers as $domain => $submanager )
 		{
 			if( in_array( $domain, $domains ) ) {
 				$submanagers[$domain] = $submanager;

@@ -142,7 +142,7 @@ class MShop_Text_Item_Default
 	{
 		if ( $text == $this->getContent() ) { return; }
 
-		@ini_set( 'mbstring.substitute_character', 'none' );
+		ini_set( 'mbstring.substitute_character', 'none' );
 		$this->_values['content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
 		$this->setModified();
 	}

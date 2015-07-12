@@ -531,10 +531,10 @@ class Controller_Frontend_Basket_Default
 			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 			$basket = $manager->getSession();
 
-			$errors = $this->_copyAddresses( $basket, $errors, $localeKey );
-			$errors = $this->_copyServices( $basket, $errors );
-			$errors = $this->_copyProducts( $basket, $errors, $localeKey );
-			$errors = $this->_copyCoupons( $basket, $errors, $localeKey );
+			$this->_copyAddresses( $basket, $errors, $localeKey );
+			$this->_copyServices( $basket, $errors );
+			$this->_copyProducts( $basket, $errors, $localeKey );
+			$this->_copyCoupons( $basket, $errors, $localeKey );
 
 			$manager->setSession( $basket );
 		}

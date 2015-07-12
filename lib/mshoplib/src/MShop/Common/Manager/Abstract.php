@@ -765,8 +765,7 @@ abstract class MShop_Common_Manager_Abstract
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ONE, array $plugins = array() )
 	{
-		$joins = $cond = array();
-		$sep = $this->_getKeySeparator();
+		$joins = array();
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
 		$siteIds = $this->_getSiteIds( $sitelevel );
