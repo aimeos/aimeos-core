@@ -7,7 +7,6 @@
 
 class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 {
-	private $_mock;
 	private $_object;
 	private $_context;
 

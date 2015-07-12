@@ -7,19 +7,6 @@
 
 class Controller_Frontend_Catalog_FactoryTest extends MW_Unittest_Testcase
 {
-	private $_object;
-
-
-	protected function setUp()
-	{
-	}
-
-
-	protected function tearDown()
-	{
-	}
-
-
 	public function testCreateController()
 	{
 		$target = 'Controller_Frontend_Catalog_Interface';

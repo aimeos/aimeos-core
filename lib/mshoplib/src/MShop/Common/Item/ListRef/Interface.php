@@ -43,9 +43,10 @@ interface MShop_Common_Item_ListRef_Interface
 	public function getRefItems( $domain, $type = null, $listtype = null );
 
 	/**
-	 * Returns the localized name of the item or the internal label if no name is available.
+	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
-	 * @return string Name or label of the item
+	 * @param string $type Text type to be returned
+	 * @return string Specified text type or label of the item
 	 */
-	public function getName();
+	public function getName( $type = 'name' );
 }

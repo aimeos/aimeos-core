@@ -78,7 +78,6 @@ class Client_Html_Checkout_Standard_Order_Default
 	 * @category Developer
 	 */
 	private $_subPartNames = array( 'address' );
-	private $_cache;
 
 
 	/**

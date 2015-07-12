@@ -19,7 +19,6 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	private $_listItems;
 	private $_refItems;
 	private $_sortedLists = array();
-	private $_sortedRefs = array();
 
 
 	/**
@@ -161,6 +160,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	/**
 	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
+	 * @param string $type Text type to be returned
 	 * @return string Specified text type or label of the item
 	 */
 	public function getName( $type = 'name' )

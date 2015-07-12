@@ -11,7 +11,6 @@
  */
 class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	private $_fixtures = array( );
 	private $_object = null;
 	private $_editor = '';
 

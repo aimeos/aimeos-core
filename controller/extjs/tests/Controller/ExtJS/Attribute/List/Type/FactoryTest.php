@@ -8,30 +8,6 @@
 
 class Controller_ExtJS_Attribute_List_Type_FactoryTest extends MW_Unittest_Testcase
 {
-	private $_object;
-
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
-	{
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
-	}
-
-
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Attribute_List_Type_Factory::createController( TestHelper::getContext() );

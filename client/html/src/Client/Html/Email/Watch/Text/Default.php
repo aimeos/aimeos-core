@@ -97,8 +97,6 @@ class Client_Html_Email_Watch_Text_Default
 	 */
 	private $_subPartNames = array( 'salutation', 'intro', 'detail', 'outro' );
 
-	private $_cache;
-
 
 	/**
 	 * Returns the HTML code for insertion into the body.

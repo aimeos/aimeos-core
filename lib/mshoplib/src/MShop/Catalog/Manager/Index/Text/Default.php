@@ -432,7 +432,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		{
 			foreach( $items as $item )
 			{
-				$parentId = $item->getId(); // array id != $item->getId() for sub-products
+				$parentId = $item->getId(); //  id is not $item->getId() for sub-products
 
 				$listTypes = array();
 				foreach( $item->getListItems( 'text' ) as $listItem ) {

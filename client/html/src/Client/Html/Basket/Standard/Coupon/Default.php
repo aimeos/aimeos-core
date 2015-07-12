@@ -52,7 +52,6 @@ class Client_Html_Basket_Standard_Coupon_Default
 	 */
 	private $_subPartPath = 'client/html/basket/standard/coupon/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

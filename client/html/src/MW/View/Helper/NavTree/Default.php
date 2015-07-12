@@ -70,7 +70,7 @@ class MW_View_Helper_NavTree_Default
 		$params['f_name'] = $enc->url( $item->getName( 'url' ) );
 		$params['f_catid'] = $id;
 
-		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
+		$url = $enc->attr( $this->_getView()->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
 
 		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" >';
 		$output .= '<a class="cat-item" href="' . $url . '"><div class="media-list">';

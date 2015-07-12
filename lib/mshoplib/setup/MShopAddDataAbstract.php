@@ -50,7 +50,6 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function _mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
-		// $this->_process();
 	}
 
 

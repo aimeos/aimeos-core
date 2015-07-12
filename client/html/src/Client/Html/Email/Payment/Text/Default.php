@@ -108,8 +108,6 @@ class Client_Html_Email_Payment_Text_Default
 	 */
 	private $_subPartNames = array( 'salutation', 'intro', 'summary', 'outro', 'legal' );
 
-	private $_cache;
-
 
 	/**
 	 * Returns the HTML code for insertion into the body.

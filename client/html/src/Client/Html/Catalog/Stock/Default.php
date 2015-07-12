@@ -192,6 +192,17 @@ class Client_Html_Catalog_Stock_Default
 
 
 	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output

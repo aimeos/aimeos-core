@@ -13,7 +13,6 @@ class Client_Html_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
 {
 	private $_client;
 	private $_object;
-	private $_view;
 
 
 	/**

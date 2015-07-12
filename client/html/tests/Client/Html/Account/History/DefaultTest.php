@@ -8,7 +8,6 @@
 class Client_Html_Account_History_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-	private $_standard;
 	private $_context;
 
 

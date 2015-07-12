@@ -17,7 +17,6 @@ return array (
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'product/promotion' => array( 'domain' => 'product', 'code' => 'promotion', 'label' => 'Promotion', 'status' => 1 ),
-// 		'product/favorite' => array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
 
 		'text/unittype1' => array( 'domain' => 'text', 'code' => 'unittype1', 'label' => 'Unit type 1', 'status' => 1 ),
 		'text/unittype2' => array( 'domain' => 'text', 'code' => 'unittype2', 'label' => 'Unit type 2', 'status' => 1 ),

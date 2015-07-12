@@ -8,20 +8,6 @@
 
 class Controller_ExtJS_Plugin_FactoryTest extends MW_Unittest_Testcase
 {
-	private $_object;
-
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
-	{
-	}
-
-
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.

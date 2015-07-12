@@ -90,7 +90,6 @@ class Client_Html_Catalog_Stage_Default
 	private $_expire;
 	private $_params;
 	private $_cache;
-	private $_view;
 
 
 	/**
@@ -391,7 +390,7 @@ class Client_Html_Catalog_Stage_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_view ) )
+		if( !isset( $this->_cache ) )
 		{
 			$params = $this->_getParamStage( $view );
 
@@ -446,12 +445,12 @@ class Client_Html_Catalog_Stage_Default
 
 			$view->stageParams = $params;
 
-			$this->_view = $view;
+			$this->_cache = $view;
 		}
 
 		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
-		return $this->_view;
+		return $this->_cache;
 	}
 }

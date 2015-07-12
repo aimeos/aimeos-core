@@ -451,7 +451,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		{
 			foreach( $items as $id => $item )
 			{
-				$parentId = $item->getId(); // $id != $item->getId() for sub-products
+				$parentId = $item->getId(); // $id is not $item->getId() for sub-products
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
 				if( !array_key_exists( $parentId, $listItems ) ) { continue; }

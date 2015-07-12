@@ -52,7 +52,6 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/standard/summary/option/terms/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

@@ -52,7 +52,6 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/standard/order/address/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

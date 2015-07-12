@@ -52,7 +52,6 @@ class Client_Html_Account_Watch_Default
 	 */
 	private $_subPartPath = 'client/html/account/watch/default/subparts';
 	private $_subPartNames = array();
-	private $_typeItem;
 	private $_cache;
 
 

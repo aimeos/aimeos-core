@@ -29,7 +29,7 @@ class MShopJsbPackageTask extends Task
 
 		$this->_arcavias = new Arcavias();
 
-		$incPath = $this->_arcavias->getIncludePaths( 'lib' );
+		$incPath = $this->_arcavias->getIncludePaths();
 		$incPath[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $incPath ) );
 

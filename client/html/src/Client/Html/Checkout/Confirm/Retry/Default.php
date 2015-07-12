@@ -52,7 +52,6 @@ class Client_Html_Checkout_Confirm_Retry_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/confirm/retry/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

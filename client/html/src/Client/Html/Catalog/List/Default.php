@@ -111,7 +111,6 @@ class Client_Html_Catalog_List_Default
 	private $_tags = array();
 	private $_expire;
 	private $_cache;
-	private $_view;
 
 
 	/**
@@ -358,7 +357,7 @@ class Client_Html_Catalog_List_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_view ) )
+		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
 			$config = $context->getConfig();
@@ -504,12 +503,12 @@ class Client_Html_Catalog_List_Default
 			$view->listProductSort = $view->param( 'f_sort', 'relevance' );
 			$view->listProductItems = $products;
 
-			$this->_view = $view;
+			$this->_cache = $view;
 		}
 
 		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
-		return $this->_view;
+		return $this->_cache;
 	}
 }

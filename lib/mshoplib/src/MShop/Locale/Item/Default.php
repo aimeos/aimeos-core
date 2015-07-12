@@ -116,7 +116,6 @@ class MShop_Locale_Item_Default
 		$this->_siteSubTree = array( (int) $id );
 
 		/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
-		// $this->_site = null;
 
 		$this->setModified();
 	}

@@ -7,18 +7,6 @@
 
 class Controller_Frontend_Service_FactoryTest extends MW_Unittest_Testcase
 {
-	private $_object;
-
-
-	protected function setUp()
-	{
-	}
-
-
-	protected function tearDown()
-	{
-	}
-
 	public function testCreateControllerInvalidImplementation()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Exception' );

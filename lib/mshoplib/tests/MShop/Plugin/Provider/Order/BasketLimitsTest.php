@@ -13,7 +13,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	private $_object;
 	private $_products;
 	private $_order;
-	private $_expensiveAddProduct;
 
 
 	/**
@@ -24,7 +23,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager('base');
 

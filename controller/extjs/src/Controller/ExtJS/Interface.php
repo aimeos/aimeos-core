@@ -17,6 +17,22 @@
 interface Controller_ExtJS_Interface
 {
 	/**
+	 * Executes tasks before processing the items.
+	 *
+	 * @param stdClass $params Associative list of parameters
+	 * @return array Associative list with success value
+	 */
+	public function init( stdClass $params );
+
+	/**
+	 * Executes tasks after processing the items.
+	 *
+	 * @param stdClass $params Associative list of parameters
+	 * @return array Associative list with success value
+	 */
+	public function finish( stdClass $params );
+
+	/**
 	 * Deletes a list of an items.
 	 *
 	 * @param stdClass $params Associative array containing the required values

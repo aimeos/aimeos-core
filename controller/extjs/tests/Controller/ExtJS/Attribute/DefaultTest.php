@@ -372,6 +372,8 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 
 	public function testFinish()
 	{
-		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+		$result = $this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+
+		$this->assertEquals( array( 'success' => true ), $result );
 	}
 }

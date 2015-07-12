@@ -52,7 +52,6 @@ class Client_Html_Common_Summary_Detail_Default
 	 */
 	private $_subPartPath = 'client/html/common/summary/detail/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

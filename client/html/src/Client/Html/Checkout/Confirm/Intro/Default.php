@@ -52,7 +52,6 @@ class Client_Html_Checkout_Confirm_Intro_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/confirm/intro/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**

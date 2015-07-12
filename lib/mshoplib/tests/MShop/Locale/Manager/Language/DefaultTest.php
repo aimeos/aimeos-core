@@ -12,7 +12,6 @@
 class MShop_Locale_Manager_Language_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-	private $_item;
 
 
 	protected function setUp()

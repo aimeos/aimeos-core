@@ -64,8 +64,6 @@ class Client_Html_Checkout_Standard_Summary_Option_Default
 	 */
 	private $_subPartNames = array( 'terms' );
 
-	private $_cache;
-
 
 	/**
 	 * Returns the HTML code for insertion into the body.
