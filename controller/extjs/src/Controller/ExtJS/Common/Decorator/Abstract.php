@@ -15,6 +15,7 @@
  * @subpackage ExtJS
  */
 abstract class Controller_ExtJS_Common_Decorator_Abstract
+	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Decorator_Interface
 {
 	private $_context = null;

@@ -21,4 +21,9 @@ class Controller_ExtJS_Common_Decorator_Example
 	public function additionalMethod()
 	{
 	}
+
+
+	protected function _getManager()
+	{
+	}
 }
