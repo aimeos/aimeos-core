@@ -31,7 +31,7 @@ interface Client_Html_Interface
 	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return string String including HTML tags for the header
+	 * @return string|null String including HTML tags for the header on error
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null );
 
