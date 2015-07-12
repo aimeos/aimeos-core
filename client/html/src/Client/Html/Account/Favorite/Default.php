@@ -52,7 +52,6 @@ class Client_Html_Account_Favorite_Default
 	 */
 	private $_subPartPath = 'client/html/account/favorite/default/subparts';
 	private $_subPartNames = array();
-	private $_typeItem;
 	private $_cache;
 
 

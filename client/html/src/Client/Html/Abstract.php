@@ -17,10 +17,8 @@
 abstract class Client_Html_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
-	private $_tags;
 	private $_view;
 	private $_cache;
-	private $_clients;
 	private $_context;
 	private $_subclients;
 	private $_templatePaths;
@@ -590,10 +588,11 @@ abstract class Client_Html_Abstract
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
-	 * @todo 2015.03 Add $tags and $expire parameters
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		return $view;
 	}

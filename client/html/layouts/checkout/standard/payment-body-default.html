@@ -89,7 +89,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
 	<div class="button-group">
-		<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
+		<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Previous' ), $enc::TRUST ); ?></a>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Next' ), $enc::TRUST ); ?></button>
 	</div>
 </section>
