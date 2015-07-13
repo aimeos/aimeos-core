@@ -57,7 +57,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 		$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
 
 		if( !( $manager instanceof $iface ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new Controller_Jobs_Exception( sprintf( ' Object is not of required type "%1$s" ', $iface ) );
 		}
 
 		$manager->rebuildIndex();
