@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:55+0200\n"
+"POT-Creation-Date: 2015-07-13 21:17+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/p/aimeos-core/language/sr/)\n"
@@ -368,8 +368,8 @@ msgstr ""
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:448
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:657
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:447
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:656
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr ""
@@ -793,7 +793,7 @@ msgstr ""
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:826
+#: src/MShop/Common/Manager/Abstract.php:825
 #: src/MShop/Locale/Manager/Default.php:899
 #, php-format
 msgid "Total results value not found"

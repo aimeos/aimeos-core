@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:55+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"POT-Creation-Date: 2015-07-13 21:17+0200\n"
+"PO-Revision-Date: 2015-07-13 19:18+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/p/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:60
+#, php-format
+msgid " Object is not of required type \"%1$s\" "
+msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:28
 msgid "Admin interface jobs"
@@ -73,7 +78,7 @@ msgstr "Denetleyici yolu boş"
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:39
 msgid "Creates a product site map for search engines"
-msgstr ""
+msgstr "Arama motorları için bir ürün site haritası oluşturur"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:39
 msgid "Creates bought together product suggestions"
@@ -117,16 +122,16 @@ msgstr "Yönetici arayüzü tarafından oluşturulan işleri yürütür, örn. m
 
 #: src/Controller/Jobs/Product/Export/Default.php:39
 msgid "Exports all available products"
-msgstr ""
+msgstr "Mevcut tüm ürünleri dışa aktarır"
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:282
 #, php-format
 msgid "Failed products during import: %1$d"
-msgstr ""
+msgstr "İçe aktarma sırasında başarısız olan ürünler: %1$d"
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:39
 msgid "Imports new and updates existing products from CSV files"
-msgstr ""
+msgstr "CSV dosyasından yeni ürün içe aktarır veya mevcut ürünleri günceller"
 
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
 #: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
@@ -220,11 +225,11 @@ msgstr "Sipariş dağıtım hizmetlerini işleme tabi tut"
 
 #: src/Controller/Jobs/Product/Export/Default.php:28
 msgid "Product export"
-msgstr ""
+msgstr "Ürün dışa aktarma"
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:28
 msgid "Product import CSV"
-msgstr ""
+msgstr "Ürün içe aktarma CSV"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:33
 msgid "Product notification e-mails"
@@ -232,7 +237,7 @@ msgstr "Ürün bildirim e-mailleri"
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:28
 msgid "Product site map"
-msgstr ""
+msgstr "Ürün site haritası"
 
 #: src/Controller/Jobs/Product/Bought/Default.php:28
 msgid "Products bought together"
@@ -262,7 +267,7 @@ msgstr "Ödenmemiş siparişleri kaldırır"
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:255
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr ""
+msgstr "Gerekli haritalama anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:44
 msgid "Sends e-mails for watched products"
@@ -283,7 +288,7 @@ msgstr "ERP sistemine veya lojistik ortağa ödenen siparişleri gönderir"
 #: src/Controller/Jobs/Abstract.php:92
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr ""
+msgstr "Şablon \"%1$s\" mevcut değil"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format
@@ -298,19 +303,19 @@ msgstr "Metot \"%1$s\" çağrılamıyor"
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:437
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" kodlu ürün içe aktarılamıyor: %2$s"
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:286
 #, php-format
 msgid "Unable to move imported file"
-msgstr ""
+msgstr "İçe aktarılan dosya taşınamıyor"
 
 #: src/Controller/Jobs/Product/Export/Default.php:409
 #, php-format
 msgid "aimeos-products-%d.xml"
-msgstr ""
+msgstr "aimeos-products-%d.xml"
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:403
 #, php-format
 msgid "aimeos-sitemap-%d.xml"
-msgstr ""
+msgstr "aimeos-sitemap-%d.xml"

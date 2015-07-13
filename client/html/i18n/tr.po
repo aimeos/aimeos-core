@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:55+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-07-13 21:17+0200\n"
+"PO-Revision-Date: 2015-07-12 22:09+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/p/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,8 +23,8 @@ msgstr ""
 #, php-format
 msgid "%1$d article"
 msgid_plural "%1$d articles"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$d makale"
+msgstr[1] "%1$d articles"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -167,7 +167,7 @@ msgstr "+ Nakliye"
 #: layouts/common/partials/address-default.html:127
 #: layouts/common/partials/address-default.html:131
 msgid "+1 123 456 7890"
-msgstr ""
+msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #: layouts/common/partials/price-default.html:26
@@ -231,12 +231,9 @@ msgstr "En az bir teslimat adresi bölümü eksik veya geçersiz"
 
 #: layouts/catalog/filter/attribute-body-default.html:54
 msgid "Attributes"
-msgstr ""
+msgstr "Nitelikler"
 
 #: layouts/checkout/standard/summary-body-default.html:17
-#: layouts/checkout/standard/payment-body-default.html:92
-#: layouts/checkout/standard/delivery-body-default.html:91
-#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/basket/standard/body-default.html:42
 msgid "Back"
 msgstr "Geri"
@@ -265,7 +262,7 @@ msgstr "Fatura adresi bölüm \"%1$s\" eksik"
 
 #: layouts/catalog/detail/bundle-body-default.html:24
 msgid "Bundled products"
-msgstr ""
+msgstr "Sarılmış ürünler"
 
 #: layouts/checkout/standard/summary-body-default.html:18
 msgid "Buy now"
@@ -273,7 +270,7 @@ msgstr "Şimdi satın al"
 
 #: layouts/catalog/filter/tree-body-default.html:17
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriler"
 
 #: src/Client/Html/Catalog/Filter/Tree/Default.php:251
 #, php-format
@@ -316,13 +313,13 @@ msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Class \"%1$s\" \"%2$s\" uygulamıyor"
 
 #: src/Client/Html/Common/Factory/Abstract.php:167
-#: src/Client/Html/Abstract.php:319
+#: src/Client/Html/Abstract.php:317
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Client/Html/Common/Factory/Abstract.php:161
-#: src/Client/Html/Abstract.php:313 src/Client/Html/Factory.php:51
+#: src/Client/Html/Abstract.php:311 src/Client/Html/Factory.php:51
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Class \"%1$s\" mevcut değil"
@@ -335,12 +332,12 @@ msgstr "Class \"%1$s\" bulunamadı"
 #: src/Client/Html/Factory.php:32
 #, php-format
 msgid "Client HTML type is empty"
-msgstr ""
+msgstr "Müşteri HTML türü boş"
 
 #: src/Client/Html/Factory.php:38
 #, php-format
 msgid "Client type \"%1$s\" must consist of two parts separated by \"/\""
-msgstr ""
+msgstr "\"%1$s\" müşteri türü \"/\" ile ayrılmış şekilde iki parçadan oluşmalıdır"
 
 #: layouts/account/history/order-body-default.html:21
 msgid "Close"
@@ -449,7 +446,7 @@ msgstr "* ile işaretlenmiş alanlar zorunludur"
 
 #: layouts/catalog/filter/body-default.html:98
 msgid "Filter"
-msgstr ""
+msgstr "Filtre"
 
 #: layouts/common/partials/address-eu.html:52
 #: layouts/common/partials/address-eu.html:53
@@ -461,7 +458,7 @@ msgstr "Ad"
 #: layouts/common/partials/address-eu.html:119
 #: layouts/common/partials/address-default.html:119
 msgid "GB999999973"
-msgstr ""
+msgstr "GB999999973"
 
 #: layouts/catalog/filter/search-body-default.html:107
 msgid "Go"
@@ -531,7 +528,7 @@ msgstr "Dahil indirimler"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "%1$s\" class adında geçersiz karakterler"
 
-#: src/Client/Html/Abstract.php:276 src/Client/Html/Abstract.php:304
+#: src/Client/Html/Abstract.php:274 src/Client/Html/Abstract.php:302
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "\"%1$s\" istemci adında geçersiz karakterler"
@@ -539,7 +536,7 @@ msgstr "\"%1$s\" istemci adında geçersiz karakterler"
 #: src/Client/Html/Factory.php:44
 #, php-format
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "\"%2$s\" içinde \"%1$s\" müşteri adında geçersiz karakterler"
 
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
@@ -554,7 +551,7 @@ msgstr "Geçersiz domain \"%1$s\""
 #: src/Client/Html/Factory.php:57
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Geçersiz fabrika \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Process/Default.php:217
 #, php-format
@@ -600,19 +597,19 @@ msgstr "<span class=\"searchstring\">\"%1$s\"</span> için hiç bir madde buluna
 #: src/Client/Html/Checkout/Confirm/Default.php:267
 #, php-format
 msgid "No service for code \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" kodu için hiçbir hizmet bulunamadı"
 
-#: src/Client/Html/Abstract.php:496
+#: src/Client/Html/Abstract.php:494
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için hiçbir tür öğesi bulunamadı"
 
-#: src/Client/Html/Abstract.php:51
+#: src/Client/Html/Abstract.php:49
 #, php-format
 msgid "No view available"
 msgstr "Hiçbir görünüm mevcut değil"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:210
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Kupon kodu sayısı limiti aşıyor"
@@ -661,7 +658,7 @@ msgstr "Sipariş geçmişi"
 
 #: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order status"
-msgstr ""
+msgstr "Sipariş durumu"
 
 #: src/Client/Html/Account/History/Order/Default.php:261
 #, php-format
@@ -683,7 +680,7 @@ msgstr "Toplam %2$d sayfadan %1$d.'si"
 
 #: layouts/checkout/standard/process-body-default.html:111
 msgid "Pay now"
-msgstr ""
+msgstr "Şimdi öde"
 
 #: layouts/checkout/standard/process-body-default.html:74
 #: layouts/account/history/list-body-default.html:106
@@ -703,7 +700,7 @@ msgstr "Ödeme durumu"
 msgid "Pinned products"
 msgstr "Sabitlenmiş ürünler"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:180
 msgid "Please accept the terms and conditions"
 msgstr "Lütfen hüküm ve şartları kabul edin"
 
@@ -725,7 +722,7 @@ msgstr "Lütfen en az üç karakter girin"
 
 #: layouts/checkout/standard/process-body-default.html:78
 msgid "Please enter your payment details"
-msgstr ""
+msgstr "Lütfen ödeme detaylarını giriniz"
 
 #: layouts/checkout/standard/process-body-default.html:91
 #: layouts/catalog/detail/basket-selection-body-default.html:88
@@ -739,6 +736,9 @@ msgstr "Lütfen seçiniz"
 msgid "Postal code"
 msgstr "Posta kodu"
 
+#: layouts/checkout/standard/payment-body-default.html:92
+#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
 msgstr "Önceki"
@@ -755,7 +755,7 @@ msgstr "Devam et"
 
 #: layouts/checkout/standard/process-body-default.html:76
 msgid "Processing the payment failed"
-msgstr ""
+msgstr "Ödeme işleme başarısız oldu"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
@@ -763,7 +763,7 @@ msgstr "İlgilenebileceğiniz diğer ürünler"
 
 #: layouts/catalog/detail/additional-property-body-default.html:14
 msgid "Properties"
-msgstr ""
+msgstr "Özellikler"
 
 #: layouts/common/summary/detail-body-default.html:107
 #: layouts/email/common/text-summary-detail-body-default.html:72
@@ -791,7 +791,7 @@ msgstr "Selamlama"
 
 #: layouts/catalog/filter/search-body-default.html:105
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: layouts/catalog/list/head-body-default.html:48
 #, php-format
@@ -799,8 +799,8 @@ msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d arti
 msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<span class=\"searchstring\">\"%1$s\"</span> için arama sonuçları (%2$d sonuç)"
+msgstr[1] "<span class=\"searchstring\">\"%1$s\"</span> için arama sonuçları (%2$d sonuç)"
 
 #: layouts/common/partials/address-eu.html:102
 #: layouts/common/partials/address-default.html:102
@@ -895,7 +895,7 @@ msgstr "Toplam"
 msgid "Telephone"
 msgstr "Telefon"
 
-#: src/Client/Html/Abstract.php:468
+#: src/Client/Html/Abstract.php:466
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Şablon \"%1$s\" mevcut değil"
@@ -1020,12 +1020,12 @@ msgstr "İki hafta"
 msgid "Unable to call method \"%1$s\""
 msgstr "Metot \"%1$s\" çağrılamıyor"
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:193
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Müşteri \"%1$s\" için adresler kaydedilemiyor: %2$s"
 
-#: src/Client/Html/Abstract.php:563
+#: src/Client/Html/Abstract.php:561
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr "önbellek girdisi ayarlanamadı: %1$s"
@@ -1107,7 +1107,7 @@ msgstr "Şimdi bir sonraki adıma yönlendirileceksiniz"
 
 #: layouts/catalog/filter/attribute-body-default.html:57
 msgid "Your choice"
-msgstr ""
+msgstr "Seçiminiz"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -1142,7 +1142,7 @@ msgstr "adres"
 
 #: layouts/catalog/filter/attribute-body-default.html:70
 msgid "clear all"
-msgstr ""
+msgstr "hepsini temizle"
 
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: layouts/common/summary/service-body-default.html:16
@@ -1172,7 +1172,7 @@ msgstr "yeni adres"
 
 #: layouts/catalog/detail/basket-attribute-body-default.html:52
 msgid "none"
-msgstr ""
+msgstr "hiçbiri"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
@@ -1190,7 +1190,7 @@ msgstr "ödeme"
 #: src/Client/Html/Checkout/Standard/Process/Default.php:12
 #, php-format
 msgid "process"
-msgstr ""
+msgstr "işlem"
 
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56

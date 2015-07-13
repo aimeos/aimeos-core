@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:52+0200\n"
+"POT-Creation-Date: 2015-07-13 21:14+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -449,8 +449,8 @@ msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:448
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:657
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:447
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:656
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr ""
@@ -940,7 +940,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Abstract.php:826
+#: src/MShop/Common/Manager/Abstract.php:825
 #: src/MShop/Locale/Manager/Default.php:899
 #, php-format
 msgid "Total results value not found"

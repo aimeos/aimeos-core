@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:55+0200\n"
-"PO-Revision-Date: 2015-07-09 22:36+0000\n"
+"POT-Creation-Date: 2015-07-13 21:17+0200\n"
+"PO-Revision-Date: 2015-07-13 19:22+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/p/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -236,9 +236,6 @@ msgid "Attributes"
 msgstr "Attribute"
 
 #: layouts/checkout/standard/summary-body-default.html:17
-#: layouts/checkout/standard/payment-body-default.html:92
-#: layouts/checkout/standard/delivery-body-default.html:91
-#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/basket/standard/body-default.html:42
 msgid "Back"
 msgstr "Zurück"
@@ -318,13 +315,13 @@ msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:167
-#: src/Client/Html/Abstract.php:319
+#: src/Client/Html/Abstract.php:317
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:161
-#: src/Client/Html/Abstract.php:313 src/Client/Html/Factory.php:51
+#: src/Client/Html/Abstract.php:311 src/Client/Html/Factory.php:51
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Die Klasse \"%1$s\" wurde nicht gefunden"
@@ -533,7 +530,7 @@ msgstr "Enthaltene Rabatte"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/Client/Html/Abstract.php:276 src/Client/Html/Abstract.php:304
+#: src/Client/Html/Abstract.php:274 src/Client/Html/Abstract.php:302
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
@@ -604,17 +601,17 @@ msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leide
 msgid "No service for code \"%1$s\" found"
 msgstr "Es wurde kein Dienst für den Code \"%1$s\" gefunden"
 
-#: src/Client/Html/Abstract.php:496
+#: src/Client/Html/Abstract.php:494
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr "Für das Item \"%1$s/%2$s\" in \"%3$s\" wurde kein Typ gefunden"
 
-#: src/Client/Html/Abstract.php:51
+#: src/Client/Html/Abstract.php:49
 #, php-format
 msgid "No view available"
 msgstr "Es ist kein View vorhanden"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:210
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Die Anzahl der Gutscheincodes überschreitet das vorgegebene Limit"
@@ -705,7 +702,7 @@ msgstr "Zahlungsstatus"
 msgid "Pinned products"
 msgstr "Merkliste"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:180
 msgid "Please accept the terms and conditions"
 msgstr "Bitte akzeptieren Sie die AGBs"
 
@@ -741,9 +738,12 @@ msgstr "Bitte wählen"
 msgid "Postal code"
 msgstr "PLZ"
 
+#: layouts/checkout/standard/payment-body-default.html:92
+#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
-msgstr "Vorher"
+msgstr "Vorherige Seite"
 
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:108
@@ -897,7 +897,7 @@ msgstr "Summe"
 msgid "Telephone"
 msgstr "Telefon"
 
-#: src/Client/Html/Abstract.php:468
+#: src/Client/Html/Abstract.php:466
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
@@ -1022,12 +1022,12 @@ msgstr "Zwei Wochen"
 msgid "Unable to call method \"%1$s\""
 msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:193
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Die Adresse des Kunden \"%1$s\" konnte nicht gespeichert werden: %2$s"
 
-#: src/Client/Html/Abstract.php:563
+#: src/Client/Html/Abstract.php:561
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr "Im Cache konnte kein Eintrag werden: %1$s"

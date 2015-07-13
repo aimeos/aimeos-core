@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-07-12 21:54+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/p/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,27 +155,27 @@ msgstr "Banka adı"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "İlk Ad"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Soyad"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "Kredi kartı numarası"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "Doğrulama numarası"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr ""
+msgstr "Geçerli olduğu son ay"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr ""
+msgstr "Geçerli olduğu son yıl"
 
 #. Warehouse code
 msgid "warehouse:default"
@@ -195,16 +195,16 @@ msgstr "izle"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "ambalaj-uzunluğu"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "ambalaj-genişliği"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "ambalaj-yüksekliği"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
+msgstr "ambalaj-ağırlığı"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 23:55+0200\n"
+"POT-Creation-Date: 2015-07-13 21:17+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/p/aimeos-core/language/vi/)\n"
@@ -234,9 +234,6 @@ msgid "Attributes"
 msgstr ""
 
 #: layouts/checkout/standard/summary-body-default.html:17
-#: layouts/checkout/standard/payment-body-default.html:92
-#: layouts/checkout/standard/delivery-body-default.html:91
-#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/basket/standard/body-default.html:42
 msgid "Back"
 msgstr "Quay lại"
@@ -316,13 +313,13 @@ msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
 #: src/Client/Html/Common/Factory/Abstract.php:167
-#: src/Client/Html/Abstract.php:319
+#: src/Client/Html/Abstract.php:317
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Client/Html/Common/Factory/Abstract.php:161
-#: src/Client/Html/Abstract.php:313 src/Client/Html/Factory.php:51
+#: src/Client/Html/Abstract.php:311 src/Client/Html/Factory.php:51
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -531,7 +528,7 @@ msgstr "Bao gồm phần giảm giá"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:276 src/Client/Html/Abstract.php:304
+#: src/Client/Html/Abstract.php:274 src/Client/Html/Abstract.php:302
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
@@ -602,17 +599,17 @@ msgstr ""
 msgid "No service for code \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:496
+#: src/Client/Html/Abstract.php:494
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:51
+#: src/Client/Html/Abstract.php:49
 #, php-format
 msgid "No view available"
 msgstr "Hiện không hiển thị được"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:210
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr ""
@@ -703,7 +700,7 @@ msgstr "Trạng thái chi trả"
 msgid "Pinned products"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:180
 msgid "Please accept the terms and conditions"
 msgstr "Vui lòng chấp nhận các điều khoản sau đây"
 
@@ -739,6 +736,9 @@ msgstr ""
 msgid "Postal code"
 msgstr "Mã vùng"
 
+#: layouts/checkout/standard/payment-body-default.html:92
+#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/address-body-default.html:16
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
 msgstr ""
@@ -894,7 +894,7 @@ msgstr "Tổng"
 msgid "Telephone"
 msgstr "Số điện thoại"
 
-#: src/Client/Html/Abstract.php:468
+#: src/Client/Html/Abstract.php:466
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -1019,12 +1019,12 @@ msgstr ""
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:193
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:563
+#: src/Client/Html/Abstract.php:561
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr ""
