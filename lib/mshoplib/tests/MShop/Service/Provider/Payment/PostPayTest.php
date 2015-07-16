@@ -28,7 +28,10 @@ class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = new MShop_Service_Provider_Payment_PostPay( $context, $serviceItem );
+		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PostPay' )
+			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+			->setConstructorArgs( array( $context, $serviceItem ) )
+			->getMock();
 	}
 
 

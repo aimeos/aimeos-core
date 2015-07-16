@@ -28,7 +28,10 @@ class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = new MShop_Service_Provider_Payment_PrePay( $context, $serviceItem );
+		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+			->setConstructorArgs( array( $context, $serviceItem ) )
+			->getMock();
 	}
 
 
