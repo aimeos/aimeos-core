@@ -123,10 +123,10 @@ class Controller_ExtJS_Catalog_Default
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		foreach( $items as $entry )
+		foreach( $items as $id )
 		{
-			$manager->moveItem( $entry, $params->oldparentid, $params->newparentid, $refId );
-			$ids[] = $entry->id;
+			$manager->moveItem( $id, $params->oldparentid, $params->newparentid, $refId );
+			$ids[] = $id;
 		}
 
 		$this->_clearCache( $ids );
