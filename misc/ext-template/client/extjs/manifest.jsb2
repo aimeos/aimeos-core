@@ -1,10 +1,10 @@
 {
-    "projectName": "Arcavias <extname> extension",
+    "projectName": "Aimeos <extname> extension",
     "deployDir": "deploy",
     "licenseText": "",
     "pkgs": [{
-        "name": "Arcavias <extname>",
-        "file": "js/arcavias-<extname>.js",
+        "name": "Aimeos <extname>",
+        "file": "js/aimeos-<extname>.js",
         "isDebug": true,
         "fileIncludes": []
     }],

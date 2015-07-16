@@ -48,8 +48,8 @@
 
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
+		<echo msg="File: ${po-filename}" />
 		<exec command="msgmerge -s --no-wrap -U --backup=none ${po-filename} i18n/<extname>-client-html.pot" checkreturn="true" logoutput="true" /> 
-		<exec command="msgattrib -s --no-wrap --clear-obsolete -o ${po-filename} ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
 	<target name="build" description="Builds package for deployment">
@@ -62,8 +62,9 @@
 	</target>
 
 	<target name="build-mo" description="Generates binary translation files">
-		<fail unless="mo-filename" message="Missing file name" />
-		<exec command="msgfmt --statistics -c -o `echo ${mo-filename} | sed s/\.po//` ${mo-filename}" checkreturn="true" logoutput="true" /> 
+		<fail unless="po-filename" message="Missing file name" />
+		<echo msg="File: ${po-filename}" />
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
 	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
