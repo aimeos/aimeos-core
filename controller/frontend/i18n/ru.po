@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Dimitri <doleiynyk@metaways.de>, 2013
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:50+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-07-16 11:46+0200\n"
+"PO-Revision-Date: 2015-07-15 12:34+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,12 +65,12 @@ msgstr "Неверный код купона \"%1$s\""
 #: src/Controller/Frontend/Basket/Default.php:211
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid or not available any more"
-msgstr ""
+msgstr "Код купона \"%1$s\" неверный или более не действителен"
 
 #: src/Controller/Frontend/Basket/Default.php:226
 #, php-format
 msgid "Coupon for code \"%1$s\" is not available any more"
-msgstr ""
+msgstr "Купон с кодом \"%1$s\" более недоступен"
 
 #: src/Controller/Frontend/Basket/Default.php:717
 #, php-format

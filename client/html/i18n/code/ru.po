@@ -7,14 +7,14 @@
 # Translators:
 # Translators:
 # Dimitri <doleiynyk@metaways.de>, 2013
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-07-15 12:34+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,27 +156,27 @@ msgstr "Название банка"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "Имя"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Фамилия"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "Номер кредитной карты"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "Контрольное число"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr ""
+msgstr "Месяц окончания действия"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr ""
+msgstr "Год окончания действия"
 
 #. Warehouse code
 msgid "warehouse:default"
@@ -196,16 +196,16 @@ msgstr "следить"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "длина пакета"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "ширина пакета"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "высота пакет"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
+msgstr "вес пакета"

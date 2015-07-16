@@ -149,9 +149,8 @@ msgid "payment.lastname"
 msgstr "Last name"
 
 #. Pin action
-#, fuzzy
 msgid "pin"
-msgstr "Option"
+msgstr "Pin"
 
 #. Product attribute
 msgid "size"

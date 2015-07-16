@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:50+0200\n"
+"POT-Creation-Date: 2015-07-16 11:13+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/p/aimeos-core/language/uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/MShop/Order/Item/Base/Default.php:350
@@ -202,9 +202,7 @@ msgstr ""
 
 #: src/MShop/Service/Provider/Abstract.php:347
 #, php-format
-msgid ""
-"Invalid characters in attribute for provider configuration. Attribute is not"
-" of type \"%1$s\"."
+msgid "Invalid characters in attribute for provider configuration. Attribute is not of type \"%1$s\"."
 msgstr ""
 
 #: src/MShop/Order/Manager/Factory.php:39
@@ -235,9 +233,7 @@ msgstr ""
 #: src/MShop/Order/Item/Abstract.php:161
 #: src/MShop/Common/Item/Abstract.php:195
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr ""
 
 #: src/MShop/Customer/Item/Default.php:375
@@ -327,8 +323,7 @@ msgstr ""
 
 #: src/MShop/Catalog/Manager/Index/Default.php:418
 #, php-format
-msgid ""
-"Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
 #: src/MShop/Common/Manager/ListRef/Abstract.php:141
@@ -444,9 +439,7 @@ msgstr ""
 
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
-"method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:194
@@ -527,9 +520,7 @@ msgstr ""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:250
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr ""
 
 #: src/MShop/Order/Manager/Base/Default.php:681
@@ -539,9 +530,7 @@ msgstr ""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr ""
 
 #: src/MShop/Order/Item/Abstract.php:177
@@ -619,9 +608,7 @@ msgstr ""
 
 #: src/MShop/Price/Item/Default.php:320
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr ""
 
 #: src/MShop/Price/Manager/Abstract.php:54
@@ -636,9 +623,7 @@ msgstr ""
 
 #: src/MShop/Order/Item/Base/Abstract.php:78
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:78
@@ -724,16 +709,12 @@ msgstr ""
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:33
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr ""
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:61
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr ""
 
 #: src/MShop/Locale/Manager/Default.php:122
@@ -819,9 +800,7 @@ msgstr ""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:231
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr ""
 
 #: src/MShop/Context/Item/Default.php:315

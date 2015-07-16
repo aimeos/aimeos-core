@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-13 21:14+0200\n"
+"POT-Creation-Date: 2015-07-16 11:46+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -104,9 +104,9 @@ msgstr "%2$s %1$s off"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:66
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
-msgstr "%1$s ( +%3$s%2$s )"
+msgstr "%1$s ( %4$s%2$s%3$s )"
 
 #: layouts/account/history/list-body-default.html:82
 #: layouts/account/history/list-body-default.html:98

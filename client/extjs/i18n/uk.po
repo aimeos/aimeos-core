@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:49+0200\n"
+"POT-Creation-Date: 2015-07-16 11:13+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/p/aimeos-core/language/uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/panel/price/ItemUi.js:99
@@ -575,7 +575,7 @@ msgstr ""
 msgid "Internal name (required)"
 msgstr ""
 
-#: src/panel/AbstractTreeUi.js:299
+#: src/panel/AbstractTreeUi.js:300
 #, python-brace-format
 msgid "Invalid action \"{0}\""
 msgstr ""
@@ -766,8 +766,7 @@ msgstr ""
 msgid "Locale"
 msgstr ""
 
-#. : Locale currency item panel title with currency label ({0}) and currency
-#. code ({1)}
+#. : Locale currency item panel title with currency label ({0}) and currency code ({1)}
 #: src/panel/locale/currency/ItemUi.js:99
 #, python-brace-format
 msgid "Locale currency: {0} ({1})"
@@ -779,8 +778,7 @@ msgstr ""
 msgid "Locale item details ({1})"
 msgstr ""
 
-#. : Locale language item panel title with language label ({0}) and language
-#. code ({1)}
+#. : Locale language item panel title with language label ({0}) and language code ({1)}
 #: src/panel/locale/language/ItemUi.js:99
 #, python-brace-format
 msgid "Locale language: {0} ({1})"
@@ -911,9 +909,7 @@ msgid "Please save the coupon first before you can add codes"
 msgstr ""
 
 #: src/panel/ListItemListUi.js:87
-msgid ""
-"Please select an item on the right side and add it via drag and drop to this"
-" list."
+msgid "Please select an item on the right side and add it via drag and drop to this list."
 msgstr ""
 
 #: src/panel/plugin/ListUi.js:32 src/elements/domain.js:51
@@ -1314,16 +1310,11 @@ msgid "Text: {0} ({1})"
 msgstr ""
 
 #: src/elements/exportlanguage.js:448
-msgid ""
-"The file with the exported texts will be available within a few minutes. It "
-"can then be downloaded from the \"Job\" panel of the \"Overview\" tab."
+msgid "The file with the exported texts will be available within a few minutes. It can then be downloaded from the \"Job\" panel of the \"Overview\" tab."
 msgstr ""
 
 #: src/elements/importbutton.js:77
-msgid ""
-"The texts of your uploaded file will be imported within a few minutes. You "
-"can check the status of the import in the \"Job\" panel of the \"Overview\" "
-"tab"
+msgid "The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the \"Job\" panel of the \"Overview\" tab"
 msgstr ""
 
 #: src/panel/AbstractListItemUi.js:73 src/panel/ListItemItemUi.js:118
@@ -1407,8 +1398,7 @@ msgstr ""
 msgid "Warehouse"
 msgstr ""
 
-#. : Product warehouse item panel title with warehouse label ({0}) and site
-#. code ({1)}
+#. : Product warehouse item panel title with warehouse label ({0}) and site code ({1)}
 #: src/panel/product/stock/warehouse/ItemUi.js:97
 #, python-brace-format
 msgid "Warehouse: {0} ({1})"
@@ -1434,9 +1424,7 @@ msgid "You are going to delete one or more items. Would you like to proceed?"
 msgstr ""
 
 #: src/panel/cache/ListUiSmall.js:103
-msgid ""
-"You are going to flush the complete cache for the current site. Would you "
-"like to proceed?"
+msgid "You are going to flush the complete cache for the current site. Would you like to proceed?"
 msgstr ""
 
 #: src/panel/service/type/ItemUi.js:18 src/panel/service/ItemUi.js:123

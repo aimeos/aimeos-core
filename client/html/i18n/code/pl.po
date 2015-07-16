@@ -7,14 +7,15 @@
 # Translators:
 # Translators:
 # jerzys <jerzy.skalski@gmail.com>, 2014
+# jerzys <jerzy.skalski@gmail.com>, 2015
 # jerzys <jerzy.skalski@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-07-15 09:48+0000\n"
+"Last-Translator: jerzys <jerzy.skalski@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/p/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,19 +157,19 @@ msgstr "Nazwa banku"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "Imię"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Nazwisko"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "Numer karty kredytowej"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "Numer weryfikacyjny"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"

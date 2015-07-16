@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:50+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-07-16 11:46+0200\n"
+"PO-Revision-Date: 2015-07-15 12:34+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -136,7 +136,7 @@ msgstr "Недоступна  настройка обязательного за
 #: src/MShop/Plugin/Provider/Order/Coupon.php:90
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Купон более недоступен в корзине"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:143
 #, php-format
@@ -291,7 +291,7 @@ msgstr "Недопустимые символы в дате покупки \"%1$
 #: src/MShop/Service/Manager/Default.php:572
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии типа \"%1$s\""
 
 #: src/MShop/Coupon/Provider/Present.php:37
 #: src/MShop/Coupon/Provider/FreeShipping.php:37
@@ -745,7 +745,7 @@ msgstr "Не найден сайт для кода \"%1$s\""
 #: src/MShop/Common/Item/Helper/Password/Hash.php:34
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Алгоритм \"%1$s\" не поддерживается"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:94
 #, php-format

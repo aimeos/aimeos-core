@@ -5,14 +5,14 @@
 # Translators:
 # Dimitri <doleiynyk@metaways.de>, 2013
 # nsendetzky, 2014
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:49+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-07-16 11:46+0200\n"
+"PO-Revision-Date: 2015-07-15 12:34+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,7 +171,7 @@ msgstr "+ Перевозка"
 #: layouts/common/partials/address-default.html:127
 #: layouts/common/partials/address-default.html:131
 msgid "+1 123 456 7890"
-msgstr ""
+msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #: layouts/common/partials/price-default.html:26
@@ -235,7 +235,7 @@ msgstr "Ошибка в одной из частей адреса доставк
 
 #: layouts/catalog/filter/attribute-body-default.html:54
 msgid "Attributes"
-msgstr ""
+msgstr "Атрибуты"
 
 #: layouts/checkout/standard/summary-body-default.html:17
 #: layouts/basket/standard/body-default.html:42
@@ -266,7 +266,7 @@ msgstr "Ошибка в части\"%1$s\" платёжного адреса"
 
 #: layouts/catalog/detail/bundle-body-default.html:24
 msgid "Bundled products"
-msgstr ""
+msgstr "Комплект товаров"
 
 #: layouts/checkout/standard/summary-body-default.html:18
 msgid "Buy now"
@@ -274,7 +274,7 @@ msgstr "Купить"
 
 #: layouts/catalog/filter/tree-body-default.html:17
 msgid "Categories"
-msgstr ""
+msgstr "Категории"
 
 #: src/Client/Html/Catalog/Filter/Tree/Default.php:251
 #, php-format
@@ -336,12 +336,12 @@ msgstr "Не найден класс \"%1$s\""
 #: src/Client/Html/Factory.php:32
 #, php-format
 msgid "Client HTML type is empty"
-msgstr ""
+msgstr "Отсутствует HTML тип клиента"
 
 #: src/Client/Html/Factory.php:38
 #, php-format
 msgid "Client type \"%1$s\" must consist of two parts separated by \"/\""
-msgstr ""
+msgstr "Тип клиента \"%1$s\" должен состоять из двух частей, разделяемых \"/\""
 
 #: layouts/account/history/order-body-default.html:21
 msgid "Close"
@@ -450,7 +450,7 @@ msgstr "Поля, помеченные звёздочкой (*) обязател
 
 #: layouts/catalog/filter/body-default.html:98
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
 #: layouts/common/partials/address-eu.html:52
 #: layouts/common/partials/address-eu.html:53
@@ -462,7 +462,7 @@ msgstr "Имя"
 #: layouts/common/partials/address-eu.html:119
 #: layouts/common/partials/address-default.html:119
 msgid "GB999999973"
-msgstr ""
+msgstr "GB999999973"
 
 #: layouts/catalog/filter/search-body-default.html:107
 msgid "Go"
@@ -540,7 +540,7 @@ msgstr "Недопустимые символы в названии покупа
 #: src/Client/Html/Factory.php:44
 #, php-format
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии клиента \"%1$s\" в \"%2$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
@@ -555,7 +555,7 @@ msgstr "Недопустимый домен \"%1$s\""
 #: src/Client/Html/Factory.php:57
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Недопустимая фабрика \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Process/Default.php:217
 #, php-format
@@ -601,7 +601,7 @@ msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не н
 #: src/Client/Html/Checkout/Confirm/Default.php:267
 #, php-format
 msgid "No service for code \"%1$s\" found"
-msgstr ""
+msgstr "Не найдено сервиса для кода \"%1$s\""
 
 #: src/Client/Html/Abstract.php:494
 #, php-format
@@ -662,7 +662,7 @@ msgstr "История заказов"
 
 #: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order status"
-msgstr ""
+msgstr "Статус заказа"
 
 #: src/Client/Html/Account/History/Order/Default.php:261
 #, php-format
@@ -684,7 +684,7 @@ msgstr "Страница %1$d из %2$d"
 
 #: layouts/checkout/standard/process-body-default.html:111
 msgid "Pay now"
-msgstr ""
+msgstr "Оплатить сейчас"
 
 #: layouts/checkout/standard/process-body-default.html:74
 #: layouts/account/history/list-body-default.html:106
@@ -726,7 +726,7 @@ msgstr "Необходимо ввести, по крайней мере три �
 
 #: layouts/checkout/standard/process-body-default.html:78
 msgid "Please enter your payment details"
-msgstr ""
+msgstr "Введите данные для оплаты"
 
 #: layouts/checkout/standard/process-body-default.html:91
 #: layouts/catalog/detail/basket-selection-body-default.html:88
@@ -759,7 +759,7 @@ msgstr "Продолжить"
 
 #: layouts/checkout/standard/process-body-default.html:76
 msgid "Processing the payment failed"
-msgstr ""
+msgstr "Ошибка при обработке платежа"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
@@ -767,7 +767,7 @@ msgstr "Товары, которые могут быть Вам интересн
 
 #: layouts/catalog/detail/additional-property-body-default.html:14
 msgid "Properties"
-msgstr ""
+msgstr "Свойства"
 
 #: layouts/common/summary/detail-body-default.html:107
 #: layouts/email/common/text-summary-detail-body-default.html:72
@@ -795,7 +795,7 @@ msgstr "Приветствие"
 
 #: layouts/catalog/filter/search-body-default.html:105
 msgid "Search"
-msgstr ""
+msgstr "Поиск"
 
 #: layouts/catalog/list/head-body-default.html:48
 #, php-format
@@ -1113,7 +1113,7 @@ msgstr "Переход к следующему шагу"
 
 #: layouts/catalog/filter/attribute-body-default.html:57
 msgid "Your choice"
-msgstr ""
+msgstr "Выбрано"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -1148,7 +1148,7 @@ msgstr "адрес"
 
 #: layouts/catalog/filter/attribute-body-default.html:70
 msgid "clear all"
-msgstr ""
+msgstr "сбросить всё"
 
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: layouts/common/summary/service-body-default.html:16
@@ -1178,7 +1178,7 @@ msgstr "новый адрес"
 
 #: layouts/catalog/detail/basket-attribute-body-default.html:52
 msgid "none"
-msgstr ""
+msgstr "нет"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
@@ -1196,7 +1196,7 @@ msgstr "оплата"
 #: src/Client/Html/Checkout/Standard/Process/Default.php:12
 #, php-format
 msgid "process"
-msgstr ""
+msgstr "обработка"
 
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56
