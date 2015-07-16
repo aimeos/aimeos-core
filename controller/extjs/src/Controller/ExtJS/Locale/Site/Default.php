@@ -159,8 +159,8 @@ class Controller_ExtJS_Locale_Site_Default
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		foreach( $items as $entry ) {
-			$manager->moveItem( $entry, $params->oldparentid, $params->newparentid, $refId );
+		foreach( $items as $id ) {
+			$manager->moveItem( $id, $params->oldparentid, $params->newparentid, $refId );
 		}
 
 		return array(
