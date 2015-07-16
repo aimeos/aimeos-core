@@ -29,7 +29,10 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 		$serviceItem = MShop_Factory::createManager( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = new MShop_Service_Provider_Payment_DirectDebit( $context, $serviceItem );
+		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_DirectDebit' )
+			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+			->setConstructorArgs( array( $context, $serviceItem ) )
+			->getMock();
 	}
 
 

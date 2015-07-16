@@ -99,8 +99,6 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends MW_Unittest_Test
 
 		$serviceProviderStub->expects( $this->once() )->method( 'capture' );
 
-		$orderManagerStub->expects( $this->once() )->method( 'saveItem' );
-
 
 		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
 		$object->run();

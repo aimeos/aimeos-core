@@ -26,6 +26,7 @@ class MShop_Service_Provider_Payment_PrePay
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$this->_saveOrder( $order );
 	}
 
 
@@ -41,6 +42,7 @@ class MShop_Service_Provider_Payment_PrePay
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+		$this->_saveOrder( $order );
 
 		return parent::process( $order, $params );
 	}

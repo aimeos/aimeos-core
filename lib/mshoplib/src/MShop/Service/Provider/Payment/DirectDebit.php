@@ -137,6 +137,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+		$this->_saveOrder( $order );
 
 		return parent::process( $order, $params );
 	}

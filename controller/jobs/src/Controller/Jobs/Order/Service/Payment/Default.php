@@ -140,7 +140,6 @@ class Controller_Jobs_Order_Service_Payment_Default
 							try
 							{
 								$serviceProvider->capture( $orderItem );
-								$orderManager->saveItem( $orderItem );
 							}
 							catch( Exception $e )
 							{
