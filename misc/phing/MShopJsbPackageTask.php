@@ -41,23 +41,19 @@ class MShopJsbPackageTask extends Task
 	 */
 	public function main()
 	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$this->_msg( 'Generating JSB2 packages' );
+		$this->log( 'Generating JSB2 packages' );
 
 		foreach( $this->_arcavias->getCustomPaths( 'client/extjs' ) as $base => $paths )
 		{
 			foreach( $paths as $path )
 			{
-				$jsbPath = $base . $ds . $path;
+				$jsbPath = $base . DIRECTORY_SEPARATOR . $path;
 
-				$message = sprintf( 'Package: %1$s ', $jsbPath );
-				$this->_msg( sprintf( 'Package: %1$s ', $jsbPath ) );
+				$this->log( sprintf( 'Package: %1$s ', $jsbPath ) );
 
 				if( !is_file( $jsbPath ) || !is_readable( $jsbPath ) )
 				{
-					$this->_msg( $message, 'failed' );
-					$this->_msg( sprintf( 'No manifest file found in %1$s', $jsbPath ) );
+					$this->log( sprintf( 'No manifest file found in %1$s', $jsbPath ) );
 					continue;
 				}
 
@@ -65,26 +61,12 @@ class MShopJsbPackageTask extends Task
 				{
 					$jsbParser = new MW_Jsb2_Default( $jsbPath );
 					$jsbParser->deploy( 'js' );
-					$this->_msg( $message, 'done' );
 				}
 				catch ( Exception $e )
 				{
-					$this->_msg( $message, 'failed' );
-					$this->_msg( sprintf( 'Error: %1$s', $e->getMessage() ) );
+					$this->log( sprintf( 'Error: %1$s', $e->getMessage() ) );
 				}
 			}
 		}
-	}
-
-
-	/**
-	 * Prints the message for the current task.
-	 *
-	 * @param string $msg Current message
-	 * @param string $status Status string
-	 */
-	protected function _msg( $msg, $status = '' )
-	{
-		$this->log( $msg . $status );
 	}
 }
