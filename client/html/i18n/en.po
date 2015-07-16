@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 11:46+0200\n"
+"POT-Creation-Date: 2015-07-16 18:01+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -578,6 +578,11 @@ msgstr ""
 #: layouts/catalog/list/head-body-default.html:51
 #, php-format
 msgid "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please try again with a different keyword."
+msgstr ""
+
+#: src/Client/Html/Catalog/Detail/Default.php:518
+#, php-format
+msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
 #: src/Client/Html/Checkout/Update/Default.php:218

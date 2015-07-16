@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 11:46+0200\n"
-"PO-Revision-Date: 2015-07-15 12:34+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
+"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"PO-Revision-Date: 2015-07-16 16:01+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/p/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -595,6 +595,11 @@ msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
 msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не найдено. Попробуйте искать по другим словосочетаниям."
+
+#: src/Client/Html/Catalog/Detail/Default.php:518
+#, php-format
+msgid "No product with ID \"%1$s\" found"
+msgstr ""
 
 #: src/Client/Html/Checkout/Update/Default.php:218
 #: src/Client/Html/Checkout/Standard/Process/Default.php:309

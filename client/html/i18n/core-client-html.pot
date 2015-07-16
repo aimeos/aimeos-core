@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 11:46+0200\n"
+"POT-Creation-Date: 2015-07-16 18:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -568,6 +568,11 @@ msgstr ""
 #: layouts/catalog/list/head-body-default.html:51
 #, php-format
 msgid "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please try again with a different keyword."
+msgstr ""
+
+#: src/Client/Html/Catalog/Detail/Default.php:518
+#, php-format
+msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
 #: src/Client/Html/Checkout/Update/Default.php:218
