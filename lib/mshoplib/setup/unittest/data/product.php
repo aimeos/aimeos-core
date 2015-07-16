@@ -22,7 +22,7 @@ return array (
 		'product/ABCD' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'ABCD', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/EFGH' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'EFGH', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/IJKL' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'IJKL', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
-		'product/MNOP' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'MNOP', 'suppliercode' => 'unitSupplier', 'status' => 0 ),
+		'product/MNOP' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'MNOP', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/QRST' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'QRST', 'suppliercode' => 'unitSupplier', 'status' => 0 ),
 		'product/U:CF' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Cheapest free rebate', 'code' => 'U:CF', 'suppliercode' => 'unitSupplier', 'status' => 0 ),
 		'product/U:TEST' => array( 'typeid' => 'product/select', 'label' => 'Unittest: Test Selection', 'code' => 'U:TEST', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
