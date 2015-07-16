@@ -89,8 +89,7 @@ class Controller_Frontend_Basket_Default
 
 		$context = $this->_getContext();
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$productItem = $productManager->getItem( $prodid, array( 'media', 'price', 'product', 'text' ) );
+		$productItem = $this->_getDomainItem( 'product', 'product.id', $prodid, array( 'media', 'price', 'product', 'text' ) );
 
 		$orderBaseProductItem = MShop_Factory::createManager( $context, 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
@@ -176,7 +175,7 @@ class Controller_Frontend_Basket_Default
 		}
 		$product->setAttributes( $attributes );
 
-		$productItem = $this->_getProductItem( $product->getProductCode() );
+		$productItem = $this->_getDomainItem( 'product', 'product.code', $product->getProductCode(), array( 'price', 'text' ) );
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
 		$product->setPrice( $this->_calcPrice( $product, $prices, $quantity ) );
@@ -313,7 +312,7 @@ class Controller_Frontend_Basket_Default
 		$context = $this->_getContext();
 
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
-		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
+		$serviceItem = $this->_getDomainItem( 'service', 'service.id', $id, array( 'media', 'price', 'text' ) );
 
 		$provider = $serviceManager->getProvider( $serviceItem );
 		$result = $provider->checkConfigFE( $attributes );
@@ -923,7 +922,7 @@ class Controller_Frontend_Basket_Default
 		if( empty( $prices ) )
 		{
 			$productManager = MShop_Factory::createManager( $context, 'product' );
-			$parentItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
+			$parentItem = $this->_getDomainItem( 'product', 'product.id', $product->getProductId(), array( 'price' ) );
 			$prices = $parentItem->getRefItems( 'price', 'default' );
 		}
 
@@ -951,30 +950,33 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Retrieves the product item specified by the given code.
 	 *
-	 * @param string $code Unique product code
-	 * @return MShop_Product_Item_Interface Product item
+	 * @param string $domain Product manager search key
+	 * @param string $key Domain manager search key
+	 * @param string $value Unique domain identifier
+	 * @param array $ref List of referenced items that should be fetched too
+	 * @return MShop_Common_Item_Interface Domain item object
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
-	protected function _getProductItem( $code )
+	protected function _getDomainItem( $domain, $key, $value, array $ref )
 	{
-		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$manager = MShop_Factory::createManager( $this->_getContext(), $domain );
 
-		$search = $productManager->createSearch( true );
+		$search = $manager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'product.code', $code ),
+			$search->compare( '==', $key, $value ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $productManager->searchItems( $search, array( 'price', 'text' ) );
+		$result = $manager->searchItems( $search, $ref );
 
-		if( ( $productItem = reset( $result ) ) === false )
+		if( ( $item = reset( $result ) ) === false )
 		{
-			$msg = sprintf( 'No product with code "%1$s" found', $code );
+			$msg = sprintf( 'No item for "%1$s" (%2$s) found', $value, $key );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
-		return $productItem;
+		return $item;
 	}
 
 

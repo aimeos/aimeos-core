@@ -414,46 +414,8 @@ class Client_Html_Catalog_Detail_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$config = $context->getConfig();
-
-			$prodid = $view->param( 'd_prodid' );
-			$default = array( 'media', 'price', 'text', 'attribute', 'product' );
-
-			/** client/html/catalog/domains
-			 * A list of domain names whose items should be available in the catalog view templates
-			 *
-			 * @see client/html/catalog/detail/domains
-			 */
-			$domains = $config->get( 'client/html/catalog/domains', $default );
-
-			/** client/html/catalog/detail/domains
-			 * A list of domain names whose items should be available in the product detail view template
-			 *
-			 * The templates rendering product details usually add the images,
-			 * prices, texts, attributes, products, etc. associated to the product
-			 * item. If you want to display additional or less content, you can
-			 * configure your own list of domains (attribute, media, price, product,
-			 * text, etc. are domains) whose items are fetched from the storage.
-			 * Please keep in mind that the more domains you add to the configuration,
-			 * the more time is required for fetching the content!
-			 *
-			 * Since version 2014.05 this configuration option overwrites the
-			 * "client/html/catalog/domains" option that allows to configure the
-			 * domain names of the items fetched for all catalog related data.
-			 *
-			 * @param array List of domain names
-			 * @since 2014.03
-			 * @category Developer
-			 * @see client/html/catalog/domains
-			 * @see client/html/catalog/list/domains
-			 */
-			$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
-
-			$manager = MShop_Factory::createManager( $context, 'product' );
-			$productItem = $manager->getItem( $prodid, $domains );
-
-			$this->_addMetaItem( $productItem, 'product', $this->_expire, $this->_tags );
-			$this->_addMetaList( $prodid, 'product', $this->_expire );
+			$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
+			$productItem = $this->_getProductItem( $view->param( 'd_prodid' ), $domains );
 
 
 			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
@@ -463,7 +425,7 @@ class Client_Html_Catalog_Detail_Default
 				$attrSearch->getConditions(),
 			);
 			$attrSearch->setConditions( $attrSearch->combine( '&&', $expr ) );
-			$attributes = $attrManager->searchItems( $attrSearch, $default );
+			$attributes = $attrManager->searchItems( $attrSearch, $domains );
 
 			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
 			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
@@ -476,7 +438,7 @@ class Client_Html_Catalog_Detail_Default
 				$mediaSearch->getConditions(),
 			);
 			$mediaSearch->setConditions( $mediaSearch->combine( '&&', $expr ) );
-			$media = $mediaManager->searchItems( $mediaSearch, $default );
+			$media = $mediaManager->searchItems( $mediaSearch, $domains );
 
 			$this->_addMetaItem( $media, 'media', $this->_expire, $this->_tags );
 			$this->_addMetaList( array_keys( $media ), 'media', $this->_expire );
@@ -494,5 +456,71 @@ class Client_Html_Catalog_Detail_Default
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Returns the product item for the given ID including the domain items
+	 *
+	 * @param string $prodid Unique product ID
+	 * @param array List of domain items that should be fetched too
+	 * @throws Client_Html_Exception If no product item was found
+	 * @return MShop_Product_Item_Interface Product item object
+	 */
+	protected function _getProductItem( $prodid, array $domains )
+	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+
+		/** client/html/catalog/domains
+		 * A list of domain names whose items should be available in the catalog view templates
+		 *
+		 * @see client/html/catalog/detail/domains
+		 */
+		$domains = $config->get( 'client/html/catalog/domains', $domains );
+
+		/** client/html/catalog/detail/domains
+		 * A list of domain names whose items should be available in the product detail view template
+		 *
+		 * The templates rendering product details usually add the images,
+		 * prices, texts, attributes, products, etc. associated to the product
+		 * item. If you want to display additional or less content, you can
+		 * configure your own list of domains (attribute, media, price, product,
+		 * text, etc. are domains) whose items are fetched from the storage.
+		 * Please keep in mind that the more domains you add to the configuration,
+		 * the more time is required for fetching the content!
+		 *
+		 * Since version 2014.05 this configuration option overwrites the
+		 * "client/html/catalog/domains" option that allows to configure the
+		 * domain names of the items fetched for all catalog related data.
+		 *
+		 * @param array List of domain names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see client/html/catalog/domains
+		 * @see client/html/catalog/list/domains
+		 */
+		$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
+
+
+		$manager = MShop_Factory::createManager( $context, 'product' );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.id', $prodid ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$items = $manager->searchItems( $search, $domains );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Client_Html_Exception( sprintf( 'No product with ID "%1$s" found', $prodid ) );
+		}
+
+		$this->_addMetaItem( $item, 'product', $this->_expire, $this->_tags );
+		$this->_addMetaList( $prodid, 'product', $this->_expire );
+
+		return $item;
 	}
 }
