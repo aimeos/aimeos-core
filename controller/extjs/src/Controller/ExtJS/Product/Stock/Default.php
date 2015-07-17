@@ -85,16 +85,17 @@ class Controller_ExtJS_Product_Stock_Default
 				case 'product.stock.productid': $item->setProductId( $value ); break;
 				case 'product.stock.warehouseid': $item->setWarehouseId( $value ); break;
 				case 'product.stock.stocklevel':
-					if( $value != '' ) {
+					if( $value !== '' ) {
 						$item->setStocklevel( $value );
+					} else {
+						$item->setStocklevel( null );
 					}
 					break;
 				case 'product.stock.dateback':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'product.stock.dateback'} = $value;
-						$item->setDateBack( $value );
+					if( $value !== '' ) {
+						$item->setDateBack( str_replace( 'T', ' ', $value ) );
+					} else {
+						$item->setDateBack( null );
 					}
 					break;
 			}
