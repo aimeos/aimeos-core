@@ -105,6 +105,54 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 	}
 
 
+	public function testProcessMultiple()
+	{
+		$mapping = array(
+			0 => 'catalog.list.type',
+			1 => 'catalog.code',
+			2 => 'catalog.list.type',
+			3 => 'catalog.code',
+		);
+
+		$data = array(
+			0 => 'default',
+			1 => "job_csv_test\njob_csv_test2",
+			2 => 'promotion',
+			3 => "job_csv_test\njob_csv_test2",
+		);
+
+		$category = $this->_create( 'job_csv_test' );
+		$category2 = $this->_create( 'job_csv_test2' );
+
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( self::$_product, $data );
+
+		$category = $this->_get( 'job_csv_test' );
+		$category2 = $this->_get( 'job_csv_test2' );
+
+		$this->_delete( $category );
+		$this->_delete( $category2 );
+
+
+		$pos = 0;
+		$types = array( 'default', 'promotion', 'default', 'promotion' );
+
+		foreach( array( $category->getListItems(), $category2->getListItems() ) as $listItems )
+		{
+			$this->assertEquals( 2, count( $listItems ) );
+
+			foreach( $listItems as $listItem )
+			{
+				$this->assertEquals( 1, $listItem->getStatus() );
+				$this->assertEquals( 'product', $listItem->getDomain() );
+				$this->assertEquals( $types[$pos], $listItem->getType() );
+				$this->assertEquals( 'job_csv_prod', $listItem->getRefItem()->getCode() );
+				$pos++;
+			}
+		}
+	}
+
+
 	public function testProcessUpdate()
 	{
 		$mapping = array(

@@ -65,14 +65,17 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$listManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'media' );
+		$context = $this->_getContext();
+		$manager = MShop_Factory::createManager( $context, 'media' );
+		$listManager = MShop_Factory::createManager( $context, 'product/list' );
+		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
+
 		$manager->begin();
 
 		try
 		{
-			$listItems = $product->getListItems( 'media' );
 			$map = $this->_getMappedChunk( $data );
+			$listItems = $product->getListItems( 'media' );
 
 			foreach( $map as $pos => $list )
 			{
@@ -82,28 +85,34 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 					continue;
 				}
 
-				if( ( $listItem = array_shift( $listItems ) ) !== null ) {
-					$refItem = $listItem->getRefItem();
-				} else {
-					$listItem = $listManager->createItem();
-					$refItem = $manager->createItem();
-				}
-
-				$typecode = ( isset( $list['media.type'] ) ? $list['media.type'] : 'default' );
-				$list['media.typeid'] = $this->_getTypeId( 'media/type', 'product', $typecode );
-				$list['media.domain'] = 'product';
-
-				$refItem->fromArray( $this->_addItemDefaults( $list ) );
-				$manager->saveItem( $refItem );
-
+				$urls = explode( $separator, $list['media.url'] );
+				$type = ( isset( $list['media.type'] ) ? $list['media.type'] : 'default' );
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'media', $typecode );
-				$list['product.list.parentid'] = $product->getId();
-				$list['product.list.refid'] = $refItem->getId();
-				$list['product.list.domain'] = 'media';
 
-				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
-				$listManager->saveItem( $listItem );
+				foreach( $urls as $url )
+				{
+					if( ( $listItem = array_shift( $listItems ) ) !== null ) {
+						$refItem = $listItem->getRefItem();
+					} else {
+						$listItem = $listManager->createItem();
+						$refItem = $manager->createItem();
+					}
+
+					$list['media.typeid'] = $this->_getTypeId( 'media/type', 'product', $type );
+					$list['media.domain'] = 'product';
+					$list['media.url'] = $url;
+
+					$refItem->fromArray( $this->_addItemDefaults( $list ) );
+					$manager->saveItem( $refItem );
+
+					$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'media', $typecode );
+					$list['product.list.parentid'] = $product->getId();
+					$list['product.list.refid'] = $refItem->getId();
+					$list['product.list.domain'] = 'media';
+
+					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos++ ) );
+					$listManager->saveItem( $listItem );
+				}
 			}
 
 			foreach( $listItems as $listItem )

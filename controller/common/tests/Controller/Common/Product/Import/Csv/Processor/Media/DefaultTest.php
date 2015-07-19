@@ -97,6 +97,39 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends M
 	{
 		$mapping = array(
 			0 => 'media.url',
+		);
+
+		$data = array(
+			0 => "path/to/0\npath/to/1\npath/to/2\npath/to/3",
+		);
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$pos = 0;
+		$listItems = $product->getListItems();
+		$expected = array( 'path/to/0', 'path/to/1', 'path/to/2', 'path/to/3' );
+
+		$this->assertEquals( 4, count( $listItems ) );
+
+		foreach( $listItems as $listItem )
+		{
+			$this->assertEquals( $expected[$pos], $listItem->getRefItem()->getUrl() );
+			$pos++;
+		}
+	}
+
+
+	public function testProcessMultipleFields()
+	{
+		$mapping = array(
+			0 => 'media.url',
 			1 => 'media.url',
 			2 => 'media.url',
 			3 => 'media.url',

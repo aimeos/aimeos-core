@@ -65,9 +65,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of MShop item domain names
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/common/product/import/csv/mapping
-		 * @see controller/common/product/import/csv/converter
-		 * @see controller/common/product/import/csv/max-size
+		 * @see controller/common/product/import/csv/separator
 		 */
 		$domains = $config->get( 'controller/common/product/import/csv/domains', $domains );
 

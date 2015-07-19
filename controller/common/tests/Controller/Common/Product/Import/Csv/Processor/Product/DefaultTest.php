@@ -78,6 +78,49 @@ class Controller_Common_Product_Import_Csv_Processor_Product_DefaultTest extends
 	}
 
 
+	public function testProcessMultiple()
+	{
+		$mapping = array(
+			0 => 'product.list.type',
+			1 => 'product.code',
+			2 => 'product.list.type',
+			3 => 'product.code',
+		);
+
+		$data = array(
+			0 => 'default',
+			1 => "CNC\nCNE",
+			2 => 'suggestion',
+			3 => "CNE\nCNC",
+		);
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+		$this->_delete( $product );
+
+
+		$pos = 0;
+		$listItems = $product->getListItems();
+		$codes = array( 'CNC', 'CNE', 'CNC', 'CNE' );
+		$types = array( 'default', 'default', 'suggestion', 'suggestion' );
+
+		$this->assertEquals( 4, count( $listItems ) );
+
+		foreach( $listItems as $listItem )
+		{
+			$this->assertEquals( 1, $listItem->getStatus() );
+			$this->assertEquals( 'product', $listItem->getDomain() );
+			$this->assertEquals( $types[$pos], $listItem->getType() );
+			$this->assertEquals( $codes[$pos], $listItem->getRefItem()->getCode() );
+			$pos++;
+		}
+	}
+
+
 	public function testProcessUpdate()
 	{
 		$mapping = array(
