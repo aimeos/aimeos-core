@@ -105,7 +105,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_DefaultTest extends
 
 		$pos = 0;
 		$listItems = $product->getListItems();
-		$codes = array( 'CNC', 'CNE', 'CNC', 'CNE' );
+		$codes = array( 'CNC', 'CNE', 'CNE', 'CNC' );
 		$types = array( 'default', 'default', 'suggestion', 'suggestion' );
 
 		$this->assertEquals( 4, count( $listItems ) );

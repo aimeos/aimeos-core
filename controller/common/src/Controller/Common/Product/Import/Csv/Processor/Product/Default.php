@@ -87,12 +87,13 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 
 		try
 		{
+			$pos = 0;
 			$map = $this->_getMappedChunk( $data );
 			$listItems = $this->_getListItemPool( $product, $map );
 
-			foreach( $map as $pos => $list )
+			foreach( $map as $list )
 			{
-				if( !isset( $map[$pos]['product.code'] ) || $list['product.code'] === '' || isset( $list['product.list.type'] )
+				if( !isset( $list['product.code'] ) || $list['product.code'] === '' || isset( $list['product.list.type'] )
 					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;
@@ -118,7 +119,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 					$list['product.list.refid'] = $prodid;
 					$list['product.list.domain'] = 'product';
 
-					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
+					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
 				}
 			}
