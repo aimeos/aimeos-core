@@ -20,7 +20,6 @@
 	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
 	<rule ref="Generic.PHP.ForbiddenFunctions"/>
 	<rule ref="Generic.PHP.LowerCaseConstant"/>
-	<rule ref="PEAR.Classes.ClassDeclaration"/>
 	<!-- rule ref="PEAR.ControlStructures.ControlSignatureSniff"/ -->
 	<rule ref="PEAR.Commenting.InlineComment"/>
 	<!-- rule ref="PEAR.Functions.FunctionCallSignature"/ -->
@@ -29,6 +28,12 @@
 	<rule ref="Squiz.Functions.GlobalFunction"/>
 	<rule ref="Zend.Files.ClosingTag"/>
 	<rule ref="Zend.NamingConventions.ValidVariableName"/>
+
+	<rule ref="PEAR.Classes.ClassDeclaration">
+		<properties>
+			<property name="indent" value="1"/>
+		</properties>
+	</rule>
 	
 	<rule ref="Generic.Files.LineLength">
 		<properties>
