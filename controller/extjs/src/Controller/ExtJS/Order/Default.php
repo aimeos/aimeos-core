@@ -90,19 +90,13 @@ class Controller_ExtJS_Order_Default
 				case 'order.statuspayment': $item->setPaymentStatus( $value ); break;
 				case 'order.statusdelivery': $item->setDeliveryStatus( $value ); break;
 				case 'order.datepayment':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'order.datepayment'} = $value;
-						$item->setDatePayment( $value );
+					if( $value != '' ) {
+						$item->setDatePayment( str_replace( 'T', ' ', $value ) );
 					}
 					break;
 				case 'order.datedelivery':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'order.datedelivery'} = $value;
-						$item->setDateDelivery( $value );
+					if( $value != '' ) {
+						$item->setDateDelivery( str_replace( 'T', ' ', $value ) );
 					}
 					break;
 			}
