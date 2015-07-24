@@ -205,25 +205,10 @@ class Client_Html_Checkout_Update_Default
 
 		try
 		{
-			$orderCntl = Controller_Frontend_Factory::createController( $context, 'order' );
-			$serviceManager = MShop_Factory::createManager( $context, 'service' );
-
-			$search = $serviceManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'service.code', $view->param( 'code' ) ) );
-
-			$result = $serviceManager->searchItems( $search );
-
-			if( ( $serviceItem = reset( $result ) ) === false )
-			{
-				$msg = sprintf( 'No service for code "%1$s" found', $view->param( 'code' ) );
-				throw new Client_Html_Exception( $msg );
-			}
-
-			$response = null;
-			$headers = array();
-			$config = array( 'absoluteUri' => true, 'namespace' => false );
+			$serviceItem = $this->_getServiceItem( $view->param( 'code' ) );
 			$provider = $serviceManager->getProvider( $serviceItem );
 
+			$config = array( 'absoluteUri' => true, 'namespace' => false );
 			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $view->param( 'orderid' ) );
 			$urls = array(
 				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
@@ -232,12 +217,15 @@ class Client_Html_Checkout_Update_Default
 			$urls['payment.url-self'] = $urls['payment.url-update'];
 			$provider->injectGlobalConfigBE( $urls );
 
+			$response = null;
+			$headers = array();
+
 			try
 			{
 				$body = $view->request()->getBody();
 
 				if( ( $orderItem = $provider->updateSync( $view->param(), $body, $response, $headers ) ) !== null ) {
-					$orderCntl->update( $orderItem ); // Update stock, coupons, etc.
+					Controller_Frontend_Factory::createController( $context, 'order' )->update( $orderItem ); // stock, coupons
 				}
 
 				$view->updateMessage = $response;
@@ -279,6 +267,32 @@ class Client_Html_Checkout_Update_Default
 			$msg = "Updating order status failed: %1\$s\n%2\$s\n%3\$s";
 			$context->getLogger()->log( sprintf( $msg, $e->getMessage(), $params, $body ) );
 		}
+	}
+
+
+	/**
+	 * Returns the service item for the given code
+	 *
+	 * @param string $code Unique service code
+	 * @throws Client_Html_Exception If no service item could be found
+	 * @return MShop_Service_Item_Interface Service item object
+	 */
+	protected function _getServiceItem( $code )
+	{
+		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', $code ) );
+
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $serviceItem = reset( $result ) ) === false )
+		{
+			$msg = sprintf( 'No service for code "%1$s" found', $code );
+			throw new Client_Html_Exception( $msg );
+		}
+
+		return $serviceItem;
 	}
 
 

@@ -251,24 +251,7 @@ class Client_Html_Checkout_Confirm_Default
 
 		try
 		{
-			$serviceManager = MShop_Factory::createManager( $context, 'service' );
-
-			$search = $serviceManager->createSearch();
-			$expr = array(
-				$search->compare( '==', 'service.code', $view->param( 'code' ) ),
-				$search->compare( '==', 'service.type.code', 'payment' ),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$result = $serviceManager->searchItems( $search );
-
-			if( ( $serviceItem = reset( $result ) ) === false )
-			{
-				$msg = sprintf( 'No service for code "%1$s" found', $view->param( 'code' ) );
-				throw new Client_Html_Exception( $msg );
-			}
-
-
+			$serviceItem = $this->_getServiceItem( $view->param( 'code' ) );
 			$provider = $serviceManager->getProvider( $serviceItem );
 
 			$config = array( 'absoluteUri' => true, 'namespace' => false );
@@ -300,15 +283,13 @@ class Client_Html_Checkout_Confirm_Default
 			parent::process();
 
 
-			// Clear basket and cache
 			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
 				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
 
-				$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
-				$orderBaseManager->setSession( $orderBaseManager->createItem() );
+				Controller_Frontend_Factory::createController( $context, 'basket' )->clear();
 			}
 
 			// Update stock, coupons, etc.
@@ -336,6 +317,36 @@ class Client_Html_Checkout_Confirm_Default
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
+	}
+
+
+	/**
+	 * Returns the payment service item for the given code
+	 *
+	 * @param string $code Unique service code
+	 * @throws Client_Html_Exception If no payment service item could be found
+	 * @return MShop_Service_Item_Interface Service item object
+	 */
+	protected function _getServiceItem( $code )
+	{
+		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+
+		$search = $serviceManager->createSearch();
+		$expr = array(
+				$search->compare( '==', 'service.code', $code ),
+				$search->compare( '==', 'service.type.code', 'payment' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $serviceItem = reset( $result ) ) === false )
+		{
+			$msg = sprintf( 'No service for code "%1$s" found', $code );
+			throw new Client_Html_Exception( $msg );
+		}
+
+		return $serviceItem;
 	}
 
 
