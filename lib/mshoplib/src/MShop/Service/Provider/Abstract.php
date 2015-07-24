@@ -200,6 +200,10 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
+		if( isset( $params['orderid'] ) ) {
+			return $this->_getOrder( $params['orderid'] );
+		}
+
 		return null;
 	}
 
