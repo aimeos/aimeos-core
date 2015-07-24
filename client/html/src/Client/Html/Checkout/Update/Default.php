@@ -205,11 +205,10 @@ class Client_Html_Checkout_Update_Default
 
 		try
 		{
-			$serviceItem = $this->_getServiceItem( $view->param( 'code' ) );
-			$provider = $serviceManager->getProvider( $serviceItem );
+			$provider = $this->_getServiceProvider( $view->param( 'code' ) );
 
 			$config = array( 'absoluteUri' => true, 'namespace' => false );
-			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $view->param( 'orderid' ) );
+			$params = array( 'code' => $view->param( 'code' ), 'orderid' => $view->param( 'orderid' ) );
 			$urls = array(
 				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
 				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
@@ -271,13 +270,13 @@ class Client_Html_Checkout_Update_Default
 
 
 	/**
-	 * Returns the service item for the given code
+	 * Returns the service provider for the given code
 	 *
 	 * @param string $code Unique service code
 	 * @throws Client_Html_Exception If no service item could be found
-	 * @return MShop_Service_Item_Interface Service item object
+	 * @return MShop_Service_Provider_Interface Service provider object
 	 */
-	protected function _getServiceItem( $code )
+	protected function _getServiceProvider( $code )
 	{
 		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
 
@@ -292,7 +291,7 @@ class Client_Html_Checkout_Update_Default
 			throw new Client_Html_Exception( $msg );
 		}
 
-		return $serviceItem;
+		return $serviceManager->getProvider( $serviceItem );
 	}
 
 
