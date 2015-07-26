@@ -11,9 +11,9 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-16 18:01+0200\n"
-"PO-Revision-Date: 2015-07-16 16:01+0000\n"
+"PO-Revision-Date: 2015-07-17 20:55+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: German (http://www.transifex.com/p/aimeos-core/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/projects/p/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -597,7 +597,7 @@ msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leide
 #: src/Client/Html/Catalog/Detail/Default.php:518
 #, php-format
 msgid "No product with ID \"%1$s\" found"
-msgstr ""
+msgstr "Es wurde kein Produkt mit der ID \"%1$s\" gefunden"
 
 #: src/Client/Html/Checkout/Update/Default.php:218
 #: src/Client/Html/Checkout/Standard/Process/Default.php:309
