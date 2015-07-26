@@ -9,32 +9,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 11:46+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Polish (http://www.transifex.com/p/aimeos-core/language/pl/)\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:499
+#: src/Controller/Frontend/Basket/Default.php:498
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Dodawanie produkt z ID \"%1$s\" jest nie dozwolone"
 
-#: src/Controller/Frontend/Basket/Default.php:902
+#: src/Controller/Frontend/Basket/Default.php:901
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Dostępny atrybut o ID \"%1$s\" nie pasuje do podanego atrybutu o ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:166
+#: src/Controller/Frontend/Basket/Default.php:165
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr "Nie można zmienić pozycję \"%1$d\" zawartą w koszyku"
 
-#: src/Controller/Frontend/Basket/Default.php:140
+#: src/Controller/Frontend/Basket/Default.php:139
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Nie można usunąć ręcznie pozycji \"%1$d\" z koszyka"
@@ -57,27 +57,27 @@ msgstr "Klasa \"%1$s\" jest nie dostępna"
 msgid "Controller path is empty"
 msgstr "Ścieżka kontrolera jest pusta"
 
-#: src/Controller/Frontend/Basket/Default.php:258
+#: src/Controller/Frontend/Basket/Default.php:257
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
 msgstr "Kod kuponu \"%1$s\" jest nie ważny"
 
-#: src/Controller/Frontend/Basket/Default.php:211
+#: src/Controller/Frontend/Basket/Default.php:210
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid or not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:226
+#: src/Controller/Frontend/Basket/Default.php:225
 #, php-format
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:717
+#: src/Controller/Frontend/Basket/Default.php:716
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Niepoprawna referencja \"%1$s\" do produktu z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:832
+#: src/Controller/Frontend/Basket/Default.php:831
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Niepoprawne dane adresowe, proszę je sprawdzić"
@@ -106,37 +106,37 @@ msgstr "Niepoprawna domena \"%1$s\""
 msgid "Invalid factory \"%1$s\""
 msgstr "Niepoprawny producent \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:295
+#: src/Controller/Frontend/Basket/Default.php:294
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Niewłaściwa wartość adresu o typie \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1006
+#: src/Controller/Frontend/Basket/Default.php:1008
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Nie znaleziono tego typu listy w domenie \"%1$s\" i kodzie \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1108
+#: src/Controller/Frontend/Basket/Default.php:1110
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
 msgstr "Nie znaleziono produktu o podanym atrybucie i ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:973
+#: src/Controller/Frontend/Basket/Default.php:975
 #, php-format
-msgid "No product with code \"%1$s\" found"
-msgstr "Nie znaleziono produktu o kodzie \"%1$s\""
+msgid "No item for \"%1$s\" (%2$s) found"
+msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:746
+#: src/Controller/Frontend/Basket/Default.php:745
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "Brak produktu o ID \"%1$s\" i w magazynie \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1080
+#: src/Controller/Frontend/Basket/Default.php:1082
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "Nie znaleziono produktu z podanym atrybutem i ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:233
+#: src/Controller/Frontend/Basket/Default.php:232
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
 msgstr "Wymagania kodu kuponu \"%1$s\" nie są spełnione"
@@ -146,8 +146,8 @@ msgstr "Wymagania kodu kuponu \"%1$s\" nie są spełnione"
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Nie znaleziono usługi typu \"%1$s\" i z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:387
-#: src/Controller/Frontend/Basket/Default.php:423
+#: src/Controller/Frontend/Basket/Default.php:386
+#: src/Controller/Frontend/Basket/Default.php:422
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
 msgstr "Nie ma wystarczającej ilości produktu \"%1$s\" w magazynie"
@@ -162,7 +162,7 @@ msgstr "Nie można wywołać metody \"%1$s::%2$s\""
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Nie można utworzyć providera \"%1$s\" usługi z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:324
+#: src/Controller/Frontend/Basket/Default.php:323
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Nieznany atrybut \"%1$s\""
