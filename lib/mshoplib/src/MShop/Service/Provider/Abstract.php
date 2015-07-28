@@ -307,7 +307,7 @@ implements MShop_Service_Provider_Interface
 		{
 			if( $def['required'] === true && ( !isset( $attributes[$key] ) || $attributes[$key] === '' ) )
 			{
-				$errors[$key] = sprintf( 'Required attribute "%1$s" in provider configuration not available', $key );
+				$errors[$key] = sprintf( 'Configuration for "%1$s" is missing', $key );
 				continue;
 			}
 
@@ -348,7 +348,7 @@ implements MShop_Service_Provider_Interface
 						}
 						break;
 					default:
-						throw new MShop_Service_Exception( sprintf( 'Invalid characters in attribute for provider configuration. Attribute is not of type "%1$s".', $def['type'] ) );
+						throw new MShop_Service_Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
 				}
 			}
 

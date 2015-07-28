@@ -120,7 +120,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		foreach( $configParameters as $param )
 		{
 			if( !isset( $config[ $param ] ) ) {
-				throw new MShop_Service_Exception( sprintf( 'Parameter "%1$s" for configuration not available', $param ) );
+				throw new MShop_Service_Exception( sprintf( 'Configuration for "%1$s" is missing', $param ) );
 			}
 		}
 
