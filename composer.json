@@ -1,6 +1,6 @@
 {
 	"name": "aimeos/aimeos-core",
-	"description": "e-commerce framework for web shops, portals and market places",
+	"description": "Full-featured e-commerce framework for high performance web shops",
 	"homepage": "https://aimeos.org/",
 	"license": "LGPL-3.0",
 	"keywords": ["e-commerce", "shop", "portal", "market place"],
