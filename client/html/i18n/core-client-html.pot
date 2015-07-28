@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -575,9 +575,9 @@ msgstr ""
 msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Checkout/Update/Default.php:218
+#: src/Client/Html/Checkout/Update/Default.php:290
 #: src/Client/Html/Checkout/Standard/Process/Default.php:309
-#: src/Client/Html/Checkout/Confirm/Default.php:267
+#: src/Client/Html/Checkout/Confirm/Default.php:344
 #, php-format
 msgid "No service for code \"%1$s\" found"
 msgstr ""

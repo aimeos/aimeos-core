@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 14:50+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2013-09-24 16:22+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Exports all available products"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:282
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:280
 #, php-format
 msgid "Failed products during import: %1$d"
 msgstr ""
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Removes unpaid orders"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:255
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:253
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr ""
@@ -288,12 +288,12 @@ msgstr ""
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:437
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:435
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:286
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:284
 #, php-format
 msgid "Unable to move imported file"
 msgstr ""

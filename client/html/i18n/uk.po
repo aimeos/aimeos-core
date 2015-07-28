@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/p/aimeos-core/language/uk/)\n"
@@ -575,9 +575,9 @@ msgstr ""
 msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Checkout/Update/Default.php:218
+#: src/Client/Html/Checkout/Update/Default.php:290
 #: src/Client/Html/Checkout/Standard/Process/Default.php:309
-#: src/Client/Html/Checkout/Confirm/Default.php:267
+#: src/Client/Html/Checkout/Confirm/Default.php:344
 #, php-format
 msgid "No service for code \"%1$s\" found"
 msgstr ""

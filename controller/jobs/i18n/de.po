@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2015-07-14 12:51+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/aimeos-core/language/de/)\n"
@@ -121,7 +121,7 @@ msgstr "Führt die Aufgaben aus, die in der Administrationsoberfläche erstellt 
 msgid "Exports all available products"
 msgstr "Exportiert alle verfügbaren Produkte"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:282
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:280
 #, php-format
 msgid "Failed products during import: %1$d"
 msgstr "Nicht importierte Produkte: %1$d"
@@ -261,7 +261,7 @@ msgstr "Löscht nicht abgeschlossene Bestellungen"
 msgid "Removes unpaid orders"
 msgstr "Löscht unbezahlte Bestellungen"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:255
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:253
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Der erforderliche Abbildungsschlüssel \"%1$s\" fehlt oder beinhaltet keine Felder"
@@ -297,12 +297,12 @@ msgstr "Factorymethode \"%1$s\" kann nicht aufgerufen werden"
 msgid "Unable to call method \"%1$s\""
 msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:437
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:435
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "Das Produkt mit dem Code \"%1$s\" konnte nicht importiert werden: %2$s"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:286
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:284
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Die importierte Datei konnte nicht verschoben werden"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"PO-Revision-Date: 2015-07-28 14:11+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -112,6 +112,12 @@ msgstr ""
 msgid "Code must not be longer than 32 characters"
 msgstr ""
 
+#: src/MShop/Service/Provider/Abstract.php:310
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr ""
+
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #, php-format
 msgid "Configuration invalid"
@@ -200,13 +206,6 @@ msgstr ""
 #: src/MShop/Locale/Item/Language/Default.php:97
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
-
-#: src/MShop/Service/Provider/Abstract.php:347
-#, php-format
-msgid ""
-"Invalid characters in attribute for provider configuration. Attribute is not"
-" of type \"%1$s\"."
 msgstr ""
 
 #: src/MShop/Order/Manager/Factory.php:39
@@ -315,6 +314,11 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Default.php:570
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:351
+#, php-format
+msgid "Invalid type \"%1$s\""
 msgstr ""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
@@ -572,7 +576,6 @@ msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr ""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:139
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Parametar \"%1$s\" za konfiguraciju nije dostupan"
@@ -678,11 +681,6 @@ msgstr ""
 #: src/MShop/Order/Item/Base/Product/Default.php:337
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
-
-#: src/MShop/Service/Provider/Abstract.php:306
-#, php-format
-msgid "Required attribute \"%1$s\" in provider configuration not available"
 msgstr ""
 
 #: src/MShop/Common/Manager/List/Abstract.php:43
@@ -809,7 +807,7 @@ msgstr ""
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr ""
 
-#: src/MShop/Service/Provider/Abstract.php:258
+#: src/MShop/Service/Provider/Abstract.php:262
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
 msgstr ""

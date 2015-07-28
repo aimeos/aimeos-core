@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"PO-Revision-Date: 2015-07-28 14:11+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -111,6 +111,12 @@ msgstr "La clase \"%1$s\" no está disponible"
 msgid "Code must not be longer than 32 characters"
 msgstr "El código no debe superar los 32 caracteres"
 
+#: src/MShop/Service/Provider/Abstract.php:310
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr ""
+
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #, php-format
 msgid "Configuration invalid"
@@ -200,13 +206,6 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
-
-#: src/MShop/Service/Provider/Abstract.php:347
-#, php-format
-msgid ""
-"Invalid characters in attribute for provider configuration. Attribute is not"
-" of type \"%1$s\"."
-msgstr "Hay caracteres no válidos en el atributo para la configuración del proveedor. El atributo no es de tipo \"%1$s\"."
 
 #: src/MShop/Order/Manager/Factory.php:39
 #: src/MShop/Customer/Manager/Abstract.php:167
@@ -315,6 +314,11 @@ msgstr "Tipo de MIME \"%1$s\" no válido"
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Cesta serializada no válida. \"%1$s\" devuelve \"%2$s\"."
+
+#: src/MShop/Service/Provider/Abstract.php:351
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr ""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
@@ -571,7 +575,6 @@ msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr "El pedido con ID \"%1$s\" fue rechazado con código \"%2$s\": %3$s"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:139
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "El parámetro \"%1$s\" de configuración no está disponible"
@@ -678,11 +681,6 @@ msgstr "El proveedor de \"%1$s\" no está disponible"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "La cantidad debe ser un número entero positivo y no puede exceder %1$d"
-
-#: src/MShop/Service/Provider/Abstract.php:306
-#, php-format
-msgid "Required attribute \"%1$s\" in provider configuration not available"
-msgstr "El atributo requerido \"%1$s\" en la configuración del proveedor no está disponible"
 
 #: src/MShop/Common/Manager/List/Abstract.php:43
 #: src/MShop/Common/Manager/List/Abstract.php:47
@@ -808,7 +806,7 @@ msgstr "Raíz del árbol con código \"%1$s\" en \"%2$s\" no encontrada"
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr "No se ha encontrado el elemento tipo con ID \"%1$s\" en \"%2$s\""
 
-#: src/MShop/Service/Provider/Abstract.php:258
+#: src/MShop/Service/Provider/Abstract.php:262
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
 msgstr "No se pueden ordenar los días festivos: \"%1$s\""

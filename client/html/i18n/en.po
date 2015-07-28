@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -585,9 +585,9 @@ msgstr ""
 msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Checkout/Update/Default.php:218
+#: src/Client/Html/Checkout/Update/Default.php:290
 #: src/Client/Html/Checkout/Standard/Process/Default.php:309
-#: src/Client/Html/Checkout/Confirm/Default.php:267
+#: src/Client/Html/Checkout/Confirm/Default.php:344
 #, php-format
 msgid "No service for code \"%1$s\" found"
 msgstr ""
