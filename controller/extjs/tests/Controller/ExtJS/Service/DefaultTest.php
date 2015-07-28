@@ -76,16 +76,16 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 				'service.position' => 1,
 				'service.label' => 'test service',
 				'service.status' => 1,
-				'service.code' => 'test code',
-				'service.provider' => 'test provider',
-				'service.config' => array( 'url' => 'www.url.de' ),
+				'service.code' => 'testcode',
+				'service.provider' => 'Default',
+				'service.config' => array( 'default.url' => 'www.url.de', 'default.project' => 'test' ),
 				'service.typeid' => $type->getId(),
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'service.code' => 'test code' ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'service.code' => 'testcode' ) ) ) )
 		);
 
 		$saved = $this->_object->saveItems( $saveParams );
@@ -107,6 +107,37 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'service.typeid'}, $searched['items'][0]->{'service.typeid'} );
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
+	}
+
+
+	public function testSaveItemInvalidConfig()
+	{
+		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$typeManager = $manager->getSubManager( 'type' );
+
+		$search = $typeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.type.code', 'delivery' ) );
+		$result = $typeManager->searchItems( $search );
+
+		if( ( $type = reset( $result ) ) === false ) {
+			throw new Exception( 'No service type found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'service.position' => 1,
+				'service.label' => 'test service',
+				'service.status' => 1,
+				'service.code' => 'testcode',
+				'service.provider' => 'Default',
+				'service.config' => array( 'url' => 'www.url.de' ),
+				'service.typeid' => $type->getId(),
+			),
+		);
+
+		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->_object->saveItems( $saveParams );
 	}
 
 

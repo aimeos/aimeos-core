@@ -62,7 +62,13 @@ class Controller_ExtJS_Service_Default
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
+		$result = $this->_manager->searchItems( $search );
+
+		foreach( $result as $item ) {
+			$this->_checkConfig( $item );
+		}
+
+		$items = $this->_toArray( $result );
 
 		return array(
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
@@ -97,6 +103,31 @@ class Controller_ExtJS_Service_Default
 		}
 
 		return $item;
+	}
+
+
+	/**
+	 * Tests the configuration and throws an exception if it's invalid
+	 *
+	 * @param MShop_Service_Item_Interface $item Service item object
+	 * @throws Controller_ExtJS_Exception If configuration is invalid
+	 */
+	protected function _checkConfig( MShop_Service_Item_Interface $item )
+	{
+		$msg = '';
+		$provider = $this->_manager->getProvider( $item );
+		$result = $provider->checkConfigBE( $item->getConfig() );
+
+		foreach( $result as $key => $message )
+		{
+			if( $message !== null ) {
+				$msg .= sprintf( "- %1\$s : %2\$s\n", $key, $message );
+			}
+		}
+
+		if( $msg !== '' ) {
+			throw new Controller_ExtJS_Exception( "Invalid configuration:\n" . $msg );
+		}
 	}
 
 
