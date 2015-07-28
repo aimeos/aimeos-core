@@ -366,15 +366,15 @@ implements MShop_Service_Provider_Interface
 	 * is tested in the order of the keys. The first one that matches will
 	 * be returned.
 	 *
-	 * @param array $keys List of key names that should be tested for in the order to test
+	 * @param array|string $keys Key name or list of key names that should be tested for in the order to test
 	 * @param string $default Returned value if the key wasn't was found
 	 * @return mixed Value of the first key that matches or null if none was found
 	 */
-	protected function _getConfigValue( array $keys, $default = null )
+	protected function _getConfigValue( $keys, $default = null )
 	{
 		$srvconfig = $this->getServiceItem()->getConfig();
 
-		foreach( $keys as $key )
+		foreach( (array) $keys as $key )
 		{
 			if( isset( $srvconfig[$key] ) ) {
 				return $srvconfig[$key];
