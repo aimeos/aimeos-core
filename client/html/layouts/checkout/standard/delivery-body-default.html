@@ -71,15 +71,21 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
 			<li class="form-item <?php echo $enc->attr( $key ) . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 				<label for="delivery-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $key ) ); ?></label>
-<?php			switch( $attribute->getType() ) : case 'string':
-				?><input type="text" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" />
-<?php				break; case 'select':
+<?php			switch( $attribute->getType() ) : case 'select':
 				?><select id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php $code = $key . ':' . $option; echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></option>
 <?php					endforeach; ?>
-				</select>
-<?php			endswitch; ?>
+				</select><?php
+					break; case 'boolean':
+				 ?><input type="checkbox" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; case 'integer': case 'number':
+				 ?><input type="number" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; case 'date': case 'datetime': case 'time':
+				 ?><input type="<?php echo $attribute->getType(); ?>" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; default:
+				 ?><input type="text" id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_delivery/' . $id . '/' . $key, $value ) ); ?>" /><?php
+				endswitch; ?>
 			</li>
 <?php		endforeach; ?>
 		</ul>

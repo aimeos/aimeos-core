@@ -93,8 +93,12 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php echo $enc->html( $option ); ?></option>
 <?php				endforeach; ?>
 				</select><?php
-				break; case 'number':
+				break; case 'boolean':
+				?><input type="checkbox" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				break; case 'integer': case 'number':
 				?><input type="number" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				break; case 'date': case 'datetime': case 'time':
+				?><input type="<?php echo $attribute->getType(); ?>" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
 				break; default:
 				?><input type="text" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
 <?php		endswitch; ?>

@@ -317,34 +317,52 @@ implements MShop_Service_Provider_Interface
 				{
 					case 'boolean':
 						if( $attributes[$key] != '0' && $attributes[$key] != '1' ) {
-							$errors[$key] = 'Not a true/false value'; continue 2;
+							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
 						}
 						break;
 					case 'string':
 						if( is_string( $attributes[$key] ) === false ) {
-							$errors[$key] = 'Not a string'; continue 2;
+							$errors[$key] = sprintf( 'Not a string' ); continue 2;
 						}
 						break;
 					case 'integer':
 						if( ctype_digit( $attributes[$key] ) === false ) {
-							$errors[$key] = 'Not an integer number'; continue 2;
+							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
 						}
 						break;
-					case 'decimal':
-					case 'float':
+					case 'decimal': // deprecated
+					case 'float': // deprecated
+					case 'number':
 						if( is_numeric( $attributes[$key] ) === false ) {
-							$errors[$key] = 'Not a number'; continue 2;
+							$errors[$key] = sprintf( 'Not a number' ); continue 2;
+						}
+						break;
+					case 'date':
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$';
+						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a date' ); continue 2;
 						}
 						break;
 					case 'datetime':
 						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$';
 						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
-							$errors[$key] = 'Invalid date and time'; continue 2;
+							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
+						}
+						break;
+					case 'time':
+						$pattern = '/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$';
+						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
+						}
+						break;
+					case 'select':
+						if( !is_array( $def['default'] ) || !in_array( $def['default'], $attributes[$key] ) ) {
+							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
 						}
 						break;
 					case 'map':
 						if( !is_array( $attributes[$key] ) ) {
-							$errors[$key] = 'Not a valid map'; continue 2;
+							$errors[$key] = sprintf( 'Not a key/value map' ); continue 2;
 						}
 						break;
 					default:

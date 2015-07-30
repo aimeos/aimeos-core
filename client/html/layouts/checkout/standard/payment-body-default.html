@@ -72,15 +72,21 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 			<li class="form-item <?php echo $enc->attr( $key ) . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 				<label for="payment-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $key ) ); ?></label><?php
-				switch( $attribute->getType() ) : case 'string':
-				?><input type="text" id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_payment/' . $id . '/' . $key, $value ) ); ?>" /><?php
-					break; case 'select':
+				switch( $attribute->getType() ) : case 'select':
 				?><select id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
 					<option value="<?php echo $enc->attr( $option ); ?>"><?php $code = $key . ':' . $option; echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></option>
 <?php					endforeach; ?>
-				</select>
-<?php			endswitch; ?>
+				</select><?php
+					break; case 'boolean':
+				?><input type="checkbox" id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_payment/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; case 'integer': case 'number':
+				?><input type="number" id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_payment/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; case 'date': case 'datetime': case 'time':
+				?><input type="<?php echo $attribute->getType(); ?>" id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_payment/' . $id . '/' . $key, $value ) ); ?>" /><?php
+					break; default:
+				?><input type="text" id="payment-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_payment', $id, $key ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'c_payment/' . $id . '/' . $key, $value ) ); ?>" /><?php
+				endswitch; ?>
 			</li>
 <?php		endforeach; ?>
 		</ul>
