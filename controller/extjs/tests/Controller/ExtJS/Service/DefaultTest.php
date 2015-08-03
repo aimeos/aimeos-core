@@ -110,37 +110,6 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testSaveItemInvalidConfig()
-	{
-		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
-		$typeManager = $manager->getSubManager( 'type' );
-
-		$search = $typeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.type.code', 'delivery' ) );
-		$result = $typeManager->searchItems( $search );
-
-		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No service type found' );
-		}
-
-		$saveParams = (object) array(
-			'site' => 'unittest',
-			'items' => (object) array(
-				'service.position' => 1,
-				'service.label' => 'test service',
-				'service.status' => 1,
-				'service.code' => 'testcode',
-				'service.provider' => 'Default',
-				'service.config' => array( 'url' => 'www.url.de' ),
-				'service.typeid' => $type->getId(),
-			),
-		);
-
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( $saveParams );
-	}
-
-
 	public function testFinish()
 	{
 		$result = $this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
