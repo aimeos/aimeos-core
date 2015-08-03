@@ -28,7 +28,7 @@ class MAdmin_Log_Item_Default
 	public function __construct( array $values = array() )
 	{
 		parent::__construct( 'log.', $values );
-		
+
 		$this->_values = $values;
 	}
 
@@ -137,6 +137,33 @@ class MAdmin_Log_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'log.facility': $this->setFacility( $value ); break;
+				case 'log.priority': $this->setPriority( $value ); break;
+				case 'log.message': $this->setMessage( $value ); break;
+				case 'log.request': $this->setRequest( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -153,5 +180,4 @@ class MAdmin_Log_Item_Default
 
 		return $list;
 	}
-
 }

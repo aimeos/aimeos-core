@@ -155,6 +155,34 @@ class MAdmin_Job_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'job.label': $this->setLabel( $value ); break;
+				case 'job.method': $this->setMethod( $value ); break;
+				case 'job.parameter': $this->setParameter( $value ); break;
+				case 'job.result': $this->setResult( $value ); break;
+				case 'job.status': $this->setStatus( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -165,8 +193,8 @@ class MAdmin_Job_Item_Default
 
 		$list['job.label'] = $this->getLabel();
 		$list['job.method'] = $this->getMethod();
-		$list['job.parameter'] = json_encode( $this->getParameter() );
-		$list['job.result'] = json_encode( $this->getResult() );
+		$list['job.parameter'] = $this->getParameter();
+		$list['job.result'] = $this->getResult();
 		$list['job.status'] = $this->getStatus();
 
 		return $list;

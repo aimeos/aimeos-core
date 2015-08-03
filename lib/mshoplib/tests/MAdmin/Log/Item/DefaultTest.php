@@ -145,6 +145,33 @@ class MAdmin_Log_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MAdmin_Log_Item_Default();
+
+		$list = array(
+			'log.id' => 1,
+			'log.siteid' => 2,
+			'log.priority' => 1,
+			'log.facility' => 'UT facility',
+			'log.timestamp' => '2010-01-01 00:00:00',
+			'log.message' => 'unittest log message',
+			'log.request' => 'UT request',
+		);
+
+		$unknown = $item->fromArray( $list );
+
+		$this->assertEquals( array( 'log.timestamp' => '2010-01-01 00:00:00' ), $unknown );
+
+		$this->assertEquals( $list['log.id'], $item->getId() );
+		$this->assertEquals( $list['log.priority'], $item->getPriority() );
+		$this->assertEquals( $list['log.facility'], $item->getFacility() );
+		$this->assertEquals( $list['log.message'], $item->getMessage() );
+		$this->assertEquals( $list['log.request'], $item->getRequest() );
+		$this->assertNull( $item->getSiteId() );
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();

@@ -28,6 +28,8 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function __construct( array $values = array() )
 	{
+		parent::__construct( 'cache.', $values );
+
 		$this->_values = $values;
 	}
 
@@ -144,18 +146,47 @@ class MAdmin_Cache_Item_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'cache.id': $this->setId( $value ); break;
+				case 'cache.value': $this->setValue( $value ); break;
+				case 'cache.expire': $this->setTimeExpire( $value ); break;
+				case 'cache.tags': $this->setTags( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
 	 */
 	public function toArray()
 	{
-		return array(
-			'cache.id' => $this->getId(),
-			'cache.siteid' => $this->getSiteId(),
-			'cache.value' => $this->getValue(),
-			'cache.expire' => $this->getTimeExpire(),
-		);
-	}
+		$list = array();
 
+		$list['cache.id'] = $this->getId();
+		$list['cache.siteid'] = $this->getSiteId();
+		$list['cache.value'] = $this->getValue();
+		$list['cache.expire'] = $this->getTimeExpire();
+		$list['cache.tags'] = $this->getTags();
+
+		return $list;
+	}
 }

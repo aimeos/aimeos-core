@@ -106,14 +106,39 @@ class MAdmin_Cache_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MAdmin_Cache_Item_Default();
+
+		$list = array(
+			'cache.id' => 'product/id/1:detail-body',
+			'cache.siteid' => 2,
+			'cache.value' => 'test',
+			'cache.expire' => '2000-01-01 00:00:00',
+			'cache.tags' => array( 'tag1', 'tag2' ),
+		);
+
+		$unknown = $item->fromArray( $list );
+
+		$this->assertEquals( array(), $unknown );
+
+		$this->assertEquals( $list['cache.id'], $item->getId() );
+		$this->assertEquals( $list['cache.value'], $item->getValue() );
+		$this->assertEquals( $list['cache.expire'], $item->getTimeExpire() );
+		$this->assertEquals( $list['cache.tags'], $item->getTags() );
+		$this->assertNull( $item->getSiteId() );
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();
 
-		$this->assertEquals( 4, count( $list ) );
+		$this->assertEquals( 5, count( $list ) );
 		$this->assertEquals( 'product/id/1:detail-body', $list['cache.id'] );
 		$this->assertEquals( 1, $list['cache.siteid'] );
 		$this->assertEquals( 'test', $list['cache.value'] );
 		$this->assertEquals( '2000-01-01 00:00:00', $list['cache.expire'] );
+		$this->assertEquals( array( 'tag:1', 'tag:2' ), $list['cache.tags'] );
 	}
 }

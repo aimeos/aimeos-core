@@ -157,6 +157,34 @@ class MAdmin_Job_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testFromArray()
+	{
+		$item = new MAdmin_Job_Item_Default();
+
+		$list = array(
+			'job.id' => 1,
+			'job.siteid' => 2,
+			'job.label' => 'unittest job',
+			'job.method' => 'Product_Import_Text.importFile',
+			'job.parameter' => array( 'items' => 'testfile.ext' ),
+			'job.result' => array( 'items' => 'testfile2.ext' ),
+			'job.status' => 1,
+		);
+
+		$unknown = $item->fromArray( $list );
+
+		$this->assertEquals( array(), $unknown );
+
+		$this->assertEquals( $list['job.id'], $item->getId() );
+		$this->assertEquals( $list['job.label'], $item->getLabel() );
+		$this->assertEquals( $list['job.method'], $item->getMethod() );
+		$this->assertEquals( $list['job.parameter'], $item->getParameter() );
+		$this->assertEquals( $list['job.result'], $item->getResult() );
+		$this->assertEquals( $list['job.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();
@@ -167,8 +195,8 @@ class MAdmin_Job_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 2, $list['job.siteid'] );
 		$this->assertEquals( 'unittest job', $list['job.label'] );
 		$this->assertEquals( 'Product_Import_Text.importFile', $list['job.method'] );
-		$this->assertEquals( json_encode( array( 'items' => 'testfile.ext' ) ), $list['job.parameter'] );
-		$this->assertEquals( json_encode( array( 'items' => 'testfile2.ext' ) ), $list['job.result'] );
+		$this->assertEquals( array( 'items' => 'testfile.ext' ), $list['job.parameter'] );
+		$this->assertEquals( array( 'items' => 'testfile2.ext' ), $list['job.result'] );
 		$this->assertEquals( 1, $list['job.status'] );
 		$this->assertEquals( 'unittest', $list['job.editor'] );
 		$this->assertEquals( '2010-01-01 00:00:00', $list['job.mtime'] );
