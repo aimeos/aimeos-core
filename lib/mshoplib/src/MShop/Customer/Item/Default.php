@@ -235,10 +235,13 @@ class MShop_Customer_Item_Default
 	 */
 	public function setPassword( $value )
 	{
-		$password = ( $this->_helper !== null ? $this->_helper->encode( $value, $this->_salt ) : $value );
-		if ( $password == $this->getPassword() ) { return; }
+		if( $value == $this->getPassword() ) { return; }
 
-		$this->_values['password'] = $password;
+		if( $this->_helper !== null ) {
+			$value = $this->_helper->encode( $value, $this->_salt );
+		}
+
+		$this->_values['password'] = $value;
 		$this->setModified();
 	}
 
