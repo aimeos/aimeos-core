@@ -77,7 +77,7 @@ class Controller_ExtJS_Text_List_DefaultTest extends MW_Unittest_Testcase
 				'text.list.parentid' => $result['items'][0]->{'text.id'},
 				'text.list.typeid' => $resultType['items'][0]->{'text.list.type.id'},
 				'text.list.domain' => 'text',
-				'text.list.refid' => 123,
+				'text.list.refid' => -1,
 				'text.list.datestart' => '2000-01-01 00:00:00',
 				'text.list.dateend' => '2001-01-01 00:00:00',
 				'text.list.config' => array('test' => 'unit'),
@@ -88,7 +88,7 @@ class Controller_ExtJS_Text_List_DefaultTest extends MW_Unittest_Testcase
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'text.list.refid' => 123 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'text.list.refid' => -1 ) ) ) )
 		);
 
 
