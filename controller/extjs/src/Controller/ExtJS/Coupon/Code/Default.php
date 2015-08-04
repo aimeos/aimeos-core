@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,40 +30,6 @@ class Controller_ExtJS_Coupon_Code_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Coupon_Code' );
-
-		$this->_manager = MShop_Coupon_Manager_Factory::createManager( $context )->getSubManager( 'code' );
-	}
-
-
-	/**
-	 * Creates a new coupon item or updates an existing one or a list thereof.
-	 *
-	 * @param stdClass $params Associative array containing the coupon properties
-	 */
-	public function saveItems( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$ids = array();
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-
-		foreach( $items as $entry )
-		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
-		}
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
 	}
 
 
@@ -305,41 +272,27 @@ class Controller_ExtJS_Coupon_Code_Default
 
 
 	/**
-	 * Creates a new coupon code item and sets the properties from the given array.
+	 * Returns the item populated by the data from the row.
 	 *
-	 * @param array $entry Associative list of name and value properties using the "coupon.code" prefix
-	 * @return MShop_Coupon_Item_Code_Interface Coupon code item
+	 * @param MShop_Coupon_Item_Code_Interface $item Empty coupon item
+	 * @param array $row List of coupon data (code, count, start and end)
+	 * @return MShop_Coupon_Item_Code_Interface Populated coupon item
 	 */
-	protected function _createItem( array $entry )
+	protected function _getItem( MShop_Coupon_Item_Code_Interface $item, array $row )
 	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'coupon.code.id': $item->setId( $value ); break;
-				case 'coupon.code.code': $item->setCode( $value ); break;
-				case 'coupon.code.count': $item->setCount( $value ); break;
-				case 'coupon.code.couponid': $item->setCouponId( $value ); break;
-				case 'coupon.code.datestart':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'coupon.code.datestart'} = $value;
-						$item->setDateStart( $value );
-					}
-					break;
-				case 'coupon.code.dateend':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'coupon.code.dateend'} = $value;
-						$item->setDateEnd( $value );
-					}
-					break;
-			}
+		foreach( $row as $idx => $value ) {
+			$row[$idx] = trim( $value );
 		}
+
+		$count = ( isset( $row[1] ) && $row[1] != '' ? $row[1] : 1 );
+		$start = ( isset( $row[2] ) && $row[2] != '' ? $row[2] : null );
+		$end = ( isset( $row[3] ) && $row[3] != '' ? $row[3] : null );
+
+		$item->setId( null );
+		$item->setCode( $row[0] );
+		$item->setCount( $count );
+		$item->setDateStart( $start );
+		$item->setDateEnd( $end );
 
 		return $item;
 	}
@@ -352,7 +305,22 @@ class Controller_ExtJS_Coupon_Code_Default
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'coupon/code' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'coupon.code';
 	}
 
 
@@ -396,28 +364,21 @@ class Controller_ExtJS_Coupon_Code_Default
 
 
 	/**
-	 * Returns the item populated by the data from the row.
+	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param MShop_Coupon_Item_Code_Interface $item Empty coupon item
-	 * @param array $row List of coupon data (code, count, start and end)
-	 * @return MShop_Coupon_Item_Code_Interface Populated coupon item
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
 	 */
-	protected function _getItem( MShop_Coupon_Item_Code_Interface $item, array $row )
+	protected function _transformValues( stdClass $entry )
 	{
-		foreach( $row as $idx => $value ) {
-			$row[$idx] = trim( $value );
+		if( isset( $entry->{'coupon.code.datestart'} ) ) {
+			$entry->{'coupon.code.datestart'} = str_replace( 'T', ' ', $entry->{'coupon.code.datestart'} );
 		}
 
-		$count = ( isset( $row[1] ) && $row[1] != '' ? $row[1] : 1 );
-		$start = ( isset( $row[2] ) && $row[2] != '' ? $row[2] : null );
-		$end = ( isset( $row[3] ) && $row[3] != '' ? $row[3] : null );
+		if( isset( $entry->{'coupon.code.dateend'} ) ) {
+			$entry->{'coupon.code.dateend'} = str_replace( 'T', ' ', $entry->{'coupon.code.dateend'} );
+		}
 
-		$item->setId( null );
-		$item->setCode( $row[0] );
-		$item->setCount( $count );
-		$item->setDateStart( $start );
-		$item->setDateEnd( $end );
-
-		return $item;
+		return $entry;
 	}
 }

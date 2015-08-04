@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -19,7 +20,6 @@ class Controller_ExtJS_Product_Default
 	implements Controller_ExtJS_Common_Interface
 {
 	private $_manager = null;
-	private $_context = null;
 
 
 	/**
@@ -30,9 +30,6 @@ class Controller_ExtJS_Product_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Product' );
-
-		$this->_manager = MShop_Product_Manager_Factory::createManager( $context );
-		$this->_context = $context;
 	}
 
 
@@ -47,55 +44,20 @@ class Controller_ExtJS_Product_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$manager = $this->_getManager();
+		$indexManager = MShop_Factory::createManager( $this->_getContext(), 'catalog/index' );
 
-		$search = $this->_manager->createSearch();
+		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $params->items ) );
 		$search->setSlice( 0, count( $params->items ) );
 
-		foreach( $this->_manager->searchItems( $search ) as $item ) {
+		foreach( $manager->searchItems( $search ) as $item ) {
 			$indexManager->saveItem( $item );
 		}
 
 		$this->_clearCache( (array) $params->items );
 
 		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
-	 * Creates a new product item or updates an existing one or a list thereof.
-	 *
-	 * @param stdClass $params Associative array containing the product properties
-	 * @return array Associative list with nodes and success value
-	 */
-	public function saveItems( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$ids = array();
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-
-		foreach( $items as $entry )
-		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
-		}
-
-		$this->_clearCache( $ids );
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
 	}
@@ -157,55 +119,47 @@ class Controller_ExtJS_Product_Default
 
 
 	/**
-	 * Creates a new product item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "product" prefix
-	 * @return MShop_Product_Item_Interface Product item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'product.id': $item->setId( $value ); break;
-				case 'product.code': $item->setCode( $value ); break;
-				case 'product.label': $item->setLabel( $value ); break;
-				case 'product.typeid': $item->setTypeId( $value ); break;
-				case 'product.status': $item->setStatus( $value ); break;
-				case 'product.suppliercode': $item->setSupplierCode( $value ); break;
-				case 'product.datestart':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'product.datestart'} = $value;
-						$item->setDateStart( $value );
-					}
-					break;
-				case 'product.dateend':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'product.dateend'} = $value;
-						$item->setDateEnd( $value );
-					}
-					break;
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'product';
+	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'product.datestart'} ) ) {
+			$entry->{'product.datestart'} = str_replace( 'T', ' ', $entry->{'product.datestart'} );
+		}
+
+		if( isset( $entry->{'product.dateend'} ) ) {
+			$entry->{'product.dateend'} = str_replace( 'T', ' ', $entry->{'product.dateend'} );
+		}
+
+		return $entry;
 	}
 }

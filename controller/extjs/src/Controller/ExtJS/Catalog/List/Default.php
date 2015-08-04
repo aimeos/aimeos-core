@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,9 +30,6 @@ class Controller_ExtJS_Catalog_List_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Catalog_List' );
-
-		$manager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$this->_manager = $manager->getSubManager( 'list' );
 	}
 
 
@@ -45,13 +43,15 @@ class Controller_ExtJS_Catalog_List_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
+		$manager = $this->_getManager();
 		$ids = $refIds = $domains = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
+			$item = $manager->createItem();
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$manager->saveItem( $item );
 
 			$domains[ $item->getDomain() ] = true;
 			$refIds[] = $item->getRefId();
@@ -72,16 +72,7 @@ class Controller_ExtJS_Catalog_List_Default
 			$indexManager->rebuildIndex( $productManager->searchItems( $search ) );
 		}
 
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.list.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
+		return $this->_getItems( $ids, $this->_getPrefix() );
 	}
 
 
@@ -121,57 +112,47 @@ class Controller_ExtJS_Catalog_List_Default
 
 
 	/**
-	 * Creates a new catalog list item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "catalog.list" prefix
-	 * @return MShop_Common_Item_List_Interface Common list item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( (array) $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'catalog.list.id': $item->setId( $value ); break;
-				case 'catalog.list.domain': $item->setDomain( $value ); break;
-				case 'catalog.list.parentid': $item->setParentId( $value ); break;
-				case 'catalog.list.position': $item->setPosition( $value ); break;
-				case 'catalog.list.config': $item->setConfig( (array) $value ); break;
-				case 'catalog.list.status': $item->setStatus( $value ); break;
-				case 'catalog.list.typeid': $item->setTypeId( $value ); break;
-				case 'catalog.list.refid': $item->setRefId( $value ); break;
-				case 'catalog.list.datestart':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'catalog.list.datestart'} = $value;
-						$item->setDateStart( $value );
-					}
-					break;
-				case 'catalog.list.dateend':
-					if( $value != '' )
-					{
-						$value = str_replace( 'T', ' ', $value );
-						$entry->{'catalog.list.dateend'} = $value;
-						$item->setDateEnd( $value );
-					}
-					break;
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'catalog.list';
+	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'catalog.list.datestart'} ) ) {
+			$entry->{'catalog.list.datestart'} = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
+		}
+
+		if( isset( $entry->{'catalog.list.dateend'} ) ) {
+			$entry->{'catalog.list.dateend'} = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
+		}
+
+		return $entry;
 	}
 }

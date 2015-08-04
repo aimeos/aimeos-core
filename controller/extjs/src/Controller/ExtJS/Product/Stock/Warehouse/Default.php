@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,67 +30,6 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Product_Stock_Warehouse' );
-
-		$manager = MShop_Product_Manager_Factory::createManager( $context );
-		$stockManager = $manager->getSubManager( 'stock' );
-		$this->_manager = $stockManager->getSubManager( 'warehouse' );
-	}
-
-
-	/**
-	 * Creates a new product stock warehouse item or updates an existing one or a list thereof.
-	 *
-	 * @param stdClass $params Associative array containing the product warehouse properties
-	 */
-	public function saveItems( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$ids = array();
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-
-		foreach( $items as $entry )
-		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
-		}
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
-	}
-
-
-	/**
-	 * Creates a new product stock warehouse item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "product.stock.warehouse" prefix
-	 * @return MShop_Product_Item_Stock_Warehouse_Interface Product warehouse item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'product.stock.warehouse.id': $item->setId( $value ); break;
-				case 'product.stock.warehouse.code': $item->setCode( $value ); break;
-				case 'product.stock.warehouse.label': $item->setLabel( $value ); break;
-				case 'product.stock.warehouse.status': $item->setStatus( $value ); break;
-			}
-		}
-
-		return $item;
 	}
 
 
@@ -100,6 +40,21 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock/warehouse' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'product.stock.warehouse';
 	}
 }

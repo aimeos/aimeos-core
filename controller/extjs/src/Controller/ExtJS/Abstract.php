@@ -75,10 +75,7 @@ abstract class Controller_ExtJS_Abstract
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		foreach( (array) $params->items as $id ) {
-			$this->_getManager()->deleteItem( $id );
-		}
-
+		$this->_getManager()->deleteItems( (array) $params->items );
 		$this->_clearCache( (array) $params->items );
 
 		return array(
@@ -100,8 +97,9 @@ abstract class Controller_ExtJS_Abstract
 		$this->_setLocale( $params->site );
 
 		$total = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
-		$items = $this->_getManager()->searchItems( $search, array(), $total );
+		$manager = $this->_getManager();
+		$search = $this->_initCriteria( $manager->createSearch(), $params );
+		$items = $manager->searchItems( $search, array(), $total );
 
 		return array(
 			'items' => $this->_toArray( $items ),
@@ -191,6 +189,34 @@ abstract class Controller_ExtJS_Abstract
 		return array(
 			'criteria' => $this->_getAttributeSchema( $attributes, false ),
 		);
+	}
+
+
+	/**
+	 * Creates a new item or updates an existing one or a list thereof
+	 *
+	 * @param stdClass $params Associative array containing the item properties
+	 * @return array Associative array including items and status for ExtJS
+	 */
+	public function saveItems( stdClass $params )
+	{
+		$this->_checkParams( $params, array( 'site', 'items' ) );
+		$this->_setLocale( $params->site );
+
+		$ids = array();
+		$manager = $this->_getManager();
+		$entries = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
+
+		foreach( $entries as $entry )
+		{
+			$item = $manager->createItem();
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
+
+			$manager->saveItem( $item );
+			$ids[] = $item->getId();
+		}
+
+		return $this->_getItems( $ids, $this->_getPrefix() );
 	}
 
 
@@ -301,6 +327,27 @@ abstract class Controller_ExtJS_Abstract
 			}
 		}
 		return $properties;
+	}
+
+
+	/**
+	 * Returns the items for the given domain and IDs
+	 *
+	 * @param array $ids List of domain item IDs
+	 * @param string $prefix Search key prefix
+	 * @return array Associative array including items and status for ExtJS
+	 */
+	protected function _getItems( array $ids, $prefix )
+	{
+		$search = $this->_getManager()->createSearch();
+		$search->setConditions( $search->compare( '==', $prefix . '.id', $ids ) );
+		$search->setSlice( 0, count( $ids ) );
+		$items = $this->_toArray( $this->_getManager()->searchItems( $search ) );
+
+		return array(
+			'items' => ( count( $ids ) === 1 ? reset( $items ) : $items ),
+			'success' => true,
+		);
 	}
 
 
@@ -442,6 +489,18 @@ abstract class Controller_ExtJS_Abstract
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		return $entry;
 	}
 
 

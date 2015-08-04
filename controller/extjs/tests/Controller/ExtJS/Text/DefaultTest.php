@@ -104,37 +104,56 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'text.status'}, $searched['items'][0]->{'text.status'} );
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
-		$this->assertEquals('unittest label', $saved['items']->{'text.label'} );
+		$this->assertEquals( 'unittest label', $saved['items']->{'text.label'} );
 	}
 
 
 	public function testSaveItemLabelContent()
 	{
-		$context = TestHelper::getContext();
-		$methods = array( 'createItem', 'saveItem' );
-		$managerStub = $this->getMock( 'MShop_Text_Manager_Default', $methods, array( $context ) );
-		$itemStub = $this->getMock( 'MShop_Text_Item_Default' );
+		$typeManager = MShop_Factory::createManager( TestHelper::getContext(), 'text/type' );
+		$criteria = $typeManager->createSearch();
+		$criteria->setSlice( 0, 1 );
+		$result = $typeManager->searchItems( $criteria );
 
-		$managerStub->expects( $this->once() )->method( 'createItem' )->will( $this->returnValue( $itemStub ) );
-		$managerStub->expects( $this->once() )->method( 'saveItem' );
-
-		$itemStub->expects( $this->once() )->method( 'getContent' )->will( $this->returnValue( "<br>\ntest<br>\n<br>\ncontent" ) );
-		$itemStub->expects( $this->once() )->method( 'setContent' )->with( $this->equalTo( "<br>\ntest<br>\n<br>\ncontent" ) );
-		$itemStub->expects( $this->once() )->method( 'setLabel' )->with( $this->equalTo( 'test content' ) );
-
-		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', $managerStub );
+		if( ( $type = reset( $result ) ) === false ) {
+			throw new Exception( 'No type item found' );
+		}
 
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'text.content' => "<br>\ntest<br>\n<br>\ncontent<br>\n<br>\r\n",
+				'text.content' => 'controller test text',
+				'text.domain' => 'product',
+				'text.typeid' => $type->getId(),
+				'text.languageid' => 'de',
+				'text.status' => 1,
 			),
 		);
 
-		$cntl = new Controller_ExtJS_Text_Default( $context );
-		$cntl->saveItems( $saveParams );
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'text.content' => 'controller test text' ) ) ) )
+		);
 
-		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', null );
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'text.id'} );
+		$this->_object->deleteItems( $deleteParams );
+		$result = $this->_object->searchItems( $searchParams );
+
+		$this->assertInternalType( 'object', $saved['items'] );
+		$this->assertNotNull( $saved['items']->{'text.id'} );
+		$this->assertEquals( $saved['items']->{'text.id'}, $searched['items'][0]->{'text.id'} );
+		$this->assertEquals( $saved['items']->{'text.content'}, $searched['items'][0]->{'text.content'} );
+		$this->assertEquals( $saved['items']->{'text.domain'}, $searched['items'][0]->{'text.domain'} );
+		$this->assertEquals( $saved['items']->{'text.typeid'}, $searched['items'][0]->{'text.typeid'} );
+		$this->assertEquals( $saved['items']->{'text.content'}, $searched['items'][0]->{'text.label'} );
+		$this->assertEquals( $saved['items']->{'text.languageid'}, $searched['items'][0]->{'text.languageid'} );
+		$this->assertEquals( $saved['items']->{'text.status'}, $searched['items'][0]->{'text.status'} );
+		$this->assertEquals( 1, count( $searched['items'] ) );
+		$this->assertEquals( 0, count( $result['items'] ) );
+		$this->assertEquals( 'controller test text', $saved['items']->{'text.label'} );
 	}
 
 

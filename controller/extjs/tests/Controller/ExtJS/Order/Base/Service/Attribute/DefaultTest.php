@@ -73,7 +73,7 @@ class Controller_ExtJS_Order_Base_Service_Attribute_DefaultTest extends MW_Unitt
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'order.base.service.attribute.ordservid' => $expected->getId(),
+				'order.base.service.attribute.serviceid' => $expected->getId(),
 				'order.base.service.attribute.code' => 'FooBar',
 				'order.base.service.attribute.value' => 'ValueTest',
 				'order.base.service.attribute.name' => 'TestName'

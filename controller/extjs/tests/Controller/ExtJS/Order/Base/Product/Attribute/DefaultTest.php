@@ -74,7 +74,7 @@ class Controller_ExtJS_Order_Base_Product_Attribute_DefaultTest extends MW_Unitt
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'order.base.product.attribute.ordprodid' => $expected->getId(),
+				'order.base.product.attribute.productid' => $expected->getId(),
 				'order.base.product.attribute.code' => 'color',
 				'order.base.product.attribute.value' => 'purple',
 				'order.base.product.attribute.name' => 'Lila'

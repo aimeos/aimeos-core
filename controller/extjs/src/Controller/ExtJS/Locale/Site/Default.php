@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,8 +30,6 @@ class Controller_ExtJS_Locale_Site_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Locale_Site' );
-
-		$this->_manager = MShop_Locale_Manager_Factory::createManager( $context )->getSubManager( 'site' );
 	}
 
 
@@ -63,24 +62,18 @@ class Controller_ExtJS_Locale_Site_Default
 		$this->_checkParams( $params, array( 'items' ) );
 
 		$ids = array();
+		$manager = $this->_getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
+			$item = $manager->createItem();
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'locale.site.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
+		return $this->_getItems( $ids, $this->_getPrefix() );
 	}
 
 
@@ -127,7 +120,8 @@ class Controller_ExtJS_Locale_Site_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( (array) $entry );
+			$item = $manager->createItem();
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
 			$manager->insertItem( $item, $parentId, $refId );
 
 			$entry->{'locale.site.id'} = $item->getId();
@@ -273,32 +267,6 @@ class Controller_ExtJS_Locale_Site_Default
 
 
 	/**
-	 * Creates a new locale site item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "locale.site" prefix
-	 * @return MShop_Locale_Item_Site_Interface Locale site item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'locale.site.id': $item->setId( $value ); break;
-				case 'locale.site.code': $item->setCode( $value ); break;
-				case 'locale.site.label': $item->setLabel( $value ); break;
-				case 'locale.site.status': $item->setStatus( $value ); break;
-				case 'locale.site.config': $item->setConfig( (array) $value ); break;
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Creates a list of items with children.
 	 *
 	 * @param MShop_Locale_Item_Site_Interface $item Locale site item
@@ -325,6 +293,21 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'locale/site' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'locale.site';
 	}
 }

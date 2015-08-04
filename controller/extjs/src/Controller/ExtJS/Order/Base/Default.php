@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,9 +30,6 @@ class Controller_ExtJS_Order_Base_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Order_Base' );
-
-		$manager = MShop_Order_Manager_Factory::createManager( $context );
-		$this->_manager = $manager->getSubManager( 'base' );
 	}
 
 
@@ -45,6 +43,7 @@ class Controller_ExtJS_Order_Base_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 
 		$ids = array();
+		$manager = $this->_getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
@@ -54,44 +53,13 @@ class Controller_ExtJS_Order_Base_Default
 
 			$this->_setLocale( $params->site, $langid, $currencyid );
 
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
+			$item = $manager->createItem();
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
-	}
-
-
-	/**
-	 * Creates a new order base item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "order.base" prefix
-	 * @return MShop_Order_Item_Base_Interface Order base item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'order.base.id': $item->setId( $value ); break;
-				case 'order.base.comment': $item->setComment( $value ); break;
-				case 'order.base.customerid': $item->setCustomerId( $value ); break;
-			}
-		}
-
-		return $item;
+		return $this->_getItems( $ids, $this->_getPrefix() );
 	}
 
 
@@ -102,6 +70,21 @@ class Controller_ExtJS_Order_Base_Default
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'order.base';
 	}
 }

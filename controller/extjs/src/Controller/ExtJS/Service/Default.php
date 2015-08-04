@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -19,7 +20,6 @@ class Controller_ExtJS_Service_Default
 	implements Controller_ExtJS_Common_Interface
 {
 	private $_manager = null;
-	private $_context = null;
 
 
 	/**
@@ -30,9 +30,6 @@ class Controller_ExtJS_Service_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Service' );
-
-		$this->_manager = MShop_Service_Manager_Factory::createManager( $context );
-		$this->_context = $context;
 	}
 
 
@@ -48,21 +45,23 @@ class Controller_ExtJS_Service_Default
 		$this->_setLocale( $params->site );
 
 		$ids = array();
+		$manager = $this->_getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
+			$item = $manager->createItem();
+			$item->fromArray( $this->_transformValues( (array) $entry ) );
+			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
 		$this->_clearCache( $ids );
 
-		$search = $this->_manager->createSearch();
+		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
-		$result = $this->_manager->searchItems( $search );
+		$result = $manager->searchItems( $search );
 
 		foreach( $result as $item ) {
 			$this->_checkConfig( $item );
@@ -74,35 +73,6 @@ class Controller_ExtJS_Service_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
-	}
-
-
-	/**
-	 * Creates a new service item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "service" prefix
-	 * @return MShop_Service_Item_Interface Service item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'service.id': $item->setId( $value ); break;
-				case 'service.code': $item->setCode( $value ); break;
-				case 'service.label': $item->setLabel( $value ); break;
-				case 'service.typeid': $item->setTypeId( $value ); break;
-				case 'service.status': $item->setStatus( $value ); break;
-				case 'service.position': $item->setPosition( $value ); break;
-				case 'service.provider': $item->setProvider( $value ); break;
-				case 'service.config': $item->setConfig( (array) $value ); break;
-			}
-		}
-
-		return $item;
 	}
 
 
@@ -138,6 +108,21 @@ class Controller_ExtJS_Service_Default
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'service';
 	}
 }

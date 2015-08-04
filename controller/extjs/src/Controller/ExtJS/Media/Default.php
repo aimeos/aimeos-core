@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,8 +30,6 @@ class Controller_ExtJS_Media_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Media' );
-
-		$this->_manager = MShop_Media_Manager_Factory::createManager( $context );
 	}
 
 
@@ -163,40 +162,6 @@ class Controller_ExtJS_Media_Default
 	}
 
 
-	/**
-	 * Creates a new media item or updates an existing one or a list thereof.
-	 *
-	 * @param stdClass $params Associative array containing the text properties
-	 */
-	public function saveItems( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$ids = array();
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-
-		foreach( $items as $entry )
-		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
-		}
-
-		$this->_clearCache( $ids );
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'media.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
-	}
-
-
 	public function uploadItem( stdClass $params )
 	{
 		$this->_checkParams( $params, array( 'site', 'domain' ) );
@@ -253,7 +218,7 @@ class Controller_ExtJS_Media_Default
 		$filename = md5( $fileinfo['name'] . microtime( true ) );
 		$mediaFile = MW_Media_Factory::get( $fileinfo['tmp_name'], $options );
 
-		$item = $this->_manager->createItem();
+		$item = $this->_getManager()->createItem();
 		$item->setDomain( $params->domain );
 		$item->setLabel( basename( $fileinfo['name'] ) );
 		$item->setMimeType( $mediaFile->getMimetype() );
@@ -304,47 +269,44 @@ class Controller_ExtJS_Media_Default
 
 
 	/**
-	 * Creates a new media item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "media" prefix
-	 * @return MShop_Media_Item_Interface Media item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'media.id': $item->setId( $value ); break;
-				case 'media.label': $item->setLabel( $value ); break;
-				case 'media.typeid': $item->setTypeId( $value ); break;
-				case 'media.domain': $item->setDomain( $value ); break;
-				case 'media.status': $item->setStatus( $value ); break;
-				case 'media.mimetype': $item->setMimeType( $value ); break;
-				case 'media.preview': $item->setPreview( $value ); break;
-				case 'media.url': $item->setUrl( $value ); break;
-				case 'media.languageid':
-					if( $value != null ) {
-						$item->setLanguageId( $value );
-					}
-					break;
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'media' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'media';
+	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'media.languageid'} ) && $entry->{'media.languageid'} === '' ) {
+			$entry->{'media.languageid'} = null;
+		}
+
+		return $entry;
 	}
 
 

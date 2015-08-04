@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage ExtJS
  */
@@ -29,42 +30,6 @@ class Controller_ExtJS_Price_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context, 'Price' );
-
-		$this->_manager = MShop_Price_Manager_Factory::createManager( $context );
-	}
-
-
-	/**
-	 * Creates a new price item or updates an existing one or a list thereof.
-	 *
-	 * @param stdClass $params Associative array containing the text properties
-	 */
-	public function saveItems( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$ids = array();
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-
-		foreach( $items as $entry )
-		{
-			$item = $this->_createItem( (array) $entry );
-			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
-		}
-
-		$this->_clearCache( $ids );
-
-		$search = $this->_manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.id', $ids ) );
-		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_manager->searchItems( $search ) );
-
-		return array(
-			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
-			'success' => true,
-		);
 	}
 
 
@@ -221,44 +186,27 @@ class Controller_ExtJS_Price_Default
 
 
 	/**
-	 * Creates a new price item and sets the properties from the given array.
-	 *
-	 * @param array $entry Associative list of name and value properties using the "price" prefix
-	 * @return MShop_Attribute_Item_Interface Attribute item
-	 */
-	protected function _createItem( array $entry )
-	{
-		$item = $this->_manager->createItem();
-
-		foreach( $entry as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'price.id': $item->setId( $value ); break;
-				case 'price.label': $item->setLabel( $value ); break;
-				case 'price.domain': $item->setDomain( $value ); break;
-				case 'price.typeid': $item->setTypeId( $value ); break;
-				case 'price.status': $item->setStatus( $value ); break;
-				case 'price.value': $item->setValue( $value ); break;
-				case 'price.costs': $item->setCosts( $value ); break;
-				case 'price.rebate': $item->setRebate( $value ); break;
-				case 'price.taxrate': $item->setTaxRate( $value ); break;
-				case 'price.quantity': $item->setQuantity( $value ); break;
-				case 'price.currencyid': $item->setCurrencyId( $value ); break;
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{
+		if( $this->_manager === null ) {
+			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		}
+
 		return $this->_manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function _getPrefix()
+	{
+		return 'price';
 	}
 }
