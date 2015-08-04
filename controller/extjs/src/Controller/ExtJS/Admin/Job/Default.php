@@ -71,7 +71,7 @@ class Controller_ExtJS_Admin_Job_Default
 			$entry->{'job.parameter'} = json_decode( $entry->{'job.parameter'}, true );
 		}
 
-			if( isset( $entry->{'job.result'} ) && is_string( $entry->{'job.result'} ) ) {
+		if( isset( $entry->{'job.result'} ) && is_string( $entry->{'job.result'} ) ) {
 			$entry->{'job.parameter'} = json_decode( $entry->{'job.result'}, true );
 		}
 
