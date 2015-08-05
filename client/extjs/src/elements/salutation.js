@@ -47,7 +47,7 @@ MShop.elements.salutation.getStore = function() {
                 ['company', MShop.I18n.dt('client/extjs', 'Company')],
                 ['mr', MShop.I18n.dt('client/extjs', 'Mr')],
                 ['mrs', MShop.I18n.dt('client/extjs', 'Mrs')],
-        		['miss', MShop.I18n.dt('client/extjs', 'Miss')]
+                ['miss', MShop.I18n.dt('client/extjs', 'Miss')]
             ]
         });
     }
