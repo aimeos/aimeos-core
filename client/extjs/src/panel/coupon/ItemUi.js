@@ -38,6 +38,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
+                    title : MShop.I18n.dt('client/extjs', 'Details'),
                     title : 'Details',
                     flex : 1,
                     ref : '../../mainForm',

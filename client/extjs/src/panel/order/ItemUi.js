@@ -42,7 +42,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : 'Invoice',
+                    title : MShop.I18n.dt('client/extjs', 'Invoice'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
