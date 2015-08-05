@@ -50,13 +50,6 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'customer.label',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
-            sortable : true,
-            width : 100,
-            id : 'customer-list-label'
-        }, {
-            xtype : 'gridcolumn',
             dataIndex : 'customer.code',
             header : MShop.I18n.dt('client/extjs', 'Login name'),
             sortable : true,
@@ -71,19 +64,24 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             hidden : true
         }, {
             xtype : 'gridcolumn',
+            dataIndex : 'customer.label',
+            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            sortable : true,
+            width : 100,
+            id : 'customer-list-label'
+        }, {
+            xtype : 'gridcolumn',
             dataIndex : 'customer.birthday',
             header : MShop.I18n.dt('client/extjs', 'Birthday'),
             sortable : false,
-            width : 100,
-            hidden : true
+            width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
             header : MShop.I18n.dt('client/extjs', 'Verified date'),
             sortable : false,
             width : 100,
-            format : 'Y-m-d H:i:s',
-            hidden : true
+            format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.ctime',
@@ -115,4 +113,4 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 Ext.reg('MShop.panel.customer.listui', MShop.panel.customer.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.customer.listui', MShop.panel.customer.ListUi, 55);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.customer.listui', MShop.panel.customer.ListUi, 35);
