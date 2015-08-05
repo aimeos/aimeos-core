@@ -3729,8 +3729,8 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
         itemUi.fieldsReadOnly = false;
         itemUi.readOnlyClass = '';
 
-        if(itemUi.record && itemUi.record.get(itemUi.siteidProperty)
-            && itemUi.record.get(itemUi.siteidProperty) != MShop.config.site['locale.site.id']) {
+        if(itemUi.record && itemUi.record.get(itemUi.siteidProperty) &&
+            itemUi.record.get(itemUi.siteidProperty) != MShop.config.site['locale.site.id']) {
 
             itemUi.fieldsReadOnly = true;
             itemUi.readOnlyClass = this.siteCssClass;
