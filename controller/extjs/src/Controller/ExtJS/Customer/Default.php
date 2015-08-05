@@ -56,4 +56,34 @@ class Controller_ExtJS_Customer_Default
 	{
 		return 'customer';
 	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'customer.birthday'} ) )
+		{
+			if( $entry->{'customer.birthday'} != '' ) {
+				$entry->{'customer.birthday'} = substr( $entry->{'customer.birthday'}, 0, 10 );
+			} else {
+				$entry->{'customer.birthday'} = null;
+			}
+		}
+
+		if( isset( $entry->{'customer.dateverified'} ) )
+		{
+			if( $entry->{'customer.dateverified'} != '' ) {
+				$entry->{'customer.dateverified'} = substr( $entry->{'customer.dateverified'}, 0, 10 );
+			} else {
+				$entry->{'customer.dateverified'} = null;
+			}
+		}
+
+		return $entry;
+	}
 }
