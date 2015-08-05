@@ -79,7 +79,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
-            header : MShop.I18n.dt('client/extjs', 'Verified date'),
+            header : MShop.I18n.dt('client/extjs', 'Verification date'),
             sortable : false,
             width : 100,
             format : 'Y-m-d'

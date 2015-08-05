@@ -52,7 +52,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                 labelAlign : 'top',
                                 defaults : {
                                     readOnly : this.fieldsReadOnly,
-                                    anchor : '100%'
+                                    anchor : '-25'
                                 },
                                 autoHeight : true,
                                 autoWidth : true,
@@ -93,7 +93,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                     }, {
                                         xtype : 'datefield',
                                         name : 'customer.dateverified',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Verified date'),
+                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Verification date'),
                                         emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD (optional)'),
                                         format : 'Y-m-d'
                                     }, {
@@ -122,7 +122,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                 labelAlign : 'top',
                                 defaults : {
                                     readOnly : this.fieldsReadOnly,
-                                    anchor : '100%'
+                                    anchor : '-25'
                                 },
                                 autoHeight : true,
                                 autoWidth : true,
