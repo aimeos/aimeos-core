@@ -3372,7 +3372,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
             handler : this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
         });
 
-        this.importButton = new MShop.elements.ImportButton({
+        this.actionImport = new MShop.elements.ImportButton({
             text : MShop.I18n.dt('client/extjs', 'Import'),
             disabled : (this.importMethod === null),
             importMethod : this.importMethod,
@@ -3388,7 +3388,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
             this.actionCopy,
             this.actionDelete,
             this.actionExport,
-            this.importButton];
+            this.actionImport];
     },
 
     initStore : function() {
@@ -5058,7 +5058,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
                     node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
                 }
                 // cut off item itself
-                response.responseData = response.responseText.items.children;
+                response.responseData = response.responseText.items.children || {};
                 return Ext.tree.TreeLoader.prototype.processResponse.apply(this, arguments);
             },
 
@@ -11721,6 +11721,145 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 Ext.reg('MShop.panel.customer.itemui', MShop.panel.customer.ItemUi);
 /*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.customer');
+
+// hook text picker into the customer ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.customer.TextItemPickerUi', {
+
+	xtype : 'MShop.panel.text.itempickerui',
+    itemConfig : {
+        recordName : 'Customer_List',
+        idProperty : 'customer.list.id',
+        siteidProperty : 'customer.list.siteid',
+        listDomain : 'customer',
+        listNamePrefix : 'customer.list.',
+        listTypeIdProperty : 'customer.list.type.id',
+        listTypeLabelProperty : 'customer.list.type.label',
+        listTypeControllerName : 'Customer_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'customer.list.type.domain' : 'text'
+                }
+            }]
+        },
+        listTypeKey : 'customer/list/type/text'
+    },
+    listConfig : {
+        domain : 'customer',
+        prefix : 'text.'
+    }
+}, 20);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.customer');
+
+// hook attribute picker into the customer ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.customer.AttributeItemPickerUi', {
+
+	xtype : 'MShop.panel.attribute.itempickerui',
+    itemConfig : {
+        recordName : 'Customer_List',
+        idProperty : 'customer.list.id',
+        siteidProperty : 'customer.list.siteid',
+        listDomain : 'customer',
+        listNamePrefix : 'customer.list.',
+        listTypeIdProperty : 'customer.list.type.id',
+        listTypeLabelProperty : 'customer.list.type.label',
+        listTypeControllerName : 'Customer_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'customer.list.type.domain' : 'attribute'
+                }
+            }]
+        },
+        listTypeKey : 'customer/list/type/attribute'
+    },
+    listConfig : {
+        domain : 'customer',
+        prefix : 'attribute.'
+    }
+}, 40);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.customer');
+
+// hook media picker into the customer ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.customer.MediaItemPickerUi', {
+
+	xtype : 'MShop.panel.media.itempickerui',
+    itemConfig : {
+        recordName : 'Customer_List',
+        idProperty : 'customer.list.id',
+        siteidProperty : 'customer.list.siteid',
+        listDomain : 'customer',
+        listNamePrefix : 'customer.list.',
+        listTypeIdProperty : 'customer.list.type.id',
+        listTypeLabelProperty : 'customer.list.type.label',
+        listTypeControllerName : 'Customer_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'customer.list.type.domain' : 'media'
+                }
+            }]
+        },
+        listTypeKey : 'customer/list/type/media'
+    },
+    listConfig : {
+        domain : 'customer',
+        prefix : 'media.'
+    }
+}, 30);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.customer');
+
+// hook product picker into the customer ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.customer.ProductItemPickerUi', {
+
+	xtype : 'MShop.panel.product.itempickerui',
+    itemConfig : {
+        recordName : 'Customer_List',
+        idProperty : 'customer.list.id',
+        siteidProperty : 'customer.list.siteid',
+        listDomain : 'customer',
+        listNamePrefix : 'customer.list.',
+        listTypeIdProperty : 'customer.list.type.id',
+        listTypeLabelProperty : 'customer.list.type.label',
+        listTypeControllerName : 'Customer_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'customer.list.type.domain' : 'product'
+                }
+            }]
+        },
+        listTypeKey : 'customer/list/type/product'
+    },
+    listConfig : {
+        prefix : 'product.'
+    }
+}, 10);
+/*!
  * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
@@ -12545,7 +12684,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
                 'Please save the coupon first before you can add codes'));
 
             this.actionAdd.setDisabled(true);
-            this.importButton.setDisabled(true);
+            this.actionImport.setDisabled(true);
 
             return false;
         }
@@ -12575,7 +12714,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     onFileSelect : function(fileSelector) {
-        this.importButton.onFileSelect(fileSelector, {
+        this.actionImport.onFileSelect(fileSelector, {
             couponid : this.ParentItemUi.record.id
         });
     }
@@ -15717,7 +15856,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initToolbar : function() {
-        this.tbar = [this.actionAdd, this.actionEdit, this.actionDelete, this.actionExport, this.importButton];
+        this.tbar = [this.actionAdd, this.actionEdit, this.actionDelete, this.actionExport, this.actionImport];
     },
 
     initStore : function() {
