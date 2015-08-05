@@ -228,6 +228,18 @@ abstract class Controller_ExtJS_Abstract
 
 
 	/**
+	 * Template method for returning the search key prefix of the used manager
+	 * This method has to be implemented in the derived classes
+	 *
+	 * @todo 2015.10 Make abstract
+	 */
+	protected function _getPrefix()
+	{
+		return '';
+	}
+
+
+	/**
 	 * Checks if the uploaded file is valid.
 	 *
 	 * @param string $filename Name of the uploaded file in the file system of the server
