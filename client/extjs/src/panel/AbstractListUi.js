@@ -121,7 +121,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
                 getRowClass : function(record, index) {
 
                     var siteid = MShop.config.site['locale.site.id'];
-                    var recSiteid = record.get(this.siteidProperty);
+                    var recSiteid = record.get(this.siteidProperty) || null;
 
                     if(record.phantom === false && recSiteid !== null && recSiteid != siteid) {
                         return this.rowCssClass;
