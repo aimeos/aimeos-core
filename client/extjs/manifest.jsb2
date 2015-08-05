@@ -349,9 +349,6 @@
 			"text": "ListUi.js",
 			"path": "src/panel/customer/"
 		}, {
-			"text": "AddressUi.js",
-			"path": "src/panel/customer/"
-		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/customer/"
 		}, {
