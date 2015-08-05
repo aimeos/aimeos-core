@@ -130,6 +130,9 @@
 			"text": "currency.js",
 			"path": "src/elements/"
 		}, {
+			"text": "salutation.js",
+			"path": "src/elements/"
+		}, {
 			"text": "status.js",
 			"path": "src/elements/"
 		}, {
@@ -342,6 +345,15 @@
 		}, {
 			"text": "PriceItemPickerUi.js",
 			"path": "src/panel/service/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/customer/"
+		}, {
+			"text": "AddressUi.js",
+			"path": "src/panel/customer/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/customer/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/supplier/"
