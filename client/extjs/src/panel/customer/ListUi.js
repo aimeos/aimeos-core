@@ -51,7 +51,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.code',
-            header : MShop.I18n.dt('client/extjs', 'Login name'),
+            header : MShop.I18n.dt('client/extjs', 'User name'),
             sortable : true,
             width : 100,
             id : 'customer-list-code'
@@ -74,14 +74,15 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             dataIndex : 'customer.birthday',
             header : MShop.I18n.dt('client/extjs', 'Birthday'),
             sortable : false,
-            width : 100
+            width : 100,
+            format : 'Y-m-d'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
             header : MShop.I18n.dt('client/extjs', 'Verified date'),
             sortable : false,
             width : 100,
-            format : 'Y-m-d H:i:s'
+            format : 'Y-m-d'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.ctime',
