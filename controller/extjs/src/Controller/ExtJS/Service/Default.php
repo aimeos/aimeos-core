@@ -51,7 +51,7 @@ class Controller_ExtJS_Service_Default
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( $this->_transformValues( (array) $entry ) );
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
