@@ -101,12 +101,20 @@ class Controller_ExtJS_Customer_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'customer.list.datestart'} ) ) {
+		if( isset( $entry->{'customer.list.datestart'} ) && $entry->{'customer.list.datestart'} != '' ) {
 			$entry->{'customer.list.datestart'} = str_replace( 'T', ' ', $entry->{'customer.list.datestart'} );
+		} else {
+			$entry->{'customer.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'customer.list.dateend'} ) ) {
+		if( isset( $entry->{'customer.list.dateend'} ) && $entry->{'customer.list.dateend'} != '' ) {
 			$entry->{'customer.list.dateend'} = str_replace( 'T', ' ', $entry->{'customer.list.dateend'} );
+		} else {
+			$entry->{'customer.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'customer.list.config'} ) ) {
+			$entry->{'customer.list.config'} = (array) $entry->{'customer.list.config'};
 		}
 
 		return $entry;

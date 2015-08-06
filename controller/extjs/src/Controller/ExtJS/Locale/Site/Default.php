@@ -310,4 +310,20 @@ class Controller_ExtJS_Locale_Site_Default
 	{
 		return 'locale.site';
 	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'locale.site.config'} ) ) {
+			$entry->{'locale.site.config'} = (array) $entry->{'locale.site.config'};
+		}
+
+		return $entry;
+	}
 }

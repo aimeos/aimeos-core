@@ -145,12 +145,20 @@ class Controller_ExtJS_Catalog_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'catalog.list.datestart'} ) ) {
+		if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' ) {
 			$entry->{'catalog.list.datestart'} = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
+		} else {
+			$entry->{'catalog.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'catalog.list.dateend'} ) ) {
+		if( isset( $entry->{'catalog.list.dateend'} ) && $entry->{'catalog.list.dateend'} != '' ) {
 			$entry->{'catalog.list.dateend'} = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
+		} else {
+			$entry->{'catalog.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'catalog.list.config'} ) ) {
+			$entry->{'catalog.list.config'} = (array) $entry->{'catalog.list.config'};
 		}
 
 		return $entry;

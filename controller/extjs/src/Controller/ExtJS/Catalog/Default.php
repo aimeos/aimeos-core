@@ -219,4 +219,20 @@ class Controller_ExtJS_Catalog_Default
 	{
 		return 'catalog';
 	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'catalog.config'} ) ) {
+			$entry->{'catalog.config'} = (array) $entry->{'catalog.config'};
+		}
+
+		return $entry;
+	}
 }

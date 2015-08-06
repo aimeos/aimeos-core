@@ -57,4 +57,20 @@ class Controller_ExtJS_Plugin_Default
 	{
 		return 'plugin';
 	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'plugin.config'} ) ) {
+			$entry->{'plugin.config'} = (array) $entry->{'plugin.config'};
+		}
+
+		return $entry;
+	}
 }

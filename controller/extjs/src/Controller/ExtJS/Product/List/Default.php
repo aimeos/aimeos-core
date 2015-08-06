@@ -102,12 +102,20 @@ class Controller_ExtJS_Product_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'product.list.datestart'} ) ) {
+		if( isset( $entry->{'product.list.datestart'} ) && $entry->{'product.list.datestart'} != '' ) {
 			$entry->{'product.list.datestart'} = str_replace( 'T', ' ', $entry->{'product.list.datestart'} );
+		} else {
+			$entry->{'product.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'product.list.dateend'} ) ) {
+		if( isset( $entry->{'product.list.dateend'} ) && $entry->{'product.list.dateend'} != '' ) {
 			$entry->{'product.list.dateend'} = str_replace( 'T', ' ', $entry->{'product.list.dateend'} );
+		} else {
+			$entry->{'product.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'product.list.config'} ) ) {
+			$entry->{'product.list.config'} = (array) $entry->{'product.list.config'};
 		}
 
 		return $entry;

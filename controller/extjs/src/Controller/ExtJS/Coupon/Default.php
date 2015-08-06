@@ -75,6 +75,10 @@ class Controller_ExtJS_Coupon_Default
 			$entry->{'coupon.dateend'} = str_replace( 'T', ' ', $entry->{'coupon.dateend'} );
 		}
 
+		if( isset( $entry->{'coupon.config'} ) ) {
+			$entry->{'coupon.config'} = (array) $entry->{'coupon.config'};
+		}
+
 		return $entry;
 	}
 }

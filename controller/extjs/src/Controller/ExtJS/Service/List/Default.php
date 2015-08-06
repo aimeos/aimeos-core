@@ -102,12 +102,20 @@ class Controller_ExtJS_Service_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'service.list.datestart'} ) ) {
+		if( isset( $entry->{'service.list.datestart'} ) && $entry->{'service.list.datestart'} != '' ) {
 			$entry->{'service.list.datestart'} = str_replace( 'T', ' ', $entry->{'service.list.datestart'} );
+		} else {
+			$entry->{'service.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'service.list.dateend'} ) ) {
+		if( isset( $entry->{'service.list.dateend'} ) && $entry->{'service.list.dateend'} != '' ) {
 			$entry->{'service.list.dateend'} = str_replace( 'T', ' ', $entry->{'service.list.dateend'} );
+		} else {
+			$entry->{'service.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'service.list.config'} ) ) {
+			$entry->{'service.list.config'} = (array) $entry->{'service.list.config'};
 		}
 
 		return $entry;

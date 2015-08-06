@@ -102,12 +102,20 @@ class Controller_ExtJS_Media_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'media.list.datestart'} ) ) {
+		if( isset( $entry->{'media.list.datestart'} ) && $entry->{'media.list.datestart'} != '' ) {
 			$entry->{'media.list.datestart'} = str_replace( 'T', ' ', $entry->{'media.list.datestart'} );
+		} else {
+			$entry->{'media.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'media.list.dateend'} ) ) {
+		if( isset( $entry->{'media.list.dateend'} ) && $entry->{'media.list.dateend'} != '' ) {
 			$entry->{'media.list.dateend'} = str_replace( 'T', ' ', $entry->{'media.list.dateend'} );
+		} else {
+			$entry->{'media.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'media.list.config'} ) ) {
+			$entry->{'media.list.config'} = (array) $entry->{'media.list.config'};
 		}
 
 		return $entry;

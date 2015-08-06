@@ -102,12 +102,20 @@ class Controller_ExtJS_Text_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'text.list.datestart'} ) ) {
+		if( isset( $entry->{'text.list.datestart'} ) && $entry->{'text.list.datestart'} != '' ) {
 			$entry->{'text.list.datestart'} = str_replace( 'T', ' ', $entry->{'text.list.datestart'} );
+		} else {
+			$entry->{'text.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'text.list.dateend'} ) ) {
+		if( isset( $entry->{'text.list.dateend'} ) && $entry->{'text.list.dateend'} != '' ) {
 			$entry->{'text.list.dateend'} = str_replace( 'T', ' ', $entry->{'text.list.dateend'} );
+		} else {
+			$entry->{'text.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'text.list.config'} ) ) {
+			$entry->{'text.list.config'} = (array) $entry->{'text.list.config'};
 		}
 
 		return $entry;

@@ -102,12 +102,20 @@ class Controller_ExtJS_Price_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'price.list.datestart'} ) ) {
+		if( isset( $entry->{'price.list.datestart'} ) && $entry->{'price.list.datestart'} != '' ) {
 			$entry->{'price.list.datestart'} = str_replace( 'T', ' ', $entry->{'price.list.datestart'} );
+		} else {
+			$entry->{'price.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'attribute.list.dateend'} ) ) {
+		if( isset( $entry->{'price.list.dateend'} ) && $entry->{'price.list.dateend'} != '' ) {
 			$entry->{'price.list.dateend'} = str_replace( 'T', ' ', $entry->{'price.list.dateend'} );
+		} else {
+			$entry->{'price.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'price.list.config'} ) ) {
+			$entry->{'price.list.config'} = (array) $entry->{'price.list.config'};
 		}
 
 		return $entry;

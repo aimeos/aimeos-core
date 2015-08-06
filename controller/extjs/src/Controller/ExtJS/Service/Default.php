@@ -125,4 +125,20 @@ class Controller_ExtJS_Service_Default
 	{
 		return 'service';
 	}
+
+
+	/**
+	 * Transforms ExtJS values to be suitable for storing them
+	 *
+	 * @param stdClass $entry Entry object from ExtJS
+	 * @return stdClass Modified object
+	 */
+	protected function _transformValues( stdClass $entry )
+	{
+		if( isset( $entry->{'service.config'} ) ) {
+			$entry->{'service.config'} = (array) $entry->{'service.config'};
+		}
+
+		return $entry;
+	}
 }

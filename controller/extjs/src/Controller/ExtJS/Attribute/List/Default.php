@@ -102,12 +102,20 @@ class Controller_ExtJS_Attribute_List_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'attribute.list.datestart'} ) ) {
+		if( isset( $entry->{'attribute.list.datestart'} ) && $entry->{'attribute.list.datestart'} != '' ) {
 			$entry->{'attribute.list.datestart'} = str_replace( 'T', ' ', $entry->{'attribute.list.datestart'} );
+		} else {
+			$entry->{'attribute.list.datestart'} = null;
 		}
 
-		if( isset( $entry->{'attribute.list.dateend'} ) ) {
+		if( isset( $entry->{'attribute.list.dateend'} ) && $entry->{'attribute.list.dateend'} != '' ) {
 			$entry->{'attribute.list.dateend'} = str_replace( 'T', ' ', $entry->{'attribute.list.dateend'} );
+		} else {
+			$entry->{'attribute.list.dateend'} = null;
+		}
+
+		if( isset( $entry->{'attribute.list.config'} ) ) {
+			$entry->{'attribute.list.config'} = (array) $entry->{'attribute.list.config'};
 		}
 
 		return $entry;
