@@ -67,12 +67,16 @@ class Controller_ExtJS_Order_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'order.datepayment'} ) ) {
-			$entry->{'order.datepayment'} = str_replace( 'T', ' ', $entry->{'order.datepayment'} );
+		if( isset( $entry->{'order.datestart'} ) && $entry->{'order.datestart'} != '' ) {
+			$entry->{'order.datestart'} = str_replace( 'T', ' ', $entry->{'order.datestart'} );
+		} else {
+			$entry->{'order.datestart'} = null;
 		}
 
-		if( isset( $entry->{'order.datedelivery'} ) ) {
-			$entry->{'order.datedelivery'} = str_replace( 'T', ' ', $entry->{'order.datedelivery'} );
+		if( isset( $entry->{'order.dateend'} ) && $entry->{'order.dateend'} != '' ) {
+			$entry->{'order.dateend'} = str_replace( 'T', ' ', $entry->{'order.dateend'} );
+		} else {
+			$entry->{'order.dateend'} = null;
 		}
 
 		return $entry;
