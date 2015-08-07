@@ -150,13 +150,13 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.firstname',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Firstname'),
+                                        fieldLabel : MShop.I18n.dt('client/extjs', 'First name'),
                                         emptyText : MShop.I18n.dt('client/extjs', 'First name'),
                                         maxLength : 64
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.lastname',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Lastname'),
+                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Last name'),
                                         emptyText : MShop.I18n.dt('client/extjs', 'Last name (required)'),
                                         allowBlank : false,
                                         maxLength : 64
@@ -251,7 +251,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
         var string = MShop.I18n.dt('client/extjs', 'Customer: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
-        MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
+        MShop.panel.customer.ItemUi.superclass.afterRender.apply(this, arguments);
     }
 
 });

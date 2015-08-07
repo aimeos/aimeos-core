@@ -7,7 +7,7 @@ Ext.ns('MShop.elements.salutation');
 
 MShop.elements.salutation.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Status'),
+        fieldLabel : MShop.I18n.dt('client/extjs', 'Salutation'),
         anchor : '100%',
         store : MShop.elements.salutation.getStore(),
         mode : 'local',
@@ -15,7 +15,7 @@ MShop.elements.salutation.ComboBox = function(config) {
         valueField : 'value',
         triggerAction : 'all',
         typeAhead : true,
-        value : 1
+        value : ''
     });
 
     MShop.elements.salutation.ComboBox.superclass.constructor.call(this, config);
@@ -24,6 +24,25 @@ MShop.elements.salutation.ComboBox = function(config) {
 Ext.extend(MShop.elements.salutation.ComboBox, Ext.form.ComboBox);
 
 Ext.reg('MShop.elements.salutation.combo', MShop.elements.salutation.ComboBox);
+
+
+/**
+ * @static
+ * @param {String} id
+ * @return {String} salutation
+ */
+MShop.elements.salutation.renderer = function(value) {
+
+	var store = MShop.elements.salutation.getStore();
+    var data = store.getAt(store.find('value', value));
+
+    if(data) {
+        return data.get('label');
+    }
+
+    return value;
+};
+
 
 /**
  * @static

@@ -51,6 +51,13 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'supplier.status'
                         }, {
+                            xtype : 'textfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            name : 'supplier.code',
+                            allowBlank : false,
+                            maxLength : 32,
+                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                        }, {
                             xtype : 'textarea',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
                             name : 'supplier.label',

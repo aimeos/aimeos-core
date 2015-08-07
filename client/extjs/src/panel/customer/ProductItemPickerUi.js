@@ -31,4 +31,4 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
     listConfig : {
         prefix : 'product.'
     }
-}, 10);
+}, 20);
