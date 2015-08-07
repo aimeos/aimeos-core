@@ -5,7 +5,7 @@
 
 Ext.ns('MShop.panel.product.tag');
 
-MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
+MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     siteidProperty : 'product.tag.siteid',
 
     initComponent : function() {

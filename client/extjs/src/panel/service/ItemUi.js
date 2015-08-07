@@ -7,7 +7,11 @@ Ext.ns('MShop.panel.service');
 
 MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
+    siteidProperty : 'service.siteid',
+
     initComponent : function() {
+
+        MShop.panel.AbstractListItemUi.prototype.setSiteCheck(this);
 
         this.items = [{
             xtype : 'tabpanel',

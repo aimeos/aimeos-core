@@ -7,8 +7,6 @@ Ext.ns('MShop.panel.stock.warehouse');
 
 MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-    recordName : 'Product_Stock_Warehouse',
-    idProperty : 'product.stock.warehouse.id',
     siteidProperty : 'product.stock.warehouse.siteid',
 
     initComponent : function() {
