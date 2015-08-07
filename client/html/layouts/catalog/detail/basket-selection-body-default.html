@@ -70,7 +70,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 						<input class="select-option" id="option-<?php echo $enc->attr( $attrId ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" type="radio" value="<?php echo $enc->attr( $attrId ); ?>" />
 						<label class="select-label" for="option-<?php echo $enc->attr( $attrId ); ?>"><!--
 <?php
-					foreach( $attributes[$attrId]->getListItems( 'media', 'default' ) as $listItem )
+					foreach( $attributes[$attrId]->getListItems( 'media', 'icon' ) as $listItem )
 					{
 						if( ( $item = $listItem->getRefItem() ) !== null ) {
 							echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--';
