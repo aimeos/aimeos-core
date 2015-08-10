@@ -763,7 +763,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	protected function _searchItems( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
-		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ONE, array $plugins = array() )
+		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ALL, array $plugins = array() )
 	{
 		$joins = array();
 		$conditions = $search->getConditions();
