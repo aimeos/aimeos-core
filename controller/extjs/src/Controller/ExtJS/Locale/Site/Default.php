@@ -150,11 +150,14 @@ class Controller_ExtJS_Locale_Site_Default
 			$params->newparentid = null;
 		}
 
-		$refId = ( isset( $params->refid ) ? $params->refid : null );
+		if( $params->refid === 'root' ) {
+			$params->refid = null;
+		}
+
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $id ) {
-			$manager->moveItem( $id, $params->oldparentid, $params->newparentid, $refId );
+			$manager->moveItem( $id, $params->oldparentid, $params->newparentid, $params->refid );
 		}
 
 		return array(
