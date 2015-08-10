@@ -27,6 +27,7 @@ interface Controller_Common_Product_Import_Csv_Cache_Interface
 	 * Returns the item or ID for the given code
 	 *
 	 * @param string $code Unique code of the item
+	 * @param string|null $type Item type if used and required
 	 * @return MShop_Common_Item_Interface|string|null Item object, unique ID or null if not found
 	 */
 	public function get( $code, $type = null );
