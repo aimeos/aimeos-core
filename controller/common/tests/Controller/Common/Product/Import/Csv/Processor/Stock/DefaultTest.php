@@ -32,10 +32,12 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends M
 	{
 		$mapping = array(
 			0 => 'product.stock.stocklevel',
+			1 => 'product.stock.dateback',
 		);
 
 		$data = array(
 			0 => '100',
+			1 => '2000-01-01 00:00:00',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
@@ -49,8 +51,10 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends M
 
 		$this->assertEquals( 1, count( $items ) );
 
-		foreach( $items as $item ) {
+		foreach( $items as $item )
+		{
 			$this->assertEquals( 100, $item->getStocklevel() );
+			$this->assertEquals( '2000-01-01 00:00:00', $item->getDateBack() );
 		}
 	}
 
@@ -151,11 +155,13 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends M
 		$mapping = array(
 			0 => 'product.stock.warehouse',
 			1 => 'product.stock.stocklevel',
+			2 => 'product.stock.dateback',
 		);
 
 		$data = array(
 			0 => 'unit_warehouse1',
 			1 => '',
+			2 => '',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
@@ -168,8 +174,10 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends M
 
 		$this->assertEquals( 1, count( $items ) );
 
-		foreach( $items as $item ) {
+		foreach( $items as $item )
+		{
 			$this->assertEquals( null, $item->getStocklevel() );
+			$this->assertEquals( null, $item->getDateBack() );
 		}
 	}
 

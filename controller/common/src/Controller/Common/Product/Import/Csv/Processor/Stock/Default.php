@@ -68,7 +68,11 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 					$list['product.stock.warehouseid'] = $this->_cache->get( $whcode );
 				}
 
-				if( $list['product.stock.stocklevel'] == '' ) {
+				if( isset( $list['product.stock.dateback'] ) && $list['product.stock.dateback'] === '' ) {
+					$list['product.stock.dateback'] = null;
+				}
+
+				if( $list['product.stock.stocklevel'] === '' ) {
 					$list['product.stock.stocklevel'] = null;
 				}
 
