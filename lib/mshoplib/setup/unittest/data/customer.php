@@ -18,4 +18,8 @@ return array (
 		array ( 'refid' => 'customer/UTC002', 'company' => 'Metaways GmbH', 'vatid' => 'DE999999999', 'salutation' => 'mr', 'title' => 'Dr.', 'firstname' => 'Good', 'lastname' => 'Unittest', 'address1' => 'Pickhuben', 'address2' => '2-4', 'address3' => '', 'postal' => '11099', 'city' => 'Berlin', 'state' => 'Berlin', 'countryid' => 'DE', 'langid' => 'de', 'telephone' => '055544332221', 'email' => 'eshop@metaways.de', 'telefax' => '055544333212', 'website' => 'www.metaways.de', 'flag' => 0, 'pos' => '1' ),
 		array ( 'refid' => 'customer/UTC003', 'company' => 'unitcompany', 'vatid' => 'vatnumber', 'salutation' => 'company', 'title' => 'unittitle', 'firstname' => 'unitfirstname', 'lastname' => 'unitlastname', 'address1' => 'unitaddress1', 'address2' => 'unitaddress2', 'address3' => 'unitaddress3', 'postal' => 'unitpostal', 'city' => 'unitcity', 'state' => 'unitstate', 'countryid' => 'DE', 'langid' => 'de', 'telephone' => '1234567890', 'email' => 'unit@email', 'telefax' => '1234567891', 'website' => 'unit.web.site', 'flag' => 0, 'pos' => '2' ),
 	),
+
+	'customer/group' => array (
+		'customer/group/unitgroup' => array( 'code' => 'unitgroup', 'label' => 'Unitgroup' ),
+	),
 );

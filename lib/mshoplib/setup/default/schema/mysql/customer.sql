@@ -279,3 +279,30 @@ CREATE INDEX "idx_mscusli_pid_sid_end" ON "mshop_customer_list" ("parentid", "si
 CREATE INDEX "idx_mscusli_pid_sid_pos" ON "mshop_customer_list" ("parentid", "siteid", "pos");
 
 CREATE INDEX "idx_mscusli_pid_sid_tid" ON "mshop_customer_list" ("parentid", "siteid", "typeid");
+
+
+--
+-- Table structure for table `mshop_customer_group`
+--
+CREATE TABLE "mshop_customer_group" (
+	-- Unique group id
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- site id, references mshop_locale_site.id
+	"siteid" INTEGER NOT NULL,
+	-- Unique group code
+	"code" VARCHAR(32) NOT NULL,
+	-- group label
+	"label" VARCHAR(255) NOT NULL,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_mscusgr_id"
+	PRIMARY KEY ("id"),
+CONSTRAINT "unq_mscusgr_sid_code"
+	UNIQUE ("siteid", "code")
+) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEX "idx_mscusgr_sid_label" ON "mshop_customer_group" ("siteid", "label");

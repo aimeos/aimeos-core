@@ -64,11 +64,13 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Default' );
+		$customerGroupManager = $customerManager->getSubManager( 'group', 'Default' );
 
 		$this->_conn->begin();
 
 		$parentIds = $this->_addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
 		$this->_addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
+		$this->_addCustomerGroupData( $testdata, $customerGroupManager, $parentIds );
 
 		$this->_conn->commit();
 
@@ -171,6 +173,30 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setRefId( $parentIds[ $dataset['refid'] ] );
 
 			$customerAddressManager->saveItem( $address, false );
+		}
+	}
+
+
+	/**
+	 * Adds the customer group test data.
+	 *
+	 * @param array $testdata Associative list of key/list pairs
+	 * @param MShop_Common_Manager_Interface $customerGroupManager Customer group manager
+	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
+	 * @throws MW_Setup_Exception If a required ID is not available
+	 */
+	protected function _addCustomerGroupData( array $testdata, MShop_Common_Manager_Interface $customerGroupManager,
+		array $parentIds )
+	{
+		$group = $customerGroupManager->createItem();
+
+		foreach ( $testdata['customer/group'] as $dataset )
+		{
+			$group->setId(null);
+			$group->setCode( $dataset['code'] );
+			$group->setLabel( $dataset['label'] );
+
+			$customerGroupManager->saveItem( $group, false );
 		}
 	}
 }
