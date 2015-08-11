@@ -78,7 +78,6 @@ return array (
 	),
 
 	'price/list/type' => array(
-		array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 
 	'product/type' => array (
