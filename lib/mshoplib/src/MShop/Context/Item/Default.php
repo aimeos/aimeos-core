@@ -24,7 +24,8 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_session;
 	private $_mail;
 	private $_view;
-	private $_userid;
+	private $_user;
+	private $_groups = array();
 	private $_editor = '';
 	private $_i18n = array();
 
@@ -344,15 +345,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the user ID of the logged in user.
 	 *
-	 * @param string|null $userid User ID of the logged in user
+	 * @param closure|string|null $user User ID of the logged in user or closure to retrieve them
 	 */
-	public function setUserId( $userid )
+	public function setUserId( $user )
 	{
-		if( $userid === null ) {
-			$this->_userid = null;
-		}
-
-		$this->_userid = (string) $userid;
+		$this->_user = $user;
 	}
 
 
@@ -363,6 +360,40 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getUserId()
 	{
-		return $this->_userid;
+		if( $this->_user instanceof Closure )
+		{
+			$fcn = $this->_user;
+			$this->_user = $fcn();
+		}
+
+		return $this->_user;
+	}
+
+
+	/**
+	 * Sets the group IDs of the logged in user.
+	 *
+	 * @param closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 */
+	public function setGroupIds( $groupIds )
+	{
+		$this->_groups = $groupIds;
+	}
+
+
+	/**
+	 * Returns the group IDs of the logged in user.
+	 *
+	 * @return array Group IDs of the logged in user
+	 */
+	public function getGroupIds()
+	{
+		if( $this->_groups instanceof Closure )
+		{
+			$fcn = $this->_groups;
+			$this->_groups = $fcn();
+		}
+
+		return (array) $this->_groups;
 	}
 }

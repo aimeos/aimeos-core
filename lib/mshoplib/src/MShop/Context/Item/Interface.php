@@ -171,10 +171,10 @@ interface MShop_Context_Item_Interface
 	/**
 	 * Sets the user ID of the logged in user.
 	 *
-	 * @param string $userid User ID of the logged in user
+	 * @param string $user User ID of the logged in user or closure to retrieve them
 	 * @return void
 	 */
-	public function setUserId( $userid );
+	public function setUserId( $user );
 
 	/**
 	 * Returns the user ID of the logged in user.
@@ -182,4 +182,21 @@ interface MShop_Context_Item_Interface
 	 * @return string User ID of the logged in user
 	 */
 	public function getUserId();
+
+
+	/**
+	 * Sets the group IDs of the logged in user.
+	 *
+	 * @param closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 * @return void
+	 */
+	public function setGroupIds( $groupIds );
+
+
+	/**
+	 * Returns the group IDs of the logged in user.
+	 *
+	 * @return array Group IDs of the logged in user
+	 */
+	public function getGroupIds();
 }

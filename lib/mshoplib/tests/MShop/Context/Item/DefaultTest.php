@@ -138,5 +138,19 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 
 		$this->_object->setUserId( 123 );
 		$this->assertEquals( '123', $this->_object->getUserId() );
+
+		$this->_object->setUserId( function() { return 456; } );
+		$this->assertEquals( '456', $this->_object->getUserId() );
+	}
+
+	public function testGetSetGroupIds()
+	{
+		$this->assertEquals( array(), $this->_object->getGroupIds() );
+
+		$this->_object->setGroupIds( array( 123 ) );
+		$this->assertEquals( array( '123' ), $this->_object->getGroupIds() );
+
+		$this->_object->setGroupIds( function() { return array( 456 ); } );
+		$this->assertEquals( array( '456' ), $this->_object->getGroupIds() );
 	}
 }
