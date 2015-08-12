@@ -274,6 +274,26 @@ class MShop_Customer_Item_Default
 
 
 	/**
+	 * Returns the group IDs the customer belongs to
+	 *
+	 * @return array List of group IDs
+	 */
+	public function getGroups()
+	{
+		if( !isset( $this->_values['groups'] ) )
+		{
+			$this->_values['groups'] = array();
+
+			foreach( $this->getListItems( 'customer/group' ) as $listItem ) {
+				$this->_values['groups'][] = $listItem->getRefId();
+			}
+		}
+
+		return (array) $this->_values['groups'];
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values

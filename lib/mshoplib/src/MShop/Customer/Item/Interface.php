@@ -121,4 +121,11 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * @return void
 	 */
 	public function setDateVerified( $value );
+
+	/**
+	 * Returns the group IDs the customer belongs to
+	 *
+	 * @return array List of group IDs
+	 */
+	public function getGroups();
 }

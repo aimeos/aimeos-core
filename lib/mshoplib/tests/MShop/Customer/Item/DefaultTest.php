@@ -176,6 +176,15 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+	public function testGetGroups()
+	{
+		$listValues = array( 'domain' => 'customer/group', 'refid' => 123 );
+		$listItems = array( 'customer/group' => array( new MShop_Common_Item_List_Default( '', $listValues ) ) );
+		$object = new MShop_Customer_Item_Default( $this->_address, array(), $listItems );
+
+		$this->assertEquals( array( 123 ), $object->getGroups() );
+	}
+
 	public function testGetPaymentAddress()
 	{
 		$address = $this->_object->getPaymentAddress();

@@ -70,9 +70,43 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$refIds = array();
 		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
 		$refIds['product'] = $this->_getProductData( $refKeys['product'] );
+		$refIds['customer/group'] = $this->_getCustomerGroupData( $refKeys['customer/group'] );
 		$this->_addCustomerListData( $testdata, $refIds );
 
 		$this->_status( 'done' );
+	}
+
+
+	/**
+	 * Returns the required customer group item IDs
+	 *
+	 * @param array $keys List of keys for search
+	 * @throws MW_Setup_Exception If no type ID is found
+	 */
+	protected function _getCustomerGroupData( array $keys )
+	{
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$groupManager = $manager->getSubManager( 'group' );
+
+		$codes = array();
+		foreach( $keys as $dataset )
+		{
+			if( ( $pos = strrpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+				throw new MW_Setup_Exception( sprintf( 'Some keys for referenced customer groups are wrong "%1$s"', $dataset ) );
+			}
+
+			$codes[] = $str;
+		}
+
+		$search = $groupManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.group.code', $codes ) );
+
+		$refIds = array();
+		foreach( $groupManager->searchItems( $search ) as $item ) {
+			$refIds[ 'customer/group/' . $item->getCode() ] = $item->getId();
+		}
+
+		return $refIds;
 	}
 
 
