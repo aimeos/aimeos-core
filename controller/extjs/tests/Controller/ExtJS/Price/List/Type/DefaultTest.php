@@ -39,7 +39,7 @@ class Controller_ExtJS_Price_List_Type_DefaultTest extends MW_Unittest_Testcase
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.list.type.code' => 'default' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.list.type.domain' => 'customer' ) ) ) ),
 			'sort' => 'price.list.type.code',
 			'dir' => 'ASC',
 			'start' => 0,
