@@ -225,7 +225,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
 	 */
 	protected function _doSearchItems( MW_Common_Criteria_Interface $search,
-		array $ref = array(), &$total = null, $cfgPathSearch, $cfgPathCount )
+		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();
 		$context = $this->_getContext();

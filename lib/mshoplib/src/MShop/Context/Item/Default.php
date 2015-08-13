@@ -25,7 +25,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_mail;
 	private $_view;
 	private $_user;
-	private $_groups = array();
+	private $_groups;
 	private $_editor = '';
 	private $_i18n = array();
 

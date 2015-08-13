@@ -31,27 +31,6 @@ class MShop_Catalog_Manager_Index_Catalog_MySQL
 	);
 
 
-/*	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-
-		$site = $context->getLocale()->getSitePath();
-		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
-
-		$search = $this->createSearch();
-		$expr = array(
-			$search->compare( '==', 'siteid', null ),
-			$search->compare( '==', 'siteid', $site ),
-		);
-		$search->setConditions( $search->combine( '||', $expr ) );
-
-
-		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinca."siteid"' ) );
-		$this->_searchConfig['catalog.index.catalog.id']['internalcode'] =
-			str_replace( ':site', $string, $this->_searchConfig['catalog.index.catalog.id']['internalcode'] );
-	}
-*/
-
 	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
