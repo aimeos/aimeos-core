@@ -154,7 +154,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 		$this->commit();
 
-		foreach ( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -241,7 +241,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )	{
+			while( ( $row = $results->fetch() ) !== false ) {
 				$ids[] = $row['id'];
 			}
 

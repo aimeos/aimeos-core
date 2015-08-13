@@ -225,7 +225,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach ( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
 	}
@@ -239,7 +239,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanupIndex( $timestamp )
 	{
-		foreach ( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -358,7 +358,7 @@ class MShop_Catalog_Manager_Index_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
-		$cfgPathCount =  'mshop/catalog/manager/index/default/item/count';
+		$cfgPathCount = 'mshop/catalog/manager/index/default/item/count';
 
 		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
@@ -405,7 +405,7 @@ class MShop_Catalog_Manager_Index_Default
 
 				$this->deleteItems( array_keys( $products ) );
 
-				foreach ( $submanagers as $submanager ) {
+				foreach( $submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
 				}
 

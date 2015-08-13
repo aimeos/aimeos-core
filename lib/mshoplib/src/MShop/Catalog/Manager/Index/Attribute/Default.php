@@ -324,7 +324,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'attribute' ) as $listItem ) {
-					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/insert' );
@@ -381,7 +381,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$cfgPathSearch = 'mshop/catalog/manager/index/attribute/default/item/search';
-		$cfgPathCount =  'mshop/catalog/manager/index/attribute/default/item/count';
+		$cfgPathCount = 'mshop/catalog/manager/index/attribute/default/item/count';
 
 		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
