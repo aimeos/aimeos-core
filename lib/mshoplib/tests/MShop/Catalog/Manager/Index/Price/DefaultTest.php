@@ -63,25 +63,6 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCreateItem()
-	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Interface', $this->_object->createItem() );
-	}
-
-
-	public function testCreateSearch()
-	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
-	}
-
-
-	public function testGetItem()
-	{
-		$item = $this->_object->getItem( self::$_products[ 'CNC' ]->getId(), array( 'attribute', 'price', 'text' ) );
-		$this->assertEquals( self::$_products[ 'CNC' ], $item );
-	}
-
-
 	public function testAggregate()
 	{
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'price' );

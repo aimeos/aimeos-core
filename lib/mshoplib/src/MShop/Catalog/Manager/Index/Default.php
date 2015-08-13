@@ -9,30 +9,16 @@
 
 
 /**
- * Simple catalog index for searching in product tables.
+ * Catalog index manager for searching in product tables.
  *
  * @package MShop
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Index_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Catalog_Manager_Index_DBBase
 	implements MShop_Catalog_Manager_Index_Interface
 {
-	private $_submanagers;
-
-
-	/**
-	 * Initializes the manager instance.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-		$this->_setResourceName( 'db-product' );
-
-		$this->_submanagers = $this->_getSubManagers();
-	}
+	private $_subManagers;
 
 
 	/**
@@ -49,29 +35,6 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
-	 * Create new product item object.
-	 *
-	 * @return MShop_Product_Item_Interface
-	 */
-	public function createItem()
-	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createItem();
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createSearch( $default );
-	}
-
-
-	/**
 	 * Removes multiple items from the index.
 	 *
 	 * @param array $ids list of product IDs
@@ -80,23 +43,9 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		if( empty( $ids ) ) { return; }
 
-		foreach( $this->_submanagers as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
-	}
-
-
-	/**
-	 * Returns the product item for the given product ID.
-	 *
-	 * @param integer $id Unique ID to search for
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Interface Returns the product item of the given id
-	 * @throws MShop_Exception If product couldn't be found
-	 */
-	public function getItem( $id, array $ref = array() )
-	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->getItem( $id, $ref );
 	}
 
 
@@ -108,6 +57,8 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
+		$list = parent::getSearchAttributes( $withsub );
+
 		/** mshop/catalog/manager/index/default/submanagers
 		 * List of manager names that can be instantiated by the catalog index manager
 		 *
@@ -128,7 +79,6 @@ class MShop_Catalog_Manager_Index_Default
 		$path = 'mshop/catalog/manager/index/default/submanagers';
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
-		$list = MShop_Factory::createManager( $this->_getContext(), 'product' )->getSearchAttributes( $withsub );
 		$list += $this->_getSearchAttributes( array(), $path, $default, $withsub );
 
 		return $list;
@@ -264,32 +214,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function optimize()
 	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$path = 'mshop/catalog/manager/index/default/optimize';
-			foreach( $config->get( $path, array() ) as $sql ) {
-				$conn->create( $sql )->execute()->finish();
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->optimize();
-		}
+		$this->_doOptimize( 'mshop/catalog/manager/index/default/optimize' );
 	}
 
 
@@ -300,7 +225,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach ( $this->_submanagers as $submanager ) {
+		foreach ( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
 	}
@@ -314,7 +239,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function cleanupIndex( $timestamp )
 	{
-		foreach ( $this->_submanagers as $submanager ) {
+		foreach ( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -418,7 +343,7 @@ class MShop_Catalog_Manager_Index_Default
 			throw new MShop_Catalog_Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
 		}
 
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 
@@ -432,47 +357,10 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$items = $ids = array();
-		$context = $this->_getContext();
+		$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
+		$cfgPathCount =  'mshop/catalog/manager/index/default/item/count';
 
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
-			$cfgPathCount =  'mshop/catalog/manager/index/default/item/count';
-			$required = array( 'product' );
-
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== false ) {
-				$ids[] = $row['id'];
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-		$manager = MShop_Factory::createManager( $context, 'product' );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-		$products = $manager->searchItems( $search, $ref );
-
-		foreach( $ids as $id )
-		{
-			if( isset( $products[$id] ) ) {
-				$items[$id] = $products[$id];
-			}
-		}
-
-		return $items;
+		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 
@@ -503,6 +391,7 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$submanagers = $this->_getSubManagers();
 		$start = 0;
 
 		do
@@ -516,7 +405,7 @@ class MShop_Catalog_Manager_Index_Default
 
 				$this->deleteItems( array_keys( $products ) );
 
-				foreach ( $this->_submanagers as $submanager ) {
+				foreach ( $submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
 				}
 
@@ -612,7 +501,7 @@ class MShop_Catalog_Manager_Index_Default
 
 		// Execute only the sub-managers which correspond to one of the given domains
 		// This will prevent adding product names of sub-products which messes up the sortation
-		foreach( $this->_submanagers as $domain => $submanager )
+		foreach( $this->_getSubManagers() as $domain => $submanager )
 		{
 			if( in_array( $domain, $domains ) ) {
 				$submanagers[$domain] = $submanager;
@@ -651,14 +540,19 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	protected function _getSubManagers()
 	{
-		$list = array();
-		$path = 'mshop/catalog/manager/index/default/submanagers';
-		$default = array( 'price', 'catalog', 'attribute', 'text' );
+		if( $this->_subManagers === null )
+		{
+			$this->_subManagers = array();
+			$path = 'mshop/catalog/manager/index/default/submanagers';
+			$default = array( 'price', 'catalog', 'attribute', 'text' );
 
-		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$list[$domain] = $this->getSubManager( $domain );
+			foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+				$this->_subManagers[$domain] = $this->getSubManager( $domain );
+			}
+
+			return $this->_subManagers;
 		}
 
-		return $list;
+		return $this->_subManagers;
 	}
 }

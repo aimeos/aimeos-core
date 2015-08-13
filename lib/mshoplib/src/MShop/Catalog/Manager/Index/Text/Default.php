@@ -6,6 +6,7 @@
  * @subpackage Catalog
  */
 
+
 /**
  * Submanager for text.
  *
@@ -13,11 +14,9 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Index_Text_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Catalog_Manager_Index_DBBase
 	implements MShop_Catalog_Manager_Index_Text_Interface
 {
-	private $_langIds;
-
 	private $_searchConfig = array(
 		'catalog.index.text.id' => array(
 			'code'=>'catalog.index.text.id',
@@ -68,6 +67,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 		)
 	);
 
+	private $_langIds;
+	private $_subManagers;
+
 
 	/**
 	 * Initializes the manager instance.
@@ -77,10 +79,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-product' );
 
 		$site = $context->getLocale()->getSitePath();
-		$this->_langIds = $this->_getLanguageIds( $site );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
@@ -108,34 +108,21 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach( $this->_getSubManagers() as $submanager ) {
-			$submanager->cleanup( $siteids );
-		}
+		parent::cleanup( $siteids );
 
 		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/text/default/item/delete' );
 	}
 
 
 	/**
-	 * Creates new text item object.
+	 * Removes all entries not touched after the given timestamp in the catalog index.
+	 * This can be a long lasting operation.
 	 *
-	 * @return MShop_Text_Item_Interface New product item
+	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function createItem()
+	public function cleanupIndex( $timestamp )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createItem();
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createSearch( $default );
+		$this->_doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/text/default/cleanup' );
 	}
 
 
@@ -146,28 +133,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		if( empty( $ids ) ) { return; }
-
-		foreach( $this->_getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $ids );
-		}
-
-		$path = 'mshop/catalog/manager/index/text/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid' );
-	}
-
-
-	/**
-	 * Returns the text item for the given ID
-	 *
-	 * @param integer $id Id of item
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Interface Returns the product item of the given id
-	 * @throws MShop_Exception If item couldn't be found
-	 */
-	public function getItem( $id, array $ref = array() )
-	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->getItem( $id, $ref );
+		$this->_doDeleteItems( $ids, 'mshop/catalog/manager/index/text/default/item/delete' );
 	}
 
 
@@ -179,6 +145,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
+		$list = parent::getSearchAttributes( $withsub );
+
 		/** classes/catalog/manager/index/text/submanagers
 		 * List of manager names that can be instantiated by the catalog index text manager
 		 *
@@ -198,8 +166,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 */
 		$path = 'classes/catalog/manager/index/text/submanagers';
 
-		$list = $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
-		$list += MShop_Factory::createManager( $this->_getContext(), 'product' )->getSearchAttributes( $withsub );
+		$list += $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
 
 		return $list;
 	}
@@ -334,75 +301,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function optimize()
 	{
-		$context = $this->_getContext();
-
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$path = 'mshop/catalog/manager/index/text/default/optimize';
-			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
-				$conn->create( $sql )->execute()->finish();
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-
-		foreach( $this->_getSubManagers() as $submanager ) {
-			$submanager->optimize();
-		}
-	}
-
-
-	/**
-	 * Removes all entries not touched after the given timestamp in the catalog index.
-	 * This can be a long lasting operation.
-	 *
-	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 */
-	public function cleanupIndex( $timestamp )
-	{
-		$context = $this->_getContext();
-		$siteid = $context->getLocale()->getSiteId();
-
-
-		$this->begin();
-
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/cleanup' );
-
-			$stmt->bind( 1, $timestamp ); // ctime
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			$this->rollback();
-			throw $e;
-		}
-
-		$this->commit();
-
-		foreach ( $this->_getSubManagers() as $submanager ) {
-			$submanager->cleanupIndex( $timestamp );
-		}
+		$this->_doOptimize( 'mshop/catalog/manager/index/text/default/optimize' );
 	}
 
 
@@ -419,7 +318,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$context = $this->_getContext();
+		$sites = $context->getLocale()->getSitePath();
 		$siteid = $context->getLocale()->getSiteId();
+		$langIds = $this->_getLanguageIds( $sites );
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
@@ -462,7 +363,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$nameList[ $refItem->getLanguageId() ] = $refItem;
 				}
 
-				foreach( $this->_langIds as $langId )
+				foreach( $langIds as $langId )
 				{
 					if( !isset( $nameList[$langId] ) )
 					{
@@ -492,18 +393,6 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 	/**
-	 * Stores a new item in the index.
-	 *
-	 * @param MShop_Common_Item_Interface $item Product item
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
-	{
-		$this->rebuildIndex( array( $item->getId() => $item ) );
-	}
-
-
-	/**
 	 * Searches for items matching the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria
@@ -513,47 +402,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$items = $ids = array();
-		$context = $this->_getContext();
+		$cfgPathSearch = 'mshop/catalog/manager/index/text/default/item/search';
+		$cfgPathCount = 'mshop/catalog/manager/index/text/default/item/count';
 
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/item/search';
-			$cfgPathCount = 'mshop/catalog/manager/index/text/default/item/count';
-			$required = array( 'product' );
-
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== false )	{
-				$ids[] = $row['id'];
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-		$manager = MShop_Factory::createManager( $context, 'product' );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare('==', 'product.id', $ids) );
-		$products = $manager->searchItems( $search, $ref, $total );
-
-		foreach( $ids as $id )
-		{
-			if( isset( $products[$id] ) ) {
-				$items[ $id ] = $products[ $id ];
-			}
-		}
-
-		return $items;
+		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 
@@ -733,14 +585,19 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	protected function _getSubManagers()
 	{
-		$list = array();
-		$path = 'classes/catalog/manager/index/text/submanagers';
+		if( $this->_subManagers === null )
+		{
+			$this->_subManagers = array();
+			$path = 'classes/catalog/manager/index/text/submanagers';
 
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-			$list[$domain] = $this->getSubManager( $domain );
+			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+				$this->_subManagers[$domain] = $this->getSubManager( $domain );
+			}
+
+			return $this->_subManagers;
 		}
 
-		return $list;
+		return $this->_subManagers;
 	}
 
 
@@ -752,16 +609,21 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	protected function _getLanguageIds( array $siteIds )
 	{
-		$list = array();
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'locale' );
+		if( !isset( $this->_langIds ) )
+		{
+			$list = array();
+			$manager = MShop_Factory::createManager( $this->_getContext(), 'locale' );
 
-		$search = $manager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
+			$search = $manager->createSearch( true );
+			$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
 
-		foreach( $manager->searchItems( $search ) as $item ) {
-			$list[ $item->getLanguageId() ] = null;
+			foreach( $manager->searchItems( $search ) as $item ) {
+				$list[ $item->getLanguageId() ] = null;
+			}
+
+			$this->_langIds = array_keys( $list );
 		}
 
-		return array_keys( $list );
+		return $this->_langIds;
 	}
 }

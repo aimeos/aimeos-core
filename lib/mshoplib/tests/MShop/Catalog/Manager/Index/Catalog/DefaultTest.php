@@ -44,18 +44,6 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 	}
 
 
-	public function testCreateItem()
-	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Interface', $this->_object->createItem() );
-	}
-
-
-	public function testCreateSearch()
-	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
-	}
-
-
 	public function testAggregate()
 	{
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'catalog' );
@@ -76,22 +64,6 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 2, $result[ $item->getId() ] );
-	}
-
-
-	public function testGetItem()
-	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$search = $productManager->createSearch();
-		$search->setSlice( 0, 1 );
-		$result = $productManager->searchItems( $search );
-
-		if( ( $expected = reset( $result ) ) === false ) {
-			throw new Exception( 'No item found' );
-		}
-
-		$item = $this->_object->getItem( $expected->getId() );
-		$this->assertEquals( $expected, $item );
 	}
 
 

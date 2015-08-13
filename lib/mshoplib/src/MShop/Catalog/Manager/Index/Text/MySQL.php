@@ -52,19 +52,6 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 		parent::__construct( $context );
 
 		$site = $context->getLocale()->getSitePath();
-		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
-
-		$search = $this->createSearch();
-		$expr = array(
-			$search->compare( '==', 'siteid', null ),
-			$search->compare( '==', 'siteid', $site ),
-		);
-		$search->setConditions( $search->combine( '||', $expr ) );
-
-
-		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinte."siteid"' ) );
-		$this->_searchConfig['catalog.index.text.id']['internalcode'] =
-			str_replace( ':site', $string, $this->_searchConfig['catalog.index.text.id']['internalcode'] );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte."siteid"', $site );
 	}

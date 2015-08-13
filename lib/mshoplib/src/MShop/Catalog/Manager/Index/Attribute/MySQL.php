@@ -31,7 +31,7 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 	);
 
 
-	public function __construct( MShop_Context_Item_Interface $context )
+/*	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
 
@@ -50,7 +50,7 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 		$this->_searchConfig['catalog.index.attribute.id']['internalcode'] =
 			str_replace( ':site', $string, $this->_searchConfig['catalog.index.attribute.id']['internalcode'] );
 	}
-
+*/
 
 	/**
 	 * Returns a list of objects describing the available criterias for searching.
