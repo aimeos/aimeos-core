@@ -58,13 +58,13 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer-list.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer list domain', $path ) );
 		}
 
 		$refKeys = array();
 		foreach( $testdata['customer/list'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = array();
@@ -91,7 +91,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$codes = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strrpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strrpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for referenced customer groups are wrong "%1$s"', $dataset ) );
 			}
 
@@ -103,7 +103,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 		$refIds = array();
 		foreach( $groupManager->searchItems( $search ) as $item ) {
-			$refIds[ 'customer/group/' . $item->getCode() ] = $item->getId();
+			$refIds['customer/group/' . $item->getCode()] = $item->getId();
 		}
 
 		return $refIds;
@@ -123,7 +123,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$codes = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref products are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -135,7 +135,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 		$refIds = array();
 		foreach( $manager->searchItems( $search ) as $item ) {
-			$refIds[ 'product/' . $item->getCode() ] = $item->getId();
+			$refIds['product/' . $item->getCode()] = $item->getId();
 		}
 
 		return $refIds;
@@ -155,7 +155,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -166,8 +166,8 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = array();
-		foreach( $textManager->searchItems( $search ) as $item )	{
-			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		foreach( $textManager->searchItems( $search ) as $item ) {
+			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;
@@ -191,7 +191,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$itemCode = array();
 		foreach( $testdata['customer/list'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
@@ -199,11 +199,11 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$search = $customerManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', $itemCode) );
+		$search->setConditions( $search->compare( '==', 'customer.code', $itemCode ) );
 
 		$parentIds = array();
-		foreach( $customerManager->searchItems( $search ) as $item )	{
-			$parentIds[ 'customer/'.$item->getCode() ] = $item->getId();
+		foreach( $customerManager->searchItems( $search ) as $item ) {
+			$parentIds['customer/' . $item->getCode()] = $item->getId();
 		}
 
 		$listItemTypeIds = array();
@@ -220,28 +220,28 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 			$listItemType->setStatus( $dataset['status'] );
 
 			$customerListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[ $key ] = $listItemType->getId();
+			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
 		$listItem = $customerListManager->createItem();
 		foreach( $testdata['customer/list'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No "%2$s" ref ID found for "%1$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No customer list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$listItem->setId( null );
-			$listItem->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$listItem->setTypeId( $listItemTypeIds[ $dataset['typeid'] ] );
-			$listItem->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$listItem->setParentId( $parentIds[$dataset['parentid']] );
+			$listItem->setTypeId( $listItemTypeIds[$dataset['typeid']] );
+			$listItem->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );

@@ -76,7 +76,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -90,14 +90,14 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$items = $this->_object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setDomain( 'unittest' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -122,12 +122,12 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
-		$this->assertStringStartsWith(date('Y-m-d', time()), $itemSaved->getTimeCreated());
-		$this->assertStringStartsWith(date('Y-m-d', time()), $itemSaved->getTimeModified());
+		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
+		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
-		$this->assertRegExp('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
+		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
 		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
@@ -144,7 +144,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
@@ -264,12 +264,12 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->_editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 2);
+		$search->setSlice( 0, 2 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
@@ -280,23 +280,23 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 6, count( $result ) );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.list.editor', $this->_editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 6, count( $this->_object->searchItems($search) ) );
+		$this->assertEquals( 6, count( $this->_object->searchItems( $search ) ) );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 

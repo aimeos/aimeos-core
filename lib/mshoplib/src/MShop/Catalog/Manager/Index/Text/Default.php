@@ -337,7 +337,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 				$listTypes = array();
 				foreach( $item->getListItems( 'text' ) as $listItem ) {
-					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
@@ -360,7 +360,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 				$nameList = array();
 				foreach( $item->getRefItems( 'text', 'name' ) as $refItem ) {
-					$nameList[ $refItem->getLanguageId() ] = $refItem;
+					$nameList[$refItem->getLanguageId()] = $refItem;
 				}
 
 				foreach( $langIds as $langId )
@@ -434,7 +434,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$list[ $row['prodid'] ] = $row['value'];
+				$list[$row['prodid']] = $row['value'];
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -469,7 +469,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
-		$search = $attrManager->createSearch(true);
+		$search = $attrManager->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),
 			$search->getConditions()
@@ -499,7 +499,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'text', 'default' ) as $listItem ) {
-					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
 				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
@@ -568,13 +568,13 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$stmt->bind( 6, $reftype );
 		$stmt->bind( 7, $domain );
 		$stmt->bind( 8, $content );
-		$stmt->bind( 9, $date );//mtime
+		$stmt->bind( 9, $date ); //mtime
 		$stmt->bind( 10, $editor );
-		$stmt->bind( 11, $date );//ctime
+		$stmt->bind( 11, $date ); //ctime
 
 		try {
 			$stmt->execute()->finish();
-		} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
+		} catch( MW_DB_Exception $e ) {; } // Ignore duplicates
 	}
 
 
@@ -618,7 +618,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
 
 			foreach( $manager->searchItems( $search ) as $item ) {
-				$list[ $item->getLanguageId() ] = null;
+				$list[$item->getLanguageId()] = null;
 			}
 
 			$this->_langIds = array_keys( $list );
