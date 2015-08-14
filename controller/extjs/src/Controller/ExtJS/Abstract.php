@@ -231,6 +231,7 @@ abstract class Controller_ExtJS_Abstract
 	 * Template method for returning the search key prefix of the used manager
 	 * This method has to be implemented in the derived classes
 	 *
+	 * @return MShop_Common_Manager_Interface Manager object
 	 * @todo 2015.10 Make abstract
 	 */
 	protected function _getPrefix()
