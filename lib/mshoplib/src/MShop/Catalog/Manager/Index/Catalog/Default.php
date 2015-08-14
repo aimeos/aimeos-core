@@ -336,7 +336,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$result = $listManager->searchItems( $search );
 
 		foreach( $result as $listItem ) {
-			$listItems[ $listItem->getRefId() ][] = $listItem;
+			$listItems[$listItem->getRefId()][] = $listItem;
 		}
 
 		$date = date( 'Y-m-d H:i:s' );
@@ -363,13 +363,13 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 					$stmt->bind( 3, $listItem->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 4, $listItem->getType() );
 					$stmt->bind( 5, $listItem->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 6, $date );//mtime
+					$stmt->bind( 6, $date ); //mtime
 					$stmt->bind( 7, $editor );
-					$stmt->bind( 8, $date );//ctime
+					$stmt->bind( 8, $date ); //ctime
 
 					try {
 						$stmt->execute()->finish();
-					} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
+					} catch( MW_DB_Exception $e ) {; } // Ignore duplicates
 				}
 			}
 
@@ -399,7 +399,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$cfgPathSearch = 'mshop/catalog/manager/index/catalog/default/item/search';
-		$cfgPathCount =  'mshop/catalog/manager/index/catalog/default/item/count';
+		$cfgPathCount = 'mshop/catalog/manager/index/catalog/default/item/count';
 
 		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}

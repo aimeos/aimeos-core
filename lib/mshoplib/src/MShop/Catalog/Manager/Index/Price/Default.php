@@ -368,7 +368,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'price' ) as $listItem ) {
-					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/insert' );
@@ -394,13 +394,13 @@ class MShop_Catalog_Manager_Index_Price_Default
 						$stmt->bind( 9, $refItem->getRebate() );
 						$stmt->bind( 10, $refItem->getTaxRate() );
 						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 12, $date );//mtime
+						$stmt->bind( 12, $date ); //mtime
 						$stmt->bind( 13, $editor );
-						$stmt->bind( 14, $date );//ctime
+						$stmt->bind( 14, $date ); //ctime
 
 						try {
 							$stmt->execute()->finish();
-						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
+						} catch( MW_DB_Exception $e ) {; } // Ignore duplicates
 					}
 				}
 			}
@@ -431,7 +431,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$cfgPathSearch = 'mshop/catalog/manager/index/price/default/item/search';
-		$cfgPathCount =  'mshop/catalog/manager/index/price/default/item/count';
+		$cfgPathCount = 'mshop/catalog/manager/index/price/default/item/count';
 
 		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
