@@ -53,4 +53,25 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 		return $result;
 	}
 
+
+	/**
+	 * Returns the context item
+	 *
+	 * @return MShop_Context_Item_Interface Context item object
+	 */
+	protected function _getContext()
+	{
+		return $this->_context;
+	}
+
+
+	/**
+	 * Returns the frontend controller
+	 *
+	 * @return Controller_Frontend_Common_Interface Frontend controller object
+	 */
+	protected function _getController()
+	{
+		return $this->_controller;
+	}
 }
