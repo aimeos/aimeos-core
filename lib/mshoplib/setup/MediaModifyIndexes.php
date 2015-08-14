@@ -68,9 +68,9 @@ class MW_Setup_Task_MediaModifyIndexes extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Modifying indexes in mshop_media tables' ), 0 );
 		$this->_status( '' );
 
-		foreach( $stmts['add'] AS $table => $indexes )
+		foreach( $stmts['add'] as $table => $indexes )
 		{
-			foreach( $indexes AS $index => $stmt )
+			foreach( $indexes as $index => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
@@ -87,9 +87,9 @@ class MW_Setup_Task_MediaModifyIndexes extends MW_Setup_Task_Abstract
 			}
 		}
 
-		foreach( $stmts['delete'] AS $table => $indexes )
+		foreach( $stmts['delete'] as $table => $indexes )
 		{
-			foreach( $indexes AS $index => $stmt )
+			foreach( $indexes as $index => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 

@@ -71,7 +71,7 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 		{
 			$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-			foreach( $stmts['column'] AS $column=>$stmt )
+			foreach( $stmts['column'] as $column=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
@@ -87,7 +87,7 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 
 			$this->_msg( sprintf( 'Adding constraints to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-			foreach( $stmts['constraint'] AS $constraint=>$stmt )
+			foreach( $stmts['constraint'] as $constraint=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

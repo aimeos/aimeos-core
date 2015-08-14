@@ -87,13 +87,13 @@ class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 
-		foreach( $stmts AS $table=>$stmt )
+		foreach( $stmts as $table=>$stmt )
 		{
 			if( $this->_schema->tableExists( $table ) === true )
 			{
 				$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-				foreach( $stmt AS $column=>$stmtList )
+				foreach( $stmt as $column=>$stmtList )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

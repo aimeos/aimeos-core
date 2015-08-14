@@ -62,9 +62,9 @@ class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Modifying indexes in madmin_log table' ), 0 );
 		$this->_status( '' );
 		
-		foreach( $stmts['delete'] AS $table => $indexes )
+		foreach( $stmts['delete'] as $table => $indexes )
 		{
-			foreach( $indexes AS $index => $stmt )
+			foreach( $indexes as $index => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 				

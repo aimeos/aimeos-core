@@ -54,7 +54,7 @@ class MW_Setup_Task_OrderBaseServiceRenameLabel extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Renaming in "%1$s" column "label" to "name".', $table ), 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $column => $stmt )
+		foreach( $stmts as $column => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
