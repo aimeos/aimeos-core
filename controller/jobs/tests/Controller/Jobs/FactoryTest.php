@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_Jobs_Factory.
  */
-class Controller_Jobs_FactoryTest extends MW_Unittest_Testcase
+class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_Frontend_Common_Factory_AbstractTest.
  */
-class Controller_Frontend_Common_Factory_AbstractTest extends MW_Unittest_Testcase
+class Controller_Frontend_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 

@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Locale_Item_Language_Default.
  */
-class MShop_Locale_Item_Language_DefaultTest extends MW_Unittest_Testcase
+class MShop_Locale_Item_Language_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

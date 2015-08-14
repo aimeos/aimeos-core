@@ -9,7 +9,7 @@
 /**
  * Test class for Client_Html_Common_Decorator_Example.
  */
-class Client_Html_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
+class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
 	private $_client;
 	private $_object;

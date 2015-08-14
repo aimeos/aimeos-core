@@ -8,7 +8,7 @@
 /**
  * Test class for MySQL search criteria class.
  */
-class MW_Common_Criteria_MySQLTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_MySQLTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

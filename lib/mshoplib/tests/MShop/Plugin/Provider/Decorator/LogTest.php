@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Plugin_Provider_Decorator_Log.
  */
-class MShop_Plugin_Provider_Decorator_LogTest extends MW_Unittest_Testcase
+class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_order;

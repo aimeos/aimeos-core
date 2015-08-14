@@ -6,7 +6,7 @@
  */
 
 
-class Client_Html_Catalog_Stock_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Client_Html_Catalog_Stage_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Stage_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_templatePaths;

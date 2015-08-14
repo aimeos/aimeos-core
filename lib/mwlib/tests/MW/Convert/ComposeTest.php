@@ -1,7 +1,7 @@
 <?php
 
 
-class MW_Convert_ComposeTest extends MW_Unittest_Testcase
+class MW_Convert_ComposeTest extends PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{

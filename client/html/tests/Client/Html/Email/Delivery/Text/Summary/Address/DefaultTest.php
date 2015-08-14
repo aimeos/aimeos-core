@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Client_Html_Email_Delivery_Text_Summary_Address_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Email_Delivery_Text_Summary_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private static $_orderItem;
 	private static $_orderBaseItem;

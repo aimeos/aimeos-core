@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Catalog_Manager_Index_MySQL.
  */
-class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
+class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_editor;

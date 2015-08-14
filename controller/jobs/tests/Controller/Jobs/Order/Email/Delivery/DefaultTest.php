@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Email_Delivery_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Email_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

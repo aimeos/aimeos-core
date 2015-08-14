@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Service_Provider_Decorator_Example.
  */
-class MShop_Service_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

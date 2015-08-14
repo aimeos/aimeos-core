@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Price_Item_Default.
  */
-class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
+class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

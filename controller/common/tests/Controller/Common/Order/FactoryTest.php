@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Controller_Common_Order_FactoryTest extends MW_Unittest_Testcase
+class Controller_Common_Order_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

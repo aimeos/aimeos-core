@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_ExtJS_Common_Decorator_ExampleTest.
  */
-class Controller_ExtJS_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Common_Item_Helper_Form_Default
  */
-class MShop_Common_Item_Helper_Form_DefaultTest extends MW_Unittest_Testcase
+class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

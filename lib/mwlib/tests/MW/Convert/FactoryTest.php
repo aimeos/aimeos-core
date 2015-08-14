@@ -1,7 +1,7 @@
 <?php
 
 
-class MW_Convert_FactoryTest extends MW_Unittest_Testcase
+class MW_Convert_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateConverter()
 	{

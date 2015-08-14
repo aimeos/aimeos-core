@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Catalog_List_Type_DefaultTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Catalog_List_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

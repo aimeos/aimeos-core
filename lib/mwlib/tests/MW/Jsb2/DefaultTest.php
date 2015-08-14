@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
+class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_manifestPath;

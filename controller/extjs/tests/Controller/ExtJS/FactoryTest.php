@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_ExtJS_Factory.
  */
-class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
+class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

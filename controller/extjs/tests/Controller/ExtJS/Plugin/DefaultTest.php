@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Plugin_DefaultTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Plugin_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class MAdmin_Cache_Manager_NoneTest extends MW_Unittest_Testcase
+class MAdmin_Cache_Manager_NoneTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Service_Provider_Decorator_AbstractTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_mock;
 	private $_object;

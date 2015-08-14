@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Translation_Decorator_APCTest extends MW_Unittest_Testcase
+class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

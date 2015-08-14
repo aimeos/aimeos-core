@@ -34,7 +34,7 @@ class Criteria_Plugin_SQLTest implements MW_Common_Criteria_Plugin_Interface
 /**
  * Test class for MW_Common_Criteria_SQL.
  */
-class MW_Common_Criteria_SQLTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

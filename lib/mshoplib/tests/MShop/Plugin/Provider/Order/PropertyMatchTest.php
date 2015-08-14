@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Plugin_Provider_Order_PropertyMatch.
  */
-class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
+class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_plugin;

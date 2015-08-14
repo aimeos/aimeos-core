@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Text_Manager_Default.
  */
-class MShop_Text_Manager_DefaultTest extends MW_Unittest_Testcase
+class MShop_Text_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var MShop_Text_Manager_Default

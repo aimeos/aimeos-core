@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Product_Manager_Type_Default.
  */
-class MShop_Product_Manager_Type_DefaultTest extends MW_Unittest_Testcase
+class MShop_Product_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_editor = '';

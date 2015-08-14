@@ -6,7 +6,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-class Client_Html_Checkout_Standard_Process_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

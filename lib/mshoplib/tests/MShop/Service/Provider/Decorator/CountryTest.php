@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Service_Provider_Decorator_Country.
  */
-class MShop_Service_Provider_Decorator_CountryTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_basket;

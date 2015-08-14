@@ -9,7 +9,7 @@
 /**
  * Test class for MW_View_Helper_FormParam_Default.
  */
-class MW_View_Helper_FormParam_DefaultTest extends MW_Unittest_Testcase
+class MW_View_Helper_FormParam_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	public function testTransform()
 	{

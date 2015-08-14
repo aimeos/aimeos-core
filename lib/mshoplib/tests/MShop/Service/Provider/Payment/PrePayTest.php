@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Service_Provider_Payment_PrePay.
  */
-class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

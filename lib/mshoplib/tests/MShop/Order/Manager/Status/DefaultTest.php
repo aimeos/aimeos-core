@@ -9,7 +9,7 @@
  * Test class for MShop_Order_Manager_Status_Default.
  */
 
-class MShop_Order_Manager_Status_DefaultTest extends MW_Unittest_Testcase
+class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_object;

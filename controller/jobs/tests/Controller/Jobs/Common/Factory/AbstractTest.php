@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_Jobs_Common_Factory_AbstractTest.
  */
-class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
+class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_arcavias;

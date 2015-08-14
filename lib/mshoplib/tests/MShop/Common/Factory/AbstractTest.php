@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Common_Factory_Abstract.
  */
-class MShop_Common_Factory_AbstractTest extends MW_Unittest_Testcase
+class MShop_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 

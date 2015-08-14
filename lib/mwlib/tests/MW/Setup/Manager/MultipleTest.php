@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Manager_MultipleTest extends MW_Unittest_Testcase
+class MW_Setup_Manager_MultipleTest extends PHPUnit_Framework_TestCase
 {
 	private $_config;
 	private $_dbm;

@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Perf_CatalogIndexTest extends MW_Unittest_Testcase
+class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_catItem;

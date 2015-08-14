@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

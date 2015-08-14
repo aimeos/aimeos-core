@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private static $_customerItem;
 	private $_object;

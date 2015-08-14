@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Catalog_FactoryTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Catalog_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

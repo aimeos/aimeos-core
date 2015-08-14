@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Catalog_Item_Default.
  */
-class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
+class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_node;
 	private $_object;

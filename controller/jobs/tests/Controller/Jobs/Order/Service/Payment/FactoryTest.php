@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Service_Payment_FactoryTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Service_Payment_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

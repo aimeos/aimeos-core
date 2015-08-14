@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Order_Item_Base_Address_Default.
  */
-class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
+class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

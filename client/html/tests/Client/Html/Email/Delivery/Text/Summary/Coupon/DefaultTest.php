@@ -6,7 +6,7 @@
  */
 
 class Client_Html_Email_Delivery_Text_Summary_Coupon_DefaultTest
-extends MW_Unittest_Testcase
+extends PHPUnit_Framework_TestCase
 {
 	private static $_orderItem;
 	private static $_orderBaseItem;

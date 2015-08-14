@@ -13,6 +13,7 @@
  *
  * @package MW
  * @subpackage Unittest
+ * @deprecated 2015.10 Will be removed, use PHPUnit_Framework_TestCase instead
  */
 class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 {

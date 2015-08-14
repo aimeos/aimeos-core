@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Perf_Config_ArrayTest extends MW_Unittest_Testcase
+class Perf_Config_ArrayTest extends PHPUnit_Framework_TestCase
 {
 	public function testArray()
 	{

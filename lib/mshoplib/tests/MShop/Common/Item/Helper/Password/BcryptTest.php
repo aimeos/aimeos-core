@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Common_Item_Helper_Password_Hash
  */
-class MShop_Common_Item_Helper_Password_BcryptTest extends MW_Unittest_Testcase
+class MShop_Common_Item_Helper_Password_BcryptTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Sets up the fixture. This method is called before a test is executed.

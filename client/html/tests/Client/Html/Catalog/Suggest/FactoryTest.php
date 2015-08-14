@@ -6,7 +6,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-class Client_Html_Catalog_Suggest_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Suggest_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_templatePaths;

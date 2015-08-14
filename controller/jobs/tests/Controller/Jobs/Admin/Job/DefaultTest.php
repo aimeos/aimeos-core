@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_jobItemStub;

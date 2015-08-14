@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
+class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 {
 	protected $_context;
 	protected $_paths;

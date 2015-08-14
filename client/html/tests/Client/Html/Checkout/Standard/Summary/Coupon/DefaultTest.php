@@ -6,7 +6,7 @@
  */
 
 class Client_Html_Checkout_Standard_Summary_Coupon_DefaultTest
-	extends MW_Unittest_Testcase
+	extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Plugin_Provider_Order_Shipping.
  */
-class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
+class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCase
 {
 	private $_order;
 	private $_object;

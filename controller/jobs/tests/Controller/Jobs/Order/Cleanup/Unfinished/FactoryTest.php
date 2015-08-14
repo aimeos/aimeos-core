@@ -7,7 +7,7 @@
 
 
 class Controller_Jobs_Order_Cleanup_Unfinished_FactoryTest
-	extends MW_Unittest_Testcase
+	extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{

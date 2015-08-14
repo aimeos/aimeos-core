@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Common_Product_Import_Csv_AbstractTest extends MW_Unittest_Testcase
+class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

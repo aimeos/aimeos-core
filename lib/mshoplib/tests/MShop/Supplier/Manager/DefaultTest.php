@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-class MShop_Supplier_Manager_DefaultTest extends MW_Unittest_Testcase
+class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object = null;
 	private $_editor = '';

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Media_Manager_Default
  */
-class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
+class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object = null;
 	private $_editor = '';

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Coupon_Item_Code_Default.
  */
-class MShop_Coupon_Item_Code_DefaultTest extends MW_Unittest_Testcase
+class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

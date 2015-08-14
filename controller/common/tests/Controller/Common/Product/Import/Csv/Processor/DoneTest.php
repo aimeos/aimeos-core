@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Common_Product_Import_Csv_Processor_DoneTest extends MW_Unittest_Testcase
+class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_context;

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Customer_Manager_Factory.
  */
-class MShop_Customer_Manager_FactoryTest extends MW_Unittest_Testcase
+class MShop_Customer_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{

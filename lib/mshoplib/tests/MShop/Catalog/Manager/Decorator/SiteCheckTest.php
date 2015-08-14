@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Catalog_Manager_Decorator_SiteCheck.
  */
-class MShop_Catalog_Manager_Decorator_SiteCheckTest extends MW_Unittest_Testcase
+class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

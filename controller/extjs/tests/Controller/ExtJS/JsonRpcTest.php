@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
+class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 {
 	private static $_object;
 	private $_testdir;

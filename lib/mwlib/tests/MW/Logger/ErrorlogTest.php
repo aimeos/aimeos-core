@@ -7,7 +7,7 @@
  */
 
 
-class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
+class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

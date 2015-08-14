@@ -6,7 +6,7 @@
  */
 
 
-class MW_Container_Content_TextTest extends MW_Unittest_Testcase
+class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{

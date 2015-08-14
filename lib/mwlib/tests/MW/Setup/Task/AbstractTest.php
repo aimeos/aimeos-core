@@ -33,7 +33,7 @@ class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Task_AbstractTest extends MW_Unittest_Testcase
+class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

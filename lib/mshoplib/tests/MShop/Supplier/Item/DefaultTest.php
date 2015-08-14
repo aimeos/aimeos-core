@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Supplier_Item_Default.
  */
-class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
+class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

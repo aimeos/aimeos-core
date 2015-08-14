@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Coupon_Provider_Example.
  */
-class MShop_Coupon_Provider_ExampleTest extends MW_Unittest_Testcase
+class MShop_Coupon_Provider_ExampleTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_orderBase;

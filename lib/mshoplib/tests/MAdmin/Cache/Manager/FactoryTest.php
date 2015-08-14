@@ -8,7 +8,7 @@
 /**
  * Test class for MAdmin_Cache_Manager_Factory.
  */
-class MAdmin_Cache_Manager_FactoryTest extends MW_Unittest_Testcase
+class MAdmin_Cache_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{

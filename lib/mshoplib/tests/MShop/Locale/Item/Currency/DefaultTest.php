@@ -8,7 +8,7 @@
 /**
  * Test class for MShop_Locale_Item_Currency_Default.
  */
-class MShop_Locale_Item_Currency_DefaultTest extends MW_Unittest_Testcase
+class MShop_Locale_Item_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_values;

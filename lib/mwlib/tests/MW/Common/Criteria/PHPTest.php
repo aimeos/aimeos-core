@@ -35,7 +35,7 @@ class Criteria_Plugin_PHPTest implements MW_Common_Criteria_Plugin_Interface
 /**
  * Test class for MW_Common_Criteria_PHP.
  */
-class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

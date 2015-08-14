@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Locale_Language_DefaultTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Locale_Language_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

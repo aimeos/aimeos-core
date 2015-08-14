@@ -7,7 +7,7 @@
  */
 
 
-class MW_Logger_FileTest extends MW_Unittest_Testcase
+class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_filename;

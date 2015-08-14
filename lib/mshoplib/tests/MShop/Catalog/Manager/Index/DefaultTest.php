@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Catalog_Manager_Index_Default.
  */
-class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
+class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private static $_products;
 	private $_context;

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Plugin_Provider_Order_Example and MShop_Plugin_Provider_Abstract because abstract classes can not be tested directly
  */
-class MShop_Plugin_Provider_Order_ExampleTest extends MW_Unittest_Testcase
+class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

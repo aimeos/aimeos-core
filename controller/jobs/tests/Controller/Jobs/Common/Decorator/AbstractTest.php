@@ -9,7 +9,7 @@
 /**
  * Test class for Controller_Jobs_Common_Decorator_AbstractTest.
  */
-class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
+class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_stub;
 	private $_object;

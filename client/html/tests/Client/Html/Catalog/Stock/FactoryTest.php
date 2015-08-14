@@ -6,7 +6,7 @@
  */
 
 
-class Client_Html_Catalog_Stock_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Stock_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 	private $_templatePaths;

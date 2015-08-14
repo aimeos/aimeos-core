@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-class Client_Html_Catalog_Detail_Additional_Property_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Detail_Additional_Property_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

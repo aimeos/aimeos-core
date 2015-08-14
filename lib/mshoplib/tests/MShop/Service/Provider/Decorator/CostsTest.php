@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Service_Provider_Decorator_Costs.
  */
-class MShop_Service_Provider_Decorator_CostsTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Decorator_CostsTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 	private $_basket;

@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Service_Provider_Payment_PostPay.
  */
-class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
+class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

@@ -10,7 +10,7 @@
  * Test class for MShop_Customer_Manager_Address_Default
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
+class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCase
 {
 	private $_fixture = null;
 	private $_object = null;

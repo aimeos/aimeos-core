@@ -1,7 +1,7 @@
 <?php
 
 
-class MW_Convert_DateTime_EnglishISOTest extends MW_Unittest_Testcase
+class MW_Convert_DateTime_EnglishISOTest extends PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{

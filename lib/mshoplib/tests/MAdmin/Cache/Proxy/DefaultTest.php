@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MAdmin_Cache_Proxy_DefaultTest extends MW_Unittest_Testcase
+class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_mock;
 	private $_object;

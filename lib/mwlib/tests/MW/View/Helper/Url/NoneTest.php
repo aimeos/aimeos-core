@@ -9,7 +9,7 @@
 /**
  * Test class for MW_View_Helper_Url_None.
  */
-class MW_View_Helper_Url_NoneTest extends MW_Unittest_Testcase
+class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

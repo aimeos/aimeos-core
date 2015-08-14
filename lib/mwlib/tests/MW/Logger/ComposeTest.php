@@ -6,7 +6,7 @@
  */
 
 
-class MW_Logger_ComposeTest extends MW_Unittest_Testcase
+class MW_Logger_ComposeTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
 

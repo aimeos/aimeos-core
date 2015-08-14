@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-class Perf_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcase
+class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_context;
 

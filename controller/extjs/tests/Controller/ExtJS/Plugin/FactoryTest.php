@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Plugin_FactoryTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Tears down the fixture, for example, closes a network connection.

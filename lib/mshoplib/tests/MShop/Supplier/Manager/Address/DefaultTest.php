@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Supplier_Manager_Address_DefaultTest extends MW_Unittest_Testcase
+class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object = null;
 	private $_editor = '';
