@@ -21,6 +21,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
+		$this->_context->setUserId( null );
 
 		$servManager = MShop_Service_Manager_Factory::createManager( $this->_context );
 		$this->_servItem = $servManager->createItem();
