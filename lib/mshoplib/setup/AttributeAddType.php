@@ -62,13 +62,13 @@ class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 
-		foreach( $stmts AS $table=>$columns )
+		foreach( $stmts as $table=>$columns )
 		{
 			$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
 			if( $this->_schema->tableExists( $table ) === true )
 			{
-				foreach( $columns AS $column=>$stmtList )
+				foreach( $columns as $column=>$stmtList )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

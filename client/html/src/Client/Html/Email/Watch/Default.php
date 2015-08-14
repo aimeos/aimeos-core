@@ -312,7 +312,7 @@ class Client_Html_Email_Watch_Default
 		 */
 		$tplconf = 'client/html/email/watch/default/template-header';
 
-		return $view->render( $this->_getTemplate( $tplconf, 'email/watch/header-default.html' ) );;
+		return $view->render( $this->_getTemplate( $tplconf, 'email/watch/header-default.html' ) ); ;
 	}
 
 

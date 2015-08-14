@@ -61,13 +61,13 @@ class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 
-		foreach( $stmts AS $table=>$stmtList )
+		foreach( $stmts as $table=>$stmtList )
 		{
 			$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
 			if( $this->_schema->tableExists( $table ) === true )
 			{
-				foreach( $stmtList AS $column=>$stmt )
+				foreach( $stmtList as $column=>$stmt )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

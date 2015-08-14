@@ -58,7 +58,7 @@ class MW_Setup_Task_OrderAddComment extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $column => $stmt ) {
+		foreach( $stmts as $column => $stmt ) {
 			$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
 			if( $this->_schema->tableExists( $table ) === true &&

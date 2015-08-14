@@ -763,7 +763,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			$this->_status( 'migrated' );
 		}
 
-		foreach( $stmts AS $table=>$colList )
+		foreach( $stmts as $table=>$colList )
 		{
 			if( $this->_schema->tableExists( $table ) === true )
 			{

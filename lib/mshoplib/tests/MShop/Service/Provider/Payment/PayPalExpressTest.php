@@ -139,7 +139,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			'TOKEN' => 'UT-99999999'
 		);
 
-		foreach( $testData AS $key => $value ) {
+		foreach( $testData as $key => $value ) {
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 	}
@@ -224,7 +224,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		foreach( $testData AS $key => $value ) {
+		foreach( $testData as $key => $value ) {
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
@@ -267,7 +267,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		foreach( $testData AS $key => $value ) {
+		foreach( $testData as $key => $value ) {
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 

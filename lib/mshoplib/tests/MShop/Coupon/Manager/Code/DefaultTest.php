@@ -56,7 +56,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() AS $obj ) {
+		foreach( $this->_object->getSearchAttributes() as $obj ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
 		}
 	}

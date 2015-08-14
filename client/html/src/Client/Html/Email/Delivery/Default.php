@@ -383,7 +383,7 @@ class Client_Html_Email_Delivery_Default
 		$status = $view->extOrderItem->getDeliveryStatus();
 		$default = array( 'email/delivery/' . $status . '/header-default.html', 'email/delivery/header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );;
+		return $view->render( $this->_getTemplate( $tplconf, $default ) ); ;
 	}
 
 
