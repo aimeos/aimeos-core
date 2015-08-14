@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-08-14 13:14+0200\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/p/aimeos-core/language/uk/)\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Basket empty"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:102
+#: src/MShop/Context/Item/Default.php:103
 #, php-format
 msgid "Cache object not available"
 msgstr ""
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Configuration not available"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:128
+#: src/MShop/Context/Item/Default.php:129
 #, php-format
 msgid "Configuration object not available"
 msgstr ""
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Curl could not be initialized"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:154
+#: src/MShop/Context/Item/Default.php:155
 #, php-format
 msgid "Database manager object not available"
 msgstr ""
@@ -170,7 +170,7 @@ msgid "ID of last inserted database record not available"
 msgstr ""
 
 #. / Locale ID %1$s
-#: src/MShop/Context/Item/Default.php:173
+#: src/MShop/Context/Item/Default.php:174
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr ""
@@ -237,7 +237,7 @@ msgstr ""
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr ""
 
-#: src/MShop/Customer/Item/Default.php:375
+#: src/MShop/Customer/Item/Default.php:398
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr ""
@@ -312,7 +312,7 @@ msgstr ""
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr ""
 
-#: src/MShop/Service/Provider/Abstract.php:351
+#: src/MShop/Service/Provider/Abstract.php:369
 #, php-format
 msgid "Invalid type \"%1$s\""
 msgstr ""
@@ -327,7 +327,7 @@ msgstr ""
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Default.php:418
+#: src/MShop/Catalog/Manager/Index/Default.php:343
 #, php-format
 msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
@@ -357,18 +357,18 @@ msgstr ""
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:436
+#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:336
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:479
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:380
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:447
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:656
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:348
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:508
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr ""
@@ -383,7 +383,7 @@ msgstr ""
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:211
+#: src/MShop/Context/Item/Default.php:212
 #, php-format
 msgid "Locale object not available"
 msgstr ""
@@ -398,12 +398,12 @@ msgstr ""
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:237
+#: src/MShop/Context/Item/Default.php:238
 #, php-format
 msgid "Log manager object not available"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:289
+#: src/MShop/Context/Item/Default.php:290
 #, php-format
 msgid "Mail object not available"
 msgstr ""
@@ -463,6 +463,47 @@ msgstr ""
 msgid "No warehouse for code \"%1$s\" found"
 msgstr ""
 
+#: src/MShop/Service/Provider/Abstract.php:343
+#, php-format
+msgid "Not a date"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:349
+#: src/MShop/Service/Provider/Abstract.php:355
+#, php-format
+msgid "Not a date and time"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:365
+#, php-format
+msgid "Not a key/value map"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:360
+#, php-format
+msgid "Not a listed value"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:337
+#, php-format
+msgid "Not a number"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:325
+#, php-format
+msgid "Not a string"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:320
+#, php-format
+msgid "Not a true/false value"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:330
+#, php-format
+msgid "Not an integer number"
+msgstr ""
+
 #: src/MShop/Order/Manager/Status/Default.php:190
 #: src/MShop/Order/Manager/Default.php:257
 #: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:229
@@ -472,6 +513,7 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Service/Default.php:244
 #: src/MShop/Order/Manager/Base/Address/Default.php:325
 #: src/MShop/Order/Manager/Base/Default.php:421
+#: src/MShop/Customer/Manager/Group/Default.php:207
 #: src/MShop/Customer/Manager/Default.php:322
 #: src/MShop/Media/Manager/Default.php:249
 #: src/MShop/Price/Manager/Abstract.php:36
@@ -482,7 +524,7 @@ msgstr ""
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:256
 #: src/MShop/Product/Manager/Default.php:183
 #: src/MShop/Attribute/Manager/Default.php:199
-#: src/MShop/Catalog/Manager/Index/Default.php:414
+#: src/MShop/Catalog/Manager/Index/Default.php:339
 #: src/MShop/Catalog/Manager/Default.php:355
 #: src/MShop/Text/Manager/Default.php:155
 #: src/MShop/Common/Manager/List/Abstract.php:91
@@ -702,7 +744,7 @@ msgstr ""
 msgid "Service of type \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:263
+#: src/MShop/Context/Item/Default.php:264
 #, php-format
 msgid "Session object not available"
 msgstr ""
@@ -803,7 +845,7 @@ msgstr ""
 msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:315
+#: src/MShop/Context/Item/Default.php:316
 #, php-format
 msgid "View object not available"
 msgstr ""

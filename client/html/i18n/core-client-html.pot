@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-08-14 13:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:251
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:254
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr ""
@@ -272,8 +272,8 @@ msgid "Change"
 msgstr ""
 
 #: layouts/checkout/confirm/retry-body-default.html:23
-#: layouts/checkout/standard/process-body-default.html:107
-#: layouts/checkout/standard/process-body-default.html:110
+#: layouts/checkout/standard/process-body-default.html:111
+#: layouts/checkout/standard/process-body-default.html:114
 msgid "Change payment"
 msgstr ""
 
@@ -298,13 +298,13 @@ msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
 #: src/Client/Html/Common/Factory/Abstract.php:167
-#: src/Client/Html/Abstract.php:317
+#: src/Client/Html/Abstract.php:318
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Client/Html/Common/Factory/Abstract.php:161
-#: src/Client/Html/Abstract.php:311 src/Client/Html/Factory.php:51
+#: src/Client/Html/Abstract.php:312 src/Client/Html/Factory.php:51
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -508,7 +508,7 @@ msgstr ""
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:274 src/Client/Html/Abstract.php:302
+#: src/Client/Html/Abstract.php:275 src/Client/Html/Abstract.php:303
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
@@ -558,8 +558,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: layouts/checkout/standard/payment-body-default.html:93
-#: layouts/checkout/standard/delivery-body-default.html:92
+#: layouts/checkout/standard/payment-body-default.html:99
+#: layouts/checkout/standard/delivery-body-default.html:98
 #: layouts/checkout/standard/address-body-default.html:17
 #: layouts/catalog/stage/navigator-body-default.html:19
 msgid "Next"
@@ -582,7 +582,7 @@ msgstr ""
 msgid "No service for code \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:494
+#: src/Client/Html/Abstract.php:495
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: layouts/checkout/standard/process-body-default.html:111
+#: layouts/checkout/standard/process-body-default.html:115
 msgid "Pay now"
 msgstr ""
 
@@ -719,8 +719,8 @@ msgstr ""
 msgid "Postal code"
 msgstr ""
 
-#: layouts/checkout/standard/payment-body-default.html:92
-#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/payment-body-default.html:98
+#: layouts/checkout/standard/delivery-body-default.html:97
 #: layouts/checkout/standard/address-body-default.html:16
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
@@ -732,7 +732,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: layouts/checkout/standard/process-body-default.html:113
+#: layouts/checkout/standard/process-body-default.html:117
 msgid "Proceed"
 msgstr ""
 
@@ -874,7 +874,7 @@ msgstr ""
 msgid "Telephone"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:466
+#: src/Client/Html/Abstract.php:467
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -978,7 +978,7 @@ msgid "Total quantity"
 msgstr ""
 
 #: layouts/checkout/confirm/retry-body-default.html:24
-#: layouts/checkout/standard/process-body-default.html:108
+#: layouts/checkout/standard/process-body-default.html:112
 msgid "Try again"
 msgstr ""
 
@@ -996,7 +996,7 @@ msgstr ""
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:561
+#: src/Client/Html/Abstract.php:595
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr ""

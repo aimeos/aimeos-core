@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-07-28 14:11+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/aimeos-core/language/tr/)\n"
+"PO-Revision-Date: 2015-07-29 10:42+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,7 +115,7 @@ msgstr "Kod 32 karakterden daha uzun olmamalıdır"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "\"%1$s\" için yapılandırma eksik"
 
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #, php-format
@@ -318,7 +318,7 @@ msgstr "Geçersiz serileştirilmiş sepet.  \"%1$s\" \"%2$s\" döner"
 #: src/MShop/Service/Provider/Abstract.php:351
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Geçersiz tür \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
