@@ -3,11 +3,11 @@
 return array(
 	'name' => '<extname>',
 	'depends' => array(
-		'arcavias-core',
+		'aimeos-core',
 	),
 	'include' => array(
-		'lib/custom/src',
 		'client/html/src',
+		'lib/custom/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
 		'controller/jobs/src',
