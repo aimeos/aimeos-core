@@ -7,6 +7,6 @@
 		</testsuite>
 	</testsuites>
 	<logging>
-		<log type="junit" target="<extname>_controller-extjs_test.junit.xml" />
+		<log type="junit" target="<extname>_controller-common_test.junit.xml" />
 	</logging>
 </phpunit>

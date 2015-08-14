@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="<extname> extension - ExtJS Controller" default="test">
-	
+<project name="<extname> extension - Common controller" default="test">
+
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml ."
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
-	
+
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />

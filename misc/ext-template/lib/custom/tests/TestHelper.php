@@ -67,6 +67,10 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
+
+
 		$i18n = new MW_Translation_None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
@@ -80,7 +84,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( '<extname>:lib/custom' );
+		$ctx->setEditor( '<extname>:unittest' );
 
 		return $ctx;
 	}

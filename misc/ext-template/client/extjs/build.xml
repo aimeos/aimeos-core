@@ -3,16 +3,16 @@
 <project name="<extname> extension - ExtJS client" default="all">
 
 	<target name="test" description="Executes tests">
+		<echo msg="No tests available" />
 	</target>
 
 	<target name="coverage" description="Generates code coverage report">
-	</target>
-
-	<target name="testperf" description="Executes performance tests">
+		<echo msg="No coverage tests available" />
 	</target>
 
 	<target name="check" description="Checks javascript files for common mistakes">
-		<jsllint executable="jsl">
+		<echo msg="Executing Javascript Linter" />
+		<jsllint haltonfailure="true" haltonwarning="true" showwarnings="true">
 			<fileset dir=".">
 				<include name="lib/**/*.js"/>
 				<include name="src/**/*.js"/>
@@ -26,8 +26,6 @@
 
 	<target name="i18n" description="Creates translation message files">
 		<exec command="find ./src/ -type f -name '*.js' | xgettext -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/<extname>-client-extjs.pot -f -"
-			checkreturn="true" logoutput="true" />
-		<exec command="find ./lib/ext.ux/ -type f -name '*.js' | xgettext -j -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=_ --keyword=_n:1,2,3t -o i18n/ext/<extname>-client-extjs-ext.pot -f -"
 			checkreturn="true" logoutput="true" />
 		<foreach list="./i18n" param="i18n-dir" target="i18n-files" />
 	</target>
@@ -60,7 +58,7 @@
 		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
-	<target name="all" depends="test,check" description="Builds all parts of the package">
+	<target name="all" depends="coverage,check" description="Builds all parts of the package">
 	</target>
 
 </project>

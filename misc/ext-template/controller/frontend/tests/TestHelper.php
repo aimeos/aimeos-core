@@ -71,6 +71,14 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
+
+
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
+
+
 		$session = new MW_Session_None();
 		$ctx->setSession( $session );
 
@@ -80,7 +88,7 @@ class TestHelper
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( '<extname>:controller/frontend' );
+		$ctx->setEditor( '<extname>:unittest' );
 
 		return $ctx;
 	}

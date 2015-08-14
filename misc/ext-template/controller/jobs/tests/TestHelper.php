@@ -77,12 +77,16 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
-		$session = new MW_Session_None();
-		$ctx->setSession( $session );
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
 
 
 		$i18n = new MW_Translation_None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
+
+
+		$session = new MW_Session_None();
+		$ctx->setSession( $session );
 
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
