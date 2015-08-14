@@ -207,29 +207,13 @@ class Client_Html_Catalog_List_Promo_Default
 				 */
 				$size = $config->get( 'client/html/catalog/list/promo/size', 6 );
 				$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
-				$manager = MShop_Factory::createManager( $context, 'catalog/list' );
 
-				$search = $manager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'catalog.list.parentid', $view->listCurrentCatItem->getId() ),
-					$search->compare( '==', 'catalog.list.domain', 'product' ),
-					$search->compare( '==', 'catalog.list.type.code', 'promotion' ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-				$sort = array(
-					$search->sort( '+', 'catalog.list.parentid' ),
-					$search->sort( '+', 'catalog.list.siteid' ),
-					$search->sort( '+', 'catalog.list.position' ),
-				);
-				$search->setSortations( $sort );
-				$search->setSlice( 0, $size );
+				$total = null;
+				$catId = $view->listCurrentCatItem->getId();
 
-				$result = $manager->searchRefItems( $search, $domains );
-
-				if( isset( $result['product'] ) ) {
-					$products = $result['product'];
-				}
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$filter = $controller->createProductFilterByCategory( $catId, 'position', '+', 0, $size, 'promotion' );
+				$products = $controller->getProductList( $filter, $total, $domains );
 			}
 
 

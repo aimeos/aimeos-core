@@ -398,7 +398,7 @@ class Client_Html_Catalog_Stage_Default
 			{
 				$context = $this->_getContext();
 				$config = $context->getConfig();
-				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 				$default = array( 'attribute', 'media', 'text' );
 
@@ -431,7 +431,7 @@ class Client_Html_Catalog_Stage_Default
 				 * @see client/html/catalog/list/domains
 				 */
 				$domains = $config->get( 'client/html/catalog/stage/default/domains', $domains );
-				$stageCatPath = $catalogManager->getPath( $params['f_catid'], $domains );
+				$stageCatPath = $controller->getCatalogPath( $params['f_catid'], $domains );
 
 				if( ( $categoryItem = end( $stageCatPath ) ) !== false ) {
 					$view->stageCurrentCatItem = $categoryItem;

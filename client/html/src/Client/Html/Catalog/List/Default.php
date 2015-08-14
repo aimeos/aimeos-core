@@ -375,8 +375,8 @@ class Client_Html_Catalog_List_Default
 			{
 				$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'text' ) );
 
-				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
-				$view->listCatPath = $catalogManager->getPath( $catid, $domains );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$view->listCatPath = $controller->getCatalogPath( $catid, $domains );
 
 				$listCatPath = $view->get( 'listCatPath', array() );
 

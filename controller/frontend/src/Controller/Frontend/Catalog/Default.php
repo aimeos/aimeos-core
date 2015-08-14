@@ -19,6 +19,17 @@ class Controller_Frontend_Catalog_Default
 	implements Controller_Frontend_Catalog_Interface
 {
 	/**
+	 * Returns the default catalog filter
+	 *
+	 * @return MW_Common_Criteria_Interface Criteria object for filtering
+	 */
+	public function createCatalogFilterDefault()
+	{
+		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->createSearch();
+	}
+
+
+	/**
 	 * Returns the list of categries that are in the path to the root node including the one specified by its ID.
 	 *
 	 * @param integer $id Category ID to start from, null for root node
@@ -38,11 +49,13 @@ class Controller_Frontend_Catalog_Default
 	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @param integer $level Constant from MW_Tree_Manager_Abstract for the depth of the returned tree, LEVEL_ONE for
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant
 	 */
-	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ),
+		$level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $search = null )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->getTree( $id, $domains, $level );
+		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->getTree( $id, $domains, $level, $search );
 	}
 
 

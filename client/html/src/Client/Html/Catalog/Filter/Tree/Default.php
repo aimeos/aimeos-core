@@ -186,7 +186,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$manager = MShop_Factory::createManager( $context, 'catalog' );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+			$currentid = (string) $view->param( 'f_catid', '' );
+			$currentid = ( $currentid != '' ? $currentid : null );
 
 			/** client/html/catalog/filter/tree/startid
 			 * The ID of the category node that should be the root of the displayed category tree
@@ -208,7 +211,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 * @see client/html/catalog/filter/tree/domains
 			 */
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
-			$currentid = (string) $view->param( 'f_catid', '' );
+			$startid = ( $startid != '' ? $startid : null );
 
 			/** client/html/catalog/filter/tree/domains
 			 * List of domain names whose items should be fetched with the filter categories
@@ -231,11 +234,11 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$ref = $view->config( 'client/html/catalog/filter/tree/domains', array( 'text', 'media' ) );
 
 
-			if( $currentid != '' )
+			if( $currentid )
 			{
-				$catItems = $manager->getPath( $currentid );
+				$catItems = $controller->getCatalogPath( $currentid );
 
-				if( $startid != '' )
+				if( $startid )
 				{
 					foreach( $catItems as $key => $item )
 					{
@@ -252,19 +255,14 @@ class Client_Html_Catalog_Filter_Tree_Default
 					throw new Client_Html_Exception( $msg );
 				}
 			}
-			else if( $startid != '' )
-			{
-				$node = $manager->getItem( $startid );
-				$catItems = array( $node->getId() => $node );
-			}
 			else
 			{
-				$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+				$node = $controller->getCatalogTree( $startid, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 				$catItems = array( $node->getId() => $node );
 			}
 
 
-			$search = $manager->createSearch();
+			$search = $controller->createCatalogFilterDefault();
 			$expr = $search->compare( '==', 'catalog.parentid', array_keys( $catItems ) );
 			$expr = $search->combine( '||', array( $expr, $search->compare( '==', 'catalog.id', $node->getId() ) ) );
 
@@ -323,11 +321,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$search->setConditions( $expr );
 
-			$id = ( $startid != '' ? $startid : null );
 			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
 
 			$view->treeCatalogPath = $catItems;
-			$view->treeCatalogTree = $manager->getTree( $id, $ref, $level, $search );
+			$view->treeCatalogTree = $controller->getCatalogTree( $startid, $ref, $level, $search );
 			$view->treeCatalogIds = $this->_getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
 			$view->treeFilterParams = $this->_getClientParams( $view->param(), array( 'f' ) );
 
