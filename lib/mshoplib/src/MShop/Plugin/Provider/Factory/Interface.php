@@ -21,6 +21,7 @@ interface MShop_Plugin_Provider_Factory_Interface extends MShop_Plugin_Provider_
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item );
 }

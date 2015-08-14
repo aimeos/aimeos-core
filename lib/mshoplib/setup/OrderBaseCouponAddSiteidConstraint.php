@@ -16,7 +16,7 @@
 class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_order_base_coupon' => array (
+		'mshop_order_base_coupon' => array(
 			'fk_msordbaco_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_coupon" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_coupon" DROP FOREIGN KEY "fk_msordbaco_siteid"',
@@ -34,7 +34,7 @@ class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abs
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderRenameConstraints', 'OrderAddSiteId');
+		return array( 'OrderRenameTables', 'OrderRenameConstraints', 'OrderAddSiteId' );
 	}
 
 
@@ -45,7 +45,7 @@ class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abs
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateCoupon');
+		return array( 'TablesCreateCoupon' );
 	}
 
 
@@ -69,7 +69,7 @@ class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abs
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			foreach ( $stmtList as $constraint => $stmts )
+			foreach( $stmtList as $constraint => $stmts )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

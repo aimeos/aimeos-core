@@ -121,7 +121,7 @@ class MAdmin_Log_Manager_Default
 		 * @category User
 		 */
 		$this->_loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Abstract::WARN );
-		$this->_requestid = md5( php_uname('n') . getmypid() . date( 'Y-m-d H:i:s' ) );
+		$this->_requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 
 
@@ -172,7 +172,7 @@ class MAdmin_Log_Manager_Default
 			throw new MAdmin_Log_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( ! $item->isModified() ) {
+		if( !$item->isModified() ) {
 			return;
 		}
 
@@ -259,7 +259,7 @@ class MAdmin_Log_Manager_Default
 			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getFacility() );
-			$stmt->bind( 3, date('Y-m-d H:i:s' ) );
+			$stmt->bind( 3, date( 'Y-m-d H:i:s' ) );
 			$stmt->bind( 4, $item->getPriority(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 5, $item->getMessage() );
 			$stmt->bind( 6, $item->getRequest() );
@@ -495,12 +495,12 @@ class MAdmin_Log_Manager_Default
 			 * @see madmin/log/manager/default/delete
 			 * @see madmin/log/manager/default/search
 			 */
-			$cfgPathCount =  'madmin/log/manager/default/count';
+			$cfgPathCount = 'madmin/log/manager/default/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

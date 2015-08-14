@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'media/type' => array (
+return array(
+	'media/type' => array(
 		'catalog/prod_123x103' => array( 'domain' => 'catalog', 'code' => 'prod_123x103', 'label' => 'Product 123x103', 'status' => 1 ),
 		'product/prod_266x221' => array( 'domain' => 'product', 'code' => 'prod_266x221', 'label' => 'Product 266x221', 'status' => 1 ),
 		'product/prod_114x95' => array( 'domain' => 'product', 'code' => 'prod_114x95', 'label' => 'Product 114x95', 'status' => 1 ),
@@ -25,7 +25,7 @@ return array (
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 
-	'media' => array (
+	'media' => array(
 		'media/prod_97x93/199_prod_97x93.jpg' => array( 'langid' => 'de', 'typeid' => 'attribute/prod_97x93', 'domain' => 'attribute', 'label' => 'cn_colombie_97x93', 'link' => 'prod_97x93/199_prod_97x93.jpg', 'status' => 1, 'mimetype' => null ),
 		'media/prod_123x103/195_prod_123x103.jpg' => array( 'langid' => 'de', 'typeid' => 'catalog/prod_123x103', 'domain' => 'catalog', 'label' => 'cn_colombie_123x103', 'link' => 'prod_123x103/195_prod_123x103.jpg', 'status' => 1, 'mimetype' => null ),
 		'media/prod_266x221/198_prod_266x221.jpg' => array( 'langid' => 'de', 'typeid' => 'product/prod_266x221', 'domain' => 'product', 'label' => 'cn_colombie_266x221', 'link' => 'prod_266x221/198_prod_266x221.jpg', 'status' => 1, 'mimetype' => null ),

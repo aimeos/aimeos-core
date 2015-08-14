@@ -47,7 +47,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->calcPrice($basket);
+		return $this->_object->calcPrice( $basket );
 	}
 
 
@@ -60,7 +60,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return $this->_object->checkConfigBE($attributes);
+		return $this->_object->checkConfigBE( $attributes );
 	}
 
 
@@ -73,7 +73,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigFE( array $attributes )
 	{
-		return $this->_object->checkConfigFE($attributes);
+		return $this->_object->checkConfigFE( $attributes );
 	}
 
 
@@ -133,7 +133,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->isAvailable($basket);
+		return $this->_object->isAvailable( $basket );
 	}
 
 
@@ -235,7 +235,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = @call_user_func_array( array( $this->_object, $name ), $param ) ) === null ) {
+		if( ( $result = @call_user_func_array( array( $this->_object, $name ), $param ) ) === null ) {
 			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 

@@ -27,7 +27,7 @@ class MW_Setup_Task_OrderAddressMigrateSalutation extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables');
+		return array( 'OrderRenameTables' );
 	}
 
 
@@ -38,7 +38,7 @@ class MW_Setup_Task_OrderAddressMigrateSalutation extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -66,16 +66,16 @@ class MW_Setup_Task_OrderAddressMigrateSalutation extends MW_Setup_Task_Abstract
 
 		if( $this->_schema->tableExists( $table ) === true )
 		{
-			foreach ($stmts AS $sql) {
+			foreach( $stmts AS $sql ) {
 				$stmt = $this->_conn->create( $sql );
 				$result = $stmt->execute();
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
-			if ($cntRows) {
-				$this->_status( sprintf('migrated (%1$d)', $cntRows));
+			if( $cntRows ) {
+				$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {
-				$this->_status('OK');
+				$this->_status( 'OK' );
 			}
 		}
 		else

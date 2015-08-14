@@ -55,10 +55,10 @@ class MShop_Product_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->_editor) );
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->_editor ) );
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No attribute list type item found' );
 		}
 
@@ -68,14 +68,14 @@ class MShop_Product_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->_editor) );
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->_editor ) );
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -131,13 +131,13 @@ class MShop_Product_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 		$expr[] = $search->compare( '>=', 'product.list.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.list.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
-		$search->setSlice(0, 1);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -145,7 +145,7 @@ class MShop_Product_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

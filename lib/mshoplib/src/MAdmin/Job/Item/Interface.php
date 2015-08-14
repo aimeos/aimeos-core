@@ -29,7 +29,7 @@ interface MAdmin_Job_Item_Interface extends MShop_Common_Item_Interface
 	 * @param integer $status Status of attribute item
 	 * @return void
 	 */
-	public function setStatus($status);
+	public function setStatus( $status );
 
 	/**
 	 * Returns the name of the attribute item.

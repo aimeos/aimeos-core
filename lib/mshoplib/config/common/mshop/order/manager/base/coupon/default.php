@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-return array (
+return array(
 	'aggregate' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
@@ -17,7 +17,7 @@ return array (
 		) AS list
 		GROUP BY "key"
 	',
-	'item' => array (
+	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_order_base_coupon"
 			WHERE :cond AND siteid = ?

@@ -31,7 +31,7 @@ class MShopConfigDocTask extends Task
 	{
 		$num = array_push( $this->_filesets, new FileSet() );
 
-		return $this->_filesets[$num-1];
+		return $this->_filesets[$num - 1];
 	}
 
 
@@ -195,9 +195,9 @@ class MShopConfigDocTask extends Task
 			$first = implode( '/', array_slice( $parts, 0, $this->_keyparts ) );
 
 			if( $this->_keyparts == 0 ) {
-				$sections[ $parts[0] ][] = $key;
+				$sections[$parts[0]][] = $key;
 			} else if( count( $parts ) > $this->_keyparts + 1 ) {
-				$sections[$first][ $parts[$this->_keyparts] ][] = $key;
+				$sections[$first][$parts[$this->_keyparts]][] = $key;
 			} else {
 				$sections[$first]['global'][] = $key;
 			}

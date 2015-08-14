@@ -58,7 +58,7 @@ class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Abstract
 		$this->_msg( 'Drop old pay date indexes in mshop_order table', 0 );
 		$this->_status( '' );
 
-		foreach ( $stmts AS $index => $stmt )
+		foreach( $stmts AS $index => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 

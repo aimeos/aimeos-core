@@ -56,7 +56,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
+		$this->_object->setId( null );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertNull( $this->_object->getId() );
@@ -74,7 +74,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId('fr');
+		$this->_object->setLanguageId( 'fr' );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 'fr', $this->_object->getLanguageId() );
@@ -87,7 +87,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId(33);
+		$this->_object->setTypeId( 33 );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 33, $this->_object->getTypeId() );
@@ -105,7 +105,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel('bitter');
+		$this->_object->setLabel( 'bitter' );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 'bitter', $this->_object->getLabel() );
@@ -138,14 +138,14 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 			'product.tag.languageid' => 'de',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['product.tag.id'], $item->getId());
-		$this->assertEquals($list['product.tag.typeid'], $item->getTypeId());
-		$this->assertEquals($list['product.tag.label'], $item->getLabel());
-		$this->assertEquals($list['product.tag.languageid'], $item->getLanguageId());
+		$this->assertEquals( $list['product.tag.id'], $item->getId() );
+		$this->assertEquals( $list['product.tag.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['product.tag.label'], $item->getLabel() );
+		$this->assertEquals( $list['product.tag.languageid'], $item->getLanguageId() );
 	}
 
 

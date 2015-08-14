@@ -46,7 +46,7 @@ class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstr
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 	/**
@@ -56,18 +56,18 @@ class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstr
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg('Adding siteid to locale tables', 0);
-		$this->_status('');
+		$this->_msg( 'Adding siteid to locale tables', 0 );
+		$this->_status( '' );
 
-		foreach ( $stmts as $table => $stmtList )
+		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
-			if ( $this->_schema->tableExists($table) && !$this->_schema->columnExists( $table, 'siteid' )  )
+			$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+			if( $this->_schema->tableExists( $table ) && !$this->_schema->columnExists( $table, 'siteid' ) )
 			{
-				$this->_executeList($stmtList);
-				$this->_status('added');
+				$this->_executeList( $stmtList );
+				$this->_status( 'added' );
 			} else {
-				$this->_status('OK');
+				$this->_status( 'OK' );
 			}
 		}
 	}

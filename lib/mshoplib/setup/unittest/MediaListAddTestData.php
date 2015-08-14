@@ -52,19 +52,19 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg('Adding media-list test data', 0);
+		$this->_msg( 'Adding media-list test data', 0 );
 		$this->_additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'media-list.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for media list domain', $path ) );
 		}
 
 		$refKeys = array();
 		foreach( $testdata['media/list'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = array();
@@ -124,8 +124,8 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$refIds = array();
-		foreach( $attributeManager->searchItems( $search ) as $item )	{
-			$refIds[ 'attribute/'.$item->getDomain().'/'.$item->getType().'/'.$item->getCode() ] = $item->getId();
+		foreach( $attributeManager->searchItems( $search ) as $item ) {
+			$refIds['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
 
 		return $refIds;
@@ -145,7 +145,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -156,8 +156,8 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = array();
-		foreach( $textManager->searchItems( $search ) as $item )	{
-			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		foreach( $textManager->searchItems( $search ) as $item ) {
+			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;
@@ -180,7 +180,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$urls = array();
 		foreach( $testdata['media/list'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
@@ -193,8 +193,8 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 		$result = $mediaManager->searchItems( $search );
 
 		$parentIds = array();
-		foreach( $result as $item )	{
-			$parentIds[ 'media/'.$item->getUrl() ] = $item->getId();
+		foreach( $result as $item ) {
+			$parentIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
 		$medListTypes = array();
@@ -211,28 +211,28 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 			$medListType->setStatus( $dataset['status'] );
 
 			$mediaListTypeManager->saveItem( $medListType );
-			$medListTypes[ $key ] = $medListType->getId();
+			$medListTypes[$key] = $medListType->getId();
 		}
 
 		$medList = $mediaListManager->createItem();
 		foreach( $testdata['media/list'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No media ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $medListTypes[ $dataset['typeid'] ] ) ) {
+			if( !isset( $medListTypes[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No media list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$medList->setId( null );
-			$medList->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$medList->setTypeId( $medListTypes[ $dataset['typeid'] ] );
-			$medList->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$medList->setParentId( $parentIds[$dataset['parentid']] );
+			$medList->setTypeId( $medListTypes[$dataset['typeid']] );
+			$medList->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$medList->setDomain( $dataset['domain'] );
 			$medList->setDateStart( $dataset['start'] );
 			$medList->setDateEnd( $dataset['end'] );

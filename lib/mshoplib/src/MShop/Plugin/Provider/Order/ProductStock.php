@@ -54,7 +54,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 		$outOfStock = $productQuantities = $positions = array();
 		$siteConfig = $context->getLocale()->getSite()->getConfig();
 
-		foreach ( $order->getProducts() as $position => $pr )
+		foreach( $order->getProducts() as $position => $pr )
 		{
 			$productQuantities[$pr->getProductId()] = $pr->getQuantity();
 			$positions[$pr->getProductId()] = $position;
@@ -72,7 +72,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$checkItems = $stockManager->searchItems( $search );
 
-		foreach ( $checkItems as $checkItem )
+		foreach( $checkItems as $checkItem )
 		{
 			$stocklevel = $checkItem->getStocklevel();
 
@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 			}
 		}
 
-		if ( count( $outOfStock ) > 0 )
+		if( count( $outOfStock ) > 0 )
 		{
 			$code = array( 'product' => $outOfStock );
 			throw new MShop_Plugin_Provider_Exception( sprintf( 'Products out of stock' ), -1, null, $code );

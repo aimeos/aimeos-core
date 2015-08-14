@@ -40,7 +40,7 @@ class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -67,7 +67,7 @@ class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Abstract
 
 			if( $this->_schema->tableExists( $table ) === true )
 			{
-				foreach ( $stmtList AS $column=>$stmt )
+				foreach( $stmtList AS $column=>$stmt )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

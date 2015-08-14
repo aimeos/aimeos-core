@@ -36,7 +36,7 @@ class MShop_Media_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -83,19 +83,19 @@ class MShop_Media_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $total );
 
 		// search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'media.type.code', 'default'),
+			$search->compare( '==', 'media.type.code', 'default' ),
 			$search->compare( '==', 'media.type.editor', $this->_editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 5);
-		$results = $this->_object->searchItems( $search, array(), $total);
+		$search->setSlice( 0, 5 );
+		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 7, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -105,7 +105,7 @@ class MShop_Media_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'media.type.code', 'prod_266x221'),
+			$search->compare( '==', 'media.type.code', 'prod_266x221' ),
 			$search->compare( '==', 'media.type.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -125,13 +125,13 @@ class MShop_Media_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search = $this->_object->createSearch();
 		$conditions = $search->compare( '==', 'media.type.editor', $this->_editor );
 		$search->setCOnditions( $conditions );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -167,14 +167,14 @@ class MShop_Media_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

@@ -49,7 +49,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	{
 		$this->_msg( 'Processing product demo data', 0 );
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
@@ -95,7 +95,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		foreach( $data as $entry )
@@ -127,7 +127,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	{
 		if( isset( $entry['property'] ) )
 		{
-			$context =  $this->_getContext();
+			$context = $this->_getContext();
 			$manager = MShop_Factory::createManager( $context, 'product/property' );
 
 			foreach( (array) $entry['property'] as $values )

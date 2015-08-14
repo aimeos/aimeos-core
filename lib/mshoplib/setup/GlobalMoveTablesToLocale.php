@@ -61,7 +61,7 @@ class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 	/**
@@ -71,16 +71,16 @@ class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg('Renaming global tables', 0);
-		$this->_status('');
+		$this->_msg( 'Renaming global tables', 0 );
+		$this->_status( '' );
 
-		foreach ( $stmts as $table => $stmtList )
+		foreach( $stmts as $table => $stmtList )
 		{
-			if ( $this->_schema->tableExists($table) )
+			if( $this->_schema->tableExists( $table ) )
 			{
-				$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
-				$this->_executeList($stmtList);
-				$this->_status('Ok');
+				$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+				$this->_executeList( $stmtList );
+				$this->_status( 'Ok' );
 			}
 		}
 	}

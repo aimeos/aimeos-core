@@ -64,7 +64,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch
 		$expr[] = $criteria->compare( '==', 'product.id', $value->getProductId() );
 		$expr[] = $criteria->getConditions();
 
-		foreach ( $config as $property => $value) {
+		foreach( $config as $property => $value ) {
 			$expr[] = $criteria->compare( '==', $property, $value );
 		}
 

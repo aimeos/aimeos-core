@@ -52,11 +52,11 @@ class MShop_Plugin_Provider_Order_ServicesAvailable
 
 			foreach( $this->_getItem()->getConfig() as $type => $value )
 			{
-				if ( $value == true && !isset( $availableServices[$type] ) ) {
+				if( $value == true && !isset( $availableServices[$type] ) ) {
 					$problems[$type] = 'available.none';
 				}
 
-				if ( $value !== null && $value !== '' && $value == false && isset( $availableServices[$type] ) ) {
+				if( $value !== null && $value !== '' && $value == false && isset( $availableServices[$type] ) ) {
 					$problems[$type] = 'available.notallowed';
 				}
 			}

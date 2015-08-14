@@ -52,11 +52,11 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 
 			foreach( $this->_getItem()->getConfig() as $type => $value )
 			{
-				if ( $value == true && !isset( $availableAddresses[$type] ) ) {
+				if( $value == true && !isset( $availableAddresses[$type] ) ) {
 					$problems[$type] = 'available.none';
 				}
 
-				if ( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
+				if( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
 					$problems[$type] = 'available.notallowed';
 				}
 			}

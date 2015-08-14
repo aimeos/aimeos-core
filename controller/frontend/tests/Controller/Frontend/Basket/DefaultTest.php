@@ -114,7 +114,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$attributes = $attributeManager->searchItems( $search );
 
-		if( count( $attributes ) === 0) {
+		if( count( $attributes ) === 0 ) {
 			throw new Exception( 'Attributes not found' );
 		}
 
@@ -151,7 +151,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$attributes = $attributeManager->searchItems( $search );
 
-		if( count( $attributes ) === 0) {
+		if( count( $attributes ) === 0 ) {
 			throw new Exception( 'Attributes not found' );
 		}
 
@@ -189,7 +189,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$attributes = $attributeManager->searchItems( $search );
 
-		if( count( $attributes ) === 0) {
+		if( count( $attributes ) === 0 ) {
 			throw new Exception( 'Attributes not found' );
 		}
 
@@ -208,7 +208,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$attributes = $attributeManager->searchItems( $search );
 
-		if( count( $attributes ) === 0) {
+		if( count( $attributes ) === 0 ) {
 			throw new Exception( 'Attribute not found' );
 		}
 
@@ -564,11 +564,11 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 				$search->combine( '&&', array(
 					$search->compare( '==', 'attribute.code', 'xs' ),
 					$search->compare( '==', 'attribute.type.code', 'size' ),
-				)),
+				) ),
 				$search->combine( '&&', array(
 					$search->compare( '==', 'attribute.code', 'white' ),
 					$search->compare( '==', 'attribute.type.code', 'color' ),
-				)),
+				) ),
 			) )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

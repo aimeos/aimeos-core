@@ -25,7 +25,7 @@ class MShop_Locale_Item_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser'
 		);
-		$this->_object = new MShop_Locale_Item_Currency_Default($this->_values);
+		$this->_object = new MShop_Locale_Item_Currency_Default( $this->_values );
 	}
 
 
@@ -37,92 +37,92 @@ class MShop_Locale_Item_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals('EUR', $this->_object->getId());
+		$this->assertEquals( 'EUR', $this->_object->getId() );
 	}
 
 
 	public function testSetIdBasic()
 	{
 		// test 1: set id and compare to be the same
-		$this->_object->setId('XXX');
-		$this->assertEquals('XXX', $this->_object->getId());
+		$this->_object->setId( 'XXX' );
+		$this->assertEquals( 'XXX', $this->_object->getId() );
 		// test modifier
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 
 		// test 2: set id to null, mdified should be true, id=null
 		$var = null;
-		$this->_object->setId($var);
-		$this->assertEquals(null, $this->_object->getId());
+		$this->_object->setId( $var );
+		$this->assertEquals( null, $this->_object->getId() );
 		// test modifier
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testSetIdLength()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		$this->_object->setId('EU');
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->_object->setId( 'EU' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		$this->_object->setId(123);
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->_object->setId( 123 );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals('EUR', $this->_object->getCode());
+		$this->assertEquals( 'EUR', $this->_object->getCode() );
 	}
 
 
 	public function testSetCode()
 	{
-		$this->_object->setCode('USD');
-		$this->assertEquals('USD', $this->_object->getCode());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setCode( 'USD' );
+		$this->assertEquals( 'USD', $this->_object->getCode() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals('Euro', $this->_object->getLabel());
+		$this->assertEquals( 'Euro', $this->_object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel('OtherName');
-		$this->assertEquals('OtherName', $this->_object->getLabel());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setLabel( 'OtherName' );
+		$this->assertEquals( 'OtherName', $this->_object->getLabel() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals(1, $this->_object->getSiteId());
+		$this->assertEquals( 1, $this->_object->getSiteId() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals(1, $this->_object->getStatus());
+		$this->assertEquals( 1, $this->_object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus(0);
-		$this->assertEquals(0, $this->_object->getStatus());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setStatus( 0 );
+		$this->assertEquals( 0, $this->_object->getStatus() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetTimeModified()
@@ -152,30 +152,30 @@ class MShop_Locale_Item_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 			'locale.currency.status' => 1,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['locale.currency.id'], $item->getId());
-		$this->assertEquals($list['locale.currency.code'], $item->getCode());
-		$this->assertEquals($list['locale.currency.label'], $item->getLabel());
-		$this->assertEquals($list['locale.currency.status'], $item->getStatus());
+		$this->assertEquals( $list['locale.currency.id'], $item->getId() );
+		$this->assertEquals( $list['locale.currency.code'], $item->getCode() );
+		$this->assertEquals( $list['locale.currency.label'], $item->getLabel() );
+		$this->assertEquals( $list['locale.currency.status'], $item->getStatus() );
 	}
 
 
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		$this->assertEquals((count($this->_values) + 1), count($arrayObject));
+		$this->assertEquals( ( count( $this->_values ) + 1 ), count( $arrayObject ) );
 
-		$this->assertEquals($this->_object->getId(), $arrayObject['locale.currency.id']);
-		$this->assertEquals($this->_object->getCode(), $arrayObject['locale.currency.code']);
-		$this->assertEquals($this->_object->getLabel(), $arrayObject['locale.currency.label']);
-		$this->assertEquals($this->_object->getSiteId(), $arrayObject['locale.currency.siteid']);
-		$this->assertEquals($this->_object->getStatus(), $arrayObject['locale.currency.status']);
-		$this->assertEquals($this->_object->getTimeCreated(), $arrayObject['locale.currency.ctime'] );
-		$this->assertEquals($this->_object->getTimeModified(), $arrayObject['locale.currency.mtime'] );
-		$this->assertEquals($this->_object->getEditor(), $arrayObject['locale.currency.editor'] );
+		$this->assertEquals( $this->_object->getId(), $arrayObject['locale.currency.id'] );
+		$this->assertEquals( $this->_object->getCode(), $arrayObject['locale.currency.code'] );
+		$this->assertEquals( $this->_object->getLabel(), $arrayObject['locale.currency.label'] );
+		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['locale.currency.siteid'] );
+		$this->assertEquals( $this->_object->getStatus(), $arrayObject['locale.currency.status'] );
+		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['locale.currency.ctime'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['locale.currency.mtime'] );
+		$this->assertEquals( $this->_object->getEditor(), $arrayObject['locale.currency.editor'] );
 	}
 
 }

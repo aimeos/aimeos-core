@@ -108,7 +108,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends PHPUnit_Framework_TestCas
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
-		$items = $manager->searchItems( $search, array('price') );
+		$items = $manager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );

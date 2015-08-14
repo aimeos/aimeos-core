@@ -4,7 +4,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
+return array(
 	'product/tag/type' => array(
 		'product/tag/sort' => array( 'domain' => 'product/tag', 'code' => 'sort', 'label' => 'Brand', 'status' => 1 ),
 		'product/tag/taste' => array( 'domain' => 'product/tag', 'code' => 'taste', 'label' => 'Taste', 'status' => 1 ),

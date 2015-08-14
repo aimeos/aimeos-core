@@ -80,7 +80,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf('No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
 		}
 
 		$basket = $orderBaseManager->load( $order->getBaseId() );

@@ -28,7 +28,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 *
 	 * @param string $comment Comment for the order
 	 */
-	public function setComment($comment);
+	public function setComment( $comment );
 
 	/**
 	 * Returns the code of the site the order was stored in.
@@ -49,7 +49,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 *
 	 * @param string $customerid Unique ID of the customer
 	 */
-	public function setCustomerId($customerid);
+	public function setCustomerId( $customerid );
 
 	/**
 	 * Returns the locales for the basic order item.
@@ -87,7 +87,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 * @param integer|null $position position of the new order product item
 	 * @return integer Position the product item was inserted at
 	 */
-	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position=null );
+	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null );
 
 	/**
 	 * Deletes an order product item from the (future) order.

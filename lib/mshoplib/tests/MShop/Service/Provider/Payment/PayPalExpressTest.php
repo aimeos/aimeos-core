@@ -29,7 +29,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
 
 		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare('==', 'service.code', 'paypalexpress') );
+		$search->setConditions( $search->compare( '==', 'service.code', 'paypalexpress' ) );
 
 		$serviceItems = $serviceManager->searchItems( $search );
 
@@ -51,7 +51,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $this->_order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf('No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
 		}
 
 
@@ -127,7 +127,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$attributeList = array();
 		foreach( $attributes as $attribute ) {
-			$attributeList[ $attribute->getCode() ] = $attribute;
+			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
@@ -140,7 +140,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		);
 
 		foreach( $testData AS $key => $value ) {
-			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
+			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 	}
 
@@ -152,7 +152,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$what = array( 'TOKEN' => 'UT-99999999' );
 
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
+		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->_order->getId();
 
 		$com = new MW_Communication_TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
@@ -190,7 +190,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$this->_object->setCommunication( $com );
 
 
-		$response = array (
+		$response = array(
 			'residence_country' => 'US',
 			'receiver_email' => 'selling2@metaways.de',
 			'address_city' => 'San+Jose',
@@ -212,20 +212,20 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
-		$attrManager = $orderBaseManager->getSubManager('service')->getSubManager('attribute');
+		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attributeList = array();
-		foreach( $attributes as $attribute ){
+		foreach( $attributes as $attribute ) {
 			//remove attr where txn ids as keys, because next test with same txn id would fail
 			if( $attribute->getCode() === '111111110' || $attribute->getCode() === '111111111' ) {
 				$attrManager->deleteItem( $attribute->getId() );
 			}
 
-			$attributeList[ $attribute->getCode() ] = $attribute;
+			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
 		foreach( $testData AS $key => $value ) {
-			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
+			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $orderItem->getPaymentStatus() );
@@ -263,12 +263,12 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 
 		$attributeList = array();
-		foreach( $attributes as $attribute ){
-			$attributeList[ $attribute->getCode() ] = $attribute;
+		foreach( $attributes as $attribute ) {
+			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
 		foreach( $testData AS $key => $value ) {
-			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
+			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUND, $this->_order->getPaymentStatus() );
@@ -278,7 +278,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 	public function testCapture()
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$baseItem = $orderBaseManager->getItem( $this->_order->getBaseId() );
 
 		$what = array(

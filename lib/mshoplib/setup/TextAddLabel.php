@@ -34,7 +34,7 @@ class MW_Setup_Task_TextAddLabel extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -54,15 +54,15 @@ class MW_Setup_Task_TextAddLabel extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg('Adding label to mshop text table', 0);
+		$this->_msg( 'Adding label to mshop text table', 0 );
 
-		if ( $this->_schema->tableExists('mshop_text') === true
-			&& $this->_schema->columnExists('mshop_text', 'label') === false )
+		if( $this->_schema->tableExists( 'mshop_text' ) === true
+			&& $this->_schema->columnExists( 'mshop_text', 'label' ) === false )
 		{
-			$this->_executeList($stmts);
-			$this->_status('added');
+			$this->_executeList( $stmts );
+			$this->_status( 'added' );
 		} else {
-			$this->_status('OK');
+			$this->_status( 'OK' );
 		}
 	}
 

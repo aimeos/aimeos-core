@@ -107,7 +107,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		{
 			$result = $productListManager->searchItems( $search );
 
-			foreach ( $result as $listItem )
+			foreach( $result as $listItem )
 			{
 				$refId = $listItem->getRefId();
 
@@ -199,7 +199,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$textTypes = array();
 		foreach( $types as $type ) {
-			$textTypes[ $type->getCode() ] = $type->getId();
+			$textTypes[$type->getCode()] = $type->getId();
 		}
 
 		return $textTypes;

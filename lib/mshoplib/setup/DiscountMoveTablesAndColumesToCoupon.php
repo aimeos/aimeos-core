@@ -109,7 +109,7 @@ class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_A
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -129,17 +129,17 @@ class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_A
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg('Renaming discount tables', 0); $this->_status('');
+		$this->_msg( 'Renaming discount tables', 0 ); $this->_status( '' );
 
-		if ( $this->_schema->tableExists('mshop_discount'))
+		if( $this->_schema->tableExists( 'mshop_discount' ) )
 		{
-			foreach ( $stmts as $table => $stmtList )
+			foreach( $stmts as $table => $stmtList )
 			{
-				if ( $this->_schema->tableExists( $table ) )
+				if( $this->_schema->tableExists( $table ) )
 				{
-					$this->_msg(sprintf('Process table "%1$s": ', $table), 1);
-					$this->_executeList($stmtList);
-					$this->_status('migrated');
+					$this->_msg( sprintf( 'Process table "%1$s": ', $table ), 1 );
+					$this->_executeList( $stmtList );
+					$this->_status( 'migrated' );
 				}
 			}
 		}

@@ -33,7 +33,7 @@ class MAdmin_Log_Manager_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'MAdmin_Log_Manager_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'MAdmin_Log_Manager_' . $name : '<not a string>';
 			throw new MAdmin_Log_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 

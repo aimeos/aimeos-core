@@ -34,7 +34,7 @@ class MW_Setup_Task_ProductTagTypeidAddConstraint extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -58,7 +58,7 @@ class MW_Setup_Task_ProductTagTypeidAddConstraint extends MW_Setup_Task_Abstract
 
 		if( $this->_schema->tableExists( 'mshop_product_tag' ) === true )
 		{
-			foreach ( $stmts as $constraint=>$stmt )
+			foreach( $stmts as $constraint=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

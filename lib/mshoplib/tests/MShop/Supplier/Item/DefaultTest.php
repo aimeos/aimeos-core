@@ -54,9 +54,9 @@ class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertTrue($this->_object->isModified());
-		$this->assertNull( $this->_object->getId());
+		$this->_object->setId( null );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertNull( $this->_object->getId() );
 	}
 
 	public function testGetSiteId()
@@ -72,7 +72,7 @@ class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetLabel()
 	{
 		$this->_object->setLabel( 'newName' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'newName', $this->_object->getLabel() );
 	}
 
@@ -84,7 +84,7 @@ class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetCode()
 	{
 		$this->_object->setCode( 'newCode' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'newCode', $this->_object->getCode() );
 	}
 
@@ -119,7 +119,7 @@ class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 
@@ -134,14 +134,14 @@ class MShop_Supplier_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'supplier.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['supplier.id'], $item->getId());
-		$this->assertEquals($list['supplier.code'], $item->getCode());
-		$this->assertEquals($list['supplier.label'], $item->getLabel());
-		$this->assertEquals($list['supplier.status'], $item->getStatus());
+		$this->assertEquals( $list['supplier.id'], $item->getId() );
+		$this->assertEquals( $list['supplier.code'], $item->getCode() );
+		$this->assertEquals( $list['supplier.label'], $item->getLabel() );
+		$this->assertEquals( $list['supplier.status'], $item->getStatus() );
 	}
 
 

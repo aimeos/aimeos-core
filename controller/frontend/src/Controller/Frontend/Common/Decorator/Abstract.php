@@ -44,10 +44,10 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false )
+		if( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false )
 		{
 			$cntl = get_class( $this->_controller );
-			throw new Controller_Frontend_Exception( sprintf('Unable to call method "%1$s::%2$s"', $cntl, $name ) );
+			throw new Controller_Frontend_Exception( sprintf( 'Unable to call method "%1$s::%2$s"', $cntl, $name ) );
 		}
 
 		return $result;

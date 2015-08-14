@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderAddBaseProductOrdProdIdType extends MW_Setup_Task_Abstr
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderAddBaseProductProductid');
+		return array( 'OrderAddBaseProductProductid' );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_OrderAddBaseProductOrdProdIdType extends MW_Setup_Task_Abstr
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

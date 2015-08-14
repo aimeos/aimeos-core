@@ -83,7 +83,7 @@ class Controller_ExtJS_Service_List_DefaultTest extends PHPUnit_Framework_TestCa
 				'service.list.refid' => -1,
 				'service.list.datestart' => '2000-01-01 00:00:00',
 				'service.list.dateend' => '2001-01-01 00:00:00',
-				'service.list.config' => array('test' => 'unit'),
+				'service.list.config' => array( 'test' => 'unit' ),
 				'service.list.position' => 1,
 				'service.list.status' => 1,
 			),

@@ -93,19 +93,19 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 			$ttype->setStatus( $dataset['status'] );
 
 			$textTypeManager->saveItem( $ttype );
-			$ttypeIds[ $key ] = $ttype->getId();
+			$ttypeIds[$key] = $ttype->getId();
 		}
 
 		$text = $textManager->createItem();
 		foreach( $testdata['text'] as $key => $dataset )
 		{
-			if( !isset( $ttypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $ttypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No text type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$text->setId( null );
 			$text->setLanguageId( $dataset['langid'] );
-			$text->setTypeId( $ttypeIds[ $dataset['typeid'] ] );
+			$text->setTypeId( $ttypeIds[$dataset['typeid']] );
 			$text->setDomain( $dataset['domain'] );
 			$text->setLabel( $dataset['label'] );
 			$text->setContent( $dataset['content'] );

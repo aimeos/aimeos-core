@@ -91,11 +91,11 @@ class MShop_Service_Provider_Delivery_Default
 
 
 	/**
-	* Returns the configuration attribute definitions of the provider to generate a list of available fields and
-	* rules for the value of each field in the administration interface.
-	*
-	* @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
-	*/
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 */
 	public function getConfigBE()
 	{
 		$list = array();
@@ -139,7 +139,7 @@ class MShop_Service_Provider_Delivery_Default
 				sprintf( 'Parameter "%1$s" for configuration not available', "url" ), parent::ERR_TEMP );
 		}
 
-		if( ( $curl = curl_init() )=== false ) {
+		if( ( $curl = curl_init() ) === false ) {
 			throw new MShop_Service_Exception( sprintf( 'Curl could not be initialized' ), parent::ERR_TEMP );
 		}
 
@@ -152,9 +152,9 @@ class MShop_Service_Provider_Delivery_Default
 			curl_setopt( $curl, CURLOPT_POSTFIELDS, array( 'xml' => $xml ) );
 
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
-			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );   // return data as string
-			curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, false );   // don't allow redirects
-			curl_setopt( $curl, CURLOPT_MAXREDIRS, 1 );   // maximum amount of redirects
+			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true ); // return data as string
+			curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, false ); // don't allow redirects
+			curl_setopt( $curl, CURLOPT_MAXREDIRS, 1 ); // maximum amount of redirects
 
 			if( isset( $config['default.username'] ) && isset( $config['default.password'] ) )
 			{
@@ -163,8 +163,8 @@ class MShop_Service_Provider_Delivery_Default
 				curl_setopt( $curl, CURLOPT_USERPWD, $config['default.username'] . ':' . $config['default.password'] );
 			}
 
-			$urlinfo = parse_url($config['default.url']);
-			if (isset($urlinfo['scheme']) && $urlinfo['scheme'] == 'https')
+			$urlinfo = parse_url( $config['default.url'] );
+			if( isset( $urlinfo['scheme'] ) && $urlinfo['scheme'] == 'https' )
 			{
 				if( isset( $config['default.ssl'] ) && $config['default.ssl'] == 'weak' )
 				{
@@ -176,7 +176,7 @@ class MShop_Service_Provider_Delivery_Default
 				{
 					$context->getLogger()->log( 'Using strict SSL options', MW_Logger_Abstract::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
-					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 );   // check CN and match host name
+					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 ); // check CN and match host name
 				}
 			}
 			else
@@ -184,7 +184,7 @@ class MShop_Service_Provider_Delivery_Default
 				$context->getLogger()->log( 'Using no SSL encryption', MW_Logger_Abstract::NOTICE );
 			}
 
-			if ( ( $response = curl_exec( $curl ) ) === false ) {
+			if( ( $response = curl_exec( $curl ) ) === false ) {
 				throw new MShop_Service_Exception(
 					sprintf( 'Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
 			}
@@ -218,10 +218,10 @@ class MShop_Service_Provider_Delivery_Default
 	{
 		$responseXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-response_v1.xsd';
 
-		$dom = new DOMDocument('1.0', 'UTF-8');
+		$dom = new DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
-		if ( $dom->loadXML( $response ) !== true ) {
+		if( $dom->loadXML( $response ) !== true ) {
 			throw new MShop_Service_Exception(
 				sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response ), parent::ERR_XML );
 		}
@@ -233,7 +233,7 @@ class MShop_Service_Provider_Delivery_Default
 
 		$xpath = new DOMXPath( $dom );
 
-		$globalStatus = $xpath->query( '/response/error' )->item(0)->nodeValue;
+		$globalStatus = $xpath->query( '/response/error' )->item( 0 )->nodeValue;
 		if( $globalStatus != 0 ) {
 			throw new MShop_Service_Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
 		}
@@ -242,8 +242,8 @@ class MShop_Service_Provider_Delivery_Default
 
 		foreach( $orderitemlist as $orderitem )
 		{
-			$id = $xpath->query( 'id', $orderitem )->item(0)->nodeValue;
-			$status = $xpath->query( 'status', $orderitem )->item(0)->nodeValue;
+			$id = $xpath->query( 'id', $orderitem )->item( 0 )->nodeValue;
+			$status = $xpath->query( 'status', $orderitem )->item( 0 )->nodeValue;
 
 			if( $id != $invoiceid ) {
 				throw new MShop_Service_Exception(
@@ -252,7 +252,7 @@ class MShop_Service_Provider_Delivery_Default
 
 			if( $status != 0 )
 			{
-				$msg = $xpath->query( 'message', $orderitem )->item(0)->nodeValue;
+				$msg = $xpath->query( 'message', $orderitem )->item( 0 )->nodeValue;
 				throw new MShop_Service_Exception(
 					sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
 			}
@@ -273,10 +273,10 @@ class MShop_Service_Provider_Delivery_Default
 
 		try
 		{
-			$dom = new DOMDocument('1.0', 'UTF-8');
+			$dom = new DOMDocument( '1.0', 'UTF-8' );
 
-			$orderlist = $dom->createElement( 'orderlist');
-			$orderitem = $dom->createElement( 'orderitem');
+			$orderlist = $dom->createElement( 'orderlist' );
+			$orderitem = $dom->createElement( 'orderitem' );
 
 			$this->_buildXMLHeader( $invoice, $base, $dom, $orderitem );
 			$this->_buildXMLService( $base, $dom, $orderitem );
@@ -299,10 +299,10 @@ class MShop_Service_Provider_Delivery_Default
 		if( $dom->schemaValidate( $requestXSD ) !== true )
 		{
 			$msg = 'Validation of XML response from delivery provider against schema "%1$s" failed: %2$s';
-			throw new MShop_Service_Exception( sprintf( $msg, $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA );
+			throw new MShop_Service_Exception( sprintf( $msg, $requestXSD, $dom->saveXML() ), parent::ERR_SCHEMA );
 		}
 
-		if ( ( $xml = $dom->saveXML() ) === false )
+		if( ( $xml = $dom->saveXML() ) === false )
 		{
 			$msg = 'DOM tree of XML response from delivery provider could not be converted to XML string';
 			throw new MShop_Service_Exception( sprintf( $msg ), parent::ERR_XML );
@@ -327,7 +327,7 @@ class MShop_Service_Provider_Delivery_Default
 		$regex = '/^(\d+)\-(\d+)\-(\d+) (\d+)\:(\d+)\:(\d+)$/i';
 		$date = $invoice->getDatePayment();
 
-		if ( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
+		if( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
 				throw new MShop_Service_Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
 		}
 
@@ -343,7 +343,7 @@ class MShop_Service_Provider_Delivery_Default
 		$this->_appendChildCDATA( 'type', $invoice->getType(), $dom, $orderitem );
 		$this->_appendChildCDATA( 'datetime', $pdate, $dom, $orderitem );
 
-		if ( $invoice->getRelatedId() !== null ) {
+		if( $invoice->getRelatedId() !== null ) {
 			$this->_appendChildCDATA( 'relatedid', $invoice->getRelatedId(), $dom, $orderitem );
 		}
 
@@ -593,9 +593,9 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	protected function _appendChildCDATA( $name, $value, DOMDocument $dom, DOMElement $parent )
 	{
-		$child = $dom->createElement($name);
-		$child->appendChild($dom->createCDATASection($value));
-		$parent->appendChild($child);
+		$child = $dom->createElement( $name );
+		$child->appendChild( $dom->createCDATASection( $value ) );
+		$parent->appendChild( $child );
 	}
 
 }

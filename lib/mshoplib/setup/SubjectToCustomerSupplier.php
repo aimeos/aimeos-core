@@ -63,7 +63,7 @@ class MW_Setup_Task_SubjectToCustomerSupplier extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

@@ -44,7 +44,7 @@ class MW_Setup_Task_ProductWarehouseAddLabelStatus extends MW_Setup_Task_Abstrac
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -53,39 +53,39 @@ class MW_Setup_Task_ProductWarehouseAddLabelStatus extends MW_Setup_Task_Abstrac
 	 */
 	protected function _mysql()
 	{
-		$this->_msg(sprintf('Adding label and status columns for product warehouse'), 0);
+		$this->_msg( sprintf( 'Adding label and status columns for product warehouse' ), 0 );
 		$this->_status( '' );
 
-		foreach ($this->_mysql as $table => $columns) {
+		foreach( $this->_mysql as $table => $columns ) {
 
-			if ($this->_schema->tableExists($table)) {
+			if( $this->_schema->tableExists( $table ) ) {
 
-				foreach ($columns as $column => $stmt) {
+				foreach( $columns as $column => $stmt ) {
 
-					$this->_msg(sprintf('Checking column "%1$s.%2$s": ', $table, $column), 1);
+					$this->_msg( sprintf( 'Checking column "%1$s.%2$s": ', $table, $column ), 1 );
 
-					if (!$this->_schema->columnExists($table, $column)) {
-						$this->_execute($stmt);
-						$this->_status('added');
+					if( !$this->_schema->columnExists( $table, $column ) ) {
+						$this->_execute( $stmt );
+						$this->_status( 'added' );
 					} else {
-						$this->_status('OK');
+						$this->_status( 'OK' );
 					}
 				}
 			}
 		}
 
 
-		foreach ($this->_update as $table => $columns) {
+		foreach( $this->_update as $table => $columns ) {
 
-			if ($this->_schema->tableExists($table)) {
+			if( $this->_schema->tableExists( $table ) ) {
 
-				foreach ($columns as $column => $stmt) {
+				foreach( $columns as $column => $stmt ) {
 
-					$this->_msg(sprintf('Update column "%1$s.%2$s": ', $table, $column), 1);
+					$this->_msg( sprintf( 'Update column "%1$s.%2$s": ', $table, $column ), 1 );
 
-					if ($this->_schema->columnExists($table, $column)) {
-						$this->_execute($stmt);
-						$this->_status('updated');
+					if( $this->_schema->columnExists( $table, $column ) ) {
+						$this->_execute( $stmt );
+						$this->_status( 'updated' );
 					}
 				}
 			}

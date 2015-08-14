@@ -66,7 +66,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 		$list = $this->_getProvider()->getConfigBE();
 
 		foreach( $this->_beConfig as $key => $config ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
 		return $list;

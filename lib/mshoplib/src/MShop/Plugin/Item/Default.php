@@ -27,7 +27,7 @@ class MShop_Plugin_Item_Default
 	 */
 	public function __construct( array $values = array() )
 	{
-		parent::__construct( 'plugin.', $values) ;
+		parent::__construct( 'plugin.', $values );
 
 		$this->_values = $values;
 	}
@@ -62,7 +62,7 @@ class MShop_Plugin_Item_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -98,7 +98,7 @@ class MShop_Plugin_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) {
+		if( $label == $this->getLabel() ) {
 			return;
 		}
 
@@ -115,7 +115,7 @@ class MShop_Plugin_Item_Default
 	 */
 	public function setProvider( $provider )
 	{
-		if ( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return; }
 
 		$this->_values['provider'] = (string) $provider;
 		$this->setModified();
@@ -161,9 +161,9 @@ class MShop_Plugin_Item_Default
 	 *
 	 * @param integer $position Position of the item
 	 */
-	public function setPosition($position)
+	public function setPosition( $position )
 	{
-		if ( $position == $this->getPosition() ) { return; }
+		if( $position == $this->getPosition() ) { return; }
 
 		$this->_values['pos'] = (int) $position;
 		$this->setModified();
@@ -188,7 +188,7 @@ class MShop_Plugin_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

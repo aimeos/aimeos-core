@@ -37,7 +37,7 @@ class MShop_Service_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -83,18 +83,18 @@ class MShop_Service_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'service.type.editor', $this->_editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -125,7 +125,7 @@ class MShop_Service_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'service.type.editor', $this->_editor ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 

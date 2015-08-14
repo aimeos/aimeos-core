@@ -152,7 +152,7 @@ class MShop_Plugin_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch('plugin');
+			return $this->_createSearch( 'plugin' );
 		}
 
 		return parent::createSearch();
@@ -374,7 +374,7 @@ class MShop_Plugin_Manager_Default
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
 
-		if ( ctype_alnum( $type ) === false ) {
+		if( ctype_alnum( $type ) === false ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
 		}
 
@@ -382,14 +382,14 @@ class MShop_Plugin_Manager_Default
 			throw new MShop_Plugin_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
-		if ( ctype_alnum( $provider ) === false ) {
+		if( ctype_alnum( $provider ) === false ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
 		$interface = 'MShop_Plugin_Provider_Factory_Interface';
 		$classname = 'MShop_Plugin_Provider_' . $type . '_' . $provider;
 
-		if ( class_exists( $classname ) === false ) {
+		if( class_exists( $classname ) === false ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
@@ -455,7 +455,7 @@ class MShop_Plugin_Manager_Default
 			$this->_plugins[$type] = array();
 
 			foreach( $this->searchItems( $search ) as $item ) {
-				$this->_plugins[$type][ $item->getId() ] = $this->getProvider( $item );
+				$this->_plugins[$type][$item->getId()] = $this->getProvider( $item );
 			}
 		}
 
@@ -743,7 +743,7 @@ class MShop_Plugin_Manager_Default
 			 * @see mshop/plugin/manager/default/item/delete
 			 * @see mshop/plugin/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/plugin/manager/default/item/count';
+			$cfgPathCount = 'mshop/plugin/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -756,8 +756,8 @@ class MShop_Plugin_Manager_Default
 					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -778,8 +778,8 @@ class MShop_Plugin_Manager_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 
 				$items[$id] = $this->_createItem( $row );

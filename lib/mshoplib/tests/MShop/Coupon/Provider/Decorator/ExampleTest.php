@@ -30,7 +30,7 @@ class MShop_Coupon_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Test
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
 
-		$provider = new MShop_Coupon_Provider_Example($context, $item, 'abcd');
+		$provider = new MShop_Coupon_Provider_Example( $context, $item, 'abcd' );
 		$this->_object = new MShop_Coupon_Provider_Decorator_Example( $context, $item, 'abcd', $provider );
 		$this->_object->setObject( $this->_object );
 	}

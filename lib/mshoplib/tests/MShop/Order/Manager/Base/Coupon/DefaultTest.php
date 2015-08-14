@@ -24,7 +24,7 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Base_Coupon_Default($this->_context);
+		$this->_object = new MShop_Order_Manager_Base_Coupon_Default( $this->_context );
 	}
 
 
@@ -36,7 +36,7 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -68,14 +68,14 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Interface', $this->_object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch());
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch(true));
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch( true ) );
 	}
 
 
@@ -103,11 +103,11 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 		$this->assertEquals( 2, $total );
 
 
-		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', array('OPQR','5678')));
+		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', array( 'OPQR', '5678' ) ) );
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$results = $this->_object->searchItems( $search, array(), $total);
+		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertGreaterThanOrEqual( 4, $total );
@@ -119,69 +119,69 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 		$obj = $this->_object;
 		$search = $obj->createSearch();
 
-		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR') );
+		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR' ) );
 		$results = $obj->searchItems( $search );
 
-		if ( ($item = reset($results) ) === false ) {
-			throw new Exception('empty results');
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new Exception( 'empty results' );
 		}
 
-		$this->assertEquals( $item, $obj->getItem($item->getId()) );
+		$this->assertEquals( $item, $obj->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '>=', 'order.base.coupon.productid', '1') );
+		$search->setConditions( $search->compare( '>=', 'order.base.coupon.productid', '1' ) );
 		$results = $this->_object->searchItems( $search );
 
-		if ( !($item = reset($results)) ) {
-			throw new Exception('empty results');
+		if( !( $item = reset( $results ) ) ) {
+			throw new Exception( 'empty results' );
 		}
 
-		$item->setId(null);
-		$this->_object->saveItem($item);
+		$item->setId( null );
+		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode('unitUpdCode');
-		$this->_object->saveItem($itemExp);
-		$itemUpd = $this->_object->getItem($item->getId());
+		$itemExp->setCode( 'unitUpdCode' );
+		$this->_object->saveItem( $itemExp );
+		$itemUpd = $this->_object->getItem( $item->getId() );
 
-		$this->_object->deleteItem($item->getId());
+		$this->_object->deleteItem( $item->getId() );
 
 		$context = TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertEquals( $item->getId(), $itemSaved->getId());
+		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId());
-		$this->assertEquals( $item->getCode(), $itemSaved->getCode());
-		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId());
+		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
+		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
+		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $itemExp->getId(), $itemUpd->getId());
+		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId());
-		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode());
-		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId());
+		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
+		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
+		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getItem($item->getId());
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getItem( $item->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

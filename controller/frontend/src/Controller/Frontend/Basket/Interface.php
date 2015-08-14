@@ -50,6 +50,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * 	along with the product in the order
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
+	 * @return void
 	 */
 	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
 		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), array $customAttributeValues = array(),

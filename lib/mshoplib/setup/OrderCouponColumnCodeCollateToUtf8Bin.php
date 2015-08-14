@@ -34,7 +34,7 @@ class MW_Setup_Task_OrderCouponColumnCodeCollateToUtf8Bin extends MW_Setup_Task_
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateCoupon');
+		return array( 'TablesCreateCoupon' );
 	}
 
 
@@ -63,7 +63,7 @@ class MW_Setup_Task_OrderCouponColumnCodeCollateToUtf8Bin extends MW_Setup_Task_
 
 			if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->columnExists( $table, $column ) === true
-				&& $this->_schema->getColumnDetails( $table, $column )->getCollationType() !== 'utf8_bin')
+				&& $this->_schema->getColumnDetails( $table, $column )->getCollationType() !== 'utf8_bin' )
 			{
 				$this->_execute( $stmt );
 				$this->_status( 'migrated' );

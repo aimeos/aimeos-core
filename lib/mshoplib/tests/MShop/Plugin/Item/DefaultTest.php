@@ -64,7 +64,7 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals(99, $this->_object->getSiteId());
+		$this->assertEquals( 99, $this->_object->getSiteId() );
 	}
 
 	public function testGetTypeId()
@@ -75,8 +75,8 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId(99);
-		$this->assertEquals(99, $this->_object->getTypeId());
+		$this->_object->setTypeId( 99 );
+		$this->assertEquals( 99, $this->_object->getTypeId() );
 
 		$this->assertTrue( $this->_object->isModified() );
 	}
@@ -112,14 +112,14 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array('limit'=>'40'), $this->_object->getConfig() );
+		$this->assertEquals( array( 'limit'=>'40' ), $this->_object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array('threshold'=>'20.00') );
-		$this->assertEquals( array('threshold'=>'20.00'), $this->_object->getConfig() );
+		$this->_object->setConfig( array( 'threshold'=>'20.00' ) );
+		$this->assertEquals( array( 'threshold'=>'20.00' ), $this->_object->getConfig() );
 		$this->assertEquals( true, $this->_object->isModified() );
 	}
 
@@ -179,20 +179,20 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'plugin.typeid' => 2,
 			'plugin.label' => 'test item',
 			'plugin.provider' => 'FreeShipping',
-			'plugin.config' => array('test'),
+			'plugin.config' => array( 'test' ),
 			'plugin.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['plugin.id'], $item->getId());
-		$this->assertEquals($list['plugin.typeid'], $item->getTypeId());
-		$this->assertEquals($list['plugin.label'], $item->getLabel());
-		$this->assertEquals($list['plugin.provider'], $item->getProvider());
-		$this->assertEquals($list['plugin.config'], $item->getConfig());
-		$this->assertEquals($list['plugin.status'], $item->getStatus());
+		$this->assertEquals( $list['plugin.id'], $item->getId() );
+		$this->assertEquals( $list['plugin.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['plugin.label'], $item->getLabel() );
+		$this->assertEquals( $list['plugin.provider'], $item->getProvider() );
+		$this->assertEquals( $list['plugin.config'], $item->getConfig() );
+		$this->assertEquals( $list['plugin.status'], $item->getStatus() );
 	}
 
 

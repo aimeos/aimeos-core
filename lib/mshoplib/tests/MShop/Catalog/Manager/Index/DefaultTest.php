@@ -38,7 +38,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		foreach( $result as $item )
 		{
-			self::$_products[ $item->getCode() ] = $item;
+			self::$_products[$item->getCode()] = $item;
 			$manager->saveItem( $item );
 		}
 	}
@@ -104,7 +104,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[ $item->getId() ] );
+		$this->assertEquals( 4, $result[$item->getId()] );
 	}
 
 
@@ -196,7 +196,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$sqlProd = 'SELECT "value" FROM "mshop_catalog_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
-		$sqlAttr ='SELECT "value" FROM "mshop_catalog_index_text"
+		$sqlAttr = 'SELECT "value" FROM "mshop_catalog_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
 
 		$this->_object->saveItem( $item );
@@ -238,14 +238,14 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 		$products = $this->_object->searchItems( $search );
 		$this->assertEquals( 22, count( $products ) );
 
-		foreach($products as $itemId => $item) {
+		foreach( $products as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
 
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'product.code', array('CNC', 'CNE') ),
+			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
 			$search->compare( '==', 'product.editor', $this->_editor ),
 			$search->getConditions(),
 		);
@@ -307,7 +307,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->compare( '!=', 'catalog.index.attribute.id', null ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null),
+			$search->compare( '!=', 'catalog.index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->_editor )
 		);
 
@@ -324,7 +324,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '==', $func, 2 ), // count attributes
 			$search->compare( '==', 'product.editor', $this->_editor )
 		);
-		$search->setConditions(  $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->combine( '&&', $conditions ) );
 
 		$result = $this->_object->searchItems( $search, array(), $total );
 
@@ -587,7 +587,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$langid = $context->getLocale()->getLanguageId();
 
-		$textMgr = $this->_object->getSubManager('text');
+		$textMgr = $this->_object->getSubManager( 'text' );
 
 		$search = $textMgr->createSearch();
 		$expr = array(
@@ -653,7 +653,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 0x7fffffff );
 
 		//delete whole catalog
-		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
+		$this->_object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		$afterDeleteAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
 		$afterDeletePrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
@@ -704,7 +704,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 		//delete whole catalog
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 0x7fffffff );
-		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
+		$this->_object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 		$this->_object->rebuildIndex();

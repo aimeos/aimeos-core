@@ -26,7 +26,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Default($this->_context);
+		$this->_object = new MShop_Order_Manager_Default( $this->_context );
 	}
 
 
@@ -38,7 +38,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -62,7 +62,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Order_Item_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->createItem() );
 	}
 
 
@@ -78,8 +78,8 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ($expected = reset( $results )) === false ){
-			throw new Exception(sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ));
+		if( ( $expected = reset( $results ) ) === false ) {
+			throw new Exception( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
 		}
 
 		$actual = $this->_object->getItem( $expected->getId() );
@@ -97,16 +97,16 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No order item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setType(MShop_Order_Item_Abstract::TYPE_WEB);
+		$itemExp->setType( MShop_Order_Item_Abstract::TYPE_WEB );
 		$this->_object->saveItem( $itemExp );
 		$itemUpd = $this->_object->getItem( $itemExp->getId() );
 
@@ -159,11 +159,11 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No order item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$this->_object->saveItem( $item );
 
 
@@ -176,7 +176,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 0, count( $results ) );
 
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
 		$this->_object->saveItem( $item );
 
@@ -208,11 +208,11 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No order item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$this->_object->saveItem( $item );
 
 
@@ -225,7 +225,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 0, count( $results ) );
 
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_LOST );
 		$this->_object->saveItem( $item );
 
@@ -247,7 +247,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf('MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
 	}
 
 
@@ -288,7 +288,7 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'order.base.id', null );
 		$expr[] = $search->compare( '==', 'order.base.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
-		$expr[] = $search->compare( '>=', 'order.base.customerid', '');
+		$expr[] = $search->compare( '>=', 'order.base.customerid', '' );
 		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
@@ -398,18 +398,18 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED),
+			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->_object->searchItems( $search, array(), $total);
+		$items = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -417,21 +417,21 @@ class MShop_Order_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('base') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('base', 'Default') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('status') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('status', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'base' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'base', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'status' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'status', 'Default' ) );
 
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('base', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'base', 'unknown' );
 	}
 
 }

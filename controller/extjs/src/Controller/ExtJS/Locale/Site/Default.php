@@ -221,47 +221,47 @@ class Controller_ExtJS_Locale_Site_Default
 		return array(
 			'Locale_Site.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.searchItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "condition","optional" => true ),
-					array( "type" => "integer","name" => "start","optional" => true ),
-					array( "type" => "integer","name" => "limit","optional" => true ),
-					array( "type" => "string","name" => "sort","optional" => true ),
-					array( "type" => "string","name" => "dir","optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "condition", "optional" => true ),
+					array( "type" => "integer", "name" => "start", "optional" => true ),
+					array( "type" => "integer", "name" => "limit", "optional" => true ),
+					array( "type" => "string", "name" => "sort", "optional" => true ),
+					array( "type" => "string", "name" => "dir", "optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.getTree' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.insertItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "string","name" => "parentid","optional" => true ),
-					array( "type" => "string","name" => "refid","optional" => true ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "string", "name" => "parentid", "optional" => true ),
+					array( "type" => "string", "name" => "refid", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.moveItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "string","name" => "oldparentid","optional" => false ),
-					array( "type" => "string","name" => "newparentid","optional" => false ),
-					array( "type" => "string","name" => "refid","optional" => true ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "string", "name" => "oldparentid", "optional" => false ),
+					array( "type" => "string", "name" => "newparentid", "optional" => false ),
+					array( "type" => "string", "name" => "refid", "optional" => true ),
 				),
 				"returns" => "array",
 			),

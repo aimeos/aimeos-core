@@ -29,7 +29,7 @@ class MShop_Service_Item_Default
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		parent::__construct('service.', $values, $listItems, $refItems);
+		parent::__construct( 'service.', $values, $listItems, $refItems );
 
 		$this->_values = $values;
 	}
@@ -53,7 +53,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setPosition( $pos )
 	{
-		if ( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return; }
 
 		$this->_values['pos'] = (int) $pos;
 		$this->setModified();
@@ -80,7 +80,7 @@ class MShop_Service_Item_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -105,7 +105,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setTypeId( $typeId )
 	{
-		if ( $typeId == $this->getTypeId() ) { return; }
+		if( $typeId == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeId;
 		$this->setModified();
@@ -141,7 +141,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setProvider( $provider )
 	{
-		if ( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return; }
 
 		$this->_values['provider'] = (string) $provider;
 		$this->setModified();
@@ -166,7 +166,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -214,7 +214,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

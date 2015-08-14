@@ -38,8 +38,8 @@ class MW_Setup_Task_TablesCreateMShop extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_msg('Creating base tables', 0);
-		$this->_status('');
+		$this->_msg( 'Creating base tables', 0 );
+		$this->_status( '' );
 
 		$ds = DIRECTORY_SEPARATOR;
 
@@ -59,13 +59,13 @@ class MW_Setup_Task_TablesCreateMShop extends MW_Setup_Task_Abstract
 			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'catalog.sql',
 		);
 
-		$this->_setup($files);
+		$this->_setup( $files );
 
 		$files = array(
 			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'index.sql',
 		);
 
-		$this->_setup($files);
+		$this->_setup( $files );
 	}
 
 
@@ -76,9 +76,9 @@ class MW_Setup_Task_TablesCreateMShop extends MW_Setup_Task_Abstract
 	{
 		foreach( $files as $rname => $filepath )
 		{
-			$this->_msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->_status('');
+			$this->_msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->_status( '' );
 
-			if ( ( $content = file_get_contents( $filepath ) ) === false ) {
+			if( ( $content = file_get_contents( $filepath ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
 			}
 
@@ -101,7 +101,7 @@ class MW_Setup_Task_TablesCreateMShop extends MW_Setup_Task_Abstract
 				$parts = explode( '.', $name );
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
 
-				if ( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
+				if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
 					$this->_execute( $sql, $rname );
 					$this->_status( 'created' );
 				} else {

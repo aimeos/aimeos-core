@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'catalog' => array (
+return array(
+	'catalog' => array(
 		//0 level
 		'catalog/root' => array( 'label' => 'Root', 'config' => array( 'css-class' => 'home' ), 'code' => 'root', 'status' => 1, 'parent' => 'init' ),
 		//first level

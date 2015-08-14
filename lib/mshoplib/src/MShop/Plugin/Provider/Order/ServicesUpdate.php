@@ -85,9 +85,9 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 
 		foreach( $services as $type => $service )
 		{
-			if( isset( $result[ $service->getServiceId() ] ) )
+			if( isset( $result[$service->getServiceId()] ) )
 			{
-				$provider = $serviceManager->getProvider( $result[ $service->getServiceId() ] );
+				$provider = $serviceManager->getProvider( $result[$service->getServiceId()] );
 
 				if( $provider->isAvailable( $order ) )
 				{

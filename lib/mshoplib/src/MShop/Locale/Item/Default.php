@@ -35,7 +35,7 @@ class MShop_Locale_Item_Default
 	public function __construct( array $values = array( ), MShop_Locale_Item_Site_Interface $site = null,
 		array $sitePath = array(), array $siteSubTree = array() )
 	{
-		parent::__construct('locale.', $values);
+		parent::__construct( 'locale.', $values );
 
 		$this->_values = $values;
 		$this->_site = $site;
@@ -61,8 +61,8 @@ class MShop_Locale_Item_Default
 	 */
 	public function getSite()
 	{
-		if ( $this->_site === null ) {
-			throw new MShop_Locale_Exception('No site item available');
+		if( $this->_site === null ) {
+			throw new MShop_Locale_Exception( 'No site item available' );
 		}
 
 		return $this->_site;
@@ -109,7 +109,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function setSiteId( $id )
 	{
-		if ( $id === $this->getSiteId() ) { return; }
+		if( $id === $this->getSiteId() ) { return; }
 
 		$this->_values['siteid'] = (int) $id;
 		$this->_sitePath = array( (int) $id );
@@ -140,7 +140,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function setLanguageId( $langid )
 	{
-		if ( $langid == $this->getLanguageId() ) { return; }
+		if( $langid == $this->getLanguageId() ) { return; }
 
 		$this->_checkLanguageId( $langid );
 		$this->_values['langid'] = $langid;
@@ -167,7 +167,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if ( $currencyid == $this->getCurrencyId() ) { return; }
+		if( $currencyid == $this->getCurrencyId() ) { return; }
 
 		$this->_checkCurrencyId( $currencyid );
 		$this->_values['currencyid'] = $currencyid;
@@ -193,7 +193,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function setPosition( $pos )
 	{
-		if ( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return; }
 
 		$this->_values['pos'] = (int) $pos;
 		$this->setModified();
@@ -218,7 +218,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

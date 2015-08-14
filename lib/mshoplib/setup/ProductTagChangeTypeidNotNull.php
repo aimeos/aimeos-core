@@ -28,22 +28,22 @@ class MW_Setup_Task_ProductTagChangeTypeidNotNull extends MW_Setup_Task_Abstract
 
 
 	/**
-	* Returns the list of task names which this task depends on.
-	*
-	* @return string[] List of task names
-	*/
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return string[] List of task names
+	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop', 'MShopAddTypeData', 'ProductTagAdaptColumns');
+		return array( 'TablesCreateMShop', 'MShopAddTypeData', 'ProductTagAdaptColumns' );
 	}
 
 
 
 	/**
-	* Returns the list of task names which depends on this task.
-	*
-	* @return array List of task names
-	*/
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return array List of task names
+	 */
 	public function getPostDependencies()
 	{
 		return array();
@@ -62,10 +62,10 @@ class MW_Setup_Task_ProductTagChangeTypeidNotNull extends MW_Setup_Task_Abstract
 
 
 	/**
-	* Modify column typeid to NOT NULL and changes NULL to value of mshop_product_tag.code="default"
-	*
-	* @param array $stmts List of SQL statements to execute for adding columns
-	*/
+	 * Modify column typeid to NOT NULL and changes NULL to value of mshop_product_tag.code="default"
+	 *
+	 * @param array $stmts List of SQL statements to execute for adding columns
+	 */
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Changing typeid column in mshop_product_tag table', 0 ); $this->_status( '' );

@@ -54,13 +54,13 @@ class MShop_Product_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -111,7 +111,7 @@ class MShop_Product_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($result)) === false ) {
+		if( ( $expected = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No type item found for code "%1$s"', 'product' ) );
 		}
 
@@ -161,7 +161,7 @@ class MShop_Product_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, count( $items ) );
 		$this->assertEquals( 4, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -169,8 +169,8 @@ class MShop_Product_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 }

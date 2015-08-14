@@ -12,7 +12,7 @@
 class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'delete' => array (
+		'delete' => array(
 			'madmin_log' => array(
 				'idx_malog_facility_time_prio' => 'ALTER TABLE "madmin_log" DROP INDEX "idx_malog_facility_time_prio"',
 				'idx_malog_timestamp' => 'ALTER TABLE "madmin_log" DROP INDEX "idx_malog_timestamp"'
@@ -39,7 +39,7 @@ class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMAdmin');
+		return array( 'TablesCreateMAdmin' );
 	}
 	
 	
@@ -60,13 +60,13 @@ class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying indexes in madmin_log table' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 		
 		foreach( $stmts['delete'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 				
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

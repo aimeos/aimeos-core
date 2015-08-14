@@ -67,7 +67,7 @@ class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderAddProductidAndLangid', 'ProductTagLangidNull', 'TextChangeLangidNull');
+		return array( 'OrderAddProductidAndLangid', 'ProductTagLangidNull', 'TextChangeLangidNull' );
 	}
 
 
@@ -78,7 +78,7 @@ class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -104,7 +104,7 @@ class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			foreach ( $columns AS $column=>$stmtList )
+			foreach( $columns AS $column=>$stmtList )
 			{
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->columnExists( $table, $column ) === true

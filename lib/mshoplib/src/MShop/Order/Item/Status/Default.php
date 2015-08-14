@@ -1,10 +1,10 @@
 <?php
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @package MShop
- * @subpackage Order
- */
+	 * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+	 * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+	 * @package MShop
+	 * @subpackage Order
+	 */
 
 
 /**
@@ -21,17 +21,17 @@ class MShop_Order_Item_Status_Default
 
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('order.status.', $values);
+		parent::__construct( 'order.status.', $values );
 
 		$this->_values = $values;
 	}
 
 
 	/**
-	* Returns the parentid of the order status.
-	*
-	* @return integer|null Parent ID of the order
-	*/
+	 * Returns the parentid of the order status.
+	 *
+	 * @return integer|null Parent ID of the order
+	 */
 	public function getParentId()
 	{
 		return ( isset( $this->_values['parentid'] ) ? (int) $this->_values['parentid'] : null );
@@ -42,9 +42,9 @@ class MShop_Order_Item_Status_Default
 	 *
 	 * @param integer $parentid Parent ID of the order status
 	 */
-	public function setParentId($parentid)
+	public function setParentId( $parentid )
 	{
-		if ( $parentid == $this->getParentId() ) {
+		if( $parentid == $this->getParentId() ) {
 			return;
 		}
 
@@ -69,9 +69,9 @@ class MShop_Order_Item_Status_Default
 	 *
 	 * @param string $type Type of the order status
 	 */
-	public function setType($type)
+	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) {
+		if( $type == $this->getType() ) {
 			return;
 		}
 
@@ -95,9 +95,9 @@ class MShop_Order_Item_Status_Default
 	 *
 	 * @param string $value Value of the order status
 	 */
-	public function setValue($value)
+	public function setValue( $value )
 	{
-		if ( $value == $this->getValue() ) {
+		if( $value == $this->getValue() ) {
 			return;
 		}
 
@@ -135,10 +135,10 @@ class MShop_Order_Item_Status_Default
 
 
 	/**
-	* Returns the item values as array.
-	*
-	* @return Associative list of item properties and their values
-	*/
+	 * Returns the item values as array.
+	 *
+	 * @return Associative list of item properties and their values
+	 */
 	public function toArray()
 	{
 

@@ -53,15 +53,15 @@ class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_
 	protected function _process( $stmt )
 	{
 		$msg = 'Changing code from "product" to "default" in "mshop_product_type"';
-		$this->_msg($msg, 0);
+		$this->_msg( $msg, 0 );
 
-		if ($this->_schema->tableExists('mshop_product_type') )
+		if( $this->_schema->tableExists( 'mshop_product_type' ) )
 		{
 			$result = $this->_conn->create( $stmt )->execute();
 			$cntRows = $result->affectedRows();
 			$result->finish();
 
-			if ( $cntRows ) {
+			if( $cntRows ) {
 				$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {
 				$this->_status( 'OK' );
@@ -69,7 +69,7 @@ class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_
 		}
 		else
 		{
-			$this->_status('OK');
+			$this->_status( 'OK' );
 		}
 	}
 

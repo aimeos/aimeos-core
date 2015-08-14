@@ -30,9 +30,9 @@ class MShop_Order_Item_Base_Service_Default
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
-	public function __construct( MShop_Price_Item_Interface $price, array $values=array(), array $attributes=array() )
+	public function __construct( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array() )
 	{
-		parent::__construct('order.base.service.', $values);
+		parent::__construct( 'order.base.service.', $values );
 
 		$this->_values = $values;
 		$this->_price = $price;
@@ -69,7 +69,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setBaseId( $value )
 	{
-		if ( $value == $this->getBaseId() ) { return; }
+		if( $value == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
@@ -121,7 +121,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -146,7 +146,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setName( $name )
 	{
-		if ( $name == $this->getName() ) { return; }
+		if( $name == $this->getName() ) { return; }
 
 		$this->_values['name'] = (string) $name;
 		$this->setModified();
@@ -171,7 +171,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
@@ -196,7 +196,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setMediaUrl( $value )
 	{
-		if ( $value == $this->getMediaUrl() ) {
+		if( $value == $this->getMediaUrl() ) {
 			return;
 		}
 
@@ -223,7 +223,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price )
 	{
-		if ( $price === $this->_price ) { return; }
+		if( $price === $this->_price ) { return; }
 
 		$this->_price = $price;
 		$this->setModified();
@@ -419,7 +419,7 @@ class MShop_Order_Item_Base_Service_Default
 			$this->_attributesMap = array();
 
 			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[ $attribute->getType() ][ $attribute->getCode() ] = $attribute;
+				$this->_attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
 			}
 		}
 

@@ -89,11 +89,11 @@ class MShop_Service_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
@@ -276,18 +276,18 @@ class MShop_Service_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'service.list.editor', $this->_editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 3);
-		$results = $this->_object->searchItems($search, array(), $total);
+		$search->setSlice( 0, 3 );
+		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 3, count( $results ) );
 		$this->assertEquals( 12, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

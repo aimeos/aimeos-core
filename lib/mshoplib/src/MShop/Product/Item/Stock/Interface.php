@@ -29,7 +29,7 @@ interface MShop_Product_Item_Stock_Interface extends MShop_Common_Item_Interface
 	 * @param integer $prodid New product Id
 	 * @return void
 	 */
-	public function setProductId($prodid);
+	public function setProductId( $prodid );
 
 	/**
 	 * Returns the warehouse Id.
@@ -44,7 +44,7 @@ interface MShop_Product_Item_Stock_Interface extends MShop_Common_Item_Interface
 	 * @param integer $warehouseid New warehouse Id
 	 * @return void
 	 */
-	public function setWarehouseId($warehouseid);
+	public function setWarehouseId( $warehouseid );
 
 	/**
 	 * Returns the stock level.
@@ -59,7 +59,7 @@ interface MShop_Product_Item_Stock_Interface extends MShop_Common_Item_Interface
 	 * @param integer $stocklevel New stock level
 	 * @return void
 	 */
-	public function setStocklevel($stocklevel);
+	public function setStocklevel( $stocklevel );
 
 	/**
 	 * Returns the back in stock date of the product.
@@ -74,6 +74,6 @@ interface MShop_Product_Item_Stock_Interface extends MShop_Common_Item_Interface
 	 * @param string|null $backdate New back in stock date of the product
 	 * @return void
 	 */
-	public function setDateBack($backdate);
+	public function setDateBack( $backdate );
 
 }

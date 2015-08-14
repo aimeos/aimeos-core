@@ -26,7 +26,7 @@ interface Controller_Frontend_Service_Interface
 	 * @return array List of service items implementing MShop_Service_Item_Interface with referenced items
 	 */
 	public function getServices( $type, MShop_Order_Item_Base_Interface $basket,
-		$ref = array( 'media', 'price', 'text') );
+		$ref = array( 'media', 'price', 'text' ) );
 
 	/**
 	 * Returns the list of attribute definitions which must be used to render the input form where the customer can

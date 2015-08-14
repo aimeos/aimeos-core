@@ -49,14 +49,14 @@ class MAdmin_Job_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->_object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attr );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MAdmin_Exception');
+		$this->setExpectedException( 'MAdmin_Exception' );
 		$this->_object->getSubManager( 'unknown' );
 	}
 
@@ -67,7 +67,7 @@ class MAdmin_Job_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'job.id', null );
-		$expr[] = $search->compare( '!=', 'job.siteid', null);
+		$expr[] = $search->compare( '!=', 'job.siteid', null );
 		$expr[] = $search->compare( '==', 'job.label', 'unittest job' );
 		$expr[] = $search->compare( '==', 'job.method', 'controller.method' );
 		$expr[] = $search->compare( '==', 'job.parameter', '{"items":"testfile.ext"}' );
@@ -84,7 +84,7 @@ class MAdmin_Job_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

@@ -16,7 +16,7 @@ class MShop_Locale_Manager_Language_DefaultTest extends PHPUnit_Framework_TestCa
 
 	protected function setUp()
 	{
-		$this->_object = new MShop_Locale_Manager_Language_Default(TestHelper::getContext());
+		$this->_object = new MShop_Locale_Manager_Language_Default( TestHelper::getContext() );
 	}
 
 
@@ -28,7 +28,7 @@ class MShop_Locale_Manager_Language_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Locale_Item_Language_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Locale_Item_Language_Interface', $this->_object->createItem() );
 	}
 
 
@@ -78,13 +78,13 @@ class MShop_Locale_Manager_Language_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetItem()
 	{
-		$actual = $this->_object->getItem('en');
+		$actual = $this->_object->getItem( 'en' );
 
-		$this->assertEquals('en', $actual->getId());
-		$this->assertEquals('en', $actual->getCode());
-		$this->assertEquals('English', $actual->getLabel());
-		$this->assertEquals(1, $actual->getStatus());
-		$this->assertFalse($actual->isModified());
+		$this->assertEquals( 'en', $actual->getId() );
+		$this->assertEquals( 'en', $actual->getCode() );
+		$this->assertEquals( 'English', $actual->getLabel() );
+		$this->assertEquals( 1, $actual->getStatus() );
+		$this->assertFalse( $actual->isModified() );
 	}
 
 
@@ -110,13 +110,13 @@ class MShop_Locale_Manager_Language_DefaultTest extends PHPUnit_Framework_TestCa
 
 		// search without base criteria, slice & total
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('~=', 'locale.language.label', 'rman'));
-		$search->setSlice(0, 1);
-		$results = $this->_object->searchItems($search, array(), $total);
-		$this->assertEquals(1, count( $results ));
-		$this->assertEquals(1, $total);
+		$search->setConditions( $search->compare( '~=', 'locale.language.label', 'rman' ) );
+		$search->setSlice( 0, 1 );
+		$results = $this->_object->searchItems( $search, array(), $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -124,15 +124,15 @@ class MShop_Locale_Manager_Language_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSearchAttributes()
 	{
-		foreach ( $this->_object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attribute);
+		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

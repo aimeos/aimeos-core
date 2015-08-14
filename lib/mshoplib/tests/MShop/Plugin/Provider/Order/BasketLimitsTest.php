@@ -24,25 +24,25 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	protected function setUp()
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$this->_order = $orderBaseManager->createItem();
 
-		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
+		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$search = $orderBaseProductManager->createSearch();
 
-		$search->setConditions( $search->combine('&&', array(
-			$search->compare( '==', 'order.base.product.prodcode', array('CNE', 'CNC') ),
-			$search->compare( '==', 'order.base.product.price', array('600.00', '36.00') )
-		)));
+		$search->setConditions( $search->combine( '&&', array(
+			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
+			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
+		) ) );
 		$items = $orderBaseProductManager->searchItems( $search );
 
-		if ( count( $items ) < 2 ) {
+		if( count( $items ) < 2 ) {
 			throw new Exception( 'Please fix the test data in your database.' );
 		}
 
-		foreach ( $items as $item ) {
-			$this->_products[ $item->getProductCode() ] = $item;
+		foreach( $items as $item ) {
+			$this->_products[$item->getProductCode()] = $item;
 		}
 
 		$this->_products['CNE']->setQuantity( 2 );
@@ -62,7 +62,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$plugin->setConfig( $config );
 		$plugin->setStatus( '1' );
 
-		$this->_object = new MShop_Plugin_Provider_Order_BasketLimits(TestHelper::getContext(), $plugin);
+		$this->_object = new MShop_Plugin_Provider_Order_BasketLimits( TestHelper::getContext(), $plugin );
 	}
 
 
@@ -74,8 +74,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
-		unset($this->_order);
+		unset( $this->_object );
+		unset( $this->_order );
 	}
 
 
@@ -90,7 +90,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_products['CNE']->setQuantity( 4 );
 		$this->_order->addProduct( $this->_products['CNE'] );
 
-		$this->assertTrue($this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT));
+		$this->assertTrue( $this->_object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
 	}
 
 
@@ -99,7 +99,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_order->addProduct( $this->_products['CNC'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+		$this->_object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -109,7 +109,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_order->addProduct( $this->_products['CNE'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+		$this->_object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -118,7 +118,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_order->addProduct( $this->_products['CNE'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+		$this->_object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -128,6 +128,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_order->addProduct( $this->_products['CNC'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+		$this->_object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 }

@@ -217,7 +217,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 			$textTypeMap = array();
 			foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
-				$textTypeMap[ $item->getCode() ] = $item->getId();
+				$textTypeMap[$item->getCode()] = $item->getId();
 			}
 
 			foreach( $container as $content ) {
@@ -244,14 +244,14 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		return array(
 			'Catalog_Import_Text.uploadFile' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
 				),
 				"returns" => "",
 			),
 			'Catalog_Import_Text.importFile' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "",
 			),
@@ -298,7 +298,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 				$listStart += count( $catalogItems );
 
 				foreach( $listItems as $item ) {
-					unset( $itemTextMap[ $item->getParentId() ][ $item->getRefId() ] );
+					unset( $itemTextMap[$item->getParentId()][$item->getRefId()] );
 				}
 			}
 			while( $listStart < $listTotal );

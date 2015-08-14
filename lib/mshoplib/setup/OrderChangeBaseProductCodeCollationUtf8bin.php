@@ -23,7 +23,7 @@ class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables');
+		return array( 'OrderRenameTables' );
 	}
 
 
@@ -34,7 +34,7 @@ class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -56,7 +56,7 @@ class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_
 		$tablename = 'mshop_order_base_product';
 		
 		$this->_msg( 'Changing collation in mshop_order_base_product', 0 );
-		$this->_status('');
+		$this->_status( '' );
 		
 		foreach( $stmts as $columnname => $stmt )
 		{

@@ -252,17 +252,17 @@ class Controller_ExtJS_Coupon_Code_Default
 
 		$list['Coupon_Code.uploadFile'] = array(
 			"parameters" => array(
-				array( "type" => "string","name" => "site","optional" => false ),
-				array( "type" => "string","name" => "couponid","optional" => false ),
+				array( "type" => "string", "name" => "site", "optional" => false ),
+				array( "type" => "string", "name" => "couponid", "optional" => false ),
 			),
 			"returns" => "array",
 		);
 
 		$list['Coupon_Code.importFile'] = array(
 			"parameters" => array(
-				array( "type" => "string","name" => "site","optional" => false ),
-				array( "type" => "string","name" => "couponid","optional" => false ),
-				array( "type" => "array","name" => "items","optional" => false ),
+				array( "type" => "string", "name" => "site", "optional" => false ),
+				array( "type" => "string", "name" => "couponid", "optional" => false ),
+				array( "type" => "array", "name" => "items", "optional" => false ),
 			),
 			"returns" => "array",
 		);

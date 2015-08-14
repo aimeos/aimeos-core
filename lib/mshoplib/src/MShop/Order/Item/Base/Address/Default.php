@@ -51,7 +51,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function setBaseId( $value )
 	{
-		if ( $value == $this->getBaseId() ) { return; }
+		if( $value == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
@@ -76,7 +76,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function setAddressId( $addrid )
 	{
-		if ( $addrid == $this->getAddressId() ) { return; }
+		if( $addrid == $this->getAddressId() ) { return; }
 
 		$this->_values['addrid'] = (string) $addrid;
 		$this->setModified();
@@ -101,7 +101,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
 		$this->_checkType( $type );
 

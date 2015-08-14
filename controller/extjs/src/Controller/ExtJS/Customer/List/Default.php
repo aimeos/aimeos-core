@@ -53,7 +53,7 @@ class Controller_ExtJS_Customer_List_Default
 		foreach( $result as $item )
 		{
 			if( ( $domain = $item->getDomain() ) != '' ) {
-				$idLists[ $domain ][] = $item->getRefId();
+				$idLists[$domain][] = $item->getRefId();
 			}
 			$listItems[] = (object) $item->toArray();
 		}

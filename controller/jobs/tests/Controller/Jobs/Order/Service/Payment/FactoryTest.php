@@ -14,7 +14,7 @@ class Controller_Jobs_Order_Service_Payment_FactoryTest extends PHPUnit_Framewor
 		$arcavias = TestHelper::getArcavias();
 
 		$obj = Controller_Jobs_Order_Service_Payment_Factory::createController( $context, $arcavias );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
 	}
 
 

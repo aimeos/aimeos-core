@@ -17,49 +17,49 @@ class MShop_Context_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConfig()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getConfig();
 	}
 
 	public function testGetDatabaseManager()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getDatabaseManager();
 	}
 
 	public function testGetLocale()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getLocale();
 	}
 
 	public function testGetI18n()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getI18n();
 	}
 
 	public function testGetLogger()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getLogger();
 	}
 
 	public function testGetSession()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getSession();
 	}
 
 	public function testGetMail()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getMail();
 	}
 
 	public function testGetView()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getView();
 	}
 
@@ -81,7 +81,7 @@ class MShop_Context_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$context = TestHelper::getContext();
 
-		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
+		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
 		$locale->setLanguageId( 'en' );
 		$this->_object->setLocale( $locale );
 
@@ -91,7 +91,7 @@ class MShop_Context_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLocale()
 	{
-		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
+		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
 		$this->_object->setLocale( $locale );
 		$this->assertSame( $locale, $this->_object->getLocale() );
 	}

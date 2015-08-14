@@ -60,7 +60,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->_additional, 'Default' );
 
 
-		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'plugin.php';
+		$filename = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
 			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
@@ -86,7 +86,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 		$manager = $pluginManager->getSubManager( 'type' );
 
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
-			$types[ 'plugin/' . $item->getCode() ] = $item;
+			$types['plugin/' . $item->getCode()] = $item;
 		}
 
 		$num = $total = 0;
@@ -96,12 +96,12 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 		{
 			$total++;
 
-			if( !isset( $types[ $dataset['typeid'] ] ) ) {
+			if( !isset( $types[$dataset['typeid']] ) ) {
 				throw new Exception( sprintf( 'No plugin type "%1$s" found', $dataset['typeid'] ) );
 			}
 
 			$item->setId( null );
-			$item->setTypeId( $types[ $dataset['typeid'] ]->getId() );
+			$item->setTypeId( $types[$dataset['typeid']]->getId() );
 			$item->setProvider( $dataset['provider'] );
 			$item->setLabel( $dataset['label'] );
 			$item->setConfig( $dataset['config'] );
@@ -114,7 +114,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 			try {
 				$pluginManager->saveItem( $item );
 				$num++;
-			} catch( Exception $e ) { ; } // if plugin configuration was already available
+			} catch( Exception $e ) {; } // if plugin configuration was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );

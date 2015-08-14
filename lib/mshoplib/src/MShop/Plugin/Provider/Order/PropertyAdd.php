@@ -105,13 +105,13 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 
 
 	/**
-	* Adds attribute items to an array.
-	*
-	* @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
-	* @param MShop_Order_Item_Base_Product_Interface $product Product containing attributes
-	* @param Array $properties List of item properties to be converted
-	* @return Array List of attributes
-	*/
+	 * Adds attribute items to an array.
+	 *
+	 * @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
+	 * @param MShop_Order_Item_Base_Product_Interface $product Product containing attributes
+	 * @param Array $properties List of item properties to be converted
+	 * @return Array List of attributes
+	 */
 	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();

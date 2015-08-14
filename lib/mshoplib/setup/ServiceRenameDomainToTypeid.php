@@ -29,7 +29,7 @@ class MW_Setup_Task_ServiceRenameDomainToTypeid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('MShopAddTypeData');
+		return array( 'MShopAddTypeData' );
 	}
 
 

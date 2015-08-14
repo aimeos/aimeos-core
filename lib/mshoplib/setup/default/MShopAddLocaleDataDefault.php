@@ -63,7 +63,7 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 		if( $this->_additional->getConfig()->get( 'setup/site', 'default' ) === 'default' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
-			$filename = dirname( __FILE__ ) . $ds . 'data'. $ds . 'locale.php';
+			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
 
 			if( ( $data = include( $filename ) ) == false ) {
 				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );

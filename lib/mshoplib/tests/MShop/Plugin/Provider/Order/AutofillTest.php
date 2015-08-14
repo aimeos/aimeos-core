@@ -28,7 +28,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->_plugin->setStatus( 1 );
 
 		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $this->_orderManager->getSubManager('base');
+		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
 
 		$this->_order = $orderBaseManager->createItem();
 	}

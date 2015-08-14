@@ -25,7 +25,7 @@ class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_Test
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
-		$catItems = $catalogManager->searchItems( $search, array('media') );
+		$catItems = $catalogManager->searchItems( $search, array( 'media' ) );
 
 		if( ( $catItem = reset( $catItems ) ) === false ) {
 			throw new Exception( 'No catalog item found' );

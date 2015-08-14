@@ -52,7 +52,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg('Adding order test data', 0);
+		$this->_msg( 'Adding order test data', 0 );
 		$this->_additional->setEditor( 'core:unittest' );
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
@@ -60,7 +60,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array('unittest', 'unit') ) );
+		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array( 'unittest', 'unit' ) ) );
 
 		foreach( $orderBaseManager->searchItems( $search ) as $order ) {
 			$orderBaseManager->deleteItem( $order->getId() );
@@ -79,7 +79,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$bases['items'] = $this->_addOrderBaseServiceData( $orderBaseManager, $bases, $testdata );
 
 		//update order bases (getPrice)
-		foreach( $bases['items'] as $baseItem) {
+		foreach( $bases['items'] as $baseItem ) {
 			$orderBaseManager->saveItem( $baseItem, false );
 		}
 
@@ -109,19 +109,19 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order/base'] as $key => $dataset )
 		{
-			$bases['items'][ $key ] = $orderBaseManager->createItem();
-			$bases['items'][ $key ]->setId( null );
-			$bases['items'][ $key ]->setComment( $dataset['comment'] );
-			$bases['items'][ $key ]->setCustomerId( $customerIds[ $dataset['customerid'] ] );
+			$bases['items'][$key] = $orderBaseManager->createItem();
+			$bases['items'][$key]->setId( null );
+			$bases['items'][$key]->setComment( $dataset['comment'] );
+			$bases['items'][$key]->setCustomerId( $customerIds[$dataset['customerid']] );
 
 			$locale->setId( null );
 			$locale->setSiteId( $this->_additional->getLocale()->getSiteId() );
 			$locale->setLanguageId( $dataset['langid'] );
 			$locale->setCurrencyId( $dataset['currencyid'] );
-			$bases['items'][ $key ]->setLocale( $locale );
+			$bases['items'][$key]->setLocale( $locale );
 
-			$orderBaseManager->saveItem( $bases['items'][ $key ] );
-			$bases['ids'][ $key ] = $bases['items'][ $key ]->getId();
+			$orderBaseManager->saveItem( $bases['items'][$key] );
+			$bases['ids'][$key] = $bases['items'][$key]->getId();
 		}
 
 		$this->_addOrderBaseAddressData( $orderBaseAddressManager, $bases, $testdata );
@@ -145,12 +145,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order/base/address'] as $dataset )
 		{
-			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {
+			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$orderAddr->setId( null );
-			$orderAddr->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
+			$orderAddr->setBaseId( $bases['ids'][$dataset['baseid']] );
 			$orderAddr->setAddressId( ( isset( $dataset['addrid'] ) ? $dataset['addrid'] : '' ) );
 			$orderAddr->setType( $dataset['type'] );
 			$orderAddr->setCompany( $dataset['company'] );
@@ -189,7 +189,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 	protected function _addOrderBaseServiceData( MShop_Common_Manager_Interface $orderBaseManager,
 		array $bases, array $testdata )
 	{
-		$ordServices = array ();
+		$ordServices = array();
 		$servIds = $this->_getServiceIds( $testdata );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Default' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Default' );
@@ -200,22 +200,22 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{
-			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {
+			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
 			}
 
-			if( !isset( $bases['items'][ $dataset['baseid'] ] ) ) {
+			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
 			}
 
 			$priceItem = $priceManager->createItem();
 
 			$ordServ->setId( null );
-			$ordServ->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
-			$ordServ->setType($dataset['type']);
-			$ordServ->setCode($dataset['code']);
-			$ordServ->setName($dataset['name']);
-			$ordServ->setMediaUrl($dataset['mediaurl']);
+			$ordServ->setBaseId( $bases['ids'][$dataset['baseid']] );
+			$ordServ->setType( $dataset['type'] );
+			$ordServ->setCode( $dataset['code'] );
+			$ordServ->setName( $dataset['name'] );
+			$ordServ->setMediaUrl( $dataset['mediaurl'] );
 
 			if( isset( $dataset['servid'] ) ) {
 				$ordServ->setServiceId( $servIds[$dataset['servid']] );
@@ -229,8 +229,8 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseServiceManager->saveItem( $ordServ );
 
-			$ordServices[ $key ] = $ordServ->getId();
-			$bases['items'][ $dataset['baseid'] ]->setService( $ordServ, $dataset['type'] ); //adds Services to orderbase
+			$ordServices[$key] = $ordServ->getId();
+			$bases['items'][$dataset['baseid']]->setService( $ordServ, $dataset['type'] ); //adds Services to orderbase
 		}
 
 		$this->_addOrderBaseServiceAttributeData( $orderBaseServiceAttrManager, $testdata, $ordServices );
@@ -262,18 +262,18 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
-			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {
+			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
-			if( !isset( $bases['items'][ $dataset['baseid'] ] ) ) {
+			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
 			$ordProdItem = $orderBaseProductManager->createItem();
 
 			$ordProdItem->setId( null );
-			$ordProdItem->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
+			$ordProdItem->setBaseId( $bases['ids'][$dataset['baseid']] );
 			$ordProdItem->setType( $dataset['type'] );
 			$ordProdItem->setSupplierCode( $dataset['suppliercode'] );
 			$ordProdItem->setProductCode( $dataset['prodcode'] );
@@ -284,17 +284,17 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdItem->setStatus( $dataset['status'] );
 			$ordProdItem->setPosition( $dataset['pos'] );
 
-			if( isset( $dataset['warehousecode'] ) ){
+			if( isset( $dataset['warehousecode'] ) ) {
 				$ordProdItem->setWarehouseCode( $dataset['warehousecode'] );
 			}
 
-			if( isset( $dataset['prodid'] ) ){
+			if( isset( $dataset['prodid'] ) ) {
 				$ordProdItem->setProductId( $products[$dataset['prodid']]->getId() );
 			}
 
 			// product bundle related fields
-			if( isset( $dataset['ordprodid'] ) ){
-				$ordProdItem->setOrderProductId( $ordProds[ $dataset['ordprodid'] ] );
+			if( isset( $dataset['ordprodid'] ) ) {
+				$ordProdItem->setOrderProductId( $ordProds[$dataset['ordprodid']] );
 			}
 
 			$priceItem = $priceManager->createItem();
@@ -306,8 +306,8 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseProductManager->saveItem( $ordProdItem );
 
-			$bases['items'][ $dataset['baseid'] ]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase
-			$ordProds[ $key ] = $ordProdItem->getId();
+			$bases['items'][$dataset['baseid']]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase
+			$ordProds[$key] = $ordProdItem->getId();
 		}
 
 		$this->_addOrderBaseProductAttributeData( $orderBaseProductAttrManager, $testdata, $ordProds, $products );
@@ -335,26 +335,26 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
 
 		foreach( $attributes as $attrItem ) {
-			$attrCodes[ $attrItem->getType() ][] = $attrItem;
+			$attrCodes[$attrItem->getType()][] = $attrItem;
 		}
 
 		$ordProdAttr = $manager->createItem();
 
-		foreach ( $testdata['order/base/product/attr'] as $dataset )
+		foreach( $testdata['order/base/product/attr'] as $dataset )
 		{
-			if( !isset( $ordProds[ $dataset['ordprodid'] ] ) ) {
+			if( !isset( $ordProds[$dataset['ordprodid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
 			$ordProdAttr->setId( null );
-			$ordProdAttr->setProductId( $ordProds[ $dataset['ordprodid'] ] );
+			$ordProdAttr->setProductId( $ordProds[$dataset['ordprodid']] );
 			$ordProdAttr->setCode( $dataset['code'] );
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
 
-			if( isset( $attrCodes[ $dataset['code'] ] ) )
+			if( isset( $attrCodes[$dataset['code']] ) )
 			{
-				foreach( (array) $attrCodes[ $dataset['code'] ] as $attrItem )
+				foreach( (array) $attrCodes[$dataset['code']] as $attrItem )
 				{
 					if( $attrItem->getCode() == $dataset['value'] ) {
 						$ordProdAttr->setAttributeId( $attrItem->getId() );
@@ -386,12 +386,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order/base/service/attr'] as $dataset )
 		{
-			if( !isset( $ordServices[ $dataset['ordservid'] ] ) ) {
+			if( !isset( $ordServices[$dataset['ordservid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
 			}
 
 			$ordServAttr->setId( null );
-			$ordServAttr->setServiceId( $ordServices[ $dataset['ordservid'] ] );
+			$ordServAttr->setServiceId( $ordServices[$dataset['ordservid']] );
 			$ordServAttr->setCode( $dataset['code'] );
 			$ordServAttr->setValue( $dataset['value'] );
 			$ordServAttr->setName( $dataset['name'] );
@@ -425,12 +425,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		foreach( $testdata['order'] as $key => $dataset )
 		{
-			if( !isset( $baseIds[ $dataset['baseid'] ] ) ) {
+			if( !isset( $baseIds[$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$ordItem->setId( null );
-			$ordItem->setBaseId( $baseIds[ $dataset['baseid'] ] );
+			$ordItem->setBaseId( $baseIds[$dataset['baseid']] );
 			$ordItem->setType( $dataset['type'] );
 			$ordItem->setDateDelivery( $dataset['datedelivery'] );
 			$ordItem->setDatePayment( $dataset['datepayment'] );
@@ -439,18 +439,18 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordItem->setRelatedId( $dataset['relatedid'] );
 
 			$orderManager->saveItem( $ordItem );
-			$ords[ $key ] = $ordItem->getId();
+			$ords[$key] = $ordItem->getId();
 		}
 
 		$ordStat = $orderStatusManager->createItem();
 		foreach( $testdata['order/status'] as $dataset )
 		{
-			if( !isset( $ords[ $dataset['parentid'] ] ) ) {
+			if( !isset( $ords[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$ordStat->setId( null );
-			$ordStat->setParentId( $ords[ $dataset['parentid'] ] );
+			$ordStat->setParentId( $ords[$dataset['parentid']] );
 			$ordStat->setType( $dataset['type'] );
 			$ordStat->setValue( $dataset['value'] );
 
@@ -471,7 +471,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 	{
 		$customercodes = $customerIds = array();
 
-		foreach ($testdata['order/base'] as $key => $dataset) {
+		foreach( $testdata['order/base'] as $key => $dataset ) {
 			$customercodes[] = $dataset['customerid'];
 		}
 
@@ -510,7 +510,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$result = $productManager->searchItems( $search );
 
 		foreach( $result as $item ) {
-			$items[ $item->getCode() ] = $item;
+			$items[$item->getCode()] = $item;
 		}
 
 		return $items;

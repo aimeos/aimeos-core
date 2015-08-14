@@ -55,11 +55,11 @@ class MShop_Product_Manager_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'product.tag.editor', $this->_editor ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No tag item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setLanguageId( 'en' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -105,13 +105,13 @@ class MShop_Product_Manager_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'product.tag.label', 'herb'),
+			$search->compare( '~=', 'product.tag.label', 'herb' ),
 			$search->compare( '==', 'product.tag.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($results)) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( sprintf( 'No product tag item found for label "%1$s".', 'herb' ) );
 		}
 
@@ -151,7 +151,7 @@ class MShop_Product_Manager_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'product.tag.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.tag.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
@@ -162,13 +162,13 @@ class MShop_Product_Manager_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '~=', 'product.tag.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$items = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -176,17 +176,17 @@ class MShop_Product_Manager_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('type', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'type', 'unknown' );
 	}
 }

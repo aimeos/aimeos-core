@@ -34,7 +34,7 @@ class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abst
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -64,7 +64,7 @@ class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abst
 		if( $this->_schema->tableExists( $table )
 			&& $this->_schema->columnExists( $table, $column ) === false )
 		{
-			$this->_execute( $stmts[ $column ] );
+			$this->_execute( $stmts[$column] );
 			$this->_status( 'added' );
 		} else {
 			$this->_status( 'OK' );

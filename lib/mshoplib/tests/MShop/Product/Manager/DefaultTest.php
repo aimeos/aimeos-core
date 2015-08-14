@@ -120,7 +120,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->_editor ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$products = $manager->searchItems( $search );
 
 		if( ( $item = reset( $products ) ) === false ) {
@@ -141,7 +141,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$domains = array('text','product', 'price', 'media','attribute');
+		$domains = array( 'text', 'product', 'price', 'media', 'attribute' );
 
 		$search = $this->_object->createSearch();
 		$conditions = array(
@@ -171,7 +171,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->_object->createSearch();
-		$this->assertInstanceOf('MW_Common_Criteria_SQL', $search);
+		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $search );
 	}
 
 
@@ -275,14 +275,14 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->_editor );
 
 
-		$search->setConditions( $search->combine('&&', $expr) );
-		$search->setSlice(0, 1);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
 
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
@@ -294,9 +294,9 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 28, $total );
 
 
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'product.code', array('CNC', 'CNE') ),
+			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
 			$search->compare( '==', 'product.editor', $this->_editor ),
 			$search->getConditions(),
 		);
@@ -320,7 +320,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		{
 			$result = $this->_object->searchItems( $search );
 
-			foreach ( $result as $item ) {
+			foreach( $result as $item ) {
 				$numproducts++;
 			}
 
@@ -336,23 +336,23 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('stock') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('stock', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'stock' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'stock', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('list', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'list', 'unknown' );
 	}
 }

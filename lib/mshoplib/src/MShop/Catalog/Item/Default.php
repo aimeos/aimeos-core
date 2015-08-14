@@ -68,7 +68,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setId( $id )
 	{
-		if ( $id === $this->getId() ) { return; }
+		if( $id === $this->getId() ) { return; }
 
 		$this->_node->setId( $id );
 	}
@@ -81,7 +81,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getSiteId()
 	{
-		return $this->_node->__get('siteid');
+		return $this->_node->__get( 'siteid' );
 	}
 
 
@@ -103,7 +103,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setLabel( $name )
 	{
-		if ( $name == $this->getLabel() ) { return; }
+		if( $name == $this->getLabel() ) { return; }
 
 		$this->_node->setLabel( $name );
 	}
@@ -172,7 +172,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status === $this->getStatus() ) { return; }
+		if( $status === $this->getStatus() ) { return; }
 
 		$this->_node->setStatus( $status );
 	}
@@ -184,7 +184,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getTimeModified()
 	{
-		return $this->_node->__get('mtime');
+		return $this->_node->__get( 'mtime' );
 	}
 
 
@@ -195,7 +195,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getTimeCreated()
 	{
-		return $this->_node->__get('ctime');
+		return $this->_node->__get( 'ctime' );
 	}
 
 
@@ -206,7 +206,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getEditor()
 	{
-		return $this->_node->__get('editor');
+		return $this->_node->__get( 'editor' );
 	}
 
 
@@ -251,10 +251,10 @@ class MShop_Catalog_Item_Default
 			'catalog.label' => $this->_node->getLabel(),
 			'catalog.status' => $this->_node->getStatus(),
 			'catalog.config' => $this->getConfig(),
-			'catalog.siteid' => $this->_node->__get('siteid'),
-			'catalog.ctime' => $this->_node->__get('ctime'),
-			'catalog.mtime' => $this->_node->__get('mtime'),
-			'catalog.editor' => $this->_node->__get('editor'),
+			'catalog.siteid' => $this->_node->__get( 'siteid' ),
+			'catalog.ctime' => $this->_node->__get( 'ctime' ),
+			'catalog.mtime' => $this->_node->__get( 'mtime' ),
+			'catalog.editor' => $this->_node->__get( 'editor' ),
 			'catalog.hasChildren' => $this->hasChildren()
 		);
 	}

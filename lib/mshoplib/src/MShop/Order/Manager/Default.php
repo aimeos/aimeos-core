@@ -215,8 +215,8 @@ class MShop_Order_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -257,8 +257,8 @@ class MShop_Order_Manager_Default
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if($item->getBaseId() === null) {
-			throw new MShop_Order_Exception('Required order base ID is missing');
+		if( $item->getBaseId() === null ) {
+			throw new MShop_Order_Exception( 'Required order base ID is missing' );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -349,7 +349,7 @@ class MShop_Order_Manager_Default
 			$stmt->bind( 7, $item->getPaymentStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 8, $item->getRelatedId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 9, $date ); //mtime
-			$stmt->bind( 10, $context->getEditor());
+			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
@@ -417,7 +417,7 @@ class MShop_Order_Manager_Default
 	 * @return MShop_Order_Item_Interface Returns order invoice item of the given id
 	 * @throws MShop_Order_Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array())
+	public function getItem( $id, array $ref = array() )
 	{
 		return $this->_getItem( 'order.id', $id, $ref );
 	}
@@ -614,7 +614,7 @@ class MShop_Order_Manager_Default
 			 * @see mshop/order/manager/default/item/delete
 			 * @see mshop/order/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/order/manager/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
@@ -622,7 +622,7 @@ class MShop_Order_Manager_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )

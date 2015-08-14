@@ -473,7 +473,7 @@ class MShop_Customer_Manager_Group_Default
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[ $row['id'] ] = $this->_createItem( $row );
+				$map[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

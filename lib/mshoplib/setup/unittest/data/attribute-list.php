@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'attribute/list/type' => array (
+return array(
+	'attribute/list/type' => array(
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -16,7 +16,7 @@ return array (
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 
-	'attribute/list' => array (
+	'attribute/list' => array(
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/XS', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/s', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/S', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/m', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/M', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),

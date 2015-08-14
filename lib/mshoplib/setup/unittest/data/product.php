@@ -4,15 +4,15 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'product/type' => array (
+return array(
+	'product/type' => array(
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Article', 'status' => 1 ),
 		'product/select' => array( 'domain' => 'product', 'code' => 'select', 'label' => 'Selection', 'status' => 1 ),
 		'product/rebate' => array( 'domain' => 'product', 'code' => 'rebate', 'label' => 'Rebate', 'status' => 1 ),
 		'product/bundle' => array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),
 	),
 
-	'product' => array (
+	'product' => array(
 		'product/CNE' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Expresso', 'code' => 'CNE', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/CNC' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Cappuccino', 'code' => 'CNC', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/U:MD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Monetary rebate', 'code' => 'U:MD', 'suppliercode' => 'unitSupplier', 'status' => 0 ),

@@ -60,9 +60,9 @@ class MShop_Text_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.list.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No text list type item found' );
 		}
 
@@ -74,13 +74,13 @@ class MShop_Text_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.list.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -147,12 +147,12 @@ class MShop_Text_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCas
 			$search->compare( '==', 'text.list.type.editor', $this->_editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

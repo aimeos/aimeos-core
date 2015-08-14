@@ -53,13 +53,13 @@ class Controller_ExtJS_Attribute_Export_Text_Factory
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/extjs/attribute/export/text/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/extjs/attribute/export/text/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_ExtJS_Attribute_Export_Text_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'Controller_ExtJS_Attribute_Export_Text_' . $name : '<not a string>';
 			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 

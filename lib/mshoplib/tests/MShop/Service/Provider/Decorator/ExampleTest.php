@@ -20,8 +20,8 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 		$servManager = MShop_Service_Manager_Factory::createManager( $context );
 		$search = $servManager->createSearch();
-		$search->setConditions($search->compare('==', 'service.provider', 'Default'));
-		$result = $servManager->searchItems($search, array('price'));
+		$search->setConditions( $search->compare( '==', 'service.provider', 'Default' ) );
+		$result = $servManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No order base item found' );
@@ -29,8 +29,8 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
-		$serviceProvider = $servManager->getProvider($item);
-		$this->_object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider);
+		$serviceProvider = $servManager->getProvider( $item );
+		$this->_object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider );
 	}
 
 
@@ -82,10 +82,10 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext())->getSubManager('base');
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
-		$search->setConditions( $search->compare('==', 'order.base.price', '672.00'));
-		$result = $orderBaseManager->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
+		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No order base item found' );
@@ -93,29 +93,29 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 		$price = $this->_object->calcPrice( $item );
 
-		$this->assertInstanceOf('MShop_Price_Item_Interface', $price);
-		$this->assertEquals($price->getValue(), '12.95');
+		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $price );
+		$this->assertEquals( $price->getValue(), '12.95' );
 
 	}
 
 
 	public function testIsAvailable()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext())->getSubManager('base');
-		$localeManager = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext());
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$localeItem = $localeManager->createItem();
 
 		$orderBaseDeItem = $orderBaseManager->createItem();
-		$localeItem->setLanguageId('de');
-		$orderBaseDeItem->setLocale($localeItem);
+		$localeItem->setLanguageId( 'de' );
+		$orderBaseDeItem->setLocale( $localeItem );
 
 		$orderBaseEnItem = $orderBaseManager->createItem();
-		$localeItem->setLanguageId('en');
-		$orderBaseEnItem->setLocale($localeItem);
+		$localeItem->setLanguageId( 'en' );
+		$orderBaseEnItem->setLocale( $localeItem );
 
-		$this->assertFalse($this->_object->isAvailable($orderBaseDeItem));
-		$this->assertTrue($this->_object->isAvailable($orderBaseEnItem));
+		$this->assertFalse( $this->_object->isAvailable( $orderBaseDeItem ) );
+		$this->assertTrue( $this->_object->isAvailable( $orderBaseEnItem ) );
 	}
 
 	public function testIsImplemented()
@@ -128,7 +128,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
-		$expr = array (
+		$expr = array(
 			$criteria->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
 			$criteria->compare( '==', 'order.statuspayment', '6' )
 		);

@@ -58,7 +58,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
@@ -123,7 +123,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$customer->setBirthday( ( isset( $dataset['birthday'] ) ? $dataset['birthday'] : null ) );
 
 			$customerManager->saveItem( $customer );
-			$parentIds[ $key ] = $customer->getId();
+			$parentIds[$key] = $customer->getId();
 		}
 
 		return $parentIds;
@@ -143,13 +143,13 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	{
 		$address = $customerAddressManager->createItem();
 
-		foreach ( $testdata['customer/address'] as $dataset )
+		foreach( $testdata['customer/address'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['refid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
-			$address->setId(null);
+			$address->setId( null );
 			$address->setCompany( $dataset['company'] );
 			$address->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
 			$address->setSalutation( $dataset['salutation'] );
@@ -170,7 +170,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setLanguageId( $dataset['langid'] );
 			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
-			$address->setRefId( $parentIds[ $dataset['refid'] ] );
+			$address->setRefId( $parentIds[$dataset['refid']] );
 
 			$customerAddressManager->saveItem( $address, false );
 		}
@@ -190,9 +190,9 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	{
 		$group = $customerGroupManager->createItem();
 
-		foreach ( $testdata['customer/group'] as $dataset )
+		foreach( $testdata['customer/group'] as $dataset )
 		{
-			$group->setId(null);
+			$group->setId( null );
 			$group->setCode( $dataset['code'] );
 			$group->setLabel( $dataset['label'] );
 

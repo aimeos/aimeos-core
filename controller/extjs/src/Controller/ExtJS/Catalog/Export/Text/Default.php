@@ -51,7 +51,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			'site' => $params->site,
 			'items' => array(
 				(object) array(
-					'job.label' => 'Catalog text export: '. $languages,
+					'job.label' => 'Catalog text export: ' . $languages,
 					'job.method' => 'Catalog_Export_Text.exportFile',
 					'job.parameter' => array(
 						'site' => $params->site,
@@ -170,7 +170,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		 */
 		$downloaddir = $config->get( 'controller/extjs/catalog/export/text/default/downloaddir', 'uploads' );
 
-		$foldername = 'catalog-text-export_' . date('Y-m-d_H:i:s') . '_' . md5( time() . getmypid() );
+		$foldername = 'catalog-text-export_' . date( 'Y-m-d_H:i:s' ) . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
@@ -183,7 +183,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
-			'file' => '<a href="'.$downloadFile.'">'.$context->getI18n()->dt( 'controller/extjs', 'Download' ).'</a>',
+			'file' => '<a href="' . $downloadFile . '">' . $context->getI18n()->dt( 'controller/extjs', 'Download' ) . '</a>',
 		);
 	}
 
@@ -199,9 +199,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		return array(
 			'Catalog_Export_Text.createHttpOutput' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "array","name" => "lang","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "array", "name" => "lang", "optional" => true ),
 				),
 				"returns" => "",
 			),
@@ -297,7 +297,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		{
 			$result = $globalLanguageManager->searchItems( $search );
 
-			foreach ( $result as $item )
+			foreach( $result as $item )
 			{
 				$langid = $item->getId();
 
@@ -335,7 +335,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		foreach( $ids as $id )
 		{
-			foreach( $this->_getNodeList( $manager->getTree( $id, array('text') ) ) as $item ) {
+			foreach( $this->_getNodeList( $manager->getTree( $id, array( 'text' ) ) ) as $item ) {
 				$this->_addItem( $contentItem, $item, $langid );
 			}
 		}
@@ -353,7 +353,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
-			$listTypes[ $listItem->getRefId() ] = $listItem->getType();
+			$listTypes[$listItem->getRefId()] = $listItem->getType();
 		}
 
 		foreach( $this->_getTextTypes( 'catalog' ) as $textTypeItem )
@@ -364,7 +364,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			{
 				foreach( $textItems as $textItem )
 				{
-					$listType = ( isset( $listTypes[ $textItem->getId() ] ) ? $listTypes[ $textItem->getId() ] : '' );
+					$listType = ( isset( $listTypes[$textItem->getId()] ) ? $listTypes[$textItem->getId()] : '' );
 					$items = array( $langid, $item->getLabel(), $item->getId(), $listType, $textTypeItem->getCode(), '', '' );
 
 					// use language of the text item because it may be null

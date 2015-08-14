@@ -94,19 +94,19 @@ class MW_Setup_Task_ProductAddTagTestData extends MW_Setup_Task_Abstract
 			$type->setStatus( $dataset['status'] );
 
 			$productTagTypeManager->saveItem( $type );
-			$typeIds[ $key ] = $type->getId();
+			$typeIds[$key] = $type->getId();
 		}
 
 		$prodTag = $productTagManager->createItem();
 		foreach( $testdata['product/tag'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $typeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No product tag type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$prodTag->setId( null );
 			$prodTag->setLanguageId( $dataset['langid'] );
-			$prodTag->setTypeId( $typeIds[ $dataset['typeid'] ] );
+			$prodTag->setTypeId( $typeIds[$dataset['typeid']] );
 			$prodTag->setLabel( $dataset['label'] );
 
 			$productTagManager->saveItem( $prodTag, false );

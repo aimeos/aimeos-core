@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderAddBaseProductProductid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderAddSiteId');
+		return array( 'OrderRenameTables', 'OrderAddSiteId' );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_OrderAddBaseProductProductid extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -55,14 +55,14 @@ class MW_Setup_Task_OrderAddBaseProductProductid extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg( 'Adding product ID to order base product table', 0);
+		$this->_msg( 'Adding product ID to order base product table', 0 );
 		$this->_status( '' );
 
 		$table = 'mshop_order_base_product';
 
 		$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-		if ( $this->_schema->tableExists( $table ) === true &&
+		if( $this->_schema->tableExists( $table ) === true &&
 			$this->_schema->columnExists( $table, 'prodid' ) === false )
 		{
 			$this->_executeList( $stmts );

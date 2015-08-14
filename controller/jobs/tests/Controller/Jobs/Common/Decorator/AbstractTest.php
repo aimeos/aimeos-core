@@ -30,7 +30,7 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 			->setConstructorArgs( array( $context, $arcavias ) )
 			->getMock();
 
-		$this->_object =  new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $arcavias, $this->_stub );
+		$this->_object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $arcavias, $this->_stub );
 	}
 
 

@@ -24,5 +24,5 @@ interface MShop_Service_Provider_Factory_Interface
 	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
 	 * @return void
 	 */
-	public function __construct(MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem);
+	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem );
 }

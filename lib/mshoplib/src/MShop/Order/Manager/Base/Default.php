@@ -217,9 +217,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$context = $this->_getContext();
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
-		$values = array('siteid'=> $context->getLocale()->getSiteId());
+		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
-		$base = $this->_createItem($priceManager->createItem(), clone $context->getLocale(), $values);
+		$base = $this->_createItem( $priceManager->createItem(), clone $context->getLocale(), $values );
 
 		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
 		$pluginManager->register( $base, 'order' );
@@ -441,23 +441,23 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind(1, $localeItem->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $item->getCustomerId());
-			$stmt->bind(3, $localeItem->getSite()->getCode());
-			$stmt->bind(4, $item->getLocale()->getLanguageId());
-			$stmt->bind(5, $priceItem->getCurrencyId());
-			$stmt->bind(6, $priceItem->getValue());
-			$stmt->bind(7, $priceItem->getCosts());
-			$stmt->bind(8, $priceItem->getRebate());
-			$stmt->bind(9, $item->getComment() );
-			$stmt->bind(10, $item->getStatus() );
-			$stmt->bind(11, date( 'Y-m-d H:i:s', time()));
-			$stmt->bind(12, $context->getEditor() );
+			$stmt->bind( 1, $localeItem->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getCustomerId() );
+			$stmt->bind( 3, $localeItem->getSite()->getCode() );
+			$stmt->bind( 4, $item->getLocale()->getLanguageId() );
+			$stmt->bind( 5, $priceItem->getCurrencyId() );
+			$stmt->bind( 6, $priceItem->getValue() );
+			$stmt->bind( 7, $priceItem->getCosts() );
+			$stmt->bind( 8, $priceItem->getRebate() );
+			$stmt->bind( 9, $item->getComment() );
+			$stmt->bind( 10, $item->getStatus() );
+			$stmt->bind( 11, date( 'Y-m-d H:i:s', time() ) );
+			$stmt->bind( 12, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind(13, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind( 13, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(13, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind( 13, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -508,7 +508,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
 			$required = array( 'order.base' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -524,11 +524,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 				// you may need the site object! take care!
 				$localeItem = $localeManager->createItem();
-				$localeItem->setLanguageId($row['langid']);
-				$localeItem->setCurrencyId($row['currencyid']);
-				$localeItem->setSiteId($row['siteid']);
+				$localeItem->setLanguageId( $row['langid'] );
+				$localeItem->setCurrencyId( $row['currencyid'] );
+				$localeItem->setSiteId( $row['siteid'] );
 
-				$items[ $row['id'] ] = $this->_createItem( $price, $localeItem, $row );
+				$items[$row['id']] = $this->_createItem( $price, $localeItem, $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -671,7 +671,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
 			$required = array( 'order.base' );
 			$total = null;
 
@@ -701,9 +701,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		// you may need the site object! take care!
 		$localeItem = $localeManager->createItem();
-		$localeItem->setLanguageId($row['langid']);
-		$localeItem->setCurrencyId($row['currencyid']);
-		$localeItem->setSiteId($row['siteid']);
+		$localeItem->setLanguageId( $row['langid'] );
+		$localeItem->setCurrencyId( $row['currencyid'] );
+		$localeItem->setSiteId( $row['siteid'] );
 
 		if( $fresh === false ) {
 			$basket = $this->_load( $id, $price, $localeItem, $row, $parts );
@@ -784,15 +784,15 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		foreach( $attrManager->searchItems( $criteria ) as $id => $attribute )
 		{
-			if(  $fresh == true )
+			if( $fresh == true )
 			{
-				$attributes[ $attribute->getProductId() ][] = $attribute;
+				$attributes[$attribute->getProductId()][] = $attribute;
 				$attribute->setProductId( null );
 				$attribute->setId( null );
 			}
 			else
 			{
-				$attributes[ $attribute->getProductId() ][$id] = $attribute;
+				$attributes[$attribute->getProductId()][$id] = $attribute;
 			}
 		}
 
@@ -806,13 +806,13 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			{
 				ksort( $subProducts ); // bring the array into the right order because it's reversed
 				$item->setProducts( $subProducts );
-				$products[ $item->getPosition() ] = $item;
+				$products[$item->getPosition()] = $item;
 
 				$subProducts = array();
 			}
 			else
 			{	// in case it's a sub-product
-				$subProducts[ $item->getPosition() ] = $item ;
+				$subProducts[$item->getPosition()] = $item;
 			}
 
 			if( $fresh == true )
@@ -850,7 +850,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$item->setId( null );
 			}
 
-			$items[ $item->getType() ] = $item;
+			$items[$item->getType()] = $item;
 		}
 
 		return $items;
@@ -876,8 +876,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
-			if( !isset( $items[ $item->getCode() ] ) ) {
-				$items[ $item->getCode() ] = array();
+			if( !isset( $items[$item->getCode()] ) ) {
+				$items[$item->getCode()] = array();
 			}
 
 			if( $item->getProductId() !== null )
@@ -885,7 +885,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				foreach( $products as $product )
 				{
 					if( $product->getId() == $item->getProductId() ) {
-						$items[ $item->getCode() ][] = $product;
+						$items[$item->getCode()][] = $product;
 					}
 				}
 			}
@@ -925,7 +925,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$item->setId( null );
 			}
 
-			$items[ $item->getType() ] = $item;
+			$items[$item->getType()] = $item;
 		}
 
 		return $items;
@@ -1085,7 +1085,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
-			$coupons = $this->_loadCoupons ( $id, false, $products );
+			$coupons = $this->_loadCoupons( $id, false, $products );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
@@ -1096,7 +1096,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$services = $this->_loadServices( $id, false );
 		}
 
-		$basket =  $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
+		$basket = $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
 		return $basket;
 	}
@@ -1129,7 +1129,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		}
 
 
-		$basket =  $this->_createItem( $price, $localeItem, $row );
+		$basket = $this->_createItem( $price, $localeItem, $row );
 		$basket->setId( null );
 
 		$pluginManager = MShop_Factory::createManager( $this->_getContext(), 'plugin' );

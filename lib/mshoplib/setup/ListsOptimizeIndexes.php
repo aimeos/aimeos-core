@@ -146,7 +146,7 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['add'] as $table => $stmtList )
 		{
-			foreach ( $stmtList as $name => $stmt )
+			foreach( $stmtList as $name => $stmt )
 			{
 				$this->_msg( sprintf( 'Adding constraint "%1$s": ', $name ), 1 );
 
@@ -163,7 +163,7 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['delete'] as $table => $stmtList )
 		{
-			foreach ( $stmtList as $name => $stmt )
+			foreach( $stmtList as $name => $stmt )
 			{
 				$this->_msg( sprintf( 'Deleting constraint "%1$s": ', $name ), 1 );
 
@@ -180,7 +180,7 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['indexes'] as $table => $stmtList )
 		{
-			foreach ( $stmtList as $name => $stmt )
+			foreach( $stmtList as $name => $stmt )
 			{
 				$this->_msg( sprintf( 'Dropping index "%1$s": ', $name ), 1 );
 

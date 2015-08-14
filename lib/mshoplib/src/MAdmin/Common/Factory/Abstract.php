@@ -58,20 +58,20 @@ abstract class MAdmin_Common_Factory_Abstract
 		foreach( $decorators as $key => $name )
 		{
 			if( in_array( $name, $excludes ) ) {
-				unset( $decorators[ $key ] );
+				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/global', array() );
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_Decorator_';
+		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/local', array() );
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;
 	}

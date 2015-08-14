@@ -53,7 +53,7 @@ class MW_Jsb2_Default
 	{
 		$files = array();
 
-		foreach ( $this->_registeredPackages as $filetype => $packageList )
+		foreach( $this->_registeredPackages as $filetype => $packageList )
 		{
 			if( $filetype !== $type ) {
 				continue;
@@ -132,7 +132,7 @@ class MW_Jsb2_Default
 				continue;
 			}
 
-			foreach( $packageFiles as $package)
+			foreach( $packageFiles as $package )
 			{
 				$packageFile = $this->_basePath . $this->_deployDir . $package->file;
 
@@ -241,7 +241,7 @@ class MW_Jsb2_Default
 			}
 
 			if( !in_array( $package->name, $filter ) ) {
-				$packageContainer[ pathinfo( $package->file, PATHINFO_EXTENSION ) ][] = $package;
+				$packageContainer[pathinfo( $package->file, PATHINFO_EXTENSION )][] = $package;
 			}
 		}
 

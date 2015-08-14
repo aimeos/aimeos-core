@@ -27,7 +27,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function __construct( array $values = array() )
 	{
-		parent::__construct('supplier.', $values);
+		parent::__construct( 'supplier.', $values );
 
 		$this->_values = $values;
 	}
@@ -51,7 +51,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function setLabel( $value )
 	{
-		if ( $value == $this->getLabel() ) { return; }
+		if( $value == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $value;
 		$this->setModified();
@@ -102,7 +102,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function setStatus( $value )
 	{
-		if ( $value == $this->getStatus() ) { return; }
+		if( $value == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $value;
 		$this->setModified();

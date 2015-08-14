@@ -125,8 +125,8 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -496,12 +496,12 @@ class MShop_Product_Manager_Stock_Default
 			 * @see mshop/product/manager/stock/default/item/search
 			 * @see mshop/product/manager/stock/default/item/stocklevel
 			 */
-			$cfgPathCount =  'mshop/product/manager/stock/default/item/count';
+			$cfgPathCount = 'mshop/product/manager/stock/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -647,7 +647,7 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function decrease( $productCode, $warehouseCode, $amount )
 	{
-		$this->increase($productCode, $warehouseCode, -$amount);
+		$this->increase( $productCode, $warehouseCode, -$amount );
 	}
 
 

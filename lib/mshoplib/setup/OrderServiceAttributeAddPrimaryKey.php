@@ -41,7 +41,7 @@ class MW_Setup_Task_OrderServiceAttributeAddPrimaryKey extends MW_Setup_Task_Abs
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

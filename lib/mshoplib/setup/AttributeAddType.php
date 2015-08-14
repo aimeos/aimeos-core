@@ -12,7 +12,7 @@
 class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_attribute' => array (
+		'mshop_attribute' => array(
 			'typeid' => array(
 				'ALTER TABLE "mshop_attribute" ADD "typeid" INTEGER DEFAULT NULL AFTER "siteid"',
 				'ALTER TABLE `mshop_attribute` ADD CONSTRAINT `fk_msattr_typeid` FOREIGN KEY (`typeid`) REFERENCES `mshop_attribute_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE',
@@ -68,7 +68,7 @@ class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Abstract
 
 			if( $this->_schema->tableExists( $table ) === true )
 			{
-				foreach ( $columns AS $column=>$stmtList )
+				foreach( $columns AS $column=>$stmtList )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

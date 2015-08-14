@@ -71,7 +71,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setBaseId( $value )
 	{
-		if ( $value == $this->getBaseId() ) { return; }
+		if( $value == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
@@ -98,7 +98,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setOrderProductId( $orderProductId )
 	{
-		if ( $orderProductId === $this->getOrderProductId() ) { return; }
+		if( $orderProductId === $this->getOrderProductId() ) { return; }
 
 		$this->_values['ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
 		$this->setModified();
@@ -122,7 +122,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
@@ -171,7 +171,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		$this->_checkCode( $suppliercode );
 
-		if ( $suppliercode == $this->getSupplierCode() ) { return; }
+		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
 		$this->_values['suppliercode'] = (string) $suppliercode;
 		$this->setModified();
@@ -196,7 +196,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setProductId( $id )
 	{
-		if ( $id == $this->getProductId() ) { return; }
+		if( $id == $this->getProductId() ) { return; }
 
 		$this->_values['prodid'] = (string) $id;
 		$this->setModified();
@@ -223,7 +223,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getProductCode() ) { return; }
+		if( $code == $this->getProductCode() ) { return; }
 
 		$this->_values['prodcode'] = (string) $code;
 		$this->setModified();
@@ -250,7 +250,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getWarehouseCode() ) { return; }
+		if( $code == $this->getWarehouseCode() ) { return; }
 
 		$this->_values['warehousecode'] = (string) $code;
 		$this->setModified();
@@ -275,7 +275,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setName( $value )
 	{
-		if ( $value == $this->getName() ) { return; }
+		if( $value == $this->getName() ) { return; }
 
 		$this->_values['name'] = (string) $value;
 		$this->setModified();
@@ -300,7 +300,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setMediaUrl( $value )
 	{
-		if ( $value == $this->getMediaUrl() ) { return; }
+		if( $value == $this->getMediaUrl() ) { return; }
 
 		$this->_values['mediaurl'] = (string) $value;
 		$this->setModified();
@@ -360,7 +360,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price )
 	{
-		if ( $price === $this->_price ) { return; }
+		if( $price === $this->_price ) { return; }
 
 		$this->_price = $price;
 		$this->setModified();
@@ -402,9 +402,9 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setFlags( $value )
 	{
-		if ( $value == $this->getFlags() ) { return; }
+		if( $value == $this->getFlags() ) { return; }
 
-		$this->_checkFlags($value);
+		$this->_checkFlags( $value );
 		$this->_values['flags'] = (int) $value;
 		$this->setModified();
 	}
@@ -692,7 +692,7 @@ class MShop_Order_Item_Base_Product_Default
 			$this->_attributesMap = array();
 
 			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[ $attribute->getType() ][ $attribute->getCode() ] = $attribute;
+				$this->_attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
 			}
 		}
 

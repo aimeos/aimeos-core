@@ -43,7 +43,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
-		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
+		if( ( $this->_prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
@@ -72,8 +72,8 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 
 	}
 
@@ -121,8 +121,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 10, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 
-			$statement->bind( 11, $time);//mtime
-			$statement->bind( 12, $this->_getContext()->getEditor());
+			$statement->bind( 11, $time ); //mtime
+			$statement->bind( 12, $this->_getContext()->getEditor() );
 
 
 			if( $id !== null ) {
@@ -257,7 +257,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				$row = $result->fetch();
 				$result->finish();
 
-				if ( $row !== false ) {
+				if( $row !== false ) {
 					$newpos = $row['pos'] + 1;
 				}
 			}
@@ -272,7 +272,7 @@ abstract class MShop_Common_Manager_List_Abstract
 
 			$stmt->execute()->finish();
 
-			if ( $oldpos > $newpos ) {
+			if( $oldpos > $newpos ) {
 				$oldpos++;
 			}
 
@@ -313,7 +313,7 @@ abstract class MShop_Common_Manager_List_Abstract
 		$list = array();
 
 		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
+			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
 		if( $withsub === true ) {
@@ -346,13 +346,13 @@ abstract class MShop_Common_Manager_List_Abstract
 		{
 			$domain = explode( '.', $this->_prefix );
 
-			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
+			if( ( $topdomain = array_shift( $domain ) ) === null ) {
 				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = $this->_configPath . 'search';
-			$cfgPathCount =  $this->_configPath . 'count';
+			$cfgPathCount = $this->_configPath . 'count';
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -361,12 +361,12 @@ abstract class MShop_Common_Manager_List_Abstract
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
+				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
 					$row['config'] = array();
 				}
 
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -387,10 +387,10 @@ abstract class MShop_Common_Manager_List_Abstract
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 		}
 
@@ -425,13 +425,13 @@ abstract class MShop_Common_Manager_List_Abstract
 		{
 			$domain = explode( '.', $this->_prefix );
 
-			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
+			if( ( $topdomain = array_shift( $domain ) ) === null ) {
 				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = $this->_configPath . 'search';
-			$cfgPathCount =  $this->_configPath . 'count';
+			$cfgPathCount = $this->_configPath . 'count';
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -439,7 +439,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[ $row['domain'] ][] = $row['refid'];
+				$map[$row['domain']][] = $row['refid'];
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -567,10 +567,10 @@ abstract class MShop_Common_Manager_List_Abstract
 
 
 	/**
-	* Returns the domain prefix.
-	*
-	* @return string Domain prefix with sub-domains separated by "."
-	*/
+	 * Returns the domain prefix.
+	 *
+	 * @return string Domain prefix with sub-domains separated by "."
+	 */
 	protected function _getPrefix()
 	{
 		return $this->_prefix;

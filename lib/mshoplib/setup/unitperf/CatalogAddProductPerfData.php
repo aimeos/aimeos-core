@@ -38,10 +38,10 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product categories performance data', 0);
+		$this->_msg( 'Adding product categories performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'list' );
@@ -56,7 +56,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
 
-		if ( ( $typeItem = reset( $types ) ) === false ) {
+		if( ( $typeItem = reset( $types ) ) === false ) {
 			throw new Exception( 'Catalog list type item not found' );
 		}
 

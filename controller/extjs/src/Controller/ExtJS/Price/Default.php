@@ -92,30 +92,30 @@ class Controller_ExtJS_Price_Default
 		return array(
 			'Price.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Price.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Price.searchItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "condition","optional" => true ),
-					array( "type" => "integer","name" => "start","optional" => true ),
-					array( "type" => "integer","name" => "limit","optional" => true ),
-					array( "type" => "string","name" => "sort","optional" => true ),
-					array( "type" => "string","name" => "dir","optional" => true ),
-					array( "type" => "string","name" => "domain","optional" => true ),
-					array( "type" => "string","name" => "label","optional" => true ),
-					array( "type" => "integer","name" => "parentid","optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "condition", "optional" => true ),
+					array( "type" => "integer", "name" => "start", "optional" => true ),
+					array( "type" => "integer", "name" => "limit", "optional" => true ),
+					array( "type" => "string", "name" => "sort", "optional" => true ),
+					array( "type" => "string", "name" => "dir", "optional" => true ),
+					array( "type" => "string", "name" => "domain", "optional" => true ),
+					array( "type" => "string", "name" => "label", "optional" => true ),
+					array( "type" => "integer", "name" => "parentid", "optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -123,11 +123,11 @@ class Controller_ExtJS_Price_Default
 	}
 
 	/**
-	* Deletes an item or a list of items.
-	*
-	* @param stdClass $params Associative list of parameters
-	* @return array Associative list with success value
-	*/
+	 * Deletes an item or a list of items.
+	 *
+	 * @param stdClass $params Associative list of parameters
+	 * @return array Associative list with success value
+	 */
 	public function deleteItems( stdClass $params )
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
@@ -144,7 +144,7 @@ class Controller_ExtJS_Price_Default
 		$search->setSlice( 0, count( $ids ) );
 
 		foreach( $manager->searchItems( $search ) as $id => $item ) {
-			$idList[ $item->getDomain() ][] = $id;
+			$idList[$item->getDomain()][] = $id;
 		}
 
 		$manager->deleteItems( $ids );
@@ -156,11 +156,11 @@ class Controller_ExtJS_Price_Default
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain.'.list.refid', $domainIds ),
-				$search->compare( '==', $domain.'.list.domain', 'price' )
+				$search->compare( '==', $domain . '.list.refid', $domainIds ),
+				$search->compare( '==', $domain . '.list.domain', 'price' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
 
 			$start = 0;
 

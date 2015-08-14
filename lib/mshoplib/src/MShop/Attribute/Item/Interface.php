@@ -46,7 +46,7 @@ interface MShop_Attribute_Item_Interface
 	 * @param string $code Code of the attribute item
 	 * @return void
 	 */
-	public function setCode($code);
+	public function setCode( $code );
 
 	/**
 	 * Returns the status (enabled/disabled) of the attribute item.
@@ -61,7 +61,7 @@ interface MShop_Attribute_Item_Interface
 	 * @param integer $status Status of attribute item
 	 * @return void
 	 */
-	public function setStatus($status);
+	public function setStatus( $status );
 
 	/**
 	 * Returns the name of the attribute item.

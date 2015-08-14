@@ -48,7 +48,7 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetBody()
 	{
-		$seen = array( 1 => 'html product one',  2 => 'html product two' );
+		$seen = array( 1 => 'html product one', 2 => 'html product two' );
 		$this->_context->getSession()->set( 'arcavias/catalog/session/seen/list', $seen );
 
 		$output = $this->_object->getBody();

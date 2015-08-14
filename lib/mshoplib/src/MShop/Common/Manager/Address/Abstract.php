@@ -39,8 +39,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 
 		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
 		$isList = array_keys( $this->_config );
-		foreach ( $whitelist as $str ) {
-			if ( !in_array($str, $isList) ) {
+		foreach( $whitelist as $str ) {
+			if( !in_array( $str, $isList ) ) {
 				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
@@ -49,15 +49,15 @@ abstract class MShop_Common_Manager_Address_Abstract
 
 		$this->_context = $context;
 
-		if ( ( $entry = reset( $this->_searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
-		if ( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
+		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
-		if ( ( $this->_prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
+		if( ( $this->_prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 	}
@@ -76,7 +76,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 		$list = array();
 
 		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
+			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
 		return $list;
@@ -145,7 +145,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 		{
 			$id = $item->getId();
 
-			if ( $id === null ) {
+			if( $id === null ) {
 				$sql = $this->_config['insert'];
 				$type = 'insert';
 			} else {
@@ -153,7 +153,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 				$type = 'update';
 			}
 
-			$stmt = $this->_getCachedStatement($conn, $this->_prefix . $type, $sql);
+			$stmt = $this->_getCachedStatement( $conn, $this->_prefix . $type, $sql );
 
 			$stmt->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR ); //reference id
@@ -177,25 +177,25 @@ abstract class MShop_Common_Manager_Address_Abstract
 			$stmt->bind( 20, $item->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR ); //website
 			$stmt->bind( 21, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT ); //generic flag
 			$stmt->bind( 22, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT ); //position
-			$stmt->bind( 23, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind( 24, $this->_context->getEditor());// editor
+			$stmt->bind( 23, date( 'Y-m-d H:i:s', time() ) ); //mtime
+			$stmt->bind( 24, $this->_context->getEditor() ); // editor
 
-			if ( $id !== null ) {
+			if( $id !== null ) {
 				$stmt->bind( 25, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 25, date('Y-m-d H:i:s', time()));// ctime
+				$stmt->bind( 25, date( 'Y-m-d H:i:s', time() ) ); // ctime
 			}
 
 			$stmt->execute()->finish();
 
-			if ( $id === null && $fetch === true) {
+			if( $id === null && $fetch === true ) {
 				$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -220,20 +220,20 @@ abstract class MShop_Common_Manager_Address_Abstract
 
 		try
 		{
-			$domain = explode( '.', $this->_prefix);
+			$domain = explode( '.', $this->_prefix );
 
-			if ( ( $topdomain = array_shift($domain) ) === null ) {
-				throw new MShop_Exception('No configuration available.');
+			if( ( $topdomain = array_shift( $domain ) ) === null ) {
+				throw new MShop_Exception( 'No configuration available.' );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = $this->_config['search'];
-			$cfgPathCount =  $this->_config['count'];
+			$cfgPathCount = $this->_config['count'];
 			$required = array( trim( $this->_prefix, '.' ) );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

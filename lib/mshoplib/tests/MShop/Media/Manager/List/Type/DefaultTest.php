@@ -59,9 +59,9 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No media list type item found' );
 		}
 
@@ -74,13 +74,13 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 		$search = $this->_object->createSearch();
 		$conditions = $search->compare( '==', 'media.list.type.editor', $this->_editor );
 		$search->setConditions( $conditions );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -116,7 +116,7 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
@@ -145,18 +145,18 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 
 
 		// search with base critera
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'media.list.type.editor', $this->_editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 7);
+		$search->setSlice( 0, 7 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 7, count( $results ) );
 		$this->assertEquals( 10, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -164,7 +164,7 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

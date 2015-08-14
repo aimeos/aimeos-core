@@ -55,13 +55,13 @@ class MW_Setup_Task_TablesChangeSiteidNotNullMAdmin extends MW_Setup_Task_Abstra
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Changing site ID to NOT NULL in MAdmin section', 0 );
-		$this->_status('');
+		$this->_status( '' );
 
-		foreach ( $stmts as $table => $stmtList )
+		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
+			$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists($table) &&
+			if( $this->_schema->tableExists( $table ) &&
 				$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 			{
 				$this->_executeList( $stmtList );

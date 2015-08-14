@@ -29,7 +29,7 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('ProductInlistRename');
+		return array( 'ProductInlistRename' );
 	}
 
 
@@ -40,7 +40,7 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -66,7 +66,7 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 
 		if( $this->_schema->tableExists( $table ) === true )
 		{
-			foreach( $stmts['column'] as $column => $stmt)
+			foreach( $stmts['column'] as $column => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
@@ -80,11 +80,11 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 				}
 			}
 
-			foreach( $stmts['index'] as $index => $stmt)
+			foreach( $stmts['index'] as $index => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
-				if( $this->_schema->indexExists( $table, $index ) === true)
+				if( $this->_schema->indexExists( $table, $index ) === true )
 				{
 					$this->_execute( $stmt );
 					$this->_status( 'removed' );

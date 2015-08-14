@@ -38,7 +38,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product media performance data', 0);
+		$this->_msg( 'Adding product media performance data', 0 );
 
 
 		$context = $this->_getContext();
@@ -50,13 +50,13 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $mediaTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'media.type.domain', 'product');
-		$expr[] = $search->compare('==', 'media.type.code', 'default');
+		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'media.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $mediaTypeManager->searchItems($search);
+		$types = $mediaTypeManager->searchItems( $search );
 
-		if ( ($mediaTypeItem = reset($types)) === false) {
-			throw new Exception('Media type item not found');
+		if( ( $mediaTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Media type item not found' );
 		}
 
 
@@ -66,24 +66,24 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'media');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($productListTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $productListTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'media');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'download');
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'download' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($downloadListTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $downloadListTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 
@@ -130,12 +130,12 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach( $result as $id => $item )
 			{
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '1. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ( $pos + 0 ) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ( $pos + 0 ) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -147,8 +147,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '2. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ( $pos + 1 ) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ( $pos + 1 ) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -160,8 +160,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '3. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ( $pos + 2 ) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ( $pos + 2 ) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -173,8 +173,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '4. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ( $pos + 3 ) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ( $pos + 3 ) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );

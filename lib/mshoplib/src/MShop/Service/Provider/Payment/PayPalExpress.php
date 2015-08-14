@@ -119,7 +119,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		foreach( $configParameters as $param )
 		{
-			if( !isset( $config[ $param ] ) ) {
+			if( !isset( $config[$param] ) ) {
 				throw new MShop_Service_Exception( sprintf( 'Configuration for "%1$s" is missing', $param ) );
 			}
 		}
@@ -177,10 +177,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderBaseItem = $this->_getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
 
 		$values = $this->_getOrderDetails( $orderBaseItem );
-		$values[ 'METHOD' ] = 'SetExpressCheckout';
-		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ) );
-		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
+		$values['METHOD'] = 'SetExpressCheckout';
+		$values['PAYMENTREQUEST_0_INVNUM'] = $orderid;
+		$values['RETURNURL'] = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$values['CANCELURL'] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
@@ -190,7 +190,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$paypalUrl = sprintf( $this->_getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
 
 		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
-		$this->_setAttributes( $orderBaseItem->getService( $type ), array ( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
+		$this->_setAttributes( $orderBaseItem->getService( $type ), array( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
 		$this->_saveOrderBase( $orderBaseItem );
 
 		return new MShop_Common_Item_Helper_Form_Default( $paypalUrl, 'POST', array() );
@@ -204,7 +204,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function query( MShop_Order_Item_Interface $order )
 	{
-		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID', 'payment/paypal') ) === null )
+		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -234,7 +234,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$baseItem = $this->_getOrderBase( $baseid );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
-		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -278,7 +278,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$baseItem = $this->_getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 
-		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -311,7 +311,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
-		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID', 'payment/paypal') ) === null )
+		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -516,7 +516,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $attrManager->searchItems( $search );
 
-		if ( ( $attr = reset( $results ) ) !== false )
+		if( ( $attr = reset( $results ) ) !== false )
 		{
 			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $params['txn_id'], $params['txn_status'] );
 			throw new MShop_Service_Exception( $msg );
@@ -536,7 +536,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			return;
 		}
 
-		switch ( $response['PAYMENTSTATUS'] )
+		switch( $response['PAYMENTSTATUS'] )
 		{
 			case 'Pending':
 				if( isset( $response['PENDINGREASON'] ) )
@@ -610,16 +610,16 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
 			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
 		}
-		catch( Exception $e ) { ; } // If no address is available
+		catch( Exception $e ) {; } // If no address is available
 
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
 			$lastPos = $product->getPosition() - 1;
-			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $product->getId();
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $product->getName();
-			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = $product->getQuantity();
-			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $product->getPrice()->getValue();
+			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
+			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
+			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
+			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $product->getPrice()->getValue();
 		}
 
 		foreach( $orderBase->getServices() as $service )
@@ -627,19 +627,19 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			if( ( $val = $service->getPrice()->getValue() ) > '0.00' )
 			{
 				$lastPos++;
-				$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
-				$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
-				$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $val;
+				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $service->getName();
+				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
+				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $val;
 			}
 		}
 
-		$paymentItem = $orderBase->getService('payment');
+		$paymentItem = $orderBase->getService( 'payment' );
 		if( ( $paymentCosts = $paymentItem->getPrice()->getCosts() ) > '0.00' )
 		{
 			$lastPos++;
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $this->_getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
-			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
-			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $paymentCosts;
+			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->_getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
+			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
+			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
 		}
 
 		$price = $orderBase->getPrice();
@@ -647,7 +647,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
 		$values['PAYMENTREQUEST_0_AMT'] = number_format( $amount, 2, '.', '' );
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = ( string ) ( $price->getValue() + $paymentCosts );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = (string) ( $price->getValue() + $paymentCosts );
 		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = (string) ( $price->getCosts() - $paymentCosts );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
@@ -658,14 +658,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		try
 		{
-			$orderServiceDeliveryItem = $orderBase->getService('delivery');
+			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
 
 			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) ( $price->getCosts() - $paymentCosts );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
-		catch( Exception $e ) { ; } // If no delivery service is available
+		catch( Exception $e ) {; } // If no delivery service is available
 
 
 		return $values;

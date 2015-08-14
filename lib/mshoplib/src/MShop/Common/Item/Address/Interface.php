@@ -29,7 +29,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $refid New reference id of the address
 	 * @return void
 	 */
-	public function setRefId($refid);
+	public function setRefId( $refid );
 
 
 	/**
@@ -46,7 +46,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $company New company name
 	 * @return void
 	 */
-	public function setCompany($company);
+	public function setCompany( $company );
 	
 	/**
 	 * Returns the vatid.
@@ -62,7 +62,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $vatid New vatid
 	 * @return void
 	 */
-	public function setVatID($vatid);
+	public function setVatID( $vatid );
 
 
 	/**
@@ -79,7 +79,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Abstract
 	 * @return void
 	 */
-	public function setSalutation($salutation);
+	public function setSalutation( $salutation );
 
 
 	/**
@@ -96,7 +96,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $title New title of the person
 	 * @return void
 	 */
-	public function setTitle($title);
+	public function setTitle( $title );
 
 
 	/**
@@ -113,7 +113,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $firstname New first name of the person
 	 * @return void
 	 */
-	public function setFirstname($firstname);
+	public function setFirstname( $firstname );
 
 
 	/**
@@ -130,7 +130,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $lastname New last name of the person
 	 * @return void
 	 */
-	public function setLastname($lastname);
+	public function setLastname( $lastname );
 
 
 	/**
@@ -147,7 +147,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $address1 New first address part
 	 * @return void
 	 */
-	public function setAddress1($address1);
+	public function setAddress1( $address1 );
 
 
 	/**
@@ -164,7 +164,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $address2 New second address part
 	 * @return void
 	 */
-	public function setAddress2($address2);
+	public function setAddress2( $address2 );
 
 
 	/**
@@ -181,7 +181,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $address3 New third address part
 	 * @return void
 	 */
-	public function setAddress3($address3);
+	public function setAddress3( $address3 );
 
 
 	/**
@@ -198,7 +198,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $postal New postal code
 	 * @return void
 	 */
-	public function setPostal($postal);
+	public function setPostal( $postal );
 
 
 	/**
@@ -215,7 +215,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $city New city name
 	 * @return void
 	 */
-	public function setCity($city);
+	public function setCity( $city );
 
 
 	/**
@@ -232,7 +232,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $state New state name
 	 * @return void
 	 */
-	public function setState($state);
+	public function setState( $state );
 
 
 	/**
@@ -249,7 +249,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $countryid Unique ID of the country
 	 * @return void
 	 */
-	public function setCountryId($countryid);
+	public function setCountryId( $countryid );
 
 
 	/**
@@ -266,7 +266,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $langid Unique ID of the language
 	 * @return void
 	 */
-	public function setLanguageId($langid);
+	public function setLanguageId( $langid );
 
 
 	/**
@@ -283,7 +283,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $telephone New telephone number
 	 * @return void
 	 */
-	public function setTelephone($telephone);
+	public function setTelephone( $telephone );
 
 
 	/**
@@ -300,7 +300,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $email New email address
 	 * @return void
 	 */
-	public function setEmail($email);
+	public function setEmail( $email );
 
 
 	/**
@@ -317,7 +317,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $telefax New telefax number
 	 * @return void
 	 */
-	public function setTelefax($telefax);
+	public function setTelefax( $telefax );
 
 
 	/**
@@ -334,7 +334,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $website New website URL
 	 * @return void
 	 */
-	public function setWebsite($website);
+	public function setWebsite( $website );
 
 
 	/**
@@ -351,7 +351,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param integer $flag New flag value
 	 * @return void
 	 */
-	public function setFlag($flag);
+	public function setFlag( $flag );
 
 
 	/**
@@ -368,7 +368,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param integer $position New position of the address item
 	 * @return void
 	 */
-	public function setPosition($position);
+	public function setPosition( $position );
 
 
 	/**

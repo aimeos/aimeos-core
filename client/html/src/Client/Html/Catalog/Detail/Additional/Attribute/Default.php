@@ -235,10 +235,10 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			/** @todo Make referenced domains configurable */
-			$attributes = $attrManager->searchItems( $search, array( 'text', 'media') );
+			$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
 
 			foreach( $attributes as $id => $item ) {
-				$attributeMap[ $item->getType() ][$id] = $item;
+				$attributeMap[$item->getType()][$id] = $item;
 			}
 
 			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );

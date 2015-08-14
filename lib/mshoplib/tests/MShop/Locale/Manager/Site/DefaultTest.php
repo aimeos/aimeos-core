@@ -18,7 +18,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Locale_Manager_Site_Default($this->_context);
+		$this->_object = new MShop_Locale_Manager_Site_Default( $this->_context );
 	}
 
 
@@ -30,7 +30,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Locale_Item_Site_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->_object->createItem() );
 	}
 
 
@@ -44,7 +44,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setLabel('new new name' );
+		$itemExp->setLabel( 'new new name' );
 		$this->_object->saveItem( $itemExp );
 		$itemUpd = $this->_object->getItem( $itemExp->getId() );
 
@@ -85,17 +85,17 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('~=', 'locale.site.code', 'unittest'));
+		$search->setConditions( $search->compare( '~=', 'locale.site.code', 'unittest' ) );
 
-		$a = $this->_object->searchItems($search);
-		if ( ($expected = reset($a) ) === false ) {
-			throw new Exception('Site item not found');
+		$a = $this->_object->searchItems( $search );
+		if( ( $expected = reset( $a ) ) === false ) {
+			throw new Exception( 'Site item not found' );
 		}
 
-		$actual = $this->_object->getItem($expected->getId());
+		$actual = $this->_object->getItem( $expected->getId() );
 
-		$this->assertInstanceOf('MShop_Locale_Item_Site_Interface', $actual);
-		$this->assertEquals($expected, $actual);
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $actual );
+		$this->assertEquals( $expected, $actual );
 	}
 
 
@@ -124,15 +124,15 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $total );
 
 		//search with base criteria and total
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->_object->searchItems($search, array(), $total);
-		$this->assertEquals(1, count( $results ));
-		$this->assertGreaterThanOrEqual(1, $total);
+		$results = $this->_object->searchItems( $search, array(), $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertGreaterThanOrEqual( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -140,16 +140,16 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach ( $this->_object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attribute);
+		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
@@ -221,7 +221,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testMoveItem()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
+		$this->setExpectedException( 'MShop_Locale_Exception' );
 		$this->_object->moveItem( null, null, null );
 	}
 }

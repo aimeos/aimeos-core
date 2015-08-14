@@ -167,7 +167,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	{
 		$items = $this->getRefItems( 'text', $type );
 
-		if ( ( $item = reset( $items ) ) !== false ) {
+		if( ( $item = reset( $items ) ) !== false ) {
 			return $item->getContent();
 		}
 

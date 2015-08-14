@@ -131,24 +131,24 @@ class Controller_ExtJS_Locale_Language_Default
 		return array(
 			'Locale_Language.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Language.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Language.searchItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "condition","optional" => true ),
-					array( "type" => "integer","name" => "start","optional" => true ),
-					array( "type" => "integer","name" => "limit","optional" => true ),
-					array( "type" => "string","name" => "sort","optional" => true ),
-					array( "type" => "string","name" => "dir","optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "condition", "optional" => true ),
+					array( "type" => "integer", "name" => "start", "optional" => true ),
+					array( "type" => "integer", "name" => "limit", "optional" => true ),
+					array( "type" => "string", "name" => "sort", "optional" => true ),
+					array( "type" => "string", "name" => "dir", "optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),

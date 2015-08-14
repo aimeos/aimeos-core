@@ -26,7 +26,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Base_Default($this->_context);
+		$this->_object = new MShop_Order_Manager_Base_Default( $this->_context );
 	}
 
 
@@ -38,7 +38,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -62,21 +62,21 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Order_Item_Base_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Interface', $this->_object->createItem() );
 	}
 
 
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('==', 'order.base.costs', '1.50'));
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'order.base.costs', '1.50' ) );
+		$results = $this->_object->searchItems( $search );
 
-		if ( ($expected = reset($results)) === false ) {
-			throw new MShop_Order_Exception('No order base item found');
+		if( ( $expected = reset( $results ) ) === false ) {
+			throw new MShop_Order_Exception( 'No order base item found' );
 		}
 
-		$this->assertEquals($expected, $this->_object->getItem($expected->getId()));
+		$this->assertEquals( $expected, $this->_object->getItem( $expected->getId() ) );
 	}
 
 
@@ -88,13 +88,13 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '==', 'order.base.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($results) ) === false ) {
-			throw new Exception('No order base item found.');
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new Exception( 'No order base item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setComment( 'Unittest1' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -133,7 +133,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
-		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified());
+		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
@@ -163,7 +163,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf('MW_Common_Criteria_Interface', $this->_object->createSearch());
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
 	}
 
 
@@ -293,13 +293,13 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '==', 'order.base.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->_object->searchItems($search, array(), $total);
+		$items = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 4, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -307,27 +307,27 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('coupon') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('coupon', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'coupon' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'coupon', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('product') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('product', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'product' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'product', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('service') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('service', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'service' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'service', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('address', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'address', 'unknown' );
 	}
 
 
@@ -544,7 +544,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$products = $basket->getProducts();
 		$this->assertEquals( 4, count( $products ) );
 
-		foreach ( $products as $product )
+		foreach( $products as $product )
 		{
 			$this->assertEquals( 2, count( $product->getAttributes() ) );
 			$this->assertEquals( $pos++, $product->getPosition() );
@@ -556,8 +556,8 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, count( $services ) );
 
 		$attributes = array();
-		foreach ( $services as $service ) {
-			$attributes[ $service->getCode() ] = $service->getAttributes();
+		foreach( $services as $service ) {
+			$attributes[$service->getCode()] = $service->getAttributes();
 		}
 
 		$this->assertEquals( 9, count( $attributes['OGONE'] ) );
@@ -594,8 +594,8 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			// key+1 is because of the array_splice() in MShop_Order_Item_Base_Default::addProduct()
 			// so it doesn't make sense to hand over the key as second parameter to addProduct() in
 			// MShop_Order_Manager_Base_Default::_loadFresh() to try to enforce a 1-based numbering
-			$this->assertEquals( $product->getId(), $newProducts[$key+1]->getId() );
-			$this->assertEquals( $product->getPosition(), $newProducts[$key+1]->getPosition() );
+			$this->assertEquals( $product->getId(), $newProducts[$key + 1]->getId() );
+			$this->assertEquals( $product->getPosition(), $newProducts[$key + 1]->getPosition() );
 		}
 
 		$newServices = $newBasket->getServices();
@@ -616,8 +616,8 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset( $results ) ) == false ) {
-			throw new Exception('No order found');
+		if( ( $item = reset( $results ) ) == false ) {
+			throw new Exception( 'No order found' );
 		}
 
 		$basket = $this->_object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
@@ -635,7 +635,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$products = $basket->getProducts();
 
 		$this->assertEquals( 2, count( $products ) );
-		foreach ( $products as $product )
+		foreach( $products as $product )
 		{
 			$this->assertEquals( 2, count( $product->getProducts() ) );
 			$this->assertEquals( $pos, $product->getPosition() );
@@ -726,10 +726,10 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadStoreCoupons()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('==', 'order.base.price', '672.00'));
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
+		$results = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No order found' );
 		}
 
@@ -789,11 +789,11 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
 		$expr[] = $search->compare( '==', 'order.base.editor', $this->_editor );
-		$search->setConditions( $search->combine('&&', $expr) );
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$results = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($results) ) === false ) {
-			throw new Exception('No order found');
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new Exception( 'No order found' );
 		}
 
 		return $item;

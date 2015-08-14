@@ -45,7 +45,7 @@ interface MShop_Order_Item_Base_Coupon_Interface extends MShop_Common_Item_Inter
 	 *	@param integer $productid The product ID of the ordered product
 	 * @return void
 	 */
-	public function setProductId($productid);
+	public function setProductId( $productid );
 
 	/**
 	 * Returns the coupon code the customer has selected.
@@ -60,6 +60,6 @@ interface MShop_Order_Item_Base_Coupon_Interface extends MShop_Common_Item_Inter
 	 * @param string $code The code of a coupon the customer has selected.
 	 * @return void
 	 */
-	public function setCode($code);
+	public function setCode( $code );
 
 }

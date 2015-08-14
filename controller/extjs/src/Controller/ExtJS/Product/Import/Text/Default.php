@@ -218,7 +218,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 			$textTypeMap = array();
 			foreach( $this->_getTextTypes( 'product' ) as $item ) {
-				$textTypeMap[ $item->getCode() ] = $item->getId();
+				$textTypeMap[$item->getCode()] = $item->getId();
 			}
 
 			foreach( $container as $content ) {
@@ -245,14 +245,14 @@ class Controller_ExtJS_Product_Import_Text_Default
 		return array(
 			'Product_Import_Text.uploadFile' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
 				),
 				"returns" => "",
 			),
 			'Product_Import_Text.importFile' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "",
 			),

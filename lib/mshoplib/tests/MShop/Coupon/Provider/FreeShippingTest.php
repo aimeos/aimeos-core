@@ -39,7 +39,7 @@ class MShop_Coupon_Provider_FreeShippingTest extends PHPUnit_Framework_TestCase
 
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
 		$manager = MShop_Order_Manager_Factory::createManager( $context )
-			->getSubManager( 'base' )->getSubManager('service');
+			->getSubManager( 'base' )->getSubManager( 'service' );
 
 		$delivery = $manager->createItem();
 		$delivery->setCode( 'test' );
@@ -90,7 +90,7 @@ class MShop_Coupon_Provider_FreeShippingTest extends PHPUnit_Framework_TestCase
 	public function testDeleteCoupon()
 	{
 		$this->_object->addCoupon( $this->_orderBase );
-		$this->_object->deleteCoupon($this->_orderBase);
+		$this->_object->deleteCoupon( $this->_orderBase );
 
 		$products = $this->_orderBase->getProducts();
 		$coupons = $this->_orderBase->getCoupons();

@@ -109,7 +109,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends PHPUnit_Fra
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -125,7 +125,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends PHPUnit_Fra
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if ( !( $item = reset( $results ) ) ) {
+		if( !( $item = reset( $results ) ) ) {
 			throw new Exception( 'empty results' );
 		}
 
@@ -145,7 +145,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends PHPUnit_Fra
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$orderItems = $this->_object->searchItems( $search );
 
-		if ( !( $item = reset( $orderItems ) ) ) {
+		if( !( $item = reset( $orderItems ) ) ) {
 			throw new Exception( 'empty search result' );
 		}
 
@@ -190,7 +190,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends PHPUnit_Fra
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($itemSaved->getId());
+		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 

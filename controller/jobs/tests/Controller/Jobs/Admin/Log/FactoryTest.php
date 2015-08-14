@@ -14,7 +14,7 @@ class Controller_Jobs_Admin_Log_FactoryTest extends PHPUnit_Framework_TestCase
 		$arcavias = TestHelper::getArcavias();
 
 		$obj = Controller_Jobs_Admin_Log_Factory::createController( $context, $arcavias );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
 	}
 
 

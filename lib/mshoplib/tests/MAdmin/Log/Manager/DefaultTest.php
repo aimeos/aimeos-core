@@ -49,14 +49,14 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->_object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attr );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MAdmin_Exception');
+		$this->setExpectedException( 'MAdmin_Exception' );
 		$this->_object->getSubManager( 'unknown' );
 	}
 
@@ -67,7 +67,7 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'log.id', null );
-		$expr[] = $search->compare( '!=', 'log.siteid', null);
+		$expr[] = $search->compare( '!=', 'log.siteid', null );
 		$expr[] = $search->compare( '==', 'log.facility', 'unittest facility' );
 		$expr[] = $search->compare( '>=', 'log.timestamp', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'log.priority', 1 );
@@ -78,11 +78,11 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
-		$this->assertEquals(1, count($results));
-		$this->assertEquals(1, $total);
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
-			$this->assertEquals($itemId, $item->getId());
+		foreach( $results as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
 

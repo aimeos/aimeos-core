@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-sprintf('process');
+sprintf( 'process' );
 
 
 /**
@@ -364,7 +364,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/confirm/url/target
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/checkout/confirm/url/config
-		*/
+		 */
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
 
 		/** client/html/checkout/confirm/url/action
@@ -380,7 +380,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/confirm/url/target
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/config
-		*/
+		 */
 		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
 
 		/** client/html/checkout/confirm/url/config
@@ -403,7 +403,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/action
 		 * @see client/html/url/config
-		*/
+		 */
 		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
 
 		return $view->url( $target, $cntl, $action, $params, array(), $config );
@@ -449,7 +449,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/standard/url/target
 		 * @see client/html/checkout/standard/url/action
 		 * @see client/html/checkout/standard/url/config
-		*/
+		 */
 		$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 
 		/** client/html/checkout/standard/url/action
@@ -465,7 +465,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/standard/url/target
 		 * @see client/html/checkout/standard/url/controller
 		 * @see client/html/checkout/standard/url/config
-		*/
+		 */
 		$action = $view->config( 'client/html/checkout/standard/url/action', 'standard' );
 
 		/** client/html/checkout/standard/url/config
@@ -488,7 +488,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/standard/url/controller
 		 * @see client/html/checkout/standard/url/action
 		 * @see client/html/url/config
-		*/
+		 */
 		$config = $view->config( 'client/html/checkout/standard/url/config', $config );
 
 		return $view->url( $target, $cntl, $action, $params, array(), $config );
@@ -534,7 +534,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/update/url/target
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/checkout/update/url/config
-		*/
+		 */
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
 
 		/** client/html/checkout/update/url/action
@@ -550,7 +550,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/update/url/target
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/config
-		*/
+		 */
 		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
 
 		/** client/html/checkout/update/url/config
@@ -573,7 +573,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/action
 		 * @see client/html/url/config
-		*/
+		 */
 		$config = $view->config( 'client/html/checkout/update/url/config', $config );
 
 		return $view->url( $target, $cntl, $action, $params, array(), $config );

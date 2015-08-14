@@ -56,9 +56,9 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertTrue($this->_object->isModified());
-		$this->assertNull( $this->_object->getId());
+		$this->_object->setId( null );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertNull( $this->_object->getId() );
 	}
 
 	public function testGetCode()
@@ -69,7 +69,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetCode()
 	{
 		$this->_object->setCode( 'code' );
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 		$this->assertEquals( 'code', $this->_object->getCode() );
 	}
 
@@ -81,7 +81,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetDomain()
 	{
 		$this->_object->setDomain( 'domain' );
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 		$this->assertEquals( 'domain', $this->_object->getDomain() );
 	}
 
@@ -93,7 +93,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetLabel()
 	{
 		$this->_object->setLabel( 'label' );
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 		$this->assertEquals( 'label', $this->_object->getLabel() );
 	}
 
@@ -105,7 +105,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetStatus()
 	{
 		$this->_object->setStatus( 1 );
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 		$this->assertEquals( 1, $this->_object->getStatus() );
 	}
 
@@ -132,7 +132,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Common_Item_Type_Default('common.type.');
+		$item = new MShop_Common_Item_Type_Default( 'common.type.' );
 
 		$list = array(
 			'common.type.id' => 8,
@@ -142,15 +142,15 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 			'common.type.status' => 1,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['common.type.id'], $item->getId());
-		$this->assertEquals($list['common.type.code'], $item->getCode());
-		$this->assertEquals($list['common.type.domain'], $item->getDomain());
-		$this->assertEquals($list['common.type.label'], $item->getLabel());
-		$this->assertEquals($list['common.type.status'], $item->getStatus());
+		$this->assertEquals( $list['common.type.id'], $item->getId() );
+		$this->assertEquals( $list['common.type.code'], $item->getCode() );
+		$this->assertEquals( $list['common.type.domain'], $item->getDomain() );
+		$this->assertEquals( $list['common.type.label'], $item->getLabel() );
+		$this->assertEquals( $list['common.type.status'], $item->getStatus() );
 	}
 
 	public function testToArray()
@@ -171,6 +171,6 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 }

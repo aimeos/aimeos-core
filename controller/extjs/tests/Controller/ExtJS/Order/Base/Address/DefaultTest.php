@@ -71,7 +71,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 		$sites = $siteManager->searchItems( $search );
 
-		if ( ( $siteItem = reset( $sites ) ) === false ) {
+		if( ( $siteItem = reset( $sites ) ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
 		}
 

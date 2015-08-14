@@ -29,7 +29,7 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * @param string $value label of the supplier item
 	 * @return void
 	 */
-	public function setLabel($value);
+	public function setLabel( $value );
 
 	/**
 	 * Returns the code of the supplier item.
@@ -44,7 +44,7 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * @param string $value Code of the supplier item
 	 * @return void
 	 */
-	public function setCode($value);
+	public function setCode( $value );
 
 	/**
 	 * Returns the status of the item
@@ -59,5 +59,5 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * @param integer $value Status of the item
 	 * @return void
 	 */
-	public function setStatus($value);
+	public function setStatus( $value );
 }

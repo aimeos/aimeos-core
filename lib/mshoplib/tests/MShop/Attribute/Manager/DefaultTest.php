@@ -48,8 +48,8 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach($this->_object->getSearchAttributes() as $obj) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $obj );
+		foreach( $this->_object->getSearchAttributes() as $obj ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
 		}
 	}
 
@@ -62,21 +62,21 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list', 'default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list', 'default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('list', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'list', 'unknown' );
 	}
 
 
@@ -90,7 +90,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
 		$results = $this->_object->searchItems( $search, array( 'text' ) );
-		if( ( $itemA = reset($results) ) === false) {
+		if( ( $itemA = reset( $results ) ) === false ) {
 			throw new Exception( 'No search results available in testGetItem()' );
 		}
 
@@ -114,8 +114,8 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$typeItems = $typeManager->searchItems( $search );
 
-		if( ( $typeItem = reset($typeItems) ) === false ) {
-			throw new Exception('No attribute type item available in setUp()');
+		if( ( $typeItem = reset( $typeItems ) ) === false ) {
+			throw new Exception( 'No attribute type item available in setUp()' );
 		}
 
 		$item = $this->_object->createItem();
@@ -130,7 +130,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setDomain( 'tmpDomain');
+		$itemExp->setDomain( 'tmpDomain' );
 		$itemExp->setCode( '106' );
 		$itemExp->setLabel( '106' );
 		$this->_object->saveItem( $itemExp );
@@ -177,7 +177,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->_object->createSearch();
-		$this->assertInstanceOf('MW_Common_Criteria_Interface', $search);
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $search );
 	}
 
 
@@ -187,7 +187,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'attribute.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.siteid', null);
+		$expr[] = $search->compare( '!=', 'attribute.siteid', null );
 		$expr[] = $search->compare( '!=', 'attribute.typeid', null );
 		$expr[] = $search->compare( '==', 'attribute.position', 5 );
 		$expr[] = $search->compare( '==', 'attribute.code', 'black' );
@@ -237,11 +237,11 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
-		$this->assertEquals(1, count( $results ) );
-		$this->assertEquals(1, $total);
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
 			$search->compare( '~=', 'attribute.code', '3' ),
@@ -249,12 +249,12 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 5);
+		$search->setSlice( 0, 5 );
 
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 10, $total );
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -269,7 +269,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '==', 'attribute.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 
 		$total = 0;
 		$items = $this->_object->searchItems( $search, array(), $total );

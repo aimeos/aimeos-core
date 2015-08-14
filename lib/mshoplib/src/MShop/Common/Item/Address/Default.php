@@ -28,7 +28,7 @@ class MShop_Common_Item_Address_Default
 	 */
 	public function __construct( $prefix, array $values = array( ) )
 	{
-		parent::__construct($prefix, $values);
+		parent::__construct( $prefix, $values );
 
 		$this->_values = $values;
 		$this->_prefix = $prefix;
@@ -53,7 +53,7 @@ class MShop_Common_Item_Address_Default
 	 */
 	public function setRefId( $refid )
 	{
-		if ( $refid == $this->getRefId() ) { return; }
+		if( $refid == $this->getRefId() ) { return; }
 
 		$this->_values['refid'] = (string) $refid;
 		$this->setModified();
@@ -67,7 +67,7 @@ class MShop_Common_Item_Address_Default
 	 */
 	public function setPosition( $position )
 	{
-		if ( $position == $this->getPosition() ) { return; }
+		if( $position == $this->getPosition() ) { return; }
 
 		$this->_values['pos'] = (int) $position;
 		$this->setModified();

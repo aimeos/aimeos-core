@@ -56,7 +56,7 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 *
 	 * @param string $code Code as defined by the service provider
 	 */
-	public function setCode($code);
+	public function setCode( $code );
 
 	/**
 	 * Returns the name of the service item.
@@ -70,7 +70,7 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 *
 	 * @param string $name Service item name
 	 */
-	public function setName($name);
+	public function setName( $name );
 
 	/**
 	 * Returns the type of the service item.
@@ -84,7 +84,7 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 *
 	 * @param string $type type of the service item.
 	 */
-	public function setType($type);
+	public function setType( $type );
 
 	/**
 	 * Returns the price object which belongs to the service item.
@@ -98,7 +98,7 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 *
 	 * @param MShop_Price_Item_Interface $price Price item
 	 */
-	public function setPrice(MShop_Price_Item_Interface $price);
+	public function setPrice( MShop_Price_Item_Interface $price );
 
 	/**
 	 * Returns the value of the attribute item for the service with the given code.

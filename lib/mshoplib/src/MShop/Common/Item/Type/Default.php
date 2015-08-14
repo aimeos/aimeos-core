@@ -57,7 +57,7 @@ class MShop_Common_Item_Type_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -82,7 +82,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function setDomain( $domain )
 	{
-		if ( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return; }
 
 		$this->_values['domain'] = (string) $domain;
 		$this->setModified();
@@ -107,7 +107,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -132,7 +132,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();
