@@ -52,7 +52,7 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg('Adding catalog test data', 0);
+		$this->_msg( 'Adding catalog test data', 0 );
 		$this->_additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -89,8 +89,8 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			$catalog->setConfig( $dataset['config'] );
 			$catalog->setStatus( $dataset['status'] );
 
-			$catalogManager->insertItem( $catalog, $parentIds[ $dataset['parent'] ] );
-			$parentIds[ $key ] = $catalog->getId();
+			$catalogManager->insertItem( $catalog, $parentIds[$dataset['parent']] );
+			$parentIds[$key] = $catalog->getId();
 		}
 	}
 }

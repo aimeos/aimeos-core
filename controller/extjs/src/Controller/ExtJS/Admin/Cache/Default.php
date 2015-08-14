@@ -45,7 +45,7 @@ class Controller_ExtJS_Admin_Cache_Default
 
 		$list['Admin_Cache.flush'] = array(
 			"parameters" => array(
-				array( "type" => "string","name" => "site","optional" => false ),
+				array( "type" => "string", "name" => "site", "optional" => false ),
 			),
 			"returns" => "array",
 		);

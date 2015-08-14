@@ -20,13 +20,13 @@ class Controller_ExtJS_Plugin_Factorylocal
 	/**
 	 * @param string $name
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest='plugin' )
+	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest = 'plugin' )
 	{
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/extjs/plugin/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/extjs/plugin/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false ) {
+		if( ctype_alnum( $name ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
 		}
 

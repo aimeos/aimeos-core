@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'text/type' => array (
+return array(
+	'text/type' => array(
 		'attribute/name' => array( 'domain' => 'attribute', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'attribute/short' => array( 'domain' => 'attribute', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'attribute/long' => array( 'domain' => 'attribute', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
@@ -39,11 +39,11 @@ return array (
 		'customer/newsletter' => array( 'domain' => 'customer', 'code' => 'newsletter', 'label' => 'Customer newsletter', 'status' => 1 )
 	),
 
-	'text' => array (
+	'text' => array(
 
-		'text/customer/information' => array( 'langid' => null, 'typeid' => 'customer/information', 'domain' => 'customer', 'label' => 'customer/information', 'content' => 'Customer information', 'status' => 1),
-		'text/customer/notify' => array( 'langid' => null, 'typeid' => 'customer/notify', 'domain' => 'customer', 'label' => 'customer/notify', 'content' => 'Customer notify', 'status' => 1),
-		'text/customer/newsletter' => array( 'langid' => null, 'typeid' => 'customer/newsletter', 'domain' => 'customer', 'label' => 'customer/newsletter', 'content' => 'Customer newsletter', 'status' => 1),
+		'text/customer/information' => array( 'langid' => null, 'typeid' => 'customer/information', 'domain' => 'customer', 'label' => 'customer/information', 'content' => 'Customer information', 'status' => 1 ),
+		'text/customer/notify' => array( 'langid' => null, 'typeid' => 'customer/notify', 'domain' => 'customer', 'label' => 'customer/notify', 'content' => 'Customer notify', 'status' => 1 ),
+		'text/customer/newsletter' => array( 'langid' => null, 'typeid' => 'customer/newsletter', 'domain' => 'customer', 'label' => 'customer/newsletter', 'content' => 'Customer newsletter', 'status' => 1 ),
 //ATTR
 //size
 		'text/size/XS' => array( 'langid' => null, 'typeid' => 'attribute/name', 'domain' => 'attribute', 'label' => 'size/XS', 'content' => 'XS', 'status' => 1 ),

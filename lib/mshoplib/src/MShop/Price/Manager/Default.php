@@ -202,7 +202,7 @@ class MShop_Price_Manager_Default
 			$values['currencyid'] = $locale->getCurrencyId();
 		}
 
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
@@ -346,7 +346,7 @@ class MShop_Price_Manager_Default
 				$path = 'mshop/price/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement($conn, $path);
+			$stmt = $this->_getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
@@ -360,7 +360,7 @@ class MShop_Price_Manager_Default
 			$stmt->bind( 10, $item->getTaxRate() );
 			$stmt->bind( 11, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 12, $date ); //mtime
-			$stmt->bind( 13, $context->getEditor());
+			$stmt->bind( 13, $context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 14, $id, MW_DB_Statement_Abstract::PARAM_INT );
@@ -541,14 +541,14 @@ class MShop_Price_Manager_Default
 			 * @see mshop/price/manager/default/item/delete
 			 * @see mshop/price/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/price/manager/default/item/count';
+			$cfgPathCount = 'mshop/price/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -569,8 +569,8 @@ class MShop_Price_Manager_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 			}
 		}

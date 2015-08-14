@@ -64,7 +64,7 @@ class MW_View_Helper_NavTree_Default
 		$config = $item->getConfig();
 
 		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
-		$class .= ( isset( $path[ $item->getId() ] ) ? ' active' : '' );
+		$class .= ( isset( $path[$item->getId()] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
 
 		$params['f_name'] = $enc->url( $item->getName( 'url' ) );

@@ -192,7 +192,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$object = new Controller_ExtJS_Media_Default( $context );
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );// not a real file upload
+		$this->setExpectedException( 'Controller_ExtJS_Exception' ); // not a real file upload
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
@@ -209,7 +209,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );// no upload directory
+		$this->setExpectedException( 'Controller_ExtJS_Exception' ); // no upload directory
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
@@ -240,7 +240,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testProtectedGetAbsoluteDirectoryEmptyByUploadItem()
 	{
 		$context = TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/basedir', null);
+		$context->getConfig()->set( 'controller/extjs/media/default/basedir', null );
 		$object = new Controller_ExtJS_Media_Default( $context );
 
 		$_FILES['unittest'] = array(
@@ -259,8 +259,8 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$context = TestHelper::getContext();
 
-		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/root/');
-		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', '/2/');
+		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/root/' );
+		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', '/2/' );
 
 		$object = new Controller_ExtJS_Media_Default( $context );
 
@@ -315,48 +315,48 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 		$expected = array(
 			'Media.uploadItem' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "string","name" => "domain","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "string", "name" => "domain", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Media.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Media.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Media.searchItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "condition","optional" => true ),
-					array( "type" => "integer","name" => "start","optional" => true ),
-					array( "type" => "integer","name" => "limit","optional" => true ),
-					array( "type" => "string","name" => "sort","optional" => true ),
-					array( "type" => "string","name" => "dir","optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "condition", "optional" => true ),
+					array( "type" => "integer", "name" => "start", "optional" => true ),
+					array( "type" => "integer", "name" => "limit", "optional" => true ),
+					array( "type" => "string", "name" => "sort", "optional" => true ),
+					array( "type" => "string", "name" => "dir", "optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 			'Media.init' => array(
 				'parameters' => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				'returns' => 'array',
 			),
 			'Media.finish' => array(
 				'parameters' => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				'returns' => 'array',
 			),
@@ -364,7 +364,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$actual = $this->_object->getServiceDescription();
 
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals( $expected, $actual );
 	}
 
 

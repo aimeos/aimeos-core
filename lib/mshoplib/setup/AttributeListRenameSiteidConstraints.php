@@ -41,7 +41,7 @@ class MW_Setup_Task_AttributeListRenameSiteidConstraints extends MW_Setup_Task_A
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -65,7 +65,7 @@ class MW_Setup_Task_AttributeListRenameSiteidConstraints extends MW_Setup_Task_A
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			foreach ( $stmtList as $constraint=>$stmt )
+			foreach( $stmtList as $constraint=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

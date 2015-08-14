@@ -12,13 +12,13 @@
 class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'add' => array (
-			'mshop_order_base_product' => array (
+		'add' => array(
+			'mshop_order_base_product' => array(
 				'unq_msordbapr_bid_pos' => 'ALTER TABLE "mshop_order_base_product" ADD UNIQUE INDEX "unq_msordbapr_bid_pos" ("baseid", "pos")'
 			)
 		),
 
-		'delete' => array (
+		'delete' => array(
 			'mshop_order' => array(
 				'idx_msord_sid_pstat_dstat_pdate' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_sid_pstat_dstat_pdate"',
 				'idx_msord_pdate_pstat_dstat' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_pdate_pstat_dstat"',
@@ -28,16 +28,16 @@ class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
 			'mshop_order_base_address' => array(
 				'idx_msordbaad_bid_typ_sid' => 'ALTER TABLE "mshop_order_base_address" DROP INDEX "idx_msordbaad_bid_typ_sid"'
 			),
-			'mshop_order_base_product' => array (
+			'mshop_order_base_product' => array(
 				'idx_msordbapr_bid_pcd_sid' => 'ALTER TABLE "mshop_order_base_product" DROP INDEX "idx_msordbapr_bid_pcd_sid"'
 			),
-			'mshop_order_base_product_attr' => array (
+			'mshop_order_base_product_attr' => array(
 				'idx_msordbaprat_oid_cd_val_sid' => 'ALTER TABLE "mshop_order_base_product_attr" DROP INDEX "idx_msordbaprat_oid_cd_val_sid"'
 			),
-			'mshop_order_base_service' => array (
+			'mshop_order_base_service' => array(
 				'idx_msordbase_bid_cd_typ_sid' => 'ALTER TABLE "mshop_order_base_service" DROP INDEX "idx_msordbase_bid_cd_typ_sid"'
 			),
-			'mshop_order_base_service_attr' => array (
+			'mshop_order_base_service_attr' => array(
 				'idx_msordbaseat_oid_cd_val_sid' => 'ALTER TABLE "mshop_order_base_service_attr" DROP INDEX "idx_msordbaseat_oid_cd_val_sid"'
 			)
 		)
@@ -83,13 +83,13 @@ class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying indexes in mshop_order tables' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts['add'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) !== true )
@@ -106,9 +106,9 @@ class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['delete'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

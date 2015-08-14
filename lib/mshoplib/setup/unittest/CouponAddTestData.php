@@ -72,7 +72,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	private function _addCouponData( array $testdata )
 	{
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->_additional, 'Default' );
-		$couponCodeManager = $couponManager->getSubmanager('code');
+		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
 		$couponIds = array();
 		$coupon = $couponManager->createItem();
@@ -94,12 +94,12 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 		$ccode = $couponCodeManager->createItem();
 		foreach( $testdata['coupon/code'] as $key => $dataset )
 		{
-			if( !isset( $couponIds[ $dataset['couponid'] ] ) ) {
+			if( !isset( $couponIds[$dataset['couponid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No coupon ID found for "%1$s"', $dataset['couponid'] ) );
 			}
 
 			$ccode->setId( null );
-			$ccode->setCouponId( $couponIds[ $dataset['couponid'] ] );
+			$ccode->setCouponId( $couponIds[$dataset['couponid']] );
 			$ccode->setCount( $dataset['count'] );
 			$ccode->setDateStart( $dataset['start'] );
 			$ccode->setDateEnd( $dataset['end'] );
@@ -134,18 +134,18 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
 			}
 
-			$prodcode[ $exp[0] ] = $exp[0];
-			$quantity[ $exp[1] ] = $exp[1];
-			$pos[ $exp[2] ] = $exp[2];
+			$prodcode[$exp[0]] = $exp[0];
+			$quantity[$exp[1]] = $exp[1];
+			$pos[$exp[2]] = $exp[2];
 
-			$orderBasePrices[ $dataset['baseid'] ] = $dataset['baseid'];
+			$orderBasePrices[$dataset['baseid']] = $dataset['baseid'];
 		}
 
 		$search = $orderBase->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', $orderBasePrices ) );
 
-		foreach( $orderBase->searchItems($search) as $orderBaseItem ) {
-			$orderBaseIds[ $orderBaseItem->getPrice()->getValue() ] = $orderBaseItem->getId();
+		foreach( $orderBase->searchItems( $search ) as $orderBaseItem ) {
+			$orderBaseIds[$orderBaseItem->getPrice()->getValue()] = $orderBaseItem->getId();
 		}
 
 
@@ -157,24 +157,24 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $orderBaseProd->searchItems($search) as $ordProd ) {
-			$ordProdIds[ $ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition() ] = $ordProd->getId();
+		foreach( $orderBaseProd->searchItems( $search ) as $ordProd ) {
+			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();
 		}
 
 		$orderCoupon = $orderBaseCoupon->createItem();
 		foreach( $testdata['order/base/coupon'] as $key => $dataset )
 		{
-			if( !isset( $orderBaseIds[ $dataset['baseid'] ] ) ) {
+			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
-			if( !isset( $ordProdIds[ $dataset['ordprodid'] ] ) ) {
+			if( !isset( $ordProdIds[$dataset['ordprodid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
-			$orderCoupon->setId(null);
-			$orderCoupon->setBaseId( $orderBaseIds[ $dataset['baseid'] ] );
-			$orderCoupon->setProductId( $ordProdIds[ $dataset['ordprodid'] ] );
+			$orderCoupon->setId( null );
+			$orderCoupon->setBaseId( $orderBaseIds[$dataset['baseid']] );
+			$orderCoupon->setProductId( $ordProdIds[$dataset['ordprodid']] );
 			$orderCoupon->setCode( $dataset['code'] );
 
 			$orderBaseCoupon->saveItem( $orderCoupon, false );

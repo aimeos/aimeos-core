@@ -103,7 +103,7 @@ class MShop_Factory
 
 			foreach( $parts as $part )
 			{
-				$tmpname = $name .  '/' . $part;
+				$tmpname = $name . '/' . $part;
 
 				if( self::$_cache === false || !isset( self::$_managers[$id][$tmpname] ) ) {
 					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );

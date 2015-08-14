@@ -13,12 +13,12 @@ class MW_Setup_Task_ServiceModifyIndexes extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'add' => array(
-			'mshop_service_list' => array (
+			'mshop_service_list' => array(
 				'fk_msserli_pid' => 'ALTER TABLE "mshop_service_list" ADD INDEX "fk_msserli_pid" ("parentid")',
 			)
 		),
-		'delete' => array (
-			'mshop_service_list' => array (
+		'delete' => array(
+			'mshop_service_list' => array(
 				'fk_msserli_parentid' => 'ALTER TABLE "mshop_service_list" DROP INDEX "fk_msserli_parentid"',
 				'unq_msserli_aid_sid_tid_rid_dm' => 'ALTER TABLE "mshop_service_list" DROP INDEX "unq_msserli_aid_sid_tid_rid_dm"',
 			)
@@ -65,13 +65,13 @@ class MW_Setup_Task_ServiceModifyIndexes extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying indexes in mshop_service tables' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts['add'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) !== true )
@@ -88,9 +88,9 @@ class MW_Setup_Task_ServiceModifyIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['delete'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

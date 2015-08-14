@@ -50,26 +50,26 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 				$domain = $listItem->getDomain();
 				$parentid = $listItem->getParentId();
 
-				$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
-				$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
+				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
+				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
 			$refItemMap = $this->_getRefItems( $refIdMap );
 		}
 
-		foreach ( $map as $id => $values )
+		foreach( $map as $id => $values )
 		{
 			$listItems = array();
-			if ( isset( $listItemMap[$id] ) ) {
+			if( isset( $listItemMap[$id] ) ) {
 				$listItems = $listItemMap[$id];
 			}
 
 			$refItems = array();
-			if ( isset( $refItemMap[$id] ) ) {
+			if( isset( $refItemMap[$id] ) ) {
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[ $id ] = $this->_createItem( $values, $listItems, $refItems );
+			$items[$id] = $this->_createItem( $values, $listItems, $refItems );
 		}
 
 		return $items;
@@ -86,7 +86,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 */
 	protected function _getListItems( array $ids, array $domains, $prefix )
 	{
-		$manager = $this->getSubManager('list');
+		$manager = $this->getSubManager( 'list' );
 
 		$search = $manager->createSearch( true );
 
@@ -130,8 +130,8 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 
 				foreach( $manager->searchItems( $search ) as $id => $item )
 				{
-					foreach( $list[ $id ] as $parentId ) {
-						$items[ $parentId ][ $domain ][ $id ] = $item;
+					foreach( $list[$id] as $parentId ) {
+						$items[$parentId][$domain][$id] = $item;
 					}
 				}
 			}

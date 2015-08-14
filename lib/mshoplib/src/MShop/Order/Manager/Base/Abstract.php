@@ -85,9 +85,9 @@ abstract class MShop_Order_Manager_Base_Abstract
 	 * @param integer $value Lock constant
 	 * @throws MShop_Order_Exception If given value is invalid
 	 */
-	protected function _checkLock($value)
+	protected function _checkLock( $value )
 	{
-		switch($value)
+		switch( $value )
 		{
 			case MShop_Order_Manager_Base_Abstract::LOCK_DISABLE:
 			case MShop_Order_Manager_Base_Abstract::LOCK_ENABLE:

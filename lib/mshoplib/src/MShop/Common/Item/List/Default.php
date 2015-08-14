@@ -60,7 +60,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setParentId( $parentid )
 	{
-		if ( $parentid == $this->getParentId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return; }
 
 		$this->_values['parentid'] = (int) $parentid;
 		$this->setModified();
@@ -85,7 +85,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setDomain( $domain )
 	{
-		if ( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return; }
 
 		$this->_values['domain'] = (string) $domain;
 		$this->setModified();
@@ -112,7 +112,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setRefId( $refid )
 	{
-		if ( $refid == $this->getRefId() ) { return; }
+		if( $refid == $this->getRefId() ) { return; }
 
 		$this->_values['refid'] = (string) $refid;
 		$this->setModified();
@@ -137,9 +137,9 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setDateStart( $date )
 	{
-		if ( $date === $this->getDateStart() ) { return; }
+		if( $date === $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['start'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
@@ -164,9 +164,9 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setDateEnd( $date )
 	{
-		if ( $date === $this->getDateEnd() ) { return; }
+		if( $date === $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['end'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
@@ -202,7 +202,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -227,7 +227,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setPosition( $pos )
 	{
-		if ( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return; }
 
 		$this->_values['pos'] = (int) $pos;
 		$this->setModified();
@@ -252,7 +252,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) {
+		if( $status == $this->getStatus() ) {
 			return;
 		}
 

@@ -25,7 +25,7 @@ class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstr
 	 */
 	public function getPreDependencies()
 	{
-		return array('SupplierRenameConstraints');
+		return array( 'SupplierRenameConstraints' );
 	}
 
 
@@ -36,7 +36,7 @@ class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstr
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -61,7 +61,7 @@ class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstr
 		foreach( $stmts as $table => $stmt )
 		{
 			if( $this->_schema->tableExists( $table )
-				&& strtolower( $this->_schema->getColumnDetails( $table, 'id')->getDataType() ) == 'bigint' )
+				&& strtolower( $this->_schema->getColumnDetails( $table, 'id' )->getDataType() ) == 'bigint' )
 			{
 				$this->_execute( $stmt );
 				$this->_status( 'changed' );

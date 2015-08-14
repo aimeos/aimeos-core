@@ -37,7 +37,7 @@ class MShop_Text_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -75,7 +75,7 @@ class MShop_Text_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'text.type.status', 1 );
 		$expr[] = $search->compare( '==', 'text.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
@@ -83,19 +83,19 @@ class MShop_Text_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'text.type.domain', 'attribute' ),
 			$search->compare( '==', 'text.type.editor', $this->_editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 2);
+		$search->setSlice( 0, 2 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 4, $total);
+		$this->assertEquals( 4, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -124,13 +124,13 @@ class MShop_Text_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -173,7 +173,7 @@ class MShop_Text_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

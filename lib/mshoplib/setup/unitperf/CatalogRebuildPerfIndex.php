@@ -47,7 +47,7 @@ class MW_Setup_Task_CatalogRebuildPerfIndex extends MW_Setup_Task_ProductAddBase
 	 */
 	protected function _process()
 	{
-		$this->_msg('Rebuilding catalog index for performance data', 0);
+		$this->_msg( 'Rebuilding catalog index for performance data', 0 );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 		$catalogManager->getSubManager( 'index' )->rebuildIndex();

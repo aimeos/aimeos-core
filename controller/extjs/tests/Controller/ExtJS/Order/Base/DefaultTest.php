@@ -54,7 +54,7 @@ class Controller_ExtJS_Order_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 3, $result['total'] );
-		$this->assertGreaterThanOrEqual('', $result['items'][0]->{'order.base.customerid'});
+		$this->assertGreaterThanOrEqual( '', $result['items'][0]->{'order.base.customerid'});
 	}
 
 

@@ -144,7 +144,7 @@ class MShop_Price_Manager_List_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/price/manager/list/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type') ) as $domain ) {
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 

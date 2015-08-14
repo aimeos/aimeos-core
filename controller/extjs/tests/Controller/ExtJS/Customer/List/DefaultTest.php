@@ -68,7 +68,7 @@ class Controller_ExtJS_Customer_List_DefaultTest extends PHPUnit_Framework_TestC
 				'customer.list.refid' => -1,
 				'customer.list.datestart' => '2000-01-01 00:00:00',
 				'customer.list.dateend' => '2001-01-01 00:00:00',
-				'customer.list.config' => array('test' => 'unit'),
+				'customer.list.config' => array( 'test' => 'unit' ),
 				'customer.list.position' => 1,
 				'customer.list.status' => 1,
 			),

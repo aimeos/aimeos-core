@@ -37,7 +37,7 @@ class MW_Setup_Task_OrderDropForeignKeyOfLocaleCoupon extends MW_Setup_Task_Abst
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateCoupon');
+		return array( 'TablesCreateCoupon' );
 	}
 
 
@@ -64,15 +64,15 @@ class MW_Setup_Task_OrderDropForeignKeyOfLocaleCoupon extends MW_Setup_Task_Abst
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true)
+			if( $this->_schema->tableExists( $table ) === true )
 			{
 				$this->_status( '' );
 
-				foreach( $stmtList AS $constraint => $stmt )
+				foreach( $stmtList as $constraint => $stmt )
 				{
 					$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
-					if ( $this->_schema->constraintExists( $table, $constraint ) === true )
+					if( $this->_schema->constraintExists( $table, $constraint ) === true )
 					{
 						$this->_execute( $stmt );
 						$this->_status( 'deleted' );

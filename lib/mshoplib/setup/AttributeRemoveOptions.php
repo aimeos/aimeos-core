@@ -34,7 +34,7 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('AttributeAddType');
+		return array( 'AttributeAddType' );
 	}
 
 
@@ -71,7 +71,7 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 		{
 			$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-			foreach ( $stmts['column'] AS $column=>$stmt )
+			foreach( $stmts['column'] AS $column=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
@@ -87,7 +87,7 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 
 			$this->_msg( sprintf( 'Adding constraints to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-			foreach ( $stmts['constraint'] AS $constraint=>$stmt )
+			foreach( $stmts['constraint'] AS $constraint=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
@@ -101,13 +101,13 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 			}
 		}
 
-		unset($table);
+		unset( $table );
 
 
 		// drop no longer required tables
 		$this->_msg( 'Delete attribute options', 0 ); $this->_status( '' );
 
-		foreach( $stmts['droptables'] AS $table=>$stmt )
+		foreach( $stmts['droptables'] as $table=>$stmt )
 		{
 			$this->_msg( sprintf( 'Delete table "%1$s"', $table ), 1 );
 

@@ -21,7 +21,7 @@ class MShop_Catalog_Manager_List_Type_Default
 		'catalog.list.type.id' => array(
 			'code'=>'catalog.list.type.id',
 			'internalcode'=>'mcatlity."id"',
-			'internaldeps'=>array('LEFT JOIN "mshop_catalog_list_type" as mcatlity ON ( mcatli."typeid" = mcatlity."id" )'),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_list_type" as mcatlity ON ( mcatli."typeid" = mcatlity."id" )' ),
 			'label'=>'Catalog list type ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,

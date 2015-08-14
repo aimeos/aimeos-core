@@ -27,14 +27,14 @@ class MShop_Price_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Price_Exception');
+		$this->setExpectedException( 'MShop_Price_Exception' );
 		MShop_Price_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		MShop_Price_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 }

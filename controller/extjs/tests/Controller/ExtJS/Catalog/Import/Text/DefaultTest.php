@@ -60,7 +60,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends PHPUnit_Framework
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 
 		$search = $catalogManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.code', 'root') );
+		$search->setConditions( $search->compare( '==', 'catalog.code', 'root' ) );
 		$items = $catalogManager->searchItems( $search );
 
 		if( ( $root = reset( $items ) ) === false ) {
@@ -69,13 +69,13 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends PHPUnit_Framework
 		$id = $root->getId();
 
 		$data = array();
-		$data[] = '"Language ID","Catalog code","Catalog ID","List type","Text type","Text ID","Text"'."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: long"'."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta desc"' ."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta keywords"' ."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta title"' ."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: name"' ."\n";
-		$data[] = '"en","Root","'.$id.'","default","name","","Root: short"' ."\n";
+		$data[] = '"Language ID","Catalog code","Catalog ID","List type","Text type","Text ID","Text"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: long"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: meta desc"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: meta keywords"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: meta title"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: name"' . "\n";
+		$data[] = '"en","Root","' . $id . '","default","name","","Root: short"' . "\n";
 		$data[] = ' ';
 
 		$ds = DIRECTORY_SEPARATOR;

@@ -48,7 +48,7 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 
@@ -59,10 +59,10 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg ('Drop old indexes in order attribute tables', 0);
-		$this->_status('');
+		$this->_msg( 'Drop old indexes in order attribute tables', 0 );
+		$this->_status( '' );
 
-		foreach( $stmts AS $table => $stmts )
+		foreach( $stmts as $table => $stmts )
 		{
 			foreach( $stmts as $index => $stmt )
 			{
@@ -71,12 +71,12 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )
 				{
-					$this->_execute($stmt);
-					$this->_status('dropped');
+					$this->_execute( $stmt );
+					$this->_status( 'dropped' );
 				}
 				else
 				{
-					$this->_status('OK');
+					$this->_status( 'OK' );
 				}
 			}
 		}

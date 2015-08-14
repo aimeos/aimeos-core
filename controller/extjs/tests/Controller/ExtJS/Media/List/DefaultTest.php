@@ -80,7 +80,7 @@ class Controller_ExtJS_Media_List_DefaultTest extends PHPUnit_Framework_TestCase
 				'media.list.refid' => -1,
 				'media.list.datestart' => '2000-01-01 00:00:00',
 				'media.list.dateend' => '2000-01-01 00:00:00',
-				'media.list.config' => array('test' => 'unit'),
+				'media.list.config' => array( 'test' => 'unit' ),
 				'media.list.position' => 1,
 				'media.list.status' => 1,
 			),

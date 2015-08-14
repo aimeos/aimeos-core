@@ -77,12 +77,12 @@ class Controller_Common_Order_Factory
 		 * @since 2014.07
 		 * @category Developer
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/common/order/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/common/order/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false ) {
-			$classname = is_string($name) ? 'Controller_Common_Order_' . $name : '<not a string>';
+		if( ctype_alnum( $name ) === false ) {
+			$classname = is_string( $name ) ? 'Controller_Common_Order_' . $name : '<not a string>';
 			throw new Controller_Common_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
@@ -97,7 +97,7 @@ class Controller_Common_Order_Factory
 			throw new Controller_Common_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$controller =  new $classname( $context );
+		$controller = new $classname( $context );
 
 		if( !( $controller instanceof $iface ) ) {
 			throw new Controller_Common_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );

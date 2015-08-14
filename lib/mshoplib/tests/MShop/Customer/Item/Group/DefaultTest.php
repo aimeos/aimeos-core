@@ -98,7 +98,7 @@ class MShop_Customer_Item_Group_DefaultTest extends PHPUnit_Framework_TestCase
 			'customer.group.label' => 'unittest12',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
 		$this->assertEquals( array(), $unknown );
 		$this->assertEquals( $list['customer.group.id'], $item->getId() );

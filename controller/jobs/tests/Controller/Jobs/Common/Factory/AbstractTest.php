@@ -62,7 +62,7 @@ class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_Test
 		$decorators = array( '$' );
 		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->setExpectedException('Controller_Jobs_Exception');
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, $decorators, 'Test_' );
 	}
 
@@ -72,7 +72,7 @@ class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_Test
 		$decorators = array( 'Test' );
 		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->setExpectedException('Controller_Jobs_Exception');
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, $decorators, 'Test_' );
 	}
 
@@ -82,7 +82,7 @@ class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_Test
 		$decorators = array( 'Test' );
 		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->setExpectedException('Controller_Jobs_Exception');
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->_context, $this->_arcavias, $cntl,
 			$decorators, 'Controller_Jobs_Common_Decorator_' );
 	}
@@ -92,17 +92,17 @@ class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_Test
 	{
 		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->setExpectedException('Controller_Jobs_Exception');
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		Controller_Jobs_Common_Factory_TestAbstract::addControllerDecoratorsPublic( $this->_context, $this->_arcavias, $cntl, '' );
 	}
 
 
 	public function testAddControllerDecoratorsExcludes()
 	{
-		$this->_context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array('test') );
-		$this->_context->getConfig()->set( 'controller/jobs/common/decorators/default', array('test') );
+		$this->_context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array( 'test' ) );
+		$this->_context->getConfig()->set( 'controller/jobs/common/decorators/default', array( 'test' ) );
 
-		$this->setExpectedException('Controller_Jobs_Exception');
+		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 	}
 }

@@ -64,7 +64,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 
 		$refKeys = array();
 		foreach( $testdata['text/list'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = array();
@@ -90,7 +90,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		$urls = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -102,8 +102,8 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		$result = $mediaManager->searchItems( $search );
 
 		$refIds = array();
-		foreach( $result as $item ){
-			$refIds[ 'media/'.$item->getUrl() ] = $item->getId();
+		foreach( $result as $item ) {
+			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
 		return $refIds;
@@ -126,7 +126,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $testdata['text/list'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
@@ -137,8 +137,8 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$parentIds = array();
-		foreach( $textManager->searchItems( $search ) as $item )	{
-			$parentIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		foreach( $textManager->searchItems( $search ) as $item ) {
+			$parentIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
 		$tListTypeIds = array();
@@ -155,28 +155,28 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 			$tListType->setStatus( $dataset['status'] );
 
 			$textListTypeManager->saveItem( $tListType );
-			$tListTypeIds[ $key ] = $tListType->getId();
+			$tListTypeIds[$key] = $tListType->getId();
 		}
 
 		$tList = $textListManager->createItem();
 		foreach( $testdata['text/list'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No text ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $tListTypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $tListTypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No text list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$tList->setId( null );
-			$tList->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$tList->setTypeId( $tListTypeIds[ $dataset['typeid'] ] );
-			$tList->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$tList->setParentId( $parentIds[$dataset['parentid']] );
+			$tList->setTypeId( $tListTypeIds[$dataset['typeid']] );
+			$tList->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$tList->setDomain( $dataset['domain'] );
 			$tList->setDateStart( $dataset['start'] );
 			$tList->setDateEnd( $dataset['end'] );

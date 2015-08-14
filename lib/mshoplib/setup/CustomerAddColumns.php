@@ -55,7 +55,7 @@ class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -79,7 +79,7 @@ class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
 		$table = 'mshop_customer';
 		$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-		foreach( $stmts AS $column=>$stmt )
+		foreach( $stmts as $column=>$stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s": ', $table, $column ), 1 );
 

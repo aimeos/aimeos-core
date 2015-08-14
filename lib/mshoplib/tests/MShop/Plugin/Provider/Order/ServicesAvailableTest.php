@@ -52,20 +52,20 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesAvailable(TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->_plugin );
 		$object->register( $this->_order );
 	}
 
 	public function testUpdateNone()
 	{
 		// MShop_Order_Item_Base_Abstract::PARTS_SERVICE not set, so update shall not be executed
-		$object = new MShop_Plugin_Provider_Order_ServicesAvailable(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->_plugin );
 		$this->assertTrue( $object->update( $this->_order, 'check.after' ) );
 	}
 
 	public function testUpdateEmptyConfig()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesAvailable(TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->_plugin );
 		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
 
 		$this->_order->setService( $this->_service, 'payment' );
@@ -76,7 +76,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 
 	public function testUpdateNoServices()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesAvailable(TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->_plugin );
 
 		$this->_plugin->setConfig( array(
 				'delivery' => false,
@@ -97,13 +97,13 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 				'payment' => true
 		) );
 
-		$this->setExpectedException('MShop_Plugin_Provider_Exception');
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
 	}
 
 	public function testUpdateWithServices()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesAvailable(TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->_plugin );
 
 		$this->_order->setService( $this->_service, 'payment' );
 		$this->_order->setService( $this->_service, 'delivery' );
@@ -127,7 +127,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 				'payment' => false
 		) );
 
-		$this->setExpectedException('MShop_Plugin_Provider_Exception');
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
 	}
 }

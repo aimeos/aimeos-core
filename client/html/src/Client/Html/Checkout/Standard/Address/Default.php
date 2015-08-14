@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-sprintf('address');
+sprintf( 'address' );
 
 
 /**
@@ -303,7 +303,7 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			$languages = array();
 			foreach( $locales as $locale ) {
-				$languages[ $locale->getLanguageId() ] = $locale->getLanguageId();
+				$languages[$locale->getLanguageId()] = $locale->getLanguageId();
 			}
 
 			$view->addressLanguages = $languages;

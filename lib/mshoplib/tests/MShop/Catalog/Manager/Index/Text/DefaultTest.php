@@ -28,8 +28,8 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 			throw new Exception( 'Products not available' );
 		}
 
-		foreach( $result as $item )	{
-			self::$_products[ $item->getCode() ] = $item;
+		foreach( $result as $item ) {
+			self::$_products[$item->getCode()] = $item;
 		}
 	}
 
@@ -89,7 +89,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 
 		$this->assertEquals( 18, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 2, $result[ $item->getId() ] );
+		$this->assertEquals( 2, $result[$item->getId()] );
 	}
 
 
@@ -104,7 +104,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	public function testSaveDeleteItem()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$product = self::$_products[ 'CNC' ];
+		$product = self::$_products['CNC'];
 
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
@@ -139,8 +139,8 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 

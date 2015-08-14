@@ -67,13 +67,13 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'suggestion');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'product');
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'suggestion' );
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'product' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $listTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 		$search = $productManager->createSearch();

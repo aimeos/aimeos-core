@@ -23,7 +23,7 @@ class MW_Setup_Task_PriceRenameColumnPriceToValue extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderAddComment');
+		return array( 'OrderRenameTables', 'OrderAddComment' );
 	}
 
 
@@ -34,7 +34,7 @@ class MW_Setup_Task_PriceRenameColumnPriceToValue extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -56,7 +56,7 @@ class MW_Setup_Task_PriceRenameColumnPriceToValue extends MW_Setup_Task_Abstract
 	{
 		$this->_msg( 'Renaming column "price" to "value"', 0 ); $this->_status( '' );
 
-		foreach( $stmts AS $table=>$stmt )
+		foreach( $stmts as $table=>$stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s"', $table ), 1 );
 

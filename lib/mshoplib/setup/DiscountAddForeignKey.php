@@ -35,7 +35,7 @@ class MW_Setup_Task_DiscountAddForeignKey extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

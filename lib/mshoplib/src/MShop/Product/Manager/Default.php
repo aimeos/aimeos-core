@@ -121,7 +121,7 @@ class MShop_Product_Manager_Default
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 */
-	public function __construct(MShop_Context_Item_Interface $context)
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
@@ -165,8 +165,8 @@ class MShop_Product_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -498,14 +498,14 @@ class MShop_Product_Manager_Default
 			 * @see mshop/product/manager/default/item/delete
 			 * @see mshop/product/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/product/manager/default/item/count';
+			$cfgPathCount = 'mshop/product/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -526,8 +526,8 @@ class MShop_Product_Manager_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 			}
 		}

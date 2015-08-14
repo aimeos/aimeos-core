@@ -79,9 +79,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $company New company name
 	 */
-	public function setCompany($company)
+	public function setCompany( $company )
 	{
-		if ( $company == $this->getCompany() ) { return; }
+		if( $company == $this->getCompany() ) { return; }
 
 		$this->_values['company'] = (string) $company;
 		$this->setModified();
@@ -103,9 +103,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $vatid New vatid
 	 */
-	public function setVatID($vatid)
+	public function setVatID( $vatid )
 	{
-		if ( $vatid == $this->getVatID() ) { return; }
+		if( $vatid == $this->getVatID() ) { return; }
 
 		$this->_values['vatid'] = (string) $vatid;
 		$this->setModified();
@@ -128,9 +128,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Abstract
 	 */
-	public function setSalutation($salutation)
+	public function setSalutation( $salutation )
 	{
-		if ( $salutation == $this->getSalutation() ) { return; }
+		if( $salutation == $this->getSalutation() ) { return; }
 
 		$this->_checkSalutation( $salutation );
 
@@ -155,9 +155,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $title New title of the person
 	 */
-	public function setTitle($title)
+	public function setTitle( $title )
 	{
-		if ( $title == $this->getTitle() ) { return; }
+		if( $title == $this->getTitle() ) { return; }
 
 		$this->_values['title'] = (string) $title;
 		$this->setModified();
@@ -180,9 +180,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $firstname New first name of the person
 	 */
-	public function setFirstname($firstname)
+	public function setFirstname( $firstname )
 	{
-		if ( $firstname == $this->getFirstname() ) { return; }
+		if( $firstname == $this->getFirstname() ) { return; }
 
 		$this->_values['firstname'] = (string) $firstname;
 		$this->setModified();
@@ -205,9 +205,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $lastname New last name of the person
 	 */
-	public function setLastname($lastname)
+	public function setLastname( $lastname )
 	{
-		if ( $lastname == $this->getLastname() ) { return; }
+		if( $lastname == $this->getLastname() ) { return; }
 
 		$this->_values['lastname'] = (string) $lastname;
 		$this->setModified();
@@ -230,9 +230,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $address1 New first address part
 	 */
-	public function setAddress1($address1)
+	public function setAddress1( $address1 )
 	{
-		if ( $address1 == $this->getAddress1() ) { return; }
+		if( $address1 == $this->getAddress1() ) { return; }
 
 		$this->_values['address1'] = (string) $address1;
 		$this->setModified();
@@ -255,9 +255,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $address2 New second address part
 	 */
-	public function setAddress2($address2)
+	public function setAddress2( $address2 )
 	{
-		if ( $address2 == $this->getAddress2() ) { return; }
+		if( $address2 == $this->getAddress2() ) { return; }
 
 		$this->_values['address2'] = (string) $address2;
 		$this->setModified();
@@ -280,9 +280,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $address3 New third address part
 	 */
-	public function setAddress3($address3)
+	public function setAddress3( $address3 )
 	{
-		if ( $address3 == $this->getAddress3() ) { return; }
+		if( $address3 == $this->getAddress3() ) { return; }
 
 		$this->_values['address3'] = (string) $address3;
 		$this->setModified();
@@ -305,9 +305,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $postal New postal code
 	 */
-	public function setPostal($postal)
+	public function setPostal( $postal )
 	{
-		if ( $postal == $this->getPostal() ) { return; }
+		if( $postal == $this->getPostal() ) { return; }
 
 		$this->_values['postal'] = (string) $postal;
 		$this->setModified();
@@ -330,9 +330,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $city New city name
 	 */
-	public function setCity($city)
+	public function setCity( $city )
 	{
-		if ( $city == $this->getCity() ) { return; }
+		if( $city == $this->getCity() ) { return; }
 
 		$this->_values['city'] = (string) $city;
 		$this->setModified();
@@ -355,9 +355,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $state New state name
 	 */
-	public function setState($state)
+	public function setState( $state )
 	{
-		if ( $state == $this->getState() ) { return; }
+		if( $state == $this->getState() ) { return; }
 
 		$this->_values['state'] = (string) $state;
 		$this->setModified();
@@ -369,9 +369,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $countryid Unique ID of the country
 	 */
-	public function setCountryId($countryid)
+	public function setCountryId( $countryid )
 	{
-		if ( $countryid === $this->getCountryId() ) { return; }
+		if( $countryid === $this->getCountryId() ) { return; }
 
 		$this->_values['countryid'] = strtoupper( (string) $countryid );
 		$this->setModified();
@@ -394,9 +394,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $langid Unique ID of the language
 	 */
-	public function setLanguageId($langid)
+	public function setLanguageId( $langid )
 	{
-		if ( $langid === $this->getLanguageId() ) { return; }
+		if( $langid === $this->getLanguageId() ) { return; }
 
 		$this->_values['langid'] = strtolower( (string) $langid );
 		$this->setModified();
@@ -430,9 +430,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $telephone New telephone number
 	 */
-	public function setTelephone($telephone)
+	public function setTelephone( $telephone )
 	{
-		if ( $telephone == $this->getTelephone() ) { return; }
+		if( $telephone == $this->getTelephone() ) { return; }
 
 		$this->_values['telephone'] = (string) $telephone;
 		$this->setModified();
@@ -455,11 +455,11 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $email New email address
 	 */
-	public function setEmail($email)
+	public function setEmail( $email )
 	{
-		if ( $email == $this->getEmail() ) { return; }
+		if( $email == $this->getEmail() ) { return; }
 
-		if( $email !== '' && preg_match('/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email) !== 1 ) {
+		if( $email !== '' && preg_match( '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email ) !== 1 ) {
 			throw new MShop_Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
@@ -484,9 +484,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $telefax New telefax number
 	 */
-	public function setTelefax($telefax)
+	public function setTelefax( $telefax )
 	{
-		if ( $telefax == $this->getTelefax() ) { return; }
+		if( $telefax == $this->getTelefax() ) { return; }
 
 		$this->_values['telefax'] = (string) $telefax;
 		$this->setModified();
@@ -509,9 +509,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param string $website New website URL
 	 */
-	public function setWebsite($website)
+	public function setWebsite( $website )
 	{
-		if ( $website == $this->getWebsite() ) { return; }
+		if( $website == $this->getWebsite() ) { return; }
 
 		$pattern = '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#';
 
@@ -540,9 +540,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 *
 	 * @param integer $flag New flag value
 	 */
-	public function setFlag($flag)
+	public function setFlag( $flag )
 	{
-		if ( $flag == $this->getFlag() ) { return; }
+		if( $flag == $this->getFlag() ) { return; }
 
 		$this->_values['flag'] = (int) $flag;
 		$this->setModified();

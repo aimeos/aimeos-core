@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-sprintf('delivery');
+sprintf( 'delivery' );
 
 
 /**

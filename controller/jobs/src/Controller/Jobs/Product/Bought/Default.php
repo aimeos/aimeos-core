@@ -230,7 +230,7 @@ class Controller_Jobs_Product_Bought_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $catalogListManager->searchItems( $search ) as $listItem ) {
-			$refIds[ $listItem->getRefId() ] = true;
+			$refIds[$listItem->getRefId()] = true;
 		}
 
 

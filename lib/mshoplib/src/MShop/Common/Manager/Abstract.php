@@ -135,7 +135,7 @@ abstract class MShop_Common_Manager_Abstract
 			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$list[ $row['key'] ] = $row['count'];
+				$list[$row['key']] = $row['count'];
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -368,8 +368,8 @@ abstract class MShop_Common_Manager_Abstract
 			$domainname = ucfirst( $domain );
 			$subnames = $this->_createSubNames( $manager );
 
-			$classname = 'MShop_'. $domainname . '_Manager_' . $subnames . '_' . $name;
-			$interface = 'MShop_'. $domainname . '_Manager_' . $subnames . '_Interface';
+			$classname = 'MShop_' . $domainname . '_Manager_' . $subnames . '_' . $name;
+			$interface = 'MShop_' . $domainname . '_Manager_' . $subnames . '_Interface';
 
 			if( class_exists( $classname ) === false ) {
 				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -443,7 +443,7 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Cuts the last part separated by a dot repeatedly and returns the list of resulting string.
 	 *
-	 * @param array $prefix Required base prefixes of the search keys
+	 * @param string[] $prefix Required base prefixes of the search keys
 	 * @param string $string String containing parts separated by dots
 	 * @return array List of resulting strings
 	 */
@@ -509,7 +509,7 @@ abstract class MShop_Common_Manager_Abstract
 				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$manager =  new $classname( $context, $manager );
+			$manager = new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
 				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
@@ -537,19 +537,19 @@ abstract class MShop_Common_Manager_Abstract
 		foreach( $decorators as $key => $name )
 		{
 			if( in_array( $name, $excludes ) ) {
-				unset( $decorators[ $key ] );
+				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager = $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager = $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->_createSubNames( $managerpath );
-		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
+		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
 
 		return $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
@@ -726,7 +726,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Interface $search Search criteria
 	 * @param string[] Sorted list of criteria keys
 	 * @param array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
-	 * @param array $siteIds List of site IDs that should be used for searching
+	 * @param string[] $siteIds List of site IDs that should be used for searching
 	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Interface
 	 * @since 2015.01
 	 */
@@ -821,7 +821,7 @@ abstract class MShop_Common_Manager_Abstract
 			$results->finish();
 			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
-			if ( $row === false ) {
+			if( $row === false ) {
 				throw new MShop_Exception( sprintf( 'Total results value not found' ) );
 			}
 

@@ -25,7 +25,7 @@ class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abst
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables');
+		return array( 'OrderRenameTables' );
 	}
 
 
@@ -36,7 +36,7 @@ class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abst
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

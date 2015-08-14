@@ -174,8 +174,8 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -204,7 +204,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if ( !$item->isModified() ) {
+		if( !$item->isModified() ) {
 			return;
 		}
 
@@ -219,9 +219,9 @@ class MShop_Order_Manager_Base_Coupon_Default
 			$id = $item->getId();
 
 			$path = 'mshop/order/manager/base/coupon/default/item/';
-			$path .=  ( $id === null ? 'insert' : 'update' );
+			$path .= ( $id === null ? 'insert' : 'update' );
 
-			$stmt = $this->_getCachedStatement($conn, $path);
+			$stmt = $this->_getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -233,7 +233,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			if( $id !== null ) {
 				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind( 7, date( 'Y-m-d H:i:s' ) );// ctime
+				$stmt->bind( 7, date( 'Y-m-d H:i:s' ) ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -310,7 +310,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 * @return array Return a list of items implementing MShop_Order_Item_Base_Coupon_Interface
 	 * @throws MShop_Order_Exception If creation of an item fails
 	 */
-	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->_getContext();
@@ -323,7 +323,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		{
 			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/coupon/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/coupon/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/coupon/default/item/count';
 			$required = array( 'order.base.coupon' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
@@ -331,7 +331,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )
@@ -479,8 +479,8 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 *
 	 * @return MShop_Order_Item_Base_Coupon_Default New item
 	 */
-	protected function _createItem(array $values = array())
+	protected function _createItem( array $values = array() )
 	{
-		return new MShop_Order_Item_Base_Coupon_Default($values);
+		return new MShop_Order_Item_Base_Coupon_Default( $values );
 	}
 }

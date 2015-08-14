@@ -100,13 +100,13 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function createItem()
 	{
-		try{
+		try {
 			$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		} catch (Exception $ex) {
+		} catch( Exception $ex ) {
 			$values = array( 'siteid' => null );
 		}
 
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
@@ -119,11 +119,11 @@ class MShop_Locale_Manager_Language_Default
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Locale_Item_Language_Interface';
-		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
+		if( !( $item instanceof $iface ) ) {
+			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if ( !$item->isModified() ) { return; }
+		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
 
@@ -201,7 +201,7 @@ class MShop_Locale_Manager_Language_Default
 			// code and ID are identical after saving and ID is the flag to detect updates or inserts
 			$stmt->bind( 6, $item->getCode() );
 
-			if ( $id === null ) {
+			if( $id === null ) {
 				$stmt->bind( 7, $date ); // ctime
 			}
 
@@ -511,16 +511,16 @@ class MShop_Locale_Manager_Language_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
-			catch ( Exception $e )
+			catch( Exception $e )
 			{
 				$results->finish();
 				throw $e;
 			}
 
-			if ( $total !== null )
+			if( $total !== null )
 			{
 				/** mshop/locale/manager/language/default/item/count
 				 * Counts the number of records matched by the given criteria in the database
@@ -574,7 +574,7 @@ class MShop_Locale_Manager_Language_Default
 				$row = $results->fetch();
 				$results->finish();
 
-				if ( $row === false ) {
+				if( $row === false ) {
 					throw new MShop_Locale_Exception( 'No total results value found' );
 				}
 
@@ -583,7 +583,7 @@ class MShop_Locale_Manager_Language_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -601,7 +601,7 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		if ( $default === true ) {
+		if( $default === true ) {
 			return $this->_createSearch( 'locale.language' );
 		}
 
@@ -618,8 +618,8 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
-		$statement = $conn->create($sql);
-		$this->_getContext()->getLogger()->log(__METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG);
+		$statement = $conn->create( $sql );
+		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		$results = $statement->execute();
 

@@ -15,7 +15,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 
 	private $_mysql = array(
 		// attribute
-		'mshop_attribute' => array (
+		'mshop_attribute' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_attribute" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_attribute" SET "mtime"=NOW()',
@@ -28,7 +28,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 				'ALTER TABLE "mshop_attribute" ADD "editor" VARCHAR(255) NOT NULL DEFAULT \'\' AFTER "ctime"',
 			),
 		),
-		'mshop_attribute_list' => array (
+		'mshop_attribute_list' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_attribute_list" ADD "mtime" DATETIME NOT NULL AFTER "pos"',
 				'UPDATE "mshop_attribute_list" SET "mtime"=NOW()',
@@ -41,7 +41,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 				'ALTER TABLE "mshop_attribute_list" ADD "editor" VARCHAR(255) NOT NULL DEFAULT \'\' AFTER "ctime"',
 			),
 		),
-		'mshop_attribute_list_type' => array (
+		'mshop_attribute_list_type' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_attribute_list_type" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_attribute_list_type" SET "mtime"=NOW()',
@@ -54,7 +54,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 				'ALTER TABLE "mshop_attribute_list_type" ADD "editor" VARCHAR(255) NOT NULL DEFAULT \'\' AFTER "ctime"',
 			),
 		),
-		'mshop_attribute_type' => array (
+		'mshop_attribute_type' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_attribute_type" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_attribute_type" SET "mtime"=NOW()',
@@ -69,7 +69,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 		),
 
 		// catalog
-		'mshop_catalog' => array (
+		'mshop_catalog' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_catalog" SET "mtime"=NOW()',
@@ -83,7 +83,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_index_attribute' => array (
+		'mshop_catalog_index_attribute' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_index_attribute" ADD "mtime" DATETIME NOT NULL AFTER "listtype"',
 				'UPDATE "mshop_catalog_index_attribute" SET "mtime"=NOW()',
@@ -97,7 +97,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_index_catalog' => array (
+		'mshop_catalog_index_catalog' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_index_catalog" ADD "mtime" DATETIME NOT NULL AFTER "pos"',
 				'UPDATE "mshop_catalog_index_catalog" SET "mtime"=NOW()',
@@ -111,7 +111,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_index_price' => array (
+		'mshop_catalog_index_price' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_index_price" ADD "mtime" DATETIME NOT NULL AFTER "quantity"',
 				'UPDATE "mshop_catalog_index_price" SET "mtime"=NOW()',
@@ -125,7 +125,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_index_text' => array (
+		'mshop_catalog_index_text' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_index_text" ADD "mtime" DATETIME NOT NULL AFTER "value"',
 				'UPDATE "mshop_catalog_index_text" SET "mtime"=NOW()',
@@ -139,7 +139,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_list' => array (
+		'mshop_catalog_list' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_list" ADD "mtime" DATETIME NOT NULL AFTER "pos"',
 				'UPDATE "mshop_catalog_list" SET "mtime"=NOW()',
@@ -153,7 +153,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_catalog_list_type' => array (
+		'mshop_catalog_list_type' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_catalog_list_type" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_catalog_list_type" SET "mtime"=NOW()',
@@ -168,13 +168,13 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 		),
 
 		// customer
-		'mshop_customer' => array (
+		'mshop_customer' => array(
 			'editor' => array(
 				'ALTER TABLE "mshop_customer" ADD "editor" VARCHAR(255) NOT NULL DEFAULT \'\' AFTER "ctime"',
 			),
 		),
 
-		'mshop_customer_address' => array (
+		'mshop_customer_address' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_customer_address" ADD "mtime" DATETIME NOT NULL AFTER "pos"',
 				'UPDATE "mshop_customer_address" SET "mtime"=NOW()',
@@ -188,7 +188,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_customer_list' => array (
+		'mshop_customer_list' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_customer_list" ADD "mtime" DATETIME NOT NULL AFTER "pos"',
 				'UPDATE "mshop_customer_list" SET "mtime"=NOW()',
@@ -202,7 +202,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_customer_list_type' => array (
+		'mshop_customer_list_type' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_customer_list_type" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_customer_list_type" SET "mtime"=NOW()',
@@ -217,7 +217,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 		),
 
 		// locale
-		'mshop_locale' => array (
+		'mshop_locale' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_locale" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_locale" SET "mtime"=NOW()',
@@ -231,7 +231,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_locale_currency' => array (
+		'mshop_locale_currency' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_locale_currency" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_locale_currency" SET "mtime"=NOW()',
@@ -245,7 +245,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			),
 		),
 
-		'mshop_locale_language' => array (
+		'mshop_locale_language' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_locale_language" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_locale_language" SET "mtime"=NOW()',
@@ -260,7 +260,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 
 		),
 
-		'mshop_locale_site' => array (
+		'mshop_locale_site' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_locale_site" ADD "mtime" DATETIME NOT NULL AFTER "status"',
 				'UPDATE "mshop_locale_site" SET "mtime"=NOW()',
@@ -732,7 +732,7 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -763,11 +763,11 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 			$this->_status( 'migrated' );
 		}
 
-		foreach ( $stmts AS $table=>$colList )
+		foreach( $stmts AS $table=>$colList )
 		{
 			if( $this->_schema->tableExists( $table ) === true )
 			{
-				foreach ( $colList as $column=>$stmtList )
+				foreach( $colList as $column=>$stmtList )
 				{
 					$this->_msg( sprintf( 'Checking table "%2$s" for column "%1$s": ', $column, $table ), 1 );
 

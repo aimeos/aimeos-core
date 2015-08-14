@@ -80,7 +80,7 @@ class Controller_ExtJS_Text_List_DefaultTest extends PHPUnit_Framework_TestCase
 				'text.list.refid' => -1,
 				'text.list.datestart' => '2000-01-01 00:00:00',
 				'text.list.dateend' => '2001-01-01 00:00:00',
-				'text.list.config' => array('test' => 'unit'),
+				'text.list.config' => array( 'test' => 'unit' ),
 				'text.list.position' => 1,
 				'text.list.status' => 1,
 			),

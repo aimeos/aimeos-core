@@ -237,7 +237,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					{
 						$param = array(
 							'd_prodid' => $product->getId(),
-							'd_name' => $enc->url( $product->getName( 'url ') ),
+							'd_name' => $enc->url( $product->getName( 'url ' ) ),
 							'l_pos' => $pos - 1
 						);
 						$view->navigationPrev = $view->url( $target, $controller, $action, $param, array(), $config );

@@ -36,7 +36,7 @@ class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -61,7 +61,7 @@ class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_
 		
 		$this->_msg( 'Changing product stock unique constraint', 0 );
 
-		if ( $this->_schema->tableExists( $table ) && $this->_schema->constraintExists( $table, $constraint ) )
+		if( $this->_schema->tableExists( $table ) && $this->_schema->constraintExists( $table, $constraint ) )
 		{
 			$this->_executeList( $stmts );
 			$this->_status( 'changed' );

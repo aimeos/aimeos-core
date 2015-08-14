@@ -13,7 +13,7 @@ class MShop_Coupon_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager =  MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
 	}
 
@@ -27,14 +27,14 @@ class MShop_Coupon_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Coupon_Exception');
+		$this->setExpectedException( 'MShop_Coupon_Exception' );
 		MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 }

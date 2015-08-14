@@ -53,7 +53,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setLanguageId( $langid )
 	{
-		if ( $langid === $this->getLanguageId() ) { return; }
+		if( $langid === $this->getLanguageId() ) { return; }
 
 		$this->_checkLanguageId( $langid );
 		$this->_values['langid'] = $langid;
@@ -79,7 +79,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -115,7 +115,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setDomain( $domain )
 	{
-		if ( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return; }
 
 		$this->_values['domain'] = (string) $domain;
 		$this->setModified();
@@ -140,7 +140,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setContent( $text )
 	{
-		if ( $text == $this->getContent() ) { return; }
+		if( $text == $this->getContent() ) { return; }
 
 		ini_set( 'mbstring.substitute_character', 'none' );
 		$this->_values['content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
@@ -166,7 +166,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -191,7 +191,7 @@ class MShop_Text_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();
@@ -236,7 +236,7 @@ class MShop_Text_Item_Default
 	{
 		$list = parent::toArray();
 
-		$list['text.languageid'] =  $this->getLanguageId();
+		$list['text.languageid'] = $this->getLanguageId();
 		$list['text.typeid'] = $this->getTypeId();
 		$list['text.label'] = $this->getLabel();
 		$list['text.type'] = $this->getType();

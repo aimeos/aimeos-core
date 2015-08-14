@@ -38,10 +38,10 @@ class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBaseP
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding catalog performance data', 0);
+		$this->_msg( 'Adding catalog performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
 		$catalogRootItem = $catalogManager->createItem();

@@ -27,7 +27,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$this->_item = $this->_object->createItem();
 		$this->_item->setProvider( 'Example' );
-		$this->_item->setConfig( array('key'=>'value') );
+		$this->_item->setConfig( array( 'key'=>'value' ) );
 		$this->_item->setStatus( '1' );
 	}
 
@@ -53,8 +53,8 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		$attribs = $this->_object->getSearchAttributes();
-		foreach($attribs AS $obj) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $obj );
+		foreach( $attribs AS $obj ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
 		}
 	}
 
@@ -67,17 +67,17 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('code') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('code', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'code' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'code', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidManager()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getSubManager( '$%^' );
 	}
 
@@ -92,7 +92,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR') );
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $itemA = reset( $results ) ) === false ) {
@@ -108,14 +108,14 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search = $this->_object->createSearch();
 		$result = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($result) ) === false ) {
-			throw new Exception('No coupon item found');
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No coupon item found' );
 		}
 
-		$item->setId(null);
-		$item->setProvider('Unit');
-		$item->setConfig(array('key'=>'value'));
-		$item->setStatus('1');
+		$item->setId( null );
+		$item->setProvider( 'Unit' );
+		$item->setConfig( array( 'key'=>'value' ) );
+		$item->setStatus( '1' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
@@ -157,7 +157,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $item->getId() );
 	}
 
@@ -172,7 +172,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( 'MShop_Coupon_Provider_Decorator_Example', $provider );
 
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getProvider( $this->_object->createItem(), '' );
 	}
 
@@ -180,7 +180,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->_object->createSearch();
-		$this->assertInstanceOf('MW_Common_Criteria_SQL', $search);
+		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $search );
 	}
 
 
@@ -221,7 +221,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),

@@ -56,19 +56,19 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		foreach( $decorators as $key => $name )
 		{
 			if( in_array( $name, $excludes ) ) {
-				unset( $decorators[ $key ] );
+				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  $this->_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = $this->_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager =  $this->_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = $this->_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->_createSubNames( $managerpath );
-		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
+		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
 
 		return $this->_addDecorators( $context, $manager, $decorators, $classprefix );
@@ -91,7 +91,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MAdmin_Exception( sprintf('Invalid characters in domain name "%1$s"', $domain ) );
+			throw new MAdmin_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( $name === null ) {
@@ -105,11 +105,11 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		$domainname = ucfirst( $domain );
 		$subnames = $this->_createSubNames( $manager );
 
-		$classname = 'MAdmin_'. $domainname . '_Manager_' . $subnames . '_' . $name;
-		$interface = 'MAdmin_'. $domainname . '_Manager_' . $subnames . '_Interface';
+		$classname = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_' . $name;
+		$interface = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MAdmin_Exception( sprintf('Class "%1$s" not available', $classname ) );
+			throw new MAdmin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$subManager = new $classname( $this->_getContext() );

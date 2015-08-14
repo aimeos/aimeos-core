@@ -24,28 +24,28 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Plugin_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj );
 	}
 
 
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		Controller_ExtJS_Plugin_Factory::createController( TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		Controller_ExtJS_Plugin_Factory::createController( TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factory::createController(TestHelper::getContext(), 'Factory' );
+		Controller_ExtJS_Plugin_Factory::createController( TestHelper::getContext(), 'Factory' );
 	}
 
 
@@ -59,7 +59,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller);
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
 	}
 
 
@@ -81,7 +81,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Decorator_Interface', $controller);
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Decorator_Interface', $controller );
 	}
 
 
@@ -92,7 +92,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( '$$' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin' );
 	}
 
 
@@ -103,7 +103,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( 'WrongClass' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin' );
 	}
 
 }

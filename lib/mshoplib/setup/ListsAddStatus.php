@@ -73,7 +73,7 @@ class MW_Setup_Task_ListsAddStatus extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

@@ -47,7 +47,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate(TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( TestHelper::getContext(), $this->_plugin );
 		$object->register( $this->_order );
 	}
 
@@ -91,7 +91,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
-			->setMethods( array( 'isAvailable') )->getMock();
+			->setMethods( array( 'isAvailable' ) )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( array( $orderProduct ) ) );
@@ -151,7 +151,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
-			->setMethods( array( 'isAvailable') )->getMock();
+			->setMethods( array( 'isAvailable' ) )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( array( $orderProduct ) ) );

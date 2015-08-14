@@ -31,24 +31,24 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = MShop_Plugin_Manager_Factory::createManager(TestHelper::getContext());
+		$this->_object = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$type = $this->_object->getSubManager('type');
+		$type = $this->_object->getSubManager( 'type' );
 		$search = $type->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'plugin.type.code', 'order' ),
 			$search->compare( '==', 'plugin.type.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $type->searchItems($search);
-		if ( ( $typeItem = reset($results) ) === false ) {
-			throw new Exception('No item found');
+		$results = $type->searchItems( $search );
+		if( ( $typeItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No item found' );
 		}
 
 		$this->_examplePlugin = $this->_object->createItem();
-		$this->_examplePlugin->setTypeId($typeItem->getId());
+		$this->_examplePlugin->setTypeId( $typeItem->getId() );
 
-		$this->_examplePlugin->setProvider('Example');
+		$this->_examplePlugin->setProvider( 'Example' );
 		$this->_examplePlugin->setConfig( array( "limit" => "10" ) );
 		$this->_examplePlugin->setStatus( 1 );
 
@@ -110,14 +110,14 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'plugin.provider', 'Shipping'),
+			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
 			$search->compare( '==', 'plugin.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
 		$a = $this->_object->searchItems( $search );
-		if ( ($item = reset( $a )) === false) {
-			throw new Exception('Search provider in test failt');
+		if( ( $item = reset( $a ) ) === false ) {
+			throw new Exception( 'Search provider in test failt' );
 		}
 
 		$item->setId( null );
@@ -165,7 +165,7 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($itemSaved->getId());
+		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 
@@ -197,7 +197,7 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'plugin.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
@@ -231,7 +231,7 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, count( $this->_object->searchItems( $search, array(), $total ) ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -239,17 +239,17 @@ class MShop_Plugin_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('type', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'type', 'unknown' );
 	}
 }

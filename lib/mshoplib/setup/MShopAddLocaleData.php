@@ -163,9 +163,9 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			$currencyItem->setStatus( $dataset['status'] );
 
 			try {
-				$currencyItemManager->saveItem($currencyItem);
+				$currencyItemManager->saveItem( $currencyItem );
 				$num++;
-			} catch( Exception $e ) { ; } // if currency was already available
+			} catch( Exception $e ) {; } // if currency was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -197,7 +197,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			try {
 				$languageItemManager->saveItem( $languageItem );
 				$num++;
-			} catch( Exception $e ) { ; } // if language was already available
+			} catch( Exception $e ) {; } // if language was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -218,12 +218,12 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 
 		foreach( $data as $key => $dataset )
 		{
-			if( !isset( $siteIds[ $dataset['siteid'] ] ) ) {
+			if( !isset( $siteIds[$dataset['siteid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No ID for site for key "%1$s" found', $dataset['siteid'] ) );
 			}
 
 			$localeItem->setId( null );
-			$localeItem->setSiteId( $siteIds[ $dataset['siteid'] ] );
+			$localeItem->setSiteId( $siteIds[$dataset['siteid']] );
 			$localeItem->setLanguageId( $dataset['langid'] );
 			$localeItem->setCurrencyId( $dataset['currencyid'] );
 			$localeItem->setPosition( $dataset['pos'] );
@@ -231,7 +231,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 
 			try {
 				$localeItemManager->saveItem( $localeItem );
-			} catch( Exception $e ) { ; } // if locale combination was already available
+			} catch( Exception $e ) {; } // if locale combination was already available
 		}
 
 		$this->_status( 'done' );

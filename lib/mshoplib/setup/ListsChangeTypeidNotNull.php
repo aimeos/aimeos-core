@@ -100,10 +100,10 @@ class MW_Setup_Task_ListsChangeTypeidNotNull
 		$this->_msg( 'Changing typeid to not allow NULL values', 0 );
 		$this->_status( '' );
 
-		foreach ( $this->_mysql as $table => $stmt ) {
-			$this->_msg( sprintf ( 'Checking table "%1$s": ', $table ), 1 );
+		foreach( $this->_mysql as $table => $stmt ) {
+			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if ( $this->_schema->tableExists( $table ) === true
+			if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->columnExists( $table, 'typeid' ) === true
 				&& $this->_schema->getColumnDetails( $table, 'typeid' )->isNullable() === true )
 			{

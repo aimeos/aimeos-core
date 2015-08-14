@@ -57,7 +57,7 @@ class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstrac
 		$this->_msg( 'Drop old index in mshop_catalog table', 0 );
 		$this->_status( '' );
 
-		foreach ( $stmts AS $index => $stmt )
+		foreach( $stmts AS $index => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 

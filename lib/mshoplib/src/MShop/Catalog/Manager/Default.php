@@ -401,7 +401,7 @@ class MShop_Catalog_Manager_Default
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$siteMap[ $row['siteid'] ][ $row['id'] ] = new MW_Tree_Node_Default( $row );
+				$siteMap[$row['siteid']][$row['id']] = new MW_Tree_Node_Default( $row );
 			}
 
 			$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
@@ -450,8 +450,8 @@ class MShop_Catalog_Manager_Default
 			{
 				$itemMap = array();
 
-				foreach ( $path as $node ) {
-					$itemMap[ $node->getId() ] = $node;
+				foreach( $path as $node ) {
+					$itemMap[$node->getId()] = $node;
 				}
 
 				return $this->_buildItems( $itemMap, $ref, 'catalog' );
@@ -495,21 +495,21 @@ class MShop_Catalog_Manager_Default
 				$domain = $listItem->getDomain();
 				$parentid = $listItem->getParentId();
 
-				$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
-				$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
+				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
+				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
 			$refItemMap = $this->_getRefItems( $refIdMap );
 			$nodeid = $node->getId();
 
 			$listItems = array();
-			if ( array_key_exists( $nodeid, $listItemMap ) ) {
-				$listItems = $listItemMap[ $nodeid ];
+			if( array_key_exists( $nodeid, $listItemMap ) ) {
+				$listItems = $listItemMap[$nodeid];
 			}
 
 			$refItems = array();
-			if ( array_key_exists( $nodeid, $refItemMap ) ) {
-				$refItems = $refItemMap[ $nodeid ];
+			if( array_key_exists( $nodeid, $refItemMap ) ) {
+				$refItems = $refItemMap[$nodeid];
 			}
 
 			$item = $this->_createItem( array(), $listItems, $refItems, array(), $node );
@@ -665,26 +665,26 @@ class MShop_Catalog_Manager_Default
 				$domain = $listItem->getDomain();
 				$parentid = $listItem->getParentId();
 
-				$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
-				$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
+				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
+				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
 			$refItemMap = $this->_getRefItems( $refIdMap );
 		}
 
-		foreach ( $itemMap as $id => $node )
+		foreach( $itemMap as $id => $node )
 		{
 			$listItems = array();
-			if ( isset( $listItemMap[$id] ) ) {
+			if( isset( $listItemMap[$id] ) ) {
 				$listItems = $listItemMap[$id];
 			}
 
 			$refItems = array();
-			if ( isset( $refItemMap[$id] ) ) {
+			if( isset( $refItemMap[$id] ) ) {
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[ $id ] = $this->_createItem( array(), $listItems, $refItems, array(), $node );
+			$items[$id] = $this->_createItem( array(), $listItems, $refItems, array(), $node );
 		}
 
 		return $items;
@@ -735,13 +735,13 @@ class MShop_Catalog_Manager_Default
 		foreach( $node->getChildren() as $child )
 		{
 			$listItems = array();
-			if ( array_key_exists( $child->getId(), $listItemMap ) ) {
-				$listItems = $listItemMap[ $child->getId() ];
+			if( array_key_exists( $child->getId(), $listItemMap ) ) {
+				$listItems = $listItemMap[$child->getId()];
 			}
 
 			$refItems = array();
-			if ( array_key_exists( $child->getId(), $refItemMap ) ) {
-				$refItems = $refItemMap[ $child->getId() ];
+			if( array_key_exists( $child->getId(), $refItemMap ) ) {
+				$refItems = $refItemMap[$child->getId()];
 			}
 
 			$newItem = $this->_createItem( array(), $listItems, $refItems, array(), $child );
@@ -800,7 +800,7 @@ class MShop_Catalog_Manager_Default
 	{
 		$map = array();
 
-		$map[ (string) $node->getId() ] = $node;
+		$map[(string) $node->getId()] = $node;
 
 		foreach( $node->getChildren() as $child ) {
 			$map += $this->_getNodeMap( $child );

@@ -43,7 +43,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		if ( file_exists( $this->_testfile )) {
+		if( file_exists( $this->_testfile ) ) {
 			unlink( $this->_testfile );
 		}
 
@@ -63,13 +63,13 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends PHPUnit_Framewo
 	public function testImportFromCSVFile()
 	{
 		$data = array();
-		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"'."\n";
-		$data[] = '"en","color","white","default","name","","unittest: white"'."\n";
-		$data[] = '"en","color","blue","default","name","","unittest: blue"' ."\n";
-		$data[] = '"en","color","red","default","name","","unittest: red"'."\n";
-		$data[] = '"en","size","l","default","name","","unittest: l"'."\n";
-		$data[] = '"en","size","xl","default","name","","unittest: xl"'."\n";
-		$data[] = '"en","size","xxl","default","name","","unittest: xxl"'."\n";
+		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"' . "\n";
+		$data[] = '"en","color","white","default","name","","unittest: white"' . "\n";
+		$data[] = '"en","color","blue","default","name","","unittest: blue"' . "\n";
+		$data[] = '"en","color","red","default","name","","unittest: red"' . "\n";
+		$data[] = '"en","size","l","default","name","","unittest: l"' . "\n";
+		$data[] = '"en","size","xl","default","name","","unittest: xl"' . "\n";
+		$data[] = '"en","size","xxl","default","name","","unittest: xxl"' . "\n";
 		$data[] = ' ';
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -339,8 +339,8 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends PHPUnit_Framewo
 	{
 		set_error_handler( 'TestHelper::errorHandler' );
 
-		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/uploaddir', '/up/');
-		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', false);
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/uploaddir', '/up/' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/enablecheck', false );
 
 		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
@@ -409,7 +409,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends PHPUnit_Framewo
 
 	protected function _prepareCheckFileUpload()
 	{
-		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', true);
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/enablecheck', true );
 		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
@@ -420,6 +420,6 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends PHPUnit_Framewo
 		$params->items = $this->_testfile;
 		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
-		return array($params,$object);
+		return array( $params, $object );
 	}
 }

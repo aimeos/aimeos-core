@@ -26,7 +26,7 @@ class MShop_Media_Item_Default
 	 *
 	 * @param array $values Initial values of the media item
 	 */
-	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array()  )
+	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		parent::__construct( 'media.', $values, $listItems, $refItems );
 
@@ -53,7 +53,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setLanguageId( $langid )
 	{
-		if ( $langid === $this->getLanguageId() ) { return; }
+		if( $langid === $this->getLanguageId() ) { return; }
 
 		$this->_checkLanguageId( $langid );
 		$this->_values['langid'] = $langid;
@@ -79,7 +79,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -115,7 +115,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setDomain( $domain )
 	{
-		if ( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return; }
 
 		$this->_values['domain'] = (string) $domain;
 		$this->setModified();
@@ -140,7 +140,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -165,7 +165,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();
@@ -190,7 +190,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setMimeType( $mimetype )
 	{
-		if ( $mimetype == $this->getMimeType() ) { return; }
+		if( $mimetype == $this->getMimeType() ) { return; }
 
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
 			throw new MShop_Media_Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
@@ -219,7 +219,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setUrl( $url )
 	{
-		if ( $url == $this->getUrl() ) { return; }
+		if( $url == $this->getUrl() ) { return; }
 
 		$this->_values['url'] = (string) $url;
 		$this->setModified();
@@ -244,7 +244,7 @@ class MShop_Media_Item_Default
 	 */
 	public function setPreview( $url )
 	{
-		if ( $url == $this->getPreview() ) { return; }
+		if( $url == $this->getPreview() ) { return; }
 
 		$this->_values['preview'] = (string) $url;
 		$this->setModified();

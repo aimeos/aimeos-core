@@ -98,9 +98,9 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertNull( $this->_object->getId());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setId( null );
+		$this->assertNull( $this->_object->getId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -120,8 +120,8 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId(99);
-		$this->assertEquals(99, $this->_object->getTypeId());
+		$this->_object->setTypeId( 99 );
+		$this->assertEquals( 99, $this->_object->getTypeId() );
 
 		$this->assertTrue( $this->_object->isModified() );
 	}
@@ -159,7 +159,7 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setDomain( 'service' );
 		$this->assertEquals( 'service', $this->_object->getDomain() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetLabel()
@@ -183,7 +183,7 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setQuantity( 2000 );
 		$this->assertEquals( 2000, $this->_object->getQuantity() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetPrice()
@@ -195,9 +195,9 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setValue( 199.00 );
 		$this->assertEquals( 199.00, $this->_object->getValue() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Price_Exception');
+		$this->setExpectedException( 'MShop_Price_Exception' );
 		$this->_object->setValue( '190,90' );
 	}
 
@@ -210,9 +210,9 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setValue( '20.00' );
 		$this->assertEquals( 20.00, $this->_object->getValue() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Price_Exception');
+		$this->setExpectedException( 'MShop_Price_Exception' );
 		$this->_object->setValue( '19,90' );
 	}
 
@@ -225,9 +225,9 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setRebate( '20.00' );
 		$this->assertEquals( 20.00, $this->_object->getRebate() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Price_Exception');
+		$this->setExpectedException( 'MShop_Price_Exception' );
 		$this->_object->setValue( '19,90' );
 	}
 
@@ -240,7 +240,7 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->_object->setTaxRate( '22.00' );
 		$this->assertEquals( 22.00, $this->_object->getTaxRate() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetStatus()
@@ -290,20 +290,20 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'price.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['price.id'], $item->getId());
-		$this->assertEquals($list['price.typeid'], $item->getTypeId());
-		$this->assertEquals($list['price.label'], $item->getLabel());
-		$this->assertEquals($list['price.currencyid'], $item->getCurrencyId());
-		$this->assertEquals($list['price.quantity'], $item->getQuantity());
-		$this->assertEquals($list['price.value'], $item->getValue());
-		$this->assertEquals($list['price.costs'], $item->getCosts());
-		$this->assertEquals($list['price.rebate'], $item->getRebate());
-		$this->assertEquals($list['price.taxrate'], $item->getTaxrate());
-		$this->assertEquals($list['price.status'], $item->getStatus());
+		$this->assertEquals( $list['price.id'], $item->getId() );
+		$this->assertEquals( $list['price.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['price.label'], $item->getLabel() );
+		$this->assertEquals( $list['price.currencyid'], $item->getCurrencyId() );
+		$this->assertEquals( $list['price.quantity'], $item->getQuantity() );
+		$this->assertEquals( $list['price.value'], $item->getValue() );
+		$this->assertEquals( $list['price.costs'], $item->getCosts() );
+		$this->assertEquals( $list['price.rebate'], $item->getRebate() );
+		$this->assertEquals( $list['price.taxrate'], $item->getTaxrate() );
+		$this->assertEquals( $list['price.status'], $item->getStatus() );
 	}
 
 
@@ -330,6 +330,6 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 }

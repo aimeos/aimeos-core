@@ -118,7 +118,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$productItems = $productManager->searchItems( $search );
 
-		if ( ( $productItem = reset( $productItems ) ) == false ) {
+		if( ( $productItem = reset( $productItems ) ) == false ) {
 			throw new Exception( 'No product item found' );
 		}
 

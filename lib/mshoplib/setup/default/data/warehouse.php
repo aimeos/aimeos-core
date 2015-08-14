@@ -4,8 +4,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'warehouse' => array (
-		'default' => array ( 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+return array(
+	'warehouse' => array(
+		'default' => array( 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 );

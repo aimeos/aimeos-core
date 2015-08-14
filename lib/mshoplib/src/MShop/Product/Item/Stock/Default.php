@@ -25,7 +25,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('product.stock.', $values);
+		parent::__construct( 'product.stock.', $values );
 
 		$this->_values = $values;
 	}
@@ -49,7 +49,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function setProductId( $prodid )
 	{
-		if ( $prodid == $this->getProductId() ) { return; }
+		if( $prodid == $this->getProductId() ) { return; }
 
 		$this->_values['prodid'] = (int) $prodid;
 		$this->setModified();
@@ -74,9 +74,9 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function setWarehouseId( $warehouseid )
 	{
-		if ( $warehouseid === $this->getWarehouseId() ) { return; }
+		if( $warehouseid === $this->getWarehouseId() ) { return; }
 
-		if ( $warehouseid !== null ) {
+		if( $warehouseid !== null ) {
 			$warehouseid = (int) $warehouseid;
 		}
 
@@ -103,9 +103,9 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function setStocklevel( $stocklevel )
 	{
-		if ( $stocklevel === $this->getStocklevel() ) { return; }
+		if( $stocklevel === $this->getStocklevel() ) { return; }
 
-		if ( $stocklevel !== null ) {
+		if( $stocklevel !== null ) {
 			$stocklevel = (int) $stocklevel;
 		}
 
@@ -132,11 +132,11 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function setDateBack( $backdate )
 	{
-		if ( $backdate === $this->getDateBack() ) { return; }
+		if( $backdate === $this->getDateBack() ) { return; }
 
-		$this->_checkDateFormat($backdate);
+		$this->_checkDateFormat( $backdate );
 
-		if ( $backdate !== null ) {
+		if( $backdate !== null ) {
 			$backdate = (string) $backdate;
 		}
 

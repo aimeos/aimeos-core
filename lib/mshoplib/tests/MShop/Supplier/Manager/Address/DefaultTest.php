@@ -28,7 +28,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -100,56 +100,56 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
-		$this->assertEquals( $item->getRefId(), $itemSaved->getRefId());
-		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition());
-		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId());
-		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany());
-		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID());
-		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation());
-		$this->assertEquals( $item->getTitle(), $itemSaved->getTitle());
-		$this->assertEquals( $item->getFirstname(), $itemSaved->getFirstname());
-		$this->assertEquals( $item->getLastname(), $itemSaved->getLastname());
-		$this->assertEquals( $item->getAddress1(), $itemSaved->getAddress1());
-		$this->assertEquals( $item->getAddress2(), $itemSaved->getAddress2());
-		$this->assertEquals( $item->getAddress3(), $itemSaved->getAddress3());
-		$this->assertEquals( $item->getPostal(), $itemSaved->getPostal());
-		$this->assertEquals( $item->getCity(), $itemSaved->getCity());
-		$this->assertEquals( $item->getState(), $itemSaved->getState());
-		$this->assertEquals( $item->getCountryId(), $itemSaved->getCountryId());
-		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId());
-		$this->assertEquals( $item->getTelephone(), $itemSaved->getTelephone());
-		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail());
-		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax());
-		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite());
-		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag());
+		$this->assertEquals( $item->getRefId(), $itemSaved->getRefId() );
+		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
+		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
+		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
+		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID() );
+		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
+		$this->assertEquals( $item->getTitle(), $itemSaved->getTitle() );
+		$this->assertEquals( $item->getFirstname(), $itemSaved->getFirstname() );
+		$this->assertEquals( $item->getLastname(), $itemSaved->getLastname() );
+		$this->assertEquals( $item->getAddress1(), $itemSaved->getAddress1() );
+		$this->assertEquals( $item->getAddress2(), $itemSaved->getAddress2() );
+		$this->assertEquals( $item->getAddress3(), $itemSaved->getAddress3() );
+		$this->assertEquals( $item->getPostal(), $itemSaved->getPostal() );
+		$this->assertEquals( $item->getCity(), $itemSaved->getCity() );
+		$this->assertEquals( $item->getState(), $itemSaved->getState() );
+		$this->assertEquals( $item->getCountryId(), $itemSaved->getCountryId() );
+		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
+		$this->assertEquals( $item->getTelephone(), $itemSaved->getTelephone() );
+		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail() );
+		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
+		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
+		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
-		$this->assertEquals( $itemExp->getRefId(), $itemUpd->getRefId());
-		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition());
-		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId());
-		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany());
-		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID());
-		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation());
-		$this->assertEquals( $itemExp->getTitle(), $itemUpd->getTitle());
-		$this->assertEquals( $itemExp->getFirstname(), $itemUpd->getFirstname());
-		$this->assertEquals( $itemExp->getLastname(), $itemUpd->getLastname());
-		$this->assertEquals( $itemExp->getAddress1(), $itemUpd->getAddress1());
-		$this->assertEquals( $itemExp->getAddress2(), $itemUpd->getAddress2());
-		$this->assertEquals( $itemExp->getAddress3(), $itemUpd->getAddress3());
-		$this->assertEquals( $itemExp->getPostal(), $itemUpd->getPostal());
-		$this->assertEquals( $itemExp->getCity(), $itemUpd->getCity());
-		$this->assertEquals( $itemExp->getState(), $itemUpd->getState());
-		$this->assertEquals( $itemExp->getCountryId(), $itemUpd->getCountryId());
-		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId());
-		$this->assertEquals( $itemExp->getTelephone(), $itemUpd->getTelephone());
-		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail());
-		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax());
-		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite());
-		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag());
+		$this->assertEquals( $itemExp->getRefId(), $itemUpd->getRefId() );
+		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
+		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
+		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
+		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID() );
+		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
+		$this->assertEquals( $itemExp->getTitle(), $itemUpd->getTitle() );
+		$this->assertEquals( $itemExp->getFirstname(), $itemUpd->getFirstname() );
+		$this->assertEquals( $itemExp->getLastname(), $itemUpd->getLastname() );
+		$this->assertEquals( $itemExp->getAddress1(), $itemUpd->getAddress1() );
+		$this->assertEquals( $itemExp->getAddress2(), $itemUpd->getAddress2() );
+		$this->assertEquals( $itemExp->getAddress3(), $itemUpd->getAddress3() );
+		$this->assertEquals( $itemExp->getPostal(), $itemUpd->getPostal() );
+		$this->assertEquals( $itemExp->getCity(), $itemUpd->getCity() );
+		$this->assertEquals( $itemExp->getState(), $itemUpd->getState() );
+		$this->assertEquals( $itemExp->getCountryId(), $itemUpd->getCountryId() );
+		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
+		$this->assertEquals( $itemExp->getTelephone(), $itemUpd->getTelephone() );
+		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail() );
+		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
+		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
+		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -197,7 +197,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->_editor );
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$result = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );

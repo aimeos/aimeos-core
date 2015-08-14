@@ -58,7 +58,7 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'price.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
 		}
 
@@ -93,19 +93,19 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 			$ptype->setStatus( $dataset['status'] );
 
 			$priceTypeManager->saveItem( $ptype );
-			$ptypeIds[ $key ] = $ptype->getId();
+			$ptypeIds[$key] = $ptype->getId();
 		}
 
 		$price = $priceManager->createItem();
 		foreach( $testdata['price'] as $key => $dataset )
 		{
-			if ( !isset( $ptypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $ptypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No price type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$price->setId( null );
 			$price->setCurrencyId( $dataset['currencyid'] );
-			$price->setTypeId( $ptypeIds[ $dataset['typeid'] ] );
+			$price->setTypeId( $ptypeIds[$dataset['typeid']] );
 			$price->setDomain( $dataset['domain'] );
 			$price->setLabel( $dataset['label'] );
 			$price->setQuantity( $dataset['quantity'] );

@@ -54,7 +54,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -90,7 +90,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();
@@ -117,7 +117,7 @@ class MShop_Product_Item_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -142,7 +142,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
-		if ( $suppliercode == $this->getSupplierCode() ) { return; }
+		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
 		$this->_values['suppliercode'] = (string) $suppliercode;
 		$this->setModified();
@@ -167,7 +167,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -192,7 +192,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setDateStart( $date )
 	{
-		if ( $date === $this->getDateStart() ) { return; }
+		if( $date === $this->getDateStart() ) { return; }
 
 		$this->_checkDateFormat( $date );
 
@@ -219,7 +219,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setDateEnd( $date )
 	{
-		if ( $date === $this->getDateEnd() ) { return; }
+		if( $date === $this->getDateEnd() ) { return; }
 
 		$this->_checkDateFormat( $date );
 

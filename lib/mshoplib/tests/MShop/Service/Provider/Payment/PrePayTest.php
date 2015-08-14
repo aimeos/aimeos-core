@@ -77,8 +77,8 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 
 	public function testIsImplemented()
 	{
-		$this->assertTrue( $this->_object->isImplemented(MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
-		$this->assertFalse( $this->_object->isImplemented(MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
+		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
 	}
 
 

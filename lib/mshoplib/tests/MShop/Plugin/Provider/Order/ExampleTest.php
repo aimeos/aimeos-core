@@ -26,10 +26,10 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'Example' );
-		$plugin->setConfig( array('key'=>1) );
+		$plugin->setConfig( array( 'key'=>1 ) );
 		$plugin->setStatus( '1' );
 
-		$this->_object = new MShop_Plugin_Provider_Order_Example(TestHelper::getContext(), $plugin);
+		$this->_object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $plugin );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 	/**

@@ -24,8 +24,8 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $serviceManager->createSearch();
-		$search->setConditions($search->compare('==', 'service.provider', 'Default'));
-		$result = $serviceManager->searchItems($search, array('price'));
+		$search->setConditions( $search->compare( '==', 'service.provider', 'Default' ) );
+		$result = $serviceManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No order base item found' );
@@ -34,7 +34,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 		$item->setCode( 'test' );
 
-		$this->_object = new MShop_Service_Provider_Delivery_Default(TestHelper::getContext(), $item );
+		$this->_object = new MShop_Service_Provider_Delivery_Default( TestHelper::getContext(), $item );
 	}
 
 
@@ -105,16 +105,16 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testCheckConfigFE()
 	{
-		$this->assertEquals(array(), $this->_object->checkConfigFE( array() ));
+		$this->assertEquals( array(), $this->_object->checkConfigFE( array() ) );
 	}
 
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext())->getSubManager('base');
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
-		$search->setConditions( $search->compare('==', 'order.base.price', '672.00'));
-		$result = $orderBaseManager->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
+		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No order base item found' );
@@ -122,14 +122,14 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 
 		$price = $this->_object->calcPrice( $item );
 
-		$this->assertInstanceOf('MShop_Price_Item_Interface', $price);
-		$this->assertEquals($price->getValue(), '12.95');
+		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $price );
+		$this->assertEquals( $price->getValue(), '12.95' );
 
 	}
 
 	public function testIsAvaible()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager('base');
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
 
 		$this->assertTrue( $this->_object->isAvailable( $orderBaseManager->createItem() ) );
 	}
@@ -161,7 +161,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$expected = '<?xml version="1.0" encoding="UTF-8"?>
 			<orderlist>
 				<orderitem>
-					<id><![CDATA['. $order->getId() .']]></id>
+					<id><![CDATA['. $order->getId() . ']]></id>
 					<type><![CDATA[web]]></type>
 					<datetime><![CDATA[2008-02-15T12:34:56Z]]></datetime>
 					<customerid><![CDATA[' . $orderBase->getCustomerId() . ']]></customerid>
@@ -327,10 +327,10 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 				</orderitem>
 			</orderlist>';
 
-		$dom = new DOMDocument('1.0', 'UTF-8');
+		$dom = new DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
-		if ( $dom->loadXML( $expected ) !== true ) {
+		if( $dom->loadXML( $expected ) !== true ) {
 			throw new Exception( 'Loading XML failed' );
 		}
 
@@ -355,7 +355,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$expected = '<?xml version="1.0" encoding="UTF-8"?>
 <orderlist>
 	<orderitem>
-		<id><![CDATA['. $order->getId() .']]></id>
+		<id><![CDATA['. $order->getId() . ']]></id>
 		<type><![CDATA[web]]></type>
 		<datetime><![CDATA[2009-03-18T16:14:32Z]]></datetime>
 		<customerid><![CDATA[' . $orderBase->getCustomerId() . ']]></customerid>
@@ -482,10 +482,10 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 	</orderitem>
 </orderlist>';
 
-		$dom = new DOMDocument('1.0', 'UTF-8');
+		$dom = new DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
-		if ( $dom->loadXML( $expected ) !== true ) {
+		if( $dom->loadXML( $expected ) !== true ) {
 			throw new Exception( 'Loading XML failed' );
 		}
 

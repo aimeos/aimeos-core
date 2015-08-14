@@ -62,7 +62,7 @@ class MShopJsbPackageTask extends Task
 					$jsbParser = new MW_Jsb2_Default( $jsbPath );
 					$jsbParser->deploy( 'js' );
 				}
-				catch ( Exception $e )
+				catch( Exception $e )
 				{
 					$this->log( sprintf( 'Error: %1$s', $e->getMessage() ) );
 				}

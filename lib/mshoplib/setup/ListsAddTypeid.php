@@ -62,7 +62,7 @@ class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -73,7 +73,7 @@ class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('MShopAddTypeData');
+		return array( 'MShopAddTypeData' );
 	}
 
 

@@ -23,7 +23,7 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('PluginRenameDomainToTypeid', 'TablesCreateMShop' );
+		return array( 'PluginRenameDomainToTypeid', 'TablesCreateMShop' );
 	}
 
 

@@ -120,41 +120,41 @@ abstract class Controller_ExtJS_Abstract
 		return array(
 			$this->_name . '.init' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			$this->_name . '.finish' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			$this->_name . '.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			$this->_name . '.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			$this->_name . '.searchItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "condition","optional" => true ),
-					array( "type" => "integer","name" => "start","optional" => true ),
-					array( "type" => "integer","name" => "limit","optional" => true ),
-					array( "type" => "string","name" => "sort","optional" => true ),
-					array( "type" => "string","name" => "dir","optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "condition", "optional" => true ),
+					array( "type" => "integer", "name" => "start", "optional" => true ),
+					array( "type" => "integer", "name" => "limit", "optional" => true ),
+					array( "type" => "string", "name" => "sort", "optional" => true ),
+					array( "type" => "string", "name" => "dir", "optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -331,7 +331,7 @@ abstract class Controller_ExtJS_Abstract
 
 			if( $attribute->isPublic() || (bool) $all )
 			{
-				$properties[ $attribute->getCode() ] = array(
+				$properties[$attribute->getCode()] = array(
 					'description' => $attribute->getLabel(),
 					'optional' => !$attribute->isRequired(),
 					'type' => $attribute->getType(),
@@ -392,7 +392,7 @@ abstract class Controller_ExtJS_Abstract
 		{
 			$existing = $criteria->getConditions();
 			$criteria->setConditions( $criteria->toConditions( (array) $params->condition ) );
-			$expr = array (
+			$expr = array(
 				$criteria->getConditions(),
 				$existing
 			);
@@ -470,7 +470,7 @@ abstract class Controller_ExtJS_Abstract
 		$search->setConditions( $search->compare( '==', 'locale.site.code', $site ) );
 		$sites = $siteManager->searchItems( $search );
 
-		if ( ( $siteItem = reset( $sites ) ) === false ) {
+		if( ( $siteItem = reset( $sites ) ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
 		}
 
@@ -545,7 +545,7 @@ abstract class Controller_ExtJS_Abstract
 				$parts[$key] = ucwords( $part );
 			}
 
-			$result[ implode( '_', $parts ) ] = array(
+			$result[implode( '_', $parts )] = array(
 				'items' => $this->_toArray( $items ),
 				'total' => $total,
 			);

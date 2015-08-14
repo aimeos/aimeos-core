@@ -37,7 +37,7 @@ class MShop_Attribute_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Attribute_Item_Default($this->_values);
+		$this->_object = new MShop_Attribute_Item_Default( $this->_values );
 	}
 
 
@@ -49,124 +49,124 @@ class MShop_Attribute_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals(999, $this->_object->getId());
+		$this->assertEquals( 999, $this->_object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId(999);
-		$this->assertEquals(999, $this->_object->getId());
-		$this->assertFalse($this->_object->isModified());
+		$this->_object->setId( 999 );
+		$this->assertEquals( 999, $this->_object->getId() );
+		$this->assertFalse( $this->_object->isModified() );
 
-		$this->_object->setId(null);
+		$this->_object->setId( null );
 
-		$this->assertEquals(null, $this->_object->getId());
-		$this->assertEquals(true, $this->_object->isModified());
+		$this->assertEquals( null, $this->_object->getId() );
+		$this->assertEquals( true, $this->_object->isModified() );
 	}
 
 
 	public function testGetType()
 	{
-		$this->assertEquals('unittest', $this->_object->getType());
+		$this->assertEquals( 'unittest', $this->_object->getType() );
 	}
 
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals(3, $this->_object->getTypeId());
+		$this->assertEquals( 3, $this->_object->getTypeId() );
 	}
 
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId(5);
-		$this->assertEquals(5, $this->_object->getTypeId());
-		$this->assertEquals(true, $this->_object->isModified());
+		$this->_object->setTypeId( 5 );
+		$this->assertEquals( 5, $this->_object->getTypeId() );
+		$this->assertEquals( true, $this->_object->isModified() );
 	}
 
 
 	public function testGetDomain()
 	{
-		$this->assertEquals('text', $this->_object->getDomain());
+		$this->assertEquals( 'text', $this->_object->getDomain() );
 	}
 
 
 	public function testSetDomain()
 	{
-		$this->_object->setDomain('TestDom');
-		$this->assertEquals('TestDom', $this->_object->getDomain());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setDomain( 'TestDom' );
+		$this->assertEquals( 'TestDom', $this->_object->getDomain() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals('X12345', $this->_object->getCode());
+		$this->assertEquals( 'X12345', $this->_object->getCode() );
 	}
 
 
 	public function testSetCode()
 	{
-		$this->_object->setCode('flobee');
-		$this->assertEquals('flobee', $this->_object->getCode());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setCode( 'flobee' );
+		$this->assertEquals( 'flobee', $this->_object->getCode() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetPosition()
 	{
-		$this->assertEquals(0, $this->_object->getPosition());
+		$this->assertEquals( 0, $this->_object->getPosition() );
 	}
 
 
 	public function testSetPosition()
 	{
-		$this->_object->setPosition(1);
-		$this->assertEquals(1, $this->_object->getPosition());
+		$this->_object->setPosition( 1 );
+		$this->assertEquals( 1, $this->_object->getPosition() );
 
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals('size', $this->_object->getLabel());
+		$this->assertEquals( 'size', $this->_object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel('weight');
-		$this->assertEquals('weight', $this->_object->getLabel());
+		$this->_object->setLabel( 'weight' );
+		$this->assertEquals( 'weight', $this->_object->getLabel() );
 
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals(1, $this->_object->getStatus());
+		$this->assertEquals( 1, $this->_object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus(4);
-		$this->assertEquals(4, $this->_object->getStatus());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setStatus( 4 );
+		$this->assertEquals( 4, $this->_object->getStatus() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals(99, $this->_object->getSiteId());
+		$this->assertEquals( 99, $this->_object->getSiteId() );
 	}
 
 
@@ -207,45 +207,45 @@ class MShop_Attribute_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'attribute.editor' => 'test',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array('attribute.type' => 'testtype'), $unknown);
+		$this->assertEquals( array( 'attribute.type' => 'testtype' ), $unknown );
 
-		$this->assertEquals($list['attribute.id'], $item->getId());
-		$this->assertEquals($list['attribute.code'], $item->getCode());
-		$this->assertEquals($list['attribute.domain'], $item->getDomain());
-		$this->assertEquals($list['attribute.status'], $item->getStatus());
-		$this->assertEquals($list['attribute.typeid'], $item->getTypeId());
-		$this->assertEquals($list['attribute.label'], $item->getLabel());
-		$this->assertEquals($list['attribute.position'], $item->getPosition());
-		$this->assertNull($item->getSiteId());
-		$this->assertNull($item->getType());
+		$this->assertEquals( $list['attribute.id'], $item->getId() );
+		$this->assertEquals( $list['attribute.code'], $item->getCode() );
+		$this->assertEquals( $list['attribute.domain'], $item->getDomain() );
+		$this->assertEquals( $list['attribute.status'], $item->getStatus() );
+		$this->assertEquals( $list['attribute.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['attribute.label'], $item->getLabel() );
+		$this->assertEquals( $list['attribute.position'], $item->getPosition() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getType() );
 	}
 
 
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		$this->assertEquals(count($this->_values), count($arrayObject));
+		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
 
-		$this->assertEquals($this->_object->getId(), $arrayObject['attribute.id']);
-		$this->assertEquals($this->_object->getCode(), $arrayObject['attribute.code']);
-		$this->assertEquals($this->_object->getDomain(), $arrayObject['attribute.domain']);
-		$this->assertEquals($this->_object->getStatus(), $arrayObject['attribute.status']);
-		$this->assertEquals($this->_object->getTypeId(), $arrayObject['attribute.typeid']);
-		$this->assertEquals($this->_object->getType(), $arrayObject['attribute.type']);
-		$this->assertEquals($this->_object->getLabel(), $arrayObject['attribute.label']);
-		$this->assertEquals($this->_object->getPosition(), $arrayObject['attribute.position']);
-		$this->assertEquals($this->_object->getSiteId(), $arrayObject['attribute.siteid']);
-		$this->assertEquals($this->_object->getTimeCreated(), $arrayObject['attribute.ctime']);
-		$this->assertEquals($this->_object->getTimeModified(), $arrayObject['attribute.mtime']);
-		$this->assertEquals($this->_object->getEditor(), $arrayObject['attribute.editor']);
+		$this->assertEquals( $this->_object->getId(), $arrayObject['attribute.id'] );
+		$this->assertEquals( $this->_object->getCode(), $arrayObject['attribute.code'] );
+		$this->assertEquals( $this->_object->getDomain(), $arrayObject['attribute.domain'] );
+		$this->assertEquals( $this->_object->getStatus(), $arrayObject['attribute.status'] );
+		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['attribute.typeid'] );
+		$this->assertEquals( $this->_object->getType(), $arrayObject['attribute.type'] );
+		$this->assertEquals( $this->_object->getLabel(), $arrayObject['attribute.label'] );
+		$this->assertEquals( $this->_object->getPosition(), $arrayObject['attribute.position'] );
+		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['attribute.siteid'] );
+		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['attribute.ctime'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['attribute.mtime'] );
+		$this->assertEquals( $this->_object->getEditor(), $arrayObject['attribute.editor'] );
 	}
 
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 }

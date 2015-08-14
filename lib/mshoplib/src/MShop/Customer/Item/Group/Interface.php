@@ -27,8 +27,9 @@ interface MShop_Customer_Item_Group_Interface extends MShop_Common_Item_Interfac
 	 * Sets the new code of the customer group
 	 *
 	 * @param string $value Code of the customer group
+	 * @return void
 	 */
-	public function setCode($value);
+	public function setCode( $value );
 
 	/**
 	 * Returns the label of the customer group
@@ -41,6 +42,7 @@ interface MShop_Customer_Item_Group_Interface extends MShop_Common_Item_Interfac
 	 * Sets the new label of the customer group
 	 *
 	 * @param string $value Label of the customer group
+	 * @return void
 	 */
-	public function setLabel($value);
+	public function setLabel( $value );
 }

@@ -166,8 +166,8 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -284,11 +284,11 @@ class MShop_Coupon_Manager_Default
 			$stmt->bind( 4, json_encode( $item->getConfig() ) );
 			$stmt->bind( 5, $item->getDateStart() );
 			$stmt->bind( 6, $item->getDateEnd() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
-			if( $id !== null) {
+			if( $id !== null ) {
 				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id );
 			} else {
@@ -501,7 +501,7 @@ class MShop_Coupon_Manager_Default
 			 * @see mshop/coupon/manager/default/item/delete
 			 * @see mshop/coupon/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/coupon/manager/default/item/count';
+			$cfgPathCount = 'mshop/coupon/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -511,13 +511,13 @@ class MShop_Coupon_Manager_Default
 				{
 					$config = $row['config'];
 
-					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
 						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )
@@ -671,11 +671,11 @@ class MShop_Coupon_Manager_Default
 	{
 		$names = explode( ',', $item->getProvider() );
 
-		if( ( $providername = array_shift( $names ) ) === null ){
+		if( ( $providername = array_shift( $names ) ) === null ) {
 			throw new MShop_Coupon_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
-		if ( ctype_alnum( $providername ) === false ) {
+		if( ctype_alnum( $providername ) === false ) {
 			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
 		}
 

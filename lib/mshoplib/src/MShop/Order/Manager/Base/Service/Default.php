@@ -261,24 +261,24 @@ class MShop_Order_Manager_Base_Service_Default
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind(1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(5, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(6, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(7, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(8, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(9, $price->getCosts(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(10, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(11, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(12, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(13, $context->getEditor() );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 5, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 6, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 7, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 8, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 9, $price->getCosts(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 10, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 11, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 12, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 13, $context->getEditor() );
 
-			if ( $id !== null ) {
-				$stmt->bind(14, $id, MW_DB_Statement_Abstract::PARAM_INT);
+			if( $id !== null ) {
+				$stmt->bind( 14, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(14, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind( 14, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -289,13 +289,13 @@ class MShop_Order_Manager_Base_Service_Default
 					$path = 'mshop/order/manager/base/service/default/item/newid';
 					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
-					$item->setId($id);
+					$item->setId( $id );
 				}
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -337,7 +337,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Order_Item_Base_Service_Interface
 	 */
-	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->_getContext();
@@ -351,7 +351,7 @@ class MShop_Order_Manager_Base_Service_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/service/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/service/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/service/default/item/count';
 			$required = array( 'order.base.service' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -362,11 +362,11 @@ class MShop_Order_Manager_Base_Service_Default
 				while( ( $row = $results->fetch() ) !== false )
 				{
 					$price = $priceManager->createItem();
-					$price->setValue($row['price']);
-					$price->setRebate($row['rebate']);
-					$price->setCosts($row['costs']);
-					$price->setTaxRate($row['taxrate']);
-					$items[ $row['id'] ] = array( 'price' => $price, 'item' => $row );
+					$price->setValue( $row['price'] );
+					$price->setRebate( $row['rebate'] );
+					$price->setCosts( $row['costs'] );
+					$price->setTaxRate( $row['taxrate'] );
+					$items[$row['id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
 			catch( Exception $e )
@@ -386,13 +386,13 @@ class MShop_Order_Manager_Base_Service_Default
 		$result = array();
 		$attributes = $this->_getAttributeItems( array_keys( $items ) );
 
-		foreach ( $items as $id => $row )
+		foreach( $items as $id => $row )
 		{
 			$attrList = array();
 			if( isset( $attributes[$id] ) ) {
 				$attrList = $attributes[$id];
 			}
-			$result[ $id ] = $this->_createItem( $row['price'], $row['item'], $attrList );
+			$result[$id] = $this->_createItem( $row['price'], $row['item'], $attrList );
 		}
 
 		return $result;
@@ -405,7 +405,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Interface
 	 */
-	public function getSearchAttributes($withsub = true)
+	public function getSearchAttributes( $withsub = true )
 	{
 		/** classes/order/manager/base/service/submanagers
 		 * List of manager names that can be instantiated by the order base service manager
@@ -437,7 +437,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * @param string|null $name Name of the implementation (from configuration or "Default" if null)
 	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g attribute
 	 */
-	public function getSubManager($manager, $name = null)
+	public function getSubManager( $manager, $name = null )
 	{
 		/** classes/order/manager/base/service/name
 		 * Class name of the used order base service manager implementation
@@ -582,8 +582,8 @@ class MShop_Order_Manager_Base_Service_Default
 		$search->setSlice( 0, 0x7fffffff );
 
 		$result = array();
-		foreach ($manager->searchItems( $search ) as $item) {
-			$result[ $item->getServiceId() ][ $item->getId() ] = $item;
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$result[$item->getServiceId()][$item->getId()] = $item;
 		}
 
 		return $result;

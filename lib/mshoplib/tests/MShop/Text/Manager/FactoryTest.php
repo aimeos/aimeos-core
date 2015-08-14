@@ -27,14 +27,14 @@ class MShop_Text_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Text_Exception');
+		$this->setExpectedException( 'MShop_Text_Exception' );
 		MShop_Text_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		MShop_Text_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 }

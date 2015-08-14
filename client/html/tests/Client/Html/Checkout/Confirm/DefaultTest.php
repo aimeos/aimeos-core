@@ -90,6 +90,9 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 	}
 
 
+	/**
+	 * @param string $date
+	 */
 	protected function _getOrder( $date )
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );

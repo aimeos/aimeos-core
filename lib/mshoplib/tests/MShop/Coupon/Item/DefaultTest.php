@@ -27,7 +27,7 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'siteid' => 123,
 			'label' => 'test coupon',
 			'provider' => 'Example',
-			'config' => array('key'=>'test'),
+			'config' => array( 'key'=>'test' ),
 			'start' => null,
 			'end' => null,
 			'status' => true,
@@ -60,7 +60,7 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->_object->setId( 2 );
 		$this->assertEquals( 2, $this->_object->getId() );
 
-		$this->assertFalse(false, $this->_object->isModified() );
+		$this->assertFalse( false, $this->_object->isModified() );
 
 		$this->_object->setId( null );
 
@@ -80,7 +80,7 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel('unitTest');
+		$this->_object->setLabel( 'unitTest' );
 		$this->assertEquals( 'unitTest', $this->_object->getLabel() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
@@ -121,13 +121,13 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array('key'=>'test'), $this->_object->getConfig() );
+		$this->assertEquals( array( 'key'=>'test' ), $this->_object->getConfig() );
 	}
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array('value'=>1) );
-		$this->assertEquals( array('value'=>1), $this->_object->getConfig() );
+		$this->_object->setConfig( array( 'value'=>1 ) );
+		$this->assertEquals( array( 'value'=>1 ), $this->_object->getConfig() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
@@ -165,28 +165,28 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$list = array(
 			'coupon.id' => 1,
-			'coupon.config' => array('test'),
+			'coupon.config' => array( 'test' ),
 			'coupon.label' => 'test item',
 			'coupon.provider' => 'test',
 			'coupon.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['coupon.id'], $item->getId());
-		$this->assertEquals($list['coupon.config'], $item->getConfig());
-		$this->assertEquals($list['coupon.label'], $item->getLabel());
-		$this->assertEquals($list['coupon.provider'], $item->getProvider());
-		$this->assertEquals($list['coupon.status'], $item->getStatus());
+		$this->assertEquals( $list['coupon.id'], $item->getId() );
+		$this->assertEquals( $list['coupon.config'], $item->getConfig() );
+		$this->assertEquals( $list['coupon.label'], $item->getLabel() );
+		$this->assertEquals( $list['coupon.provider'], $item->getProvider() );
+		$this->assertEquals( $list['coupon.status'], $item->getStatus() );
 	}
 
 
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( (count( $this->_values ) + 1), count( $arrayObject ) );
+		$this->assertEquals( ( count( $this->_values ) + 1 ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->_object->getId(), $arrayObject['coupon.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['coupon.siteid'] );
@@ -194,9 +194,9 @@ class MShop_Coupon_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->_object->getLabel(), $arrayObject['coupon.label'] );
 		$this->assertEquals( $this->_object->getProvider(), $arrayObject['coupon.provider'] );
 		$this->assertEquals( $this->_object->getStatus(), $arrayObject['coupon.status'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['coupon.ctime']);
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['coupon.mtime']);
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['coupon.editor']);
+		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['coupon.ctime'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['coupon.mtime'] );
+		$this->assertEquals( $this->_object->getEditor(), $arrayObject['coupon.editor'] );
 	}
 
 

@@ -33,7 +33,7 @@ class MShop_Customer_Item_Default
 		array $listItems = array(), array $refItems = array(), $salt = '',
 		MShop_Common_Item_Helper_Password_Interface $helper = null )
 	{
-		parent::__construct('customer.', $values, $listItems, $refItems);
+		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
 		foreach( $values as $name => $value )
 		{
@@ -102,7 +102,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setLabel( $value )
 	{
-		if ( $value == $this->getLabel() ) { return; }
+		if( $value == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $value;
 		$this->setModified();
@@ -127,7 +127,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setStatus( $value )
 	{
-		if ( $value == $this->getStatus() ) { return; }
+		if( $value == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $value;
 		$this->setModified();
@@ -154,7 +154,7 @@ class MShop_Customer_Item_Default
 	{
 		$this->_checkCode( $value );
 
-		if ( $value == $this->getCode() ) { return; }
+		if( $value == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $value;
 		$this->setModified();
@@ -179,7 +179,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address )
 	{
-		if ( $address === $this->_billingaddress && $address->isModified() === false ) { return; }
+		if( $address === $this->_billingaddress && $address->isModified() === false ) { return; }
 
 		$this->_billingaddress = $address;
 		$this->setModified();
@@ -204,7 +204,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setBirthday( $value )
 	{
-		if ( $value === $this->getBirthday() ) { return; }
+		if( $value === $this->getBirthday() ) { return; }
 
 		if( $value !== null )
 		{

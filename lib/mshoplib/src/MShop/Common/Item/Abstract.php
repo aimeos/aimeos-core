@@ -51,7 +51,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function setId( $id )
 	{
-		if ( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
 			$this->_modified = true;
 		} else {
 			$this->_modified = false;

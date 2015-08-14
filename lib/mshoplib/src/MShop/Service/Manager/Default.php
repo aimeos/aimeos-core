@@ -175,7 +175,7 @@ class MShop_Service_Manager_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
@@ -238,8 +238,8 @@ class MShop_Service_Manager_Default
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Service_Item_Interface';
-		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Service_Exception(sprintf('Object is not of required type "%1$s"', $iface));
+		if( !( $item instanceof $iface ) ) {
+			throw new MShop_Service_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -331,7 +331,7 @@ class MShop_Service_Manager_Default
 			$stmt->bind( 9, $date ); // mtime
 			$stmt->bind( 10, $context->getEditor() );
 
-			if ( $id !== null ) {
+			if( $id !== null ) {
 				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id );
 			} else {
@@ -373,12 +373,12 @@ class MShop_Service_Manager_Default
 				 * @see mshop/service/manager/default/item/count
 				 */
 				$path = 'mshop/service/manager/default/item/newid';
-				$item->setId( $this->_newId($conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -510,7 +510,7 @@ class MShop_Service_Manager_Default
 			 * @see mshop/service/manager/default/item/delete
 			 * @see mshop/service/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/service/manager/default/item/count';
+			$cfgPathCount = 'mshop/service/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -518,14 +518,14 @@ class MShop_Service_Manager_Default
 			{
 				$config = $row['config'];
 
-				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['id'], $config );
 					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -546,8 +546,8 @@ class MShop_Service_Manager_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 			}
 		}
@@ -568,7 +568,7 @@ class MShop_Service_Manager_Default
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
 
-		if ( ctype_alnum( $type ) === false ) {
+		if( ctype_alnum( $type ) === false ) {
 			throw new MShop_Service_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
 		}
 
@@ -576,25 +576,25 @@ class MShop_Service_Manager_Default
 			throw new MShop_Service_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
-		if ( ctype_alnum( $provider ) === false ) {
+		if( ctype_alnum( $provider ) === false ) {
 			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
 		$interface = 'MShop_Service_Provider_Factory_Interface';
 		$classname = 'MShop_Service_Provider_' . $type . '_' . $provider;
 
-		if ( class_exists( $classname ) === false ) {
-			throw new MShop_Service_Exception(sprintf( 'Class "%1$s" not available', $classname ) );
+		if( class_exists( $classname ) === false ) {
+			throw new MShop_Service_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
-		if ( ( $provider instanceof $interface ) === false )
+		if( ( $provider instanceof $interface ) === false )
 		{
 			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new MShop_Service_Exception($msg);
+			throw new MShop_Service_Exception( $msg );
 		}
 
 		/** mshop/service/provider/delivery/decorators
@@ -767,7 +767,7 @@ class MShop_Service_Manager_Default
 		 * @see mshop/service/manager/decorators/global
 		 */
 
-		return $this->_getSubManager('service', $manager, $name);
+		return $this->_getSubManager( 'service', $manager, $name );
 	}
 
 
@@ -779,8 +779,8 @@ class MShop_Service_Manager_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		if ( $default === true ) {
-			return $this->_createSearch('service');
+		if( $default === true ) {
+			return $this->_createSearch( 'service' );
 		}
 
 		return parent::createSearch();
@@ -797,6 +797,6 @@ class MShop_Service_Manager_Default
 	 */
 	protected function _createItem( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
 	{
-		return new MShop_Service_Item_Default($values, $listitems, $textItems);
+		return new MShop_Service_Item_Default( $values, $listitems, $textItems );
 	}
 }

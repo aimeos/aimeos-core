@@ -21,7 +21,7 @@ class MShop_Customer_Manager_List_Type_Default
 		'customer.list.type.id' => array(
 			'code'=>'customer.list.type.id',
 			'internalcode'=>'mcuslity."id"',
-			'internaldeps'=>array('LEFT JOIN "mshop_customer_list_type" AS mcuslity ON ( mcusli."typeid" = mcuslity."id" )'),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_customer_list_type" AS mcuslity ON ( mcusli."typeid" = mcuslity."id" )' ),
 			'label'=>'Customer list type Id',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,

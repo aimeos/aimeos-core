@@ -12,7 +12,7 @@
 class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_locale_currency' => array (
+		'mshop_locale_currency' => array(
 			'fk_msloccu_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_locale_currency" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_locale_currency" DROP FOREIGN KEY "fk_msloccu_siteid"',
@@ -22,7 +22,7 @@ class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Tas
 				',
 			),
 		),
-		'mshop_locale_language' => array (
+		'mshop_locale_language' => array(
 			'fk_mslocla_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_locale_language" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_locale_language" DROP FOREIGN KEY "fk_mslocla_siteid"',
@@ -77,7 +77,7 @@ class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Tas
 
 		foreach( $stmts as $table => $stmtLists )
 		{
-			foreach ( $stmtLists as $constraint=>$stmtList )
+			foreach( $stmtLists as $constraint=>$stmtList )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 				if( $this->_schema->tableExists( $table ) )

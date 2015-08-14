@@ -64,7 +64,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 	public function testGetId()
@@ -74,9 +74,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertTrue($this->_object->isModified());
-		$this->assertNull( $this->_object->getId());
+		$this->_object->setId( null );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertNull( $this->_object->getId() );
 	}
 
 	public function testGetSiteId()
@@ -91,9 +91,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testSetBaseId()
 	{
-		$this->_object->setBaseId(66);
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 66, $this->_object->getBaseId());
+		$this->_object->setBaseId( 66 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 66, $this->_object->getBaseId() );
 	}
 
 	public function testSetBaseIdReset()
@@ -129,7 +129,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetType()
 	{
 		$this->_object->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_object->getType() );
 	}
 
@@ -141,7 +141,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetCompany()
 	{
 		$this->_object->setCompany( 'company' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'company', $this->_object->getCompany() );
 	}
 
@@ -153,7 +153,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetVatID()
 	{
 		$this->_object->setVatID( 'vatid' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'vatid', $this->_object->getVatID() );
 	}
 
@@ -165,7 +165,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetSalutation()
 	{
 		$this->_object->setSalutation( MShop_Order_item_Base_Address_Abstract::SALUTATION_COMPANY );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_COMPANY, $this->_object->getSalutation() );
 	}
 
@@ -177,7 +177,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetTitle()
 	{
 		$this->_object->setTitle( 'Dr.' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'Dr.', $this->_object->getTitle() );
 	}
 
@@ -189,7 +189,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetFirstname()
 	{
 		$this->_object->setFirstname( 'hans' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'hans', $this->_object->getFirstname() );
 	}
 
@@ -201,7 +201,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetLastname()
 	{
 		$this->_object->setLastname( 'im Glück' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'im Glück', $this->_object->getLastname() );
 	}
 
@@ -213,7 +213,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetAddress1()
 	{
 		$this->_object->setAddress1( 'unitallee' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'unitallee', $this->_object->getAddress1() );
 	}
 
@@ -225,7 +225,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetAddress2()
 	{
 		$this->_object->setAddress2( '12' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '12', $this->_object->getAddress2() );
 	}
 
@@ -237,7 +237,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetAddress3()
 	{
 		$this->_object->setAddress3( 'EG' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'EG', $this->_object->getAddress3() );
 	}
 
@@ -249,7 +249,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetPostal()
 	{
 		$this->_object->setPostal( '11111' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '11111', $this->_object->getPostal() );
 	}
 
@@ -261,7 +261,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetCity()
 	{
 		$this->_object->setCity( 'unitCity' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'unitCity', $this->_object->getCity() );
 	}
 
@@ -273,20 +273,20 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetState()
 	{
 		$this->_object->setState( 'unitState' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'unitState', $this->_object->getState() );
 	}
 
 	public function testGetCountryId()
 	{
-		$this->assertEquals( 'DE', $this->_object->getCountryId());
+		$this->assertEquals( 'DE', $this->_object->getCountryId() );
 	}
 
 	public function testSetCountryId()
 	{
-		$this->_object->setCountryId('uk');
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'UK', $this->_object->getCountryId());
+		$this->_object->setCountryId( 'uk' );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 'UK', $this->_object->getCountryId() );
 	}
 
 	public function testGetTelephone()
@@ -297,20 +297,20 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSetTelephone()
 	{
 		$this->_object->setTelephone( '55512345' );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '55512345', $this->_object->getTelephone() );
 	}
 
 	public function testGetEmail()
 	{
-		$this->assertEquals( 'unit.test@metaways.de', $this->_object->getEmail());
+		$this->assertEquals( 'unit.test@metaways.de', $this->_object->getEmail() );
 	}
 
 	public function testSetEmail()
 	{
-		$this->_object->setEmail('unit@test.de');
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'unit@test.de', $this->_object->getEmail());
+		$this->_object->setEmail( 'unit@test.de' );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 'unit@test.de', $this->_object->getEmail() );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->setEmail( 'a@.' );
@@ -318,26 +318,26 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetTelefax()
 	{
-		$this->assertEquals( '05554433222', $this->_object->getTelefax());
+		$this->assertEquals( '05554433222', $this->_object->getTelefax() );
 	}
 
 	public function testSetTelefax()
 	{
-		$this->_object->setTelefax('55512345');
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( '55512345', $this->_object->getTelefax());
+		$this->_object->setTelefax( '55512345' );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( '55512345', $this->_object->getTelefax() );
 	}
 
 	public function testGetWebsite()
 	{
-		$this->assertEquals( 'www.metaways.de', $this->_object->getWebsite());
+		$this->assertEquals( 'www.metaways.de', $this->_object->getWebsite() );
 	}
 
 	public function testSetWebsite()
 	{
-		$this->_object->setWebsite('www.test.de');
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'www.test.de', $this->_object->getWebsite());
+		$this->_object->setWebsite( 'www.test.de' );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 'www.test.de', $this->_object->getWebsite() );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->setWebsite( 'abcde:abc' );
@@ -345,26 +345,26 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'de', $this->_object->getLanguageId());
+		$this->assertEquals( 'de', $this->_object->getLanguageId() );
 	}
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId('en');
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'en', $this->_object->getLanguageId());
+		$this->_object->setLanguageId( 'en' );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 'en', $this->_object->getLanguageId() );
 	}
 
 	public function testGetFlag()
 	{
-		$this->assertEquals( 2, $this->_object->getFlag());
+		$this->assertEquals( 2, $this->_object->getFlag() );
 	}
 
 	public function testSetFlag()
 	{
-		$this->_object->setFlag(4);
-		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 4, $this->_object->getFlag());
+		$this->_object->setFlag( 4 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 4, $this->_object->getFlag() );
 	}
 
 	public function testGetTimeModified()
@@ -467,6 +467,6 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 }

@@ -27,7 +27,7 @@ class MW_Setup_Task_ServiceTextToList extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

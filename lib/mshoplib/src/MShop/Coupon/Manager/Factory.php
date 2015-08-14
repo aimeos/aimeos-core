@@ -30,7 +30,7 @@ class MShop_Coupon_Manager_Factory
 	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get('classes/coupon/manager/name', 'Default');
+			$name = $context->getConfig()->get( 'classes/coupon/manager/name', 'Default' );
 		}
 
 		if( ctype_alnum( $name ) === false )

@@ -53,7 +53,7 @@ class Controller_ExtJS_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->assertEquals( 1, count( $service ) );
-		$this->assertEquals( reset( $service )->{'service.label'}, 'unitlabel');
+		$this->assertEquals( reset( $service )->{'service.label'}, 'unitlabel' );
 	}
 
 

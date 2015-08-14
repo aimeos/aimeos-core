@@ -93,19 +93,19 @@ class MW_Setup_Task_MediaAddTestData extends MW_Setup_Task_Abstract
 			$mtype->setStatus( $dataset['status'] );
 
 			$mediaTypeManager->saveItem( $mtype );
-			$mtypeIds[ $key ] = $mtype->getId();
+			$mtypeIds[$key] = $mtype->getId();
 		}
 
 		$media = $mediaManager->createItem();
 		foreach( $testdata['media'] as $key => $dataset )
 		{
-			if( !isset( $mtypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $mtypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No media type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$media->setId( null );
 			$media->setLanguageId( $dataset['langid'] );
-			$media->setTypeId( $mtypeIds[ $dataset['typeid'] ] );
+			$media->setTypeId( $mtypeIds[$dataset['typeid']] );
 			$media->setDomain( $dataset['domain'] );
 			$media->setLabel( $dataset['label'] );
 			$media->setUrl( $dataset['link'] );

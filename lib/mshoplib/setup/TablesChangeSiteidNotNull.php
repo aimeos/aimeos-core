@@ -225,17 +225,17 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Changing site ID to NOT NULL', 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		if( $this->_schema->tableExists( 'mshop_locale_site' ) ) {
 			$this->_execute( $this->_site );
 		}
 
-		foreach ( $stmts as $table => $stmtList )
+		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
+			$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists($table) &&
+			if( $this->_schema->tableExists( $table ) &&
 				$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 			{
 				$this->_executeList( $stmtList );

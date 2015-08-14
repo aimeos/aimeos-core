@@ -111,7 +111,7 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends PHPUnit_Framew
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->_values['type'], $this->_object->getType());
+		$this->assertEquals( $this->_values['type'], $this->_object->getType() );
 	}
 
 
@@ -139,7 +139,7 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends PHPUnit_Framew
 
 	public function testGetValue()
 	{
-		$this->assertEquals($this->_values['value'], $this->_object->getValue());
+		$this->assertEquals( $this->_values['value'], $this->_object->getValue() );
 	}
 
 
@@ -212,17 +212,17 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends PHPUnit_Framew
 			'order.base.service.attribute.name' => 'test item',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.base.service.attribute.id'], $item->getId());
-		$this->assertEquals($list['order.base.service.attribute.attrid'], $item->getAttributeId());
-		$this->assertEquals($list['order.base.service.attribute.serviceid'], $item->getServiceId());
-		$this->assertEquals($list['order.base.service.attribute.type'], $item->getType());
-		$this->assertEquals($list['order.base.service.attribute.code'], $item->getCode());
-		$this->assertEquals($list['order.base.service.attribute.value'], $item->getValue());
-		$this->assertEquals($list['order.base.service.attribute.name'], $item->getName());
+		$this->assertEquals( $list['order.base.service.attribute.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.service.attribute.attrid'], $item->getAttributeId() );
+		$this->assertEquals( $list['order.base.service.attribute.serviceid'], $item->getServiceId() );
+		$this->assertEquals( $list['order.base.service.attribute.type'], $item->getType() );
+		$this->assertEquals( $list['order.base.service.attribute.code'], $item->getCode() );
+		$this->assertEquals( $list['order.base.service.attribute.value'], $item->getValue() );
+		$this->assertEquals( $list['order.base.service.attribute.name'], $item->getName() );
 	}
 
 
@@ -236,7 +236,7 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends PHPUnit_Framew
 		$this->assertEquals( $this->_object->getAttributeId(), $list['order.base.service.attribute.attrid'] );
 		$this->assertEquals( $this->_object->getServiceId(), $list['order.base.service.attribute.serviceid'] );
 		$this->assertEquals( $this->_object->getType(), $list['order.base.service.attribute.type'] );
-		$this->assertEquals( $this->_object->getCode(), $list['order.base.service.attribute.code']) ;
+		$this->assertEquals( $this->_object->getCode(), $list['order.base.service.attribute.code'] );
 		$this->assertEquals( $this->_object->getValue(), $list['order.base.service.attribute.value'] );
 		$this->assertEquals( $this->_object->getName(), $list['order.base.service.attribute.name'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $list['order.base.service.attribute.mtime'] );

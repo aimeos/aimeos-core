@@ -41,7 +41,7 @@ class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 	/**

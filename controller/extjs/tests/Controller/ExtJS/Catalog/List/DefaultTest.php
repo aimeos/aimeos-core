@@ -77,7 +77,7 @@ class Controller_ExtJS_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCa
 				'catalog.list.refid' => -1,
 				'catalog.list.datestart' => '2000-01-01 00:00:00',
 				'catalog.list.dateend' => '2000-01-01 00:00:00',
-				'catalog.list.config' => array('test' => 'unit'),
+				'catalog.list.config' => array( 'test' => 'unit' ),
 				'catalog.list.position' => 1,
 				'catalog.list.status' => 1,
 			),

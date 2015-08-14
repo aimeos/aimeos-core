@@ -144,8 +144,8 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -472,7 +472,7 @@ class MShop_Supplier_Manager_Default
 			 * @see mshop/supplier/manager/default/item/delete
 			 * @see mshop/supplier/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
+			$cfgPathCount = 'mshop/supplier/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
@@ -620,10 +620,10 @@ class MShop_Supplier_Manager_Default
 	 * @param boolean $default
 	 * @return MW_Common_Criteria_Interface
 	 */
-	public function createSearch($default = false)
+	public function createSearch( $default = false )
 	{
-		if ($default) {
-			return $this->_createSearch('supplier');
+		if( $default ) {
+			return $this->_createSearch( 'supplier' );
 		}
 
 		return parent::createSearch();

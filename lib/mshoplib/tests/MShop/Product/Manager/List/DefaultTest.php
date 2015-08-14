@@ -83,7 +83,7 @@ class MShop_Product_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No list item found' );
 		}
 
@@ -93,11 +93,11 @@ class MShop_Product_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
@@ -117,7 +117,7 @@ class MShop_Product_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setDomain( 'unittest' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -293,25 +293,25 @@ class MShop_Product_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'product.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.list.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
 
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.list.domain', 'product' ),
 			$search->compare( '==', 'product.list.editor', $this->_editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 4);
-		$results = $this->_object->searchItems($search, array(), $total);
+		$search->setSlice( 0, 4 );
+		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 4, count( $results ) );
 		$this->assertEquals( 16, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

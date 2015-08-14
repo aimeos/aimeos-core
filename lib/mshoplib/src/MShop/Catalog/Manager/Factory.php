@@ -26,16 +26,16 @@ class MShop_Catalog_Manager_Factory
 	 * @return MShop_Common_Manager_Interface Manager object
 	 * @throws MShop_Catalog_Exception If requested manager implementation couldn't be found
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null)
+	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
 	{
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/catalog/manager/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/catalog/manager/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'MShop_Catalog_Manager_' . $name : '<not a string>';
-			throw new MShop_Catalog_Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
+			$classname = is_string( $name ) ? 'MShop_Catalog_Manager_' . $name : '<not a string>';
+			throw new MShop_Catalog_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'MShop_Catalog_Manager_Interface';

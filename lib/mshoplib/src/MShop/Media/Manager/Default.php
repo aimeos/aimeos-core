@@ -181,8 +181,8 @@ class MShop_Media_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -335,13 +335,13 @@ class MShop_Media_Manager_Default
 			$stmt->bind( 5, $item->getMimeType() );
 			$stmt->bind( 6, $item->getUrl() );
 			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 8, $item->getDomain());
+			$stmt->bind( 8, $item->getDomain() );
 			$stmt->bind( 9, $item->getPreview() );
 			$stmt->bind( 10, $date ); // mtime
 			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 12, $date ); // ctime
@@ -516,14 +516,14 @@ class MShop_Media_Manager_Default
 			 * @see mshop/media/manager/default/item/delete
 			 * @see mshop/media/manager/default/item/search
 			 */
-			$cfgPathCount =  'mshop/media/manager/default/item/count';
+			$cfgPathCount = 'mshop/media/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -544,8 +544,8 @@ class MShop_Media_Manager_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 			}
 		}
@@ -560,7 +560,7 @@ class MShop_Media_Manager_Default
 	 * @param boolean $default
 	 * @return MW_Common_Criteria_Interface
 	 */
-	public function createSearch($default = false)
+	public function createSearch( $default = false )
 	{
 		if( $default === true )
 		{

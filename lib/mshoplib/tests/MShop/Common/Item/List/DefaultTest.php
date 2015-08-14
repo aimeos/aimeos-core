@@ -109,8 +109,8 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '2002-01-01 00:00:00', $this->_object->getDateStart() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setDateStart('2008-34-12');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setDateStart( '2008-34-12' );
 	}
 
 	public function testGetDateEnd()
@@ -124,8 +124,8 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '4400-12-31 00:00:00', $this->_object->getDateEnd() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setDateEnd('2008-34-12');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setDateEnd( '2008-34-12' );
 	}
 
 	public function testSetPosition()
@@ -186,14 +186,14 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array('cnt'=>'40'), $this->_object->getConfig() );
+		$this->assertEquals( array( 'cnt'=>'40' ), $this->_object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array('new value'=>'20.00') );
-		$this->assertEquals( array('new value'=>'20.00'), $this->_object->getConfig() );
+		$this->_object->setConfig( array( 'new value'=>'20.00' ) );
+		$this->assertEquals( array( 'new value'=>'20.00' ), $this->_object->getConfig() );
 		$this->assertEquals( true, $this->_object->isModified() );
 	}
 
@@ -219,7 +219,7 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Common_Item_List_Default('common.list.');
+		$item = new MShop_Common_Item_List_Default( 'common.list.' );
 
 		$list = array(
 			'common.list.id' => 8,
@@ -232,18 +232,18 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 			'common.list.status' => 1,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['common.list.id'], $item->getId());
-		$this->assertEquals($list['common.list.parentid'], $item->getParentId());
-		$this->assertEquals($list['common.list.typeid'], $item->getTypeId());
-		$this->assertEquals($list['common.list.domain'], $item->getDomain());
-		$this->assertEquals($list['common.list.refid'], $item->getRefId());
-		$this->assertEquals($list['common.list.config'], $item->getConfig());
-		$this->assertEquals($list['common.list.position'], $item->getPosition());
-		$this->assertEquals($list['common.list.status'], $item->getStatus());
+		$this->assertEquals( $list['common.list.id'], $item->getId() );
+		$this->assertEquals( $list['common.list.parentid'], $item->getParentId() );
+		$this->assertEquals( $list['common.list.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['common.list.domain'], $item->getDomain() );
+		$this->assertEquals( $list['common.list.refid'], $item->getRefId() );
+		$this->assertEquals( $list['common.list.config'], $item->getConfig() );
+		$this->assertEquals( $list['common.list.position'], $item->getPosition() );
+		$this->assertEquals( $list['common.list.status'], $item->getStatus() );
 	}
 
 

@@ -30,12 +30,12 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'Shipping' );
-		$plugin->setConfig( array('threshold' => array ('EUR' => '34.00' ) ) );
+		$plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
 		$plugin->setStatus( '1' );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
 		$manager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $manager->createSearch();
@@ -44,19 +44,19 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 
 		$pResults = $manager->searchItems( $search, array( 'price' ) );
 
-		if ( count($pResults) !== 3 ) {
-			throw new Exception('Wrong number of products');
+		if( count( $pResults ) !== 3 ) {
+			throw new Exception( 'Wrong number of products' );
 		}
 
 		$products = array();
 		foreach( $pResults as $prod ) {
-			$products[ $prod->getCode() ] = $prod;
+			$products[$prod->getCode()] = $prod;
 		}
 
-		if( ( $price = current( $products['IJKL']->getRefItems('price') ) ) === false ) {
-			throw new Exception('No price item found');
+		if( ( $price = current( $products['IJKL']->getRefItems( 'price' ) ) ) === false ) {
+			throw new Exception( 'No price item found' );
 		}
-		$price->setValue(10.00);
+		$price->setValue( 10.00 );
 
 		$this->_product = $orderBaseProductManager->createItem();
 		$this->_product->copyFrom( $products['CNE'] );
@@ -80,8 +80,8 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
 
-		if ( ($delivery = reset($results)) === false ) {
-			throw new Exception('No order base item found');
+		if( ( $delivery = reset( $results ) ) === false ) {
+			throw new Exception( 'No order base item found' );
 		}
 
 		$this->_order = $orderBaseManager->createItem();
@@ -122,11 +122,11 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 	public function testUpdate()
 	{
 		$this->assertEquals( 5.00, $this->_order->getPrice()->getCosts() );
-		$this->_object->update($this->_order, 'addProduct');
+		$this->_object->update( $this->_order, 'addProduct' );
 
 		$this->_order->addProduct( $this->_product );
-		$this->_object->update($this->_order, 'addProduct');
+		$this->_object->update( $this->_order, 'addProduct' );
 
-		$this->assertEquals( 0.00, $this->_order->getPrice()->getCosts());
+		$this->assertEquals( 0.00, $this->_order->getPrice()->getCosts() );
 	}
 }

@@ -25,13 +25,13 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
-		$this->_listItems = array( 1 => new MShop_Common_Item_List_Default('catalog.list.', $listValues ) );
+		$this->_listItems = array( 1 => new MShop_Common_Item_List_Default( 'catalog.list.', $listValues ) );
 
 		$this->_values = array(
 			'id' => 2,
 			'code' => 'unit-test',
 			'label' => 'unittest',
-			'config' => array('testcategory' => '10'),
+			'config' => array( 'testcategory' => '10' ),
 			'status' => 1,
 			'siteid' => '99',
 			'mtime' => '2011-01-01 00:00:02',
@@ -107,14 +107,14 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array('testcategory' => '10'), $this->_object->getConfig() );
+		$this->assertEquals( array( 'testcategory' => '10' ), $this->_object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array('unitcategory' => '12') );
-		$this->assertEquals( array('unitcategory' => '12'), $this->_object->getConfig() );
+		$this->_object->setConfig( array( 'unitcategory' => '12' ) );
+		$this->assertEquals( array( 'unitcategory' => '12' ), $this->_object->getConfig() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
@@ -165,25 +165,25 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Catalog_Item_Default(new MW_Tree_Node_Default());
+		$item = new MShop_Catalog_Item_Default( new MW_Tree_Node_Default() );
 
 		$list = array(
 			'catalog.id' => 1,
 			'catalog.code' => 'test',
-			'catalog.config' => array('test'),
+			'catalog.config' => array( 'test' ),
 			'catalog.label' => 'test item',
 			'catalog.status' => '0',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['catalog.id'], $item->getId());
-		$this->assertEquals($list['catalog.code'], $item->getCode());
-		$this->assertEquals($list['catalog.config'], $item->getConfig());
-		$this->assertEquals($list['catalog.status'], $item->getStatus());
-		$this->assertEquals($list['catalog.label'], $item->getLabel());
+		$this->assertEquals( $list['catalog.id'], $item->getId() );
+		$this->assertEquals( $list['catalog.code'], $item->getCode() );
+		$this->assertEquals( $list['catalog.config'], $item->getConfig() );
+		$this->assertEquals( $list['catalog.status'], $item->getStatus() );
+		$this->assertEquals( $list['catalog.label'], $item->getLabel() );
 	}
 
 
@@ -199,10 +199,10 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->_values['status'], $values['catalog.status'] );
 		$this->assertEquals( $this->_values['siteid'], $values['catalog.siteid'] );
 		$this->assertEquals( $this->_values['code'], $values['catalog.code'] );
-		$this->assertEquals( $this->_values['ctime'], $values['catalog.ctime']);
-		$this->assertEquals( $this->_values['mtime'], $values['catalog.mtime']);
-		$this->assertEquals( $this->_values['editor'], $values['catalog.editor']);
-		$this->assertEquals( $this->_values['hasChildren'], $values['catalog.hasChildren']);
+		$this->assertEquals( $this->_values['ctime'], $values['catalog.ctime'] );
+		$this->assertEquals( $this->_values['mtime'], $values['catalog.mtime'] );
+		$this->assertEquals( $this->_values['editor'], $values['catalog.editor'] );
+		$this->assertEquals( $this->_values['hasChildren'], $values['catalog.hasChildren'] );
 	}
 
 

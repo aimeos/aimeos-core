@@ -97,7 +97,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 		$saved = $this->_object->saveItems( $saveParams );
 		$searched = $this->_object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array($saved['items']->{'coupon.code.id'}) );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array( $saved['items']->{'coupon.code.id'}) );
 		$this->_object->deleteItems( $deleteParams );
 		$result = $this->_object->searchItems( $searchParams );
 
@@ -115,7 +115,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testAbstractInit()
 	{
-		$expected = array('success' => true);
+		$expected = array( 'success' => true );
 		$actual = $this->_object->init( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
@@ -123,7 +123,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testAbstractFinish()
 	{
-		$expected = array('success' => true);
+		$expected = array( 'success' => true );
 		$actual = $this->_object->finish( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}

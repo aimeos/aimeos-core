@@ -27,14 +27,14 @@ class MShop_Catalog_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Catalog_Exception');
-		MShop_Catalog_Manager_Factory::createManager(TestHelper::getContext(), '%^');
+		$this->setExpectedException( 'MShop_Catalog_Exception' );
+		MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException('MShop_Exception');
-		MShop_Catalog_Manager_Factory::createManager(TestHelper::getContext(), 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 }

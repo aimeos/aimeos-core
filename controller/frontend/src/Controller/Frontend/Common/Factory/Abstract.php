@@ -50,7 +50,7 @@ class Controller_Frontend_Common_Factory_Abstract
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string($name) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
+				$classname = is_string( $name ) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
@@ -60,7 +60,7 @@ class Controller_Frontend_Common_Factory_Abstract
 				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$controller =  new $classname( $context, $controller );
+			$controller = new $classname( $context, $controller );
 
 			if( !( $controller instanceof $iface ) ) {
 				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
@@ -82,14 +82,14 @@ class Controller_Frontend_Common_Factory_Abstract
 	protected static function _addControllerDecorators( MShop_Context_Item_Interface $context,
 		Controller_Frontend_Interface $controller, $domain )
 	{
-		if ( !is_string( $domain ) || $domain === '' ) {
+		if( !is_string( $domain ) || $domain === '' ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
-		$subdomains = explode('/', $domain);
+		$subdomains = explode( '/', $domain );
 		$domain = $localClass = $subdomains[0];
-		if (count($subdomains) > 1) {
-			$localClass = str_replace(' ', '_', ucwords( implode(' ', $subdomains) ) );
+		if( count( $subdomains ) > 1 ) {
+			$localClass = str_replace( ' ', '_', ucwords( implode( ' ', $subdomains ) ) );
 		}
 
 		$config = $context->getConfig();
@@ -122,20 +122,20 @@ class Controller_Frontend_Common_Factory_Abstract
 		foreach( $decorators as $key => $name )
 		{
 			if( in_array( $name, $excludes ) ) {
-				unset( $decorators[ $key ] );
+				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = 'Controller_Frontend_Common_Decorator_';
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Frontend_Common_Decorator_';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/global', array() );
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_Frontend_'. $localClass . '_Decorator_';
+		$classprefix = 'Controller_Frontend_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/local', array() );
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
 		return $controller;
 	}
@@ -159,7 +159,7 @@ class Controller_Frontend_Common_Factory_Abstract
 			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$controller =  new $classname( $context );
+		$controller = new $classname( $context );
 
 		if( !( $controller instanceof $interface ) ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );

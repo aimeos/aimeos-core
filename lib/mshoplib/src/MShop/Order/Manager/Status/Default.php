@@ -172,8 +172,8 @@ class MShop_Order_Manager_Status_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -207,20 +207,20 @@ class MShop_Order_Manager_Status_Default
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(2, $item->getParentID(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(3, $item->getType() );
-			$stmt->bind(4, $item->getValue() );
-			$stmt->bind(5, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind(6, $context->getEditor());
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getParentID(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getValue() );
+			$stmt->bind( 5, date( 'Y-m-d H:i:s', time() ) ); //mtime
+			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null )
 			{
-				$stmt->bind(7, $id, MW_DB_Statement_Abstract::PARAM_INT);
-				$item->setId($id); //is not modified anymore
+				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$item->setId( $id ); //is not modified anymore
 			}
 			else {
-				$stmt->bind(7, date('Y-m-d H:i:s', time()));//ctime
+				$stmt->bind( 7, date( 'Y-m-d H:i:s', time() ) ); //ctime
 			}
 
 			$stmt->execute()->finish();
@@ -442,20 +442,20 @@ class MShop_Order_Manager_Status_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/status/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/status/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/status/default/item/count';
 			$required = array( 'order.status' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
 
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;

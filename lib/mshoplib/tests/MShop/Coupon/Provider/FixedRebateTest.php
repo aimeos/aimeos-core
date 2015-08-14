@@ -153,7 +153,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 	public function testDeleteCoupon()
 	{
 		$this->_object->addCoupon( $this->_orderBase );
-		$this->_object->deleteCoupon($this->_orderBase);
+		$this->_object->deleteCoupon( $this->_orderBase );
 
 		$products = $this->_orderBase->getProducts();
 		$coupons = $this->_orderBase->getCoupons();
@@ -171,7 +171,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 
 		$object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
 
-		$this->setExpectedException('MShop_Coupon_Exception');
+		$this->setExpectedException( 'MShop_Coupon_Exception' );
 		$object->addCoupon( $this->_orderBase );
 	}
 
@@ -188,18 +188,18 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->combine('&&', array(
-			$search->compare( '==', 'order.base.product.prodcode', array('CNE', 'CNC') ),
-			$search->compare( '==', 'order.base.product.price', array('600.00', '36.00') )
-		)));
+		$search->setConditions( $search->combine( '&&', array(
+			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
+			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
+		) ) );
 		$items = $manager->searchItems( $search );
 
-		if ( count( $items ) < 2 ) {
+		if( count( $items ) < 2 ) {
 			throw new Exception( 'Please fix the test data in your database.' );
 		}
 
 		foreach( $items as $item ) {
-			$products[ $item->getProductCode() ] = $item;
+			$products[$item->getProductCode()] = $item;
 		}
 
 		return $products;

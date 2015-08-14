@@ -101,13 +101,13 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function createItem()
 	{
-		try{
+		try {
 			$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		} catch (Exception $ex) {
+		} catch( Exception $ex ) {
 			$values = array( 'siteid' => null );
 		}
 
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
@@ -123,8 +123,8 @@ class MShop_Locale_Manager_Currency_Default
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Locale_Item_Currency_Interface';
-		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
+		if( !( $item instanceof $iface ) ) {
+			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -206,7 +206,7 @@ class MShop_Locale_Manager_Currency_Default
 			// id is the flag to detect updates or inserts!
 			$stmt->bind( 6, $item->getCode() );
 
-			if ( $id === null ) {
+			if( $id === null ) {
 				$stmt->bind( 7, $date ); // ctime
 			}
 
@@ -216,7 +216,7 @@ class MShop_Locale_Manager_Currency_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -331,8 +331,8 @@ class MShop_Locale_Manager_Currency_Default
 
 			$find = array( ':cond', ':order', ':start', ':size' );
 			$replace = array(
-				$search->getConditionString($types, $translations),
-				$search->getSortationString($types, $translations),
+				$search->getConditionString( $types, $translations ),
+				$search->getSortationString( $types, $translations ),
 				$search->getSliceStart(),
 				$search->getSliceSize(),
 			);
@@ -394,17 +394,17 @@ class MShop_Locale_Manager_Currency_Default
 
 			try
 			{
-				while ( ($row = $results->fetch()) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem($row);
+				while( ( $row = $results->fetch() ) !== false ) {
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
-			catch ( Exception $e )
+			catch( Exception $e )
 			{
 				$results->finish();
 				throw $e;
 			}
 
-			if ( $total !== null )
+			if( $total !== null )
 			{
 				/** mshop/locale/manager/currency/default/item/count
 				 * Counts the number of records matched by the given criteria in the database
@@ -458,7 +458,7 @@ class MShop_Locale_Manager_Currency_Default
 				$row = $results->fetch();
 				$results->finish();
 
-				if ( $row === false ) {
+				if( $row === false ) {
 					throw new MShop_Locale_Exception( 'No total results value found' );
 				}
 
@@ -467,7 +467,7 @@ class MShop_Locale_Manager_Currency_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -607,7 +607,7 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		if ( $default === true ) {
+		if( $default === true ) {
 			return $this->_createSearch( 'locale.currency' );
 		}
 

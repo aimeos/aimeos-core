@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderRenameBaseCustomerCodeToId extends MW_Setup_Task_Abstra
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables');
+		return array( 'OrderRenameTables' );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_OrderRenameBaseCustomerCodeToId extends MW_Setup_Task_Abstra
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

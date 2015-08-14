@@ -27,7 +27,7 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 		try {
 			throw new MShop_Plugin_Provider_Exception( 'msg', 13, null, $this->_codes );
 		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
+		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( 13, $mppe->getCode() );
 			$this->assertEquals( 'msg', $mppe->getMessage() );
@@ -38,7 +38,7 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 		try {
 			throw new MShop_Plugin_Provider_Exception( 'msg2', 11 );
 		}
-		catch ( MShop_Plugin_Provider_Exception $e )
+		catch( MShop_Plugin_Provider_Exception $e )
 		{
 			$this->assertEquals( array(), $e->getErrorCodes() );
 		}

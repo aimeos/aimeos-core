@@ -35,14 +35,14 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_Frontend_Common_Interface', $controller);
+		$this->assertInstanceOf( 'Controller_Frontend_Common_Interface', $controller );
 	}
 
 	// using Factorylocal class
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$context = TestHelper::getContext();
-		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', 'service/type');
+		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', 'service/type' );
 
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
 		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', '' );
@@ -58,7 +58,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_Frontend_Common_Decorator_Interface', $controller);
+		$this->assertInstanceOf( 'Controller_Frontend_Common_Decorator_Interface', $controller );
 	}
 
 	public function testAbstractAddDecoratorsExceptionWrongName()

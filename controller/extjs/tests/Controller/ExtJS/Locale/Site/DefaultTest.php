@@ -91,9 +91,9 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 
 		try {
 			$this->_object->getTree( $params );
-		} catch ( MShop_Exception $me){
+		} catch( MShop_Exception $me ) {
 			return;
-		} catch ( MW_Tree_Exception $mte){
+		} catch( MW_Tree_Exception $mte ) {
 			return;
 		}
 
@@ -176,13 +176,13 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 		$expected = array(
 			'Locale_Site.deleteItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Locale_Site.saveItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
@@ -193,7 +193,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 					array( "type" => "integer", "name" => "limit", "optional" => true ),
 					array( "type" => "string", "name" => "sort", "optional" => true ),
 					array( "type" => "string", "name" => "dir", "optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -213,10 +213,10 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			),
 			'Locale_Site.moveItems' => array(
 				"parameters" => array(
-					array( "type" => "array","name" => "items", "optional" => false ),
-					array( "type" => "string","name" => "oldparentid", "optional" => false ),
-					array( "type" => "string","name" => "newparentid", "optional" => false ),
-					array( "type" => "string","name" => "refid", "optional" => true ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "string", "name" => "oldparentid", "optional" => false ),
+					array( "type" => "string", "name" => "newparentid", "optional" => false ),
+					array( "type" => "string", "name" => "refid", "optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -224,6 +224,6 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 
 		$actual = $this->_object->getServiceDescription();
 
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals( $expected, $actual );
 	}
 }

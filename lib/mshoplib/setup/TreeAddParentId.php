@@ -86,7 +86,7 @@ class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 		{
 			$this->_msg( sprintf( 'Checking parentid column in "%1$s"', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true	&& $this->_schema->columnExists( $table, 'parentid' ) === false )
+			if( $this->_schema->tableExists( $table ) === true && $this->_schema->columnExists( $table, 'parentid' ) === false )
 			{
 				$this->_executeList( $stmt );
 				$this->_status( 'added' );

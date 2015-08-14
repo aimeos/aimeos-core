@@ -56,7 +56,7 @@ abstract class MShop_Order_Item_Base_Abstract
 	 * @param integer $value Part constant
 	 * @throws MShop_Order_Exception If parts constant is invalid
 	 */
-	protected function _checkParts($value)
+	protected function _checkParts( $value )
 	{
 		$value = (int) $value;
 

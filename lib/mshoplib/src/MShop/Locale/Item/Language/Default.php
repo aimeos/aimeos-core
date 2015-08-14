@@ -30,11 +30,11 @@ class MShop_Locale_Item_Language_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('locale.language.', $values);
+		parent::__construct( 'locale.language.', $values );
 
 		$this->_values = $values;
 
-		if ( isset( $values['id'] ) ) {
+		if( isset( $values['id'] ) ) {
 			$this->setId( $values['id'] );
 		}
 	}
@@ -60,7 +60,7 @@ class MShop_Locale_Item_Language_Default
 	{
 		if( $key !== null )
 		{
-			$this->setCode($key);
+			$this->setCode( $key );
 			$this->_values['id'] = $this->_values['code'];
 			$this->_modified = false;
 		}
@@ -90,11 +90,11 @@ class MShop_Locale_Item_Language_Default
 	 */
 	public function setCode( $key )
 	{
-		if ( $key == $this->getCode() ) { return; }
+		if( $key == $this->getCode() ) { return; }
 
 		$len = strlen( $key );
-		if ( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
-			throw new MShop_Locale_Exception(sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
+		if( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
+			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
 		$this->_values['code'] = (string) $key;
@@ -120,7 +120,7 @@ class MShop_Locale_Item_Language_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -145,7 +145,7 @@ class MShop_Locale_Item_Language_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

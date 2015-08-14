@@ -46,7 +46,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );
 
 		$ids = array();
-		foreach ( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->searchItems( $search ) as $item ) {
 			$ids[$item->getLabel()] = $item->getId();
 		}
 
@@ -57,13 +57,13 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 
 		$result = $this->_object->exportFile( $params );
 
-		$this->assertTrue( array_key_exists('file', $result) );
+		$this->assertTrue( array_key_exists( 'file', $result ) );
 
-		$file = substr($result['file'], 9, -14);
+		$file = substr( $result['file'], 9, -14 );
 		$this->assertTrue( file_exists( $file ) );
 
 		$zip = new ZipArchive();
-		$zip->open($file);
+		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
@@ -86,7 +86,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 			$this->assertTrue( file_exists( $path ) );
 			$fh = fopen( $path, 'r' );
 			while( ( $data = fgetcsv( $fh ) ) != false ) {
-				$lines[ $lang ][] = $data;
+				$lines[$lang][] = $data;
 			}
 
 			fclose( $fh );
@@ -124,9 +124,9 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 		$expected = array(
 			'Catalog_Export_Text.createHttpOutput' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "array","name" => "lang","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "array", "name" => "lang", "optional" => true ),
 				),
 				"returns" => "",
 			),

@@ -48,32 +48,32 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext() )->createItem();
+		$this->_locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
 
 		$this->_object = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $this->_locale, $this->_values );
 
 
 		$price = $priceManager->createItem();
-		$price->setRebate('3.01');
-		$price->setValue('43.12');
-		$price->setCosts('1.11');
-		$price->setTaxRate('0.00');
-		$price->setCurrencyId('EUR');
+		$price->setRebate( '3.01' );
+		$price->setValue( '43.12' );
+		$price->setCosts( '1.11' );
+		$price->setTaxRate( '0.00' );
+		$price->setCurrencyId( 'EUR' );
 
 		$prod1 = $orderProductManager->createItem();
-		$prod1->setProductCode('prod1');
-		$prod1->setPrice($price);
+		$prod1->setProductCode( 'prod1' );
+		$prod1->setPrice( $price );
 
 		$price = $priceManager->createItem();
-		$price->setRebate('4.00');
-		$price->setValue('20.00');
-		$price->setCosts('2.00');
-		$price->setTaxRate('0.50');
-		$price->setCurrencyId('EUR');
+		$price->setRebate( '4.00' );
+		$price->setValue( '20.00' );
+		$price->setCosts( '2.00' );
+		$price->setTaxRate( '0.50' );
+		$price->setCurrencyId( 'EUR' );
 
 		$prod2 = $orderProductManager->createItem();
-		$prod2->setProductCode('prod2');
-		$prod2->setPrice($price);
+		$prod2->setProductCode( 'prod2' );
+		$prod2->setPrice( $price );
 
 
 		$this->_products = array( $prod1, $prod2 );
@@ -92,8 +92,8 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		//registering order object for plugin use
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager(TestHelper::getContext());
-		$pluginManager->register($this->_object, 'order');
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager->register( $this->_object, 'order' );
 	}
 
 
@@ -117,23 +117,23 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertEquals(null, $this->_object->getId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setId( null );
+		$this->assertEquals( null, $this->_object->getId() );
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->_object->setId(5);
-		$this->assertEquals(5, $this->_object->getId() );
-		$this->assertFalse($this->_object->isModified());
+		$this->_object->setId( 5 );
+		$this->assertEquals( 5, $this->_object->getId() );
+		$this->assertFalse( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId(6);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId('test');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 'test' );
 	}
 
 
@@ -145,31 +145,31 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetCustomerIc()
 	{
-		$this->assertEquals($this->_values['customerid'], $this->_object->getCustomerId() );
+		$this->assertEquals( $this->_values['customerid'], $this->_object->getCustomerId() );
 	}
 
 
 	public function testSetCustomerId()
 	{
-		$this->_object->setCustomerId('44');
-		$this->assertEquals('44', $this->_object->getCustomerId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setCustomerId( '44' );
+		$this->assertEquals( '44', $this->_object->getCustomerId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetLocale()
 	{
-		$this->assertEquals($this->_locale, $this->_object->getLocale() );
+		$this->assertEquals( $this->_locale, $this->_object->getLocale() );
 	}
 
 
 	public function testSetLocale()
 	{
-		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
-		$this->_object->setLocale($locale);
+		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$this->_object->setLocale( $locale );
 
-		$this->assertEquals($locale, $this->_object->getLocale());
-		$this->assertTrue($this->_object->isModified());
+		$this->assertEquals( $locale, $this->_object->getLocale() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
@@ -181,11 +181,11 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$priceItem = $this->_object->getPrice();
 
-		$this->assertEquals($priceItem->getCurrencyId(), 'EUR');
-		$this->assertEquals($priceItem->getTaxRate(), '0.00');
-		$this->assertEquals($priceItem->getRebate(), '7.01');
-		$this->assertEquals($priceItem->getCosts(), '3.11');
-		$this->assertEquals($priceItem->getValue(), '63.12');
+		$this->assertEquals( $priceItem->getCurrencyId(), 'EUR' );
+		$this->assertEquals( $priceItem->getTaxRate(), '0.00' );
+		$this->assertEquals( $priceItem->getRebate(), '7.01' );
+		$this->assertEquals( $priceItem->getCosts(), '3.11' );
+		$this->assertEquals( $priceItem->getValue(), '63.12' );
 	}
 
 
@@ -234,7 +234,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Default(new MShop_Price_Item_Default(), new MShop_Locale_Item_Default());
+		$item = new MShop_Order_Item_Base_Default( new MShop_Price_Item_Default(), new MShop_Locale_Item_Default() );
 
 		$list = array(
 			'order.base.id' => 1,
@@ -244,15 +244,15 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.status' => 4,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.base.id'], $item->getId());
-		$this->assertEquals($list['order.base.customerid'], $item->getCustomerId());
-		$this->assertEquals($list['order.base.languageid'], $item->getLocale()->getLanguageId());
-		$this->assertEquals($list['order.base.comment'], $item->getComment());
-		$this->assertEquals($list['order.base.status'], $item->getStatus());
+		$this->assertEquals( $list['order.base.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
+		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );
+		$this->assertEquals( $list['order.base.comment'], $item->getComment() );
+		$this->assertEquals( $list['order.base.status'], $item->getStatus() );
 	}
 
 
@@ -280,7 +280,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 
@@ -296,8 +296,8 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->_object->addProduct( $product );
 		}
 
-		$this->assertSame($this->_products, $this->_object->getProducts());
-		$this->assertSame($this->_products[1], $this->_object->getProduct(1));
+		$this->assertSame( $this->_products, $this->_object->getProducts() );
+		$this->assertSame( $this->_products[1], $this->_object->getProduct( 1 ) );
 	}
 
 
@@ -311,7 +311,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$product = $this->_createProduct( 'prodid3' );
 		$products[] = $product;
 
-		$pos = $this->_object->addProduct($product);
+		$pos = $this->_object->addProduct( $product );
 
 		$this->assertSame( $products, $this->_object->getProducts() );
 		$this->assertSame( $product, $this->_object->getProduct( $pos ) );
@@ -414,24 +414,24 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->_object->addProduct( $product );
 		}
 
-		unset($this->_products[1]);
-		$this->_object->deleteProduct(1);
-		$this->assertSame($this->_products, $this->_object->getProducts());
-		$this->assertTrue($this->_object->isModified());
+		unset( $this->_products[1] );
+		$this->_object->deleteProduct( 1 );
+		$this->assertSame( $this->_products, $this->_object->getProducts() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetAddress()
 	{
 		foreach( $this->_addresses as $type => $address ) {
-			$address->setId(null);
+			$address->setId( null );
 			$this->_object->setAddress( $address, $type );
 		}
 
-		$this->assertEquals($this->_addresses, $this->_object->getAddresses());
+		$this->assertEquals( $this->_addresses, $this->_object->getAddresses() );
 
-		$address = $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
-		$this->assertEquals($this->_addresses[MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT], $address);
+		$address = $this->_object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->assertEquals( $this->_addresses[MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT], $address );
 	}
 
 
@@ -441,18 +441,18 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->_object->setAddress( $address, $type );
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$result = $this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
-		$item = $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
+		$result = $this->_object->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$item = $this->_object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
-		$this->assertEquals($result, $item);
-		$this->assertEquals(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item->getType());
-		$this->assertTrue($item->isModified());
-		$this->assertNull($item->getId());
+		$this->assertEquals( $result, $item );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item->getType() );
+		$this->assertTrue( $item->isModified() );
+		$this->assertNull( $item->getId() );
 	}
 
 
@@ -474,14 +474,14 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetService()
 	{
 		foreach( $this->_services as $type => $service ) {
-			$service->setId(null);
+			$service->setId( null );
 			$this->_object->setService( $service, $type );
 		}
 
-		$this->assertEquals($this->_services, $this->_object->getServices());
+		$this->assertEquals( $this->_services, $this->_object->getServices() );
 
 		$type = 'payment';
-		$this->assertEquals($this->_services[$type], $this->_object->getService($type));
+		$this->assertEquals( $this->_services[$type], $this->_object->getService( $type ) );
 	}
 
 
@@ -492,18 +492,18 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$type = 'delivery';
-		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$service = $orderServiceManager->createItem();
 
-		$result = $this->_object->setService($service, $type);
-		$item = $this->_object->getService($type);
+		$result = $this->_object->setService( $service, $type );
+		$item = $this->_object->getService( $type );
 
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $result );
-		$this->assertEquals($result, $item);
-		$this->assertEquals($type, $item->getType());
-		$this->assertTrue($item->isModified());
-		$this->assertNull($item->getId());
+		$this->assertEquals( $result, $item );
+		$this->assertEquals( $type, $item->getType() );
+		$this->assertTrue( $item->isModified() );
+		$this->assertNull( $item->getId() );
 	}
 
 
@@ -549,7 +549,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->_object->deleteCoupon( 'OPQR', true );
 		$this->assertEquals( array(), $this->_object->getCoupons() );
 
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
@@ -638,7 +638,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function _createProduct( $code )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->createItem();
 

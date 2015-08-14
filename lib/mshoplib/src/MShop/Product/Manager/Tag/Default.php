@@ -115,7 +115,7 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
 		return $this->_createItem( $values );
 	}
 
@@ -476,13 +476,13 @@ class MShop_Product_Manager_Tag_Default
 			 * @see mshop/product/manager/tag/default/item/delete
 			 * @see mshop/product/manager/tag/default/item/search
 			 */
-			$cfgPathCount =  'mshop/product/manager/tag/default/item/count';
+			$cfgPathCount = 'mshop/product/manager/tag/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[$row['id']] = $row;
+				$typeIds[$row['typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -503,8 +503,8 @@ class MShop_Product_Manager_Tag_Default
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[$row['typeid']] ) ) {
+					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 
 				$items[$id] = $this->_createItem( $row );

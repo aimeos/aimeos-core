@@ -145,7 +145,7 @@ class MShop_Common_Item_ListRef_AbstractTest extends PHPUnit_Framework_TestCase
 		foreach( $result as $listItem )
 		{
 			$this->assertInstanceof( 'MShop_Text_Item_Interface', $listItem->getRefItem() );
-			$this->assertSame( $expected[ $listItem->getRefId() ], $listItem->getRefItem() );
+			$this->assertSame( $expected[$listItem->getRefId()], $listItem->getRefItem() );
 		}
 	}
 

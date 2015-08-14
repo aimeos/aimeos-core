@@ -49,7 +49,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	{
 		$this->_msg( 'Processing customer demo data', 0 );
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'customer' );
 
 		$search = $manager->createSearch();

@@ -44,7 +44,7 @@ class MW_Setup_Task_OrderBaseAttributeAddAttrId extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 
@@ -56,7 +56,7 @@ class MW_Setup_Task_OrderBaseAttributeAddAttrId extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Adding attrid column to order attribute tables', 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{

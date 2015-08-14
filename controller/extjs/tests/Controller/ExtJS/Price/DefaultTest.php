@@ -71,7 +71,7 @@ class Controller_ExtJS_Price_DefaultTest extends PHPUnit_Framework_TestCase
 
 		// find refs
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productsList = $productManager->getSubManager('list');
+		$productsList = $productManager->getSubManager( 'list' );
 
 		$search = $productsList->createSearch();
 
@@ -83,7 +83,7 @@ class Controller_ExtJS_Price_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$sort = array( $search->sort( '+', 'product.list.id' ) );
 		$search->setSortations( $sort );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 
 		$items = $productsList->searchItems( $search );
 
@@ -206,7 +206,7 @@ class Controller_ExtJS_Price_DefaultTest extends PHPUnit_Framework_TestCase
 					array( "type" => "string", "name" => "domain", "optional" => true ),
 					array( "type" => "string", "name" => "label", "optional" => true ),
 					array( "type" => "integer", "name" => "parentid", "optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),

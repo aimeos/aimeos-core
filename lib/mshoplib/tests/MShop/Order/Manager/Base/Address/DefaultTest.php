@@ -24,8 +24,8 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$this->_context = TestHelper::getContext();
 
-		$orderManager = MShop_Order_Manager_Factory::createManager($this->_context);
-		$this->_object = $orderManager->getSubManager('base')->getSubManager('address');
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$this->_object = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 	}
 
 
@@ -34,7 +34,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -188,7 +188,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($oldId);
+		$this->_object->getItem( $oldId );
 	}
 
 
@@ -238,13 +238,13 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 			$search->compare( '==', 'order.base.address.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
-		$items = $this->_object->searchItems( $search, array(), $total);
+		$search->setSlice( 0, 1 );
+		$items = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 4, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -252,7 +252,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

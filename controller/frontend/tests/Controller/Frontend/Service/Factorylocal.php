@@ -20,13 +20,13 @@ class Controller_Frontend_Service_Factorylocal
 	/**
 	 * @param string $name
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest='service' )
+	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest = 'service' )
 	{
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/frontend/service/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false ) {
+		if( ctype_alnum( $name ) === false ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 

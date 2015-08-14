@@ -47,7 +47,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product config attribute performance data', 0);
+		$this->_msg( 'Adding product config attribute performance data', 0 );
 
 
 		$this->_txBegin();
@@ -57,7 +57,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$this->_txCommit();
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$productListManager = $productManager->getSubManager( 'list' );
@@ -65,13 +65,13 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'attribute');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'config');
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'config' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($productListTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $productListTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 
@@ -91,7 +91,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach( $result as $id => $item )
 			{
 				$pos = 0;
 				foreach( $attrList as $attrId => $attrItem )
@@ -120,7 +120,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 	protected function _getAttributeList()
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
@@ -197,7 +197,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 			$attrItem->setPosition( $pos++ );
 			$attrManager->saveItem( $attrItem );
 
-			$attrList[ $attrItem->getId() ] = clone $attrItem;
+			$attrList[$attrItem->getId()] = clone $attrItem;
 
 			if( $price !== null )
 			{

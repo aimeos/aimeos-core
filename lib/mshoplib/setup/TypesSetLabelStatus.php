@@ -99,7 +99,7 @@ class MW_Setup_Task_TypesSetLabelStatus extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TypesAddLabelStatus');
+		return array( 'TypesAddLabelStatus' );
 	}
 
 
@@ -119,18 +119,18 @@ class MW_Setup_Task_TypesSetLabelStatus extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_msg(sprintf('Setting label and status values'), 0);
+		$this->_msg( sprintf( 'Setting label and status values' ), 0 );
 		$this->_status( '' );
 
-		foreach ($this->_mysql as $table => $stmts)
+		foreach( $this->_mysql as $table => $stmts )
 		{
-			$this->_msg(sprintf('Checking table "%1$s": ', $table), 1);
+			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if ($this->_schema->tableExists($table)) {
-				$this->_executeList($stmts);
-				$this->_status('OK');
+			if( $this->_schema->tableExists( $table ) ) {
+				$this->_executeList( $stmts );
+				$this->_status( 'OK' );
 			} else {
-				$this->_status('n/a');
+				$this->_status( 'n/a' );
 			}
 		}
 	}

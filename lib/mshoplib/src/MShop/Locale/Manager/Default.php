@@ -137,7 +137,7 @@ class MShop_Locale_Manager_Default
 	{
 		try {
 			return $this->_createItem( array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() ) );
-		} catch ( Exception $e ) {
+		} catch( Exception $e ) {
 			return $this->_createItem();
 		}
 	}
@@ -151,8 +151,8 @@ class MShop_Locale_Manager_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		if ( $default === true ) {
-			return $this->_createSearch('locale');
+		if( $default === true ) {
+			return $this->_createSearch( 'locale' );
 		}
 
 		return parent::createSearch();
@@ -196,7 +196,7 @@ class MShop_Locale_Manager_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $this->_search( $search, $ref, $total ) as $row ) {
-			$items[ $row['id'] ] = $this->_createItem( $row );
+			$items[$row['id']] = $this->_createItem( $row );
 		}
 
 		return $items;
@@ -248,8 +248,8 @@ class MShop_Locale_Manager_Default
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Locale_Item_Interface';
-		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
+		if( !( $item instanceof $iface ) ) {
+			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -386,7 +386,7 @@ class MShop_Locale_Manager_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -512,7 +512,7 @@ class MShop_Locale_Manager_Default
 		 * @see mshop/locale/manager/decorators/global
 		 */
 
-		return $this->_getSubManager('locale', $manager, $name);
+		return $this->_getSubManager( 'locale', $manager, $name );
 	}
 
 
@@ -621,7 +621,7 @@ class MShop_Locale_Manager_Default
 		$expr[] = $search->getConditions();
 
 
-		if ( $active === true )
+		if( $active === true )
 		{
 			$expr[] = $search->compare( '>', 'locale.currency.status', 0 );
 			$expr[] = $search->compare( '>', 'locale.language.status', 0 );
@@ -670,12 +670,12 @@ class MShop_Locale_Manager_Default
 		// Try to find the best matching locale
 		$search = $this->createSearch( $active );
 
-		$expr = array (
+		$expr = array(
 			$search->compare( '==', 'locale.siteid', $sitePath ),
 			$search->getConditions()
 		);
 
-		if ( $active === true )
+		if( $active === true )
 		{
 			$expr[] = $search->compare( '>', 'locale.currency.status', 0 );
 			$expr[] = $search->compare( '>', 'locale.language.status', 0 );
@@ -748,9 +748,9 @@ class MShop_Locale_Manager_Default
 	 */
 	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
-		$stmt = $conn->create($sql);
+		$stmt = $conn->create( $sql );
 
-		$this->_getContext()->getLogger()->log(__METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG);
+		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 		return $stmt->execute();
 	}
@@ -777,13 +777,13 @@ class MShop_Locale_Manager_Default
 		try
 		{
 			$attributes = $this->getSearchAttributes();
-			$types = $this->_getSearchTypes($attributes);
-			$translations = $this->_getSearchTranslations($attributes);
+			$types = $this->_getSearchTypes( $attributes );
+			$translations = $this->_getSearchTranslations( $attributes );
 
 			$find = array( ':cond', ':order', ':start', ':size' );
 			$replace = array(
-				$search->getConditionString($types, $translations),
-				$search->getSortationString($types, $translations),
+				$search->getConditionString( $types, $translations ),
+				$search->getSortationString( $types, $translations ),
 				$search->getSliceStart(),
 				$search->getSliceSize(),
 			);
@@ -833,13 +833,13 @@ class MShop_Locale_Manager_Default
 			 */
 			$path = 'mshop/locale/manager/default/item/search';
 
-			$sql = $config->get($path, $path);
-			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+			$sql = $config->get( $path, $path );
+			$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 			try
 			{
-				while ( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $row;
+				while( ( $row = $results->fetch() ) !== false ) {
+					$items[$row['id']] = $row;
 				}
 			}
 			catch( Exception $e )
@@ -848,7 +848,7 @@ class MShop_Locale_Manager_Default
 				throw $e;
 			}
 
-			if ( $total !== null )
+			if( $total !== null )
 			{
 				/** mshop/locale/manager/default/item/count
 				 * Counts the number of records matched by the given criteria in the database
@@ -889,13 +889,13 @@ class MShop_Locale_Manager_Default
 				 */
 				$path = 'mshop/locale/manager/default/item/count';
 
-				$sql = $config->get($path, $path);
-				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+				$sql = $config->get( $path, $path );
+				$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 				$row = $results->fetch();
 				$results->finish();
 
-				if ( $row === false ) {
+				if( $row === false ) {
 					throw new MShop_Locale_Exception( sprintf( 'Total results value not found' ) );
 				}
 
@@ -904,7 +904,7 @@ class MShop_Locale_Manager_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;

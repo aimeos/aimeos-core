@@ -58,7 +58,7 @@ class MW_Setup_Task_CatalogDropIndexCatalogIndexes extends MW_Setup_Task_Abstrac
 		$this->_msg( 'Drop old indexes in mshop_catalog_index_catalog table', 0 );
 		$this->_status( '' );
 
-		foreach ( $stmts AS $index => $stmt )
+		foreach( $stmts AS $index => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 

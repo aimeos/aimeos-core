@@ -91,13 +91,13 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 			$supplier->setStatus( $dataset['status'] );
 
 			$supplierManager->saveItem( $supplier );
-			$supIds[ $key ] = $supplier->getId();
+			$supIds[$key] = $supplier->getId();
 		}
 
 		$supAdr = $supplierAddressManager->createItem();
 		foreach( $testdata['supplier/address'] as $dataset )
 		{
-			if( !isset( $supIds[ $dataset['refid'] ] ) ) {
+			if( !isset( $supIds[$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
@@ -121,7 +121,7 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 			$supAdr->setTelefax( $dataset['telefax'] );
 			$supAdr->setWebsite( $dataset['website'] );
 			$supAdr->setLanguageId( $dataset['langid'] );
-			$supAdr->setRefId( $supIds[ $dataset['refid'] ] );
+			$supAdr->setRefId( $supIds[$dataset['refid']] );
 
 			$supplierAddressManager->saveItem( $supAdr, false );
 		}

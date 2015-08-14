@@ -46,7 +46,7 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Service_Item_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Service_Item_Interface', $this->_object->createItem() );
 	}
 
 	public function testSaveUpdateDeleteItem()
@@ -60,11 +60,11 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No service provider item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'newstaticdelivery' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -113,7 +113,7 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($itemSaved->getId());
+		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 
@@ -121,18 +121,18 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'service.code', 'unitcode'),
+			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception('No item found');
+			throw new Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->_object->getItem( $item->getId(), array( 'text' ) ) );
-		$this->assertEquals( 2, count( $item->getRefItems('text') ) );
+		$this->assertEquals( 2, count( $item->getRefItems( 'text' ) ) );
 	}
 
 
@@ -143,7 +143,7 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'service.id', null );
-		$expr[] = $search->compare( '!=', 'service.siteid', null);
+		$expr[] = $search->compare( '!=', 'service.siteid', null );
 		$expr[] = $search->compare( '>', 'service.typeid', 0 );
 		$expr[] = $search->compare( '>=', 'service.position', 0 );
 		$expr[] = $search->compare( '==', 'service.code', 'unitcode' );
@@ -195,12 +195,12 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'service.provider', 'unitprovider' ),
 			$search->compare( '==', 'service.editor', $this->_editor ),
@@ -226,43 +226,43 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No service item found' );
 		}
 
-		$item->setProvider( 'Default,Example');
+		$item->setProvider( 'Default,Example' );
 		$provider = $this->_object->getProvider( $item );
 
-		$this->assertInstanceOf('MShop_Service_Provider_Interface', $provider );
-		$this->assertInstanceOf('MShop_Service_Provider_Decorator_Example', $provider );
+		$this->assertInstanceOf( 'MShop_Service_Provider_Interface', $provider );
+		$this->assertInstanceOf( 'MShop_Service_Provider_Decorator_Example', $provider );
 
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getProvider( $this->_object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('list', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('list', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'list', 'unknown' );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		$attribs = $this->_object->getSearchAttributes();
-		foreach($attribs as $obj) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $obj );
+		foreach( $attribs as $obj ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
 		}
 
 	}
@@ -271,6 +271,6 @@ class MShop_Service_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->_object->createSearch();
-		$this->assertInstanceOf('MW_Common_Criteria_Interface', $search);
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $search );
 	}
 }

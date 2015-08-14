@@ -53,14 +53,14 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framewo
 
 		$result = $this->_object->exportFile( $params );
 
-		$this->assertTrue( array_key_exists('file', $result) );
+		$this->assertTrue( array_key_exists( 'file', $result ) );
 
-		$file = substr($result['file'], 9, -14);
+		$file = substr( $result['file'], 9, -14 );
 		$this->assertTrue( file_exists( $file ) );
 
 
 		$zip = new ZipArchive();
-		$zip->open($file);
+		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {

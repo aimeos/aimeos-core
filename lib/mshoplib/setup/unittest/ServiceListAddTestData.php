@@ -64,7 +64,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 
 		$refKeys = array();
 		foreach( $testdata['service/list'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = array();
@@ -129,8 +129,8 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$result = $priceManager->searchItems( $search );
 
 		$refIds = array();
-		foreach( $result as $item )	{
-			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getCosts() ] = $item->getId();
+		foreach( $result as $item ) {
+			$refIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
 
 		return $refIds;
@@ -151,7 +151,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -162,8 +162,8 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = array();
-		foreach( $textManager->searchItems( $search ) as $item )	{
-			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		foreach( $textManager->searchItems( $search ) as $item ) {
+			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;
@@ -184,7 +184,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -195,8 +195,8 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'media.label', $labels ) );
 
 		$refIds = array();
-		foreach( $mediaManager->searchItems( $search ) as $item )	{
-			$refIds[ 'media/' . $item->getLabel() ] = $item->getId();
+		foreach( $mediaManager->searchItems( $search ) as $item ) {
+			$refIds['media/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;
@@ -251,8 +251,8 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = array();
-		foreach( $serviceManager->searchItems( $search ) as $item )	{
-			$parentIds[ 'service/'.$item->getType().'/'.$item->getCode() ] = $item->getId();
+		foreach( $serviceManager->searchItems( $search ) as $item ) {
+			$parentIds['service/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
 
 		$listItemTypeIds = array();
@@ -260,7 +260,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 
 		$this->_conn->begin();
 
-		foreach ( $testdata['service/list/type'] as $key => $dataset )
+		foreach( $testdata['service/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -269,28 +269,28 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 			$listItemType->setStatus( $dataset['status'] );
 
 			$serviceListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[ $key ] = $listItemType->getId();
+			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
 		$listItem = $serviceListManager->createItem();
 		foreach( $testdata['service/list'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No service ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No service list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$listItem->setId( null );
-			$listItem->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$listItem->setTypeId( $listItemTypeIds[ $dataset['typeid'] ] );
-			$listItem->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$listItem->setParentId( $parentIds[$dataset['parentid']] );
+			$listItem->setTypeId( $listItemTypeIds[$dataset['typeid']] );
+			$listItem->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );

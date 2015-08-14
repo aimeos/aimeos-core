@@ -24,12 +24,12 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
 	{
-		if ( $parentId !== null ) {
+		if( $parentId !== null ) {
 
 			$parent = $this->_getManager()->getItem( $parentId );
 			$siteId = $this->_getContext()->getLocale()->getSiteId();
 
-			if ( $parent->getSiteId() != $siteId ) {
+			if( $parent->getSiteId() != $siteId ) {
 				throw new MShop_Exception( sprintf( 'Site can not be inserted. Site ID of site differs from site ID of parent site.' ) );
 			}
 		}
@@ -53,11 +53,11 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 
 		$manager = $this->_getManager();
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare('==', 'catalog.id', $ids ) );
+		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );
 
-		foreach ( $manager->searchItems( $search ) as $item )
+		foreach( $manager->searchItems( $search ) as $item )
 		{
-			if ( $item->getSiteId() != $siteId  ) {
+			if( $item->getSiteId() != $siteId ) {
 				throw new MShop_Exception( sprintf( 'Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site.' ) );
 			}
 		}

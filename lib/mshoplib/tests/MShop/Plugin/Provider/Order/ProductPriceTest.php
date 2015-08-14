@@ -27,14 +27,14 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$this->_plugin->setProvider( 'ProductPrice' );
 		$this->_plugin->setStatus( 1 );
 
-		$this->_order =  MShop_Factory::createManager( $context, 'order/base' )->createItem();
+		$this->_order = MShop_Factory::createManager( $context, 'order/base' )->createItem();
 
 		$orderBaseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
 		$search = $orderBaseProductManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNC' ) );
 		$productItems = $orderBaseProductManager->searchItems( $search );
 
-		if ( ( $productItem = reset( $productItems ) ) === false ) {
+		if( ( $productItem = reset( $productItems ) ) === false ) {
 			throw new Exception( 'No order base product item found.' );
 		}
 
@@ -66,7 +66,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 		$object->register( $this->_order );
 	}
 
@@ -75,7 +75,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	{
 		$this->_plugin->setConfig( array( 'update' => true ) );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
 	}
@@ -106,7 +106,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 		$this->_plugin->setConfig( array( 'update' => true ) );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
 	}
@@ -117,7 +117,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$this->_order->getProduct( 0 )->setPrice( $this->_price );
 
 		$this->_plugin->setConfig( array( 'update' => true ) );
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		try
 		{
@@ -125,10 +125,10 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
+		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( '600.00', $this->_order->getProduct( 0 )->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -156,7 +156,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$orderProduct->setProductCode( 'U:TESTSUB02' );
 		$orderProduct->setPrice( $this->_price );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		try
 		{
@@ -164,10 +164,10 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
+		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( '18.00', $this->_order->getProduct( 0 )->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -207,10 +207,10 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
+		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( '612.95', $this->_order->getProduct( 0 )->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -219,13 +219,13 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	{
 		$products = $this->_order->getProducts();
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new Exception('There is a product missing from your test data.');
+			throw new Exception( 'There is a product missing from your test data.' );
 		}
 
 		$refPrice = $product->getPrice()->getValue();
 		$product->setPrice( $this->_price );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		try
 		{
@@ -233,7 +233,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
+		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$products = $this->_order->getProducts();
 
@@ -242,7 +242,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 			};
 
 			$this->assertEquals( $refPrice, $product->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -251,8 +251,8 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	{
 		$products = $this->_order->getProducts();
 
-		if ( ( $product = reset( $products ) ) === false ) {
-			throw new Exception('Product missing from your test data.');
+		if( ( $product = reset( $products ) ) === false ) {
+			throw new Exception( 'Product missing from your test data.' );
 		}
 
 		$product->setPrice( $this->_price );
@@ -260,7 +260,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 		$oldPrice = clone $product->getPrice();
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->_plugin );
 
 		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
 		$this->assertEquals( $oldPrice, $product->getPrice() );

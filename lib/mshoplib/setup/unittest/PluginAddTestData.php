@@ -74,7 +74,7 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'plugin.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
@@ -92,18 +92,18 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 			$type->setStatus( $dataset['status'] );
 
 			$pluginTypeManager->saveItem( $type );
-			$plugTypeIds[ $key ] = $type->getId();
+			$plugTypeIds[$key] = $type->getId();
 		}
 
 		$plugin = $pluginManager->createItem();
 		foreach( $testdata['plugin'] as $dataset )
 		{
-			if( !isset( $plugTypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $plugTypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No plugin type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$plugin->setId( null );
-			$plugin->setTypeId( $plugTypeIds[ $dataset['typeid'] ] );
+			$plugin->setTypeId( $plugTypeIds[$dataset['typeid']] );
 			$plugin->setLabel( $dataset['label'] );
 			$plugin->setStatus( $dataset['status'] );
 			$plugin->setConfig( $dataset['config'] );

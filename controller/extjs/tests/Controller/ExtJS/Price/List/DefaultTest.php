@@ -79,7 +79,7 @@ class Controller_ExtJS_Price_List_DefaultTest extends PHPUnit_Framework_TestCase
 				'price.list.refid' => -1,
 				'price.list.datestart' => '2000-01-01 00:00:00',
 				'price.list.dateend' => '2001-01-01 00:00:00',
-				'price.list.config' => array('test' => 'unit'),
+				'price.list.config' => array( 'test' => 'unit' ),
 				'price.list.position' => 1,
 				'price.list.status' => 1,
 			),

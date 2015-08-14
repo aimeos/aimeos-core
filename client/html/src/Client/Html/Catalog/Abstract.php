@@ -145,7 +145,7 @@ abstract class Client_Html_Catalog_Abstract
 
 		if( $text !== '' && $textfilter === true )
 		{
-			$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+			$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ( $page - 1 ) * $size, $size );
 
 			if( $catid !== '' && $catfilter === true ) {
 				$filter = $controller->addProductFilterCategory( $filter, $catid );
@@ -155,11 +155,11 @@ abstract class Client_Html_Catalog_Abstract
 		}
 		elseif( $catid !== '' && $catfilter === true )
 		{
-			return $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+			return $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
 		else
 		{
-			return $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+			return $controller->createProductFilterDefault( $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
 	}
 

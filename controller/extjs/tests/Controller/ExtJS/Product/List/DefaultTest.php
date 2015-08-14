@@ -80,7 +80,7 @@ class Controller_ExtJS_Product_List_DefaultTest extends PHPUnit_Framework_TestCa
 				'product.list.refid' => -1,
 				'product.list.datestart' => '2000-01-01 00:00:00',
 				'product.list.dateend' => '2001-01-01 00:00:00',
-				'product.list.config' => array('test' => 'unit'),
+				'product.list.config' => array( 'test' => 'unit' ),
 				'product.list.position' => 1,
 				'product.list.status' => 1,
 			),

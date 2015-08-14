@@ -55,7 +55,7 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 
 	public function testCheckConfigBE()
 	{
-		$result = $this->_object->checkConfigBE( array('payment.url-success' => 'testurl' ) );
+		$result = $this->_object->checkConfigBE( array( 'payment.url-success' => 'testurl' ) );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( null, $result['payment.url-success'] );
@@ -67,7 +67,7 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 		// Currently does nothing.
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$this->_object->process($manager->createItem());
+		$this->_object->process( $manager->createItem() );
 	}
 
 

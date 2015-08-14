@@ -63,7 +63,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 2, $result[ $item->getId() ] );
+		$this->assertEquals( 2, $result[$item->getId()] );
 	}
 
 
@@ -133,8 +133,8 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 

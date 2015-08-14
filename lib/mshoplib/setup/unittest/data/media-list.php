@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'media/list/type' => array (
+return array(
+	'media/list/type' => array(
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -20,7 +20,7 @@ return array (
 		'attribute/back' => array( 'domain' => 'attribute', 'code' => 'back', 'label' => 'Backside', 'status' => 1 ),
 	),
 
-	'media/list' => array (
+	'media/list' => array(
 		array( 'parentid' => 'media/prod_266x221/198_prod_266x221.jpg', 'typeid' => 'attribute/option', 'domain' => 'attribute', 'refid' => 'attribute/media/color/olive', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'media/prod_266x221/198_prod_266x221.jpg', 'typeid' => 'attribute/option', 'domain' => 'attribute', 'refid' => 'attribute/media/color/blue', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'media/prod_266x221/198_prod_266x221.jpg', 'typeid' => 'attribute/option', 'domain' => 'attribute', 'refid' => 'attribute/media/color/red', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),

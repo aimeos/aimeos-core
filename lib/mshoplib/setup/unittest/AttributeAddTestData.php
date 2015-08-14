@@ -93,25 +93,25 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Abstract
 			$atype->setStatus( $dataset['status'] );
 
 			$attributeTypeManager->saveItem( $atype );
-			$atypeIds[ $key ] = $atype->getId();
+			$atypeIds[$key] = $atype->getId();
 		}
 
 		$attribute = $attributeManager->createItem();
 		foreach( $testdata['attribute'] as $key => $dataset )
 		{
-			if( !isset( $atypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $atypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No attribute type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$attribute->setId( null );
 			$attribute->setDomain( $dataset['domain'] );
-			$attribute->setTypeId( $atypeIds[ $dataset['typeid'] ] );
+			$attribute->setTypeId( $atypeIds[$dataset['typeid']] );
 			$attribute->setCode( $dataset['code'] );
 			$attribute->setLabel( $dataset['label'] );
 			$attribute->setStatus( $dataset['status'] );
 			$attribute->setPosition( $dataset['pos'] );
 
-			$attributeManager->saveItem($attribute, false);
+			$attributeManager->saveItem( $attribute, false );
 		}
 
 		$this->_conn->commit();

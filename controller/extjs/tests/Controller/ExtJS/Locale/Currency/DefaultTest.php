@@ -107,7 +107,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 					array( "type" => "integer", "name" => "limit", "optional" => true ),
 					array( "type" => "string", "name" => "sort", "optional" => true ),
 					array( "type" => "string", "name" => "dir", "optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
@@ -115,7 +115,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 
 		$actual = $this->_object->getServiceDescription();
 
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals( $expected, $actual );
 	}
 
 }

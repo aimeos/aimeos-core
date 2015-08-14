@@ -106,7 +106,7 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $typeManager->searchItems( $search );
 
-		if ( ( $typeItem = reset( $types ) ) === false ) {
+		if( ( $typeItem = reset( $types ) ) === false ) {
 			throw new Exception( 'Service type item "delivery" not found' );
 		}
 

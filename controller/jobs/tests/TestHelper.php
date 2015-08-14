@@ -101,7 +101,7 @@ class TestHelper
 	protected static function _createView( MW_Config_Interface $config )
 	{
 		$tmplpaths = self::getArcavias()->getCustomPaths( 'client/html' );
-		$tmplpaths[ dirname(__DIR__) ] = array( 'layouts' );
+		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );
 
 		$view = new MW_View_Default();
 
@@ -137,7 +137,7 @@ class TestHelper
 	}
 
 
-	public static function errorHandler($code, $message, $file, $row)
+	public static function errorHandler( $code, $message, $file, $row )
 	{
 		return true;
 	}

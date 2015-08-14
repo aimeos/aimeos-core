@@ -30,7 +30,7 @@ class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

@@ -26,7 +26,7 @@ class MW_Setup_Task_PriceRenameColumnDiscountToRebate extends MW_Setup_Task_Abst
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderAddComment');
+		return array( 'OrderRenameTables', 'OrderAddComment' );
 	}
 
 
@@ -37,7 +37,7 @@ class MW_Setup_Task_PriceRenameColumnDiscountToRebate extends MW_Setup_Task_Abst
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -59,7 +59,7 @@ class MW_Setup_Task_PriceRenameColumnDiscountToRebate extends MW_Setup_Task_Abst
 	{
 		$this->_msg( 'Renaming column "discount" to "rebate"', 0 ); $this->_status( '' );
 
-		foreach( $stmts AS $table=>$stmt )
+		foreach( $stmts as $table=>$stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s"', $table ), 1 );
 

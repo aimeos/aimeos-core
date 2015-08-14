@@ -42,7 +42,7 @@ class MW_Setup_Task_CatalogAddIndexPriceidTextid extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

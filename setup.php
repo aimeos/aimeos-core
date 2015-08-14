@@ -11,14 +11,14 @@ if( php_sapi_name() != 'cli' ) {
 }
 
 ini_set( 'display_errors', 1 );
-date_default_timezone_set('UTC');
+date_default_timezone_set( 'UTC' );
 
 
 function setup_autoload( $classname )
 {
 	if( strncmp( $classname, 'MW_Setup_Task_', 14 ) === 0 )
 	{
-	    $fileName = substr( $classname, 14 ) . '.php';
+		$fileName = substr( $classname, 14 ) . '.php';
 		$paths = explode( PATH_SEPARATOR, get_include_path() );
 
 		foreach( $paths as $path )
@@ -58,16 +58,16 @@ try
 
 		if( strncmp( $option, '--', 2 ) === 0 && ( $pos = strpos( $option, '=', 2 ) ) !== false )
 		{
-			if( ( $name = substr( $option, 2, $pos-2 ) ) !== false )
+			if( ( $name = substr( $option, 2, $pos - 2 ) ) !== false )
 			{
 				if( isset( $options[$name] ) )
 				{
 					$options[$name] = (array) $options[$name];
-					$options[$name][] = substr( $option, $pos+1 );
+					$options[$name][] = substr( $option, $pos + 1 );
 				}
 				else
 				{
-					$options[$name] = substr( $option, $pos+1 );
+					$options[$name] = substr( $option, $pos + 1 );
 				}
 
 				unset( $params[$key] );
@@ -174,4 +174,4 @@ catch( Exception $e )
 
 $exectimeStop = microtime( true );
 
-printf( "Setup process took %1\$f sec\n\n", ($exectimeStop - $exectimeStart) );
+printf( "Setup process took %1\$f sec\n\n", ( $exectimeStop - $exectimeStart ) );

@@ -47,8 +47,8 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf('Unable to call method "%1$s"', $name) );
+		if( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false ) {
+			throw new Controller_Jobs_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
 		return $result;

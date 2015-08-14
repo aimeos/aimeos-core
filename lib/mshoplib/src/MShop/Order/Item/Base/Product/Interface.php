@@ -136,7 +136,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * @param string $value Value of the localized name of the product
 	 * @return void
 	 */
-	public function setName($value);
+	public function setName( $value );
 
 	/**
 	 * Sets the media url of the product the customer has added.
@@ -262,6 +262,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Adds or replaces the attribute item in the list of product attributes.
 	 *
 	 * @param MShop_Order_Item_Base_Product_Attribute_Interface $item Product attribute item
+	 * @return void
 	 */
 	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Interface $item );
 

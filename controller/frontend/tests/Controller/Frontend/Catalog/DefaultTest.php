@@ -28,8 +28,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 		$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
 
 		$list = array();
-		foreach( $this->_object->getCatalogPath( $item->getChild(0)->getId(), array( 'text' ) ) as $item ) {
-			$list[ $item->getCode() ] = $item;
+		foreach( $this->_object->getCatalogPath( $item->getChild( 0 )->getId(), array( 'text' ) ) as $item ) {
+			$list[$item->getCode()] = $item;
 		}
 
 		$this->assertEquals( 2, count( $list ) );
@@ -140,7 +140,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateProductFilterByCategoryPrice()
 	{
-		$filter = $this->_object->createProductFilterByCategory( 0, 'price');
+		$filter = $this->_object->createProductFilterByCategory( 0, 'price' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -244,7 +244,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateProductFilterByTextPrice()
 	{
-		$filter = $this->_object->createProductFilterByCategory( 'Espresso', 'price');
+		$filter = $this->_object->createProductFilterByCategory( 'Espresso', 'price' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 

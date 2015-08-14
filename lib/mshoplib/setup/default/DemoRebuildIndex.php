@@ -58,7 +58,7 @@ class MW_Setup_Task_DemoRebuildIndex extends MW_Setup_Task_Abstract
 	 */
 	protected function _process()
 	{
-		$this->_msg('Rebuilding catalog index for demo data', 0);
+		$this->_msg( 'Rebuilding catalog index for demo data', 0 );
 
 		MShop_Factory::createManager( $this->_additional, 'catalog/index' )->rebuildIndex();
 

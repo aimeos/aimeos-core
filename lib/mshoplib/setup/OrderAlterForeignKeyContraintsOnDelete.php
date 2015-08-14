@@ -17,49 +17,49 @@
 class MW_Setup_Task_OrderAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_order' => array (
+		'mshop_order' => array(
 			'fk_msord_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order" DROP FOREIGN KEY "fk_msord_siteid"',
 			),
 		),
-		'mshop_order_base' => array (
+		'mshop_order_base' => array(
 			'fk_msordba_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base" DROP FOREIGN KEY "fk_msordbaad_siteid"',
 			),
 		),
-		'mshop_order_base_address' => array (
+		'mshop_order_base_address' => array(
 			'fk_msordbaad_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_address" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_address" DROP FOREIGN KEY "fk_msordbaad_siteid"',
 			),
 		),
-		'mshop_order_base_product' => array (
+		'mshop_order_base_product' => array(
 			'fk_msordbapr_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_product" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_product" DROP FOREIGN KEY "fk_msordbapr_siteid"',
 			),
 		),
-		'mshop_order_base_product_attr' => array (
+		'mshop_order_base_product_attr' => array(
 			'fk_msordbaprat_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_product_attr" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_product_attr" DROP FOREIGN KEY "fk_msordbaprat_siteid"',
 			),
 		),
-		'mshop_order_base_service' => array (
+		'mshop_order_base_service' => array(
 			'fk_msordbase_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_service" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_service" DROP FOREIGN KEY "fk_msordbase_siteid"',
 			),
 		),
-		'mshop_order_base_service_attr' => array (
+		'mshop_order_base_service_attr' => array(
 			'fk_msordbaseat_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_service_attr" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_base_service_attr" DROP FOREIGN KEY "fk_msordbaseat_siteid"',
 			),
 		),
-		'mshop_order_status' => array (
+		'mshop_order_status' => array(
 			'fk_msordst_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_status" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
 				'drop' => 'ALTER TABLE "mshop_order_status" DROP FOREIGN KEY "fk_msordst_siteid"',
@@ -75,7 +75,7 @@ class MW_Setup_Task_OrderAlterForeignKeyContraintsOnDelete extends MW_Setup_Task
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderRenameConstraints', 'OrderAddSiteId');
+		return array( 'OrderRenameTables', 'OrderRenameConstraints', 'OrderAddSiteId' );
 	}
 
 
@@ -110,7 +110,7 @@ class MW_Setup_Task_OrderAlterForeignKeyContraintsOnDelete extends MW_Setup_Task
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			foreach ( $stmtList as $constraint => $stmts )
+			foreach( $stmtList as $constraint => $stmts )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

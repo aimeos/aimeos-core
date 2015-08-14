@@ -16,7 +16,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	protected function setUp()
 	{
-		$this->_object = new MShop_Locale_Manager_Currency_Default(TestHelper::getContext());
+		$this->_object = new MShop_Locale_Manager_Currency_Default( TestHelper::getContext() );
 	}
 
 
@@ -28,7 +28,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Locale_Item_Currency_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Locale_Item_Currency_Interface', $this->_object->createItem() );
 	}
 
 
@@ -74,18 +74,18 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($item->getId());
+		$this->_object->getItem( $item->getId() );
 	}
 
 
 	public function testGetItem()
 	{
-		$actual = $this->_object->getItem('EUR');
+		$actual = $this->_object->getItem( 'EUR' );
 
-		$this->assertEquals('EUR', $actual->getId());
-		$this->assertEquals('Euro', $actual->getLabel());
-		$this->assertEquals(1, $actual->getStatus());
-		$this->assertEquals('EUR', $actual->getCode());
+		$this->assertEquals( 'EUR', $actual->getId() );
+		$this->assertEquals( 'Euro', $actual->getLabel() );
+		$this->assertEquals( 1, $actual->getStatus() );
+		$this->assertEquals( 'EUR', $actual->getCode() );
 	}
 
 
@@ -111,13 +111,13 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 		// search without base criteria, slice & total
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('~=', 'locale.currency.label', 'CFA'));
-		$search->setSlice(0, 1);
-		$results = $this->_object->searchItems($search, array(), $total);
-		$this->assertEquals(1, count( $results ));
-		$this->assertEquals(2, $total);
+		$search->setConditions( $search->compare( '~=', 'locale.currency.label', 'CFA' ) );
+		$search->setSlice( 0, 1 );
+		$results = $this->_object->searchItems( $search, array(), $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -125,15 +125,15 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSearchAttributes()
 	{
-		foreach ( $this->_object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attribute);
+		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

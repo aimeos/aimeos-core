@@ -65,7 +65,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setTypeId( $typeid )
 	{
-		if ( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $typeid;
 		$this->setModified();
@@ -91,7 +91,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if ( $currencyid == $this->getCurrencyId() ) { return; }
+		if( $currencyid == $this->getCurrencyId() ) { return; }
 
 		$this->_checkCurrencyId( $currencyid, false );
 		$this->_values['currencyid'] = $currencyid;
@@ -117,7 +117,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setDomain( $domain )
 	{
-		if ( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return; }
 
 		$this->_values['domain'] = (string) $domain;
 		$this->setModified();
@@ -142,7 +142,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setQuantity( $quantity )
 	{
-		if ( $quantity == $this->getQuantity() ) { return; }
+		if( $quantity == $this->getQuantity() ) { return; }
 
 		$this->_values['quantity'] = (int) $quantity;
 		$this->setModified();
@@ -167,7 +167,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setValue( $price )
 	{
-		if ( $price == $this->getValue() ) { return; }
+		if( $price == $this->getValue() ) { return; }
 
 		$this->_checkPrice( $price );
 
@@ -194,7 +194,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setCosts( $price )
 	{
-		if ( $price == $this->getCosts() ) { return; }
+		if( $price == $this->getCosts() ) { return; }
 
 		$this->_checkPrice( $price );
 
@@ -221,7 +221,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setRebate( $price )
 	{
-		if ( $price == $this->getRebate() ) { return; }
+		if( $price == $this->getRebate() ) { return; }
 
 		$this->_checkPrice( $price );
 
@@ -248,7 +248,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setTaxRate( $taxrate )
 	{
-		if ( $taxrate == $this->getTaxRate() ) { return; }
+		if( $taxrate == $this->getTaxRate() ) { return; }
 
 		$this->_checkPrice( $taxrate );
 
@@ -275,7 +275,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();
@@ -300,7 +300,7 @@ class MShop_Price_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();

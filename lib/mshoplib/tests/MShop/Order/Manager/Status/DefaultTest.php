@@ -17,28 +17,28 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 	/**
-	* Sets up the fixture, for example, opens a network connection.
-	* This method is called before a test is executed.
-	*
-	* @access protected
-	*/
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Status_Default($this->_context);
+		$this->_object = new MShop_Order_Manager_Status_Default( $this->_context );
 	}
 
 	
 	/**
-	* Tears down the fixture, for example, closes a network connection.
-	* This method is called after a test is executed.
-	*
-	* @access protected
-	*/
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -62,21 +62,21 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 	
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Order_Item_Status_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Order_Item_Status_Interface', $this->_object->createItem() );
 	}
 
 	
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare('==', 'order.status.value', 'shipped') );
-		$results = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'order.status.value', 'shipped' ) );
+		$results = $this->_object->searchItems( $search );
 
-		if ( ($expected = reset($results)) === false ) {
-			throw new MShop_Order_Exception('No order status item found');
+		if( ( $expected = reset( $results ) ) === false ) {
+			throw new MShop_Order_Exception( 'No order status item found' );
 		}
 
-		$this->assertEquals($expected, $this->_object->getItem($expected->getId()));
+		$this->assertEquals( $expected, $this->_object->getItem( $expected->getId() ) );
 	}
 
 
@@ -90,11 +90,11 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No order base item found.' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
@@ -127,13 +127,13 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf('MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
 	}
 
 	public function testSearchItems()
@@ -168,13 +168,13 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 			$search->compare( '==', 'order.status.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->_object->searchItems($search, array(), $total);
+		$items = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 2, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -182,7 +182,7 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getSubManager( 'unknown' );
 	}
 
