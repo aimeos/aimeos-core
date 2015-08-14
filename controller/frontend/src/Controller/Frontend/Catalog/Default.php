@@ -49,7 +49,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @param integer $level Constant from MW_Tree_Manager_Abstract for the depth of the returned tree, LEVEL_ONE for
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
+	 * @param MW_Common_Criteria_Interface|null $search Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant
 	 */
 	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ),
