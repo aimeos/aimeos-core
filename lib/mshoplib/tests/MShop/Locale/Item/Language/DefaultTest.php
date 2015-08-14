@@ -25,7 +25,7 @@ class MShop_Locale_Item_Language_DefaultTest extends PHPUnit_Framework_TestCase
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser'
 		);
-		$this->_object = new MShop_Locale_Item_Language_Default($this->_values);
+		$this->_object = new MShop_Locale_Item_Language_Default( $this->_values );
 	}
 
 
@@ -37,89 +37,89 @@ class MShop_Locale_Item_Language_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals('es', $this->_object->getId());
+		$this->assertEquals( 'es', $this->_object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId('de');
-		$this->assertEquals('de', $this->_object->getId());
-		$this->assertFalse($this->_object->isModified());
+		$this->_object->setId( 'de' );
+		$this->assertEquals( 'de', $this->_object->getId() );
+		$this->assertFalse( $this->_object->isModified() );
 
 		$var = null;
-		$this->_object->setId($var);
-		$this->assertEquals(null, $this->_object->getId());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setId( $var );
+		$this->assertEquals( null, $this->_object->getId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testSetIdLength()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		$this->_object->setId('espania');
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->_object->setId( 'espania' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		$this->_object->setId(123);
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->_object->setId( 123 );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals($this->_object->getId(), $this->_object->getCode());
+		$this->assertEquals( $this->_object->getId(), $this->_object->getCode() );
 	}
 
 
 	public function testSetCodeInvalid()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		$this->_object->setCode('XXX');
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->_object->setCode( 'XXX' );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals('spanish', $this->_object->getLabel());
+		$this->assertEquals( 'spanish', $this->_object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel('OtherName');
-		$this->assertEquals('OtherName', $this->_object->getLabel());
+		$this->_object->setLabel( 'OtherName' );
+		$this->assertEquals( 'OtherName', $this->_object->getLabel() );
 		// test modifier
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals(1, $this->_object->getSiteId());
+		$this->assertEquals( 1, $this->_object->getSiteId() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals(9, $this->_object->getStatus());
+		$this->assertEquals( 9, $this->_object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus(0);
-		$this->assertEquals(0, $this->_object->getStatus());
+		$this->_object->setStatus( 0 );
+		$this->assertEquals( 0, $this->_object->getStatus() );
 		// test modifier
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
@@ -152,30 +152,30 @@ class MShop_Locale_Item_Language_DefaultTest extends PHPUnit_Framework_TestCase
 				'locale.language.status' => 1,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['locale.language.id'], $item->getId());
-		$this->assertEquals($list['locale.language.code'], $item->getCode());
-		$this->assertEquals($list['locale.language.label'], $item->getLabel());
-		$this->assertEquals($list['locale.language.status'], $item->getStatus());
+		$this->assertEquals( $list['locale.language.id'], $item->getId() );
+		$this->assertEquals( $list['locale.language.code'], $item->getCode() );
+		$this->assertEquals( $list['locale.language.label'], $item->getLabel() );
+		$this->assertEquals( $list['locale.language.status'], $item->getStatus() );
 	}
 
 
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		$this->assertEquals((count($this->_values) + 1), count($arrayObject));
+		$this->assertEquals( ( count( $this->_values ) + 1 ), count( $arrayObject ) );
 
-		$this->assertEquals($this->_object->getId(), $arrayObject['locale.language.id']);
-		$this->assertEquals($this->_object->getCode(), $arrayObject['locale.language.code']);
-		$this->assertEquals($this->_object->getLabel(), $arrayObject['locale.language.label']);
-		$this->assertEquals($this->_object->getSiteId(), $arrayObject['locale.language.siteid']);
-		$this->assertEquals($this->_object->getStatus(), $arrayObject['locale.language.status']);
-		$this->assertEquals($this->_object->getTimeCreated(), $arrayObject['locale.language.ctime'] );
-		$this->assertEquals($this->_object->getTimeModified(), $arrayObject['locale.language.mtime'] );
-		$this->assertEquals($this->_object->getEditor(), $arrayObject['locale.language.editor'] );
+		$this->assertEquals( $this->_object->getId(), $arrayObject['locale.language.id'] );
+		$this->assertEquals( $this->_object->getCode(), $arrayObject['locale.language.code'] );
+		$this->assertEquals( $this->_object->getLabel(), $arrayObject['locale.language.label'] );
+		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['locale.language.siteid'] );
+		$this->assertEquals( $this->_object->getStatus(), $arrayObject['locale.language.status'] );
+		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['locale.language.ctime'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['locale.language.mtime'] );
+		$this->assertEquals( $this->_object->getEditor(), $arrayObject['locale.language.editor'] );
 	}
 
 }

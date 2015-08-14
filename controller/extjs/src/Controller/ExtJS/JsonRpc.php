@@ -90,7 +90,7 @@ class Controller_ExtJS_JsonRpc
 
 		foreach( $this->_getControllers() as $controller )
 		{
-			foreach( $controller->getServiceDescription() as $method => $entry ){
+			foreach( $controller->getServiceDescription() as $method => $entry ) {
 				$services[$method] = $entry + $transport;
 			}
 		}

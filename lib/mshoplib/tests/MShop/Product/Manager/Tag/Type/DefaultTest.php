@@ -25,7 +25,7 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $manager->getSubManager( 'tag' )->getSubManager('type');
+		$this->_object = $manager->getSubManager( 'tag' )->getSubManager( 'type' );
 	}
 
 
@@ -37,7 +37,7 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -72,7 +72,7 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 
 		$results = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($results) ) === false )
+		if( ( $expected = reset( $results ) ) === false )
 		{
 			throw new Exception( 'No tag type item found.' );
 		}
@@ -87,13 +87,13 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.tag.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -150,24 +150,24 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 		$expr[] = $search->compare( '>=', 'product.tag.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.tag.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'product.tag.type.code', 't'),
+			$search->compare( '~=', 'product.tag.type.code', 't' ),
 			$search->compare( '==', 'product.tag.type.editor', $this->_editor )
 		);
-		$search->setConditions( $search->combine('&&', $conditions ) );
-		$search->setSlice(0, 1);
-		$items = $this->_object->searchItems( $search, array(), $total);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSlice( 0, 1 );
+		$items = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 2, $total );
 
-		foreach($items as $itemId => $item) {
+		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -175,7 +175,7 @@ class MShop_Product_Manager_Tag_Type_DefaultTest extends PHPUnit_Framework_TestC
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

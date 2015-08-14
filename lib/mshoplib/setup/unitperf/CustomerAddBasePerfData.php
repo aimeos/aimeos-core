@@ -41,13 +41,13 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 		$this->_msg( 'Adding customer performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
 
 		$customerItem = $customerManager->createItem();
 		$customerItem->setCode( 'demo-test' );
 		$customerItem->setLabel( 'Test demo unitperf user' );
-		$customerItem->setPassword( sha1( microtime(true) . getmypid() . rand() ) );
+		$customerItem->setPassword( sha1( microtime( true ) . getmypid() . rand() ) );
 		$customerItem->setStatus( 1 );
 
 		$addrItem = $customerItem->getPaymentAddress();

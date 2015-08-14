@@ -37,7 +37,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAbstractInit()
 	{
-		$expected = array('success' => true);
+		$expected = array( 'success' => true );
 		$actual = $this->_object->init( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
@@ -45,7 +45,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAbstractFinish()
 	{
-		$expected = array('success' => true);
+		$expected = array( 'success' => true );
 		$actual = $this->_object->finish( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}

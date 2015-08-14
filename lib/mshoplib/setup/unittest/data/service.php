@@ -4,8 +4,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'service/type' => array (
+return array(
+	'service/type' => array(
 		'service/payment' => array(
 			'domain' => 'service',
 			'code' => 'payment',
@@ -20,8 +20,8 @@ return array (
 		),
 	),
 
-	'service' => array (
-		'service/delivery/unitcode' => array (
+	'service' => array(
+		'service/delivery/unitcode' => array(
 			'pos' => 0,
 			'typeid' => 'service/delivery',
 			'code' => 'unitcode',
@@ -32,7 +32,7 @@ return array (
 			),
 			'status' => 1
 		),
-		'service/payment/unitcode' => array (
+		'service/payment/unitcode' => array(
 			'pos' => 0,
 			'typeid' => 'service/payment',
 			'code' => 'unitpaymentcode',
@@ -43,7 +43,7 @@ return array (
 			),
 			'status' => 1
 		),
-		'service/payment/directdebit' => array (
+		'service/payment/directdebit' => array(
 			'pos' => 1,
 			'typeid' => 'service/payment',
 			'code' => 'directdebit-test',
@@ -52,7 +52,7 @@ return array (
 			'config' => array(),
 			'status' => 1
 		),
-		'service/payment/paypalexpress' => array (
+		'service/payment/paypalexpress' => array(
 			'pos' => 2,
 			'typeid' => 'service/payment',
 			'code' => 'paypalexpress',

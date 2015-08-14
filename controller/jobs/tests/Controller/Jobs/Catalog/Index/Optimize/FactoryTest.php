@@ -14,7 +14,7 @@ class Controller_Jobs_Catalog_Index_Optimize_FactoryTest extends PHPUnit_Framewo
 		$arcavias = TestHelper::getArcavias();
 
 		$obj = Controller_Jobs_Catalog_Index_Optimize_Factory::createController( $context, $arcavias );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
 	}
 
 

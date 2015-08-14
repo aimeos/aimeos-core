@@ -107,7 +107,7 @@ class Controller_ExtJS_Media_Default
 
 		foreach( $manager->searchItems( $search ) as $id => $item )
 		{
-			$idList[ $item->getDomain() ][] = $id;
+			$idList[$item->getDomain()][] = $id;
 
 			if( is_file( $basedir . $item->getPreview() )
 				&& strcmp( ltrim( $uploaddir, '/' ), ltrim( $item->getPreview(), '/' ) ) !== 0
@@ -133,11 +133,11 @@ class Controller_ExtJS_Media_Default
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain.'.list.refid', $domainIds ),
-				$search->compare( '==', $domain.'.list.domain', 'media' )
+				$search->compare( '==', $domain . '.list.refid', $domainIds ),
+				$search->compare( '==', $domain . '.list.domain', 'media' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
 
 			$start = 0;
 
@@ -258,8 +258,8 @@ class Controller_ExtJS_Media_Default
 
 		$smd['Media.uploadItem'] = array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "string","name" => "domain","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "string", "name" => "domain", "optional" => false ),
 				),
 				"returns" => "array",
 		);
@@ -559,7 +559,7 @@ class Controller_ExtJS_Media_Default
 		$ds = DIRECTORY_SEPARATOR;
 		$fileext = $this->_getFileExtension( $mimetype );
 		$filepath = $mediadir . $ds . $type . $ds . $domain . $ds . $filename[0] . $ds . $filename[1];
-		$dest =  $this->_getAbsoluteDirectory( $filepath ). $ds . $filename . $fileext;
+		$dest = $this->_getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
 
 
 		/** controller/extjs/media/default/files/maxwidth

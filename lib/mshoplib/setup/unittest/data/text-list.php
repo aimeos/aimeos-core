@@ -5,8 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
-	'text/list/type' => array (
+return array(
+	'text/list/type' => array(
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -20,7 +20,7 @@ return array (
 		'media/align-bottom' => array( 'domain' => 'media', 'code' => 'align-bottom', 'label' => 'Align bottom', 'status' => 1 ),
 	),
 
-	'text/list' => array (
+	'text/list' => array(
 		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),

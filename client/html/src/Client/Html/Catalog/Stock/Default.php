@@ -268,8 +268,8 @@ class Client_Html_Catalog_Stock_Default
 
 				foreach( $stockItems as $item )
 				{
-					$warehouseIds[ $item->getWarehouseId() ] = null;
-					$stockItemsByProducts[ $item->getProductId() ][] = $item;
+					$warehouseIds[$item->getWarehouseId()] = null;
+					$stockItemsByProducts[$item->getProductId()][] = $item;
 				}
 
 				$warehouseIds = array_keys( $warehouseIds );

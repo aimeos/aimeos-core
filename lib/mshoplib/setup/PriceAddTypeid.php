@@ -28,7 +28,7 @@ class MW_Setup_Task_PriceAddTypeid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop','MShopAddLocaleData');
+		return array( 'TablesCreateMShop', 'MShopAddLocaleData' );
 	}
 
 

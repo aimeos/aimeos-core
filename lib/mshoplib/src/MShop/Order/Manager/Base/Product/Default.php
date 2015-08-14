@@ -361,28 +361,28 @@ class MShop_Order_Manager_Base_Product_Default
 			$stmt->bind( 16, $item->getFlags(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 17, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 18, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 19, date('Y-m-d H:i:s') );
+			$stmt->bind( 19, date( 'Y-m-d H:i:s' ) );
 			$stmt->bind( 20, $context->getEditor() );
 
-			if ( $id !== null ) {
-				$stmt->bind(21, $id, MW_DB_Statement_Abstract::PARAM_INT);
+			if( $id !== null ) {
+				$stmt->bind( 21, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(21, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);// ctime
+				$stmt->bind( 21, date( 'Y-m-d H:i:s' ), MW_DB_Statement_Abstract::PARAM_STR ); // ctime
 			}
 
 			$stmt->execute()->finish();
 
 
-			if ( $id === null ) {
+			if( $id === null ) {
 				$path = 'mshop/order/manager/base/product/default/item/newid';
 				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			} else {
-				$item->setId($id);
+				$item->setId( $id );
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch(Exception $e)
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -408,7 +408,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array Returns a list of attributes implementing MW_Common_Criteria_Attribute_Interface
 	 */
-	public function getSearchAttributes($withsub = true)
+	public function getSearchAttributes( $withsub = true )
 	{
 		/** classes/order/manager/base/product/submanagers
 		 * List of manager names that can be instantiated by the order base product manager
@@ -562,7 +562,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of products implementing MShop_Order_Item_Base_Product_Interface's
 	 */
-	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->_getContext();
@@ -576,7 +576,7 @@ class MShop_Order_Manager_Base_Product_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/product/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/product/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/product/default/item/count';
 			$required = array( 'order.base.product' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -587,11 +587,11 @@ class MShop_Order_Manager_Base_Product_Default
 				while( ( $row = $results->fetch() ) !== false )
 				{
 					$price = $priceManager->createItem();
-					$price->setValue($row['price']);
-					$price->setRebate($row['rebate']);
-					$price->setCosts($row['costs']);
-					$price->setTaxRate($row['taxrate']);
-					$items[ $row['id'] ] = array( 'price' => $price, 'item' => $row );
+					$price->setValue( $row['price'] );
+					$price->setRebate( $row['rebate'] );
+					$price->setCosts( $row['costs'] );
+					$price->setTaxRate( $row['taxrate'] );
+					$items[$row['id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
 			catch( Exception $e )
@@ -611,10 +611,10 @@ class MShop_Order_Manager_Base_Product_Default
 		$result = array();
 		$attributes = $this->_getAttributeItems( array_keys( $items ) );
 
-		foreach ( $items as $id => $row )
+		foreach( $items as $id => $row )
 		{
 			$attrList = ( isset( $attributes[$id] ) ? $attributes[$id] : array() );
-			$result[ $id ] = $this->_createItem( $row['price'], $row['item'], $attrList );
+			$result[$id] = $this->_createItem( $row['price'], $row['item'], $attrList );
 		}
 
 		return $result;
@@ -626,7 +626,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 *
 	 * @return MShop_Order_Item_Base_Product_Interface
 	 */
-	protected function _createItem(MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array())
+	protected function _createItem( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array() )
 	{
 		return new MShop_Order_Item_Base_Product_Default( $price, $values, $attributes );
 	}
@@ -646,8 +646,8 @@ class MShop_Order_Manager_Base_Product_Default
 		$search->setSlice( 0, 0x7fffffff );
 
 		$result = array();
-		foreach ($manager->searchItems( $search ) as $item) {
-			$result[ $item->getProductId() ][ $item->getId() ] = $item;
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$result[$item->getProductId()][$item->getId()] = $item;
 		}
 
 		return $result;

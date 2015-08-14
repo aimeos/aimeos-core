@@ -29,14 +29,14 @@ class MShop_Price_Manager_Factory
 	 */
 	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
 	{
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/price/manager/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/price/manager/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'MShop_Price_Manager_' . $name : '<not a string>';
-			throw new MShop_Price_Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
+			$classname = is_string( $name ) ? 'MShop_Price_Manager_' . $name : '<not a string>';
+			throw new MShop_Price_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'MShop_Price_Manager_Interface';

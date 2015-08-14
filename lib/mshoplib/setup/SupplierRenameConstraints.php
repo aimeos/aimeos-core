@@ -50,7 +50,7 @@ class MW_Setup_Task_SupplierRenameConstraints extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('SubjectToCustomerSupplier');
+		return array( 'SubjectToCustomerSupplier' );
 	}
 
 
@@ -61,7 +61,7 @@ class MW_Setup_Task_SupplierRenameConstraints extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -85,7 +85,7 @@ class MW_Setup_Task_SupplierRenameConstraints extends MW_Setup_Task_Abstract
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			foreach ( $stmtList as $constraint=>$stmt )
+			foreach( $stmtList as $constraint=>$stmt )
 			{
 				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 

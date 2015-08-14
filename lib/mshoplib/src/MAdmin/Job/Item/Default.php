@@ -62,7 +62,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -87,7 +87,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function setMethod( $method )
 	{
-		if ( $method == $this->getMethod() ) { return; }
+		if( $method == $this->getMethod() ) { return; }
 
 		$this->_values['method'] = (string) $method;
 		$this->setModified();
@@ -147,7 +147,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

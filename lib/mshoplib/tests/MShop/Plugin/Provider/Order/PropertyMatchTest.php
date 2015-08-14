@@ -33,17 +33,17 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC') ) );
+		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		$products = $manager->searchItems( $search );
 
-		if ( count( $products ) !== 2 ) {
-			throw new Exception('Wrong number of products');
+		if( count( $products ) !== 2 ) {
+			throw new Exception( 'Wrong number of products' );
 		}
 
 		$this->_products = array();
@@ -53,7 +53,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 			$item = $orderBaseProductManager->createItem();
 			$item->copyFrom( $product );
 
-			$this->_products[ $product->getCode() ] = $item;
+			$this->_products[$product->getCode()] = $item;
 		}
 
 		$this->_order = $orderBaseManager->createItem();

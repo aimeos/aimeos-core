@@ -15,7 +15,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$obj = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $arcavias );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
 	}
 
 

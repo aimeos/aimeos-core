@@ -44,7 +44,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if ( ( $result = call_user_func_array( array( $this->_manager, $name ), $param ) ) === false ) {
+		if( ( $result = call_user_func_array( array( $this->_manager, $name ), $param ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 

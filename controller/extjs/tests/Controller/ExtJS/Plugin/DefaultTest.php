@@ -53,7 +53,7 @@ class Controller_ExtJS_Plugin_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->assertEquals( 1, count( $plugin ) );
-		$this->assertEquals( reset( $plugin )->{'plugin.provider'}, 'Shipping,Example');
+		$this->assertEquals( reset( $plugin )->{'plugin.provider'}, 'Shipping,Example' );
 	}
 
 

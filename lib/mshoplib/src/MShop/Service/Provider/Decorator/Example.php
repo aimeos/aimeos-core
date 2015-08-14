@@ -57,7 +57,7 @@ class MShop_Service_Provider_Decorator_Example
 		$list = $this->_getProvider()->getConfigBE();
 
 		foreach( $this->_beConfig as $key => $config ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
 		return $list;
@@ -73,7 +73,7 @@ class MShop_Service_Provider_Decorator_Example
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
-		if ( $basket->getLocale()->getLanguageId() === 'en' ) {
+		if( $basket->getLocale()->getLanguageId() === 'en' ) {
 			return $this->_getProvider()->isAvailable( $basket );
 		}
 		return false;

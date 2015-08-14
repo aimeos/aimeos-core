@@ -17,13 +17,13 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext());
+		$this->_object = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
 	}
 
 
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -60,50 +60,50 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf('MShop_Locale_Item_Interface', $this->_object->createItem());
+		$this->assertInstanceOf( 'MShop_Locale_Item_Interface', $this->_object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('site') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('site', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'site' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'site', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('language') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('language', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'language' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'language', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('currency') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('currency', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'currency' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'currency', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('site', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'site', 'unknown' );
 	}
 
 
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('==', 'locale.site.code', 'unittest'));
-		$items = $this->_object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
+		$items = $this->_object->searchItems( $search );
 
-		if ( ( $tmpItem = reset($items) ) === false ) {
-			throw new Exception('No locale item found for code: "unit"');
+		if( ( $tmpItem = reset( $items ) ) === false ) {
+			throw new Exception( 'No locale item found for code: "unit"' );
 		}
 
-		$item = $this->_object->getItem($tmpItem->getId());
+		$item = $this->_object->getItem( $tmpItem->getId() );
 
-		$this->assertEquals($tmpItem->getId(), $item->getId());
-		$this->assertEquals($tmpItem->getSiteId(), $item->getSiteId());
-		$this->assertEquals('de', $item->getLanguageId());
-		$this->assertEquals('EUR', $item->getCurrencyId());
-		$this->assertEquals(0, $item->getPosition());
+		$this->assertEquals( $tmpItem->getId(), $item->getId() );
+		$this->assertEquals( $tmpItem->getSiteId(), $item->getSiteId() );
+		$this->assertEquals( 'de', $item->getLanguageId() );
+		$this->assertEquals( 'EUR', $item->getCurrencyId() );
+		$this->assertEquals( 0, $item->getPosition() );
 	}
 
 
@@ -113,7 +113,7 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'locale.id', null );
-		$expr[] = $search->compare( '!=', 'locale.siteid', null);
+		$expr[] = $search->compare( '!=', 'locale.siteid', null );
 		$expr[] = $search->compare( '==', 'locale.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'locale.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'locale.position', 0 );
@@ -151,13 +151,13 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -166,11 +166,11 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare('==', 'locale.site.code', 'unittest') );
+		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 		$items = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($items) ) === false ) {
-			throw new Exception('No locale item found for code: "unit"');
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'No locale item found for code: "unit"' );
 		}
 
 		$item->setId( null );
@@ -218,8 +218,8 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach ( $this->_object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attribute);
+		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 

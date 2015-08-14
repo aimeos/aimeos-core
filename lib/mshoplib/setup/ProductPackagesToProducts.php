@@ -72,7 +72,7 @@ class MW_Setup_Task_ProductPackagesToProducts extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

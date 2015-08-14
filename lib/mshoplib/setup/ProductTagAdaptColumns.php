@@ -55,7 +55,7 @@ class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop', 'MShopAddTypeData');
+		return array( 'TablesCreateMShop', 'MShopAddTypeData' );
 	}
 
 
@@ -93,7 +93,7 @@ class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Abstract
 			{
 				$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
 
-				foreach ( $stmt AS $column=>$stmtList )
+				foreach( $stmt AS $column=>$stmtList )
 				{
 					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

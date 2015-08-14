@@ -58,7 +58,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 		}
 
 		$sitecode = $this->_additional->getLocale()->getSite()->getCode();
-		$this->_msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0);
+		$this->_msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
 		$this->_status( '' );
 
 
@@ -102,7 +102,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 				try {
 					$domainManager->saveItem( $type );
 					$num++;
-				} catch( Exception $e ) { ; } // if type was already available
+				} catch( Exception $e ) {; } // if type was already available
 			}
 
 			$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -160,7 +160,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 
 			foreach( $parts as $part )
 			{
-				$tmpname = $domainname .  '/' . $part;
+				$tmpname = $domainname . '/' . $part;
 
 				if( !isset( $this->_domainManagers[$tmpname] ) ) {
 					$this->_domainManagers[$tmpname] = $this->_domainManagers[$domainname]->getSubManager( $part );

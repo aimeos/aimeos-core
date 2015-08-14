@@ -59,10 +59,10 @@ class Controller_ExtJS_Product_Stock_DefaultTest extends PHPUnit_Framework_TestC
 		$ctx = TestHelper::getContext();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $ctx );
-		$warehouseManager = $productManager->getSubManager('stock')->getSubManager('warehouse');
+		$warehouseManager = $productManager->getSubManager( 'stock' )->getSubManager( 'warehouse' );
 
 		$search = $warehouseManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.code', 'default') );
+		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.code', 'default' ) );
 		$search->setSlice( 0, 1 );
 		$items = $warehouseManager->searchItems( $search );
 
@@ -71,7 +71,7 @@ class Controller_ExtJS_Product_Stock_DefaultTest extends PHPUnit_Framework_TestC
 		}
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '~=', 'product.label', 'Cheapest') );
+		$search->setConditions( $search->compare( '~=', 'product.label', 'Cheapest' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $productItem = reset( $items ) ) === false ) {

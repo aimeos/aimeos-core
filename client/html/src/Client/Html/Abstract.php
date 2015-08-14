@@ -305,7 +305,7 @@ abstract class Client_Html_Abstract
 
 		$subnames = $this->_createSubNames( $client );
 
-		$classname = 'Client_Html_'. $subnames . '_' . $name;
+		$classname = 'Client_Html_' . $subnames . '_' . $name;
 		$interface = 'Client_Html_Interface';
 
 		if( class_exists( $classname ) === false ) {
@@ -410,7 +410,7 @@ abstract class Client_Html_Abstract
 	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
 	 * @todo 2015.03 Remove $confpath and $default parameters
 	 */
-	protected function _getSubClients( $confpath = null , array $default = array() )
+	protected function _getSubClients( $confpath = null, array $default = array() )
 	{
 		if( !isset( $this->_subclients ) )
 		{
@@ -505,7 +505,7 @@ abstract class Client_Html_Abstract
 	 *
 	 * @param string $type Type of the cache entry, i.e. "body" or "header"
 	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
-	 * @param array $prefixes List of prefixes of all parameters that are relevant for generating the output
+	 * @param string[] $prefixes List of prefixes of all parameters that are relevant for generating the output
 	 * @param string $confkey Configuration key prefix that matches all relevant settings for the component
 	 * @return string Cached entry or empty string if not available
 	 */
@@ -564,7 +564,7 @@ abstract class Client_Html_Abstract
 	 *
 	 * @param string $type Type of the cache entry, i.e. "body" or "header"
 	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
-	 * @param array $prefixes List of prefixes of all parameters that are relevant for generating the output
+	 * @param string[] $prefixes List of prefixes of all parameters that are relevant for generating the output
 	 * @param string $confkey Configuration key prefix that matches all relevant settings for the component
 	 * @param string $value Value string that should be stored for the given key
 	 * @param array $tags List of tag strings that should be assoicated to the
@@ -610,8 +610,8 @@ abstract class Client_Html_Abstract
 		$marker = '<!-- ' . $marker . ' -->';
 		$start = strpos( $content, $marker );
 
-		if( $start !== false && ( $end = strpos( $content, $marker, $start+1 ) ) !== false ) {
-			return substr_replace( $content, $section, $start, $end - $start + strlen( $marker) );
+		if( $start !== false && ( $end = strpos( $content, $marker, $start + 1 ) ) !== false ) {
+			return substr_replace( $content, $section, $start, $end - $start + strlen( $marker ) );
 		}
 
 		return $content;

@@ -431,6 +431,7 @@ class Controller_Frontend_Basket_Default
 	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Order product item
 	 * @param MShop_Product_Item_Interface $productItem Bundle product item
 	 * @param array $variantAttributeIds List of product variant attribute IDs
+	 * @param string $warehouse
 	 */
 	protected function _addBundleProducts( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
 		MShop_Product_Item_Interface $productItem, array $variantAttributeIds, $warehouse )
@@ -623,7 +624,7 @@ class Controller_Frontend_Basket_Default
 				$attrIds = array();
 
 				foreach( $product->getAttributes() as $attrItem ) {
-					$attrIds[ $attrItem->getType() ][] = $attrItem->getAttributeId();
+					$attrIds[$attrItem->getType()][] = $attrItem->getAttributeId();
 				}
 
 				$this->addProduct(
@@ -669,13 +670,13 @@ class Controller_Frontend_Basket_Default
 				$attributes = array();
 
 				foreach( $item->getAttributes() as $attrItem ) {
-					$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+					$attributes[$attrItem->getCode()] = $attrItem->getValue();
 				}
 
 				$this->setService( $type, $item->getServiceId(), $attributes );
 				$basket->deleteService( $type );
 			}
-			catch( Exception $e ) { ; } // Don't notify the user as appropriate services can be added automatically
+			catch( Exception $e ) {; } // Don't notify the user as appropriate services can be added automatically
 		}
 
 		return $errors;
@@ -953,7 +954,7 @@ class Controller_Frontend_Basket_Default
 	 * @param string $domain Product manager search key
 	 * @param string $key Domain manager search key
 	 * @param string $value Unique domain identifier
-	 * @param array $ref List of referenced items that should be fetched too
+	 * @param string[] $ref List of referenced items that should be fetched too
 	 * @return MShop_Common_Item_Interface Domain item object
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
@@ -994,7 +995,7 @@ class Controller_Frontend_Basket_Default
 			$listTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
 
 			$listTypeSearch = $listTypeManager->createSearch( true );
-			$expr = array (
+			$expr = array(
 				$listTypeSearch->compare( '==', 'product.list.type.domain', $domain ),
 				$listTypeSearch->compare( '==', 'product.list.type.code', $code ),
 				$listTypeSearch->getConditions(),

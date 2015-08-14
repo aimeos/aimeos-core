@@ -233,19 +233,19 @@ class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'media.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['media.id'], $item->getId());
-		$this->assertEquals($list['media.domain'], $item->getDomain());
-		$this->assertEquals($list['media.label'], $item->getLabel());
-		$this->assertEquals($list['media.languageid'], $item->getLanguageId());
-		$this->assertEquals($list['media.typeid'], $item->getTypeId());
-		$this->assertEquals($list['media.mimetype'], $item->getMimetype());
-		$this->assertEquals($list['media.preview'], $item->getPreview());
-		$this->assertEquals($list['media.url'], $item->getUrl());
-		$this->assertEquals($list['media.status'], $item->getStatus());
+		$this->assertEquals( $list['media.id'], $item->getId() );
+		$this->assertEquals( $list['media.domain'], $item->getDomain() );
+		$this->assertEquals( $list['media.label'], $item->getLabel() );
+		$this->assertEquals( $list['media.languageid'], $item->getLanguageId() );
+		$this->assertEquals( $list['media.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['media.mimetype'], $item->getMimetype() );
+		$this->assertEquals( $list['media.preview'], $item->getPreview() );
+		$this->assertEquals( $list['media.url'], $item->getUrl() );
+		$this->assertEquals( $list['media.status'], $item->getStatus() );
 	}
 
 

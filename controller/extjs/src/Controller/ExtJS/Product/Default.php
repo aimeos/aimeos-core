@@ -64,11 +64,11 @@ class Controller_ExtJS_Product_Default
 
 
 	/**
-	* Deletes an item or a list of items.
-	*
-	* @param stdClass $params Associative list of parameters
-	* @return array Associative list with success value
-	*/
+	 * Deletes an item or a list of items.
+	 *
+	 * @param stdClass $params Associative list of parameters
+	 * @return array Associative list with success value
+	 */
 	public function deleteItems( stdClass $params )
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
@@ -88,11 +88,11 @@ class Controller_ExtJS_Product_Default
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain.'.list.refid', $ids ),
-				$search->compare( '==', $domain.'.list.domain', 'product' )
+				$search->compare( '==', $domain . '.list.refid', $ids ),
+				$search->compare( '==', $domain . '.list.domain', 'product' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
 
 			$start = 0;
 

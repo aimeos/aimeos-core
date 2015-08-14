@@ -55,11 +55,11 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'price.type.editor', $this->_editor ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -110,7 +110,7 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($result)) === false ) {
+		if( ( $expected = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No type item found for code "%1$s"', 'product' ) );
 		}
 
@@ -143,7 +143,7 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'price.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
@@ -162,7 +162,7 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

@@ -84,7 +84,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_Test
 				'attribute.list.refid' => -1,
 				'attribute.list.datestart' => '2000-01-01 00:00:00',
 				'attribute.list.dateend' => '2000-01-01 00:00:00',
-				'attribute.list.config' => array('test' => 'unit'),
+				'attribute.list.config' => array( 'test' => 'unit' ),
 				'attribute.list.position' => 1,
 				'attribute.list.status' => 1,
 			),

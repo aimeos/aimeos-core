@@ -58,7 +58,7 @@ class MW_Setup_Task_ColumnCodeCollateToUtf8Bin extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -87,7 +87,7 @@ class MW_Setup_Task_ColumnCodeCollateToUtf8Bin extends MW_Setup_Task_Abstract
 
 			if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->columnExists( $table, $column ) === true
-				&& $this->_schema->getColumnDetails( $table, $column )->getCollationType() !== 'utf8_bin')
+				&& $this->_schema->getColumnDetails( $table, $column )->getCollationType() !== 'utf8_bin' )
 			{
 				$this->_execute( $stmt );
 				$this->_status( 'migrated' );

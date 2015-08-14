@@ -61,7 +61,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 
 		foreach( $order->getProducts() as $product )
 		{
-			$sum->addItem( $product->getPrice(), $product->getQuantity());
+			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 			$count += $product->getQuantity();
 		}
 

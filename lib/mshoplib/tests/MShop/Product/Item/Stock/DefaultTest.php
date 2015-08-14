@@ -56,7 +56,7 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
+		$this->_object->setId( null );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertNull( $this->_object->getId() );
@@ -74,7 +74,7 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetProductId()
 	{
-		$this->_object->setProductId(10000);
+		$this->_object->setProductId( 10000 );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 10000, $this->_object->getProductId() );
@@ -87,7 +87,7 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetWarehouseId()
 	{
-		$this->_object->setWarehouseId(30000);
+		$this->_object->setWarehouseId( 30000 );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 30000, $this->_object->getWarehouseId() );
@@ -100,7 +100,7 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetStocklevel()
 	{
-		$this->_object->setStocklevel(200);
+		$this->_object->setStocklevel( 200 );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( 200, $this->_object->getStocklevel() );
@@ -113,7 +113,7 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetDateBack()
 	{
-		$this->_object->setDateBack('2010-10-10 01:10:00');
+		$this->_object->setDateBack( '2010-10-10 01:10:00' );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertEquals( '2010-10-10 01:10:00', $this->_object->getDateBack() );
@@ -147,15 +147,15 @@ class MShop_Product_Item_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 			'product.stock.dateback' => '2000-01-01 00:00:00',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['product.stock.id'], $item->getId());
-		$this->assertEquals($list['product.stock.productid'], $item->getProductId());
-		$this->assertEquals($list['product.stock.warehouseid'], $item->getWarehouseId());
-		$this->assertEquals($list['product.stock.stocklevel'], $item->getStocklevel());
-		$this->assertEquals($list['product.stock.dateback'], $item->getDateBack());
+		$this->assertEquals( $list['product.stock.id'], $item->getId() );
+		$this->assertEquals( $list['product.stock.productid'], $item->getProductId() );
+		$this->assertEquals( $list['product.stock.warehouseid'], $item->getWarehouseId() );
+		$this->assertEquals( $list['product.stock.stocklevel'], $item->getStocklevel() );
+		$this->assertEquals( $list['product.stock.dateback'], $item->getDateBack() );
 	}
 
 

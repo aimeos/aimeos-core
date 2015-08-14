@@ -90,7 +90,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * @param string|array $value Value of the product attribute
 	 * @return void
 	 */
-	public function setValue($value);
+	public function setValue( $value );
 
 	/**
 	 * Returns the localized name of the product attribute.
@@ -105,7 +105,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * @param string $name Localized name of the product attribute
 	 * @return void
 	 */
-	public function setName($name);
+	public function setName( $name );
 
 	/**
 	 * Copys all data from a given attribute item.

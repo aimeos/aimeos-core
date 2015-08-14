@@ -39,7 +39,7 @@ class MShop_Coupon_Provider_FreeShipping
 			) );
 		}
 
-		$price = clone ( $base->getService('delivery')->getPrice() );
+		$price = clone ( $base->getService( 'delivery' )->getPrice() );
 		$price->setRebate( $price->getCosts() );
 		$price->setCosts( -$price->getCosts() );
 

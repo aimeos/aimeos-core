@@ -35,7 +35,7 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 		$this->_object->setObject( $this->_object );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
@@ -51,7 +51,7 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 		{
 			$orderProduct = $orderProductManager->createItem();
 			$orderProduct->copyFrom( $product );
-			$orderProducts[ $product->getCode() ] = $orderProduct;
+			$orderProducts[$product->getCode()] = $orderProduct;
 		}
 
 		$orderProducts['CNC']->setPrice( $price );

@@ -84,7 +84,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 		$prodcode = array();
 		foreach( $testdata['product/stock'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for prodid are set wrong "%1$s"', $dataset['prodid'] ) );
 			}
 
@@ -97,7 +97,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 		$parentIds = array();
 		foreach( $productManager->searchItems( $search ) as $item )
 		{
-			$parentIds[ 'product/'.$item->getCode() ] = $item->getId();
+			$parentIds['product/' . $item->getCode()] = $item->getId();
 		}
 
 		$wareIds = array();
@@ -113,24 +113,24 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 			$ware->setStatus( $dataset['status'] );
 
 			$productStockWarehouse->saveItem( $ware );
-			$wareIds[ $key ] = $ware->getId();
+			$wareIds[$key] = $ware->getId();
 		}
 
 		$stock = $productStockManager->createItem();
 		foreach( $testdata['product/stock'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['prodid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['prodid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No product ID found for "%1$s"', $dataset['prodid'] ) );
 			}
 
-			if( !isset( $wareIds[ $dataset['warehouseid'] ] ) ) {
+			if( !isset( $wareIds[$dataset['warehouseid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No warehouse ID found for "%1$s"', $dataset['warehouseid'] ) );
 			}
 
 			$stock->setId( null );
-			$stock->setProductId( $parentIds[ $dataset['prodid'] ] );
-			$stock->setWarehouseId( $wareIds[ $dataset['warehouseid'] ] );
-			$stock->setStocklevel(  $dataset['stocklevel'] );
+			$stock->setProductId( $parentIds[$dataset['prodid']] );
+			$stock->setWarehouseId( $wareIds[$dataset['warehouseid']] );
+			$stock->setStocklevel( $dataset['stocklevel'] );
 			$stock->setDateBack( $dataset['backdate'] );
 
 			$productStockManager->saveItem( $stock, false );

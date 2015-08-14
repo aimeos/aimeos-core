@@ -211,7 +211,7 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetPaymentAddress()
 	{
-		$this->_address->setCompany('unitCompany0815');
+		$this->_address->setCompany( 'unitCompany0815' );
 		$this->_object->setPaymentAddress( $this->_address );
 		$this->assertEquals( $this->_address, $this->_object->getPaymentAddress() );
 	}
@@ -219,8 +219,8 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$address = new MShop_Common_Item_Address_Default('common.address.');
-		$item = new MShop_Customer_Item_Default($address);
+		$address = new MShop_Common_Item_Address_Default( 'common.address.' );
+		$item = new MShop_Customer_Item_Default( $address );
 
 		$list = array(
 			'customer.id' => 1,
@@ -250,17 +250,17 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'customer.website' => 'www.metaways.de',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['customer.id'], $item->getId());
-		$this->assertEquals($list['customer.code'], $item->getCode());
-		$this->assertEquals($list['customer.label'], $item->getLabel());
-		$this->assertEquals($list['customer.birthday'], $item->getBirthday());
-		$this->assertEquals($list['customer.status'], $item->getStatus());
-		$this->assertEquals($list['customer.password'], $item->getPassword());
-		$this->assertEquals($list['customer.dateverified'], $item->getDateVerified());
+		$this->assertEquals( $list['customer.id'], $item->getId() );
+		$this->assertEquals( $list['customer.code'], $item->getCode() );
+		$this->assertEquals( $list['customer.label'], $item->getLabel() );
+		$this->assertEquals( $list['customer.birthday'], $item->getBirthday() );
+		$this->assertEquals( $list['customer.status'], $item->getStatus() );
+		$this->assertEquals( $list['customer.password'], $item->getPassword() );
+		$this->assertEquals( $list['customer.dateverified'], $item->getDateVerified() );
 
 		$address = $item->getPaymentAddress();
 		$this->assertEquals( $list['customer.company'], $address->getCompany() );

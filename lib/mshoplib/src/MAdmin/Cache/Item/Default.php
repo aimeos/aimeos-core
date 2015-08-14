@@ -54,7 +54,7 @@ class MAdmin_Cache_Item_Default
 	{
 		if( $id === $this->getId() ) { return; }
 
-		$this->_values['id'] = (string) $id ;
+		$this->_values['id'] = (string) $id;
 		$this->setModified();
 	}
 

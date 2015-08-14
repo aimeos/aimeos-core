@@ -67,7 +67,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[ $item->getId() ] );
+		$this->assertEquals( 4, $result[$item->getId()] );
 	}
 
 
@@ -85,7 +85,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
-		$result = $productManager->searchItems( $search, array('attribute') );
+		$result = $productManager->searchItems( $search, array( 'attribute' ) );
 
 		if( ( $product = reset( $result ) ) === false ) {
 			throw new Exception( 'No product item with code CNE found!' );
@@ -123,8 +123,8 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 

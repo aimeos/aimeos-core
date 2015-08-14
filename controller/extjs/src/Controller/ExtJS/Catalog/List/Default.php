@@ -53,7 +53,7 @@ class Controller_ExtJS_Catalog_List_Default
 			$item->fromArray( (array) $this->_transformValues( $entry ) );
 			$manager->saveItem( $item );
 
-			$domains[ $item->getDomain() ] = true;
+			$domains[$item->getDomain()] = true;
 			$refIds[] = $item->getRefId();
 			$ids[] = $item->getId();
 		}
@@ -97,7 +97,7 @@ class Controller_ExtJS_Catalog_List_Default
 		foreach( $result as $item )
 		{
 			if( ( $domain = $item->getDomain() ) != '' ) {
-				$idLists[ $domain ][] = $item->getRefId();
+				$idLists[$domain][] = $item->getRefId();
 			}
 			$listItems[] = (object) $item->toArray();
 		}

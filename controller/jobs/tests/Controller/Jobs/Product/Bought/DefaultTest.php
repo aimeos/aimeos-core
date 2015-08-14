@@ -67,8 +67,8 @@ class Controller_Jobs_Product_Bought_DefaultTest extends PHPUnit_Framework_TestC
 
 		MShop_Factory::injectManager( $this->_context, 'product/list', $stub );
 
-		$stub->expects( $this->atLeastOnce() )->method('deleteItems');
-		$stub->expects( $this->atLeastOnce() )->method('saveItem');
+		$stub->expects( $this->atLeastOnce() )->method( 'deleteItems' );
+		$stub->expects( $this->atLeastOnce() )->method( 'saveItem' );
 
 		$this->_object->run();
 	}

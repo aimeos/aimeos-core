@@ -284,7 +284,7 @@ class MAdmin_Cache_Manager_Default
 			throw new MAdmin_Cache_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( ! $item->isModified() ) {
+		if( !$item->isModified() ) {
 			return;
 		}
 
@@ -482,12 +482,12 @@ class MAdmin_Cache_Manager_Default
 			 * @see madmin/cache/manager/default/settag
 			 * @see madmin/cache/manager/default/search
 			 */
-			$cfgPathCount =  'madmin/cache/manager/default/count';
+			$cfgPathCount = 'madmin/cache/manager/default/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

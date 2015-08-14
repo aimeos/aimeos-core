@@ -15,11 +15,11 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 	/**
-	* Sets up the fixture, for example, opens a network connection.
-	* This method is called before a test is executed.
-	*
-	* @access protected
-	*/
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function setUp()
 	{
 		$this->_values = array(
@@ -33,17 +33,17 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Order_Item_Status_Default($this->_values);
+		$this->_object = new MShop_Order_Item_Status_Default( $this->_values );
 
 	}
 
 
 	/**
-	* Tears down the fixture, for example, closes a network connection.
-	* This method is called after a test is executed.
-	*
-	* @access protected
-	*/
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 *
+	 * @access protected
+	 */
 	protected function tearDown()
 	{
 		$this->_object = null;
@@ -56,16 +56,16 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertEquals(null, $this->_object->getId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setId( null );
+		$this->assertEquals( null, $this->_object->getId() );
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->_object->setId(15);
-		$this->assertEquals(15, $this->_object->getId() );
-		$this->assertFalse($this->_object->isModified());
+		$this->_object->setId( 15 );
+		$this->assertEquals( 15, $this->_object->getId() );
+		$this->assertFalse( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId(6);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 6 );
 	}
 
 	public function testGetSiteId()
@@ -80,9 +80,9 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->_object->setParentId(12);
+		$this->_object->setParentId( 12 );
 		$this->assertEquals( 12, $this->_object->getParentId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetType()
@@ -92,9 +92,9 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->_object->setType('unittest');
+		$this->_object->setType( 'unittest' );
 		$this->assertEquals( 'unittest', $this->_object->getType() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetValue()
@@ -104,9 +104,9 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetValue()
 	{
-		$this->_object->setValue('was changed by unittest');
+		$this->_object->setValue( 'was changed by unittest' );
 		$this->assertEquals( 'was changed by unittest', $this->_object->getValue() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetTimeModified()
@@ -136,14 +136,14 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.status.value' => 'value',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.status.id'], $item->getId());
-		$this->assertEquals($list['order.status.parentid'], $item->getParentId());
-		$this->assertEquals($list['order.status.type'], $item->getType());
-		$this->assertEquals($list['order.status.value'], $item->getValue());
+		$this->assertEquals( $list['order.status.id'], $item->getId() );
+		$this->assertEquals( $list['order.status.parentid'], $item->getParentId() );
+		$this->assertEquals( $list['order.status.type'], $item->getType() );
+		$this->assertEquals( $list['order.status.value'], $item->getValue() );
 	}
 
 
@@ -155,7 +155,7 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->_object->getId(), $list['order.status.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $list['order.status.siteid'] );
 		$this->assertEquals( $this->_object->getParentId(), $list['order.status.parentid'] );
-		$this->assertEquals( $this->_object->getType(), $list['order.status.type'] );;
+		$this->assertEquals( $this->_object->getType(), $list['order.status.type'] ); ;
 		$this->assertEquals( $this->_object->getValue(), $list['order.status.value'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $list['order.status.mtime'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $list['order.status.ctime'] );

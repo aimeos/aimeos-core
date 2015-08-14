@@ -43,7 +43,7 @@ class Controller_ExtJS_Order_DefaultTest extends PHPUnit_Framework_TestCase
 				'&&' => array(
 					0 => array( '~=' => (object) array( 'order.type' => 'web' ) ),
 					1 => array( '==' => (object) array( 'order.statusdelivery' => 4 ) ),
-					2 => array('==' => (object) array( 'order.editor' => 'core:unittest' ) )
+					2 => array( '==' => (object) array( 'order.editor' => 'core:unittest' ) )
 				)
 			),
 			'sort' => 'order.baseid',
@@ -67,7 +67,7 @@ class Controller_ExtJS_Order_DefaultTest extends PHPUnit_Framework_TestCase
 		$search = $baseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
 		$results = $baseManager->searchItems( $search );
-		if ( ( $expected = reset( $results ) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No items found.' );
 		}
 

@@ -93,19 +93,19 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 			$type->setStatus( $dataset['status'] );
 
 			$serviceTypeManager->saveItem( $type );
-			$typeIds[ $key ] = $type->getId();
+			$typeIds[$key] = $type->getId();
 		}
 
 		$parent = $serviceManager->createItem();
 
 		foreach( $testdata['service'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $typeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No service type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$parent->setId( null );
-			$parent->setTypeId( $typeIds[ $dataset['typeid'] ] );
+			$parent->setTypeId( $typeIds[$dataset['typeid']] );
 			$parent->setPosition( $dataset['pos'] );
 			$parent->setCode( $dataset['code'] );
 			$parent->setLabel( $dataset['label'] );

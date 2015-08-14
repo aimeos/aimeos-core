@@ -58,7 +58,7 @@ abstract class MShop_Common_Factory_Abstract
 				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$manager =  new $classname( $context, $manager );
+			$manager = new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
 				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
@@ -110,20 +110,20 @@ abstract class MShop_Common_Factory_Abstract
 		foreach( $decorators as $key => $name )
 		{
 			if( in_array( $name, $excludes ) ) {
-				unset( $decorators[ $key ] );
+				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', array() );
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_Decorator_';
+		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', array() );
-		$manager =  self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;
 	}
@@ -147,7 +147,7 @@ abstract class MShop_Common_Factory_Abstract
 			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$manager =  new $classname( $context );
+		$manager = new $classname( $context );
 
 		if( !( $manager instanceof $interface ) ) {
 			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );

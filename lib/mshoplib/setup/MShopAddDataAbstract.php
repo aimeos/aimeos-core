@@ -62,7 +62,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addAttributes( $parentid, array $data, $domain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -126,7 +126,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addMedia( $parentid, array $data, $domain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -192,7 +192,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addPrices( $parentid, array $data, $domain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'price' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -260,7 +260,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addTexts( $parentid, array $data, $domain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$textManager = MShop_Factory::createManager( $context, 'text' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -324,7 +324,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addProducts( $parentid, array $data, $domain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -337,7 +337,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		$codes = array();
 
 		foreach( $data as $entry ) {
-			$codes[ $entry['code'] ] = null;
+			$codes[$entry['code']] = null;
 		}
 
 		$search = $productManager->createSearch();
@@ -345,13 +345,13 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		$products = $productManager->searchItems( $search );
 
 		foreach( $products as $product ) {
-			$codes[ $product->getCode() ] = $product->getId();
+			$codes[$product->getCode()] = $product->getId();
 		}
 
 
 		foreach( $data as $entry )
 		{
-			if( !isset( $codes[ $entry['code'] ] ) ) {
+			if( !isset( $codes[$entry['code']] ) ) {
 				throw new Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
 			}
 
@@ -362,7 +362,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$listItem->setConfig( $entry['list-config'] );
 			$listItem->setPosition( $entry['list-position'] );
 			$listItem->setStatus( $entry['list-status'] );
-			$listItem->setRefId( $codes[ $entry['code'] ] );
+			$listItem->setRefId( $codes[$entry['code']] );
 
 			$listManager->saveItem( $listItem, false );
 		}
@@ -381,7 +381,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 
 		$warehouses = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
-			$warehouses[ $item->getCode() ] = $id;
+			$warehouses[$item->getCode()] = $id;
 		}
 
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
@@ -394,7 +394,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$item->setId( null );
 			$item->setDateBack( $entry['dateback'] );
 			$item->setStockLevel( $entry['stocklevel'] );
-			$item->setWarehouseId( $warehouses[ $entry['warehouse'] ] );
+			$item->setWarehouseId( $warehouses[$entry['warehouse']] );
 
 			$manager->saveItem( $item, false );
 		}
@@ -451,7 +451,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _removeItems( $parentid, $name, $domain, $refdomain )
 	{
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = MShop_Factory::createManager( $context, $refdomain );
@@ -492,7 +492,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function _removeListItems( $parentid, $name, $refdomain )
 	{
 		$start = 0;
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = MShop_Factory::createManager( $context, $refdomain );
@@ -514,7 +514,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			foreach( $result as $id => $listItem )
 			{
 				$refIds[] = $listItem->getRefId();
-				$map[ $listItem->getRefId() ][] = $id;
+				$map[$listItem->getRefId()][] = $id;
 			}
 
 

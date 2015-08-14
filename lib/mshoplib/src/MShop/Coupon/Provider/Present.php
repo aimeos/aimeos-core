@@ -31,7 +31,7 @@ class MShop_Coupon_Provider_Present
 
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity']) )
+		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',

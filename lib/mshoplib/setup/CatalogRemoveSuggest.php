@@ -33,7 +33,7 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop', 'MShopAddTypeData');
+		return array( 'TablesCreateMShop', 'MShopAddTypeData' );
 	}
 
 

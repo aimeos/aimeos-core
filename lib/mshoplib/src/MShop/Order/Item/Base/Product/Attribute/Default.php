@@ -26,9 +26,9 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 * @param array $values Associative array of order product attribute values. Possible
 	 * keys: 'id', 'ordprodid', 'value', 'code', 'mtime'
 	 */
-	public function __construct(array $values = array())
+	public function __construct( array $values = array() )
 	{
-		parent::__construct('order.base.product.attribute.', $values);
+		parent::__construct( 'order.base.product.attribute.', $values );
 
 		$this->_values = $values;
 	}
@@ -52,7 +52,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function setAttributeId( $id )
 	{
-		if ( $id == $this->getAttributeId() ) { return; }
+		if( $id == $this->getAttributeId() ) { return; }
 
 		$this->_values['attrid'] = (string) $id;
 		$this->setModified();
@@ -77,7 +77,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function setProductId( $id )
 	{
-		if ( $id == $this->getProductId() ) { return; }
+		if( $id == $this->getProductId() ) { return; }
 
 		$this->_values['ordprodid'] = (string) $id;
 		$this->setModified();
@@ -102,7 +102,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
@@ -129,7 +129,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -152,9 +152,9 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 *
 	 * @param string|array $value Value of the product attribute
 	 */
-	public function setValue($value)
+	public function setValue( $value )
 	{
-		if ( $value == $this->getValue() ) { return; }
+		if( $value == $this->getValue() ) { return; }
 
 		$this->_values['value'] = $value;
 		$this->setModified();
@@ -177,9 +177,9 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 *
 	 * @param string $name Localized name of the product attribute
 	 */
-	public function setName($name)
+	public function setName( $name )
 	{
-		if ( $name == $this->getName() ) { return; }
+		if( $name == $this->getName() ) { return; }
 
 		$this->_values['name'] = (string) $name;
 		$this->setModified();

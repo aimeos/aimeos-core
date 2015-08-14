@@ -29,7 +29,7 @@ class MShop_Locale_Item_Site_Default
 	public function __construct( array $values = array( ), array $children = array() )
 	{
 		MW_Common_Abstract::checkClassList( 'MShop_Locale_Item_Site_Interface', $children );
-		parent::__construct('locale.site.', $values);
+		parent::__construct( 'locale.site.', $values );
 
 		$this->_values = $values;
 		$this->_children = $children;
@@ -67,7 +67,7 @@ class MShop_Locale_Item_Site_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -92,7 +92,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -140,7 +140,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

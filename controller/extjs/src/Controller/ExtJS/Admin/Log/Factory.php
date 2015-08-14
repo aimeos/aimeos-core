@@ -53,13 +53,13 @@ class Controller_ExtJS_Admin_Log_Factory
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/extjs/admin/log/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/extjs/admin/log/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_ExtJS_Admin_Log_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'Controller_ExtJS_Admin_Log_' . $name : '<not a string>';
 			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 

@@ -382,12 +382,12 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
-	* Re-writes the index entries for all products that are search result of given criteria
-	*
-	* @param MW_Common_Criteria_Interface $search Search criteria
-	* @param array $domains List of domains to be
-	* @param integer $size Size of a chunk of products to handle at a time
-	*/
+	 * Re-writes the index entries for all products that are search result of given criteria
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param array $domains List of domains to be
+	 * @param integer $size Size of a chunk of products to handle at a time
+	 */
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );

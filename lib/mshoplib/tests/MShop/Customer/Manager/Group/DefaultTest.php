@@ -69,7 +69,7 @@ class MShop_Common_Manager_Group_AbstractTest extends PHPUnit_Framework_TestCase
 		$item->setCode( 'unittest-group' );
 		$item->setLabel( 'unittest group' );
 
-		$this->_object->saveItem($item);
+		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
@@ -83,22 +83,22 @@ class MShop_Common_Manager_Group_AbstractTest extends PHPUnit_Framework_TestCase
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
-		$this->assertEquals( $item->getCode(), $itemSaved->getCode());
-		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel());
+		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
+		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
-		$this->assertRegExp('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified());
+		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
-		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode());
-		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel());
+		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
+		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 

@@ -30,7 +30,7 @@ interface MShop_Product_Item_Interface
 	 * @param integer $status New status of the product
 	 * @return void
 	 */
-	public function setStatus($status);
+	public function setStatus( $status );
 
 	/**
 	 * Returns the code of the product item.
@@ -45,7 +45,7 @@ interface MShop_Product_Item_Interface
 	 * @param string $code New code of the product item
 	 * @return void
 	 */
-	public function setCode($code);
+	public function setCode( $code );
 
 	/**
 	 * Returns the supplier code of the product.
@@ -75,7 +75,7 @@ interface MShop_Product_Item_Interface
 	 * @param string $label New label of the product item
 	 * @return void
 	 */
-	public function setLabel($label);
+	public function setLabel( $label );
 
 	/**
 	 * Returns the starting point of time, in which the product is available.
@@ -90,7 +90,7 @@ interface MShop_Product_Item_Interface
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return void
 	 */
-	public function setDateStart($date);
+	public function setDateStart( $date );
 
 	/**
 	 * Returns the ending point of time, in which the product is available.
@@ -105,6 +105,6 @@ interface MShop_Product_Item_Interface
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return void
 	 */
-	public function setDateEnd($date);
+	public function setDateEnd( $date );
 
 }

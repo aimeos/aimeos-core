@@ -40,7 +40,7 @@ class MW_Setup_Task_AttributeChangeTypeidNotNull extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop', 'MShopAddTypeData');
+		return array( 'TablesCreateMShop', 'MShopAddTypeData' );
 	}
 
 

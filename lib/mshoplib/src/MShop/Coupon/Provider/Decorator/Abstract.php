@@ -30,7 +30,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 * @param string $code Coupon code entered by the customer
 	 * @param MShop_Coupon_Provider_Interface $provider Coupon provider interface
 	 */
-	public function __construct(MShop_Context_Item_Interface $context,
+	public function __construct( MShop_Context_Item_Interface $context,
 		MShop_Coupon_Item_Interface $couponItem, $code, MShop_Coupon_Provider_Interface $provider )
 	{
 		$this->_provider = $provider;

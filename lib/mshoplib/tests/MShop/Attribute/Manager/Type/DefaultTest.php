@@ -37,7 +37,7 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -85,7 +85,7 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 
 
 		// search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.type.code', 'size' ),
 			$search->compare( '==', 'attribute.type.editor', $this->_editor ),
@@ -95,7 +95,7 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 		$results = $this->_object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -118,13 +118,13 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -161,14 +161,14 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

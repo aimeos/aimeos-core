@@ -127,8 +127,8 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -484,7 +484,7 @@ class MAdmin_Job_Manager_Default
 			 * @see madmin/job/manager/default/delete
 			 * @see madmin/job/manager/default/search
 			 */
-			$cfgPathCount =  'madmin/job/manager/default/count';
+			$cfgPathCount = 'madmin/job/manager/default/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -504,7 +504,7 @@ class MAdmin_Job_Manager_Default
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -696,8 +696,8 @@ class MAdmin_Job_Manager_Default
 		$context = $this->_getContext();
 		$siteId = $context->getLocale()->getSiteId();
 
-		$statement = $conn->create($sql);
-		$statement->bind(1, $siteId, MW_DB_Statement_Abstract::PARAM_INT);
+		$statement = $conn->create( $sql );
+		$statement->bind( 1, $siteId, MW_DB_Statement_Abstract::PARAM_INT );
 
 		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 

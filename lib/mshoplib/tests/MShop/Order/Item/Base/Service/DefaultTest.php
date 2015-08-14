@@ -56,7 +56,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 	public function testGetId()
@@ -144,14 +144,14 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetMediaUrl()
 	{
-		$this->assertEquals($this->_values['mediaurl'], $this->_object->getMediaUrl());
+		$this->assertEquals( $this->_values['mediaurl'], $this->_object->getMediaUrl() );
 	}
 
 	public function testSetMediaUrl()
 	{
-		$this->_object->setMediaUrl('testUrl');
-		$this->assertEquals('testUrl', $this->_object->getMediaUrl());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setMediaUrl( 'testUrl' );
+		$this->assertEquals( 'testUrl', $this->_object->getMediaUrl() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetType()
@@ -176,7 +176,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 		$this->_price->setCosts( '5.00' );
 		$this->_object->setPrice( $this->_price );
 		$this->assertFalse( $this->_object->isModified() );
-		$this->assertSame($this->_price, $this->_object->getPrice());
+		$this->assertSame( $this->_price, $this->_object->getPrice() );
 	}
 
 	public function testGetAttribute()
@@ -219,13 +219,13 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
-		$attrItem001->setCode( 'code_001');
-		$attrItem001->setValue( 'value_001');
+		$attrItem001->setCode( 'code_001' );
+		$attrItem001->setValue( 'value_001' );
 
 		$attrItem002 = $attManager->createItem();
-		$attrItem002->setCode( 'code_002');
+		$attrItem002->setCode( 'code_002' );
 		$attrItem002->setType( 'test_002' );
-		$attrItem002->setValue( 'value_002');
+		$attrItem002->setValue( 'value_002' );
 
 		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
 
@@ -321,7 +321,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Service_Default(new MShop_Price_Item_Default());
+		$item = new MShop_Order_Item_Base_Service_Default( new MShop_Price_Item_Default() );
 
 		$list = array(
 			'order.base.service.id' => 1,
@@ -332,16 +332,16 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 			'order.base.service.type' => 'delivery',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.base.service.id'], $item->getId());
-		$this->assertEquals($list['order.base.service.baseid'], $item->getBaseId());
-		$this->assertEquals($list['order.base.service.serviceid'], $item->getServiceId());
-		$this->assertEquals($list['order.base.service.code'], $item->getCode());
-		$this->assertEquals($list['order.base.service.name'], $item->getName());
-		$this->assertEquals($list['order.base.service.type'], $item->getType());
+		$this->assertEquals( $list['order.base.service.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.service.baseid'], $item->getBaseId() );
+		$this->assertEquals( $list['order.base.service.serviceid'], $item->getServiceId() );
+		$this->assertEquals( $list['order.base.service.code'], $item->getCode() );
+		$this->assertEquals( $list['order.base.service.name'], $item->getName() );
+		$this->assertEquals( $list['order.base.service.type'], $item->getType() );
 	}
 
 
@@ -370,7 +370,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 
 
@@ -381,7 +381,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends PHPUnit_Framework_TestCa
 		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.provider', 'default') );
+		$search->setConditions( $search->compare( '==', 'service.provider', 'default' ) );
 		$services = $manager->searchItems( $search );
 
 		if( ( $service = reset( $services ) ) !== false ) {

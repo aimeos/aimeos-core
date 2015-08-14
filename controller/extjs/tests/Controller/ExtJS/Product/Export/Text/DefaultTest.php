@@ -48,7 +48,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 
 		$searchResult = $productManager->searchItems( $criteria );
 
-		if ( ( $productItem = reset( $searchResult ) ) === false ) {
+		if( ( $productItem = reset( $searchResult ) ) === false ) {
 			throw new Exception( 'No item with product code CNE found' );
 		}
 
@@ -63,7 +63,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 		$this->assertTrue( file_exists( $file ) );
 
 		$zip = new ZipArchive();
-		$zip->open($file);
+		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
@@ -119,9 +119,9 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 		$expected = array(
 			'Product_Export_Text.createHttpOutput' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "array","name" => "lang","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "array", "name" => "lang", "optional" => true ),
 				),
 				"returns" => "",
 			),

@@ -55,7 +55,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 		}
 
 		$this->assertEquals( 1, count( $plugin ) );
-		$this->assertEquals( reset( $plugin )->{'plugin.provider'}, 'Shipping,Example');
+		$this->assertEquals( reset( $plugin )->{'plugin.provider'}, 'Shipping,Example' );
 	}
 
 
@@ -123,8 +123,8 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testCall()
 	{
-		$result = $this->_object->__call('getServiceDescription', array() );
-		$this->assertInternalType('array', $result);
+		$result = $this->_object->__call( 'getServiceDescription', array() );
+		$this->assertInternalType( 'array', $result );
 	}
 
 }

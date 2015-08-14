@@ -222,7 +222,7 @@ class Client_Html_Account_Favorite_Default
 
 			$items = array();
 			foreach( $manager->searchItems( $search ) as $item ) {
-				$items[ $item->getRefId() ] = $item;
+				$items[$item->getRefId()] = $item;
 			}
 
 
@@ -360,7 +360,7 @@ class Client_Html_Account_Favorite_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 			$search->setSortations( array( $search->sort( '-', 'customer.list.position' ) ) );
-			$search->setSlice( ($current-1) * $size, $size );
+			$search->setSlice( ( $current - 1 ) * $size, $size );
 
 			$view->favoriteListItems = $manager->searchItems( $search, array(), $total );
 

@@ -61,7 +61,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product base performance data', 0);
+		$this->_msg( 'Adding product base performance data', 0 );
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
 		$productTypeItem = $this->_getTypeItem( 'product/type', 'product', 'default' );
@@ -107,7 +107,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.list.type.code', $code ),
-			$search->compare ('==', 'product.list.type.domain', $domain ),
+			$search->compare( '==', 'product.list.type.domain', $domain ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

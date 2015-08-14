@@ -600,11 +600,11 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 			 * @see mshop/product/manager/stock/warehouse/default/item/delete
 			 * @see mshop/product/manager/stock/warehouse/default/item/search
 			 */
-			$cfgPathCount =  'mshop/product/manager/stock/warehouse/default/item/count';
+			$cfgPathCount = 'mshop/product/manager/stock/warehouse/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+				$items[$row['id']] = $this->_createItem( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

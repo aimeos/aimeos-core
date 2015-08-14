@@ -24,7 +24,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function __construct( array $values = array() )
 	{
-		parent::__construct('product.stock.warehouse.', $values);
+		parent::__construct( 'product.stock.warehouse.', $values );
 
 		$this->_values = $values;
 	}

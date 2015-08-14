@@ -40,7 +40,7 @@ abstract class MShop_Price_Manager_Abstract
 				continue;
 			}
 
-			$priceList[ $priceItem->getQuantity() ] = $priceItem;
+			$priceList[$priceItem->getQuantity()] = $priceItem;
 		}
 
 		ksort( $priceList );

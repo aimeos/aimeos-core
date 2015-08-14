@@ -35,7 +35,7 @@ class MW_Setup_Task_ListsChangeIdNotNull extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -56,11 +56,11 @@ class MW_Setup_Task_ListsChangeIdNotNull extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Changing list ids to NOT NULL', 0 );
-		$this->_status('');
+		$this->_status( '' );
 		
 		foreach( $stmts as $tablename => $stmt )
 		{
-			$this->_msg(sprintf('Checking table "%1$s": ', $tablename), 1);
+			$this->_msg( sprintf( 'Checking table "%1$s": ', $tablename ), 1 );
 			
 			if( $this->_schema->tableExists( $tablename ) === true
 				&& $this->_schema->getColumnDetails( $tablename, 'id' )->isNullable() === true )

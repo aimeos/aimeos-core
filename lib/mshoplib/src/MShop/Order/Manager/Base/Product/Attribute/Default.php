@@ -196,8 +196,8 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -219,7 +219,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	 * Adds a new item to the storage or updates an existing one.
 	 *
 	 * @param MShop_Order_Item_Base_Product_Attribute_Interface $item New item that should
-     * be saved to the storage
+	 * be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
@@ -256,7 +256,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
-			if ( $id !== null ) {
+			if( $id !== null ) {
 				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -276,7 +276,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch(Exception $e)
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -302,7 +302,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Interface
 	 */
-	public function getSearchAttributes($withsub = true)
+	public function getSearchAttributes( $withsub = true )
 	{
 		/** classes/order/manager/base/product/attribute/submanagers
 		 * List of manager names that can be instantiated by the order base product attribute manager
@@ -456,7 +456,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of products implementing MShop_Order_Item_Base_Product_Attribute_Interface
 	 */
-	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->_getContext();
 
@@ -470,7 +470,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/product/attribute/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/product/attribute/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/product/attribute/default/item/count';
 			$required = array( 'order.base.product.attribute' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -483,7 +483,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
 						$row['value'] = $value;
 					}
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )
@@ -510,7 +510,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	 * @param array $values Associative array of order product attribute values
 	 * @return MShop_Order_Item_Base_Product_Attribute_Interface
 	 */
-	protected function _createItem(array $values = array())
+	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Order_Item_Base_Product_Attribute_Default( $values );
 	}

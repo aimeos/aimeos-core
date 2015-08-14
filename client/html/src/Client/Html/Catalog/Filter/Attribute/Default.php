@@ -243,7 +243,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$attributes = $manager->searchItems( $search, $domains );
 
 			foreach( $attributes as $id => $item ) {
-				$attrMap[ $item->getType() ][$id] = $item;
+				$attrMap[$item->getType()][$id] = $item;
 			}
 
 			if( !empty( $attrTypes ) )

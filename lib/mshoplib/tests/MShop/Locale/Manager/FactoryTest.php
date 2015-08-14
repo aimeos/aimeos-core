@@ -13,29 +13,29 @@ class MShop_Locale_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext());
-		$this->assertInstanceOf('MShop_Common_Manager_Interface', $manager);
+		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext(), 'Default');
-		$this->assertInstanceOf('MShop_Common_Manager_Interface', $manager);
+		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Locale_Exception');
-		MShop_Locale_Manager_Factory::createManager(TestHelper::getContext(), '%^&');
+		$this->setExpectedException( 'MShop_Locale_Exception' );
+		MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException('MShop_Exception');
-		MShop_Locale_Manager_Factory::createManager(TestHelper::getContext(), 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 
 }

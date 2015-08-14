@@ -55,7 +55,7 @@ class MShop_Product_Item_Stock_Warehouse_DefaultTest extends PHPUnit_Framework_T
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
+		$this->_object->setId( null );
 		$this->assertTrue( $this->_object->isModified() );
 
 		$this->assertNull( $this->_object->getId() );
@@ -132,14 +132,14 @@ class MShop_Product_Item_Stock_Warehouse_DefaultTest extends PHPUnit_Framework_T
 			'product.stock.warehouse.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['product.stock.warehouse.id'], $item->getId());
-		$this->assertEquals($list['product.stock.warehouse.code'], $item->getCode());
-		$this->assertEquals($list['product.stock.warehouse.label'], $item->getLabel());
-		$this->assertEquals($list['product.stock.warehouse.status'], $item->getStatus());
+		$this->assertEquals( $list['product.stock.warehouse.id'], $item->getId() );
+		$this->assertEquals( $list['product.stock.warehouse.code'], $item->getCode() );
+		$this->assertEquals( $list['product.stock.warehouse.label'], $item->getLabel() );
+		$this->assertEquals( $list['product.stock.warehouse.status'], $item->getStatus() );
 	}
 
 

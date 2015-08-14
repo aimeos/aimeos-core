@@ -66,7 +66,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * @param string $provider Plugin provider, esp. short plugin class name
 	 * @return void
 	 */
-	public function setProvider($provider);
+	public function setProvider( $provider );
 
 	/**
 	 * Returns the configuration of the plugin item.
@@ -96,7 +96,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * @param integer $position Position of the item
 	 * @return void
 	 */
-	public function setPosition($position);
+	public function setPosition( $position );
 
 	/**
 	 * Returns the status of the plugin item.
@@ -111,5 +111,5 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * @param integer $status Status of the item
 	 * @return void
 	 */
-	public function setStatus($status);
+	public function setStatus( $status );
 }

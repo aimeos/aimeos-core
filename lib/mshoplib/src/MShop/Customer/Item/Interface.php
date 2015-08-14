@@ -29,7 +29,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * @param string $value Label of the customer item
 	 * @return void
 	 */
-	public function setLabel($value);
+	public function setLabel( $value );
 
 	/**
 	 * Returns the status of the item.
@@ -44,7 +44,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * @param integer $value Status of the item
 	 * @return void
 	 */
-	public function setStatus($value);
+	public function setStatus( $value );
 
 	/**
 	 * Returns the unique code of the customer item.

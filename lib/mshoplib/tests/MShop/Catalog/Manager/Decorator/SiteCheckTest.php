@@ -23,7 +23,7 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$this->_object = MShop_Catalog_Manager_Factory::createManager($context);
+		$this->_object = MShop_Catalog_Manager_Factory::createManager( $context );
 	}
 
 
@@ -41,29 +41,29 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 
 	public function testGetTreePath()
 	{
-		$parent = $this->_object->getTree(null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE);
+		$parent = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 		$pathNodes = $this->_object->getPath( $parent->getId() );
 
 		if( ( $node = reset( $pathNodes ) ) === false ) {
-			throw new Exception('No node found');
+			throw new Exception( 'No node found' );
 		}
 
-		$this->assertEquals($parent->getId(), $node->getId());
+		$this->assertEquals( $parent->getId(), $node->getId() );
 	}
 
 
 	public function testInsertMoveItem()
 	{
 		$item = $this->_object->createItem();
-		$parent = $this->_object->getTree(null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE);
+		$parent = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$this->_object->insertItem($item, $parent->getId());
-		$this->_object->moveItem($item->getId(), $parent->getId(), $parent->getId());
-		$savedItem = $this->_object->getItem($item->getId());
+		$this->_object->insertItem( $item, $parent->getId() );
+		$this->_object->moveItem( $item->getId(), $parent->getId(), $parent->getId() );
+		$savedItem = $this->_object->getItem( $item->getId() );
 
-		$this->_object->deleteItem($item->getId());
+		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals($item->getId(), $savedItem->getId());
-		$this->assertEquals(TestHelper::getContext()->getEditor(), $savedItem->getEditor());
+		$this->assertEquals( $item->getId(), $savedItem->getId() );
+		$this->assertEquals( TestHelper::getContext()->getEditor(), $savedItem->getEditor() );
 	}
 }

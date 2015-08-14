@@ -41,7 +41,7 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 		$this->_msg( 'Adding catalog promotion performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'list' );
@@ -56,7 +56,7 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
 
-		if ( ( $typeItem = reset( $types ) ) === false ) {
+		if( ( $typeItem = reset( $types ) ) === false ) {
 			throw new Exception( 'Catalog list type item not found' );
 		}
 

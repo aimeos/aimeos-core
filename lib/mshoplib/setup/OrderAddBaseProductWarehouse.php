@@ -60,7 +60,7 @@ class MW_Setup_Task_OrderAddBaseProductWarehouse extends MW_Setup_Task_Abstract
 		$table = 'mshop_order_base_product';
 		$schema = $this->_getSchema( 'db-order' );
 
-		if ( $schema->tableExists( $table ) === true &&
+		if( $schema->tableExists( $table ) === true &&
 			$schema->columnExists( $table, 'warehousecode' ) === false )
 		{
 			$this->_executeList( $stmts, 'db-order' );

@@ -71,10 +71,10 @@ abstract class MShop_Customer_Manager_Abstract
 	 * @param boolean $default Include default criteria like the status
 	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
-	public function createSearch($default = false)
+	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch('customer');
+			return $this->_createSearch( 'customer' );
 		}
 
 		return parent::createSearch();
@@ -161,9 +161,9 @@ abstract class MShop_Customer_Manager_Abstract
 		 */
 		$options = $config->get( 'mshop/customer/manager/password/options', array() );
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'MShop_Common_Item_Helper_Password_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'MShop_Common_Item_Helper_Password_' . $name : '<not a string>';
 			throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
@@ -174,7 +174,7 @@ abstract class MShop_Customer_Manager_Abstract
 			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$helper =  new $classname( $options );
+		$helper = new $classname( $options );
 
 		if( !( $helper instanceof $iface ) ) {
 			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

@@ -33,11 +33,11 @@ class MShop_Order_Item_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('order.', $values);
+		parent::__construct( 'order.', $values );
 
 		$this->_values = $values;
 
-		if ( !isset($values['datepayment']) ) {
+		if( !isset( $values['datepayment'] ) ) {
 			$this->_values['datepayment'] = date( 'Y-m-d H:i:s', time() );
 		}
 
@@ -69,7 +69,7 @@ class MShop_Order_Item_Default
 	 */
 	public function setBaseId( $id )
 	{
-		if ( $id == $this->getBaseId() ) { return; }
+		if( $id == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = (int) $id;
 		$this->setModified();
@@ -94,9 +94,9 @@ class MShop_Order_Item_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
-		$this->_checkType($type);
+		$this->_checkType( $type );
 
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
@@ -121,9 +121,9 @@ class MShop_Order_Item_Default
 	 */
 	public function setDateDelivery( $date )
 	{
-		if ( $date === $this->getDateDelivery() ) { return; }
+		if( $date === $this->getDateDelivery() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['datedelivery'] = (string) $date;
 		$this->setModified();
@@ -148,9 +148,9 @@ class MShop_Order_Item_Default
 	 */
 	public function setDatePayment( $date )
 	{
-		if ( $date === $this->getDatePayment() ) { return; }
+		if( $date === $this->getDatePayment() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['datepayment'] = (string) $date;
 		$this->setModified();
@@ -164,7 +164,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getDeliveryStatus()
 	{
-		if ( isset( $this->_values['statusdelivery'] ) ) {
+		if( isset( $this->_values['statusdelivery'] ) ) {
 			return (int) $this->_values['statusdelivery'];
 		}
 
@@ -191,7 +191,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getPaymentStatus()
 	{
-		if ( isset( $this->_values['statuspayment'] ) ) {
+		if( isset( $this->_values['statuspayment'] ) ) {
 			return (int) $this->_values['statuspayment'];
 		}
 
@@ -230,7 +230,7 @@ class MShop_Order_Item_Default
 	 */
 	public function setRelatedId( $id )
 	{
-		if ( $id === $this->getRelatedId() ) { return; }
+		if( $id === $this->getRelatedId() ) { return; }
 		$id = (int) $id;
 		$this->_values['relatedid'] = $id;
 		$this->setModified();

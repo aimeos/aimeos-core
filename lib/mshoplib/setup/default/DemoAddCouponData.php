@@ -49,7 +49,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 	{
 		$this->_msg( 'Processing coupon demo data', 0 );
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'coupon' );
 
 		$search = $manager->createSearch();

@@ -94,7 +94,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertFalse( $this->_object->isModified() );
 
-		$this->_object->setCode('NEU');
+		$this->_object->setCode( 'NEU' );
 		$this->assertEquals( 'NEU', $this->_object->getCode() );
 
 		$this->assertTrue( $this->_object->isModified() );
@@ -117,7 +117,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertFalse( $this->_object->isModified() );
 
-		$this->_object->setSupplierCode('unitTestSupplier');
+		$this->_object->setSupplierCode( 'unitTestSupplier' );
 		$this->assertEquals( 'unitTestSupplier', $this->_object->getSupplierCode() );
 
 		$this->assertTrue( $this->_object->isModified() );
@@ -135,7 +135,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->_object->setId( 1 );
 		$this->assertEquals( '1', $this->_object->getId() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 
 		$this->_object->setId( 2 );
 		$this->assertEquals( '2', $this->_object->getId() );
@@ -238,18 +238,18 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'product.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['product.id'], $item->getId());
-		$this->assertEquals($list['product.typeid'], $item->getTypeId());
-		$this->assertEquals($list['product.code'], $item->getCode());
-		$this->assertEquals($list['product.label'], $item->getLabel());
-		$this->assertEquals($list['product.suppliercode'], $item->getSuppliercode());
-		$this->assertEquals($list['product.datestart'], $item->getDateStart());
-		$this->assertEquals($list['product.dateend'], $item->getDateEnd());
-		$this->assertEquals($list['product.status'], $item->getStatus());
+		$this->assertEquals( $list['product.id'], $item->getId() );
+		$this->assertEquals( $list['product.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['product.code'], $item->getCode() );
+		$this->assertEquals( $list['product.label'], $item->getLabel() );
+		$this->assertEquals( $list['product.suppliercode'], $item->getSuppliercode() );
+		$this->assertEquals( $list['product.datestart'], $item->getDateStart() );
+		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
+		$this->assertEquals( $list['product.status'], $item->getStatus() );
 	}
 
 

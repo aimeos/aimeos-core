@@ -12,7 +12,7 @@
 class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_attribute' => array (
+		'mshop_attribute' => array(
 				'dx_msatt_sid_dom_editor' => 'ALTER TABLE "mshop_attribute" DROP INDEX "dx_msatt_sid_dom_editor"',
 			)
 	);
@@ -57,13 +57,13 @@ class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying index in mshop_attribute table' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

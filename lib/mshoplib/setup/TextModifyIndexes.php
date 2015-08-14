@@ -13,12 +13,12 @@ class MW_Setup_Task_TextModifyIndexes extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'add' => array(
-			'mshop_text_list' => array (
+			'mshop_text_list' => array(
 				'fk_mstexli_pid' => 'ALTER TABLE "mshop_text_list" ADD INDEX "fk_mstexli_pid" ("parentid")',
 			)
 		),
 		'delete' => array(
-			'mshop_text_list' => array (
+			'mshop_text_list' => array(
 				'fk_mstexli_parentid' => 'ALTER TABLE "mshop_text_list" DROP INDEX "fk_mstexli_parentid"',
 				'unq_mstexli_pid_sid_tid_rid_dm' => 'ALTER TABLE "mshop_text_list" DROP INDEX "unq_mstexli_pid_sid_tid_rid_dm"',
 			)
@@ -66,13 +66,13 @@ class MW_Setup_Task_TextModifyIndexes extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying indexes in mshop_text tables' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts['add'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) !== true )
@@ -89,9 +89,9 @@ class MW_Setup_Task_TextModifyIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['delete'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

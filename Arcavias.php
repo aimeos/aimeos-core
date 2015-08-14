@@ -41,23 +41,23 @@ class Arcavias
 		self::$_includePaths = $this->getIncludePaths();
 		$this->_registerAutoloader();
 
-		foreach ( $this->_getManifests( $extdirs ) as $location => $manifest )
+		foreach( $this->_getManifests( $extdirs ) as $location => $manifest )
 		{
-			if ( isset( $this->_extensions[$manifest['name']] ) )
+			if( isset( $this->_extensions[$manifest['name']] ) )
 			{
 				$location2 = $this->_extensions[$manifest['name']]['location'];
 				$msg = 'Extension "%1$s" exists twice in "%2$s" and in "%3$s"';
 				throw new Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
 			}
 
-			if ( !isset( $manifest['depends'] ) || !is_array( $manifest['depends'] ) ) {
+			if( !isset( $manifest['depends'] ) || !is_array( $manifest['depends'] ) ) {
 				throw new Exception( sprintf( 'Incorrect dependency configuration in manifest "%1$s"', $location ) );
 			}
 
 			$manifest['location'] = $location;
 			$this->_extensions[$manifest['name']] = $manifest;
 
-			foreach ( $manifest['depends'] as $name ) {
+			foreach( $manifest['depends'] as $name ) {
 				$this->_dependencies[$manifest['name']][$name] = $name;
 			}
 		}
@@ -108,9 +108,9 @@ class Arcavias
 	{
 		$paths = array();
 
-		foreach ( $this->_manifests as $basePath => $manifest )
+		foreach( $this->_manifests as $basePath => $manifest )
 		{
-			if ( !isset( $manifest['i18n'] ) ) {
+			if( !isset( $manifest['i18n'] ) ) {
 				continue;
 			}
 
@@ -132,13 +132,13 @@ class Arcavias
 	{
 		$includes = array();
 
-		foreach ( $this->_manifests as $path => $manifest )
+		foreach( $this->_manifests as $path => $manifest )
 		{
-			if ( !isset( $manifest['include'] ) ) {
+			if( !isset( $manifest['include'] ) ) {
 				continue;
 			}
 
-			foreach ( $manifest['include'] as $paths ) {
+			foreach( $manifest['include'] as $paths ) {
 				$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
@@ -157,13 +157,13 @@ class Arcavias
 	{
 		$confpaths = array();
 
-		foreach ( $this->_manifests as $path => $manifest )
+		foreach( $this->_manifests as $path => $manifest )
 		{
-			if ( !isset( $manifest['config'][$dbtype] ) ) {
+			if( !isset( $manifest['config'][$dbtype] ) ) {
 				continue;
 			}
 
-			foreach ( $manifest['config'][$dbtype] as $paths ) {
+			foreach( $manifest['config'][$dbtype] as $paths ) {
 				$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
@@ -182,9 +182,9 @@ class Arcavias
 	{
 		$paths = array();
 
-		foreach ( $this->_manifests as $path => $manifest )
+		foreach( $this->_manifests as $path => $manifest )
 		{
-			if ( isset( $manifest['custom'][$section] ) ) {
+			if( isset( $manifest['custom'][$section] ) ) {
 				$paths[$path] = $manifest['custom'][$section];
 			}
 		}
@@ -203,7 +203,7 @@ class Arcavias
 	{
 		$setupPaths = array();
 
-		foreach ( $this->_manifests as $path => $manifest )
+		foreach( $this->_manifests as $path => $manifest )
 		{
 			if( !isset( $manifest['setup'] ) ) {
 				continue;
@@ -235,26 +235,26 @@ class Arcavias
 	{
 		$manifests = array();
 
-		foreach ( $directories as $directory )
+		foreach( $directories as $directory )
 		{
 			$manifest = $this->_getManifestFile( $directory );
 
-			if ( $manifest !== false )
+			if( $manifest !== false )
 			{
-				$manifests[ $directory ] = $manifest;
+				$manifests[$directory] = $manifest;
 				continue;
 			}
 
 			$dir = new DirectoryIterator( $directory );
 
-			foreach ( $dir as $dirinfo )
+			foreach( $dir as $dirinfo )
 			{
-				if ( $dirinfo->isDot() !== false ) {
+				if( $dirinfo->isDot() !== false ) {
 					continue;
 				}
 
 				$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
-				if ( $manifest === false ) {
+				if( $manifest === false ) {
 					continue;
 				}
 
@@ -276,7 +276,7 @@ class Arcavias
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
-		if ( file_exists( $manifestFile ) ) {
+		if( file_exists( $manifestFile ) ) {
 			return include $manifestFile;
 		}
 
@@ -304,15 +304,15 @@ class Arcavias
 	 * @param array $stack List of task names that are scheduled after this task
 	 * @todo version checks
 	 */
-	private function _addManifests( array $deps, array $stack=array( ) )
+	private function _addManifests( array $deps, array $stack = array( ) )
 	{
-		foreach ( $deps as $extName => $name )
+		foreach( $deps as $extName => $name )
 		{
-			if ( in_array( $extName, $this->_extensionsDone ) ) {
+			if( in_array( $extName, $this->_extensionsDone ) ) {
 				continue;
 			}
 
-			if ( in_array( $extName, $stack ) ) {
+			if( in_array( $extName, $stack ) ) {
 				$msg = sprintf( 'Circular dependency for "%1$s" detected', $extName );
 				throw new Exception( $msg );
 			}
@@ -320,11 +320,11 @@ class Arcavias
 			$stack[] = $extName;
 
 			/** @todo test for expression object or array when implementing version checks */
-			if ( isset( $this->_dependencies[$extName] ) ) {
+			if( isset( $this->_dependencies[$extName] ) ) {
 				$this->_addManifests( (array) $this->_dependencies[$extName], $stack );
 			}
 
-			if ( isset( $this->_extensions[$extName] ) ) {
+			if( isset( $this->_extensions[$extName] ) ) {
 				$this->_manifests[$this->_extensions[$extName]['location']] = $this->_extensions[$extName];
 			}
 

@@ -4,7 +4,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-return array (
+return array(
 	'price/list/type' => array(
 		'customer/default' => array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),

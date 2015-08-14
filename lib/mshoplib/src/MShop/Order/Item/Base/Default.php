@@ -102,7 +102,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setId( $id )
 	{
-		if ( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId($this->getId(), $id) ) === null ) {
+		if( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
 			$this->_modified = true;
 		} else {
 			$this->_modified = false;
@@ -150,7 +150,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setComment( $comment )
 	{
-		if ( $comment == $this->getComment() ) { return; }
+		if( $comment == $this->getComment() ) { return; }
 
 		$this->_values['comment'] = (string) $comment;
 
@@ -176,7 +176,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setCustomerId( $customerid )
 	{
-		if ( $customerid === $this->getCustomerId() ) { return; }
+		if( $customerid === $this->getCustomerId() ) { return; }
 
 		$this->_notifyListeners( 'setCustomerId.before', $customerid );
 
@@ -275,7 +275,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 					if( $key < $position ) {
 						$products[$key] = $product;
 					} else if( $key >= $position ) {
-						$products[$key+1] = $product;
+						$products[$key + 1] = $product;
 					}
 				}
 
@@ -319,7 +319,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		$this->_notifyListeners( 'deleteProduct.before', $position );
 
 		$product = $this->_products[$position];
-		unset($this->_products[$position]);
+		unset( $this->_products[$position] );
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'deleteProduct.after', $product );
@@ -346,7 +346,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
-		if(!isset($this->_addresses[$domain])) {
+		if( !isset( $this->_addresses[$domain] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
 		}
 
@@ -364,7 +364,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
 		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
-		if ( isset( $this->_addresses[ $domain ] ) && $this->_addresses[ $domain ] === $address ) { return; }
+		if( isset( $this->_addresses[$domain] ) && $this->_addresses[$domain] === $address ) { return; }
 
 		$this->_notifyListeners( 'setAddress.before', $address );
 
@@ -422,7 +422,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getService( $type )
 	{
-		if(!isset($this->_services[$type])) {
+		if( !isset( $this->_services[$type] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
 		}
 
@@ -571,7 +571,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'check.before', $what );
 
-		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) ) {
+		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count( $this->_products ) < 1 ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 
@@ -786,7 +786,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		$attributeMap = array();
 
 		foreach( $item->getAttributes() as $attributeItem ) {
-			$attributeMap[ $attributeItem->getCode() ] = $attributeItem;
+			$attributeMap[$attributeItem->getCode()] = $attributeItem;
 		}
 
 		foreach( $this->_products as $position => $product )
@@ -804,7 +804,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			foreach( $prodAttributes as $attribute )
 			{
 				if( array_key_exists( $attribute->getCode(), $attributeMap ) === false
-					|| $attributeMap[ $attribute->getCode() ]->getValue() != $attribute->getValue() ) {
+					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue() ) {
 					continue 2; // jump to outer loop
 				}
 			}

@@ -132,7 +132,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	{
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
-		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.id' ) ) );
 
 		$start = 0;
 		$itemIdMap = $itemCodeMap = array();
@@ -143,8 +143,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 			foreach( $result as $item )
 			{
-				$itemIdMap[ $item->getId() ] = $item->getCode();
-				$itemCodeMap[ $item->getCode() ] = $item->getId();
+				$itemIdMap[$item->getId()] = $item->getCode();
+				$itemCodeMap[$item->getCode()] = $item->getId();
 			}
 
 			$count = count( $result );
@@ -162,7 +162,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				$search->compare( '==', $domain . '.list.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
 
 		$start = 0;
 
@@ -171,7 +171,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			$result = $listManager->searchItems( $search );
 
 			foreach( $result as $item ) {
-				unset( $itemTextMap[ $itemIdMap[ $item->getParentId() ] ][ $item->getRefId() ] );
+				unset( $itemTextMap[$itemIdMap[$item->getParentId()]][$item->getRefId()] );
 			}
 
 			$count = count( $result );
@@ -195,7 +195,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					}
 
 					$item = $listManager->createItem();
-					$item->setParentId( $itemCodeMap[ $itemCode ] );
+					$item->setParentId( $itemCodeMap[$itemCode] );
 					$item->setTypeId( $listTypes[$listType]->getId() );
 					$item->setDomain( 'text' );
 					$item->setRefId( $textId );
@@ -238,7 +238,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			$result = $typeManager->searchItems( $search );
 
 			foreach( $result as $typeItem ) {
-				$this->_textListTypes[$domain][ $typeItem->getCode() ] = $typeItem;
+				$this->_textListTypes[$domain][$typeItem->getCode()] = $typeItem;
 			}
 
 			$count = count( $result );
@@ -309,7 +309,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			$search->setConditions( $search->compare( '==', 'locale.site.code', $site ) );
 			$sites = $siteManager->searchItems( $search );
 
-			if ( ( $siteItem = reset( $sites ) ) === false ) {
+			if( ( $siteItem = reset( $sites ) ) === false ) {
 				throw new Controller_ExtJS_Exception( 'Site item not found.' );
 			}
 		}
@@ -385,9 +385,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		try
 		{
-			$textType =  isset( $row[4] ) ? $row[4] : null;
+			$textType = isset( $row[4] ) ? $row[4] : null;
 
-			if( !isset( $textTypeMap[ $textType ] ) ) {
+			if( !isset( $textTypeMap[$textType] ) ) {
 				throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 			}
 
@@ -428,7 +428,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			}
 
 			$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
-			$item->setTypeId( $textTypeMap[ $row[4] ] );
+			$item->setTypeId( $textTypeMap[$row[4]] );
 			$item->setDomain( $domain );
 			$item->setLabel( mb_strcut( $value, 0, 255 ) );
 			$item->setContent( $value );
@@ -436,7 +436,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 			$textManager->saveItem( $item );
 
-			$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
+			$codeIdMap[$row[2]][$item->getId()] = $row[3];
 		}
 
 		return $codeIdMap;

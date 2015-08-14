@@ -37,7 +37,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Order_Item_Base_Product_Attribute_Default($this->_values);
+		$this->_object = new MShop_Order_Item_Base_Product_Attribute_Default( $this->_values );
 	}
 
 
@@ -49,28 +49,28 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals($this->_values['id'], $this->_object->getId());
+		$this->assertEquals( $this->_values['id'], $this->_object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertEquals(null, $this->_object->getId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setId( null );
+		$this->assertEquals( null, $this->_object->getId() );
+		$this->assertTrue( $this->_object->isModified() );
 
-		$this->_object->setId(8);
-		$this->assertEquals(8, $this->_object->getId() );
-		$this->assertFalse($this->_object->isModified());
+		$this->_object->setId( 8 );
+		$this->assertEquals( 8, $this->_object->getId() );
+		$this->assertFalse( $this->_object->isModified() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId(3);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 3 );
 	}
 
 
@@ -110,7 +110,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->_values['type'], $this->_object->getType());
+		$this->assertEquals( $this->_values['type'], $this->_object->getType() );
 	}
 
 
@@ -124,15 +124,15 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 
 	public function testGetCode()
 	{
-		$this->assertEquals($this->_values['code'], $this->_object->getCode());
+		$this->assertEquals( $this->_values['code'], $this->_object->getCode() );
 	}
 
 
 	public function testSetCode()
 	{
-		$this->_object->setCode('weight');
-		$this->assertEquals('weight', $this->_object->getCode());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setCode( 'weight' );
+		$this->assertEquals( 'weight', $this->_object->getCode() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
@@ -167,7 +167,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 	public function testGetTimeModified()
 	{
 		$regexp = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
-		$this->assertRegExp($regexp, $this->_object->getTimeModified());
+		$this->assertRegExp( $regexp, $this->_object->getTimeModified() );
 	}
 
 
@@ -215,17 +215,17 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 			'order.base.product.attribute.name' => 'test item',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.base.product.attribute.id'], $item->getId());
-		$this->assertEquals($list['order.base.product.attribute.attrid'], $item->getAttributeId());
-		$this->assertEquals($list['order.base.product.attribute.productid'], $item->getProductId());
-		$this->assertEquals($list['order.base.product.attribute.type'], $item->getType());
-		$this->assertEquals($list['order.base.product.attribute.code'], $item->getCode());
-		$this->assertEquals($list['order.base.product.attribute.value'], $item->getValue());
-		$this->assertEquals($list['order.base.product.attribute.name'], $item->getName());
+		$this->assertEquals( $list['order.base.product.attribute.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.product.attribute.attrid'], $item->getAttributeId() );
+		$this->assertEquals( $list['order.base.product.attribute.productid'], $item->getProductId() );
+		$this->assertEquals( $list['order.base.product.attribute.type'], $item->getType() );
+		$this->assertEquals( $list['order.base.product.attribute.code'], $item->getCode() );
+		$this->assertEquals( $list['order.base.product.attribute.value'], $item->getValue() );
+		$this->assertEquals( $list['order.base.product.attribute.name'], $item->getName() );
 	}
 
 
@@ -251,6 +251,6 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends PHPUnit_Framew
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 }

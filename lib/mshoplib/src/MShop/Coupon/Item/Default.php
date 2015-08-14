@@ -28,7 +28,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('coupon.', $values);
+		parent::__construct( 'coupon.', $values );
 
 		$this->_values = $values;
 	}
@@ -52,7 +52,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setLabel( $name )
 	{
-		if ( $name == $this->getLabel() ) { return; }
+		if( $name == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $name;
 		$this->setModified();
@@ -77,9 +77,9 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setDateStart( $date )
 	{
-		if ( $date == $this->getDateStart() ) { return; }
+		if( $date == $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['start'] = ( $date !== null ? (string) $date : null );
 
@@ -105,9 +105,9 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setDateEnd( $date )
 	{
-		if ( $date == $this->getDateEnd() ) { return; }
+		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat($date);
+		$this->_checkDateFormat( $date );
 
 		$this->_values['end'] = ( $date !== null ? (string) $date : null );
 
@@ -133,7 +133,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setProvider( $provider )
 	{
-		if ( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return; }
 
 		$this->_values['provider'] = (string) $provider;
 		$this->setModified();
@@ -158,7 +158,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setConfig( array $config )
 	{
-		if ( $config == $this->getConfig() ) { return; }
+		if( $config == $this->getConfig() ) { return; }
 
 		$this->_values['config'] = $config;
 		$this->setModified();
@@ -183,7 +183,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

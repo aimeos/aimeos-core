@@ -28,7 +28,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('locale.currency.', $values);
+		parent::__construct( 'locale.currency.', $values );
 
 		$this->_values = $values;
 
@@ -47,7 +47,7 @@ class MShop_Locale_Item_Currency_Default
 	{
 		if( $key !== null )
 		{
-			$this->setCode($key);
+			$this->setCode( $key );
 			$this->_values['id'] = $this->_values['code'];
 			$this->_modified = false;
 		}
@@ -88,9 +88,9 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function setCode( $key )
 	{
-		if ( $key == $this->getCode() ) { return; }
+		if( $key == $this->getCode() ) { return; }
 
-		if ( strlen($key) != 3 || ctype_alpha( $key ) === false ) {
+		if( strlen( $key ) != 3 || ctype_alpha( $key ) === false ) {
 			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
@@ -117,7 +117,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();
@@ -142,7 +142,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return; }
 
 		$this->_values['status'] = (int) $status;
 		$this->setModified();

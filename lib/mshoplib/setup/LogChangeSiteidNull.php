@@ -51,11 +51,11 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 		$table = 'madmin_log';
 
 		$this->_msg( 'Changing site ID to NULL in madmin_log', 0 );
-		$this->_status('');
+		$this->_status( '' );
 
-		$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
+		$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
 
-		if( $this->_schema->tableExists($table) &&
+		if( $this->_schema->tableExists( $table ) &&
 			!$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 		{
 			$this->_execute( $stmt );

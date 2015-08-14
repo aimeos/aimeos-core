@@ -7,10 +7,10 @@
 
 return array(
 	'order/base' => array(
-		'19.95' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '19.95', 'shipping' => '6.50', 'rebate' => '0.00', 'comment' => 'This is a comment if an order. It can be added by the user.'),
-		'636.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '636.00', 'shipping' => '31.00', 'rebate' => '0.00', 'comment' => 'This is another comment.'),
-		'18.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '18.00', 'shipping' => '1.00', 'rebate' => '0.00', 'comment' => 'This is a bundle basket.'),
-		'10.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '10.00', 'shipping' => '4.50', 'rebate' => '2.00', 'comment' => 'This is a comment if an order. It can be added by the user.'),
+		'19.95' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '19.95', 'shipping' => '6.50', 'rebate' => '0.00', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
+		'636.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '636.00', 'shipping' => '31.00', 'rebate' => '0.00', 'comment' => 'This is another comment.' ),
+		'18.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '18.00', 'shipping' => '1.00', 'rebate' => '0.00', 'comment' => 'This is a bundle basket.' ),
+		'10.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '10.00', 'shipping' => '4.50', 'rebate' => '2.00', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
 	),
 
 	'order/base/address' => array(
@@ -67,15 +67,15 @@ return array(
 	),
 
 	'order/base/service/attr' => array(
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'account owner', 'code' => 'ACOWNER', 'value' => 'test user'),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'account number', 'code' => 'ACSTRING', 'value' => 9876543),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'payment method', 'code' => 'NAME', 'value' => 'CreditCard'),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'reference id', 'code' => 'REFID', 'value' => 12345678),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction date', 'code' => 'TXDATE', 'value' => '2009-08-18'),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction account', 'code' => 'X-ACCOUNT', 'value' => 'Kraft02'),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction status', 'code' => 'X-STATUS', 'value' => 9),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias name', 'code' => 'ogone-alias-name', 'value' => 'aliasName'),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias value', 'code' => 'ogone-alias-value', 'value' => 'aliasValue'),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'account owner', 'code' => 'ACOWNER', 'value' => 'test user' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'account number', 'code' => 'ACSTRING', 'value' => 9876543 ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'payment method', 'code' => 'NAME', 'value' => 'CreditCard' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'reference id', 'code' => 'REFID', 'value' => 12345678 ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction date', 'code' => 'TXDATE', 'value' => '2009-08-18' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction account', 'code' => 'X-ACCOUNT', 'value' => 'Kraft02' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction status', 'code' => 'X-STATUS', 'value' => 9 ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias name', 'code' => 'ogone-alias-name', 'value' => 'aliasName' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias value', 'code' => 'ogone-alias-value', 'value' => 'aliasValue' ),
 	),
 
 	'order' => array(

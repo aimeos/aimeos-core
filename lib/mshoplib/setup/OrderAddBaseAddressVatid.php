@@ -25,7 +25,7 @@ class MW_Setup_Task_OrderAddBaseAddressVatid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables');
+		return array( 'OrderRenameTables' );
 	}
 
 
@@ -36,7 +36,7 @@ class MW_Setup_Task_OrderAddBaseAddressVatid extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -58,7 +58,7 @@ class MW_Setup_Task_OrderAddBaseAddressVatid extends MW_Setup_Task_Abstract
 	{
 		$this->_msg( 'Adding "vatid" column to order base address tables', 0 ); $this->_status( '' );
 
-		foreach( $stmts AS $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
 

@@ -203,17 +203,17 @@ class MShop_Text_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'text.status' => 0,
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['text.id'], $item->getId());
-		$this->assertEquals($list['text.typeid'], $item->getTypeId());
-		$this->assertEquals($list['text.languageid'], $item->getLanguageId());
-		$this->assertEquals($list['text.label'], $item->getLabel());
-		$this->assertEquals($list['text.domain'], $item->getDomain());
-		$this->assertEquals($list['text.content'], $item->getContent());
-		$this->assertEquals($list['text.status'], $item->getStatus());
+		$this->assertEquals( $list['text.id'], $item->getId() );
+		$this->assertEquals( $list['text.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['text.languageid'], $item->getLanguageId() );
+		$this->assertEquals( $list['text.label'], $item->getLabel() );
+		$this->assertEquals( $list['text.domain'], $item->getDomain() );
+		$this->assertEquals( $list['text.content'], $item->getContent() );
+		$this->assertEquals( $list['text.status'], $item->getStatus() );
 	}
 
 
@@ -246,14 +246,14 @@ class MShop_Text_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->_object->setLanguageId( 'en' );
 		$this->assertEquals( 'en', $this->_object->getLanguageId() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setLanguageId(0);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setLanguageId( 0 );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setLanguageId(0);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setLanguageId( 0 );
 	}
 }

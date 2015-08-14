@@ -255,7 +255,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
-			if ( $id !== null ) {
+			if( $id !== null ) {
 				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -269,13 +269,13 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 					$path = 'mshop/order/manager/base/service/attribute/default/item/newid';
 					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
-					$item->setId($id);
+					$item->setId( $id );
 				}
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -348,7 +348,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/service/attribute/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/service/attribute/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/service/attribute/default/item/count';
 			$required = array( 'order.base.service.attribute' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -361,7 +361,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
 						$row['value'] = $value;
 					}
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )

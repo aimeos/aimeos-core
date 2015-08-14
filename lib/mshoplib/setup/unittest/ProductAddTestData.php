@@ -95,18 +95,18 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 			$type->setStatus( $dataset['status'] );
 
 			$productTypeManager->saveItem( $type );
-			$typeIds[ $key ] = $type->getId();
+			$typeIds[$key] = $type->getId();
 		}
 
 		$product = $productManager->createItem();
 		foreach( $testdata['product'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $typeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No product type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$product->setId( null );
-			$product->setTypeId( $typeIds[ $dataset['typeid'] ] );
+			$product->setTypeId( $typeIds[$dataset['typeid']] );
 			$product->setCode( $dataset['code'] );
 			$product->setLabel( $dataset['label'] );
 			$product->setSupplierCode( $dataset['suppliercode'] );

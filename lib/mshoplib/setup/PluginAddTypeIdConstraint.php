@@ -65,7 +65,7 @@ class MW_Setup_Task_PluginAddTypeIdConstraint extends MW_Setup_Task_Abstract
 			&& $this->_schema->columnExists( $table, 'typeid' )
 			&& $this->_schema->constraintExists( $table, $constraint ) === false )
 		{
-			$this->_execute( $stmts[ $constraint ] );
+			$this->_execute( $stmts[$constraint] );
 			$this->_status( 'added' );
 		}
 		else

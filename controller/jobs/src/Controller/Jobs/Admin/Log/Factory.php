@@ -61,13 +61,13 @@ class Controller_Jobs_Admin_Log_Factory
 		 * @since 2014.09
 		 * @category Developer
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/admin/log/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/jobs/admin/log/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Jobs_Admin_Log_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'Controller_Jobs_Admin_Log_' . $name : '<not a string>';
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 

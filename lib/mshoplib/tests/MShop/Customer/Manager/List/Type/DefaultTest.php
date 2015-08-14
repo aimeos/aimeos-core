@@ -59,10 +59,10 @@ class MShop_Customer_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
-		$results = $this->_object->searchItems($search);
+		$search->setSlice( 0, 1 );
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No list type item found' );
 		}
 
@@ -73,14 +73,14 @@ class MShop_Customer_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Tes
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
-		$results = $this->_object->searchItems($search);
+		$search->setSlice( 0, 1 );
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestInit' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -116,7 +116,7 @@ class MShop_Customer_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
@@ -138,13 +138,13 @@ class MShop_Customer_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Tes
 		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->_editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

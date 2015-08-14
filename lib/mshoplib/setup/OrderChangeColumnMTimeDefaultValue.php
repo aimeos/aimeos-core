@@ -62,11 +62,11 @@ class MW_Setup_Task_OrderChangeColumnMTimeDefaultValue extends MW_Setup_Task_Abs
 		$this->_msg( 'Changing default value from column "mtime" to "NOT NULL"', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s"', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) && $this->_schema->columnExists( $table, 'mtime' ) === true && $this->_schema->getColumnDetails($table, 'mtime')->isNullable() )
+			if( $this->_schema->tableExists( $table ) && $this->_schema->columnExists( $table, 'mtime' ) === true && $this->_schema->getColumnDetails( $table, 'mtime' )->isNullable() )
 			{
 				$this->_execute( $stmt );
 				$this->_status( 'changed' );

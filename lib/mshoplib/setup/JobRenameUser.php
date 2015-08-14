@@ -40,7 +40,7 @@ class MW_Setup_Task_JobRenameUser extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class MW_Setup_Task_JobRenameUser extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Renaming in "%1$s" column "user" to "editor".', $table ), 0 );
 		$this->_status( '' );
 
-		foreach ( $stmts AS $column => $stmt )
+		foreach( $stmts AS $column => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 

@@ -52,7 +52,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function setBaseId( $baseid )
 	{
-		if ( $baseid == $this->getBaseId() ) { return; }
+		if( $baseid == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = (int) $baseid;
 		$this->setModified();
@@ -77,7 +77,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function setProductId( $productid )
 	{
-		if ( $productid == $this->getProductId() ) { return; }
+		if( $productid == $this->getProductId() ) { return; }
 
 		$this->_values['ordprodid'] = (int) $productid;
 		$this->setModified();
@@ -104,7 +104,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();

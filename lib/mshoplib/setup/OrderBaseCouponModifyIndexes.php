@@ -12,13 +12,13 @@
 class MW_Setup_Task_OrderBaseCouponModifyIndexes extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'add' => array (
-			'mshop_order_base_coupon' => array (
+		'add' => array(
+			'mshop_order_base_coupon' => array(
 				'fk_msordbaco_baseid' => 'ALTER TABLE "mshop_order_base_coupon" ADD INDEX "fk_msordbaco_baseid" ("baseid")',
 			)
 		),
-		'delete' => array (
-			'mshop_order_base_coupon' => array (
+		'delete' => array(
+			'mshop_order_base_coupon' => array(
 				'idx_msordbaco_bid_code_sid' => 'ALTER TABLE "mshop_order_base_coupon" DROP INDEX "idx_msordbaco_bid_code_sid"'
 			)
 		)
@@ -64,13 +64,13 @@ class MW_Setup_Task_OrderBaseCouponModifyIndexes extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Modifying indexes in mshop_order_base_coupon tables' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		foreach( $stmts['add'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->indexExists( $table, $index ) !== true )
@@ -87,9 +87,9 @@ class MW_Setup_Task_OrderBaseCouponModifyIndexes extends MW_Setup_Task_Abstract
 
 		foreach( $stmts['delete'] AS $table => $indexes )
 		{
-			foreach ( $indexes AS $index => $stmt )
+			foreach( $indexes AS $index => $stmt )
 			{
-				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )

@@ -60,13 +60,13 @@ class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( sprintf( 'Renameing product list constraint' ), 0 );
-		$this->_status('');
+		$this->_status( '' );
 
 		$table = 'mshop_product_list';
 
-		foreach ( $stmts AS $name => $stmt )
+		foreach( $stmts AS $name => $stmt )
 		{
-			$this->_msg(sprintf('Checking constraint "%1$s": ', $name), 1);
+			$this->_msg( sprintf( 'Checking constraint "%1$s": ', $name ), 1 );
 
 			if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->constraintExists( $table, $name ) === true )

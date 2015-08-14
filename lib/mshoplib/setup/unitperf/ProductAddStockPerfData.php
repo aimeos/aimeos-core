@@ -38,10 +38,10 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product stock performance data', 0);
+		$this->_msg( 'Adding product stock performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$productStockManager = $productManager->getSubManager( 'stock' );
@@ -72,7 +72,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $product )
+			foreach( $result as $id => $product )
 			{
 				$item->setId( null );
 				$item->setProductId( $id );

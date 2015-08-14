@@ -189,7 +189,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 			foreach( $configAttributes as $id => $attribute )
 			{
 				if( isset( $attrItems[$id] ) ) {
-					$attributeTypes[ $attrItems[$id]->getType() ][$id] = $attrItems[$id];
+					$attributeTypes[$attrItems[$id]->getType()][$id] = $attrItems[$id];
 				}
 			}
 

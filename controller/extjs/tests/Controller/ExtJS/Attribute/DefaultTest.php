@@ -91,7 +91,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 		$saved = $this->_object->saveItems( $saveParams );
 		$searched = $this->_object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array($saved['items']->{'attribute.id'}) );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array( $saved['items']->{'attribute.id'}) );
 		$this->_object->deleteItems( $deleteParams );
 		$result = $this->_object->searchItems( $searchParams );
 
@@ -365,7 +365,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$this->setExpectedException('Controller_ExtJS_Exception');
+		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		$this->_object->searchItems( $params );
 	}
 

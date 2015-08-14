@@ -59,9 +59,9 @@ class MShop_Attribute_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Te
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No attribute list type item found' );
 		}
 
@@ -71,13 +71,13 @@ class MShop_Attribute_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Te
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems($search);
+		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -115,7 +115,7 @@ class MShop_Attribute_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Te
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
 	}
 
@@ -150,7 +150,7 @@ class MShop_Attribute_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Te
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 7, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

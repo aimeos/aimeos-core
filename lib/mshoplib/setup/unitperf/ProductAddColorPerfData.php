@@ -52,7 +52,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 			'#FFFDD0' => 'cream', '#DC143C' => 'crimson', '#00FFFF' => 'cyan', '#555D50' => 'ebony', '#C2B280' => 'ecru',
 			'#614051' => 'eggplant', '#F0EAD6' => 'eggshell', '#50C878' => 'emerald', '#C19A6B' => 'fallow', '#FF00FF' => 'fuchsia',
 			'#B06500' => 'ginger', '#00FF00' => 'green', '#FFD700' => 'gold', '#B2BEB5' => 'grey', '#F0FFF0' => 'honeydew',
-			'#6F00FF' => 'indigo', '#FFFFF0' => 'ivory', '#00A86B' => 'jade','#F0E890' => 'khaki','#E0E8F0' => 'lavender',
+			'#6F00FF' => 'indigo', '#FFFFF0' => 'ivory', '#00A86B' => 'jade', '#F0E890' => 'khaki', '#E0E8F0' => 'lavender',
 			'#FFF700' => 'lemon', '#C8A2C8' => 'lilac', '#00FF00' => 'lime', '#FF00FF' => 'magenta', '#C04000' => 'mahogany',
 			'#800000' => 'maroon', '#E0B0FF' => 'mauve', '#FDBCB4' => 'melon', '#3EB489' => 'mint', '#C54B8C' => 'mulberry',
 			'#FFDB58' => 'mustard', '#000080' => 'navy', '#CC7722' => 'ocher', '#808000' => 'olive', '#353839' => 'onyx',
@@ -95,7 +95,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach( $result as $id => $item )
 			{
 				$attrListItem->setId( null );
 				$attrListItem->setParentId( $id );

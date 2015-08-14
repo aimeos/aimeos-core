@@ -123,7 +123,7 @@ class TestHelper
 	}
 
 
-	public static function errorHandler($code, $message, $file, $row)
+	public static function errorHandler( $code, $message, $file, $row )
 	{
 		return true;
 	}

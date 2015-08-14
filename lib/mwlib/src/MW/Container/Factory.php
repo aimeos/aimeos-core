@@ -38,7 +38,7 @@ class MW_Container_Factory
 			throw new MW_Container_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$object =  new $classname( $resourcepath, $format, $options );
+		$object = new $classname( $resourcepath, $format, $options );
 
 		if( !( $object instanceof $iface ) ) {
 			throw new MW_Container_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

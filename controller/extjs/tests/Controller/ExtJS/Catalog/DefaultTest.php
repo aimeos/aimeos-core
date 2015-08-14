@@ -190,21 +190,21 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 					array( "type" => "integer", "name" => "limit", "optional" => true ),
 					array( "type" => "string", "name" => "sort", "optional" => true ),
 					array( "type" => "string", "name" => "dir", "optional" => true ),
-					array( "type" => "array","name" => "options","optional" => true ),
+					array( "type" => "array", "name" => "options", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 			'Catalog.init' => array(
 				'parameters' => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				'returns' => 'array',
 			),
 			'Catalog.finish' => array(
 				'parameters' => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				'returns' => 'array',
 			),

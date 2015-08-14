@@ -281,7 +281,7 @@ implements MShop_Service_Provider_Interface
 			{
 				$ts = $timestamp - $i * 86400;
 
-				if( date( 'N', $ts ) > 5 && !isset( $holidays[ date( 'Y-m-d', $ts ) ] ) ) {
+				if( date( 'N', $ts ) > 5 && !isset( $holidays[date( 'Y-m-d', $ts )] ) ) {
 					$skipdays++;
 				}
 			}
@@ -303,7 +303,7 @@ implements MShop_Service_Provider_Interface
 	{
 		$errors = array();
 
-		foreach ( $config as $key => $def )
+		foreach( $config as $key => $def )
 		{
 			if( $def['required'] === true && ( !isset( $attributes[$key] ) || $attributes[$key] === '' ) )
 			{

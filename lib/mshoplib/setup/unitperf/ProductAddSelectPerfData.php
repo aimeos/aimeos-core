@@ -53,7 +53,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product selection performance data', 0);
+		$this->_msg( 'Adding product selection performance data', 0 );
 
 
 		$this->_txBegin();
@@ -93,7 +93,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 			foreach( $result as $id => $product )
 			{
-				$pos = (int) ( ($num / 9) % $selCount );
+				$pos = (int) ( ( $num / 9 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
 				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
@@ -103,7 +103,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 				$productListManager->saveItem( $listItem, false );
 
 
-				$pos = (int) ( ($num / 9 + 1) % $selCount );
+				$pos = (int) ( ( $num / 9 + 1 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
 				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
@@ -113,7 +113,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 				$productListManager->saveItem( $listItem, false );
 
 
-				$pos = (int) ( ($num / 9 + 2) % $selCount );
+				$pos = (int) ( ( $num / 9 + 2 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
 				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
@@ -185,16 +185,16 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 		$search = $textTypeManager->createSearch();
 		$expr = array(
-			$search->compare('==', 'text.type.domain', 'product'),
+			$search->compare( '==', 'text.type.domain', 'product' ),
 			$search->combine( '||', array(
-				$search->compare('==', 'text.type.code', 'short'),
-				$search->compare('==', 'text.type.code', 'long'),
+				$search->compare( '==', 'text.type.code', 'short' ),
+				$search->compare( '==', 'text.type.code', 'long' ),
 			) ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $textTypeManager->searchItems($search) as $item ) {
-			$textTypeItems[ $item->getCode() ] = $item;
+		foreach( $textTypeManager->searchItems( $search ) as $item ) {
+			$textTypeItems[$item->getCode()] = $item;
 		}
 
 		if( count( $textTypeItems ) !== 2 ) {
@@ -213,13 +213,13 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'text');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($productListTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $productListTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 
@@ -235,13 +235,13 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 		$expr = array();
 		$search = $productTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.type.domain', 'product');
-		$expr[] = $search->compare('==', 'product.type.code', 'select');
+		$expr[] = $search->compare( '==', 'product.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.type.code', 'select' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productTypeManager->searchItems($search);
+		$types = $productTypeManager->searchItems( $search );
 
-		if ( ($productTypeItem = reset($types)) === false) {
-			throw new Exception('Product type item not found');
+		if( ( $productTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product type item not found' );
 		}
 
 
@@ -260,7 +260,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		{
 			$productItem->setId( null );
 			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );
-			$productItem->setLabel( 'Selection product ' . ($i+1) );
+			$productItem->setLabel( 'Selection product ' . ( $i + 1 ) );
 			$productManager->saveItem( $productItem );
 
 			$selProducts[] = $productItem->getId();
@@ -268,8 +268,8 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 			$textItem->setId( null );
 			$textItem->setTypeId( $textTypeItems['short']->getId() );
-			$textItem->setLabel( 'Short description for ' . ($i+1) . '. selection product' );
-			$textItem->setContent( 'Short description for ' . ($i+1) . '. selection product' );
+			$textItem->setLabel( 'Short description for ' . ( $i + 1 ) . '. selection product' );
+			$textItem->setContent( 'Short description for ' . ( $i + 1 ) . '. selection product' );
 			$textManager->saveItem( $textItem );
 
 			$productListItem->setId( null );
@@ -280,8 +280,8 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 			$textItem->setId( null );
 			$textItem->setTypeId( $textTypeItems['long']->getId() );
-			$textItem->setLabel( 'Long description for ' . ($i+1) . '. selection product' );
-			$textItem->setContent( 'Long description for ' . ($i+1) . '. selection product. This may contain some "Lorem ipsum" text' );
+			$textItem->setLabel( 'Long description for ' . ( $i + 1 ) . '. selection product' );
+			$textItem->setContent( 'Long description for ' . ( $i + 1 ) . '. selection product. This may contain some "Lorem ipsum" text' );
 			$textManager->saveItem( $textItem );
 
 			$productListItem->setId( null );

@@ -64,6 +64,7 @@ interface MShop_Common_Item_Helper_Form_Interface
 	 *
 	 * @param string $key Unique key
 	 * @param MW_Common_Criteria_Attribute_Interface $value Attribute item for the given key
+	 * @return void
 	 */
 	public function setValue( $key, MW_Common_Criteria_Attribute_Interface $value );
 

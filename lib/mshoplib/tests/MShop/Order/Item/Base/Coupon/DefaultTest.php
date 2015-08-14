@@ -45,30 +45,30 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals($this->_values['id'], $this->_object->getId());
+		$this->assertEquals( $this->_values['id'], $this->_object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertEquals(null, $this->_object->getId() );
+		$this->_object->setId( null );
+		$this->assertEquals( null, $this->_object->getId() );
 
-		$this->_object->setId(5);
-		$this->assertEquals(5, $this->_object->getId() );
+		$this->_object->setId( 5 );
+		$this->assertEquals( 5, $this->_object->getId() );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId(6);
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setId('test');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setId( 'test' );
 	}
 
 	public function testGetSiteId()
@@ -78,43 +78,43 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBaseId()
 	{
-		$this->assertEquals($this->_values['baseid'], $this->_object->getBaseId());
+		$this->assertEquals( $this->_values['baseid'], $this->_object->getBaseId() );
 	}
 
 	public function testSetBaseId()
 	{
-		$this->_object->setBaseId(99);
-		$this->assertEquals(99, $this->_object->getBaseId());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setBaseId( 99 );
+		$this->assertEquals( 99, $this->_object->getBaseId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetCode()
 	{
-		$this->assertEquals($this->_values['code'], $this->_object->getCode());
+		$this->assertEquals( $this->_values['code'], $this->_object->getCode() );
 	}
 
 	public function testSetCode()
 	{
-		$this->_object->setCode('testId');
-		$this->assertEquals('testId', $this->_object->getCode());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setCode( 'testId' );
+		$this->assertEquals( 'testId', $this->_object->getCode() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetProductId()
 	{
-		$this->assertEquals($this->_values['ordprodid'], $this->_object->getProductId());
+		$this->assertEquals( $this->_values['ordprodid'], $this->_object->getProductId() );
 	}
 
 	public function testSetProductId()
 	{
-		$this->_object->setProductId(12345);
-		$this->assertEquals(12345, $this->_object->getProductId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setProductId( 12345 );
+		$this->assertEquals( 12345, $this->_object->getProductId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals($this->_values['mtime'], $this->_object->getTimeModified());
+		$this->assertEquals( $this->_values['mtime'], $this->_object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
@@ -139,14 +139,14 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCas
 			'order.base.coupon.code' => 'test',
 		);
 
-		$unknown = $item->fromArray($list);
+		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals(array(), $unknown);
+		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals($list['order.base.coupon.id'], $item->getId());
-		$this->assertEquals($list['order.base.coupon.baseid'], $item->getBaseId());
-		$this->assertEquals($list['order.base.coupon.productid'], $item->getProductId());
-		$this->assertEquals($list['order.base.coupon.code'], $item->getCode());
+		$this->assertEquals( $list['order.base.coupon.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.coupon.baseid'], $item->getBaseId() );
+		$this->assertEquals( $list['order.base.coupon.productid'], $item->getProductId() );
+		$this->assertEquals( $list['order.base.coupon.code'], $item->getCode() );
 	}
 
 
@@ -155,18 +155,18 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCas
 		$array = $this->_object->toArray();
 		$this->assertEquals( count( $this->_values ), count( $array ) );
 
-		$this->assertEquals($this->_object->getId(), $array['order.base.coupon.id']);
-		$this->assertEquals($this->_object->getSiteId(), $array['order.base.coupon.siteid']);
-		$this->assertEquals($this->_object->getBaseId(), $array['order.base.coupon.baseid']);
-		$this->assertEquals($this->_object->getCode(), $array['order.base.coupon.code']);
-		$this->assertEquals($this->_object->getProductId(), $array['order.base.coupon.productid']);
-		$this->assertEquals($this->_object->getTimeModified(), $array['order.base.coupon.mtime']);
-		$this->assertEquals( $this->_object->getTimeCreated(), $array['order.base.coupon.ctime']);
-		$this->assertEquals( $this->_object->getEditor(), $array['order.base.coupon.editor']);
+		$this->assertEquals( $this->_object->getId(), $array['order.base.coupon.id'] );
+		$this->assertEquals( $this->_object->getSiteId(), $array['order.base.coupon.siteid'] );
+		$this->assertEquals( $this->_object->getBaseId(), $array['order.base.coupon.baseid'] );
+		$this->assertEquals( $this->_object->getCode(), $array['order.base.coupon.code'] );
+		$this->assertEquals( $this->_object->getProductId(), $array['order.base.coupon.productid'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $array['order.base.coupon.mtime'] );
+		$this->assertEquals( $this->_object->getTimeCreated(), $array['order.base.coupon.ctime'] );
+		$this->assertEquals( $this->_object->getEditor(), $array['order.base.coupon.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse($this->_object->isModified());
+		$this->assertFalse( $this->_object->isModified() );
 	}
 }

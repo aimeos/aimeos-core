@@ -37,7 +37,7 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -78,14 +78,14 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->_editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'plugin.type.editor', $this->_editor ),
 			$search->getConditions()
@@ -94,7 +94,7 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$results = $this->_object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -105,7 +105,7 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search = $this->_object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'plugin.type.editor', $this->_editor ),
-			$search->compare( '==', 'plugin.type.code', 'order')
+			$search->compare( '==', 'plugin.type.code', 'order' )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
@@ -125,11 +125,11 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'plugin.type.editor', $this->_editor ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -172,8 +172,8 @@ class MShop_Plugin_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 }

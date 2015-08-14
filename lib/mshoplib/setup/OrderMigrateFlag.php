@@ -43,7 +43,7 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -89,7 +89,7 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 				$mapping = array();
 
 				for( $i = 1; $i < 16; $i++ ) {
-					$mapping[ 0x1 << $i ] = 0x1 << $i;
+					$mapping[0x1 << $i] = 0x1 << $i;
 				}
 
 				$mapping[1] = 'stock-update';

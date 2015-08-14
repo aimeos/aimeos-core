@@ -17,7 +17,7 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = new MShop_Supplier_Manager_Default(TestHelper::getContext());
+		$this->_object = new MShop_Supplier_Manager_Default( TestHelper::getContext() );
 	}
 
 
@@ -26,7 +26,7 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object );
 	}
 
 
@@ -173,13 +173,13 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->_editor ) );
-		$search->setSlice(0, 2);
+		$search->setSlice( 0, 2 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'supplier.editor', $this->_editor ),
 			$search->getConditions()
@@ -188,7 +188,7 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$results = $this->_object->searchItems( $search );
 		$this->assertEquals( 2, count( $results ) );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -196,17 +196,17 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('address', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'address', 'unknown' );
 	}
 }

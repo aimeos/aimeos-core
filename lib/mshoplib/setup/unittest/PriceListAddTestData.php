@@ -58,13 +58,13 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'price-list.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
 		}
 
 		$refKeys = array();
 		foreach( $testdata['price/list'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = array();
@@ -90,7 +90,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$codes = array();
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for ref customer are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -101,8 +101,8 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->compare( '==', 'customer.code', $codes ) );
 
 		$refIds = array();
-		foreach( $customerManager->searchItems( $search ) as $item) {
-			$refIds[ 'customer/'.$item->getCode() ] = $item->getId();
+		foreach( $customerManager->searchItems( $search ) as $item ) {
+			$refIds['customer/' . $item->getCode()] = $item->getId();
 		}
 
 		return $refIds;
@@ -159,8 +159,8 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = array();
-		foreach( $priceManager->searchItems( $search ) as $item )	{
-			$parentIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getCosts() ] = $item->getId();
+		foreach( $priceManager->searchItems( $search ) as $item ) {
+			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
 
 		$listItemTypeIds = array();
@@ -177,28 +177,28 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 			$listItemType->setStatus( $dataset['status'] );
 
 			$priceListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[ $key ] = $listItemType->getId();
+			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
 		$listItem = $priceListManager->createItem();
 		foreach( $testdata['price/list'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No price ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[ $dataset['typeid'] ] ) ) {
+			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No attribute list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$listItem->setId( null );
-			$listItem->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$listItem->setTypeId( $listItemTypeIds[ $dataset['typeid'] ] );
-			$listItem->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$listItem->setParentId( $parentIds[$dataset['parentid']] );
+			$listItem->setTypeId( $listItemTypeIds[$dataset['typeid']] );
+			$listItem->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );

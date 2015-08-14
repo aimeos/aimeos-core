@@ -38,23 +38,23 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product price performance data', 0);
+		$this->_msg( 'Adding product price performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 
 		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
 
 		$expr = array();
 		$search = $priceTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'price.type.domain', 'product');
-		$expr[] = $search->compare('==', 'price.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'price.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'price.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $priceTypeManager->searchItems($search);
+		$types = $priceTypeManager->searchItems( $search );
 
-		if ( ($priceTypeItem = reset($types)) === false) {
-			throw new Exception('Price type item not found');
+		if( ( $priceTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Price type item not found' );
 		}
 
 
@@ -74,13 +74,13 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'price');
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'price' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $listTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 
@@ -107,14 +107,14 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach( $result as $id => $item )
 			{
 				$listItem->setParentId( $id );
 
 				for( $i = 0; $i < 3; $i++ )
 				{
 					$priceItem->setId( null );
-					$priceItem->setLabel( $item->getLabel() . ': from ' . (1 + $i * 5) );
+					$priceItem->setLabel( $item->getLabel() . ': from ' . ( 1 + $i * 5 ) );
 					$priceItem->setQuantity( 1 + $i * 5 );
 					$priceItem->setValue( $price - $i * 10 );
 					$priceItem->setRebate( $i * 10 );

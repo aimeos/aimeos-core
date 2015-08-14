@@ -116,7 +116,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * @param array $domains Domain names of items that are associated with the products and that should be fetched too
 	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
 	 */
-	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text') );
+	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text' ) );
 
 
 	/**

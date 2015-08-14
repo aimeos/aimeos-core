@@ -30,7 +30,7 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('LocaleAddSiteidToLangAndCurrency');
+		return array( 'LocaleAddSiteidToLangAndCurrency' );
 	}
 
 
@@ -41,7 +41,7 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 

@@ -21,18 +21,18 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 
 
 	/**
-	* Checks if given method exists in current version of PHPUnit.
-	*
-	* @param string $method Method to check
-	* @return boolean
-	*/
+	 * Checks if given method exists in current version of PHPUnit.
+	 *
+	 * @param string $method Method to check
+	 * @return boolean
+	 */
 	private static function _checkMethod( $method )
 	{
-		if( !isset( self::$_methodExists[ $method ] ) ) {
-			self::$_methodExists[ $method ] = method_exists( 'PHPUnit_Framework_TestCase', $method );
+		if( !isset( self::$_methodExists[$method] ) ) {
+			self::$_methodExists[$method] = method_exists( 'PHPUnit_Framework_TestCase', $method );
 		}
 
-		return self::$_methodExists[ $method ];
+		return self::$_methodExists[$method];
 	}
 
 
@@ -51,7 +51,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 			parent::assertType( $expected, $actual, $message );
 		}
 		else {
-			throw new Exception('assertType() is removed since phpunit >= 3.5');
+			throw new Exception( 'assertType() is removed since phpunit >= 3.5' );
 		}
 	}
 
@@ -107,7 +107,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 			parent::assertEmpty( $actual, $message );
 		}
 		else {
-			self::assertThat($actual, self::isEmpty(), $message);
+			self::assertThat( $actual, self::isEmpty(), $message );
 		}
 	}
 }

@@ -62,7 +62,7 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends PHPUnit_Framewor
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unit test warehouse' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -111,7 +111,7 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends PHPUnit_Framewor
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($result)) === false ) {
+		if( ( $expected = reset( $result ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
@@ -141,7 +141,7 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends PHPUnit_Framewor
 		$expr[] = $search->compare( '>=', 'product.stock.warehouse.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -167,8 +167,8 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends PHPUnit_Framewor
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 }

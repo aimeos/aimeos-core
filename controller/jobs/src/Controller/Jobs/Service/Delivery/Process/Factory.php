@@ -37,13 +37,13 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 * @category Developer
 		 * @deprecated Use classes/controller/jobs/order/service/delivery/name instead
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/service/delivery/process/name', 'Default');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'classes/controller/jobs/service/delivery/process/name', 'Default' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Jobs_Service_Delivery_Process_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'Controller_Jobs_Service_Delivery_Process_' . $name : '<not a string>';
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 

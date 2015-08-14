@@ -97,7 +97,7 @@ class MShop_Text_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setDomain( 'unittest' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -264,21 +264,21 @@ class MShop_Text_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.list.editor', $this->_editor ) );
-		$this->assertEquals( 12, count( $this->_object->searchItems($search) ) );
+		$this->assertEquals( 12, count( $this->_object->searchItems( $search ) ) );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'text.list.editor', $this->_editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 5);
-		$results = $this->_object->searchItems($search, array(), $total);
+		$search->setSlice( 0, 5 );
+		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 10, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -286,11 +286,11 @@ class MShop_Text_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 

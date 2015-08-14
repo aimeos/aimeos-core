@@ -148,33 +148,33 @@ class Controller_ExtJS_Catalog_Default
 		$catdesc = array(
 			'Catalog.getTree' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
 			'Catalog.insertItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "string","name" => "parentid","optional" => true ),
-					array( "type" => "string","name" => "refid","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "string", "name" => "parentid", "optional" => true ),
+					array( "type" => "string", "name" => "refid", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 			'Catalog.moveItems' => array(
 				"parameters" => array(
-					array( "type" => "string","name" => "site","optional" => false ),
-					array( "type" => "array","name" => "items","optional" => false ),
-					array( "type" => "string","name" => "oldparentid","optional" => false ),
-					array( "type" => "string","name" => "newparentid","optional" => false ),
-					array( "type" => "string","name" => "refid","optional" => true ),
+					array( "type" => "string", "name" => "site", "optional" => false ),
+					array( "type" => "array", "name" => "items", "optional" => false ),
+					array( "type" => "string", "name" => "oldparentid", "optional" => false ),
+					array( "type" => "string", "name" => "newparentid", "optional" => false ),
+					array( "type" => "string", "name" => "refid", "optional" => true ),
 				),
 				"returns" => "array",
 			),
 		);
 
-		return array_merge($desc, $catdesc);
+		return array_merge( $desc, $catdesc );
 	}
 
 

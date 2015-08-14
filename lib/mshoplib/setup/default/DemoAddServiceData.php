@@ -49,7 +49,7 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 	{
 		$this->_msg( 'Processing service demo data', 0 );
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'service' );
 
 		$search = $manager->createSearch();

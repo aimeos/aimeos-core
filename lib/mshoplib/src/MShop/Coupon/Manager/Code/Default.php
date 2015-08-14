@@ -285,8 +285,8 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -407,7 +407,7 @@ class MShop_Coupon_Manager_Code_Default
 			$stmt->bind( 7, $date ); // mtime
 			$stmt->bind( 8, $context->getEditor() );
 
-			if( $id !== null) {
+			if( $id !== null ) {
 				$stmt->bind( 9, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id );
 			} else {
@@ -625,14 +625,14 @@ class MShop_Coupon_Manager_Code_Default
 			 * @see mshop/coupon/manager/code/default/item/search
 			 * @see mshop/coupon/manager/code/default/item/counter
 			 */
-			$cfgPathCount =  'mshop/coupon/manager/code/default/item/count';
+			$cfgPathCount = 'mshop/coupon/manager/code/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )
@@ -679,7 +679,7 @@ class MShop_Coupon_Manager_Code_Default
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSitePath() ) );
 
-		$types = array(	'coupon.code.siteid' => $this->_searchConfig['coupon.code.siteid']['internaltype'] );
+		$types = array( 'coupon.code.siteid' => $this->_searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
 		$conditions = $search->getConditionString( $types, $translations );
 
@@ -743,7 +743,7 @@ class MShop_Coupon_Manager_Code_Default
 	 *
 	 * @return MShop_Coupon_Item_Code_Interface Emtpy coupon code object
 	 */
-	public function _createItem(array $values = array() )
+	public function _createItem( array $values = array() )
 	{
 		return new MShop_Coupon_Item_Code_Default( $values );
 	}

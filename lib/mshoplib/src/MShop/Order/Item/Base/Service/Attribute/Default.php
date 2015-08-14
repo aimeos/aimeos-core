@@ -28,7 +28,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('order.base.service.attribute.', $values);
+		parent::__construct( 'order.base.service.attribute.', $values );
 
 		$this->_values = $values;
 	}
@@ -52,7 +52,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function setAttributeId( $id )
 	{
-		if ( $id == $this->getAttributeId() ) { return; }
+		if( $id == $this->getAttributeId() ) { return; }
 
 		$this->_values['attrid'] = (string) $id;
 		$this->setModified();
@@ -77,7 +77,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function setServiceId( $id )
 	{
-		if ( $id == $this->getServiceId() ) { return; }
+		if( $id == $this->getServiceId() ) { return; }
 
 		$this->_values['ordservid'] = (int) $id;
 		$this->setModified();
@@ -102,7 +102,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function setType( $type )
 	{
-		if ( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return; }
 
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
@@ -152,7 +152,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	{
 		$this->_checkCode( $code );
 
-		if ( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
@@ -177,7 +177,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function setValue( $value )
 	{
-		if ( $value == $this->getValue() ) { return; }
+		if( $value == $this->getValue() ) { return; }
 
 		$this->_values['value'] = $value;
 		$this->setModified();

@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTable');
+		return array( 'OrderRenameTable' );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -44,7 +44,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);
+		$this->_process( $this->_mysql );
 	}
 
 
@@ -55,22 +55,22 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg ('Add column type to order attribute tables', 0);
-		$this->_status('');
+		$this->_msg( 'Add column type to order attribute tables', 0 );
+		$this->_status( '' );
 
-		foreach( $stmts AS $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
 
 			if( $this->_schema->tableExists( $table ) === true
 				&& $this->_schema->columnExists( $table, 'type' ) === false )
 			{
-				$this->_execute($stmt);
-				$this->_status('added');
+				$this->_execute( $stmt );
+				$this->_status( 'added' );
 			}
 			else
 			{
-				$this->_status('OK');
+				$this->_status( 'OK' );
 			}
 		}
 	}

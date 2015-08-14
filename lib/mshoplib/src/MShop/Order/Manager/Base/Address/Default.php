@@ -307,8 +307,8 @@ class MShop_Order_Manager_Base_Address_Default
 	 */
 	public function createItem()
 	{
-		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		return $this->_createItem( $values );
 	}
 
 
@@ -367,7 +367,7 @@ class MShop_Order_Manager_Base_Address_Default
 			$stmt->bind( 24, date( 'Y-m-d H:i:s' ), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 25, $context->getEditor() );
 
-			if ( $id !== null ) {
+			if( $id !== null ) {
 				$stmt->bind( 26, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
 				$stmt->bind( 26, date( 'Y-m-d H:i:s' ), MW_DB_Statement_Abstract::PARAM_STR ); // ctime
@@ -475,7 +475,7 @@ class MShop_Order_Manager_Base_Address_Default
 		{
 			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/address/default/item/search';
-			$cfgPathCount =  'mshop/order/manager/base/address/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/address/default/item/count';
 			$required = array( 'order.base.address' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
@@ -484,7 +484,7 @@ class MShop_Order_Manager_Base_Address_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[ $row['id'] ] = $this->_createItem( $row );
+					$items[$row['id']] = $this->_createItem( $row );
 				}
 			}
 			catch( Exception $e )

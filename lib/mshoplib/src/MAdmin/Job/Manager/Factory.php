@@ -33,7 +33,7 @@ class MAdmin_Job_Manager_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'MAdmin_Job_Manager_' . $name : '<not a string>';
+			$classname = is_string( $name ) ? 'MAdmin_Job_Manager_' . $name : '<not a string>';
 			throw new MAdmin_Job_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 

@@ -46,8 +46,8 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach($this->_object->getSearchAttributes() as $object) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $object );
+		foreach( $this->_object->getSearchAttributes() as $object ) {
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $object );
 		}
 	}
 
@@ -66,7 +66,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems( $search );
 
-		if ( ( $item = reset($results) ) === false) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No results available' );
 		}
 
@@ -86,7 +86,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setLabel( 'price label' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -143,7 +143,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf('MW_Common_Criteria_SQL', $this->_object->createSearch());
+		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->_object->createSearch() );
 	}
 
 
@@ -179,7 +179,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'price.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.type.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
@@ -188,13 +188,13 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->_editor ) );
-		$search->setSlice(0, 10);
+		$search->setSlice( 0, 10 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 23, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'price.editor', $this->_editor ),
 			$search->getConditions()
@@ -203,7 +203,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$results = $this->_object->searchItems( $search );
 		$this->assertEquals( 21, count( $results ) );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -211,8 +211,8 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
 	}
 
 

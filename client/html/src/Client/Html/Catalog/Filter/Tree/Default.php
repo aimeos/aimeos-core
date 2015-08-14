@@ -365,7 +365,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 		foreach( $tree->getChildren() as $child )
 		{
-			if( isset( $path[ $child->getId() ] ) ) {
+			if( isset( $path[$child->getId()] ) ) {
 				return $this->_getCatalogIds( $child, $path, $currentId );
 			}
 		}

@@ -72,7 +72,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setProductId( $product->getId() );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
@@ -109,7 +109,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem($itemSaved->getId());
+		$this->_object->getItem( $itemSaved->getId() );
 	}
 
 
@@ -123,7 +123,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search );
 
-		if( ($expected = reset($result)) === false ){
+		if( ( $expected = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
 		}
 
@@ -156,14 +156,14 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'product.stock.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.stock.editor', $this->_editor );
 
-		$search->setConditions( $search->combine('&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
@@ -173,7 +173,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.stock.editor', $this->_editor ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $stockItem = reset( $results ) ) === false ) {
@@ -199,7 +199,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.stock.editor', $this->_editor ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $stockItem = reset( $results ) ) === false ) {
@@ -223,7 +223,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 }

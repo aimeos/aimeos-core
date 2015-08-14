@@ -80,7 +80,7 @@ class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTables', 'OrderServiceAttributeAddPrimaryKey');
+		return array( 'OrderRenameTables', 'OrderServiceAttributeAddPrimaryKey' );
 	}
 
 
@@ -91,7 +91,7 @@ class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array('TablesCreateMShop', 'OrderAlterForeignKeyContraintsOnDelete');
+		return array( 'TablesCreateMShop', 'OrderAlterForeignKeyContraintsOnDelete' );
 	}
 
 
@@ -111,14 +111,14 @@ class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg( 'Adding siteid to order tables', 0);
+		$this->_msg( 'Adding siteid to order tables', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if ( $this->_schema->tableExists( $table ) === true &&
+			if( $this->_schema->tableExists( $table ) === true &&
 				$this->_schema->columnExists( $table, 'siteid' ) === false )
 			{
 				$this->_executeList( $stmt );

@@ -48,10 +48,10 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 	protected function _process()
 	{
 
-		$this->_msg('Adding product variant attribute performance data', 0);
+		$this->_msg( 'Adding product variant attribute performance data', 0 );
 
 
-		$context =  $this->_getContext();
+		$context = $this->_getContext();
 
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$attrTypeManager = $attrManager->getSubManager( 'type' );
@@ -84,7 +84,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 			$attrManager->saveItem( $attrItem );
 
-			$attrListWidth[ $attrItem->getId() ] = clone $attrItem;
+			$attrListWidth[$attrItem->getId()] = clone $attrItem;
 		}
 
 
@@ -114,7 +114,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 			$attrManager->saveItem( $attrItem );
 
-			$attrListLength[ $attrItem->getId() ] = clone $attrItem;
+			$attrListLength[$attrItem->getId()] = clone $attrItem;
 		}
 
 		$this->_txCommit();
@@ -126,13 +126,13 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'attribute');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'variant');
+		$expr[] = $search->compare( '==', 'product.list.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'product.list.type.code', 'variant' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
+		$types = $productListTypeManager->searchItems( $search );
 
-		if ( ($productListTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
+		if( ( $productListTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
 		}
 
 
@@ -152,7 +152,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		{
 			$result = $productManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach( $result as $id => $item )
 			{
 				$listItem->setId( null );
 				$listItem->setParentId( $id );

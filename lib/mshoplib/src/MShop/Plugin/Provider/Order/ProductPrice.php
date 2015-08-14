@@ -79,8 +79,8 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			$refPrices = array();
 
 			// fetch prices of articles/sub-products
-			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
-				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price', 'default', 'default' );
+			if( isset( $prodMap[$orderProduct->getProductCode()] ) ) {
+				$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
 			}
 
 			$orderPosPrice = $orderProduct->getPrice();
@@ -97,7 +97,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			}
 		}
 
-		if ( count( $changedProducts ) > 0 )
+		if( count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
 			$msg = sprintf( 'Please have a look at the prices of the products in your basket' );
@@ -158,7 +158,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		$prodMap = array();
 
 		foreach( $products as $item ) {
-			$prodMap[ $item->getCode() ] = $item;
+			$prodMap[$item->getCode()] = $item;
 		}
 
 		return $prodMap;

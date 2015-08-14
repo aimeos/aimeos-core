@@ -51,14 +51,14 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->_object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf('MW_Common_Criteria_Attribute_Interface', $attr );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MAdmin_Exception');
+		$this->setExpectedException( 'MAdmin_Exception' );
 		$this->_object->getSubManager( 'unknown' );
 	}
 

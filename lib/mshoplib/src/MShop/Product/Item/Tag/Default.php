@@ -25,7 +25,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct('product.tag.', $values);
+		parent::__construct( 'product.tag.', $values );
 
 		$this->_values = $values;
 	}
@@ -49,7 +49,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function setLanguageId( $id )
 	{
-		if ( $id === $this->getLanguageId() ) { return; }
+		if( $id === $this->getLanguageId() ) { return; }
 
 		$this->_checkLanguageId( $id );
 		$this->_values['langid'] = $id;
@@ -76,7 +76,7 @@ class MShop_Product_Item_Tag_Default
 	public function setTypeId( $id )
 	{
 		$id = (int) $id;
-		if ( $id === $this->getTypeId() ) { return; }
+		if( $id === $this->getTypeId() ) { return; }
 
 		$this->_values['typeid'] = (int) $id;
 		$this->setModified();
@@ -101,7 +101,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function setLabel( $label )
 	{
-		if ( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return; }
 
 		$this->_values['label'] = (string) $label;
 		$this->setModified();

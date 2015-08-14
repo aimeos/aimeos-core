@@ -126,7 +126,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 
-		foreach($result as $itemId => $item) {
+		foreach( $result as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}

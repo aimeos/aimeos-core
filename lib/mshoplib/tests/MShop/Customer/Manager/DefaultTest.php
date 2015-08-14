@@ -22,7 +22,7 @@ class MShop_Customer_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = new MShop_Customer_Manager_Default(TestHelper::getContext());
+		$this->_object = new MShop_Customer_Manager_Default( TestHelper::getContext() );
 
 		$this->_fixture = array(
 			'label' => 'unitTest',
@@ -38,7 +38,7 @@ class MShop_Customer_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object, $this->_fixture, $this->_address);
+		unset( $this->_object, $this->_fixture, $this->_address );
 	}
 
 
@@ -78,7 +78,7 @@ class MShop_Customer_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No customer item with code "UTC003" found' );
 		}
 
-		$actual = $this->_object->getItem( $expected->getId(), array('text') );
+		$actual = $this->_object->getItem( $expected->getId(), array( 'text' ) );
 
 		$this->assertEquals( $expected, $actual );
 		$this->assertEquals( 3, count( $actual->getListItems( 'text' ) ) );
@@ -217,17 +217,17 @@ class MShop_Customer_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->_editor ) );
-		$search->setSlice(0, 2);
+		$search->setSlice( 0, 2 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
 		//search with base criteria
-		$search = $this->_object->createSearch(true);
+		$search = $this->_object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.address.editor', $this->_editor ),
 			$search->getConditions()
@@ -239,17 +239,17 @@ class MShop_Customer_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address', 'Default') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'address', 'Default' ) );
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->getSubManager('address', 'unknown');
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'address', 'unknown' );
 	}
 }

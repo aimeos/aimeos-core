@@ -84,7 +84,7 @@ class MShop_Plugin_Provider_Order_Coupon
 			self::$_lock = false;
 		}
 
-		if ( count( $notAvailable ) > 0 )
+		if( count( $notAvailable ) > 0 )
 		{
 			$codes = array( 'coupon' => $notAvailable );
 			$msg = sprintf( 'Coupon in basket is not available any more' );
