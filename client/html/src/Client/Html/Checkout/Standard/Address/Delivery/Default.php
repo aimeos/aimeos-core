@@ -384,7 +384,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		 * @see client/html/checkout/standard/address/delivery/mandatory
 		 * @see client/html/checkout/standard/address/delivery/optional
 		 */
-		$regex = $view->config( 'client/html/checkout/standard/address/validate', array() );
 
 		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
@@ -394,8 +393,9 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			if( isset( $allFields[$key] ) )
 			{
 				$name = substr( $key, 19 );
+				$regex = $view->config( 'client/html/checkout/standard/address/validate/' . $name );
 
-				if( isset( $regex[$name] ) && preg_match( $regex[$name], $value ) !== 1 )
+				if( $regex && preg_match( '/' . $regex . '/', $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is invalid' );
 					$invalid[$key] = sprintf( $msg, $name );

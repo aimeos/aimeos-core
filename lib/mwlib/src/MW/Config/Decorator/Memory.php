@@ -96,7 +96,7 @@ class MW_Config_Decorator_Memory
 			$this->_negCache[ $name ] = true;
 		}
 
-		$this->_getObject()->set( $name, $value );
+		// don't store local configuration
 	}
 
 
