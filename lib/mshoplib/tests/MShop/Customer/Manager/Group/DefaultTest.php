@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Common_Manager_Group_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Common_Manager_Group_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $_object = null;
 	private $_editor = '';

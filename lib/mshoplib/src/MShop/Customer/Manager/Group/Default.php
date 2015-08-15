@@ -63,11 +63,11 @@ class MShop_Customer_Manager_Group_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'customer.group.editor'=> array(
-			'code'=>'customer.group.editor',
-			'internalcode'=>'mcusgr."editor"',
-			'label'=>'Customer group editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'code' => 'customer.group.editor',
+			'internalcode' => 'mcusgr."editor"',
+			'label' => 'Customer group editor',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 	);
 
