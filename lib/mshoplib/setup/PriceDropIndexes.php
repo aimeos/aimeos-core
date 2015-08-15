@@ -65,7 +65,7 @@ class MW_Setup_Task_PriceDropIndexes extends MW_Setup_Task_Abstract
 		$this->_msg( 'Remove unused indexes in mshop_price table', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $index => $stmt )
+		foreach( $stmts as $index => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 

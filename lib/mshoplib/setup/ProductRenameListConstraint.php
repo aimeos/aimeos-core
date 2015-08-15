@@ -64,7 +64,7 @@ class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Abstract
 
 		$table = 'mshop_product_list';
 
-		foreach( $stmts AS $name => $stmt )
+		foreach( $stmts as $name => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking constraint "%1$s": ', $name ), 1 );
 

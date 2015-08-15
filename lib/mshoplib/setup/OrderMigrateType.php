@@ -64,7 +64,7 @@ class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
 
 		if( $this->_schema->tableExists( $table ) === true )
 		{
-			foreach( $stmts AS $sql ) {
+			foreach( $stmts as $sql ) {
 				$stmt = $this->_conn->create( $sql );
 				$result = $stmt->execute();
 				$cntRows += $result->affectedRows();

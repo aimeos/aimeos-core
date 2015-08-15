@@ -318,7 +318,7 @@ class Client_Html_Email_Payment_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/header-default.html', 'email/payment/header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );;
+		return $view->render( $this->_getTemplate( $tplconf, $default ) ); ;
 	}
 
 

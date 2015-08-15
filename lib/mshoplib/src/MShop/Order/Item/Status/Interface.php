@@ -27,7 +27,7 @@ interface MShop_Order_Item_Status_Interface extends MShop_Common_Item_Interface
 	 * @param integer $parentid Parent ID of the order status
 	 * @return void
 	 */
-	public function setParentId($parentid);
+	public function setParentId( $parentid );
 	
 	
 	/**

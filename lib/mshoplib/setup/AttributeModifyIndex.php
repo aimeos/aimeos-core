@@ -59,9 +59,9 @@ class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 		$this->_msg( sprintf( 'Modifying index in mshop_attribute table' ), 0 );
 		$this->_status( '' );
 
-		foreach( $stmts AS $table => $indexes )
+		foreach( $stmts as $table => $indexes )
 		{
-			foreach( $indexes AS $index => $stmt )
+			foreach( $indexes as $index => $stmt )
 			{
 				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
