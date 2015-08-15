@@ -26,7 +26,7 @@
 		<phing target="coverage" haltonfailure="true" dir="controller/jobs" />
 	</target>
 
-	<target name="check" description="Executes all tests">
+	<target name="check" description="Checks for code quality">
 		<phing target="check" haltonfailure="true" dir="lib/custom"/>
 		<phing target="check" haltonfailure="true" dir="client/html" />
 		<phing target="check" haltonfailure="true" dir="client/extjs" />
