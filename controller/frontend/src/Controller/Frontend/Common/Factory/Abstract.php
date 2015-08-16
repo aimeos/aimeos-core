@@ -50,11 +50,11 @@ class Controller_Frontend_Common_Factory_Abstract
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string($name) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$classname = $classprefix . ucfirst( strtolower( $name ) );
+			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
 				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -133,7 +133,7 @@ class Controller_Frontend_Common_Factory_Abstract
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/global', array() );
 		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_Frontend_'. $localClass . '_Decorator_';
+		$classprefix = 'Controller_Frontend_' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/local', array() );
 		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
