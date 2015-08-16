@@ -183,6 +183,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		if( !isset( $this->_cache ) )
 		{
 			$attrMap = array();
+			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
 
 			/** client/html/catalog/filter/attribute/types
 			 * List of attribute types that should be displayed in this order in the catalog filter
@@ -206,7 +207,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			 */
 			$attrTypes = $view->config( 'client/html/catalog/filter/attribute/types', array() );
 
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+			$manager = $controller->createManager( 'attribute' );
 			$search = $manager->createSearch( true );
 
 			$expr = array();

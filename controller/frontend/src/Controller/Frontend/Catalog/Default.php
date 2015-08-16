@@ -19,6 +19,19 @@ class Controller_Frontend_Catalog_Default
 	implements Controller_Frontend_Catalog_Interface
 {
 	/**
+	 * Returns the manager for the given name
+	 *
+	 * @param string $name Name of the manager
+	 * @return MShop_Common_Manager_Interface Manager object
+	 * @since 2015.08
+	 */
+	public function createManager( $name )
+	{
+		return MShop_Factory::createManager( $this->_getContext(), $name );
+	}
+
+
+	/**
 	 * Returns the default catalog filter
 	 *
 	 * @param boolean True to add default criteria, e.g. status > 0

@@ -218,7 +218,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
 
 
-			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+			$attrManager = $controller->createManager( 'attribute' );
 
 			$search = $attrManager->createSearch( true );
 			$expr = array(

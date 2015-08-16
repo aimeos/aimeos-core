@@ -416,9 +416,10 @@ class Client_Html_Catalog_Detail_Default
 			$context = $this->_getContext();
 			$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
 			$productItem = $this->_getProductItem( $view->param( 'd_prodid' ), $domains );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 
-			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+			$attrManager = $controller->createManager( 'attribute' );
 			$attrSearch = $attrManager->createSearch( true );
 			$expr = array(
 				$attrSearch->compare( '==', 'attribute.id', array_keys( $productItem->getRefItems( 'attribute' ) ) ),
@@ -431,7 +432,7 @@ class Client_Html_Catalog_Detail_Default
 			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
 
 
-			$mediaManager = MShop_Factory::createManager( $context, 'media' );
+			$mediaManager = $controller->createManager( 'media' );
 			$mediaSearch = $mediaManager->createSearch( true );
 			$expr = array(
 				$mediaSearch->compare( '==', 'media.id', array_keys( $productItem->getRefItems( 'media' ) ) ),

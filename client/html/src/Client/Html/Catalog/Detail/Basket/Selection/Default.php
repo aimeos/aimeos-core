@@ -214,7 +214,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$this->_addMetaList( array_keys( $subproducts ), 'product', $this->_expire );
 
 
-				$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+				$attrManager = $controller->createManager( 'attribute' );
 
 				$search = $attrManager->createSearch( true );
 				$expr = array(

@@ -18,6 +18,15 @@ interface Controller_Frontend_Catalog_Interface
 	extends Controller_Frontend_Common_Interface
 {
 	/**
+	 * Returns the manager for the given name
+	 *
+	 * @param string $name Name of the manager
+	 * @return MShop_Common_Manager_Interface Manager object
+	 */
+	public function createManager( $name );
+
+
+	/**
 	 * Returns the default catalog filter
 	 *
 	 * @return MW_Common_Criteria_Interface Criteria object for filtering
