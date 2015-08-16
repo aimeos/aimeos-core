@@ -93,7 +93,7 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * @deprecated 2015.10 use aggregateIndex() instead
 	 * @param MW_Common_Criteria_Interface $filter
-	 * @param unknown $key
+	 * @param string $key
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $filter, $key )
 	{
@@ -159,7 +159,7 @@ class Controller_Frontend_Catalog_Default
 
 	/**
 	 * @deprecated 2015.10 use createIndexFilter() instead
-	 * @param string $sort
+	 * @param string|null $sort
 	 * @param string $direction
 	 * @param integer $start
 	 * @param integer $size
@@ -207,7 +207,7 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * @deprecated 2015.10 use createIndexFilterCategory() instead
 	 * @param string $catid
-	 * @param string $sort
+	 * @param string|null $sort
 	 * @param string $direction
 	 * @param integer $start
 	 * @param integer $size
@@ -247,11 +247,11 @@ class Controller_Frontend_Catalog_Default
 
 	/**
 	 * @deprecated 2015.10 use createIndexFilterText() instead
-	 * @param unknown $input
-	 * @param string $sort
+	 * @param string $input
+	 * @param string|null $sort
 	 * @param string $direction
-	 * @param number $start
-	 * @param number $size
+	 * @param integer $start
+	 * @param integer $size
 	 * @param string $listtype
 	 */
 	public function createProductFilterByText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
@@ -282,7 +282,7 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * @deprecated 2015.10 use addIndexFilterCategory() instead
 	 * @param MW_Common_Criteria_Interface $search
-	 * @param unknown $catid
+	 * @param string $catid
 	 */
 	public function addProductFilterCategory( MW_Common_Criteria_Interface $search, $catid )
 	{
@@ -314,7 +314,7 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * @deprecated 2015.10 use addIndexFilterText() instead
 	 * @param MW_Common_Criteria_Interface $search
-	 * @param unknown $input
+	 * @param string $input
 	 * @param string $listtype
 	 */
 	public function addProductFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
@@ -327,7 +327,7 @@ class Controller_Frontend_Catalog_Default
 	 * Returns the products from the index filtered by the given criteria object.
 	 *
 	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
-	 * @param array $domains Domain names of items that are associated with the products and that should be fetched too
+	 * @param string[] $domains Domain names of items that are associated with the products and that should be fetched too
 	 * @param integer &$total Parameter where the total number of found products will be stored in
 	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
 	 * @since 2015.08
@@ -341,8 +341,8 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * @deprecated 2015.10 use getIndexItems() instead
 	 * @param MW_Common_Criteria_Interface $filter
-	 * @param string $total
-	 * @param array $domains
+	 * @param integer|null $total
+	 * @param string[] $domains
 	 */
 	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text' ) )
 	{
@@ -355,7 +355,7 @@ class Controller_Frontend_Catalog_Default
 	 *
 	 * @param array $ids List of product IDs
 	 * @param array $domains Domain names of items that are associated with the products and that should be fetched too
-	 * @return array List of product items implementing MShop_Product_Item_Interface
+	 * @return string[] List of product items implementing MShop_Product_Item_Interface
 	 * @throws Controller_Frontend_Catalog_Exception If product isn't available
 	 * @since 2015.08
 	 */
