@@ -51,11 +51,11 @@ abstract class Controller_Jobs_Common_Factory_Abstract
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string( $name ) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
 				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$classname = $classprefix . ucfirst( strtolower( $name ) );
+			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
 				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -135,7 +135,7 @@ abstract class Controller_Jobs_Common_Factory_Abstract
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
 		$controller = self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_Jobs_' . $localClass . '_Decorator_';
+		$classprefix = 'Controller_Jobs_' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
 		$controller = self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
 

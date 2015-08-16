@@ -50,11 +50,11 @@ class Controller_ExtJS_Common_Factory_Abstract
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string( $name ) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
 				throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 			}
 
-			$classname = $classprefix . ucfirst( strtolower( $name ) );
+			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
 				throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
@@ -134,7 +134,7 @@ class Controller_ExtJS_Common_Factory_Abstract
 		$decorators = $config->get( 'controller/extjs/' . $domain . '/decorators/global', array() );
 		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_ExtJS_' . $localClass . '_Decorator_';
+		$classprefix = 'Controller_ExtJS_' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/extjs/' . $domain . '/decorators/local', array() );
 		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
 
