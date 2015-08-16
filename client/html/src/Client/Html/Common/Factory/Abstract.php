@@ -50,11 +50,11 @@ class Client_Html_Common_Factory_Abstract
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string($name) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
 				throw new Client_Html_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 			}
 
-			$classname = $classprefix . ucfirst( strtolower( $name ) );
+			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
@@ -133,7 +133,7 @@ class Client_Html_Common_Factory_Abstract
 		$decorators = $config->get( 'client/html/' . $domain . '/decorators/global', array() );
 		$client =  self::_addDecorators( $context, $client, $decorators, $classprefix );
 
-		$classprefix = 'Client_Html_'. $localClass . '_Decorator_';
+		$classprefix = 'Client_Html_' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $domain . '/decorators/local', array() );
 		$client =  self::_addDecorators( $context, $client, $decorators, $classprefix );
 
