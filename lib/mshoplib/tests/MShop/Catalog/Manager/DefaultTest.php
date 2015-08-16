@@ -70,6 +70,17 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
+	public function testRegisterItemFilter()
+	{
+		$callback = function( MShop_Common_Item_ListRef_Interface $item, $index )
+		{
+			return true;
+		};
+
+		$this->_object->registerItemFilter( 'test', $callback );
+	}
+
+
 	public function testSearchItems()
 	{
 		$search = $this->_object->createSearch();
@@ -237,6 +248,28 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $cafecat->getId(), $caffein->getNode()->parentid );
 		$this->assertEquals( array(), $groupcatChildren );
 		$this->assertEquals( 3, count( $categorycatChildren ) );
+	}
+
+
+	public function testGetTreeWithFilter()
+	{
+		$this->assertEquals( 2, count( $this->_object->getTree()->getChildren() ) );
+
+		$callback = function( MShop_Common_Item_ListRef_Interface $item, $index )
+		{
+			return (bool) $index % 2;
+		};
+
+		$this->_object->registerItemFilter( 'test', $callback );
+		$tree = $this->_object->getTree();
+
+		$rootItem = $this->_object->getTree();
+		$this->assertEquals( 1, count( $tree->getChildren() ) );
+
+		$groupItem = $rootItem->getChild( 0 );
+		$this->assertEquals( 'Groups', $groupItem->getLabel() );
+		$this->assertEquals( 1, count( $groupItem->getChildren() ) );
+		$this->assertEquals( 'Internet', $groupItem->getChild( 0 )->getLabel() );
 	}
 
 

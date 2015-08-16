@@ -18,6 +18,7 @@ class MShop_Catalog_Manager_Default
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Catalog_Manager_Interface, MShop_Common_Manager_Factory_Interface
 {
+	private $_filter = array();
 	private $_treeManagers = array();
 
 	private $_searchConfig = array(
@@ -645,6 +646,29 @@ class MShop_Catalog_Manager_Default
 
 
 	/**
+	 * Registers a new item filter for the given name
+	 *
+	 * To prevent catalog items to be added to the tree, you can register a
+	 * closure function that checks if the item should be part of the category
+	 * tree or not. The function signature must be:
+	 *
+	 * function( MShop_Common_Item_ListRef_Interface $item, $index )
+	 *
+	 * It must accept an item implementing the list reference interface and the
+	 * index of the category in the list starting from 0. Its return value must
+	 * be a boolean value of "true" if the category item should be added to the
+	 * tree and "false" if not.
+	 *
+	 * @param string $name Filter name
+	 * @param Closure $fcn Callback function
+	 */
+	public function registerItemFilter( $name, Closure $fcn )
+	{
+		$this->_filter[$name] = $fcn;
+	}
+
+
+	/**
 	 * Creates the catalog item objects.
 	 *
 	 * @param array $itemMap Associative list of catalog ID / tree node pairs
@@ -732,7 +756,7 @@ class MShop_Catalog_Manager_Default
 	protected function _createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
 		array $listItemMap, array $refItemMap )
 	{
-		foreach( $node->getChildren() as $child )
+		foreach( $node->getChildren() as $idx => $child )
 		{
 			$listItems = array();
 			if( array_key_exists( $child->getId(), $listItemMap ) ) {
@@ -745,9 +769,17 @@ class MShop_Catalog_Manager_Default
 			}
 
 			$newItem = $this->_createItem( array(), $listItems, $refItems, array(), $child );
-			$item->addChild( $newItem );
 
-			$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
+			$result = true;
+			foreach( $this->_filter as $fcn ) {
+				$result = $result && $fcn( $newItem, $idx );
+			}
+
+			if( $result === true )
+			{
+				$item->addChild( $newItem );
+				$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
+			}
 		}
 	}
 
