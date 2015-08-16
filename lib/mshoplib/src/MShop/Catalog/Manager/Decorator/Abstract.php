@@ -19,7 +19,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	implements MShop_Common_Manager_Decorator_Interface, MShop_Catalog_Manager_Interface
 {
 	/**
-	 * Returns a list if item IDs, that are in the path of given item ID.
+	 * Returns a list of items starting with the given category that are in the path to the root node
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
