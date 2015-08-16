@@ -221,7 +221,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 				$total = null;
 
 				$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
-				$products = $controller->getProductList( $filter, $total, array( 'text' ) );
+				$products = $controller->getIndexItems( $filter, array( 'text' ), $total );
 
 				if( ( $count = count( $products ) ) > 1 )
 				{

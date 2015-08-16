@@ -293,18 +293,6 @@ class Client_Html_Basket_Related_Bought_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
-		$manager = MShop_Factory::createManager( $context, 'product' );
-
-		$search = $manager->createSearch( true );
-		$expr = array(
-				$search->compare( '==', 'product.id', $ids ),
-				$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-
-		$domains = array( 'text', 'price', 'media' );
-
 		/** client/html/basket/related/bought/default/domains
 		 * The list of domain names whose items should be available in the template for the products
 		 *
@@ -320,8 +308,11 @@ class Client_Html_Basket_Related_Bought_Default
 		 * @since 2014.09
 		 * @category Developer
 		 */
+		$domains = array( 'text', 'price', 'media' );
 		$domains = $config->get( 'client/html/basket/related/bought/default/domains', $domains );
 
-		return $manager->searchItems( $search, $domains );
+		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+		return $controller->getProductItems( $ids, $domains );
 	}
 }

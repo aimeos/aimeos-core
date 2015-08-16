@@ -190,19 +190,11 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
 
-				$productManager = MShop_Factory::createManager( $context, 'product' );
-
-				$search = $productManager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'product.id', array_keys( $products ) ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
 				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media', 'attribute' );
 
-				$subproducts = $productManager->searchItems( $search, $domains );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$subproducts = $controller->getProductItems( array_keys( $products ), $domains );
 				$attrIds = $prodDeps = $attrDeps = $attrTypeDeps = array();
 
 				foreach( $subproducts as $subProdId => $subProduct )

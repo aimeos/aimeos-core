@@ -388,15 +388,9 @@ class Client_Html_Account_Favorite_Default
 				$productIds[] = $listItem->getRefId();
 			}
 
-			$manager = MShop_Factory::createManager( $context, 'product' );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
-			$search = $manager->createSearch();
-			$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );
-			$search->setSlice( 0, count( $view->favoriteListItems ) );
-
-			$view->favoriteProductItems = $manager->searchItems( $search, $domains );
-
-
+			$view->favoriteProductItems = $controller->getProductItems( $productIds, $domains );
 			$view->favoritePageFirst = 1;
 			$view->favoritePagePrev = ( $current > 1 ? $current - 1 : 1 );
 			$view->favoritePageNext = ( $current < $last ? $current + 1 : $last );

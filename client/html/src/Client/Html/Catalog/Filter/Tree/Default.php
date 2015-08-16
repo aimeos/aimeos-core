@@ -262,7 +262,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			}
 
 
-			$search = $controller->createCatalogFilterDefault();
+			$search = $controller->createCatalogFilter();
 			$expr = $search->compare( '==', 'catalog.parentid', array_keys( $catItems ) );
 			$expr = $search->combine( '||', array( $expr, $search->compare( '==', 'catalog.id', $node->getId() ) ) );
 

@@ -228,7 +228,7 @@ class Client_Html_Catalog_Count_Attribute_Default
 				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
-				$view->attributeCountList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
+				$view->attributeCountList = $controller->aggregateIndex( $filter, 'catalog.index.attribute.id' );
 			}
 
 			$this->_cache = $view;

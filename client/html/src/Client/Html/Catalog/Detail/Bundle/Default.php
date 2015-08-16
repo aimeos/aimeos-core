@@ -188,19 +188,12 @@ class Client_Html_Catalog_Detail_Bundle_Default
 				$context = $this->_getContext();
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'default' );
 
-				$manager = MShop_Factory::createManager( $context, 'product' );
-
-				$search = $manager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'product.id', array_keys( $products ) ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
 				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media' );
 
-				$view->bundleItems = $manager->searchItems( $search, $domains );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+				$view->bundleItems = $controller->getProductItems( array_keys( $products ), $domains );
 				$view->bundlePosItems = $products;
 
 				$this->_addMetaItem( $view->bundleItems, 'product', $this->_expire, $this->_tags );

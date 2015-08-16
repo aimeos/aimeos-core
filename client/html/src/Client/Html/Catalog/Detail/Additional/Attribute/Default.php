@@ -194,20 +194,13 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			}
 
 
-			// find regular attributes from sub-products
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
-			$productManager = MShop_Factory::createManager( $context, 'product' );
-
-			$search = $productManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'product.id', array_keys( $products ) ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
 			/** @todo Make referenced domains configurable */
-			$products = $productManager->searchItems( $search, array( 'attribute' ) );
+
+			// find regular attributes from sub-products
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+			$products = $controller->getProductItems( array_keys( $products ), array( 'attribute' ) );
 
 			foreach( $products as $subProdId => $subProduct )
 			{

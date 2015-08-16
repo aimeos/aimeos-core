@@ -212,8 +212,8 @@ class Client_Html_Catalog_List_Promo_Default
 				$catId = $view->listCurrentCatItem->getId();
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
-				$filter = $controller->createProductFilterByCategory( $catId, 'position', '+', 0, $size, 'promotion' );
-				$products = $controller->getProductList( $filter, $total, $domains );
+				$filter = $controller->createIndexFilterCategory( $catId, 'position', '+', 0, $size, 'promotion' );
+				$products = $controller->getIndexItems( $filter, $domains, $total );
 			}
 
 

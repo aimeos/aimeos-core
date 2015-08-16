@@ -324,10 +324,8 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
 
-			$manager = MShop_Factory::createManager( $context, 'product' );
-			$search = $manager->createSearch( true );
-			$search->setConditions( $search->compare( '==', 'product.id', $pinned ) );
-			$result = $manager->searchItems( $search, $domains );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+			$result = $controller->getProductItems( $pinned, $domains );
 
 			foreach( array_reverse( $pinned ) as $id )
 			{

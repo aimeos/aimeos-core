@@ -502,17 +502,8 @@ class Client_Html_Catalog_Detail_Default
 		 */
 		$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
 
-
-		$manager = MShop_Factory::createManager( $context, 'product' );
-
-		$search = $manager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'product.id', $prodid ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$items = $manager->searchItems( $search, $domains );
+		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		$items = $controller->getProductItems( array( $prodid ), $domains );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'No product with ID "%1$s" found', $prodid ) );

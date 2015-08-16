@@ -206,7 +206,7 @@ class Client_Html_Catalog_Count_Tree_Default
 				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
-				$view->treeCountList = $controller->aggregate( $filter, 'catalog.index.catalog.id' );
+				$view->treeCountList = $controller->aggregateIndex( $filter, 'catalog.index.catalog.id' );
 			}
 
 			$this->_cache = $view;

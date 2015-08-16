@@ -145,21 +145,21 @@ abstract class Client_Html_Catalog_Abstract
 
 		if( $text !== '' && $textfilter === true )
 		{
-			$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ( $page - 1 ) * $size, $size );
+			$filter = $controller->createIndexFilterText( $text, $sort, $sortdir, ( $page - 1 ) * $size, $size );
 
 			if( $catid !== '' && $catfilter === true ) {
-				$filter = $controller->addProductFilterCategory( $filter, $catid );
+				$filter = $controller->addIndexFilterCategory( $filter, $catid );
 			}
 
 			return $filter;
 		}
 		elseif( $catid !== '' && $catfilter === true )
 		{
-			return $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ( $page - 1 ) * $size, $size );
+			return $controller->createIndexFilterCategory( $catid, $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
 		else
 		{
-			return $controller->createProductFilterDefault( $sort, $sortdir, ( $page - 1 ) * $size, $size );
+			return $controller->createIndexFilter( $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
 	}
 
@@ -363,6 +363,6 @@ abstract class Client_Html_Catalog_Abstract
 		$productFilter = $this->_getProductListFilter( $view );
 		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
-		$this->_productList = $controller->getProductList( $productFilter, $this->_productTotal, $domains );
+		$this->_productList = $controller->getIndexItems( $productFilter, $domains, $this->_productTotal );
 	}
 }

@@ -454,15 +454,9 @@ class Client_Html_Account_Watch_Default
 				$productIds[] = $listItem->getRefId();
 			}
 
-			$manager = MShop_Factory::createManager( $context, 'product' );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
-			$search = $manager->createSearch();
-			$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );
-			$search->setSlice( 0, count( $view->watchListItems ) );
-
-			$view->watchProductItems = $manager->searchItems( $search, $domains );
-
-
+			$view->watchProductItems = $controller->getProductItems( $productIds, $domains );
 			$view->watchPageFirst = 1;
 			$view->watchPagePrev = ( $current > 1 ? $current - 1 : 1 );
 			$view->watchPageNext = ( $current < $last ? $current + 1 : $last );

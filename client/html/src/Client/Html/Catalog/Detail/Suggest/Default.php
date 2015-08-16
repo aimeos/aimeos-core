@@ -189,19 +189,12 @@ class Client_Html_Catalog_Detail_Suggest_Default
 				$context = $this->_getContext();
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'suggestion' );
 
-				$manager = MShop_Factory::createManager( $context, 'product' );
-
-				$search = $manager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'product.id', array_keys( $products ) ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media' );
 
-				$view->suggestItems = $manager->searchItems( $search, $domains );
+				$view->suggestItems = $controller->getProductItems( array_keys( $products ), $domains );
 				$view->suggestPosItems = $products;
 
 				$this->_addMetaItem( $view->suggestItems, 'product', $this->_expire, $this->_tags );
