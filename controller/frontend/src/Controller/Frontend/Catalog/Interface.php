@@ -140,6 +140,18 @@ interface Controller_Frontend_Catalog_Interface
 
 
 	/**
+	 * Returns the products from the index filtered by the given criteria object.
+	 *
+	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param string[] $domains Domain names of items that are associated with the products and that should be fetched too
+	 * @param integer &$total Parameter where the total number of found products will be stored in
+	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
+	 * @since 2015.08
+	 */
+	public function getIndexItems( MW_Common_Criteria_Interface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null );
+
+
+	/**
 	 * Returns the product item for the given ID if it's available
 	 *
 	 * @param array $ids List of product IDs

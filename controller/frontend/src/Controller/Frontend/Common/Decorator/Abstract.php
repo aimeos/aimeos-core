@@ -55,6 +55,21 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 
 
 	/**
+	 * Returns the products from the index filtered by the given criteria object.
+	 *
+	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param string[] $domains Domain names of items that are associated with the products and that should be fetched too
+	 * @param integer &$total Parameter where the total number of found products will be stored in
+	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
+	 * @since 2015.08
+	 */
+	public function getIndexItems( MW_Common_Criteria_Interface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
+	{
+		$this->_controller->getIndexItems( $filter, $domains, $total );
+	}
+
+
+	/**
 	 * Returns the context item
 	 *
 	 * @return MShop_Context_Item_Interface Context item object
