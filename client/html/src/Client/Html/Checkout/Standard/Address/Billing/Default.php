@@ -438,7 +438,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$name = substr( $key, 19 );
 				$regex = $view->config( 'client/html/checkout/standard/address/validate/' . $name );
 
-				if( $regex && preg_match( '/' . $regex . '/', $value ) !== 1 )
+				if( $regex && preg_match( $regex, $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is invalid' );
 					$invalid[$key] = sprintf( $msg, $name );
