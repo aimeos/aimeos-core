@@ -33,6 +33,39 @@ class Controller_ExtJS_Customer_Default
 
 
 	/**
+	 * Creates a new item or updates an existing one or a list thereof
+	 *
+	 * @param stdClass $params Associative array containing the item properties
+	 * @return array Associative array including items and status for ExtJS
+	 */
+	public function saveItems( stdClass $params )
+	{
+		$this->_checkParams( $params, array( 'site', 'items' ) );
+		$this->_setLocale( $params->site );
+
+		$ids = array();
+		$manager = $this->_getManager();
+		$entries = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
+
+		foreach( $entries as $entry )
+		{
+			if( isset( $entry->{'customer.id'} ) && $entry->{'customer.id'} !== '' ) {
+				$item = $manager->getItem( $entry->{'customer.id'} );
+			} else {
+				$item = $manager->createItem();
+			}
+
+			$item->fromArray( (array) $this->_transformValues( $entry ) );
+
+			$manager->saveItem( $item );
+			$ids[] = $item->getId();
+		}
+
+		return $this->_getItems( $ids, $this->_getPrefix() );
+	}
+
+
+	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
