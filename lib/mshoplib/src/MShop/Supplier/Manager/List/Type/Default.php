@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @package MShop
  * @subpackage Supplier
@@ -19,7 +19,7 @@ class MShop_Supplier_Manager_List_Type_Default
 {
 	private $_searchConfig = array(
 		'supplier.list.type.id' => array(
-			'code'=>'product.list.type.id',
+			'code'=>'supplier.list.type.id',
 			'internalcode'=>'msuplity."id"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_supplier_list_type" AS msuplity ON ( mproli."typeid" = msuplity."id" )' ),
 			'label'=>'Supplier list type ID',
@@ -28,7 +28,7 @@ class MShop_Supplier_Manager_List_Type_Default
 			'public' => false,
 		),
 		'supplier.list.type.siteid' => array(
-			'code'=>'product.list.type.siteid',
+			'code'=>'supplier.list.type.siteid',
 			'internalcode'=>'msuplity."siteid"',
 			'label'=>'Supplier list type site ID',
 			'type'=> 'integer',
@@ -36,49 +36,49 @@ class MShop_Supplier_Manager_List_Type_Default
 			'public' => false,
 		),
 		'supplier.list.type.code' => array(
-			'code'=>'product.list.type.code',
+			'code'=>'supplier.list.type.code',
 			'internalcode'=>'msuplity."code"',
 			'label'=>'Supplier list type code',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'supplier.list.type.domain' => array(
-			'code'=>'product.list.type.domain',
+			'code'=>'supplier.list.type.domain',
 			'internalcode'=>'msuplity."domain"',
 			'label'=>'Supplier list type domain',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'supplier.list.type.label' => array(
-			'code'=>'product.list.type.label',
+			'code'=>'supplier.list.type.label',
 			'internalcode'=>'msuplity."label"',
 			'label'=>'Supplier list type label',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'supplier.list.type.status' => array(
-			'code'=>'product.list.type.status',
+			'code'=>'supplier.list.type.status',
 			'internalcode'=>'msuplity."status"',
 			'label'=>'Supplier list type status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
 		'supplier.list.type.ctime'=> array(
-			'code'=>'product.list.type.ctime',
+			'code'=>'supplier.list.type.ctime',
 			'internalcode'=>'msuplity."ctime"',
 			'label'=>'Supplier list type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'supplier.list.type.mtime'=> array(
-			'code'=>'product.list.type.mtime',
+			'code'=>'supplier.list.type.mtime',
 			'internalcode'=>'msuplity."mtime"',
 			'label'=>'Supplier list type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'supplier.list.type.editor'=> array(
-			'code'=>'product.list.type.editor',
+			'code'=>'supplier.list.type.editor',
 			'internalcode'=>'msuplity."editor"',
 			'label'=>'Supplier list type editor',
 			'type'=> 'string',
@@ -106,12 +106,12 @@ class MShop_Supplier_Manager_List_Type_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/product/manager/list/type/submanagers';
+		$path = 'classes/supplier/manager/list/type/submanagers';
 		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/product/manager/list/type/default/item/delete' );
+		$this->_cleanup( $siteids, 'mshop/supplier/manager/list/type/default/item/delete' );
 	}
 
 
@@ -123,7 +123,7 @@ class MShop_Supplier_Manager_List_Type_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/product/manager/list/type/submanagers
+		/** classes/supplier/manager/list/type/submanagers
 		 * List of manager names that can be instantiated by the Supplier list type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -140,7 +140,7 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/product/manager/list/type/submanagers';
+		$path = 'classes/supplier/manager/list/type/submanagers';
 
 		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
 	}
@@ -155,7 +155,7 @@ class MShop_Supplier_Manager_List_Type_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/product/manager/list/type/name
+		/** classes/supplier/manager/list/type/name
 		 * Class name of the used Supplier list type manager implementation
 		 *
 		 * Each default Supplier list type manager can be replaced by an alternative imlementation.
@@ -165,15 +165,15 @@ class MShop_Supplier_Manager_List_Type_Default
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_List_Type_Default
+		 *  MShop_Supplier_Manager_List_Type_Default
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_List_Type_Mytype
+		 *  MShop_Supplier_Manager_List_Type_Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/product/manager/list/type/name = Mytype
+		 *  classes/supplier/manager/list/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -189,7 +189,7 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @category Developer
 		 */
 
-		/** mshop/product/manager/list/type/decorators/excludes
+		/** mshop/supplier/manager/list/type/decorators/excludes
 		 * Excludes decorators added by the "common" option from the Supplier list type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -201,7 +201,7 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * "mshop/common/manager/decorators/default" before they are wrapped
 		 * around the Supplier list type manager.
 		 *
-		 *  mshop/product/manager/list/type/decorators/excludes = array( 'decorator1' )
+		 *  mshop/supplier/manager/list/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
@@ -211,11 +211,11 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @since 2014.03
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/list/type/decorators/global
-		 * @see mshop/product/manager/list/type/decorators/local
+		 * @see mshop/supplier/manager/list/type/decorators/global
+		 * @see mshop/supplier/manager/list/type/decorators/local
 		 */
 
-		/** mshop/product/manager/list/type/decorators/global
+		/** mshop/supplier/manager/list/type/decorators/global
 		 * Adds a list of globally available decorators only to the Supplier list type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -226,20 +226,20 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * This option allows you to wrap global decorators
 		 * ("MShop_Common_Manager_Decorator_*") around the Supplier list type manager.
 		 *
-		 *  mshop/product/manager/list/type/decorators/global = array( 'decorator1' )
+		 *  mshop/supplier/manager/list/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "MShop_Common_Manager_Decorator_Decorator1" only to the supplier controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/list/type/decorators/excludes
-		 * @see mshop/product/manager/list/type/decorators/local
+		 * @see mshop/supplier/manager/list/type/decorators/excludes
+		 * @see mshop/supplier/manager/list/type/decorators/local
 		 */
 
-		/** mshop/product/manager/list/type/decorators/local
+		/** mshop/supplier/manager/list/type/decorators/local
 		 * Adds a list of local decorators only to the Supplier list type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -250,21 +250,21 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * This option allows you to wrap local decorators
 		 * ("MShop_Common_Manager_Decorator_*") around the Supplier list type manager.
 		 *
-		 *  mshop/product/manager/list/type/decorators/local = array( 'decorator2' )
+		 *  mshop/supplier/manager/list/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "MShop_Common_Manager_Decorator_Decorator2" only to the supplier
 		 * controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/list/type/decorators/excludes
-		 * @see mshop/product/manager/list/type/decorators/global
+		 * @see mshop/supplier/manager/list/type/decorators/excludes
+		 * @see mshop/supplier/manager/list/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'list/type/' . $manager, $name );
+		return $this->_getSubManager( 'supplier', 'list/type/' . $manager, $name );
 	}
 
 
@@ -275,7 +275,7 @@ class MShop_Supplier_Manager_List_Type_Default
 	 */
 	protected function _getConfigPath()
 	{
-		/** mshop/product/manager/list/type/default/item/insert
+		/** mshop/supplier/manager/list/type/default/item/insert
 		 * Inserts a new Supplier list type record into the database table
 		 *
 		 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -298,14 +298,14 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for inserting records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/update
-		 * @see mshop/product/manager/list/type/default/item/newid
-		 * @see mshop/product/manager/list/type/default/item/delete
-		 * @see mshop/product/manager/list/type/default/item/search
-		 * @see mshop/product/manager/list/type/default/item/count
+		 * @see mshop/supplier/manager/list/type/default/item/update
+		 * @see mshop/supplier/manager/list/type/default/item/newid
+		 * @see mshop/supplier/manager/list/type/default/item/delete
+		 * @see mshop/supplier/manager/list/type/default/item/search
+		 * @see mshop/supplier/manager/list/type/default/item/count
 		 */
 
-		/** mshop/product/manager/list/type/default/item/update
+		/** mshop/supplier/manager/list/type/default/item/update
 		 * Updates an existing Supplier list type record in the database
 		 *
 		 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -325,14 +325,14 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for updating records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/insert
-		 * @see mshop/product/manager/list/type/default/item/newid
-		 * @see mshop/product/manager/list/type/default/item/delete
-		 * @see mshop/product/manager/list/type/default/item/search
-		 * @see mshop/product/manager/list/type/default/item/count
+		 * @see mshop/supplier/manager/list/type/default/item/insert
+		 * @see mshop/supplier/manager/list/type/default/item/newid
+		 * @see mshop/supplier/manager/list/type/default/item/delete
+		 * @see mshop/supplier/manager/list/type/default/item/search
+		 * @see mshop/supplier/manager/list/type/default/item/count
 		 */
 
-		/** mshop/product/manager/list/type/default/item/newid
+		/** mshop/supplier/manager/list/type/default/item/newid
 		 * Retrieves the ID generated by the database when inserting a new record
 		 *
 		 * As soon as a new record is inserted into the database table,
@@ -356,17 +356,17 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/insert
-		 * @see mshop/product/manager/list/type/default/item/update
-		 * @see mshop/product/manager/list/type/default/item/delete
-		 * @see mshop/product/manager/list/type/default/item/search
-		 * @see mshop/product/manager/list/type/default/item/count
+		 * @see mshop/supplier/manager/list/type/default/item/insert
+		 * @see mshop/supplier/manager/list/type/default/item/update
+		 * @see mshop/supplier/manager/list/type/default/item/delete
+		 * @see mshop/supplier/manager/list/type/default/item/search
+		 * @see mshop/supplier/manager/list/type/default/item/count
 		 */
 
-		/** mshop/product/manager/list/type/default/item/delete
+		/** mshop/supplier/manager/list/type/default/item/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * Removes the records specified by the given IDs from the product database.
+		 * Removes the records specified by the given IDs from the supplier database.
 		 * The records must be from the site that is configured via the
 		 * context item.
 		 *
@@ -381,17 +381,17 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/insert
-		 * @see mshop/product/manager/list/type/default/item/update
-		 * @see mshop/product/manager/list/type/default/item/newid
-		 * @see mshop/product/manager/list/type/default/item/search
-		 * @see mshop/product/manager/list/type/default/item/count
+		 * @see mshop/supplier/manager/list/type/default/item/insert
+		 * @see mshop/supplier/manager/list/type/default/item/update
+		 * @see mshop/supplier/manager/list/type/default/item/newid
+		 * @see mshop/supplier/manager/list/type/default/item/search
+		 * @see mshop/supplier/manager/list/type/default/item/count
 		 */
 
-		/** mshop/product/manager/list/type/default/item/search
+		/** mshop/supplier/manager/list/type/default/item/search
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * Fetches the records matched by the given criteria from the product
+		 * Fetches the records matched by the given criteria from the supplier
 		 * database. The records must be from one of the sites that are
 		 * configured via the context item. If the current site is part of
 		 * a tree of sites, the SELECT statement can retrieve all records
@@ -433,17 +433,17 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/insert
-		 * @see mshop/product/manager/list/type/default/item/update
-		 * @see mshop/product/manager/list/type/default/item/newid
-		 * @see mshop/product/manager/list/type/default/item/delete
-		 * @see mshop/product/manager/list/type/default/item/count
+		 * @see mshop/supplier/manager/list/type/default/item/insert
+		 * @see mshop/supplier/manager/list/type/default/item/update
+		 * @see mshop/supplier/manager/list/type/default/item/newid
+		 * @see mshop/supplier/manager/list/type/default/item/delete
+		 * @see mshop/supplier/manager/list/type/default/item/count
 		 */
 
-		/** mshop/product/manager/list/type/default/item/count
+		/** mshop/supplier/manager/list/type/default/item/count
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * Counts all records matched by the given criteria from the product
+		 * Counts all records matched by the given criteria from the supplier
 		 * database. The records must be from one of the sites that are
 		 * configured via the context item. If the current site is part of
 		 * a tree of sites, the statement can count all records from the
@@ -479,14 +479,14 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/list/type/default/item/insert
-		 * @see mshop/product/manager/list/type/default/item/update
-		 * @see mshop/product/manager/list/type/default/item/newid
-		 * @see mshop/product/manager/list/type/default/item/delete
-		 * @see mshop/product/manager/list/type/default/item/search
+		 * @see mshop/supplier/manager/list/type/default/item/insert
+		 * @see mshop/supplier/manager/list/type/default/item/update
+		 * @see mshop/supplier/manager/list/type/default/item/newid
+		 * @see mshop/supplier/manager/list/type/default/item/delete
+		 * @see mshop/supplier/manager/list/type/default/item/search
 		 */
 
-		return 'mshop/product/manager/list/type/default/item/';
+		return 'mshop/supplier/manager/list/type/default/item/';
 	}
 
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @package MShop
  * @subpackage Supplier
@@ -238,7 +238,7 @@ class MShop_Supplier_Manager_List_Default
 		 * "mshop/common/manager/decorators/default" before they are wrapped
 		 * around the Supplier list manager.
 		 *
-		 *  mshop/product/manager/list/decorators/excludes = array( 'decorator1' )
+		 *  mshop/supplier/manager/list/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
