@@ -10,11 +10,12 @@
 
 /**
  * Class MShop_Supplier_Manager_Default.
+ *
  * @package MShop
  * @subpackage Supplier
  */
 class MShop_Supplier_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Supplier_Manager_Interface
 {
 	private $_searchConfig = array(
@@ -144,8 +145,8 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
+		return $this->_createItem($values);
 	}
 
 
@@ -356,13 +357,14 @@ class MShop_Supplier_Manager_Default
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Supplier_Item_Interface
 	 * @throws MShop_Supplier_Exception If creating items failed
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$items = array();
+		$map = $typeIds = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -472,11 +474,15 @@ class MShop_Supplier_Manager_Default
 			 * @see mshop/supplier/manager/default/item/delete
 			 * @see mshop/supplier/manager/default/item/search
 			 */
-			$cfgPathCount = 'mshop/supplier/manager/default/item/count';
+			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				//$items[$row['id']] = $this->_createItem( $row );
+				$map[ $row['id'] ] = $row; // $row
+				//$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -487,7 +493,24 @@ class MShop_Supplier_Manager_Default
 			throw $e;
 		}
 
-		return $items;
+		if( !empty( $typeIds ) )
+		{
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
+			//$typeSearch->setConditions( $typeSearch->compare( '==', 'supplier.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['typeid'] ] ) ) {
+					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				}
+			}
+		}
+
+		return $this->_buildItems( $map, $ref, 'supplier' );
+		//return $items;
 	}
 
 
@@ -620,10 +643,10 @@ class MShop_Supplier_Manager_Default
 	 * @param boolean $default
 	 * @return MW_Common_Criteria_Interface
 	 */
-	public function createSearch( $default = false )
+	public function createSearch($default = false)
 	{
-		if( $default ) {
-			return $this->_createSearch( 'supplier' );
+		if ($default) {
+			return $this->_createSearch('supplier');
 		}
 
 		return parent::createSearch();
@@ -636,8 +659,8 @@ class MShop_Supplier_Manager_Default
 	 * @param array $values List of attributes for supplier item
 	 * @return MShop_Supplier_Item_Interface New supplier item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function _createItem( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
-		return new MShop_Supplier_Item_Default( $values );
+		return new MShop_Supplier_Item_Default( $values, $listitems, $refItems );
 	}
 }
