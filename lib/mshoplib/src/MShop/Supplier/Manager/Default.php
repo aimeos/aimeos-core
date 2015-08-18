@@ -357,13 +357,14 @@ class MShop_Supplier_Manager_Default
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Supplier_Item_Interface
 	 * @throws MShop_Supplier_Exception If creating items failed
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$items = array();
+		$map = $typeIds = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -476,8 +477,12 @@ class MShop_Supplier_Manager_Default
 			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				//$items[$row['id']] = $this->_createItem( $row );
+				$map[ $row['id'] ] = $row; // $row
+				//$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -488,7 +493,24 @@ class MShop_Supplier_Manager_Default
 			throw $e;
 		}
 
-		return $items;
+		if( !empty( $typeIds ) )
+		{
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
+			//$typeSearch->setConditions( $typeSearch->compare( '==', 'supplier.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['typeid'] ] ) ) {
+					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				}
+			}
+		}
+
+		return $this->_buildItems( $map, $ref, 'supplier' );
+		//return $items;
 	}
 
 
