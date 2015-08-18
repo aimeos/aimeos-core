@@ -271,8 +271,9 @@ class Client_Html_Checkout_Confirm_Default
 
 			$provider = $serviceManager->getProvider( $serviceItem );
 
+			$orderid = $session->get( 'arcavias/orderid' );
 			$config = array( 'absoluteUri' => true, 'namespace' => false );
-			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $session->get( 'arcavias/orderid' ) );
+			$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
 			$urls = array(
 				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
 				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
@@ -281,7 +282,10 @@ class Client_Html_Checkout_Confirm_Default
 			$urls['payment.url-self'] = $urls['payment.url-success'];
 			$provider->injectGlobalConfigBE( $urls );
 
-			if( ( $orderItem = $provider->updateSync( $view->param(), $view->request()->getBody() ) ) !== null )
+			$reqParams = $view->param();
+			$reqParams['orderid'] = $orderid;
+
+			if( ( $orderItem = $provider->updateSync( $reqParams, $view->request()->getBody() ) ) !== null )
 			{
 				if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
 					&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
