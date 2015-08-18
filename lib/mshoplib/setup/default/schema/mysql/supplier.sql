@@ -38,6 +38,102 @@ CREATE INDEX "idx_mssup_sid_status" ON "mshop_supplier" ("siteid", "status");
 
 
 --
+-- Table structure for table `mshop_supplier_list_type`
+--
+
+CREATE TABLE "mshop_supplier_list_type" (
+	-- Unique id
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- site id, references mshop_locale_site.id
+	"siteid" INTEGER NOT NULL,
+	-- domain
+	"domain" VARCHAR(32) NOT NULL,
+	-- code
+	"code"  VARCHAR(32) NOT NULL COLLATE utf8_bin,
+	-- Name of the list type
+	"label" VARCHAR(255) NOT NULL,
+	-- Status (0=disabled, 1=enabled, >1 for special)
+	"status" SMALLINT NOT NULL,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_msuplity_id"
+	PRIMARY KEY ("id"),
+CONSTRAINT "unq_msuplity_sid_dom_code"
+	UNIQUE ("siteid", "domain", "code")
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX "idx_msuplity_sid_status" ON "mshop_supplier_list_type" ("siteid", "status");
+
+CREATE INDEX "idx_msuplity_sid_label" ON "mshop_supplier_list_type" ("siteid", "label");
+
+CREATE INDEX "idxmsuplity_sid_code" ON "mshop_supplier_list_type" ("siteid", "code");
+
+
+--
+-- Product list
+--
+
+CREATE TABLE "mshop_supplier_list" (
+	-- Unique list id
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- Product id
+	"parentid" INTEGER NOT NULL,
+	-- Site id
+	"siteid" INTEGER NOT NULL,
+	-- typeid
+	"typeid" INTEGER NOT NULL,
+	-- list type
+	"domain" VARCHAR(32) NOT NULL,
+	-- Featured reference
+	"refid" VARCHAR(32) NOT NULL,
+	-- Valid from
+	"start" DATETIME DEFAULT NULL,
+	-- Valid until
+	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
+	-- Position of the list element regarding to the domain and the supid
+	"pos" INTEGER NOT NULL DEFAULT 0,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_msupli_id"
+	PRIMARY KEY ("id"),
+CONSTRAINT "unq_msupli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
+CONSTRAINT "fk_msupli_pid"
+	FOREIGN KEY ("parentid")
+	REFERENCES "mshop_supplier" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+CONSTRAINT "fk_msupli_typeid"
+	FOREIGN KEY ( "typeid" )
+	REFERENCES "mshop_supplier_list_type" ("id")
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX "idx_msupli_sid_stat_start_end" ON "mshop_supplier_list" ("siteid", "status", "start", "end");
+
+CREATE INDEX "idx_msupli_pid_sid_rid_dom_tid" ON "mshop_supplier_list" ("parentid", "siteid", "refid", "domain", "typeid");
+
+CREATE INDEX "idx_msupli_pid_sid_start" ON "mshop_supplier_list" ("parentid", "siteid", "start");
+
+CREATE INDEX "idx_msupli_pid_sid_end" ON "mshop_supplier_list" ("parentid", "siteid", "end");
+
+CREATE INDEX "idx_msupli_pid_sid_pos" ON "mshop_supplier_list" ("parentid", "siteid", "pos");
+
+
+--
 -- Table structure for table `mshop_supplier_address`
 --
 CREATE TABLE "mshop_supplier_address" (
