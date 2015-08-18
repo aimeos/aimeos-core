@@ -21,7 +21,7 @@ class MShop_Supplier_Manager_List_Type_Default
 		'supplier.list.type.id' => array(
 			'code'=>'supplier.list.type.id',
 			'internalcode'=>'msuplity."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_supplier_list_type" AS msuplity ON ( mproli."typeid" = msuplity."id" )' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_supplier_list_type" AS msuplity ON ( msupli."typeid" = msuplity."id" )' ),
 			'label'=>'Supplier list type ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,

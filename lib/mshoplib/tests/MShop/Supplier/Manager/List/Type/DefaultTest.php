@@ -123,7 +123,7 @@ class MShop_Supplier_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'supplier.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'supplier.list.type.domain', 'supplier' );
+		$expr[] = $search->compare( '==', 'supplier.list.type.domain', 'text' );
 		$expr[] = $search->compare( '==', 'supplier.list.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'supplier.list.type.label', 'Default' );
 		$expr[] = $search->compare( '==', 'supplier.list.type.status', 1 );

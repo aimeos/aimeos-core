@@ -123,7 +123,7 @@ class MShop_Text_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->_editor ) );
-		$this->assertEquals( 86, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 87, count( $this->_object->searchItems( $search ) ) );
 
 		//search with base criteria
 		$search = $this->_object->createSearch( true );
@@ -135,7 +135,7 @@ class MShop_Text_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 5 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 82, $total );
+		$this->assertEquals( 83, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

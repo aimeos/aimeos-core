@@ -60,9 +60,9 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->aggregate( $search, 'supplier.list.domain' );
 
-		$this->assertEquals( 6, count( $result ) );
-		$this->assertArrayHasKey( 'price', $result );
-		$this->assertEquals( 22, $result['price'] );
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertArrayHasKey( 'text', $result );
+		$this->assertEquals( 3, $result['text'] );
 	}
 
 
@@ -258,14 +258,14 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch();
 		$expr = array(
 			$search->compare( '==', 'supplier.list.siteid', $siteid ),
-			$search->compare( '==', 'supplier.list.domain', 'media' ),
-			$search->compare( '==', 'supplier.list.datestart', '2000-01-01 00:00:00' ),
+			$search->compare( '==', 'supplier.list.domain', 'text' ),
+			$search->compare( '==', 'supplier.list.datestart', '2010-01-01 00:00:00' ),
 			$search->compare( '==', 'supplier.list.dateend', '2100-01-01 00:00:00' ),
 			$search->compare( '!=', 'supplier.list.config', null ),
 			$search->compare( '==', 'supplier.list.position', 0 ),
 			$search->compare( '==', 'supplier.list.status', 1 ),
 			$search->compare( '==', 'supplier.list.editor', $this->_editor ),
-			$search->compare( '==', 'supplier.list.type.code', 'unittype1' ),
+			$search->compare( '==', 'supplier.list.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -282,9 +282,9 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'supplier.list.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'supplier.list.parentid', null );
 		$expr[] = $search->compare( '!=', 'supplier.list.typeid', null );
-		$expr[] = $search->compare( '==', 'supplier.list.domain', 'media' );
+		$expr[] = $search->compare( '==', 'supplier.list.domain', 'text' );
 		$expr[] = $search->compare( '==', 'supplier.list.refid', $listItem->getRefId() );
-		$expr[] = $search->compare( '==', 'supplier.list.datestart', '2000-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'supplier.list.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.list.dateend', '2100-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'supplier.list.config', null );
 		$expr[] = $search->compare( '==', 'supplier.list.position', 0 );
@@ -295,21 +295,21 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		$search->setConditions( $search->combine('&&', $expr) );
 		$results = $this->_object->searchItems( $search, array(), $total );
-		$this->assertEquals( 2, count( $results ) );
+		$this->assertEquals( 1, count( $results ) );
 
 
 		//search with base criteria
 		$search = $this->_object->createSearch(true);
 		$expr = array(
-			$search->compare( '==', 'supplier.list.domain', 'supplier' ),
+			$search->compare( '==', 'supplier.list.domain', 'text' ),
 			$search->compare( '==', 'supplier.list.editor', $this->_editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 4);
+		$search->setSlice(0, 1);
 		$results = $this->_object->searchItems($search, array(), $total);
-		$this->assertEquals( 4, count( $results ) );
-		$this->assertEquals( 16, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 3, $total );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -322,20 +322,17 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.list.domain', array( 'attribute', 'media' ) ) );
+		$search->setConditions( $search->compare( '==', 'supplier.list.domain', array( 'text' ) ) );
 
 		$result = $this->_object->searchRefItems( $search, array( 'text' ), $total );
 
-		$this->assertArrayHasKey( 'attribute', $result );
-		$this->assertArrayHasKey( 'media', $result );
-		$this->assertArrayNotHasKey( 'price', $result );
+		$this->assertArrayHasKey( 'text', $result );
 
-		$this->assertEquals( 12, count( $result['attribute'] ) );
-		$this->assertEquals( 8, count( $result['media'] ) );
+		$this->assertEquals( 3, count( $result['text'] ) );
 
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
-		$this->assertEquals( 38, $total );
+		$this->assertEquals( 3, $total );
 	}
 
 
@@ -344,7 +341,7 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$manager = MShop_Supplier_Manager_Factory::createManager( $this->_context, 'Default' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.code', 'U:TEST' ) );
+		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
 		$search->setSlice( 0, 1 );
 
 		$results = $manager->searchItems( $search );
@@ -356,7 +353,7 @@ class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch();
 		$expr = array(
 			$search->compare( '==', 'supplier.list.parentid', $item->getId() ),
-			$search->compare( '==', 'supplier.list.domain', 'supplier' ),
+			$search->compare( '==', 'supplier.list.domain', 'text' ),
 			$search->compare( '==', 'supplier.list.editor', $this->_editor ),
 			$search->compare( '==', 'supplier.list.type.code', 'default' ),
 		);
