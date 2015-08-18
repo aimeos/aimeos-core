@@ -11,6 +11,6 @@ return array (
     ),
 
     'supplier/list' => array (
-        array( 'parentid' => 'supplier/UTC001', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/supplier/description', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
+        array( 'parentid' => 'supplier/unitCode001', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/supplier/description', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
    ),
 );
