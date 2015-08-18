@@ -10,11 +10,12 @@
 
 /**
  * Class MShop_Supplier_Manager_Default.
+ *
  * @package MShop
  * @subpackage Supplier
  */
 class MShop_Supplier_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Supplier_Manager_Interface
 {
 	private $_searchConfig = array(
@@ -144,8 +145,8 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
+		return $this->_createItem($values);
 	}
 
 
@@ -472,7 +473,7 @@ class MShop_Supplier_Manager_Default
 			 * @see mshop/supplier/manager/default/item/delete
 			 * @see mshop/supplier/manager/default/item/search
 			 */
-			$cfgPathCount = 'mshop/supplier/manager/default/item/count';
+			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
@@ -620,10 +621,10 @@ class MShop_Supplier_Manager_Default
 	 * @param boolean $default
 	 * @return MW_Common_Criteria_Interface
 	 */
-	public function createSearch( $default = false )
+	public function createSearch($default = false)
 	{
-		if( $default ) {
-			return $this->_createSearch( 'supplier' );
+		if ($default) {
+			return $this->_createSearch('supplier');
 		}
 
 		return parent::createSearch();
@@ -636,8 +637,8 @@ class MShop_Supplier_Manager_Default
 	 * @param array $values List of attributes for supplier item
 	 * @return MShop_Supplier_Item_Interface New supplier item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function _createItem( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
-		return new MShop_Supplier_Item_Default( $values );
+		return new MShop_Supplier_Item_Default( $values, $listitems, $refItems );
 	}
 }
