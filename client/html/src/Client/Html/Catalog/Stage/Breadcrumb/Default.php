@@ -16,6 +16,7 @@
  */
 class Client_Html_Catalog_Stage_Breadcrumb_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/catalog/stage/breadcrumb/default/subparts
 	 * List of HTML sub-clients rendered within the catalog stage breadcrumb section

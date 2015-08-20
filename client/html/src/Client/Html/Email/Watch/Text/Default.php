@@ -16,6 +16,7 @@
  */
 class Client_Html_Email_Watch_Text_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/email/watch/text/default/subparts
 	 * List of HTML sub-clients rendered within the text section of a product notification email

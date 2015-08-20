@@ -16,6 +16,7 @@
  */
 class Client_Html_Email_Delivery_Html_Salutation_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/email/delivery/html/salutation/default/subparts
 	 * List of HTML sub-clients rendered within the email delivery html salutation section

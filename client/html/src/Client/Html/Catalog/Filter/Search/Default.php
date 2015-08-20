@@ -16,6 +16,7 @@
  */
 class Client_Html_Catalog_Filter_Search_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/catalog/filter/search/default/subparts
 	 * List of HTML sub-clients rendered within the catalog filter search section

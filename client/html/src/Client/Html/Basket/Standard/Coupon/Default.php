@@ -16,6 +16,7 @@
  */
 class Client_Html_Basket_Standard_Coupon_Default
 	extends Client_Html_Basket_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/basket/standard/coupon/default/subparts
 	 * List of HTML sub-clients rendered within the basket standard coupon section

@@ -16,6 +16,7 @@
  */
 class Client_Html_Account_History_List_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/account/history/list/default/subparts
 	 * List of HTML sub-clients rendered within the account history list section

@@ -20,6 +20,7 @@ sprintf( 'payment' );
  */
 class Client_Html_Checkout_Standard_Payment_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/payment/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard payment section
