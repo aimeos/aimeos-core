@@ -16,7 +16,6 @@
  */
 abstract class MShop_Plugin_Provider_Decorator_Abstract
 	extends MShop_Plugin_Provider_Order_Abstract
-	implements MShop_Plugin_Provider_Decorator_Interface
 {
 	private $_object;
 
