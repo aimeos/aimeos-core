@@ -131,6 +131,13 @@ return array(
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 
+	'supplier/list/type' => array(
+		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+	),
+
 	'text/type' => array(
 		array( 'domain' => 'attribute', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),

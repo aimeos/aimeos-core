@@ -12918,6 +12918,145 @@ Ext.reg('MShop.panel.supplier.itemui', MShop.panel.supplier.ItemUi);
  * @copyright Aimeos.org, 2015
  */
 
+
+Ext.ns('MShop.panel.supplier');
+
+// hook attribute picker into the supplier ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.supplier.AttributeItemPickerUi', {
+
+	xtype : 'MShop.panel.attribute.itempickerui',
+    itemConfig : {
+        recordName : 'Supplier_List',
+        idProperty : 'supplier.list.id',
+        siteidProperty : 'supplier.list.siteid',
+        listDomain : 'supplier',
+        listNamePrefix : 'supplier.list.',
+        listTypeIdProperty : 'supplier.list.type.id',
+        listTypeLabelProperty : 'supplier.list.type.label',
+        listTypeControllerName : 'Supplier_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'supplier.list.type.domain' : 'attribute'
+                }
+            }]
+        },
+        listTypeKey : 'supplier/list/type/attribute'
+    },
+    listConfig : {
+        domain : 'supplier',
+        prefix : 'attribute.'
+    }
+}, 60);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.supplier');
+
+// hook media picker into the supplier ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.supplier.MediaItemPickerUi', {
+
+	xtype : 'MShop.panel.media.itempickerui',
+    itemConfig : {
+        recordName : 'Supplier_List',
+        idProperty : 'supplier.list.id',
+        siteidProperty : 'supplier.list.siteid',
+        listDomain : 'supplier',
+        listNamePrefix : 'supplier.list.',
+        listTypeIdProperty : 'supplier.list.type.id',
+        listTypeLabelProperty : 'supplier.list.type.label',
+        listTypeControllerName : 'Supplier_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'supplier.list.type.domain' : 'media'
+                }
+            }]
+        },
+        listTypeKey : 'supplier/list/type/media'
+    },
+    listConfig : {
+        domain : 'supplier',
+        prefix : 'media.'
+    }
+}, 50);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.supplier');
+
+// hook product picker into the supplier ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.supplier.ProductItemPickerUi', {
+
+	xtype : 'MShop.panel.product.itempickerui',
+    itemConfig : {
+        recordName : 'Supplier_List',
+        idProperty : 'supplier.list.id',
+        siteidProperty : 'supplier.list.siteid',
+        listDomain : 'supplier',
+        listNamePrefix : 'supplier.list.',
+        listTypeIdProperty : 'supplier.list.type.id',
+        listTypeLabelProperty : 'supplier.list.type.label',
+        listTypeControllerName : 'Supplier_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'supplier.list.type.domain' : 'product'
+                }
+            }]
+        },
+        listTypeKey : 'supplier/list/type/product'
+    },
+    listConfig : {
+        prefix : 'product.'
+    }
+}, 30);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
+
+Ext.ns('MShop.panel.supplier');
+
+// hook text picker into the supplier ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.supplier.TextItemPickerUi', {
+
+	xtype : 'MShop.panel.text.itempickerui',
+    itemConfig : {
+        recordName : 'Supplier_List',
+        idProperty : 'supplier.list.id',
+        siteidProperty : 'supplier.list.siteid',
+        listDomain : 'supplier',
+        listNamePrefix : 'supplier.list.',
+        listTypeIdProperty : 'supplier.list.type.id',
+        listTypeLabelProperty : 'supplier.list.type.label',
+        listTypeControllerName : 'Supplier_List_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'supplier.list.type.domain' : 'text'
+                }
+            }]
+        },
+        listTypeKey : 'supplier/list/type/text'
+    },
+    listConfig : {
+        domain : 'supplier',
+        prefix : 'text.'
+    }
+}, 40);
+/*!
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos.org, 2015
+ */
+
 Ext.ns('MShop.panel.supplier.address');
 
 MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
