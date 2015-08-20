@@ -16,6 +16,7 @@
  */
 class MShop_Coupon_Provider_Decorator_BasketValues
 	extends MShop_Coupon_Provider_Decorator_Abstract
+	implements MShop_Coupon_Provider_Decorator_Interface
 {
 	/**
 	 * Checks for the min/max order value.

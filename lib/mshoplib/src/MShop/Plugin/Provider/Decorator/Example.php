@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Decorator_Example extends MShop_Plugin_Provider_Decorator_Abstract
+class MShop_Plugin_Provider_Decorator_Example
+	extends MShop_Plugin_Provider_Decorator_Abstract
+	implements MShop_Plugin_Provider_Decorator_Interface
 {
 	/**
 	 * Subscribes itself to a publisher

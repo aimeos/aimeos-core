@@ -16,6 +16,7 @@
  */
 class MShop_Coupon_Provider_Decorator_Example
 	extends MShop_Coupon_Provider_Decorator_Abstract
+	implements MShop_Coupon_Provider_Decorator_Interface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.

@@ -16,7 +16,6 @@
  */
 abstract class MShop_Coupon_Provider_Decorator_Abstract
 	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Decorator_Interface
 {
 	private $_provider;
 	private $_object;
