@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Abstract
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Interface
 {
 	private $_view;
 	private $_cache;

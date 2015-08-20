@@ -15,9 +15,9 @@
  * @subpackage Html
  */
 abstract class Client_Html_Common_Decorator_Abstract
+	extends Client_Html_Abstract
 	implements Client_Html_Common_Decorator_Interface
 {
-	private $_context;
 	private $_client;
 
 
@@ -25,11 +25,14 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 * Initializes the client decorator.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
+	 * 	and a list of relative paths inside the core or the extension as values
 	 * @param Client_Html_Interface $client Client object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Client_Html_Interface $client )
+	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths, Client_Html_Interface $client )
 	{
-		$this->_context = $context;
+		parent::__construct( $context, $templatePaths );
+
 		$this->_client = $client;
 	}
 

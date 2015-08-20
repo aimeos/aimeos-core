@@ -27,8 +27,8 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 		$methods = array( 'getHeader', 'getBody' );
 
 		$this->_client = $this->getMock( 'Client_Html_Catalog_Filter_Default', $methods, array( $context, array() ) );
-		$this->_object = new Client_Html_Common_Decorator_Example( $context, $this->_client );
-		$this->_object->setView( new MW_View_Default() );
+		$this->_object = new Client_Html_Common_Decorator_Example( $context, array(), $this->_client );
+		$this->_object->setView( TestHelper::getView());
 	}
 
 
