@@ -19,7 +19,6 @@ abstract class Client_Html_Common_Decorator_Abstract
 {
 	private $_context;
 	private $_client;
-	private $_view;
 
 
 	/**
@@ -112,7 +111,6 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function setView( MW_View_Interface $view )
 	{
-		$this->_view = $view;
 		$this->_client->setView( $view );
 	}
 
@@ -165,5 +163,16 @@ abstract class Client_Html_Common_Decorator_Abstract
 	public function process()
 	{
 		$this->_client->process();
+	}
+
+
+	/**
+	 * Returns the inner client object
+	 *
+	 * @return Client_Html_Interface HTML client
+	 */
+	protected function _getClient()
+	{
+		return $this->_client;
 	}
 }
