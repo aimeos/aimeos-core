@@ -16,6 +16,7 @@
  */
 class Client_Html_Checkout_Standard_Summary_Option_Terms_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Interface
 {
 	/** client/html/checkout/standard/summary/option/terms/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard summary option terms section

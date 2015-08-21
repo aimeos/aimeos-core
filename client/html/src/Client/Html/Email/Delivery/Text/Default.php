@@ -16,6 +16,7 @@
  */
 class Client_Html_Email_Delivery_Text_Default
 	extends Client_Html_Abstract
+	implements Client_Html_Interface
 {
 	/** client/html/email/delivery/text/default/subparts
 	 * List of HTML sub-clients rendered within the email delivery text section

@@ -76,22 +76,17 @@ class Client_Html_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
-	 * @param string $domain Domain name in lower case, e.g. "product"
+	 * @param string $path Path of the client in lower case, e.g. "catalog/detail"
 	 * @return Client_Html_Interface Client object
 	 */
 	protected static function _addClientDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, $domain )
+		Client_Html_Interface $client, $path )
 	{
-		if( !is_string( $domain ) || $domain === '' ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+		if( !is_string( $path ) || $path === '' ) {
+			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
 		}
 
-		$subdomains = explode( '/', $domain );
-		$domain = $localClass = $subdomains[0];
-		if( count( $subdomains ) > 1 ) {
-			$localClass = str_replace( ' ', '_', ucwords( implode( ' ', $subdomains ) ) );
-		}
-
+		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
 		$config = $context->getConfig();
 
 		/** client/html/common/decorators/default
@@ -117,7 +112,7 @@ class Client_Html_Common_Factory_Abstract
 		 * @category Developer
 		 */
 		$decorators = $config->get( 'client/html/common/decorators/default', array() );
-		$excludes = $config->get( 'client/html/' . $domain . '/decorators/excludes', array() );
+		$excludes = $config->get( 'client/html/' . $path . '/decorators/excludes', array() );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -130,11 +125,11 @@ class Client_Html_Common_Factory_Abstract
 		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$decorators = $config->get( 'client/html/' . $domain . '/decorators/global', array() );
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
 		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
 
-		$classprefix = 'Client_Html_' . ucfirst( $localClass ) . '_Decorator_';
-		$decorators = $config->get( 'client/html/' . $domain . '/decorators/local', array() );
+		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
 		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
 
 		return $client;

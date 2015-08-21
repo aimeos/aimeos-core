@@ -15,7 +15,6 @@
  * @subpackage Html
  */
 abstract class Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_view;
 	private $_cache;
@@ -129,6 +128,83 @@ abstract class Client_Html_Abstract
 	{
 		$this->_view = $view;
 		return $this;
+	}
+
+
+	/**
+	 * Adds the decorators to the client object
+	 *
+	 * @param Client_Html_Interface $client Client object
+	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
+	 * @return Client_Html_Interface Client object
+	 */
+	protected function _addDecorators( Client_Html_Interface $client, array $decorators, $classprefix )
+	{
+		$iface = 'Client_Html_Common_Decorator_Interface';
+
+		foreach( $decorators as $name )
+		{
+			if( ctype_alnum( $name ) === false )
+			{
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
+				throw new Client_Html_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			}
+
+			$classname = $classprefix . $name;
+
+			if( class_exists( $classname ) === false ) {
+				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			}
+
+			$client = new $classname( $context, $client );
+
+			if( !( $client instanceof $iface ) ) {
+				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+			}
+		}
+
+		return $client;
+	}
+
+
+	/**
+	 * Adds the decorators to the client object
+	 *
+	 * @param Client_Html_Interface $client Client object
+	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
+	 * @return Client_Html_Interface Client object
+	 */
+	protected function _addClientDecorators( Client_Html_Interface $client, $path )
+	{
+		if( !is_string( $path ) || $path === '' ) {
+			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
+		}
+
+		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
+		$config = $this->_context->getConfig();
+
+		$decorators = $config->get( 'client/html/common/decorators/default', array() );
+		$excludes = $config->get( 'client/html/' . $path . '/decorators/excludes', array() );
+
+		foreach( $decorators as $key => $name )
+		{
+			if( in_array( $name, $excludes ) ) {
+				unset( $decorators[$key] );
+			}
+		}
+
+		$classprefix = 'Client_Html_Common_Decorator_';
+		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+
+		$classprefix = 'Client_Html_Common_Decorator_';
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
+		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+
+		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
+		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+
+		return $client;
 	}
 
 
@@ -262,17 +338,18 @@ abstract class Client_Html_Abstract
 	/**
 	 * Transforms the client path to the appropriate class names.
 	 *
-	 * @param string $client Path of client names, e.g. "catalog/navigation"
+	 * @param string $path Path of client names, e.g. "catalog/navigation"
 	 * @return string Class names, e.g. "Catalog_Navigation"
+	 * @deprecated 2015.10 Remove method, use str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) )
 	 */
-	protected function _createSubNames( $client )
+	protected function _createSubNames( $path )
 	{
-		$names = explode( '/', $client );
+		$names = explode( '/', $path );
 
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $client ) );
+				throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $path ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -285,25 +362,23 @@ abstract class Client_Html_Abstract
 	/**
 	 * Returns the sub-client given by its name.
 	 *
-	 * @param string $client Name of the sub-part in lower case (can contain a path like catalog/navigation)
+	 * @param string $path Name of the sub-part in lower case (can contain a path like catalog/filter/tree)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return Client_Html_Interface Sub-part object
 	 */
-	protected function _createSubClient( $client, $name )
+	protected function _createSubClient( $path, $name )
 	{
-		$client = strtolower( $client );
+		$path = strtolower( $path );
 
-		if( $name === null )
-		{
-			$path = 'client/html/' . $client . '/name';
-			$name = $this->_context->getConfig()->get( $path, 'Default' );
+		if( $name === null ) {
+			$name = $this->_context->getConfig()->get( 'client/html/' . $path . '/name', 'Default' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $name ) );
 		}
 
-		$subnames = $this->_createSubNames( $client );
+		$subnames = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
 
 		$classname = 'Client_Html_' . $subnames . '_' . $name;
 		$interface = 'Client_Html_Interface';
@@ -312,13 +387,13 @@ abstract class Client_Html_Abstract
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$subClient = new $classname( $this->_context, $this->_templatePaths );
+		$object = new $classname( $this->_context, $this->_templatePaths );
 
-		if( ( $subClient instanceof $interface ) === false ) {
+		if( ( $object instanceof $interface ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
-		return $subClient;
+		return $this->_addClientDecorators( $object, $path );
 	}
 
 
