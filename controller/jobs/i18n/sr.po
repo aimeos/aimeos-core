@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2015-07-14 12:51+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Serbian (http://www.transifex.com/projects/p/aimeos-core/language/sr/)\n"
+"Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Exports all available products"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:282
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:280
 #, php-format
 msgid "Failed products during import: %1$d"
 msgstr ""
@@ -259,7 +259,7 @@ msgstr "Uklanja nedovrsene porudzbine"
 msgid "Removes unpaid orders"
 msgstr "sklanja neplacene porudzbine"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:255
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:253
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr ""
@@ -295,12 +295,12 @@ msgstr ""
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:437
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:435
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:286
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:284
 #, php-format
 msgid "Unable to move imported file"
 msgstr ""

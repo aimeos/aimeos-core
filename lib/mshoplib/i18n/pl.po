@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"PO-Revision-Date: 2015-07-28 14:11+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/aimeos-core/language/pl/)\n"
+"Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -112,6 +112,12 @@ msgstr "Klasa \"%1$s\" nie dostępna"
 msgid "Code must not be longer than 32 characters"
 msgstr "Kod nie może być dłuższy niż 32 znaki"
 
+#: src/MShop/Service/Provider/Abstract.php:310
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr ""
+
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #, php-format
 msgid "Configuration invalid"
@@ -201,13 +207,6 @@ msgstr "Niepoprawne znaki w kodzie waluty ISO \"%1$s\""
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "Niepoprawne znaki w kodzie języka ISO \"%1$s\""
-
-#: src/MShop/Service/Provider/Abstract.php:347
-#, php-format
-msgid ""
-"Invalid characters in attribute for provider configuration. Attribute is not"
-" of type \"%1$s\"."
-msgstr "Niepoprawne znaki w atrybucie prowajdera konfiguracji. Atrybut nie jest typu \"%1$s\"."
 
 #: src/MShop/Order/Manager/Factory.php:39
 #: src/MShop/Customer/Manager/Abstract.php:167
@@ -316,6 +315,11 @@ msgstr "Niepoprawny typ mime \"%1$s\""
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Niepoprawna serializacja koszyka. \"%1$s\" zwraca \"%2$s\"."
+
+#: src/MShop/Service/Provider/Abstract.php:351
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr ""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
@@ -572,7 +576,6 @@ msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr "Zamówienie z ID \"%1$s\" zostało odrzucone z kodem \"%2$s\": %3$s"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:139
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Nie dostępny parametr konfiguracyjny \"%1$s\""
@@ -679,11 +682,6 @@ msgstr "Dostawca w \"%1$s\" nie dostępny"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "Ilość musi być liczbą dodatnią i nie może być większa niż %1$d"
-
-#: src/MShop/Service/Provider/Abstract.php:306
-#, php-format
-msgid "Required attribute \"%1$s\" in provider configuration not available"
-msgstr "Wymagany atrybut \"%1$s\" nie dostępny w konfiguracji usługodawcy"
 
 #: src/MShop/Common/Manager/List/Abstract.php:43
 #: src/MShop/Common/Manager/List/Abstract.php:47
@@ -809,7 +807,7 @@ msgstr "Nie znaleziono korzenia drzewa o kodzie \"%1$s\" w \"%2$s\""
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr "Nie znaleziono pozycji z ID \"%1$s\" w \"%2$s\""
 
-#: src/MShop/Service/Provider/Abstract.php:258
+#: src/MShop/Service/Provider/Abstract.php:262
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
 msgstr "Nie można posortować świąt publicznych: \"%1$s\""

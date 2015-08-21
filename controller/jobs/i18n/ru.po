@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 18:01+0200\n"
+"POT-Creation-Date: 2015-07-28 16:11+0200\n"
 "PO-Revision-Date: 2015-07-15 12:34+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/aimeos-core/language/ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -120,7 +120,7 @@ msgstr "Запускает задания, созданные администр
 msgid "Exports all available products"
 msgstr "Экспорт всех доступных товаров"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:282
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:280
 #, php-format
 msgid "Failed products during import: %1$d"
 msgstr "Не удалось импортировать товары: %1$d"
@@ -260,7 +260,7 @@ msgstr "Удаление незавершённых заказов"
 msgid "Removes unpaid orders"
 msgstr "Удаление неоплаченных заказов"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:255
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:253
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Обязателный ключ разметки \"%1$s\" невернен или не содержит массива"
@@ -296,12 +296,12 @@ msgstr "Невозможно вызвать метод фабрики \"%1$s\""
 msgid "Unable to call method \"%1$s\""
 msgstr "Невозможно вызвать метод \"%1$s\""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:437
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:435
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "Невозможно импортировать товар с кодом \"%1$s\": %2$s"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:286
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:284
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Невозможно переместить импортированный файл"
