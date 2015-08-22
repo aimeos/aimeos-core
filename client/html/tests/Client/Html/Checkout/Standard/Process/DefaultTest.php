@@ -103,7 +103,7 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 	}
 
 
-	public function testProcessPaypal()
+	public function testProcessDirectDebit()
 	{
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
 			->setConstructorArgs( array( $this->_context ) )
@@ -117,7 +117,7 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$orderid = $this->_getOrder( '2011-09-17 16:14:32' )->getId();
+		$orderid = $this->_getOrder( '2009-03-18 16:14:32' )->getId();
 		$this->_context->getSession()->set( 'arcavias/orderid', $orderid );
 
 		$this->_object->process();

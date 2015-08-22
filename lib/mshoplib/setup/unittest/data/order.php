@@ -62,7 +62,7 @@ return array(
 		'solucia/636.00' => array( 'baseid' => '636.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 		'paypal/10.00' => array( 'baseid' => '10.00', 'servid' => 'paypalexpress', 'type' => 'payment', 'code' => 'paypalexpress', 'name' => 'paypal', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 		'solucia/10.00' => array( 'baseid' => '10.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'OGONE/18.00' => array( 'baseid' => '18.00', 'servid' => 'unitpaymentcode', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'directdebit/18.00' => array( 'baseid' => '18.00', 'servid' => 'directdebit-test', 'type' => 'payment', 'code' => 'directdebit-test', 'name' => 'DirectDebit', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 		'solucia/18.00' => array( 'baseid' => '18.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 	),
 

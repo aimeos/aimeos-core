@@ -35,12 +35,12 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends PHPUnit_Framework_Tes
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:unittest' ) );
 		$result = $this->_object->aggregate( $search, 'order.base.service.code' );
-	
-		$this->assertEquals( 3, count( $result ) );
+
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( 'OGONE', $result );
-		$this->assertEquals( 3, $result['OGONE'] );
+		$this->assertEquals( 2, $result['OGONE'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
@@ -121,7 +121,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends PHPUnit_Framework_Tes
 		$results = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 2, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

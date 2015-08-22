@@ -367,8 +367,8 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 			<name><![CDATA[solucia]]></name>
 		</deliveryitem>
 		<paymentitem>
-			<code><![CDATA[OGONE]]></code>
-			<name><![CDATA[ogone]]></name>
+			<code><![CDATA[directdebit-test]]></code>
+			<name><![CDATA[DirectDebit]]></name>
 			<fieldlist />
 		</paymentitem>
 		<priceitem>
