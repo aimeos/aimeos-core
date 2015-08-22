@@ -133,6 +133,87 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Adds the decorators to the client object
+	 *
+	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
+	 * @param array $decorators List of decorator name that should be wrapped around the client
+	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
+	 * @return Client_Html_Interface Client object
+	 */
+	protected function _addDecorators( Client_Html_Interface $client, array $templatePaths,
+		array $decorators, $classprefix )
+	{
+		$iface = 'Client_Html_Common_Decorator_Interface';
+
+		foreach( $decorators as $name )
+		{
+			if( ctype_alnum( $name ) === false )
+			{
+				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
+				throw new Client_Html_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			}
+
+			$classname = $classprefix . $name;
+
+			if( class_exists( $classname ) === false ) {
+				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			}
+
+			$client = new $classname( $this->_context, $this->_templatePaths, $client );
+
+			if( !( $client instanceof $iface ) ) {
+				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+			}
+		}
+
+		return $client;
+	}
+
+
+	/**
+	 * Adds the decorators to the client object
+	 *
+	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
+	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
+	 * @return Client_Html_Interface Client object
+	 */
+	protected function _addClientDecorators( Client_Html_Interface $client, array $templatePaths, $path )
+	{
+		if( !is_string( $path ) || $path === '' ) {
+			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
+		}
+
+		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
+		$config = $this->_context->getConfig();
+
+		$decorators = $config->get( 'client/html/common/decorators/default', array() );
+		$excludes = $config->get( 'client/html/' . $path . '/decorators/excludes', array() );
+
+		foreach( $decorators as $key => $name )
+		{
+			if( in_array( $name, $excludes ) ) {
+				unset( $decorators[$key] );
+			}
+		}
+
+		$classprefix = 'Client_Html_Common_Decorator_';
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+
+		$classprefix = 'Client_Html_Common_Decorator_';
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+
+		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
+		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+
+		return $client;
+	}
+
+
+	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
 	 * @param array|MShop_Common_Item_Interface $items Item or list of items, maybe with associated list items
@@ -317,7 +398,7 @@ abstract class Client_Html_Abstract
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
-		return $subClient;
+		return $this->_addClientDecorators( $subClient, $this->_templatePaths, $client );
 	}
 
 

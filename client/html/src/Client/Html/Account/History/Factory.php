@@ -22,7 +22,7 @@ class Client_Html_Account_History_Factory
 	 * Creates a account history client object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
-	 * @param array List of file system paths where the templates are stored
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Interface Filter part implementing Client_Html_Interface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
@@ -150,7 +150,7 @@ class Client_Html_Account_History_Factory
 		 * @see client/html/account/history/decorators/excludes
 		 * @see client/html/account/history/decorators/global
 		 */
-		return self::_addClientDecorators( $context, $client, 'account/history' );
+		return self::_addClientDecorators( $context, $client, $templatePaths, 'account/history' );
 	}
 
 }

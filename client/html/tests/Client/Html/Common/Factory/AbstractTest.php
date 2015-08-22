@@ -28,7 +28,6 @@ class Client_Html_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 		$config->set( 'client/html/common/decorators/default', array() );
 		$config->set( 'client/html/admin/decorators/global', array() );
 		$config->set( 'client/html/admin/decorators/local', array() );
-
 	}
 
 

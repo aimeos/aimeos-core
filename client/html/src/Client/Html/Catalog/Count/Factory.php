@@ -22,7 +22,7 @@ class Client_Html_Catalog_Count_Factory
 	 * Creates a catalog count client object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
-	 * @param array List of file system paths where the templates are stored
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Interface Count part implementing Client_Html_Interface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
@@ -150,7 +150,7 @@ class Client_Html_Catalog_Count_Factory
 		 * @see client/html/catalog/count/decorators/excludes
 		 * @see client/html/catalog/count/decorators/global
 		 */
-		return self::_addClientDecorators( $context, $client, 'catalog/count' );
+		return self::_addClientDecorators( $context, $client, $templatePaths, 'catalog/count' );
 	}
 
 }

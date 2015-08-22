@@ -38,11 +38,13 @@ class Client_Html_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
+	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
 	protected static function _addDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, array $decorators, $classprefix )
+		Client_Html_Interface $client, array $templatePaths, array $decorators, $classprefix )
 	{
 		$iface = 'Client_Html_Common_Decorator_Interface';
 
@@ -60,7 +62,7 @@ class Client_Html_Common_Factory_Abstract
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$client =  new $classname( $context, $client );
+			$client =  new $classname( $context, $templatePaths, $client );
 
 			if( !( $client instanceof $iface ) ) {
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
@@ -76,22 +78,18 @@ class Client_Html_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return Client_Html_Interface Client object
 	 */
 	protected static function _addClientDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, $domain )
+		Client_Html_Interface $client, array $templatePaths, $domain )
 	{
 		if ( !is_string( $domain ) || $domain === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
-		$subdomains = explode('/', $domain);
-		$domain = $localClass = $subdomains[0];
-		if (count($subdomains) > 1) {
-			$localClass = str_replace(' ', '_', ucwords( implode(' ', $subdomains) ) );
-		}
-
+		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
 		$config = $context->getConfig();
 
 		/** client/html/common/decorators/default
@@ -127,15 +125,15 @@ class Client_Html_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$client =  self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client =  self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
 		$decorators = $config->get( 'client/html/' . $domain . '/decorators/global', array() );
-		$client =  self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client =  self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
-		$classprefix = 'Client_Html_' . ucfirst( $localClass ) . '_Decorator_';
+		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $domain . '/decorators/local', array() );
-		$client =  self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client =  self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		return $client;
 	}
