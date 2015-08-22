@@ -47,8 +47,10 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 */
 	public function run()
 	{
-		$errors = 0;
-		$config = $this->_getContext()->getConfig();
+		$total = $errors = 0;
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$logger = $context->getLogger();
 		$domains = array( 'attribute', 'media', 'price', 'product', 'text' );
 		$mappings = $this->_getDefaultMapping();
 
@@ -260,24 +262,40 @@ class Controller_Jobs_Product_Import_Csv_Default
 		$convlist = $this->_getConverterList( $converters );
 		$processor = $this->_getProcessors( $procMappings );
 		$container = $this->_getContainer();
+		$path = $container->getName();
+
+		$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
+		$logger->log( $msg, MW_Logger_Abstract::NOTICE );
 
 		foreach( $container as $content )
 		{
+			$name = $content->getName();
+
 			while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
 			{
 				$data = $this->_convertData( $convlist, $data );
 				$products = $this->_getProducts( array_keys( $data ), $domains );
-				$errors += $this->_import( $products, $data, $mappings['item'], $processor );
+				$errcnt = $this->_import( $products, $data, $mappings['item'], $processor );
+				$chunkcnt = count( $data );
 
+				$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
+				$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+
+				$errors += $errcnt;
+				$total += $chunkcnt;
 				unset( $products, $data );
 			}
 		}
 
-		$path = $container->getName();
 		$container->close();
 
-		if( $errors > 0 ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Failed products during import: %1$d', $errors ) );
+		$msg = 'Finished product import from "%1$s": %2$d successful, %3$s errors, %4$s total (%5$s)';
+		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+
+		if( $errors > 0 )
+		{
+			$msg = sprintf( 'Invalid product lines in "%1$s": %2$d/%3$d', $path, $errors, $total );
+			throw new Controller_Jobs_Exception( $msg );
 		}
 
 		if( !empty( $backup ) && @rename( $path, strftime( $backup ) ) === false ) {
