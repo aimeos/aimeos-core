@@ -23,7 +23,7 @@ class Client_Html_Catalog_Suggest_Factory
 	 * Creates a suggest client object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
-	 * @param array List of file system paths where the templates are stored
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Interface Filter part implementing Client_Html_Interface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
@@ -78,7 +78,7 @@ class Client_Html_Catalog_Suggest_Factory
 
 		$client = self::_createClient( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, 'catalog/suggest' );
+		return self::_addClientDecorators( $context, $client, $templatePaths, 'catalog/suggest' );
 	}
 }
 

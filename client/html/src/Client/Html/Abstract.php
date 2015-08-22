@@ -15,6 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Abstract
+	implements Client_Html_Interface
 {
 	private $_view;
 	private $_cache;
@@ -135,10 +136,13 @@ abstract class Client_Html_Abstract
 	 * Adds the decorators to the client object
 	 *
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
+	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected function _addDecorators( Client_Html_Interface $client, array $decorators, $classprefix )
+	protected function _addDecorators( Client_Html_Interface $client, array $templatePaths,
+		array $decorators, $classprefix )
 	{
 		$iface = 'Client_Html_Common_Decorator_Interface';
 
@@ -156,7 +160,7 @@ abstract class Client_Html_Abstract
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$client = new $classname( $context, $client );
+			$client = new $classname( $this->_context, $this->_templatePaths, $client );
 
 			if( !( $client instanceof $iface ) ) {
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
@@ -171,10 +175,11 @@ abstract class Client_Html_Abstract
 	 * Adds the decorators to the client object
 	 *
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected function _addClientDecorators( Client_Html_Interface $client, $path )
+	protected function _addClientDecorators( Client_Html_Interface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
@@ -194,15 +199,15 @@ abstract class Client_Html_Abstract
 		}
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
-		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
-		$client = $this->_addDecorators( $client, $decorators, $classprefix );
+		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		return $client;
 	}
@@ -393,7 +398,7 @@ abstract class Client_Html_Abstract
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
-		return $this->_addClientDecorators( $object, $path );
+		return $this->_addClientDecorators( $object, $this->_templatePaths, $path );
 	}
 
 

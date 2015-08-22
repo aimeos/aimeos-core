@@ -39,6 +39,7 @@ class Client_Html_Common_Factory_Abstract
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
+	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
