@@ -152,6 +152,7 @@ class Client_Html_Common_Summary_Service_Default
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
 	 * @return Client_Html_Interface Sub-client object
+	 * @deprecated 2015.10 Make class abstract and remove method
 	 */
 	public function getSubClient( $type, $name = null )
 	{

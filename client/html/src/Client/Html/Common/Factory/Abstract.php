@@ -38,11 +38,12 @@ class Client_Html_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
 	protected static function _addDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, array $decorators, $classprefix )
+		Client_Html_Interface $client, array $templatePaths, array $decorators, $classprefix )
 	{
 		$iface = 'Client_Html_Common_Decorator_Interface';
 
@@ -60,7 +61,7 @@ class Client_Html_Common_Factory_Abstract
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$client = new $classname( $context, $client );
+			$client = new $classname( $context, $templatePaths, $client );
 
 			if( !( $client instanceof $iface ) ) {
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
@@ -76,11 +77,12 @@ class Client_Html_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Client_Html_Interface $client Client object
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Path of the client in lower case, e.g. "catalog/detail"
 	 * @return Client_Html_Interface Client object
 	 */
 	protected static function _addClientDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, $path )
+		Client_Html_Interface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
@@ -122,15 +124,15 @@ class Client_Html_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
-		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
-		$client = self::_addDecorators( $context, $client, $decorators, $classprefix );
+		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		return $client;
 	}
@@ -142,7 +144,7 @@ class Client_Html_Common_Factory_Abstract
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param string $classname Name of the client class
 	 * @param string $interface Name of the client interface
-	 * @param array List of file system paths where the templates are stored
+	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @return Client_Html__Interface Client object
 	 * @throws Client_Html_Exception If client couldn't be found or doesn't implement the interface
 	 */
