@@ -111,10 +111,12 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 * Sets the view object that will generate the HTML output.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return Client_Html_Interface Reference to this object for fluent calls
 	 */
 	public function setView( MW_View_Interface $view )
 	{
 		$this->_client->setView( $view );
+		return $this;
 	}
 
 
