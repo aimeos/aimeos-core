@@ -67,7 +67,9 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of MShop item domain names
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/common/product/import/csv/separator
+		 * @see controller/common/product/import/csv/mapping
+		 * @see controller/common/product/import/csv/converter
+		 * @see controller/common/product/import/csv/max-size
 		 */
 		$domains = $config->get( 'controller/common/product/import/csv/domains', $domains );
 
@@ -82,11 +84,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of MShop item domain names
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/common/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
+		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
-		 * @see controller/jobs/product/import/csv/max-size
 		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/max-size
 		 */
 		$domains = $config->get( 'controller/jobs/product/import/csv/domains', $domains );
 
@@ -129,11 +131,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of processor names and lists of key/position pairs
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/common/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
-		 * @see controller/jobs/product/import/csv/max-size
 		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/max-size
 		 */
 		$mappings = $config->get( 'controller/jobs/product/import/csv/mapping', $mappings );
 
@@ -190,11 +192,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @param array Associative list of position/converter name (or list of names) pairs
 		 * @since 2015.05
 		 * @category Developer
-		 * @see controller/common/product/import/csv/converter
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
-		 * @see controller/jobs/product/import/csv/max-size
+		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/max-size
 		 */
 		$converters = $config->get( 'controller/jobs/product/import/csv/converter', $converters );
 
@@ -216,7 +218,28 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/common/product/import/csv/mapping
 		 * @see controller/common/product/import/csv/converter
 		 */
-		$maxcnt = $config->get( 'controller/common/product/import/csv/max-size', 1000 );
+		$maxcnt = (int) $config->get( 'controller/common/product/import/csv/max-size', 1000 );
+
+
+		/** controller/jobs/product/import/csv/skip-lines
+		 * Number of rows skipped in front of each CSV files
+		 *
+		 * Some CSV files contain header information describing the content of
+		 * the column values. These data is for informational purpose only and
+		 * can't be imported into the database. Using this option, you can
+		 * define the number of lines that should be left out before the import
+		 * begins.
+		 *
+		 * @param integer Number of rows
+		 * @since 2015.08
+		 * @category Developer
+		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/mapping
+		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/max-size
+		 */
+		$skiplines = (int) $config->get( 'controller/jobs/product/import/csv/skip-lines', 0 );
 
 
 		/** controller/jobs/product/import/csv/backup
@@ -244,8 +267,9 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @category Developer
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
+		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
-		 * @see controller/jobs/product/import/csv/max-size
+		 * @see controller/common/product/import/csv/max-size
 		 */
 		$backup = $config->get( 'controller/jobs/product/import/csv/backup' );
 
@@ -270,6 +294,10 @@ class Controller_Jobs_Product_Import_Csv_Default
 		foreach( $container as $content )
 		{
 			$name = $content->getName();
+
+			for( $i = 0; $i < $skiplines; $i++ ) {
+				$content->next();
+			}
 
 			while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
 			{
