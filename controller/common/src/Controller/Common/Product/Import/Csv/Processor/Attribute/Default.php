@@ -71,6 +71,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 		$context = $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'attribute' );
 		$listManager = MShop_Factory::createManager( $context, 'product/list' );
+		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
 		$manager->begin();
 
@@ -118,22 +119,28 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 					continue;
 				}
 
-				$attrItem = $this->_getAttributeItem( $list['attribute.code'], $list['attribute.type'] );
-				$attrItem->fromArray( $list );
-				$manager->saveItem( $attrItem );
+				$codes = explode( $separator, $list['attribute.code'] );
 
-				if( ( $listItem = array_shift( $listItems ) ) === null ) {
-					$listItem = $listManager->createItem();
+				foreach( $codes as $code )
+				{
+					$attrItem = $this->_getAttributeItem( $code, $list['attribute.type'] );
+					$attrItem->fromArray( $list );
+					$attrItem->setCode( $code );
+					$manager->saveItem( $attrItem );
+
+					if( ( $listItem = array_shift( $listItems ) ) === null ) {
+						$listItem = $listManager->createItem();
+					}
+
+					$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
+					$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'attribute', $typecode );
+					$list['product.list.refid'] = $attrItem->getId();
+					$list['product.list.parentid'] = $product->getId();
+					$list['product.list.domain'] = 'attribute';
+
+					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
+					$listManager->saveItem( $listItem );
 				}
-
-				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'attribute', $typecode );
-				$list['product.list.refid'] = $attrItem->getId();
-				$list['product.list.parentid'] = $product->getId();
-				$list['product.list.domain'] = 'attribute';
-
-				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
-				$listManager->saveItem( $listItem );
 			}
 
 			$remaining = $this->_getObject()->process( $product, $data );

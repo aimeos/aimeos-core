@@ -85,6 +85,49 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_DefaultTest exten
 	}
 
 
+	public function testProcessMultiple()
+	{
+		$mapping = array(
+			0 => 'attribute.type',
+			1 => 'attribute.code',
+			2 => 'product.list.type',
+		);
+
+		$data = array(
+			0 => 'color',
+			1 => "white\nblack\naimeos",
+			2 => 'variant',
+		);
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
+		$result = $object->process( $product, $data );
+
+		$product = $this->_get( 'job_csv_test' );
+
+		$this->_delete( $product );
+
+
+		$pos = 0;
+		$codes = array( 'white', 'black', 'aimeos' );
+
+		foreach( $product->getListItems() as $listItems )
+		{
+			$this->assertEquals( 3, count( $listItems ) );
+
+			foreach( $listItems as $listItem )
+			{
+				$this->assertEquals( 1, $listItem->getStatus() );
+				$this->assertEquals( 'attribute', $listItem->getDomain() );
+				$this->assertEquals( 'variant', $listItem->getType() );
+				$this->assertEquals( $codes[$pos], $listItem->getRefItem()->getCode() );
+				$pos++;
+			}
+		}
+	}
+
+
 	public function testProcessUpdate()
 	{
 		$mapping = array(
