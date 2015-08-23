@@ -25,8 +25,11 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 		$this->_context = TestHelper::getContext();
 		$this->_arcavias = TestHelper::getArcavias();
+		$config = $this->_context->getConfig();
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
+		$config->set( 'controller/jobs/product/import/csv/skip-lines', 1 );
+		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
+
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
 	}
 
@@ -194,7 +197,10 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends MW_Unittest_Testcas
 
 		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
+		$config = $this->_context->getConfig();
+		$config->set( 'controller/jobs/product/import/csv/skip-lines', 0 );
+		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
+
 		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
