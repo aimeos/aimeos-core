@@ -216,6 +216,8 @@ abstract class Controller_ExtJS_Abstract
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		return $this->_getItems( $ids, $this->_getPrefix() );
 	}
 
