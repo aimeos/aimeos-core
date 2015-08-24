@@ -118,7 +118,10 @@ class Controller_Frontend_Catalog_Default
 		$context = $this->_getContext();
 
 		$search = MShop_Factory::createManager( $context, 'catalog/index' )->createSearch( true );
-		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
+		$expr = array(
+			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '==', 'catalog.index.catalog.listtype', $listtype ),
+		);
 
 		switch( $sort )
 		{
@@ -185,7 +188,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createIndexFilterCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
-		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
+		$search = $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
 
 		if( $sort === 'relevance' )
