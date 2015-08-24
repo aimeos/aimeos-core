@@ -300,10 +300,11 @@ abstract class Controller_ExtJS_Abstract
 	 * Removes the cache entries tagged with the domain or domain items.
 	 *
 	 * @param array $ids List of domain IDs
+	 * @param string|null $domain Domain of the IDs, null for current domain
 	 */
-	protected function _clearCache( array $ids )
+	protected function _clearCache( array $ids, $domain = null )
 	{
-		$domain = strtolower( $this->_name );
+		$domain = ( $domain !== null ? $domain : strtolower( $this->_name ) );
 		$tags = array( $domain );
 
 		foreach( $ids as $id ) {

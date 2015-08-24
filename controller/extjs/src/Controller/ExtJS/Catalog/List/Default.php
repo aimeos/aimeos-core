@@ -34,6 +34,43 @@ class Controller_ExtJS_Catalog_List_Default
 
 
 	/**
+	 * Deletes an item or a list of items.
+	 *
+	 * @param stdClass $params Associative list of parameters
+	 * @return array Associative list with success value
+	 */
+	public function deleteItems( stdClass $params )
+	{
+		$this->_checkParams( $params, array( 'site', 'items' ) );
+		$this->_setLocale( $params->site );
+		$manager = $this->_getManager();
+		$ids = (array) $params->items;
+		$refIds = array();
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', $this->_getPrefix() . '.id', $ids ) );
+		$search->setSlice( 0, count( $ids ) );
+
+		foreach( $manager->searchItems( $search ) as $id => $item ) {
+			$refIds[$item->getDomain()][] = $id;
+		}
+
+		$manager->deleteItems( $ids );
+
+		if( isset( $refIds['product'] ) )
+		{
+			$this->_rebuildIndex( (array) $refIds['product'] );
+			$this->_clearCache( $ids, 'product' );
+		}
+
+		return array(
+			'items' => $params->items,
+			'success' => true,
+		);
+	}
+
+
+	/**
 	 * Creates a new list item or updates an existing one or a list thereof.
 	 *
 	 * @param stdClass $params Associative array containing the item properties
@@ -43,8 +80,8 @@ class Controller_ExtJS_Catalog_List_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
+		$ids = $refIds = array();
 		$manager = $this->_getManager();
-		$ids = $refIds = $domains = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
@@ -53,23 +90,14 @@ class Controller_ExtJS_Catalog_List_Default
 			$item->fromArray( (array) $this->_transformValues( $entry ) );
 			$manager->saveItem( $item );
 
-			$domains[$item->getDomain()] = true;
-			$refIds[] = $item->getRefId();
+			$refIds[$item->getDomain()][] = $item->getRefId();
 			$ids[] = $item->getId();
 		}
 
-
-		if( isset( $domains['product'] ) )
+		if( isset( $refIds['product'] ) )
 		{
-			$context = $this->_getContext();
-			$productManager = MShop_Factory::createManager( $context, 'product' );
-
-			$search = $productManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'product.id', $refIds ) );
-			$search->setSlice( 0, count( $refIds ) );
-
-			$indexManager = MShop_Factory::createManager( $context, 'catalog/index' );
-			$indexManager->rebuildIndex( $productManager->searchItems( $search ) );
+			$this->_rebuildIndex( (array) $refIds['product'] );
+			$this->_clearCache( $ids, 'product' );
 		}
 
 		return $this->_getItems( $ids, $this->_getPrefix() );
@@ -134,6 +162,25 @@ class Controller_ExtJS_Catalog_List_Default
 	protected function _getPrefix()
 	{
 		return 'catalog.list';
+	}
+
+
+	/**
+	 * Rebuild the index for the given product IDs
+	 *
+	 * @param array $prodIds List of product IDs
+	 */
+	protected function _rebuildIndex( array $prodIds )
+	{
+		$context = $this->_getContext();
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.id', $prodIds ) );
+		$search->setSlice( 0, count( $prodIds ) );
+
+		$indexManager = MShop_Factory::createManager( $context, 'catalog/index' );
+		$indexManager->rebuildIndex( $productManager->searchItems( $search ) );
 	}
 
 
