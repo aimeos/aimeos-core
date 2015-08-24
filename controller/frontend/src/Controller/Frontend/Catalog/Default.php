@@ -118,10 +118,7 @@ class Controller_Frontend_Catalog_Default
 		$context = $this->_getContext();
 
 		$search = MShop_Factory::createManager( $context, 'catalog/index' )->createSearch( true );
-		$expr = array(
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
-			$search->compare( '==', 'catalog.index.catalog.listtype', $listtype ),
-		);
+		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
 
 		switch( $sort )
 		{
