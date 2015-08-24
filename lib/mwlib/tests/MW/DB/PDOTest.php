@@ -216,6 +216,22 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $rows );
 	}
 
+	public function testStmtEscape()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (:value)';
+
+		$conn = $this->_object->acquire();
+
+		$value = "(\\')";
+		$sqlinsert = str_replace( ':value', '\'' . $conn->escape( $value ) . '\'', $sqlinsert );
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->execute()->finish();
+
+		$this->_object->release( $conn );
+
+		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'(\\\\\'\')\')', strval( $stmt ) );
+	}
+
 	public function testStmtSimpleBindOne()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';

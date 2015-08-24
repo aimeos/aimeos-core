@@ -65,7 +65,7 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function escape($data)
 	{
-		return str_replace( '\'', '\'\'', $data);
+		return str_replace( '\\', '\\\\', str_replace( '\'', '\'\'', $data ) );
 	}
 
 
