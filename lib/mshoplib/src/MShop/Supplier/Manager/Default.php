@@ -476,8 +476,12 @@ class MShop_Supplier_Manager_Default
 			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				//$items[$row['id']] = $this->_createItem( $row );
+				$map[ $row['id'] ] = $row; // $row
+				//$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -488,7 +492,23 @@ class MShop_Supplier_Manager_Default
 			throw $e;
 		}
 
-		return $items;
+		if( !empty( $typeIds ) )
+		{
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
+			//$typeSearch->setConditions( $typeSearch->compare( '==', 'supplier.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['typeid'] ] ) ) {
+					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				}
+			}
+		}
+
+		return $this->_buildItems( $map, $ref, 'supplier' );
 	}
 
 
