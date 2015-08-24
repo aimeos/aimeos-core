@@ -280,42 +280,52 @@ class Controller_Jobs_Product_Import_Csv_Default
 			throw new Controller_Jobs_Exception( $msg );
 		}
 
-		$procMappings = $mappings;
-		unset( $procMappings['item'] );
-
-		$convlist = $this->_getConverterList( $converters );
-		$processor = $this->_getProcessors( $procMappings );
-		$container = $this->_getContainer();
-		$path = $container->getName();
-
-		$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
-		$logger->log( $msg, MW_Logger_Abstract::NOTICE );
-
-		foreach( $container as $content )
+		try
 		{
-			$name = $content->getName();
+			$procMappings = $mappings;
+			unset( $procMappings['item'] );
 
-			for( $i = 0; $i < $skiplines; $i++ ) {
-				$content->next();
-			}
+			$convlist = $this->_getConverterList( $converters );
+			$processor = $this->_getProcessors( $procMappings );
+			$container = $this->_getContainer();
+			$path = $container->getName();
 
-			while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
+			$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
+			$logger->log( $msg, MW_Logger_Abstract::NOTICE );
+
+			foreach( $container as $content )
 			{
-				$data = $this->_convertData( $convlist, $data );
-				$products = $this->_getProducts( array_keys( $data ), $domains );
-				$errcnt = $this->_import( $products, $data, $mappings['item'], $processor );
-				$chunkcnt = count( $data );
+				$name = $content->getName();
 
-				$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
-				$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+				for( $i = 0; $i < $skiplines; $i++ ) {
+					$content->next();
+				}
 
-				$errors += $errcnt;
-				$total += $chunkcnt;
-				unset( $products, $data );
+				while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
+				{
+					$data = $this->_convertData( $convlist, $data );
+					$products = $this->_getProducts( array_keys( $data ), $domains );
+					$errcnt = $this->_import( $products, $data, $mappings['item'], $processor );
+					$chunkcnt = count( $data );
+
+					$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
+					$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+
+					$errors += $errcnt;
+					$total += $chunkcnt;
+					unset( $products, $data );
+				}
 			}
-		}
 
-		$container->close();
+			$container->close();
+		}
+		catch( Exception $e )
+		{
+			$logger->log( 'Product import error: ' . $e->getMessage() );
+			$logger->log( $e->getTraceAsString() );
+
+			throw new Controller_Jobs_Exception( $e->getMessage() );
+		}
 
 		$msg = 'Finished product import from "%1$s": %2$d successful, %3$s errors, %4$s total (%5$s)';
 		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), MW_Logger_Abstract::NOTICE );
