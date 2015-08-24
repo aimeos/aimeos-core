@@ -267,38 +267,43 @@ class MShop_Catalog_Manager_Index_Default
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		$paramIds = array();
-		foreach( $items as $item ) {
-			$paramIds[] = $item->getId();
-		}
 
-		if( $mode === 'all' ) // index all product items
+		// index given product items
+		if( !empty( $items ) )
 		{
-			if( !empty( $paramIds ) )
-			{
-				$expr = array(
-					$search->compare( '==', 'product.id', $paramIds ),
-					$defaultConditions,
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
+			$prodIds = array();
+
+			foreach( $items as $item ) {
+				$prodIds[] = $item->getId();
 			}
 
+			$expr = array(
+				$search->compare( '==', 'product.id', $prodIds ),
+				$defaultConditions,
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
 			$this->_writeIndex( $search, $domains, $size );
-			$this->_clearCache( $paramIds );
 			return;
 		}
+
+
+		// index all product items
+		if( $mode === 'all' )
+		{
+			$this->_writeIndex( $search, $domains, $size );
+			return;
+		}
+
 
 		// index categorized product items only
 		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
-		$expr = array( $catalogSearch->compare( '==', 'catalog.list.domain', 'product' ) );
-
-		if( !empty( $paramIds ) ) {
-			$expr[] = $catalogSearch->compare( '==', 'catalog.list.refid', $paramIds );
-		}
-
-		$expr[] = $catalogSearch->getConditions();
+		$expr = array(
+			$catalogSearch->compare( '==', 'catalog.list.domain', 'product' ),
+			$catalogSearch->getConditions(),
+		);
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
 		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.list.refid' ) ) );
@@ -310,15 +315,13 @@ class MShop_Catalog_Manager_Index_Default
 			$catalogSearch->setSlice( $start, $size );
 			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.list.refid' );
 
-			$prodIds = array_keys( $result );
 			$expr = array(
-				$search->compare( '==', 'product.id', $prodIds ),
+				$search->compare( '==', 'product.id', array_keys( $result ) ),
 				$defaultConditions,
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
-			$this->_clearCache( $prodIds );
 
 			$start += $size;
 		}
@@ -398,12 +401,13 @@ class MShop_Catalog_Manager_Index_Default
 		{
 			$search->setSlice( $start, $size );
 			$products = $manager->searchItems( $search, $domains );
+			$prodIds = array_keys( $products );
 
 			try
 			{
 				$this->begin();
 
-				$this->deleteItems( array_keys( $products ) );
+				$this->deleteItems( $prodIds );
 
 				foreach( $submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
@@ -418,6 +422,8 @@ class MShop_Catalog_Manager_Index_Default
 				$this->_rollback();
 				throw $e;
 			}
+
+			$this->_clearCache( $prodIds );
 
 			$count = count( $products );
 			$start += $count;

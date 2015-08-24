@@ -43,16 +43,17 @@ class Controller_ExtJS_Catalog_List_Default
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
-		$manager = $this->_getManager();
-		$ids = (array) $params->items;
+
 		$refIds = array();
+		$ids = (array) $params->items;
+		$manager = $this->_getManager();
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $this->_getPrefix() . '.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
 
-		foreach( $manager->searchItems( $search ) as $id => $item ) {
-			$refIds[$item->getDomain()][] = $id;
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$refIds[$item->getDomain()][] = $item->getRefId();
 		}
 
 		$manager->deleteItems( $ids );
@@ -60,7 +61,7 @@ class Controller_ExtJS_Catalog_List_Default
 		if( isset( $refIds['product'] ) )
 		{
 			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( $ids, 'product' );
+			$this->_clearCache( $refIds, 'product' );
 		}
 
 		return array(
@@ -97,7 +98,7 @@ class Controller_ExtJS_Catalog_List_Default
 		if( isset( $refIds['product'] ) )
 		{
 			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( $ids, 'product' );
+			$this->_clearCache( $refIds, 'product' );
 		}
 
 		return $this->_getItems( $ids, $this->_getPrefix() );
