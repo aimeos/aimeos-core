@@ -87,6 +87,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/strict
 		 * @see controller/jobs/product/import/csv/backup
 		 * @see controller/common/product/import/csv/max-size
 		 */
@@ -134,6 +135,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/strict
 		 * @see controller/jobs/product/import/csv/backup
 		 * @see controller/common/product/import/csv/max-size
 		 */
@@ -195,6 +197,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/skip-lines
+		 * @see controller/jobs/product/import/csv/strict
 		 * @see controller/jobs/product/import/csv/backup
 		 * @see controller/common/product/import/csv/max-size
 		 */
@@ -236,10 +239,35 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/domains
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/strict
 		 * @see controller/jobs/product/import/csv/backup
 		 * @see controller/common/product/import/csv/max-size
 		 */
 		$skiplines = (int) $config->get( 'controller/jobs/product/import/csv/skip-lines', 0 );
+
+
+		/** controller/jobs/product/import/csv/skip-lines
+		 * Log all columns from the file that are not mapped and therefore not imported
+		 *
+		 * Depending on the mapping, there can be more columns in the CSV file
+		 * than those which will be imported. This can be by purpose if you want
+		 * to import only selected columns or if you've missed to configure one
+		 * or more columns. This configuration option will log all columns that
+		 * have not been imported if set to true. Otherwise, the left over fields
+		 * in the imported line will be silently ignored.
+		 *
+		 * @param boolen True if not imported columns should be logged, false if not
+		 * @since 2015.08
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/product/import/csv/domains
+		 * @see controller/jobs/product/import/csv/mapping
+		 * @see controller/jobs/product/import/csv/skip-lines
+		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/backup
+		 * @see controller/common/product/import/csv/max-size
+		 */
+		$strict = (bool) $config->get( 'controller/jobs/product/import/csv/strict', true );
 
 
 		/** controller/jobs/product/import/csv/backup
@@ -269,6 +297,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		 * @see controller/jobs/product/import/csv/mapping
 		 * @see controller/jobs/product/import/csv/skip-lines
 		 * @see controller/jobs/product/import/csv/converter
+		 * @see controller/jobs/product/import/csv/strict
 		 * @see controller/common/product/import/csv/max-size
 		 */
 		$backup = $config->get( 'controller/jobs/product/import/csv/backup' );
@@ -305,7 +334,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 				{
 					$data = $this->_convertData( $convlist, $data );
 					$products = $this->_getProducts( array_keys( $data ), $domains );
-					$errcnt = $this->_import( $products, $data, $mappings['item'], $processor );
+					$errcnt = $this->_import( $products, $data, $mappings['item'], $processor, $strict );
 					$chunkcnt = count( $data );
 
 					$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
@@ -448,11 +477,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 * @param array $data Associative list of import data as index/value pairs
 	 * @param array $mappings Associative list of positions and domain item keys
 	 * @param Controller_Common_Product_Import_Csv_Processor_Interface $processor Processor object
+	 * @param boolean $strict Log columns not mapped or silently ignore them
 	 * @return integer Number of products that couldn't be imported
 	 * @throws Controller_Jobs_Exception
 	 */
 	protected function _import( array $products, array $data, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Interface $processor )
+		Controller_Common_Product_Import_Csv_Processor_Interface $processor, $strict )
 	{
 		$errors = 0;
 		$context = $this->_getContext();
@@ -494,7 +524,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 				$errors++;
 			}
 
-			if( !empty( $remaining ) ) {
+			if( $strict && !empty( $remaining ) ) {
 				$context->getLogger()->log( 'Not imported: ' . print_r( $remaining, true ) );
 			}
 		}
