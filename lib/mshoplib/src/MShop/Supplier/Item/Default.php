@@ -15,7 +15,7 @@
  * @subpackage Supplier
  */
 class MShop_Supplier_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Supplier_Item_Interface
 {
 	private $_values;
