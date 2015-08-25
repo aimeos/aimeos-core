@@ -120,7 +120,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		if( ( $url = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $this->content( $url ); ?>" />
 <?php		endif; ?>
-<?php		$params = array( 'd_prodid' => $product->getProductId(), 'd_name' => $enc->url( $product->getName( 'url' ) ) ); ?>
+<?php		$params = array( 'd_prodid' => $product->getProductId(), 'd_name' => $product->getName( 'url' ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
