@@ -1,7 +1,7 @@
 <?php
 
 
-class MW_Convert_DateTime_LatinUTF8Test extends PHPUnit_Framework_TestCase
+class MW_Convert_Text_LatinUTF8Test extends PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{
