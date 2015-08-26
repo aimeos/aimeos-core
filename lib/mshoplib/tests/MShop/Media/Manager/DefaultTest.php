@@ -127,7 +127,7 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 4 );
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 4, count( $results ) );
-		$this->assertEquals( 10, $total );
+		$this->assertEquals( 11, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

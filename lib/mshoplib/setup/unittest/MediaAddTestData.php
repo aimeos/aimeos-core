@@ -112,6 +112,10 @@ class MW_Setup_Task_MediaAddTestData extends MW_Setup_Task_Abstract
 			$media->setStatus( $dataset['status'] );
 			$media->setMimeType( $dataset['mimetype'] );
 
+			if( isset( $dataset['preview'] ) ) {
+				$media->setPreview( $dataset['preview'] );
+			}
+
 			$mediaManager->saveItem( $media, false );
 		}
 
