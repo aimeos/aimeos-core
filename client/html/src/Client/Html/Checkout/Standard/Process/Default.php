@@ -19,7 +19,7 @@ sprintf( 'process' );
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Process_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/process/default/subparts

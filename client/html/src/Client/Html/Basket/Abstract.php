@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Basket_Abstract
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Client_Factory_Abstract
 {
 	/**
 	 * Removes all cached basket parts from the cache.
