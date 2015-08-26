@@ -52,24 +52,15 @@ $enc = $this->encoder();
 					<option class="select-option" value=""><?php echo $enc->html( $this->translate( 'client/html', 'none' ) ); ?></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
 					<option class="select-option" value="<?php echo $enc->attr( $id ); ?>">
-<?php
-			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
-
-			if( ( $priceItem = reset( $priceItems ) ) !== false )
-			{
-				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
-				$value = $priceItem->getValue() + $priceItem->getCosts();
-				$sign = ( $value < 0 ? '−' : '+' );
-				$value = $this->number( abs( $value ) );
-				
-				/// Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s)
-				echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s ( %4$s%2$s%3$s )' ), $attribute->getName(), $value, $currency, $sign ), $enc::TRUST );
-			}
-			else
-			{
-				echo $enc->html( $attribute->getName(), $enc::TRUST );
-			}
-?>
+<?php		$priceItems = $attribute->getRefItems( 'price', 'default', 'default' ); ?>
+<?php		if( ( $priceItem = reset( $priceItems ) ) !== false ) : ?>
+<?php			$value = $priceItem->getValue() + $priceItem->getCosts(); ?>
+<?php			$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
+<?php			/// Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s) ?>
+<?php			echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s ( %4$s%2$s%3$s )' ), $attribute->getName(), $this->number( abs( $value ) ), $currency, ( $value < 0 ? '−' : '+' ) ), $enc::TRUST ); ?>
+<?php		else : ?>
+<?php			echo $enc->html( $attribute->getName(), $enc::TRUST ); ?>
+<?php		endif; ?>
 					</option>
 <?php	endforeach; ?>
 				</select>

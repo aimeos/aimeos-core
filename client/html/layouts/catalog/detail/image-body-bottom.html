@@ -88,16 +88,12 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 	<div class="image-thumbs">
 		<a class="prev-thumbs disabled"></a>
 		<div class="thumbs">
-<?php	if( count( $mediaItems ) > 1 )
-		{
-			$class = 'item selected';
-			foreach( $mediaItems as $id => $mediaItem )
-			{
-				echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $this->content( $mediaItem->getPreview() ) . '\')"></a>';
-				$class = 'item';
-			}
-		}
-?>
+<?php	if( count( $mediaItems ) > 1 ) : $class = 'item selected'; ?>
+<?php		foreach( $mediaItems as $id => $mediaItem ) : ?>
+			<a href="<?php echo $url . '#image-' . $id; ?>" class="<?php echo $class; ?>" style="background-image: url('<?php echo $this->content( $mediaItem->getPreview() ); ?>')"></a>
+<?php			$class = 'item'; ?>
+<?php		endforeach; ?>
+<?php	endif; ?>
 		</div>
 		<a class="next-thumbs disabled"></a>
 	</div><!--

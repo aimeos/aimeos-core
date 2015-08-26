@@ -82,14 +82,11 @@ $params = $this->param(); unset( $params['target'] );
 				<input class="attr-item" id="attr-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'f_attrid', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $attribute->getName( 'url' ) ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
 				<label class="attr-name" for="attr-<?php echo $enc->attr( $id ); ?>"><!--
 					--><div class="media-list"><!--
-<?php
-					foreach( $attribute->getListItems( 'media', 'icon' ) as $listItem )
-					{
-						if( ( $item = $listItem->getRefItem() ) !== null ) {
-							echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--';
-						}
-					}
-?>
+<?php				foreach( $attribute->getListItems( 'media', 'icon' ) as $listItem ) : ?>
+<?php					if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
+<?php						echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--'; ?>
+<?php					endif; ?>
+<?php				endforeach; ?>
 					--></div>
 					<span><?php echo $enc->html( $attribute->getName(), $enc::TRUST ); ?></span><!--
 				--></label>

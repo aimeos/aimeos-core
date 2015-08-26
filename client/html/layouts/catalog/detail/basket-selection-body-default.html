@@ -69,14 +69,11 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 					<li class="select-entry">
 						<input class="select-option" id="option-<?php echo $enc->attr( $attrId ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" type="radio" value="<?php echo $enc->attr( $attrId ); ?>" />
 						<label class="select-label" for="option-<?php echo $enc->attr( $attrId ); ?>"><!--
-<?php
-					foreach( $attributes[$attrId]->getListItems( 'media', 'icon' ) as $listItem )
-					{
-						if( ( $item = $listItem->getRefItem() ) !== null ) {
-							echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--';
-						}
-					}
-?>
+<?php				foreach( $attributes[$attrId]->getListItems( 'media', 'icon' ) as $listItem ) : ?>
+<?php					if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
+<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
+<?php					endif; ?>
+<?php				endforeach; ?>
 							--><span><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></span><!--
 						--></label>
 					</li>

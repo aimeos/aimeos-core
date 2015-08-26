@@ -6,7 +6,7 @@
  */
 
 ?>
-
+// <!--
 var categoryCounts = <?php echo json_encode( $this->get( 'treeCountList', array() ), JSON_FORCE_OBJECT ); ?>;
 
 $( ".catalog-filter-count li.cat-item" ).each( function( index, item ) {	
@@ -22,3 +22,4 @@ $( ".catalog-filter-count li.cat-item" ).each( function( index, item ) {
 });
 
 <?php echo $this->get( 'treeBody' ); ?>
+// -->
