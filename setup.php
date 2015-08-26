@@ -161,6 +161,16 @@ try
 	$manager = new MW_Setup_Manager_Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 	$manager->run( 'mysql' );
 }
+catch( Throwable $t )
+{
+	echo "\n\nCaught PHP error while processing setup";
+	echo "\n\nMessage:\n";
+	echo $t->getMessage();
+	echo "\n\nStack trace:\n";
+	echo $t->getTraceAsString();
+	echo "\n\n";
+	exit( 1 );
+}
 catch( Exception $e )
 {
 	echo "\n\nCaught exception while processing setup";
