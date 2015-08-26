@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 abstract class MShop_Plugin_Provider_Decorator_Abstract
-	extends MShop_Plugin_Provider_Order_Abstract
+	extends MShop_Plugin_Provider_Abstract
 {
 	private $_object;
 
