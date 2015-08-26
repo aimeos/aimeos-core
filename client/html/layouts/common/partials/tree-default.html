@@ -50,7 +50,7 @@ $config = $this->config( 'client/html/catalog/list/url/config', array() );
 			--></div><!--
 			--><span class="cat-name"><?php echo $enc->html( $item->getName(), $enc::TRUST ); ?></span><!--
 		--></a>
-<?php		if( !empty( $item->getChildren() ) ) : ?>
+<?php		if( count( $item->getChildren() ) > 0 ) : ?>
 <?php			$values = array( 'nodes' => $item->getChildren(), 'path' => $path, 'params' => $params, 'level' => $level + 1 ); ?>
 <?php			echo $this->partial( 'client/html/common/partials/tree', 'common/partials/tree-default.html', $values ); ?>
 <?php		endif; ?>
