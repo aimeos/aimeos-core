@@ -5,7 +5,6 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-$contentUrl = $this->config( 'client/html/common/content/baseurl' );
 $subAttrDeps = $this->get( 'subAttributeDependencies', array() );
 $attrMap = $this->get( 'attributeMap', array() );
 $enc = $this->encoder();
@@ -36,7 +35,7 @@ $enc = $this->encoder();
 			foreach( $attrItem->getListItems( 'media', 'default' ) as $listItem )
 			{
 				if( ( $item = $listItem->getRefItem() ) !== null ) {
-					echo $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) );
+					echo $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ); 
 				}
 			}
 ?>

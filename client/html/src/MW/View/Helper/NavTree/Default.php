@@ -13,6 +13,7 @@
  *
  * @package MW
  * @subpackage View
+ * @deprecated 2016.01
  */
 class MW_View_Helper_NavTree_Default
 	extends MW_View_Helper_Abstract
@@ -67,7 +68,7 @@ class MW_View_Helper_NavTree_Default
 		$class .= ( isset( $path[$item->getId()] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
 
-		$params['f_name'] = $enc->url( $item->getName( 'url' ) );
+		$params['f_name'] = $item->getName( 'url' );
 		$params['f_catid'] = $id;
 
 		$url = $enc->attr( $this->_getView()->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );

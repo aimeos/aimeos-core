@@ -73,7 +73,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 					foreach( $attributes[$attrId]->getListItems( 'media', 'icon' ) as $listItem )
 					{
 						if( ( $item = $listItem->getRefItem() ) !== null ) {
-							echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--';
+							echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--';
 						}
 					}
 ?>
