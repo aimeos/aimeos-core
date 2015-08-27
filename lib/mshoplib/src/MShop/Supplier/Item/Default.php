@@ -25,9 +25,9 @@ class MShop_Supplier_Item_Default
 	 *
 	 * @param array $values List of attributes that belong to the supplier item
 	 */
-	public function __construct( array $values = array() )
+	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		parent::__construct( 'supplier.', $values );
+		parent::__construct( 'supplier.', $values, $values, $listItems, $refItems );
 
 		$this->_values = $values;
 	}
