@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
+interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface, MShop_Common_Item_ListRef_Interface
 {
 	/**
 	 * Returns the label of the supplier item.
