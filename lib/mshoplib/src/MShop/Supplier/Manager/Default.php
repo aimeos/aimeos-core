@@ -363,7 +363,7 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$items = array();
+		$map = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -477,7 +477,7 @@ class MShop_Supplier_Manager_Default
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$map[$row['id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -488,7 +488,7 @@ class MShop_Supplier_Manager_Default
 			throw $e;
 		}
 
-		return $items;
+		return $this->_buildItems( $map, $ref, 'supplier' );
 	}
 
 
