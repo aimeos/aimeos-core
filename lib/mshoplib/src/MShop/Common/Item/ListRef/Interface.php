@@ -23,11 +23,11 @@ interface MShop_Common_Item_ListRef_Interface
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *
-	 * @param string $domain Name of the domain (e.g. product, text, etc.)
+	 * @param string $domain|null Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the list item type or null for all
 	 * @return array List of items implementing MShop_Common_Item_List_Interface
 	 */
-	public function getListItems( $domain, $type = null );
+	public function getListItems( $domain = null, $type = null );
 
 	/**
 	 * Returns the product, text, etc. items, optionally filtered by type.
