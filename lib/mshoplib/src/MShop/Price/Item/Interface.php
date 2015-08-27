@@ -15,7 +15,7 @@
  * @subpackage Price
  */
 interface MShop_Price_Item_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Add the given price to the current one.

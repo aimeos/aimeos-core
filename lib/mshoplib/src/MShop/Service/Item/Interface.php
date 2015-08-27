@@ -14,8 +14,7 @@
  * @subpackage Service
  */
 interface MShop_Service_Item_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_ListRef_Interface,
-		MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the code of the service item.

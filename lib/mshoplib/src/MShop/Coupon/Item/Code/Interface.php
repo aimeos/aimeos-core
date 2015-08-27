@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
+interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface, MShop_Common_Item_Time_Interface
 {
 	/**
 	 * Returns the unique ID of the coupon item the code belongs to.
@@ -65,39 +65,4 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * @return void
 	 */
 	public function setCount( $count );
-
-
-	/**
-	 * Returns the starting point of time, in which the code is available.
-	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
-	 */
-	public function getDateStart();
-
-
-	/**
-	 * Sets a new starting point of time, in which the code is available.
-	 *
-	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return void
-	 */
-	public function setDateStart( $date );
-
-
-	/**
-	 * Returns the ending point of time, in which the code is available.
-	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
-	 */
-	public function getDateEnd();
-
-
-	/**
-	 * Sets a new ending point of time, in which the code is available.
-	 *
-	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return void
-	 */
-	public function setDateEnd( $date );
-
 }

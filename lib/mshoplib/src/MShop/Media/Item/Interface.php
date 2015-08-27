@@ -15,7 +15,7 @@
  * @subpackage Media
  */
 interface MShop_Media_Item_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the ISO language code.

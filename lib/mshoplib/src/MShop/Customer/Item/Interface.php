@@ -14,7 +14,8 @@
  * @package MShop
  * @subpackage Customer
  */
-interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
+interface MShop_Customer_Item_Interface
+	extends MShop_Common_Item_ListRef_Interface
 {
 	/**
 	 * Returns the label of the customer item.

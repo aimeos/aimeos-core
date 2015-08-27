@@ -15,8 +15,7 @@
  * @subpackage Attribute
  */
 interface MShop_Attribute_Item_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_ListRef_Interface,
-		MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the domain of the attribute item.

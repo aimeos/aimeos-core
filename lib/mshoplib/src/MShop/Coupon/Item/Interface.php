@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
+interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface, MShop_Common_Item_Time_Interface
 {
 	/**
 	 * Returns the label of the coupon if available.
@@ -30,36 +30,6 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * @return void
 	 */
 	public function setLabel( $name );
-
-	/**
-	 * Returns the starting point of time, in which the coupon is available.
-	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
-	 */
-	public function getDateStart();
-
-	/**
-	 * Sets a new starting point of time, in which the coupon is available.
-	 *
-	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return void
-	 */
-	public function setDateStart( $date );
-
-	/**
-	 * Returns the ending point of time, in which the coupon is available.
-	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
-	 */
-	public function getDateEnd();
-
-	/**
-	 * Sets a new ending point of time, in which the coupon is available.
-	 *
-	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return void
-	 */
-	public function setDateEnd( $date );
 
 	/**
 	 * Returns the provider of the coupon.
