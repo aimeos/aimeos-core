@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Detail_Additional_Property_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/catalog/detail/additional/property/default/subparts

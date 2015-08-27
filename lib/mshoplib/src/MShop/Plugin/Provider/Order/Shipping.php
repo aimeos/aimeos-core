@@ -16,7 +16,7 @@
  * @deprecated Use Reduction service decorator for each delivery option instead
  */
 class MShop_Plugin_Provider_Order_Shipping
-	extends MShop_Plugin_Provider_Order_Abstract
+	extends MShop_Plugin_Provider_Factory_Abstract
 	implements MShop_Plugin_Provider_Factory_Interface
 {
 	/**

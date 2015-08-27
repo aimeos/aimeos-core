@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Order_ServicesUpdate
-	extends MShop_Plugin_Provider_Order_Abstract
+	extends MShop_Plugin_Provider_Factory_Abstract
 	implements MShop_Plugin_Provider_Factory_Interface
 {
 	/**
