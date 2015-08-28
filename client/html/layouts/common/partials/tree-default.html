@@ -39,7 +39,7 @@ $config = $this->config( 'client/html/catalog/list/url/config', array() );
 <?php		$params['f_name'] = $item->getName( 'url' ); $params['f_catid'] = $id; ?>
 <?php		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' ) . ( isset( $path[$id] ) ? ' active' : '' ) . ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' ) ?>
 	<li class="cat-item catid-<?php echo $enc->attr( $id . $class ); ?>" data-id="<?php echo $id; ?>" >
-		<a class="cat-item" href="<?php $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>"><!--
+		<a class="cat-item" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>"><!--
 			--><div class="media-list"><!--
 <?php	foreach( $item->getListItems( 'media', 'icon' ) as $listItem ) : ?>
 <?php		if( ( $mediaItem = $listItem->getRefItem() ) !== null ) : ?>
