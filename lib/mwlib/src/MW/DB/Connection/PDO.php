@@ -58,18 +58,6 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 
 
 	/**
-	 * Escapes the value if necessary for direct inclusion in SQL statement.
-	 *
-	 * @param string $data Value to escape
-	 * @return string Escaped string
-	 */
-	public function escape($data)
-	{
-		return str_replace( '\'', '\'\'', $data);
-	}
-
-
-	/**
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.

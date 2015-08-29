@@ -25,4 +25,16 @@ abstract class MW_DB_Connection_Abstract
 	 * Prepared statements
 	 */
 	const TYPE_PREP = 1;
+
+
+	/**
+	 * Escapes the value if necessary for direct inclusion in SQL statement.
+	 *
+	 * @param string $data Value to escape
+	 * @return string Escaped string
+	 */
+	public function escape($data)
+	{
+		return str_replace( array( "'", '\\' ), array( "''", '\\\\' ), $data);
+	}
 }
