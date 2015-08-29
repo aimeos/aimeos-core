@@ -14,7 +14,9 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Connection_None implements MW_DB_Connection_Interface
+class MW_DB_Connection_None
+	extends MW_DB_Connection_Abstract
+	implements MW_DB_Connection_Interface
 {
 	/**
 	 * Creates a database statement.
@@ -28,18 +30,6 @@ class MW_DB_Connection_None implements MW_DB_Connection_Interface
 	public function create( $sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE )
 	{
 		throw new MW_DB_Exception( 'This method is not implemented' );
-	}
-
-
-	/**
-	 * Escapes the value if necessary for direct inclusion in SQL statement.
-	 *
-	 * @param string $data Value to escape
-	 * @return string Escaped string
-	 */
-	public function escape( $data )
-	{
-		return str_replace( '\'', '\'\'', $data );
 	}
 
 
