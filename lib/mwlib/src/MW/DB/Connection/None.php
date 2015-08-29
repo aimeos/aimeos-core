@@ -32,18 +32,6 @@ class MW_DB_Connection_None implements MW_DB_Connection_Interface
 
 
 	/**
-	 * Escapes the value if necessary for direct inclusion in SQL statement.
-	 *
-	 * @param string $data Value to escape
-	 * @return string Escaped string
-	 */
-	public function escape( $data )
-	{
-		return str_replace( '\'', '\'\'', $data );
-	}
-
-
-	/**
 	 * Starts a transaction for this connection.
 	 *
 	 * Throws an exception because there is no implementation available.
