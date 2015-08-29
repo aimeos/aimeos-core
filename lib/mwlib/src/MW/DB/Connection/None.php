@@ -14,7 +14,9 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Connection_None implements MW_DB_Connection_Interface
+class MW_DB_Connection_None
+	extends MW_DB_Connection_Abstract
+	implements MW_DB_Connection_Interface
 {
 	/**
 	 * Creates a database statement.
