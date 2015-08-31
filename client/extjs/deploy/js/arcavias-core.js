@@ -10646,31 +10646,19 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
     },
 
     inspectCreateNode : function(attr) {
-        // adding label to object as text is necessary
-        var status = attr['catalog.status'];
 
         attr.id = attr['catalog.id'];
+        attr.label = attr['catalog.label'];
         attr.text = attr['catalog.id'] + " - " + attr['catalog.label'];
         attr.code = attr['catalog.code'];
-        attr.cls = 'statustext-' + status;
+        attr.status = attr['catalog.status'];
+        attr.cls = 'statustext-' + attr.status;
 
         // create record and insert into own store
         this.store.suspendEvents(false);
-        var oldRecord = this.store.getById(attr['catalog.id']);
-        this.store.remove(oldRecord);
 
-        this.store.add([new this.recordClass({
-            id : attr.id,
-            status : status,
-            code : attr['catalog.code'],
-            label : attr['catalog.label'],
-            'catalog.hasChildren' : attr['catalog.hasChildren'],
-            'catalog.config' : attr['catalog.config'],
-            'catalog.siteid' : attr['catalog.siteid'],
-            'catalog.ctime' : attr['catalog.ctime'],
-            'catalog.mtime' : attr['catalog.mtime'],
-            'catalog.editor' : attr['catalog.editor']
-        }, attr.id)]);
+        this.store.remove(this.store.getById(attr.id));
+        this.store.add([new this.recordClass(attr, attr.id)]);
 
         this.store.resumeEvents();
     }
