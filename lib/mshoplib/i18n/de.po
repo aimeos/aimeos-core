@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-07-28 14:11+0000\n"
+"PO-Revision-Date: 2015-08-21 16:49+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgstr "Der eindeutige Code darf nicht länger als 32 Zeichen sein"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:123
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Konfiguration für \"%1$s\" fehlt"
 
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #, php-format
@@ -320,7 +320,7 @@ msgstr "Warenkorb ist fehlerhaft serialisiert. \"%1$s\" liefert \"%2$s\"."
 #: src/MShop/Service/Provider/Abstract.php:351
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Üngültiger Typ \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #, php-format
