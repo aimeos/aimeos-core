@@ -43,8 +43,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 
         MShop.urlManager.redirect({
             site : siteCode,
-            tab : domainTabIdx,
-            locale : MShop.urlManager.getLanguageCode() || null
+            tab : domainTabIdx
         });
     }
 });
