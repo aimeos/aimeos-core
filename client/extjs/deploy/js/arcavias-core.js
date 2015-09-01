@@ -2607,7 +2607,7 @@ MShop.UrlManager.prototype = {
                 this.setSiteCode(config.site);
             }
 
-            if(MShop.i18n.hasOwnProperty('lang')) {
+            if(config.hasOwnProperty('lang')) {
                 this.setLanguageCode(config.lang);
             }
 
@@ -2692,8 +2692,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 
         MShop.urlManager.redirect({
             site : siteCode,
-            tab : domainTabIdx,
-            locale : MShop.urlManager.getLanguageCode() || null
+            tab : domainTabIdx
         });
     }
 });
@@ -2780,7 +2779,6 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
         }).show();
 
         MShop.urlManager.redirect({
-            site : MShop.urlManager.data.site,
             lang : languageCode,
             tab : domainTabIdx
         });
