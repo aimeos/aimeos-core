@@ -139,6 +139,8 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             }]
         }];
 
+        this.store.on('beforesave', this.onBeforeSave, this);
+
         MShop.panel.product.ItemUi.superclass.initComponent.call(this);
     },
 
