@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Catalog_Abstract
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Client_Factory_Abstract
 {
 	private $_productList;
 	private $_productTotal = 0;

@@ -28,6 +28,11 @@ class MShop_Customer_Item_Default
 	 * Initializes the customer item object
 	 *
 	 * @param array $values List of attributes that belong to the customer item
+	 * @param MShop_Common_Item_Address_Interface $address Payment address item object
+	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
+	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param string $salt Password salt (optional)
+	 * @param MShop_Common_Item_Helper_Password_Interface $helper Password encryption helper object
 	 */
 	public function __construct( MShop_Common_Item_Address_Interface $address, array $values = array(),
 		array $listItems = array(), array $refItems = array(), $salt = '',

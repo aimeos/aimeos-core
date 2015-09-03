@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 interface MShop_Common_Item_List_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Time_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the parent Id (DB-field parentid) of the common list item, like the unique Id of a product or a tree node.
@@ -61,36 +61,6 @@ interface MShop_Common_Item_List_Interface
 	 * @return void
 	 */
 	public function setRefId( $refid );
-
-	/**
-	 * Returns the start date of the common list item (YYYY-MM-DD hh:mm:ss).
-	 *
-	 * @return string Start date of the common list item (YYYY-MM-DD hh:mm:ss)
-	 */
-	public function getDateStart();
-
-	/**
-	 * Sets the new start date of the common list item (YYYY-MM-DD hh:mm:ss).
-	 *
-	 * @param string $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
-	 * @return void
-	 */
-	public function setDateStart( $date );
-
-	/**
-	 * Returns the end date of the common list item (YYYY-MM-DD hh:mm:ss).
-	 *
-	 * @return string End date of the common list item (YYYY-MM-DD hh:mm:ss)
-	 */
-	public function getDateEnd();
-
-	/**
-	 * Sets the new end date of the common list item (YYYY-MM-DD hh:mm:ss).
-	 *
-	 * @param string $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
-	 * @return void
-	 */
-	public function setDateEnd( $date );
 
 	/**
 	 * Returns the configuration of the list item.

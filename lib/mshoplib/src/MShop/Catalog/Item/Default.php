@@ -26,8 +26,9 @@ class MShop_Catalog_Item_Default
 	 * Initializes the catalog item.
 	 *
 	 * @param MW_Tree_Node_Interface $node Tree node
-	 * @param array $listItems List of list items
-	 * @param array $refItems List of referenced items
+	 * @param MShop_Catalog_Item_Interface[] $children List of children of the item
+	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
+	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
 	 */
 	public function __construct( MW_Tree_Node_Interface $node, array $children = array(),
 		array $listItems = array(), array $refItems = array() )

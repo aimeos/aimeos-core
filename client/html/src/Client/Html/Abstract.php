@@ -282,19 +282,18 @@ abstract class Client_Html_Abstract
 	 */
 	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
-		$listIface = 'MShop_Common_Item_ListRef_Interface';
-		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
 		$expires = array();
+		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
 
 		if( $tagAll === true ) {
 			$tags[] = $domain . '-' . $item->getId();
 		}
 
-		if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
+		if( $item instanceof MShop_Common_Item_Time_Interface && ( $date = $item->getDateEnd() ) !== null ) {
 			$expires[] = $date;
 		}
 
-		if( $item instanceof $listIface )
+		if( $item instanceof MShop_Common_Item_ListRef_Interface )
 		{
 			foreach( $item->getListItems() as $listitem )
 			{

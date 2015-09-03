@@ -24,8 +24,8 @@ class MShop_Service_Item_Default
 	 * Initializes the item object.
 	 *
 	 * @param array $values Parameter for initializing the basic properties
-	 * @param array List of items implementing MShop_Common_List_Item_Interface
-	 * @param array List of items implementing MShop_Text_Item_Interface
+	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
+	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

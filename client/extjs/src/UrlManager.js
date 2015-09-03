@@ -22,7 +22,7 @@ MShop.UrlManager.prototype = {
                 this.setSiteCode(config.site);
             }
 
-            if(MShop.i18n.hasOwnProperty('lang')) {
+            if(config.hasOwnProperty('lang')) {
                 this.setLanguageCode(config.lang);
             }
 

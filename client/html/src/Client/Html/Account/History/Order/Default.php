@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Account_History_Order_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/account/history/order/default/subparts

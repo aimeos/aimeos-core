@@ -24,10 +24,12 @@ class MShop_Supplier_Item_Default
 	 * Initializes the supplier item object
 	 *
 	 * @param array $values List of attributes that belong to the supplier item
+	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
+	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = array() )
+	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		parent::__construct( 'supplier.', $values );
+		parent::__construct( 'supplier.', $values, $listItems, $refItems );
 
 		$this->_values = $values;
 	}

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-08-15 00:37+0000\n"
+"PO-Revision-Date: 2015-08-26 00:49+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -1162,7 +1162,7 @@ msgstr "teslimat"
 #: src/MW/View/Helper/Price/Default.php:77
 #, php-format
 msgid "from %1$s"
-msgstr "%1$s 'dan"
+msgstr "%1$s adet için"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:70
 #: layouts/common/summary/address-body-default.html:131
