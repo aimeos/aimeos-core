@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Product
  */
@@ -229,6 +230,29 @@ class MShop_Product_Item_Default
 
 
 	/**
+	 * Returns the configuration values of the item
+	 *
+	 * @return array Configuration values
+	 */
+	public function getConfig()
+	{
+		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+	}
+
+
+	/**
+	 * Sets the configuration values of the item.
+	 *
+	 * @param array $config Configuration values
+	 */
+	public function setConfig( array $config )
+	{
+		$this->_values['config'] = $config;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values
@@ -250,6 +274,7 @@ class MShop_Product_Item_Default
 				case 'product.suppliercode': $this->setSupplierCode( $value ); break;
 				case 'product.datestart': $this->setDateStart( $value ); break;
 				case 'product.dateend': $this->setDateEnd( $value ); break;
+				case 'product.config': $this->setConfig( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -275,6 +300,7 @@ class MShop_Product_Item_Default
 		$list['product.suppliercode'] = $this->getSupplierCode();
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
+		$list['product.config'] = $this->getConfig();
 
 		return $list;
 	}

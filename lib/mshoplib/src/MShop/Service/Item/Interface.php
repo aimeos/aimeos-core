@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Service
  */
@@ -14,7 +15,8 @@
  * @subpackage Service
  */
 interface MShop_Service_Item_Interface
-	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_Config_Interface, MShop_Common_Item_ListRef_Interface,
+		MShop_Common_Item_Position_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the code of the service item.
@@ -60,21 +62,6 @@ interface MShop_Service_Item_Interface
 	 * @return void
 	 */
 	public function setLabel( $label );
-
-	/**
-	 * Returns the configuration values of the item
-	 *
-	 * @return array Configuration values
-	 */
-	public function getConfig();
-
-	/**
-	 * Sets the configuration values of the item.
-	 *
-	 * @param array $config Configuration values
-	 * @return void
-	 */
-	public function setConfig( array $config );
 
 	/**
 	 * Returns the status of the service item.

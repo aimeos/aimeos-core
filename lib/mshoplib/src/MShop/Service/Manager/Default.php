@@ -518,7 +518,7 @@ class MShop_Service_Manager_Default
 			{
 				$config = $row['config'];
 
-				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['id'], $config );
 					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );

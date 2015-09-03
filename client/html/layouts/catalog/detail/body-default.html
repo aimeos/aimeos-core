@@ -6,7 +6,14 @@
  */
 
 $enc = $this->encoder();
-$id = ( isset( $this->detailProductItem ) ? $this->detailProductItem->getId() : '' );
+
+$id = $css = '';
+if( isset( $this->detailProductItem ) )
+{
+	$id = $this->detailProductItem->getId();
+	$conf = $this->detailProductItem->getConfig();
+	$css = ( isset( $conf['css-class'] ) ? $conf['css-class'] : '' );
+}
 
 ?>
 <section class="aimeos catalog-detail">
@@ -17,7 +24,7 @@ $id = ( isset( $this->detailProductItem ) ? $this->detailProductItem->getId() : 
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<article class="product" data-id="<?php echo $id; ?>">
+	<article class="product <?php echo $css; ?>" data-id="<?php echo $id; ?>">
 <?php echo $this->get( 'detailBody' ); ?>
 	</article>
 </section>

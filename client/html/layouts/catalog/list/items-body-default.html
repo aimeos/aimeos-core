@@ -41,7 +41,8 @@ $position = $this->get( 'itemPosition', 0 );
 	<ul class="list-items"><!--
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
 <?php	$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $id, 'l_pos' => $position++ ); ?>
-	--><li class="product">
+<?php	$conf = $productItem->getConfig(); $css = ( isset( $conf['css-class'] ) ? $conf['css-class'] : '' ); ?>
+	--><li class="product <?php echo $css; ?>">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>

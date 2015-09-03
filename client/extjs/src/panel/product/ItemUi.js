@@ -1,6 +1,7 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Aimeos (aimeos.org), 2015
  */
 
 Ext.ns('MShop.panel.product');
@@ -130,12 +131,15 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         }]
                     }]
                 }, {
-                    xtype : 'MShop.panel.product.stock.listuismall',
+                    xtype : 'MShop.panel.configui',
                     layout : 'fit',
-                    flex : 1
+                    flex : 1,
+                    data : (this.record ? this.record.get('product.config') : {})
                 }]
             }]
         }];
+
+        this.store.on('beforesave', this.onBeforeSave, this);
 
         MShop.panel.product.ItemUi.superclass.initComponent.call(this);
     },
@@ -147,6 +151,12 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
+    },
+
+    onBeforeSave : function(store, data) {
+        MShop.panel.product.ItemUi.superclass.onBeforeSave.call(this, store, data, {
+            configname : 'product.config'
+        });
     },
 
     onStoreWrite : function(store, action, result, transaction, rs) {

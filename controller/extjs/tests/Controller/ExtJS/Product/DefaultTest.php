@@ -77,6 +77,7 @@ class Controller_ExtJS_Product_DefaultTest extends PHPUnit_Framework_TestCase
 				'product.dateend' => '2001-01-01 00:00:00',
 				'product.suppliercode' => '',
 				'product.typeid' => $type->getId(),
+				'product.config' => (object) array( 'key' => 'value' ),
 			),
 		);
 
@@ -103,6 +104,7 @@ class Controller_ExtJS_Product_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $saved['items']->{'product.dateend'}, $searched['items'][0]->{'product.dateend'} );
 		$this->assertEquals( $saved['items']->{'product.suppliercode'}, $searched['items'][0]->{'product.suppliercode'} );
 		$this->assertEquals( $saved['items']->{'product.typeid'}, $searched['items'][0]->{'product.typeid'} );
+		$this->assertEquals( $saved['items']->{'product.config'}, $searched['items'][0]->{'product.config'} );
 
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );

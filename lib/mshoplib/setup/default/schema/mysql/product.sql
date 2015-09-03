@@ -62,6 +62,8 @@ CREATE TABLE "mshop_product" (
 	"suppliercode" VARCHAR(32) NOT NULL,
 	-- Default name in admin backend
 	"label" VARCHAR(255) NOT NULL,
+	-- catalog config values stored in JSON format
+	"config" TEXT NOT NULL,
 	-- Date and time the product should be activated
 	"start" DATETIME DEFAULT NULL,
 	-- Date and time the product should be deactivated

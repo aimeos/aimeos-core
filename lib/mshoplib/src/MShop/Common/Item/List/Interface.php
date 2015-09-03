@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Common
  */
@@ -15,7 +16,9 @@
  * @subpackage Common
  */
 interface MShop_Common_Item_List_Interface
-	extends MShop_Common_Item_Interface, MShop_Common_Item_Position_Interface, MShop_Common_Item_Time_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_Interface, MShop_Common_Item_Config_Interface,
+		MShop_Common_Item_Position_Interface, MShop_Common_Item_Time_Interface,
+		MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the parent Id (DB-field parentid) of the common list item, like the unique Id of a product or a tree node.
@@ -61,21 +64,6 @@ interface MShop_Common_Item_List_Interface
 	 * @return void
 	 */
 	public function setRefId( $refid );
-
-	/**
-	 * Returns the configuration of the list item.
-	 *
-	 * @return string Custom configuration values
-	 */
-	public function getConfig();
-
-	/**
-	 * Sets the new configuration for the list item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return void
-	 */
-	public function setConfig( array $config );
 
 	/**
 	 * Returns the status of the list item.

@@ -39,7 +39,7 @@ class MShop_Catalog_Manager_Default
 		'config' => array(
 			'code' => 'catalog.config',
 			'internalcode' => 'mcat."config"',
-			'label' => 'Catalog site config',
+			'label' => 'Catalog node config',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
