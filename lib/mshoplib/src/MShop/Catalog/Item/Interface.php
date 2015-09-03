@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Catalog
  */
@@ -15,7 +16,7 @@
  * @subpackage Catalog
  */
 interface MShop_Catalog_Item_Interface
-	extends MShop_Common_Item_ListRef_Interface
+	extends MShop_Common_Item_Config_Interface, MShop_Common_Item_ListRef_Interface
 {
 	/**
 	 * Returns the name of the item.
@@ -46,21 +47,6 @@ interface MShop_Catalog_Item_Interface
 	 * @return void
 	 */
 	public function setCode( $name );
-
-	/**
-	 * Returns the config property of the catalog.
-	 *
-	 * @return array Returns the config of the catalog node
-	 */
-	public function getConfig();
-
-	/**
-	 * Sets the config property of the catalog item.
-	 *
-	 * @param array $options Options to be set for the catalog node
-	 * @return void
-	 */
-	public function setConfig( array $options );
 
 	/**
 	 * Returns the status of the item.

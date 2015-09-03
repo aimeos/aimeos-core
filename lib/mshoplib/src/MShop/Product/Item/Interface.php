@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Product
  */
@@ -15,7 +16,8 @@
  * @subpackage Product
  */
 interface MShop_Product_Item_Interface
-	extends MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Time_Interface, MShop_Common_Item_Typeid_Interface
+	extends MShop_Common_Item_Config_Interface, MShop_Common_Item_ListRef_Interface,
+		MShop_Common_Item_Time_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the status of the product item.
