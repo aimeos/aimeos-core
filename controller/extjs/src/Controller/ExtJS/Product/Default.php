@@ -164,6 +164,10 @@ class Controller_ExtJS_Product_Default
 			$entry->{'product.dateend'} = null;
 		}
 
+		if( isset( $entry->{'product.config'} ) ) {
+			$entry->{'product.config'} = (array) $entry->{'product.config'};
+		}
+
 		return $entry;
 	}
 }
