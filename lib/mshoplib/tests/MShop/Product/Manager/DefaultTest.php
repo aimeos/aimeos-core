@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 
@@ -89,6 +90,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getSuppliercode(), $itemSaved->getSuppliercode() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
+		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -104,6 +106,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getSuppliercode(), $itemUpd->getSuppliercode() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
+		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -222,6 +225,7 @@ class MShop_Product_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'product.code', 'CNE' );
 		$expr[] = $search->compare( '==', 'product.suppliercode', 'unitSupplier' );
 		$expr[] = $search->compare( '==', 'product.label', 'Cafe Noire Expresso' );
+		$expr[] = $search->compare( '~=', 'product.config', 'css-class' );
 		$expr[] = $search->compare( '==', 'product.datestart', null );
 		$expr[] = $search->compare( '==', 'product.dateend', null );
 		$expr[] = $search->compare( '==', 'product.status', 1 );

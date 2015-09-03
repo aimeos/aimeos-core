@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 
@@ -111,6 +112,10 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 			$product->setLabel( $dataset['label'] );
 			$product->setSupplierCode( $dataset['suppliercode'] );
 			$product->setStatus( $dataset['status'] );
+
+			if( isset( $dataset['config'] ) ) {
+				$product->setConfig( $dataset['config'] );
+			}
 
 			$productManager->saveItem( $product, false );
 		}

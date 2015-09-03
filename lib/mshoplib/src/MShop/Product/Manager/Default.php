@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Product
  */
@@ -55,6 +56,13 @@ class MShop_Product_Manager_Default
 			'label'=>'Product label',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.config' => array(
+			'code' => 'product.config',
+			'internalcode' => 'mpro."config"',
+			'label' => 'Product config',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'product.suppliercode'=> array(
 			'code'=>'product.suppliercode',
@@ -269,14 +277,15 @@ class MShop_Product_Manager_Default
 			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 7, $item->getDateStart() );
 			$stmt->bind( 8, $item->getDateEnd() );
-			$stmt->bind( 9, $date ); // mtime
-			$stmt->bind( 10, $context->getEditor() );
+			$stmt->bind( 9, json_encode( $item->getConfig() ) );
+			$stmt->bind( 10, $date ); // mtime
+			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
-				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 12, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -504,6 +513,14 @@ class MShop_Product_Manager_Default
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
+				$config = $row['config'];
+
+				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['id'], $config );
+					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				}
+
 				$map[$row['id']] = $row;
 				$typeIds[$row['typeid']] = null;
 			}

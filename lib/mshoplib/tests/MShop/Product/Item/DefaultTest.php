@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 
@@ -32,6 +33,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'code' => 'TEST',
 			'suppliercode' => 'unitSupplier',
 			'label' => 'testproduct',
+			'config' => array( 'css-class' => 'test' ),
 			'start' => null,
 			'end' => null,
 			'ctime' => '2011-01-19 17:04:32',
@@ -172,6 +174,22 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetConfig()
+	{
+		$this->assertEquals( array( 'css-class' => 'test' ), $this->_object->getConfig() );
+	}
+
+
+	public function testSetConfig()
+	{
+		$this->assertFalse( $this->_object->isModified() );
+
+		$this->_object->setConfig( array( 'key' => 'value' ) );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( array( 'key' => 'value' ), $this->_object->getConfig() );
+	}
+
+
 	public function testGetDateStart()
 	{
 		$this->assertEquals( null, $this->_object->getDateStart() );
@@ -235,6 +253,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'product.suppliercode' => 'testsup',
 			'product.datestart' => '2000-01-01 00:00:00',
 			'product.dateend' => '2001-01-01 00:00:00',
+			'product.config' => array( 'key' => 'value' ),
 			'product.status' => 0,
 		);
 
@@ -249,6 +268,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['product.suppliercode'], $item->getSuppliercode() );
 		$this->assertEquals( $list['product.datestart'], $item->getDateStart() );
 		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
+		$this->assertEquals( $list['product.config'], $item->getConfig() );
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
 	}
 
@@ -268,6 +288,7 @@ class MShop_Product_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->_object->getSuppliercode(), $arrayObject['product.suppliercode'] );
 		$this->assertEquals( $this->_object->getDateStart(), $arrayObject['product.datestart'] );
 		$this->assertEquals( $this->_object->getDateEnd(), $arrayObject['product.dateend'] );
+		$this->assertEquals( $this->_object->getConfig(), $arrayObject['product.config'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['product.ctime'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['product.mtime'] );
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['product.editor'] );

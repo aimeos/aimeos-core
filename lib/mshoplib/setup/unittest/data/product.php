@@ -1,7 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 return array(
@@ -13,8 +14,8 @@ return array(
 	),
 
 	'product' => array(
-		'product/CNE' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Expresso', 'code' => 'CNE', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
-		'product/CNC' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Cappuccino', 'code' => 'CNC', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
+		'product/CNE' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Expresso', 'code' => 'CNE', 'suppliercode' => 'unitSupplier', 'config' => array( 'css-class' => 'top' ), 'status' => 1 ),
+		'product/CNC' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Cappuccino', 'code' => 'CNC', 'suppliercode' => 'unitSupplier', 'config' => array( 'css-class' => 'sale' ), 'status' => 1 ),
 		'product/U:MD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Monetary rebate', 'code' => 'U:MD', 'suppliercode' => 'unitSupplier', 'status' => 0 ),
 		'product/U:SD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Shipping rebate', 'code' => 'U:SD', 'suppliercode' => 'unitSupplier', 'status' => 0 ),
 		'product/U:PD' => array( 'typeid' => 'product/rebate', 'label' => 'Unittest: Present rebate', 'code' => 'U:PD', 'suppliercode' => 'unitSupplier', 'status' => 0 ),

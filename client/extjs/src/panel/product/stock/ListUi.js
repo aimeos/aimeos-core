@@ -1,11 +1,12 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Aimeos (aimeos.org), 2015
  */
 
 Ext.ns('MShop.panel.product.stock');
 
-MShop.panel.product.stock.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
+MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Product_Stock',
     idProperty : 'product.stock.id',
@@ -28,7 +29,7 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.product.stock.ListUiSmall.superclass.initComponent.call(this);
+        MShop.panel.product.stock.ListUi.superclass.initComponent.call(this);
     },
 
     afterRender : function() {
@@ -36,7 +37,7 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             return c.isXType(MShop.panel.AbstractItemUi, false);
         });
 
-        MShop.panel.product.stock.ListUiSmall.superclass.afterRender.apply(this, arguments);
+        MShop.panel.product.stock.ListUi.superclass.afterRender.apply(this, arguments);
     },
 
     onBeforeLoad : function(store, options) {
@@ -134,4 +135,6 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     }
 });
 
-Ext.reg('MShop.panel.product.stock.listuismall', MShop.panel.product.stock.ListUiSmall);
+Ext.reg('MShop.panel.product.stock.listui', MShop.panel.product.stock.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.stock.listui', MShop.panel.product.stock.ListUi, 2);
