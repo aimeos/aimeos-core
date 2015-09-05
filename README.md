@@ -37,10 +37,11 @@ fits as base for portals or market places.
 ## Links
 
 * [Web site](https://aimeos.org/)
-* [News](https://facebook.com/Aimeos)
 * [Documentation](https://aimeos.org/docs/)
-* [Issue tracker](https://github.com/aimeos/aimeos-core/issues)
 * [Help](https://aimeos.org/help/)
+* [Issue tracker](https://github.com/aimeos/aimeos-core/issues)
+* [Composer packages](https://packagist.org/packages/aimeos/aimeos-core)
+* [Source code](https://github.com/aimeos/aimeos-core)
 * [Translate](https://www.transifex.com/projects/p/aimeos-core/)
 
 ## License
