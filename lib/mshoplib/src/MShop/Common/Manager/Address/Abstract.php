@@ -295,6 +295,17 @@ abstract class MShop_Common_Manager_Address_Abstract
 
 
 	/**
+	 * Returns the search key and item prefix
+	 *
+	 * @return string Search key / item prefix
+	 */
+	protected function _getPrefix()
+	{
+		return $this->_prefix;
+	}
+
+
+	/**
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
