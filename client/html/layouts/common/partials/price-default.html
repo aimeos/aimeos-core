@@ -39,7 +39,7 @@ $format = array(
 	$rebate = $priceItem->getRebate();
 	$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 ?>
-<div class="price-item">
+<div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>">
 	<span class="quantity"><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>
 	<span class="value"><?php echo $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
 <?php if( $rebate > 0 ) : ?>
