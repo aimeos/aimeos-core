@@ -52,14 +52,14 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 
 		$data = array(
 			array( 'test', 'file', 'data' ),
-			array( ":\r\n", pack( 'x' ), '\\' ),
+			array( ":\r\n", pack( 'x', null ), '\\' ),
 		);
 
 		foreach( $data as $entry ) {
 			$csv->add( $entry );
 		}
 		$csv->close();
-		
+
 		$expected = ":test:;:file:;:data:\r\n:\\: :;:" . pack( 'x' ) . ":;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
