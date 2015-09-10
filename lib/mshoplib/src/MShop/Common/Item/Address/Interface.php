@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Common
  */
@@ -15,23 +16,6 @@
  */
 interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interface
 {
-	/**
-	 * Returns the reference id regarding to the product suppliercode of the address.
-	 *
-	 * @return string Address reference id
-	 */
-	public function getRefId();
-
-
-	/**
-	 * Sets the new reference id regarding to the product suppliercode of the address.
-	 *
-	 * @param string $refid New reference id of the address
-	 * @return void
-	 */
-	public function setRefId( $refid );
-
-
 	/**
 	 * Returns the company name.
 	 *
@@ -47,7 +31,8 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @return void
 	 */
 	public function setCompany( $company );
-	
+
+
 	/**
 	 * Returns the vatid.
 	 *
@@ -352,31 +337,4 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @return void
 	 */
 	public function setFlag( $flag );
-
-
-	/**
-	 * Returns the position of the address item.
-	 *
-	 * @return integer Position of the address item
-	 */
-	public function getPosition();
-
-
-	/**
-	 * Sets the Position of the address item.
-	 *
-	 * @param integer $position New position of the address item
-	 * @return void
-	 */
-	public function setPosition( $position );
-
-
-	/**
-	 * Copies the values of the order address item into the address item.
-	 *
-	 * @param MShop_Order_Item_Base_Address_Interface $item Order address item
-	 * @return MShop_Common_Item_Address_Interface The address item for method chaining
-	 */
-	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item );
-
 }

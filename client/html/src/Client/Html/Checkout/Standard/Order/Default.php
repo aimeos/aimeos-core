@@ -78,7 +78,7 @@ class Client_Html_Checkout_Standard_Order_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address' );
+	private $_subPartNames = array( 'account', 'address' );
 
 
 	/**
