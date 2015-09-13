@@ -76,11 +76,31 @@ class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Fr
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setEmail( 'unittest@aimeos.org' );
 
+
+		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_None' )
+			->disableOriginalConstructor()
+			->disableOriginalClone()
+			->getMock();
+
+		$mailStub->expects( $this->once() )
+			->method( 'createMessage' )
+			->will( $this->returnValue( $mailMsgStub ) );
+
+		$mailStub->expects( $this->once() )->method( 'send' );
+
+		$this->_context->setMail( $mailStub );
+
+
 		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
 		$basketCntl->setAddress( $type, $addrItem );
 
 		$view = TestHelper::getView();
 		$view->orderBasket = $basketCntl->get();
+		$this->_context->setView( $view );
 		$this->_object->setView( $view );
 
 		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
