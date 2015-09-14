@@ -94,7 +94,7 @@ class Client_Html_Basket_Mini_Product_Default
 		 * @see client/html/basket/mini/product/default/template-header
 		 */
 		$tplconf = 'client/html/basket/mini/product/default/template-body';
-		$default = 'basket/product/main-body-default.html';
+		$default = 'basket/mini/product-body-default.html';
 
 		return $view->render($this->_getTemplate($tplconf, $default));
 	}
@@ -140,7 +140,7 @@ class Client_Html_Basket_Mini_Product_Default
 		 * @see client/html/basket/mini/product/default/template-body
 		 */
 		$tplconf = 'client/html/basket/mini/product/default/template-header';
-		$default = 'basket/product/main-header-default.html';
+		$default = 'basket/mini/product-header-default.html';
 
 		return $view->render($this->_getTemplate($tplconf, $default));
 	}

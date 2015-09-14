@@ -2336,7 +2336,19 @@ div.dark_rounded #pp_full_res .pp_inline,div.dark_square #pp_full_res .pp_inline
 .pp_fade,.pp_gallery li.default a img{display:none}
 
 /* basket product */
-.basket-mini-main ul li {
-    list-style-type: none;
-    text-align: left;
+.basket-mini-main li {
+	list-style-type: none;
+	text-align: left;
+}
+
+.basket-mini-main li span.productname {
+	width:65%
+}
+
+.basket-mini-main li span.productquantity {
+	width:15%
+}
+
+.basket-mini-main ul li span.productprice {
+	width:20%
 }
