@@ -52,15 +52,15 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 
 		$data = array(
 			array( 'test', 'file', 'data' ),
-			array( ":\r\n", pack( 'x' ), '\\' ),
+			array( ":\r\n", "\0", "\\" ),
 		);
 
 		foreach( $data as $entry ) {
 			$csv->add( $entry );
 		}
 		$csv->close();
-		
-		$expected = ":test:;:file:;:data:\r\n:\\: :;:" . pack( 'x' ) . ":;:\\:\r\n";
+
+		$expected = ":test:;:file:;:data:\r\n:\\: :;:\0:;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
