@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Joyce Darimont, 2015
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
@@ -9,7 +9,7 @@
 try
 {
 	$miniPriceValue = $this->mainPriceItem->getValue();
-    $miniPriceCosts = $this->mainPriceItem->getCosts();
+	$miniPriceCosts = $this->mainPriceItem->getCosts();
 	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
 catch( Exception $e )
