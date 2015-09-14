@@ -548,6 +548,18 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Returns the paths where the layout templates can be found
+	 *
+	 * @return array List of template paths
+	 * @since 2015.09
+	 */
+	protected function _getTemplatePaths()
+	{
+		return $this->_templatePaths;
+	}
+
+
+	/**
 	 * Returns the attribute type item specified by the code.
 	 *
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
