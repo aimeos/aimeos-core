@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ */
+
+
+try
+{
+	$miniPriceValue = $this->mainPriceItem->getValue();
+    $miniPriceCosts = $this->mainPriceItem->getCosts();
+	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
+}
+catch( Exception $e )
+{
+	$miniPriceValue = '0.00';
+	$miniPriceCurrency = '';
+}
+
+
+
+$products = $this->get( 'mainProducts', 0 );
+
+
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+
+$enc = $this->encoder();
+?>
+<div class="basket-mini-main">
+    <ul>
+        <?php foreach($products as $product) { ?>
+        <li><span style="width:65%"><?php echo($product->getName()) ?></span><span style="width:15%"><?php echo $product->getQuantity() ?></span><span style="width:20%"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $product->getPrice()->getValue() ), $miniPriceCurrency ) ); ?></span></li>
+        <?php } ?>
+        <li>
+            <div class="total">
+                <span class="left">Total</span>
+                <span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ) ); ?></span>
+            </div>
+        </li>
+        <li>
+            <div class="total">
+                <span class="left">DeliveryCosts</span>
+                <span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceCosts ), $miniPriceCurrency ) ); ?></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<?php echo $this->get( 'mainBody' ); ?>
+
