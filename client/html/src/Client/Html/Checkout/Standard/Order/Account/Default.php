@@ -277,8 +277,6 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 			}
 			catch( Exception $e )
 			{
-echo __METHOD__ . ': ' . $e->getMessage() . PHP_EOL;
-echo $e->getTraceAsString() . PHP_EOL;
 				$msg = sprintf( 'Unable to create customer account for "%1$s": %2$s', $email, $e->getMessage() );
 				$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
 			}
