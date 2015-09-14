@@ -85,6 +85,7 @@ class MShop_Customer_Item_Default
 		parent::setId( $id );
 
 		// set modified flag
+		$this->_billingaddress->setId( null );
 		$this->_billingaddress->setId( $this->getId() );
 	}
 
