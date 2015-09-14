@@ -8,8 +8,8 @@
 
 try
 {
-	$miniPriceValue = $this->mainPriceItem->getValue();
-	$miniPriceCosts = $this->mainPriceItem->getCosts();
+	$miniPriceValue = $this->productPriceItem->getValue();
+	$miniPriceCosts = $this->productPriceItem->getCosts();
 	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
 catch( Exception $e )
@@ -20,7 +20,7 @@ catch( Exception $e )
 
 
 
-$products = $this->get( 'mainProducts', 0 );
+$products = $this->get( 'productItems', 0 );
 
 
 /// Price format with price value (%1$s) and currency (%2$s)
@@ -31,12 +31,12 @@ $enc = $this->encoder();
 <div class="basket">
 	<ul>
 		<div class="basket-mini-main">
-			<?php foreach($products as $product) { ?>
+			<?php foreach($products as $product): ?>
 			<li><span class="productname"><?php echo($product->getName()) ?></span>
 				<span class="productquantity"><?php echo $product->getQuantity() ?></span>
 				<span class="productprice"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $product->getPrice()->getValue() ), $miniPriceCurrency ) ); ?></span>
 			</li>
-			<?php } ?>
+			<?php endforeach; ?>
 			<li>
 				<div class="total">
 					<span class="left"><?php echo $enc->html( $this->translate( 'client/html', 'Total' ), $enc::TRUST ); ?></span>
@@ -55,5 +55,5 @@ $enc = $this->encoder();
 	</ul>
 </div>
 
-<?php echo $this->get( 'mainBody' ); ?>
+<?php echo $this->get( 'productBody' ); ?>
 

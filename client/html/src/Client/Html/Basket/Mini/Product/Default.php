@@ -71,7 +71,7 @@ class Client_Html_Basket_Mini_Product_Default
 		foreach ($this->_getSubClients() as $subclient) {
 			$html .= $subclient->setView($view)->getBody($uid, $tags, $expire);
 		}
-		$view->mainBody = $html;
+		$view->productBody = $html;
 
 		/** client/html/basket/mini/product/default/template-body
 		 * Relative path to the HTML body template of the basket mini product client.
@@ -116,7 +116,7 @@ class Client_Html_Basket_Mini_Product_Default
 		foreach ($this->_getSubClients() as $subclient) {
 			$html .= $subclient->setView($view)->getHeader($uid, $tags, $expire);
 		}
-		$view->mainHeader = $html;
+		$view->productHeader = $html;
 
 		/** client/html/basket/mini/product/default/template-header
 		 * Relative path to the HTML header template of the basket mini product client.
@@ -181,8 +181,8 @@ class Client_Html_Basket_Mini_Product_Default
 	protected function _setViewParams(MW_View_Interface $view, array &$tags = array(), &$expire = null)
 	{
 		if (!isset($this->_cache)) {
-			$view->mainPriceItem = $view->miniBasket->getPrice();
-			$view->mainProducts = $view->miniBasket->getProducts();
+			$view->productPriceItem = $view->miniBasket->getPrice();
+			$view->productItems = $view->miniBasket->getProducts();
 
 			$this->_cache = $view;
 		}
