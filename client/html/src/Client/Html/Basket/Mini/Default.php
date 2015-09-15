@@ -63,7 +63,18 @@ class Client_Html_Basket_Mini_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'main' );
+
+	/** client/html/basket/mini/product/name
+	 * Name of the product part used by the basket mini client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Basket_Mini_Product_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2015.09
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'main', 'product' );
 
 	private $_cache;
 

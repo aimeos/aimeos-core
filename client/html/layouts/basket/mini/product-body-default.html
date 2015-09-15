@@ -1,59 +1,62 @@
 <?php
 
 /**
- * @copyright Copyright (c) Joyce Darimont, 2015
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Joyce Darimont, 2015
  */
 
+$enc = $this->encoder();
 
 try
 {
-	$miniPriceValue = $this->productPriceItem->getValue();
-	$miniPriceCosts = $this->productPriceItem->getCosts();
-	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
+	$products = $this->miniBasket->getProducts();
+	$priceItem = $this->miniBasket->getPrice();
+	$priceValue = $priceItem->getValue();
+	$priceService = $priceItem->getCosts();
+	$priceCurrency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 }
 catch( Exception $e )
 {
-	$miniPriceValue = '0.00';
-	$miniPriceCurrency = '';
+	$priceValue = $priceCosts = '0.00';
+	$priceCurrency = '';
+	$products = array();
 }
-
-
-
-$products = $this->get( 'productItems', array() );
-
 
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
-$enc = $this->encoder();
 ?>
-<div class="basket">
-	<ul>
-		<div class="basket-mini-main">
-			<?php foreach($products as $product): ?>
-			<li><span class="productname"><?php echo($product->getName()) ?></span>
-				<span class="productquantity"><?php echo $product->getQuantity() ?></span>
-				<span class="productprice"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $product->getPrice()->getValue() ), $miniPriceCurrency ) ); ?></span>
-			</li>
-			<?php endforeach; ?>
-			<li>
-				<div class="total">
-					<span class="left"><?php echo $enc->html( $this->translate( 'client/html', 'Total' ), $enc::TRUST ); ?></span>
-					<span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ) ); ?></span>
-				</div>
-			</li>
-			<div class="clearfix"></div>
-			<li>
-				<div class="total">
-					<span class="left"><?php echo $enc->html( $this->translate( 'client/html', 'Deliverycosts' ), $enc::TRUST ); ?></span>
-					<span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceCosts ), $miniPriceCurrency ) ); ?></span>
-				</div>
-			</li>
-
-		</div>
-	</ul>
-</div>
-
+<div class="basket-mini-product">
+	<a class="minibutton" href="#"><?php echo $enc->html( $this->translate( 'client/html', '▼' ), $enc::TRUST ); ?></a>
+	<table class="basket">
+		<thead>
+			<tr>
+				<th class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Product' ), $enc::TRUST ); ?></th>
+				<th class="quantity"><?php echo $enc->html( $this->translate( 'client/html', 'Quantity' ), $enc::TRUST ); ?></th>
+				<th class="price"><?php echo $enc->html( $this->translate( 'client/html', 'Price' ), $enc::TRUST ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+<?php foreach( $products as $product ) : ?>
+			<tr class="product">
+				<td class="name"><?php echo $enc->html( $product->getName() ) ?></td>
+				<td class="quantity"><?php echo $enc->html( $product->getQuantity() ) ?></td>
+				<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $product->getPrice()->getValue() ), $priceCurrency ) ); ?></td>
+			</tr>
+<?php endforeach; ?>
+		</tbody>
+		<tfoot>
+			<tr class="delivery">
+				<td class="name" colspan="2"><?php echo $enc->html( $this->translate( 'client/html', 'Shipping' ), $enc::TRUST ); ?></td>
+				<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceService ), $priceCurrency ) ); ?></td>
+			</tr>
+			<tr class="total">
+				<td class="name" colspan="2"><?php echo $enc->html( $this->translate( 'client/html', 'Total' ), $enc::TRUST ); ?></td>
+				<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ) ); ?></td>
+			</tr>
+		</tfoot>
+	</table>
 <?php echo $this->get( 'productBody' ); ?>
+</div>
 

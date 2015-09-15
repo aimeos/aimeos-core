@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Joyce Darimont, 2015
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Joyce Darimont, 2015
  * @package Client
  * @subpackage Html
  */
@@ -47,7 +48,7 @@ class Client_Html_Basket_Mini_Product_Default
 	 * design.
 	 *
 	 * @param array List of sub-client names
-	 * @since 2014.03
+	 * @since 2015.09
 	 * @category Developer
 	 */
 	private $_subPartPath = 'client/html/basket/mini/product/default/subparts';
@@ -68,8 +69,8 @@ class Client_Html_Basket_Mini_Product_Default
 		$view = $this->_setViewParams($this->getView(), $tags, $expire);
 
 		$html = '';
-		foreach ($this->_getSubClients() as $subclient) {
-			$html .= $subclient->setView($view)->getBody($uid, $tags, $expire);
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->productBody = $html;
 
@@ -89,14 +90,14 @@ class Client_Html_Basket_Mini_Product_Default
 		 * should be replaced by the name of the new class.
 		 *
 		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
+		 * @since 2015.09
 		 * @category Developer
 		 * @see client/html/basket/mini/product/default/template-header
 		 */
 		$tplconf = 'client/html/basket/mini/product/default/template-body';
 		$default = 'basket/mini/product-body-default.html';
 
-		return $view->render($this->_getTemplate($tplconf, $default));
+		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -110,11 +111,11 @@ class Client_Html_Basket_Mini_Product_Default
 	 */
 	public function getHeader($uid = '', array &$tags = array(), &$expire = null)
 	{
-		$view = $this->_setViewParams($this->getView(), $tags, $expire);
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach ($this->_getSubClients() as $subclient) {
-			$html .= $subclient->setView($view)->getHeader($uid, $tags, $expire);
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->productHeader = $html;
 
@@ -135,14 +136,14 @@ class Client_Html_Basket_Mini_Product_Default
 		 * should be replaced by the name of the new class.
 		 *
 		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
+		 * @since 2015.09
 		 * @category Developer
 		 * @see client/html/basket/mini/product/default/template-body
 		 */
 		$tplconf = 'client/html/basket/mini/product/default/template-header';
 		$default = 'basket/mini/product-header-default.html';
 
-		return $view->render($this->_getTemplate($tplconf, $default));
+		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -155,7 +156,7 @@ class Client_Html_Basket_Mini_Product_Default
 	 */
 	public function getSubClient($type, $name = null)
 	{
-		return $this->_createSubClient('basket/mini/product/' . $type, $name);
+		return $this->_createSubClient( 'basket/mini/product/' . $type, $name );
 	}
 
 
@@ -166,27 +167,6 @@ class Client_Html_Basket_Mini_Product_Default
 	 */
 	protected function _getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get($this->_subPartPath, $this->_subPartNames);
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @param array &$tags Result array for the list of tags that are associated to the output
-	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams(MW_View_Interface $view, array &$tags = array(), &$expire = null)
-	{
-		if (!isset($this->_cache)) {
-			$view->productPriceItem = $view->miniBasket->getPrice();
-			$view->productItems = $view->miniBasket->getProducts();
-
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 }
