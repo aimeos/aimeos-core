@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Joyce Darimont, 2015
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ */
+
+
+try
+{
+	$miniPriceValue = $this->productPriceItem->getValue();
+	$miniPriceCosts = $this->productPriceItem->getCosts();
+	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
+}
+catch( Exception $e )
+{
+	$miniPriceValue = '0.00';
+	$miniPriceCurrency = '';
+}
+
+
+
+$products = $this->get( 'productItems', array() );
+
+
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+
+$enc = $this->encoder();
+?>
+<div class="basket">
+	<ul>
+		<div class="basket-mini-main">
+			<?php foreach($products as $product): ?>
+			<li><span class="productname"><?php echo($product->getName()) ?></span>
+				<span class="productquantity"><?php echo $product->getQuantity() ?></span>
+				<span class="productprice"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $product->getPrice()->getValue() ), $miniPriceCurrency ) ); ?></span>
+			</li>
+			<?php endforeach; ?>
+			<li>
+				<div class="total">
+					<span class="left"><?php echo $enc->html( $this->translate( 'client/html', 'Total' ), $enc::TRUST ); ?></span>
+					<span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ) ); ?></span>
+				</div>
+			</li>
+			<div class="clearfix"></div>
+			<li>
+				<div class="total">
+					<span class="left"><?php echo $enc->html( $this->translate( 'client/html', 'Deliverycosts' ), $enc::TRUST ); ?></span>
+					<span class="right"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceCosts ), $miniPriceCurrency ) ); ?></span>
+				</div>
+			</li>
+
+		</div>
+	</ul>
+</div>
+
+<?php echo $this->get( 'productBody' ); ?>
+
