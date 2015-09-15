@@ -1606,7 +1606,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	background-color: #FFFFFF;
 	position: absolute;
 	padding: 0.5em 1em;
-	display: table;
+	display: none;
 	opacity: 1.0;
 	width: 14em;
 	z-index: 2;
