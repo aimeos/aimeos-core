@@ -57,21 +57,21 @@ class Client_Html_Checkout_Standard_Order_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/standard/order/default/subparts';
 
+	/** client/html/checkout/standard/order/account/name
+	 * Name of the account part used by the checkout standard order client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Checkout_Standard_Order_Account_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2015.09
+	 * @category Developer
+	 */
+
 	/** client/html/checkout/standard/order/address/name
 	 * Name of the address part used by the checkout standard order client implementation
 	 *
 	 * Use "Myname" if your class is named "Client_Checkout_Standard_Order_Address_Myname".
-	 * The name is case-sensitive and you should avoid camel case names like "MyName".
-	 *
-	 * @param string Last part of the client class name
-	 * @since 2014.03
-	 * @category Developer
-	 */
-
-	/** client/html/checkout/standard/order/payment/name
-	 * Name of the payment part used by the checkout standard order client implementation
-	 *
-	 * Use "Myname" if your class is named "Client_Checkout_Standard_Order_Payment_Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name

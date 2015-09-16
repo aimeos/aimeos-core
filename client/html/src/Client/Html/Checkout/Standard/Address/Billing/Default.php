@@ -508,6 +508,108 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/checkout/standard/address/billing/optional
 		 */
 
+		/** client/html/checkout/standard/address/validate/company
+		 * Regular expression to check the "company" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/vatid
+		 * Regular expression to check the "vatid" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/salutation
+		 * Regular expression to check the "salutation" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/firstname
+		 * Regular expression to check the "firstname" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/lastname
+		 * Regular expression to check the "lastname" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/address1
+		 * Regular expression to check the "address1" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/address2
+		 * Regular expression to check the "address2" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/address3
+		 * Regular expression to check the "address3" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/postal
+		 * Regular expression to check the "postal" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/city
+		 * Regular expression to check the "city" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/state
+		 * Regular expression to check the "state" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/languageid
+		 * Regular expression to check the "languageid" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/countryid
+		 * Regular expression to check the "countryid" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/telephone
+		 * Regular expression to check the "telephone" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/telefax
+		 * Regular expression to check the "telefax" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/email
+		 * Regular expression to check the "email" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
+		/** client/html/checkout/standard/address/validate/website
+		 * Regular expression to check the "website" address value
+		 *
+		 * @see client/html/checkout/standard/address/validate
+		 */
+
 		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
 
