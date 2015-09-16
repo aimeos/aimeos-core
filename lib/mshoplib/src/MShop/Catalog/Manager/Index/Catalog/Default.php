@@ -146,7 +146,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
-		/** classes/catalog/manager/index/attribute/submanagers
+		/** classes/catalog/manager/index/catalog/submanagers
 		 * List of manager names that can be instantiated by the catalog index attribute manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -163,7 +163,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/catalog/manager/index/attribute/submanagers';
+		$path = 'classes/catalog/manager/index/catalog/submanagers';
 
 		$list += $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
 
@@ -415,7 +415,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		if( $this->_subManagers === null )
 		{
 			$this->_subManagers = array();
-			$path = 'mshop/catalog/manager/index/catalog/submanagers';
+			$path = 'classes/catalog/manager/index/catalog/submanagers';
 
 			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
 				$this->_subManagers[$domain] = $this->getSubManager( $domain );

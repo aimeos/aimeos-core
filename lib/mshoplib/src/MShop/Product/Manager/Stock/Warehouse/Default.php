@@ -100,7 +100,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'mshop/product/manager/stock/wareshouse/submanagers';
+		$path = 'classes/product/manager/stock/warehouse/submanagers';
 		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -453,7 +453,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** mshop/product/manager/stock/warehouse/submanagers
+		/** classes/product/manager/stock/warehouse/submanagers
 		 * List of manager names that can be instantiated by the product stock warehouse manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -470,7 +470,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'mshop/product/manager/stock/warehouse/submanagers';
+		$path = 'classes/product/manager/stock/warehouse/submanagers';
 
 		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
 	}
