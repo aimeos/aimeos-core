@@ -89,13 +89,13 @@ class Controller_ExtJS_Factory
 				throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $factory ) );
 			}
 
-			$manager = @call_user_func_array( array( $factory, 'createController' ), array( $context ) );
+			$controller = @call_user_func_array( array( $factory, 'createController' ), array( $context ) );
 
-			if( $manager === false ) {
+			if( $controller === false ) {
 				throw new Controller_ExtJS_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$_controllers[$id][$path] = $manager;
+			self::$_controllers[$id][$path] = $controller;
 		}
 
 		return self::$_controllers[$id][$path];

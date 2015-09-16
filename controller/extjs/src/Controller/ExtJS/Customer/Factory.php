@@ -66,7 +66,7 @@ class Controller_ExtJS_Customer_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Customer_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$controller = self::_createController( $context, $classname, $iface );
 
 		/** controller/extjs/customer/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Customer_Factory
 		 * @see controller/extjs/customer/decorators/excludes
 		 * @see controller/extjs/customer/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'customer' );
+		return self::_addControllerDecorators( $context, $controller, 'customer' );
 	}
 }

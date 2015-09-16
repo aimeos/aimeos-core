@@ -66,7 +66,7 @@ class Controller_ExtJS_Catalog_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Catalog_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$controller = self::_createController( $context, $classname, $iface );
 
 		/** controller/extjs/catalog/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Catalog_Factory
 		 * @see controller/extjs/catalog/decorators/excludes
 		 * @see controller/extjs/catalog/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'catalog' );
+		return self::_addControllerDecorators( $context, $controller, 'catalog' );
 	}
 }

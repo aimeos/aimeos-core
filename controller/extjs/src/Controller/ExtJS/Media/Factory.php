@@ -66,7 +66,7 @@ class Controller_ExtJS_Media_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Media_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$controller = self::_createController( $context, $classname, $iface );
 
 		/** controller/extjs/media/decorators/excludes
 		 * Excludes decorators added by the "common" option from the media ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Media_Factory
 		 * @see controller/extjs/media/decorators/excludes
 		 * @see controller/extjs/media/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'media' );
+		return self::_addControllerDecorators( $context, $controller, 'media' );
 	}
 }

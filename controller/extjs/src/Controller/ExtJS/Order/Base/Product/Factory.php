@@ -66,7 +66,82 @@ class Controller_ExtJS_Order_Base_Product_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Order_Base_Product_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
-		return self::_addControllerDecorators( $context, $manager, 'order/base/product' );
+		$controller = self::_createController( $context, $classname, $iface );
+
+		/** controller/extjs/order/base/product/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order base product ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "controller/extjs/common/decorators/default" before they are wrapped
+		 * around the ExtJS controller.
+		 *
+		 *  controller/extjs/order/base/product/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * "controller/extjs/common/decorators/default" for the admin ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/order/base/product/decorators/global
+		 * @see controller/extjs/order/base/product/decorators/local
+		 */
+
+		/** controller/extjs/order/base/product/decorators/global
+		 * Adds a list of globally available decorators only to the order base product ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/order/base/product/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/order/base/product/decorators/excludes
+		 * @see controller/extjs/order/base/product/decorators/local
+		 */
+
+		/** controller/extjs/order/base/product/decorators/local
+		 * Adds a list of local decorators only to the order base product ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("Controller_ExtJS_Order_Base_Product_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/order/base/product/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "Controller_ExtJS_Order_Base_Product_Decorator_Decorator2" only to the ExtJS
+		 * controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/order/base/product/decorators/excludes
+		 * @see controller/extjs/order/base/product/decorators/global
+		 */
+		return self::_addControllerDecorators( $context, $controller, 'order/base/product' );
 	}
 }

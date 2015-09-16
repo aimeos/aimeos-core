@@ -26,8 +26,8 @@ class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_Tes
 		$config = $this->_context->getConfig();
 
 		$config->set( 'controller/extjs/common/decorators/default', array() );
-		$config->set( 'controller/extjs/admin/decorators/global', array() );
-		$config->set( 'controller/extjs/admin/decorators/local', array() );
+		$config->set( 'controller/extjs/admin/log/decorators/global', array() );
+		$config->set( 'controller/extjs/admin/log/decorators/local', array() );
 
 	}
 
