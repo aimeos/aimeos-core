@@ -260,6 +260,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$catItems = array();
 			$context = $this->_getContext();
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
@@ -323,14 +324,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 						unset( $catItems[$key] );
 					}
 				}
-
-				if( ( $node = reset( $catItems ) ) === false )
-				{
-					$msg = sprintf( 'Category with ID "%1$s" not below ID "%2$s"', $currentid, $startid );
-					throw new Client_Html_Exception( $msg );
-				}
 			}
-			else
+
+			if( ( $node = reset( $catItems ) ) === false )
 			{
 				$node = $controller->getCatalogTree( $startid, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 				$catItems = array( $node->getId() => $node );
