@@ -51,6 +51,22 @@ class MShop_Plugin_Provider_Order_BasketLimits
 
 		$context = $this->_getContext();
 
+		/** mshop/plugin/provider/order/complete/disable
+		 * Disables the basket limits check
+		 *
+		 * If the BasketLimits plug-in is enabled, it enforces the configured
+		 * limits before customers or anyone on behalf of them can continue the
+		 * checkout process.
+		 *
+		 * This option enables e.g. call center agents to place orders which
+		 * doesn't satisfy all requirements. It may be useful if you want to
+		 * allow them to send free or replacements for lost or damaged products.
+		 *
+		 * @param boolean True to disable the check, false to keep it enabled
+		 * @category Developer
+		 * @category User
+		 * @since 2014.03
+		 */
 		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) ) {
 			return true;
 		}
