@@ -88,12 +88,7 @@ abstract class Controller_Jobs_Common_Factory_Abstract
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
-		$subdomains = explode( '/', $domain );
-		$domain = $localClass = $subdomains[0];
-		if( count( $subdomains ) > 1 ) {
-			$localClass = str_replace( ' ', '_', ucwords( implode( ' ', $subdomains ) ) );
-		}
-
+		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
 		$config = $context->getConfig();
 
 		/** controller/jobs/common/decorators/default
