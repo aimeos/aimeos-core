@@ -619,7 +619,7 @@ class MShop_Customer_Manager_Address_Default
 		 * @see mshop/customer/manager/address/default/item/search
 		 */
 
-		return 'mshop/customer/manager/address/default/item/';
+		return 'mshop/customer/manager/address/default/item';
 	}
 
 

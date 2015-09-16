@@ -19,7 +19,6 @@ abstract class MShop_Common_Manager_Address_Abstract
 	implements MShop_Common_Manager_Address_Interface
 {
 	private $_context;
-	private $_config;
 	private $_searchConfig;
 	private $_prefix;
 
@@ -33,21 +32,10 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_config = $context->getConfig()->get( $this->_getConfigPath() );
-
-		$this->_searchConfig = $this->_getSearchConfig();
-
-		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
-		$isList = array_keys( $this->_config );
-		foreach( $whitelist as $str ) {
-			if( !in_array( $str, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
-			}
-		}
-
 		parent::__construct( $context );
 
 		$this->_context = $context;
+		$this->_searchConfig = $this->_getSearchConfig();
 
 		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
@@ -102,7 +90,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$path = $this->_getConfigPath() . '/delete';
+		$this->_deleteItems( $ids, $this->_context->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -144,53 +133,57 @@ abstract class MShop_Common_Manager_Address_Abstract
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 
 			if( $id === null ) {
-				$sql = $this->_config['insert'];
 				$type = 'insert';
 			} else {
-				$sql = $this->_config['update'];
 				$type = 'update';
 			}
 
+			$path = $this->_getConfigPath() . '/' . $type;
+
+			$sql = $this->_context->getConfig()->get( $path, $path );
 			$stmt = $this->_getCachedStatement( $conn, $this->_prefix . $type, $sql );
 
 			$stmt->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR ); //reference id
-			$stmt->bind( 3, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR ); //company
-			$stmt->bind( 4, $item->getVatID(), MW_DB_Statement_Abstract::PARAM_STR ); //vatid
-			$stmt->bind( 5, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR ); //salutation
-			$stmt->bind( 6, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR ); //title
-			$stmt->bind( 7, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR ); //firstname
-			$stmt->bind( 8, $item->getLastname(), MW_DB_Statement_Abstract::PARAM_STR ); //lastname
-			$stmt->bind( 9, $item->getAddress1(), MW_DB_Statement_Abstract::PARAM_STR ); //address1
-			$stmt->bind( 10, $item->getAddress2(), MW_DB_Statement_Abstract::PARAM_STR ); //address2
-			$stmt->bind( 11, $item->getAddress3(), MW_DB_Statement_Abstract::PARAM_STR ); //address3
-			$stmt->bind( 12, $item->getPostal(), MW_DB_Statement_Abstract::PARAM_STR ); //postal
-			$stmt->bind( 13, $item->getCity(), MW_DB_Statement_Abstract::PARAM_STR ); //city
-			$stmt->bind( 14, $item->getState(), MW_DB_Statement_Abstract::PARAM_STR ); //state
-			$stmt->bind( 15, $item->getCountryId(), MW_DB_Statement_Abstract::PARAM_STR ); //countryid
-			$stmt->bind( 16, $item->getLanguageId(), MW_DB_Statement_Abstract::PARAM_STR ); //langid
-			$stmt->bind( 17, $item->getTelephone(), MW_DB_Statement_Abstract::PARAM_STR ); //telephone
-			$stmt->bind( 18, $item->getEmail(), MW_DB_Statement_Abstract::PARAM_STR ); //email
-			$stmt->bind( 19, $item->getTelefax(), MW_DB_Statement_Abstract::PARAM_STR ); //telefax
-			$stmt->bind( 20, $item->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR ); //website
-			$stmt->bind( 21, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT ); //generic flag
-			$stmt->bind( 22, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT ); //position
-			$stmt->bind( 23, date( 'Y-m-d H:i:s', time() ) ); //mtime
-			$stmt->bind( 24, $this->_context->getEditor() ); // editor
+			$stmt->bind( 2, $item->getRefId() );
+			$stmt->bind( 3, $item->getCompany() );
+			$stmt->bind( 4, $item->getVatId() );
+			$stmt->bind( 5, $item->getSalutation() );
+			$stmt->bind( 6, $item->getTitle() );
+			$stmt->bind( 7, $item->getFirstname() );
+			$stmt->bind( 8, $item->getLastname() );
+			$stmt->bind( 9, $item->getAddress1() );
+			$stmt->bind( 10, $item->getAddress2());
+			$stmt->bind( 11, $item->getAddress3() );
+			$stmt->bind( 12, $item->getPostal() );
+			$stmt->bind( 13, $item->getCity() );
+			$stmt->bind( 14, $item->getState() );
+			$stmt->bind( 15, $item->getCountryId() );
+			$stmt->bind( 16, $item->getLanguageId() );
+			$stmt->bind( 17, $item->getTelephone() );
+			$stmt->bind( 18, $item->getEmail() );
+			$stmt->bind( 19, $item->getTelefax() );
+			$stmt->bind( 20, $item->getWebsite() );
+			$stmt->bind( 21, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 22, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 23, $date ); //mtime
+			$stmt->bind( 24, $this->_context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 25, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 25, date( 'Y-m-d H:i:s', time() ) ); // ctime
+				$stmt->bind( 25, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
 
-			if( $id === null && $fetch === true ) {
-				$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );
+			if( $id === null && $fetch === true )
+			{
+				$path = $this->_getConfigPath() . '/newid';
+				$item->setId( $this->_newId( $conn, $this->_context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -226,12 +219,13 @@ abstract class MShop_Common_Manager_Address_Abstract
 				throw new MShop_Exception( 'No configuration available.' );
 			}
 
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_config['search'];
-			$cfgPathCount = $this->_config['count'];
 			$required = array( trim( $this->_prefix, '.' ) );
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$cfgPathSearch = $this->_getConfigPath() . '/search';
+			$cfgPathCount = $this->_getConfigPath() . '/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[$row['id']] = $this->_createItem( $row );
 			}
