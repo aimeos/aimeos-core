@@ -76,7 +76,7 @@ class Controller_Jobs_Product_Export_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/product/export/excludes
+		/** controller/jobs/product/export/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product export job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects

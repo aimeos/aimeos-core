@@ -76,7 +76,7 @@ class Controller_Jobs_Product_Bought_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/product/bought/excludes
+		/** controller/jobs/product/bought/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product bought job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects

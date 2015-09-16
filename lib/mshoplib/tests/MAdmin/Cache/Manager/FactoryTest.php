@@ -35,7 +35,7 @@ class MAdmin_Cache_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext(), 'notexist' );
+		MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 
 }

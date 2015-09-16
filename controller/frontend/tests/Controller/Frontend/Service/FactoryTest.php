@@ -41,11 +41,8 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 	// using Factorylocal class
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
-		$context = TestHelper::getContext();
-		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', 'service/type' );
-
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', '' );
+		Controller_Frontend_Service_Factorylocal::createController( TestHelper::getContext(), 'Default', '' );
 	}
 
 	public function testAbstractAddDecorators()

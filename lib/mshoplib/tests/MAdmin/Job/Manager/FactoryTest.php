@@ -34,7 +34,7 @@ class MAdmin_Job_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext(), 'notexist' );
+		MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 
 }

@@ -42,14 +42,14 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), 'notexist' );
+		MShop_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), 'attribute/notexist' );
+		MShop_Factory::createManager( TestHelper::getContext(), 'attribute/unknown' );
 	}
 
 

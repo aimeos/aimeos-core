@@ -588,7 +588,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		if( $this->_subManagers === null )
 		{
 			$this->_subManagers = array();
-			$path = 'classes/catalog/manager/index/text/submanagers';
+			$path = 'mshop/catalog/manager/index/text/submanagers';
 
 			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
 				$this->_subManagers[$domain] = $this->getSubManager( $domain );

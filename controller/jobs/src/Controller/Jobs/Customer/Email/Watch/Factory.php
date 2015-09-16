@@ -76,7 +76,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/catalog/index/rebuild/decorators/excludes
+		/** controller/jobs/customer/email/watch/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer email watch controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -88,7 +88,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * "controller/jobs/common/decorators/default" before they are wrapped
 		 * around the job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/excludes = array( 'decorator1' )
+		 *  controller/jobs/customer/email/watch/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_Jobs_Common_Decorator_*") added via
@@ -98,11 +98,11 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/global
-		 * @see controller/jobs/catalog/index/rebuild/decorators/local
+		 * @see controller/jobs/customer/email/watch/decorators/global
+		 * @see controller/jobs/customer/email/watch/decorators/local
 		 */
 
-		/** controller/jobs/catalog/index/rebuild/decorators/global
+		/** controller/jobs/customer/email/watch/decorators/global
 		 * Adds a list of globally available decorators only to the customer email watch controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -113,7 +113,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * This option allows you to wrap global decorators
 		 * ("Controller_Jobs_Common_Decorator_*") around the job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/global = array( 'decorator1' )
+		 *  controller/jobs/customer/email/watch/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "Controller_Jobs_Common_Decorator_Decorator1" only to this job controller.
@@ -122,11 +122,11 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
-		 * @see controller/jobs/catalog/index/rebuild/decorators/local
+		 * @see controller/jobs/customer/email/watch/decorators/excludes
+		 * @see controller/jobs/customer/email/watch/decorators/local
 		 */
 
-		/** controller/jobs/catalog/index/rebuild/decorators/local
+		/** controller/jobs/customer/email/watch/decorators/local
 		 * Adds a list of local decorators only to the customer email watch controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -137,7 +137,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * This option allows you to wrap local decorators
 		 * ("Controller_Jobs_Customer_Email_Watch_Decorator_*") around this job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/local = array( 'decorator2' )
+		 *  controller/jobs/customer/email/watch/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "Controller_Jobs_Customer_Email_Watch_Decorator_Decorator2" only to this job
@@ -147,8 +147,8 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
-		 * @see controller/jobs/catalog/index/rebuild/decorators/global
+		 * @see controller/jobs/customer/email/watch/decorators/excludes
+		 * @see controller/jobs/customer/email/watch/decorators/global
 		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'customer/email/watch' );
 	}

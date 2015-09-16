@@ -76,7 +76,7 @@ class Controller_Jobs_Product_Import_Csv_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/product/import/csv/excludes
+		/** controller/jobs/product/import/csv/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product import CSV job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
