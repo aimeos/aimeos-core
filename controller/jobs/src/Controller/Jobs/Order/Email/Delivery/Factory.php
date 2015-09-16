@@ -76,8 +76,8 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/order/decorators/excludes
-		 * Excludes decorators added by the "common" option from the order job controllers
+		/** controller/jobs/order/email/delivery/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order email delivery controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -88,22 +88,22 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 * "controller/jobs/common/decorators/default" before they are wrapped
 		 * around the job controller.
 		 *
-		 *  controller/jobs/order/decorators/excludes = array( 'decorator1' )
+		 *  controller/jobs/order/email/delivery/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_Jobs_Common_Decorator_*") added via
-		 * "controller/jobs/common/decorators/default" for the admin job controller.
+		 * "controller/jobs/common/decorators/default" to this job controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/order/decorators/global
-		 * @see controller/jobs/order/decorators/local
+		 * @see controller/jobs/order/email/delivery/decorators/global
+		 * @see controller/jobs/order/email/delivery/decorators/local
 		 */
 
-		/** controller/jobs/order/decorators/global
-		 * Adds a list of globally available decorators only to the order job controllers
+		/** controller/jobs/order/email/delivery/decorators/global
+		 * Adds a list of globally available decorators only to the order email delivery controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -113,21 +113,21 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 * This option allows you to wrap global decorators
 		 * ("Controller_Jobs_Common_Decorator_*") around the job controller.
 		 *
-		 *  controller/jobs/order/decorators/global = array( 'decorator1' )
+		 *  controller/jobs/order/email/delivery/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Jobs_Common_Decorator_Decorator1" only to the job controller.
+		 * "Controller_Jobs_Common_Decorator_Decorator1" only to this job controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/order/decorators/excludes
-		 * @see controller/jobs/order/decorators/local
+		 * @see controller/jobs/order/email/delivery/decorators/excludes
+		 * @see controller/jobs/order/email/delivery/decorators/local
 		 */
 
-		/** controller/jobs/order/decorators/local
-		 * Adds a list of local decorators only to the order job controllers
+		/** controller/jobs/order/email/delivery/decorators/local
+		 * Adds a list of local decorators only to the order email delivery controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -135,21 +135,20 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_Jobs_Order_Decorator_*") around the job
-		 * controller.
+		 * ("Controller_Jobs_Order_Email_Delivery_Decorator_*") around this job controller.
 		 *
-		 *  controller/jobs/order/decorators/local = array( 'decorator2' )
+		 *  controller/jobs/order/email/delivery/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Jobs_Order_Decorator_Decorator2"
-		 * only to the job controller.
+		 * "Controller_Jobs_Order_Email_Delivery_Decorator_Decorator2" only to this job
+		 * controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/order/decorators/excludes
-		 * @see controller/jobs/order/decorators/global
+		 * @see controller/jobs/order/email/delivery/decorators/excludes
+		 * @see controller/jobs/order/email/delivery/decorators/global
 		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/email/delivery' );
 	}

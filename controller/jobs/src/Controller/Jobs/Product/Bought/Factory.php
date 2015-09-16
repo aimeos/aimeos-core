@@ -76,8 +76,8 @@ class Controller_Jobs_Product_Bought_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/product/excludes
-		 * Excludes decorators added by the "common" option from the product job controller
+		/** controller/jobs/product/bought/excludes
+		 * Excludes decorators added by the "common" option from the product bought job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -88,7 +88,7 @@ class Controller_Jobs_Product_Bought_Factory
 		 * "controller/jobs/common/decorators/default" before they are wrapped
 		 * around the job controller.
 		 *
-		 *  controller/jobs/product/decorators/excludes = array( 'decorator1' )
+		 *  controller/jobs/product/bought/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_Jobs_Common_Decorator_*") added via
@@ -98,12 +98,12 @@ class Controller_Jobs_Product_Bought_Factory
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/product/decorators/global
-		 * @see controller/jobs/product/decorators/local
+		 * @see controller/jobs/product/bought/decorators/global
+		 * @see controller/jobs/product/bought/decorators/local
 		 */
 
-		/** controller/jobs/product/decorators/global
-		 * Adds a list of globally available decorators only to the catalog job controller
+		/** controller/jobs/product/bought/decorators/global
+		 * Adds a list of globally available decorators only to the product bought job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -113,7 +113,7 @@ class Controller_Jobs_Product_Bought_Factory
 		 * This option allows you to wrap global decorators
 		 * ("Controller_Jobs_Common_Decorator_*") around the job controller.
 		 *
-		 *  controller/jobs/product/decorators/global = array( 'decorator1' )
+		 *  controller/jobs/product/bought/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "Controller_Jobs_Common_Decorator_Decorator1" only to the job controller.
@@ -122,12 +122,12 @@ class Controller_Jobs_Product_Bought_Factory
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/product/decorators/excludes
-		 * @see controller/jobs/product/decorators/local
+		 * @see controller/jobs/product/bought/decorators/excludes
+		 * @see controller/jobs/product/bought/decorators/local
 		 */
 
-		/** controller/jobs/product/decorators/local
-		 * Adds a list of local decorators only to the catalog job controller
+		/** controller/jobs/product/bought/decorators/local
+		 * Adds a list of local decorators only to the product bought job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -135,21 +135,21 @@ class Controller_Jobs_Product_Bought_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_Jobs_Product_Decorator_*") around the job
+		 * ("Controller_Jobs_Product_Bought_Decorator_*") around the job
 		 * controller.
 		 *
-		 *  controller/jobs/product/decorators/local = array( 'decorator2' )
+		 *  controller/jobs/product/bought/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Jobs_Product_Decorator_Decorator2"
+		 * "Controller_Jobs_Product_Bought_Decorator_Decorator2"
 		 * only to the job controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/product/decorators/excludes
-		 * @see controller/jobs/product/decorators/global
+		 * @see controller/jobs/product/bought/decorators/excludes
+		 * @see controller/jobs/product/bought/decorators/global
 		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'product/bought' );
 	}

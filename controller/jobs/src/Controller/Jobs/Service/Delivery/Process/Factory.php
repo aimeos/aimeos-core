@@ -52,40 +52,40 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/service/decorators/excludes
+		/** controller/jobs/service/delivery/process/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service job controllers
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/service/decorators/global
-		 * @see controller/jobs/service/decorators/local
-		 * @deprecated Use controller/jobs/order/decorators/excludes instead
+		 * @see controller/jobs/service/delivery/process/decorators/global
+		 * @see controller/jobs/service/delivery/process/decorators/local
+		 * @deprecated Use controller/jobs/order/service/delivery/decorators/excludes instead
 		 */
 
-		/** controller/jobs/service/decorators/global
+		/** controller/jobs/service/delivery/process/decorators/global
 		 * Adds a list of globally available decorators only to the service job controllers
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/service/decorators/excludes
-		 * @see controller/jobs/service/decorators/local
-		 * @deprecated Use controller/jobs/order/decorators/global instead
+		 * @see controller/jobs/service/delivery/process/decorators/excludes
+		 * @see controller/jobs/service/delivery/process/decorators/local
+		 * @deprecated Use controller/jobs/order/service/delivery/decorators/global instead
 		 */
 
-		/** controller/jobs/service/decorators/local
+		/** controller/jobs/service/delivery/process/decorators/local
 		 * Adds a list of local decorators only to the service jos controllers
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/service/decorators/excludes
-		 * @see controller/jobs/service/decorators/global
-		 * @deprecated Use controller/jobs/order/decorators/local instead
+		 * @see controller/jobs/service/delivery/process/decorators/excludes
+		 * @see controller/jobs/service/delivery/process/decorators/global
+		 * @deprecated Use controller/jobs/order/service/delivery/decorators/local instead
 		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'service/delivery/process' );
 	}

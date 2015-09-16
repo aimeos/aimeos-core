@@ -76,7 +76,7 @@ class Controller_Jobs_Admin_Log_Factory
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/admin/decorators/excludes
+		/** controller/jobs/admin/log/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin log controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -86,23 +86,23 @@ class Controller_Jobs_Admin_Log_Factory
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "controller/jobs/common/decorators/default" before they are wrapped
-		 * around the log controller.
+		 * around the job controller.
 		 *
-		 *  controller/jobs/admin/decorators/excludes = array( 'decorator1' )
+		 *  controller/jobs/admin/log/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_Jobs_Common_Decorator_*") added via
-		 * "controller/jobs/common/decorators/default" for the admin log controller.
+		 * "controller/jobs/common/decorators/default" to this job controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.09
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/admin/decorators/global
-		 * @see controller/jobs/admin/decorators/local
+		 * @see controller/jobs/admin/log/decorators/global
+		 * @see controller/jobs/admin/log/decorators/local
 		 */
 
-		/** controller/jobs/admin/decorators/global
+		/** controller/jobs/admin/log/decorators/global
 		 * Adds a list of globally available decorators only to the admin log controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -111,22 +111,22 @@ class Controller_Jobs_Admin_Log_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_Jobs_Common_Decorator_*") around the log controller.
+		 * ("Controller_Jobs_Common_Decorator_*") around the job controller.
 		 *
-		 *  controller/jobs/admin/decorators/global = array( 'decorator1' )
+		 *  controller/jobs/admin/log/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Jobs_Common_Decorator_Decorator1" only to the log controller.
+		 * "Controller_Jobs_Common_Decorator_Decorator1" only to this job controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.09
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/admin/decorators/excludes
-		 * @see controller/jobs/admin/decorators/local
+		 * @see controller/jobs/admin/log/decorators/excludes
+		 * @see controller/jobs/admin/log/decorators/local
 		 */
 
-		/** controller/jobs/admin/decorators/local
+		/** controller/jobs/admin/log/decorators/local
 		 * Adds a list of local decorators only to the admin log controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -135,20 +135,20 @@ class Controller_Jobs_Admin_Log_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_Jobs_Admin_Decorator_*") around the log controller.
+		 * ("Controller_Jobs_Admin_Log_Decorator_*") around this job controller.
 		 *
-		 *  controller/jobs/admin/decorators/local = array( 'decorator2' )
+		 *  controller/jobs/admin/log/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Jobs_Admin_Decorator_Decorator2" only to the log
+		 * "Controller_Jobs_Admin_Log_Decorator_Decorator2" only to this job
 		 * controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.09
+		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/admin/decorators/excludes
-		 * @see controller/jobs/admin/decorators/global
+		 * @see controller/jobs/admin/log/decorators/excludes
+		 * @see controller/jobs/admin/log/decorators/global
 		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'admin/log' );
 	}

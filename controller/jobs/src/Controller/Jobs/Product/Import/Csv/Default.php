@@ -246,7 +246,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		$skiplines = (int) $config->get( 'controller/jobs/product/import/csv/skip-lines', 0 );
 
 
-		/** controller/jobs/product/import/csv/skip-lines
+		/** controller/jobs/product/import/csv/strict
 		 * Log all columns from the file that are not mapped and therefore not imported
 		 *
 		 * Depending on the mapping, there can be more columns in the CSV file

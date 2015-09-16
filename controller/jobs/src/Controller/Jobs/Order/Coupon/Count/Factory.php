@@ -34,7 +34,7 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		 * @param string Last part of the class name
 		 * @since 2014.03
 		 * @category Developer
-		 * @deprecated Use classes/controller/jobs/order/cleanup/resource/name instead
+		 * @deprecated Use classes/controller/jobs/order/cleanup/unfinished/name instead
 		 */
 		if( $name === null ) {
 			$name = $context->getConfig()->get( 'classes/controller/jobs/order/coupon/count/name', 'Default' );
@@ -50,6 +50,42 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		$classname = 'Controller_Jobs_Order_Coupon_Count_' . $name;
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+
+		/** controller/jobs/order/coupon/count/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order coupon count controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/coupon/count/decorators/global
+		 * @see controller/jobs/order/coupon/count/decorators/local
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/excludes instead
+		 */
+
+		/** controller/jobs/order/coupon/count/decorators/global
+		 * Adds a list of globally available decorators only to the order coupon count controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/coupon/count/decorators/excludes
+		 * @see controller/jobs/order/coupon/count/decorators/local
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/global instead
+		 */
+
+		/** controller/jobs/order/coupon/count/decorators/local
+		 * Adds a list of local decorators only to the order coupon count controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/coupon/count/decorators/excludes
+		 * @see controller/jobs/order/coupon/count/decorators/global
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
+		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/coupon/count' );
 	}
 }

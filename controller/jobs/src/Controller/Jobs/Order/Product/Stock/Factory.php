@@ -34,7 +34,7 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		 * @param string Last part of the class name
 		 * @since 2014.03
 		 * @category Developer
-		 * @deprecated Use classes/controller/jobs/order/cleanup/resource/name instead
+		 * @deprecated Use classes/controller/jobs/order/cleanup/unfinished/name instead
 		 */
 		if( $name === null ) {
 			$name = $context->getConfig()->get( 'classes/controller/jobs/order/product/stock/name', 'Default' );
@@ -50,6 +50,42 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		$classname = 'Controller_Jobs_Order_Product_Stock_' . $name;
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+
+		/** controller/jobs/order/product/stock/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order product stock controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/product/stock/decorators/global
+		 * @see controller/jobs/order/product/stock/decorators/local
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/excludes instead
+		 */
+
+		/** controller/jobs/order/product/stock/decorators/global
+		 * Adds a list of globally available decorators only to the order product stock controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/product/stock/decorators/excludes
+		 * @see controller/jobs/order/product/stock/decorators/local
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/global instead
+		 */
+
+		/** controller/jobs/order/product/stock/decorators/local
+		 * Adds a list of local decorators only to the order product stock controllers
+		 *
+		 * @param array List of decorator names
+		 * @since 2015.09
+		 * @category Developer
+		 * @see controller/jobs/common/decorators/default
+		 * @see controller/jobs/order/product/stock/decorators/excludes
+		 * @see controller/jobs/order/product/stock/decorators/global
+		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
+		 */
 		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/product/stock' );
 	}
 }
