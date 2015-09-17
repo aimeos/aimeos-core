@@ -61,7 +61,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends PHPUnit_Framework_TestCas
 		$view->miniBasket = $controller->get();
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
+		$this->assertContains( '<div class="basket-mini-main">', $output );
 	}
 
 
@@ -80,7 +80,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends PHPUnit_Framework_TestCas
 
 		$controller->clear();
 
-		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
+		$this->assertContains( '<div class="basket-mini-main">', $output );
 		$this->assertRegExp( '#9#smU', $output );
 		$this->assertRegExp( '#171.00#smU', $output );
 	}
