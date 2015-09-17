@@ -323,39 +323,17 @@ class Client_Html_Checkout_Confirm_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
+		$orderid = $session->get( 'arcavias/orderid' );
 
 		try
 		{
-			$orderid = $session->get( 'arcavias/orderid' );
-			$provider = $this->_getServiceProvider( $view->param( 'code' ) );
-
-			$config = array( 'absoluteUri' => true, 'namespace' => false );
-			$params = array( 'code' => $view->param( 'code' ), 'orderid' => $orderid );
-			$urls = array(
-				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
-				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
-				'client.ipaddress' => $view->request()->getClientAddress(),
-			);
-			$urls['payment.url-self'] = $urls['payment.url-success'];
-			$provider->injectGlobalConfigBE( $urls );
-
-			$reqParams = $view->param();
-			$reqParams['orderid'] = $orderid;
-
-			if( ( $orderItem = $provider->updateSync( $reqParams, $view->request()->getBody() ) ) !== null )
+			if( ( $orderItem = $this->_updatePayment( $view, $orderid ) ) === null )
 			{
-				if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
-					&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
-				) {
-					$provider->query( $orderItem );
-				}
+				$orderManager = MShop_Factory::createManager( $context, 'order' );
+				$orderItem = $orderManager->getItem( $orderid );
+			}
 
-				$view->confirmOrderItem = $orderItem;
-			}
-			else
-			{
-				return;
-			}
+			$view->confirmOrderItem = $orderItem;
 
 
 			parent::process();
@@ -411,8 +389,8 @@ class Client_Html_Checkout_Confirm_Default
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
-				$search->compare( '==', 'service.code', $code ),
-				$search->compare( '==', 'service.type.code', 'payment' ),
+			$search->compare( '==', 'service.code', $code ),
+			$search->compare( '==', 'service.type.code', 'payment' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -502,5 +480,44 @@ class Client_Html_Checkout_Confirm_Default
 		}
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Updates the payment status for the given order ID and returns the order item
+	 *
+	 * @param MW_View_Interface $view View object of the HTML client
+	 * @param string $orderid ID of the order whose payment status should be updated
+	 * @return void|MShop_Order_Item_Interface Order item that has been updated
+	 */
+	protected function _updatePayment( MW_View_Interface $view, $orderid )
+	{
+		if( ( $code = $view->param( 'code' ) ) === null ) {
+			return;
+		}
+
+		$provider = $this->_getServiceProvider( $code );
+
+		$config = array( 'absoluteUri' => true, 'namespace' => false );
+		$params = array( 'code' => $code, 'orderid' => $orderid );
+		$urls = array(
+			'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
+			'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+			'client.ipaddress' => $view->request()->getClientAddress(),
+		);
+		$urls['payment.url-self'] = $urls['payment.url-success'];
+		$provider->injectGlobalConfigBE( $urls );
+
+		$reqParams = $view->param();
+		$reqParams['orderid'] = $orderid;
+
+		if( ( $orderItem = $provider->updateSync( $reqParams, $view->request()->getBody() ) ) !== null
+			&& $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
+			&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
+		) {
+			$provider->query( $orderItem );
+		}
+
+		return $orderItem;
 	}
 }
