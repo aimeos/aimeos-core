@@ -394,10 +394,118 @@ class MShop_Catalog_Manager_Default
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
-			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
-			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 			$required = array( 'catalog' );
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
+
+			/** mshop/catalog/manager/default/item/search-item
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the catalog
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the SELECT statement can retrieve all records
+			 * from the current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * If the records that are retrieved should be ordered by one or more
+			 * columns, the generated string of column / sort direction pairs
+			 * replaces the ":order" placeholder. In case no ordering is required,
+			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+			 * markers is removed to speed up retrieving the records. Columns of
+			 * sub-managers can also be used for ordering the result set but then
+			 * no index can be used.
+			 *
+			 * The number of returned records can be limited and can start at any
+			 * number between the begining and the end of the result set. For that
+			 * the ":size" and ":start" placeholders are replaced by the
+			 * corresponding values from the criteria object. The default values
+			 * are 0 for the start and 100 for the size value.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/catalog/manager/default/item/delete
+			 * @see mshop/catalog/manager/default/item/get
+			 * @see mshop/catalog/manager/default/item/insert
+			 * @see mshop/catalog/manager/default/item/update
+			 * @see mshop/catalog/manager/default/item/newid
+			 * @see mshop/catalog/manager/default/item/search
+			 * @see mshop/catalog/manager/default/item/count
+			 * @see mshop/catalog/manager/default/item/move-left
+			 * @see mshop/catalog/manager/default/item/move-right
+			 * @see mshop/catalog/manager/default/item/update-parentid
+			 */
+			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
+
+			/** mshop/catalog/manager/default/item/count
+			 * Counts the number of records matched by the given criteria in the database
+			 *
+			 * Counts all records matched by the given criteria from the catalog
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the statement can count all records from the
+			 * current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * Both, the strings for ":joins" and for ":cond" are the same as for
+			 * the "search" SQL statement.
+			 *
+			 * Contrary to the "search" statement, it doesn't return any records
+			 * but instead the number of records that have been found. As counting
+			 * thousands of records can be a long running task, the maximum number
+			 * of counted records is limited for performance reasons.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for counting items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/catalog/manager/default/item/delete
+			 * @see mshop/catalog/manager/default/item/get
+			 * @see mshop/catalog/manager/default/item/insert
+			 * @see mshop/catalog/manager/default/item/update
+			 * @see mshop/catalog/manager/default/item/newid
+			 * @see mshop/catalog/manager/default/item/search
+			 * @see mshop/catalog/manager/default/item/search-item
+			 * @see mshop/catalog/manager/default/item/move-left
+			 * @see mshop/catalog/manager/default/item/move-right
+			 * @see mshop/catalog/manager/default/item/update-parentid
+			 */
+			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -694,14 +802,339 @@ class MShop_Catalog_Manager_Default
 				'search' => $this->_searchConfig,
 				'dbname' => $this->_getResourceName(),
 				'sql' => array(
+
+					/** mshop/catalog/manager/default/item/delete
+					 * Deletes the items matched by the given IDs from the database
+					 *
+					 * Removes the records specified by the given IDs from the database.
+					 * The records must be from the site that is configured via the
+					 * context item.
+					 *
+					 * The ":cond" placeholder is replaced by the name of the ID column and
+					 * the given ID or list of IDs while the site ID is bound to the question
+					 * mark.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for deleting items
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'delete' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/delete' ) ),
+
+					/** mshop/catalog/manager/default/item/get
+					 * Returns a node record and its complete subtree optionally limited by the level
+					 *
+					 * Fetches the records matched by the given criteria from the catalog
+					 * database. The records must be from one of the sites that are
+					 * configured via the context item. If the current site is part of
+					 * a tree of sites, the SELECT statement can retrieve all records
+					 * from the current site and the complete sub-tree of sites. This
+					 * statement retrieves all records that are part of the subtree for
+					 * the found node. The depth can be limited by the "level" number.
+					 *
+					 * To limit the records matched, conditions can be added to the given
+					 * criteria object. It can contain comparisons like column names that
+					 * must match specific values which can be combined by AND, OR or NOT
+					 * operators. The resulting string of SQL conditions replaces the
+					 * ":cond" placeholder before the statement is sent to the database
+					 * server.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for searching items
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'get' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/get' ) ),
+
+					/** mshop/catalog/manager/default/item/insert
+					 * Inserts a new catalog node into the database table
+					 *
+					 * Items with no ID yet (i.e. the ID is NULL) will be created in
+					 * the database and the newly created ID retrieved afterwards
+					 * using the "newid" SQL statement.
+					 *
+					 * The SQL statement must be a string suitable for being used as
+					 * prepared statement. It must include question marks for binding
+					 * the values from the catalog item to the statement before they are
+					 * sent to the database server. The number of question marks must
+					 * be the same as the number of columns listed in the INSERT
+					 * statement. The order of the columns must correspond to the
+					 * order in the insertNode() method, so the correct values are
+					 * bound to the columns.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for inserting records
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'insert' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/insert' ) ),
+
+					/** mshop/catalog/manager/default/item/move-left
+					 * Updates the left values of the nodes that are moved within the catalog tree
+					 *
+					 * When moving nodes or subtrees with the catalog tree, the left
+					 * value of each moved node inside the nested set must be updated
+					 * to match their new position within the catalog tree.
+					 *
+					 * The SQL statement must be a string suitable for being used as
+					 * prepared statement. It must include question marks for binding
+					 * the values from the catalog item to the statement before they are
+					 * sent to the database server. The order of the columns must
+					 * correspond to the order in the moveNode() method, so the
+					 * correct values are bound to the columns.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for updating records
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'move-left' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/move-left' ) ),
+
+					/** mshop/catalog/manager/default/item/move-right
+					 * Updates the left values of the nodes that are moved within the catalog tree
+					 *
+					 * When moving nodes or subtrees with the catalog tree, the right
+					 * value of each moved node inside the nested set must be updated
+					 * to match their new position within the catalog tree.
+					 *
+					 * The SQL statement must be a string suitable for being used as
+					 * prepared statement. It must include question marks for binding
+					 * the values from the catalog item to the statement before they are
+					 * sent to the database server. The order of the columns must
+					 * correspond to the order in the moveNode() method, so the
+					 * correct values are bound to the columns.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for updating records
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'move-right' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/move-right' ) ),
+
+					/** mshop/catalog/manager/default/item/search
+					 * Retrieves the records matched by the given criteria in the database
+					 *
+					 * Fetches the records matched by the given criteria from the catalog
+					 * database. The records must be from one of the sites that are
+					 * configured via the context item. If the current site is part of
+					 * a tree of sites, the SELECT statement can retrieve all records
+					 * from the current site and the complete sub-tree of sites.
+					 *
+					 * To limit the records matched, conditions can be added to the given
+					 * criteria object. It can contain comparisons like column names that
+					 * must match specific values which can be combined by AND, OR or NOT
+					 * operators. The resulting string of SQL conditions replaces the
+					 * ":cond" placeholder before the statement is sent to the database
+					 * server.
+					 *
+					 * If the records that are retrieved should be ordered by one or more
+					 * columns, the generated string of column / sort direction pairs
+					 * replaces the ":order" placeholder.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for searching items
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'search' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/search' ) ),
+
+					/** mshop/catalog/manager/default/item/update
+					 * Updates an existing catalog node in the database
+					 *
+					 * Items which already have an ID (i.e. the ID is not NULL) will
+					 * be updated in the database.
+					 *
+					 * The SQL statement must be a string suitable for being used as
+					 * prepared statement. It must include question marks for binding
+					 * the values from the catalog item to the statement before they are
+					 * sent to the database server. The order of the columns must
+					 * correspond to the order in the saveNode() method, so the
+					 * correct values are bound to the columns.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for updating records
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'update' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update' ) ),
+
+					/** mshop/catalog/manager/default/item/update-parentid
+					 * Updates the parent ID after moving a node record
+					 *
+					 * When moving nodes with the catalog tree, the parent ID
+					 * references must be updated to match the new parent.
+					 *
+					 * The SQL statement must be a string suitable for being used as
+					 * prepared statement. It must include question marks for binding
+					 * the values from the catalog item to the statement before they are
+					 * sent to the database server. The order of the columns must
+					 * correspond to the order in the moveNode() method, so the
+					 * correct values are bound to the columns.
+					 *
+					 * The SQL statement should conform to the ANSI standard to be
+					 * compatible with most relational database systems. This also
+					 * includes using double quotes for table and column names.
+					 *
+					 * @param string SQL statement for updating records
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/newid
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'update-parentid' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update-parentid' ) ),
+
+					/** mshop/catalog/manager/default/item/newid
+					 * Retrieves the ID generated by the database when inserting a new record
+					 *
+					 * As soon as a new record is inserted into the database table,
+					 * the database server generates a new and unique identifier for
+					 * that record. This ID can be used for retrieving, updating and
+					 * deleting that specific record from the table again.
+					 *
+					 * For MySQL:
+					 *  SELECT LAST_INSERT_ID()
+					 * For PostgreSQL:
+					 *  SELECT currval('seq_mcat_id')
+					 * For SQL Server:
+					 *  SELECT SCOPE_IDENTITY()
+					 * For Oracle:
+					 *  SELECT "seq_mcat_id".CURRVAL FROM DUAL
+					 *
+					 * There's no way to retrive the new ID by a SQL statements that
+					 * fits for most database servers as they implement their own
+					 * specific way.
+					 *
+					 * @param string SQL statement for retrieving the last inserted record ID
+					 * @since 2014.03
+					 * @category Developer
+					 * @see mshop/catalog/manager/default/item/delete
+					 * @see mshop/catalog/manager/default/item/get
+					 * @see mshop/catalog/manager/default/item/insert
+					 * @see mshop/catalog/manager/default/item/update
+					 * @see mshop/catalog/manager/default/item/search
+					 * @see mshop/catalog/manager/default/item/search-item
+					 * @see mshop/catalog/manager/default/item/count
+					 * @see mshop/catalog/manager/default/item/move-left
+					 * @see mshop/catalog/manager/default/item/move-right
+					 * @see mshop/catalog/manager/default/item/update-parentid
+					 * @see mshop/catalog/manager/default/item/usage/add
+					 * @see mshop/catalog/manager/default/item/usage/update
+					 */
 					'newid' => $config->get( 'mshop/catalog/manager/default/item/newid' ),
 				),
 			);
@@ -754,9 +1187,82 @@ class MShop_Catalog_Manager_Default
 		{
 			$siteid = $context->getLocale()->getSiteId();
 
-			if( $case !== true ) {
+			if( $case !== true )
+			{
+				/** mshop/catalog/manager/default/item/usage/update
+				 * Updates the config, editor and mtime value of an updated record
+				 *
+				 * Each record contains some usage information like when it was
+				 * created, last modified and by whom. These information are part
+				 * of the catalog items and the generic tree manager doesn't care
+				 * about this information. Thus, they are updated after the tree
+				 * manager saved the basic record information.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the catalog item to the statement before they are
+				 * sent to the database server. The order of the columns must
+				 * correspond to the order in the method using this statement,
+				 * so the correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/catalog/manager/default/item/delete
+				 * @see mshop/catalog/manager/default/item/get
+				 * @see mshop/catalog/manager/default/item/insert
+				 * @see mshop/catalog/manager/default/item/newid
+				 * @see mshop/catalog/manager/default/item/search
+				 * @see mshop/catalog/manager/default/item/search-item
+				 * @see mshop/catalog/manager/default/item/count
+				 * @see mshop/catalog/manager/default/item/move-left
+				 * @see mshop/catalog/manager/default/item/move-right
+				 * @see mshop/catalog/manager/default/item/update-parentid
+				 * @see mshop/catalog/manager/default/item/usage/add
+				 */
 				$path = 'mshop/catalog/manager/default/item/usage/update';
-			} else {
+			}
+			else
+			{
+				/** mshop/catalog/manager/default/item/usage/add
+				 * Updates the config, editor, ctime and mtime value of an inserted record
+				 *
+				 * Each record contains some usage information like when it was
+				 * created, last modified and by whom. These information are part
+				 * of the catalog items and the generic tree manager doesn't care
+				 * about this information. Thus, they are updated after the tree
+				 * manager inserted the basic record information.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the catalog item to the statement before they are
+				 * sent to the database server. The order of the columns must
+				 * correspond to the order in the method using this statement,
+				 * so the correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/catalog/manager/default/item/delete
+				 * @see mshop/catalog/manager/default/item/get
+				 * @see mshop/catalog/manager/default/item/insert
+				 * @see mshop/catalog/manager/default/item/newid
+				 * @see mshop/catalog/manager/default/item/search
+				 * @see mshop/catalog/manager/default/item/search-item
+				 * @see mshop/catalog/manager/default/item/count
+				 * @see mshop/catalog/manager/default/item/move-left
+				 * @see mshop/catalog/manager/default/item/move-right
+				 * @see mshop/catalog/manager/default/item/update-parentid
+				 * @see mshop/catalog/manager/default/item/usage/update
+				 */
 				$path = 'mshop/catalog/manager/default/item/usage/add';
 			}
 
