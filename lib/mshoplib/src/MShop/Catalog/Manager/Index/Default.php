@@ -30,6 +30,46 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
+		/** mshop/catalog/manager/index/default/aggregate
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * Groups all records by the values in the key column and counts their
+		 * occurence. The matched records can be limited by the given criteria
+		 * from the order database. The records must be from one of the sites
+		 * that are configured via the context item. If the current site is part
+		 * of a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * This statement doesn't return any records. Instead, it returns pairs
+		 * of the different values found in the key column together with the
+		 * number of records that have been found for that key values.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for aggregating order items
+		 * @since 2014.09
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/item/count
+		 * @see mshop/catalog/manager/index/default/item/optimize
+		 * @see mshop/catalog/manager/index/default/item/search
+		 */
 		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate', array( 'product' ) );
 	}
 
@@ -214,6 +254,25 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function optimize()
 	{
+		/** mshop/catalog/manager/index/default/optimize
+		 * Optimizes the stored product data for retrieving the records faster
+		 *
+		 * The SQL statement should reorganize the data in the DBMS storage to
+		 * optimize access to the records of the table or tables. Some DBMS
+		 * offer specialized statements to optimize indexes and records. This
+		 * statement doesn't return any records.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for optimizing the stored product data
+		 * @since 2014.09
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/item/count
+		 * @see mshop/catalog/manager/index/default/item/search
+		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 */
 		$this->_doOptimize( 'mshop/catalog/manager/index/default/optimize' );
 	}
 
@@ -256,9 +315,74 @@ class MShop_Catalog_Manager_Index_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
+		/** mshop/catalog/manager/index/default/chunksize
+		 * Number of products that should be indexed at once
+		 *
+		 * When rebuilding the product index, several products are updated at
+		 * once within a transaction. This speeds up the time that is needed
+		 * for reindexing.
+		 *
+		 * Usually, the more products are updated in one bunch, the faster the
+		 * process of rebuilding the index will be up to a certain limit. The
+		 * downside of big bunches is a higher memory consumption that can
+		 * exceed the maximum allowed memory of the process.
+		 *
+		 * @param integer Number of products
+		 * @since 2014.09
+		 * @category User
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/domains
+		 * @see mshop/catalog/manager/index/default/index
+		 * @see mshop/catalog/manager/index/default/subdomains
+		 * @see mshop/catalog/manager/index/default/submanagers
+		 */
 		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+
+		/** mshop/catalog/manager/index/default/index
+		 * Index mode for products which determines what products are added to the index
+		 *
+		 * By default, only products that have been added to a category are
+		 * part of the index. Thus, it's possible to have special products like
+		 * rebate products that are necessary if you use coupon codes in your
+		 * shop but won't be found by e.g. when searching for products.
+		 *
+		 * Alternatively, you can add all products to the index, even those
+		 * which are not listed in any category. This mode should only be
+		 * used in special cases when you have no rebate or similar products
+		 * that shouldn't be found by users.
+		 *
+		 * @param integer Number of products
+		 * @since 2014.09
+		 * @category User
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/chunksize
+		 * @see mshop/catalog/manager/index/default/domains
+		 * @see mshop/catalog/manager/index/default/subdomains
+		 * @see mshop/catalog/manager/index/default/submanagers
+		 */
 		$mode = $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' );
 
+		/** mshop/catalog/manager/index/default/domains
+		 * A list of domain names whose items should be retrieved together with the product
+		 *
+		 * To speed up the indexing process, items like texts, prices, media,
+		 * attributes etc. which have been associated to products can be
+		 * retrieved together with the products.
+		 *
+		 * Please note that the index submanagers expect that the items
+		 * associated to the products are fetched together with the products.
+		 * Thus, if you leave out a domain, this information won't be part
+		 * of the indexed product and therefore won't be found when searching
+		 * the index.
+		 *
+		 * @param string List of MShop domain names
+		 * @since 2014.09
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/chunksize
+		 * @see mshop/catalog/manager/index/default/index
+		 * @see mshop/catalog/manager/index/default/subdomains
+		 * @see mshop/catalog/manager/index/default/submanagers
+		 */
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
 
@@ -360,7 +484,100 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/catalog/manager/index/default/item/search
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the order
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/item/count
+		 * @see mshop/catalog/manager/index/default/item/optimize
+		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 */
 		$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
+
+		/** mshop/catalog/manager/index/default/item/count
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the order
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/item/search
+		 * @see mshop/catalog/manager/index/default/item/optimize
+		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 */
 		$cfgPathCount = 'mshop/catalog/manager/index/default/item/count';
 
 		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
@@ -441,6 +658,26 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$context = $this->_getContext();
 
+		/** mshop/catalog/manager/index/default/subdomains
+		 * A list of domains for sub-products whose items should be added to the parent product
+		 *
+		 * Data from sub-products like variants or bundled products can be
+		 * added to the parent product so that one will be found if the search
+		 * criteria of the customer matches.
+		 *
+		 * Caution: If you include the text and price items of the sub-products,
+		 * it will mess up the sortation in the list views because the products
+		 * are sorted by names or prices of the sub-products but only the
+		 * parent products with their names and prices are shown.
+		 *
+		 * @param string List of MShop domain names
+		 * @since 2014.09
+		 * @category Developer
+		 * @see mshop/catalog/manager/index/default/chunksize
+		 * @see mshop/catalog/manager/index/default/domains
+		 * @see mshop/catalog/manager/index/default/index
+		 * @see mshop/catalog/manager/index/default/submanagers
+		 */
 		// Including "text" and "price" messes up the sortation
 		$default = array( 'attribute', 'product' );
 		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/subdomains', $default );
@@ -549,6 +786,31 @@ class MShop_Catalog_Manager_Index_Default
 		if( $this->_subManagers === null )
 		{
 			$this->_subManagers = array();
+
+			/** mshop/catalog/manager/index/default/submanagers
+			 * A list of sub-manager names used for indexing associated items
+			 *
+			 * All items referenced by a product (e.g. texts, prices, media,
+			 * etc.) are added to the product index via specialized index
+			 * managers. You can add the name of new sub-managers to add more
+			 * data to the index or remove existing ones if you don't want to
+			 * index that data at all.
+			 *
+			 * Caution: Please note that the list of sub-manager names should
+			 * correspond to the list of domains that are fetched together with
+			 * the products as the sub-manager depends on the items being
+			 * retrieved there and fetching items that won't be indexed is a
+			 * waste of resources.
+			 *
+			 * @param string List of index sub-manager names
+			 * @since 2014.09
+			 * @category User
+			 * @category Developer
+			 * @see mshop/catalog/manager/index/default/chunksize
+			 * @see mshop/catalog/manager/index/default/domains
+			 * @see mshop/catalog/manager/index/default/index
+			 * @see mshop/catalog/manager/index/default/subdomains
+			 */
 			$path = 'mshop/catalog/manager/index/default/submanagers';
 			$default = array( 'price', 'catalog', 'attribute', 'text' );
 
