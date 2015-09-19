@@ -260,6 +260,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
+			$config = $context->getConfig();
 			$attrIds = $attributeMap = $subAttrDeps = array();
 
 			if( isset( $view->detailProductItem ) )
@@ -271,11 +272,27 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
-			/** @todo Make referenced domains configurable */
+			/** client/html/catalog/detail/additional/attribute/domains
+			 * A list of domain names whose items should be available in the additional attribute part of the catalog detail view templates
+			 *
+			 * The templates rendering additional attribute related data usually add
+			 * the images and texts associated to each item. If you want to
+			 * display additional content like the attributes, you can configure
+			 * your own list of domains (attribute, media, price, product, text,
+			 * etc. are domains) whose items are fetched from the storage.
+			 * Please keep in mind that the more domains you add to the
+			 * configuration, the more time is required for fetching the content!
+			 *
+			 * @param array List of domain names
+			 * @since 2015.09
+			 * @category Developer
+			 * @see client/html/catalog/detail/basket/selection/domains-attributes
+			*/
+			$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains', array( 'attribute' ) );
 
 			// find regular attributes from sub-products
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
-			$products = $controller->getProductItems( array_keys( $products ), array( 'attribute' ) );
+			$products = $controller->getProductItems( array_keys( $products ), $domains );
 
 			foreach( $products as $subProdId => $subProduct )
 			{
@@ -302,8 +319,27 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			/** @todo Make referenced domains configurable */
-			$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
+
+			/** client/html/catalog/detail/basket/selection/domains-attributes
+			 * A list of domain names whose items should be available for the attributes in the
+			 * additional attribute part of the catalog detail view templates
+			 *
+			 * The templates rendering additional attribute related data usually add
+			 * the images and texts associated to each item. If you want to
+			 * display additional content like the attributes, you can configure
+			 * your own list of domains (attribute, media, price, product, text,
+			 * etc. are domains) whose items are fetched from the storage.
+			 * Please keep in mind that the more domains you add to the
+			 * configuration, the more time is required for fetching the content!
+			 *
+			 * @param array List of domain names
+			 * @since 2015.09
+			 * @category Developer
+			 * @see client/html/catalog/detail/basket/selection/domains
+			*/
+			$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains-attributes', array( 'text', 'media' ) );
+
+			$attributes = $attrManager->searchItems( $search, $domains );
 
 			foreach( $attributes as $id => $item ) {
 				$attributeMap[$item->getType()][$id] = $item;

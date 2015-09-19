@@ -262,11 +262,28 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 			if( $view->detailProductItem->getType() === 'select' )
 			{
 				$context = $this->_getContext();
+				$config = $context->getConfig();
+				$domains = array( 'text', 'price', 'media', 'attribute' );
 				$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
-
-				/** @todo Make referenced domains configurable */
-				$domains = array( 'text', 'price', 'media', 'attribute' );
+				/** client/html/catalog/detail/basket/selection/domains
+				 * A list of domain names whose items should be available in the basket
+				 * selection part of the catalog detail view templates
+				 *
+				 * The templates rendering basket selection related data usually add
+				 * the images and texts associated to each item. If you want to
+				 * display additional content like the attributes, you can configure
+				 * your own list of domains (attribute, media, price, product, text,
+				 * etc. are domains) whose items are fetched from the storage.
+				 * Please keep in mind that the more domains you add to the
+				 * configuration, the more time is required for fetching the content!
+				 *
+				 * @param array List of domain names
+				 * @since 2015.09
+				 * @category Developer
+				 * @see client/html/catalog/detail/basket/selection/domains-attributes
+				*/
+				$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains', $domains );
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$subproducts = $controller->getProductItems( array_keys( $products ), $domains );
@@ -298,8 +315,27 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				/** @todo Make referenced domains configurable */
-				$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
+				/** client/html/catalog/detail/basket/selection/domains-attributes
+				 * A list of domain names whose items should be available for the attributes
+				 * in the basket selection part of the catalog detail view templates
+				 *
+				 * The templates rendering basket selection related data usually add
+				 * the images and texts associated to each item. If you want to
+				 * display additional content like the attributes, you can configure
+				 * your own list of domains (attribute, media, price, product, text,
+				 * etc. are domains) whose items are fetched from the storage.
+				 * Please keep in mind that the more domains you add to the
+				 * configuration, the more time is required for fetching the content!
+				 *
+				 * @param array List of domain names
+				 * @since 2015.09
+				 * @category Developer
+				 * @see client/html/catalog/detail/basket/selection/domains
+				 */
+				$domains = array( 'text', 'media' );
+				$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains-attributes', $domains );
+
+				$attributes = $attrManager->searchItems( $search, $domains );
 
 				$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
 				$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );

@@ -261,10 +261,39 @@ class Client_Html_Catalog_Detail_Bundle_Default
 			if( isset( $view->detailProductItem ) && $view->detailProductItem->getType() === 'bundle' )
 			{
 				$context = $this->_getContext();
+				$config = $context->getConfig();
+				$domains = array( 'text', 'price', 'media' );
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'default' );
 
-				/** @todo Make referenced domains configurable */
-				$domains = array( 'text', 'price', 'media' );
+				/** client/html/catalog/detail/domains
+				 * A list of domain names whose items should be available in the catalog view templates
+				 *
+				 * @see client/html/catalog/detail/domains
+				 */
+				$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
+
+				/** client/html/catalog/detail/bundle/domains
+				 * A list of domain names whose items should be available in the bundle part of the catalog detail view templates
+				 *
+				 * The templates rendering bundle related data usually add
+				 * the images and texts associated to each item. If you want to
+				 * display additional content like the attributes, you can configure
+				 * your own list of domains (attribute, media, price, product, text,
+				 * etc. are domains) whose items are fetched from the storage.
+				 * Please keep in mind that the more domains you add to the
+				 * configuration, the more time is required for fetching the content!
+				 *
+				 * This configuration option can be overwritten by the
+				 * "client/html/catalog/detail/domains" configuration option that
+				 * allows to configure the domain names of the items fetched
+				 * specifically for all types of product listings.
+				 *
+				 * @param array List of domain names
+				 * @since 2015.09
+				 * @category Developer
+				 * @see client/html/catalog/detail/domains
+				 */
+				$domains = $config->get( 'client/html/catalog/detail/bundle/domains', $domains );
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
