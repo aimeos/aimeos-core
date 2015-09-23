@@ -12,7 +12,7 @@
 class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
- 		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',
+		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',
 		'unq_msordbaseat_osid_type_code' => 'CREATE UNIQUE INDEX "unq_msordbaseat_osid_type_code" ON "mshop_order_base_service_attr" ("ordservid","type","code")',
 	);
 
