@@ -12,8 +12,8 @@
 class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
+ 		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',
 		'unq_msordbaseat_osid_type_code' => 'CREATE UNIQUE INDEX "unq_msordbaseat_osid_type_code" ON "mshop_order_base_service_attr" ("ordservid","type","code")',
-		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',
 	);
 
 	/**
@@ -60,15 +60,15 @@ class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abst
 
 		if( $this->_schema->tableExists( $table ) === true )
 		{
-			if( $this->_schema->constraintExists( $table, 'unq_msordbaseat_ordservid_code' ) === true )
-			{
-				$this->_execute( $stmts['unq_msordbaseat_ordservid_code'] );
-				$status = 'done';
-			}
-
 			if( $this->_schema->constraintExists( $table, 'unq_msordbaseat_osid_type_code' ) === false )
 			{
 				$this->_execute( $stmts['unq_msordbaseat_osid_type_code'] );
+				$status = 'done';
+			}
+
+			if( $this->_schema->constraintExists( $table, 'unq_msordbaseat_ordservid_code' ) === true )
+			{
+				$this->_execute( $stmts['unq_msordbaseat_ordservid_code'] );
 				$status = 'done';
 			}
 		}
