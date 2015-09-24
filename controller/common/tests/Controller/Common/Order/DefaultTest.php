@@ -118,7 +118,7 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 			->getMock();
 
 		$productManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Default' )
-			->setMethods( array( 'getSubManager' ) )
+			->setMethods( array( 'getSubManager', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
@@ -138,8 +138,8 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 			->getMock();
 
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Product_Manager_' . $name, $productManagerStub );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Coupon_Manager_' . $name, $couponManagerStub );
+		MShop_Product_Manager_Factory::injectManager( 'MShop_Product_Manager_' . $name, $productManagerStub );
+		MShop_Coupon_Manager_Factory::injectManager( 'MShop_Coupon_Manager_' . $name, $couponManagerStub );
 
 
 		$orderStatusItemBlocked = $orderStatusManagerStub->createItem();
@@ -175,8 +175,11 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderProductManagerStub->expects( $this->exactly( 2 ) )->method( 'searchItems' )
 			->will( $this->returnValue( array( $orderProductManagerStub->createItem() ) ) );
 
-		$productManagerStub->expects( $this->exactly( 2 ) )->method( 'getSubManager' )
+		$productManagerStub->expects( $this->exactly( 4 ) )->method( 'getSubManager' )
 			->will( $this->returnValue( $productStockManagerStub ) );
+
+		$productManagerStub->expects( $this->exactly( 2 ) )->method( 'searchItems' )
+			->will( $this->returnValue( array() ) );
 
 		$productStockManagerStub->expects( $this->exactly( 2 ) )->method( 'increase' );
 
@@ -209,5 +212,74 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$object = new Controller_Common_Order_Default( $context );
 		$object->update( $orderItem );
+	}
+
+
+	public function testUpdateStockBundle()
+	{
+		$stockItems = array();
+		$context = TestHelper::getContext();
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:BUNDLE' ) );
+		$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
+
+
+		$name = 'ControllerCommonOrderUpdate';
+		$context->getConfig()->set( 'classes/product/manager/name', $name );
+
+		$stockManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Stock_Default' )
+			->setMethods( array( 'saveItem', 'searchItems' ) )
+			->setConstructorArgs( array( $context ) )
+			->getMock();
+
+		$productManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Default' )
+			->setMethods( array( 'getSubManager' ) )
+			->setConstructorArgs( array( $context ) )
+			->getMock();
+
+		$productManagerStub->expects( $this->once() )->method( 'getSubManager' )
+			->will( $this->returnValue( $stockManagerStub ) );
+
+		MShop_Product_Manager_Factory::injectManager( 'MShop_Product_Manager_' . $name, $productManagerStub );
+
+
+		$stock = 10;
+
+		foreach( $bundleItems as $bundleId => $bundleItem )
+		{
+			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $refItem )
+			{
+				$stockItem = $stockManagerStub->createItem();
+				$stockItem->setProductId( $refItem->getId() );
+				$stockItem->setStockLevel( $stock );
+
+				$stockItems[] = $stockItem;
+				$stock += 10;
+			}
+
+			$bundleStockItem = $stockManagerStub->createItem();
+			$bundleStockItem->setProductId( $bundleId );
+			$bundleStockItem->setStockLevel( $stock - 5 );
+		}
+
+		$fcn = function( $subject ) {
+			return ( $subject->getStockLevel() === 10 );
+		};
+
+		$stockManagerStub->expects( $this->exactly( 2 ) )->method( 'searchItems' )
+			->will( $this->onConsecutiveCalls( $stockItems, array( $bundleStockItem ) ) );
+
+		$stockManagerStub->expects( $this->exactly( 1 ) )->method( 'saveItem' )
+			->with( $this->callback( $fcn ) );
+
+
+		$class = new ReflectionClass( 'Controller_Common_Order_Default' );
+		$method = $class->getMethod( '_updateStockBundle' );
+		$method->setAccessible( true );
+
+		$object = new Controller_Common_Order_Default( $context );
+		$method->invokeArgs( $object, array( $bundleItems, 'default' ) );
 	}
 }

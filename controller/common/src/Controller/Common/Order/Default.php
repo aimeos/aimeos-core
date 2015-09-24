@@ -191,58 +191,29 @@ class Controller_Common_Order_Default
 
 		$couponCodeManager->begin();
 
-		do
+		try
 		{
-			$items = $manager->searchItems( $search );
+			do
+			{
+				$items = $manager->searchItems( $search );
 
-			foreach( $items as $item ) {
-				$couponCodeManager->increase( $item->getCode(), $how * 1 );
+				foreach( $items as $item ) {
+					$couponCodeManager->increase( $item->getCode(), $how * 1 );
+				}
+
+				$count = count( $items );
+				$start += $count;
+				$search->setSlice( $start );
 			}
+			while( $count >= $search->getSliceSize() );
 
-			$count = count( $items );
-			$start += $count;
-			$search->setSlice( $start );
+			$couponCodeManager->commit();
 		}
-		while( $count >= $search->getSliceSize() );
-
-		$couponCodeManager->commit();
-	}
-
-
-	/**
-	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
-	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
-	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
-	 */
-	protected function _updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
-	{
-		$context = $this->_getContext();
-		$manager = MShop_Factory::createManager( $context, 'order/base/product' );
-		$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.product.baseid', $orderItem->getBaseId() ) );
-
-		$start = 0;
-
-		$stockManager->begin();
-
-		do
+		catch( Exception $e )
 		{
-			$items = $manager->searchItems( $search );
-
-			foreach( $items as $item ) {
-				$stockManager->increase( $item->getProductCode(), $item->getWarehouseCode(), $how * $item->getQuantity() );
-			}
-
-			$count = count( $items );
-			$start += $count;
-			$search->setSlice( $start );
+			$couponCodeManager->rollback();
+			throw $e;
 		}
-		while( $count >= $search->getSliceSize() );
-
-		$stockManager->commit();
 	}
 
 
@@ -269,5 +240,140 @@ class Controller_Common_Order_Default
 		}
 
 		$this->_addStatusItem( $orderItem->getId(), $type, $status );
+	}
+
+
+	/**
+	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
+	 *
+	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
+	 */
+	protected function _updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
+	{
+		$context = $this->_getContext();
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
+		$manager = MShop_Factory::createManager( $context, 'order/base/product' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.product.baseid', $orderItem->getBaseId() ) );
+
+		$start = 0;
+
+		$stockManager->begin();
+
+		try
+		{
+			do
+			{
+				$items = $manager->searchItems( $search );
+
+				foreach( $items as $item )
+				{
+					$stockManager->increase( $item->getProductCode(), $item->getWarehouseCode(), $how * $item->getQuantity() );
+
+					// recalculate stock level of product bundles
+					$search = $productManager->createSearch();
+					$expr = array(
+						$search->compare( '==', 'product.type.code', 'bundle' ),
+						$search->compare( '==', 'product.list.domain', 'product' ),
+						$search->compare( '==', 'product.list.refid', $item->getProductId() ),
+						$search->compare( '==', 'product.list.type.code', 'default' ),
+					);
+					$search->setConditions( $search->combine( '&&', $expr ) );
+					$search->setSlice( 0, 0x7fffffff );
+
+					$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
+
+					$this->_updateStockBundle( $bundleItems, $item->getWarehouseCode() );
+				}
+
+				$count = count( $items );
+				$start += $count;
+				$search->setSlice( $start );
+			}
+			while( $count >= $search->getSliceSize() );
+
+			$stockManager->commit();
+		}
+		catch( Exception $e )
+		{
+			$stockManager->rollback();
+			throw $e;
+		}
+	}
+
+
+	/**
+	 * Updates the stock levels of bundles for a specific warehouse
+	 *
+	 * @param array $bundleItems List of items implementing MShop_Product_Item_Interface
+	 * @param string $whcode Unique warehouse code
+	 */
+	protected function _updateStockBundle( array $bundleItems, $whcode )
+	{
+		$bundleMap = $prodIds = $stock = array();
+		$stockManager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
+
+
+		foreach( $bundleItems as $bundleId => $bundleItem )
+		{
+			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $id => $item )
+			{
+				$bundleMap[$id][] = $bundleId;
+				$prodIds[] = $id;
+			}
+		}
+
+		if( empty( $prodIds ) ) {
+			return;
+		}
+
+
+		$search = $stockManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.stock.productid', $prodIds ),
+			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $stockManager->searchItems( $search ) as $stockItem )
+		{
+			if( isset( $bundleMap[$stockItem->getProductId()] ) && $stockItem->getStockLevel() !== null )
+			{
+				foreach( $bundleMap[$stockItem->getProductId()] as $bundleId )
+				{
+					if( isset( $stock[$bundleId] ) ) {
+						$stock[$bundleId] = min( $stock[$bundleId], $stockItem->getStockLevel() );
+					} else {
+						$stock[$bundleId] = $stockItem->getStockLevel();
+					}
+				}
+			}
+		}
+
+
+		if( empty( $stock ) ) {
+			return;
+		}
+
+		$search = $stockManager->createSearch();
+		$expr = array(
+				$search->compare( '==', 'product.stock.productid', array_keys( $bundleItems ) ),
+				$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $stockManager->searchItems( $search ) as $item )
+		{
+			if( isset( $stock[$item->getProductId()] ) )
+			{
+				$item->setStockLevel( $stock[$item->getProductId()] );
+				$stockManager->saveItem( $item );
+			}
+		}
 	}
 }
