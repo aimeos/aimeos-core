@@ -76,7 +76,7 @@ class Client_Html_Email_Account_Text_Detail_DefaultTest extends PHPUnit_Framewor
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertContains( 'Login', $output );
+		$this->assertContains( 'Account', $output );
 		$this->assertContains( 'Password', $output );
 	}
 
