@@ -43,9 +43,21 @@ source_file = client/html/i18n/currency/core-client-html-currency.pot
 source_lang = en
 type = PO
 
+[aimeos-core.controller-common]
+file_filter = controller/common/i18n/<lang>.po
+source_file = controller/common/i18n/core-controller-common.pot
+source_lang = en
+type = PO
+
 [aimeos-core.controller-frontend]
 file_filter = controller/frontend/i18n/<lang>.po
 source_file = controller/frontend/i18n/core-controller-frontend.pot
+source_lang = en
+type = PO
+
+[aimeos-core.controller-extjs]
+file_filter = controller/extjs/i18n/<lang>.po
+source_file = controller/extjs/i18n/core-controller-extjs.pot
 source_lang = en
 type = PO
 
