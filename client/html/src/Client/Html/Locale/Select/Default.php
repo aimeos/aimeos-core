@@ -359,10 +359,13 @@ class Client_Html_Locale_Select_Default
 				$map[$langId][$curId] = array( $langname => $langId, $curname => $curId );
 			}
 
+			$params = $view->param();
+			unset( $params['target'] );
+
 			$view->selectMap = $map;
+			$view->selectParams = $params;
 			$view->selectLanguageId = $locale->getLanguageId();
 			$view->selectCurrencyId = $locale->getCurrencyId();
-			$view->selectParams = $this->_getClientParams( $view->param(), array( 'f', 'l', 'd' ) );
 
 			$this->_cache = $view;
 		}
