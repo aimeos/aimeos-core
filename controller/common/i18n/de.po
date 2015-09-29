@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Aimeos <aimeos@aimeos.org>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"PO-Revision-Date: 2015-09-29 13:05+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/Controller/Common/Order/Factory.php:103
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:78
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:264
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
+
+#: src/Controller/Common/Order/Factory.php:97
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Die Klasse \"%1$s\" wurde nicht gefunden"
+
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:72
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:258
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Die Klasse \"%1$s\" ist unbekannt"
+
+#: src/Controller/Common/Order/Factory.php:86
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:66
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:252
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
+
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:320
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "Für den Eintrag \"%1$s/%2$s\" in \"%3$s\" wurde kein Typ gefunden"

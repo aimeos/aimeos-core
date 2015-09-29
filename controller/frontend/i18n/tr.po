@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
 "PO-Revision-Date: 2015-07-22 21:02+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:498
+#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "\"%1$s\" ID'li ürünü eklemeye izin verilmiyor"
 
-#: src/Controller/Frontend/Basket/Default.php:901
+#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Mevcut nitelik ID'ler \"%1$s\" verilen nitelik ID'ler \"%2$s\" ile eşleşmiyor"
@@ -39,13 +39,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "\"%1$d\" konumundaki sepet öğesi manuel olarak silinemez"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Common/Factory/Abstract.php:154
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -71,12 +71,12 @@ msgstr "\"%1$s\" kupon kodu geçersiz veya artık kullanılamaz"
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr "\"%1$s\" kupon kodu artık kullanılamaz"
 
-#: src/Controller/Frontend/Basket/Default.php:716
+#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "\"%2$s\" ID'li ürün için geçersiz \"%1$s\" referanslar"
 
-#: src/Controller/Frontend/Basket/Default.php:831
+#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Geçersiz adres özellikleri, girişinizi kontrol edin"
@@ -125,7 +125,7 @@ msgstr "Seçilen nitelikler ve \"%1$s\" ürün ID'si için makale bulunamadı"
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr "\"%1$s\" (%2$s) için hiçbir öğe bulumadı"
 
-#: src/Controller/Frontend/Basket/Default.php:745
+#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "\"%1$s\" ürün ID'si ve \"%2$s\" depo için stok mevcut değil"

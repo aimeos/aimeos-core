@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
 "PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
@@ -20,12 +20,12 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:498
+#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "U mag product ID  \"%1$s\"  niet toevoegen"
 
-#: src/Controller/Frontend/Basket/Default.php:901
+#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr ""
@@ -41,13 +41,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr ""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Common/Factory/Abstract.php:154
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -73,12 +73,12 @@ msgstr ""
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:716
+#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Ongeldige \"%1$s\" referentie van product met ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:831
+#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Ongeldige adres eigenschappen, controleer uw invoer alstublieft."
@@ -127,7 +127,7 @@ msgstr ""
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:745
+#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "Geen voorraad voor product ID \"%1$s\" en magazijn \"%2$s\" beschikbaar"

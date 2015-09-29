@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
 "PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:498
+#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Запрещено добавлять продукт с номером \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:901
+#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Доступные номера атрибутов \"%1$s\" не совпадают с данными номерами атрибутов \"%2$s\""
@@ -40,13 +40,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Невозможно вручную удалить элемент корзины на позиции \"%1$d\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Common/Factory/Abstract.php:154
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -72,12 +72,12 @@ msgstr "Код купона \"%1$s\" неверный или более не д�
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr "Купон с кодом \"%1$s\" более недоступен"
 
-#: src/Controller/Frontend/Basket/Default.php:716
+#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Недопустимые ссылки \"%1$s\" для продукта с номером \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:831
+#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Недопустимые свойства адреса, проверьте введённые данные"
@@ -126,7 +126,7 @@ msgstr "Элементов для выбранных атрибутов и но�
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:745
+#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "Товара № \"%1$s\" отсутствует на складе \"%2$s\""

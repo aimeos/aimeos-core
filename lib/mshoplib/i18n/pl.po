@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-07-28 14:11+0000\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"PO-Revision-Date: 2015-09-29 12:32+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Niedostępny adres w domenie \"%1$s\""
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr "Pozdrowienie w adresie \"%1$s\" nie znajduje się wewnątrz dozwolonego zakresu"
 
-#: src/MShop/Common/Manager/Address/Abstract.php:120
+#: src/MShop/Common/Manager/Address/Abstract.php:109
 #, php-format
 msgid "Address search configuration not available"
 msgstr "Konfiguracja wyszukiwania adresu nie dostępna"
@@ -44,17 +44,17 @@ msgstr "Typ adresu \"%1$s\" w niedozwolonym zakresie"
 msgid "Basket empty"
 msgstr "Koszyk pusty"
 
-#: src/MShop/Context/Item/Default.php:102
+#: src/MShop/Context/Item/Default.php:103
 #, php-format
 msgid "Cache object not available"
 msgstr "Obiekt pamięci podręcznej nie dostępny"
 
-#: src/MShop/Catalog/Manager/Default.php:521
+#: src/MShop/Catalog/Manager/Default.php:630
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
 msgstr "Węzeł katalogu o ID \"%1$s\" nie dostępny"
 
-#: src/MShop/Catalog/Manager/Default.php:461
+#: src/MShop/Catalog/Manager/Default.php:570
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
 msgstr "Nie znaleziono ścieżki katalogu o ID \"%1$s\""
@@ -69,7 +69,7 @@ msgstr "Kontrola na dostępność adresów w koszyku zakończona niepowodzeniem"
 msgid "Checks for available service items in basket failed"
 msgstr "Kontrola dostępności usług w koszyku zakończona niepowodzeniem"
 
-#: src/MShop/Catalog/Item/Default.php:285
+#: src/MShop/Catalog/Item/Default.php:286
 #: src/MShop/Locale/Item/Site/Default.php:208
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
@@ -81,9 +81,9 @@ msgstr "Węzeł potomny z indeksem \"%1$d\" nie dostępny"
 #: src/MShop/Common/Factory/Abstract.php:64
 #: src/MShop/Common/Factory/Abstract.php:153
 #: src/MShop/Plugin/Manager/Abstract.php:41
-#: src/MShop/Plugin/Manager/Default.php:402
+#: src/MShop/Plugin/Manager/Default.php:293
 #: src/MShop/Coupon/Manager/Abstract.php:50
-#: src/MShop/Coupon/Manager/Default.php:694
+#: src/MShop/Coupon/Manager/Default.php:585
 #: src/MShop/Service/Manager/Abstract.php:41
 #: src/MShop/Service/Manager/Default.php:596
 #: src/MAdmin/Common/Manager/Abstract.php:118
@@ -97,9 +97,9 @@ msgstr "W klasie \"%1$s\" nie zaimplementowano interfejsu \"%2$s\""
 #: src/MShop/Common/Factory/Abstract.php:58
 #: src/MShop/Common/Factory/Abstract.php:147
 #: src/MShop/Plugin/Manager/Abstract.php:35
-#: src/MShop/Plugin/Manager/Default.php:393
+#: src/MShop/Plugin/Manager/Default.php:284
 #: src/MShop/Coupon/Manager/Abstract.php:44
-#: src/MShop/Coupon/Manager/Default.php:686
+#: src/MShop/Coupon/Manager/Default.php:577
 #: src/MShop/Service/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:587 src/MShop/Factory.php:91
 #: src/MAdmin/Common/Manager/Abstract.php:112 src/MAdmin/Factory.php:90
@@ -129,13 +129,12 @@ msgstr "Niepoprawna konfiguracja"
 msgid "Configuration not available"
 msgstr "Konfiguracja nie dostępna"
 
-#: src/MShop/Context/Item/Default.php:128
+#: src/MShop/Context/Item/Default.php:129
 #, php-format
 msgid "Configuration object not available"
 msgstr "Nie dostępny obiekt konfiguracji"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:55
-#: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
 msgstr "Konfiguracja obowiązkowego polecenia SQL \"%1$s\" nie dostępna"
@@ -150,7 +149,7 @@ msgstr ""
 msgid "Curl could not be initialized"
 msgstr "CURL nie został zainicjalizowany"
 
-#: src/MShop/Context/Item/Default.php:154
+#: src/MShop/Context/Item/Default.php:155
 #, php-format
 msgid "Database manager object not available"
 msgstr "Obiekt zarządzania bazą danych jest niedostępny"
@@ -172,7 +171,7 @@ msgid "ID of last inserted database record not available"
 msgstr "ID ostatnio wstawionego rekordu do bazy danych jest niedostępne"
 
 #. / Locale ID %1$s
-#: src/MShop/Context/Item/Default.php:173
+#: src/MShop/Context/Item/Default.php:174
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr "Obiekt internacjonalizacji nie dostępny \"%1$s\""
@@ -188,7 +187,8 @@ msgstr "Niepoprawny kod waluty ISO \"%1$s\""
 msgid "Invalid ISO language code \"%1$s\""
 msgstr "Niepoprawny kod języka ISO \"%1$s\""
 
-#: src/MShop/Plugin/Manager/Default.php:755
+#: src/MShop/Product/Manager/Default.php:520
+#: src/MShop/Plugin/Manager/Default.php:646
 #: src/MShop/Coupon/Manager/Default.php:516
 #: src/MShop/Service/Manager/Default.php:523
 #: src/MShop/Locale/Manager/Site/Default.php:576
@@ -208,27 +208,27 @@ msgstr "Niepoprawne znaki w kodzie waluty ISO \"%1$s\""
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "Niepoprawne znaki w kodzie języka ISO \"%1$s\""
 
-#: src/MShop/Order/Manager/Factory.php:39
+#: src/MShop/Order/Manager/Factory.php:72
 #: src/MShop/Customer/Manager/Abstract.php:167
-#: src/MShop/Customer/Manager/Factory.php:39
-#: src/MShop/Media/Manager/Factory.php:39
-#: src/MShop/Price/Manager/Factory.php:39
-#: src/MShop/Product/Manager/Factory.php:39
-#: src/MShop/Attribute/Manager/Factory.php:39
-#: src/MShop/Catalog/Manager/Factory.php:38
-#: src/MShop/Text/Manager/Factory.php:39
+#: src/MShop/Customer/Manager/Factory.php:72
+#: src/MShop/Media/Manager/Factory.php:72
+#: src/MShop/Price/Manager/Factory.php:72
+#: src/MShop/Product/Manager/Factory.php:72
+#: src/MShop/Attribute/Manager/Factory.php:72
+#: src/MShop/Catalog/Manager/Factory.php:71
+#: src/MShop/Text/Manager/Factory.php:72
 #: src/MShop/Common/Manager/Abstract.php:503
 #: src/MShop/Common/Factory/Abstract.php:52
 #: src/MShop/Plugin/Manager/Abstract.php:29
-#: src/MShop/Plugin/Manager/Factory.php:39
+#: src/MShop/Plugin/Manager/Factory.php:72
 #: src/MShop/Coupon/Manager/Abstract.php:38
-#: src/MShop/Coupon/Manager/Factory.php:39
+#: src/MShop/Coupon/Manager/Factory.php:72
 #: src/MShop/Service/Manager/Abstract.php:29
-#: src/MShop/Service/Manager/Factory.php:39
-#: src/MShop/Locale/Manager/Factory.php:38
-#: src/MShop/Supplier/Manager/Factory.php:39
-#: src/MAdmin/Cache/Manager/Factory.php:37
-#: src/MAdmin/Job/Manager/Factory.php:37 src/MAdmin/Log/Manager/Factory.php:37
+#: src/MShop/Service/Manager/Factory.php:72
+#: src/MShop/Locale/Manager/Factory.php:71
+#: src/MShop/Supplier/Manager/Factory.php:72
+#: src/MAdmin/Cache/Manager/Factory.php:70
+#: src/MAdmin/Job/Manager/Factory.php:70 src/MAdmin/Log/Manager/Factory.php:70
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Niepoprawne znaki w nazwie klasy \"%1$s\""
@@ -241,7 +241,7 @@ msgid ""
 "expected."
 msgstr "Niepoprawne znaki  w dacie \"%1$s\". Oczekiwany format ISO \"YYYY-MM-DD hh:mm:ss\"."
 
-#: src/MShop/Customer/Item/Default.php:375
+#: src/MShop/Customer/Item/Default.php:404
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Niepoprawne znaki w dacie \"%1$s\". Oczekiwany format ISO \"YYYY-MM-DD\"."
@@ -275,8 +275,8 @@ msgstr "Niepoprawne znaki w nazwie menedżera \"%1$s\" w \"%2$s\""
 msgid "Invalid characters in price \"%1$s\""
 msgstr "Niepoprawne znaki w cenie \"%1$s\""
 
-#: src/MShop/Plugin/Manager/Default.php:386
-#: src/MShop/Coupon/Manager/Default.php:679
+#: src/MShop/Plugin/Manager/Default.php:277
+#: src/MShop/Coupon/Manager/Default.php:570
 #: src/MShop/Service/Manager/Default.php:580
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
@@ -287,7 +287,7 @@ msgstr "Niepoprawne znaki w nazwie prowajdera \"%1$s\""
 msgid "Invalid characters in purchase date \"%1$s\""
 msgstr "Niepoprawne znaki w dacie zakupu \"%1$s\""
 
-#: src/MShop/Plugin/Manager/Default.php:378
+#: src/MShop/Plugin/Manager/Default.php:269
 #: src/MShop/Service/Manager/Default.php:572
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
@@ -306,17 +306,17 @@ msgstr "Niepoprawna konfiguracja w dostawcy kuponu \"%1$s\", wymagane \"%2$s\""
 msgid "Invalid factory \"%1$s\""
 msgstr "Niepoprawna fabryka \"%1$s\""
 
-#: src/MShop/Media/Item/Default.php:196
+#: src/MShop/Media/Item/Default.php:198
 #, php-format
 msgid "Invalid mime type \"%1$s\""
 msgstr "Niepoprawny typ mime \"%1$s\""
 
-#: src/MShop/Order/Manager/Base/Default.php:570
+#: src/MShop/Order/Manager/Base/Default.php:781
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Niepoprawna serializacja koszyka. \"%1$s\" zwraca \"%2$s\"."
 
-#: src/MShop/Service/Provider/Abstract.php:351
+#: src/MShop/Service/Provider/Abstract.php:369
 #, php-format
 msgid "Invalid type \"%1$s\""
 msgstr ""
@@ -331,7 +331,7 @@ msgstr "Niepoprawny URL strony www \"%1$s\""
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Pozycję nie można usunąć. ID strony z pozycją różni się od ID strony obecnej."
 
-#: src/MShop/Catalog/Manager/Index/Default.php:418
+#: src/MShop/Catalog/Manager/Index/Default.php:470
 #, php-format
 msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
@@ -362,18 +362,18 @@ msgstr "Zadanie z ID \"%1$s\" nie znalezione"
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "Pozycja listy z ID \"%2$s\" w \"%1$s\" nie znaleziona"
 
-#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:436
+#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:430
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr "Nie dostępny typ listy atrybutu pozycji z ID \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:479
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:474
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr "Niedostępny typ listy ceny pozycji z ID \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:447
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:656
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:449
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:784
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr "Niedostępny typ listy tekstu pozycji z ID \"%1$s\""
@@ -383,12 +383,12 @@ msgstr "Niedostępny typ listy tekstu pozycji z ID \"%1$s\""
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
 msgstr "Pobranie odpowiedzi XML \"%1$s\" od usługodawcy dostawy zakończone niepowodzeniem"
 
-#: src/MShop/Locale/Manager/Default.php:585
+#: src/MShop/Locale/Manager/Default.php:476
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
 msgstr "Nie znaleziono lokalizacji strony \"%1$s\""
 
-#: src/MShop/Context/Item/Default.php:211
+#: src/MShop/Context/Item/Default.php:212
 #, php-format
 msgid "Locale object not available"
 msgstr "Obiekt lokalizacji niedostępny"
@@ -403,12 +403,12 @@ msgstr "Flaga blokady \"%1$d\" w niedozwolonym zakresie-"
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr "Wpis do logu o ID \"%1$s\" nie znaleziony"
 
-#: src/MShop/Context/Item/Default.php:237
+#: src/MShop/Context/Item/Default.php:238
 #, php-format
 msgid "Log manager object not available"
 msgstr "Obiekt zarządzania logiem nie dostępny"
 
-#: src/MShop/Context/Item/Default.php:289
+#: src/MShop/Context/Item/Default.php:290
 #, php-format
 msgid "Mail object not available"
 msgstr "Obiekt mail niedostępny"
@@ -470,6 +470,47 @@ msgstr "Nie znaleziono produktu z kodem \"%1$s\""
 msgid "No warehouse for code \"%1$s\" found"
 msgstr "Nie znaleziono magazynu z kodem \"%1$s\""
 
+#: src/MShop/Service/Provider/Abstract.php:343
+#, php-format
+msgid "Not a date"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:349
+#: src/MShop/Service/Provider/Abstract.php:355
+#, php-format
+msgid "Not a date and time"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:365
+#, php-format
+msgid "Not a key/value map"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:360
+#, php-format
+msgid "Not a listed value"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:337
+#, php-format
+msgid "Not a number"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:325
+#, php-format
+msgid "Not a string"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:320
+#, php-format
+msgid "Not a true/false value"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:330
+#, php-format
+msgid "Not an integer number"
+msgstr ""
+
 #: src/MShop/Order/Manager/Status/Default.php:190
 #: src/MShop/Order/Manager/Default.php:257
 #: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:229
@@ -478,7 +519,8 @@ msgstr "Nie znaleziono magazynu z kodem \"%1$s\""
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:228
 #: src/MShop/Order/Manager/Base/Service/Default.php:244
 #: src/MShop/Order/Manager/Base/Address/Default.php:325
-#: src/MShop/Order/Manager/Base/Default.php:421
+#: src/MShop/Order/Manager/Base/Default.php:445
+#: src/MShop/Customer/Manager/Group/Default.php:207
 #: src/MShop/Customer/Manager/Default.php:322
 #: src/MShop/Media/Manager/Default.php:249
 #: src/MShop/Price/Manager/Abstract.php:36
@@ -487,14 +529,14 @@ msgstr "Nie znaleziono magazynu z kodem \"%1$s\""
 #: src/MShop/Product/Manager/Tag/Default.php:133
 #: src/MShop/Product/Manager/Stock/Default.php:143
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:256
-#: src/MShop/Product/Manager/Default.php:183
+#: src/MShop/Product/Manager/Default.php:191
 #: src/MShop/Attribute/Manager/Default.php:199
-#: src/MShop/Catalog/Manager/Index/Default.php:414
-#: src/MShop/Catalog/Manager/Default.php:355
+#: src/MShop/Catalog/Manager/Index/Default.php:466
+#: src/MShop/Catalog/Manager/Default.php:356
 #: src/MShop/Text/Manager/Default.php:155
 #: src/MShop/Common/Manager/List/Abstract.php:91
 #: src/MShop/Common/Manager/Type/Abstract.php:115
-#: src/MShop/Common/Manager/Address/Abstract.php:137
+#: src/MShop/Common/Manager/Address/Abstract.php:126
 #: src/MShop/Plugin/Provider/Order/Coupon.php:50
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:43
 #: src/MShop/Plugin/Provider/Order/Autofill.php:45
@@ -510,7 +552,7 @@ msgstr "Nie znaleziono magazynu z kodem \"%1$s\""
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:45
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:45
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:50
-#: src/MShop/Plugin/Manager/Default.php:478
+#: src/MShop/Plugin/Manager/Default.php:369
 #: src/MShop/Coupon/Manager/Code/Default.php:317
 #: src/MShop/Coupon/Manager/Default.php:199
 #: src/MShop/Service/Manager/Default.php:242
@@ -518,7 +560,7 @@ msgstr "Nie znaleziono magazynu z kodem \"%1$s\""
 #: src/MShop/Locale/Manager/Currency/Default.php:127
 #: src/MShop/Locale/Manager/Default.php:252
 #: src/MShop/Locale/Manager/Site/Default.php:152
-#: src/MShop/Supplier/Manager/Default.php:212
+#: src/MShop/Supplier/Manager/Default.php:213
 #: src/MAdmin/Cache/Manager/Default.php:284
 #: src/MAdmin/Job/Manager/Default.php:161
 #: src/MAdmin/Log/Manager/Default.php:172
@@ -538,7 +580,7 @@ msgid ""
 "invoice ID \"%2$s\" of the order"
 msgstr "ID zamówienia \"%1$s\" w odpowiedzi XML usługodawcy dostawy różni się od zapisanego ID zamówienia \"%2$s\""
 
-#: src/MShop/Order/Manager/Base/Default.php:681
+#: src/MShop/Order/Manager/Base/Default.php:892
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Nie znaleziono podstawowej pozycji zamówienia z ID \"%1$s\""
@@ -671,8 +713,8 @@ msgstr "Nie ma produktu na stanie"
 msgid "Property name \"%1$s\" not within allowed range"
 msgstr "Nazwa właściwości \"%1$s\" nie jest w dozwolonym zakresie"
 
-#: src/MShop/Plugin/Manager/Default.php:382
-#: src/MShop/Coupon/Manager/Default.php:675
+#: src/MShop/Plugin/Manager/Default.php:273
+#: src/MShop/Coupon/Manager/Default.php:566
 #: src/MShop/Service/Manager/Default.php:576
 #, php-format
 msgid "Provider in \"%1$s\" not available"
@@ -687,8 +729,8 @@ msgstr "Ilość musi być liczbą dodatnią i nie może być większa niż %1$d"
 #: src/MShop/Common/Manager/List/Abstract.php:47
 #: src/MShop/Common/Manager/Type/Abstract.php:68
 #: src/MShop/Common/Manager/Type/Abstract.php:72
-#: src/MShop/Common/Manager/Address/Abstract.php:57
-#: src/MShop/Common/Manager/Address/Abstract.php:61
+#: src/MShop/Common/Manager/Address/Abstract.php:45
+#: src/MShop/Common/Manager/Address/Abstract.php:49
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
 msgstr "Nie dostępna konfiguracja szukania \"%1$s\""
@@ -696,7 +738,7 @@ msgstr "Nie dostępna konfiguracja szukania \"%1$s\""
 #: src/MShop/Common/Manager/List/Abstract.php:39
 #: src/MShop/Common/Manager/List/Abstract.php:179
 #: src/MShop/Common/Manager/Type/Abstract.php:64
-#: src/MShop/Common/Manager/Address/Abstract.php:53
+#: src/MShop/Common/Manager/Address/Abstract.php:41
 #, php-format
 msgid "Search configuration not available"
 msgstr "Nie dostępna konfiguracja szukania"
@@ -717,7 +759,7 @@ msgstr "Wysłanie zamówienia do usługodawcy dostawy zakończone niepowodzeniem
 msgid "Service of type \"%1$s\" not available"
 msgstr "Usług typu \"%1$s\" nie dostępna"
 
-#: src/MShop/Context/Item/Default.php:263
+#: src/MShop/Context/Item/Default.php:264
 #, php-format
 msgid "Session object not available"
 msgstr "Nie dostępny obiekt sesji"
@@ -746,7 +788,7 @@ msgstr "Nie znaleziono strony z kodem \"%1$s\""
 msgid "The algorithm \"%1$s\" is not supported"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:94
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:110
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
 msgstr "Przekroczono maksymalną wartość koszyka %1$s"
@@ -756,7 +798,7 @@ msgstr "Przekroczono maksymalną wartość koszyka %1$s"
 msgid "The maximum product quantity is %1$d"
 msgstr "Maksymalna ilość produktu to %1$d"
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:106
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:122
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
 msgstr "Przekroczono maksymalną ilość produktu %1$d"
@@ -776,12 +818,12 @@ msgstr "Maksymalna ilość wszystkich produktów to %1$d"
 msgid "The maximum value of all products is %1$s"
 msgstr "Maksymalna wartość wszystkich produktów to %1$s"
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:88
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:104
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
 msgstr "Nie osiągnięto minimalną wartość koszyka %1$s"
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:100
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:116
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
 msgstr "Nie osiągnięto minimalną ilość produktu %1$d"
@@ -792,7 +834,7 @@ msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr "Typ parametru konfiguracji z kluczem \"%1$s\" musi być typu \"%2$s\""
 
 #: src/MShop/Common/Manager/Abstract.php:825
-#: src/MShop/Locale/Manager/Default.php:899
+#: src/MShop/Locale/Manager/Default.php:790
 #, php-format
 msgid "Total results value not found"
 msgstr "Nie znaleziono łącznych wyników"
@@ -824,7 +866,7 @@ msgid ""
 "failed"
 msgstr "Walidacja odpowiedzi XML od usługodawcy dostawy zgodności z schematem \"%1$s\" zakończona niepowodzeniem"
 
-#: src/MShop/Context/Item/Default.php:315
+#: src/MShop/Context/Item/Default.php:316
 #, php-format
 msgid "View object not available"
 msgstr "Niedostępny obiekt widoku"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
 "PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:498
+#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "L'ajout du produit avec l'ID \"%1$s\" n'est pas autorisé"
 
-#: src/Controller/Frontend/Basket/Default.php:901
+#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Les IDs d'attribut disponibles \"%1$s\" ne correspondent pas aux IDs d'attribut données \"%2$s\""
@@ -39,13 +39,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "L'article du panier en position \"%1$d\" ne peut être effacé manuellement"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La classe \"%1$s\" n'implémente pas l'interface \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Common/Factory/Abstract.php:154
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -71,12 +71,12 @@ msgstr ""
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:716
+#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Références \"%1$s\" non valides pour le produit avec l'ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:831
+#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Propriétés d'adresse non valides, merci de vérifier votre saisie"
@@ -125,7 +125,7 @@ msgstr "Pas d'article trouvé pour les attributs et le produit sélectionnés \"
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:745
+#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr ""

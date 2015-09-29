@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
 "PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:498
+#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Dodawanie produkt z ID \"%1$s\" jest nie dozwolone"
 
-#: src/Controller/Frontend/Basket/Default.php:901
+#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Dostępny atrybut o ID \"%1$s\" nie pasuje do podanego atrybutu o ID \"%2$s\""
@@ -40,13 +40,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Nie można usunąć ręcznie pozycji \"%1$d\" z koszyka"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:165
+#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "W klasie \"%1$s\" nie zaimplementowano interfejsu \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:159
+#: src/Controller/Frontend/Common/Factory/Abstract.php:154
 #: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -72,12 +72,12 @@ msgstr ""
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:716
+#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Niepoprawna referencja \"%1$s\" do produktu z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:831
+#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Niepoprawne dane adresowe, proszę je sprawdzić"
@@ -126,7 +126,7 @@ msgstr "Nie znaleziono produktu o podanym atrybucie i ID \"%1$s\""
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:745
+#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "Brak produktu o ID \"%1$s\" i w magazynie \"%2$s\""

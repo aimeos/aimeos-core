@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-07-15 12:34+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"PO-Revision-Date: 2015-09-29 12:32+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,13 +50,13 @@ msgid "Catalog index rebuild"
 msgstr "Перестроение индекса каталога"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
-#: src/Controller/Jobs/Common/Factory/Abstract.php:169
+#: src/Controller/Jobs/Common/Factory/Abstract.php:164
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
-#: src/Controller/Jobs/Common/Factory/Abstract.php:163
+#: src/Controller/Jobs/Common/Factory/Abstract.php:158
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -120,11 +120,6 @@ msgstr "Запускает задания, созданные администр
 msgid "Exports all available products"
 msgstr "Экспорт всех доступных товаров"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:280
-#, php-format
-msgid "Failed products during import: %1$d"
-msgstr "Не удалось импортировать товары: %1$d"
-
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:39
 msgid "Imports new and updates existing products from CSV files"
 msgstr "Импорт новых и обновление существующих товаров из файлов CSV"
@@ -178,6 +173,11 @@ msgstr "Недопустимая фабрика \"%1$s\""
 #, php-format
 msgid "Invalid job method \"%1$s\""
 msgstr "Недопустимый метод задания \"%1$s\""
+
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:364
+#, php-format
+msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
+msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:296
 #, php-format
@@ -260,7 +260,7 @@ msgstr "Удаление незавершённых заказов"
 msgid "Removes unpaid orders"
 msgstr "Удаление неоплаченных заказов"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:253
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:308
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Обязателный ключ разметки \"%1$s\" невернен или не содержит массива"
@@ -281,6 +281,11 @@ msgstr "Отправка писем об обновлении статуса д�
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr "Отправка оплаченных заказов в систему ERP или партнёру по логистике"
 
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:322
+#, php-format
+msgid "Started product import from \"%1$s\" (%2$s)"
+msgstr ""
+
 #: src/Controller/Jobs/Abstract.php:92
 #, php-format
 msgid "Template \"%1$s\" not available"
@@ -296,12 +301,12 @@ msgstr "Невозможно вызвать метод фабрики \"%1$s\""
 msgid "Unable to call method \"%1$s\""
 msgstr "Невозможно вызвать метод \"%1$s\""
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:435
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:521
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "Невозможно импортировать товар с кодом \"%1$s\": %2$s"
 
-#: src/Controller/Jobs/Product/Import/Csv/Default.php:284
+#: src/Controller/Jobs/Product/Import/Csv/Default.php:369
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Невозможно переместить импортированный файл"

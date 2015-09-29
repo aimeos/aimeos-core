@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:11+0200\n"
-"PO-Revision-Date: 2015-07-16 16:01+0000\n"
+"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"PO-Revision-Date: 2015-09-29 12:45+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: layouts/basket/mini/main-body-default.html:29
+#: layouts/basket/mini/main-body-default.html:102
 #: layouts/common/summary/detail-body-default.html:283
 #, php-format
 msgid "%1$d article"
@@ -76,10 +76,11 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
-#: layouts/checkout/standard/payment-body-default.html:38
-#: layouts/checkout/standard/delivery-body-default.html:38
+#: layouts/checkout/standard/payment-body-default.html:37
+#: layouts/checkout/standard/delivery-body-default.html:37
 #: layouts/basket/related/bought-body-default.html:16
-#: layouts/basket/mini/main-body-default.html:23
+#: layouts/basket/mini/product-body-default.html:27
+#: layouts/basket/mini/main-body-default.html:25
 #: layouts/account/watch/body-default.html:90
 #: layouts/account/favorite/body-default.html:90
 #: layouts/catalog/detail/seen-body-default.html:16
@@ -108,7 +109,7 @@ msgstr "%1$s %2$s popusta"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:66
+#: layouts/catalog/detail/basket-attribute-body-default.html:60
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
@@ -136,8 +137,8 @@ msgstr "%1$s%%"
 
 #. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
 #. (%3$s)
-#: layouts/checkout/standard/payment-body-default.html:51
-#: layouts/checkout/standard/delivery-body-default.html:51
+#: layouts/checkout/standard/payment-body-default.html:50
+#: layouts/checkout/standard/delivery-body-default.html:50
 #, php-format
 msgid "%1$s%3$s + %2$s%3$s"
 msgstr "%1$s%3$s + %2$s%3$s"
@@ -179,6 +180,11 @@ msgstr ""
 msgid "-%1$s%%"
 msgstr "-%1$s%%"
 
+#: layouts/email/account/text-detail-body-default.html:16
+#: layouts/email/account/html-detail-body-default.html:18
+msgid "Account"
+msgstr ""
+
 #: layouts/catalog/detail/basket-body-default.html:34
 msgid "Add to basket"
 msgstr "Dodaj u korpu"
@@ -197,8 +203,8 @@ msgstr "Dodatno"
 msgid "Additional 2"
 msgstr "Dodatno 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:196
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:250
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:271
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:325
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "Adresa sa ID \"%1$s\" nije pronađena"
@@ -215,18 +221,23 @@ msgid ""
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
 msgstr "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n\nThis email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
 
+#: layouts/email/account/html-intro-body-default.html:9
+#: layouts/email/account/text-intro-body-default.html:8
+msgid "An account has been created for you."
+msgstr ""
+
 #: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
 msgstr "Br. proizvoda:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:229
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:273
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:304
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:348
 #, php-format
 msgid "At least one billing address part is missing or invalid"
 msgstr "Barem jedan deo adrese racuna je pogresan ili nedostaje"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:239
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:272
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:314
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:347
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
 msgstr "Barem jedan deo adrese za isporuku je pogresan ili nedostaje"
@@ -242,7 +253,7 @@ msgstr "Nazad"
 
 #: layouts/checkout/standard/body-default.html:27
 #: layouts/basket/standard/body-default.html:36
-#: layouts/basket/mini/body-default.html:90
+#: layouts/basket/mini/body-default.html:20
 msgid "Basket"
 msgstr "Korpa"
 
@@ -252,12 +263,12 @@ msgstr "Korpa"
 msgid "Billing address"
 msgstr "Adresa za račun"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:448
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:625
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
 msgstr "Deo \"%1$s\" adrese racuna je pogresan"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:473
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:650
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Deo \"%1$s\" adrese racuna nedostaje"
@@ -270,14 +281,9 @@ msgstr ""
 msgid "Buy now"
 msgstr "Kupi sada"
 
-#: layouts/catalog/filter/tree-body-default.html:17
+#: layouts/catalog/filter/tree-body-default.html:31
 msgid "Categories"
 msgstr ""
-
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:251
-#, php-format
-msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
-msgstr "Kategorija sa  ID \"%1$s\" nije ispod ID \"%2$s\""
 
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
@@ -288,13 +294,13 @@ msgstr "Kategorija sa  ID \"%1$s\" nije ispod ID \"%2$s\""
 msgid "Change"
 msgstr "Promeni"
 
-#: layouts/checkout/confirm/retry-body-default.html:23
-#: layouts/checkout/standard/process-body-default.html:107
-#: layouts/checkout/standard/process-body-default.html:110
+#: layouts/checkout/confirm/retry-body-default.html:22
+#: layouts/checkout/standard/process-body-default.html:111
+#: layouts/checkout/standard/process-body-default.html:114
 msgid "Change payment"
 msgstr "Promeniti nacin placanja"
 
-#: layouts/catalog/detail/additional-attribute-body-default.html:16
+#: layouts/catalog/detail/additional-attribute-body-default.html:15
 msgid "Characteristics"
 msgstr "Karakteristike"
 
@@ -309,24 +315,26 @@ msgstr "Odjaviti"
 msgid "City"
 msgstr "Grad"
 
-#: src/Client/Html/Common/Factory/Abstract.php:66
+#: src/Client/Html/Common/Factory/Abstract.php:68
+#: src/Client/Html/Abstract.php:166
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Klasa \"%1$s\" nije implementirana \"%2$s\""
 
-#: src/Client/Html/Common/Factory/Abstract.php:167
-#: src/Client/Html/Abstract.php:317
+#: src/Client/Html/Common/Factory/Abstract.php:165
+#: src/Client/Html/Abstract.php:397
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasa \"%1$s\" ne implementira interfejs \"%2$s\""
 
-#: src/Client/Html/Common/Factory/Abstract.php:161
-#: src/Client/Html/Abstract.php:311 src/Client/Html/Factory.php:51
+#: src/Client/Html/Common/Factory/Abstract.php:159
+#: src/Client/Html/Abstract.php:391 src/Client/Html/Factory.php:51
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasa \"%1$s\" nije dostupna"
 
-#: src/Client/Html/Common/Factory/Abstract.php:60
+#: src/Client/Html/Common/Factory/Abstract.php:62
+#: src/Client/Html/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Klasa \"%1$s\" nije pronadjena"
@@ -371,7 +379,7 @@ msgstr "Kod kupona"
 msgid "Coupons"
 msgstr "Kuponi"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:248
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:323
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "Kupac sa ID \"%1$s\" nije pornaden"
@@ -400,12 +408,12 @@ msgstr "Isporuka"
 msgid "Delivery address"
 msgstr "Adresa Isporuke"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:400
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:475
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
 msgstr "Deo \"%1$s\" adrese za isporuku je pogresan"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:426
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:501
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Deo \"%1$s\" adrese za isporuku nedostaje"
@@ -519,6 +527,7 @@ msgstr "Ukljuceni rabati"
 #: src/Client/Html/Catalog/Session/Factory.php:72
 #: src/Client/Html/Catalog/Count/Factory.php:72
 #: src/Client/Html/Catalog/Stock/Factory.php:72
+#: src/Client/Html/Email/Account/Factory.php:72
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Email/Watch/Factory.php:72
 #: src/Client/Html/Email/Payment/Factory.php:72
@@ -530,7 +539,7 @@ msgstr "Ukljuceni rabati"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Nedozvoljen karakter u imenu klase \"%1$s\""
 
-#: src/Client/Html/Abstract.php:274 src/Client/Html/Abstract.php:302
+#: src/Client/Html/Abstract.php:356 src/Client/Html/Abstract.php:382
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Nedozvoljen karakter u imenu klienta \"%1$s\""
@@ -540,12 +549,14 @@ msgstr "Nedozvoljen karakter u imenu klienta \"%1$s\""
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Common/Factory/Abstract.php:54
+#: src/Client/Html/Common/Factory/Abstract.php:56
+#: src/Client/Html/Abstract.php:154
 #, php-format
 msgid "Invalid class name \"%1$s\""
 msgstr "Pogrešno ime klase \"%1$s\""
 
-#: src/Client/Html/Common/Factory/Abstract.php:86
+#: src/Client/Html/Common/Factory/Abstract.php:89
+#: src/Client/Html/Abstract.php:185
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Pogrešan domen \"%1$s\""
@@ -555,7 +566,7 @@ msgstr "Pogrešan domen \"%1$s\""
 msgid "Invalid factory \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Process/Default.php:217
+#: src/Client/Html/Checkout/Standard/Process/Default.php:292
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr ""
@@ -580,8 +591,8 @@ msgstr "Poslednje gledano"
 msgid "Name"
 msgstr "Ime"
 
-#: layouts/checkout/standard/payment-body-default.html:93
-#: layouts/checkout/standard/delivery-body-default.html:92
+#: layouts/checkout/standard/payment-body-default.html:98
+#: layouts/checkout/standard/delivery-body-default.html:97
 #: layouts/checkout/standard/address-body-default.html:17
 #: layouts/catalog/stage/navigator-body-default.html:19
 msgid "Next"
@@ -594,19 +605,19 @@ msgid ""
 "try again with a different keyword."
 msgstr ""
 
-#: src/Client/Html/Catalog/Detail/Default.php:518
+#: src/Client/Html/Catalog/Detail/Default.php:585
 #, php-format
 msgid "No product with ID \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Checkout/Update/Default.php:290
-#: src/Client/Html/Checkout/Standard/Process/Default.php:309
-#: src/Client/Html/Checkout/Confirm/Default.php:344
+#: src/Client/Html/Checkout/Update/Default.php:365
+#: src/Client/Html/Checkout/Standard/Process/Default.php:384
+#: src/Client/Html/Checkout/Confirm/Default.php:401
 #, php-format
 msgid "No service for code \"%1$s\" found"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:494
+#: src/Client/Html/Abstract.php:586
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
@@ -616,7 +627,7 @@ msgstr ""
 msgid "No view available"
 msgstr "Pregled nije moguc"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:210
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:284
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Broj kodova kupona prekoracuje limit"
@@ -667,7 +678,7 @@ msgstr "Historija porudzbine"
 msgid "Order status"
 msgstr ""
 
-#: src/Client/Html/Account/History/Order/Default.php:261
+#: src/Client/Html/Account/History/Order/Default.php:336
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Porudzbina pod ID \"%1$s\" nije pronadena"
@@ -685,7 +696,12 @@ msgstr "Druge musterije su kupile i"
 msgid "Page %1$d of %2$d"
 msgstr "Stranica %1$d od %2$d"
 
-#: layouts/checkout/standard/process-body-default.html:111
+#: layouts/email/account/text-detail-body-default.html:18
+#: layouts/email/account/html-detail-body-default.html:22
+msgid "Password"
+msgstr ""
+
+#: layouts/checkout/standard/process-body-default.html:115
 msgid "Pay now"
 msgstr ""
 
@@ -707,7 +723,7 @@ msgstr "Status placanja"
 msgid "Pinned products"
 msgstr "Zakačeni proizvodi"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:180
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:255
 msgid "Please accept the terms and conditions"
 msgstr "Molimo Vas da prihvatite uslove"
 
@@ -715,11 +731,11 @@ msgstr "Molimo Vas da prihvatite uslove"
 msgid "Please check your order"
 msgstr "Molimo Vas da proverite svoju porudzbinu"
 
-#: layouts/checkout/standard/delivery-body-default.html:43
+#: layouts/checkout/standard/delivery-body-default.html:42
 msgid "Please choose your delivery method"
 msgstr "Molimo vas da izaberete metod isporuke"
 
-#: layouts/checkout/standard/payment-body-default.html:43
+#: layouts/checkout/standard/payment-body-default.html:42
 msgid "Please choose your payment method"
 msgstr "Molimo Vas da izaberete metod placanja"
 
@@ -732,7 +748,7 @@ msgid "Please enter your payment details"
 msgstr ""
 
 #: layouts/checkout/standard/process-body-default.html:91
-#: layouts/catalog/detail/basket-selection-body-default.html:88
+#: layouts/catalog/detail/basket-selection-body-default.html:85
 msgid "Please select"
 msgstr "Molimo odaberite"
 
@@ -743,25 +759,30 @@ msgstr "Molimo odaberite"
 msgid "Postal code"
 msgstr "Postanski broj"
 
-#: layouts/checkout/standard/payment-body-default.html:92
-#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/payment-body-default.html:97
+#: layouts/checkout/standard/delivery-body-default.html:96
 #: layouts/checkout/standard/address-body-default.html:16
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
 msgstr "Prijasnje"
 
+#: layouts/basket/mini/product-body-default.html:38
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:108
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
 msgstr "Cena"
 
-#: layouts/checkout/standard/process-body-default.html:113
+#: layouts/checkout/standard/process-body-default.html:117
 msgid "Proceed"
 msgstr "Nastavi"
 
 #: layouts/checkout/standard/process-body-default.html:76
 msgid "Processing the payment failed"
+msgstr ""
+
+#: layouts/basket/mini/product-body-default.html:36
+msgid "Product"
 msgstr ""
 
 #: layouts/basket/related/bought-body-default.html:23
@@ -770,6 +791,10 @@ msgstr "Proizvodi koji bi Vas mogli zanimati"
 
 #: layouts/catalog/detail/additional-property-body-default.html:14
 msgid "Properties"
+msgstr ""
+
+#: layouts/basket/mini/product-body-default.html:37
+msgid "Qty"
 msgstr ""
 
 #: layouts/common/summary/detail-body-default.html:107
@@ -841,11 +866,12 @@ msgstr "Naplata usluge"
 msgid "Services"
 msgstr "Usluga"
 
+#: layouts/basket/mini/product-body-default.html:52
 #: layouts/common/summary/detail-body-default.html:239
 msgid "Shipping"
 msgstr "Slanje"
 
-#: layouts/catalog/filter/attribute-body-default.html:107
+#: layouts/catalog/filter/attribute-body-default.html:104
 msgid "Show"
 msgstr "Pokazati"
 
@@ -903,7 +929,7 @@ msgstr "Zbir"
 msgid "Telephone"
 msgstr "Telefon"
 
-#: src/Client/Html/Abstract.php:466
+#: src/Client/Html/Abstract.php:546
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -1004,6 +1030,7 @@ msgstr "Vremenski period"
 msgid "Top seller"
 msgstr "Naj prodavaniji"
 
+#: layouts/basket/mini/product-body-default.html:56
 #: layouts/common/summary/detail-body-default.html:255
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
@@ -1014,8 +1041,8 @@ msgstr "Ukupno"
 msgid "Total quantity"
 msgstr "Ukupna kolicina"
 
-#: layouts/checkout/confirm/retry-body-default.html:24
-#: layouts/checkout/standard/process-body-default.html:108
+#: layouts/checkout/confirm/retry-body-default.html:23
+#: layouts/checkout/standard/process-body-default.html:112
 msgid "Try again"
 msgstr "Pokusaj opet"
 
@@ -1023,17 +1050,22 @@ msgstr "Pokusaj opet"
 msgid "Two weeks"
 msgstr "Dve nedelje"
 
-#: src/Client/Html/Common/Decorator/Abstract.php:49
+#: src/Client/Html/Common/Decorator/Abstract.php:51
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:193
+#: src/Client/Html/Checkout/Standard/Order/Account/Default.php:280
+#, php-format
+msgid "Unable to create an account for \"%1$s\": %2$s"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:268
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:561
+#: src/Client/Html/Abstract.php:686
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr ""
@@ -1113,8 +1145,18 @@ msgstr "Vi ste ovde"
 msgid "You will now be forwarded to the next step"
 msgstr "Necete biti prosledeni na sledeci korak"
 
+#: layouts/email/account/text-detail-body-default.html:14
+#: layouts/email/account/html-detail-body-default.html:13
+msgid "Your account"
+msgstr ""
+
 #: layouts/catalog/filter/attribute-body-default.html:57
 msgid "Your choice"
+msgstr ""
+
+#. / Account creation e-mail subject
+#: layouts/email/account/header-default.html:9
+msgid "Your new account"
 msgstr ""
 
 #. / Delivery e-mail subject with order ID
@@ -1152,7 +1194,7 @@ msgstr "adresa"
 msgid "clear all"
 msgstr ""
 
-#: layouts/checkout/standard/delivery-body-default.html:42
+#: layouts/checkout/standard/delivery-body-default.html:41
 #: layouts/common/summary/service-body-default.html:16
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
 #, php-format
@@ -1188,7 +1230,7 @@ msgstr ""
 msgid "order"
 msgstr "porudzbina"
 
-#: layouts/checkout/standard/payment-body-default.html:42
+#: layouts/checkout/standard/payment-body-default.html:41
 #: layouts/common/summary/service-body-default.html:50
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
 #, php-format
@@ -1249,6 +1291,10 @@ msgstr "▶"
 #: layouts/catalog/list/pagination-body-default.html:56
 msgid "▶▶"
 msgstr "▶▶"
+
+#: layouts/basket/mini/product-body-default.html:31
+msgid "▼"
+msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:23
 msgid "▼ Name"
