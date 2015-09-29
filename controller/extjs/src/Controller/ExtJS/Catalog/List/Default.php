@@ -61,7 +61,7 @@ class Controller_ExtJS_Catalog_List_Default
 		if( isset( $refIds['product'] ) )
 		{
 			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( $refIds, 'product' );
+			$this->_clearCache( (array) $refIds['product'], 'product' );
 		}
 
 		return array(
@@ -98,7 +98,7 @@ class Controller_ExtJS_Catalog_List_Default
 		if( isset( $refIds['product'] ) )
 		{
 			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( $refIds, 'product' );
+			$this->_clearCache( (array) $refIds['product'], 'product' );
 		}
 
 		return $this->_getItems( $ids, $this->_getPrefix() );
