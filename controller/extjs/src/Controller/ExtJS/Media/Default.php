@@ -705,7 +705,7 @@ class Controller_ExtJS_Media_Default
 
 		if( chmod( $dest, $perms ) === false )
 		{
-			$msg = sprintf( 'Changing file permissions for "%1$s" to "%1$o" failed', $dest, $perms );
+			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
