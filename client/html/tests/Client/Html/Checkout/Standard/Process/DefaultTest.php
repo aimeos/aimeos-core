@@ -105,12 +105,12 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 
 	public function testProcessDirectDebit()
 	{
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setConstructorArgs( array( $this->_context ) )
-			->setMethods( array( 'store' ) )
+			->setMethods( array( 'saveItem', ) )
 			->getMock();
 
-		MShop_Factory::injectManager( $this->_context, 'order/base', $mock );
+		MShop_Factory::injectManager( $this->_context, 'order', $mock );
 
 		$view = $this->_object->getView();
 		$param = array( 'c_step' => 'process' );
