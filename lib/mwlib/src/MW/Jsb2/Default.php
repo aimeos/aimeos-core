@@ -72,7 +72,7 @@ class MW_Jsb2_Default
 
 				$result = $this->_getFileUrls( $this->_baseURL, $this->_basePath, $package, $timestamp, $version );
 
-				if( $packageFileTime >= $timestamp ) {
+				if( $packageFileTime > 0 && $packageFileTime >= $timestamp ) {
 					$files[] = $this->_baseURL . $packageFile . sprintf( $version, $packageFileTime );
 				} else {
 					$files = array_merge( $files, $result );
