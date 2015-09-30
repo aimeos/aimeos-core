@@ -33,7 +33,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		$this->_object->clear();
-		$this->_context->getSession()->set( 'arcavias', array() );
+		$this->_context->getSession()->set( 'aimeos', array() );
 
 		unset( $this->_object, $this->_testItem );
 	}
@@ -908,10 +908,10 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->_context->getLocale()->setCurrencyId( 'CHF' );
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_getAddress( 'Metaways' ) );
 
-		$this->_context->getSession()->set( 'arcavias/basket/currency', 'CHF' );
+		$this->_context->getSession()->set( 'aimeos/basket/currency', 'CHF' );
 		$this->_context->getLocale()->setCurrencyId( 'EUR' );
 
-		$this->_context->getSession()->set( 'arcavias/basket/content-unittest-en-EUR-', null );
+		$this->_context->getSession()->set( 'aimeos/basket/content-unittest-en-EUR-', null );
 
 		$object = new Controller_Frontend_Basket_Default( $this->_context );
 		$basket = $object->get();

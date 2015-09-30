@@ -404,7 +404,7 @@ class Client_Html_Catalog_Stage_Default
 		{
 			$context = $this->_getContext();
 			$site = $context->getLocale()->getSite()->getCode();
-			$params = (array) $context->getSession()->get( 'arcavias/catalog/list/params/last/' . $site, array() );
+			$params = (array) $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
 		}
 
 		ksort( $params );
@@ -433,7 +433,7 @@ class Client_Html_Catalog_Stage_Default
 			{
 				$context = $this->_getContext();
 				$site = $context->getLocale()->getSite()->getCode();
-				$params = $context->getSession()->get( 'arcavias/catalog/list/params/last/' . $site, array() );
+				$params = $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
 			}
 
 			$this->_params = $params;

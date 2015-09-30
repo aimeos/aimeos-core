@@ -61,7 +61,7 @@ class MW_Setup_Task_TablesChangeSiteidNotNullCoupon extends MW_Setup_Task_Abstra
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg( 'Changing site ID to NOT NULL in Arcavias Coupon Extension', 0 );
+		$this->_msg( 'Changing site ID to NOT NULL in Aimeos Coupon Extension', 0 );
 		$this->_status( '' );
 
 		foreach( $stmts as $table => $stmtList )

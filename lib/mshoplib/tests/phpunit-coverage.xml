@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="bootstrap.php">
 	<testsuites>
-		<testsuite name="Arcavias suite">
+		<testsuite name="Aimeos suite">
 			<directory>MShop/</directory>
 		</testsuite>
 		<testsuite name="MAdmin suite">

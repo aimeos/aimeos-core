@@ -9,7 +9,7 @@
 /**
  * Global starting point for applicatons.
  */
-class Arcavias
+class Aimeos
 {
 	private $_manifests = array();
 	private $_extensions = array();
@@ -24,7 +24,7 @@ class Arcavias
 	 *
 	 * @param array $extdirs List of directories to look for manifest files (or sub-directories thereof)
 	 * @param boolean $defaultdir If default extension directory should be included automatically
-	 * @param string|null $basedir Arcavias core path (optional, dirname(__FILE__) if null)
+	 * @param string|null $basedir Aimeos core path (optional, dirname(__FILE__) if null)
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
@@ -285,7 +285,7 @@ class Arcavias
 
 
 	/**
-	 * Registers the Arcavias autoloader.
+	 * Registers the Aimeos autoloader.
 	 */
 	protected function _registerAutoloader()
 	{

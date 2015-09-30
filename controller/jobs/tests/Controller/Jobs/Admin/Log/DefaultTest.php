@@ -21,9 +21,9 @@ class Controller_Jobs_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Admin_Log_Default( $this->_context, $arcavias );
+		$this->_object = new Controller_Jobs_Admin_Log_Default( $this->_context, $aimeos );
 	}
 
 

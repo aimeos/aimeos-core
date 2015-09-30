@@ -42,7 +42,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetHeader()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->_context->getSession()->set( 'aimeos/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$output = $this->_object->getHeader();
 		$this->assertNotNull( $output );
@@ -51,7 +51,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBody()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->_context->getSession()->set( 'aimeos/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos checkout-confirm">', $output );
@@ -74,7 +74,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testProcess()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->_context->getSession()->set( 'aimeos/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$view = $this->_object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'code' => 'paypalexpress' ) );

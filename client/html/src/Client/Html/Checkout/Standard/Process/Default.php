@@ -264,7 +264,7 @@ class Client_Html_Checkout_Standard_Process_Default
 
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$orderid = $session->get( 'arcavias/orderid' );
+		$orderid = $session->get( 'aimeos/orderid' );
 		$config = array( 'absoluteUri' => true, 'namespace' => false );
 
 		try

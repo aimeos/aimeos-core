@@ -34,6 +34,10 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 	 */
 	public function __construct( MW_DB_Manager_Interface $dbm, array $dbconfig, $taskpath, $additional = null )
 	{
+		if( empty( $dbconfig ) ) {
+			throw new MW_Setup_Exception( 'No databases configured in resource config file' );
+		}
+
 		$this->_dbm = $dbm;
 		$this->_additional = $additional;
 

@@ -22,11 +22,11 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/order/coupon/count/name
 		 * Class name of the used order coupon count scheduler controller implementation
@@ -49,7 +49,7 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Coupon_Count_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::_createController( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/coupon/count/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order coupon count controllers
@@ -86,6 +86,6 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		 * @see controller/jobs/order/coupon/count/decorators/global
 		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/coupon/count' );
+		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/coupon/count' );
 	}
 }

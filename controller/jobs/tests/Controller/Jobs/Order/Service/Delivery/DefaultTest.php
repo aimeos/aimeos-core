@@ -20,9 +20,9 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
@@ -98,7 +98,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 		$orderManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -106,7 +106,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testRunExceptionProcess()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
@@ -151,7 +151,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -159,7 +159,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testRunExceptionProvider()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
@@ -192,7 +192,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
 		$object->run();
 	}
 }

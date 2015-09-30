@@ -8,7 +8,7 @@
 
 class TestHelper
 {
-	private static $_arcavias;
+	private static $_aimeos;
 	private static $_context;
 
 
@@ -16,7 +16,7 @@ class TestHelper
 	{
 		set_error_handler( 'TestHelper::errorHandler' );
 
-		self::_getArcavias();
+		self::_getAimeos();
 		MShop_Factory::setCache( false );
 		Controller_ExtJS_Factory::setCache( false );
 	}
@@ -32,22 +32,22 @@ class TestHelper
 	}
 
 
-	private static function _getArcavias()
+	private static function _getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$_aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$_arcavias = new Arcavias();
+			self::$_aimeos = new Aimeos();
 		}
 
-		return self::$_arcavias;
+		return self::$_aimeos;
 	}
 
 
 	public static function getControllerPaths()
 	{
-		return self::_getArcavias()->getCustomPaths( 'controller/extjs' );
+		return self::_getAimeos()->getCustomPaths( 'controller/extjs' );
 	}
 
 
@@ -57,10 +57,10 @@ class TestHelper
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::_getArcavias();
+		$aimeos = self::_getAimeos();
 
 
-		$paths = $arcavias->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 

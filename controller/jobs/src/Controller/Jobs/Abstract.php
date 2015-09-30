@@ -16,7 +16,7 @@
  */
 abstract class Controller_Jobs_Abstract
 {
-	private $_arcavias;
+	private $_aimeos;
 	private $_context;
 
 
@@ -24,12 +24,12 @@ abstract class Controller_Jobs_Abstract
 	 * Initializes the object.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
-	 * @param Arcavias $arcavias Arcavias main object
+	 * @param Aimeos $aimeos Aimeos main object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias )
+	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos )
 	{
 		$this->_context = $context;
-		$this->_arcavias = $arcavias;
+		$this->_aimeos = $aimeos;
 	}
 
 
@@ -45,13 +45,13 @@ abstract class Controller_Jobs_Abstract
 
 
 	/**
-	 * Returns the Arcavias object.
+	 * Returns the Aimeos object.
 	 *
-	 * @return Arcavias Arcavias object
+	 * @return Aimeos Aimeos object
 	 */
-	protected function _getArcavias()
+	protected function _getAimeos()
 	{
-		return $this->_arcavias;
+		return $this->_aimeos;
 	}
 
 
@@ -67,7 +67,7 @@ abstract class Controller_Jobs_Abstract
 	protected function _getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$templatePaths = $this->_arcavias->getCustomPaths( 'controller/jobs/layouts' );
+		$templatePaths = $this->_aimeos->getCustomPaths( 'controller/jobs/layouts' );
 	
 		foreach( (array) $default as $fname )
 		{

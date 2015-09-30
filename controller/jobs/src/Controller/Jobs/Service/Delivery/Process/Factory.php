@@ -23,11 +23,11 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/service/delivery/process/name
 		 * Class name of the used service delivery process scheduler controller implementation
@@ -50,7 +50,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Service_Delivery_Process_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::_createController( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/service/delivery/process/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service job controllers
@@ -87,6 +87,6 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 * @see controller/jobs/service/delivery/process/decorators/global
 		 * @deprecated Use controller/jobs/order/service/delivery/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'service/delivery/process' );
+		return self::_addControllerDecorators( $context, $aimeos, $controller, 'service/delivery/process' );
 	}
 }

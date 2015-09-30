@@ -16,9 +16,9 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 		MShop_Factory::setCache( true );
 
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Common_Product_Import_Csv_TestAbstract( $context, $arcavias );
+		$this->_object = new Controller_Common_Product_Import_Csv_TestAbstract( $context, $aimeos );
 	}
 
 

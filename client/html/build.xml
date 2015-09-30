@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Arcavias HTML client" default="all">
+<project name="Aimeos HTML client" default="all">
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />

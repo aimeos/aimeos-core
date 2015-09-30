@@ -427,7 +427,7 @@ class Client_Html_Basket_Standard_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$params = $context->getSession()->get( 'arcavias/catalog/detail/params/last', array() );
+			$params = $context->getSession()->get( 'aimeos/catalog/detail/params/last', array() );
 
 			$target = $view->config( 'client/html/catalog/detail/url/target' );
 			$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );

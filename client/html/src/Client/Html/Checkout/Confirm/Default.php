@@ -323,7 +323,7 @@ class Client_Html_Checkout_Confirm_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$orderid = $session->get( 'arcavias/orderid' );
+		$orderid = $session->get( 'aimeos/orderid' );
 
 		try
 		{
@@ -341,7 +341,7 @@ class Client_Html_Checkout_Confirm_Default
 
 			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
-				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+				foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
 
@@ -470,7 +470,7 @@ class Client_Html_Checkout_Confirm_Default
 			if( !isset( $view->confirmOrderItem ) )
 			{
 				$context = $this->_getContext();
-				$orderid = $context->getSession()->get( 'arcavias/orderid' );
+				$orderid = $context->getSession()->get( 'aimeos/orderid' );
 				$orderManager = MShop_Factory::createManager( $context, 'order' );
 
 				$view->confirmOrderItem = $orderManager->getItem( $orderid );

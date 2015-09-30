@@ -14,9 +14,9 @@ class Controller_Jobs_AbstractTest extends PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_TestAbstract( $context, $arcavias );
+		$this->_object = new Controller_Jobs_TestAbstract( $context, $aimeos );
 	}
 
 

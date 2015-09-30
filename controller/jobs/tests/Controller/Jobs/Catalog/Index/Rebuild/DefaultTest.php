@@ -20,9 +20,9 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends PHPUnit_Framewor
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $aimeos );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends PHPUnit_Framewor
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
@@ -81,7 +81,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends PHPUnit_Framewor
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $aimeos );
 		$object->run();
 	}
 }

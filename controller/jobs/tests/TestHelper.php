@@ -8,13 +8,13 @@
 
 class TestHelper
 {
-	private static $_arcavias;
+	private static $_aimeos;
 	private static $_context;
 
 
 	public static function bootstrap()
 	{
-		self::getArcavias();
+		self::getAimeos();
 		MShop_Factory::setCache( false );
 	}
 
@@ -29,22 +29,22 @@ class TestHelper
 	}
 
 
-	public static function getArcavias()
+	public static function getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$_aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$_arcavias = new Arcavias( array(), false );
+			self::$_aimeos = new Aimeos( array(), false );
 		}
 
-		return self::$_arcavias;
+		return self::$_aimeos;
 	}
 
 
 	public static function getControllerPaths()
 	{
-		return self::getArcavias()->getCustomPaths( 'controller/jobs' );
+		return self::getAimeos()->getCustomPaths( 'controller/jobs' );
 	}
 
 
@@ -54,10 +54,10 @@ class TestHelper
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::getArcavias();
+		$aimeos = self::getAimeos();
 
 
-		$paths = $arcavias->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
@@ -100,7 +100,7 @@ class TestHelper
 
 	protected static function _createView( MW_Config_Interface $config )
 	{
-		$tmplpaths = self::getArcavias()->getCustomPaths( 'client/html' );
+		$tmplpaths = self::getAimeos()->getCustomPaths( 'client/html' );
 		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );
 
 		$view = new MW_View_Default();

@@ -10,7 +10,7 @@ class Controller_Jobs_Product_Export_Sitemap_DefaultTest extends PHPUnit_Framewo
 {
 	private $_object;
 	private $_context;
-	private $_arcavias;
+	private $_aimeos;
 
 
 	/**
@@ -24,9 +24,9 @@ class Controller_Jobs_Product_Export_Sitemap_DefaultTest extends PHPUnit_Framewo
 		MShop_Factory::setCache( true );
 
 		$this->_context = TestHelper::getContext();
-		$this->_arcavias = TestHelper::getArcavias();
+		$this->_aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Product_Export_Sitemap_Default( $this->_context, $this->_arcavias );
+		$this->_object = new Controller_Jobs_Product_Export_Sitemap_Default( $this->_context, $this->_aimeos );
 	}
 
 

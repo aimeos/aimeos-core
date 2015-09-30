@@ -34,7 +34,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		$this->_context->getSession()->set( 'arcavias/catalog/session/pinned/list', null );
+		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', null );
 		unset( $this->_object );
 	}
 
@@ -49,7 +49,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	public function testGetBody()
 	{
 		$pinned = array( $this->_getProductItem( 'CNC' )->getId() );
-		$this->_context->getSession()->set( 'arcavias/catalog/session/pinned/list', $pinned );
+		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', $pinned );
 
 		$output = $this->_object->getBody();
 
@@ -80,7 +80,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 
 		$this->_object->process();
 
-		$pinned = $this->_context->getSession()->get( 'arcavias/catalog/session/pinned/list' );
+		$pinned = $this->_context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
 		$this->assertEquals( array( $prodId => $prodId ), $pinned );
 	}
 
@@ -88,7 +88,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	public function testProcessDelete()
 	{
 		$prodId = $this->_getProductItem( 'CNE' )->getId();
-		$this->_context->getSession()->set( 'arcavias/catalog/session/pinned/list', array( $prodId => $prodId ) );
+		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', array( $prodId => $prodId ) );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -101,7 +101,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 
 		$this->_object->process();
 
-		$pinned = $this->_context->getSession()->get( 'arcavias/catalog/session/pinned/list' );
+		$pinned = $this->_context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
 		$this->assertEquals( array(), $pinned );
 	}
 

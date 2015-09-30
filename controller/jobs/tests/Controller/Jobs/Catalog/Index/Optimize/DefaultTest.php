@@ -20,9 +20,9 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $aimeos );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsCatalogIndexOptimizeDefaultRun';
@@ -80,7 +80,7 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'optimize' );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $aimeos );
 		$object->run();
 	}
 }

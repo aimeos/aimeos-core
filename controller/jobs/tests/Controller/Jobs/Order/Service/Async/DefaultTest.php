@@ -20,9 +20,9 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
@@ -85,7 +85,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 		$serviceProviderStub->expects( $this->once() )->method( 'updateAsync' );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -93,7 +93,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	public function testRunExceptionProcess()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
@@ -117,7 +117,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 			->will( $this->throwException( new MShop_Service_Exception() ) );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 		$object->run();
 	}
 }

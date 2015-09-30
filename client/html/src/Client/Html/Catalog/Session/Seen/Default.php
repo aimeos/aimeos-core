@@ -117,8 +117,8 @@ class Client_Html_Catalog_Session_Seen_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/seen/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/seen/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/seen/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -178,8 +178,8 @@ class Client_Html_Catalog_Session_Seen_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/seen/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/seen/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/seen/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -298,7 +298,7 @@ class Client_Html_Catalog_Session_Seen_Default
 		if( !isset( $this->_cache ) )
 		{
 			$session = $this->_getContext()->getSession();
-			$lastSeen = $session->get( 'arcavias/catalog/session/seen/list', array() );
+			$lastSeen = $session->get( 'aimeos/catalog/session/seen/list', array() );
 
 			$view->seenItems = array_reverse( $lastSeen );
 

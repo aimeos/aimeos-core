@@ -6973,7 +6973,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     previewRenderer : function(preview) {
-        return '<img class="arcavias-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl(preview) +
+        return '<img class="aimeos-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl(preview) +
             '" />';
     }
 });
@@ -7223,7 +7223,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
 
     refPreviewRenderer : function(refId, metaData, record, rowIndex, colIndex, store) {
         var refItem = this.getRefStore().getById(refId);
-        return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' +
+        return (refItem ? '<img class="aimeos-admin-media-list-preview" src="' +
             MShop.urlManager.getAbsoluteUrl(refItem.get('media.preview')) + '" />' : '');
     }
 });
@@ -7315,7 +7315,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
      */
     defaultImage : 'mimeicons/unknown.png',
 
-    cls : 'arcavias-admin-media-item-preview',
+    cls : 'aimeos-admin-media-item-preview',
 
     defaultAutoCreate : {
         tag : 'input',

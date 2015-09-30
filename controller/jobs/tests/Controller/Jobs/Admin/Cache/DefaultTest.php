@@ -20,9 +20,9 @@ class Controller_Jobs_Admin_Cache_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Admin_Cache_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Admin_Cache_Default( $context, $aimeos );
 	}
 
 

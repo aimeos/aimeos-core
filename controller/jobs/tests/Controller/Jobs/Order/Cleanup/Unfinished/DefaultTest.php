@@ -21,9 +21,9 @@ class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $aimeos );
 	}
 
 
@@ -55,7 +55,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsOrderCleanupUnfinishedDefaultRun';
@@ -99,7 +99,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 		$orderCntlStub->expects( $this->once() )->method( 'unblock' );
 
 
-		$object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $aimeos );
 		$object->run();
 	}
 }

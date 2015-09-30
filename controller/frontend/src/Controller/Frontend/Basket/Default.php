@@ -512,7 +512,7 @@ class Controller_Frontend_Basket_Default
 		$session = $context->getSession();
 		$locale = $this->_basket->getLocale();
 
-		$localeStr = $session->get( 'arcavias/basket/locale' );
+		$localeStr = $session->get( 'aimeos/basket/locale' );
 		$localeKey = $locale->getSite()->getCode() . '|' . $locale->getLanguageId() . '|' . $locale->getCurrencyId();
 
 		if( $localeStr !== null && $localeStr !== $localeKey )
@@ -539,7 +539,7 @@ class Controller_Frontend_Basket_Default
 			$manager->setSession( $basket );
 		}
 
-		$session->set( 'arcavias/basket/locale', $localeKey );
+		$session->set( 'aimeos/basket/locale', $localeKey );
 	}
 
 
