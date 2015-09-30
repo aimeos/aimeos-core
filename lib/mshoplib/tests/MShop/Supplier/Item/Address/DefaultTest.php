@@ -42,9 +42,9 @@ class MShop_Supplier_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 			'countryid' => 'DE',
 			'langid' => 'de',
 			'telephone' => '05554433221',
-			'email' => 'unit.test@metaways.de',
+			'email' => 'test@example.com',
 			'telefax' => '05554433222',
-			'website' => 'www.metaways.de',
+			'website' => 'www.example.com',
 			'pos' => 1,
 			'flag' => 2,
 			'mtime' => '2011-01-01 00:00:02',
@@ -272,7 +272,7 @@ class MShop_Supplier_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetEmail()
 	{
-		$this->assertEquals( 'unit.test@metaways.de', $this->_object->getEmail() );
+		$this->assertEquals( 'test@example.com', $this->_object->getEmail() );
 	}
 
 	public function testSetEmail()
@@ -299,7 +299,7 @@ class MShop_Supplier_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetWebsite()
 	{
-		$this->assertEquals( 'www.metaways.de', $this->_object->getWebsite() );
+		$this->assertEquals( 'www.example.com', $this->_object->getWebsite() );
 	}
 
 	public function testSetWebsite()

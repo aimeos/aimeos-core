@@ -746,19 +746,19 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetBillingAddressByItem()
 	{
-		$item = $this->_getAddress( 'Metaways' );
+		$item = $this->_getAddress( 'Example company' );
 
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
 
 	public function testSetBillingAddressByArray()
 	{
 		$fixture = array(
-			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -773,16 +773,16 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.countryid' => 'de',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.telephone' => '05554433221',
-			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.email' => 'test@example.com',
 			'order.base.address.telefax' => '05554433222',
-			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
 
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $fixture );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
 	}
@@ -804,19 +804,19 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetDeliveryAddressByItem()
 	{
-		$item = $this->_getAddress( 'Metaways' );
+		$item = $this->_getAddress( 'Example company' );
 
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
 
 	public function testSetDeliveryAddressByArray()
 	{
 		$fixture = array(
-			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -831,15 +831,15 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.countryid' => 'de',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.telephone' => '05554433221',
-			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.email' => 'test@example.com',
 			'order.base.address.telefax' => '05554433222',
-			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $fixture );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
 	}
@@ -906,7 +906,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$price->setCurrencyId( 'CHF' );
 
 		$this->_context->getLocale()->setCurrencyId( 'CHF' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_getAddress( 'Metaways' ) );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_getAddress( 'Example company' ) );
 
 		$this->_context->getSession()->set( 'aimeos/basket/currency', 'CHF' );
 		$this->_context->getLocale()->setCurrencyId( 'EUR' );

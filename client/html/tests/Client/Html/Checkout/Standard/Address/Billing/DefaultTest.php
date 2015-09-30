@@ -250,7 +250,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends PHPUnit_
 
 		$this->_context->setEditor( null );
 		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
-		$this->assertEquals( 'Metaways', $basket->getAddress( 'payment' )->getCompany() );
+		$this->assertEquals( 'Example company', $basket->getAddress( 'payment' )->getCompany() );
 	}
 
 

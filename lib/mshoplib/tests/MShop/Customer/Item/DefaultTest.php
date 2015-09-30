@@ -55,9 +55,9 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'countryid' => 'de',
 			'langid' => 'de',
 			'telephone' => '05554433221',
-			'email' => 'unit.test@metaways.de',
+			'email' => 'test@example.com',
 			'telefax' => '05554433222',
-			'website' => 'www.metaways.de',
+			'website' => 'www.example.com',
 			'mtime'=> '2010-01-05 00:00:05',
 			'ctime'=> '2010-01-01 00:00:00',
 			'editor' => 'unitTestUser'
@@ -204,9 +204,9 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $address->getCountryId(), 'DE' );
 		$this->assertEquals( $address->getLanguageId(), 'de' );
 		$this->assertEquals( $address->getTelephone(), '05554433221' );
-		$this->assertEquals( $address->getEmail(), 'unit.test@metaways.de' );
+		$this->assertEquals( $address->getEmail(), 'test@example.com' );
 		$this->assertEquals( $address->getTelefax(), '05554433222' );
-		$this->assertEquals( $address->getWebsite(), 'www.metaways.de' );
+		$this->assertEquals( $address->getWebsite(), 'www.example.com' );
 	}
 
 	public function testSetPaymentAddress()
@@ -245,9 +245,9 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'customer.countryid' => 'DE',
 			'customer.languageid' => 'de',
 			'customer.telephone' => '05554433221',
-			'customer.email' => 'unit.test@metaways.de',
+			'customer.email' => 'test@example.com',
 			'customer.telefax' => '05554433222',
-			'customer.website' => 'www.metaways.de',
+			'customer.website' => 'www.example.com',
 		);
 
 		$unknown = $item->fromArray( $list );

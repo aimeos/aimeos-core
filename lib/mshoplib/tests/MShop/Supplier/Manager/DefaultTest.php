@@ -142,7 +142,7 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'supplier.address.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.refid', '' );
-		$expr[] = $search->compare( '==', 'supplier.address.company', 'Metaways' );
+		$expr[] = $search->compare( '==', 'supplier.address.company', 'Example company' );
 		$expr[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'supplier.address.salutation', 'mrs' );
 		$expr[] = $search->compare( '==', 'supplier.address.title', '' );
@@ -157,8 +157,8 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'supplier.address.countryid', 'de' );
 		$expr[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
-		$expr[] = $search->compare( '==', 'supplier.address.email', 'eshop@metaways.de' );
-		$expr[] = $search->compare( '==', 'supplier.address.website', 'www.metaways.de' );
+		$expr[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
+		$expr[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'supplier.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'supplier.address.position', 0 );
 		$expr[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );

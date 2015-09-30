@@ -208,7 +208,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'order.base.address.email', 'eshop@metaways.de' );
+		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'order.base.address.telefax', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.metaways.net' );
 		$expr[] = $search->compare( '>=', 'order.base.address.mtime', '1970-01-01 00:00:00' );

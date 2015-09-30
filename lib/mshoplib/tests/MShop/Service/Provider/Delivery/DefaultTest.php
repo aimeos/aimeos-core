@@ -286,7 +286,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 							<title><![CDATA[Dr.]]></title>
 							<firstname><![CDATA[Our]]></firstname>
 							<lastname><![CDATA[Unittest]]></lastname>
-							<company><![CDATA[Metaways]]></company>
+							<company><![CDATA[Example company]]></company>
 							<address1><![CDATA[Pickhuben]]></address1>
 							<address2><![CDATA[2-4]]></address2>
 							<address3><![CDATA[]]></address3>
@@ -294,7 +294,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 							<city><![CDATA[Hamburg]]></city>
 							<state><![CDATA[Hamburg]]></state>
 							<countrycode><![CDATA[DE]]></countrycode>
-							<email><![CDATA[eshop@metaways.de]]></email>
+							<email><![CDATA[test@example.com]]></email>
 							<phone><![CDATA[055544332211]]></phone>
 							<vatid><![CDATA[DE999999999]]></vatid>
 						</addressitem>
@@ -312,7 +312,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 							<city><![CDATA[Hamburg]]></city>
 							<state><![CDATA[Hamburg]]></state>
 							<countrycode><![CDATA[DE]]></countrycode>
-							<email><![CDATA[eshop@metaways.de]]></email>
+							<email><![CDATA[test@example.com]]></email>
 							<phone><![CDATA[055544332211]]></phone>
 							<vatid><![CDATA[]]></vatid>
 						</addressitem>
@@ -470,7 +470,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 				<city><![CDATA[Hamburg]]></city>
 				<state><![CDATA[Hamburg]]></state>
 				<countrycode><![CDATA[DE]]></countrycode>
-				<email><![CDATA[eshop@metaways.de]]></email>
+				<email><![CDATA[test@example.com]]></email>
 				<phone><![CDATA[055544332211]]></phone>
 				<vatid><![CDATA[]]></vatid>
 			</addressitem>

@@ -58,7 +58,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'supplier.address.company', 'Metaways' ),
+			$search->compare( '~=', 'supplier.address.company', 'Example company' ),
 			$search->compare( '==', 'supplier.address.editor', $this->_editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -175,7 +175,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$conditions[] = $search->compare( '!=', 'supplier.address.id', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.refid', null );
-		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Metaways GmbH' );
+		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$conditions[] = $search->compare( '==', 'supplier.address.salutation', MShop_Common_Item_Address_Abstract::SALUTATION_MRS );
 		$conditions[] = $search->compare( '==', 'supplier.address.title', '' );
@@ -189,9 +189,9 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$conditions[] = $search->compare( '==', 'supplier.address.state', 'Hamburg' );
 		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'de' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
-		$conditions[] = $search->compare( '==', 'supplier.address.email', 'eshop@metaways.de' );
+		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
-		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.metaways.de' );
+		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->_editor );

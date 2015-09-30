@@ -116,7 +116,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 				'order.base.address.telephone' => '0815-4711',
 				'order.base.address.email' => 'ich@du.de',
 				'order.base.address.telefax' => '0815-4712',
-				'order.base.address.website' => 'www.metaways.de'
+				'order.base.address.website' => 'www.example.com'
 			),
 		);
 

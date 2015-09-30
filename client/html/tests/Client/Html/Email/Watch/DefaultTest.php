@@ -88,7 +88,7 @@ class Client_Html_Email_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 			->with( $this->equalTo( 'X-MailGenerator' ), $this->equalTo( 'Aimeos' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'addTo' )
-			->with( $this->equalTo( 'eshop@metaways.de' ), $this->equalTo( 'Our Unittest' ) );
+			->with( $this->equalTo( 'test@example.com' ), $this->equalTo( 'Our Unittest' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'addFrom' )
 			->with( $this->equalTo( 'me@localhost' ), $this->equalTo( 'My company' ) );
