@@ -25,7 +25,7 @@ abstract class MW_Config_Abstract implements MW_Config_Interface
 	* @param string $file Path and file name of a config file
 	* @return array Value of the requested config file
 	**/
-	protected function _include( $file )
+	protected function includeFile( $file )
 	{
 		if( !isset( $this->_includeCache[$file] ) ) {
 			$this->_includeCache[$file] = include $file;

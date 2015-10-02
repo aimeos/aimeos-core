@@ -46,7 +46,7 @@ class MW_Config_Array
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
 
-		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+		if( ( $value = $this->getPart( $this->_config, $parts ) ) !== null ) {
 			return $value;
 		}
 
@@ -54,7 +54,7 @@ class MW_Config_Array
 			$this->_config = $this->_load( $this->_config, $fspath, $parts );
 		}
 
-		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+		if( ( $value = $this->getPart( $this->_config, $parts ) ) !== null ) {
 			return $value;
 		}
 
@@ -71,7 +71,7 @@ class MW_Config_Array
 	public function set( $name, $value )
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
-		$this->_config = $this->_set( $this->_config, $parts, $value );
+		$this->_config = $this->setPart( $this->_config, $parts, $value );
 	}
 
 
@@ -82,12 +82,12 @@ class MW_Config_Array
 	 * @param array $parts Configuration path parts to look for inside the array
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function _get( $config,  $parts )
+	protected function getPart( $config,  $parts )
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
 			if( count( $parts ) > 0 ) {
-				return $this->_get( $config[$current], $parts );
+				return $this->getPart( $config[$current], $parts );
 			}
 
 			return $config[$current];
@@ -104,14 +104,14 @@ class MW_Config_Array
 	 * @param array $path Configuration path parts
 	 * @param array $value The new value
 	 */
-	protected function _set( $config, $path, $value )
+	protected function setPart( $config, $path, $value )
 	{
 		if( ( $current = array_shift( $path ) ) !== null )
 		{
 			if( isset( $config[$current] ) ) {
-				$config[$current] = $this->_set( $config[$current], $path, $value );
+				$config[$current] = $this->setPart( $config[$current], $path, $value );
 			} else {
-				$config[$current] = $this->_set( array(), $path, $value );
+				$config[$current] = $this->setPart( array(), $path, $value );
 			}
 
 			return $config;
@@ -150,7 +150,7 @@ class MW_Config_Array
 					$config[$key] = array();
 				}
 
-				$config[$key] = $this->_merge( $config[$key], $this->_include( $newPath . '.php' ) );
+				$config[$key] = $this->_merge( $config[$key], $this->includeFile( $newPath . '.php' ) );
 			}
 		}
 
