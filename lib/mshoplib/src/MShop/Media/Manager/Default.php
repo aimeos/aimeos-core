@@ -598,7 +598,7 @@ class MShop_Media_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'media', $manager, $name );
+		return $this->getSubManagerBase( 'media', $manager, $name );
 	}
 
 

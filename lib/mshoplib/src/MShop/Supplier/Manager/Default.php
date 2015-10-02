@@ -502,7 +502,7 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'supplier', $manager, $name );
+		return $this->getSubManagerBase( 'supplier', $manager, $name );
 	}
 
 

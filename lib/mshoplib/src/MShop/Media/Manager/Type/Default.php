@@ -264,7 +264,7 @@ class MShop_Media_Manager_Type_Default
 		 * @see mshop/media/manager/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'media', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'media', 'type/' . $manager, $name );
 	}
 
 

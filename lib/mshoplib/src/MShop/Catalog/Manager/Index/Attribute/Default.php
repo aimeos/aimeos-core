@@ -328,7 +328,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 * @see mshop/catalog/manager/index/attribute/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/attribute/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/attribute/' . $manager, $name );
 	}
 
 

@@ -595,7 +595,7 @@ class MShop_Locale_Manager_Currency_Default
 		 * @see mshop/locale/manager/currency/decorators/global
 		 */
 
-		return $this->_getSubManager( 'locale', 'currency/' . $manager, $name );
+		return $this->getSubManagerBase( 'locale', 'currency/' . $manager, $name );
 	}
 
 

@@ -125,6 +125,6 @@ class MAdmin_Cache_Manager_None
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'cache', $manager, $name );
+		return $this->getSubManagerBase( 'cache', $manager, $name );
 	}
 }

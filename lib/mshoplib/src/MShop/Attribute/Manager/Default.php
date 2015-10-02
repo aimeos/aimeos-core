@@ -565,7 +565,7 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'attribute', $manager, $name );
+		return $this->getSubManagerBase( 'attribute', $manager, $name );
 	}
 
 

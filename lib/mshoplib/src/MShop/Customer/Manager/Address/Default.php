@@ -385,7 +385,7 @@ class MShop_Customer_Manager_Address_Default
 		 * @see mshop/customer/manager/address/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer', 'address/' . $manager, $name );
+		return $this->getSubManagerBase( 'customer', 'address/' . $manager, $name );
 	}
 
 

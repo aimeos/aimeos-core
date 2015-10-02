@@ -264,7 +264,7 @@ class MShop_Product_Manager_Type_Default
 		 * @see mshop/product/manager/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'type/' . $manager, $name );
 	}
 
 

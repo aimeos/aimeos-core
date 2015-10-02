@@ -301,7 +301,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'attribute', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'attribute', 'list/' . $manager, $name );
 	}
 
 

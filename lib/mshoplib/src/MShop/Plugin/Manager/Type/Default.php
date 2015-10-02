@@ -264,7 +264,7 @@ class MShop_Plugin_Manager_Type_Default
 		 * @see mshop/plugin/manager/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'plugin', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'plugin', 'type/' . $manager, $name );
 	}
 
 

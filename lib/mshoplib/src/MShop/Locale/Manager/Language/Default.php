@@ -417,7 +417,7 @@ class MShop_Locale_Manager_Language_Default
 		 * @see mshop/locale/manager/language/decorators/global
 		 */
 
-		return $this->_getSubManager( 'locale', 'language/' . $manager, $name );
+		return $this->getSubManagerBase( 'locale', 'language/' . $manager, $name );
 	}
 
 

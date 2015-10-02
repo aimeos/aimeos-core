@@ -634,7 +634,7 @@ class MShop_Product_Manager_Stock_Default
 		 * @see mshop/product/manager/stock/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'stock/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'stock/' . $manager, $name );
 	}
 
 

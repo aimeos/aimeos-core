@@ -555,7 +555,7 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'log', $manager, $name );
+		return $this->getSubManagerBase( 'log', $manager, $name );
 	}
 
 

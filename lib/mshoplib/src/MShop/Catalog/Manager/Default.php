@@ -640,7 +640,7 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'catalog', $manager, $name );
+		return $this->getSubManagerBase( 'catalog', $manager, $name );
 	}
 
 

@@ -264,7 +264,7 @@ class MShop_Customer_Manager_List_Type_Default
 		 * @see mshop/customer/manager/list/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer', 'list/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'customer', 'list/type/' . $manager, $name );
 	}
 
 

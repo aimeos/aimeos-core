@@ -264,7 +264,7 @@ class MShop_Service_Manager_Type_Default
 		 * @see mshop/service/manager/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'service', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'service', 'type/' . $manager, $name );
 	}
 
 

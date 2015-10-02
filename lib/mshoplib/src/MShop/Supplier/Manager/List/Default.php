@@ -301,7 +301,7 @@ class MShop_Supplier_Manager_List_Default
 		 * @see mshop/supplier/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'supplier', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'supplier', 'list/' . $manager, $name );
 	}
 
 

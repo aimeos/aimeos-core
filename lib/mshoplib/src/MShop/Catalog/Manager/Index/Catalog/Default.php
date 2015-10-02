@@ -336,7 +336,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @see mshop/catalog/manager/index/catalog/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/catalog/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/catalog/' . $manager, $name );
 	}
 
 

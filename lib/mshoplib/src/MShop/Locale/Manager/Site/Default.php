@@ -474,7 +474,7 @@ class MShop_Locale_Manager_Site_Default
 		 * @see mshop/locale/manager/site/decorators/global
 		 */
 
-		return $this->_getSubManager( 'locale', 'site/' . $manager, $name );
+		return $this->getSubManagerBase( 'locale', 'site/' . $manager, $name );
 	}
 
 

@@ -372,7 +372,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 		 * @see mshop/catalog/manager/index/price/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/price/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/price/' . $manager, $name );
 	}
 
 

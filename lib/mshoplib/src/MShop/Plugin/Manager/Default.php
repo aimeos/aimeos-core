@@ -235,7 +235,7 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'plugin', $manager, $name );
+		return $this->getSubManagerBase( 'plugin', $manager, $name );
 	}
 
 

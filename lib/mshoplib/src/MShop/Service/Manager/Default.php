@@ -658,7 +658,7 @@ class MShop_Service_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'service', $manager, $name );
+		return $this->getSubManagerBase( 'service', $manager, $name );
 	}
 
 

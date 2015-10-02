@@ -227,7 +227,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 		 * @see mshop/product/manager/stock/warehouse/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'stock/warehouse/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'stock/warehouse/' . $manager, $name );
 	}
 
 

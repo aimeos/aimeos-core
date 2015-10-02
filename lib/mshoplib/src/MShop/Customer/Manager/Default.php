@@ -634,6 +634,6 @@ class MShop_Customer_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', $manager, $name );
+		return $this->getSubManagerBase( 'customer', $manager, $name );
 	}
 }

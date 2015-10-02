@@ -546,7 +546,7 @@ class MShop_Text_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'text', $manager, $name );
+		return $this->getSubManagerBase( 'text', $manager, $name );
 	}
 
 

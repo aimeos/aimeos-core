@@ -557,7 +557,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		 * @see mshop/order/manager/base/product/attribute/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/product/attribute/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/product/attribute/' . $manager, $name );
 	}
 
 

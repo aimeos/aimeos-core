@@ -428,7 +428,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		 * @see mshop/order/manager/base/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/' . $manager, $name );
 	}
 
 

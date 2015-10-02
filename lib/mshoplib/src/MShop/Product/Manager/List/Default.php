@@ -301,7 +301,7 @@ class MShop_Product_Manager_List_Default
 		 * @see mshop/product/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'list/' . $manager, $name );
 	}
 
 

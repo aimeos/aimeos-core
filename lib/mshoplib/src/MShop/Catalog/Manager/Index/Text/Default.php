@@ -339,7 +339,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 * @see mshop/catalog/manager/index/text/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/text/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/text/' . $manager, $name );
 	}
 
 

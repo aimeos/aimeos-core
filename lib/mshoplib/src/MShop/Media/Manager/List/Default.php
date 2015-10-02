@@ -301,7 +301,7 @@ class MShop_Media_Manager_List_Default
 		 * @see mshop/media/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'media', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'media', 'list/' . $manager, $name );
 	}
 
 

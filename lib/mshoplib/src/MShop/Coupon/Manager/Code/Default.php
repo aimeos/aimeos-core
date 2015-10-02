@@ -243,7 +243,7 @@ class MShop_Coupon_Manager_Code_Default
 		 * @see mshop/coupon/manager/code/decorators/global
 		 */
 
-		return $this->_getSubManager( 'coupon', 'code/' . $manager, $name );
+		return $this->getSubManagerBase( 'coupon', 'code/' . $manager, $name );
 	}
 
 

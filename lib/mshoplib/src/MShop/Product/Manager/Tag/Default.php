@@ -634,7 +634,7 @@ class MShop_Product_Manager_Tag_Default
 		 * @see mshop/product/manager/tag/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'tag/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'tag/' . $manager, $name );
 	}
 
 

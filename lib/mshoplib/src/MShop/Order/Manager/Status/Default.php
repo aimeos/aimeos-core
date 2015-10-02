@@ -531,7 +531,7 @@ class MShop_Order_Manager_Status_Default
 		 * @see mshop/order/manager/status/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'status/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'status/' . $manager, $name );
 	}
 
 

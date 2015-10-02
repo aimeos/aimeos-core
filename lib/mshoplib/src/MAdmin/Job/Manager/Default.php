@@ -559,7 +559,7 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'job', $manager, $name );
+		return $this->getSubManagerBase( 'job', $manager, $name );
 	}
 
 

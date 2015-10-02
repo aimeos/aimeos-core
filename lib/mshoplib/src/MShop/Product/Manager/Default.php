@@ -594,7 +594,7 @@ class MShop_Product_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'product', $manager, $name );
+		return $this->getSubManagerBase( 'product', $manager, $name );
 	}
 
 

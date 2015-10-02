@@ -264,7 +264,7 @@ class MShop_Supplier_Manager_List_Type_Default
 		 * @see mshop/supplier/manager/list/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'supplier', 'list/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'supplier', 'list/type/' . $manager, $name );
 	}
 
 

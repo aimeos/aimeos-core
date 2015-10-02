@@ -681,7 +681,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		 * @see mshop/order/manager/base/coupon/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/coupon/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/coupon/' . $manager, $name );
 	}
 
 

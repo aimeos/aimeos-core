@@ -835,7 +835,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/address/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/address/' . $manager, $name );
 	}
 
 

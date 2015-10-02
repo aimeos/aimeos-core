@@ -301,7 +301,7 @@ class MShop_Text_Manager_List_Default
 		 * @see mshop/text/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'text', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'text', 'list/' . $manager, $name );
 	}
 
 

@@ -652,7 +652,7 @@ class MShop_Order_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'order', $manager, $name );
+		return $this->getSubManagerBase( 'order', $manager, $name );
 	}
 
 

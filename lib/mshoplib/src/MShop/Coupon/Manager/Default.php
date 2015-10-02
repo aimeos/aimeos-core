@@ -547,7 +547,7 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'coupon', $manager, $name );
+		return $this->getSubManagerBase( 'coupon', $manager, $name );
 	}
 
 

@@ -251,7 +251,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'common', 'address/' . $manager, $name );
+		return $this->getSubManagerBase( 'common', 'address/' . $manager, $name );
 	}
 
 

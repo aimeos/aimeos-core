@@ -607,7 +607,7 @@ class MShop_Customer_Manager_Group_Default
 		 * @see mshop/customer/manager/group/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer/group', $manager, $name );
+		return $this->getSubManagerBase( 'customer/group', $manager, $name );
 	}
 
 

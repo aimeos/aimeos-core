@@ -301,7 +301,7 @@ class MShop_Customer_Manager_List_Default
 		 * @see mshop/customer/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'customer', 'list/' . $manager, $name );
 	}
 
 

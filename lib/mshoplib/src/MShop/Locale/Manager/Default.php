@@ -403,7 +403,7 @@ class MShop_Locale_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'locale', $manager, $name );
+		return $this->getSubManagerBase( 'locale', $manager, $name );
 	}
 
 

@@ -301,7 +301,7 @@ class MShop_Service_Manager_List_Default
 		 * @see mshop/service/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'service', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'service', 'list/' . $manager, $name );
 	}
 
 

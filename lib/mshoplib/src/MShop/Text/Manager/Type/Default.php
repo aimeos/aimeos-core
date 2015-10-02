@@ -264,7 +264,7 @@ class MShop_Text_Manager_Type_Default
 		 * @see mshop/text/manager/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'text', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'text', 'type/' . $manager, $name );
 	}
 
 

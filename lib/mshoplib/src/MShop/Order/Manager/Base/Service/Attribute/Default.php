@@ -710,7 +710,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 * @see mshop/order/manager/base/service/attribute/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/service/attribute/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/service/attribute/' . $manager, $name );
 	}
 
 

@@ -264,7 +264,7 @@ class MShop_Price_Manager_List_Type_Default
 		 * @see mshop/price/manager/list/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'price', 'list/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'price', 'list/type/' . $manager, $name );
 	}
 
 

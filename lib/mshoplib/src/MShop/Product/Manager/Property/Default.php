@@ -670,7 +670,7 @@ class MShop_Product_Manager_Property_Default
 		 * @see mshop/product/manager/property/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', 'property/' . $manager, $name );
+		return $this->getSubManagerBase( 'product', 'property/' . $manager, $name );
 	}
 
 

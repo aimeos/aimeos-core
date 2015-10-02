@@ -83,7 +83,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return MShop_Common_Manager_Interface Manager for different extensions
 	 */
-	protected function _getSubManager( $domain, $manager, $name )
+	protected function getSubManagerBase( $domain, $manager, $name )
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );

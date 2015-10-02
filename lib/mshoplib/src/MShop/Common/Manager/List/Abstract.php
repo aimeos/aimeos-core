@@ -516,7 +516,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'common', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'common', 'list/' . $manager, $name );
 	}
 
 

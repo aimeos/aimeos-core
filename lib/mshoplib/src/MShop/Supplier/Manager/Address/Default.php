@@ -385,7 +385,7 @@ class MShop_Supplier_Manager_Address_Default
 		 * @see mshop/supplier/manager/address/decorators/global
 		 */
 
-		return $this->_getSubManager( 'supplier', 'address/' . $manager, $name );
+		return $this->getSubManagerBase( 'supplier', 'address/' . $manager, $name );
 	}
 
 
