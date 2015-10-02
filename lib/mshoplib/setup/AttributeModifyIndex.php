@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute' => array(
 				'dx_msatt_sid_dom_editor' => 'ALTER TABLE "mshop_attribute" DROP INDEX "dx_msatt_sid_dom_editor"',
 			)
@@ -43,9 +43,9 @@ class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,26 +54,26 @@ class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for renaming columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( sprintf( 'Modifying index in mshop_attribute table' ), 0 );
-		$this->_status( '' );
+		$this->msg( sprintf( 'Modifying index in mshop_attribute table' ), 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $indexes )
 		{
 			foreach( $indexes as $index => $stmt )
 			{
-				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
+				$this->msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->indexExists( $table, $index ) === true )
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->indexExists( $table, $index ) === true )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'dropped' );
+					$this->execute( $stmt );
+					$this->status( 'dropped' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

@@ -16,18 +16,18 @@
  */
 class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 {
-	private $_cache;
-	private $_config;
-	private $_dbm;
-	private $_locale;
-	private $_logger;
-	private $_session;
-	private $_mail;
-	private $_view;
-	private $_user;
-	private $_groups;
-	private $_editor = '';
-	private $_i18n = array();
+	private $cache;
+	private $config;
+	private $dbm;
+	private $locale;
+	private $logger;
+	private $session;
+	private $mail;
+	private $view;
+	private $user;
+	private $groups;
+	private $editor = '';
+	private $i18n = array();
 
 
 	/**
@@ -35,15 +35,15 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function __destruct()
 	{
-		$this->_cache = null;
-		$this->_config = null;
-		$this->_dbm = null;
-		$this->_locale = null;
-		$this->_logger = null;
-		$this->_session = null;
-		$this->_mail = null;
-		$this->_view = null;
-		$this->_i18n = array();
+		$this->cache = null;
+		$this->config = null;
+		$this->dbm = null;
+		$this->locale = null;
+		$this->logger = null;
+		$this->session = null;
+		$this->mail = null;
+		$this->view = null;
+		$this->i18n = array();
 	}
 
 
@@ -52,16 +52,16 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function __clone()
 	{
-		$this->_cache = ( isset( $this->_cache ) ? clone $this->_cache : null );
-		$this->_config = ( isset( $this->_config ) ? clone $this->_config : null );
-		$this->_locale = ( isset( $this->_locale ) ? clone $this->_locale : null );
-		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
-		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );
-		$this->_mail = ( isset( $this->_mail ) ? clone $this->_mail : null );
+		$this->cache = ( isset( $this->cache ) ? clone $this->cache : null );
+		$this->config = ( isset( $this->config ) ? clone $this->config : null );
+		$this->locale = ( isset( $this->locale ) ? clone $this->locale : null );
+		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
+		$this->session = ( isset( $this->session ) ? clone $this->session : null );
+		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
 		// view is always cloned
 
-		foreach( $this->_i18n as $locale => $object ) {
-			$this->_i18n[$locale] = clone $this->_i18n[$locale];
+		foreach( $this->i18n as $locale => $object ) {
+			$this->i18n[$locale] = clone $this->i18n[$locale];
 		}
 	}
 
@@ -73,8 +73,8 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function __toString()
 	{
-		if( isset( $this->_locale ) ) {
-			return spl_object_hash( $this->_locale );
+		if( isset( $this->locale ) ) {
+			return spl_object_hash( $this->locale );
 		}
 
 		return '0';
@@ -88,7 +88,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setCache( MW_Cache_Interface $cache )
 	{
-		$this->_cache = $cache;
+		$this->cache = $cache;
 	}
 
 
@@ -99,11 +99,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getCache()
 	{
-		if( !isset( $this->_cache ) ) {
+		if( !isset( $this->cache ) ) {
 			throw new MShop_Exception( sprintf( 'Cache object not available' ) );
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 
 
@@ -114,7 +114,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setConfig( MW_Config_Interface $config )
 	{
-		$this->_config = $config;
+		$this->config = $config;
 	}
 
 
@@ -125,11 +125,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getConfig()
 	{
-		if( !isset( $this->_config ) ) {
+		if( !isset( $this->config ) ) {
 			throw new MShop_Exception( sprintf( 'Configuration object not available' ) );
 		}
 
-		return $this->_config;
+		return $this->config;
 	}
 
 
@@ -140,7 +140,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setDatabaseManager( MW_DB_Manager_Interface $manager )
 	{
-		$this->_dbm = $manager;
+		$this->dbm = $manager;
 	}
 
 
@@ -151,11 +151,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getDatabaseManager()
 	{
-		if( !isset( $this->_dbm ) ) {
+		if( !isset( $this->dbm ) ) {
 			throw new MShop_Exception( sprintf( 'Database manager object not available' ) );
 		}
 
-		return $this->_dbm;
+		return $this->dbm;
 	}
 
 
@@ -169,12 +169,12 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	{
 		$locale = ( $locale !== null ? $locale : $this->getLocale()->getLanguageId() );
 
-		if( !isset( $this->_i18n[$locale] ) ) {
+		if( !isset( $this->i18n[$locale] ) ) {
 			/// Locale ID %1$s
 			throw new MShop_Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
 		}
 
-		return $this->_i18n[$locale];
+		return $this->i18n[$locale];
 	}
 
 
@@ -186,7 +186,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setI18n( array $translations )
 	{
-		$this->_i18n = $translations;
+		$this->i18n = $translations;
 	}
 
 
@@ -197,7 +197,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setLocale( MShop_Locale_Item_Interface $locale )
 	{
-		$this->_locale = $locale;
+		$this->locale = $locale;
 	}
 
 
@@ -208,11 +208,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getLocale()
 	{
-		if( !isset( $this->_locale ) ) {
+		if( !isset( $this->locale ) ) {
 			throw new MShop_Exception( sprintf( 'Locale object not available' ) );
 		}
 
-		return $this->_locale;
+		return $this->locale;
 	}
 
 
@@ -223,7 +223,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setLogger( MW_Logger_Interface $logger )
 	{
-		$this->_logger = $logger;
+		$this->logger = $logger;
 	}
 
 
@@ -234,11 +234,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getLogger()
 	{
-		if( !isset( $this->_logger ) ) {
+		if( !isset( $this->logger ) ) {
 			throw new MShop_Exception( sprintf( 'Log manager object not available' ) );
 		}
 
-		return $this->_logger;
+		return $this->logger;
 	}
 
 
@@ -249,7 +249,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setSession( MW_Session_Interface $session )
 	{
-		$this->_session = $session;
+		$this->session = $session;
 	}
 
 
@@ -260,11 +260,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getSession()
 	{
-		if( !isset( $this->_session ) ) {
+		if( !isset( $this->session ) ) {
 			throw new MShop_Exception( sprintf( 'Session object not available' ) );
 		}
 
-		return $this->_session;
+		return $this->session;
 	}
 
 
@@ -275,7 +275,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setMail( MW_Mail_Interface $mail )
 	{
-		$this->_mail = $mail;
+		$this->mail = $mail;
 	}
 
 
@@ -286,11 +286,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getMail()
 	{
-		if( !isset( $this->_mail ) ) {
+		if( !isset( $this->mail ) ) {
 			throw new MShop_Exception( sprintf( 'Mail object not available' ) );
 		}
 
-		return $this->_mail;
+		return $this->mail;
 	}
 
 
@@ -301,7 +301,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setView( MW_View_Interface $view )
 	{
-		$this->_view = $view;
+		$this->view = $view;
 	}
 
 
@@ -312,11 +312,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getView()
 	{
-		if( !isset( $this->_view ) ) {
+		if( !isset( $this->view ) ) {
 			throw new MShop_Exception( sprintf( 'View object not available' ) );
 		}
 
-		return clone $this->_view;
+		return clone $this->view;
 	}
 
 
@@ -327,7 +327,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setEditor( $name )
 	{
-		$this->_editor = (string) $name;
+		$this->editor = (string) $name;
 	}
 
 
@@ -338,7 +338,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getEditor()
 	{
-		return $this->_editor;
+		return $this->editor;
 	}
 
 
@@ -349,7 +349,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setUserId( $user )
 	{
-		$this->_user = $user;
+		$this->user = $user;
 	}
 
 
@@ -360,13 +360,13 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getUserId()
 	{
-		if( $this->_user instanceof Closure )
+		if( $this->user instanceof Closure )
 		{
-			$fcn = $this->_user;
-			$this->_user = $fcn();
+			$fcn = $this->user;
+			$this->user = $fcn();
 		}
 
-		return $this->_user;
+		return $this->user;
 	}
 
 
@@ -377,7 +377,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setGroupIds( $groupIds )
 	{
-		$this->_groups = $groupIds;
+		$this->groups = $groupIds;
 	}
 
 
@@ -388,12 +388,12 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getGroupIds()
 	{
-		if( $this->_groups instanceof Closure )
+		if( $this->groups instanceof Closure )
 		{
-			$fcn = $this->_groups;
-			$this->_groups = $fcn();
+			$fcn = $this->groups;
+			$this->groups = $fcn();
 		}
 
-		return (array) $this->_groups;
+		return (array) $this->groups;
 	}
 }

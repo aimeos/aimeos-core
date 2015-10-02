@@ -77,7 +77,7 @@ class Client_Html_Catalog_List_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'catalog/list' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'catalog/list' );
 	}
 }
 

@@ -18,7 +18,7 @@ class Controller_ExtJS_Product_Property_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -37,13 +37,13 @@ class Controller_ExtJS_Product_Property_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'product/property' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -52,7 +52,7 @@ class Controller_ExtJS_Product_Property_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'product.property';
 	}
@@ -64,7 +64,7 @@ class Controller_ExtJS_Product_Property_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'product.property.languageid'} ) && $entry->{'product.property.languageid'} === '' ) {
 			$entry->{'product.property.languageid'} = null;

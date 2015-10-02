@@ -7,18 +7,18 @@
 
 class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	protected function setUp()
 	{
 		MShop_Factory::setCache( true );
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Order_Account_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Order_Account_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -27,21 +27,21 @@ class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Fr
 		MShop_Factory::clear();
 		MShop_Factory::setCache( false );
 
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertNotNull( $output );
 	}
 
@@ -49,21 +49,21 @@ class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Fr
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
 		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
@@ -92,33 +92,33 @@ class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Fr
 
 		$mailStub->expects( $this->once() )->method( 'send' );
 
-		$this->_context->setMail( $mailStub );
+		$this->context->setMail( $mailStub );
 
 
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 
 		$view = TestHelper::getView();
 		$view->orderBasket = $basketCntl->get();
-		$this->_context->setView( $view );
-		$this->_object->setView( $view );
+		$this->context->setView( $view );
+		$this->object->setView( $view );
 
 		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$customerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$orderBaseStub->expects( $this->once() )->method( 'saveItem' );
 		$customerStub->expects( $this->once() )->method( 'saveItem' );
 
-		MShop_Factory::injectManager( $this->_context, 'customer', $customerStub );
-		MShop_Factory::injectManager( $this->_context, 'order/base', $orderBaseStub );
+		MShop_Factory::injectManager( $this->context, 'customer', $customerStub );
+		MShop_Factory::injectManager( $this->context, 'order/base', $orderBaseStub );
 
-		$this->_object->process();
+		$this->object->process();
 	}
 }

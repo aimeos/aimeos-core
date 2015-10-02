@@ -25,7 +25,7 @@ class Controller_Jobs_Admin_Job_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Admin interface jobs' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Admin interface jobs' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Admin_Job_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Executes the jobs created by the admin interface, e.g. the text exports' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Executes the jobs created by the admin interface, e.g. the text exports' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Admin_Job_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$jobManager = MAdmin_Job_Manager_Factory::createManager( $context );
 		$criteria = $jobManager->createSearch( true );

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_list' => array(
 			'ALTER TABLE "mshop_attribute_list" ADD "typeid" INTEGER DEFAULT NULL AFTER "siteid"',
 			'ALTER TABLE "mshop_attribute_list" ADD CONSTRAINT "fk_msattli_typeid" FOREIGN KEY ( "typeid" ) REFERENCES "mshop_attribute_list_type" ("id") ON DELETE CASCADE ON UPDATE CASCADE',
@@ -80,9 +80,9 @@ class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -91,24 +91,24 @@ class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Move list types to separate table', 0 ); $this->_status( '' );
+		$this->msg( 'Move list types to separate table', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, 'type' ) === true
-				&& $this->_schema->columnExists( $table, 'typeid' ) === false )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, 'type' ) === true
+				&& $this->schema->columnExists( $table, 'typeid' ) === false )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'migrated' );
+				$this->executeList( $stmtList );
+				$this->status( 'migrated' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

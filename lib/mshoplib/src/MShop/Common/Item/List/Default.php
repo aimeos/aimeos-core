@@ -18,9 +18,9 @@ class MShop_Common_Item_List_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Common_Item_List_Interface
 {
-	private $_prefix;
-	private $_values;
-	private $_refItem;
+	private $prefix;
+	private $values;
+	private $refItem;
 
 
 	/**
@@ -33,8 +33,8 @@ class MShop_Common_Item_List_Default
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->_prefix = (string) $prefix;
-		$this->_values = $values;
+		$this->prefix = (string) $prefix;
+		$this->values = $values;
 	}
 
 
@@ -48,7 +48,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->_values['parentid'] ) ? (int) $this->_values['parentid'] : null );
+		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
 	}
 
 
@@ -62,7 +62,7 @@ class MShop_Common_Item_List_Default
 	{
 		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->_values['parentid'] = (int) $parentid;
+		$this->values['parentid'] = (int) $parentid;
 		$this->setModified();
 	}
 
@@ -74,7 +74,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->_values['domain'] ) ? (string) $this->_values['domain'] : '' );
+		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
 	}
 
 
@@ -87,7 +87,7 @@ class MShop_Common_Item_List_Default
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->_values['domain'] = (string) $domain;
+		$this->values['domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -100,7 +100,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getRefId()
 	{
-		return ( isset( $this->_values['refid'] ) ? (string) $this->_values['refid'] : '' );
+		return ( isset( $this->values['refid'] ) ? (string) $this->values['refid'] : '' );
 	}
 
 
@@ -114,7 +114,7 @@ class MShop_Common_Item_List_Default
 	{
 		if( $refid == $this->getRefId() ) { return; }
 
-		$this->_values['refid'] = (string) $refid;
+		$this->values['refid'] = (string) $refid;
 		$this->setModified();
 	}
 
@@ -126,7 +126,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->_values['start'] ) ? (string) $this->_values['start'] : null );
+		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
 	}
 
 
@@ -139,9 +139,9 @@ class MShop_Common_Item_List_Default
 	{
 		if( $date === $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['start'] = ( $date !== null ? (string) $date : null );
+		$this->values['start'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
 	}
 
@@ -153,7 +153,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->_values['end'] ) ? (string) $this->_values['end'] : null );
+		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
 	}
 
 
@@ -166,9 +166,9 @@ class MShop_Common_Item_List_Default
 	{
 		if( $date === $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['end'] = ( $date !== null ? (string) $date : null );
+		$this->values['end'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
 	}
 
@@ -180,7 +180,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -191,7 +191,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -204,7 +204,7 @@ class MShop_Common_Item_List_Default
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $typeid;
+		$this->values['typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -216,7 +216,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 
@@ -229,7 +229,7 @@ class MShop_Common_Item_List_Default
 	{
 		if( $pos == $this->getPosition() ) { return; }
 
-		$this->_values['pos'] = (int) $pos;
+		$this->values['pos'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -241,7 +241,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 1 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 1 );
 	}
 
 
@@ -256,7 +256,7 @@ class MShop_Common_Item_List_Default
 			return;
 		}
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -268,7 +268,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
 	}
 
 
@@ -279,7 +279,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setConfig( array $config )
 	{
-		$this->_values['config'] = $config;
+		$this->values['config'] = $config;
 		$this->setModified();
 	}
 
@@ -291,7 +291,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getRefItem()
 	{
-		return $this->_refItem;
+		return $this->refItem;
 	}
 
 
@@ -302,7 +302,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function setRefItem( MShop_Common_Item_Interface $refItem )
 	{
-		$this->_refItem = $refItem;
+		$this->refItem = $refItem;
 	}
 
 
@@ -321,15 +321,15 @@ class MShop_Common_Item_List_Default
 		{
 			switch( $key )
 			{
-				case $this->_prefix . 'parentid': $this->setParentId( $value ); break;
-				case $this->_prefix . 'typeid': $this->setTypeId( $value ); break;
-				case $this->_prefix . 'domain': $this->setDomain( $value ); break;
-				case $this->_prefix . 'refid': $this->setRefId( $value ); break;
-				case $this->_prefix . 'datestart': $this->setDateStart( $value ); break;
-				case $this->_prefix . 'dateend': $this->setDateEnd( $value ); break;
-				case $this->_prefix . 'config': $this->setConfig( $value ); break;
-				case $this->_prefix . 'position': $this->setPosition( $value ); break;
-				case $this->_prefix . 'status': $this->setStatus( $value ); break;
+				case $this->prefix . 'parentid': $this->setParentId( $value ); break;
+				case $this->prefix . 'typeid': $this->setTypeId( $value ); break;
+				case $this->prefix . 'domain': $this->setDomain( $value ); break;
+				case $this->prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->prefix . 'datestart': $this->setDateStart( $value ); break;
+				case $this->prefix . 'dateend': $this->setDateEnd( $value ); break;
+				case $this->prefix . 'config': $this->setConfig( $value ); break;
+				case $this->prefix . 'position': $this->setPosition( $value ); break;
+				case $this->prefix . 'status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -347,16 +347,16 @@ class MShop_Common_Item_List_Default
 	{
 		$list = parent::toArray();
 
-		$list[$this->_prefix . 'parentid'] = $this->getParentId();
-		$list[$this->_prefix . 'typeid'] = $this->getTypeId();
-		$list[$this->_prefix . 'type'] = $this->getType();
-		$list[$this->_prefix . 'domain'] = $this->getDomain();
-		$list[$this->_prefix . 'refid'] = $this->getRefId();
-		$list[$this->_prefix . 'datestart'] = $this->getDateStart();
-		$list[$this->_prefix . 'dateend'] = $this->getDateEnd();
-		$list[$this->_prefix . 'config'] = $this->getConfig();
-		$list[$this->_prefix . 'position'] = $this->getPosition();
-		$list[$this->_prefix . 'status'] = $this->getStatus();
+		$list[$this->prefix . 'parentid'] = $this->getParentId();
+		$list[$this->prefix . 'typeid'] = $this->getTypeId();
+		$list[$this->prefix . 'type'] = $this->getType();
+		$list[$this->prefix . 'domain'] = $this->getDomain();
+		$list[$this->prefix . 'refid'] = $this->getRefId();
+		$list[$this->prefix . 'datestart'] = $this->getDateStart();
+		$list[$this->prefix . 'dateend'] = $this->getDateEnd();
+		$list[$this->prefix . 'config'] = $this->getConfig();
+		$list[$this->prefix . 'position'] = $this->getPosition();
+		$list[$this->prefix . 'status'] = $this->getStatus();
 
 		return $list;
 	}

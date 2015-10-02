@@ -18,8 +18,8 @@ class MShop_Common_Item_Type_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Common_Item_Type_Interface
 {
-	private $_prefix;
-	private $_values;
+	private $prefix;
+	private $values;
 
 
 	/**
@@ -32,8 +32,8 @@ class MShop_Common_Item_Type_Default
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->_prefix = $prefix;
-		$this->_values = $values;
+		$this->prefix = $prefix;
+		$this->values = $values;
 	}
 
 
@@ -44,7 +44,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -55,11 +55,11 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -71,7 +71,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->_values['domain'] ) ? (string) $this->_values['domain'] : '' );
+		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
 	}
 
 
@@ -84,7 +84,7 @@ class MShop_Common_Item_Type_Default
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->_values['domain'] = (string) $domain;
+		$this->values['domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -96,7 +96,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -109,7 +109,7 @@ class MShop_Common_Item_Type_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -121,7 +121,7 @@ class MShop_Common_Item_Type_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -134,7 +134,7 @@ class MShop_Common_Item_Type_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -154,10 +154,10 @@ class MShop_Common_Item_Type_Default
 		{
 			switch( $key )
 			{
-				case $this->_prefix . 'code': $this->setCode( $value ); break;
-				case $this->_prefix . 'domain': $this->setDomain( $value ); break;
-				case $this->_prefix . 'label': $this->setLabel( $value ); break;
-				case $this->_prefix . 'status': $this->setStatus( $value ); break;
+				case $this->prefix . 'code': $this->setCode( $value ); break;
+				case $this->prefix . 'domain': $this->setDomain( $value ); break;
+				case $this->prefix . 'label': $this->setLabel( $value ); break;
+				case $this->prefix . 'status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -175,10 +175,10 @@ class MShop_Common_Item_Type_Default
 	{
 		$list = parent::toArray();
 
-		$list[$this->_prefix . 'code'] = $this->getCode();
-		$list[$this->_prefix . 'domain'] = $this->getDomain();
-		$list[$this->_prefix . 'label'] = $this->getLabel();
-		$list[$this->_prefix . 'status'] = $this->getStatus();
+		$list[$this->prefix . 'code'] = $this->getCode();
+		$list[$this->prefix . 'domain'] = $this->getDomain();
+		$list[$this->prefix . 'label'] = $this->getLabel();
+		$list[$this->prefix . 'status'] = $this->getStatus();
 
 		return $list;
 	}

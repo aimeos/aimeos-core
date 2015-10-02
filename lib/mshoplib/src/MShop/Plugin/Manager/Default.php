@@ -18,9 +18,9 @@ class MShop_Plugin_Manager_Default
 	extends MShop_Plugin_Manager_Abstract
 	implements MShop_Plugin_Manager_Interface
 {
-	private $_plugins = array();
+	private $plugins = array();
 
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'plugin.id' => array(
 			'label' => 'Plugin ID',
 			'code' => 'plugin.id',
@@ -111,7 +111,7 @@ class MShop_Plugin_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-plugin' );
+		$this->setResourceName( 'db-plugin' );
 	}
 
 
@@ -123,7 +123,7 @@ class MShop_Plugin_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/plugin/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -138,7 +138,7 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -191,7 +191,7 @@ class MShop_Plugin_Manager_Default
 		 * @see mshop/plugin/manager/default/item/count
 		 */
 		$path = 'mshop/plugin/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -222,7 +222,7 @@ class MShop_Plugin_Manager_Default
 		 */
 		$path = 'classes/plugin/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
@@ -284,7 +284,7 @@ class MShop_Plugin_Manager_Default
 			throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
@@ -318,8 +318,8 @@ class MShop_Plugin_Manager_Default
 		 */
 		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', array() );
 
-		$provider = $this->_addPluginDecorators( $item, $provider, $names );
-		return $this->_addPluginDecorators( $item, $provider, $decorators );
+		$provider = $this->addPluginDecorators( $item, $provider, $names );
+		return $this->addPluginDecorators( $item, $provider, $decorators );
 	}
 
 
@@ -331,7 +331,7 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function register( MW_Observer_Publisher_Interface $publisher, $type )
 	{
-		if( !isset( $this->_plugins[$type] ) )
+		if( !isset( $this->plugins[$type] ) )
 		{
 			$search = $this->createSearch( true );
 
@@ -343,14 +343,14 @@ class MShop_Plugin_Manager_Default
 			$search->setConditions( $search->combine( '&&', $expr ) );
 			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
 
-			$this->_plugins[$type] = array();
+			$this->plugins[$type] = array();
 
 			foreach( $this->searchItems( $search ) as $item ) {
-				$this->_plugins[$type][$item->getId()] = $this->getProvider( $item );
+				$this->plugins[$type][$item->getId()] = $this->getProvider( $item );
 			}
 		}
 
-		foreach( $this->_plugins[$type] as $plugin ) {
+		foreach( $this->plugins[$type] as $plugin ) {
 			$plugin->register( $publisher );
 		}
 	}
@@ -371,10 +371,10 @@ class MShop_Plugin_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -446,7 +446,7 @@ class MShop_Plugin_Manager_Default
 				$path = 'mshop/plugin/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getLabel() );
@@ -499,10 +499,10 @@ class MShop_Plugin_Manager_Default
 				 * @see mshop/plugin/manager/default/item/count
 				 */
 				$path = 'mshop/plugin/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
-			$this->_plugins[$id] = $item;
+			$this->plugins[$id] = $item;
 
 			$dbm->release( $conn, $dbname );
 		}
@@ -525,10 +525,10 @@ class MShop_Plugin_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -644,7 +644,7 @@ class MShop_Plugin_Manager_Default
 				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['id'], $config );
-					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$map[$row['id']] = $row;

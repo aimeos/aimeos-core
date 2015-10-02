@@ -150,6 +150,6 @@ class Controller_Jobs_Admin_Log_Factory
 		 * @see controller/jobs/admin/log/decorators/excludes
 		 * @see controller/jobs/admin/log/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'admin/log' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'admin/log' );
 	}
 }

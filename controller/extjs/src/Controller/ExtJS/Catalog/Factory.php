@@ -142,6 +142,6 @@ class Controller_ExtJS_Catalog_Factory
 		 * @see controller/extjs/catalog/decorators/excludes
 		 * @see controller/extjs/catalog/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'catalog' );
+		return self::addControllerDecorators( $context, $controller, 'catalog' );
 	}
 }

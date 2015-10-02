@@ -16,10 +16,10 @@
  */
 abstract class MShop_Coupon_Provider_Abstract
 {
-	private $_context;
-	private $_object;
-	private $_item;
-	private $_code = '';
+	private $context;
+	private $object;
+	private $item;
+	private $code = '';
 
 	/**
 	 * Initializes the coupon model.
@@ -30,9 +30,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code )
 	{
-		$this->_context = $context;
-		$this->_item = $item;
-		$this->_code = $code;
+		$this->context = $context;
+		$this->item = $item;
+		$this->code = $code;
 	}
 
 
@@ -43,9 +43,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) !== true )
+		if( $this->getObject()->isAvailable( $base ) !== true )
 		{
-			$base->deleteCoupon( $this->_code );
+			$base->deleteCoupon( $this->code );
 			return;
 		}
 
@@ -61,7 +61,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$base->deleteCoupon( $this->_code, true );
+		$base->deleteCoupon( $this->code, true );
 	}
 
 
@@ -83,7 +83,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function setObject( MShop_Coupon_Provider_Interface $object )
 	{
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -92,9 +92,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -103,9 +103,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 *
 	 * @return string Coupon code
 	 */
-	protected function _getCode()
+	protected function getCode()
 	{
-		return $this->_code;
+		return $this->code;
 	}
 
 
@@ -116,9 +116,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 * @param mixed $default Default value if configuration key isn't available
 	 * @return mixed Value from service item configuration
 	 */
-	protected function _getConfigValue( $key, $default = null )
+	protected function getConfigValue( $key, $default = null )
 	{
-		$config = $this->_item->getConfig();
+		$config = $this->item->getConfig();
 
 		if( isset( $config[$key] ) ) {
 			return $config[$key];
@@ -135,7 +135,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	protected function getItemBase()
 	{
-		return $this->_item;
+		return $this->item;
 	}
 
 
@@ -144,10 +144,10 @@ abstract class MShop_Coupon_Provider_Abstract
 	 *
 	 * @return MShop_Coupon_Provider_Interface Outmost object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		if( isset( $this->_object ) ) {
-			return $this->_object;
+		if( isset( $this->object ) ) {
+			return $this->object;
 		}
 
 		return $this;
@@ -162,9 +162,9 @@ abstract class MShop_Coupon_Provider_Abstract
 	 * @param string $warehouse Unique code of the warehouse the product is from
 	 * @return MShop_Order_Item_Base_Product_Interface Ordered product
 	 */
-	protected function _createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
+	protected function createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
 	{
-		$productManager = MShop_Factory::createManager( $this->_context, 'product' );
+		$productManager = MShop_Factory::createManager( $this->context, 'product' );
 		$search = $productManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
@@ -173,7 +173,7 @@ abstract class MShop_Coupon_Provider_Abstract
 			throw new MShop_Coupon_Exception( sprintf( 'No product with code "%1$s" found', $productCode ) );
 		}
 
-		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
+		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		if( empty( $prices ) ) {
@@ -182,7 +182,7 @@ abstract class MShop_Coupon_Provider_Abstract
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		}
 
-		$orderBaseProductManager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
+		$orderBaseProductManager = MShop_Factory::createManager( $this->context, 'order/base/product' );
 		$orderProduct = $orderBaseProductManager->createItem();
 
 		$orderProduct->copyFrom( $product );
@@ -205,16 +205,16 @@ abstract class MShop_Coupon_Provider_Abstract
 	 * @param string $warehouse Unique code of the warehouse the product is from
 	 * @return MShop_Order_Item_Base_Product_Interface[] Order products with monetary rebates
 	 */
-	protected function _createMonetaryRebateProducts( MShop_Order_Item_Base_Interface $base,
+	protected function createMonetaryRebateProducts( MShop_Order_Item_Base_Interface $base,
 		$productCode, $rebate, $quantity = 1, $warehouse = 'default' )
 	{
 		$orderProducts = array();
-		$prices = $this->_getPriceByTaxRate( $base );
+		$prices = $this->getPriceByTaxRate( $base );
 
 		krsort( $prices );
 
 		if( empty( $prices ) ) {
-			$prices = array( '0.00' => MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem() );
+			$prices = array( '0.00' => MShop_Factory::createManager( $this->getContext(), 'price' )->createItem() );
 		}
 
 		foreach( $prices as $taxrate => $price )
@@ -236,7 +236,7 @@ abstract class MShop_Coupon_Provider_Abstract
 				$rebate = '0.00';
 			}
 
-			$orderProduct = $this->_createProduct( $productCode, $quantity, $warehouse );
+			$orderProduct = $this->createProduct( $productCode, $quantity, $warehouse );
 
 			$price = $orderProduct->getPrice();
 			$price->setValue( -$value );
@@ -258,10 +258,10 @@ abstract class MShop_Coupon_Provider_Abstract
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
 	 * @return array Associative list of tax rates as key and corresponding price items as value
 	 */
-	protected function _getPriceByTaxRate( MShop_Order_Item_Base_Interface $basket )
+	protected function getPriceByTaxRate( MShop_Order_Item_Base_Interface $basket )
 	{
 		$taxrates = array();
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'price' );
 
 		foreach( $basket->getProducts() as $product )
 		{

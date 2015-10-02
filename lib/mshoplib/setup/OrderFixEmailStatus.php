@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'update' => '
 			UPDATE "mshop_order_status"
 			SET "siteid"=(SELECT "siteid" FROM "mshop_order" mord WHERE mord."id"="parentid" LIMIT 1 ),
@@ -51,9 +51,9 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -62,13 +62,13 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Fixing order email status values', 0 );
+		$this->msg( 'Fixing order email status values', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_order_status' ) === true )
+		if( $this->schema->tableExists( 'mshop_order_status' ) === true )
 		{
-			$this->_execute( $stmts['update'] );
+			$this->execute( $stmts['update'] );
 
 			$mapping = array(
 				0 => 'email-deleted',
@@ -84,7 +84,7 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 			$cntRows = 0;
 			foreach( $mapping as $value => $type )
 			{
-				$stmt = $this->_conn->create( $stmts['change'] );
+				$stmt = $this->conn->create( $stmts['change'] );
 				$stmt->bind( 1, $value, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 2, $type );
 
@@ -94,14 +94,14 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 			}
 
 			if( $cntRows > 0 ) {
-				$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
+				$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 
 	}

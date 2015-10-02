@@ -19,7 +19,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -40,14 +40,14 @@ class Controller_ExtJS_Coupon_Code_Default
 	 */
 	public function uploadFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'couponid' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'couponid' ) );
+		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
 			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
 		}
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/coupon/code/default/uploaddir
 		 * Upload directory for text files that should be imported
@@ -73,7 +73,7 @@ class Controller_ExtJS_Coupon_Code_Default
 		 * @category Developer
 		 */
 		if( $config->get( 'controller/extjs/coupon/code/default/enablecheck', true ) ) {
-			$this->_checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
+			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
 		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
@@ -131,7 +131,7 @@ class Controller_ExtJS_Coupon_Code_Default
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_getContext() );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->getContext() );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -148,8 +148,8 @@ class Controller_ExtJS_Coupon_Code_Default
 	 */
 	public function importFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'couponid', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'couponid', 'items' ) );
+		$this->setLocale( $params->site );
 
 		/** controller/extjs/coupon/code/default/container/type
 		 * Container file type storing all coupon code files to import
@@ -215,7 +215,7 @@ class Controller_ExtJS_Coupon_Code_Default
 		 * @see controller/extjs/coupon/code/default/container/format
 		 */
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		$type = $config->get( 'controller/extjs/coupon/code/default/container/type', 'Zip' );
 		$format = $config->get( 'controller/extjs/coupon/code/default/container/format', 'CSV' );
@@ -228,7 +228,7 @@ class Controller_ExtJS_Coupon_Code_Default
 			$container = MW_Container_Factory::getContainer( $path, $type, $format, $options );
 
 			foreach( $container as $content ) {
-				$this->_importContent( $content, $params->couponid );
+				$this->importContent( $content, $params->couponid );
 			}
 
 			unlink( $path );
@@ -303,13 +303,13 @@ class Controller_ExtJS_Coupon_Code_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'coupon/code' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'coupon/code' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -318,7 +318,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'coupon.code';
 	}
@@ -331,9 +331,9 @@ class Controller_ExtJS_Coupon_Code_Default
 	 * @param string $couponId Unique ID of the coupon configuration for which the codes should be imported
 	 * @throws Exception If a code or its meta data can't be imported
 	 */
-	protected function _importContent( MW_Container_Content_Interface $content, $couponId )
+	protected function importContent( MW_Container_Content_Interface $content, $couponId )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'coupon/code' );
 
 		$item = $manager->createItem();
@@ -369,7 +369,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'coupon.code.datestart'} ) ) {
 			$entry->{'coupon.code.datestart'} = str_replace( 'T', ' ', $entry->{'coupon.code.datestart'} );

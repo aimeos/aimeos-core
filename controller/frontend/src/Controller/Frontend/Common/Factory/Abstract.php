@@ -16,7 +16,7 @@
  */
 class Controller_Frontend_Common_Factory_Abstract
 {
-	private static $_objects = array();
+	private static $objects = array();
 
 
 	/**
@@ -29,7 +29,7 @@ class Controller_Frontend_Common_Factory_Abstract
 	 */
 	public static function injectController( $classname, Controller_Frontend_Interface $controller = null )
 	{
-		self::$_objects[$classname] = $controller;
+		self::$objects[$classname] = $controller;
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_Frontend_Common_Factory_Abstract
 	 * @param string $classprefix Decorator class prefix, e.g. "Controller_Frontend_Basket_Decorator_"
 	 * @return Controller_Frontend_Common_Interface Controller object
 	 */
-	protected static function _addDecorators( MShop_Context_Item_Interface $context,
+	protected static function addDecorators( MShop_Context_Item_Interface $context,
 		Controller_Frontend_Interface $controller, array $decorators, $classprefix )
 	{
 		$iface = 'Controller_Frontend_Common_Decorator_Interface';
@@ -79,7 +79,7 @@ class Controller_Frontend_Common_Factory_Abstract
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return Controller_Frontend_Common_Interface Controller object
 	 */
-	protected static function _addControllerDecorators( MShop_Context_Item_Interface $context,
+	protected static function addControllerDecorators( MShop_Context_Item_Interface $context,
 		Controller_Frontend_Interface $controller, $domain )
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
@@ -122,15 +122,15 @@ class Controller_Frontend_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Controller_Frontend_Common_Decorator_';
-		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Frontend_Common_Decorator_';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/global', array() );
-		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Frontend_' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/local', array() );
-		$controller = self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
 		return $controller;
 	}
@@ -146,8 +146,8 @@ class Controller_Frontend_Common_Factory_Abstract
 	 */
 	protected static function createControllerBase( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
-		if( isset( self::$_objects[$classname] ) ) {
-			return self::$_objects[$classname];
+		if( isset( self::$objects[$classname] ) ) {
+			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

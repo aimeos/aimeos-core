@@ -36,31 +36,31 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds locale test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding test data for MShop locale domain', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding test data for MShop locale domain', 0 );
+		$this->status( '' );
 
 
 		// Set editor for further tasks
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->additional->setEditor( 'core:unittest' );
 
 
-		if( $this->_additional->getConfig()->get( 'setup/site' ) === 'unittest' )
+		if( $this->additional->getConfig()->get( 'setup/site' ) === 'unittest' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
@@ -69,25 +69,25 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional );
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional );
 
-			$this->_cleanupSites( $localeManager );
+			$this->cleanupSites( $localeManager );
 
 			$siteIds = array();
 			if( isset( $testdata['locale/site'] ) ) {
-				$siteIds = $this->_addLocaleSiteData( $localeManager, $testdata['locale/site'] );
+				$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
 			}
 
 			if( isset( $testdata['locale/currency'] ) ) {
-				$this->_addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
+				$this->addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
 			}
 
 			if( isset( $testdata['locale/language'] ) ) {
-				$this->_addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
+				$this->addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
 			}
 
 			if( isset( $testdata['locale'] ) ) {
-				$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
+				$this->addLocaleData( $localeManager, $testdata['locale'], $siteIds );
 			}
 		}
 	}
@@ -99,12 +99,12 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 * @param MShop_Locale_Item_Site_Interface $site Site which can contain sub-sites
 	 * @return MShop_Locale_Item_Site_Interface[] $sites List with sites
 	 */
-	private function _getSites( MShop_Locale_Item_Site_Interface $site )
+	private function getSites( MShop_Locale_Item_Site_Interface $site )
 	{
 		$sites = array( $site );
 
 		foreach( $site->getChildren() as $child ) {
-			$sites = array_merge( $sites, $this->_getSites( $child ) );
+			$sites = array_merge( $sites, $this->getSites( $child ) );
 		}
 
 		return $sites;
@@ -117,7 +117,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 *
 	 * @param MShop_Locale_Manager_Interface $localeManager
 	 */
-	private function _cleanupSites( $localeManager )
+	private function cleanupSites( $localeManager )
 	{
 		$localeSiteManager = $localeManager->getSubManager( 'site' );
 
@@ -129,12 +129,12 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 		foreach( $localeSiteManager->searchItems( $search ) as $site )
 		{
 			$site = $localeSiteManager->getTree( $site->getId() );
-			$sites = array_merge( $sites, $this->_getSites( $site ) );
+			$sites = array_merge( $sites, $this->getSites( $site ) );
 		}
 
 		foreach( $sites as $site )
 		{
-			$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
+			$this->additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
 			$localeSiteManager->deleteItem( $site->getId() );
 		}
 	}

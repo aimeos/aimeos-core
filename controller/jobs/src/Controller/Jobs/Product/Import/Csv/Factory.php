@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Import_Csv_Factory
 		 * @see controller/jobs/product/import/csv/decorators/excludes
 		 * @see controller/jobs/product/import/csv/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/import/csv' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/import/csv' );
 	}
 }

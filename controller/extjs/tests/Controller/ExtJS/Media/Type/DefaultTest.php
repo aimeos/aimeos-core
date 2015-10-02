@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Media_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Media_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Media_Type_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Media_Type_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Media_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Media_Type_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -71,12 +71,12 @@ class Controller_ExtJS_Media_Type_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => array( 'media.type.code' => 'cntltest' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.type.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'media.type.id'} );

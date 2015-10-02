@@ -9,8 +9,8 @@
 
 class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_filename;
+	private $object;
+	private $filename;
 
 
 	/**
@@ -21,8 +21,8 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_filename = 'loggertest.log';
-		$this->_object = new MW_Logger_File( $this->_filename );
+		$this->filename = 'loggertest.log';
+		$this->object = new MW_Logger_File( $this->filename );
 	}
 
 	/**
@@ -38,13 +38,13 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testLog()
 	{
-		$this->_object->log( 'error' );
+		$this->object->log( 'error' );
 
-		if( !file_exists( $this->_filename ) ) {
+		if( !file_exists( $this->filename ) ) {
 			throw new Exception( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->_filename ) );
+		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
 			throw new Exception( 'No log record found' );
@@ -58,18 +58,18 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 
 		$this->setExpectedException('MW_Logger_Exception');
-		$this->_object->log( 'wrong log level', -1);
+		$this->object->log( 'wrong log level', -1);
 	}
 
 	public function testScalarLog()
 	{
-		$this->_object->log( array ( 'scalar', 'errortest' ) );
+		$this->object->log( array ( 'scalar', 'errortest' ) );
 
-		if( !file_exists( $this->_filename ) ) {
+		if( !file_exists( $this->filename ) ) {
 			throw new Exception( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->_filename ) );
+		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
 			throw new Exception( 'No log record found' );
@@ -84,13 +84,13 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testLogCrit()
 	{
-		$this->_object->log( 'critical', MW_Logger_Abstract::CRIT );
+		$this->object->log( 'critical', MW_Logger_Abstract::CRIT );
 
-		if( !file_exists( $this->_filename ) ) {
+		if( !file_exists( $this->filename ) ) {
 			throw new Exception( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->_filename ) );
+		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
 			throw new Exception( 'No log record found' );
@@ -105,13 +105,13 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testLogWarn()
 	{
-		$this->_object->log( 'debug', MW_Logger_Abstract::WARN );
+		$this->object->log( 'debug', MW_Logger_Abstract::WARN );
 
-		if( !file_exists( $this->_filename ) ) {
+		if( !file_exists( $this->filename ) ) {
 			throw new Exception( 'No test file found' );
 		}
 
-		$msg = file_get_contents( $this->_filename );
+		$msg = file_get_contents( $this->filename );
 
 		if( $msg !== '' ) {
 			throw new Exception( 'Log record found but none expected' );
@@ -120,13 +120,13 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testFacility()
 	{
-		$this->_object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
+		$this->object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
 
-		if( !file_exists( $this->_filename ) ) {
+		if( !file_exists( $this->filename ) ) {
 			throw new Exception( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->_filename ) );
+		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
 			throw new Exception( 'No log record found' );
@@ -137,9 +137,9 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testFacilityLimited()
 	{
-		$this->_object = new MW_Logger_File( $this->_filename, MW_Logger_Abstract::ERR, array( 'test' ) );
-		$this->_object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
+		$this->object = new MW_Logger_File( $this->filename, MW_Logger_Abstract::ERR, array( 'test' ) );
+		$this->object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
 
-		$this->assertEquals( '', file_get_contents( $this->_filename ) );
+		$this->assertEquals( '', file_get_contents( $this->filename ) );
 	}
 }

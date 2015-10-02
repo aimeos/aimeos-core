@@ -151,7 +151,7 @@ class MShop_Price_Manager_Factory
 		 * @see mshop/price/manager/decorators/excludes
 		 * @see mshop/price/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'price' );
+		return self::addManagerDecorators( $context, $manager, 'price' );
 	}
 
 }

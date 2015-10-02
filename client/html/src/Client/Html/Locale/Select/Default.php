@@ -51,7 +51,7 @@ class Client_Html_Locale_Select_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/locale/select/default/subparts';
+	private $subPartPath = 'client/html/locale/select/default/subparts';
 
 	/** client/html/locale/select/language/name
 	 * Name of the language part used by the locale selector client implementation
@@ -74,8 +74,8 @@ class Client_Html_Locale_Select_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'language', 'currency' );
-	private $_cache;
+	private $subPartNames = array( 'language', 'currency' );
+	private $cache;
 
 
 	/**
@@ -88,32 +88,32 @@ class Client_Html_Locale_Select_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->selectBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -147,7 +147,7 @@ class Client_Html_Locale_Select_Default
 		$tplconf = 'client/html/locale/select/default/template-body';
 		$default = 'locale/select/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -163,10 +163,10 @@ class Client_Html_Locale_Select_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->selectHeader = $html;
@@ -195,11 +195,11 @@ class Client_Html_Locale_Select_Default
 			$tplconf = 'client/html/locale/select/default/template-header';
 			$default = 'locale/select/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -286,7 +286,7 @@ class Client_Html_Locale_Select_Default
 		 * @see client/html/locale/select/decorators/excludes
 		 * @see client/html/locale/select/decorators/global
 		 */
-		return $this->_createSubClient( 'locale/select/' . $type, $name );
+		return $this->createSubClient( 'locale/select/' . $type, $name );
 	}
 
 
@@ -295,9 +295,9 @@ class Client_Html_Locale_Select_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -309,12 +309,12 @@ class Client_Html_Locale_Select_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$map = array();
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 			$locale = $context->getLocale();
 
@@ -367,9 +367,9 @@ class Client_Html_Locale_Select_Default
 			$view->selectLanguageId = $locale->getLanguageId();
 			$view->selectCurrencyId = $locale->getCurrencyId();
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

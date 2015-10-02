@@ -18,11 +18,11 @@ class MW_Container_Zip
 	extends MW_Container_Abstract
 	implements MW_Container_Interface
 {
-	private $_container;
-	private $_classname;
-	private $_position = 0;
-	private $_content = array();
-	private $_resourcepath;
+	private $container;
+	private $classname;
+	private $position = 0;
+	private $content = array();
+	private $resourcepath;
 
 
 	/**
@@ -37,9 +37,9 @@ class MW_Container_Zip
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() )
 	{
-		$this->_classname = 'MW_Container_Content_' . $format;
+		$this->classname = 'MW_Container_Content_' . $format;
 
-		if( class_exists( $this->_classname ) === false ) {
+		if( class_exists( $this->classname ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
@@ -49,10 +49,10 @@ class MW_Container_Zip
 
 		parent::__construct( $resourcepath, $options );
 
-		$this->_resourcepath = $resourcepath;
+		$this->resourcepath = $resourcepath;
 
-		$this->_container = new ZipArchive();
-		$this->_container->open( $resourcepath, ZipArchive::CREATE );
+		$this->container = new ZipArchive();
+		$this->container->open( $resourcepath, ZipArchive::CREATE );
 	}
 
 
@@ -69,9 +69,9 @@ class MW_Container_Zip
 	 */
 	public function create( $name )
 	{
-		$tmpfile = tempnam( $this->_getOption( 'tempdir', sys_get_temp_dir() ), '' );
+		$tmpfile = tempnam( $this->getOption( 'tempdir', sys_get_temp_dir() ), '' );
 
-		return new $this->_classname( $tmpfile, $name, $this->_getOptions() );
+		return new $this->classname( $tmpfile, $name, $this->getOptions() );
 	}
 
 
@@ -82,7 +82,7 @@ class MW_Container_Zip
 	 */
 	public function add( MW_Container_Content_Interface $content )
 	{
-		$this->_content[] = $content;
+		$this->content[] = $content;
 	}
 
 
@@ -94,14 +94,14 @@ class MW_Container_Zip
 	 */
 	public function get( $name )
 	{
-		if( $this->_container->locateName( $name ) === false )
+		if( $this->container->locateName( $name ) === false )
 		{
 			$msg = 'No content object "%1$s" available in "%2$s"';
-			throw new MW_Container_Exception( sprintf( $msg, $name, $this->_container->filename ) );
+			throw new MW_Container_Exception( sprintf( $msg, $name, $this->container->filename ) );
 		}
 
-		// $this->_container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
-		return new $this->_classname( 'zip://' . $this->_resourcepath . '#' . $name, $name );
+		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
+		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name );
 	}
 
 
@@ -110,22 +110,22 @@ class MW_Container_Zip
 	 */
 	public function close()
 	{
-		foreach( $this->_content as $content )
+		foreach( $this->content as $content )
 		{
 			$content->close();
 
-			if( $this->_container->addFile( $content->getResource(), $content->getName() ) === false )
+			if( $this->container->addFile( $content->getResource(), $content->getName() ) === false )
 			{
 				$msg = 'Unable to add content in "%1$s" to file "%2$s"';
-				throw new MW_Content_Exception( sprinf( $msg, $content->getResource(), $this->_container->filename ) );
+				throw new MW_Content_Exception( sprinf( $msg, $content->getResource(), $this->container->filename ) );
 			}
 		}
 
-		if( $this->_container->close() === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close zip file "%1$s"', $this->_container->filename ) );
+		if( $this->container->close() === false ) {
+			throw new MW_Container_Exception( sprintf( 'Unable to close zip file "%1$s"', $this->container->filename ) );
 		}
 
-		foreach( $this->_content as $content ) {
+		foreach( $this->content as $content ) {
 			unlink( $content->getResource() );
 		}
 	}
@@ -138,14 +138,14 @@ class MW_Container_Zip
 	 */
 	function current()
 	{
-		if( ( $name = $this->_container->getNameIndex( $this->_position ) ) === false )
+		if( ( $name = $this->container->getNameIndex( $this->position ) ) === false )
 		{
 			$msg = 'Unable to get name of file at index "%1$s" in "%2$s"';
-			throw new MW_Container_Exception( sprintf( $msg, $this->_position, $this->_container->filename ) );
+			throw new MW_Container_Exception( sprintf( $msg, $this->position, $this->container->filename ) );
 		}
 
-		// $this->_container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
-		return new $this->_classname( 'zip://' . $this->_resourcepath . '#' . $name, $name );
+		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
+		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name );
 	}
 
 
@@ -156,7 +156,7 @@ class MW_Container_Zip
 	 */
 	function key()
 	{
-		return $this->_position;
+		return $this->position;
 	}
 
 
@@ -165,7 +165,7 @@ class MW_Container_Zip
 	 */
 	function next()
 	{
-		$this->_position++;
+		$this->position++;
 	}
 
 
@@ -174,7 +174,7 @@ class MW_Container_Zip
 	 */
 	function rewind()
 	{
-		$this->_position = 0;
+		$this->position = 0;
 	}
 
 
@@ -185,6 +185,6 @@ class MW_Container_Zip
 	 */
 	function valid()
 	{
-		return $this->_position < $this->_container->numFiles;
+		return $this->position < $this->container->numFiles;
 	}
 }

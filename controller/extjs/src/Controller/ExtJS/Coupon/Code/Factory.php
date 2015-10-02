@@ -142,6 +142,6 @@ class Controller_ExtJS_Coupon_Code_Factory
 		 * @see controller/extjs/coupon/code/decorators/excludes
 		 * @see controller/extjs/coupon/code/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'coupon/code' );
+		return self::addControllerDecorators( $context, $controller, 'coupon/code' );
 	}
 }

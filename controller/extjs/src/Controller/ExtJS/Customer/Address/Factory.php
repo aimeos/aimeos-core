@@ -142,6 +142,6 @@ class Controller_ExtJS_Customer_Address_Factory
 		 * @see controller/extjs/customer/address/decorators/excludes
 		 * @see controller/extjs/customer/address/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'customer/address' );
+		return self::addControllerDecorators( $context, $controller, 'customer/address' );
 	}
 }

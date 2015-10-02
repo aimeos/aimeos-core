@@ -7,8 +7,8 @@
 
 class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Basket_Standard_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Basket_Standard_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,31 +35,31 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos basket-standard">', $output );
 	}
 
 
 	public function testGetBodyAddSingle()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
-			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_prodid' => $this->getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
 			'b_warehouse' => 'default',
 		);
@@ -67,8 +67,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 .+</td>.*</tfoot>#smU', $output );
@@ -80,17 +80,17 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyAddMulti()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
 			'b_prod' => array(
 				array(
-					'prodid' => $this->_getProductItem( 'CNC' )->getId(),
+					'prodid' => $this->getProductItem( 'CNC' )->getId(),
 					'quantity' => 1,
 					'warehouse' => 'default',
 				),
 				array(
-					'prodid' => $this->_getProductItem( 'CNE' )->getId(),
+					'prodid' => $this->getProductItem( 'CNE' )->getId(),
 					'quantity' => 1,
 					'warehouse' => 'default',
 				),
@@ -100,8 +100,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
 		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 .+</td>.*</tbody>#smU', $output );
@@ -113,7 +113,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyAddVariantAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -132,10 +132,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$attributes = $attrManager->searchItems( $search, array() );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
-			'b_prodid' => $this->_getProductItem( 'U:TEST' )->getId(),
+			'b_prodid' => $this->getProductItem( 'U:TEST' )->getId(),
 			'b_quantity' => 1,
 			'b_attrvarid' => array_keys( $attributes ),
 		);
@@ -143,8 +143,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">30</span>.*</li>.*<li class="attr-item">.*<span class="value">30</span>.*</li>#smU', $output );
 	}
@@ -152,7 +152,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyAddConfigAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -167,10 +167,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No attribute' );
 		}
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
-			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_prodid' => $this->getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
 			'b_attrconfid' => $attribute->getId(),
 			'b_warehouse' => 'default',
@@ -179,8 +179,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<li class="attr-item">.*<a class="change" href=[^>]*>.*<span class="value">weiß</span>.*</a>.*</li>#smU', $output );
 	}
@@ -188,7 +188,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyAddHiddenAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -203,10 +203,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No attribute' );
 		}
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
-			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_prodid' => $this->getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
 			'b_attrhideid' => $attribute->getId(),
 			'b_warehouse' => 'default',
@@ -215,8 +215,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertNotRegExp( '#<li class="attr-item">.*<span class="value">m</span>.*</li>#smU', $output );
 	}
@@ -224,7 +224,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyAddCustomAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -239,10 +239,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No attribute' );
 		}
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 				'b_action' => 'add',
-				'b_prodid' => $this->_getProductItem( 'U:TESTP' )->getId(),
+				'b_prodid' => $this->getProductItem( 'U:TESTP' )->getId(),
 				'b_quantity' => 1,
 				'b_attrcustid' => array( $attribute->getId() => '2000-01-01' ),
 				'b_warehouse' => 'default',
@@ -251,8 +251,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">2000-01-01</span>.*</li>#smU', $output );
 	}
@@ -260,9 +260,9 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyEditSingle()
 	{
-		$this->_addProduct( 'CNE', 2, 'default' );
+		$this->addProduct( 'CNE', 2, 'default' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'edit',
 			'b_position' => 0,
@@ -272,8 +272,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 .+</td>.*</tfoot>#smU', $output );
@@ -284,10 +284,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyEditMulti()
 	{
-		$this->_addProduct( 'CNE', 1, 'default' );
-		$this->_addProduct( 'CNC', 2, 'default' );
+		$this->addProduct( 'CNE', 1, 'default' );
+		$this->addProduct( 'CNC', 2, 'default' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'edit',
 			'b_prod' => array(
@@ -305,8 +305,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 .+</td>.*</tbody>#smU', $output );
 		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 .+</td>.*</tbody>#smU', $output );
@@ -318,10 +318,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyDeleteSingle()
 	{
-		$this->_addProduct( 'CNE', 2, 'default' );
-		$this->_addProduct( 'CNC', 1, 'default' );
+		$this->addProduct( 'CNE', 2, 'default' );
+		$this->addProduct( 'CNC', 1, 'default' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'delete',
 			'b_position' => 1,
@@ -330,8 +330,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 .+</td>.*</tbody>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">36.00 .+</td>.*</tfoot>#smU', $output );
@@ -342,10 +342,10 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyDeleteMulti()
 	{
-		$this->_addProduct( 'CNE', 1, 'default' );
-		$this->_addProduct( 'CNC', 1, 'default' );
+		$this->addProduct( 'CNE', 1, 'default' );
+		$this->addProduct( 'CNC', 1, 'default' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'delete',
 			'b_position' => array( 0, 1 ),
@@ -354,8 +354,8 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
-		$output = $this->_object->getBody();
+		$this->object->process();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
@@ -365,7 +365,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyDeleteInvalid()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'delete',
 			'b_position' => -1,
@@ -374,7 +374,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 
 		$this->assertEquals( 1, count( $view->get( 'standardErrorList', array() ) ) );
 	}
@@ -382,7 +382,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'detail', 'Default' );
+		$client = $this->object->getSubClient( 'detail', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
@@ -390,14 +390,14 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
@@ -406,9 +406,9 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 	 * @param integer $quantity
 	 * @param string $warehouse
 	 */
-	protected function _addProduct( $code, $quantity, $warehouse )
+	protected function addProduct( $code, $quantity, $warehouse )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
@@ -417,7 +417,7 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'b_action' => 'add',
 			'b_prodid' => $item->getId(),
@@ -428,16 +428,16 @@ class Client_Html_Basket_Standard_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	/**
 	 * @param string $code
 	 */
-	protected function _getProductItem( $code )
+	protected function getProductItem( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );

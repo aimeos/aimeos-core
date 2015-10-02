@@ -18,7 +18,7 @@ class MShop_Service_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Service_Item_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the item object.
@@ -31,7 +31,7 @@ class MShop_Service_Item_Default
 	{
 		parent::__construct( 'service.', $values, $listItems, $refItems );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -42,7 +42,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 
@@ -55,7 +55,7 @@ class MShop_Service_Item_Default
 	{
 		if( $pos == $this->getPosition() ) { return; }
 
-		$this->_values['pos'] = (int) $pos;
+		$this->values['pos'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -67,7 +67,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -78,11 +78,11 @@ class MShop_Service_Item_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -94,7 +94,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -107,7 +107,7 @@ class MShop_Service_Item_Default
 	{
 		if( $typeId == $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $typeId;
+		$this->values['typeid'] = (int) $typeId;
 		$this->setModified();
 	}
 
@@ -119,7 +119,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -130,7 +130,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getProvider()
 	{
-		return ( isset( $this->_values['provider'] ) ? (string) $this->_values['provider'] : '' );
+		return ( isset( $this->values['provider'] ) ? (string) $this->values['provider'] : '' );
 	}
 
 
@@ -143,7 +143,7 @@ class MShop_Service_Item_Default
 	{
 		if( $provider == $this->getProvider() ) { return; }
 
-		$this->_values['provider'] = (string) $provider;
+		$this->values['provider'] = (string) $provider;
 		$this->setModified();
 	}
 
@@ -155,7 +155,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -168,7 +168,7 @@ class MShop_Service_Item_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -180,7 +180,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
 	}
 
 
@@ -191,7 +191,7 @@ class MShop_Service_Item_Default
 	 */
 	public function setConfig( array $config )
 	{
-		$this->_values['config'] = $config;
+		$this->values['config'] = $config;
 		$this->setModified();
 	}
 
@@ -203,7 +203,7 @@ class MShop_Service_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -216,7 +216,7 @@ class MShop_Service_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 

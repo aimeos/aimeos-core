@@ -8,7 +8,7 @@
 
 class Controller_Common_Product_Import_Csv_Cache_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
@@ -16,7 +16,7 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_DefaultTest extends PHP
 		MShop_Factory::setCache( true );
 
 		$context = TestHelper::getContext();
-		$this->_object = new Controller_Common_Product_Import_Csv_Cache_Catalog_Default( $context );
+		$this->object = new Controller_Common_Product_Import_Csv_Cache_Catalog_Default( $context );
 	}
 
 
@@ -29,7 +29,7 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_DefaultTest extends PHP
 
 	public function testGet()
 	{
-		$result = $this->_object->get( 'root' );
+		$result = $this->object->get( 'root' );
 
 		$this->assertNotEquals( null, $result );
 		$this->assertInternalType( 'integer', $result );
@@ -38,7 +38,7 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_DefaultTest extends PHP
 
 	public function testGetUnknown()
 	{
-		$this->assertEquals( null, $this->_object->get( 'cache-test' ) );
+		$this->assertEquals( null, $this->object->get( 'cache-test' ) );
 	}
 
 
@@ -48,8 +48,8 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_DefaultTest extends PHP
 		$item->setCode( 'cache-test' );
 		$item->setId( 1 );
 
-		$this->_object->set( $item );
-		$id = $this->_object->get( 'cache-test' );
+		$this->object->set( $item );
+		$id = $this->object->get( 'cache-test' );
 
 		$this->assertEquals( $item->getId(), $id );
 	}

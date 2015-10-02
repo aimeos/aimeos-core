@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'ALTER TABLE "mshop_catalog_index_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL';
+	private $mysql = 'ALTER TABLE "mshop_catalog_index_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL';
 
 
 	/**
@@ -39,9 +39,9 @@ class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -49,19 +49,19 @@ class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abst
 	 *
 	 * @param string $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Renameing shipping to costs in catalog index price table', 0 );
+		$this->msg( 'Renameing shipping to costs in catalog index price table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_catalog_index_price' ) === true
-			&& $this->_schema->columnExists( 'mshop_catalog_index_price', 'shipping' ) === true )
+		if( $this->schema->tableExists( 'mshop_catalog_index_price' ) === true
+			&& $this->schema->columnExists( 'mshop_catalog_index_price', 'shipping' ) === true )
 		{
-			$this->_execute( $stmts );
-			$this->_status( 'done' );
+			$this->execute( $stmts );
+			$this->status( 'done' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

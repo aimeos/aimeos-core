@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_TypesSetLabelStatus extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_type' => array(
 			'UPDATE "mshop_attribute_type" SET "status" = 1 WHERE "code" IN (\'color\', \'size\', \'width\', \'length\') AND "label" = \'\' AND "status" = 0',
 			'UPDATE "mshop_attribute_type" SET "label" = \'Color\' WHERE "code" = \'color\' AND "label" = \'\'',
@@ -117,20 +117,20 @@ class MW_Setup_Task_TypesSetLabelStatus extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( sprintf( 'Setting label and status values' ), 0 );
-		$this->_status( '' );
+		$this->msg( sprintf( 'Setting label and status values' ), 0 );
+		$this->status( '' );
 
-		foreach( $this->_mysql as $table => $stmts )
+		foreach( $this->mysql as $table => $stmts )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) ) {
-				$this->_executeList( $stmts );
-				$this->_status( 'OK' );
+			if( $this->schema->tableExists( $table ) ) {
+				$this->executeList( $stmts );
+				$this->status( 'OK' );
 			} else {
-				$this->_status( 'n/a' );
+				$this->status( 'n/a' );
 			}
 		}
 	}

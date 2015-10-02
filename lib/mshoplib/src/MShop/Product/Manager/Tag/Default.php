@@ -18,7 +18,7 @@ class MShop_Product_Manager_Tag_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Product_Manager_Tag_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'product.tag.id'=> array(
 			'code'=>'product.tag.id',
 			'internalcode'=>'mprota."id"',
@@ -88,7 +88,7 @@ class MShop_Product_Manager_Tag_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-product' );
+		$this->setResourceName( 'db-product' );
 	}
 
 
@@ -100,7 +100,7 @@ class MShop_Product_Manager_Tag_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/product/manager/tag/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -115,7 +115,7 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -135,10 +135,10 @@ class MShop_Product_Manager_Tag_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -210,7 +210,7 @@ class MShop_Product_Manager_Tag_Default
 				$path = 'mshop/product/manager/tag/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
 			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -260,7 +260,7 @@ class MShop_Product_Manager_Tag_Default
 				 * @see mshop/product/manager/tag/default/item/count
 				 */
 				$path = 'mshop/product/manager/tag/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -305,7 +305,7 @@ class MShop_Product_Manager_Tag_Default
 		 * @see mshop/product/manager/tag/default/item/count
 		 */
 		$path = 'mshop/product/manager/tag/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -350,7 +350,7 @@ class MShop_Product_Manager_Tag_Default
 		 */
 		$path = 'classes/product/manager/tag/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
@@ -367,10 +367,10 @@ class MShop_Product_Manager_Tag_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

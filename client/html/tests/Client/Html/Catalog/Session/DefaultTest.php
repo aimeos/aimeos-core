@@ -7,8 +7,8 @@
 
 class Client_Html_Catalog_Session_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Catalog_Session_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Session_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Session_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,27 +35,27 @@ class Client_Html_Catalog_Session_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos catalog-session">', $output );
 	}
 
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'seen', 'Default' );
+		$client = $this->object->getSubClient( 'seen', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
@@ -63,13 +63,13 @@ class Client_Html_Catalog_Session_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 }

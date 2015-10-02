@@ -18,7 +18,7 @@ class MShop_Order_Manager_Base_Product_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Product_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.base.product.id' => array(
 			'code'=>'order.base.product.id',
 			'internalcode'=>'mordbapr."id"',
@@ -207,7 +207,7 @@ class MShop_Order_Manager_Base_Product_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -276,7 +276,7 @@ class MShop_Order_Manager_Base_Product_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/base/product/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -291,7 +291,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 */
 	public function createItem()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$values = array( 'siteid' => $context->getLocale()->getSiteId() );
 
@@ -328,10 +328,10 @@ class MShop_Order_Manager_Base_Product_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -404,7 +404,7 @@ class MShop_Order_Manager_Base_Product_Default
 				$path = 'mshop/order/manager/base/product/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $item->getOrderProductId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -468,7 +468,7 @@ class MShop_Order_Manager_Base_Product_Default
 				 * @see mshop/order/manager/base/product/default/item/count
 				 */
 				$path = 'mshop/order/manager/base/product/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -513,7 +513,7 @@ class MShop_Order_Manager_Base_Product_Default
 		 * @see mshop/order/manager/base/product/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/product/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -544,7 +544,7 @@ class MShop_Order_Manager_Base_Product_Default
 		 */
 		$path = 'classes/order/manager/base/product/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'attribute' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'attribute' ), $withsub );
 	}
 
 
@@ -680,11 +680,11 @@ class MShop_Order_Manager_Base_Product_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -822,7 +822,7 @@ class MShop_Order_Manager_Base_Product_Default
 		}
 
 		$result = array();
-		$attributes = $this->_getAttributeItems( array_keys( $items ) );
+		$attributes = $this->getAttributeItems( array_keys( $items ) );
 
 		foreach( $items as $id => $row )
 		{
@@ -850,7 +850,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 * @param string[] $ids List of order product item IDs
 	 * @return array List of items implementing MShop_Order_Item_Base_Product_Attribute_Interface
 	 */
-	protected function _getAttributeItems( $ids )
+	protected function getAttributeItems( $ids )
 	{
 		$manager = $this->getSubmanager( 'attribute' );
 		$search = $manager->createSearch();

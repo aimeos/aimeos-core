@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Url_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Url_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Url_Default( $view, '/baseurl/' );
+		$this->object = new MW_View_Helper_Url_Default( $view, '/baseurl/' );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_View_Helper_Url_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -45,7 +45,7 @@ class MW_View_Helper_Url_DefaultTest extends PHPUnit_Framework_TestCase
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 		$trailing = array( 'some', 'nice', 'text' );
 
-		$this->assertEquals( $expected, $this->_object->transform( 'module', 'test', 'index', $params, $trailing ) );
+		$this->assertEquals( $expected, $this->object->transform( 'module', 'test', 'index', $params, $trailing ) );
 	}
 
 
@@ -54,13 +54,13 @@ class MW_View_Helper_Url_DefaultTest extends PHPUnit_Framework_TestCase
 		$expected = '/baseurl/module/test/index/?plain=1&multi%5Bsub%5D=1';
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 
-		$this->assertEquals( $expected, $this->_object->transform( 'module', 'test', 'index', $params ) );
+		$this->assertEquals( $expected, $this->object->transform( 'module', 'test', 'index', $params ) );
 	}
 
 
 	public function testTransformOnlyBase()
 	{
-		$this->assertEquals( '/baseurl/', $this->_object->transform() );
+		$this->assertEquals( '/baseurl/', $this->object->transform() );
 	}
 
 }

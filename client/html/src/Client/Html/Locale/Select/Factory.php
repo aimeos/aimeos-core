@@ -77,6 +77,6 @@ class Client_Html_Locale_Select_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'locale/select' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'locale/select' );
 	}
 }

@@ -11,8 +11,8 @@
  */
 class MW_View_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_translate;
+	private $object;
+	private $translate;
 
 
 	/**
@@ -23,8 +23,8 @@ class MW_View_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_View_Default();
-		$this->_translate = new MW_View_Helper_Translate_Default( $this->_object, new MW_Translation_None( 'en_GB' ) );
+		$this->object = new MW_View_Default();
+		$this->translate = new MW_View_Helper_Translate_Default( $this->object, new MW_Translation_None( 'en_GB' ) );
 	}
 
 
@@ -36,39 +36,39 @@ class MW_View_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testMagicMethods()
 	{
-		$this->assertEquals( false, isset( $this->_object->test ) );
+		$this->assertEquals( false, isset( $this->object->test ) );
 
-		$this->_object->test = 10;
-		$this->assertEquals( 10, $this->_object->test );
-		$this->assertEquals( true, isset( $this->_object->test ) );
+		$this->object->test = 10;
+		$this->assertEquals( 10, $this->object->test );
+		$this->assertEquals( true, isset( $this->object->test ) );
 
-		unset( $this->_object->test );
-		$this->assertEquals( false, isset( $this->_object->test ) );
+		unset( $this->object->test );
+		$this->assertEquals( false, isset( $this->object->test ) );
 
 		$this->setExpectedException( 'MW_View_Exception' );
-		$this->_object->test;
+		$this->object->test;
 	}
 
 
 	public function testGet()
 	{
-		$this->assertEquals( null, $this->_object->get( 'test' ) );
-		$this->assertEquals( 1, $this->_object->get( 'test', 1 ) );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
+		$this->assertEquals( 1, $this->object->get( 'test', 1 ) );
 
-		$this->_object->test = 10;
-		$this->assertEquals( 10, $this->_object->get( 'test' ) );
+		$this->object->test = 10;
+		$this->assertEquals( 10, $this->object->get( 'test' ) );
 	}
 
 
 	public function testCallCreateHelper()
 	{
-		$enc = $this->_object->encoder();
+		$enc = $this->object->encoder();
 		$this->assertInstanceOf( 'MW_View_Helper_Interface', $enc );
 	}
 
@@ -76,40 +76,40 @@ class MW_View_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCallInvalidName()
 	{
 		$this->setExpectedException( 'MW_View_Exception' );
-		$this->_object->_invalid();
+		$this->object->invalid();
 	}
 
 
 	public function testCallUnknown()
 	{
 		$this->setExpectedException( 'MW_View_Exception' );
-		$this->_object->unknown();
+		$this->object->unknown();
 	}
 
 
 	public function testCallAddHelper()
 	{
-		$this->_object->addHelper( 'translate', $this->_translate );
+		$this->object->addHelper( 'translate', $this->translate );
 
-		$this->assertEquals( 'File', $this->_object->translate( 'test', 'File', 'Files', 1 ) );
+		$this->assertEquals( 'File', $this->object->translate( 'test', 'File', 'Files', 1 ) );
 	}
 
 
 	public function testAssignRender()
 	{
-		$this->_object->addHelper( 'translate', $this->_translate );
+		$this->object->addHelper( 'translate', $this->translate );
 		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles'. DIRECTORY_SEPARATOR . 'template';
 
 
-		$this->_object->assign( array( 'quantity' => 1 ) );
-		$output = $this->_object->render( $filename );
+		$this->object->assign( array( 'quantity' => 1 ) );
+		$output = $this->object->render( $filename );
 
 		$expected = "Number of files:\n1 File";
 		$this->assertEquals( $expected, $output );
 
 
-		$this->_object->assign( array( 'quantity' => 0 ) );
-		$output = $this->_object->render( $filename );
+		$this->object->assign( array( 'quantity' => 0 ) );
+		$output = $this->object->render( $filename );
 
 		$expected = "Number of files:\n0 Files";
 		$this->assertEquals( $expected, $output );

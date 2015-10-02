@@ -36,7 +36,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
 	}
@@ -45,19 +45,19 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 	/**
 	 * Adds locale data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding default plugin data', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding default plugin data', 0 );
+		$this->status( '' );
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Default' );
 
 
 		$filename = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
@@ -67,7 +67,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 		}
 
 		if( isset( $data['plugin'] ) ) {
-			$this->_addPluginData( $pluginManager, $data['plugin'] );
+			$this->addPluginData( $pluginManager, $data['plugin'] );
 		}
 	}
 
@@ -78,9 +78,9 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Manager_Interface $pluginManager Plugin manager
 	 * @param array $data Associative list of plugin data
 	 */
-	protected function _addPluginData( MShop_Common_Manager_Interface $pluginManager, array $data )
+	protected function addPluginData( MShop_Common_Manager_Interface $pluginManager, array $data )
 	{
-		$this->_msg( 'Adding data for MShop plugins', 1 );
+		$this->msg( 'Adding data for MShop plugins', 1 );
 
 		$types = array();
 		$manager = $pluginManager->getSubManager( 'type' );
@@ -117,6 +117,6 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 			} catch( Exception $e ) {; } // if plugin configuration was already available
 		}
 
-		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
+		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBasePerfData
 {
-	private $_count = 1000;
+	private $count = 1000;
 
 
 	/**
@@ -42,46 +42,46 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert product data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product selection performance data', 0 );
+		$this->msg( 'Adding product selection performance data', 0 );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
-		$selProducts = $this->_getSelectionProductIds();
+		$selProducts = $this->getSelectionProductIds();
 
-		$this->_txCommit();
-
-
-		$productTypeItem = $this->_getTypeItem( 'product/type', 'product', 'default' );
-		$listTypeItem = $this->_getTypeItem( 'product/list/type', 'product', 'default' );
+		$this->txCommit();
 
 
-		$productListManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
+		$listTypeItem = $this->getTypeItem( 'product/list/type', 'product', 'default' );
+
+
+		$productListManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'product' );
 
 
-		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
 		$search->setSortations( array( $search->sort( '-', 'product.id' ) ) );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$selCount = count( $selProducts );
 		$selPrices = array();
@@ -95,7 +95,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 			{
 				$pos = (int) ( ( $num / 9 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
-				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
+				$selPrices[$pos] = $this->getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
 				$listItem->setId( null );
 				$listItem->setParentId( $selProducts[$pos] );
@@ -105,7 +105,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 				$pos = (int) ( ( $num / 9 + 1 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
-				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
+				$selPrices[$pos] = $this->getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
 				$listItem->setId( null );
 				$listItem->setParentId( $selProducts[$pos] );
@@ -115,7 +115,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 				$pos = (int) ( ( $num / 9 + 2 ) % $selCount );
 				$prices = $product->getRefItems( 'price', 'default', 'default' );
-				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
+				$selPrices[$pos] = $this->getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
 				$listItem->setId( null );
 				$listItem->setParentId( $selProducts[$pos] );
@@ -131,15 +131,15 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$listTypeItem = $this->_getTypeItem( 'product/list/type', 'price', 'default' );
+		$listTypeItem = $this->getTypeItem( 'product/list/type', 'price', 'default' );
 
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'price' );
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		foreach( $selPrices as $pos => $priceItem )
 		{
@@ -149,14 +149,14 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 			$productListManager->saveItem( $listItem, false );
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getLowestPrice( MShop_Price_Item_Interface $price = null, array $prices = array() )
+	protected function getLowestPrice( MShop_Price_Item_Interface $price = null, array $prices = array() )
 	{
 		foreach( $prices as $item )
 		{
@@ -175,10 +175,10 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	}
 
 
-	protected function _getSelectionProductIds()
+	protected function getSelectionProductIds()
 	{
 		$textTypeItems = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 
 		$textTypeManager = MShop_Factory::createManager( $context, 'text/type' );
@@ -256,7 +256,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 		$selProducts = array();
 
-		for( $i = 0; $i < $this->_count; $i++ )
+		for( $i = 0; $i < $this->count; $i++ )
 		{
 			$productItem->setId( null );
 			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );

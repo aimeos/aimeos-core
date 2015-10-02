@@ -142,6 +142,6 @@ class Controller_ExtJS_Service_Factory
 		 * @see controller/extjs/service/decorators/excludes
 		 * @see controller/extjs/service/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'service' );
+		return self::addControllerDecorators( $context, $controller, 'service' );
 	}
 }

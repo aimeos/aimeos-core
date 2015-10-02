@@ -8,8 +8,8 @@
 
 class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -22,8 +22,8 @@ class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Fr
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_object = new Controller_Common_Product_Import_Csv_Processor_Done( $this->_context, array() );
+		$this->context = TestHelper::getContext();
+		$this->object = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
 	}
 
 
@@ -38,15 +38,15 @@ class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Fr
 		MShop_Factory::setCache( false );
 		MShop_Factory::clear();
 
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testProcess()
 	{
-		$product = MShop_Factory::createManager( $this->_context, 'product' )->createItem();
+		$product = MShop_Factory::createManager( $this->context, 'product' )->createItem();
 
-		$result = $this->_object->process( $product, array( 'test' ) );
+		$result = $this->object->process( $product, array( 'test' ) );
 
 		$this->assertEquals( array( 'test' ), $result );
 	}

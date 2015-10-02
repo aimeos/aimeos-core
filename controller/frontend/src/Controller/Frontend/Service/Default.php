@@ -18,8 +18,8 @@ class Controller_Frontend_Service_Default
 	extends Controller_Frontend_Abstract
 	implements Controller_Frontend_Service_Interface
 {
-	private $_items = array();
-	private $_providers = array();
+	private $items = array();
+	private $providers = array();
 
 
 	/**
@@ -34,11 +34,11 @@ class Controller_Frontend_Service_Default
 	public function getServices( $type, MShop_Order_Item_Base_Interface $basket,
 		$ref = array( 'media', 'price', 'text' ) )
 	{
-		if( isset( $this->_items[$type] ) ) {
-			return $this->_items[$type];
+		if( isset( $this->items[$type] ) ) {
+			return $this->items[$type];
 		}
 
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(
@@ -49,29 +49,29 @@ class Controller_Frontend_Service_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
-		$this->_items[$type] = $serviceManager->searchItems( $search, $ref );
+		$this->items[$type] = $serviceManager->searchItems( $search, $ref );
 
 
-		foreach( $this->_items[$type] as $id => $service )
+		foreach( $this->items[$type] as $id => $service )
 		{
 			try
 			{
 				$provider = $serviceManager->getProvider( $service );
 
 				if( $provider->isAvailable( $basket ) ) {
-					$this->_providers[$type][$id] = $provider;
+					$this->providers[$type][$id] = $provider;
 				} else {
-					unset( $this->_items[$type][$id] );
+					unset( $this->items[$type][$id] );
 				}
 			}
 			catch( MShop_Service_Exception $e )
 			{
 				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
-				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 		}
 
-		return $this->_items[$type];
+		return $this->items[$type];
 	}
 
 
@@ -89,12 +89,12 @@ class Controller_Frontend_Service_Default
 	 */
 	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
 	{
-		if( isset( $this->_providers[$type][$serviceId] ) ) {
-			return $this->_providers[$type][$serviceId]->getConfigFE( $basket );
+		if( isset( $this->providers[$type][$serviceId] ) ) {
+			return $this->providers[$type][$serviceId]->getConfigFE( $basket );
 		}
 
-		$item = $this->_getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$item = $this->getServiceItem( $type, $serviceId );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->getConfigFE( $basket );
 	}
@@ -113,12 +113,12 @@ class Controller_Frontend_Service_Default
 	 */
 	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
 	{
-		if( isset( $this->_providers[$type][$serviceId] ) ) {
-			return $this->_providers[$type][$serviceId]->calcPrice( $basket );
+		if( isset( $this->providers[$type][$serviceId] ) ) {
+			return $this->providers[$type][$serviceId]->calcPrice( $basket );
 		}
 
-		$item = $this->_getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$item = $this->getServiceItem( $type, $serviceId );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->calcPrice( $basket );
 	}
@@ -137,12 +137,12 @@ class Controller_Frontend_Service_Default
 	 */
 	public function checkServiceAttributes( $type, $serviceId, array $attributes )
 	{
-		if( isset( $this->_providers[$type][$serviceId] ) ) {
-			return $this->_providers[$type][$serviceId]->checkConfigFE( $attributes );
+		if( isset( $this->providers[$type][$serviceId] ) ) {
+			return $this->providers[$type][$serviceId]->checkConfigFE( $attributes );
 		}
 
-		$item = $this->_getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$item = $this->getServiceItem( $type, $serviceId );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->checkConfigFE( $attributes );
 	}
@@ -155,9 +155,9 @@ class Controller_Frontend_Service_Default
 	 * @param string $serviceId Identifier of the service option chosen by the customer
 	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
 	 */
-	protected function _getServiceItem( $type, $serviceId )
+	protected function getServiceItem( $type, $serviceId )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(

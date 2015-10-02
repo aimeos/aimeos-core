@@ -17,7 +17,7 @@
 class MShop_Service_Provider_Decorator_Example
 	extends MShop_Service_Provider_Decorator_Abstract
 {
-	private $_beConfig = array(
+	private $beConfig = array(
 		'country' => array(
 			'code' => 'country',
 			'internalcode'=> 'country',
@@ -39,8 +39,8 @@ class MShop_Service_Provider_Decorator_Example
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->_getProvider()->checkConfigBE( $attributes );
-		$error += $this->_checkConfig( $this->_beConfig, $attributes );
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
 
 		return $error;
 	}
@@ -54,9 +54,9 @@ class MShop_Service_Provider_Decorator_Example
 	 */
 	public function getConfigBE()
 	{
-		$list = $this->_getProvider()->getConfigBE();
+		$list = $this->getProvider()->getConfigBE();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -74,7 +74,7 @@ class MShop_Service_Provider_Decorator_Example
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
 		if( $basket->getLocale()->getLanguageId() === 'en' ) {
-			return $this->_getProvider()->isAvailable( $basket );
+			return $this->getProvider()->isAvailable( $basket );
 		}
 		return false;
 	}

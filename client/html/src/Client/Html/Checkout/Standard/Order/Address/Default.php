@@ -51,8 +51,8 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/order/address/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/checkout/standard/order/address/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,10 +65,10 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->addressBody = $html;
@@ -96,7 +96,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		$tplconf = 'client/html/checkout/standard/order/address/default/template-body';
 		$default = 'checkout/standard/order-address-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -110,10 +110,10 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->addressHeader = $html;
@@ -142,7 +142,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		$tplconf = 'client/html/checkout/standard/order/address/default/template-header';
 		$default = 'checkout/standard/order-address-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -229,7 +229,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		 * @see client/html/checkout/standard/order/address/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/order/address/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/order/address/' . $type, $name );
 	}
 
 
@@ -250,8 +250,8 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 
 			if( $customerId != '' && $addr->getAddressId() == '' )
 			{
-				$addrManager = MShop_Factory::createManager( $this->_getContext(), 'customer/address' );
-				$orderAddrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/address' );
+				$addrManager = MShop_Factory::createManager( $this->getContext(), 'customer/address' );
+				$orderAddrManager = MShop_Factory::createManager( $this->getContext(), 'order/base/address' );
 
 				$item = $addrManager->createItem();
 				$item->setRefId( $customerId );
@@ -266,7 +266,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		catch( Exception $e )
 		{
 			$msg = sprintf( 'Unable to save address for customer "%1$s": %2$s', $customerId, $e->getMessage() );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
 		}
 
 		parent::process();
@@ -278,8 +278,8 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

@@ -23,7 +23,7 @@ class Controller_ExtJS_Common_Decorator_Example
 	}
 
 
-	protected function _getManager()
+	protected function getManager()
 	{
 	}
 }

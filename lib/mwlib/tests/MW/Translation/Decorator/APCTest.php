@@ -8,7 +8,7 @@
  */
 class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -24,7 +24,7 @@ class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
 		}
 
 		$trans = new MW_Translation_None( 'en_GB' );
-		$this->_object = new MW_Translation_Decorator_APC( $trans, 'i18n' );
+		$this->object = new MW_Translation_Decorator_APC( $trans, 'i18n' );
 	}
 
 	/**
@@ -39,16 +39,16 @@ class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
 
 	public function testDt()
 	{
-		$this->assertEquals( 'test', $this->_object->dt( 'domain', 'test' ) );
+		$this->assertEquals( 'test', $this->object->dt( 'domain', 'test' ) );
 	}
 
 	public function testDn()
 	{
-		$this->assertEquals( 'tests', $this->_object->dn( 'domain', 'test', 'tests', 2 ) );
+		$this->assertEquals( 'tests', $this->object->dn( 'domain', 'test', 'tests', 2 ) );
 	}
 
 	public function testGetLocale()
 	{
-		$this->assertEquals( 'en_GB', $this->_object->getLocale() );
+		$this->assertEquals( 'en_GB', $this->object->getLocale() );
 	}
 }

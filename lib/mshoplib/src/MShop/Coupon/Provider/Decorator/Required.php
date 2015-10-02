@@ -26,7 +26,7 @@ class MShop_Coupon_Provider_Decorator_Required
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base )
 	{
-		if( ( $prodcode = $this->_getConfigValue( 'required.productcode' ) ) !== null )
+		if( ( $prodcode = $this->getConfigValue( 'required.productcode' ) ) !== null )
 		{
 			foreach( $base->getProducts() as $product )
 			{

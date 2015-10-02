@@ -36,31 +36,31 @@ class MW_Setup_Task_MShopSetLocale extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds locale data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$site = $this->_additional->getConfig()->get( 'setup/site', 'default' );
+		$site = $this->additional->getConfig()->get( 'setup/site', 'default' );
 
 
-		$this->_msg( sprintf( 'Setting locale to "%1$s"', $site ), 0 );
+		$this->msg( sprintf( 'Setting locale to "%1$s"', $site ), 0 );
 
 		// Set locale for further tasks
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
-		$this->_additional->setLocale( $localeManager->bootstrap( $site, '', '', false ) );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+		$this->additional->setLocale( $localeManager->bootstrap( $site, '', '', false ) );
 
-		$this->_status( 'OK' );
+		$this->status( 'OK' );
 	}
 }

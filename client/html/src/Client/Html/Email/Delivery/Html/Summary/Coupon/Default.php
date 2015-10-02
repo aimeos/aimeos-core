@@ -100,6 +100,6 @@ class Client_Html_Email_Delivery_Html_Summary_Coupon_Default
 		 * @see client/html/email/delivery/html/summary/coupon/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/delivery/html/summary/coupon/' . $type, $name );
+		return $this->createSubClient( 'email/delivery/html/summary/coupon/' . $type, $name );
 	}
 }

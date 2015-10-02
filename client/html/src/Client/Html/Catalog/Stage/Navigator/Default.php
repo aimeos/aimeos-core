@@ -51,9 +51,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/stage/navigator/default/subparts';
-	private $_subPartNames = array();
-	private $_view;
+	private $subPartPath = 'client/html/catalog/stage/navigator/default/subparts';
+	private $subPartNames = array();
+	private $view;
 
 
 	/**
@@ -66,10 +66,10 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->navigatorBody = $html;
@@ -97,7 +97,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 		$tplconf = 'client/html/catalog/stage/navigator/default/template-body';
 		$default = 'catalog/stage/navigator-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -111,10 +111,10 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->navigatorHeader = $html;
@@ -143,7 +143,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 		$tplconf = 'client/html/catalog/stage/navigator/default/template-header';
 		$default = 'catalog/stage/navigator-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -230,7 +230,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 		 * @see client/html/catalog/stage/navigator/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/stage/navigator/' . $type, $name );
+		return $this->createSubClient( 'catalog/stage/navigator/' . $type, $name );
 	}
 
 
@@ -243,7 +243,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 */
 	public function modifyBody( $content, $uid )
 	{
-		return $this->_replaceSection( $content, $this->getBody( $uid ), 'catalog.stage.navigator' );
+		return $this->replaceSection( $content, $this->getBody( $uid ), 'catalog.stage.navigator' );
 	}
 
 
@@ -256,7 +256,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 */
 	public function modifyHeader( $content, $uid )
 	{
-		return $this->_replaceSection( $content, $this->getHeader( $uid ), 'catalog.stage.navigator' );
+		return $this->replaceSection( $content, $this->getHeader( $uid ), 'catalog.stage.navigator' );
 	}
 
 
@@ -265,9 +265,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -279,9 +279,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_view ) )
+		if( !isset( $this->view ) )
 		{
 			if( ( $pos = $view->param( 'l_pos' ) ) !== null && ( $pid = $view->param( 'd_prodid' ) ) !== null )
 			{
@@ -291,11 +291,11 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					$start = $pos - 1; $size = 3;
 				}
 
-				$filter = $this->_getProductListFilterByParam( $view->get( 'stageParams', array() ) );
+				$filter = $this->getProductListFilterByParam( $view->get( 'stageParams', array() ) );
 				$filter->setSlice( $start, $size );
 				$total = null;
 
-				$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
+				$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'catalog' );
 				$products = $controller->getIndexItems( $filter, array( 'text' ), $total );
 
 				if( ( $count = count( $products ) ) > 1 )
@@ -330,9 +330,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 				}
 			}
 
-			$this->_view = $view;
+			$this->view = $view;
 		}
 
-		return $this->_view;
+		return $this->view;
 	}
 }

@@ -142,6 +142,6 @@ class Controller_ExtJS_Order_Base_Service_Factory
 		 * @see controller/extjs/order/base/service/decorators/excludes
 		 * @see controller/extjs/order/base/service/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'order/base/service' );
+		return self::addControllerDecorators( $context, $controller, 'order/base/service' );
 	}
 }

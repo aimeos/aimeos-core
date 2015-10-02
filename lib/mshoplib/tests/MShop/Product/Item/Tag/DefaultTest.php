@@ -11,8 +11,8 @@
  */
 class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 987,
 			'siteid'=>99,
 			'typeid' => 44,
@@ -35,7 +35,7 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Product_Item_Tag_Default( $this->_values );
+		$this->object = new MShop_Product_Item_Tag_Default( $this->values );
 	}
 
 	/**
@@ -46,84 +46,84 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 987, $this->_object->getId() );
+		$this->assertEquals( 987, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertNull( $this->_object->getId() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'en', $this->_object->getLanguageId() );
+		$this->assertEquals( 'en', $this->object->getLanguageId() );
 	}
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId( 'fr' );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLanguageId( 'fr' );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 'fr', $this->_object->getLanguageId() );
+		$this->assertEquals( 'fr', $this->object->getLanguageId() );
 	}
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 44, $this->_object->getTypeId() );
+		$this->assertEquals( 44, $this->object->getTypeId() );
 	}
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId( 33 );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setTypeId( 33 );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 33, $this->_object->getTypeId() );
+		$this->assertEquals( 33, $this->object->getTypeId() );
 	}
 
 	public function testGetType()
 	{
-		$this->assertEquals( 'taste', $this->_object->getType() );
+		$this->assertEquals( 'taste', $this->object->getType() );
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'salty', $this->_object->getLabel() );
+		$this->assertEquals( 'salty', $this->object->getLabel() );
 	}
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'bitter' );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLabel( 'bitter' );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 'bitter', $this->_object->getLabel() );
+		$this->assertEquals( 'bitter', $this->object->getLabel() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -151,22 +151,22 @@ class MShop_Product_Item_Tag_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['product.tag.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['product.tag.siteid'] );
-		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['product.tag.typeid'] );
-		$this->assertEquals( $this->_object->getLanguageId(), $arrayObject['product.tag.languageid'] );
-		$this->assertEquals( $this->_object->getType(), $arrayObject['product.tag.type'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['product.tag.label'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['product.tag.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['product.tag.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['product.tag.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['product.tag.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.tag.siteid'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.tag.typeid'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['product.tag.languageid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['product.tag.type'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['product.tag.label'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.tag.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.tag.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.tag.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

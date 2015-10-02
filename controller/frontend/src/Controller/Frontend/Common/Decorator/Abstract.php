@@ -17,8 +17,8 @@
 abstract class Controller_Frontend_Common_Decorator_Abstract
 	implements Controller_Frontend_Common_Decorator_Interface
 {
-	private $_context = null;
-	private $_controller = null;
+	private $context = null;
+	private $controller = null;
 
 
 	/**
@@ -29,8 +29,8 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Controller_Frontend_Interface $controller )
 	{
-		$this->_context = $context;
-		$this->_controller = $controller;
+		$this->context = $context;
+		$this->controller = $controller;
 	}
 
 
@@ -44,9 +44,9 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false )
+		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false )
 		{
-			$cntl = get_class( $this->_controller );
+			$cntl = get_class( $this->controller );
 			throw new Controller_Frontend_Exception( sprintf( 'Unable to call method "%1$s::%2$s"', $cntl, $name ) );
 		}
 
@@ -59,9 +59,9 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context item object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -70,8 +70,8 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	 *
 	 * @return Controller_Frontend_Common_Interface Frontend controller object
 	 */
-	protected function _getController()
+	protected function getController()
 	{
-		return $this->_controller;
+		return $this->controller;
 	}
 }

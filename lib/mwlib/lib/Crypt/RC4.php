@@ -78,7 +78,7 @@ define('CRYPT_RC4_MODE_MCRYPT', 2);
 
 /**#@+
  * @access private
- * @see Crypt_RC4::_crypt()
+ * @see Crypt_RC4::crypt()
  */
 define('CRYPT_RC4_ENCRYPT', 0);
 define('CRYPT_RC4_DECRYPT', 1);
@@ -127,7 +127,7 @@ class Crypt_RC4 {
     /**
      * The $i and $j indexes for encryption
      *
-     * @see Crypt_RC4::_crypt()
+     * @see Crypt_RC4::crypt()
      * @var Integer
      * @access private
      */
@@ -136,7 +136,7 @@ class Crypt_RC4 {
     /**
      * The $i and $j indexes for decryption
      *
-     * @see Crypt_RC4::_crypt()
+     * @see Crypt_RC4::crypt()
      * @var Integer
      * @access private
      */
@@ -269,7 +269,7 @@ class Crypt_RC4 {
 
                 $i = 1;
                 while (strlen($key) < $dkLen) {
-                    //$dk.= $this->_pbkdf($password, $salt, $count, $i++);
+                    //$dk.= $this->pbkdf($password, $salt, $count, $i++);
                     $hmac = new Crypt_Hash();
                     $hmac->setHash($hash);
                     $hmac->setKey($password);
@@ -311,13 +311,13 @@ class Crypt_RC4 {
     /**
      * Encrypts a message.
      *
-     * @see Crypt_RC4::_crypt()
+     * @see Crypt_RC4::crypt()
      * @access public
      * @param String $plaintext
      */
     function encrypt($plaintext)
     {
-        return $this->_crypt($plaintext, CRYPT_RC4_ENCRYPT);
+        return $this->crypt($plaintext, CRYPT_RC4_ENCRYPT);
     }
 
     /**
@@ -326,13 +326,13 @@ class Crypt_RC4 {
      * $this->decrypt($this->encrypt($plaintext)) == $this->encrypt($this->encrypt($plaintext)).
      * Atleast if the continuous buffer is disabled.
      *
-     * @see Crypt_RC4::_crypt()
+     * @see Crypt_RC4::crypt()
      * @access public
      * @param String $ciphertext
      */
     function decrypt($ciphertext)
     {
-        return $this->_crypt($ciphertext, CRYPT_RC4_DECRYPT);
+        return $this->crypt($ciphertext, CRYPT_RC4_DECRYPT);
     }
 
     /**
@@ -344,7 +344,7 @@ class Crypt_RC4 {
      * @param String $text
      * @param Integer $mode
      */
-    function _crypt($text, $mode)
+    function crypt($text, $mode)
     {
         if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT ) {
             $keyStream = $mode == CRYPT_RC4_ENCRYPT ? 'encryptStream' : 'decryptStream';
@@ -497,7 +497,7 @@ class Crypt_RC4 {
     function __destruct()
     {
         if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT ) {
-            $this->_closeMCrypt();
+            $this->closeMCrypt();
         }
     }
 
@@ -506,7 +506,7 @@ class Crypt_RC4 {
      *
      * @access prviate
      */
-    function _closeMCrypt()
+    function closeMCrypt()
     {
         if ( $this->encryptStream !== false ) {
             if ( $this->continuousBuffer ) {

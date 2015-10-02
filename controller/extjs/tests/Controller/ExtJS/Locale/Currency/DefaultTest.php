@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Locale_Currency_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Locale_Currency_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -45,7 +45,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -67,12 +67,12 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => array( 'locale.currency.code' => 'xxx' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'items' => $saved['items']->{'locale.currency.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'locale.currency.id'} );
@@ -113,7 +113,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends PHPUnit_Framework_Tes
 			),
 		);
 
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertEquals( $expected, $actual );
 	}

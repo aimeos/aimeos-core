@@ -37,13 +37,13 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */
-	protected function _buildItems( array $map, array $domains, $prefix )
+	protected function buildItems( array $map, array $domains, $prefix )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = array();
 
 		if( count( $domains ) > 0 )
 		{
-			$listItems = $this->_getListItems( array_keys( $map ), $domains, $prefix );
+			$listItems = $this->getListItems( array_keys( $map ), $domains, $prefix );
 
 			foreach( $listItems as $listItem )
 			{
@@ -54,7 +54,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->_getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap );
 		}
 
 		foreach( $map as $id => $values )
@@ -84,7 +84,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing MShop_Common_List_Item_Interface
 	 */
-	protected function _getListItems( array $ids, array $domains, $prefix )
+	protected function getListItems( array $ids, array $domains, $prefix )
 	{
 		$manager = $this->getSubManager( 'list' );
 
@@ -109,10 +109,10 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function _getRefItems( array $refIdMap )
+	protected function getRefItems( array $refIdMap )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		foreach( $refIdMap as $domain => $list )
 		{

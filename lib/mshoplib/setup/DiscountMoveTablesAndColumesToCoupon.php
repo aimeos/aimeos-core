@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_discount' => array(
 			'RENAME TABLE "mshop_discount" TO "mshop_coupon"',
 		),
@@ -116,9 +116,9 @@ class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_A
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -127,19 +127,19 @@ class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_A
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming discount tables', 0 ); $this->_status( '' );
+		$this->msg( 'Renaming discount tables', 0 ); $this->status( '' );
 
-		if( $this->_schema->tableExists( 'mshop_discount' ) )
+		if( $this->schema->tableExists( 'mshop_discount' ) )
 		{
 			foreach( $stmts as $table => $stmtList )
 			{
-				if( $this->_schema->tableExists( $table ) )
+				if( $this->schema->tableExists( $table ) )
 				{
-					$this->_msg( sprintf( 'Process table "%1$s": ', $table ), 1 );
-					$this->_executeList( $stmtList );
-					$this->_status( 'migrated' );
+					$this->msg( sprintf( 'Process table "%1$s": ', $table ), 1 );
+					$this->executeList( $stmtList );
+					$this->status( 'migrated' );
 				}
 			}
 		}

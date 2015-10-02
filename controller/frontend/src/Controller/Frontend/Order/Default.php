@@ -30,7 +30,7 @@ class Controller_Frontend_Order_Default
 	 */
 	public function store( MShop_Order_Item_Base_Interface $basket )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$orderManager = MShop_Factory::createManager( $context, 'order' );
 		$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
@@ -70,7 +70,7 @@ class Controller_Frontend_Order_Default
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->_getContext() )->block( $orderItem );
+		Controller_Common_Order_Factory::createController( $this->getContext() )->block( $orderItem );
 	}
 
 
@@ -94,7 +94,7 @@ class Controller_Frontend_Order_Default
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->_getContext() )->unblock( $orderItem );
+		Controller_Common_Order_Factory::createController( $this->getContext() )->unblock( $orderItem );
 	}
 
 
@@ -114,6 +114,6 @@ class Controller_Frontend_Order_Default
 	 */
 	public function update( MShop_Order_Item_Interface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->_getContext() )->update( $orderItem );
+		Controller_Common_Order_Factory::createController( $this->getContext() )->update( $orderItem );
 	}
 }

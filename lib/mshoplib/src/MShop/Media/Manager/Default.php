@@ -18,7 +18,7 @@ class MShop_Media_Manager_Default
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Media_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'media.id' => array(
 			'label' => 'Media ID',
 			'code' => 'media.id',
@@ -123,7 +123,7 @@ class MShop_Media_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-media' );
+		$this->setResourceName( 'db-media' );
 	}
 
 
@@ -135,7 +135,7 @@ class MShop_Media_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/media/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -170,7 +170,7 @@ class MShop_Media_Manager_Default
 		 */
 		$path = 'classes/media/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
 	}
 
 
@@ -181,7 +181,7 @@ class MShop_Media_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -218,7 +218,7 @@ class MShop_Media_Manager_Default
 		 * @see mshop/media/manager/default/item/count
 		 */
 		$path = 'mshop/media/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -251,10 +251,10 @@ class MShop_Media_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -326,7 +326,7 @@ class MShop_Media_Manager_Default
 				$path = 'mshop/media/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
@@ -382,7 +382,7 @@ class MShop_Media_Manager_Default
 				 * @see mshop/media/manager/default/item/count
 				 */
 				$path = 'mshop/media/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -407,10 +407,10 @@ class MShop_Media_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -550,7 +550,7 @@ class MShop_Media_Manager_Default
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'media' );
+		return $this->buildItems( $map, $ref, 'media' );
 	}
 
 
@@ -565,7 +565,7 @@ class MShop_Media_Manager_Default
 		if( $default === true )
 		{
 			$object = $this->createSearchBase( 'media' );
-			$langid = $this->_getContext()->getLocale()->getLanguageId();
+			$langid = $this->getContext()->getLocale()->getLanguageId();
 
 			if( $langid !== null )
 			{

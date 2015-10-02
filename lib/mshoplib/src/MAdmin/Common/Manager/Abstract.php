@@ -23,9 +23,9 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 */
-	protected function _addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		/** madmin/common/manager/decorators/default
@@ -61,17 +61,17 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager = $this->_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager = $this->_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$subpath = $this->_createSubNames( $managerpath );
+		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
 
-		return $this->_addDecorators( $context, $manager, $decorators, $classprefix );
+		return $this->addDecorators( $context, $manager, $decorators, $classprefix );
 	}
 
 
@@ -87,7 +87,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
@@ -103,7 +103,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		}
 
 		$domainname = ucfirst( $domain );
-		$subnames = $this->_createSubNames( $manager );
+		$subnames = $this->createSubNames( $manager );
 
 		$classname = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_' . $name;
 		$interface = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_Interface';
@@ -112,7 +112,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 			throw new MAdmin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$subManager = new $classname( $this->_getContext() );
+		$subManager = new $classname( $this->getContext() );
 
 		if( ( $subManager instanceof $interface ) === false ) {
 			throw new MAdmin_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );

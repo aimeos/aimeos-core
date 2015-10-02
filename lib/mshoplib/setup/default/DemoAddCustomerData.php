@@ -36,20 +36,20 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert service data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Processing customer demo data', 0 );
+		$this->msg( 'Processing customer demo data', 0 );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'customer' );
 
 		$search = $manager->createSearch();
@@ -68,13 +68,13 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 				throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 			}
 
-			$this->_saveCustomerItems( $data );
+			$this->saveCustomerItems( $data );
 
-			$this->_status( 'added' );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'removed' );
+			$this->status( 'removed' );
 		}
 	}
 
@@ -84,9 +84,9 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	 *
 	 * @param array $data List of arrays containing the customer properties
 	 */
-	protected function _saveCustomerItems( array $data )
+	protected function saveCustomerItems( array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'customer' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'customer' );
 
 		foreach( $data as $entry )
 		{
@@ -121,7 +121,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 			$manager->saveItem( $item );
 
 			if( isset( $entry['delivery'] ) ) {
-				$this->_saveAddressItems( $entry['delivery'], $item->getId() );
+				$this->saveAddressItems( $entry['delivery'], $item->getId() );
 			}
 		}
 	}
@@ -133,9 +133,9 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	 * @param array $data List of arrays containing the customer properties
 	 * @param string $id Unique ID of the customer item
 	 */
-	protected function _saveAddressItems( array $data, $id )
+	protected function saveAddressItems( array $data, $id )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'customer/address' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/address' );
 
 		foreach( $data as $entry )
 		{

@@ -11,7 +11,7 @@
  */
 class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,7 +28,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 
 		$serviceItem = $serviceManager->createItem();
 
-		$this->_object = new MShop_Service_Provider_Delivery_Manual( $context, $serviceItem );
+		$this->object = new MShop_Service_Provider_Delivery_Manual( $context, $serviceItem );
 	}
 
 
@@ -40,13 +40,13 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( array(), $this->_object->getConfigBE() );
+		$this->assertEquals( array(), $this->object->getConfigBE() );
 	}
 
 
@@ -55,7 +55,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$this->assertEquals( array(), $this->_object->getConfigFE( $basket ) );
+		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
 	}
 
 
@@ -63,7 +63,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$order = $manager->createItem();
-		$this->_object->process( $order );
+		$this->object->process( $order );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $order->getDeliveryStatus() );
 	}
@@ -72,7 +72,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	public function testSetConfigFE()
 	{
 		$item = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/service' )->createItem();
-		$this->_object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
+		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
 		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'delivery' ) );

@@ -51,9 +51,9 @@ class Client_Html_Basket_Mini_Product_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/basket/mini/product/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/basket/mini/product/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
 
 	/**
@@ -66,10 +66,10 @@ class Client_Html_Basket_Mini_Product_Default
 	 */
 	public function getBody($uid = '', array &$tags = array(), &$expire = null)
 	{
-		$view = $this->_setViewParams($this->getView(), $tags, $expire);
+		$view = $this->setViewParams($this->getView(), $tags, $expire);
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->productBody = $html;
@@ -97,7 +97,7 @@ class Client_Html_Basket_Mini_Product_Default
 		$tplconf = 'client/html/basket/mini/product/default/template-body';
 		$default = 'basket/mini/product-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -111,10 +111,10 @@ class Client_Html_Basket_Mini_Product_Default
 	 */
 	public function getHeader($uid = '', array &$tags = array(), &$expire = null)
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->productHeader = $html;
@@ -143,7 +143,7 @@ class Client_Html_Basket_Mini_Product_Default
 		$tplconf = 'client/html/basket/mini/product/default/template-header';
 		$default = 'basket/mini/product-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -230,7 +230,7 @@ class Client_Html_Basket_Mini_Product_Default
 		 * @see client/html/basket/mini/product/decorators/global
 		 */
 
-		return $this->_createSubClient( 'basket/mini/product/' . $type, $name );
+		return $this->createSubClient( 'basket/mini/product/' . $type, $name );
 	}
 
 
@@ -239,8 +239,8 @@ class Client_Html_Basket_Mini_Product_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

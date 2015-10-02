@@ -8,7 +8,7 @@
  */
 class MW_Tree_Node_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -21,7 +21,7 @@ class MW_Tree_Node_DefaultTest extends PHPUnit_Framework_TestCase
 		$child1 = new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
 		$child2 = new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
 
-		$this->_object = new MW_Tree_Node_Default( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
+		$this->object = new MW_Tree_Node_Default( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
 	}
 
 	/**
@@ -32,71 +32,71 @@ class MW_Tree_Node_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testMagicMethods1()
 	{
-		$this->assertEquals( 'test', $this->_object->custom );
-		$this->assertTrue( isset( $this->_object->custom ) );
+		$this->assertEquals( 'test', $this->object->custom );
+		$this->assertTrue( isset( $this->object->custom ) );
 
-		unset( $this->_object->custom );
-		$this->assertFalse( isset( $this->_object->custom ) );
-		$this->assertTrue( $this->_object->isModified() );
+		unset( $this->object->custom );
+		$this->assertFalse( isset( $this->object->custom ) );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testMagicMethods2()
 	{
-		$this->_object->custom = 'test2';
-		$this->assertEquals( 'test2', $this->_object->custom );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->custom = 'test2';
+		$this->assertEquals( 'test2', $this->object->custom );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testLabel()
 	{
-		$this->assertEquals( 'parent', $this->_object->getLabel() );
+		$this->assertEquals( 'parent', $this->object->getLabel() );
 
-		$this->_object->setLabel( 'ancestor' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'ancestor', $this->_object->getLabel() );
+		$this->object->setLabel( 'ancestor' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'ancestor', $this->object->getLabel() );
 	}
 
 	public function testStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 
-		$this->_object->setStatus( 0 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 0, $this->_object->getStatus() );
+		$this->object->setStatus( 0 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 0, $this->object->getStatus() );
 	}
 
 	public function testChildren()
 	{
-		$this->assertEquals( 'child2', $this->_object->getChild( 1 )->getLabel() );
-		$this->assertEquals( 2, count( $this->_object->getChildren() ) );
+		$this->assertEquals( 'child2', $this->object->getChild( 1 )->getLabel() );
+		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
 	public function testHasChildren()
 	{
-		$this->assertEquals( true, $this->_object->hasChildren() );
+		$this->assertEquals( true, $this->object->hasChildren() );
 	}
 
 	public function testAddChild()
 	{
-		$this->_object->addChild( new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child3' ) ) );
-		$this->assertEquals( 'child1', $this->_object->getChild( 0 )->getLabel() );
-		$this->assertEquals( 'child2', $this->_object->getChild( 1 )->getLabel() );
-		$this->assertEquals( 'child3', $this->_object->getChild( 2 )->getLabel() );
+		$this->object->addChild( new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child3' ) ) );
+		$this->assertEquals( 'child1', $this->object->getChild( 0 )->getLabel() );
+		$this->assertEquals( 'child2', $this->object->getChild( 1 )->getLabel() );
+		$this->assertEquals( 'child3', $this->object->getChild( 2 )->getLabel() );
 	}
 
 	public function testToArray()
 	{
-		$values = $this->_object->toArray();
+		$values = $this->object->toArray();
 
 		$this->assertEquals( 1, $values['id'] );
 		$this->assertEquals( 'parent', $values['label'] );
@@ -104,14 +104,14 @@ class MW_Tree_Node_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 	public function testCount()
 	{
-		$this->assertEquals( 2, count( $this->_object ) );
+		$this->assertEquals( 2, count( $this->object ) );
 
-		$this->_object->addChild( new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child3' ) ) );
-		$this->assertEquals( 3, count( $this->_object ) );
+		$this->object->addChild( new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child3' ) ) );
+		$this->assertEquals( 3, count( $this->object ) );
 	}
 }

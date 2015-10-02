@@ -151,7 +151,7 @@ class MShop_Order_Manager_Factory
 		 * @see mshop/order/manager/decorators/excludes
 		 * @see mshop/order/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'order' );
+		return self::addManagerDecorators( $context, $manager, 'order' );
 	}
 
 }

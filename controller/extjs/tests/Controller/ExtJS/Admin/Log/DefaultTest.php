@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Admin_Log_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Admin_Log_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 'unittest message', $result['items'][0]->{'log.message'} );
@@ -55,14 +55,14 @@ class Controller_ExtJS_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testDeleteItems()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->deleteItems( new stdClass() );
+		$this->object->deleteItems( new stdClass() );
 	}
 
 
 	public function testSaveItems()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( new stdClass() );
+		$this->object->saveItems( new stdClass() );
 	}
 
 }

@@ -150,6 +150,6 @@ class MShop_Catalog_Manager_Factory
 		 * @see mshop/catalog/manager/decorators/excludes
 		 * @see mshop/catalog/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'catalog' );
+		return self::addManagerDecorators( $context, $manager, 'catalog' );
 	}
 }

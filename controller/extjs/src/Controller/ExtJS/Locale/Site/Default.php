@@ -19,7 +19,7 @@ class Controller_ExtJS_Locale_Site_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -40,10 +40,10 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
 		foreach( (array) $params->items as $id ) {
-			$this->_getManager()->deleteItem( $id );
+			$this->getManager()->deleteItem( $id );
 		}
 
 		return array(
@@ -59,21 +59,21 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -86,16 +86,16 @@ class Controller_ExtJS_Locale_Site_Default
 	public function searchItems( stdClass $params )
 	{
 		$total = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
+		$search = $this->initCriteria( $this->getManager()->createSearch(), $params );
 
 		$sort = $search->getSortations();
 		$sort[] = $search->sort( '+', 'locale.site.left' );
 		$search->setSortations( $sort );
 
-		$items = $this->_getManager()->searchItems( $search, array(), $total );
+		$items = $this->getManager()->searchItems( $search, array(), $total );
 
 		return array(
-			'items' => $this->_toArray( $items ),
+			'items' => $this->toArray( $items ),
 			'total' => $total,
 			'success' => true,
 		);
@@ -110,9 +110,9 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function insertItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$parentId = ( ( isset( $params->parentid ) && $params->parentid !== 'root' ) ? $params->parentid : null );
@@ -121,7 +121,7 @@ class Controller_ExtJS_Locale_Site_Default
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->insertItem( $item, $parentId, $refId );
 
 			$entry->{'locale.site.id'} = $item->getId();
@@ -142,9 +142,9 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function moveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items', 'oldparentid', 'newparentid', 'refid' ) );
+		$this->checkParams( $params, array( 'items', 'oldparentid', 'newparentid', 'refid' ) );
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		if( $params->newparentid === 'root' ) {
 			$params->newparentid = null;
@@ -174,9 +174,9 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function getTree( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$result = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
@@ -185,13 +185,13 @@ class Controller_ExtJS_Locale_Site_Default
 		{
 			if( $entry == 'root' )
 			{
-				$search = $this->_manager->createSearch();
+				$search = $this->manager->createSearch();
 				$search->setConditions( $search->compare( '==', 'locale.site.level', 0 ) );
 
-				$item = $this->_manager->createItem();
+				$item = $this->manager->createItem();
 				$item->setLabel( 'Root' );
 
-				foreach( $this->_manager->searchItems( $search ) as $siteItem ) {
+				foreach( $this->manager->searchItems( $search ) as $siteItem ) {
 					$item->addChild( $siteItem );
 				}
 			}
@@ -200,7 +200,7 @@ class Controller_ExtJS_Locale_Site_Default
 				$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
 			}
 
-			$result[] = $this->_createNodeArray( $item );
+			$result[] = $this->createNodeArray( $item );
 		}
 
 		return array(
@@ -274,14 +274,14 @@ class Controller_ExtJS_Locale_Site_Default
 	 *
 	 * @param MShop_Locale_Item_Site_Interface $item Locale site item
 	 */
-	protected function _createNodeArray( MShop_Locale_Item_Site_Interface $item )
+	protected function createNodeArray( MShop_Locale_Item_Site_Interface $item )
 	{
 		$result = $item->toArray();
 
 		if( method_exists( $item, 'getChildren' ) )
 		{
 			foreach( $item->getChildren() as $child ) {
-				$result['children'][] = $this->_createNodeArray( $child );
+				$result['children'][] = $this->createNodeArray( $child );
 			}
 		}
 
@@ -294,13 +294,13 @@ class Controller_ExtJS_Locale_Site_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'locale/site' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'locale/site' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -309,7 +309,7 @@ class Controller_ExtJS_Locale_Site_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'locale.site';
 	}
@@ -321,7 +321,7 @@ class Controller_ExtJS_Locale_Site_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'locale.site.config'} ) ) {
 			$entry->{'locale.site.config'} = (array) $entry->{'locale.site.config'};

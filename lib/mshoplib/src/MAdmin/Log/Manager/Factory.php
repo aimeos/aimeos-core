@@ -149,6 +149,6 @@ class MAdmin_Log_Manager_Factory
 		 * @see madmin/log/manager/decorators/excludes
 		 * @see madmin/log/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'log' );
+		return self::addManagerDecorators( $context, $manager, 'log' );
 	}
 }

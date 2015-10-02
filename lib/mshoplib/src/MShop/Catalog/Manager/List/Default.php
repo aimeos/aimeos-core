@@ -17,7 +17,7 @@ class MShop_Catalog_Manager_List_Default
 	extends MShop_Common_Manager_List_Abstract
 	implements MShop_Catalog_Manager_List_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.list.id'=> array(
 			'code'=>'catalog.list.id',
 			'internalcode'=>'mcatli."id"',
@@ -132,7 +132,7 @@ class MShop_Catalog_Manager_List_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-catalog' );
+		$this->setResourceName( 'db-catalog' );
 	}
 
 
@@ -144,7 +144,7 @@ class MShop_Catalog_Manager_List_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/catalog/manager/list/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -179,7 +179,7 @@ class MShop_Catalog_Manager_List_Default
 		 */
 		$path = 'classes/catalog/manager/list/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
@@ -310,7 +310,7 @@ class MShop_Catalog_Manager_List_Default
 	 *
 	 * @return string Configuration path
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		/** mshop/catalog/manager/list/default/item/insert
 		 * Inserts a new catalog list record into the database table
@@ -699,8 +699,8 @@ class MShop_Catalog_Manager_List_Default
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

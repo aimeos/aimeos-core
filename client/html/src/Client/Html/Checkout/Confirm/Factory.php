@@ -77,7 +77,7 @@ class Client_Html_Checkout_Confirm_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'checkout/confirm' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'checkout/confirm' );
 	}
 }
 

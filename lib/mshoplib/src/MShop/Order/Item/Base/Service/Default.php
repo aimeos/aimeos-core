@@ -18,10 +18,10 @@ class MShop_Order_Item_Base_Service_Default
 	extends MShop_Order_Item_Base_Service_Abstract
 	implements MShop_Order_Item_Base_Service_Interface
 {
-	private $_price;
-	private $_attributes;
-	private $_attributesMap;
-	private $_values;
+	private $price;
+	private $attributes;
+	private $attributesMap;
+	private $values;
 
 	/**
 	 * Initializes the order base service item
@@ -34,11 +34,11 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		parent::__construct( 'order.base.service.', $values );
 
-		$this->_values = $values;
-		$this->_price = $price;
+		$this->values = $values;
+		$this->price = $price;
 
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
-		$this->_attributes = $attributes;
+		$this->attributes = $attributes;
 	}
 
 
@@ -47,7 +47,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function __clone()
 	{
-		$this->_price = clone $this->_price;
+		$this->price = clone $this->price;
 	}
 
 
@@ -58,7 +58,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->_values['baseid'] ) ? (int) $this->_values['baseid'] : null );
+		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
 	}
 
 
@@ -71,7 +71,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -83,7 +83,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getServiceId()
 	{
-		return( isset( $this->_values['servid'] ) ? (string) $this->_values['servid'] : '' );
+		return( isset( $this->values['servid'] ) ? (string) $this->values['servid'] : '' );
 	}
 
 
@@ -96,7 +96,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		if( $servid == $this->getServiceId() ) { return; }
 
-		$this->_values['servid'] = (string) $servid;
+		$this->values['servid'] = (string) $servid;
 		$this->setModified();
 	}
 
@@ -108,7 +108,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -119,11 +119,11 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -135,7 +135,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getName()
 	{
-		return ( isset( $this->_values['name'] ) ? (string) $this->_values['name'] : '' );
+		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
 	}
 
 
@@ -148,7 +148,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		if( $name == $this->getName() ) { return; }
 
-		$this->_values['name'] = (string) $name;
+		$this->values['name'] = (string) $name;
 		$this->setModified();
 	}
 
@@ -160,7 +160,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -173,7 +173,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -185,7 +185,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getMediaUrl()
 	{
-		return ( isset( $this->_values['mediaurl'] ) ? (string) $this->_values['mediaurl'] : '' );
+		return ( isset( $this->values['mediaurl'] ) ? (string) $this->values['mediaurl'] : '' );
 	}
 
 
@@ -200,7 +200,7 @@ class MShop_Order_Item_Base_Service_Default
 			return;
 		}
 
-		$this->_values['mediaurl'] = (string) $value;
+		$this->values['mediaurl'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -212,7 +212,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getPrice()
 	{
-		return $this->_price;
+		return $this->price;
 	}
 
 
@@ -223,9 +223,9 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price )
 	{
-		if( $price === $this->_price ) { return; }
+		if( $price === $this->price ) { return; }
 
-		$this->_price = $price;
+		$this->price = $price;
 		$this->setModified();
 	}
 
@@ -239,7 +239,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getAttribute( $code, $type = '' )
 	{
-		$map = $this->_getAttributeMap();
+		$map = $this->getAttributeMap();
 
 		if( isset( $map[$type][$code] ) ) {
 			return $map[$type][$code]->getValue();
@@ -257,7 +257,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
-		$map = $this->_getAttributeMap();
+		$map = $this->getAttributeMap();
 
 		if( isset( $map[$type][$code] ) ) {
 			return $map[$type][$code];
@@ -274,18 +274,18 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setAttributeItem( MShop_Order_Item_Base_Service_Attribute_Interface $item )
 	{
-		$this->_getAttributeMap();
+		$this->getAttributeMap();
 
 		$type = $item->getType();
 		$code = $item->getCode();
 
-		if( !isset( $this->_attributesMap[$type][$code] ) )
+		if( !isset( $this->attributesMap[$type][$code] ) )
 		{
-			$this->_attributesMap[$type][$code] = $item;
-			$this->_attributes[] = $item;
+			$this->attributesMap[$type][$code] = $item;
+			$this->attributes[] = $item;
 		}
 
-		$this->_attributesMap[$type][$code]->setValue( $item->getValue() );
+		$this->attributesMap[$type][$code]->setValue( $item->getValue() );
 		$this->setModified();
 	}
 
@@ -299,10 +299,10 @@ class MShop_Order_Item_Base_Service_Default
 	public function getAttributes( $type = null )
 	{
 		if( $type === null ) {
-			return $this->_attributes;
+			return $this->attributes;
 		}
 
-		$map = $this->_getAttributeMap();
+		$map = $this->getAttributeMap();
 
 		if( isset( $map[$type] ) ) {
 			return $map[$type];
@@ -321,8 +321,8 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
 
-		$this->_attributes = $attributes;
-		$this->_attributesMap = null;
+		$this->attributes = $attributes;
+		$this->attributesMap = null;
 		$this->setModified();
 	}
 
@@ -348,10 +348,10 @@ class MShop_Order_Item_Base_Service_Default
 				case 'order.base.service.name': $this->setName( $value ); break;
 				case 'order.base.service.mediaurl': $this->setMediaUrl( $value ); break;
 				case 'order.base.service.type': $this->setType( $value ); break;
-				case 'order.base.service.price': $this->_price->setValue( $value ); break;
-				case 'order.base.service.costs': $this->_price->setCosts( $value ); break;
-				case 'order.base.service.rebate': $this->_price->setRebate( $value ); break;
-				case 'order.base.service.taxrate': $this->_price->setTaxRate( $value ); break;
+				case 'order.base.service.price': $this->price->setValue( $value ); break;
+				case 'order.base.service.costs': $this->price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $this->price->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $this->price->setTaxRate( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -369,7 +369,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		$list = parent::toArray();
 
-		$price = $this->_price;
+		$price = $this->price;
 
 		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
@@ -412,17 +412,17 @@ class MShop_Order_Item_Base_Service_Default
 	 *
 	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Service_Attribute_Interface as value
 	 */
-	protected function _getAttributeMap()
+	protected function getAttributeMap()
 	{
-		if( !isset( $this->_attributesMap ) )
+		if( !isset( $this->attributesMap ) )
 		{
-			$this->_attributesMap = array();
+			$this->attributesMap = array();
 
-			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
+			foreach( $this->attributes as $attribute ) {
+				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
 			}
 		}
 
-		return $this->_attributesMap;
+		return $this->attributesMap;
 	}
 }

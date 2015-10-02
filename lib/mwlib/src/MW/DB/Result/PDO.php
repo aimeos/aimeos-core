@@ -16,8 +16,8 @@
  */
 class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Interface
 {
-	private $_statement = null;
-	private $_style = array(
+	private $statement = null;
+	private $style = array(
 		MW_DB_Result_Abstract::FETCH_ASSOC => PDO::FETCH_ASSOC,
 		MW_DB_Result_Abstract::FETCH_NUM => PDO::FETCH_NUM,
 	);
@@ -30,7 +30,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	 */
 	public function __construct( PDOStatement $stmt )
 	{
-		$this->_statement = $stmt;
+		$this->statement = $stmt;
 	}
 
 
@@ -43,7 +43,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	public function affectedRows()
 	{
 		try {
-			return $this->_statement->rowCount();
+			return $this->statement->rowCount();
 		} catch ( PDOException $e ) {
 			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
@@ -60,7 +60,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	public function fetch( $style = MW_DB_Result_Abstract::FETCH_ASSOC )
 	{
 		try {
-			return $this->_statement->fetch( $this->_style[$style] );
+			return $this->statement->fetch( $this->style[$style] );
 		} catch ( PDOException $e ) {
 			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
@@ -75,7 +75,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	public function finish()
 	{
 		try {
-			$this->_statement->closeCursor();
+			$this->statement->closeCursor();
 		} catch ( PDOException $e ) {
 			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
@@ -91,7 +91,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	public function nextResult()
 	{
 		try {
-			return $this->_statement->nextRowset();
+			return $this->statement->nextRowset();
 		} catch ( PDOException $e ) {
 			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}

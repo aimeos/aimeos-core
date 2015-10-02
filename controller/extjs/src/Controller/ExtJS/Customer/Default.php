@@ -18,7 +18,7 @@ class Controller_ExtJS_Customer_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -40,11 +40,11 @@ class Controller_ExtJS_Customer_Default
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$entries = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $entries as $entry )
@@ -55,13 +55,13 @@ class Controller_ExtJS_Customer_Default
 				$item = $manager->createItem();
 			}
 
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -70,13 +70,13 @@ class Controller_ExtJS_Customer_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'customer' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'customer' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -85,7 +85,7 @@ class Controller_ExtJS_Customer_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'customer';
 	}
@@ -97,7 +97,7 @@ class Controller_ExtJS_Customer_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'customer.birthday'} ) )
 		{

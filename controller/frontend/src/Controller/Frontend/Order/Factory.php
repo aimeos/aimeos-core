@@ -141,6 +141,6 @@ class Controller_Frontend_Order_Factory
 		 * @see controller/frontend/order/decorators/excludes
 		 * @see controller/frontend/order/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'order' );
+		return self::addControllerDecorators( $context, $manager, 'order' );
 	}
 }

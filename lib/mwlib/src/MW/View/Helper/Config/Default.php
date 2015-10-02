@@ -18,7 +18,7 @@ class MW_View_Helper_Config_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_config;
+	private $config;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_Config_Default
 	{
 		parent::__construct( $view );
 
-		$this->_config = $config;
+		$this->config = $config;
 	}
 
 
@@ -44,6 +44,6 @@ class MW_View_Helper_Config_Default
 	 */
 	public function transform( $name = null, $default = null )
 	{
-		return $this->_config->get( $name, $default );
+		return $this->config->get( $name, $default );
 	}
 }

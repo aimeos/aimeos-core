@@ -142,6 +142,6 @@ class Controller_ExtJS_Product_Factory
 		 * @see controller/extjs/product/decorators/excludes
 		 * @see controller/extjs/product/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'product' );
+		return self::addControllerDecorators( $context, $controller, 'product' );
 	}
 }

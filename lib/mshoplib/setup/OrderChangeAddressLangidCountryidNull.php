@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderChangeAddressLangidCountryidNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_order_base_address" MODIFY "langid" VARCHAR(5) NULL',
 		'countryid' => 'ALTER TABLE "mshop_order_base_address" MODIFY "countryid" CHAR(2) NULL',
 	);
@@ -42,9 +42,9 @@ class MW_Setup_Task_OrderChangeAddressLangidCountryidNull extends MW_Setup_Task_
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -53,23 +53,23 @@ class MW_Setup_Task_OrderChangeAddressLangidCountryidNull extends MW_Setup_Task_
 	 *
 	 * array string $stmts List of SQL statements to execute for changing columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_order_base_address';
-		$this->_msg( sprintf( 'Allow NULL in table "%1$s"', $table ), 0 ); $this->_status( '' );
+		$this->msg( sprintf( 'Allow NULL in table "%1$s"', $table ), 0 ); $this->status( '' );
 
 		foreach( $stmts as $column => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking column "%1$s"', $column ), 1 );
+			$this->msg( sprintf( 'Checking column "%1$s"', $column ), 1 );
 
-			if( $this->_schema->tableExists( $table )
-				&& $this->_schema->columnExists( $table, $column ) === true
-				&& $this->_schema->getColumnDetails( $table, $column )->isNullable() === false
+			if( $this->schema->tableExists( $table )
+				&& $this->schema->columnExists( $table, $column ) === true
+				&& $this->schema->getColumnDetails( $table, $column )->isNullable() === false
 			) {
-				$this->_execute( $stmt );
-				$this->_status( 'changed' );
+				$this->execute( $stmt );
+				$this->status( 'changed' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

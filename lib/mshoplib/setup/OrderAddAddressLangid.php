@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base_address.langid' => array(
 			'ALTER TABLE "mshop_order_base_address" ADD "langid" CHAR(2) NOT NULL AFTER "countryid"',
 		),
@@ -43,11 +43,11 @@ class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Adding langid and prodid columns to order tables', 0 ); $this->_status( '' );
+		$this->msg( 'Adding langid and prodid columns to order tables', 0 ); $this->status( '' );
 
-		$this->_process( 'mshop_order_base_address', 'langid', $this->_mysql['mshop_order_base_address.langid'] );
+		$this->process( 'mshop_order_base_address', 'langid', $this->mysql['mshop_order_base_address.langid'] );
 	}
 
 	/**
@@ -57,19 +57,19 @@ class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 	 * @param string $column Column name to add
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $table, $column, $stmts )
+	protected function process( $table, $column, $stmts )
 	{
-		$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-		if( $this->_schema->tableExists( $table ) === true
-			&& $this->_schema->columnExists( $table, $column ) === false )
+		if( $this->schema->tableExists( $table ) === true
+			&& $this->schema->columnExists( $table, $column ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Service_Payment_Factory
 		 * @see controller/jobs/order/service/payment/decorators/excludes
 		 * @see controller/jobs/order/service/payment/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/service/payment' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/service/payment' );
 	}
 }

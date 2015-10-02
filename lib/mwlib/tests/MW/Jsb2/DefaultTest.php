@@ -8,9 +8,9 @@
  */
 class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_manifestPath;
-	private $_deployPath;
+	private $object;
+	private $manifestPath;
+	private $deployPath;
 
 
 	/**
@@ -22,9 +22,9 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->_manifestPath = dirname( __FILE__ ) . $ds . 'manifests' . $ds;
-		$this->_deployPath = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest.jsb2' );
+		$this->manifestPath = dirname( __FILE__ ) . $ds . 'manifests' . $ds;
+		$this->deployPath = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest.jsb2' );
 	}
 
 
@@ -38,42 +38,42 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
-		$this->_delTree( dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' );
+		$this->delTree( dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' );
 	}
 
 
 	public function testConstructNoIncludeFilesExceptions()
 	{
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_invalid_fileinclude.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_invalid_fileinclude.jsb2' );
 	}
 
 
 	public function testConstructNoPackageExceptions()
 	{
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_invalid_package.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_invalid_package.jsb2' );
 	}
 
 
 	public function testConstructInvalidPackageContentExceptions()
 	{
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_invalid_package_content.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_invalid_package_content.jsb2' );
 	}
 
 
 	public function testConstructNotJSONExceptions()
 	{
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_no_json.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_no_json.jsb2' );
 	}
 
 
 	public function testConstructFileNotExistingExceptions()
 	{
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_not_existing.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_not_existing.jsb2' );
 	}
 
 
@@ -81,11 +81,11 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
-		$this->_object->deploy();
-		$this->assertFileExists( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0755', substr( decoct( fileperms( $this->_deployPath ) ), 1 ) );
+		$this->object->deploy();
+		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
+		$this->assertEquals( '0755', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
 		$this->assertEquals( '0644',
-			substr( decoct( fileperms( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
+			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
 		);
 	}
 
@@ -94,18 +94,18 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
-		$this->_object->deploy( null, true, 0645, 0754 );
-		$this->assertFileExists( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0754', substr( decoct( fileperms( $this->_deployPath ) ), 1 ) );
+		$this->object->deploy( null, true, 0645, 0754 );
+		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
+		$this->assertEquals( '0754', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
 		$this->assertEquals( '0645',
-			substr( decoct( fileperms( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
+			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
 		);
 
-		$this->_object->deploy( null, true, 0655, 0755 );
-		$this->assertFileExists( $this->_deployPath . $ds . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0754', substr( decoct( fileperms( $this->_deployPath ) ), 1 ) );
+		$this->object->deploy( null, true, 0655, 0755 );
+		$this->assertFileExists( $this->deployPath . $ds . 'js' . $ds . 'jsb2-test.js' );
+		$this->assertEquals( '0754', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
 		$this->assertEquals( '0655',
-			substr( decoct( fileperms( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
+			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
 		);
 
 	}
@@ -115,15 +115,15 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
-		$this->_object->deploy( 'js', false );
-		$this->assertFileExists( $this->_deployPath . 'js' . $ds . 'jsb2-test.js' );
+		$this->object->deploy( 'js', false );
+		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
 	}
 
 
 	public function testGetUrlsWithPackage()
 	{
-		$this->_object->deploy();
-		$urls = $this->_object->getUrls( 'js' );
+		$this->object->deploy();
+		$urls = $this->object->getUrls( 'js' );
 
 		$this->assertEquals( 1, count( $urls ) );
 		$this->assertContains( '/jsb2-test.js', $urls[0] );
@@ -132,7 +132,7 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 
 	public function testGetUrlsWithoutPackage()
 	{
-		$urls = $this->_object->getUrls( 'js' );
+		$urls = $this->object->getUrls( 'js' );
 
 		$this->assertEquals( 1, count( $urls ) );
 		$this->assertContains( '/test.js', $urls[0] );
@@ -141,9 +141,9 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 
 	public function testGetHTMLWithPackage()
 	{
-		$this->_object->deploy();
-		$this->assertGreaterThan( 1, strpos( trim( $this->_object->getHTML( 'js' ) ), 'jsb2/js/jsb2-test.js' ) );
-		$this->assertEquals( '', $this->_object->getHTML( 'css' ) );
+		$this->object->deploy();
+		$this->assertGreaterThan( 1, strpos( trim( $this->object->getHTML( 'js' ) ), 'jsb2/js/jsb2-test.js' ) );
+		$this->assertEquals( '', $this->object->getHTML( 'css' ) );
 	}
 
 
@@ -152,7 +152,7 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 		$html = '<script type="text/javascript" src="/./../%1$s"></script>';
 		$mtime = filemtime( __DIR__ . DIRECTORY_SEPARATOR . 'test.js' );
 
-		$this->assertEquals( sprintf( $html, 'test.js?v=' . $mtime ), trim( $this->_object->getHTML( 'js' ) ) );
+		$this->assertEquals( sprintf( $html, 'test.js?v=' . $mtime ), trim( $this->object->getHTML( 'js' ) ) );
 	}
 
 
@@ -163,18 +163,18 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 		$alteredFilename = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . 'test.js';
 
 		copy( $filename, $alteredFilename );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_filemtime_exception.jsb2' );
+		$this->object = new MW_Jsb2_Default( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
 		unlink( $alteredFilename );
 
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object->getHTML( 'js' );
+		$this->object->getHTML( 'js' );
 	}
 
 
 	/**
 	 * @param string $dir
 	 */
-	protected function _delTree( $dir )
+	protected function delTree( $dir )
 	{
 		if( !is_dir( $dir ) ) {
 			return;
@@ -189,7 +189,7 @@ class MW_Jsb2_Default_Test extends PHPUnit_Framework_TestCase
 			}
 
 			if( $iterator->isDir() ) {
-				$this->_delTree( $iterator->getPathname() );
+				$this->delTree( $iterator->getPathname() );
 			} else {
 				unlink( $iterator->getPathname() );
 			}

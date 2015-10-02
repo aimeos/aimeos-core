@@ -12,7 +12,7 @@ class MW_Common_Criteria_Attribute_DefaultTest extends PHPUnit_Framework_TestCas
 	 * @var    MW_Common_Criteria_Attribute_Default
 	 * @access protected
 	 */
-	private $_object;
+	private $object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -34,7 +34,7 @@ class MW_Common_Criteria_Attribute_DefaultTest extends PHPUnit_Framework_TestCas
 			'required' => false,
 		);
 
-		$this->_object = new MW_Common_Criteria_Attribute_Default($values);
+		$this->object = new MW_Common_Criteria_Attribute_Default($values);
 	}
 
 	/**
@@ -50,47 +50,47 @@ class MW_Common_Criteria_Attribute_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetType()
 	{
-		$this->assertEquals('attribute_type', $this->_object->getType());
+		$this->assertEquals('attribute_type', $this->object->getType());
 	}
 
 
 	public function testGetInternalType()
 	{
-		$this->assertEquals('internaltype', $this->_object->getInternalType());
+		$this->assertEquals('internaltype', $this->object->getInternalType());
 	}
 
 	public function testGetCode()
 	{
-		$this->assertEquals('attribute_code', $this->_object->getCode());
+		$this->assertEquals('attribute_code', $this->object->getCode());
 	}
 
 	public function testGetInternalCode()
 	{
-		$this->assertEquals('internalcode', $this->_object->getInternalCode());
+		$this->assertEquals('internalcode', $this->object->getInternalCode());
 	}
 
 	public function testGetInternalDeps()
 	{
-		$this->assertEquals(array( 'test' ), $this->_object->getInternalDeps());
+		$this->assertEquals(array( 'test' ), $this->object->getInternalDeps());
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals('labelname', $this->_object->getLabel());
+		$this->assertEquals('labelname', $this->object->getLabel());
 	}
 
 	public function testGetDefault()
 	{
-		$this->assertEquals('default value', $this->_object->getDefault());
+		$this->assertEquals('default value', $this->object->getDefault());
 	}
 
 	public function testIsPublic()
 	{
-		$this->assertEquals(false, $this->_object->isPublic());
+		$this->assertEquals(false, $this->object->isPublic());
 	}
 
 	public function testIsRequired()
 	{
-		$this->assertEquals(false, $this->_object->isRequired());
+		$this->assertEquals(false, $this->object->isRequired());
 	}
 }

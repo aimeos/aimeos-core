@@ -485,7 +485,7 @@ class File_ANSI {
      * @access private
      * @return String
      */
-    function _getScreen()
+    function getScreen()
     {
         $output = '';
         for ($i = 0; $i <= $this->max_y; $i++) {
@@ -510,7 +510,7 @@ class File_ANSI {
      */
     function getScreen()
     {
-        return '<pre style="color: white; background: black" width="' . ($this->max_x + 1) . '">' . $this->_getScreen() . '</pre>';
+        return '<pre style="color: white; background: black" width="' . ($this->max_x + 1) . '">' . $this->getScreen() . '</pre>';
     }
 
     /**
@@ -533,7 +533,7 @@ class File_ANSI {
             }
             $scrollback.= "\r\n";
         }
-        $scrollback.= $this->_getScreen();
+        $scrollback.= $this->getScreen();
 
         return '<pre style="color: white; background: black" width="' . ($this->max_x + 1) . '">' . $scrollback . '</pre>';
     }

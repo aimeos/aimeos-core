@@ -36,14 +36,14 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	 */
 	public function uploadFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
 			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
 		}
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/attribute/import/text/default/uploaddir
 		 * Upload directory for text files that should be imported
@@ -69,7 +69,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 		 * @category Developer
 		 */
 		if( $config->get( 'controller/extjs/attribute/import/text/default/enablecheck', true ) ) {
-			$this->_checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
+			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
 		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
@@ -126,7 +126,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_getContext() );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->getContext() );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -143,8 +143,8 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	 */
 	public function importFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
@@ -213,15 +213,15 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 			 * @category User
 			 * @see controller/extjs/attribute/import/text/default/container/format
 			 */
-			$container = $this->_createContainer( $path, 'controller/extjs/attribute/import/text/default/container' );
+			$container = $this->createContainer( $path, 'controller/extjs/attribute/import/text/default/container' );
 
 			$textTypeMap = array();
-			foreach( $this->_getTextTypes( 'attribute' ) as $item ) {
+			foreach( $this->getTextTypes( 'attribute' ) as $item ) {
 				$textTypeMap[$item->getCode()] = $item->getId();
 			}
 
 			foreach( $container as $content ) {
-				$this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
+				$this->importTextsFromContent( $content, $textTypeMap, 'attribute' );
 			}
 
 			unlink( $path );

@@ -18,7 +18,7 @@ class MShop_Plugin_Provider_Order_Coupon
 	extends MShop_Plugin_Provider_Factory_Abstract
 	implements MShop_Plugin_Provider_Factory_Interface
 {
-	protected static $_lock = false;
+	protected static $lock = false;
 
 
 	/**
@@ -52,11 +52,11 @@ class MShop_Plugin_Provider_Order_Coupon
 
 		$notAvailable = array();
 
-		if( self::$_lock === false )
+		if( self::$lock === false )
 		{
-			self::$_lock = true;
+			self::$lock = true;
 
-			$couponManager = MShop_Factory::createManager( $this->_getContext(), 'coupon' );
+			$couponManager = MShop_Factory::createManager( $this->getContext(), 'coupon' );
 
 			foreach( $order->getCoupons() as $code => $products )
 			{
@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_Coupon
 				}
 			}
 
-			self::$_lock = false;
+			self::$lock = false;
 		}
 
 		if( count( $notAvailable ) > 0 )

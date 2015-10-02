@@ -77,7 +77,7 @@ class Client_Html_Email_Payment_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'email/payment' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'email/payment' );
 	}
 }
 

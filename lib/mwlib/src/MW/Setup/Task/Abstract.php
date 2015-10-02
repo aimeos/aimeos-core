@@ -16,15 +16,15 @@
  */
 abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 {
-	private $_connections = array();
-	private $_schemas = array();
-	protected $_additional;
+	private $connections = array();
+	private $schemas = array();
+	protected $additional;
 
 	/** @deprecated Use getSchema() instead */
-	protected $_schema;
+	protected $schema;
 
 	/** @deprecated Use getConnection() instead */
-	protected $_conn;
+	protected $conn;
 
 
 	/**
@@ -36,9 +36,9 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 */
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
 	{
-		$this->_schema = $schema;
-		$this->_conn = $conn;
-		$this->_additional = $additional;
+		$this->schema = $schema;
+		$this->conn = $conn;
+		$this->additional = $additional;
 	}
 
 
@@ -51,7 +51,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	{
 		switch( $dbtype )
 		{
-			case 'mysql': $this->_mysql(); break;
+			case 'mysql': $this->mysql(); break;
 			default:
 				throw new MW_Setup_Exception( sprintf( 'Unknown database type "%1$s"', $dbtype ) );
 		}
@@ -65,7 +65,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 */
 	public function setConnections( array $conns )
 	{
-		$this->_connections = $conns;
+		$this->connections = $conns;
 	}
 
 
@@ -76,14 +76,14 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 */
 	public function setSchemas( array $schemas )
 	{
-		$this->_schemas = $schemas;
+		$this->schemas = $schemas;
 	}
 
 
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected abstract function _mysql();
+	protected abstract function mysql();
 
 
 	/**
@@ -92,9 +92,9 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $sql SQL statement to execute
 	 * @param string $name Name from the resource configuration
 	 */
-	protected function _execute( $sql, $name = 'db' )
+	protected function execute( $sql, $name = 'db' )
 	{
-		$this->_getConnection( $name )->create( $sql )->execute()->finish();
+		$this->getConnection( $name )->create( $sql )->execute()->finish();
 	}
 
 
@@ -104,9 +104,9 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param array $list List of SQL statement to execute
 	 * @param string $name Name from the resource configuration
 	 */
-	protected function _executeList( array $list, $name = 'db' )
+	protected function executeList( array $list, $name = 'db' )
 	{
-		$conn = $this->_getConnection( $name );
+		$conn = $this->getConnection( $name );
 
 		foreach( $list as $sql ) {
 			$conn->create( $sql )->execute()->finish();
@@ -121,9 +121,9 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $column Column name to retrieve
 	 * @param string $name Name from the resource configuration
 	 */
-	protected function _getValue( $sql, $column, $name = 'db' )
+	protected function getValue( $sql, $column, $name = 'db' )
 	{
-		$result = $this->_getConnection( $name )->create( $sql )->execute();
+		$result = $this->getConnection( $name )->create( $sql )->execute();
 
 		if( ( $row = $result->fetch() ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'No rows found: %1$s', $sql ) );
@@ -145,13 +145,13 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $name Name from resource configuration
 	 * @return MW_DB_Connection_Interface
 	 */
-	protected function _getConnection( $name )
+	protected function getConnection( $name )
 	{
-		if( !isset( $this->_connections[$name] ) ) {
-			return $this->_conn;
+		if( !isset( $this->connections[$name] ) ) {
+			return $this->conn;
 		}
 
-		return $this->_connections[$name];
+		return $this->connections[$name];
 	}
 
 
@@ -161,13 +161,13 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $name Name from resource configuration
 	 * @return MW_Setup_DBSchema_Interface
 	 */
-	protected function _getSchema( $name )
+	protected function getSchema( $name )
 	{
-		if( !isset( $this->_schemas[$name] ) ) {
-			return $this->_schema;
+		if( !isset( $this->schemas[$name] ) ) {
+			return $this->schema;
 		}
 
-		return $this->_schemas[$name];
+		return $this->schemas[$name];
 	}
 
 
@@ -177,7 +177,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $msg Current message
 	 * @param integer $level Indent level of the message (default: 0 )
 	 */
-	protected function _msg( $msg, $level = 0 )
+	protected function msg( $msg, $level = 0 )
 	{
 		$pre = '';
 		for( $i = 0; $i < 2*$level; $i++ ) { $pre .= ' '; }
@@ -191,7 +191,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 *
 	 * @param string $status Current status
 	 */
-	protected function _status( $status )
+	protected function status( $status )
 	{
 		echo $status . PHP_EOL;
 	}
@@ -203,7 +203,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $content Content of the file to parse
 	 * @return array Associative list of table names with table create statements ordered like in the file
 	 */
-	protected function _getTableDefinitions( $content )
+	protected function getTableDefinitions( $content )
 	{
 		$defs = array( );
 		$matches = array( );
@@ -227,7 +227,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $content Content of the file to parse
 	 * @return array Associative list of index names with index create statements ordered like in the file
 	 */
-	protected function _getIndexDefinitions( $content )
+	protected function getIndexDefinitions( $content )
 	{
 		$defs = array( );
 		$matches = array( );
@@ -251,7 +251,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * @param string $content Content of the file to parse
 	 * @return array Associative list of trigger names with trigger create statements ordered like in the file
 	 */
-	protected function _getTriggerDefinitions( $content )
+	protected function getTriggerDefinitions( $content )
 	{
 		$defs = array( );
 		$matches = array( );

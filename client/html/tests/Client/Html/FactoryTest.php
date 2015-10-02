@@ -7,8 +7,8 @@
 
 class Client_Html_FactoryTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_templatePaths;
+	private $context;
+	private $templatePaths;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_templatePaths = TestHelper::getHtmlTemplatePaths();
+		$this->context = TestHelper::getContext();
+		$this->templatePaths = TestHelper::getHtmlTemplatePaths();
 	}
 
 
@@ -32,20 +32,20 @@ class Client_Html_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCreateClient()
 	{
-		$client = Client_Html_Factory::createClient( $this->_context, $this->_templatePaths, 'account/favorite' );
+		$client = Client_Html_Factory::createClient( $this->context, $this->templatePaths, 'account/favorite' );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Factory::createClient( $this->_context, $this->_templatePaths, 'account/favorite', 'Default' );
+		$client = Client_Html_Factory::createClient( $this->context, $this->templatePaths, 'account/favorite', 'Default' );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
@@ -53,28 +53,28 @@ class Client_Html_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateClientNameEmpty()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Factory::createClient( $this->_context, $this->_templatePaths, '' );
+		Client_Html_Factory::createClient( $this->context, $this->templatePaths, '' );
 	}
 
 
 	public function testCreateClientNameParts()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Factory::createClient( $this->_context, $this->_templatePaths, 'account_favorite' );
+		Client_Html_Factory::createClient( $this->context, $this->templatePaths, 'account_favorite' );
 	}
 
 
 	public function testCreateClientNameInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Factory::createClient( $this->_context, $this->_templatePaths, '%account/favorite' );
+		Client_Html_Factory::createClient( $this->context, $this->templatePaths, '%account/favorite' );
 	}
 
 
 	public function testCreateClientNameNotFound()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Account_Favorite_Factory::createClient( $this->_context, $this->_templatePaths, 'account/fav' );
+		Client_Html_Account_Favorite_Factory::createClient( $this->context, $this->templatePaths, 'account/fav' );
 	}
 
 }

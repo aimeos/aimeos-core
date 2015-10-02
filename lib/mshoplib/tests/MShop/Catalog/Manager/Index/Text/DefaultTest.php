@@ -11,9 +11,9 @@
  */
 class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	protected static $_products;
-	private $_editor = '';
+	private $object;
+	protected static $products;
+	private $editor = '';
 
 
 	public static function setUpBeforeClass()
@@ -29,7 +29,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		}
 
 		foreach( $result as $item ) {
-			self::$_products[$item->getCode()] = $item;
+			self::$products[$item->getCode()] = $item;
 		}
 	}
 
@@ -41,9 +41,9 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 
-		$this->_object = new MShop_Catalog_Manager_Index_Text_Default( TestHelper::getContext() );
+		$this->object = new MShop_Catalog_Manager_Index_Text_Default( TestHelper::getContext() );
 	}
 
 
@@ -55,13 +55,13 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
@@ -84,8 +84,8 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		}
 
 
-		$search = $this->_object->createSearch( true );
-		$result = $this->_object->aggregate( $search, 'catalog.index.text.id' );
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'catalog.index.text.id' );
 
 		$this->assertEquals( 18, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -95,7 +95,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -104,7 +104,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	public function testSaveDeleteItem()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$product = self::$_products['CNC'];
+		$product = self::$products['CNC'];
 
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
@@ -115,21 +115,21 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		$product->setId( null );
 		$product->setCode( 'ModifiedCNC' );
 		$productManager->saveItem( $product );
-		$this->_object->saveItem( $product );
+		$this->object->saveItem( $product );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 
-		$this->_object->deleteItem( $product->getId() );
+		$this->object->deleteItem( $product->getId() );
 		$productManager->deleteItem( $product->getId() );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
-		$result2 = $this->_object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search );
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -140,27 +140,27 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
-		$textItems = self::$_products['CNC']->getRefItems( 'text', 'name' );
+		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
 			throw new Exception( 'No text with type "name" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.text.id', null ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
@@ -171,7 +171,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 
@@ -181,7 +181,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 	}
@@ -195,7 +195,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 		$search = $productManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->_editor )
+			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $productManager->searchItems( $search );
@@ -207,14 +207,14 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 
 		$langid = $context->getLocale()->getLanguageId();
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->_object->searchTexts( $search );
+		$result = $this->object->searchTexts( $search );
 
 		$this->assertArrayHasKey( $product->getId(), $result );
 		$this->assertContains( 'Cafe Noire Cappuccino', $result );
@@ -223,7 +223,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testCleanupIndex()
 	{
-		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
 	}
 
 }

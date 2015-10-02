@@ -17,11 +17,11 @@
 abstract class Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_view;
-	private $_cache;
-	private $_context;
-	private $_subclients;
-	private $_templatePaths;
+	private $view;
+	private $cache;
+	private $context;
+	private $subclients;
+	private $templatePaths;
 
 
 	/**
@@ -33,8 +33,8 @@ abstract class Client_Html_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths )
 	{
-		$this->_context = $context;
-		$this->_templatePaths = $templatePaths;
+		$this->context = $context;
+		$this->templatePaths = $templatePaths;
 	}
 
 
@@ -45,11 +45,11 @@ abstract class Client_Html_Abstract
 	 */
 	public function getView()
 	{
-		if( !isset( $this->_view ) ) {
+		if( !isset( $this->view ) ) {
 			throw new Client_Html_Exception( sprintf( 'No view available' ) );
 		}
 
-		return $this->_view;
+		return $this->view;
 	}
 
 
@@ -64,7 +64,7 @@ abstract class Client_Html_Abstract
 	{
 		$view = $this->getView();
 
-		foreach( $this->_getSubClients() as $subclient )
+		foreach( $this->getSubClients() as $subclient )
 		{
 			$subclient->setView( $view );
 			$content = $subclient->modifyBody( $content, $uid );
@@ -85,7 +85,7 @@ abstract class Client_Html_Abstract
 	{
 		$view = $this->getView();
 
-		foreach( $this->_getSubClients() as $subclient )
+		foreach( $this->getSubClients() as $subclient )
 		{
 			$subclient->setView( $view );
 			$content = $subclient->modifyHeader( $content, $uid );
@@ -106,7 +106,7 @@ abstract class Client_Html_Abstract
 	{
 		$view = $this->getView();
 
-		foreach( $this->_getSubClients() as $subclient )
+		foreach( $this->getSubClients() as $subclient )
 		{
 			$subclient->setView( $view );
 
@@ -127,7 +127,7 @@ abstract class Client_Html_Abstract
 	 */
 	public function setView( MW_View_Interface $view )
 	{
-		$this->_view = $view;
+		$this->view = $view;
 		return $this;
 	}
 
@@ -141,7 +141,7 @@ abstract class Client_Html_Abstract
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected function _addDecorators( Client_Html_Interface $client, array $templatePaths,
+	protected function addDecorators( Client_Html_Interface $client, array $templatePaths,
 		array $decorators, $classprefix )
 	{
 		$iface = 'Client_Html_Common_Decorator_Interface';
@@ -160,7 +160,7 @@ abstract class Client_Html_Abstract
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$client = new $classname( $this->_context, $this->_templatePaths, $client );
+			$client = new $classname( $this->context, $this->templatePaths, $client );
 
 			if( !( $client instanceof $iface ) ) {
 				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
@@ -179,14 +179,14 @@ abstract class Client_Html_Abstract
 	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected function _addClientDecorators( Client_Html_Interface $client, array $templatePaths, $path )
+	protected function addClientDecorators( Client_Html_Interface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
 		}
 
 		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 
 		$decorators = $config->get( 'client/html/common/decorators/default', array() );
 		$excludes = $config->get( 'client/html/' . $path . '/decorators/excludes', array() );
@@ -199,15 +199,15 @@ abstract class Client_Html_Abstract
 		}
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
-		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
-		$client = $this->_addDecorators( $client, $templatePaths, $decorators, $classprefix );
+		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
 		return $client;
 	}
@@ -221,7 +221,7 @@ abstract class Client_Html_Abstract
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function _addMetaItem( $items, $domain, &$expire, array &$tags )
+	protected function addMetaItem( $items, $domain, &$expire, array &$tags )
 	{
 		/** client/html/common/cache/tag-all
 		 * Adds tags for all items used in a cache entry
@@ -255,7 +255,7 @@ abstract class Client_Html_Abstract
 		 * @see classes/cache/manager/name
 		 * @see classes/cache/name
 		 */
-		$tagAll = $this->_context->getConfig()->get( 'client/html/common/cache/tag-all', false );
+		$tagAll = $this->context->getConfig()->get( 'client/html/common/cache/tag-all', false );
 
 		if( !is_array( $items ) ) {
 			$items = array( $items );
@@ -266,7 +266,7 @@ abstract class Client_Html_Abstract
 		}
 
 		foreach( $items as $item ) {
-			$this->_addMetaItemSingle( $item, $domain, $expire, $tags, $tagAll );
+			$this->addMetaItemSingle( $item, $domain, $expire, $tags, $tagAll );
 		}
 	}
 
@@ -280,7 +280,7 @@ abstract class Client_Html_Abstract
 	 * @param array &$tags List of tags the new tags will be added to
 	 * @param boolean $tagAll True of tags for all items should be added, false if only for the main item
 	 */
-	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
+	private function addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
 		$expires = array();
 		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
@@ -320,9 +320,9 @@ abstract class Client_Html_Abstract
 	 * @param string $domain Name of the domain the item IDs are from
 	 * @param string|null &$expire Expiration date that will be overwritten if an start date in the future is available
 	 */
-	protected function _addMetaList( $ids, $domain, &$expire )
+	protected function addMetaList( $ids, $domain, &$expire )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), $domain . '/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), $domain . '/list' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -334,7 +334,7 @@ abstract class Client_Html_Abstract
 		$search->setSlice( 0, 1 );
 
 		foreach( $manager->searchItems( $search ) as $listItem ) {
-			$expire = $this->_expires( $expire, $listItem->getDateStart() );
+			$expire = $this->expires( $expire, $listItem->getDateStart() );
 		}
 	}
 
@@ -346,7 +346,7 @@ abstract class Client_Html_Abstract
 	 * @return string Class names, e.g. "Catalog_Navigation"
 	 * @deprecated 2015.10 Remove method, use str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) )
 	 */
-	protected function _createSubNames( $path )
+	protected function createSubNames( $path )
 	{
 		$names = explode( '/', $path );
 
@@ -370,12 +370,12 @@ abstract class Client_Html_Abstract
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return Client_Html_Interface Sub-part object
 	 */
-	protected function _createSubClient( $path, $name )
+	protected function createSubClient( $path, $name )
 	{
 		$path = strtolower( $path );
 
 		if( $name === null ) {
-			$name = $this->_context->getConfig()->get( 'client/html/' . $path . '/name', 'Default' );
+			$name = $this->context->getConfig()->get( 'client/html/' . $path . '/name', 'Default' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
@@ -391,13 +391,13 @@ abstract class Client_Html_Abstract
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$object = new $classname( $this->_context, $this->_templatePaths );
+		$object = new $classname( $this->context, $this->templatePaths );
 
 		if( ( $object instanceof $interface ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
-		return $this->_addClientDecorators( $object, $this->_templatePaths, $path );
+		return $this->addClientDecorators( $object, $this->templatePaths, $path );
 	}
 
 
@@ -408,7 +408,7 @@ abstract class Client_Html_Abstract
 	 * @param string|null $second Second expiration date or null
 	 * @return string|null Expiration date
 	 */
-	protected function _expires( $first, $second )
+	protected function expires( $first, $second )
 	{
 		return ( $first !== null ? ( $second !== null ? min( $first, $second ) : $first ) : $second );
 	}
@@ -421,7 +421,7 @@ abstract class Client_Html_Abstract
 	 * @param array $prefixes List of prefixes the parameters must start with
 	 * @return array Associative list of parameters used by the html client
 	 */
-	protected function _getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
+	protected function getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
 	{
 		$list = array();
 
@@ -441,9 +441,9 @@ abstract class Client_Html_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -455,10 +455,10 @@ abstract class Client_Html_Abstract
 	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
 	 * @return string Unique hash
 	 */
-	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
+	protected function getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
 	{
-		$locale = $this->_getContext()->getLocale();
-		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
+		$locale = $this->getContext()->getLocale();
+		$params = $this->getClientParams( $this->getView()->param(), $prefixes );
 		ksort( $params );
 
 		if( ( $pstr = json_encode( $params ) ) === false || ( $cstr = json_encode( $config ) ) === false ) {
@@ -475,7 +475,7 @@ abstract class Client_Html_Abstract
 	 * @return array List of HTML client names
 	 * @todo 2015.03 Make abstract so clients have to implement it
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
 		return array();
 	}
@@ -489,24 +489,24 @@ abstract class Client_Html_Abstract
 	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
 	 * @todo 2015.03 Remove $confpath and $default parameters
 	 */
-	protected function _getSubClients( $confpath = null, array $default = array() )
+	protected function getSubClients( $confpath = null, array $default = array() )
 	{
-		if( !isset( $this->_subclients ) )
+		if( !isset( $this->subclients ) )
 		{
-			$this->_subclients = array();
+			$this->subclients = array();
 
 			if( $confpath !== null ) {
-				$names = $this->_context->getConfig()->get( $confpath, $default );
+				$names = $this->context->getConfig()->get( $confpath, $default );
 			} else {
-				$names = $this->_getSubClientNames();
+				$names = $this->getSubClientNames();
 			}
 
 			foreach( $names as $name ) {
-				$this->_subclients[] = $this->getSubClient( $name );
+				$this->subclients[] = $this->getSubClient( $name );
 			}
 		}
 
-		return $this->_subclients;
+		return $this->subclients;
 	}
 
 
@@ -519,15 +519,15 @@ abstract class Client_Html_Abstract
 	 * @return string path the to the template file
 	 * @throws Client_Html_Exception If no template file was found
 	 */
-	protected function _getTemplate( $confpath, $default )
+	protected function getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
 		foreach( (array) $default as $fname )
 		{
-			$file = $this->_context->getConfig()->get( $confpath, $fname );
+			$file = $this->context->getConfig()->get( $confpath, $fname );
 
-			foreach( array_reverse( $this->_templatePaths ) as $path => $relPaths )
+			foreach( array_reverse( $this->templatePaths ) as $path => $relPaths )
 			{
 				foreach( $relPaths as $relPath )
 				{
@@ -553,9 +553,9 @@ abstract class Client_Html_Abstract
 	 * @return array List of template paths
 	 * @since 2015.09
 	 */
-	protected function _getTemplatePaths()
+	protected function getTemplatePaths()
 	{
-		return $this->_templatePaths;
+		return $this->templatePaths;
 	}
 
 
@@ -568,9 +568,9 @@ abstract class Client_Html_Abstract
 	 * @return MShop_Common_Item_Type_Interface Type item
 	 * @throws Controller_Jobs_Exception If no item is found
 	 */
-	protected function _getTypeItem( $prefix, $domain, $code )
+	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), $prefix );
+		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();
@@ -600,11 +600,11 @@ abstract class Client_Html_Abstract
 	 * @param string $confkey Configuration key prefix that matches all relevant settings for the component
 	 * @return string Cached entry or empty string if not available
 	 */
-	protected function _getCached( $type, $uid, array $prefixes, $confkey )
+	protected function getCached( $type, $uid, array $prefixes, $confkey )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 
 			/** client/html/common/cache/force
@@ -634,19 +634,19 @@ abstract class Client_Html_Abstract
 			$cfg = $config->get( $confkey, array() );
 
 			$keys = array(
-				'body' => $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':body', $cfg ),
-				'header' => $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':header', $cfg ),
+				'body' => $this->getParamHash( $prefixes, $uid . ':' . $confkey . ':body', $cfg ),
+				'header' => $this->getParamHash( $prefixes, $uid . ':' . $confkey . ':header', $cfg ),
 			);
 
 			$entries = $context->getCache()->getList( $keys );
-			$this->_cache = array();
+			$this->cache = array();
 
 			foreach( $keys as $key => $hash ) {
-				$this->_cache[$key] = ( array_key_exists( $hash, $entries ) ? $entries[$hash] : null );
+				$this->cache[$key] = ( array_key_exists( $hash, $entries ) ? $entries[$hash] : null );
 			}
 		}
 
-		return ( array_key_exists( $type, $this->_cache ) ? $this->_cache[$type] : null );
+		return ( array_key_exists( $type, $this->cache ) ? $this->cache[$type] : null );
 	}
 
 
@@ -663,9 +663,9 @@ abstract class Client_Html_Abstract
 	 * @param string|null $expire Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
 	 */
-	protected function _setCached( $type, $uid, array $prefixes, $confkey, $value, array $tags, $expire )
+	protected function setCached( $type, $uid, array $prefixes, $confkey, $value, array $tags, $expire )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$force = $config->get( 'client/html/common/cache/force', false );
@@ -677,7 +677,7 @@ abstract class Client_Html_Abstract
 		try
 		{
 			$cfg = $config->get( $confkey, array() );
-			$key = $this->_getParamHash( $prefixes, $uid . ':' . $confkey . ':' . $type, $cfg );
+			$key = $this->getParamHash( $prefixes, $uid . ':' . $confkey . ':' . $type, $cfg );
 
 			$context->getCache()->set( $key, $value, array_unique( $tags ), $expire );
 		}
@@ -696,7 +696,7 @@ abstract class Client_Html_Abstract
 	 * @param string $section New section content
 	 * @param string $marker Name of the section marker without "<!-- " and " -->" parts
 	 */
-	protected function _replaceSection( $content, $section, $marker )
+	protected function replaceSection( $content, $section, $marker )
 	{
 		$marker = '<!-- ' . $marker . ' -->';
 		$start = strpos( $content, $marker );
@@ -717,7 +717,7 @@ abstract class Client_Html_Abstract
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		return $view;
 	}
@@ -729,10 +729,10 @@ abstract class Client_Html_Abstract
 	 * @param array $codes Associative list of scope and object as key and error code as value
 	 * @return array List of translated error messages
 	 */
-	protected function _translatePluginErrorCodes( array $codes )
+	protected function translatePluginErrorCodes( array $codes )
 	{
 		$errors = array();
-		$i18n = $this->_context->getI18n();
+		$i18n = $this->context->getI18n();
 
 		foreach( $codes as $scope => $list )
 		{

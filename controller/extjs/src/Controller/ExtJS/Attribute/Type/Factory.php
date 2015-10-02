@@ -142,6 +142,6 @@ class Controller_ExtJS_Attribute_Type_Factory
 		 * @see controller/extjs/attribute/type/decorators/excludes
 		 * @see controller/extjs/attribute/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'attribute/type' );
+		return self::addControllerDecorators( $context, $controller, 'attribute/type' );
 	}
 }

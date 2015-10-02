@@ -142,6 +142,6 @@ class Controller_ExtJS_Admin_Cache_Factory
 		 * @see controller/extjs/admin/cache/decorators/excludes
 		 * @see controller/extjs/admin/cache/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'admin/cache' );
+		return self::addControllerDecorators( $context, $controller, 'admin/cache' );
 	}
 }

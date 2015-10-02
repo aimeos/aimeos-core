@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_TypesAddLabelStatus extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_type' => array(
 			'label'  => 'ALTER TABLE "mshop_attribute_type" ADD "label" VARCHAR(255) NOT NULL',
 			'status' => 'ALTER TABLE "mshop_attribute_type" ADD "status" smallint(6) NOT NULL DEFAULT 0 AFTER label'
@@ -92,24 +92,24 @@ class MW_Setup_Task_TypesAddLabelStatus extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( sprintf( 'Adding label and status columns' ), 0 );
-		$this->_status( '' );
+		$this->msg( sprintf( 'Adding label and status columns' ), 0 );
+		$this->status( '' );
 
-		foreach( $this->_mysql as $table => $columns ) {
+		foreach( $this->mysql as $table => $columns ) {
 
-			if( $this->_schema->tableExists( $table ) ) {
+			if( $this->schema->tableExists( $table ) ) {
 
 				foreach( $columns as $column => $stmt ) {
 
-					$this->_msg( sprintf( 'Checking column "%1$s.%2$s": ', $table, $column ), 1 );
+					$this->msg( sprintf( 'Checking column "%1$s.%2$s": ', $table, $column ), 1 );
 
-					if( !$this->_schema->columnExists( $table, $column ) ) {
-						$this->_execute( $stmt );
-						$this->_status( 'added' );
+					if( !$this->schema->columnExists( $table, $column ) ) {
+						$this->execute( $stmt );
+						$this->status( 'added' );
 					} else {
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 			}

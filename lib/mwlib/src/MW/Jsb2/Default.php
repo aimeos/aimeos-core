@@ -17,10 +17,10 @@
  */
 class MW_Jsb2_Default
 {
-	private $_registeredPackages = array();
-	private $_baseURL = '';
-	private $_basePath = '';
-	private $_deployDir = '';
+	private $registeredPackages = array();
+	private $baseURL = '';
+	private $basePath = '';
+	private $deployDir = '';
 
 
 	/**
@@ -32,13 +32,13 @@ class MW_Jsb2_Default
 	 */
 	public function __construct( $filename, $baseURL = "", $filter = array() )
 	{
-		$manifest = $this->_getManifest( $filename );
+		$manifest = $this->getManifest( $filename );
 
-		$this->_baseURL = rtrim( $baseURL, '/' ) . '/';
-		$this->_basePath = dirname( $filename ) . '/';
-		$this->_deployDir = $manifest->deployDir . '/';
+		$this->baseURL = rtrim( $baseURL, '/' ) . '/';
+		$this->basePath = dirname( $filename ) . '/';
+		$this->deployDir = $manifest->deployDir . '/';
 
-		$this->_registeredPackages = $this->_getPackages( $manifest, $filter );
+		$this->registeredPackages = $this->getPackages( $manifest, $filter );
 	}
 
 
@@ -53,7 +53,7 @@ class MW_Jsb2_Default
 	{
 		$files = array();
 
-		foreach( $this->_registeredPackages as $filetype => $packageList )
+		foreach( $this->registeredPackages as $filetype => $packageList )
 		{
 			if( $filetype !== $type ) {
 				continue;
@@ -61,8 +61,8 @@ class MW_Jsb2_Default
 
 			foreach( $packageList as $package )
 			{
-				$packageFile = $this->_deployDir . $package->file;
-				$packageFileFilesystem = $this->_basePath . $packageFile;
+				$packageFile = $this->deployDir . $package->file;
+				$packageFileFilesystem = $this->basePath . $packageFile;
 				$packageFileTime = 0;
 				$timestamp = 0;
 
@@ -70,10 +70,10 @@ class MW_Jsb2_Default
 					$packageFileTime = filemtime( $packageFileFilesystem );
 				}
 
-				$result = $this->_getFileUrls( $this->_baseURL, $this->_basePath, $package, $timestamp, $version );
+				$result = $this->getFileUrls( $this->baseURL, $this->basePath, $package, $timestamp, $version );
 
 				if( $packageFileTime > 0 && $packageFileTime >= $timestamp ) {
-					$files[] = $this->_baseURL . $packageFile . sprintf( $version, $packageFileTime );
+					$files[] = $this->baseURL . $packageFile . sprintf( $version, $packageFileTime );
 				} else {
 					$files = array_merge( $files, $result );
 				}
@@ -95,7 +95,7 @@ class MW_Jsb2_Default
 		$html = '';
 		$version = '?v=%s';
 
-		if( strpos( $this->_baseURL, '?' ) !== false ) {
+		if( strpos( $this->baseURL, '?' ) !== false ) {
 			$version = '&v=%s';
 		}
 
@@ -126,7 +126,7 @@ class MW_Jsb2_Default
 	 */
 	public function deploy( $type = null, $debug = true, $filepermission = 0644, $dirpermission = 0755 )
 	{
-		foreach( $this->_registeredPackages as $filetype => $packageFiles )
+		foreach( $this->registeredPackages as $filetype => $packageFiles )
 		{
 			if( $type !== null && $filetype !== $type ) {
 				continue;
@@ -134,7 +134,7 @@ class MW_Jsb2_Default
 
 			foreach( $packageFiles as $package )
 			{
-				$packageFile = $this->_basePath . $this->_deployDir . $package->file;
+				$packageFile = $this->basePath . $this->deployDir . $package->file;
 
 				$packageDir = dirname( $packageFile );
 
@@ -145,7 +145,7 @@ class MW_Jsb2_Default
 					}
 				}
 
-				$this->_minify( $package, $debug, $filepermission );
+				$this->minify( $package, $debug, $filepermission );
 			}
 		}
 	}
@@ -161,7 +161,7 @@ class MW_Jsb2_Default
 	 * @param integer &$timestamp Value/result parameter that will contain the latest file modification timestamp
 	 * @throws MW_Jsb2_Exception If the file modification timestamp couldn't be determined
 	 */
-	protected function _getFileUrls( $baseUrl, $basePath, stdClass $package, &$timestamp, $version = '?v=%s' )
+	protected function getFileUrls( $baseUrl, $basePath, stdClass $package, &$timestamp, $version = '?v=%s' )
 	{
 		$timestamp = (int) $timestamp;
 		$filesToDisplay = array();
@@ -189,11 +189,11 @@ class MW_Jsb2_Default
 	 * @param boolean $debug Create debug files if true
 	 * @param integer $permissions File permissions to set on new files
 	 */
-	protected function _minify( $package, $debug, $permissions )
+	protected function minify( $package, $debug, $permissions )
 	{
 		$content = '';
 
-		foreach( $this->_getFilenames( $package, $this->_basePath ) as $filename )
+		foreach( $this->getFilenames( $package, $this->basePath ) as $filename )
 		{
 			if( ( $content .= file_get_contents( $filename ) ) === false ) {
 				throw new MW_Jsb2_Exception( sprintf( 'Unable to get content of file "%1$s"', $filename ) );
@@ -204,7 +204,7 @@ class MW_Jsb2_Default
 			$content = JSMin::minify( $content );
 		}
 
-		$pkgFileName = $this->_basePath . $this->_deployDir . $package->file;
+		$pkgFileName = $this->basePath . $this->deployDir . $package->file;
 
 		if( file_put_contents( $pkgFileName, $content ) === false ) {
 			throw new MW_Jsb2_Exception( sprintf( 'Unable to create package file "%1$s"', $pkgFileName ) );
@@ -222,7 +222,7 @@ class MW_Jsb2_Default
 	 * @param object JSON decoded manifest
 	 * @param array $filter What packages should NOT be returned
 	 */
-	protected function _getPackages( $manifest, $filter = array() )
+	protected function getPackages( $manifest, $filter = array() )
 	{
 		$packageContainer = array();
 
@@ -255,7 +255,7 @@ class MW_Jsb2_Default
 	 * @param object $package Single package from manifest
 	 * @param string $prePath String added before filepaths
 	 */
-	protected function _getFilenames( $package, $prePath = '' )
+	protected function getFilenames( $package, $prePath = '' )
 	{
 		$filenames = array();
 
@@ -266,7 +266,7 @@ class MW_Jsb2_Default
 			}
 
 			$filename = $include->path . $include->text;
-			$absfilename = $this->_basePath . $filename;
+			$absfilename = $this->basePath . $filename;
 
 			if( !file_exists( $absfilename ) ) {
 				throw new MW_Jsb2_Exception( sprintf( 'File does not exists: "%1$s"', $absfilename ) );
@@ -285,7 +285,7 @@ class MW_Jsb2_Default
 	 * @param string $filepath Path to manifest
 	 * @throws MW_Jsb2_Exception
 	 */
-	protected function _getManifest( $filepath )
+	protected function getManifest( $filepath )
 	{
 		if( !file_exists( $filepath ) ) {
 			throw new MW_Jsb2_Exception( sprintf( 'File does not exists: "%1$s"', $filepath ) );

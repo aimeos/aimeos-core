@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CouponAddMtimeCtimeEditor extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_coupon' => array(
 			'mtime' => array(
 				'ALTER TABLE "mshop_coupon" ADD "mtime" DATETIME NOT NULL AFTER "status"',
@@ -76,9 +76,9 @@ class MW_Setup_Task_CouponAddMtimeCtimeEditor extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -87,28 +87,28 @@ class MW_Setup_Task_CouponAddMtimeCtimeEditor extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding mtime, ctime, editor columns to coupon tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding mtime, ctime, editor columns to coupon tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $columns )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s"', $table ), 1 );
-			$this->_status( '' );
+			$this->msg( sprintf( 'Checking table "%1$s"', $table ), 1 );
+			$this->status( '' );
 
-			if( $this->_schema->tableExists( $table ) === true )
+			if( $this->schema->tableExists( $table ) === true )
 			{
 				foreach( $columns as $column => $stmtList )
 				{
-					$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 2 );
+					$this->msg( sprintf( 'Checking column "%1$s": ', $column ), 2 );
 
-					if( $this->_schema->columnExists( $table, $column ) === false )
+					if( $this->schema->columnExists( $table, $column ) === false )
 					{
-						$this->_executeList( $stmtList );
-						$this->_status( 'added' );
+						$this->executeList( $stmtList );
+						$this->status( 'added' );
 					} else {
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 			}

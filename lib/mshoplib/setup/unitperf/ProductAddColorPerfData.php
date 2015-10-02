@@ -36,9 +36,9 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Insert text data and product/text relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product color attribute performance data', 0 );
+		$this->msg( 'Adding product color attribute performance data', 0 );
 
 
 		$colors = array(
@@ -69,14 +69,14 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		);
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
-		$attrList = $this->_getAttributeIds( $colors );
+		$attrList = $this->getAttributeIds( $colors );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
 
@@ -84,10 +84,10 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$search->setConditions( $search->compare( '==', 'product.type.code', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
-		$attrListItem = $this->_getProductListItem( 'attribute', 'variant' );
+		$attrListItem = $this->getProductListItem( 'attribute', 'variant' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = 0;
 
@@ -113,10 +113,10 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -126,14 +126,14 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	 * @param array $colors List of attribute codes
 	 * @throws Exception If a type isn't found
 	 */
-	protected function _getAttributeIds( array $colors )
+	protected function getAttributeIds( array $colors )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 
-		$attrTypeItem = $this->_getTypeItem( 'attribute/type', 'product', 'color' );
-		$mediaTypeItem = $this->_getTypeItem( 'media/type', 'attribute', 'default' );
-		$attrListTypeItem = $this->_getTypeItem( 'attribute/list/type', 'media', 'icon' );
+		$attrTypeItem = $this->getTypeItem( 'attribute/type', 'product', 'color' );
+		$mediaTypeItem = $this->getTypeItem( 'media/type', 'attribute', 'default' );
+		$attrListTypeItem = $this->getTypeItem( 'attribute/list/type', 'media', 'icon' );
 
 
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
@@ -167,7 +167,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 		foreach( $colors as $code => $name )
 		{
-			$imageData = $this->_getImageData( $code, $mime );
+			$imageData = $this->getImageData( $code, $mime );
 
 			$attrItem->setId( null );
 			$attrItem->setCode( $code );
@@ -200,7 +200,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	 * @param string &$mime Contains the mime type of the created image as result
 	 * @throws Exception If the image couldn't be created
 	 */
-	protected function _getImageData( $code, &$mime )
+	protected function getImageData( $code, &$mime )
 	{
 		$list = str_split( ltrim( $code, '#' ), 2 );
 

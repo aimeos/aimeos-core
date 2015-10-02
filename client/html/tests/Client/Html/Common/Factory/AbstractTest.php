@@ -11,7 +11,7 @@
  */
 class Client_Html_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -22,8 +22,8 @@ class Client_Html_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$config = $this->_context->getConfig();
+		$this->context = TestHelper::getContext();
+		$config = $this->context->getConfig();
 
 		$config->set( 'client/html/common/decorators/default', array() );
 		$config->set( 'client/html/admin/decorators/global', array() );
@@ -33,10 +33,10 @@ class Client_Html_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClient()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array(), 'Default' );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
 		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', $client );
 
-		$injectedClient = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array(), 'Default' );
+		$injectedClient = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
 
 		$this->assertSame( $client, $injectedClient );
 	}
@@ -44,11 +44,11 @@ class Client_Html_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClientReset()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array(), 'Default' );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
 		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', $client );
 		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', null );
 
-		$new = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array(), 'Default' );
+		$new = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
 
 		$this->assertNotSame( $client, $new );
 	}

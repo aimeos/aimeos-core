@@ -36,22 +36,22 @@ class MW_Setup_Task_CatalogRebuildPerfIndex extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Rebuilds the catalog index.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Rebuilding catalog index for performance data', 0 );
+		$this->msg( 'Rebuilding catalog index for performance data', 0 );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
 		$catalogManager->getSubManager( 'index' )->rebuildIndex();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

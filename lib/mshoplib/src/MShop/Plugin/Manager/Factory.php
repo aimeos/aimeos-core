@@ -151,7 +151,7 @@ class MShop_Plugin_Manager_Factory
 		 * @see mshop/plugin/manager/decorators/excludes
 		 * @see mshop/plugin/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'plugin' );
+		return self::addManagerDecorators( $context, $manager, 'plugin' );
 	}
 
 }

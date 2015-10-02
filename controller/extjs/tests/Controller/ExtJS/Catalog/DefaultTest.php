@@ -8,8 +8,8 @@
 
 class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_rootnode;
+	private $object;
+	private $rootnode;
 
 
 	/**
@@ -20,12 +20,12 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Catalog_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Catalog_Default( TestHelper::getContext() );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => 'root' );
 
-		$result = $this->_object->getTree( $params );
-		$this->_rootnode = $result['items'];
+		$result = $this->object->getTree( $params );
+		$this->rootnode = $result['items'];
 	}
 
 
@@ -37,16 +37,16 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_rootnode );
+		unset( $this->object );
+		unset( $this->rootnode );
 	}
 
 
 	public function testGetTree()
 	{
-		$this->assertEquals( 'Root', $this->_rootnode->{'catalog.label'} );
-		$this->assertEquals( 1, $this->_rootnode->{'catalog.status'} );
-		$this->assertEquals( 2, count( $this->_rootnode->{'children'} ) );
+		$this->assertEquals( 'Root', $this->rootnode->{'catalog.label'} );
+		$this->assertEquals( 1, $this->rootnode->{'catalog.status'} );
+		$this->assertEquals( 2, count( $this->rootnode->{'children'} ) );
 	}
 
 
@@ -60,10 +60,10 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 				'catalog.config' => array( 'unittest' => '1234' ),
 				'catalog.status' => 0,
 			),
-			'parentid' => $this->_rootnode->{'catalog.id'},
-			'refid' => $this->_rootnode->{'children'}[1]->{'catalog.id'},
+			'parentid' => $this->rootnode->{'catalog.id'},
+			'refid' => $this->rootnode->{'children'}[1]->{'catalog.id'},
 		);
-		$inserted = $this->_object->insertItems( $insertParams );
+		$inserted = $this->object->insertItems( $insertParams );
 
 		$saveParams = (object) array(
 			'site' => 'unittest',
@@ -75,13 +75,13 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 				'catalog.status' => 0,
 			),
 		);
-		$this->_object->saveItems( $saveParams );
+		$this->object->saveItems( $saveParams );
 
-		$params = (object) array( 'site' => 'unittest', 'items' => $this->_rootnode->{'catalog.id'} );
-		$newroot = $this->_object->getTree( $params );
+		$params = (object) array( 'site' => 'unittest', 'items' => $this->rootnode->{'catalog.id'} );
+		$newroot = $this->object->getTree( $params );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => $inserted['items']->{'catalog.id'} );
-		$this->_object->deleteItems( $params );
+		$this->object->deleteItems( $params );
 
 		$this->assertEquals( $inserted['items']->{'catalog.id'}, $newroot['items']->{'children'}[1]->{'catalog.id'} );
 		$this->assertEquals( 'controller test', $newroot['items']->{'children'}[1]->{'catalog.label'} );
@@ -97,29 +97,29 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 				'catalog.label' => 'controller test node',
 				'status' => false,
 			),
-			'parentid' => $this->_rootnode->{'catalog.id'},
-			'refid' => $this->_rootnode->{'children'}[1]->{'catalog.id'},
+			'parentid' => $this->rootnode->{'catalog.id'},
+			'refid' => $this->rootnode->{'children'}[1]->{'catalog.id'},
 		);
-		$inserted = $this->_object->insertItems( $insertParams );
+		$inserted = $this->object->insertItems( $insertParams );
 
 		$moveParams = (object) array(
 			'site' => 'unittest',
 			'items' => $inserted['items']->{'catalog.id'},
-			'oldparentid' => $this->_rootnode->{'catalog.id'},
-			'newparentid' => $this->_rootnode->{'children'}[0]->{'catalog.id'},
+			'oldparentid' => $this->rootnode->{'catalog.id'},
+			'newparentid' => $this->rootnode->{'children'}[0]->{'catalog.id'},
 		);
-		$this->_object->moveItems( $moveParams );
+		$this->object->moveItems( $moveParams );
 
-		$params = (object) array( 'site' => 'unittest', 'items' => $this->_rootnode->{'catalog.id'} );
-		$newroot = $this->_object->getTree( $params );
+		$params = (object) array( 'site' => 'unittest', 'items' => $this->rootnode->{'catalog.id'} );
+		$newroot = $this->object->getTree( $params );
 
-		$params = (object) array( 'site' => 'unittest', 'items' => $this->_rootnode->{'children'}[0]->{'catalog.id'} );
-		$newparent = $this->_object->getTree( $params );
+		$params = (object) array( 'site' => 'unittest', 'items' => $this->rootnode->{'children'}[0]->{'catalog.id'} );
+		$newparent = $this->object->getTree( $params );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => $inserted['items']->{'catalog.id'} );
-		$this->_object->deleteItems( $params );
+		$this->object->deleteItems( $params );
 
-		$this->assertEquals( $this->_rootnode->{'children'}[1]->{'catalog.id'}, $newroot['items']->{'children'}[1]->{'catalog.id'} );
+		$this->assertEquals( $this->rootnode->{'children'}[1]->{'catalog.id'}, $newroot['items']->{'children'}[1]->{'catalog.id'} );
 		$this->assertEquals( $inserted['items']->{'catalog.id'}, $newparent['items']->{'children'}[3]->{'catalog.id'} );
 		$this->assertEquals( 'controller test node', $newparent['items']->{'children'}[3]->{'catalog.label'} );
 	}
@@ -127,19 +127,19 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchSchema()
 	{
-		$this->assertInternalType( 'array', $this->_object->getSearchSchema() );
+		$this->assertInternalType( 'array', $this->object->getSearchSchema() );
 	}
 
 
 	public function testGetItemSchema()
 	{
-		$this->assertInternalType( 'array', $this->_object->getItemSchema() );
+		$this->assertInternalType( 'array', $this->object->getItemSchema() );
 	}
 
 
 	public function testGetServiceDescription()
 	{
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$expected = array(
 			'Catalog.getTree' => array(
@@ -216,7 +216,7 @@ class Controller_ExtJS_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$result = $this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+		$result = $this->object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
 
 		$this->assertEquals( array( 'success' => true ), $result );
 	}

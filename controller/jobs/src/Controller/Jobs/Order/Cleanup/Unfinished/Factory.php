@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 		 * @see controller/jobs/order/cleanup/unfinished/decorators/excludes
 		 * @see controller/jobs/order/cleanup/unfinished/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/cleanup/unfinished' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/cleanup/unfinished' );
 	}
 }

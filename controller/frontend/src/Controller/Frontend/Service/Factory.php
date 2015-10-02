@@ -141,6 +141,6 @@ class Controller_Frontend_Service_Factory
 		 * @see controller/frontend/service/decorators/excludes
 		 * @see controller/frontend/service/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'service' );
+		return self::addControllerDecorators( $context, $manager, 'service' );
 	}
 }

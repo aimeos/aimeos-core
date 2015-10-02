@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -22,7 +22,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
+		$this->object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
 	}
 
 
@@ -34,20 +34,20 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Capture authorized payments', $this->_object->getName() );
+		$this->assertEquals( 'Capture authorized payments', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Authorized payments of orders will be captured after dispatching or after a configurable amount of time';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 

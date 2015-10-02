@@ -42,8 +42,8 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	const SALUTATION_MR = 'mr';
 
-	private $_prefix;
-	private $_values;
+	private $prefix;
+	private $values;
 
 
 	/**
@@ -56,8 +56,8 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->_values = $values;
-		$this->_prefix = $prefix;
+		$this->values = $values;
+		$this->prefix = $prefix;
 	}
 
 
@@ -70,7 +70,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getCompany()
 	{
-		return ( isset( $this->_values['company'] ) ? (string) $this->_values['company'] : '' );
+		return ( isset( $this->values['company'] ) ? (string) $this->values['company'] : '' );
 	}
 
 
@@ -83,7 +83,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $company == $this->getCompany() ) { return; }
 
-		$this->_values['company'] = (string) $company;
+		$this->values['company'] = (string) $company;
 		$this->setModified();
 	}
 
@@ -94,7 +94,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getVatID()
 	{
-		return ( isset( $this->_values['vatid'] ) ? (string) $this->_values['vatid'] : '' );
+		return ( isset( $this->values['vatid'] ) ? (string) $this->values['vatid'] : '' );
 	}
 
 
@@ -107,7 +107,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $vatid == $this->getVatID() ) { return; }
 
-		$this->_values['vatid'] = (string) $vatid;
+		$this->values['vatid'] = (string) $vatid;
 		$this->setModified();
 	}
 
@@ -119,7 +119,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getSalutation()
 	{
-		return ( isset( $this->_values['salutation'] ) ? (string) $this->_values['salutation'] : MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN );
+		return ( isset( $this->values['salutation'] ) ? (string) $this->values['salutation'] : MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN );
 	}
 
 
@@ -132,9 +132,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $salutation == $this->getSalutation() ) { return; }
 
-		$this->_checkSalutation( $salutation );
+		$this->checkSalutation( $salutation );
 
-		$this->_values['salutation'] = (string) $salutation;
+		$this->values['salutation'] = (string) $salutation;
 		$this->setModified();
 	}
 
@@ -146,7 +146,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getTitle()
 	{
-		return ( isset( $this->_values['title'] ) ? (string) $this->_values['title'] : '' );
+		return ( isset( $this->values['title'] ) ? (string) $this->values['title'] : '' );
 	}
 
 
@@ -159,7 +159,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $title == $this->getTitle() ) { return; }
 
-		$this->_values['title'] = (string) $title;
+		$this->values['title'] = (string) $title;
 		$this->setModified();
 	}
 
@@ -171,7 +171,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getFirstname()
 	{
-		return ( isset( $this->_values['firstname'] ) ? (string) $this->_values['firstname'] : '' );
+		return ( isset( $this->values['firstname'] ) ? (string) $this->values['firstname'] : '' );
 	}
 
 
@@ -184,7 +184,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $firstname == $this->getFirstname() ) { return; }
 
-		$this->_values['firstname'] = (string) $firstname;
+		$this->values['firstname'] = (string) $firstname;
 		$this->setModified();
 	}
 
@@ -196,7 +196,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getLastname()
 	{
-		return ( isset( $this->_values['lastname'] ) ? (string) $this->_values['lastname'] : '' );
+		return ( isset( $this->values['lastname'] ) ? (string) $this->values['lastname'] : '' );
 	}
 
 
@@ -209,7 +209,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $lastname == $this->getLastname() ) { return; }
 
-		$this->_values['lastname'] = (string) $lastname;
+		$this->values['lastname'] = (string) $lastname;
 		$this->setModified();
 	}
 
@@ -221,7 +221,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getAddress1()
 	{
-		return ( isset( $this->_values['address1'] ) ? (string) $this->_values['address1'] : '' );
+		return ( isset( $this->values['address1'] ) ? (string) $this->values['address1'] : '' );
 	}
 
 
@@ -234,7 +234,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $address1 == $this->getAddress1() ) { return; }
 
-		$this->_values['address1'] = (string) $address1;
+		$this->values['address1'] = (string) $address1;
 		$this->setModified();
 	}
 
@@ -246,7 +246,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getAddress2()
 	{
-		return ( isset( $this->_values['address2'] ) ? (string) $this->_values['address2'] : '' );
+		return ( isset( $this->values['address2'] ) ? (string) $this->values['address2'] : '' );
 	}
 
 
@@ -259,7 +259,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $address2 == $this->getAddress2() ) { return; }
 
-		$this->_values['address2'] = (string) $address2;
+		$this->values['address2'] = (string) $address2;
 		$this->setModified();
 	}
 
@@ -271,7 +271,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getAddress3()
 	{
-		return ( isset( $this->_values['address3'] ) ? (string) $this->_values['address3'] : '' );
+		return ( isset( $this->values['address3'] ) ? (string) $this->values['address3'] : '' );
 	}
 
 
@@ -284,7 +284,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $address3 == $this->getAddress3() ) { return; }
 
-		$this->_values['address3'] = (string) $address3;
+		$this->values['address3'] = (string) $address3;
 		$this->setModified();
 	}
 
@@ -296,7 +296,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getPostal()
 	{
-		return ( isset( $this->_values['postal'] ) ? (string) $this->_values['postal'] : '' );
+		return ( isset( $this->values['postal'] ) ? (string) $this->values['postal'] : '' );
 	}
 
 
@@ -309,7 +309,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $postal == $this->getPostal() ) { return; }
 
-		$this->_values['postal'] = (string) $postal;
+		$this->values['postal'] = (string) $postal;
 		$this->setModified();
 	}
 
@@ -321,7 +321,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getCity()
 	{
-		return ( isset( $this->_values['city'] ) ? (string) $this->_values['city'] : '' );
+		return ( isset( $this->values['city'] ) ? (string) $this->values['city'] : '' );
 	}
 
 
@@ -334,7 +334,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $city == $this->getCity() ) { return; }
 
-		$this->_values['city'] = (string) $city;
+		$this->values['city'] = (string) $city;
 		$this->setModified();
 	}
 
@@ -346,7 +346,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getState()
 	{
-		return ( isset( $this->_values['state'] ) ? (string) $this->_values['state'] : '' );
+		return ( isset( $this->values['state'] ) ? (string) $this->values['state'] : '' );
 	}
 
 
@@ -359,7 +359,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $state == $this->getState() ) { return; }
 
-		$this->_values['state'] = (string) $state;
+		$this->values['state'] = (string) $state;
 		$this->setModified();
 	}
 
@@ -373,7 +373,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $countryid === $this->getCountryId() ) { return; }
 
-		$this->_values['countryid'] = strtoupper( (string) $countryid );
+		$this->values['countryid'] = strtoupper( (string) $countryid );
 		$this->setModified();
 	}
 
@@ -385,7 +385,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getCountryId()
 	{
-		return ( isset( $this->_values['countryid'] ) ? (string) $this->_values['countryid'] : null );
+		return ( isset( $this->values['countryid'] ) ? (string) $this->values['countryid'] : null );
 	}
 
 
@@ -398,7 +398,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $langid === $this->getLanguageId() ) { return; }
 
-		$this->_values['langid'] = strtolower( (string) $langid );
+		$this->values['langid'] = strtolower( (string) $langid );
 		$this->setModified();
 	}
 
@@ -410,7 +410,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : null );
+		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
 	}
 
 
@@ -421,7 +421,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getTelephone()
 	{
-		return ( isset( $this->_values['telephone'] ) ? (string) $this->_values['telephone'] : '' );
+		return ( isset( $this->values['telephone'] ) ? (string) $this->values['telephone'] : '' );
 	}
 
 
@@ -434,7 +434,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $telephone == $this->getTelephone() ) { return; }
 
-		$this->_values['telephone'] = (string) $telephone;
+		$this->values['telephone'] = (string) $telephone;
 		$this->setModified();
 	}
 
@@ -446,7 +446,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getEmail()
 	{
-		return ( isset( $this->_values['email'] ) ? (string) $this->_values['email'] : '' );
+		return ( isset( $this->values['email'] ) ? (string) $this->values['email'] : '' );
 	}
 
 
@@ -463,7 +463,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 			throw new MShop_Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
-		$this->_values['email'] = (string) $email;
+		$this->values['email'] = (string) $email;
 		$this->setModified();
 	}
 
@@ -475,7 +475,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getTelefax()
 	{
-		return ( isset( $this->_values['telefax'] ) ? (string) $this->_values['telefax'] : '' );
+		return ( isset( $this->values['telefax'] ) ? (string) $this->values['telefax'] : '' );
 	}
 
 
@@ -488,7 +488,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $telefax == $this->getTelefax() ) { return; }
 
-		$this->_values['telefax'] = (string) $telefax;
+		$this->values['telefax'] = (string) $telefax;
 		$this->setModified();
 	}
 
@@ -500,7 +500,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getWebsite()
 	{
-		return ( isset( $this->_values['website'] ) ? (string) $this->_values['website'] : '' );
+		return ( isset( $this->values['website'] ) ? (string) $this->values['website'] : '' );
 	}
 
 
@@ -519,7 +519,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 			throw new MShop_Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
-		$this->_values['website'] = (string) $website;
+		$this->values['website'] = (string) $website;
 		$this->setModified();
 	}
 
@@ -531,7 +531,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getFlag()
 	{
-		return ( isset( $this->_values['flag'] ) ? (int) $this->_values['flag'] : 0 );
+		return ( isset( $this->values['flag'] ) ? (int) $this->values['flag'] : 0 );
 	}
 
 
@@ -544,7 +544,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if( $flag == $this->getFlag() ) { return; }
 
-		$this->_values['flag'] = (int) $flag;
+		$this->values['flag'] = (int) $flag;
 		$this->setModified();
 	}
 
@@ -564,25 +564,25 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		{
 			switch( $key )
 			{
-				case $this->_prefix . 'salutation': $this->setSalutation( $value ); break;
-				case $this->_prefix . 'company': $this->setCompany( $value ); break;
-				case $this->_prefix . 'vatid': $this->setVatID( $value ); break;
-				case $this->_prefix . 'title': $this->setTitle( $value ); break;
-				case $this->_prefix . 'firstname': $this->setFirstname( $value ); break;
-				case $this->_prefix . 'lastname': $this->setLastname( $value ); break;
-				case $this->_prefix . 'address1': $this->setAddress1( $value ); break;
-				case $this->_prefix . 'address2': $this->setAddress2( $value ); break;
-				case $this->_prefix . 'address3': $this->setAddress3( $value ); break;
-				case $this->_prefix . 'postal': $this->setPostal( $value ); break;
-				case $this->_prefix . 'city': $this->setCity( $value ); break;
-				case $this->_prefix . 'state': $this->setState( $value ); break;
-				case $this->_prefix . 'countryid': $this->setCountryId( $value ); break;
-				case $this->_prefix . 'languageid': $this->setLanguageId( $value ); break;
-				case $this->_prefix . 'telephone': $this->setTelephone( $value ); break;
-				case $this->_prefix . 'telefax': $this->setTelefax( $value ); break;
-				case $this->_prefix . 'email': $this->setEmail( $value ); break;
-				case $this->_prefix . 'website': $this->setWebsite( $value ); break;
-				case $this->_prefix . 'flag': $this->setFlag( $value ); break;
+				case $this->prefix . 'salutation': $this->setSalutation( $value ); break;
+				case $this->prefix . 'company': $this->setCompany( $value ); break;
+				case $this->prefix . 'vatid': $this->setVatID( $value ); break;
+				case $this->prefix . 'title': $this->setTitle( $value ); break;
+				case $this->prefix . 'firstname': $this->setFirstname( $value ); break;
+				case $this->prefix . 'lastname': $this->setLastname( $value ); break;
+				case $this->prefix . 'address1': $this->setAddress1( $value ); break;
+				case $this->prefix . 'address2': $this->setAddress2( $value ); break;
+				case $this->prefix . 'address3': $this->setAddress3( $value ); break;
+				case $this->prefix . 'postal': $this->setPostal( $value ); break;
+				case $this->prefix . 'city': $this->setCity( $value ); break;
+				case $this->prefix . 'state': $this->setState( $value ); break;
+				case $this->prefix . 'countryid': $this->setCountryId( $value ); break;
+				case $this->prefix . 'languageid': $this->setLanguageId( $value ); break;
+				case $this->prefix . 'telephone': $this->setTelephone( $value ); break;
+				case $this->prefix . 'telefax': $this->setTelefax( $value ); break;
+				case $this->prefix . 'email': $this->setEmail( $value ); break;
+				case $this->prefix . 'website': $this->setWebsite( $value ); break;
+				case $this->prefix . 'flag': $this->setFlag( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -600,25 +600,25 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		$list = parent::toArray();
 
-		$list[$this->_prefix . 'salutation'] = $this->getSalutation();
-		$list[$this->_prefix . 'company'] = $this->getCompany();
-		$list[$this->_prefix . 'vatid'] = $this->getVatID();
-		$list[$this->_prefix . 'title'] = $this->getTitle();
-		$list[$this->_prefix . 'firstname'] = $this->getFirstname();
-		$list[$this->_prefix . 'lastname'] = $this->getLastname();
-		$list[$this->_prefix . 'address1'] = $this->getAddress1();
-		$list[$this->_prefix . 'address2'] = $this->getAddress2();
-		$list[$this->_prefix . 'address3'] = $this->getAddress3();
-		$list[$this->_prefix . 'postal'] = $this->getPostal();
-		$list[$this->_prefix . 'city'] = $this->getCity();
-		$list[$this->_prefix . 'state'] = $this->getState();
-		$list[$this->_prefix . 'countryid'] = $this->getCountryId();
-		$list[$this->_prefix . 'languageid'] = $this->getLanguageId();
-		$list[$this->_prefix . 'telephone'] = $this->getTelephone();
-		$list[$this->_prefix . 'telefax'] = $this->getTelefax();
-		$list[$this->_prefix . 'email'] = $this->getEmail();
-		$list[$this->_prefix . 'website'] = $this->getWebsite();
-		$list[$this->_prefix . 'flag'] = $this->getFlag();
+		$list[$this->prefix . 'salutation'] = $this->getSalutation();
+		$list[$this->prefix . 'company'] = $this->getCompany();
+		$list[$this->prefix . 'vatid'] = $this->getVatID();
+		$list[$this->prefix . 'title'] = $this->getTitle();
+		$list[$this->prefix . 'firstname'] = $this->getFirstname();
+		$list[$this->prefix . 'lastname'] = $this->getLastname();
+		$list[$this->prefix . 'address1'] = $this->getAddress1();
+		$list[$this->prefix . 'address2'] = $this->getAddress2();
+		$list[$this->prefix . 'address3'] = $this->getAddress3();
+		$list[$this->prefix . 'postal'] = $this->getPostal();
+		$list[$this->prefix . 'city'] = $this->getCity();
+		$list[$this->prefix . 'state'] = $this->getState();
+		$list[$this->prefix . 'countryid'] = $this->getCountryId();
+		$list[$this->prefix . 'languageid'] = $this->getLanguageId();
+		$list[$this->prefix . 'telephone'] = $this->getTelephone();
+		$list[$this->prefix . 'telefax'] = $this->getTelefax();
+		$list[$this->prefix . 'email'] = $this->getEmail();
+		$list[$this->prefix . 'website'] = $this->getWebsite();
+		$list[$this->prefix . 'flag'] = $this->getFlag();
 
 		return $list;
 	}
@@ -630,7 +630,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 * @param integer $value Address salutation defined in MShop_Common_Item_Address_Abstract
 	 * @throws MShop_Common_Exception If salutation is invalid
 	 */
-	protected function _checkSalutation( $value )
+	protected function checkSalutation( $value )
 	{
 		switch( $value )
 		{

@@ -150,6 +150,6 @@ class Controller_Jobs_Admin_Job_Factory
 		 * @see controller/jobs/admin/job/decorators/excludes
 		 * @see controller/jobs/admin/job/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'admin/job' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'admin/job' );
 	}
 }

@@ -8,7 +8,7 @@
 
 class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Common_Product_Import_Csv_TestAbstract( $context, $aimeos );
+		$this->object = new Controller_Common_Product_Import_Csv_TestAbstract( $context, $aimeos );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 
 	public function testGetCache()
 	{
-		$cache = $this->_object->getCachePublic( 'attribute' );
+		$cache = $this->object->getCachePublic( 'attribute' );
 
 		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Cache_Interface', $cache );
 	}
@@ -40,27 +40,27 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 	public function testGetCacheInvalidType()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getCachePublic( '$' );
+		$this->object->getCachePublic( '$' );
 	}
 
 
 	public function testGetCacheInvalidClass()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getCachePublic( 'test' );
+		$this->object->getCachePublic( 'test' );
 	}
 
 
 	public function testGetCacheInvalidInterface()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getCachePublic( 'attribute', 'Invalid' );
+		$this->object->getCachePublic( 'attribute', 'Invalid' );
 	}
 
 
 	public function testGetProcessors()
 	{
-		$processor = $this->_object->getProcessorsPublic( array( 'attribute' => array() ) );
+		$processor = $this->object->getProcessorsPublic( array( 'attribute' => array() ) );
 
 		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Processor_Interface', $processor );
 	}
@@ -69,27 +69,27 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 	public function testGetProcessorsInvalidType()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getProcessorsPublic( array( '$' => array() ) );
+		$this->object->getProcessorsPublic( array( '$' => array() ) );
 	}
 
 
 	public function testGetProcessorsInvalidClass()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getProcessorsPublic( array( 'test' => array() ) );
+		$this->object->getProcessorsPublic( array( 'test' => array() ) );
 	}
 
 
 	public function testGetProcessorsInvalidInterface()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getProcessorsPublic( array( 'invalid' => array() ) );
+		$this->object->getProcessorsPublic( array( 'invalid' => array() ) );
 	}
 
 
 	public function testGetTypeId()
 	{
-		$typeid = $this->_object->getTypeIdPublic( 'attribute/type', 'product', 'color' );
+		$typeid = $this->object->getTypeIdPublic( 'attribute/type', 'product', 'color' );
 
 		$this->assertNotEquals( null, $typeid );
 	}
@@ -98,7 +98,7 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 	public function testGetTypeIdUnknown()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getTypeIdPublic( 'attribute/type', 'product', 'unknown' );
+		$this->object->getTypeIdPublic( 'attribute/type', 'product', 'unknown' );
 	}
 }
 
@@ -108,19 +108,19 @@ class Controller_Common_Product_Import_Csv_TestAbstract
 {
 	public function getCachePublic( $type, $name = null )
 	{
-		return $this->_getCache( $type, $name );
+		return $this->getCache( $type, $name );
 	}
 
 
 	public function getProcessorsPublic( array $mappings )
 	{
-		return $this->_getProcessors( $mappings );
+		return $this->getProcessors( $mappings );
 	}
 
 
 	public function getTypeIdPublic( $path, $domain, $code )
 	{
-		return $this->_getTypeId( $path, $domain, $code );
+		return $this->getTypeId( $path, $domain, $code );
 	}
 }
 

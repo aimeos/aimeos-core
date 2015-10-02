@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_Test
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Stage_Image_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_Stage_Image_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -35,7 +35,7 @@ class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_Test
 
 		$view->stageCatPath = array( $catItem );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -47,21 +47,21 @@ class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
-		$mediaItems = $this->_object->getView()->get( 'imageItems', array() );
+		$output = $this->object->getBody();
+		$mediaItems = $this->object->getView()->get( 'imageItems', array() );
 
 		if( ( $mediaItem = reset( $mediaItems ) ) === false ) {
 			throw new Exception( 'No item found' );
@@ -75,12 +75,12 @@ class Client_Html_Catalog_Stage_Image_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

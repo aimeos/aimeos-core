@@ -7,20 +7,20 @@
 
 class Perf_ProductTest extends PHPUnit_Framework_TestCase
 {
-	private $_item;
-	private $_context;
+	private $item;
+	private $context;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext( 'unitperf' );
+		$this->context = TestHelper::getContext( 'unitperf' );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
-		if( ( $this->_item = reset( $result ) ) === false ) {
+		if( ( $this->item = reset( $result ) ) === false ) {
 			throw new Exception( 'No product item found' );
 		}
 	}
@@ -30,8 +30,8 @@ class Perf_ProductTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
-		$product = $productManager->getItem( $this->_item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$product = $productManager->getItem( $this->item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		$ids = array();
 		foreach( $product->getRefItems( 'product' ) as $subproduct ) {

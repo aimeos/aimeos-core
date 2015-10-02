@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base_product' => array(
 			'ALTER TABLE "mshop_order_base_product" CHANGE "label" "name" VARCHAR(255) NOT NULL',
 		),
@@ -43,9 +43,9 @@ class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,22 +54,22 @@ class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abst
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming order base product label', 0 ); $this->_status( '' );
+		$this->msg( 'Renaming order base product label', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) && $this->_schema->columnExists( $table, 'label' ) === true )
+			if( $this->schema->tableExists( $table ) && $this->schema->columnExists( $table, 'label' ) === true )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'renamed' );
+				$this->executeList( $stmtList );
+				$this->status( 'renamed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

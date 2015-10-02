@@ -16,11 +16,11 @@
  */
 class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_DB_Statement_Interface
 {
-	private $_conn = null;
-	private $_binds = array();
-	private $_sql = '';
-	private $_stmt = null;
-	private $_parts = array();
+	private $conn = null;
+	private $binds = array();
+	private $sql = '';
+	private $stmt = null;
+	private $parts = array();
 
 
 	/**
@@ -31,8 +31,8 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	 */
 	public function __construct( PDO $conn, $sql )
 	{
-		$this->_conn = $conn;
-		$this->_sql = $sql;
+		$this->conn = $conn;
+		$this->sql = $sql;
 
 		$parts = explode( '?', $sql );
 
@@ -48,7 +48,7 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 					}
 					$temp .= '?' . $part;
 				}
-				$this->_parts[] = $temp;
+				$this->parts[] = $temp;
 			}
 			while( ( $part = next( $parts ) ) !== false );
 		}
@@ -65,28 +65,28 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	public function bind( $position, $value, $type = MW_DB_Statement_Abstract::PARAM_STR )
 	{
 		if( is_null( $value ) ) {
-			$this->_binds[$position] = 'NULL'; return;
+			$this->binds[$position] = 'NULL'; return;
 		}
 
 		switch( $type )
 		{
 			case MW_DB_Statement_Abstract::PARAM_NULL:
-				$this->_binds[$position] = 'NULL'; break;
+				$this->binds[$position] = 'NULL'; break;
 			case MW_DB_Statement_Abstract::PARAM_BOOL:
-				$this->_binds[$position] = (int) (bool) $value; break;
+				$this->binds[$position] = (int) (bool) $value; break;
 			case MW_DB_Statement_Abstract::PARAM_INT:
-				$this->_binds[$position] = (int) $value; break;
+				$this->binds[$position] = (int) $value; break;
 			case MW_DB_Statement_Abstract::PARAM_FLOAT:
-				$this->_binds[$position] = (float) $value; break;
+				$this->binds[$position] = (float) $value; break;
 			case MW_DB_Statement_Abstract::PARAM_STR:
 				// PDO quote isn't available for ODBC driver
 				$value = str_replace( '\'', '\'\'', str_replace( '\\', '\\\\', $value ) );
-				$this->_binds[$position] = '\'' . $value . '\''; break;
+				$this->binds[$position] = '\'' . $value . '\''; break;
 			default:
-				$this->_binds[$position] = $value; break;
+				$this->binds[$position] = $value; break;
 		}
 
-		$this->_stmt = null;
+		$this->stmt = null;
 	}
 
 
@@ -98,14 +98,14 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	 */
 	public function execute()
 	{
-		if( count( $this->_binds ) !== count( $this->_parts ) - 1 ) {
-			throw new MW_DB_Exception( sprintf( 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"', count( $this->_binds ), $this->_sql ) );
+		if( count( $this->binds ) !== count( $this->parts ) - 1 ) {
+			throw new MW_DB_Exception( sprintf( 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"', count( $this->binds ), $this->sql ) );
 		}
 
-		$sql = $this->_buildSQL();
+		$sql = $this->buildSQL();
 
 		try {
-			return new MW_DB_Result_PDO( $this->_conn->query( $sql ) );
+			return new MW_DB_Result_PDO( $this->conn->query( $sql ) );
 		} catch ( PDOException $pe ) {
 			throw new MW_DB_Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
@@ -119,7 +119,7 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	 */
 	public function __toString()
 	{
-		return $this->_buildSQL();
+		return $this->buildSQL();
 	}
 
 
@@ -128,22 +128,22 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	 *
 	 * @return string SQL statement
 	 */
-	protected function _buildSQL()
+	protected function buildSQL()
 	{
-		if( $this->_stmt !== null ) {
-			return $this->_stmt;
+		if( $this->stmt !== null ) {
+			return $this->stmt;
 		}
 
 		$i = 1;
-		foreach( $this->_parts as $part )
+		foreach( $this->parts as $part )
 		{
-			$this->_stmt .= $part;
-			if( isset( $this->_binds[$i] ) ) {
-				$this->_stmt .= $this->_binds[$i];
+			$this->stmt .= $part;
+			if( isset( $this->binds[$i] ) ) {
+				$this->stmt .= $this->binds[$i];
 			}
 			$i++;
 		}
 
-		return $this->_stmt;
+		return $this->stmt;
 	}
 }

@@ -77,6 +77,6 @@ class Client_Html_Email_Account_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'email/account' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'email/account' );
 	}
 }

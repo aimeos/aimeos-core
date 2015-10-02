@@ -18,11 +18,11 @@ class MW_Container_Content_Text
 	extends MW_Container_Content_Abstract
 	implements MW_Container_Content_Interface
 {
-	private $_fh;
-	private $_data;
-	private $_position = 0;
-	private $_lineend;
-	private $_size;
+	private $fh;
+	private $data;
+	private $position = 0;
+	private $lineend;
+	private $size;
 
 
 	/**
@@ -46,17 +46,17 @@ class MW_Container_Content_Text
 			$name .= '.txt';
 		}
 
-		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
-			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
+		if( ( $this->fh = @fopen( $resource, 'a+' ) ) === false
+			&& ( $this->fh = fopen( $resource, 'r' ) ) === false
 		) {
 			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
 
-		$this->_lineend = $this->_getOption( 'text-lineend', chr( 10 ) );
-		$this->_size = $this->_getOption( 'text-maxsize', 0x100000 );
-		$this->_data = $this->_getData();
+		$this->lineend = $this->getOption( 'text-lineend', chr( 10 ) );
+		$this->size = $this->getOption( 'text-maxsize', 0x100000 );
+		$this->data = $this->getData();
 	}
 
 
@@ -67,11 +67,11 @@ class MW_Container_Content_Text
 	 */
 	public function close()
 	{
-		if( fflush( $this->_fh ) === false ) {
+		if( fflush( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
 		}
 
-		if( fclose( $this->_fh ) === false ) {
+		if( fclose( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
@@ -84,7 +84,7 @@ class MW_Container_Content_Text
 	 */
 	public function add( $data )
 	{
-		if( fwrite( $this->_fh, $data . $this->_lineend ) === false ) {
+		if( fwrite( $this->fh, $data . $this->lineend ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
@@ -97,7 +97,7 @@ class MW_Container_Content_Text
 	 */
 	function current()
 	{
-		return $this->_data;
+		return $this->data;
 	}
 
 
@@ -108,8 +108,8 @@ class MW_Container_Content_Text
 	 */
 	function key()
 	{
-		if( $this->_data !== null ) {
-			return $this->_position;
+		if( $this->data !== null ) {
+			return $this->position;
 		}
 
 		return null;
@@ -121,8 +121,8 @@ class MW_Container_Content_Text
 	 */
 	function next()
 	{
-		$this->_position++;
-		$this->_data = $this->_getData();
+		$this->position++;
+		$this->data = $this->getData();
 	}
 
 
@@ -131,12 +131,12 @@ class MW_Container_Content_Text
 	 */
 	function rewind()
 	{
-		if( rewind( $this->_fh ) === 0 ) {
+		if( rewind( $this->fh ) === 0 ) {
 			throw new MW_Container_Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
 		}
 
-		$this->_position = 0;
-		$this->_data = $this->_getData();
+		$this->position = 0;
+		$this->data = $this->getData();
 	}
 
 
@@ -147,7 +147,7 @@ class MW_Container_Content_Text
 	 */
 	function valid()
 	{
-		return ( $this->_data === null ? !feof( $this->_fh ) : true );
+		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}
 
 
@@ -156,9 +156,9 @@ class MW_Container_Content_Text
 	 *
 	 * @return string Data
 	 */
-	protected function _getData()
+	protected function getData()
 	{
-		if( ( $data = fgets( $this->_fh, $this->_size ) ) === false ) {
+		if( ( $data = fgets( $this->fh, $this->size ) ) === false ) {
 			return null;
 		}
 

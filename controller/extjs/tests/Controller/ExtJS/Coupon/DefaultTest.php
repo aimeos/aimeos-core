@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Coupon_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Coupon_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -76,12 +76,12 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'coupon.provider' => 'NewBestsellerProvider' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array( $saved['items']->{'coupon.id'}) );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'coupon.id'} );
@@ -98,7 +98,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->init( new stdClass() );
+		$actual = $this->object->init( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -106,14 +106,14 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->finish( new stdClass() );
+		$actual = $this->object->finish( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
 
 	public function testAbstractGetItemSchema()
 	{
-		$actual = $this->_object->getItemSchema();
+		$actual = $this->object->getItemSchema();
 		$expected = array(
 			'name' => 'Coupon',
 			'properties' => array(
@@ -181,7 +181,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAbstractGetSearchSchema()
 	{
-		$actual = $this->_object->getSearchSchema();
+		$actual = $this->object->getSearchSchema();
 		$expected = array(
 			'criteria' => array(
 				'coupon.id' => array(
@@ -288,6 +288,6 @@ class Controller_ExtJS_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->searchItems( $params );
+		$this->object->searchItems( $params );
 	}
 }

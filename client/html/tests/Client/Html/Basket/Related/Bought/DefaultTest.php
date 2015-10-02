@@ -6,8 +6,8 @@
 
 class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -18,11 +18,11 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Basket_Related_Bought_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Basket_Related_Bought_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -34,33 +34,33 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$view->relatedBasket = $controller->get();
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
 
 		$basket = $controller->get();
-		$basket->addProduct( $this->_getOrderProductItem( 'CNC' ) );
+		$basket->addProduct( $this->getOrderProductItem( 'CNC' ) );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$view->relatedBasket = $basket;
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertStringStartsWith( '<section class="basket-related-bought', $output );
 		$this->assertContains( 'Cafe Noire Expresso', $output );
@@ -70,14 +70,14 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
@@ -85,9 +85,9 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 	 * @param string $code
 	 * @return MShop_Order_Item_Base_Product_Interface
 	 */
-	protected function _getOrderProductItem( $code )
+	protected function getOrderProductItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'product' );
+		$manager = MShop_Factory::createManager( $this->context, 'product' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
@@ -96,7 +96,7 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
-		$manager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
+		$manager = MShop_Factory::createManager( $this->context, 'order/base/product' );
 		$orderItem = $manager->createItem();
 		$orderItem->copyFrom( $item );
 

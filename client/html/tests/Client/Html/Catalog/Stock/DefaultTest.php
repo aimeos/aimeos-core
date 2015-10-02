@@ -8,8 +8,8 @@
 
 class Client_Html_Catalog_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,11 +20,11 @@ class Client_Html_Catalog_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Stock_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Stock_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -36,37 +36,37 @@ class Client_Html_Catalog_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$productId = $this->_getProductItem()->getId();
+		$productId = $this->getProductItem()->getId();
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's_prodid' => $productId ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertRegExp( '/"' . $productId . '".*stock-high/', $output );
 	}
 
 
 	public function testGetBodyStockUnlimited()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's_prodid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertRegExp( '/"-1".*stock-unlimited/', $output );
 	}
 
@@ -74,20 +74,20 @@ class Client_Html_Catalog_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search );

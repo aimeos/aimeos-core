@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogAddCode extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_catalog" ADD "code" VARCHAR(32) NOT NULL DEFAULT \'\' AFTER "level"',
 		'UPDATE "mshop_catalog" SET "code" = "id" WHERE "code" LIKE \'\'',
 		'ALTER TABLE "mshop_catalog" ADD UNIQUE "unq_mscat_sid_code" ("siteid", "code" )',
@@ -42,9 +42,9 @@ class MW_Setup_Task_CatalogAddCode extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -52,19 +52,19 @@ class MW_Setup_Task_CatalogAddCode extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding code column to mshop_catalog', 0 );
+		$this->msg( 'Adding code column to mshop_catalog', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_catalog' ) === true
-			&& $this->_schema->columnExists( 'mshop_catalog', 'code' ) === false )
+		if( $this->schema->tableExists( 'mshop_catalog' ) === true
+			&& $this->schema->columnExists( 'mshop_catalog', 'code' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

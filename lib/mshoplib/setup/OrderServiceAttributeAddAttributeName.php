@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderServiceAttributeAddAttributeName extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_order_base_service_attr" ADD "name" VARCHAR(255) NOT NULL AFTER "value"',
 	);
 
@@ -40,9 +40,9 @@ class MW_Setup_Task_OrderServiceAttributeAddAttributeName extends MW_Setup_Task_
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -51,19 +51,19 @@ class MW_Setup_Task_OrderServiceAttributeAddAttributeName extends MW_Setup_Task_
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding name to order service attribute table', 0 );
+		$this->msg( 'Adding name to order service attribute table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_order_base_service_attr' ) === true
-			&& $this->_schema->columnExists( 'mshop_order_base_service_attr', 'name' ) === false )
+		if( $this->schema->tableExists( 'mshop_order_base_service_attr' ) === true
+			&& $this->schema->columnExists( 'mshop_order_base_service_attr', 'name' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

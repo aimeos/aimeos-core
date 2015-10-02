@@ -8,7 +8,7 @@
  */
 class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_conn = null;
+	private $conn = null;
 
 
 	/**
@@ -25,7 +25,7 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 
 
 		$dbm = TestHelper::getDBManager();
-		$this->_conn = $dbm->acquire();
+		$this->conn = $dbm->acquire();
 	}
 
 	/**
@@ -37,7 +37,7 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 	protected function tearDown()
 	{
 		$dbm = TestHelper::getDBManager();
-		$dbm->release( $this->_conn );
+		$dbm->release( $this->conn );
 	}
 
 	public function testGetOperators()
@@ -49,13 +49,13 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, '+', 'test' );
+		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '+', 'test' );
 		$this->assertEquals( '+', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, '-', 'test' );
+		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test' );
 		$this->assertEquals( 'test', $expr->getName() );
 	}
 
@@ -70,13 +70,13 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 			'test()' => 'testfunc($1,$2)',
 		);
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, '-', 'test' );
+		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test' );
 		$this->assertEquals( 'test DESC', $object->toString( $types ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, '+', 'test(1,2.1)' );
+		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '+', 'test(1,2.1)' );
 		$this->assertEquals( 'testfunc(1,2.1) ASC', $object->toString( $types, $translations ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, '-', 'test("a",2)' );
+		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test("a",2)' );
 		$this->assertEquals( 'testfunc(\'a\',2) DESC', $object->toString( $types, $translations ) );
 	}
 }

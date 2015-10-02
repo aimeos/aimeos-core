@@ -8,9 +8,9 @@
 
 class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_testdir;
+	private $object;
+	private $context;
+	private $testdir;
 
 
 	/**
@@ -21,15 +21,15 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
+		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
 
-		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
+		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
+			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Coupon_Code_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Coupon_Code_Default( $this->context );
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -61,7 +61,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -94,12 +94,12 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'coupon.code.code' => 'zzzz' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array( $saved['items']->{'coupon.code.id'}) );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'coupon.code.id'} );
@@ -116,7 +116,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->init( new stdClass() );
+		$actual = $this->object->init( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -124,14 +124,14 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->finish( new stdClass() );
+		$actual = $this->object->finish( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
 
 	public function testAbstractGetItemSchema()
 	{
-		$actual = $this->_object->getItemSchema();
+		$actual = $this->object->getItemSchema();
 		$expected = array(
 			'name' => 'Coupon_Code',
 			'properties' => array(
@@ -194,7 +194,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testAbstractGetSearchSchema()
 	{
-		$actual = $this->_object->getSearchSchema();
+		$actual = $this->object->getSearchSchema();
 		$expected = array(
 			'criteria' => array(
 				'coupon.code.code' => array(
@@ -241,7 +241,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServiceDescription()
 	{
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertArrayHasKey( 'Coupon_Code.uploadFile', $actual );
 		$this->assertArrayHasKey( 'Coupon_Code.importFile', $actual );
@@ -250,38 +250,38 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testUploadFile()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'controller/extjs/coupon/code/default/uploaddir', './tmp' );
 		$config->set( 'controller/extjs/coupon/code/default/enablecheck', false );
 
 		$cntlMock = $this->getMockBuilder( 'Controller_ExtJS_Admin_Job_Default' )
-			->setMethods( array( 'saveItems' ) )->setConstructorArgs( array( $this->_context ) )->getMock();
+			->setMethods( array( 'saveItems' ) )->setConstructorArgs( array( $this->context ) )->getMock();
 
 		$cntlMock->expects( $this->once() )->method( 'saveItems' );
 
 
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
-		$this->_context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
+		$this->context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
 
 		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_' . $name, $cntlMock );
 
 
 		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
+		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 		$_FILES['unittest'] = array(
 			'name' => 'coupon.zip',
-			'tmp_name' => $this->_testdir . DIRECTORY_SEPARATOR . 'coupon.zip',
+			'tmp_name' => $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip',
 			'error' => UPLOAD_ERR_OK,
 		);
 
 		$params = new stdClass();
-		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->couponid = '-1';
 
 
-		$result = $this->_object->uploadFile( $params );
+		$result = $this->object->uploadFile( $params );
 
 		$this->assertTrue( file_exists( $result['items'] ) );
 		unlink( $result['items'] );
@@ -291,27 +291,27 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testUploadFileExeptionNoFiles()
 	{
 		$params = new stdClass();
-		$params->items = basename( $this->_testdir . DIRECTORY_SEPARATOR . 'coupon.zip' );
+		$params->items = basename( $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip' );
 		$params->site = 'unittest';
 
 		$_FILES = array();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->uploadFile( $params );
+		$this->object->uploadFile( $params );
 	}
 
 
 	public function testImportFile()
 	{
 		$codeMock = $this->getMockBuilder( 'MShop_Coupon_Manager_Code_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$codeMock->expects( $this->exactly( 3 ) )->method( 'saveItem' );
 
 		$mock = $this->getMockBuilder( 'MShop_Coupon_Manager_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'getSubManager' ) )
 			->getMock();
 
@@ -319,20 +319,20 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends PHPUnit_Framework_TestCas
 			->will( $this->returnValue( $codeMock ) );
 
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
-		$this->_context->getConfig()->set( 'classes/coupon/manager/name', $name );
+		$this->context->getConfig()->set( 'classes/coupon/manager/name', $name );
 
 		MShop_Coupon_Manager_Factory::injectManager( 'MShop_Coupon_Manager_' . $name, $mock );
 
 
 		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
+		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 
 		$params = new stdClass();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
-		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
+		$params->site = $this->context->getLocale()->getSite()->getCode();
+		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
 		$params->couponid = '-1';
 
-		$this->_object->importFile( $params );
+		$this->object->importFile( $params );
 	}
 }

@@ -19,7 +19,7 @@ class MW_View_Helper_Price_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private static $_format;
+	private static $format;
 
 
 	/**
@@ -32,7 +32,7 @@ class MW_View_Helper_Price_Default
 	{
 		$html = '';
 		$enc = $this->encoder();
-		$format = $this->_getFormat();
+		$format = $this->getFormat();
 		$iface = 'MShop_Price_Item_Interface';
 
 		if( !is_array( $prices ) ) {
@@ -68,11 +68,11 @@ class MW_View_Helper_Price_Default
 	}
 
 
-	protected function _getFormat()
+	protected function getFormat()
 	{
-		if( !isset( self::$_format ) )
+		if( !isset( self::$format ) )
 		{
-			self::$_format = array(
+			self::$format = array(
 				/// Price quantity format with quantity (%1$s)
 				'quantity' => $this->translate( 'client/html', 'from %1$s' ),
 				/// Price format with price value (%1$s) and currency (%2$s)
@@ -88,6 +88,6 @@ class MW_View_Helper_Price_Default
 			);
 		}
 
-		return self::$_format;
+		return self::$format;
 	}
 }

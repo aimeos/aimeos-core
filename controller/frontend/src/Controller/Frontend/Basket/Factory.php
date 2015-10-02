@@ -142,7 +142,7 @@ class Controller_Frontend_Basket_Factory
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'basket' );
+		return self::addControllerDecorators( $context, $manager, 'basket' );
 	}
 
 }

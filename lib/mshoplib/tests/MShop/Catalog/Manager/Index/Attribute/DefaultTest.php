@@ -11,7 +11,7 @@
  */
 class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -22,7 +22,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MShop_Catalog_Manager_Index_Attribute_Default( TestHelper::getContext() );
+		$this->object = new MShop_Catalog_Manager_Index_Attribute_Default( TestHelper::getContext() );
 	}
 
 
@@ -34,13 +34,13 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
@@ -62,8 +62,8 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 		}
 
 
-		$search = $this->_object->createSearch( true );
-		$result = $this->_object->aggregate( $search, 'catalog.index.attribute.id' );
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'catalog.index.attribute.id' );
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -73,7 +73,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -99,21 +99,21 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 		$product->setId( null );
 		$product->setCode( 'ModifiedCNC' );
 		$productManager->saveItem( $product );
-		$this->_object->saveItem( $product );
+		$this->object->saveItem( $product );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 
-		$this->_object->deleteItem( $product->getId() );
+		$this->object->deleteItem( $product->getId() );
 		$productManager->deleteItem( $product->getId() );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
-		$result2 = $this->_object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search );
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -124,7 +124,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
@@ -161,29 +161,29 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 		}
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrWidthItem->getId() ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrLengthItem->getId() ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 		$this->assertEquals( 3, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.attribute.id', null ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
 		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
 		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		if( ( $product = reset( $result ) ) === false ) {
 			throw new Exception( 'No product found' );
@@ -196,14 +196,14 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends PHPUnit_Framewor
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 		$this->assertEquals( 4, count( $result ) );
 	}
 
 
 	public function testCleanupIndex()
 	{
-		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
 	}
 
 }

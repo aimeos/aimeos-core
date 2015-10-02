@@ -18,7 +18,7 @@ class MShop_Product_Item_Stock_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Product_Item_Stock_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the stock item object with the given values
@@ -27,7 +27,7 @@ class MShop_Product_Item_Stock_Default
 	{
 		parent::__construct( 'product.stock.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -38,7 +38,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->_values['prodid'] ) ? (int) $this->_values['prodid'] : null );
+		return ( isset( $this->values['prodid'] ) ? (int) $this->values['prodid'] : null );
 	}
 
 
@@ -51,7 +51,7 @@ class MShop_Product_Item_Stock_Default
 	{
 		if( $prodid == $this->getProductId() ) { return; }
 
-		$this->_values['prodid'] = (int) $prodid;
+		$this->values['prodid'] = (int) $prodid;
 		$this->setModified();
 	}
 
@@ -63,7 +63,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function getWarehouseId()
 	{
-		return ( isset( $this->_values['warehouseid'] ) ? (int) $this->_values['warehouseid'] : null );
+		return ( isset( $this->values['warehouseid'] ) ? (int) $this->values['warehouseid'] : null );
 	}
 
 
@@ -80,7 +80,7 @@ class MShop_Product_Item_Stock_Default
 			$warehouseid = (int) $warehouseid;
 		}
 
-		$this->_values['warehouseid'] = $warehouseid;
+		$this->values['warehouseid'] = $warehouseid;
 		$this->setModified();
 	}
 
@@ -92,7 +92,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function getStocklevel()
 	{
-		return ( isset( $this->_values['stocklevel'] ) ? (int) $this->_values['stocklevel'] : null );
+		return ( isset( $this->values['stocklevel'] ) ? (int) $this->values['stocklevel'] : null );
 	}
 
 
@@ -109,7 +109,7 @@ class MShop_Product_Item_Stock_Default
 			$stocklevel = (int) $stocklevel;
 		}
 
-		$this->_values['stocklevel'] = $stocklevel;
+		$this->values['stocklevel'] = $stocklevel;
 		$this->setModified();
 	}
 
@@ -121,7 +121,7 @@ class MShop_Product_Item_Stock_Default
 	 */
 	public function getDateBack()
 	{
-		return ( isset( $this->_values['backdate'] ) ? (string) $this->_values['backdate'] : null );
+		return ( isset( $this->values['backdate'] ) ? (string) $this->values['backdate'] : null );
 	}
 
 
@@ -134,13 +134,13 @@ class MShop_Product_Item_Stock_Default
 	{
 		if( $backdate === $this->getDateBack() ) { return; }
 
-		$this->_checkDateFormat( $backdate );
+		$this->checkDateFormat( $backdate );
 
 		if( $backdate !== null ) {
 			$backdate = (string) $backdate;
 		}
 
-		$this->_values['backdate'] = $backdate;
+		$this->values['backdate'] = $backdate;
 		$this->setModified();
 	}
 

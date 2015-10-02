@@ -77,7 +77,7 @@ class Client_Html_Account_History_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'account/history' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'account/history' );
 	}
 
 }

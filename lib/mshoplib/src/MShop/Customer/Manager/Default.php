@@ -18,7 +18,7 @@ class MShop_Customer_Manager_Default
 	extends MShop_Customer_Manager_Abstract
 	implements MShop_Customer_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
@@ -234,7 +234,7 @@ class MShop_Customer_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -269,7 +269,7 @@ class MShop_Customer_Manager_Default
 		 */
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
 	}
 
 
@@ -305,7 +305,7 @@ class MShop_Customer_Manager_Default
 		 * @see mshop/customer/manager/default/item/count
 		 */
 		$path = 'mshop/customer/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -324,10 +324,10 @@ class MShop_Customer_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -400,7 +400,7 @@ class MShop_Customer_Manager_Default
 				$path = 'mshop/customer/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
@@ -473,7 +473,7 @@ class MShop_Customer_Manager_Default
 				 * @see mshop/customer/manager/default/item/count
 				 */
 				$path = 'mshop/customer/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -497,10 +497,10 @@ class MShop_Customer_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -621,7 +621,7 @@ class MShop_Customer_Manager_Default
 			throw $e;
 		}
 
-		return $this->_buildItems( $map, $ref, 'customer' );
+		return $this->buildItems( $map, $ref, 'customer' );
 	}
 
 

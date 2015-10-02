@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderAddProductAttributeName extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_order_base_product_attr" ADD "name" VARCHAR(255) NOT NULL AFTER "value"',
 	);
 
@@ -41,11 +41,11 @@ class MW_Setup_Task_OrderAddProductAttributeName extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Adding name column to order product attribute table', 0 ); $this->_status( '' );
+		$this->msg( 'Adding name column to order product attribute table', 0 ); $this->status( '' );
 
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -53,20 +53,20 @@ class MW_Setup_Task_OrderAddProductAttributeName extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
 		$table = 'mshop_order_base_product_attr';
-		$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-		if( $this->_schema->tableExists( $table ) === true
-			&& $this->_schema->columnExists( $table, 'name' ) === false )
+		if( $this->schema->tableExists( $table ) === true
+			&& $this->schema->columnExists( $table, 'name' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

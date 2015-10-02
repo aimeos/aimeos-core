@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 * @see controller/jobs/order/email/delivery/decorators/excludes
 		 * @see controller/jobs/order/email/delivery/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/email/delivery' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/email/delivery' );
 	}
 }

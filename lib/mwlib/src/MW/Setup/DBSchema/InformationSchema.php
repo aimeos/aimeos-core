@@ -16,8 +16,8 @@
  */
 abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_Interface
 {
-	private $_conn;
-	private $_dbname = '';
+	private $conn;
+	private $dbname = '';
 
 
 	/**
@@ -28,8 +28,8 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 */
 	public function __construct( MW_DB_Connection_Interface $conn, $dbname )
 	{
-		$this->_conn = $conn;
-		$this->_dbname = $dbname;
+		$this->conn = $conn;
+		$this->dbname = $dbname;
 	}
 
 
@@ -49,8 +49,8 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 				AND TABLE_NAME = ?
 		";
 
-		$stmt = $this->_conn->create( $sql );
-		$stmt->bind( 1, $this->_dbname );
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$result = $stmt->execute();
 
@@ -79,8 +79,8 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 				AND CONSTRAINT_NAME = ?
 		";
 
-		$stmt = $this->_conn->create( $sql );
-		$stmt->bind( 1, $this->_dbname );
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $constraintname );
 		$result = $stmt->execute();
@@ -110,8 +110,8 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->_conn->create( $sql );
-		$stmt->bind( 1, $this->_dbname );
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
 		$result = $stmt->execute();
@@ -141,8 +141,8 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->_conn->create( $sql );
-		$stmt->bind( 1, $this->_dbname );
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
 		$result = $stmt->execute();
@@ -151,7 +151,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 			throw new MW_Setup_Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $tablename, $columnname ) );
 		}
 
-		return $this->_createColumnItem( $record );
+		return $this->createColumnItem( $record );
 	}
 	
 	
@@ -162,7 +162,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 */
 	public function getDBName()
 	{
-		return $this->_dbname;
+		return $this->dbname;
 	}
 
 	/**
@@ -172,7 +172,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
 	 * @return MW_Setup_DBSchema_Column_Interface Column item
 	 */
-	protected function _createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = array() )
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 		return new MW_Setup_DBSchema_Column_Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
@@ -185,9 +185,9 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 *
 	 * @return MW_DB_Connection_Interface Database connection
 	 */
-	protected function _getConnection()
+	protected function getConnection()
 	{
-		return $this->_conn;
+		return $this->conn;
 	}
 
 }

@@ -87,6 +87,6 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 * @see controller/jobs/service/delivery/process/decorators/global
 		 * @deprecated Use controller/jobs/order/service/delivery/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'service/delivery/process' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'service/delivery/process' );
 	}
 }

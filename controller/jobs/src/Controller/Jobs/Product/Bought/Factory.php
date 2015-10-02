@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Bought_Factory
 		 * @see controller/jobs/product/bought/decorators/excludes
 		 * @see controller/jobs/product/bought/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/bought' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/bought' );
 	}
 }

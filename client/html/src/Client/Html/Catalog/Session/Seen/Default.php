@@ -51,9 +51,9 @@ class Client_Html_Catalog_Session_Seen_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/session/seen/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/session/seen/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
 
 	/**
@@ -66,7 +66,7 @@ class Client_Html_Catalog_Session_Seen_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 
 		/** client/html/catalog/session/seen
@@ -80,14 +80,14 @@ class Client_Html_Catalog_Session_Seen_Default
 		 * @see client/html/catalog#session
 		 */
 		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
-		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-body', $config );
+		$key = $this->getParamHash( array(), $uid . ':catalog:session-seen-body', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$output = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->seenBody = $output;
@@ -115,7 +115,7 @@ class Client_Html_Catalog_Session_Seen_Default
 			$tplconf = 'client/html/catalog/session/seen/default/template-body';
 			$default = 'catalog/session/seen-body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/seen/cache', $cached );
@@ -136,18 +136,18 @@ class Client_Html_Catalog_Session_Seen_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 
 		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
-		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-header', $config );
+		$key = $this->getParamHash( array(), $uid . ':catalog:session-seen-header', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$output = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->seenHeader = $output;
@@ -176,7 +176,7 @@ class Client_Html_Catalog_Session_Seen_Default
 			$tplconf = 'client/html/catalog/session/seen/default/template-header';
 			$default = 'catalog/session/seen-header-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/seen/cache', $cached );
@@ -270,7 +270,7 @@ class Client_Html_Catalog_Session_Seen_Default
 		 * @see client/html/catalog/session/seen/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/session/seen/' . $type, $name );
+		return $this->createSubClient( 'catalog/session/seen/' . $type, $name );
 	}
 
 
@@ -279,9 +279,9 @@ class Client_Html_Catalog_Session_Seen_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -293,18 +293,18 @@ class Client_Html_Catalog_Session_Seen_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$session = $this->_getContext()->getSession();
+			$session = $this->getContext()->getSession();
 			$lastSeen = $session->get( 'aimeos/catalog/session/seen/list', array() );
 
 			$view->seenItems = array_reverse( $lastSeen );
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

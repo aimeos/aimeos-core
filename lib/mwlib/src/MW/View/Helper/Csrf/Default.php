@@ -18,9 +18,9 @@ class MW_View_Helper_Csrf_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_name;
-	private $_value;
-	private $_formfield = '';
+	private $name;
+	private $value;
+	private $formfield = '';
 
 
 	/**
@@ -34,11 +34,11 @@ class MW_View_Helper_Csrf_Default
 	{
 		parent::__construct( $view );
 
-		$this->_name = $name;
-		$this->_value = $value;
+		$this->name = $name;
+		$this->value = $value;
 
 		if( $value != '' ) {
-			$this->_formfield = '<input class="csrf-token" type="hidden" name="' . $this->_name . '" value="' . $this->_value . '" />';
+			$this->formfield = '<input class="csrf-token" type="hidden" name="' . $this->name . '" value="' . $this->value . '" />';
 		}
 	}
 
@@ -61,7 +61,7 @@ class MW_View_Helper_Csrf_Default
 	 */
 	public function name()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -72,7 +72,7 @@ class MW_View_Helper_Csrf_Default
 	 */
 	public function value()
 	{
-		return $this->_value;
+		return $this->value;
 	}
 
 
@@ -83,6 +83,6 @@ class MW_View_Helper_Csrf_Default
 	 */
 	public function formfield()
 	{
-		return $this->_formfield;
+		return $this->formfield;
 	}
 }

@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Delivery_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Delivery_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,14 +35,14 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
@@ -50,11 +50,11 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 		$view->standardStepActive = 'delivery';
 		$view->standardSteps = array( 'before', 'delivery', 'after' );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="checkout-standard-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryServices ) );
@@ -65,9 +65,9 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testGetBodyOtherStep()
 	{
 		$view = TestHelper::getView();
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertEquals( '', $output );
 	}
 
@@ -75,26 +75,26 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessExistingId()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
 		$result = $serviceManager->searchItems( $search );
@@ -111,11 +111,11 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
 		$this->assertEquals( 'unitcode', $basket->getService( 'delivery' )->getCode() );
 	}
 
@@ -128,16 +128,16 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessNotExistingAttributes()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
 		$result = $serviceManager->searchItems( $search );
@@ -159,9 +159,9 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends PHPUnit_Framewo
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->process();
+		$this->object->process();
 	}
 }

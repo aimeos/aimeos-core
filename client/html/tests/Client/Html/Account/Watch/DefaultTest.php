@@ -7,8 +7,8 @@
 
 class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Account_Watch_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Account_Watch_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,20 +35,20 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos account-watch">', $output );
 	}
 
@@ -56,28 +56,28 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessAddItem()
 	{
-		$this->_context->setUserId( '123' );
+		$this->context->setUserId( '123' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'wat_action' => 'add',
 			'wat_id' => 321,
@@ -90,16 +90,16 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Default' )
 			->setMethods( array( 'saveItem', 'moveItem' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Default' )
 			->setMethods( array( 'getSubManager' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
-		$this->_context->getConfig()->set( 'classes/customer/manager/name', $name );
+		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
 		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
 
@@ -111,15 +111,15 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 		$listManagerStub->expects( $this->once() )->method( 'moveItem' );
 
 
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessEditItem()
 	{
-		$this->_context->setUserId( '123' );
+		$this->context->setUserId( '123' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'wat_action' => 'edit',
 			'wat_id' => 321,
@@ -131,16 +131,16 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Default' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Default' )
 			->setMethods( array( 'getSubManager' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
-		$this->_context->getConfig()->set( 'classes/customer/manager/name', $name );
+		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
 		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
 
@@ -157,15 +157,15 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 		$listManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessDeleteItem()
 	{
-		$this->_context->setUserId( '123' );
+		$this->context->setUserId( '123' );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'wat_action' => 'delete',
 			'wat_id' => 321,
@@ -178,16 +178,16 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Default' )
 			->setMethods( array( 'deleteItems' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Default' )
 			->setMethods( array( 'getSubManager' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
-		$this->_context->getConfig()->set( 'classes/customer/manager/name', $name );
+		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
 		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
 
@@ -198,6 +198,6 @@ class Client_Html_Account_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 		$listManagerStub->expects( $this->once() )->method( 'deleteItems' );
 
 
-		$this->_object->process();
+		$this->object->process();
 	}
 }

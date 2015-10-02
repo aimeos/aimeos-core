@@ -142,6 +142,6 @@ class Controller_ExtJS_Service_List_Type_Factory
 		 * @see controller/extjs/service/list/type/decorators/excludes
 		 * @see controller/extjs/service/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'service/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'service/list/type' );
 	}
 }

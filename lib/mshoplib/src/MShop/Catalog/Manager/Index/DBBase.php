@@ -27,7 +27,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	{
 		parent::__construct( $context );
 
-		$this->_setResourceName( 'db-product' );
+		$this->setResourceName( 'db-product' );
 	}
 
 
@@ -38,7 +38,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function cleanup( array $siteids )
 	{
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
 	}
@@ -51,7 +51,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function createItem()
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createItem();
+		return MShop_Factory::createManager( $this->getContext(), 'product' )->createItem();
 	}
 
 
@@ -63,7 +63,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function createSearch( $default = false )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createSearch( $default );
+		return MShop_Factory::createManager( $this->getContext(), 'product' )->createSearch( $default );
 	}
 
 
@@ -75,7 +75,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->getItem( $id, $ref );
+		return MShop_Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref );
 	}
 
 
@@ -87,7 +87,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'product' )->getSearchAttributes( $withsub );
+		return MShop_Factory::createManager( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
 	}
 
 
@@ -98,7 +98,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
 	}
@@ -122,21 +122,21 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @param string $path Configuration path to the SQL statement to execute
 	 */
-	protected function _doCleanupIndex( $timestamp, $path )
+	protected function doCleanupIndex( $timestamp, $path )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
 
 		$this->begin();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $timestamp ); // ctime
 			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -154,7 +154,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 		$this->commit();
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -166,15 +166,15 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * @param array $ids List of product IDs
 	 * @param string $path Configuration path to the SQL statement to execute
 	 */
-	protected function _doDeleteItems( array $ids, $path )
+	protected function doDeleteItems( array $ids, $path )
 	{
 		if( empty( $ids ) ) { return; }
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
 
-		$sql = $this->_getContext()->getConfig()->get( $path, $path );
+		$sql = $this->getContext()->getConfig()->get( $path, $path );
 
 		$this->deleteItemsBase( $ids, $sql, true, 'prodid' );
 	}
@@ -185,13 +185,13 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute
 	 */
-	protected function _doOptimize( $path )
+	protected function doOptimize( $path )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -208,7 +208,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 			throw $e;
 		}
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -224,14 +224,14 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
 	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
 	 */
-	protected function _doSearchItems( MW_Common_Criteria_Interface $search,
+	protected function doSearchItems( MW_Common_Criteria_Interface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -275,5 +275,5 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 *
 	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
-	abstract protected function _getSubManagers();
+	abstract protected function getSubManagers();
 }

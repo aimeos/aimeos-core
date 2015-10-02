@@ -150,6 +150,6 @@ class Controller_Jobs_Catalog_Index_Optimize_Factory
 		 * @see controller/jobs/catalog/index/optimize/decorators/excludes
 		 * @see controller/jobs/catalog/index/optimize/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/optimize' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/optimize' );
 	}
 }

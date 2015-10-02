@@ -100,6 +100,6 @@ class Client_Html_Checkout_Confirm_Order_Coupon_Default
 		 * @see client/html/checkout/confirm/order/coupon/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/confirm/order/coupon/' . $type, $name );
+		return $this->createSubClient( 'checkout/confirm/order/coupon/' . $type, $name );
 	}
 }

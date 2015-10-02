@@ -11,9 +11,9 @@
  */
 class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_editor = '';
+	private $object;
+	private $context;
+	private $editor = '';
 
 
 	/**
@@ -24,10 +24,10 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_editor = $this->_context->getEditor();
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context, 'Default' );
-		$this->_object = $manager->getSubManager( 'list', 'Default' );
+		$this->context = TestHelper::getContext();
+		$this->editor = $this->context->getEditor();
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context, 'Default' );
+		$this->object = $manager->getSubManager( 'list', 'Default' );
 	}
 
 
@@ -39,26 +39,26 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_context );
+		unset( $this->object, $this->context );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testAggregate()
 	{
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'customer.list.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->_object->aggregate( $search, 'customer.list.domain' );
+		$result = $this->object->aggregate( $search, 'customer.list.domain' );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -68,30 +68,30 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $item );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No item found' );
@@ -99,15 +99,15 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$item->setId( null );
 		$item->setDomain( 'unittest' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setDomain( 'unittest2' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -121,11 +121,11 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -140,18 +140,18 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testMoveItemLastToFront()
 	{
-		$listItems = $this->_getListItems();
+		$listItems = $this->getListItems();
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
@@ -162,12 +162,12 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No last customer list item' );
 		}
 
-		$this->_object->moveItem( $last->getId(), $first->getId() );
+		$this->object->moveItem( $last->getId(), $first->getId() );
 
-		$newFirst = $this->_object->getItem( $last->getId() );
-		$newSecond = $this->_object->getItem( $first->getId() );
+		$newFirst = $this->object->getItem( $last->getId() );
+		$newSecond = $this->object->getItem( $first->getId() );
 
-		$this->_object->moveItem( $last->getId() );
+		$this->object->moveItem( $last->getId() );
 
 		$this->assertEquals( 0, $newFirst->getPosition() );
 		$this->assertEquals( 1, $newSecond->getPosition() );
@@ -176,7 +176,7 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testMoveItemFirstToLast()
 	{
-		$listItems = $this->_getListItems();
+		$listItems = $this->getListItems();
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
@@ -191,12 +191,12 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No last customer list item' );
 		}
 
-		$this->_object->moveItem( $first->getId() );
+		$this->object->moveItem( $first->getId() );
 
-		$newBefore = $this->_object->getItem( $last->getId() );
-		$newLast = $this->_object->getItem( $first->getId() );
+		$newBefore = $this->object->getItem( $last->getId() );
+		$newLast = $this->object->getItem( $first->getId() );
 
-		$this->_object->moveItem( $first->getId(), $second->getId() );
+		$this->object->moveItem( $first->getId(), $second->getId() );
 
 		$this->assertEquals( $last->getPosition() - 1, $newBefore->getPosition() );
 		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
@@ -205,7 +205,7 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testMoveItemFirstUp()
 	{
-		$listItems = $this->_getListItems();
+		$listItems = $this->getListItems();
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
@@ -220,12 +220,12 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No last customer list item' );
 		}
 
-		$this->_object->moveItem( $first->getId(), $last->getId() );
+		$this->object->moveItem( $first->getId(), $last->getId() );
 
-		$newLast = $this->_object->getItem( $last->getId() );
-		$newUp = $this->_object->getItem( $first->getId() );
+		$newLast = $this->object->getItem( $last->getId() );
+		$newUp = $this->object->getItem( $first->getId() );
 
-		$this->_object->moveItem( $first->getId(), $second->getId() );
+		$this->object->moveItem( $first->getId(), $second->getId() );
 
 		$this->assertEquals( $last->getPosition() - 1, $newUp->getPosition() );
 		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
@@ -235,7 +235,7 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.list.id', null );
@@ -251,7 +251,7 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'customer.list.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
 		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
@@ -261,11 +261,11 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 2 );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -274,35 +274,35 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		//search without base criteria
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.list.editor', $this->_editor ) );
-		$result = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.list.editor', $this->editor ) );
+		$result = $this->object->searchItems( $search );
 		$this->assertEquals( 6, count( $result ) );
 
 		//search with base criteria
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'customer.list.editor', $this->_editor ),
+			$search->compare( '==', 'customer.list.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 6, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 6, count( $this->object->searchItems( $search ) ) );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
-	protected function _getListItems()
+	protected function getListItems()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context, 'Default' );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context, 'Default' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );
@@ -314,16 +314,16 @@ class MShop_Customer_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No customer item found' );
 		}
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$expr = array(
 			$search->compare( '==', 'customer.list.parentid', $item->getId() ),
 			$search->compare( '==', 'customer.list.domain', 'text' ),
-			$search->compare( '==', 'customer.list.editor', $this->_editor ),
+			$search->compare( '==', 'customer.list.editor', $this->editor ),
 			$search->compare( '==', 'customer.list.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'customer.list.position' ) ) );
 
-		return $this->_object->searchItems( $search );
+		return $this->object->searchItems( $search );
 	}
 }

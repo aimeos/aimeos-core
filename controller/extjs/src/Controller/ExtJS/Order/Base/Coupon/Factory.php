@@ -136,6 +136,6 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		 * @see controller/extjs/order/base/coupon/decorators/excludes
 		 * @see controller/extjs/order/base/coupon/decorators/global
 		*/
-		return self::_addControllerDecorators( $context, $controller, 'order/base/coupon' );
+		return self::addControllerDecorators( $context, $controller, 'order/base/coupon' );
 	}
 }

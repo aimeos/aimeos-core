@@ -151,7 +151,7 @@ class MShop_Supplier_Manager_Factory
 		 * @see mshop/supplier/manager/decorators/excludes
 		 * @see mshop/supplier/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'supplier' );
+		return self::addManagerDecorators( $context, $manager, 'supplier' );
 	}
 
 }

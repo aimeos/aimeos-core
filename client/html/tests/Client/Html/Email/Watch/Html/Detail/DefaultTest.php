@@ -7,11 +7,11 @@
 
 class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private static $_productItems;
-	private static $_customerItem;
-	private $_object;
-	private $_context;
-	private $_emailMock;
+	private static $productItems;
+	private static $customerItem;
+	private $object;
+	private $context;
+	private $emailMock;
 
 
 	public static function setUpBeforeClass()
@@ -24,7 +24,7 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $manager->searchItems( $search );
 
-		if( ( self::$_customerItem = reset( $result ) ) === false ) {
+		if( ( self::$customerItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No customer found' );
 		}
 
@@ -37,8 +37,8 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_
 		{
 			$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-			self::$_productItems[$id]['price'] = reset( $prices );
-			self::$_productItems[$id]['item'] = $product;
+			self::$productItems[$id]['price'] = reset( $prices );
+			self::$productItems[$id]['item'] = $product;
 		}
 	}
 
@@ -51,18 +51,18 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = TestHelper::getContext();
+		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Email_Watch_Html_Detail_Default( $this->_context, $paths );
+		$this->object = new Client_Html_Email_Watch_Html_Detail_Default( $this->context, $paths );
 
 		$view = TestHelper::getView();
-		$view->extProducts = self::$_productItems;
-		$view->extAddressItem = self::$_customerItem->getPaymentAddress();
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
+		$view->extProducts = self::$productItems;
+		$view->extAddressItem = self::$customerItem->getPaymentAddress();
+		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->emailMock ) );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -74,20 +74,20 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertStringStartsWith( '<div class="common-summary-detail common-summary container content-block">', $output );
 		$this->assertContains( 'Cafe Noire Cappuccino', $output );
@@ -98,19 +98,19 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends PHPUnit_Framework_
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

@@ -16,9 +16,9 @@
  */
 class MW_Template_Base implements MW_Template_Interface
 {
-	private $_begin;
-	private $_end;
-	private $_text;
+	private $begin;
+	private $end;
+	private $text;
 
 
 	/**
@@ -30,9 +30,9 @@ class MW_Template_Base implements MW_Template_Interface
 	 */
 	public function __construct( $text, $begin = '[$]', $end = '[/$]' )
 	{
-		$this->_begin = $begin;
-		$this->_end = $end;
-		$this->_text = $text;
+		$this->begin = $begin;
+		$this->end = $end;
+		$this->text = $text;
 	}
 
 
@@ -48,11 +48,11 @@ class MW_Template_Base implements MW_Template_Interface
 
 		foreach( (array) $name as $item )
 		{
-			$marray[] = str_replace( '$', $item, $this->_begin );
-			$marray[] = str_replace( '$', $item, $this->_end );
+			$marray[] = str_replace( '$', $item, $this->begin );
+			$marray[] = str_replace( '$', $item, $this->end );
 		}
 
-		$this->_text = str_replace( $marray, '', $this->_text );
+		$this->text = str_replace( $marray, '', $this->text );
 
 		return $this;
 	}
@@ -86,31 +86,31 @@ class MW_Template_Base implements MW_Template_Interface
 	 */
 	public function get( $name )
 	{
-		$mbegin = str_replace( '$', $name, $this->_begin );
-		$mend = str_replace( '$', $name, $this->_end );
+		$mbegin = str_replace( '$', $name, $this->begin );
+		$mend = str_replace( '$', $name, $this->end );
 
-		if( ( $begin = strpos( $this->_text, $mbegin ) ) === false )
+		if( ( $begin = strpos( $this->text, $mbegin ) ) === false )
 		{
 			throw new MW_Template_Exception( sprintf( 'Error finding begin of marker "%1$s" in template', $name ) );
 		}
 
 		$begin += strlen( $mbegin );
 
-		if( ( $end = strpos( $this->_text, $mend, $begin ) ) === false )
+		if( ( $end = strpos( $this->text, $mend, $begin ) ) === false )
 		{
 			throw new MW_Template_Exception( sprintf( 'Error finding end of marker "%1$s" in template', $name ) );
 		}
 
-		return new self( substr( $this->_text, $begin, $end - $begin ), $this->_begin, $this->_end );
+		return new self( substr( $this->text, $begin, $end - $begin ), $this->begin, $this->end );
 	}
 
 
 	public function getMarkerNames()
 	{
 		$matches = array();
-		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->_begin, '/' ) ) . '/U';
+		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
 
-		if( preg_match_all( $regex, $this->_text, $matches ) === false ) {
+		if( preg_match_all( $regex, $this->text, $matches ) === false ) {
 			throw new MW_Template_Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
 		}
 
@@ -127,7 +127,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 */
 	public function replace( $old, $new )
 	{
-		$this->_text = str_replace( $old, $new, $this->_text );
+		$this->text = str_replace( $old, $new, $this->text );
 
 		return $this;
 	}
@@ -144,17 +144,17 @@ class MW_Template_Base implements MW_Template_Interface
 		foreach( $substitute as $marker => $value )
 		{
 			$begin = 0;
-			$mbegin = (string) str_replace( '$', $marker, $this->_begin );
-			$mend = (string) str_replace( '$', $marker, $this->_end );
+			$mbegin = (string) str_replace( '$', $marker, $this->begin );
+			$mend = (string) str_replace( '$', $marker, $this->end );
 
-			while( ( $begin = strpos( $this->_text, $mbegin, $begin ) ) !== false )
+			while( ( $begin = strpos( $this->text, $mbegin, $begin ) ) !== false )
 			{
-				if( ( $end = strpos( $this->_text, $mend, $begin + strlen( $mbegin ) ) ) === false )
+				if( ( $end = strpos( $this->text, $mend, $begin + strlen( $mbegin ) ) ) === false )
 				{
 					throw new MW_Template_Exception( sprintf( 'Error finding end of marker "%1$s" in template', $marker ) );
 				}
 
-				$this->_text = substr_replace( $this->_text, $value, $begin, $end + strlen( $mend ) - $begin );
+				$this->text = substr_replace( $this->text, $value, $begin, $end + strlen( $mend ) - $begin );
 			}
 		}
 
@@ -171,13 +171,13 @@ class MW_Template_Base implements MW_Template_Interface
 	public function str( $remove = true )
 	{
 		if( $remove === false ) {
-			return $this->_text;
+			return $this->text;
 		}
 
 		$matches = array();
-		$text = $this->_text;
+		$text = $this->text;
 
-		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->_begin, '/' ) ) . '/U';
+		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
 		if( preg_match_all( $regex, $text, $matches ) === false ) {
 			throw new MW_Template_Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
 		}
@@ -185,8 +185,8 @@ class MW_Template_Base implements MW_Template_Interface
 		$matches = array_unique( $matches[1] );
 		foreach( $matches as $match )
 		{
-			$begin = str_replace( '\$', $match, preg_quote( $this->_begin, '/' ) );
-			$end = str_replace( '\$', $match, preg_quote( $this->_end, '/' ) );
+			$begin = str_replace( '\$', $match, preg_quote( $this->begin, '/' ) );
+			$end = str_replace( '\$', $match, preg_quote( $this->end, '/' ) );
 
 			$regex = '/' . $begin . '.*' . $end . '/smU';
 			if( ( $text = preg_replace( $regex, '', $text ) ) === null ) {

@@ -25,7 +25,7 @@ class Controller_Jobs_Admin_Log_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Log cleanup' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Log cleanup' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Admin_Log_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Removes the old log entries from the database and archives them (optional)' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Removes the old log entries from the database and archives them (optional)' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Admin_Log_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$container = null;
 

@@ -17,8 +17,8 @@
  */
 class MW_Logger_Errorlog extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_loglevel;
-	private $_facilities;
+	private $loglevel;
+	private $facilities;
 
 
 	/**
@@ -29,8 +29,8 @@ class MW_Logger_Errorlog extends MW_Logger_Abstract implements MW_Logger_Interfa
 	 */
 	public function __construct( $loglevel = MW_Logger_Abstract::ERR, array $facilities = null )
 	{
-		$this->_loglevel = $loglevel;
-		$this->_facilities = $facilities;
+		$this->loglevel = $loglevel;
+		$this->facilities = $facilities;
 	}
 
 
@@ -45,8 +45,8 @@ class MW_Logger_Errorlog extends MW_Logger_Abstract implements MW_Logger_Interfa
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel
-			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
+		if( $priority <= $this->loglevel
+			&& ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
 			switch( $priority )
 			{

@@ -18,9 +18,9 @@ class MAdmin_Cache_Manager_Default
 	extends MAdmin_Common_Manager_Abstract
 	implements MAdmin_Cache_Manager_Interface
 {
-	private $_object;
+	private $object;
 
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'cache.id' => array(
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
@@ -71,7 +71,7 @@ class MAdmin_Cache_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-cache' );
+		$this->setResourceName( 'db-cache' );
 	}
 
 
@@ -82,7 +82,7 @@ class MAdmin_Cache_Manager_Default
 	 */
 	public function getCache()
 	{
-		if( !isset( $this->_object ) )
+		if( !isset( $this->object ) )
 		{
 			/** madmin/cache/manager/default/deletebytag
 			 * Deletes the items from the database matched by the given tags
@@ -163,7 +163,7 @@ class MAdmin_Cache_Manager_Default
 			 * @see madmin/cache/manager/default/count
 			 */
 
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 
 			$name = $config->get( 'resource/db/adapter' );
@@ -183,8 +183,8 @@ class MAdmin_Cache_Manager_Default
 			 */
 			$name = $config->get( 'classes/cache/name', $name );
 			$config = array(
-				'search' => $this->_searchConfig,
-				'dbname' => $this->_getResourceName(),
+				'search' => $this->searchConfig,
+				'dbname' => $this->getResourceName(),
 				'siteid' => $context->getLocale()->getSiteId(),
 				'sql' => array(
 					'delete' => $config->get( 'madmin/cache/manager/default/delete' ),
@@ -198,13 +198,13 @@ class MAdmin_Cache_Manager_Default
 			$dbm = $context->getDatabaseManager();
 
 			try {
-				$this->_object = MW_Cache_Factory::createManager( $name, $config, $dbm );
+				$this->object = MW_Cache_Factory::createManager( $name, $config, $dbm );
 			} catch( Exception $e ) {
-				$this->_object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
+				$this->object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
 			}
 		}
 
-		return $this->_object;
+		return $this->object;
 	}
 
 
@@ -215,7 +215,7 @@ class MAdmin_Cache_Manager_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$path = 'classes/cache/manager/submanagers';
@@ -262,7 +262,7 @@ class MAdmin_Cache_Manager_Default
 	public function createItem()
 	{
 		try {
-			$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+			$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		} catch( Exception $e ) {
 			$values = array( 'siteid' => null );
 		}
@@ -400,10 +400,10 @@ class MAdmin_Cache_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -529,7 +529,7 @@ class MAdmin_Cache_Manager_Default
 		 */
 		$path = 'classes/cache/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -554,7 +554,7 @@ class MAdmin_Cache_Manager_Default
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
+		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		return new MAdmin_Cache_Item_Default( $values );
 	}

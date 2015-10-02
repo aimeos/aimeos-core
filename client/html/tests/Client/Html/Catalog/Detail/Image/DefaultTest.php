@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Detail_Image_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Detail_Image_DefaultTest extends PHPUnit_Framework_Tes
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Detail_Image_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Detail_Image_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,37 +32,37 @@ class Client_Html_Catalog_Detail_Image_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="catalog-detail-image', $output );
 	}
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();

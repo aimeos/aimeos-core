@@ -51,7 +51,7 @@ class Client_Html_Email_Delivery_Html_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/delivery/html/default/subparts';
+	private $subPartPath = 'client/html/email/delivery/html/default/subparts';
 
 	/** client/html/email/delivery/html/salutation/name
 	 * Name of the salutation part used by the email delivery html client implementation
@@ -107,7 +107,7 @@ class Client_Html_Email_Delivery_Html_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'salutation', 'intro', 'summary', 'outro', 'legal' );
+	private $subPartNames = array( 'salutation', 'intro', 'summary', 'outro', 'legal' );
 
 
 	/**
@@ -120,10 +120,10 @@ class Client_Html_Email_Delivery_Html_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->htmlBody = $content;
@@ -160,7 +160,7 @@ class Client_Html_Email_Delivery_Html_Default
 		$status = $view->extOrderItem->getDeliveryStatus();
 		$default = array( 'email/delivery/' . $status . '/html-body-default.html', 'email/common/html-body-default.html' );
 
-		$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+		$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 		$view->mail()->setBodyHtml( $html );
 		return $html;
 	}
@@ -176,10 +176,10 @@ class Client_Html_Email_Delivery_Html_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->htmlHeader = $content;
@@ -217,7 +217,7 @@ class Client_Html_Email_Delivery_Html_Default
 		$status = $view->extOrderItem->getDeliveryStatus();
 		$default = array( 'email/delivery/' . $status . '/html-header-default.html', 'email/common/html-header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -304,7 +304,7 @@ class Client_Html_Email_Delivery_Html_Default
 		 * @see client/html/email/delivery/html/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/delivery/html/' . $type, $name );
+		return $this->createSubClient( 'email/delivery/html/' . $type, $name );
 	}
 
 
@@ -313,8 +313,8 @@ class Client_Html_Email_Delivery_Html_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

@@ -142,6 +142,6 @@ class Controller_ExtJS_Admin_Log_Factory
 		 * @see controller/extjs/admin/log/decorators/excludes
 		 * @see controller/extjs/admin/log/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'admin/log' );
+		return self::addControllerDecorators( $context, $controller, 'admin/log' );
 	}
 }

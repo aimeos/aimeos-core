@@ -11,8 +11,8 @@
  */
 class MW_View_Helper_Mail_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_message;
+	private $object;
+	private $message;
 
 
 	/**
@@ -26,9 +26,9 @@ class MW_View_Helper_Mail_DefaultTest extends PHPUnit_Framework_TestCase
 		$view = new MW_View_Default();
 
 		$mail = new MW_Mail_None();
-		$this->_message = $mail->createMessage();
+		$this->message = $mail->createMessage();
 
-		$this->_object = new MW_View_Helper_Mail_Default( $view, $this->_message );
+		$this->object = new MW_View_Helper_Mail_Default( $view, $this->message );
 	}
 
 
@@ -40,13 +40,13 @@ class MW_View_Helper_Mail_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertSame( $this->_message, $this->_object->transform() );
+		$this->assertSame( $this->message, $this->object->transform() );
 	}
 
 }

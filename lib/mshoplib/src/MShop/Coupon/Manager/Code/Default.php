@@ -19,7 +19,7 @@ class MShop_Coupon_Manager_Code_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Coupon_Manager_Code_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'coupon.code.id'=> array(
 			'code'=>'coupon.code.id',
 			'internalcode'=>'mcouco."id"',
@@ -105,7 +105,7 @@ class MShop_Coupon_Manager_Code_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-coupon' );
+		$this->setResourceName( 'db-coupon' );
 	}
 
 
@@ -117,7 +117,7 @@ class MShop_Coupon_Manager_Code_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/coupon/manager/code/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -274,7 +274,7 @@ class MShop_Coupon_Manager_Code_Default
 		 */
 		$path = 'classes/coupon/manager/code/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -285,7 +285,7 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -319,10 +319,10 @@ class MShop_Coupon_Manager_Code_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -396,7 +396,7 @@ class MShop_Coupon_Manager_Code_Default
 				$path = 'mshop/coupon/manager/code/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getCouponId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -450,7 +450,7 @@ class MShop_Coupon_Manager_Code_Default
 				 * @see mshop/coupon/manager/code/default/item/counter
 				 */
 				$path = 'mshop/coupon/manager/code/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -496,7 +496,7 @@ class MShop_Coupon_Manager_Code_Default
 		 * @see mshop/coupon/manager/code/default/item/counter
 		 */
 		$path = 'mshop/coupon/manager/code/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -515,8 +515,8 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->getContext()->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
@@ -674,17 +674,17 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function increase( $code, $amount )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSitePath() ) );
 
-		$types = array( 'coupon.code.siteid' => $this->_searchConfig['coupon.code.siteid']['internaltype'] );
+		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
 		$conditions = $search->getConditionString( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -757,8 +757,8 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->getContext()->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );

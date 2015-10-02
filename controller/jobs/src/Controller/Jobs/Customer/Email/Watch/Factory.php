@@ -150,6 +150,6 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @see controller/jobs/customer/email/watch/decorators/excludes
 		 * @see controller/jobs/customer/email/watch/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'customer/email/watch' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'customer/email/watch' );
 	}
 }

@@ -10,7 +10,7 @@
  */
 class MW_Common_Criteria_MySQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -25,7 +25,7 @@ class MW_Common_Criteria_MySQLTest extends PHPUnit_Framework_TestCase
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
-		$this->_object = new MW_Common_Criteria_MySQL( $conn );
+		$this->object = new MW_Common_Criteria_MySQL( $conn );
 
 		$dbm->release( $conn );
 	}
@@ -39,7 +39,7 @@ class MW_Common_Criteria_MySQLTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -47,10 +47,10 @@ class MW_Common_Criteria_MySQLTest extends PHPUnit_Framework_TestCase
 	{
 		$params = array( 'listtype', 'langid', 'test string' );
 
-		$str = $this->_object->createFunction( 'catalog.index.text.relevance', $params );
+		$str = $this->object->createFunction( 'catalog.index.text.relevance', $params );
 		$this->assertEquals( 'catalog.index.text.relevance("listtype","langid"," +test* +string*")', $str );
 
-		$str = $this->_object->createFunction( 'sort:catalog.index.text.relevance', $params );
+		$str = $this->object->createFunction( 'sort:catalog.index.text.relevance', $params );
 		$this->assertEquals( 'sort:catalog.index.text.relevance("listtype","langid"," +test* +string*")', $str );
 	}
 

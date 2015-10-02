@@ -17,7 +17,7 @@
 class MShop_Plugin_Provider_Exception extends MShop_Plugin_Exception
 {
 
-	private $_errorCodes;
+	private $errorCodes;
 
 
 	/**
@@ -32,7 +32,7 @@ class MShop_Plugin_Provider_Exception extends MShop_Plugin_Exception
 	{
 		parent::__construct( $message, $code, $previous );
 
-		$this->_errorCodes = $errorCodes;
+		$this->errorCodes = $errorCodes;
 	}
 
 
@@ -43,6 +43,6 @@ class MShop_Plugin_Provider_Exception extends MShop_Plugin_Exception
 	 */
 	public function getErrorCodes()
 	{
-		return $this->_errorCodes;
+		return $this->errorCodes;
 	}
 }

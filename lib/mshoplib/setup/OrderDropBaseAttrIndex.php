@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base_product_attr' => array(
 			'idx_msordbaprat_sid_oid_cd_val' => 'ALTER TABLE "mshop_order_base_product_attr" DROP INDEX "idx_msordbaprat_sid_oid_cd_val"'
 		),
@@ -46,9 +46,9 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -57,26 +57,26 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative list of tables names and SQL statements to execute
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Drop old indexes in order attribute tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Drop old indexes in order attribute tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmts )
 		{
 			foreach( $stmts as $index => $stmt )
 			{
-				$this->_msg( sprintf( 'Checking index "%1$s"', $index ), 1 );
+				$this->msg( sprintf( 'Checking index "%1$s"', $index ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->indexExists( $table, $index ) === true )
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->indexExists( $table, $index ) === true )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'dropped' );
+					$this->execute( $stmt );
+					$this->status( 'dropped' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

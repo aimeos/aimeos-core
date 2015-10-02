@@ -142,6 +142,6 @@ class Controller_ExtJS_Admin_Job_Factory
 		 * @see controller/extjs/admin/job/decorators/excludes
 		 * @see controller/extjs/admin/job/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'admin/job' );
+		return self::addControllerDecorators( $context, $controller, 'admin/job' );
 	}
 }

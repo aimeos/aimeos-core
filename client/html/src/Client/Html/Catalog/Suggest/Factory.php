@@ -78,7 +78,7 @@ class Client_Html_Catalog_Suggest_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'catalog/suggest' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'catalog/suggest' );
 	}
 }
 

@@ -142,6 +142,6 @@ class Controller_ExtJS_Media_Factory
 		 * @see controller/extjs/media/decorators/excludes
 		 * @see controller/extjs/media/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'media' );
+		return self::addControllerDecorators( $context, $controller, 'media' );
 	}
 }

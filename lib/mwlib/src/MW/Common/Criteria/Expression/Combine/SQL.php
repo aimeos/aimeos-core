@@ -16,9 +16,9 @@
  */
 class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Expression_Combine_Interface
 {
-	private static $_operators = array( '&&' => 'AND', '||' => 'OR', '!' => 'NOT' );
-	private $_operator = '&&';
-	private $_expressions = array();
+	private static $operators = array( '&&' => 'AND', '||' => 'OR', '!' => 'NOT' );
+	private $operator = '&&';
+	private $expressions = array();
 
 
 	/**
@@ -29,14 +29,14 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	 */
 	public function __construct( $operator, array $list )
 	{
-		if( !isset( self::$_operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Expression_Interface', $list );
 
-		$this->_operator = $operator;
-		$this->_expressions = $list;
+		$this->operator = $operator;
+		$this->expressions = $list;
 	}
 
 
@@ -47,7 +47,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	 */
 	public function getExpressions()
 	{
-		return $this->_expressions;
+		return $this->expressions;
 	}
 
 
@@ -58,7 +58,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	 */
 	public function getOperator()
 	{
-		return $this->_operator;
+		return $this->operator;
 	}
 
 
@@ -69,7 +69,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$_operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -83,22 +83,22 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		if( ( $item = reset( $this->_expressions ) ) === false ) {
+		if( ( $item = reset( $this->expressions ) ) === false ) {
 			return '';
 		}
 
 		$string = $item->toString( $types, $translations, $plugins );
 
-		if( $this->_operator == '!' && $string !== '' ) {
-			return ' ' . self::$_operators[$this->_operator] . ' ' . $string;
+		if( $this->operator == '!' && $string !== '' ) {
+			return ' ' . self::$operators[$this->operator] . ' ' . $string;
 		}
 
-		while( ( $item = next( $this->_expressions ) ) !== false )
+		while( ( $item = next( $this->expressions ) ) !== false )
 		{
 			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' )
 			{
 				if( $string !== '' ) {
-					$string .= ' ' . self::$_operators[$this->_operator] . ' ' . $itemstr;
+					$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
 				} else {
 					$string = $itemstr;
 				}

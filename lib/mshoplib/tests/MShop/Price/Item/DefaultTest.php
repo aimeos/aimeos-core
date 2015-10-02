@@ -10,8 +10,8 @@
  */
 class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -22,7 +22,7 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 199,
 			'siteid'=>99,
 			'typeid' => 2,
@@ -41,7 +41,7 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Price_Item_Default( $this->_values );
+		$this->object = new MShop_Price_Item_Default( $this->values );
 	}
 
 	/**
@@ -52,224 +52,224 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 	public function testAddItem()
 	{
-		$price = new MShop_Price_Item_Default( $this->_values );
-		$this->_object->addItem( $price );
+		$price = new MShop_Price_Item_Default( $this->values );
+		$this->object->addItem( $price );
 
-		$this->assertEquals( '391.00', $this->_object->getValue() );
-		$this->assertEquals( '39.90', $this->_object->getCosts() );
-		$this->assertEquals( '20.00', $this->_object->getRebate() );
+		$this->assertEquals( '391.00', $this->object->getValue() );
+		$this->assertEquals( '39.90', $this->object->getCosts() );
+		$this->assertEquals( '20.00', $this->object->getRebate() );
 	}
 
 	public function testAddItemWrongCurrency()
 	{
-		$values = $this->_values;
+		$values = $this->values;
 		$values['currencyid'] = 'USD';
 
 		$price = new MShop_Price_Item_Default( $values );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->addItem( $price );
+		$this->object->addItem( $price );
 	}
 
 	public function testCompare()
 	{
-		$price = new MShop_Price_Item_Default( $this->_values );
-		$this->assertTrue( $this->_object->compare( $price ) );
+		$price = new MShop_Price_Item_Default( $this->values );
+		$this->assertTrue( $this->object->compare( $price ) );
 	}
 
 	public function testCompareFail()
 	{
-		$values = $this->_values;
+		$values = $this->values;
 		$values['value'] = '200.00';
 
 		$price = new MShop_Price_Item_Default( $values );
-		$this->assertFalse( $this->_object->compare( $price ) );
+		$this->assertFalse( $this->object->compare( $price ) );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 199, $this->_object->getId() );
+		$this->assertEquals( 199, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertNull( $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetType()
 	{
-		$this->assertEquals( 'default', $this->_object->getType() );
+		$this->assertEquals( 'default', $this->object->getType() );
 	}
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 2, $this->_object->getTypeId() );
+		$this->assertEquals( 2, $this->object->getTypeId() );
 	}
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId( 99 );
-		$this->assertEquals( 99, $this->_object->getTypeId() );
+		$this->object->setTypeId( 99 );
+		$this->assertEquals( 99, $this->object->getTypeId() );
 
-		$this->assertTrue( $this->_object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCurrencyId()
 	{
-		$this->assertEquals( 'EUR', $this->_object->getCurrencyId() );
+		$this->assertEquals( 'EUR', $this->object->getCurrencyId() );
 	}
 
 	public function testSetCurrencyId()
 	{
-		$this->_object->setCurrencyId( 'USD' );
-		$this->assertEquals( 'USD', $this->_object->getCurrencyId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setCurrencyId( 'USD' );
+		$this->assertEquals( 'USD', $this->object->getCurrencyId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetCurrencyIdNull()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setCurrencyId( null );
+		$this->object->setCurrencyId( null );
 	}
 
 	public function testSetCurrencyIdInvalid()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setCurrencyId( 'usd' );
+		$this->object->setCurrencyId( 'usd' );
 	}
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'product', $this->_object->getDomain() );
+		$this->assertEquals( 'product', $this->object->getDomain() );
 	}
 
 	public function testSetDomain()
 	{
-		$this->_object->setDomain( 'service' );
-		$this->assertEquals( 'service', $this->_object->getDomain() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setDomain( 'service' );
+		$this->assertEquals( 'service', $this->object->getDomain() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'Price label', $this->_object->getLabel() );
+		$this->assertEquals( 'Price label', $this->object->getLabel() );
 	}
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'special price' );
-		$this->assertEquals( 'special price', $this->_object->getlabel() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLabel( 'special price' );
+		$this->assertEquals( 'special price', $this->object->getlabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetQuantity()
 	{
-		$this->assertEquals( 1500, $this->_object->getQuantity() );
+		$this->assertEquals( 1500, $this->object->getQuantity() );
 	}
 
 	public function testSetQuantity()
 	{
-		$this->_object->setQuantity( 2000 );
-		$this->assertEquals( 2000, $this->_object->getQuantity() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setQuantity( 2000 );
+		$this->assertEquals( 2000, $this->object->getQuantity() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetPrice()
 	{
-		$this->assertEquals( '195.50', $this->_object->getValue() );
+		$this->assertEquals( '195.50', $this->object->getValue() );
 	}
 
 	public function testSetPrice()
 	{
-		$this->_object->setValue( 199.00 );
-		$this->assertEquals( 199.00, $this->_object->getValue() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setValue( 199.00 );
+		$this->assertEquals( 199.00, $this->object->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->setValue( '190,90' );
+		$this->object->setValue( '190,90' );
 	}
 
 	public function testGetCosts()
 	{
-		$this->assertEquals( '19.95', $this->_object->getCosts() );
+		$this->assertEquals( '19.95', $this->object->getCosts() );
 	}
 
 	public function testSetCosts()
 	{
-		$this->_object->setValue( '20.00' );
-		$this->assertEquals( 20.00, $this->_object->getValue() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setValue( '20.00' );
+		$this->assertEquals( 20.00, $this->object->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->setValue( '19,90' );
+		$this->object->setValue( '19,90' );
 	}
 
 	public function testGetRebate()
 	{
-		$this->assertEquals( '10.00', $this->_object->getRebate() );
+		$this->assertEquals( '10.00', $this->object->getRebate() );
 	}
 
 	public function testSetRebate()
 	{
-		$this->_object->setRebate( '20.00' );
-		$this->assertEquals( 20.00, $this->_object->getRebate() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setRebate( '20.00' );
+		$this->assertEquals( 20.00, $this->object->getRebate() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->setValue( '19,90' );
+		$this->object->setValue( '19,90' );
 	}
 
 	public function testgetTaxRate()
 	{
-		$this->assertEquals( '19.00', $this->_object->getTaxRate() );
+		$this->assertEquals( '19.00', $this->object->getTaxRate() );
 	}
 
 	public function testsetTaxRate()
 	{
-		$this->_object->setTaxRate( '22.00' );
-		$this->assertEquals( 22.00, $this->_object->getTaxRate() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setTaxRate( '22.00' );
+		$this->assertEquals( 22.00, $this->object->getTaxRate() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -309,27 +309,27 @@ class MShop_Price_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['price.id'] );
-		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['price.typeid'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['price.siteid'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['price.label'] );
-		$this->assertEquals( $this->_object->getCurrencyId(), $arrayObject['price.currencyid'] );
-		$this->assertEquals( $this->_object->getQuantity(), $arrayObject['price.quantity'] );
-		$this->assertEquals( $this->_object->getValue(), $arrayObject['price.value'] );
-		$this->assertEquals( $this->_object->getCosts(), $arrayObject['price.costs'] );
-		$this->assertEquals( $this->_object->getRebate(), $arrayObject['price.rebate'] );
-		$this->assertEquals( $this->_object->getTaxrate(), $arrayObject['price.taxrate'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['price.status'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['price.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['price.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['price.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['price.typeid'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['price.siteid'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['price.label'] );
+		$this->assertEquals( $this->object->getCurrencyId(), $arrayObject['price.currencyid'] );
+		$this->assertEquals( $this->object->getQuantity(), $arrayObject['price.quantity'] );
+		$this->assertEquals( $this->object->getValue(), $arrayObject['price.value'] );
+		$this->assertEquals( $this->object->getCosts(), $arrayObject['price.costs'] );
+		$this->assertEquals( $this->object->getRebate(), $arrayObject['price.rebate'] );
+		$this->assertEquals( $this->object->getTaxrate(), $arrayObject['price.taxrate'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['price.status'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['price.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['price.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['price.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

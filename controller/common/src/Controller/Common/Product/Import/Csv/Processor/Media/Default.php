@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_listTypes;
+	private $listTypes;
 
 
 	/**
@@ -52,7 +52,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 		 * @see controller/common/product/import/csv/processor/price/listtypes
 		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/media/listtypes' );
+		$this->listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/media/listtypes' );
 	}
 
 
@@ -65,7 +65,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'media' );
 		$listManager = MShop_Factory::createManager( $context, 'product/list' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
@@ -74,13 +74,13 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 
 		try
 		{
-			$map = $this->_getMappedChunk( $data );
+			$map = $this->getMappedChunk( $data );
 			$listItems = $product->getListItems( 'media' );
 
 			foreach( $map as $pos => $list )
 			{
 				if( !isset( $list['media.url'] ) || $list['media.url'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -98,19 +98,19 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 						$refItem = $manager->createItem();
 					}
 
-					$list['media.typeid'] = $this->_getTypeId( 'media/type', 'product', $type );
+					$list['media.typeid'] = $this->getTypeId( 'media/type', 'product', $type );
 					$list['media.domain'] = 'product';
 					$list['media.url'] = $url;
 
-					$refItem->fromArray( $this->_addItemDefaults( $list ) );
+					$refItem->fromArray( $this->addItemDefaults( $list ) );
 					$manager->saveItem( $refItem );
 
-					$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'media', $typecode );
+					$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'media', $typecode );
 					$list['product.list.parentid'] = $product->getId();
 					$list['product.list.refid'] = $refItem->getId();
 					$list['product.list.domain'] = 'media';
 
-					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos++ ) );
+					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
 				}
 			}
@@ -121,7 +121,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 				$listManager->deleteItem( $listItem->getId() );
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -141,7 +141,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 	 * @param array $list Associative list of domain item keys and their values, e.g. "media.status" => 1
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addItemDefaults( array $list )
+	protected function addItemDefaults( array $list )
 	{
 		if( !isset( $list['media.label'] ) ) {
 			$list['media.label'] = $list['media.url'];

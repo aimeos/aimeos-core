@@ -26,7 +26,7 @@ class MW_Media_Image_Abstract
 	 * @param integer $destHeight New height of the image
 	 * @return array Array containing the new width at position 0 and the new height as position 1
 	 */
-	protected function _getSizeFitted( $srcWidth, $srcHeight, $destWidth, $destHeight )
+	protected function getSizeFitted( $srcWidth, $srcHeight, $destWidth, $destHeight )
 	{
 		$destWidth = ( $destWidth === null ? $srcWidth : $destWidth );
 		$destHeight = ( $destHeight === null ? $srcHeight : $destHeight );

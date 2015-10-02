@@ -8,7 +8,7 @@
 
 class MW_View_Helper_Request_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class MW_View_Helper_Request_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Request_Default( $view, 'body', '127.0.0.1' );
+		$this->object = new MW_View_Helper_Request_Default( $view, 'body', '127.0.0.1' );
 	}
 
 
@@ -32,25 +32,25 @@ class MW_View_Helper_Request_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->_object->transform() );
+		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->object->transform() );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->assertEquals( 'body', $this->_object->transform()->getBody() );
+		$this->assertEquals( 'body', $this->object->transform()->getBody() );
 	}
 
 
 	public function testGetClientAddress()
 	{
-		$this->assertEquals( '127.0.0.1', $this->_object->transform()->getClientAddress() );
+		$this->assertEquals( '127.0.0.1', $this->object->transform()->getClientAddress() );
 	}
 
 }

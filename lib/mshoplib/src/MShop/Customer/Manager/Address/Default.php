@@ -18,7 +18,7 @@ class MShop_Customer_Manager_Address_Default
 	extends MShop_Common_Manager_Address_Abstract
 	implements MShop_Customer_Manager_Address_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.address.id' => array(
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
@@ -216,7 +216,7 @@ class MShop_Customer_Manager_Address_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-customer' );
+		$this->setResourceName( 'db-customer' );
 	}
 
 
@@ -228,7 +228,7 @@ class MShop_Customer_Manager_Address_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/address/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -263,7 +263,7 @@ class MShop_Customer_Manager_Address_Default
 		 */
 		$path = 'classes/customer/manager/address/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -397,7 +397,7 @@ class MShop_Customer_Manager_Address_Default
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{
-		return new MShop_Customer_Item_Address_Default( $this->_getPrefix(), $values );
+		return new MShop_Customer_Item_Address_Default( $this->getPrefix(), $values );
 	}
 
 
@@ -406,7 +406,7 @@ class MShop_Customer_Manager_Address_Default
 	 *
 	 * @return string Configuration path
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		/** mshop/customer/manager/address/default/item/insert
 		 * Inserts a new customer address record into the database table
@@ -628,8 +628,8 @@ class MShop_Customer_Manager_Address_Default
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

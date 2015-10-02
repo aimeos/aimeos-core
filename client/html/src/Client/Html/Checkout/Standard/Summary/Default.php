@@ -55,7 +55,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/summary/default/subparts';
+	private $subPartPath = 'client/html/checkout/standard/summary/default/subparts';
 
 	/** client/html/checkout/standard/summary/address/name
 	 * Name of the address part used by the checkout standard summary client implementation
@@ -111,7 +111,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'service', 'coupon', 'option', 'detail' );
+	private $subPartNames = array( 'address', 'service', 'coupon', 'option', 'detail' );
 
 
 	/**
@@ -132,10 +132,10 @@ class Client_Html_Checkout_Standard_Summary_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->summaryBody = $html;
@@ -163,7 +163,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 		$tplconf = 'client/html/checkout/standard/summary/default/template-body';
 		$default = 'checkout/standard/summary-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -185,10 +185,10 @@ class Client_Html_Checkout_Standard_Summary_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->summaryHeader = $html;
@@ -217,7 +217,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 		$tplconf = 'client/html/checkout/standard/summary/default/template-header';
 		$default = 'checkout/standard/summary-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -304,7 +304,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 		 * @see client/html/checkout/standard/summary/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/summary/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/summary/' . $type, $name );
 	}
 
 
@@ -323,7 +323,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 
 		try
 		{
-			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+			$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
 
 			parent::process();
@@ -341,8 +341,8 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

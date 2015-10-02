@@ -17,7 +17,7 @@ class MShop_Attribute_Manager_Default
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Attribute_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'attribute.id'=> array(
 			'code'=>'attribute.id',
 			'internalcode'=>'matt."id"',
@@ -108,7 +108,7 @@ class MShop_Attribute_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-attribute' );
+		$this->setResourceName( 'db-attribute' );
 	}
 
 
@@ -120,7 +120,7 @@ class MShop_Attribute_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/attribute/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -155,7 +155,7 @@ class MShop_Attribute_Manager_Default
 		 */
 		$path = 'classes/attribute/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
 	}
 
 
@@ -166,7 +166,7 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -201,10 +201,10 @@ class MShop_Attribute_Manager_Default
 
 		if( $item->isModified() === false ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -276,7 +276,7 @@ class MShop_Attribute_Manager_Default
 				$path = 'mshop/attribute/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId() );
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getDomain() );
@@ -329,7 +329,7 @@ class MShop_Attribute_Manager_Default
 				 * @see mshop/attribute/manager/default/item/count
 				 */
 				$path = 'mshop/attribute/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -374,7 +374,7 @@ class MShop_Attribute_Manager_Default
 		 * @see mshop/attribute/manager/default/item/count
 		 */
 		$path = 'mshop/attribute/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -393,10 +393,10 @@ class MShop_Attribute_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -536,7 +536,7 @@ class MShop_Attribute_Manager_Default
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'attribute' );
+		return $this->buildItems( $map, $ref, 'attribute' );
 	}
 
 

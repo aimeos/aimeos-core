@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Locale_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Locale_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,14 +31,14 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->init( new stdClass() );
+		$actual = $this->object->init( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->_object->finish( new stdClass() );
+		$actual = $this->object->finish( new stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -67,7 +67,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 2, $result['total'] );
@@ -91,12 +91,12 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$searchParams = (object) array( 'site' => 'unittest', 'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'locale.currencyid' => 'CHF' ) ) ) ) );
 
-		$saved = $this->_object->saveItems( $saveParam );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParam );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'locale.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'locale.id'} );
@@ -114,7 +114,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$saveParam = (object) array();
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( $saveParam );
+		$this->object->saveItems( $saveParam );
 	}
 
 
@@ -125,7 +125,7 @@ class Controller_ExtJS_Locale_DefaultTest extends PHPUnit_Framework_TestCase
 			'items' => (object) array(),
 		);
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( $saveParam );
+		$this->object->saveItems( $saveParam );
 	}
 
 }

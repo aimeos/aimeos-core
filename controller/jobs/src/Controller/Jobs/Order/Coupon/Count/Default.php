@@ -26,7 +26,7 @@ class Controller_Jobs_Order_Coupon_Count_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Deprecated: Use "Remove unfinised orders"' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Deprecated: Use "Remove unfinised orders"' );
 	}
 
 
@@ -37,6 +37,6 @@ class Controller_Jobs_Order_Coupon_Count_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Decreases the counts of successfully redeemed coupons' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Decreases the counts of successfully redeemed coupons' );
 	}
 }

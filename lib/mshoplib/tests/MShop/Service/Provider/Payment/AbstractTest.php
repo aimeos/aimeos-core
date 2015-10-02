@@ -8,15 +8,15 @@
 
 class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$servManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$servManager = MShop_Service_Manager_Factory::createManager( $this->context );
 		$search = $servManager->createSearch();
 		$search->setConditions($search->compare('==', 'service.provider', 'Default'));
 		$result = $servManager->searchItems($search, array('price'));
@@ -25,7 +25,7 @@ class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_Test
 			throw new Exception( 'No order base item found' );
 		}
 
-		$this->_object = new MShop_Service_Provider_Payment_Test( $this->_context, $item );
+		$this->object = new MShop_Service_Provider_Payment_Test( $this->context, $item );
 	}
 
 
@@ -37,13 +37,13 @@ class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$result = $this->_object->checkConfigBE( array( 'payment.url-success' => true ) );
+		$result = $this->object->checkConfigBE( array( 'payment.url-success' => true ) );
 
 		$this->assertInternalType( 'array', $result );
 		$this->assertArrayHasKey( 'payment.url-success', $result );
@@ -52,7 +52,7 @@ class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_Test
 
 	public function testGetConfigBE()
 	{
-		$result = $this->_object->getConfigBE();
+		$result = $this->object->getConfigBE();
 
 		$this->assertInternalType( 'array', $result );
 		$this->assertArrayHasKey( 'payment.url-success', $result );
@@ -64,45 +64,45 @@ class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_Test
 
 	public function testCancel()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->_context )->createItem();
+		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
 
 		$this->setExpectedException( 'MShop_Service_Exception' );
-		$this->_object->cancel( $item );
+		$this->object->cancel( $item );
 	}
 
 
 	public function testCapture()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->_context )->createItem();
+		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
 
 		$this->setExpectedException( 'MShop_Service_Exception' );
-		$this->_object->capture( $item );
+		$this->object->capture( $item );
 	}
 
 	public function testProcess()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->_context )->createItem();
+		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
 
-		$result = $this->_object->process( $item, array() );
+		$result = $this->object->process( $item, array() );
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $result );
 	}
 
 
 	public function testRefund()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->_context )->createItem();
+		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
 
 		$this->setExpectedException( 'MShop_Service_Exception' );
-		$this->_object->refund( $item );
+		$this->object->refund( $item );
 	}
 
 
 	public function testSetConfigFE()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->_context )
+		$item = MShop_Order_Manager_Factory::createManager( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
-		$this->_object->setConfigFE( $item, array() );
+		$this->object->setConfigFE( $item, array() );
 	}
 }
 

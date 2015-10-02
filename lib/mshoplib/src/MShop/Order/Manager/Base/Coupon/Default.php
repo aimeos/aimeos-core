@@ -18,7 +18,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Coupon_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.base.coupon.id'=> array(
 			'code'=>'order.base.coupon.id',
 			'internalcode'=>'mordbaco."id"',
@@ -90,7 +90,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -159,7 +159,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/base/coupon/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -174,7 +174,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -208,10 +208,10 @@ class MShop_Order_Manager_Base_Coupon_Default
 			return;
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -283,7 +283,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 				$path = 'mshop/order/manager/base/coupon/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -334,7 +334,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 				 * @see mshop/order/manager/base/coupon/default/item/count
 				 */
 				$path = 'mshop/order/manager/base/coupon/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -379,7 +379,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		 * @see mshop/order/manager/base/coupon/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/coupon/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -410,7 +410,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		 */
 		$path = 'classes/order/manager/base/coupon/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -426,10 +426,10 @@ class MShop_Order_Manager_Base_Coupon_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

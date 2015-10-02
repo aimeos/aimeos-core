@@ -11,13 +11,13 @@
  */
 class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 {
-	private $_site = '
+	private $site = '
 		INSERT INTO "mshop_locale_site" ("code", "label", "config", "status", "level", "nleft", "nright", "mtime", "ctime", "editor")
 		SELECT \'default\', \'Default\', \'{}\', 1, 0, ( SELECT COALESCE( MAX("nright"), 0 ) FROM "mshop_locale_site" ) + 1, ( SELECT COALESCE( MAX("nright"), 0 ) FROM "mshop_locale_site" ) + 2, NOW(), NOW(), \'\' FROM DUAL
 		WHERE ( SELECT COUNT(*) FROM "mshop_locale_site" WHERE "code" = \'default\' ) = 0
 	';
 
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute' => array(
 			'UPDATE "mshop_attribute" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
 			'ALTER TABLE "mshop_attribute" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
@@ -212,9 +212,9 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -222,26 +222,26 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and SQL statements.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing site ID to NOT NULL', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing site ID to NOT NULL', 0 );
+		$this->status( '' );
 
-		if( $this->_schema->tableExists( 'mshop_locale_site' ) ) {
-			$this->_execute( $this->_site );
+		if( $this->schema->tableExists( 'mshop_locale_site' ) ) {
+			$this->execute( $this->site );
 		}
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) &&
-				$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
+			if( $this->schema->tableExists( $table ) &&
+				$this->schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'done' );
+				$this->executeList( $stmtList );
+				$this->status( 'done' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

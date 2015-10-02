@@ -142,7 +142,7 @@ class Controller_Frontend_Catalog_Factory
 		 * @see controller/frontend/catalog/decorators/excludes
 		 * @see controller/frontend/catalog/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'catalog' );
+		return self::addControllerDecorators( $context, $manager, 'catalog' );
 	}
 
 }

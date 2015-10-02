@@ -142,6 +142,6 @@ class Controller_ExtJS_Price_List_Type_Factory
 		 * @see controller/extjs/price/list/type/decorators/excludes
 		 * @see controller/extjs/price/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'price/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'price/list/type' );
 	}
 }

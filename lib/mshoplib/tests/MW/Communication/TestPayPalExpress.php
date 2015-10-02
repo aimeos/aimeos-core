@@ -16,7 +16,7 @@
  */
 class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 {
-	private $_rules = array();
+	private $rules = array();
 
 
 	/**
@@ -28,9 +28,9 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 	 */
 	public function addRule( array $what, $error, $success )
 	{
-		$this->_rules['set'] = $what;
-		$this->_rules['error'] = $error;
-		$this->_rules['success'] = $success;
+		$this->rules['set'] = $what;
+		$this->rules['error'] = $error;
+		$this->rules['success'] = $success;
 	}
 
 
@@ -41,7 +41,7 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 	 */
 	public function getRules()
 	{
-		return $this->_rules;
+		return $this->rules;
 	}
 
 
@@ -55,28 +55,28 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 	 */
 	public function transmit( $target, $method, $payload )
 	{
-		if( !isset( $this->_rules['set'] ) ) {
+		if( !isset( $this->rules['set'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No rules for unit tests was set' ) );
 		}
 
-		if( !isset( $this->_rules['error'] ) ) {
+		if( !isset( $this->rules['error'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No error message for unit tests was set' ) );
 		}
 
-		if( !isset( $this->_rules['success'] ) ) {
+		if( !isset( $this->rules['success'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
 
 		$params = array();
 		parse_str( $payload, $params );
 
-		foreach( $this->_rules['set'] as $key => $value )
+		foreach( $this->rules['set'] as $key => $value )
 		{
 			if( $params[$key] != $value ) {
-				return $this->_rules['error'];
+				return $this->rules['error'];
 			}
 		}
 
-		return $this->_rules['success'];
+		return $this->rules['success'];
 	}
 }

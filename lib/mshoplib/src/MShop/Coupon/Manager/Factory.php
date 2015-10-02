@@ -151,6 +151,6 @@ class MShop_Coupon_Manager_Factory
 		 * @see mshop/coupon/manager/decorators/excludes
 		 * @see mshop/coupon/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'coupon' );
+		return self::addManagerDecorators( $context, $manager, 'coupon' );
 	}
 }

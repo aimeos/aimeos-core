@@ -18,7 +18,7 @@ class MShop_Locale_Manager_Language_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Locale_Manager_Language_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'locale.language.id' => array(
 			'code' => 'locale.language.id',
 			'internalcode' => 'mlocla."id"',
@@ -89,7 +89,7 @@ class MShop_Locale_Manager_Language_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-locale' );
+		$this->setResourceName( 'db-locale' );
 	}
 
 
@@ -101,7 +101,7 @@ class MShop_Locale_Manager_Language_Default
 	public function createItem()
 	{
 		try {
-			$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+			$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		} catch( Exception $ex ) {
 			$values = array( 'siteid' => null );
 		}
@@ -125,10 +125,10 @@ class MShop_Locale_Manager_Language_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -191,7 +191,7 @@ class MShop_Locale_Manager_Language_Default
 				$path = 'mshop/locale/manager/language/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLabel() );
 			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -250,7 +250,7 @@ class MShop_Locale_Manager_Language_Default
 		 * @see mshop/locale/manager/language/default/item/count
 		 */
 		$path = 'mshop/locale/manager/language/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -295,7 +295,7 @@ class MShop_Locale_Manager_Language_Default
 		 */
 		$path = 'classes/locale/manager/language/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -432,18 +432,18 @@ class MShop_Locale_Manager_Language_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
 			$attributes = $this->getSearchAttributes();
-			$types = $this->_getSearchTypes( $attributes );
-			$translations = $this->_getSearchTranslations( $attributes );
+			$types = $this->getSearchTypes( $attributes );
+			$translations = $this->getSearchTranslations( $attributes );
 
 			$find = array( ':cond', ':order', ':start', ':size' );
 			$replace = array(
@@ -506,7 +506,7 @@ class MShop_Locale_Manager_Language_Default
 			$path = 'mshop/locale/manager/language/default/item/search';
 
 			$sql = $config->get( $path, $path );
-			$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 			try
 			{
@@ -569,7 +569,7 @@ class MShop_Locale_Manager_Language_Default
 				$path = 'mshop/locale/manager/language/default/item/count';
 
 				$sql = $config->get( $path, $path );
-				$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+				$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 				$row = $results->fetch();
 				$results->finish();
@@ -616,10 +616,10 @@ class MShop_Locale_Manager_Language_Default
 	 * @param $sql SQL statement
 	 * @return MW_DB_Result_Interface Search result object
 	 */
-	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		$results = $statement->execute();
 

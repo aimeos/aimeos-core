@@ -18,8 +18,8 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_cache;
-	private $_listTypes;
+	private $cache;
+	private $listTypes;
 
 
 	/**
@@ -53,9 +53,9 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 		 * @see controller/common/product/import/csv/processor/price/listtypes
 		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/attribute/listtypes');
+		$this->listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/attribute/listtypes');
 
-		$this->_cache = $this->_getCache( 'attribute' );
+		$this->cache = $this->getCache( 'attribute' );
 	}
 
 
@@ -68,7 +68,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'attribute' );
 		$listManager = MShop_Factory::createManager( $context, 'product/list' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
@@ -79,8 +79,8 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 		{
 			$pos = 0;
 			$delete = $attrcodes = array();
-			$map = $this->_getMappedChunk( $data );
-			$listItems = $product->getListItems( 'attribute', $this->_listTypes );
+			$map = $this->getMappedChunk( $data );
+			$listItems = $product->getListItems( 'attribute', $this->listTypes );
 
 			foreach( $listItems as $listId => $listItem )
 			{
@@ -114,7 +114,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 			foreach( $map as $pos => $list )
 			{
 				if( $list['attribute.code'] === '' || $list['attribute.type'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -123,7 +123,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 
 				foreach( $codes as $code )
 				{
-					$attrItem = $this->_getAttributeItem( $code, $list['attribute.type'] );
+					$attrItem = $this->getAttributeItem( $code, $list['attribute.type'] );
 					$attrItem->fromArray( $list );
 					$attrItem->setCode( $code );
 					$manager->saveItem( $attrItem );
@@ -133,17 +133,17 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 					}
 
 					$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-					$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'attribute', $typecode );
+					$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'attribute', $typecode );
 					$list['product.list.refid'] = $attrItem->getId();
 					$list['product.list.parentid'] = $product->getId();
 					$list['product.list.domain'] = 'attribute';
 
-					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
+					$listItem->fromArray( $this->addListItemDefaults( $list, $pos ) );
 					$listManager->saveItem( $listItem );
 				}
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -164,21 +164,21 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 	 * @param string $type Attribute type
 	 * @return MShop_Attribute_Item_Interface Attribute item object
 	 */
-	protected function _getAttributeItem( $code, $type )
+	protected function getAttributeItem( $code, $type )
 	{
-		if( ( $item = $this->_cache->get( $code, $type ) ) === null )
+		if( ( $item = $this->cache->get( $code, $type ) ) === null )
 		{
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+			$manager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
 
 			$item = $manager->createItem();
-			$item->setTypeId( $this->_getTypeId( 'attribute/type', 'product', $type ) );
+			$item->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) );
 			$item->setCode( $code );
 			$item->setLabel( $type . ' ' . $code );
 			$item->setStatus( 1 );
 
 			$manager->saveItem( $item );
 
-			$this->_cache->set( $item );
+			$this->cache->set( $item );
 		}
 
 		return $item;

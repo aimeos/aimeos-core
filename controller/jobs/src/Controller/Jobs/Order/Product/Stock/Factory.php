@@ -86,6 +86,6 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		 * @see controller/jobs/order/product/stock/decorators/global
 		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/product/stock' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/product/stock' );
 	}
 }

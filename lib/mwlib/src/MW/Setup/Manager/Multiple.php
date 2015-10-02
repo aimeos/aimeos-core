@@ -16,11 +16,11 @@
  */
 class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 {
-	private $_dbm;
-	private $_additional;
-	private $_tasks = array();
-	private $_tasksDone = array();
-	private $_dependencies = array();
+	private $dbm;
+	private $additional;
+	private $tasks = array();
+	private $tasksDone = array();
+	private $dependencies = array();
 
 
 	/**
@@ -38,8 +38,8 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 			throw new MW_Setup_Exception( 'No databases configured in resource config file' );
 		}
 
-		$this->_dbm = $dbm;
-		$this->_additional = $additional;
+		$this->dbm = $dbm;
+		$this->additional = $additional;
 
 		$conns = array();
 		$schemas = array();
@@ -55,11 +55,11 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 			}
 
 			$conns[$rname] = $dbm->acquire( $rname );
-			$schemas[$rname] = $this->_createSchema( $conns[$rname], $dbconf['adapter'], $dbconf['database'] );
+			$schemas[$rname] = $this->createSchema( $conns[$rname], $dbconf['adapter'], $dbconf['database'] );
 		}
 
 		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
-		$this->_setupTasks( $taskpath, $conns, $schemas );
+		$this->setupTasks( $taskpath, $conns, $schemas );
 	}
 
 
@@ -70,8 +70,8 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 	 */
 	public function run( $dbtype )
 	{
-		foreach( $this->_tasks as $taskname => $task ) {
-			$this->_runTasks( $dbtype, array( $taskname ) );
+		foreach( $this->tasks as $taskname => $task ) {
+			$this->runTasks( $dbtype, array( $taskname ) );
 		}
 	}
 
@@ -83,11 +83,11 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
 	 */
-	protected function _runTasks( $dbtype, array $tasknames, array $stack = array() )
+	protected function runTasks( $dbtype, array $tasknames, array $stack = array() )
 	{
 		foreach( $tasknames as $taskname )
 		{
-			if( in_array( $taskname, $this->_tasksDone ) ) { continue; }
+			if( in_array( $taskname, $this->tasksDone ) ) { continue; }
 
 			if( in_array( $taskname, $stack ) ) {
 				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
@@ -96,15 +96,15 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 
 			$stack[] = $taskname;
 
-			if( isset( $this->_dependencies[$taskname] ) ) {
-				$this->_runTasks( $dbtype, (array) $this->_dependencies[$taskname], $stack );
+			if( isset( $this->dependencies[$taskname] ) ) {
+				$this->runTasks( $dbtype, (array) $this->dependencies[$taskname], $stack );
 			}
 
-			if( isset( $this->_tasks[$taskname] ) ) {
-				$this->_tasks[$taskname]->run( $dbtype );
+			if( isset( $this->tasks[$taskname] ) ) {
+				$this->tasks[$taskname]->run( $dbtype );
 			}
 
-			$this->_tasksDone[] = $taskname;
+			$this->tasksDone[] = $taskname;
 		}
 	}
 
@@ -116,24 +116,24 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 	 * @param array $conns Associative list of db connections with the resource name as key
 	 * @param array $schemas Associative list of db schemas with the resource name as key
 	 */
-	protected function _setupTasks( array $paths, array $conns, array $schemas )
+	protected function setupTasks( array $paths, array $conns, array $schemas )
 	{
 		$defconn = ( isset( $conns['db'] ) ? $conns['db'] : reset( $conns ) );
 		$defschema = ( isset( $schemas['db'] ) ? $schemas['db'] : reset( $schemas ) );
 
-		$this->_tasks = $this->_createTasks( $paths, $defschema, $defconn, $this->_additional );
+		$this->tasks = $this->createTasks( $paths, $defschema, $defconn, $this->additional );
 
-		foreach( $this->_tasks as $name => $task )
+		foreach( $this->tasks as $name => $task )
 		{
 			$task->setSchemas( $schemas );
 			$task->setConnections( $conns );
 
 			foreach( (array) $task->getPreDependencies() as $taskname ) {
-				$this->_dependencies[$name][] = $taskname;
+				$this->dependencies[$name][] = $taskname;
 			}
 
 			foreach( (array) $task->getPostDependencies() as $taskname ) {
-				$this->_dependencies[$taskname][] = $name;
+				$this->dependencies[$taskname][] = $name;
 			}
 		}
 	}

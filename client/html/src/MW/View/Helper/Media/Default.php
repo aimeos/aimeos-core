@@ -37,7 +37,7 @@ class MW_View_Helper_Media_Default
 		$enc = $this->encoder();
 		$previewUrl = $item->getPreview();
 
-		$tag = $this->_createMediaTag( $item, $boxAttributes, $itemAttributes, $baseurl );
+		$tag = $this->createMediaTag( $item, $boxAttributes, $itemAttributes, $baseurl );
 
 		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data', 4 ) !== 0 && $baseurl !== null ) {
 			$url = $baseurl . '/' . $url;
@@ -63,7 +63,7 @@ class MW_View_Helper_Media_Default
 	 * 	Item attributes can contain placeholders for the URL (%1$s) and the preview URL (%2$s)
 	 * @return string Inner string for media HTML tags
 	 */
-	protected function _createAssociatedMediaString( array $mediaItems, $baseurl = null, $attributes )
+	protected function createAssociatedMediaString( array $mediaItems, $baseurl = null, $attributes )
 	{
 		$string = '';
 		$enc = $this->encoder();
@@ -114,7 +114,7 @@ class MW_View_Helper_Media_Default
 	 * @param string $baseurl Base URL for the media items
 	 * @return string Media HTML tag
 	 */
-	protected function _createMediaTag( MShop_Media_Item_Interface $item, array $boxAttributes, array $itemAttributes, $baseurl )
+	protected function createMediaTag( MShop_Media_Item_Interface $item, array $boxAttributes, array $itemAttributes, $baseurl )
 	{
 		$enc = $this->encoder();
 		$mediaItems = $item->getRefItems( 'media' );
@@ -135,27 +135,27 @@ class MW_View_Helper_Media_Default
 			case 'audio':
 				$tag = "<audio ${boxattr}>";
 				$tag .= "<source src=\"%1\$s\" title=\"%3\$s\" type=\"%4\$s\" ${itemattr} />";
-				$tag .= $this->_createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
+				$tag .= $this->createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
 				$tag .= '%3$s';
 				$tag .= '</audio>';
 				break;
 			case 'video':
 				$tag = "<video ${boxattr}>";
 				$tag .= "<source src=\"%1\$s\" title=\"%3\$s\" type=\"%4\$s\" ${itemattr} />";
-				$tag .= $this->_createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
+				$tag .= $this->createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
 				$tag .= '%3$s';
 				$tag .= '</video>';
 				break;
 			case 'image':
 				$tag = "<div ${boxattr}>";
 				$tag .= "<img src=\"%2\$s\" title=\"%3\$s\" ${itemattr} />";
-				$tag .= $this->_createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
+				$tag .= $this->createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
 				$tag .= '</div>';
 				break;
 			default:
 				$tag = "<a href=\"%1\$s\" ${boxattr}>";
 				$tag .= "<img src=\"%2\$s\" title=\"%3\$s\" ${itemattr} />";
-				$tag .= $this->_createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
+				$tag .= $this->createAssociatedMediaString( $mediaItems, $baseurl, $itemattr );
 				$tag .= '%3$s';
 				$tag .= '</a>';
 				break;

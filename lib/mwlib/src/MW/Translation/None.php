@@ -44,7 +44,7 @@ class MW_Translation_None
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		if( $this->_getPluralIndex( $number, $this->getLocale() ) > 0 ) {
+		if( $this->getPluralIndex( $number, $this->getLocale() ) > 0 ) {
 			return (string) $plural;
 		}
 

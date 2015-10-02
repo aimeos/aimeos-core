@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCa
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Head_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_List_Head_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -33,7 +33,7 @@ class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCa
 
 		$view = TestHelper::getView();
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -45,20 +45,20 @@ class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertStringStartsWith( '<div class="catalog-list-head">', $output );
 		$this->assertRegExp( '#<h1>Kaffee</h1>#', $output );
@@ -67,11 +67,11 @@ class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetBodySearch()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => '<b>Search result</b>' ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertContains( '&lt;b&gt;Search result&lt;/b&gt;', $output );
 	}
 
@@ -79,6 +79,6 @@ class Client_Html_Catalog_List_Head_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 }

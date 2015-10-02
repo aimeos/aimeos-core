@@ -16,7 +16,7 @@
  */
 abstract class MW_Config_Abstract implements MW_Config_Interface
 {
-	private $_includeCache = array();
+	private $includeCache = array();
 
 
 	/**
@@ -27,10 +27,10 @@ abstract class MW_Config_Abstract implements MW_Config_Interface
 	**/
 	protected function includeFile( $file )
 	{
-		if( !isset( $this->_includeCache[$file] ) ) {
-			$this->_includeCache[$file] = include $file;
+		if( !isset( $this->includeCache[$file] ) ) {
+			$this->includeCache[$file] = include $file;
 		}
 
-		return $this->_includeCache[$file];
+		return $this->includeCache[$file];
 	}
 }

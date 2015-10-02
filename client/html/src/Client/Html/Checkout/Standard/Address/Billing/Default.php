@@ -51,11 +51,11 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/address/billing/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/checkout/standard/address/billing/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
-	private $_mandatory = array(
+	private $mandatory = array(
 		'order.base.address.salutation',
 		'order.base.address.firstname',
 		'order.base.address.lastname',
@@ -66,7 +66,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		'order.base.address.email'
 	);
 
-	private $_optional = array(
+	private $optional = array(
 		'order.base.address.company',
 		'order.base.address.vatid',
 		'order.base.address.address2',
@@ -85,10 +85,10 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->billingBody = $html;
@@ -116,7 +116,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		$tplconf = 'client/html/checkout/standard/address/billing/default/template-body';
 		$default = 'checkout/standard/address-billing-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -130,10 +130,10 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->billingHeader = $html;
@@ -162,7 +162,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		$tplconf = 'client/html/checkout/standard/address/billing/default/template-header';
 		$default = 'checkout/standard/address-billing-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -249,7 +249,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/checkout/standard/address/billing/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/address/billing/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/address/billing/' . $type, $name );
 	}
 
 
@@ -267,7 +267,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				return;
 			}
 
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 
@@ -296,7 +296,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			if( ( $option = $view->param( 'ca_billingoption', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$params = $view->param( 'ca_billing', array() );
-				$invalid = $this->_checkFields( $params );
+				$invalid = $this->checkFields( $params );
 
 				if( count( $invalid ) > 0 )
 				{
@@ -330,7 +330,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				if( !empty( $params ) )
 				{
 					$list = array();
-					$invalid = $this->_checkFields( $params );
+					$invalid = $this->checkFields( $params );
 
 					foreach( $params as $key => $value ) {
 						$list[str_replace( 'order.base', 'customer', $key )] = $value;
@@ -367,7 +367,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 * @param array &$params Associative list of address keys (order.base.address.* or customer.address.*) and their values
 	 * @return array List of missing field names
 	 */
-	protected function _checkFields( array &$params )
+	protected function checkFields( array &$params )
 	{
 		$view = $this->getView();
 
@@ -409,7 +409,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/checkout/standard/address/countries
 		 * @see client/html/checkout/standard/address/validate
 		 */
-		$mandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
+		$mandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->mandatory );
 
 		/** client/html/checkout/standard/address/billing/optional
 		 * List of billing address input fields that are optional
@@ -449,7 +449,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/checkout/standard/address/countries
 		 * @see client/html/checkout/standard/address/validate
 		 */
-		$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
+		$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->optional );
 
 		/** client/html/checkout/standard/address/validate
 		 * List of regular expressions to validate the data of the address fields
@@ -662,9 +662,9 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -676,11 +676,11 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
@@ -767,13 +767,13 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			 */
 			$view->billingSalutations = $view->config( 'client/html/checkout/standard/address/billing/salutations', $salutations );
 
-			$view->billingMandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
-			$view->billingOptional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
+			$view->billingMandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->mandatory );
+			$view->billingOptional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->optional );
 			$view->billingHidden = $hidden;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

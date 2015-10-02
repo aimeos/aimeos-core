@@ -151,7 +151,7 @@ class MShop_Service_Manager_Factory
 		 * @see mshop/service/manager/decorators/excludes
 		 * @see mshop/service/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'service' );
+		return self::addManagerDecorators( $context, $manager, 'service' );
 	}
 
 }

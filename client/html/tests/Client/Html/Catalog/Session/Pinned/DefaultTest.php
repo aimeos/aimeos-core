@@ -6,8 +6,8 @@
 
 class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -18,11 +18,11 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
 
-		$this->_object = new Client_Html_Catalog_Session_Pinned_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Session_Pinned_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -34,24 +34,24 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', null );
-		unset( $this->_object );
+		$this->context->getSession()->set( 'aimeos/catalog/session/pinned/list', null );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$pinned = array( $this->_getProductItem( 'CNC' )->getId() );
-		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', $pinned );
+		$pinned = array( $this->getProductItem( 'CNC' )->getId() );
+		$this->context->getSession()->set( 'aimeos/catalog/session/pinned/list', $pinned );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#.*Cafe Noire Cappuccino.*#smU', $output );
 		$this->assertStringStartsWith( '<section class="catalog-session-pinned">', $output );
@@ -61,15 +61,15 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcessAdd()
 	{
-		$prodId = $this->_getProductItem( 'CNE' )->getId();
+		$prodId = $this->getProductItem( 'CNE' )->getId();
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'pin_action' => 'add',
 			'pin_id' => $prodId,
@@ -78,19 +78,19 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$pinned = $this->_context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
+		$pinned = $this->context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
 		$this->assertEquals( array( $prodId => $prodId ), $pinned );
 	}
 
 
 	public function testProcessDelete()
 	{
-		$prodId = $this->_getProductItem( 'CNE' )->getId();
-		$this->_context->getSession()->set( 'aimeos/catalog/session/pinned/list', array( $prodId => $prodId ) );
+		$prodId = $this->getProductItem( 'CNE' )->getId();
+		$this->context->getSession()->set( 'aimeos/catalog/session/pinned/list', array( $prodId => $prodId ) );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array(
 			'pin_action' => 'delete',
 			'pin_id' => $prodId,
@@ -99,9 +99,9 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$pinned = $this->_context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
+		$pinned = $this->context->getSession()->get( 'aimeos/catalog/session/pinned/list' );
 		$this->assertEquals( array(), $pinned );
 	}
 
@@ -113,9 +113,9 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	 * @throws Exception If no product is found
 	 * @return MShop_Product_Item_Interface
 	 */
-	protected function _getProductItem( $code )
+	protected function getProductItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'product' );
+		$manager = MShop_Factory::createManager( $this->context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );

@@ -142,6 +142,6 @@ class Controller_ExtJS_Locale_Site_Factory
 		 * @see controller/extjs/locale/site/decorators/excludes
 		 * @see controller/extjs/locale/site/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'locale/site' );
+		return self::addControllerDecorators( $context, $controller, 'locale/site' );
 	}
 }

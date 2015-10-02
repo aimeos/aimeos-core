@@ -8,7 +8,7 @@
 
 class MW_View_Helper_Partial_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Partial_DefaultTest extends PHPUnit_Framework_TestCase
 		$conf = new MW_Config_Array();
 		$paths = array( __DIR__ => array( 'testfiles' ) );
 
-		$this->_object = new MW_View_Helper_Partial_Default( $view, $conf, $paths );
+		$this->object = new MW_View_Helper_Partial_Default( $view, $conf, $paths );
 	}
 
 
@@ -35,18 +35,18 @@ class MW_View_Helper_Partial_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertEquals( '', $this->_object->transform( '', 'partial.html' ) );
+		$this->assertEquals( '', $this->object->transform( '', 'partial.html' ) );
 	}
 
 
 	public function testTransformParams()
 	{
-		$this->assertEquals( 'test', $this->_object->transform( '', 'partial.html', array( 'testparam' => 'test' ) ) );
+		$this->assertEquals( 'test', $this->object->transform( '', 'partial.html', array( 'testparam' => 'test' ) ) );
 	}
 }

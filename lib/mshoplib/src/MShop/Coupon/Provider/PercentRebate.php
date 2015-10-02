@@ -25,7 +25,7 @@ class MShop_Coupon_Provider_PercentRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
@@ -46,8 +46,8 @@ class MShop_Coupon_Provider_PercentRebate
 		}
 
 		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
-		$orderProducts = $this->_createMonetaryRebateProducts( $base, $config['percentrebate.productcode'], $rebate );
+		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['percentrebate.productcode'], $rebate );
 
-		$base->addCoupon( $this->_getCode(), $orderProducts );
+		$base->addCoupon( $this->getCode(), $orderProducts );
 	}
 }

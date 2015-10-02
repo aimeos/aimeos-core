@@ -18,7 +18,7 @@ class MAdmin_Cache_Item_Default
 	extends MShop_Common_Item_Abstract
 	implements MAdmin_Cache_Item_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -30,7 +30,7 @@ class MAdmin_Cache_Item_Default
 	{
 		parent::__construct( 'cache.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -41,7 +41,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getId()
 	{
-		return ( isset( $this->_values['id'] ) ? (string) $this->_values['id'] : null );
+		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
 	}
 
 
@@ -54,7 +54,7 @@ class MAdmin_Cache_Item_Default
 	{
 		if( $id === $this->getId() ) { return; }
 
-		$this->_values['id'] = (string) $id;
+		$this->values['id'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -66,7 +66,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->_values['siteid'] ) ? (int) $this->_values['siteid'] : null );
+		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
 	}
 
 
@@ -77,7 +77,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->_values['value'] ) ? (string) $this->_values['value'] : '' );
+		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
 	}
 
 
@@ -88,7 +88,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function setValue( $value )
 	{
-		$this->_values['value'] = (string) $value;
+		$this->values['value'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -100,7 +100,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getTimeExpire()
 	{
-		return ( isset( $this->_values['expire'] ) ? (string) $this->_values['expire'] : null );
+		return ( isset( $this->values['expire'] ) ? (string) $this->values['expire'] : null );
 	}
 
 
@@ -114,10 +114,10 @@ class MAdmin_Cache_Item_Default
 		if( $timestamp !== null )
 		{
 			$timestamp = (string) $timestamp;
-			$this->_checkDateFormat( $timestamp );
+			$this->checkDateFormat( $timestamp );
 		}
 
-		$this->_values['expire'] = $timestamp;
+		$this->values['expire'] = $timestamp;
 		$this->setModified();
 	}
 
@@ -129,7 +129,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getTags()
 	{
-		return ( isset( $this->_values['tags'] ) ? (array) $this->_values['tags'] : array() );
+		return ( isset( $this->values['tags'] ) ? (array) $this->values['tags'] : array() );
 	}
 
 
@@ -140,7 +140,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function setTags( array $tags )
 	{
-		$this->_values['tags'] = $tags;
+		$this->values['tags'] = $tags;
 		$this->setModified();
 	}
 

@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		 * @see controller/jobs/product/export/sitemap/export/sitemap/decorators/excludes
 		 * @see controller/jobs/product/export/sitemap/export/sitemap/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/export/sitemap' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/export/sitemap' );
 	}
 }

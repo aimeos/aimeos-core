@@ -16,7 +16,7 @@
  */
 class MShop_Service_Exception extends MShop_Exception
 {
-	private $_errorCodes = array();
+	private $errorCodes = array();
 
 
 	/**
@@ -31,7 +31,7 @@ class MShop_Service_Exception extends MShop_Exception
 	{
 		parent::__construct( $message, $code );
 
-		$this->_errorCodes = $errorCodes;
+		$this->errorCodes = $errorCodes;
 	}
 
 
@@ -42,6 +42,6 @@ class MShop_Service_Exception extends MShop_Exception
 	 */
 	public function getErrorCodes()
 	{
-		return $this->_errorCodes;
+		return $this->errorCodes;
 	}
 }

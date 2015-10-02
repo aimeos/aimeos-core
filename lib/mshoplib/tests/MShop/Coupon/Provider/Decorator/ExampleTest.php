@@ -11,8 +11,8 @@
  */
 class MShop_Coupon_Provider_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_orderBase;
+	private $object;
+	private $orderBase;
 
 
 	/**
@@ -28,11 +28,11 @@ class MShop_Coupon_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Test
 		$item = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
 
 		$provider = new MShop_Coupon_Provider_Example( $context, $item, 'abcd' );
-		$this->_object = new MShop_Coupon_Provider_Decorator_Example( $context, $item, 'abcd', $provider );
-		$this->_object->setObject( $this->_object );
+		$this->object = new MShop_Coupon_Provider_Decorator_Example( $context, $item, 'abcd', $provider );
+		$this->object->setObject( $this->object );
 	}
 
 	/**
@@ -43,33 +43,33 @@ class MShop_Coupon_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_orderBase );
+		unset( $this->object );
+		unset( $this->orderBase );
 	}
 
 
 	public function testAddCoupon()
 	{
-		$this->_object->addCoupon( $this->_orderBase );
+		$this->object->addCoupon( $this->orderBase );
 	}
 
 	public function testDeleteCoupon()
 	{
-		$this->_object->deleteCoupon( $this->_orderBase );
+		$this->object->deleteCoupon( $this->orderBase );
 	}
 
 	public function testUpdateCoupon()
 	{
-		$this->_object->updateCoupon( $this->_orderBase );
+		$this->object->updateCoupon( $this->orderBase );
 	}
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 	public function testSetObject()
 	{
-		$this->_object->setObject( $this->_object );
+		$this->object->setObject( $this->object );
 	}
 }

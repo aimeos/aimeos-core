@@ -12,7 +12,7 @@
 class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Abstract
 {
 
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_global_currency' => array(
 			'RENAME TABLE "mshop_global_currency" TO "mshop_locale_currency"',
 		),
@@ -59,9 +59,9 @@ class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -69,18 +69,18 @@ class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming global tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Renaming global tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			if( $this->_schema->tableExists( $table ) )
+			if( $this->schema->tableExists( $table ) )
 			{
-				$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
-				$this->_executeList( $stmtList );
-				$this->_status( 'Ok' );
+				$this->msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+				$this->executeList( $stmtList );
+				$this->status( 'Ok' );
 			}
 		}
 	}

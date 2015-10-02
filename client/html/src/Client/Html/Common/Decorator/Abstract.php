@@ -18,7 +18,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	extends Client_Html_Abstract
 	implements Client_Html_Common_Decorator_Interface
 {
-	private $_client;
+	private $client;
 
 
 	/**
@@ -33,7 +33,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	{
 		parent::__construct( $context, $templatePaths );
 
-		$this->_client = $client;
+		$this->client = $client;
 	}
 
 
@@ -47,7 +47,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->_client, $name ), $param ) ) === false ) {
+		if( ( $result = call_user_func_array( array( $this->client, $name ), $param ) ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
@@ -64,7 +64,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_client->getSubClient( $type, $name );
+		return $this->client->getSubClient( $type, $name );
 	}
 
 
@@ -78,7 +78,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		return $this->_client->getHeader( $uid, $tags, $expire );
+		return $this->client->getHeader( $uid, $tags, $expire );
 	}
 
 
@@ -92,7 +92,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		return $this->_client->getBody( $uid, $tags, $expire );
+		return $this->client->getBody( $uid, $tags, $expire );
 	}
 
 
@@ -103,7 +103,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function getView()
 	{
-		return $this->_client->getView();
+		return $this->client->getView();
 	}
 
 
@@ -115,7 +115,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function setView( MW_View_Interface $view )
 	{
-		$this->_client->setView( $view );
+		$this->client->setView( $view );
 		return $this;
 	}
 
@@ -130,7 +130,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function isCachable( $what )
 	{
-		return $this->_client->isCachable( $what );
+		return $this->client->isCachable( $what );
 	}
 
 
@@ -143,7 +143,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function modifyBody( $content, $uid )
 	{
-		return $this->_client->modifyBody( $content, $uid );
+		return $this->client->modifyBody( $content, $uid );
 	}
 
 
@@ -156,7 +156,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function modifyHeader( $content, $uid )
 	{
-		return $this->_client->modifyHeader( $content, $uid );
+		return $this->client->modifyHeader( $content, $uid );
 	}
 
 
@@ -167,7 +167,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 */
 	public function process()
 	{
-		$this->_client->process();
+		$this->client->process();
 	}
 
 
@@ -176,8 +176,8 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 *
 	 * @return Client_Html_Interface HTML client
 	 */
-	protected function _getClient()
+	protected function getClient()
 	{
-		return $this->_client;
+		return $this->client;
 	}
 }

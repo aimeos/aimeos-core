@@ -142,6 +142,6 @@ class Controller_ExtJS_Price_Factory
 		 * @see controller/extjs/price/decorators/excludes
 		 * @see controller/extjs/price/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'price' );
+		return self::addControllerDecorators( $context, $controller, 'price' );
 	}
 }

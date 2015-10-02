@@ -142,6 +142,6 @@ class Controller_ExtJS_Product_Property_Type_Factory
 		 * @see controller/extjs/product/property/type/decorators/excludes
 		 * @see controller/extjs/product/property/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'product/property/type' );
+		return self::addControllerDecorators( $context, $controller, 'product/property/type' );
 	}
 }

@@ -9,7 +9,7 @@
 class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 	extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $aimeos );
+		$this->object = new Controller_Jobs_Order_Cleanup_Unfinished_Default( $context, $aimeos );
 	}
 
 
@@ -35,20 +35,20 @@ class Controller_Jobs_Order_Cleanup_Unfinished_DefaultTest
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Removes unfinished orders', $this->_object->getName() );
+		$this->assertEquals( 'Removes unfinished orders', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Deletes unfinished orders an makes their products and coupon codes available again';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 

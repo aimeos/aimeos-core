@@ -77,7 +77,7 @@ class Client_Html_Email_Watch_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'email/watch' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'email/watch' );
 	}
 }
 

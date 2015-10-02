@@ -11,7 +11,7 @@
 
 class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'minorder' => array(
 			'select' => 'SELECT COUNT(*) AS "cnt" FROM "mshop_plugin" WHERE "config" LIKE \'%minorder%\'',
 			'update' => 'UPDATE "mshop_plugin" SET "config" = REPLACE("config", \'minorder\', \'min-value\') WHERE "config" LIKE \'%minorder%\'',
@@ -51,9 +51,9 @@ class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Ab
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -62,25 +62,25 @@ class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Ab
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating "Complete" to "BasketLimits" plugin', 0 ); $this->_status( '' );
+		$this->msg( 'Migrating "Complete" to "BasketLimits" plugin', 0 ); $this->status( '' );
 
-		if( $this->_schema->columnExists( 'mshop_plugin', 'config' ) === true
-			&& $this->_schema->columnExists( 'mshop_plugin', 'provider' ) === true
+		if( $this->schema->columnExists( 'mshop_plugin', 'config' ) === true
+			&& $this->schema->columnExists( 'mshop_plugin', 'provider' ) === true
 		) {
 			foreach( $stmts as $key => $list )
 			{
-				$this->_msg( sprintf( 'Migrating "%1$s"', $key ), 1 );
+				$this->msg( sprintf( 'Migrating "%1$s"', $key ), 1 );
 
-				if( $this->_getValue( $list['select'], 'cnt' ) > 0 )
+				if( $this->getValue( $list['select'], 'cnt' ) > 0 )
 				{
-					$this->_execute( $list['update'] );
-					$this->_status( 'migrated' );
+					$this->execute( $list['update'] );
+					$this->status( 'migrated' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

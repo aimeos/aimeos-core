@@ -11,8 +11,8 @@
  */
 class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_client;
-	private $_object;
+	private $client;
+	private $object;
 
 
 	/**
@@ -26,68 +26,68 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 		$context = TestHelper::getContext();
 		$methods = array( 'getHeader', 'getBody' );
 
-		$this->_client = $this->getMock( 'Client_Html_Catalog_Filter_Default', $methods, array( $context, array() ) );
-		$this->_object = new Client_Html_Common_Decorator_Example( $context, array(), $this->_client );
-		$this->_object->setView( TestHelper::getView());
+		$this->client = $this->getMock( 'Client_Html_Catalog_Filter_Default', $methods, array( $context, array() ) );
+		$this->object = new Client_Html_Common_Decorator_Example( $context, array(), $this->client );
+		$this->object->setView( TestHelper::getView());
 	}
 
 
 	public function testCall()
 	{
-		$this->assertInternalType( 'boolean', $this->_object->additionalMethod() );
+		$this->assertInternalType( 'boolean', $this->object->additionalMethod() );
 	}
 
 
 	public function testGetSubClient()
 	{
-		$this->assertInstanceOf( 'Client_Html_Interface', $this->_object->getSubClient( 'tree' ) );
+		$this->assertInstanceOf( 'Client_Html_Interface', $this->object->getSubClient( 'tree' ) );
 	}
 
 
 	public function testGetHeader()
 	{
-		$this->_client->expects( $this->once() )->method( 'getHeader' )->will( $this->returnValue( 'header' ) );
-		$this->assertEquals( 'header', $this->_object->getHeader() );
+		$this->client->expects( $this->once() )->method( 'getHeader' )->will( $this->returnValue( 'header' ) );
+		$this->assertEquals( 'header', $this->object->getHeader() );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->_client->expects( $this->once() )->method( 'getBody' )->will( $this->returnValue( 'body' ) );
-		$this->assertEquals( 'body', $this->_object->getBody() );
+		$this->client->expects( $this->once() )->method( 'getBody' )->will( $this->returnValue( 'body' ) );
+		$this->assertEquals( 'body', $this->object->getBody() );
 	}
 
 
 	public function testGetView()
 	{
-		$this->assertInstanceOf( 'MW_View_Interface', $this->_object->getView() );
+		$this->assertInstanceOf( 'MW_View_Interface', $this->object->getView() );
 	}
 
 
 	public function testSetView()
 	{
 		$view = new MW_View_Default();
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$this->assertSame( $view, $this->_object->getView() );
+		$this->assertSame( $view, $this->object->getView() );
 	}
 
 
 	public function testModifyBody()
 	{
-		$this->assertEquals( 'test', $this->_object->modifyBody( 'test', 1 ) );
+		$this->assertEquals( 'test', $this->object->modifyBody( 'test', 1 ) );
 	}
 
 
 	public function testModifyHeader()
 	{
-		$this->assertEquals( 'test', $this->_object->modifyHeader( 'test', 1 ) );
+		$this->assertEquals( 'test', $this->object->modifyHeader( 'test', 1 ) );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 }

@@ -151,6 +151,6 @@ class MShop_Text_Manager_Factory
 		 * @see mshop/text/manager/decorators/excludes
 		 * @see mshop/text/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'text' );
+		return self::addManagerDecorators( $context, $manager, 'text' );
 	}
 }

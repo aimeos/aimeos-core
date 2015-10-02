@@ -18,7 +18,7 @@ class MShop_Customer_Item_Group_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Customer_Item_Group_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -30,7 +30,7 @@ class MShop_Customer_Item_Group_Default
 	{
 		parent::__construct( 'customer.group.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -41,7 +41,7 @@ class MShop_Customer_Item_Group_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Customer_Item_Group_Default
 	{
 		if( $value == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $value;
+		$this->values['code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -66,7 +66,7 @@ class MShop_Customer_Item_Group_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -79,7 +79,7 @@ class MShop_Customer_Item_Group_Default
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $value;
+		$this->values['label'] = (string) $value;
 		$this->setModified();
 	}
 

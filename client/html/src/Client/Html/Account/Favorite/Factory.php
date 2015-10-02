@@ -77,7 +77,7 @@ class Client_Html_Account_Favorite_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'account/favorite' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'account/favorite' );
 	}
 
 }

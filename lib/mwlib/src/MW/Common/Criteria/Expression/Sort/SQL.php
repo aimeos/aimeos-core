@@ -18,10 +18,10 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	extends MW_Common_Criteria_Expression_Abstract
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
-	private static $_operators = array( '+' => 'ASC', '-' => 'DESC' );
-	private $_operator;
-	private $_conn;
-	private $_name;
+	private static $operators = array( '+' => 'ASC', '-' => 'DESC' );
+	private $operator;
+	private $conn;
+	private $name;
 
 
 	/**
@@ -33,13 +33,13 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 */
 	public function __construct( MW_DB_Connection_Interface $conn, $operator, $name )
 	{
-		if( !isset( self::$_operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		$this->_operator = $operator;
-		$this->_conn = $conn;
-		$this->_name = $name;
+		$this->operator = $operator;
+		$this->conn = $conn;
+		$this->name = $name;
 	}
 
 
@@ -50,7 +50,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 */
 	public function getOperator()
 	{
-		return $this->_operator;
+		return $this->operator;
 	}
 
 
@@ -61,7 +61,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$_operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -72,7 +72,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -86,11 +86,11 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		$this->_setPlugins( $plugins );
+		$this->setPlugins( $plugins );
 
-		$name = $this->_name;
+		$name = $this->name;
 
-		if( ( $transname = $this->_translateName( $name, $translations ) ) === '' ) {
+		if( ( $transname = $this->translateName( $name, $translations ) ) === '' ) {
 			return '';
 		}
 
@@ -98,7 +98,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return $transname . ' ' . self::$_operators[$this->_operator];
+		return $transname . ' ' . self::$operators[$this->operator];
 	}
 
 
@@ -110,9 +110,9 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
-	protected function _escape( $operator, $type, $value )
+	protected function escape( $operator, $type, $value )
 	{
-		$value = $this->_translateValue( $this->getName(), $value );
+		$value = $this->translateValue( $this->getName(), $value );
 
 		switch( $type )
 		{
@@ -124,10 +124,10 @@ class MW_Common_Criteria_Expression_Sort_SQL
 				$value = (float) $value; break;
 			case MW_DB_Statement_Abstract::PARAM_STR:
 				if( $operator == '~=' ) {
-					$value = '\'%' . $this->_conn->escape( $value ) . '%\''; break;
+					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
 			default:
-				$value = '\'' . $this->_conn->escape( $value ) . '\'';
+				$value = '\'' . $this->conn->escape( $value ) . '\'';
 		}
 
 		return (string) $value;
@@ -141,7 +141,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 * @return integer Internal parameter type
 	 * @throws MW_Common_Exception If an error occurs
 	 */
-	protected function _getParamType( &$item )
+	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{

@@ -18,7 +18,7 @@ class MW_View_Helper_Mail_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_message;
+	private $message;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_Mail_Default
 	{
 		parent::__construct( $view );
 
-		$this->_message = $message;
+		$this->message = $message;
 	}
 
 
@@ -42,6 +42,6 @@ class MW_View_Helper_Mail_Default
 	 */
 	public function transform()
 	{
-		return $this->_message;
+		return $this->message;
 	}
 }

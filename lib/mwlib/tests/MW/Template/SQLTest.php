@@ -8,14 +8,14 @@
  */
 class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
 	{
 		$template = 'SELECT * FROM /*-FROM*/table/*FROM-*/';
 
-		$this->_object = new MW_Template_SQL( $template );
+		$this->object = new MW_Template_SQL( $template );
 	}
 
 
@@ -31,7 +31,7 @@ class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testToString()
 	{
-		$template = $this->_object->get('FROM');
+		$template = $this->object->get('FROM');
 		$this->assertInstanceOf( 'MW_Template_Interface', $template );
 
 		$this->assertEquals( 'table', $template->str() );

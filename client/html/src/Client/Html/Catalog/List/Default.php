@@ -51,7 +51,7 @@ class Client_Html_Catalog_List_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/list/default/subparts';
+	private $subPartPath = 'client/html/catalog/list/default/subparts';
 
 	/** client/html/catalog/list/head/name
 	 * Name of the head part used by the catalog list client implementation
@@ -107,11 +107,11 @@ class Client_Html_Catalog_List_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'head', 'quote', 'promo', 'pagination', 'items', 'pagination' );
+	private $subPartNames = array( 'head', 'quote', 'promo', 'pagination', 'items', 'pagination' );
 
-	private $_tags = array();
-	private $_expire;
-	private $_cache;
+	private $tags = array();
+	private $expire;
+	private $cache;
 
 
 	/**
@@ -138,17 +138,17 @@ class Client_Html_Catalog_List_Default
 		 */
 		$confkey = 'client/html/catalog/list';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$html = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->listBody = $html;
@@ -199,9 +199,9 @@ class Client_Html_Catalog_List_Default
 			$tplconf = 'client/html/catalog/list/default/template-body';
 			$default = 'catalog/list/body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$this->_setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
+			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
@@ -225,16 +225,16 @@ class Client_Html_Catalog_List_Default
 		$prefixes = array( 'f', 'l' );
 		$confkey = 'client/html/catalog/list';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$html = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->listHeader = $html;
@@ -263,13 +263,13 @@ class Client_Html_Catalog_List_Default
 				$tplconf = 'client/html/catalog/list/default/template-header';
 				$default = 'catalog/list/header-default.html';
 
-				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-				$this->_setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
+				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -364,7 +364,7 @@ class Client_Html_Catalog_List_Default
 		 * @see client/html/catalog/list/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/list/' . $type, $name );
+		return $this->createSubClient( 'catalog/list/' . $type, $name );
 	}
 
 
@@ -375,13 +375,13 @@ class Client_Html_Catalog_List_Default
 	 */
 	public function process()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
 			$site = $context->getLocale()->getSite()->getCode();
-			$params = $this->_getClientParams( $view->param() );
+			$params = $this->getClientParams( $view->param() );
 			$context->getSession()->set( 'aimeos/catalog/list/params/last/' . $site, $params );
 
 			parent::process();
@@ -416,9 +416,9 @@ class Client_Html_Catalog_List_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -430,14 +430,14 @@ class Client_Html_Catalog_List_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 
-			$products = $this->_getProductList( $view );
+			$products = $this->getProductList( $view );
 
 			$text = (string) $view->param( 'f_search' );
 			$catid = (string) $view->param( 'f_catid' );
@@ -459,8 +459,8 @@ class Client_Html_Catalog_List_Default
 					$view->listCurrentCatItem = $categoryItem;
 				}
 
-				$this->_addMetaItem( $listCatPath, 'catalog', $this->_expire, $this->_tags );
-				$this->_addMetaList( array_keys( $listCatPath ), 'catalog', $this->_expire );
+				$this->addMetaItem( $listCatPath, 'catalog', $this->expire, $this->tags );
+				$this->addMetaList( array_keys( $listCatPath ), 'catalog', $this->expire );
 			}
 
 			/** client/html/catalog/list/stock/enable
@@ -565,25 +565,25 @@ class Client_Html_Catalog_List_Default
 			}
 
 
-			$this->_addMetaItem( $products, 'product', $this->_expire, $this->_tags );
-			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
+			$this->addMetaItem( $products, 'product', $this->expire, $this->tags );
+			$this->addMetaList( array_keys( $products ), 'product', $this->expire );
 
 			// Delete cache when products are added or deleted even when in "tag-all" mode
-			$this->_tags[] = 'product';
+			$this->tags[] = 'product';
 
-			$view->listParams = $this->_getClientParams( $view->param() );
-			$view->listPageCurr = $this->_getProductListPage( $view );
-			$view->listPageSize = $this->_getProductListSize( $view );
-			$view->listProductTotal = $this->_getProductListTotal( $view );
+			$view->listParams = $this->getClientParams( $view->param() );
+			$view->listPageCurr = $this->getProductListPage( $view );
+			$view->listPageSize = $this->getProductListSize( $view );
+			$view->listProductTotal = $this->getProductListTotal( $view );
 			$view->listProductSort = $view->param( 'f_sort', 'relevance' );
 			$view->listProductItems = $products;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

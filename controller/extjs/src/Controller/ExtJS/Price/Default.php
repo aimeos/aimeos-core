@@ -19,7 +19,7 @@ class Controller_ExtJS_Price_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,16 +41,16 @@ class Controller_ExtJS_Price_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		$total = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
+		$search = $this->initCriteria( $this->getManager()->createSearch(), $params );
 
 		if( isset( $params->domain ) && isset( $params->parentid )
 			&& ( !isset( $params->options->showall ) || $params->options->showall == false ) )
 		{
-			$listManager = MShop_Factory::createManager( $this->_getContext(), $params->domain . '/list' );
+			$listManager = MShop_Factory::createManager( $this->getContext(), $params->domain . '/list' );
 			$criteria = $listManager->createSearch();
 
 			$expr = array();
@@ -71,10 +71,10 @@ class Controller_ExtJS_Price_Default
 			$search->setConditions( $search->combine( '&&', $expr ) );
 		}
 
-		$items = $this->_getManager()->searchItems( $search, array(), $total );
+		$items = $this->getManager()->searchItems( $search, array(), $total );
 
 		return array(
-			'items' => $this->_toArray( $items ),
+			'items' => $this->toArray( $items ),
 			'total' => $total,
 			'success' => true,
 		);
@@ -130,13 +130,13 @@ class Controller_ExtJS_Price_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$idList = array();
 		$ids = (array) $params->items;
-		$context = $this->_getContext();
-		$manager = $this->_getManager();
+		$context = $this->getContext();
+		$manager = $this->getManager();
 
 
 		$search = $manager->createSearch();
@@ -176,7 +176,7 @@ class Controller_ExtJS_Price_Default
 			while( $count >= $search->getSliceSize() );
 		}
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
 		return array(
 				'items' => $params->items,
@@ -190,13 +190,13 @@ class Controller_ExtJS_Price_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'price' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -205,7 +205,7 @@ class Controller_ExtJS_Price_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'price';
 	}

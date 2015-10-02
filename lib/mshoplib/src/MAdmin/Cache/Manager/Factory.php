@@ -149,6 +149,6 @@ class MAdmin_Cache_Manager_Factory
 		 * @see madmin/cache/manager/decorators/excludes
 		 * @see madmin/cache/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'cache' );
+		return self::addManagerDecorators( $context, $manager, 'cache' );
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_product"
 			SET "typeid" = ( SELECT "id" FROM "mshop_product_type" WHERE "siteid" IS NULL AND "domain" = \'product\' AND "code" = \'product\' )
 			WHERE "typeid" IS NULL',
@@ -44,9 +44,9 @@ class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -54,22 +54,22 @@ class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Changing typeid column of product table', 0 ); $this->_status( '' );
+		$this->msg( 'Changing typeid column of product table', 0 ); $this->status( '' );
 
-		$this->_msg( sprintf( 'Checking table "%1$s": ', 'mshop_product' ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s": ', 'mshop_product' ), 1 );
 
-		if( $this->_schema->tableExists( 'mshop_product' ) === true
-			&& $this->_schema->columnExists( 'mshop_product', 'typeid' ) === true
-			&& $this->_schema->getColumnDetails( 'mshop_product', 'typeid' )->isNullable() === true )
+		if( $this->schema->tableExists( 'mshop_product' ) === true
+			&& $this->schema->columnExists( 'mshop_product', 'typeid' ) === true
+			&& $this->schema->getColumnDetails( 'mshop_product', 'typeid' )->isNullable() === true )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'migrated' );
+			$this->executeList( $stmts );
+			$this->status( 'migrated' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

@@ -16,10 +16,10 @@ class MW_Setup_Task_OneTask extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_status( '' );
-		$this->_msg( 'Executing OneTask' );
-		$this->_status( 'OK' );
+		$this->status( '' );
+		$this->msg( 'Executing OneTask' );
+		$this->status( 'OK' );
 	}
 }

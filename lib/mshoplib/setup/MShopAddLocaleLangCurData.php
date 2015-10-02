@@ -36,28 +36,28 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Creates new locale data if necessary
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Add locale data for languages and currencies', 0 );
-		$this->_status( '' );
+		$this->msg( 'Add locale data for languages and currencies', 0 );
+		$this->status( '' );
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
 
 
 		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'language.php';
@@ -67,7 +67,7 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 		}
 
 		if( isset( $data['locale/language'] ) ) {
-			$this->_addLocaleLanguageData( $localeManager, $data['locale/language'] );
+			$this->addLocaleLanguageData( $localeManager, $data['locale/language'] );
 		}
 
 
@@ -78,7 +78,7 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 		}
 
 		if( isset( $data['locale/currency'] ) ) {
-			$this->_addLocaleCurrencyData( $localeManager, $data['locale/currency'] );
+			$this->addLocaleCurrencyData( $localeManager, $data['locale/currency'] );
 		}
 	}
 }

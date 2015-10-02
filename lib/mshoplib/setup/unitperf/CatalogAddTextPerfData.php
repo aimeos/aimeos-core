@@ -36,12 +36,12 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 	/**
 	 * Insert catalog nodes and product/catalog relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding catalog text performance data', 0 );
+		$this->msg( 'Adding catalog text performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'list' );
@@ -89,7 +89,7 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$listItem->setDomain( 'text' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = $pos = 0;
 		$search = $catalogManager->createSearch();
@@ -121,9 +121,9 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

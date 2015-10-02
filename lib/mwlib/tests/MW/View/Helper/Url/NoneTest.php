@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Url_None( $view );
+		$this->object = new MW_View_Helper_Url_None( $view );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -44,7 +44,7 @@ class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 		$trailing = array( 'some', 'nice', 'text' );
 
-		$this->assertEquals( '', $this->_object->transform( 'module', 'test', 'index', $params, $trailing ) );
+		$this->assertEquals( '', $this->object->transform( 'module', 'test', 'index', $params, $trailing ) );
 	}
 
 }

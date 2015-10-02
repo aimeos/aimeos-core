@@ -8,9 +8,9 @@
 
 class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_aimeos;
+	private $object;
+	private $context;
+	private $aimeos;
 
 
 	/**
@@ -21,10 +21,10 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_aimeos = TestHelper::getAimeos();
+		$this->context = TestHelper::getContext();
+		$this->aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Customer_Email_Watch_Default( $this->_context, $this->_aimeos );
+		$this->object = new Controller_Jobs_Customer_Email_Watch_Default( $this->context, $this->aimeos );
 	}
 
 
@@ -36,20 +36,20 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Product notification e-mails', $this->_object->getName() );
+		$this->assertEquals( 'Product notification e-mails', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Sends e-mails for watched products';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
@@ -70,18 +70,18 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 
 		$mailStub->expects( $this->once() )->method( 'send' );
 
-		$this->_context->setMail( $mailStub );
+		$this->context->setMail( $mailStub );
 
 
-		$product = $this->_getProductItem();
+		$product = $this->getProductItem();
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
-			->setConstructorArgs( array( $this->_context, $this->_aimeos ) )
-			->setMethods( array( '_getListProducts' ) )
+			->setConstructorArgs( array( $this->context, $this->aimeos ) )
+			->setMethods( array( 'getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( '_getListProducts' )
+		$object->expects( $this->once() )->method( 'getListProducts' )
 			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
@@ -99,18 +99,18 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 			->method( 'createMessage' )
 			->will( $this->throwException( new Exception() ) );
 
-		$this->_context->setMail( $mailStub );
+		$this->context->setMail( $mailStub );
 
 
-		$product = $this->_getProductItem();
+		$product = $this->getProductItem();
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
-			->setConstructorArgs( array( $this->_context, $this->_aimeos ) )
-			->setMethods( array( '_getListProducts' ) )
+			->setConstructorArgs( array( $this->context, $this->aimeos ) )
+			->setMethods( array( 'getListProducts' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( '_getListProducts' )
+		$object->expects( $this->once() )->method( 'getListProducts' )
 			->will( $this->returnValue( array( -1 => array( 'item' => $product, 'price' => reset( $prices ) ) ) ) );
 
 
@@ -118,9 +118,9 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search, array( 'media', 'price', 'text' ) );

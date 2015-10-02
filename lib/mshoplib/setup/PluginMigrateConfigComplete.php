@@ -11,7 +11,7 @@
 
 class MW_Setup_Task_PluginMigrateConfigComplete extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'select' => 'SELECT COUNT(*) AS "cnt" FROM "mshop_plugin" WHERE "config" LIKE \'%minorder%\'',
 		'update' => 'UPDATE "mshop_plugin" SET "config" = REPLACE("config", \'minorder\', \'min-value\') WHERE "config" LIKE \'%minorder%\'',
 	);
@@ -41,9 +41,9 @@ class MW_Setup_Task_PluginMigrateConfigComplete extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,21 +52,21 @@ class MW_Setup_Task_PluginMigrateConfigComplete extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating configuration of "Complete" plugin', 0 );
+		$this->msg( 'Migrating configuration of "Complete" plugin', 0 );
 
-		if( $this->_schema->columnExists( 'mshop_plugin', 'config' ) === true )
+		if( $this->schema->columnExists( 'mshop_plugin', 'config' ) === true )
 		{
-			if( $this->_getValue( $stmts['select'], 'cnt' ) > 0 )
+			if( $this->getValue( $stmts['select'], 'cnt' ) > 0 )
 			{
-				$this->_execute( $stmts['update'] );
-				$this->_status( 'migrated' );
+				$this->execute( $stmts['update'] );
+				$this->status( 'migrated' );
 				return;
 			}
 		}
 
-		$this->_status( 'OK' );
+		$this->status( 'OK' );
 	}
 
 }

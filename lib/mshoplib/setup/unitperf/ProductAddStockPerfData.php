@@ -36,12 +36,12 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Insert price data and product/price relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product stock performance data', 0 );
+		$this->msg( 'Adding product stock performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$productStockManager = $productManager->getSubManager( 'stock' );
@@ -66,7 +66,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 		$stocklevels = array( null, 100, 80, 60, 40, 20, 10, 5, 2, 0 );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		do
 		{
@@ -91,9 +91,9 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

@@ -6,7 +6,7 @@
 
 class Client_Html_Catalog_Detail_Bundle_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -18,8 +18,8 @@ class Client_Html_Catalog_Detail_Bundle_DefaultTest extends PHPUnit_Framework_Te
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Detail_Bundle_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Detail_Bundle_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -31,18 +31,18 @@ class Client_Html_Catalog_Detail_Bundle_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -52,12 +52,12 @@ class Client_Html_Catalog_Detail_Bundle_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="catalog-detail-bundle">', $output );
 		$this->assertRegExp( '/.*Cappuccino.*/', $output );
@@ -69,11 +69,11 @@ class Client_Html_Catalog_Detail_Bundle_DefaultTest extends PHPUnit_Framework_Te
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();

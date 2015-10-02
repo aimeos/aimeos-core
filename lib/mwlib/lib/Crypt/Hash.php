@@ -352,7 +352,7 @@ class Crypt_Hash {
      * @access private
      * @param String $text
      */
-    function _md5($m)
+    function md5($m)
     {
         return pack('H*', md5($m));
     }
@@ -363,7 +363,7 @@ class Crypt_Hash {
      * @access private
      * @param String $text
      */
-    function _sha1($m)
+    function sha1($m)
     {
         return pack('H*', sha1($m));
     }
@@ -376,7 +376,7 @@ class Crypt_Hash {
      * @access private
      * @param String $text
      */
-    function _md2($m)
+    function md2($m)
     {
         static $s = array(
              41,  46,  67, 201, 162, 216, 124,   1,  61,  54,  84, 161, 236, 240, 6,
@@ -452,7 +452,7 @@ class Crypt_Hash {
      * @access private
      * @param String $text
      */
-    function _sha256($m)
+    function sha256($m)
     {
         if (extension_loaded('suhosin')) {
             return pack('H*', sha256($m));
@@ -488,19 +488,19 @@ class Crypt_Hash {
         foreach ($chunks as $chunk) {
             $w = array();
             for ($i = 0; $i < 16; $i++) {
-                extract(unpack('Ntemp', $this->_string_shift($chunk, 4)));
+                extract(unpack('Ntemp', $this->string_shift($chunk, 4)));
                 $w[] = $temp;
             }
 
             // Extend the sixteen 32-bit words into sixty-four 32-bit words
             for ($i = 16; $i < 64; $i++) {
-                $s0 = $this->_rightRotate($w[$i - 15],  7) ^
-                      $this->_rightRotate($w[$i - 15], 18) ^
-                      $this->_rightShift( $w[$i - 15],  3);
-                $s1 = $this->_rightRotate($w[$i - 2], 17) ^
-                      $this->_rightRotate($w[$i - 2], 19) ^
-                      $this->_rightShift( $w[$i - 2], 10);
-                $w[$i] = $this->_add($w[$i - 16], $s0, $w[$i - 7], $s1);
+                $s0 = $this->rightRotate($w[$i - 15],  7) ^
+                      $this->rightRotate($w[$i - 15], 18) ^
+                      $this->rightShift( $w[$i - 15],  3);
+                $s1 = $this->rightRotate($w[$i - 2], 17) ^
+                      $this->rightRotate($w[$i - 2], 19) ^
+                      $this->rightShift( $w[$i - 2], 10);
+                $w[$i] = $this->add($w[$i - 16], $s0, $w[$i - 7], $s1);
 
             }
 
@@ -509,41 +509,41 @@ class Crypt_Hash {
 
             // Main loop
             for ($i = 0; $i < 64; $i++) {
-                $s0 = $this->_rightRotate($a,  2) ^
-                      $this->_rightRotate($a, 13) ^
-                      $this->_rightRotate($a, 22);
+                $s0 = $this->rightRotate($a,  2) ^
+                      $this->rightRotate($a, 13) ^
+                      $this->rightRotate($a, 22);
                 $maj = ($a & $b) ^
                        ($a & $c) ^
                        ($b & $c);
-                $t2 = $this->_add($s0, $maj);
+                $t2 = $this->add($s0, $maj);
 
-                $s1 = $this->_rightRotate($e,  6) ^
-                      $this->_rightRotate($e, 11) ^
-                      $this->_rightRotate($e, 25);
+                $s1 = $this->rightRotate($e,  6) ^
+                      $this->rightRotate($e, 11) ^
+                      $this->rightRotate($e, 25);
                 $ch = ($e & $f) ^
-                      ($this->_not($e) & $g);
-                $t1 = $this->_add($h, $s1, $ch, $k[$i], $w[$i]);
+                      ($this->not($e) & $g);
+                $t1 = $this->add($h, $s1, $ch, $k[$i], $w[$i]);
 
                 $h = $g;
                 $g = $f;
                 $f = $e;
-                $e = $this->_add($d, $t1);
+                $e = $this->add($d, $t1);
                 $d = $c;
                 $c = $b;
                 $b = $a;
-                $a = $this->_add($t1, $t2);
+                $a = $this->add($t1, $t2);
             }
 
             // Add this chunk's hash to result so far
             $hash = array(
-                $this->_add($hash[0], $a),
-                $this->_add($hash[1], $b),
-                $this->_add($hash[2], $c),
-                $this->_add($hash[3], $d),
-                $this->_add($hash[4], $e),
-                $this->_add($hash[5], $f),
-                $this->_add($hash[6], $g),
-                $this->_add($hash[7], $h)
+                $this->add($hash[0], $a),
+                $this->add($hash[1], $b),
+                $this->add($hash[2], $c),
+                $this->add($hash[3], $d),
+                $this->add($hash[4], $e),
+                $this->add($hash[5], $f),
+                $this->add($hash[6], $g),
+                $this->add($hash[7], $h)
             );
         }
 
@@ -557,7 +557,7 @@ class Crypt_Hash {
      * @access private
      * @param String $text
      */
-    function _sha512($m)
+    function sha512($m)
     {
         if (!class_exists('Math_BigInteger')) {
             require_once('Math/BigInteger.php');
@@ -628,7 +628,7 @@ class Crypt_Hash {
         foreach ($chunks as $chunk) {
             $w = array();
             for ($i = 0; $i < 16; $i++) {
-                $temp = new Math_BigInteger($this->_string_shift($chunk, 8), 256);
+                $temp = new Math_BigInteger($this->string_shift($chunk, 8), 256);
                 $temp->setPrecision(64);
                 $w[] = $temp;
             }
@@ -743,7 +743,7 @@ class Crypt_Hash {
      * @see _sha256()
      * @return Integer
      */
-    function _rightRotate($int, $amt)
+    function rightRotate($int, $amt)
     {
         $invamt = 32 - $amt;
         $mask = (1 << $invamt) - 1;
@@ -759,7 +759,7 @@ class Crypt_Hash {
      * @see _sha256()
      * @return Integer
      */
-    function _rightShift($int, $amt)
+    function rightShift($int, $amt)
     {
         $mask = (1 << (32 - $amt)) - 1;
         return ($int >> $amt) & $mask;
@@ -773,7 +773,7 @@ class Crypt_Hash {
      * @see _sha256()
      * @return Integer
      */
-    function _not($int)
+    function not($int)
     {
         return ~$int & 0xFFFFFFFF;
     }
@@ -790,7 +790,7 @@ class Crypt_Hash {
      * @see _sha256()
      * @access private
      */
-    function _add()
+    function add()
     {
         static $mod;
         if (!isset($mod)) {
@@ -816,7 +816,7 @@ class Crypt_Hash {
      * @return String
      * @access private
      */
-    function _string_shift(&$string, $index = 1)
+    function string_shift(&$string, $index = 1)
     {
         $substr = substr($string, 0, $index);
         $string = substr($string, $index);

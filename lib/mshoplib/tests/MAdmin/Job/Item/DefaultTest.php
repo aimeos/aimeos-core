@@ -7,8 +7,8 @@
 
 class MAdmin_Job_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -19,7 +19,7 @@ class MAdmin_Job_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 1,
 			'siteid' => 2,
 			'label' => 'unittest job',
@@ -32,7 +32,7 @@ class MAdmin_Job_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'ctime' => '2000-01-01 00:00:00',
 		);
 
-		$this->_object = new MAdmin_Job_Item_Default( $this->_values );
+		$this->object = new MAdmin_Job_Item_Default( $this->values );
 	}
 
 
@@ -44,116 +44,116 @@ class MAdmin_Job_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertEquals( 1, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 2, $this->_object->getSiteId() );
+		$this->assertEquals( 2, $this->object->getSiteId() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'unittest job', $this->_object->getLabel() );
+		$this->assertEquals( 'unittest job', $this->object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'unittest job2' );
-		$this->assertEquals( 'unittest job2', $this->_object->getLabel() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLabel( 'unittest job2' );
+		$this->assertEquals( 'unittest job2', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetMethod()
 	{
-		$this->assertEquals( 'Product_Import_Text.importFile', $this->_object->getMethod() );
+		$this->assertEquals( 'Product_Import_Text.importFile', $this->object->getMethod() );
 	}
 
 
 	public function testSetMethod()
 	{
-		$this->_object->setMethod( 'Controller.method' );
-		$this->assertEquals( 'Controller.method', $this->_object->getMethod() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setMethod( 'Controller.method' );
+		$this->assertEquals( 'Controller.method', $this->object->getMethod() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetParameter()
 	{
-		$this->assertEquals( array( 'items' => 'testfile.ext' ), $this->_object->getParameter() );
+		$this->assertEquals( array( 'items' => 'testfile.ext' ), $this->object->getParameter() );
 	}
 
 
 	public function testSetParameter()
 	{
-		$this->_object->setParameter( array( 'items' => 'newfile.ext' ) );
-		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->_object->getParameter() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setParameter( array( 'items' => 'newfile.ext' ) );
+		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->object->getParameter() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetResult()
 	{
-		$this->assertEquals( array( 'items' => 'testfile2.ext' ), $this->_object->getResult() );
+		$this->assertEquals( array( 'items' => 'testfile2.ext' ), $this->object->getResult() );
 	}
 
 
 	public function testSetResult()
 	{
-		$this->_object->setResult( array( 'items' => 'newfile.ext' ) );
-		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->_object->getResult() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setResult( array( 'items' => 'newfile.ext' ) );
+		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->object->getResult() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( -1 );
-		$this->assertEquals( -1, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( -1 );
+		$this->assertEquals( -1, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unittest', $this->_object->getEditor() );
+		$this->assertEquals( 'unittest', $this->object->getEditor() );
 	}
 
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2010-01-01 00:00:00', $this->_object->getTimeModified() );
+		$this->assertEquals( '2010-01-01 00:00:00', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2000-01-01 00:00:00', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2000-01-01 00:00:00', $this->object->getTimeCreated() );
 	}
 
 
@@ -187,9 +187,9 @@ class MAdmin_Job_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$list = $this->_object->toArray();
+		$list = $this->object->toArray();
 
-		$this->assertEquals( count( $this->_values ), count( $list ) );
+		$this->assertEquals( count( $this->values ), count( $list ) );
 
 		$this->assertEquals( 1, $list['job.id'] );
 		$this->assertEquals( 2, $list['job.siteid'] );

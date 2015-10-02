@@ -142,6 +142,6 @@ class Controller_ExtJS_Customer_Group_Factory
 		 * @see controller/extjs/customer/group/decorators/excludes
 		 * @see controller/extjs/customer/group/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'customer/group' );
+		return self::addControllerDecorators( $context, $controller, 'customer/group' );
 	}
 }

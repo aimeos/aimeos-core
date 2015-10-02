@@ -18,7 +18,7 @@ class MShop_Coupon_Manager_Default
 	extends MShop_Coupon_Manager_Abstract
 	implements MShop_Coupon_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'coupon.id'=> array(
 			'code'=>'coupon.id',
 			'internalcode'=>'mcou."id"',
@@ -108,7 +108,7 @@ class MShop_Coupon_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-coupon' );
+		$this->setResourceName( 'db-coupon' );
 	}
 
 
@@ -120,7 +120,7 @@ class MShop_Coupon_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/coupon/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -155,7 +155,7 @@ class MShop_Coupon_Manager_Default
 		 */
 		$path = 'classes/coupon/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'code' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'code' ), $withsub );
 	}
 
 
@@ -166,7 +166,7 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -201,10 +201,10 @@ class MShop_Coupon_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -276,7 +276,7 @@ class MShop_Coupon_Manager_Default
 				$path = 'mshop/coupon/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId() );
 			$stmt->bind( 2, $item->getLabel() );
@@ -330,7 +330,7 @@ class MShop_Coupon_Manager_Default
 				 * @see mshop/coupon/manager/default/item/count
 				 */
 				$path = 'mshop/coupon/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -375,7 +375,7 @@ class MShop_Coupon_Manager_Default
 		 * @see mshop/coupon/manager/default/item/count
 		 */
 		$path = 'mshop/coupon/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -393,8 +393,8 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->getContext()->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
@@ -514,7 +514,7 @@ class MShop_Coupon_Manager_Default
 					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+						$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
 					$items[$row['id']] = $this->createItemBase( $row );
@@ -577,7 +577,7 @@ class MShop_Coupon_Manager_Default
 			throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$provider = new $classname( $context, $item, $code );
 
 		if( ( $provider instanceof $interface ) === false )
@@ -612,8 +612,8 @@ class MShop_Coupon_Manager_Default
 		 */
 		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', array() );
 
-		$object = $this->_addCouponDecorators( $item, $code, $provider, $names );
-		$object = $this->_addCouponDecorators( $item, $code, $object, $decorators );
+		$object = $this->addCouponDecorators( $item, $code, $provider, $names );
+		$object = $this->addCouponDecorators( $item, $code, $object, $decorators );
 		$object->setObject( $object );
 
 		return $object;

@@ -17,7 +17,7 @@
 class Controller_Common_Order_Default
 	implements Controller_Common_Order_Interface
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -27,7 +27,7 @@ class Controller_Common_Order_Default
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_context = $context;
+		$this->context = $context;
 	}
 
 
@@ -51,8 +51,8 @@ class Controller_Common_Order_Default
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem )
 	{
-		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 1, -1 );
-		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 1, -1 );
 	}
 
 
@@ -76,8 +76,8 @@ class Controller_Common_Order_Default
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem )
 	{
-		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 0, +1 );
-		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 0, +1 );
 	}
 
 
@@ -122,9 +122,9 @@ class Controller_Common_Order_Default
 	 * @param string $type Status type
 	 * @param string $value Status value
 	 */
-	protected function _addStatusItem( $parentid, $type, $value )
+	protected function addStatusItem( $parentid, $type, $value )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
 
 		$item = $manager->createItem();
 		$item->setParentId( $parentid );
@@ -140,9 +140,9 @@ class Controller_Common_Order_Default
 	 *
 	 * @return MShop_Context_Item_Interface Context item object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -152,9 +152,9 @@ class Controller_Common_Order_Default
 	 * @param string $parentid Order ID
 	 * @return MShop_Order_Item_Status_Interface|false Order status item or false if no item is available
 	 */
-	protected function _getLastStatusItem( $parentid, $type )
+	protected function getLastStatusItem( $parentid, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -178,9 +178,9 @@ class Controller_Common_Order_Default
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the coupon count
 	 */
-	protected function _updateCoupons( MShop_Order_Item_Interface $orderItem, $how = +1 )
+	protected function updateCoupons( MShop_Order_Item_Interface $orderItem, $how = +1 )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'order/base/coupon' );
 		$couponCodeManager = MShop_Factory::createManager( $context, 'coupon/code' );
 
@@ -225,21 +225,21 @@ class Controller_Common_Order_Default
 	 * @param string $status New status value stored along with the order item
 	 * @param integer $value Number to increse or decrease the stock level or coupon code count
 	 */
-	protected function _updateStatus( MShop_Order_Item_Interface $orderItem, $type, $status, $value )
+	protected function updateStatus( MShop_Order_Item_Interface $orderItem, $type, $status, $value )
 	{
-		$statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type );
+		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type );
 
 		if( $statusItem !== false && $statusItem->getValue() == $status ) {
 			return;
 		}
 
 		if( $type == MShop_Order_Item_Status_Abstract::STOCK_UPDATE ) {
-			$this->_updateStock( $orderItem, $value );
+			$this->updateStock( $orderItem, $value );
 		} elseif( $type == MShop_Order_Item_Status_Abstract::COUPON_UPDATE ) {
-			$this->_updateCoupons( $orderItem, $value );
+			$this->updateCoupons( $orderItem, $value );
 		}
 
-		$this->_addStatusItem( $orderItem->getId(), $type, $status );
+		$this->addStatusItem( $orderItem->getId(), $type, $status );
 	}
 
 
@@ -249,9 +249,9 @@ class Controller_Common_Order_Default
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
 	 */
-	protected function _updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
+	protected function updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
 		$manager = MShop_Factory::createManager( $context, 'order/base/product' );
@@ -286,7 +286,7 @@ class Controller_Common_Order_Default
 
 					$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
 
-					$this->_updateStockBundle( $bundleItems, $item->getWarehouseCode() );
+					$this->updateStockBundle( $bundleItems, $item->getWarehouseCode() );
 				}
 
 				$count = count( $items );
@@ -311,10 +311,10 @@ class Controller_Common_Order_Default
 	 * @param array $bundleItems List of items implementing MShop_Product_Item_Interface
 	 * @param string $whcode Unique warehouse code
 	 */
-	protected function _updateStockBundle( array $bundleItems, $whcode )
+	protected function updateStockBundle( array $bundleItems, $whcode )
 	{
 		$bundleMap = $prodIds = $stock = array();
-		$stockManager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
+		$stockManager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
 
 
 		foreach( $bundleItems as $bundleId => $bundleItem )

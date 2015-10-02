@@ -7,8 +7,8 @@
 
 class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_List_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,19 +35,19 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $this->_getCatalogItem()->getId() ) );
+		$view = $this->object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '	<title>Kaffee</title>', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -57,13 +57,13 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetHeaderSearch()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => '<b>Search result</b>' ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertRegexp( '#<title>[^>]*Search result[^<]*</title>#', $output );
 		$this->assertEquals( null, $expire );
@@ -73,13 +73,13 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $this->_getCatalogItem()->getId() ) );
+		$view = $this->object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="aimeos catalog-list home categories coffee">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -89,11 +89,11 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyNoDefaultCat()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 		$this->assertNotRegExp( '#.*U:TESTPSUB01.*#smu', $output );
 		$this->assertNotRegExp( '#.*U:TESTSUB03.*#smu', $output );
@@ -104,47 +104,47 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetBodyDefaultCat()
 	{
-		$context = clone $this->_context;
-		$context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->_getCatalogItem()->getId() );
+		$context = clone $this->context;
+		$context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->getCatalogItem()->getId() );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Default( $context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_List_Default( $context, $paths );
+		$this->object->setView( TestHelper::getView() );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos catalog-list home categories coffee">', $output );
 	}
 
 
 	public function testGetBodySearchText()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => 'Kaffee' ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 	}
 
 
 	public function testGetBodySearchAttribute()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => array( -1, -2 ) ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 	}
 
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'items', 'Default' );
+		$client = $this->object->getSubClient( 'items', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
@@ -152,20 +152,20 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
-	protected function _getCatalogItem()
+	protected function getCatalogItem()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
 		$items = $catalogManager->searchItems( $search );

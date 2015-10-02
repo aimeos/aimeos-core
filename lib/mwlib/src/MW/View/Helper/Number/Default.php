@@ -18,8 +18,8 @@ class MW_View_Helper_Number_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_dsep;
-	private $_tsep;
+	private $dsep;
+	private $tsep;
 
 
 	/**
@@ -33,8 +33,8 @@ class MW_View_Helper_Number_Default
 	{
 		parent::__construct( $view );
 
-		$this->_dsep = $decimalSeparator;
-		$this->_tsep = $thousandsSeperator;
+		$this->dsep = $decimalSeparator;
+		$this->tsep = $thousandsSeperator;
 	}
 
 
@@ -47,6 +47,6 @@ class MW_View_Helper_Number_Default
 	 */
 	public function transform( $number, $decimals = 2 )
 	{
-		return number_format( $number, $decimals, $this->_dsep, $this->_tsep );
+		return number_format( $number, $decimals, $this->dsep, $this->tsep );
 	}
 }

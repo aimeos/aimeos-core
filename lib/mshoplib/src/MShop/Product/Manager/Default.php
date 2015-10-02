@@ -19,7 +19,7 @@ class MShop_Product_Manager_Default
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Product_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'product.id'=> array(
 			'code'=>'product.id',
 			'internalcode'=>'mpro."id"',
@@ -132,11 +132,11 @@ class MShop_Product_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-product' );
+		$this->setResourceName( 'db-product' );
 
 		$date = date( 'Y-m-d H:i:00' );
 
-		$this->_searchConfig['product.contains']['internalcode'] =
+		$this->searchConfig['product.contains']['internalcode'] =
 			'( SELECT COUNT(mproli2."parentid") FROM "mshop_product_list" AS mproli2
 				WHERE mpro."id" = mproli2."parentid" AND :site
 					AND mproli2."domain" = $1 AND mproli2."refid" IN ( $3 ) AND mproli2."typeid" = $2
@@ -144,7 +144,7 @@ class MShop_Product_Manager_Default
 					AND ( mproli2."end" IS NULL OR mproli2."end" >= \'' . $date . '\' ) )';
 
 		$sites = $context->getLocale()->getSitePath();
-		$this->_replaceSiteMarker( $this->_searchConfig['product.contains'], 'mproli2."siteid"', $sites, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli2."siteid"', $sites, ':site' );
 	}
 
 
@@ -158,7 +158,7 @@ class MShop_Product_Manager_Default
 		$path = 'classes/product/manager/submanagers';
 		$default = array( 'type', 'property', 'stock', 'list' );
 
-		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -173,7 +173,7 @@ class MShop_Product_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -193,10 +193,10 @@ class MShop_Product_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -268,7 +268,7 @@ class MShop_Product_Manager_Default
 				$path = 'mshop/product/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
@@ -323,7 +323,7 @@ class MShop_Product_Manager_Default
 				 * @see mshop/product/manager/default/item/count
 				 */
 				$path = 'mshop/product/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -368,7 +368,7 @@ class MShop_Product_Manager_Default
 		 * @see mshop/product/manager/default/item/count
 		 */
 		$path = 'mshop/product/manager/default/item/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -398,10 +398,10 @@ class MShop_Product_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -518,7 +518,7 @@ class MShop_Product_Manager_Default
 				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['id'], $config );
-					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$map[$row['id']] = $row;
@@ -549,7 +549,7 @@ class MShop_Product_Manager_Default
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'product' );
+		return $this->buildItems( $map, $ref, 'product' );
 	}
 
 
@@ -581,7 +581,7 @@ class MShop_Product_Manager_Default
 		$path = 'classes/product/manager/submanagers';
 		$default = array( 'type', 'property', 'list', 'stock' );
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
@@ -640,7 +640,7 @@ class MShop_Product_Manager_Default
 	 * @param MShop_Product_Item_Interface $item Product item object
 	 * @return array Associative list of key/value pairs suitable for product item constructor
 	 */
-	protected function _createArray( MShop_Product_Item_Interface $item )
+	protected function createArray( MShop_Product_Item_Interface $item )
 	{
 		return array(
 			'id' => $item->getId(),

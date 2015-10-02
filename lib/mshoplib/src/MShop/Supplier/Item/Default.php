@@ -18,7 +18,7 @@ class MShop_Supplier_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Supplier_Item_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the supplier item object
@@ -31,7 +31,7 @@ class MShop_Supplier_Item_Default
 	{
 		parent::__construct( 'supplier.', $values, $listItems, $refItems );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -42,7 +42,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -55,7 +55,7 @@ class MShop_Supplier_Item_Default
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $value;
+		$this->values['label'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -67,7 +67,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -78,9 +78,9 @@ class MShop_Supplier_Item_Default
 	 */
 	public function setCode( $value )
 	{
-		$this->_checkCode( $value );
+		$this->checkCode( $value );
 
-		$this->_values['code'] = (string) $value;
+		$this->values['code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -93,7 +93,7 @@ class MShop_Supplier_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -106,7 +106,7 @@ class MShop_Supplier_Item_Default
 	{
 		if( $value == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $value;
+		$this->values['status'] = (int) $value;
 		$this->setModified();
 	}
 

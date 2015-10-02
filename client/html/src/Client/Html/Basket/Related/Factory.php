@@ -76,7 +76,7 @@ class Client_Html_Basket_Related_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'basket/related' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'basket/related' );
 	}
 }
 

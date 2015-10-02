@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Export_Factory
 		 * @see controller/jobs/product/export/decorators/excludes
 		 * @see controller/jobs/product/export/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/export' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/export' );
 	}
 }

@@ -142,6 +142,6 @@ class Controller_ExtJS_Text_List_Type_Factory
 		 * @see controller/extjs/text/list/type/decorators/excludes
 		 * @see controller/extjs/text/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'text/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'text/list/type' );
 	}
 }

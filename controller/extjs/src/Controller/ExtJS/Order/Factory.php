@@ -142,6 +142,6 @@ class Controller_ExtJS_Order_Factory
 		 * @see controller/extjs/order/decorators/excludes
 		 * @see controller/extjs/order/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'order' );
+		return self::addControllerDecorators( $context, $controller, 'order' );
 	}
 }

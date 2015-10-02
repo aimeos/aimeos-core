@@ -11,7 +11,7 @@
  */
 class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -34,7 +34,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 		$item->setCode( 'test' );
 
-		$this->_object = new MShop_Service_Provider_Delivery_Default( TestHelper::getContext(), $item );
+		$this->object = new MShop_Service_Provider_Delivery_Default( TestHelper::getContext(), $item );
 	}
 
 
@@ -46,13 +46,13 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'default.project', $this->_object->getConfigBE() );
+		$this->assertArrayHasKey( 'default.project', $this->object->getConfigBE() );
 	}
 
 
@@ -61,28 +61,28 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$this->assertEquals( array(), $this->_object->getConfigFE( $basket ) );
+		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
 	}
 
 
 	public function testCheckConfigBE()
 	{
 		$attributes = array( 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertInternalType( 'null', $result['default.project'] );
 		$this->assertInternalType( 'null', $result['default.url'] );
 
 
 		$attributes = array( 'default.project' => '', 'default.url' => 'http://unittest.com' );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertInternalType( 'string', $result['default.project'] );
 		$this->assertInternalType( 'null', $result['default.url'] );
 
 
 		$attributes = array( 'default.project' => 'Unit', 'default.url' => null );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertInternalType( 'null', $result['default.project'] );
 		$this->assertInternalType( 'string', $result['default.url'] );
@@ -92,7 +92,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 	public function testCheckConfigBEwrongTypes()
 	{
 		$attributes = array( 'default.project' => true, 'default.url' => 'http://unittest.com', 'default.password' => 1111 );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 5, count( $result ) );
 		$this->assertInternalType( 'null', $result['default.url'] );
@@ -105,7 +105,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testCheckConfigFE()
 	{
-		$this->assertEquals( array(), $this->_object->checkConfigFE( array() ) );
+		$this->assertEquals( array(), $this->object->checkConfigFE( array() ) );
 	}
 
 
@@ -120,7 +120,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 			throw new Exception( 'No order base item found' );
 		}
 
-		$price = $this->_object->calcPrice( $item );
+		$price = $this->object->calcPrice( $item );
 
 		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
@@ -131,12 +131,12 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 	{
 		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
 
-		$this->assertTrue( $this->_object->isAvailable( $orderBaseManager->createItem() ) );
+		$this->assertTrue( $this->object->isAvailable( $orderBaseManager->createItem() ) );
 	}
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Delivery_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Delivery_Abstract::FEAT_QUERY ) );
 	}
 
 	public function testProcess()
@@ -334,7 +334,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 			throw new Exception( 'Loading XML failed' );
 		}
 
-		$this->assertEquals( $dom->saveXML(), $this->_object->buildXML( $order ) );
+		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
 	}
 
 	public function testBuildXMLWithBundle()
@@ -489,6 +489,6 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 			throw new Exception( 'Loading XML failed' );
 		}
 
-		$this->assertEquals( $dom->saveXML(), $this->_object->buildXML( $order ) );
+		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
 	}
 }

@@ -25,7 +25,7 @@ class MShop_Coupon_Provider_FixedRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
@@ -53,8 +53,8 @@ class MShop_Coupon_Provider_FixedRebate
 		}
 
 
-		$orderProducts = $this->_createMonetaryRebateProducts( $base, $config['fixedrebate.productcode'], $rebate );
+		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['fixedrebate.productcode'], $rebate );
 
-		$base->addCoupon( $this->_getCode(), $orderProducts );
+		$base->addCoupon( $this->getCode(), $orderProducts );
 	}
 }

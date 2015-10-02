@@ -11,8 +11,8 @@
  */
 class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -23,9 +23,9 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $manager->getSubManager( 'type' );
+		$this->object = $manager->getSubManager( 'type' );
 	}
 
 
@@ -37,25 +37,25 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -63,7 +63,7 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
@@ -74,25 +74,25 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 		$expr[] = $search->compare( '==', 'attribute.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'attribute.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'attribute.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 
 		// search with base criteria
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.type.code', 'size' ),
-			$search->compare( '==', 'attribute.type.editor', $this->_editor ),
+			$search->compare( '==', 'attribute.type.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
@@ -103,22 +103,22 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
-		$actual = $this->_object->getItem( $expected->getId() );
+		$actual = $this->object->getItem( $expected->getId() );
 		$this->assertEquals( $expected, $actual );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
@@ -126,15 +126,15 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTestSave2' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 		$context = TestHelper::getContext();
 
@@ -162,13 +162,13 @@ class MShop_Attribute_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCas
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

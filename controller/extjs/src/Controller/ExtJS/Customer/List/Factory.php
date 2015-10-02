@@ -142,6 +142,6 @@ class Controller_ExtJS_Customer_List_Factory
 		 * @see controller/extjs/customer/list/decorators/excludes
 		 * @see controller/extjs/customer/list/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'customer/list' );
+		return self::addControllerDecorators( $context, $controller, 'customer/list' );
 	}
 }

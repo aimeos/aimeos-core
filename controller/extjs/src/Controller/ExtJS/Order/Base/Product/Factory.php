@@ -142,6 +142,6 @@ class Controller_ExtJS_Order_Base_Product_Factory
 		 * @see controller/extjs/order/base/product/decorators/excludes
 		 * @see controller/extjs/order/base/product/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'order/base/product' );
+		return self::addControllerDecorators( $context, $controller, 'order/base/product' );
 	}
 }

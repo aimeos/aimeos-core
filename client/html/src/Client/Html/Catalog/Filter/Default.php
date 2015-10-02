@@ -18,7 +18,7 @@ class Client_Html_Catalog_Filter_Default
 	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
-	private static $_headerSingleton;
+	private static $headerSingleton;
 
 	/** client/html/catalog/filter/default/subparts
 	 * List of HTML sub-clients rendered within the catalog filter section
@@ -53,7 +53,7 @@ class Client_Html_Catalog_Filter_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/filter/default/subparts';
+	private $subPartPath = 'client/html/catalog/filter/default/subparts';
 
 	/** client/html/catalog/filter/search/name
 	 * Name of the search part used by the catalog filter client implementation
@@ -87,8 +87,8 @@ class Client_Html_Catalog_Filter_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'search', 'tree', 'attribute' );
-	private $_cache;
+	private $subPartNames = array( 'search', 'tree', 'attribute' );
+	private $cache;
 
 
 	/**
@@ -115,17 +115,17 @@ class Client_Html_Catalog_Filter_Default
 		 */
 		$confkey = 'client/html/catalog/filter';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$html = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->filterBody = $html;
@@ -176,9 +176,9 @@ class Client_Html_Catalog_Filter_Default
 			$tplconf = 'client/html/catalog/filter/default/template-body';
 			$default = 'catalog/filter/body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$this->_setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
+			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
@@ -199,25 +199,25 @@ class Client_Html_Catalog_Filter_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		if( self::$_headerSingleton !== null ) {
+		if( self::$headerSingleton !== null ) {
 			return '';
 		}
 
-		self::$_headerSingleton = true;
+		self::$headerSingleton = true;
 
 		$prefixes = array( 'f' );
 		$confkey = 'client/html/catalog/filter';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$html = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->filterHeader = $html;
@@ -246,13 +246,13 @@ class Client_Html_Catalog_Filter_Default
 				$tplconf = 'client/html/catalog/filter/default/template-header';
 				$default = 'catalog/filter/header-default.html';
 
-				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-				$this->_setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
+				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -347,7 +347,7 @@ class Client_Html_Catalog_Filter_Default
 		 * @see client/html/catalog/filter/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/filter/' . $type, $name );
+		return $this->createSubClient( 'catalog/filter/' . $type, $name );
 	}
 
 
@@ -358,7 +358,7 @@ class Client_Html_Catalog_Filter_Default
 	 */
 	public function process()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
@@ -390,9 +390,9 @@ class Client_Html_Catalog_Filter_Default
 	}
 
 
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -404,11 +404,11 @@ class Client_Html_Catalog_Filter_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$config = $this->_getContext()->getConfig();
+			$config = $this->getContext()->getConfig();
 
 			/** client/html/catalog/count/enable
 			 * Enables or disables displaying product counts in the catalog filter
@@ -504,14 +504,14 @@ class Client_Html_Catalog_Filter_Default
 				 */
 				$config = $config->get( 'client/html/catalog/count/url/config', array() );
 
-				$params = $this->_getClientParams( $view->param(), array( 'f' ) );
+				$params = $this->getClientParams( $view->param(), array( 'f' ) );
 
 				$view->filterCountUrl = $view->url( $target, $controller, $action, $params, array(), $config );
 			}
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

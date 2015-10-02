@@ -7,7 +7,7 @@
 
 class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -29,7 +29,7 @@ class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$this->_object = new MW_View_Helper_Price_Default( $view );
+		$this->object = new MW_View_Helper_Price_Default( $view );
 	}
 
 
@@ -41,7 +41,7 @@ class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -56,7 +56,7 @@ class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 		$price->setTaxrate( '20.00' );
 
 
-		$output = $this->_object->transform( $price );
+		$output = $this->object->transform( $price );
 		$this->assertRegexp( '/.*1.*10,00.*2,00.*1,00.*20,00.*/smU', $output );
 	}
 
@@ -78,7 +78,7 @@ class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 		$price2->setRebate( '4.00' );
 		$price2->setTaxrate( '10.00' );
 
-		$output = $this->_object->transform( array( $price, $price2 ) );
+		$output = $this->object->transform( array( $price, $price2 ) );
 		$this->assertRegexp( '/.*1.*10,00.*2,00.*1,00.*20,00.*5.*20,00.*4,00.*2,00.*10,00.*/smU', $output );
 	}
 
@@ -86,6 +86,6 @@ class MW_View_Helper_Price_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testTransformInvalid()
 	{
 		$this->setExpectedException( 'MW_View_Exception' );
-		$this->_object->transform( new stdClass() );
+		$this->object->transform( new stdClass() );
 	}
 }

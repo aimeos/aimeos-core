@@ -8,7 +8,7 @@
  */
 class MW_Template_BaseTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -35,7 +35,7 @@ test template
 </html>
     	';
 
-		$this->_object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$this->object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ test template
 		$this->assertEquals('
 <div> text</div>
 ',
-		$this->_object->get('ITEM')->disable( 'NUM' )->substitute( array( 'TEXT' => 'text' ) )->str() );
+		$this->object->get('ITEM')->disable( 'NUM' )->substitute( array( 'TEXT' => 'text' ) )->str() );
 	}
 
 
@@ -63,13 +63,13 @@ test template
 		$this->assertEquals('
 <div>1 text</div>
 ',
-		$this->_object->get('ITEM')->enable( 'NUM' )->substitute( array( 'TEXT' => 'text' ) )->str() );
+		$this->object->get('ITEM')->enable( 'NUM' )->substitute( array( 'TEXT' => 'text' ) )->str() );
 	}
 
 
 	public function testGet()
 	{
-		$template = $this->_object->get('TEMPLATE');
+		$template = $this->object->get('TEMPLATE');
 		$this->assertInstanceOf( 'MW_Template_Interface', $template );
 
 		$this->assertEquals('
@@ -86,7 +86,7 @@ test template
 	public function testGetBeginIsNotDefined()
 	{
 		$this->setExpectedException('MW_Template_Exception');
-		$this->_object->get('NOTDEFINED');
+		$this->object->get('NOTDEFINED');
 	}
 
 	public function testGetEndIsNotDefined()
@@ -107,17 +107,17 @@ test template
 			</html>
     	';
 
-		$_object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
 
 		$this->setExpectedException('MW_Template_Exception');
-		$_object->get('ITEM');
+		$object->get('ITEM');
 	}
 
 
 
 	public function testGetMarkerNames()
 	{
-		$this->assertEquals( array('TEMPLATE', 'LIST', 'ITEM', 'NUM', 'TEXT'), $this->_object->getMarkerNames() );
+		$this->assertEquals( array('TEMPLATE', 'LIST', 'ITEM', 'NUM', 'TEXT'), $this->object->getMarkerNames() );
 	}
 
 
@@ -126,7 +126,7 @@ test template
 		$this->assertEquals('
 <div><!--###NUM-->1<!--NUM###--> <!--###TEXT-->example test<!--TEXT###--></div>
 ',
-		$this->_object->get('ITEM')->replace( 'text', 'test' )->str( false ) );
+		$this->object->get('ITEM')->replace( 'text', 'test' )->str( false ) );
 	}
 
 
@@ -140,7 +140,7 @@ test template
 		$this->assertEquals('
 <div>123 test</div>
 ',
-			$this->_object->get('ITEM')->substitute( $marker )->str()
+			$this->object->get('ITEM')->substitute( $marker )->str()
 		);
 	}
 
@@ -162,15 +162,15 @@ test template
 			</html>
     	';
 
-		$_object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
 
 		$this->setExpectedException('MW_Template_Exception');
-		$_object->substitute( array('ITEM'=>'Title' ) );
+		$object->substitute( array('ITEM'=>'Title' ) );
 	}
 
 	public function testStr()
 	{
-		$template = $this->_object->get('TEMPLATE');
+		$template = $this->object->get('TEMPLATE');
 		$this->assertInstanceOf( 'MW_Template_Interface', $template );
 
 		$this->assertEquals('

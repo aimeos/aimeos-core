@@ -11,8 +11,8 @@
  */
 class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 {
-	private $_editor = '';
-	private $_domainManagers = array();
+	private $editor = '';
+	private $domainManagers = array();
 
 
 	/**
@@ -40,26 +40,26 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
-		// $this->_process();
+		// $this->process();
 	}
 
 
 	/**
 	 * Adds locale data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$sitecode = $this->_additional->getLocale()->getSite()->getCode();
-		$this->_msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
-		$this->_status( '' );
+		$sitecode = $this->additional->getLocale()->getSite()->getCode();
+		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
+		$this->status( '' );
 
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -69,23 +69,23 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
 		}
 
-		$this->_processFile( $testdata );
+		$this->processFile( $testdata );
 	}
 
 
-	protected function _processFile( array $testdata )
+	protected function processFile( array $testdata )
 	{
-		$editor = $this->_additional->getEditor();
-		$this->_additional->setEditor( $this->_editor );
+		$editor = $this->additional->getEditor();
+		$this->additional->setEditor( $this->editor );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		foreach( $testdata as $domain => $datasets )
 		{
-			$this->_msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
+			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
 
-			$domainManager = $this->_getDomainManager( $domain );
+			$domainManager = $this->getDomainManager( $domain );
 			$type = $domainManager->createItem();
 			$num = $total = 0;
 
@@ -105,12 +105,12 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 				} catch( Exception $e ) {; } // if type was already available
 			}
 
-			$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
+			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
-		$this->_additional->setEditor( $editor );
+		$this->additional->setEditor( $editor );
 	}
 
 
@@ -120,7 +120,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 	 * @param string $domain String of domain and sub-domains, e.g. "product" or "order/base/service"
 	 * @throws Controller_Frontend_Exception If domain string is invalid or no manager can be instantiated
 	 */
-	protected function _getDomainManager( $domain )
+	protected function getDomainManager( $domain )
 	{
 		$domain = strtolower( trim( $domain, "/ \n\t\r\0\x0B" ) );
 
@@ -128,7 +128,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 			throw new Exception( 'An empty domain is invalid' );
 		}
 
-		if( !isset( $this->_domainManagers[$domain] ) )
+		if( !isset( $this->domainManagers[$domain] ) )
 		{
 			$parts = explode( '/', $domain );
 
@@ -144,17 +144,17 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 			}
 
 
-			if( !isset( $this->_domainManagers[$domainname] ) )
+			if( !isset( $this->domainManagers[$domainname] ) )
 			{
 				$iface = 'MShop_Common_Manager_Interface';
 				$factory = 'MShop_' . ucwords( $domainname ) . '_Manager_Factory';
-				$manager = call_user_func_array( $factory . '::createManager', array( $this->_additional ) );
+				$manager = call_user_func_array( $factory . '::createManager', array( $this->additional ) );
 
 				if( !( $manager instanceof $iface ) ) {
 					throw new Exception( sprintf( 'No factory "%1$s" found', $factory ) );
 				}
 
-				$this->_domainManagers[$domainname] = $manager;
+				$this->domainManagers[$domainname] = $manager;
 			}
 
 
@@ -162,21 +162,21 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 			{
 				$tmpname = $domainname . '/' . $part;
 
-				if( !isset( $this->_domainManagers[$tmpname] ) ) {
-					$this->_domainManagers[$tmpname] = $this->_domainManagers[$domainname]->getSubManager( $part );
+				if( !isset( $this->domainManagers[$tmpname] ) ) {
+					$this->domainManagers[$tmpname] = $this->domainManagers[$domainname]->getSubManager( $part );
 				}
 
 				$domainname = $tmpname;
 			}
 		}
 
-		return $this->_domainManagers[$domain];
+		return $this->domainManagers[$domain];
 	}
 
 
-	protected function _txBegin()
+	protected function txBegin()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -184,9 +184,9 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txCommit()
+	protected function txCommit()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

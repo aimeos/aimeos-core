@@ -30,13 +30,13 @@ class MShop_Coupon_Provider_Decorator_BasketValues
 		$currency = $price->getCurrencyId();
 		$value = $price->getValue() + $price->getRebate();
 
-		$minvalue = $this->_getConfigValue( 'basketvalues.total-value-min', array() );
+		$minvalue = $this->getConfigValue( 'basketvalues.total-value-min', array() );
 
 		if( isset( $minvalue[$currency] ) && $minvalue[$currency] > $value ) {
 			return false;
 		}
 
-		$maxvalue = $this->_getConfigValue( 'basketvalues.total-value-max', array() );
+		$maxvalue = $this->getConfigValue( 'basketvalues.total-value-max', array() );
 
 		if( isset( $maxvalue[$currency] ) && $maxvalue[$currency] < $value ) {
 			return false;

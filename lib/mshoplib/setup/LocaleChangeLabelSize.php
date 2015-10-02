@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_LocaleChangeLabelSize extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_locale_site' => 'ALTER TABLE "mshop_locale_site" CHANGE "label" "label" VARCHAR(255) NOT NULL DEFAULT \'\'',
 		'mshop_locale_language' => 'ALTER TABLE "mshop_locale_language" CHANGE "label" "label" VARCHAR(255) NOT NULL DEFAULT \'\'',
 		'mshop_locale_currency' => 'ALTER TABLE "mshop_locale_currency" CHANGE "label" "label" VARCHAR(255) NOT NULL DEFAULT \'\'',
@@ -42,9 +42,9 @@ class MW_Setup_Task_LocaleChangeLabelSize extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -53,24 +53,24 @@ class MW_Setup_Task_LocaleChangeLabelSize extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing size of column label for locale tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing size of column label for locale tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s" for label": ', $table ), 1 );
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, 'label' ) === true
-				&& $this->_schema->getColumnDetails( $table, 'label' )->getMaxLength() < 255 )
+			$this->msg( sprintf( 'Checking table "%1$s" for label": ', $table ), 1 );
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, 'label' ) === true
+				&& $this->schema->getColumnDetails( $table, 'label' )->getMaxLength() < 255 )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'changed' );
+				$this->execute( $stmt );
+				$this->status( 'changed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

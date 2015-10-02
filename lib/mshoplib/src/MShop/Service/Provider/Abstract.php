@@ -17,10 +17,10 @@
 abstract class MShop_Service_Provider_Abstract
 implements MShop_Service_Provider_Interface
 {
-	private $_context;
-	private $_serviceItem;
-	private $_communication;
-	private $_beGlobalConfig;
+	private $context;
+	private $serviceItem;
+	private $communication;
+	private $beGlobalConfig;
 
 
 	/**
@@ -31,8 +31,8 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem )
 	{
-		$this->_context = $context;
-		$this->_serviceItem = $serviceItem;
+		$this->context = $context;
+		$this->serviceItem = $serviceItem;
 	}
 
 
@@ -46,8 +46,8 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
 	{
-		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
-		$prices = $this->_serviceItem->getRefItems( 'price', 'default', 'default' );
+		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
+		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
 		if( count( $prices ) > 0 ) {
 			return $priceManager->getLowestPrice( $prices, 1 );
@@ -115,7 +115,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function getServiceItem()
 	{
-		return $this->_serviceItem;
+		return $this->serviceItem;
 	}
 
 
@@ -135,7 +135,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function injectGlobalConfigBE( array $config )
 	{
-		$this->_beGlobalConfig = $config;
+		$this->beGlobalConfig = $config;
 	}
 
 
@@ -201,7 +201,7 @@ implements MShop_Service_Provider_Interface
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
 		if( isset( $params['orderid'] ) ) {
-			return $this->_getOrder( $params['orderid'] );
+			return $this->getOrder( $params['orderid'] );
 		}
 
 		return null;
@@ -215,7 +215,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function setCommunication( MW_Communication_Interface $communication )
 	{
-		$this->_communication = $communication;
+		$this->communication = $communication;
 	}
 
 
@@ -224,13 +224,13 @@ implements MShop_Service_Provider_Interface
 	 *
 	 * @return MW_Communication_Interface Object for communication
 	 */
-	protected function _getCommunication()
+	protected function getCommunication()
 	{
-		if( !isset( $this->_communication ) ) {
-			$this->_communication = new MW_Communication_Curl();
+		if( !isset( $this->communication ) ) {
+			$this->communication = new MW_Communication_Curl();
 		}
 
-		return $this->_communication;
+		return $this->communication;
 	}
 
 
@@ -250,7 +250,7 @@ implements MShop_Service_Provider_Interface
 	 * @return string Date in YYY-MM-DD format to be compared to the order date
 	 * @throws MShop_Service_Exception If the given holiday string is in the wrong format and can't be processed
 	 */
-	protected function _calcDateLimit( $timestamp, $skipdays = 0, $businessOnly = false, $publicHolidays = '' )
+	protected function calcDateLimit( $timestamp, $skipdays = 0, $businessOnly = false, $publicHolidays = '' )
 	{
 		$holidays = array();
 
@@ -299,7 +299,7 @@ implements MShop_Service_Provider_Interface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	protected function _checkConfig( array $config, array $attributes )
+	protected function checkConfig( array $config, array $attributes )
 	{
 		$errors = array();
 
@@ -388,7 +388,7 @@ implements MShop_Service_Provider_Interface
 	 * @param string $default Returned value if the key wasn't was found
 	 * @return mixed Value of the first key that matches or null if none was found
 	 */
-	protected function _getConfigValue( $keys, $default = null )
+	protected function getConfigValue( $keys, $default = null )
 	{
 		$srvconfig = $this->getServiceItem()->getConfig();
 
@@ -398,8 +398,8 @@ implements MShop_Service_Provider_Interface
 				return $srvconfig[$key];
 			}
 
-			if( isset( $this->_beGlobalConfig[$key] ) ) {
-				return $this->_beGlobalConfig[$key];
+			if( isset( $this->beGlobalConfig[$key] ) ) {
+				return $this->beGlobalConfig[$key];
 			}
 		}
 
@@ -412,9 +412,9 @@ implements MShop_Service_Provider_Interface
 	 *
 	 * @return MShop_Context_Item_Interface Context item
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -424,9 +424,9 @@ implements MShop_Service_Provider_Interface
 	 * @param string $id Unique order ID
 	 * @return MShop_Order_Item_Interface $item Order object
 	 */
-	protected function _getOrder( $id )
+	protected function getOrder( $id )
 	{
-		return MShop_Factory::createManager( $this->_context, 'order' )->getItem( $id );
+		return MShop_Factory::createManager( $this->context, 'order' )->getItem( $id );
 	}
 
 
@@ -437,9 +437,9 @@ implements MShop_Service_Provider_Interface
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Interface Basket, optional with addresses, products, services and coupons
 	 */
-	protected function _getOrderBase( $baseId, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
+	protected function getOrderBase( $baseId, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
 	{
-		return MShop_Factory::createManager( $this->_context, 'order/base' )->load( $baseId, $parts );
+		return MShop_Factory::createManager( $this->context, 'order/base' )->load( $baseId, $parts );
 	}
 
 
@@ -448,9 +448,9 @@ implements MShop_Service_Provider_Interface
 	 *
 	 * @param MShop_Order_Item_Interface $item Order object
 	 */
-	protected function _saveOrder( MShop_Order_Item_Interface $item )
+	protected function saveOrder( MShop_Order_Item_Interface $item )
 	{
-		MShop_Factory::createManager( $this->_context, 'order' )->saveItem( $item );
+		MShop_Factory::createManager( $this->context, 'order' )->saveItem( $item );
 	}
 
 
@@ -460,9 +460,9 @@ implements MShop_Service_Provider_Interface
 	 * @param MShop_Order_Item_Base_Interface $base Order base object with associated items
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	protected function _saveOrderBase( MShop_Order_Item_Base_Interface $base, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
+	protected function saveOrderBase( MShop_Order_Item_Base_Interface $base, $parts = MShop_Order_Manager_Base_Abstract::PARTS_SERVICE )
 	{
-		MShop_Factory::createManager( $this->_context, 'order/base' )->store( $base, $parts );
+		MShop_Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
 	}
 
 
@@ -473,9 +473,9 @@ implements MShop_Service_Provider_Interface
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 */
-	protected function _setAttributes( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
+	protected function setAttributes( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'order/base/service/attribute' );
+		$manager = MShop_Factory::createManager( $this->context, 'order/base/service/attribute' );
 
 		foreach( $attributes as $key => $value )
 		{

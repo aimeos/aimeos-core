@@ -18,7 +18,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Decorator_Interface
 {
-	private $_manager;
+	private $manager;
 
 
 	/**
@@ -30,7 +30,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Common_Manager_Interface $manager )
 	{
 		parent::__construct( $context );
-		$this->_manager = $manager;
+		$this->manager = $manager;
 	}
 
 
@@ -44,7 +44,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->_manager, $name ), $param ) ) === false ) {
+		if( ( $result = call_user_func_array( array( $this->manager, $name ), $param ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 
@@ -59,7 +59,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function cleanup( array $siteids )
 	{
-		return $this->_manager->cleanup( $siteids );
+		return $this->manager->cleanup( $siteids );
 	}
 
 
@@ -70,7 +70,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function createItem()
 	{
-		return $this->_manager->createItem();
+		return $this->manager->createItem();
 	}
 
 
@@ -82,7 +82,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function createSearch( $default = false )
 	{
-		return $this->_manager->createSearch( $default );
+		return $this->manager->createSearch( $default );
 	}
 
 
@@ -93,7 +93,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function deleteItem( $id )
 	{
-		$this->_manager->deleteItem( $id );
+		$this->manager->deleteItem( $id );
 	}
 
 
@@ -104,7 +104,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_manager->deleteItems( $ids );
+		$this->manager->deleteItems( $ids );
 	}
 
 
@@ -117,7 +117,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_manager->getItem( $id, $ref );
+		return $this->manager->getItem( $id, $ref );
 	}
 
 
@@ -129,7 +129,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		return $this->_manager->getSearchAttributes( $withsub );
+		return $this->manager->getSearchAttributes( $withsub );
 	}
 
 
@@ -140,7 +140,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function getSubManager( $domain, $name = null )
 	{
-		return $this->_manager->getSubManager( $domain, $name );
+		return $this->manager->getSubManager( $domain, $name );
 	}
 
 
@@ -152,7 +152,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->_manager->saveItem( $item, $fetch );
+		$this->manager->saveItem( $item, $fetch );
 	}
 
 
@@ -165,7 +165,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		return $this->_manager->searchItems( $search, $ref, $total );
+		return $this->manager->searchItems( $search, $ref, $total );
 	}
 
 
@@ -183,7 +183,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 */
 	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		return $this->_manager->searchRefItems( $search, $ref, $total );
+		return $this->manager->searchRefItems( $search, $ref, $total );
 	}
 
 
@@ -193,8 +193,8 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		return $this->_manager;
+		return $this->manager;
 	}
 }

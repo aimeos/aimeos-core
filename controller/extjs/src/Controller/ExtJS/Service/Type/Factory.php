@@ -142,6 +142,6 @@ class Controller_ExtJS_Service_Type_Factory
 		 * @see controller/extjs/service/type/decorators/excludes
 		 * @see controller/extjs/service/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'service/type' );
+		return self::addControllerDecorators( $context, $controller, 'service/type' );
 	}
 }

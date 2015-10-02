@@ -36,28 +36,28 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds supplier test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding supplier test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding supplier test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
-		$this->_addSupplierData();
+		$this->addSupplierData();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -66,9 +66,9 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 	 *
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addSupplierData()
+	private function addSupplierData()
 	{
-		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, 'Default' );
 		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Default' );
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -81,7 +81,7 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 		$supIds = array();
 		$supplier = $supplierManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['supplier'] as $key => $dataset )
 		{
@@ -126,6 +126,6 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 			$supplierAddressManager->saveItem( $supAdr, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

@@ -17,7 +17,7 @@
 class Client_Html_Account_History_Order_Detail_Default
 	extends Client_Html_Common_Summary_Detail_Default
 {
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -102,7 +102,7 @@ class Client_Html_Account_History_Order_Detail_Default
 		 * @see client/html/account/history/order/detail/decorators/excludes
 		 * @see client/html/account/history/order/detail/decorators/global
 		 */
-		return $this->_createSubClient( 'account/history/order/detail/' . $type, $name );
+		return $this->createSubClient( 'account/history/order/detail/' . $type, $name );
 	}
 
 
@@ -114,17 +114,17 @@ class Client_Html_Account_History_Order_Detail_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$view = parent::_setViewParams( $view );
+			$view = parent::setViewParams( $view );
 
-			$view->summaryTaxRates = $this->_getTaxRates( $view->summaryBasket );
+			$view->summaryTaxRates = $this->getTaxRates( $view->summaryBasket );
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

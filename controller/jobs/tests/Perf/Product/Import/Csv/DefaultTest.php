@@ -7,18 +7,18 @@
 
 class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext('unitperf');
+		$this->context = TestHelper::getContext('unitperf');
 
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/product-import.zip' );
 		$config->set( 'controller/jobs/product/import/csv/container/type', 'Zip' );
 		$config->set( 'controller/jobs/product/import/csv/container/content', 'CSV' );
-		$config->set( 'controller/jobs/product/import/csv/mapping', $this->_getMapping() );
+		$config->set( 'controller/jobs/product/import/csv/mapping', $this->getMapping() );
 
 		$container = MW_Container_Factory::getContainer( 'tmp/product-import.zip', 'Zip', 'CSV', array() );
 
@@ -28,13 +28,13 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 		{
 			$data = array();
 
-			$data = $this->_addProduct( $data, $i );
-			$data = $this->_addText( $data, $i );
-			$data = $this->_addMedia( $data, $i );
-			$data = $this->_addPrice( $data, $i );
-			$data = $this->_addAttribute( $data, $i );
-			$data = $this->_addProductRef( $data, $i );
-			$data = $this->_addProperty( $data, $i );
+			$data = $this->addProduct( $data, $i );
+			$data = $this->addText( $data, $i );
+			$data = $this->addMedia( $data, $i );
+			$data = $this->addPrice( $data, $i );
+			$data = $this->addAttribute( $data, $i );
+			$data = $this->addProductRef( $data, $i );
+			$data = $this->addProperty( $data, $i );
 
 			$content->add( $data );
 		}
@@ -47,11 +47,11 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		$this->_cleanupAttribute();
-		$this->_cleanupMedia();
-		$this->_cleanupText();
-		$this->_cleanupPrice();
-		$this->_cleanupProduct();
+		$this->cleanupAttribute();
+		$this->cleanupMedia();
+		$this->cleanupText();
+		$this->cleanupPrice();
+		$this->cleanupProduct();
 
 		unlink( 'tmp/product-import.zip' );
 	}
@@ -60,7 +60,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testImport()
 	{
 		$aimeos = TestHelper::getAimeos();
-		$cntl = Controller_Jobs_Product_Import_Csv_Factory::createController( $this->_context, $aimeos, 'Default' );
+		$cntl = Controller_Jobs_Product_Import_Csv_Factory::createController( $this->context, $aimeos, 'Default' );
 
 		$start = microtime( true );
 
@@ -71,7 +71,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addAttribute( array $data, $cnt )
+	protected function addAttribute( array $data, $cnt )
 	{
 		$data[] = 'length'; // type
 		$data[] = 'import-' . ($cnt % 30); // code
@@ -84,7 +84,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addMedia( array $data, $cnt )
+	protected function addMedia( array $data, $cnt )
 	{
 		$data[] = "/path/to/image-$cnt.jpg"; // url
 
@@ -92,7 +92,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addPrice( array $data, $cnt )
+	protected function addPrice( array $data, $cnt )
 	{
 		$data[] = 1; // quantity
 		$data[] = 'import-' . $cnt; // label
@@ -103,7 +103,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addProduct( array $data, $cnt )
+	protected function addProduct( array $data, $cnt )
 	{
 		$data[] = 'import-' . $cnt; // code
 		$data[] = 'import-' . $cnt; // label
@@ -114,7 +114,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addProductRef( array $data, $cnt )
+	protected function addProductRef( array $data, $cnt )
 	{
 		$data[] = 'import-' . ($cnt % 100); // code
 		$data[] = 'suggestion'; // type
@@ -123,7 +123,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addProperty( array $data, $cnt )
+	protected function addProperty( array $data, $cnt )
 	{
 		$data[] = 'package-weight'; // type
 		$data[] = '0.5'; // value
@@ -132,7 +132,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _addText( array $data, $cnt )
+	protected function addText( array $data, $cnt )
 	{
 		$data[] = 'name'; // type
 		$data[] = 'import-name-' . $cnt; //content
@@ -145,9 +145,9 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _cleanupAttribute()
+	protected function cleanupAttribute()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -172,9 +172,9 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _cleanupMedia()
+	protected function cleanupMedia()
 	{
-		$manager = MShop_Media_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Media_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -199,9 +199,9 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _cleanupPrice()
+	protected function cleanupPrice()
 	{
-		$manager = MShop_Price_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Price_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -226,9 +226,9 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _cleanupProduct()
+	protected function cleanupProduct()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'import-%' ) );
@@ -249,9 +249,9 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _cleanupText()
+	protected function cleanupText()
 	{
-		$manager = MShop_Text_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Text_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -276,7 +276,7 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _getMapping()
+	protected function getMapping()
 	{
 		return array(
 			'item' => array(

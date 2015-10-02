@@ -142,6 +142,6 @@ class Controller_ExtJS_Text_Factory
 		 * @see controller/extjs/text/decorators/excludes
 		 * @see controller/extjs/text/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'text' );
+		return self::addControllerDecorators( $context, $controller, 'text' );
 	}
 }

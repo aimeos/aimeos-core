@@ -16,8 +16,8 @@
  */
 class MW_Communication_Sftp implements MW_Communication_Interface
 {
-	private $_sftp;
-	private $_config;
+	private $sftp;
+	private $config;
 
 
 	/**
@@ -27,10 +27,10 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 	 */
 	public function __construct( array $config )
 	{
-		$this->_config = $config;
-		$this->_sftp = new Net_SFTP( $config['host'] );
+		$this->config = $config;
+		$this->sftp = new Net_SFTP( $config['host'] );
 
-		if( $this->_sftp->login( $config['username'], $config['password'] ) === false ) {
+		if( $this->sftp->login( $config['username'], $config['password'] ) === false ) {
 			throw new MW_Communication_Exception( sprintf( 'Login to "%1$s" with user "%2$s" failed', $config['host'], $config['username'] ) );
 		}
 	}
@@ -41,7 +41,7 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 	 */
 	public function __destruct()
 	{
-		$this->_sftp->disconnect();
+		$this->sftp->disconnect();
 	}
 
 
@@ -62,9 +62,9 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 				$method = NET_SFTP_STRING; break;
 		}
 
-		if ( $this->_sftp->put( $target, $payload, $method ) === false )
+		if ( $this->sftp->put( $target, $payload, $method ) === false )
 		{
-			$msg = sprintf( 'Could not upload payload to "%1$s:%2$s"', $this->_config['host'], $target );
+			$msg = sprintf( 'Could not upload payload to "%1$s:%2$s"', $this->config['host'], $target );
 			throw new MW_Communication_Exception( $msg );
 		}
 	}

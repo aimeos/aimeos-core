@@ -8,7 +8,7 @@
  */
 class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -21,7 +21,7 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$child1 = new MW_Tree_Node_DBNestedSet( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'left' => 2, 'right' => 3 ) );
 		$child2 = new MW_Tree_Node_DBNestedSet( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'left' => 4, 'right' => 5 ) );
 
-		$this->_object = new MW_Tree_Node_DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 6 ), array( $child1, $child2 ) );
+		$this->object = new MW_Tree_Node_DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 6 ), array( $child1, $child2 ) );
 	}
 
 	/**
@@ -32,12 +32,12 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testHasChildren()
 	{
-		$this->assertEquals( true, $this->_object->hasChildren() );
+		$this->assertEquals( true, $this->object->hasChildren() );
 	}
 
 	public function testHasNoChildren()
@@ -48,20 +48,20 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setId(null);
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 	public function testGetChild()
 	{
 		$this->setExpectedException('MW_Tree_Exception');
-		$this->_object->getChild(null);
+		$this->object->getChild(null);
 	}
 
 	public function testMagicGet()
 	{
 		$this->setExpectedException('MW_Tree_Exception');
-		$this->_object->notDefined;
+		$this->object->notDefined;
 	}
 
 }

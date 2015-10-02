@@ -150,6 +150,6 @@ class Controller_Jobs_Catalog_Index_Rebuild_Factory
 		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
 		 * @see controller/jobs/catalog/index/rebuild/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/rebuild' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/rebuild' );
 	}
 }

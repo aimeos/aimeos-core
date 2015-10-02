@@ -142,6 +142,6 @@ class Controller_ExtJS_Plugin_Factory
 		 * @see controller/extjs/plugin/decorators/excludes
 		 * @see controller/extjs/plugin/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'plugin' );
+		return self::addControllerDecorators( $context, $controller, 'plugin' );
 	}
 }

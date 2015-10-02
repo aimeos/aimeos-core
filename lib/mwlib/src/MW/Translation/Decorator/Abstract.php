@@ -18,7 +18,7 @@ abstract class MW_Translation_Decorator_Abstract
 	extends MW_Translation_Abstract
 	implements MW_Translation_Decorator_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,7 +28,7 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function __construct( MW_Translation_Interface $object )
 	{
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -41,7 +41,7 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function dt( $domain, $string )
 	{
-		return $this->_object->dt( $domain, $string );
+		return $this->object->dt( $domain, $string );
 	}
 
 
@@ -56,7 +56,7 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		return $this->_object->dn( $domain, $singular, $plural, $number );
+		return $this->object->dn( $domain, $singular, $plural, $number );
 	}
 
 
@@ -70,7 +70,7 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function getAll( $domain )
 	{
-		return $this->_object->getAll( $domain );
+		return $this->object->getAll( $domain );
 	}
 
 
@@ -81,7 +81,7 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function getLocale()
 	{
-		return $this->_object->getLocale();
+		return $this->object->getLocale();
 	}
 
 
@@ -90,8 +90,8 @@ abstract class MW_Translation_Decorator_Abstract
 	 *
 	 * @return MW_Translation_Interface Translation object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		return $this->_object;
+		return $this->object;
 	}
 }

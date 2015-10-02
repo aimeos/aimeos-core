@@ -37,10 +37,10 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 */
 	public function createJob( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
@@ -80,9 +80,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 */
 	public function exportFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-		$context = $this->_getContext();
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
+		$context = $this->getContext();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
@@ -179,7 +179,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$context->getLogger()->log( sprintf( 'Create export directory for catalog IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
-		$filename = $this->_exportData( $items, $lang, $tmpfolder );
+		$filename = $this->exportData( $items, $lang, $tmpfolder );
 		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
@@ -217,9 +217,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param string $filename Temporary folder name where to write export files
 	 * @return string Path to the exported file
 	 */
-	protected function _exportData( array $ids, array $lang, $filename )
+	protected function exportData( array $ids, array $lang, $filename )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Locale_Manager_Factory::createManager( $context );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
 
@@ -289,7 +289,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		 * @category Developer
 		 * @category User
 		 */
-		$containerItem = $this->_createContainer( $filename, 'controller/extjs/catalog/export/text/default/container' );
+		$containerItem = $this->createContainer( $filename, 'controller/extjs/catalog/export/text/default/container' );
 		$actualLangid = $context->getLocale()->getLanguageId();
 		$start = 0;
 
@@ -304,7 +304,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 				$contentItem = $containerItem->create( $langid );
 				$contentItem->add( array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$context->getLocale()->setLanguageId( $langid );
-				$this->_addLanguage( $contentItem, $langid, $ids );
+				$this->addLanguage( $contentItem, $langid, $ids );
 
 				$containerItem->add( $contentItem );
 			}
@@ -329,14 +329,14 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param array $ids List of of item ids whose texts should be added
 	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
-	protected function _addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
+	protected function addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
 
 		foreach( $ids as $id )
 		{
-			foreach( $this->_getNodeList( $manager->getTree( $id, array( 'text' ) ) ) as $item ) {
-				$this->_addItem( $contentItem, $item, $langid );
+			foreach( $this->getNodeList( $manager->getTree( $id, array( 'text' ) ) ) as $item ) {
+				$this->addItem( $contentItem, $item, $langid );
 			}
 		}
 	}
@@ -349,14 +349,14 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param MShop_Catalog_Item_Interface $item product item object
 	 * @param string $langid Language id
 	 */
-	protected function _addItem( MW_Container_Content_Interface $contentItem, MShop_Catalog_Item_Interface $item, $langid )
+	protected function addItem( MW_Container_Content_Interface $contentItem, MShop_Catalog_Item_Interface $item, $langid )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
 			$listTypes[$listItem->getRefId()] = $listItem->getType();
 		}
 
-		foreach( $this->_getTextTypes( 'catalog' ) as $textTypeItem )
+		foreach( $this->getTextTypes( 'catalog' ) as $textTypeItem )
 		{
 			$textItems = $item->getRefItems( 'text', $textTypeItem->getCode() );
 
@@ -394,12 +394,12 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param MShop_Catalog_Item_Interface $node
 	 * @return MShop_Catalog_Item_Interface[] $nodes List of nodes
 	 */
-	protected function _getNodeList( MShop_Catalog_Item_Interface $node )
+	protected function getNodeList( MShop_Catalog_Item_Interface $node )
 	{
 		$nodes = array( $node );
 
 		foreach( $node->getChildren() as $child ) {
-			$nodes = array_merge( $nodes, $this->_getNodeList( $child ) );
+			$nodes = array_merge( $nodes, $this->getNodeList( $child ) );
 		}
 
 		return $nodes;

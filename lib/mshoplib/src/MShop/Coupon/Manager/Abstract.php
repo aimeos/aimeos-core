@@ -26,7 +26,7 @@ abstract class MShop_Coupon_Manager_Abstract
 	 * @return MShop_Coupon_Provider_Interface Coupon provider wrapped by one or more coupon decorators
 	 * @throws MShop_Coupon_Exception If a coupon decorator couldn't be instantiated
 	 */
-	protected function _addCouponDecorators( MShop_Coupon_Item_Interface $item, $code,
+	protected function addCouponDecorators( MShop_Coupon_Item_Interface $item, $code,
 		MShop_Coupon_Provider_Interface $provider, array $names )
 	{
 		$iface = 'MShop_Coupon_Provider_Decorator_Interface';
@@ -44,7 +44,7 @@ abstract class MShop_Coupon_Manager_Abstract
 				throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->_getContext(), $item, $code, $provider );
+			$provider = new $classname( $this->getContext(), $item, $code, $provider );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

@@ -36,24 +36,24 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds customer test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding customer-list test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding customer-list test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer-list.php';
@@ -68,12 +68,12 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$refIds = array();
-		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
-		$refIds['product'] = $this->_getProductData( $refKeys['product'] );
-		$refIds['customer/group'] = $this->_getCustomerGroupData( $refKeys['customer/group'] );
-		$this->_addCustomerListData( $testdata, $refIds );
+		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$refIds['product'] = $this->getProductData( $refKeys['product'] );
+		$refIds['customer/group'] = $this->getCustomerGroupData( $refKeys['customer/group'] );
+		$this->addCustomerListData( $testdata, $refIds );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -83,9 +83,9 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getCustomerGroupData( array $keys )
+	protected function getCustomerGroupData( array $keys )
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
 		$groupManager = $manager->getSubManager( 'group' );
 
 		$codes = array();
@@ -116,9 +116,9 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getProductData( array $keys )
+	protected function getProductData( array $keys )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -148,9 +148,9 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getTextData( array $keys )
+	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -182,9 +182,9 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 * @param string $type Manager type string
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function _addCustomerListData( array $testdata, array $refIds, $type = 'Default' )
+	protected function addCustomerListData( array $testdata, array $refIds, $type = 'Default' )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, $type );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, $type );
 		$customerListManager = $customerManager->getSubManager( 'list', $type );
 		$customerListTypeManager = $customerListManager->getSubmanager( 'type', $type );
 
@@ -209,7 +209,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 		$listItemTypeIds = array();
 		$listItemType = $customerListTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['customer/list/type'] as $key => $dataset )
 		{
@@ -252,6 +252,6 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 			$customerListManager->saveItem( $listItem, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

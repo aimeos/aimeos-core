@@ -11,8 +11,8 @@
  */
 class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -23,8 +23,8 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = new MShop_Catalog_Manager_Default( TestHelper::getContext() );
+		$this->editor = TestHelper::getContext()->getEditor();
+		$this->object = new MShop_Catalog_Manager_Default( TestHelper::getContext() );
 	}
 
 
@@ -36,19 +36,19 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 
 		$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $item );
 		$this->assertEquals( TestHelper::getContext()->getLocale()->getSiteId(), $item->getNode()->siteid );
@@ -57,14 +57,14 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -77,13 +77,13 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			return true;
 		};
 
-		$this->_object->registerItemFilter( 'test', $callback );
+		$this->object->registerItemFilter( 'test', $callback );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'catalog.id', null );
@@ -97,7 +97,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '~=', 'catalog.config', '{' );
 		$expr[] = $search->compare( '>=', 'catalog.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'catalog.list.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.list.siteid', null );
@@ -111,7 +111,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'catalog.list.position', 0 );
 		$expr[] = $search->compare( '>=', 'catalog.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'catalog.list.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'catalog.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.list.type.siteid', null );
@@ -120,14 +120,14 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'catalog.list.type.label', '' );
 		$expr[] = $search->compare( '>=', 'catalog.list.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'catalog.list.type.editor', $this->editor );
 
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$items = $this->_object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $items ) );
@@ -139,10 +139,10 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Misc' ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search, array( 'text' ) );
+		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'Catalog item not found' );
@@ -154,19 +154,19 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Root' ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search, array( 'text' ) );
+		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'Catalog item not found' );
 		}
 
-		$testItem = $this->_object->getItem( $item->getId() );
+		$testItem = $this->object->getItem( $item->getId() );
 
 		$this->assertEquals( TestHelper::getContext()->getLocale()->getSiteId(), $testItem->getSiteId() );
 		$this->assertEquals( $item->getId(), $testItem->getId() );
@@ -178,19 +178,19 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTree()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'catalog.code', 'root' ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'Catalog item not found' );
 		}
 
-		$rootItem = $this->_object->getTree( $item->getId(), array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_TREE );
 		$categoryItem = $rootItem->getChild( 0 );
 		$miscItem = $categoryItem->getChild( 2 );
 
@@ -202,13 +202,13 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTreeWithConditions()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'catalog.code', array( 'root', 'categories' ) ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 		$parentIds = array();
 
 		foreach( $items as $item ) {
@@ -221,10 +221,10 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$parentIds[] = 0;
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
 
-		$tree = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
+		$tree = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
 
 		$categorycat = $tree->getChild( 0 );
 		$groupcat = $tree->getChild( 1 );
@@ -232,12 +232,12 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$categorycatChildren = $categorycat->getChildren();
 		$cafecat = $categorycat->getChild( 0 );
 
-		$caffein = $this->_object->createItem();
+		$caffein = $this->object->createItem();
 		$caffein->setCode( 'caffein' );
 		$caffein->setLabel( 'Caffein' );
 
-		$this->_object->insertItem( $caffein, $cafecat->getId() );
-		$this->_object->deleteItem( $caffein->getId() );
+		$this->object->insertItem( $caffein, $cafecat->getId() );
+		$this->object->deleteItem( $caffein->getId() );
 
 		$this->assertEquals( 0, $tree->getNode()->parentid );
 		$this->assertEquals( 'categories', $categorycat->getCode() );
@@ -253,17 +253,17 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTreeWithFilter()
 	{
-		$this->assertEquals( 2, count( $this->_object->getTree()->getChildren() ) );
+		$this->assertEquals( 2, count( $this->object->getTree()->getChildren() ) );
 
 		$callback = function( MShop_Common_Item_ListRef_Interface $item, $index )
 		{
 			return (bool) $index % 2;
 		};
 
-		$this->_object->registerItemFilter( 'test', $callback );
-		$tree = $this->_object->getTree();
+		$this->object->registerItemFilter( 'test', $callback );
+		$tree = $this->object->getTree();
 
-		$rootItem = $this->_object->getTree();
+		$rootItem = $this->object->getTree();
 		$this->assertEquals( 1, count( $tree->getChildren() ) );
 
 		$groupItem = $rootItem->getChild( 0 );
@@ -275,19 +275,19 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetPath()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Kaffee' ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search, array( 'text' ) );
+		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'Catalog item not found' );
 		}
 
-		$items = $this->_object->getPath( $item->getId() );
+		$items = $this->object->getPath( $item->getId() );
 		$expected = array( 'Root', 'Categories', 'Kaffee' );
 
 		foreach( $items as $item ) {
@@ -300,13 +300,13 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveInsertMoveDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Root' ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
+			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search, array( 'text' ) );
+		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No root node found' );
@@ -316,16 +316,16 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$item->setId( null );
 		$item->setLabel( 'Root child' );
 		$item->setCode( 'new Root child' );
-		$this->_object->insertItem( $item, $parentId );
-		$this->_object->moveItem( $item->getId(), $parentId, $parentId );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->insertItem( $item, $parentId );
+		$this->object->moveItem( $item->getId(), $parentId, $parentId );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setStatus( true );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 		$context = TestHelper::getContext();
 
@@ -351,24 +351,24 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
 		$target = 'MShop_Common_Manager_Interface';
-		$this->assertInstanceOf( $target, $this->_object->getSubManager( 'list' ) );
-		$this->assertInstanceOf( $target, $this->_object->getSubManager( 'list', 'Default' ) );
+		$this->assertInstanceOf( $target, $this->object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( $target, $this->object->getSubManager( 'list', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'list', 'unknown' );
+		$this->object->getSubManager( 'list', 'unknown' );
 	}
 }

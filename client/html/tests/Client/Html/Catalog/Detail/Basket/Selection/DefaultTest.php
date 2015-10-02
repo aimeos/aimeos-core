@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends PHPUnit_Fr
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Detail_Basket_Selection_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Detail_Basket_Selection_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,18 +32,18 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends PHPUnit_Fr
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem( 'U:TESTP' );
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem( 'U:TESTP' );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( null, $expire );
@@ -53,18 +53,18 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends PHPUnit_Fr
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem( 'U:TEST' );
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem( 'U:TEST' );
 
-		$variantAttr1 = $this->_getProductItem( 'U:TESTSUB02' )->getRefItems( 'attribute', null, 'variant' );
-		$variantAttr2 = $this->_getProductItem( 'U:TESTSUB04' )->getRefItems( 'attribute', null, 'variant' );
+		$variantAttr1 = $this->getProductItem( 'U:TESTSUB02' )->getRefItems( 'attribute', null, 'variant' );
+		$variantAttr2 = $this->getProductItem( 'U:TESTSUB04' )->getRefItems( 'attribute', null, 'variant' );
 
 		$this->assertGreaterThan( 0, count( $variantAttr1 ) );
 		$this->assertGreaterThan( 0, count( $variantAttr2 ) );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<div class="catalog-detail-basket-selection', $output );
 
@@ -83,14 +83,14 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends PHPUnit_Fr
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	/**
 	 * @param string $code
 	 */
-	protected function _getProductItem( $code )
+	protected function getProductItem( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();

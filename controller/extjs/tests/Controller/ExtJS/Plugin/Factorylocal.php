@@ -34,6 +34,6 @@ class Controller_ExtJS_Plugin_Factorylocal
 		$classname = 'Controller_ExtJS_Plugin_' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );
-		return self::_addControllerDecorators( $context, $manager, $domainToTest );
+		return self::addControllerDecorators( $context, $manager, $domainToTest );
 	}
 }

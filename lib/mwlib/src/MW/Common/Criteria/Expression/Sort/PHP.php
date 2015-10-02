@@ -18,9 +18,9 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	extends MW_Common_Criteria_Expression_Abstract
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
-	private static $_operators = array( '+' => 'asort', '-' => 'arsort' );
-	private $_operator;
-	private $_name;
+	private static $operators = array( '+' => 'asort', '-' => 'arsort' );
+	private $operator;
+	private $name;
 
 
 	/**
@@ -31,12 +31,12 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 */
 	public function __construct( $operator, $name )
 	{
-		if( !isset( self::$_operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		$this->_operator = $operator;
-		$this->_name = $name;
+		$this->operator = $operator;
+		$this->name = $name;
 	}
 
 
@@ -47,7 +47,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 */
 	public function getOperator()
 	{
-		return $this->_operator;
+		return $this->operator;
 	}
 
 
@@ -58,7 +58,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$_operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -69,7 +69,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -83,11 +83,11 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		$this->_setPlugins( $plugins );
+		$this->setPlugins( $plugins );
 
-		$name = $this->_name;
+		$name = $this->name;
 
-		if( ( $transname = $this->_translateName( $name, $translations ) ) === '' ) {
+		if( ( $transname = $this->translateName( $name, $translations ) ) === '' ) {
 			return '';
 		}
 
@@ -95,7 +95,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return self::$_operators[$this->_operator] . '(' . $transname . ');';
+		return self::$operators[$this->operator] . '(' . $transname . ');';
 	}
 
 
@@ -107,9 +107,9 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
-	protected function _escape( $operator, $type, $value )
+	protected function escape( $operator, $type, $value )
 	{
-		$value = $this->_translateValue( $this->getName(), $value );
+		$value = $this->translateValue( $this->getName(), $value );
 
 		switch( $type )
 		{
@@ -130,7 +130,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 * @return string Internal parameter type
 	 * @throws MW_Common_Exception If an error occurs
 	 */
-	protected function _getParamType( &$item )
+	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{

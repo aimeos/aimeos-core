@@ -51,7 +51,7 @@ class Client_Html_Email_Watch_Text_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/watch/text/default/subparts';
+	private $subPartPath = 'client/html/email/watch/text/default/subparts';
 
 	/** client/html/email/watch/text/salutation/name
 	 * Name of the salutation part used by the product notification email text client implementation
@@ -96,7 +96,7 @@ class Client_Html_Email_Watch_Text_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'salutation', 'intro', 'detail', 'outro' );
+	private $subPartNames = array( 'salutation', 'intro', 'detail', 'outro' );
 
 
 	/**
@@ -109,10 +109,10 @@ class Client_Html_Email_Watch_Text_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->textBody = $content;
@@ -146,7 +146,7 @@ class Client_Html_Email_Watch_Text_Default
 		 */
 		$tplconf = 'client/html/email/watch/text/default/template-body';
 
-		$text = $view->render( $this->_getTemplate( $tplconf, 'email/common/text-body-default.html' ) );
+		$text = $view->render( $this->getTemplate( $tplconf, 'email/common/text-body-default.html' ) );
 		$view->mail()->setBody( $text );
 		return $text;
 	}
@@ -162,10 +162,10 @@ class Client_Html_Email_Watch_Text_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->textHeader = $content;
@@ -200,7 +200,7 @@ class Client_Html_Email_Watch_Text_Default
 		 */
 		$tplconf = 'client/html/email/watch/text/default/template-header';
 
-		return $view->render( $this->_getTemplate( $tplconf, 'email/common/text-header-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/common/text-header-default.html' ) );
 	}
 
 
@@ -287,7 +287,7 @@ class Client_Html_Email_Watch_Text_Default
 		 * @see client/html/email/watch/text/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/watch/text/' . $type, $name );
+		return $this->createSubClient( 'email/watch/text/' . $type, $name );
 	}
 
 
@@ -296,8 +296,8 @@ class Client_Html_Email_Watch_Text_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

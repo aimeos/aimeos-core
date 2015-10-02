@@ -18,9 +18,9 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	extends MW_Common_Criteria_Expression_Abstract
 	implements MW_Common_Criteria_Expression_Compare_Interface
 {
-	private $_operator;
-	private $_name;
-	private $_value;
+	private $operator;
+	private $name;
+	private $value;
 
 
 	/**
@@ -32,9 +32,9 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 */
 	public function __construct( $operator, $name, $value )
 	{
-		$this->_operator = $operator;
-		$this->_name = $name;
-		$this->_value = $value;
+		$this->operator = $operator;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 
@@ -45,7 +45,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 */
 	public function getOperator()
 	{
-		return $this->_operator;
+		return $this->operator;
 	}
 
 
@@ -56,7 +56,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -67,7 +67,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 */
 	public function getValue()
 	{
-		return $this->_value;
+		return $this->value;
 	}
 
 
@@ -81,11 +81,11 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		$this->_setPlugins( $plugins );
+		$this->setPlugins( $plugins );
 
-		$name = $this->_name;
+		$name = $this->name;
 
-		if( ( $transname = $this->_translateName( $name, $translations ) ) === '' ) {
+		if( ( $transname = $this->translateName( $name, $translations ) ) === '' ) {
 			$transname = $name;
 		}
 
@@ -93,15 +93,15 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		if( $this->_value === null ) {
-			return $this->_createNullTerm( $transname );
+		if( $this->value === null ) {
+			return $this->createNullTerm( $transname );
 		}
 
-		if( is_array( $this->_value ) ) {
-			return $this->_createListTerm( $transname, $types[$name] );
+		if( is_array( $this->value ) ) {
+			return $this->createListTerm( $transname, $types[$name] );
 		}
 
-		return $this->_createTerm( $transname, $types[$name], $this->_value );
+		return $this->createTerm( $transname, $types[$name], $this->value );
 	}
 
 
@@ -113,7 +113,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 * @param string $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	abstract protected function _createTerm( $name, $type, $value );
+	abstract protected function createTerm( $name, $type, $value );
 
 
 	/**
@@ -122,7 +122,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 * @param string $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function _createNullTerm( $name );
+	abstract protected function createNullTerm( $name );
 
 
 	/**
@@ -132,5 +132,5 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 * @param integer $type Type constant
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function _createListTerm( $name, $type );
+	abstract protected function createListTerm( $name, $type );
 }

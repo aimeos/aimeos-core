@@ -18,7 +18,7 @@ class MAdmin_Log_Item_Default
 	extends MShop_Common_Item_Abstract
 	implements MAdmin_Log_Item_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the log item.
@@ -29,7 +29,7 @@ class MAdmin_Log_Item_Default
 	{
 		parent::__construct( 'log.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -40,7 +40,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function getFacility()
 	{
-		return ( isset( $this->_values['facility'] ) ? (string) $this->_values['facility'] : '' );
+		return ( isset( $this->values['facility'] ) ? (string) $this->values['facility'] : '' );
 	}
 
 
@@ -51,7 +51,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function setFacility( $facility )
 	{
-		$this->_values['facility'] = (string) $facility;
+		$this->values['facility'] = (string) $facility;
 		$this->setModified();
 	}
 
@@ -63,7 +63,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function getTimestamp()
 	{
-		return ( isset( $this->_values['timestamp'] ) ? (string) $this->_values['timestamp'] : null );
+		return ( isset( $this->values['timestamp'] ) ? (string) $this->values['timestamp'] : null );
 	}
 
 
@@ -74,7 +74,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function getPriority()
 	{
-		return ( isset( $this->_values['priority'] ) ? (int) $this->_values['priority'] : 0 );
+		return ( isset( $this->values['priority'] ) ? (int) $this->values['priority'] : 0 );
 	}
 
 
@@ -85,7 +85,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function setPriority( $priority )
 	{
-		$this->_values['priority'] = (int) $priority;
+		$this->values['priority'] = (int) $priority;
 		$this->setModified();
 	}
 
@@ -97,7 +97,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function getMessage()
 	{
-		return ( isset( $this->_values['message'] ) ? (string) $this->_values['message'] : '' );
+		return ( isset( $this->values['message'] ) ? (string) $this->values['message'] : '' );
 	}
 
 
@@ -108,7 +108,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function setMessage( $message )
 	{
-		$this->_values['message'] = (string) $message;
+		$this->values['message'] = (string) $message;
 		$this->setModified();
 	}
 
@@ -120,7 +120,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function getRequest()
 	{
-		return ( isset( $this->_values['request'] ) ? (string) $this->_values['request'] : '' );
+		return ( isset( $this->values['request'] ) ? (string) $this->values['request'] : '' );
 	}
 
 
@@ -131,7 +131,7 @@ class MAdmin_Log_Item_Default
 	 */
 	public function setRequest( $request )
 	{
-		$this->_values['request'] = (string) $request;
+		$this->values['request'] = (string) $request;
 		$this->setModified();
 	}
 

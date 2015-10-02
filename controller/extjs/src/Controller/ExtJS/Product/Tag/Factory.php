@@ -142,6 +142,6 @@ class Controller_ExtJS_Product_Tag_Factory
 		 * @see controller/extjs/product/tag/decorators/excludes
 		 * @see controller/extjs/product/tag/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'product/tag' );
+		return self::addControllerDecorators( $context, $controller, 'product/tag' );
 	}
 }

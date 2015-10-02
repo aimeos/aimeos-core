@@ -151,7 +151,7 @@ class MShop_Customer_Manager_Factory
 		 * @see mshop/customer/manager/decorators/excludes
 		 * @see mshop/customer/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'customer' );
+		return self::addManagerDecorators( $context, $manager, 'customer' );
 	}
 
 }

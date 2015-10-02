@@ -142,6 +142,6 @@ class Controller_ExtJS_Catalog_List_Type_Factory
 		 * @see controller/extjs/catalog/list/type/decorators/excludes
 		 * @see controller/extjs/catalog/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'catalog/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'catalog/list/type' );
 	}
 }

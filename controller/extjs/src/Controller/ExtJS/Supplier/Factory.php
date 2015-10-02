@@ -142,6 +142,6 @@ class Controller_ExtJS_Supplier_Factory
 		 * @see controller/extjs/supplier/decorators/excludes
 		 * @see controller/extjs/supplier/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'supplier' );
+		return self::addControllerDecorators( $context, $controller, 'supplier' );
 	}
 }

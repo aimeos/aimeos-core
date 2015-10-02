@@ -18,10 +18,10 @@ class MAdmin_Log_Manager_Default
 	extends MAdmin_Common_Manager_Abstract
 	implements MAdmin_Log_Manager_Interface, MW_Logger_Interface
 {
-	private $_loglevel;
-	private $_requestid;
+	private $loglevel;
+	private $requestid;
 
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'log.id' => array(
 			'code' => 'log.id',
 			'internalcode' => 'malog."id"',
@@ -82,7 +82,7 @@ class MAdmin_Log_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-log' );
+		$this->setResourceName( 'db-log' );
 
 		$config = $context->getConfig();
 
@@ -120,8 +120,8 @@ class MAdmin_Log_Manager_Default
 		 * @category Developer
 		 * @category User
 		 */
-		$this->_loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Abstract::WARN );
-		$this->_requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
+		$this->loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Abstract::WARN );
+		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 
 
@@ -133,7 +133,7 @@ class MAdmin_Log_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/log/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -149,7 +149,7 @@ class MAdmin_Log_Manager_Default
 	public function createItem()
 	{
 		try {
-			$siteid = $this->_getContext()->getLocale()->getSiteId();
+			$siteid = $this->getContext()->getLocale()->getSiteId();
 		} catch( Exception $e ) {
 			$siteid = null;
 		}
@@ -176,7 +176,7 @@ class MAdmin_Log_Manager_Default
 			return;
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		try {
 			$siteid = $context->getLocale()->getSiteId();
@@ -185,7 +185,7 @@ class MAdmin_Log_Manager_Default
 		}
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -256,7 +256,7 @@ class MAdmin_Log_Manager_Default
 				$path = 'madmin/log/manager/default/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getFacility() );
 			$stmt->bind( 3, date( 'Y-m-d H:i:s' ) );
@@ -304,7 +304,7 @@ class MAdmin_Log_Manager_Default
 				 * @see madmin/log/manager/default/count
 				 */
 				$path = 'madmin/log/manager/default/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -349,7 +349,7 @@ class MAdmin_Log_Manager_Default
 		 * @see madmin/log/manager/default/count
 		 */
 		$path = 'madmin/log/manager/default/delete';
-		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -386,10 +386,10 @@ class MAdmin_Log_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -542,7 +542,7 @@ class MAdmin_Log_Manager_Default
 		 */
 		$path = 'classes/log/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -578,9 +578,9 @@ class MAdmin_Log_Manager_Default
 	 * @param string $sql SQL-statement to execute
 	 * @return MW_DB_Result_Interface Returns db result set from given sql statment
 	 */
-	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$statement = $conn->create( $sql );
 
 		try {
@@ -602,7 +602,7 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel )
+		if( $priority <= $this->loglevel )
 		{
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
@@ -613,7 +613,7 @@ class MAdmin_Log_Manager_Default
 			$item->setFacility( $facility );
 			$item->setPriority( $priority );
 			$item->setMessage( $message );
-			$item->setRequest( $this->_requestid );
+			$item->setRequest( $this->requestid );
 
 			$this->saveItem( $item );
 		}

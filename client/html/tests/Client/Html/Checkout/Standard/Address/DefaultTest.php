@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Address_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Address_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,14 +35,14 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
@@ -51,24 +51,24 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	{
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'xyz';
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertEquals( '', $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$item = $this->_getCustomerItem();
-		$this->_context->setUserId( $item->getId() );
+		$item = $this->getCustomerItem();
+		$this->context->setUserId( $item->getId() );
 
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'address';
 		$view->standardSteps = array( 'address', 'after' );
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="checkout-standard-address">', $output );
 
 		$this->assertGreaterThanOrEqual( 0, count( $view->addressLanguages ) );
@@ -80,9 +80,9 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	{
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'xyz';
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertEquals( '', $output );
 	}
 
@@ -90,20 +90,20 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
@@ -114,9 +114,9 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends PHPUnit_Framewor
 	 * @throws Exception If no customer item is found
 	 * @return MShop_Customer_Item_Interface Customer item object
 	 */
-	protected function _getCustomerItem( $code = 'UTC001' )
+	protected function getCustomerItem( $code = 'UTC001' )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
 		$result = $customerManager->searchItems( $search );

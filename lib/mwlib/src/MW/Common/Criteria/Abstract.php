@@ -66,10 +66,10 @@ abstract class MW_Common_Criteria_Abstract implements MW_Common_Criteria_Interfa
 		$operators = $this->getOperators();
 
 		if( in_array( $op, $operators['combine'] ) ) {
-			return $this->_createCombineExpression( $op, (array) $value );
+			return $this->createCombineExpression( $op, (array) $value );
 		}
 		else if( in_array( $op, $operators['compare'] ) ) {
-			return $this->_createCompareExpression( $op, (array) $value );
+			return $this->createCompareExpression( $op, (array) $value );
 		}
 
 		throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
@@ -107,7 +107,7 @@ abstract class MW_Common_Criteria_Abstract implements MW_Common_Criteria_Interfa
 	 * @param array $list List of arrays with "combine" or "compare" representations
 	 * @throws MW_Common_Exception If operator is invalid
 	 */
-	protected function _createCombineExpression( $operator, array $list )
+	protected function createCombineExpression( $operator, array $list )
 	{
 		$results = array();
 		$operators = $this->getOperators();
@@ -121,10 +121,10 @@ abstract class MW_Common_Criteria_Abstract implements MW_Common_Criteria_Interfa
 			}
 
 			if( in_array( $op, $operators['combine'] ) ) {
-				$results[] = $this->_createCombineExpression( $op, (array) $entry[$op] );
+				$results[] = $this->createCombineExpression( $op, (array) $entry[$op] );
 			}
 			else if( in_array( $op, $operators['compare'] ) ) {
-				$results[] = $this->_createCompareExpression( $op, (array) $entry[$op] );
+				$results[] = $this->createCompareExpression( $op, (array) $entry[$op] );
 			}
 			else {
 				throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
@@ -142,7 +142,7 @@ abstract class MW_Common_Criteria_Abstract implements MW_Common_Criteria_Interfa
 	 * @param array $pair Associative list containing one name/value pair
 	 * @throws MW_Common_Exception If no name/value pair is available
 	 */
-	protected function _createCompareExpression( $op, array $pair )
+	protected function createCompareExpression( $op, array $pair )
 	{
 		if( ( list( $name, $value ) = each( $pair ) ) === false ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid compare condition array "%1$s"', json_encode( $pair ) ) );

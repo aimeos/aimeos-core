@@ -16,14 +16,14 @@
  */
 class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 {
-	private $_price;
-	private $_locale;
-	private $_values;
-	private $_products;
-	private $_addresses;
-	private $_services;
-	private $_coupons;
-	private $_modified = false;
+	private $price;
+	private $locale;
+	private $values;
+	private $products;
+	private $addresses;
+	private $services;
+	private $coupons;
+	private $modified = false;
 
 
 	/**
@@ -46,15 +46,15 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $couponProducts );
 		}
 
-		$this->_price = $price;
-		$this->_locale = $locale;
-		$this->_values = $values;
-		$this->_products = $products;
-		$this->_addresses = $addresses;
-		$this->_services = $services;
-		$this->_coupons = $coupons;
+		$this->price = $price;
+		$this->locale = $locale;
+		$this->values = $values;
+		$this->products = $products;
+		$this->addresses = $addresses;
+		$this->services = $services;
+		$this->coupons = $coupons;
 
-		$this->_modified = false;
+		$this->modified = false;
 	}
 
 
@@ -63,23 +63,23 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function __clone()
 	{
-		$this->_price = clone $this->_price;
-		$this->_locale = clone $this->_locale;
+		$this->price = clone $this->price;
+		$this->locale = clone $this->locale;
 
-		foreach( $this->_products as $key => $value ) {
-			$this->_products[$key] = $value;
+		foreach( $this->products as $key => $value ) {
+			$this->products[$key] = $value;
 		}
 
-		foreach( $this->_addresses as $key => $value ) {
-			$this->_addresses[$key] = $value;
+		foreach( $this->addresses as $key => $value ) {
+			$this->addresses[$key] = $value;
 		}
 
-		foreach( $this->_services as $key => $value ) {
-			$this->_services[$key] = $value;
+		foreach( $this->services as $key => $value ) {
+			$this->services[$key] = $value;
 		}
 
-		foreach( $this->_coupons as $key => $value ) {
-			$this->_coupons[$key] = $value;
+		foreach( $this->coupons as $key => $value ) {
+			$this->coupons[$key] = $value;
 		}
 	}
 
@@ -91,7 +91,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getId()
 	{
-		return ( isset( $this->_values['id'] ) ? (string) $this->_values['id'] : null );
+		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
 	}
 
 
@@ -102,10 +102,10 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
-			$this->_modified = true;
+		if( ( $this->values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
+			$this->modified = true;
 		} else {
-			$this->_modified = false;
+			$this->modified = false;
 		}
 	}
 
@@ -117,7 +117,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->_values['siteid'] ) ? (int) $this->_values['siteid'] : null );
+		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
 	}
 
 
@@ -128,7 +128,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getSiteCode()
 	{
-		return ( isset( $this->_values['sitecode'] ) ? (string) $this->_values['sitecode'] : '' );
+		return ( isset( $this->values['sitecode'] ) ? (string) $this->values['sitecode'] : '' );
 	}
 
 
@@ -139,7 +139,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getComment()
 	{
-		return ( isset( $this->_values['comment'] ) ? (string) $this->_values['comment'] : '' );
+		return ( isset( $this->values['comment'] ) ? (string) $this->values['comment'] : '' );
 	}
 
 
@@ -152,9 +152,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		if( $comment == $this->getComment() ) { return; }
 
-		$this->_values['comment'] = (string) $comment;
+		$this->values['comment'] = (string) $comment;
 
-		$this->_modified = true;
+		$this->modified = true;
 	}
 
 
@@ -165,7 +165,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getCustomerId()
 	{
-		return ( isset( $this->_values['customerid'] ) ? (string) $this->_values['customerid'] : '' );
+		return ( isset( $this->values['customerid'] ) ? (string) $this->values['customerid'] : '' );
 	}
 
 
@@ -178,12 +178,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		if( $customerid === $this->getCustomerId() ) { return; }
 
-		$this->_notifyListeners( 'setCustomerId.before', $customerid );
+		$this->notifyListeners( 'setCustomerId.before', $customerid );
 
-		$this->_values['customerid'] = (string) $customerid;
-		$this->_modified = true;
+		$this->values['customerid'] = (string) $customerid;
+		$this->modified = true;
 
-		$this->_notifyListeners( 'setCustomerId.after', $customerid );
+		$this->notifyListeners( 'setCustomerId.after', $customerid );
 	}
 
 
@@ -195,7 +195,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getLocale()
 	{
-		return $this->_locale;
+		return $this->locale;
 	}
 
 
@@ -207,12 +207,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setLocale( MShop_Locale_Item_Interface $locale )
 	{
-		$this->_notifyListeners( 'setLocale.before', $locale );
+		$this->notifyListeners( 'setLocale.before', $locale );
 
-		$this->_locale = clone $locale;
-		$this->_modified = true;
+		$this->locale = clone $locale;
+		$this->modified = true;
 
-		$this->_notifyListeners( 'setLocale.after', $locale );
+		$this->notifyListeners( 'setLocale.after', $locale );
 	}
 
 
@@ -223,7 +223,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getProducts()
 	{
-		return $this->_products;
+		return $this->products;
 	}
 
 
@@ -235,11 +235,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getProduct( $key )
 	{
-		if( !isset( $this->_products[$key] ) ) {
+		if( !isset( $this->products[$key] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $key ) );
 		}
 
-		return $this->_products[$key];
+		return $this->products[$key];
 	}
 
 
@@ -253,24 +253,24 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null )
 	{
-		$this->_checkProduct( $item );
-		$this->_checkPrice( $item->getPrice() );
+		$this->checkProduct( $item );
+		$this->checkPrice( $item->getPrice() );
 
-		$this->_notifyListeners( 'addProduct.before', $item );
+		$this->notifyListeners( 'addProduct.before', $item );
 
-		if( ( $pos = $this->_getSameProduct( $item ) ) !== false )
+		if( ( $pos = $this->getSameProduct( $item ) ) !== false )
 		{
 			$quantity = $item->getQuantity();
-			$item = $this->_products[$pos];
+			$item = $this->products[$pos];
 			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
 		else if( $position !== null )
 		{
-			if( isset( $this->_products[$position] ) )
+			if( isset( $this->products[$position] ) )
 			{
 				$products = array();
 
-				foreach( $this->_products as $key => $product )
+				foreach( $this->products as $key => $product )
 				{
 					if( $key < $position ) {
 						$products[$key] = $product;
@@ -280,26 +280,26 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 				}
 
 				$products[$position] = $item;
-				$this->_products = $products;
+				$this->products = $products;
 			}
 			else
 			{
-				$this->_products[$position] = $item;
+				$this->products[$position] = $item;
 			}
 
 			$pos = $position;
 		}
 		else
 		{
-			$this->_products[] = $item;
-			end( $this->_products );
-			$pos = key( $this->_products );
+			$this->products[] = $item;
+			end( $this->products );
+			$pos = key( $this->products );
 		}
 
-		ksort( $this->_products );
-		$this->_modified = true;
+		ksort( $this->products );
+		$this->modified = true;
 
-		$this->_notifyListeners( 'addProduct.after', $item );
+		$this->notifyListeners( 'addProduct.after', $item );
 
 		return $pos;
 	}
@@ -312,17 +312,17 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function deleteProduct( $position )
 	{
-		if( !array_key_exists( $position, $this->_products ) ) {
+		if( !array_key_exists( $position, $this->products ) ) {
 			return;
 		}
 
-		$this->_notifyListeners( 'deleteProduct.before', $position );
+		$this->notifyListeners( 'deleteProduct.before', $position );
 
-		$product = $this->_products[$position];
-		unset( $this->_products[$position] );
-		$this->_modified = true;
+		$product = $this->products[$position];
+		unset( $this->products[$position] );
+		$this->modified = true;
 
-		$this->_notifyListeners( 'deleteProduct.after', $product );
+		$this->notifyListeners( 'deleteProduct.after', $product );
 	}
 
 
@@ -334,7 +334,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getAddresses()
 	{
-		return $this->_addresses;
+		return $this->addresses;
 	}
 
 
@@ -346,11 +346,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
-		if( !isset( $this->_addresses[$domain] ) ) {
+		if( !isset( $this->addresses[$domain] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
 		}
 
-		return $this->_addresses[$domain];
+		return $this->addresses[$domain];
 	}
 
 
@@ -364,20 +364,20 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
 		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
-		if( isset( $this->_addresses[$domain] ) && $this->_addresses[$domain] === $address ) { return; }
+		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return; }
 
-		$this->_notifyListeners( 'setAddress.before', $address );
+		$this->notifyListeners( 'setAddress.before', $address );
 
 		$address = clone $address;
 		$address->setType( $domain ); // enforce that the type is the same as the given one
 		$address->setId( null ); // enforce saving as new item
 
-		$this->_addresses[$domain] = $address;
-		$this->_modified = true;
+		$this->addresses[$domain] = $address;
+		$this->modified = true;
 
-		$this->_notifyListeners( 'setAddress.after', $address );
+		$this->notifyListeners( 'setAddress.after', $address );
 
-		return $this->_addresses[$domain];
+		return $this->addresses[$domain];
 	}
 
 
@@ -388,17 +388,17 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function deleteAddress( $type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )
 	{
-		if( !isset( $this->_addresses[$type] ) ) {
+		if( !isset( $this->addresses[$type] ) ) {
 			return;
 		}
 
-		$this->_notifyListeners( 'deleteAddress.before', $type );
+		$this->notifyListeners( 'deleteAddress.before', $type );
 
-		$address = $this->_addresses[$type];
-		unset( $this->_addresses[$type] );
-		$this->_modified = true;
+		$address = $this->addresses[$type];
+		unset( $this->addresses[$type] );
+		$this->modified = true;
 
-		$this->_notifyListeners( 'deleteAddress.after', $address );
+		$this->notifyListeners( 'deleteAddress.after', $address );
 	}
 
 
@@ -410,7 +410,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getServices()
 	{
-		return $this->_services;
+		return $this->services;
 	}
 
 
@@ -422,11 +422,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getService( $type )
 	{
-		if( !isset( $this->_services[$type] ) ) {
+		if( !isset( $this->services[$type] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
 		}
 
-		return $this->_services[$type];
+		return $this->services[$type];
 	}
 
 
@@ -439,20 +439,20 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setService( MShop_Order_Item_Base_Service_Interface $service, $type )
 	{
-		$this->_checkPrice( $service->getPrice() );
+		$this->checkPrice( $service->getPrice() );
 
-		$this->_notifyListeners( 'setService.before', $service );
+		$this->notifyListeners( 'setService.before', $service );
 
 		$service = clone $service;
 		$service->setType( $type ); // enforce that the type is the same as the given one
 		$service->setId( null ); // enforce saving as new item
 
-		$this->_services[$type] = $service;
-		$this->_modified = true;
+		$this->services[$type] = $service;
+		$this->modified = true;
 
-		$this->_notifyListeners( 'setService.after', $service );
+		$this->notifyListeners( 'setService.after', $service );
 
-		return $this->_services[$type];
+		return $this->services[$type];
 	}
 
 
@@ -461,17 +461,17 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function deleteService( $type )
 	{
-		if( !isset( $this->_services[$type] ) ) {
+		if( !isset( $this->services[$type] ) ) {
 			return;
 		}
 
-		$this->_notifyListeners( 'deleteService.before', $type );
+		$this->notifyListeners( 'deleteService.before', $type );
 
-		$service = $this->_services[$type];
-		unset( $this->_services[$type] );
-		$this->_modified = true;
+		$service = $this->services[$type];
+		unset( $this->services[$type] );
+		$this->modified = true;
 
-		$this->_notifyListeners( 'deleteService.after', $service );
+		$this->notifyListeners( 'deleteService.after', $service );
 	}
 
 
@@ -483,7 +483,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getCoupons()
 	{
-		return $this->_coupons;
+		return $this->coupons;
 	}
 
 
@@ -495,27 +495,27 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function addCoupon( $code, array $products = array() )
 	{
-		if( isset( $this->_coupons[$code] ) ) {
+		if( isset( $this->coupons[$code] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Duplicate coupon code "%1$s"', $code ) );
 		}
 
 		foreach( $products as $product )
 		{
-			$this->_checkProduct( $product );
-			$this->_checkPrice( $product->getPrice() );
+			$this->checkProduct( $product );
+			$this->checkPrice( $product->getPrice() );
 		}
 
-		$this->_notifyListeners( 'addCoupon.before', $products );
+		$this->notifyListeners( 'addCoupon.before', $products );
 
-		$this->_coupons[$code] = $products;
+		$this->coupons[$code] = $products;
 
 		foreach( $products as $product ) {
-			$this->_products[] = $product;
+			$this->products[] = $product;
 		}
 
-		$this->_modified = true;
+		$this->modified = true;
 
-		$this->_notifyListeners( 'addCoupon.after', $code );
+		$this->notifyListeners( 'addCoupon.after', $code );
 	}
 
 
@@ -531,28 +531,28 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		$products = array();
 
-		if( isset( $this->_coupons[$code] ) )
+		if( isset( $this->coupons[$code] ) )
 		{
-			$this->_notifyListeners( 'deleteCoupon.before', $code );
+			$this->notifyListeners( 'deleteCoupon.before', $code );
 
-			$products = $this->_coupons[$code];
+			$products = $this->coupons[$code];
 
 			foreach( $products as $product )
 			{
-				if( ( $key = array_search( $product, $this->_products, true ) ) !== false ) {
-					unset( $this->_products[$key] );
+				if( ( $key = array_search( $product, $this->products, true ) ) !== false ) {
+					unset( $this->products[$key] );
 				}
 			}
 
 			if( $removecode === true ) {
-				unset( $this->_coupons[$code] );
+				unset( $this->coupons[$code] );
 			} else {
-				$this->_coupons[$code] = array();
+				$this->coupons[$code] = array();
 			}
 
-			$this->_modified = true;
+			$this->modified = true;
 
-			$this->_notifyListeners( 'deleteCoupon.after', $code );
+			$this->notifyListeners( 'deleteCoupon.after', $code );
 		}
 
 		return $products;
@@ -567,15 +567,15 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function check( $what = MShop_Order_Item_Base_Abstract::PARTS_ALL )
 	{
-		$this->_checkParts( $what );
+		$this->checkParts( $what );
 
-		$this->_notifyListeners( 'check.before', $what );
+		$this->notifyListeners( 'check.before', $what );
 
-		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count( $this->_products ) < 1 ) ) {
+		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 
-		$this->_notifyListeners( 'check.after', $what );
+		$this->notifyListeners( 'check.after', $what );
 	}
 
 
@@ -586,7 +586,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function isModified()
 	{
-		return $this->_modified;
+		return $this->modified;
 	}
 
 
@@ -597,23 +597,23 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getPrice()
 	{
-		if( $this->_modified !== false )
+		if( $this->modified !== false )
 		{
-			$this->_price->setValue( '0.00' );
-			$this->_price->setCosts( '0.00' );
-			$this->_price->setRebate( '0.00' );
-			$this->_price->setTaxRate( '0.00' );
+			$this->price->setValue( '0.00' );
+			$this->price->setCosts( '0.00' );
+			$this->price->setRebate( '0.00' );
+			$this->price->setTaxRate( '0.00' );
 
 			foreach( $this->getServices() as $service ) {
-				$this->_price->addItem( $service->getPrice() );
+				$this->price->addItem( $service->getPrice() );
 			}
 
 			foreach( $this->getProducts() as $product ) {
-				$this->_price->addItem( $product->getPrice(), $product->getQuantity() );
+				$this->price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 		}
 
-		return $this->_price;
+		return $this->price;
 	}
 
 
@@ -624,7 +624,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -635,8 +635,8 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setStatus( $value )
 	{
-		$this->_values['status'] = (int) $value;
-		$this->_modified = true;
+		$this->values['status'] = (int) $value;
+		$this->modified = true;
 	}
 
 
@@ -647,7 +647,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getTimeModified()
 	{
-		return ( isset( $this->_values['mtime'] ) ? (string) $this->_values['mtime'] : null );
+		return ( isset( $this->values['mtime'] ) ? (string) $this->values['mtime'] : null );
 	}
 
 
@@ -658,7 +658,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getTimeCreated()
 	{
-		return ( isset( $this->_values['ctime'] ) ? (string) $this->_values['ctime'] : null );
+		return ( isset( $this->values['ctime'] ) ? (string) $this->values['ctime'] : null );
 	}
 
 
@@ -669,7 +669,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getEditor()
 	{
-		return ( isset( $this->_values['editor'] ) ? (string) $this->_values['editor'] : '' );
+		return ( isset( $this->values['editor'] ) ? (string) $this->values['editor'] : '' );
 	}
 
 
@@ -691,7 +691,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 				case 'order.base.comment': $this->setComment( $value ); break;
 				case 'order.base.customerid': $this->setCustomerId( $value ); break;
 				case 'order.base.status': $this->setStatus( $value ); break;
-				case 'order.base.languageid': $this->_locale->setLanguageId( $value ); break;
+				case 'order.base.languageid': $this->locale->setLanguageId( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -712,8 +712,8 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function toArray()
 	{
-		$price = $this->_price;
-		$locale = $this->_locale;
+		$price = $this->price;
+		$locale = $this->locale;
 
 		return array(
 			'order.base.id' => $this->getId(),
@@ -739,7 +739,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function finish()
 	{
-		$this->_notifyListeners( 'setOrder.before' );
+		$this->notifyListeners( 'setOrder.before' );
 	}
 
 
@@ -754,7 +754,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		 * Workaround because database connections can't be serialized
 		 * Listeners will be reattached on wakeup by the customer manager
 		 */
-		$this->_clearListeners();
+		$this->clearListeners();
 
 		return array_keys( get_object_vars( $this ) );
 	}
@@ -765,9 +765,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param MShop_Price_Item_Interface $item Price item
 	 */
-	protected function _checkPrice( MShop_Price_Item_Interface $item )
+	protected function checkPrice( MShop_Price_Item_Interface $item )
 	{
-		$price = clone $this->_price;
+		$price = clone $this->price;
 		$price->addItem( $item );
 	}
 
@@ -781,7 +781,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @return integer Positon of the same product in the product list
 	 * @throws MShop_Order_Exception If no similar item was found
 	 */
-	protected function _getSameProduct( MShop_Order_Item_Base_Product_Interface $item )
+	protected function getSameProduct( MShop_Order_Item_Base_Product_Interface $item )
 	{
 		$attributeMap = array();
 
@@ -789,7 +789,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			$attributeMap[$attributeItem->getCode()] = $attributeItem;
 		}
 
-		foreach( $this->_products as $position => $product )
+		foreach( $this->products as $position => $product )
 		{
 			if( $product->compare( $item ) === false ) {
 				continue;

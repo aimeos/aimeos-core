@@ -24,7 +24,7 @@ abstract class MW_Setup_Manager_Abstract implements MW_Setup_Manager_Interface
 	 * @param string $dbname Name of the database that will be used
 	 * @return MW_Setup_DBSchema_Interface Database schema object
 	 */
-	protected  function _createSchema( MW_DB_Connection_Interface $conn, $adapter, $dbname )
+	protected  function createSchema( MW_DB_Connection_Interface $conn, $adapter, $dbname )
 	{
 		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
@@ -45,7 +45,7 @@ abstract class MW_Setup_Manager_Abstract implements MW_Setup_Manager_Interface
 	 *
 	 * @param string $pathname Path to the file including the file name
 	 */
-	protected function _includeFile( $pathname )
+	protected function includeFile( $pathname )
 	{
 		if( ( include_once $pathname ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Unable to include file "%1$s"', $pathname ) );
@@ -62,7 +62,7 @@ abstract class MW_Setup_Manager_Abstract implements MW_Setup_Manager_Interface
 	 * @param mixed $additional Additional data that should be handed over to the setup tasks
 	 * @return MW_Setup_Task_Interface[] List of setup task objects
 	 */
-	protected function _createTasks( array $paths, MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional )
+	protected function createTasks( array $paths, MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional )
 	{
 		$tasks = array();
 
@@ -72,7 +72,7 @@ abstract class MW_Setup_Manager_Abstract implements MW_Setup_Manager_Interface
 			{
 				if( $item->isDir() === true || substr( $item->getFilename(), -4 ) != '.php' ) { continue; }
 
-				$this->_includeFile( $item->getPathName() );
+				$this->includeFile( $item->getPathName() );
 
 				$taskname = substr( $item->getFilename(), 0, -4 );
 				$classname = 'MW_Setup_Task_' . $taskname;

@@ -17,7 +17,7 @@ class MShop_Text_Manager_List_Type_Default
 	extends MShop_Common_Manager_Type_Abstract
 	implements MShop_Text_Manager_List_Type_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'text.list.type.id' => array(
 			'code'=>'text.list.type.id',
 			'internalcode'=>'mtexlity."id"',
@@ -95,7 +95,7 @@ class MShop_Text_Manager_List_Type_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-text' );
+		$this->setResourceName( 'db-text' );
 	}
 
 
@@ -107,7 +107,7 @@ class MShop_Text_Manager_List_Type_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/text/manager/list/type/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -142,7 +142,7 @@ class MShop_Text_Manager_List_Type_Default
 		 */
 		$path = 'classes/text/manager/list/type/submanagers';
 
-		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -273,7 +273,7 @@ class MShop_Text_Manager_List_Type_Default
 	 *
 	 * @return string Configuration path
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		/** mshop/text/manager/list/type/default/item/insert
 		 * Inserts a new text list type record into the database table
@@ -495,8 +495,8 @@ class MShop_Text_Manager_List_Type_Default
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

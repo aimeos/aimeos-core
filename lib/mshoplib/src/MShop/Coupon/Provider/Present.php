@@ -25,7 +25,7 @@ class MShop_Coupon_Provider_Present
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
@@ -39,8 +39,8 @@ class MShop_Coupon_Provider_Present
 			) );
 		}
 
-		$orderProduct = $this->_createProduct( $config['present.productcode'], $config['present.quantity'] );
+		$orderProduct = $this->createProduct( $config['present.productcode'], $config['present.quantity'] );
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->getCode(), array( $orderProduct ) );
 	}
 }

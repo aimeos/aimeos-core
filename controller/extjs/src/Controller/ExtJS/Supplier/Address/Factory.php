@@ -142,6 +142,6 @@ class Controller_ExtJS_Supplier_Address_Factory
 		 * @see controller/extjs/supplier/address/decorators/excludes
 		 * @see controller/extjs/supplier/address/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'supplier/address' );
+		return self::addControllerDecorators( $context, $controller, 'supplier/address' );
 	}
 }

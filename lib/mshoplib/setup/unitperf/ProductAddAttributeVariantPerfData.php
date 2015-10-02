@@ -36,22 +36,22 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert attribute items and product/attribute relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
 
-		$this->_msg( 'Adding product variant attribute performance data', 0 );
+		$this->msg( 'Adding product variant attribute performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$attrTypeManager = $attrManager->getSubManager( 'type' );
@@ -65,7 +65,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		}
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -117,7 +117,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 			$attrListLength[$attrItem->getId()] = clone $attrItem;
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
@@ -144,7 +144,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$listItem->setDomain( 'attribute' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = 0;
 
@@ -185,9 +185,9 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

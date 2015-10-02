@@ -11,7 +11,7 @@
  */
 class Controller_Frontend_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -22,8 +22,8 @@ class Controller_Frontend_Common_Factory_AbstractTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$config = $this->_context->getConfig();
+		$this->context = TestHelper::getContext();
+		$config = $this->context->getConfig();
 
 		$config->set( 'controller/frontend/common/decorators/default', array() );
 		$config->set( 'controller/frontend/admin/decorators/global', array() );
@@ -34,10 +34,10 @@ class Controller_Frontend_Common_Factory_AbstractTest extends PHPUnit_Framework_
 
 	public function testInjectController()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->_context, 'Default' );
+		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
 		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', $controller );
 
-		$injectedController = Controller_Frontend_Catalog_Factory::createController( $this->_context, 'Default' );
+		$injectedController = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +45,11 @@ class Controller_Frontend_Common_Factory_AbstractTest extends PHPUnit_Framework_
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->_context, 'Default' );
+		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
 		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', $controller );
 		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', null );
 
-		$new = Controller_Frontend_Catalog_Factory::createController( $this->_context, 'Default' );
+		$new = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
 
 		$this->assertNotSame( $controller, $new );
 	}

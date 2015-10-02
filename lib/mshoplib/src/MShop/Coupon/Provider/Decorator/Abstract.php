@@ -17,8 +17,8 @@
 abstract class MShop_Coupon_Provider_Decorator_Abstract
 	extends MShop_Coupon_Provider_Abstract
 {
-	private $_provider;
-	private $_object;
+	private $provider;
+	private $object;
 
 
 	/**
@@ -32,7 +32,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	public function __construct( MShop_Context_Item_Interface $context,
 		MShop_Coupon_Item_Interface $couponItem, $code, MShop_Coupon_Provider_Interface $provider )
 	{
-		$this->_provider = $provider;
+		$this->provider = $provider;
 
 		parent::__construct( $context, $couponItem, $code );
 	}
@@ -45,7 +45,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$this->_provider->addCoupon( $base );
+		$this->provider->addCoupon( $base );
 	}
 
 
@@ -56,7 +56,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 */
 	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$this->_provider->updateCoupon( $base );
+		$this->provider->updateCoupon( $base );
 	}
 
 
@@ -67,7 +67,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 */
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$this->_provider->deleteCoupon( $base );
+		$this->provider->deleteCoupon( $base );
 	}
 
 
@@ -79,7 +79,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base )
 	{
-		return $this->_provider->isAvailable( $base );
+		return $this->provider->isAvailable( $base );
 	}
 
 
@@ -90,8 +90,8 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 */
 	public function setObject( MShop_Coupon_Provider_Interface $object )
 	{
-		$this->_provider->setObject( $object );
-		$this->_object = $object;
+		$this->provider->setObject( $object );
+		$this->object = $object;
 	}
 
 
@@ -100,10 +100,10 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 *
 	 * @return MShop_Coupon_Provider_Interface Outmost object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		if( isset( $this->_object ) ) {
-			return $this->_object;
+		if( isset( $this->object ) ) {
+			return $this->object;
 		}
 
 		return $this;
@@ -115,8 +115,8 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	 *
 	 * @return MShop_Coupon_Provider_Interface Coupon provider
 	 */
-	protected function _getProvider()
+	protected function getProvider()
 	{
-		return $this->_provider;
+		return $this->provider;
 	}
 }

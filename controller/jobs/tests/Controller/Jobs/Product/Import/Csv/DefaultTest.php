@@ -8,9 +8,9 @@
 
 class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_aimeos;
+	private $object;
+	private $context;
+	private $aimeos;
 
 
 	/**
@@ -23,14 +23,14 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_aimeos = TestHelper::getAimeos();
-		$config = $this->_context->getConfig();
+		$this->context = TestHelper::getContext();
+		$this->aimeos = TestHelper::getAimeos();
+		$config = $this->context->getConfig();
 
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 1 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
 
-		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_aimeos );
+		$this->object = new Controller_Jobs_Product_Import_Csv_Default( $this->context, $this->aimeos );
 	}
 
 
@@ -45,7 +45,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		MShop_Factory::setCache( false );
 		MShop_Factory::clear();
 
-		$this->_object = null;
+		$this->object = null;
 
 		if( file_exists( 'tmp/import.zip' ) ) {
 			unlink( 'tmp/import.zip' );
@@ -55,14 +55,14 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Product import CSV', $this->_object->getName() );
+		$this->assertEquals( 'Product import CSV', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Imports new and updates existing products from CSV files';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
@@ -76,13 +76,13 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 			1 => 'Text/LatinUTF8',
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/converter', $convert );
+		$this->context->getConfig()->set( 'controller/jobs/product/import/csv/converter', $convert );
 
-		$this->_object->run();
+		$this->object->run();
 
-		$result = $this->_get( $prodcodes, array_merge( $delete, $nondelete ) );
-		$properties = $this->_getProperties( array_keys( $result ) );
-		$this->_delete( $prodcodes, $delete, $nondelete );
+		$result = $this->get( $prodcodes, array_merge( $delete, $nondelete ) );
+		$properties = $this->getProperties( array_keys( $result ) );
+		$this->delete( $prodcodes, $delete, $nondelete );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 2, count( $properties ) );
@@ -99,12 +99,12 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		$nondelete = array( 'attribute', 'product' );
 		$delete = array( 'media', 'price', 'text' );
 
-		$this->_object->run();
-		$this->_object->run();
+		$this->object->run();
+		$this->object->run();
 
-		$result = $this->_get( $prodcodes, array_merge( $delete, $nondelete ) );
-		$properties = $this->_getProperties( array_keys( $result ) );
-		$this->_delete( $prodcodes, $delete, $nondelete );
+		$result = $this->get( $prodcodes, array_merge( $delete, $nondelete ) );
+		$properties = $this->getProperties( array_keys( $result ) );
+		$this->delete( $prodcodes, $delete, $nondelete );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 2, count( $properties ) );
@@ -137,11 +137,11 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 			),
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+		$this->context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
-		$this->_object->run();
+		$this->object->run();
 
-		$this->_delete( $prodcodes, array( 'text', 'media' ), array() );
+		$this->delete( $prodcodes, array( 'text', 'media' ), array() );
 	}
 
 
@@ -153,10 +153,10 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 			),
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+		$this->context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->run();
+		$this->object->run();
 	}
 
 
@@ -195,22 +195,22 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 			),
 		);
 
-		$this->_context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+		$this->context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 0 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
 
-		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_aimeos );
+		$this->object = new Controller_Jobs_Product_Import_Csv_Default( $this->context, $this->aimeos );
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->run();
+		$this->object->run();
 	}
 
 
 	public function testRunBackup()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/container/type', 'Zip' );
 		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/import.zip' );
 		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/test-%Y-%m-%d.zip' );
@@ -219,7 +219,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 			throw new Exception( 'Unable to copy test file' );
 		}
 
-		$this->_object->run();
+		$this->object->run();
 
 		$filename = strftime( 'tmp/test-%Y-%m-%d.zip' );
 		$this->assertTrue( file_exists( $filename ) );
@@ -230,7 +230,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 
 	public function testRunBackupInvalid()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/container/type', 'Zip' );
 		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/import.zip' );
 		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/notexist/import.zip' );
@@ -240,21 +240,21 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		}
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->run();
+		$this->object->run();
 	}
 
 
-	protected function _delete( array $prodcodes, array $delete, array $nondelete )
+	protected function delete( array $prodcodes, array $delete, array $nondelete )
 	{
-		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->_context )->getSubmanager( 'list' );
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->context )->getSubmanager( 'list' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$listManager = $productManager->getSubManager( 'list' );
 
-		foreach( $this->_get( $prodcodes, $delete + $nondelete ) as $id => $product )
+		foreach( $this->get( $prodcodes, $delete + $nondelete ) as $id => $product )
 		{
 			foreach( $delete as $domain )
 			{
-				$manager = MShop_Factory::createManager( $this->_context, $domain );
+				$manager = MShop_Factory::createManager( $this->context, $domain );
 
 				foreach( $product->getListItems( $domain ) as $listItem )
 				{
@@ -279,7 +279,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		}
 
 
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'import-test' ) );
@@ -290,9 +290,9 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 	}
 
 
-	protected function _get( array $prodcodes, array $domains )
+	protected function get( array $prodcodes, array $domains )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $prodcodes ) );
@@ -301,9 +301,9 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 	}
 
 
-	protected function _getProperties( array $prodids )
+	protected function getProperties( array $prodids )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context )->getSubManager( 'property' );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context )->getSubManager( 'property' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodids ) );

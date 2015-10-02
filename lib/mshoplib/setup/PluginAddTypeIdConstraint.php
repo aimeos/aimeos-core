@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_PluginAddTypeIdConstraint extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'fk_msplu_typeid' => 'ALTER TABLE "mshop_plugin" ADD CONSTRAINT "fk_msplu_typeid" FOREIGN KEY ("typeid") REFERENCES "mshop_plugin_type" ("id") ON DELETE CASCADE ON UPDATE CASCADE',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_PluginAddTypeIdConstraint extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,25 +52,25 @@ class MW_Setup_Task_PluginAddTypeIdConstraint extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_plugin';
 		$constraint = 'fk_msplu_typeid';
 
-		$this->_msg( 'Adding constraint for table mshop_plugin', 0 ); $this->_status( '' );
+		$this->msg( 'Adding constraint for table mshop_plugin', 0 ); $this->status( '' );
 
-		$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
+		$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
-		if( $this->_schema->tableExists( $table ) === true
-			&& $this->_schema->columnExists( $table, 'typeid' )
-			&& $this->_schema->constraintExists( $table, $constraint ) === false )
+		if( $this->schema->tableExists( $table ) === true
+			&& $this->schema->columnExists( $table, 'typeid' )
+			&& $this->schema->constraintExists( $table, $constraint ) === false )
 		{
-			$this->_execute( $stmts[$constraint] );
-			$this->_status( 'added' );
+			$this->execute( $stmts[$constraint] );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

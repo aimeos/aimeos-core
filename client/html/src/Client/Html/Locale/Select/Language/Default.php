@@ -51,8 +51,8 @@ class Client_Html_Locale_Select_Language_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/locale/select/language/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/locale/select/language/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,10 +65,10 @@ class Client_Html_Locale_Select_Language_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->languageBody = $html;
@@ -96,7 +96,7 @@ class Client_Html_Locale_Select_Language_Default
 		$tplconf = 'client/html/locale/select/language/default/template-body';
 		$default = 'locale/select/language-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -110,10 +110,10 @@ class Client_Html_Locale_Select_Language_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->languageHeader = $html;
@@ -142,7 +142,7 @@ class Client_Html_Locale_Select_Language_Default
 		$tplconf = 'client/html/locale/select/language/default/template-header';
 		$default = 'locale/select/language-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -229,7 +229,7 @@ class Client_Html_Locale_Select_Language_Default
 		 * @see client/html/locale/select/language/decorators/global
 		 */
 
-		return $this->_createSubClient( 'locale/select/language/' . $type, $name );
+		return $this->createSubClient( 'locale/select/language/' . $type, $name );
 	}
 
 
@@ -241,7 +241,7 @@ class Client_Html_Locale_Select_Language_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$session = $context->getSession();
 
@@ -260,8 +260,8 @@ class Client_Html_Locale_Select_Language_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

@@ -151,7 +151,7 @@ class MShop_Media_Manager_Factory
 		 * @see mshop/media/manager/decorators/excludes
 		 * @see mshop/media/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'media' );
+		return self::addManagerDecorators( $context, $manager, 'media' );
 	}
 
 }

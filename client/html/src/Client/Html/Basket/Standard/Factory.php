@@ -77,7 +77,7 @@ class Client_Html_Basket_Standard_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'basket/standard' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'basket/standard' );
 	}
 }
 

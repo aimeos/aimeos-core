@@ -17,7 +17,7 @@
 class MShop_Service_Provider_Decorator_Country
 	extends MShop_Service_Provider_Decorator_Abstract
 {
-	private $_beConfig = array(
+	private $beConfig = array(
 		'country.billing-include' => array(
 			'code' => 'country.billing-include',
 			'internalcode'=> 'country.billing-include',
@@ -66,8 +66,8 @@ class MShop_Service_Provider_Decorator_Country
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->_getProvider()->checkConfigBE( $attributes );
-		$error += $this->_checkConfig( $this->_beConfig, $attributes );
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
 
 		return $error;
 	}
@@ -81,9 +81,9 @@ class MShop_Service_Provider_Decorator_Country
 	 */
 	public function getConfigBE()
 	{
-		$list = $this->_getProvider()->getConfigBE();
+		$list = $this->getProvider()->getConfigBE();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -109,8 +109,8 @@ class MShop_Service_Provider_Decorator_Country
 		{
 			$code = strtoupper( $addresses[$deliveryType]->getCountryId() );
 
-			if( $this->_checkCountryCode( $code, 'country.delivery-include' ) === false
-				|| $this->_checkCountryCode( $code, 'country.delivery-exclude' ) === true
+			if( $this->checkCountryCode( $code, 'country.delivery-include' ) === false
+				|| $this->checkCountryCode( $code, 'country.delivery-exclude' ) === true
 			) {
 				return false;
 			}
@@ -119,8 +119,8 @@ class MShop_Service_Provider_Decorator_Country
 		{
 			$code = strtoupper( $addresses[$paymentType]->getCountryId() );
 
-			if( $this->_checkCountryCode( $code, 'country.delivery-include' ) === false
-				|| $this->_checkCountryCode( $code, 'country.delivery-exclude' ) === true
+			if( $this->checkCountryCode( $code, 'country.delivery-include' ) === false
+				|| $this->checkCountryCode( $code, 'country.delivery-exclude' ) === true
 			) {
 				return false;
 			}
@@ -130,14 +130,14 @@ class MShop_Service_Provider_Decorator_Country
 		{
 			$code = strtoupper( $addresses[$paymentType]->getCountryId() );
 
-			if( $this->_checkCountryCode( $code, 'country.billing-include' ) === false
-				|| $this->_checkCountryCode( $code, 'country.billing-exclude' ) === true
+			if( $this->checkCountryCode( $code, 'country.billing-include' ) === false
+				|| $this->checkCountryCode( $code, 'country.billing-exclude' ) === true
 			) {
 				return false;
 			}
 		}
 
-		return $this->_getProvider()->isAvailable( $basket );
+		return $this->getProvider()->isAvailable( $basket );
 	}
 
 
@@ -147,9 +147,9 @@ class MShop_Service_Provider_Decorator_Country
 	 * @param string $code Two letter ISO country code in upper case
 	 * @param string $key Configuration key referring to the country code configuration
 	 */
-	protected function _checkCountryCode( $code, $key )
+	protected function checkCountryCode( $code, $key )
 	{
-		if( ( $str = $this->_getConfigValue( array( $key ) ) ) === null ) {
+		if( ( $str = $this->getConfigValue( array( $key ) ) ) === null ) {
 			return null;
 		}
 

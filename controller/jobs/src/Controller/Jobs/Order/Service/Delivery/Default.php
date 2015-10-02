@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Service_Delivery_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Process order delivery services' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Process order delivery services' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Service_Delivery_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Sends paid orders to the ERP system or logistic partner' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Sends paid orders to the ERP system or logistic partner' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Order_Service_Delivery_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		/** controller/jobs/service/delivery/process/limit-days
 		 * Deprecated: Use controller/jobs/order/service/delivery/limit-days instead

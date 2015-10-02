@@ -18,7 +18,7 @@ class MW_Translation_Decorator_APC
 	extends MW_Translation_Decorator_Abstract
 	implements MW_Translation_Decorator_Interface
 {
-	private $_prefix;
+	private $prefix;
 
 
 	/**
@@ -34,7 +34,7 @@ class MW_Translation_Decorator_APC
 		}
 
 		parent::__construct( $object );
-		$this->_prefix = $prefix;
+		$this->prefix = $prefix;
 	}
 
 
@@ -47,7 +47,7 @@ class MW_Translation_Decorator_APC
 	 */
 	public function dt( $domain, $string )
 	{
-		$key = $this->_prefix . $domain . '|' . $this->getLocale() . '|' . $string;
+		$key = $this->prefix . $domain . '|' . $this->getLocale() . '|' . $string;
 
 		// regular cache
 		$success = false;
@@ -78,8 +78,8 @@ class MW_Translation_Decorator_APC
 	public function dn( $domain, $singular, $plural, $number )
 	{
 		$locale = $this->getLocale();
-		$index = $this->_getPluralIndex( $number, $locale );
-		$key = $this->_prefix . $domain . '|' . $locale . '|' . $singular . '|' . $index;
+		$index = $this->getPluralIndex( $number, $locale );
+		$key = $this->prefix . $domain . '|' . $locale . '|' . $singular . '|' . $index;
 
 		// regular cache
 		$success = false;

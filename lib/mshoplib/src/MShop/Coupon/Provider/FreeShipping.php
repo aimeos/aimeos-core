@@ -25,7 +25,7 @@ class MShop_Coupon_Provider_FreeShipping
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
@@ -43,9 +43,9 @@ class MShop_Coupon_Provider_FreeShipping
 		$price->setRebate( $price->getCosts() );
 		$price->setCosts( -$price->getCosts() );
 
-		$orderProduct = $this->_createProduct( $config['freeshipping.productcode'], 1 );
+		$orderProduct = $this->createProduct( $config['freeshipping.productcode'], 1 );
 		$orderProduct->setPrice( $price );
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->getCode(), array( $orderProduct ) );
 	}
 }

@@ -47,21 +47,21 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert product data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding service base performance data', 0 );
+		$this->msg( 'Adding service base performance data', 0 );
 
 
-		$manager = MShop_Service_Manager_Factory::createManager( $this->_getContext() );
+		$manager = MShop_Service_Manager_Factory::createManager( $this->getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
@@ -81,7 +81,7 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 		$item->setProvider( 'PrePay' );
 		$item->setStatus( 1 );
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		for( $i = 0; $i < 100; $i++ )
 		{
@@ -95,7 +95,7 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 			$manager->saveItem( $item, false );
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
 		$search = $typeManager->createSearch();
@@ -115,7 +115,7 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 		$item->setProvider( 'Manual' );
 		$item->setStatus( 1 );
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		for( $i = 0; $i < 100; $i++ )
 		{
@@ -129,22 +129,22 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 			$manager->saveItem( $item, false );
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_additional;
+		return $this->additional;
 	}
 
 
-	protected function _txBegin()
+	protected function txBegin()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -152,9 +152,9 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txCommit()
+	protected function txCommit()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

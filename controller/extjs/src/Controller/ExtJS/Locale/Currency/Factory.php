@@ -142,6 +142,6 @@ class Controller_ExtJS_Locale_Currency_Factory
 		 * @see controller/extjs/locale/currency/decorators/excludes
 		 * @see controller/extjs/locale/currency/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'locale/currency' );
+		return self::addControllerDecorators( $context, $controller, 'locale/currency' );
 	}
 }

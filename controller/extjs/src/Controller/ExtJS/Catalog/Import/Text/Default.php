@@ -36,14 +36,14 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	public function uploadFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
 			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
 		}
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/catalog/import/text/default/uploaddir
 		 * Upload directory for text files that should be imported
@@ -69,7 +69,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		 * @category Developer
 		 */
 		if( $config->get( 'controller/extjs/catalog/import/text/default/enablecheck', true ) ) {
-			$this->_checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
+			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
 		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
@@ -126,7 +126,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_getContext() );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->getContext() );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -143,8 +143,8 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	public function importFile( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
@@ -213,15 +213,15 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 			 * @category User
 			 * @see controller/extjs/catalog/import/text/default/container/format
 			 */
-			$container = $this->_createContainer( $path, 'controller/extjs/catalog/import/text/default/container' );
+			$container = $this->createContainer( $path, 'controller/extjs/catalog/import/text/default/container' );
 
 			$textTypeMap = array();
-			foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
+			foreach( $this->getTextTypes( 'catalog' ) as $item ) {
 				$textTypeMap[$item->getCode()] = $item->getId();
 			}
 
 			foreach( $container as $content ) {
-				$this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
+				$this->importTextsFromContent( $content, $textTypeMap, 'catalog' );
 			}
 
 			unlink( $path );
@@ -266,7 +266,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
+	protected function importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
 	{
 		$catalogStart = $catalogTotal = 0;
 		$listManager = $manager->getSubManager( 'list' );
@@ -307,7 +307,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		while( $catalogStart < $catalogTotal );
 
 
-		$listTypes = $this->_getTextListTypes( $manager, 'catalog' );
+		$listTypes = $this->getTextListTypes( $manager, 'catalog' );
 
 		foreach( $itemTextMap as $catalogCode => $textIds )
 		{
@@ -330,7 +330,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 				}
 				catch( Exception $e )
 				{
-					$this->_getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
+					$this->getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
 				}
 			}
 		}

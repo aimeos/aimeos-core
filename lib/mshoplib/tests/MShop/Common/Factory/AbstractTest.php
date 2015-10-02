@@ -11,7 +11,7 @@
  */
 class MShop_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -22,8 +22,8 @@ class MShop_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$config = $this->_context->getConfig();
+		$this->context = TestHelper::getContext();
+		$config = $this->context->getConfig();
 
 		$config->set( 'mshop/common/manager/decorators/default', array() );
 		$config->set( 'mshop/attribute/manager/decorators/global', array() );
@@ -39,10 +39,10 @@ class MShop_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectManager()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context, 'Default' );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Default' );
 		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', $manager );
 
-		$injectedManager = MShop_Attribute_Manager_Factory::createManager( $this->_context, 'DefaultMock' );
+		$injectedManager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'DefaultMock' );
 
 		$this->assertSame( $manager, $injectedManager );
 	}
@@ -50,12 +50,12 @@ class MShop_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectManagerReset()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context, 'Default' );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Default' );
 		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', $manager );
 		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', null );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Attribute_Manager_Factory::createManager( $this->_context, 'DefaultMock' );
+		MShop_Attribute_Manager_Factory::createManager( $this->context, 'DefaultMock' );
 	}
 
 }

@@ -8,7 +8,7 @@
  */
 class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Translation_None( 'ru_XX' );
+		$this->object = new MW_Translation_None( 'ru_XX' );
 	}
 
 
@@ -31,7 +31,7 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -70,8 +70,8 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 
 	public function testDt()
 	{
-		$this->assertEquals( 'File', $this->_object->dt( 'testDomain', 'File' ) );
-		$this->assertEquals( 'ελληνική γλώσσα', $this->_object->dt( 'testDomain', 'ελληνική γλώσσα' ) );
+		$this->assertEquals( 'File', $this->object->dt( 'testDomain', 'File' ) );
+		$this->assertEquals( 'ελληνική γλώσσα', $this->object->dt( 'testDomain', 'ελληνική γλώσσα' ) );
 	}
 
 
@@ -83,17 +83,17 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 		 * 1, if $n == 2..4, 22..24, 32..34, ...
 		 * 2, if $n == 5..20, 25..30, 35..40, .
 		 */
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', 0 ) );
-		$this->assertEquals( 'File', $this->_object->dn( 'testDomain', 'File', 'Files', 1 ) );
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', 2 ) );
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', 5 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', 0 ) );
+		$this->assertEquals( 'File', $this->object->dn( 'testDomain', 'File', 'Files', 1 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', 2 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', 5 ) );
 
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', 22 ) );
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', 25 ) );
-		$this->assertEquals( 'File', $this->_object->dn( 'testDomain', 'File', 'Files', 31 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', 22 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', 25 ) );
+		$this->assertEquals( 'File', $this->object->dn( 'testDomain', 'File', 'Files', 31 ) );
 
-		$this->assertEquals( 'File', $this->_object->dn( 'testDomain', 'File', 'Files', -1 ) );
-		$this->assertEquals( 'Files', $this->_object->dn( 'testDomain', 'File', 'Files', -22 ) );
+		$this->assertEquals( 'File', $this->object->dn( 'testDomain', 'File', 'Files', -1 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', -22 ) );
 
 
 	}
@@ -131,7 +131,7 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 
 	public function testGetAll()
 	{
-		$this->assertEquals( array(), $this->_object->getAll( 'testDomain' ) );
+		$this->assertEquals( array(), $this->object->getAll( 'testDomain' ) );
 	}
 
 }

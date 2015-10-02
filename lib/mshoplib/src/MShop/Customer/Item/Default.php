@@ -18,10 +18,10 @@ class MShop_Customer_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Customer_Item_Interface
 {
-	private $_billingaddress;
-	private $_values;
-	private $_helper;
-	private $_salt;
+	private $billingaddress;
+	private $values;
+	private $helper;
+	private $salt;
 
 
 	/**
@@ -68,10 +68,10 @@ class MShop_Customer_Item_Default
 		// set modified flag to false
 		$address->setId( $this->getId() );
 
-		$this->_billingaddress = $address;
-		$this->_values = $values;
-		$this->_helper = $helper;
-		$this->_salt = $salt;
+		$this->billingaddress = $address;
+		$this->values = $values;
+		$this->helper = $helper;
+		$this->salt = $salt;
 	}
 
 
@@ -85,8 +85,8 @@ class MShop_Customer_Item_Default
 		parent::setId( $id );
 
 		// set modified flag
-		$this->_billingaddress->setId( null );
-		$this->_billingaddress->setId( $this->getId() );
+		$this->billingaddress->setId( null );
+		$this->billingaddress->setId( $this->getId() );
 	}
 
 
@@ -97,7 +97,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -110,7 +110,7 @@ class MShop_Customer_Item_Default
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $value;
+		$this->values['label'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -122,7 +122,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -135,7 +135,7 @@ class MShop_Customer_Item_Default
 	{
 		if( $value == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $value;
+		$this->values['status'] = (int) $value;
 		$this->setModified();
 	}
 
@@ -147,7 +147,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -158,11 +158,11 @@ class MShop_Customer_Item_Default
 	 */
 	public function setCode( $value )
 	{
-		$this->_checkCode( $value );
+		$this->checkCode( $value );
 
 		if( $value == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $value;
+		$this->values['code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -174,7 +174,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getPaymentAddress()
 	{
-		return $this->_billingaddress;
+		return $this->billingaddress;
 	}
 
 
@@ -185,9 +185,9 @@ class MShop_Customer_Item_Default
 	 */
 	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address )
 	{
-		if( $address === $this->_billingaddress && $address->isModified() === false ) { return; }
+		if( $address === $this->billingaddress && $address->isModified() === false ) { return; }
 
-		$this->_billingaddress = $address;
+		$this->billingaddress = $address;
 		$this->setModified();
 	}
 
@@ -199,7 +199,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getBirthday()
 	{
-		return ( isset( $this->_values['birthday'] ) ? (string) $this->_values['birthday'] : null );
+		return ( isset( $this->values['birthday'] ) ? (string) $this->values['birthday'] : null );
 	}
 
 
@@ -214,11 +214,11 @@ class MShop_Customer_Item_Default
 
 		if( $value !== null )
 		{
-			$this->_checkDateOnlyFormat( $value );
+			$this->checkDateOnlyFormat( $value );
 			$value = (string) $value;
 		}
 
-		$this->_values['birthday'] = $value;
+		$this->values['birthday'] = $value;
 		$this->setModified();
 	}
 
@@ -230,7 +230,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getPassword()
 	{
-		return ( isset( $this->_values['password'] ) ? (string) $this->_values['password'] : '' );
+		return ( isset( $this->values['password'] ) ? (string) $this->values['password'] : '' );
 	}
 
 
@@ -243,11 +243,11 @@ class MShop_Customer_Item_Default
 	{
 		if( $value == $this->getPassword() ) { return; }
 
-		if( $this->_helper !== null ) {
-			$value = $this->_helper->encode( $value, $this->_salt );
+		if( $this->helper !== null ) {
+			$value = $this->helper->encode( $value, $this->salt );
 		}
 
-		$this->_values['password'] = $value;
+		$this->values['password'] = $value;
 		$this->setModified();
 	}
 
@@ -259,7 +259,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function getDateVerified()
 	{
-		return ( isset( $this->_values['vdate'] ) ? (string) $this->_values['vdate'] : null );
+		return ( isset( $this->values['vdate'] ) ? (string) $this->values['vdate'] : null );
 	}
 
 
@@ -272,9 +272,9 @@ class MShop_Customer_Item_Default
 	{
 		if( $value === $this->getDateVerified() ) { return; }
 
-		$this->_checkDateOnlyFormat( $value );
+		$this->checkDateOnlyFormat( $value );
 
-		$this->_values['vdate'] = ( $value ? (string) $value : null );
+		$this->values['vdate'] = ( $value ? (string) $value : null );
 		$this->setModified();
 	}
 
@@ -286,16 +286,16 @@ class MShop_Customer_Item_Default
 	 */
 	public function getGroups()
 	{
-		if( !isset( $this->_values['groups'] ) )
+		if( !isset( $this->values['groups'] ) )
 		{
-			$this->_values['groups'] = array();
+			$this->values['groups'] = array();
 
 			foreach( $this->getListItems( 'customer/group' ) as $listItem ) {
-				$this->_values['groups'][] = $listItem->getRefId();
+				$this->values['groups'][] = $listItem->getRefId();
 			}
 		}
 
-		return (array) $this->_values['groups'];
+		return (array) $this->values['groups'];
 	}
 
 
@@ -389,7 +389,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function __clone()
 	{
-		$this->_billingaddress = clone $this->_billingaddress;
+		$this->billingaddress = clone $this->billingaddress;
 	}
 
 
@@ -398,7 +398,7 @@ class MShop_Customer_Item_Default
 	 *
 	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
 	 */
-	protected function _checkDateOnlyFormat( $date )
+	protected function checkDateOnlyFormat( $date )
 	{
 		if( $date !== null && preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', $date ) !== 1 ) {
 			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );

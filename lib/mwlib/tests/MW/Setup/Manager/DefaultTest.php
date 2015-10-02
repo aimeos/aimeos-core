@@ -8,8 +8,8 @@
  */
 class MW_Setup_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_config;
-	private $_dbm;
+	private $config;
+	private $dbm;
 
 
 	/**
@@ -20,13 +20,13 @@ class MW_Setup_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_config = TestHelper::getConfig();
+		$this->config = TestHelper::getConfig();
 
-		if( $this->_config->get( 'resource/db/adapter', false ) === false ) {
+		if( $this->config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
-		$this->_dbm = TestHelper::getDBManager();
+		$this->dbm = TestHelper::getDBManager();
 	}
 
 	/**
@@ -46,12 +46,12 @@ Executing OneTask                                                     OK
 Executing TwoTask                                                     OK
 ';
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$taskPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks';
-		$object = new MW_Setup_Manager_Default( $conn, $this->_config->get( 'resource/db', array() ), $taskPath );
+		$object = new MW_Setup_Manager_Default( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		ob_start();
 
@@ -71,16 +71,16 @@ Executing TwoTask                                                     OK
 Executing ThreeTask                                                   OK
 ';
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$taskPath =  array(
 			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks',
 			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks2',
 		);
 
-		$object = new MW_Setup_Manager_Default( $conn, $this->_config->get( 'resource/db', array() ), $taskPath );
+		$object = new MW_Setup_Manager_Default( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		ob_start();
 

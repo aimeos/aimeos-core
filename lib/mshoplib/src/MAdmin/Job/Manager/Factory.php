@@ -149,6 +149,6 @@ class MAdmin_Job_Manager_Factory
 		 * @see madmin/job/manager/decorators/excludes
 		 * @see madmin/job/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'job' );
+		return self::addManagerDecorators( $context, $manager, 'job' );
 	}
 }

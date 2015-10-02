@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_List_Items_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Items_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Items_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_List_Items_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -45,7 +45,7 @@ class Client_Html_Catalog_List_Items_DefaultTest extends PHPUnit_Framework_TestC
 		$view->listParams = array();
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -57,20 +57,20 @@ class Client_Html_Catalog_List_Items_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="catalog-list-items">', $output );
 
 		$this->assertContains( '<div class="price-item', $output );
@@ -83,6 +83,6 @@ class Client_Html_Catalog_List_Items_DefaultTest extends PHPUnit_Framework_TestC
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 }

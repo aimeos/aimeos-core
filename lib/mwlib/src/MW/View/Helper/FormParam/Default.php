@@ -18,7 +18,7 @@ class MW_View_Helper_FormParam_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_names;
+	private $names;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_FormParam_Default
 	{
 		parent::__construct( $view );
 
-		$this->_names = $names;
+		$this->names = $names;
 	}
 
 
@@ -45,7 +45,7 @@ class MW_View_Helper_FormParam_Default
 	 */
 	public function transform( $names )
 	{
-		$names = array_merge( $this->_names, (array) $names );
+		$names = array_merge( $this->names, (array) $names );
 
 		if( ( $result = array_shift( $names ) ) === null ) {
 			return '';

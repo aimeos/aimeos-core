@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',
 		'unq_msordbaseat_osid_type_code' => 'CREATE UNIQUE INDEX "unq_msordbaseat_osid_type_code" ON "mshop_order_base_service_attr" ("ordservid","type","code")',
 	);
@@ -41,9 +41,9 @@ class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,27 +52,27 @@ class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abst
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$status = 'OK';
 		$table = 'mshop_order_base_service_attr';
-		$this->_msg( sprintf( 'Adding type to unique index to "%1$s"', $table ), 0 );
+		$this->msg( sprintf( 'Adding type to unique index to "%1$s"', $table ), 0 );
 
-		if( $this->_schema->tableExists( $table ) === true )
+		if( $this->schema->tableExists( $table ) === true )
 		{
-			if( $this->_schema->constraintExists( $table, 'unq_msordbaseat_osid_type_code' ) === false )
+			if( $this->schema->constraintExists( $table, 'unq_msordbaseat_osid_type_code' ) === false )
 			{
-				$this->_execute( $stmts['unq_msordbaseat_osid_type_code'] );
+				$this->execute( $stmts['unq_msordbaseat_osid_type_code'] );
 				$status = 'done';
 			}
 
-			if( $this->_schema->constraintExists( $table, 'unq_msordbaseat_ordservid_code' ) === true )
+			if( $this->schema->constraintExists( $table, 'unq_msordbaseat_ordservid_code' ) === true )
 			{
-				$this->_execute( $stmts['unq_msordbaseat_ordservid_code'] );
+				$this->execute( $stmts['unq_msordbaseat_ordservid_code'] );
 				$status = 'done';
 			}
 		}
 
-		$this->_status( $status );
+		$this->status( $status );
 	}
 }

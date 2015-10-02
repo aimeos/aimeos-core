@@ -49,7 +49,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 			return true;
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		/** mshop/plugin/provider/order/complete/disable
 		 * Disables the basket limits check
@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 			$count += $product->getQuantity();
 		}
 
-		$this->_checkLimits( $sum, $count );
+		$this->checkLimits( $sum, $count );
 
 		return true;
 	}
@@ -94,7 +94,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 	 * @param integer $count Total number of products in the basket
 	 * @throws MShop_Plugin_Provider_Exception If one of the minimum or maximum limits is exceeded
 	 */
-	protected function _checkLimits( MShop_Price_Item_Interface $sum, $count )
+	protected function checkLimits( MShop_Price_Item_Interface $sum, $count )
 	{
 		$currencyId = $sum->getCurrencyId();
 		$config = $this->getItemBase()->getConfig();

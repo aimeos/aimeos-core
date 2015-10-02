@@ -151,7 +151,7 @@ class MShop_Attribute_Manager_Factory
 		 * @see mshop/attribute/manager/decorators/excludes
 		 * @see mshop/attribute/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'attribute' );
+		return self::addManagerDecorators( $context, $manager, 'attribute' );
 	}
 
 }

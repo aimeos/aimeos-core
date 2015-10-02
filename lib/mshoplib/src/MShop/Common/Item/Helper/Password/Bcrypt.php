@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Helper_Password_Interface
 {
-	private $_options = array();
+	private $options = array();
 	
 
 	/**
@@ -30,7 +30,7 @@ class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Help
 			throw new MShop_Exception( 'To use the BCrypt encoder, you need to upgrade to PHP 5.5 or install the "ircmaxell/password-compat" via Composer' );
 		}
 
-		$this->_options = $options;
+		$this->options = $options;
 	}
 
 
@@ -43,7 +43,7 @@ class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Help
 	 */
 	public function encode( $password, $salt = null )
 	{
-		$options = $this->_options;
+		$options = $this->options;
 
 		return password_hash( $password, PASSWORD_BCRYPT, $options );
 	}

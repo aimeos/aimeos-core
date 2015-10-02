@@ -7,7 +7,7 @@
 
 class MW_View_Helper_Media_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Media_DefaultTest extends PHPUnit_Framework_TestCase
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$this->_object = new MW_View_Helper_Media_Default( $view );
+		$this->object = new MW_View_Helper_Media_Default( $view );
 	}
 
 
@@ -35,7 +35,7 @@ class MW_View_Helper_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -52,7 +52,7 @@ class MW_View_Helper_Media_DefaultTest extends PHPUnit_Framework_TestCase
 		$attr = array( 'class' => 'testclass' );
 		$expected = '<div class="testclass" ><img src="/base/path/to/preview.jpg" title="test image"  /></div>';
 
-		$output = $this->_object->transform( $item, '/base', $attr );
+		$output = $this->object->transform( $item, '/base', $attr );
 		$this->assertContains( $expected, $output );
 	}
 
@@ -71,7 +71,7 @@ class MW_View_Helper_Media_DefaultTest extends PHPUnit_Framework_TestCase
 		$itemattr = array( 'class' => 'itemclass' );
 		$expected = '<a href="/base/path/to/file.pdf" class="boxclass" ><img src="/base/path/to/preview.jpg" title="test PDF" class="itemclass"  />test PDF</a>';
 
-		$output = $this->_object->transform( $item, '/base', $boxattr, $itemattr );
+		$output = $this->object->transform( $item, '/base', $boxattr, $itemattr );
 		$this->assertContains( $expected, $output );
 	}
 }

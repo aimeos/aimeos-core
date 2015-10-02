@@ -17,7 +17,7 @@
  */
 class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 {
-	private static $_methodExists = array();
+	private static $methodExists = array();
 
 
 	/**
@@ -26,13 +26,13 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 * @param string $method Method to check
 	 * @return boolean
 	 */
-	private static function _checkMethod( $method )
+	private static function checkMethod( $method )
 	{
-		if( !isset( self::$_methodExists[$method] ) ) {
-			self::$_methodExists[$method] = method_exists( 'PHPUnit_Framework_TestCase', $method );
+		if( !isset( self::$methodExists[$method] ) ) {
+			self::$methodExists[$method] = method_exists( 'PHPUnit_Framework_TestCase', $method );
 		}
 
-		return self::$_methodExists[$method];
+		return self::$methodExists[$method];
 	}
 
 
@@ -47,7 +47,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 */
 	public static function assertType( $expected, $actual, $message = '' )
 	{
-		if( self::_checkMethod( 'assertType' ) ) {
+		if( self::checkMethod( 'assertType' ) ) {
 			parent::assertType( $expected, $actual, $message );
 		}
 		else {
@@ -66,7 +66,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 */
 	public static function assertInternalType( $expected, $actual, $message = '' )
 	{
-		if( self::_checkMethod( 'assertInternalType' ) ) {
+		if( self::checkMethod( 'assertInternalType' ) ) {
 			parent::assertInternalType( $expected, $actual, $message );
 		}
 		else {
@@ -85,7 +85,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 */
 	public static function assertInstanceOf( $expected, $actual, $message = '' )
 	{
-		if( self::_checkMethod( 'assertInstanceOf' ) ) {
+		if( self::checkMethod( 'assertInstanceOf' ) ) {
 			parent::assertInstanceOf( $expected, $actual, $message );
 		}
 		else {
@@ -103,7 +103,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 */
 	public static function assertEmpty( $actual, $message = '' )
 	{
-		if( self::_checkMethod( 'assertEmpty' ) ) {
+		if( self::checkMethod( 'assertEmpty' ) ) {
 			parent::assertEmpty( $actual, $message );
 		}
 		else {
