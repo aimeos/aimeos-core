@@ -152,7 +152,7 @@ class MShop_Locale_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'locale' );
+			return $this->createSearchBase( 'locale' );
 		}
 
 		return parent::createSearch();

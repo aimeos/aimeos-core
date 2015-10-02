@@ -609,7 +609,7 @@ class MShop_Product_Manager_Default
 		if( $default === true )
 		{
 			$curDate = date( 'Y-m-d H:i:00', time() );
-			$object = $this->_createSearch( 'product' );
+			$object = $this->createSearchBase( 'product' );
 
 			$expr = array( $object->getConditions() );
 

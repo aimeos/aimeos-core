@@ -589,7 +589,7 @@ class MShop_Price_Manager_Default
 	{
 		if( $default === true )
 		{
-			$object = $this->_createSearch( 'price' );
+			$object = $this->createSearchBase( 'price' );
 			$currencyid = $this->_getContext()->getLocale()->getCurrencyId();
 
 			if( $currencyid !== null )

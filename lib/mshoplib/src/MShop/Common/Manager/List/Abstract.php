@@ -481,7 +481,7 @@ abstract class MShop_Common_Manager_List_Abstract
 		if( $default === true )
 		{
 			$prefix = rtrim( $this->_getPrefix(), '.' );
-			$object = $this->_createSearch( $prefix );
+			$object = $this->createSearchBase( $prefix );
 
 			$expr = array();
 			$curDate = date( 'Y-m-d H:i:00' );

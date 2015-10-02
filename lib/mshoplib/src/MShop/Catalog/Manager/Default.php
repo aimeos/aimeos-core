@@ -201,7 +201,7 @@ class MShop_Catalog_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'catalog' );
+			return $this->createSearchBase( 'catalog' );
 		}
 
 		return parent::createSearch();

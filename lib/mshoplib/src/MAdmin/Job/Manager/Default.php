@@ -141,7 +141,7 @@ class MAdmin_Job_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'job' );
+			return $this->createSearchBase( 'job' );
 		}
 
 		return parent::createSearch();

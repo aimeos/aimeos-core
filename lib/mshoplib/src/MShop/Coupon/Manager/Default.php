@@ -630,7 +630,7 @@ class MShop_Coupon_Manager_Default
 	{
 		if( $default === true )
 		{
-			$object = $this->_createSearch( 'coupon' );
+			$object = $this->createSearchBase( 'coupon' );
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
 			$expr = array();

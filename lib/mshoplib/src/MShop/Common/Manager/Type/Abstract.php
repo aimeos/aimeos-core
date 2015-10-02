@@ -95,7 +95,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( substr( $this->_prefix, 0, strlen( $this->_prefix ) - 1 ) );
+			return $this->createSearchBase( substr( $this->_prefix, 0, strlen( $this->_prefix ) - 1 ) );
 		}
 
 		return parent::createSearch();

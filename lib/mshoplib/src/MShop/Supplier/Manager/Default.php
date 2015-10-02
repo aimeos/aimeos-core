@@ -515,7 +515,7 @@ class MShop_Supplier_Manager_Default
 	public function createSearch($default = false)
 	{
 		if ($default) {
-			return $this->_createSearch('supplier');
+			return $this->createSearchBase('supplier');
 		}
 
 		return parent::createSearch();

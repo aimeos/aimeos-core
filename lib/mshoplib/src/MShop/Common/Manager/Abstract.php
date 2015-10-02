@@ -213,7 +213,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
 	 * @return MW_Common_Criteria_Interface Search critery object
 	 */
-	protected function _createSearch( $domain )
+	protected function createSearchBase( $domain )
 	{
 		$dbm = $this->_context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

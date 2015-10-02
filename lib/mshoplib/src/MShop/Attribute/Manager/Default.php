@@ -549,7 +549,7 @@ class MShop_Attribute_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'attribute' );
+			return $this->createSearchBase( 'attribute' );
 		}
 
 		return parent::createSearch();

@@ -671,7 +671,7 @@ class MShop_Service_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'service' );
+			return $this->createSearchBase( 'service' );
 		}
 
 		return parent::createSearch();

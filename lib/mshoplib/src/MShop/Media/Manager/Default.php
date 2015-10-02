@@ -564,7 +564,7 @@ class MShop_Media_Manager_Default
 	{
 		if( $default === true )
 		{
-			$object = $this->_createSearch( 'media' );
+			$object = $this->createSearchBase( 'media' );
 			$langid = $this->_getContext()->getLocale()->getLanguageId();
 
 			if( $langid !== null )

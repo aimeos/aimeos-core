@@ -560,7 +560,7 @@ class MShop_Text_Manager_Default
 	{
 		if( $default === true )
 		{
-			$object = $this->_createSearch( 'text' );
+			$object = $this->createSearchBase( 'text' );
 			$langid = $this->_getContext()->getLocale()->getLanguageId();
 
 			if( $langid !== null )
