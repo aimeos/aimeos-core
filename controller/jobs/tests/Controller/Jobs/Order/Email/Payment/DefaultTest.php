@@ -20,9 +20,9 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends PHPUnit_Framework_
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Email_Payment_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Email_Payment_Default( $context, $aimeos );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends PHPUnit_Framework_
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
@@ -117,7 +117,7 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends PHPUnit_Framework_
 		$orderStatusManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Email_Payment_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Email_Payment_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -125,7 +125,7 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends PHPUnit_Framework_
 	public function testRunException()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
@@ -154,7 +154,7 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends PHPUnit_Framework_
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array(), array(), array() ) );
 
 
-		$object = new Controller_Jobs_Order_Email_Payment_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Email_Payment_Default( $context, $aimeos );
 		$object->run();
 	}
 

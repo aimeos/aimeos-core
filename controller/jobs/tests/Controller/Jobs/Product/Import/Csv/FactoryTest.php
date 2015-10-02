@@ -11,9 +11,9 @@ class Controller_Jobs_Product_Import_Csv_FactoryTest extends PHPUnit_Framework_T
 	public function testCreateController()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$obj = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $arcavias );
+		$obj = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $aimeos );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
 	}
 
@@ -21,29 +21,29 @@ class Controller_Jobs_Product_Import_Csv_FactoryTest extends PHPUnit_Framework_T
 	public function testFactoryExceptionWrongName()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $aimeos, 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $arcavias, 'WrongClass' );
+		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $aimeos, 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $arcavias, 'Factory' );
+		$object = Controller_Jobs_Product_Import_Csv_Factory::createController( $context, $aimeos, 'Factory' );
 	}
 }

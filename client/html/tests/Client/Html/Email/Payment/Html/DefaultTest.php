@@ -76,14 +76,14 @@ class Client_Html_Email_Payment_Html_DefaultTest extends PHPUnit_Framework_TestC
 	public function testGetBody()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$file = '..' . $ds . 'themes' . $ds . 'classic' . $ds . 'css' . $ds . 'images' . $ds . 'arcavias.png';
+		$file = '..' . $ds . 'themes' . $ds . 'classic' . $ds . 'media' . $ds . 'aimeos.png';
 		$this->_context->getConfig()->set( 'client/html/email/logo', $file );
 
 		$this->_emailMock->expects( $this->once() )->method( 'embedAttachment' )
 			->will( $this->returnValue( 'cid:123-unique-id' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'setBodyHtml' )
-			->with( $this->matchesRegularExpression( '#<html>.*<title>E-mail notification</title>.*<meta.*Arcavias.*<body>#smu' ) );
+			->with( $this->matchesRegularExpression( '#<html>.*<title>E-mail notification</title>.*<meta.*Aimeos.*<body>#smu' ) );
 
 		$output = $this->_object->getBody();
 

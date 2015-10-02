@@ -1,5 +1,5 @@
 {
-	"projectName": "Arcavias Core",
+	"projectName": "Aimeos Core",
 	"deployDir": "deploy",
 	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
 	"pkgs": [{
@@ -14,8 +14,8 @@
 			"path": "lib/extjs/resources/css/"
 		}]
 	}, {
-		"name": "Arcavias Admin Core CSS",
-		"file": "resources/css/arcavias-core.css",
+		"name": "Aimeos Admin Core CSS",
+		"file": "resources/css/aimeos-core.css",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "main.css",
@@ -39,8 +39,8 @@
 			"path": "lib/extjs/"
 		}]
 	}, {
-		"name": "Arcavias Core",
-		"file": "js/arcavias-core.js",
+		"name": "Aimeos Core",
+		"file": "js/aimeos-core.js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "ext-override.js",

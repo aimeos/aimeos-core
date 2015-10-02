@@ -8,15 +8,15 @@
 
 class TestHelper
 {
-	private static $_arcavias;
+	private static $_aimeos;
 	private static $_context = array();
 
 
 	public static function bootstrap()
 	{
-		$arcavias = self::_getArcavias();
+		$aimeos = self::_getAimeos();
 
-		$includepaths = $arcavias->getIncludePaths();
+		$includepaths = $aimeos->getIncludePaths();
 		$includepaths[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
 	}
@@ -67,32 +67,32 @@ class TestHelper
 
 	public static function getHtmlTemplatePaths()
 	{
-		return self::_getArcavias()->getCustomPaths( 'client/html' );
+		return self::_getAimeos()->getCustomPaths( 'client/html' );
 	}
 
 
-	private static function _getArcavias()
+	private static function _getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$_aimeos ) )
 		{
-			require_once 'Arcavias.php';
-			spl_autoload_register( 'Arcavias::autoload' );
+			require_once 'Aimeos.php';
+			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) );
-			self::$_arcavias = new Arcavias( array( $extdir ), false );
+			self::$_aimeos = new Aimeos( array( $extdir ), false );
 		}
 
-		return self::$_arcavias;
+		return self::$_aimeos;
 	}
 
 
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::_getArcavias();
+		$aimeos = self::_getAimeos();
 
 
-		$paths = $arcavias->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );

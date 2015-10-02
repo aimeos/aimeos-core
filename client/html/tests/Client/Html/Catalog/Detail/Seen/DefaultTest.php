@@ -69,7 +69,7 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends PHPUnit_Framework_Test
 
 		$this->_object->process();
 
-		$str = $this->_context->getSession()->get( 'arcavias/catalog/session/seen/list' );
+		$str = $this->_context->getSession()->get( 'aimeos/catalog/session/seen/list' );
 		$this->assertInternalType( 'array', $str );
 	}
 

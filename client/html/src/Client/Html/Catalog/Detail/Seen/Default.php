@@ -192,7 +192,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 		{
 			$context = $this->_getContext();
 			$session = $context->getSession();
-			$lastSeen = $session->get( 'arcavias/catalog/session/seen/list', array() );
+			$lastSeen = $session->get( 'aimeos/catalog/session/seen/list', array() );
 
 			if( isset( $lastSeen[$id] ) )
 			{
@@ -220,9 +220,9 @@ class Client_Html_Catalog_Detail_Seen_Default
 				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
 			}
 
-			$session->set( 'arcavias/catalog/session/seen/list', $lastSeen );
+			$session->set( 'aimeos/catalog/session/seen/list', $lastSeen );
 
-			foreach( $session->get( 'arcavias/catalog/session/seen/cache', array() ) as $key => $value ) {
+			foreach( $session->get( 'aimeos/catalog/session/seen/cache', array() ) as $key => $value ) {
 				$session->set( $key, null );
 			}
 		}

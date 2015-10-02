@@ -73,10 +73,10 @@ class Client_Html_Email_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 		$config->set( 'client/html/email/from-name', 'My company' );
 
 		$this->_emailMock->expects( $this->once() )->method( 'addHeader' )
-			->with( $this->equalTo( 'X-MailGenerator' ), $this->equalTo( 'Arcavias' ) );
+			->with( $this->equalTo( 'X-MailGenerator' ), $this->equalTo( 'Aimeos' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'addTo' )
-			->with( $this->equalTo( 'eshop@metaways.de' ), $this->equalTo( 'Our Unittest' ) );
+			->with( $this->equalTo( 'test@example.com' ), $this->equalTo( 'Our Unittest' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'addFrom' )
 			->with( $this->equalTo( 'me@localhost' ), $this->equalTo( 'My company' ) );

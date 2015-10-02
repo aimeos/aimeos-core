@@ -22,7 +22,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->_jobItemStub = $this->getMockBuilder( 'MAdmin_Job_Item_Default' )->getMock();
 
@@ -31,7 +31,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$this->_object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
 	}
 
 
@@ -63,7 +63,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
@@ -97,7 +97,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 			->with( $this->equalTo( -1 ) );
 
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -108,12 +108,12 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testRunInvalidMethod( $method )
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
 		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->_jobManagerStub );
 
 

@@ -12,9 +12,9 @@ class Controller_Jobs_Order_Cleanup_Unpaid_FactoryTest
 	public function testCreateController()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$obj = Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias );
+		$obj = Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $aimeos );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
 	}
 
@@ -22,30 +22,30 @@ class Controller_Jobs_Order_Cleanup_Unpaid_FactoryTest
 	public function testFactoryExceptionWrongName()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $aimeos, 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'WrongClass' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $aimeos, 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Factory' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $aimeos, 'Factory' );
 	}
 
 }

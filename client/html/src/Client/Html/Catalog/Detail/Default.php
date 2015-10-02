@@ -436,7 +436,7 @@ class Client_Html_Catalog_Detail_Default
 		try
 		{
 			$params = $this->_getClientParams( $view->param() );
-			$context->getSession()->set( 'arcavias/catalog/detail/params/last', $params );
+			$context->getSession()->set( 'aimeos/catalog/detail/params/last', $params );
 
 			parent::process();
 		}

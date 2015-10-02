@@ -43,9 +43,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 			'state' => 'Hamburg',
 			'countryid' => 'DE',
 			'telephone' => '05554433221',
-			'email' => 'unit.test@metaways.de',
+			'email' => 'test@example.com',
 			'telefax' => '05554433222',
-			'website' => 'www.metaways.de',
+			'website' => 'www.example.com',
 			'langid' => 'de',
 			'flag' => 2,
 			'mtime' => '2011-01-01 00:00:02',
@@ -303,7 +303,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetEmail()
 	{
-		$this->assertEquals( 'unit.test@metaways.de', $this->_object->getEmail() );
+		$this->assertEquals( 'test@example.com', $this->_object->getEmail() );
 	}
 
 	public function testSetEmail()
@@ -330,7 +330,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetWebsite()
 	{
-		$this->assertEquals( 'www.metaways.de', $this->_object->getWebsite() );
+		$this->assertEquals( 'www.example.com', $this->_object->getWebsite() );
 	}
 
 	public function testSetWebsite()
@@ -405,9 +405,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 		$this->assertEquals( 'Hamburg', $addressCopy->getState() );
 		$this->assertEquals( 'DE', $addressCopy->getCountryId() );
 		$this->assertEquals( '05554433221', $addressCopy->getTelephone() );
-		$this->assertEquals( 'unit.test@metaways.de', $addressCopy->getEmail() );
+		$this->assertEquals( 'test@example.com', $addressCopy->getEmail() );
 		$this->assertEquals( '05554433222', $addressCopy->getTelefax() );
-		$this->assertEquals( 'www.metaways.de', $addressCopy->getWebsite() );
+		$this->assertEquals( 'www.example.com', $addressCopy->getWebsite() );
 		$this->assertEquals( 'de', $addressCopy->getLanguageId() );
 		$this->assertEquals( 2, $addressCopy->getFlag() );
 

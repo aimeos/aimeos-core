@@ -171,7 +171,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	{
 		if( !isset( $this->_client ) )
 		{
-			$templatePaths = $this->_getArcavias()->getCustomPaths( 'client/html' );
+			$templatePaths = $this->_getAimeos()->getCustomPaths( 'client/html' );
 			$this->_client = Client_Html_Email_Watch_Factory::createClient( $context, $templatePaths );
 		}
 

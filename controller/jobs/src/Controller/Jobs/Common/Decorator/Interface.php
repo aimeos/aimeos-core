@@ -21,10 +21,10 @@ interface Controller_Jobs_Common_Decorator_Interface
 	 * Initializes a new controller decorator object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param Controller_Jobs_Interface $controller Controller object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias,
+	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos,
 		Controller_Jobs_Interface $controller );
 }

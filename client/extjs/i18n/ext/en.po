@@ -1,16 +1,16 @@
-# English translations for arcavias-core (ExtJs client).
+# English translations for aimeos-core (ExtJs client).
 # Copyright (C) 2014
-# This file is distributed under the same license as the arcavias-core package.
+# This file is distributed under the same license as the aimeos-core package.
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias\n"
+"Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
+"Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
 "Language: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

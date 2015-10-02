@@ -47,13 +47,13 @@ class Controller_Jobs_Order_Email_Delivery_Default
 	 */
 	public function run()
 	{
-		$arcavias = $this->_getArcavias();
+		$aimeos = $this->_getAimeos();
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$mailer = $context->getMail();
 		$view = $context->getView();
 
-		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
+		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
 
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );

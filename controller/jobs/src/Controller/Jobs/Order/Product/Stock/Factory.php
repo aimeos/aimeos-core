@@ -22,11 +22,11 @@ class Controller_Jobs_Order_Product_Stock_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/order/product/stock/name
 		 * Class name of the used order product stock scheduler controller implementation
@@ -49,7 +49,7 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Product_Stock_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::_createController( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/product/stock/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order product stock controllers
@@ -86,6 +86,6 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		 * @see controller/jobs/order/product/stock/decorators/global
 		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/product/stock' );
+		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/product/stock' );
 	}
 }

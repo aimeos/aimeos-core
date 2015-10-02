@@ -117,8 +117,8 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -178,8 +178,8 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -285,7 +285,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
+		$pinned = $session->get( 'aimeos/catalog/session/pinned/list', array() );
 
 		switch( $view->param( 'pin_action' ) )
 		{
@@ -331,9 +331,9 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 		if( $refresh )
 		{
-			$session->set( 'arcavias/catalog/session/pinned/list', $pinned );
+			$session->set( 'aimeos/catalog/session/pinned/list', $pinned );
 
-			foreach( $session->get( 'arcavias/catalog/session/pinned/cache', array() ) as $key => $value ) {
+			foreach( $session->get( 'aimeos/catalog/session/pinned/cache', array() ) as $key => $value ) {
 				$session->set( $key, null );
 			}
 		}
@@ -397,7 +397,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 */
 			$domains = $config->get( 'client/html/catalog/session/pinned/domains', $domains );
 
-			$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
+			$pinned = $session->get( 'aimeos/catalog/session/pinned/list', array() );
 
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 			$result = $controller->getProductItems( $pinned, $domains );

@@ -300,7 +300,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderItem = $cntl->store( $basket );
 			$cntl->block( $orderItem );
 
-			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
+			$context->getSession()->set( 'aimeos/orderid', $orderItem->getId() );
 
 			$view->orderItem = $orderItem;
 			$view->orderBasket = $basket;

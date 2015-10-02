@@ -10,7 +10,7 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 {
 	private $_object;
 	private $_context;
-	private $_arcavias;
+	private $_aimeos;
 
 
 	/**
@@ -22,9 +22,9 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_arcavias = TestHelper::getArcavias();
+		$this->_aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Customer_Email_Watch_Default( $this->_context, $this->_arcavias );
+		$this->_object = new Controller_Jobs_Customer_Email_Watch_Default( $this->_context, $this->_aimeos );
 	}
 
 
@@ -77,7 +77,7 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
-			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
+			->setConstructorArgs( array( $this->_context, $this->_aimeos ) )
 			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 
@@ -106,7 +106,7 @@ class Controller_Jobs_Customer_Email_Watch_DefaultTest extends PHPUnit_Framework
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Default' )
-			->setConstructorArgs( array( $this->_context, $this->_arcavias ) )
+			->setConstructorArgs( array( $this->_context, $this->_aimeos ) )
 			->setMethods( array( '_getListProducts' ) )
 			->getMock();
 

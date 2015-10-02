@@ -24,7 +24,7 @@ abstract class Client_Html_Basket_Abstract
 	{
 		$session = $this->_getContext()->getSession();
 
-		foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+		foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 			$session->set( $key, null );
 		}
 	}
@@ -72,8 +72,8 @@ abstract class Client_Html_Basket_Abstract
 		{
 			$session = $context->getSession();
 
-			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/basket/cache', $cached );
+			$cached = $session->get( 'aimeos/basket/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/basket/cache', $cached );
 			$session->set( $key, $value );
 		}
 	}

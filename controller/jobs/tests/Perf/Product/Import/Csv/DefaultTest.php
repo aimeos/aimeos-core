@@ -59,8 +59,8 @@ class Perf_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testImport()
 	{
-		$arcavias = TestHelper::getArcavias();
-		$cntl = Controller_Jobs_Product_Import_Csv_Factory::createController( $this->_context, $arcavias, 'Default' );
+		$aimeos = TestHelper::getAimeos();
+		$cntl = Controller_Jobs_Product_Import_Csv_Factory::createController( $this->_context, $aimeos, 'Default' );
 
 		$start = microtime( true );
 

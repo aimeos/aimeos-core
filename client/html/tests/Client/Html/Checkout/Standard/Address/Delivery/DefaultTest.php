@@ -314,7 +314,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 
 		$this->_context->setEditor( null );
 		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
-		$this->assertEquals( 'Metaways', $basket->getAddress( 'delivery' )->getCompany() );
+		$this->assertEquals( 'Example company', $basket->getAddress( 'delivery' )->getCompany() );
 	}
 
 

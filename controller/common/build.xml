@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Arcavias common controller" default="all">
+<project name="Aimeos common controller" default="all">
 
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />

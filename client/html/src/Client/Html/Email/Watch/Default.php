@@ -150,7 +150,7 @@ class Client_Html_Email_Watch_Default
 		$addr = $view->extAddressItem;
 
 		$msg = $view->mail();
-		$msg->addHeader( 'X-MailGenerator', 'Arcavias' );
+		$msg->addHeader( 'X-MailGenerator', 'Aimeos' );
 		$msg->addTo( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
 
 

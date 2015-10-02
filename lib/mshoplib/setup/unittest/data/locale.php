@@ -7,7 +7,7 @@
 
 return array(
 	'locale/site' => array(
-		'unittest' => array( 'code' => 'unittest', 'label' => 'Unit test site', 'config' => array( "timezone" => "Europe/Berlin", "emailfrom" => "no-reply@metaways.de", "emailreply" => "eshop@metaways.de" ), 'status' => 0 )
+		'unittest' => array( 'code' => 'unittest', 'label' => 'Unit test site', 'config' => array( "timezone" => "Europe/Berlin", "emailfrom" => "no-reply@metaways.de", "emailreply" => "test@example.com" ), 'status' => 0 )
 	),
 
 	'locale' => array(

@@ -2,7 +2,7 @@
 
 return array(
 	'db' => array(
-		'username' => 'arcavias',
-		'password' => 'arcavias',
+		'username' => 'aimeos',
+		'password' => 'aimeos',
 	),
 );

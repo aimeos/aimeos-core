@@ -24,13 +24,13 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->_stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Default' )
-			->setConstructorArgs( array( $context, $arcavias ) )
+			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
-		$this->_object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $arcavias, $this->_stub );
+		$this->_object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $aimeos, $this->_stub );
 	}
 
 
@@ -72,9 +72,9 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 	}
 
 
-	public function testGetArcavias()
+	public function testGetAimeos()
 	{
-		$this->assertInstanceOf( 'Arcavias', $this->_object->getArcavias() );
+		$this->assertInstanceOf( 'Aimeos', $this->_object->getAimeos() );
 	}
 
 
@@ -94,8 +94,8 @@ class Controller_Jobs_Common_Decorator_AbstractImpl
 		return $this->_getContext();
 	}
 
-	public function getArcavias()
+	public function getAimeos()
 	{
-		return $this->_getArcavias();
+		return $this->_getAimeos();
 	}
 }

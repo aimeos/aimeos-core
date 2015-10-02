@@ -38,7 +38,7 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 
 		$this->_fixture = array(
 			'refid' => $customerItem->getId(),
-			'company' => 'Metaways',
+			'company' => 'Example company',
 			'vatid' => 'DE999999999',
 			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'titlekey' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -54,9 +54,9 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 			'countryid' => 'de',
 			'langid' => 'de',
 			'telephone' => '05554433221',
-			'email' => 'unit.test@metaways.de',
+			'email' => 'test@example.com',
 			'telefax' => '05554433222',
-			'website' => 'www.metaways.de',
+			'website' => 'www.example.com',
 			'position' => 1,
 			'siteid' => TestHelper::getContext()->getLocale()->getSiteId(),
 		);
@@ -96,7 +96,7 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Metaways' ) );
+		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
 		$items = $this->_object->searchItems( $search );
 
@@ -196,7 +196,7 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 		$search = $this->_object->createSearch();
 
 		$conditions = array(
-			$search->compare( '==', 'customer.address.company', 'Metaways' ),
+			$search->compare( '==', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -204,7 +204,7 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 
 		$total = 0;
 		$conditions = array(
-			$search->compare( '~=', 'customer.address.company', 'Metaways' ),
+			$search->compare( '~=', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

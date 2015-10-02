@@ -82,7 +82,7 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->_getOrder( '2008-02-15 12:34:56' )->getId();
-		$this->_context->getSession()->set( 'arcavias/orderid', $orderid );
+		$this->_context->getSession()->set( 'aimeos/orderid', $orderid );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$mock = $this->getMockBuilder( 'Client_Html_Checkout_Standard_Process_Default' )
@@ -118,7 +118,7 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->_getOrder( '2009-03-18 16:14:32' )->getId();
-		$this->_context->getSession()->set( 'arcavias/orderid', $orderid );
+		$this->_context->getSession()->set( 'aimeos/orderid', $orderid );
 
 		$this->_object->process();
 

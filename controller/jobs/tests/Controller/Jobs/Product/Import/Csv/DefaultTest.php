@@ -10,7 +10,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 {
 	private $_object;
 	private $_context;
-	private $_arcavias;
+	private $_aimeos;
 
 
 	/**
@@ -24,13 +24,13 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		MShop_Factory::setCache( true );
 
 		$this->_context = TestHelper::getContext();
-		$this->_arcavias = TestHelper::getArcavias();
+		$this->_aimeos = TestHelper::getAimeos();
 		$config = $this->_context->getConfig();
 
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 1 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
 
-		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
+		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_aimeos );
 	}
 
 
@@ -201,7 +201,7 @@ class Controller_Jobs_Product_Import_Csv_DefaultTest extends PHPUnit_Framework_T
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 0 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
 
-		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_arcavias );
+		$this->_object = new Controller_Jobs_Product_Import_Csv_Default( $this->_context, $this->_aimeos );
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
 		$this->_object->run();

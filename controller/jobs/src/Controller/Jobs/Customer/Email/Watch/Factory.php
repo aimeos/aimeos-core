@@ -22,11 +22,11 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/customer/email/watch/name
 		 * Class name of the used product notification e-mail scheduler controller implementation
@@ -74,7 +74,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Customer_Email_Watch_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::_createController( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/customer/email/watch/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer email watch controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @see controller/jobs/customer/email/watch/decorators/excludes
 		 * @see controller/jobs/customer/email/watch/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'customer/email/watch' );
+		return self::_addControllerDecorators( $context, $aimeos, $controller, 'customer/email/watch' );
 	}
 }
