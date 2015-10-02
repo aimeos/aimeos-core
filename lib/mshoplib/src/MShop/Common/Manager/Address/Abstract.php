@@ -224,7 +224,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 			$cfgPathSearch = $this->_getConfigPath() . '/search';
 			$cfgPathCount = $this->_getConfigPath() . '/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[$row['id']] = $this->_createItem( $row );

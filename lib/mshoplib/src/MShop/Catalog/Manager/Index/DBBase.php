@@ -239,7 +239,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$ids[] = $row['id'];

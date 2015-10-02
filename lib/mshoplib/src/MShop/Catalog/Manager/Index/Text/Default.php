@@ -676,7 +676,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/text/search';
 
 			$total = null;
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[$row['prodid']] = $row['value'];

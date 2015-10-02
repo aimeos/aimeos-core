@@ -722,7 +722,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false )
@@ -886,7 +886,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$required = array( 'order.base' );
 			$total = null;
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
 
 			if( ( $row = $results->fetch() ) === false ) {
 				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );

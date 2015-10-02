@@ -504,7 +504,7 @@ class MShop_Attribute_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/attribute/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

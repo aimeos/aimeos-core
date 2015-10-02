@@ -565,7 +565,7 @@ class MShop_Order_Manager_Base_Service_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/service/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			try

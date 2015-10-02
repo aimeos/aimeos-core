@@ -132,7 +132,7 @@ abstract class MShop_Common_Manager_Abstract
 			$total = null;
 
 			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
-			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[$row['key']] = $row['count'];
@@ -761,7 +761,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return MW_DB_Result_Interface SQL result object for accessing the found records
 	 * @throws MShop_Exception if no number of all matching records is available
 	 */
-	protected function _searchItems( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
+	protected function searchItemsBase( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ALL, array $plugins = array() )
 	{

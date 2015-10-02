@@ -486,7 +486,7 @@ class MAdmin_Job_Manager_Default
 			 */
 			$cfgPathCount = 'madmin/job/manager/default/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

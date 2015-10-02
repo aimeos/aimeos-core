@@ -608,7 +608,7 @@ class MShop_Customer_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/customer/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['id']] = $row;
 			}

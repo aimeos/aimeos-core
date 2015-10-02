@@ -507,7 +507,7 @@ class MShop_Catalog_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$siteMap[$row['siteid']][$row['id']] = new MW_Tree_Node_Default( $row );

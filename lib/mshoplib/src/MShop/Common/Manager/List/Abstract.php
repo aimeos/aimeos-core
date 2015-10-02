@@ -357,7 +357,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
@@ -436,7 +436,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['domain']][] = $row['refid'];

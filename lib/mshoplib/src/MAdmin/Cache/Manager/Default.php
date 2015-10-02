@@ -484,7 +484,7 @@ class MAdmin_Cache_Manager_Default
 			 */
 			$cfgPathCount = 'madmin/cache/manager/default/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[$row['id']] = $this->_createItem( $row );

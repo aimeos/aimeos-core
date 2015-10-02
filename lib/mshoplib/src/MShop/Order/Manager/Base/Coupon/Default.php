@@ -537,7 +537,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/coupon/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			try
 			{
