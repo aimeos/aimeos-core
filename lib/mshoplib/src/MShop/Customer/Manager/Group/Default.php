@@ -140,7 +140,7 @@ class MShop_Customer_Manager_Group_Default
 		 */
 		$path = 'classes/customer/manager/group/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

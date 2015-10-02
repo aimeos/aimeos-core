@@ -306,7 +306,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$path = 'classes/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, $default, $withsub );
 	}
 
 

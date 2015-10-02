@@ -435,7 +435,7 @@ class MShop_Locale_Manager_Default
 		$path = 'classes/locale/manager/submanagers';
 		$default = array( 'language', 'currency', 'site' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, $default, $withsub );
 	}
 
 

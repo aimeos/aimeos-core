@@ -112,7 +112,7 @@ class MAdmin_Cache_Manager_None
 	{
 		$path = 'classes/cache/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

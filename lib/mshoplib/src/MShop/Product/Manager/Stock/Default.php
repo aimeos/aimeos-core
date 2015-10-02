@@ -365,7 +365,7 @@ class MShop_Product_Manager_Stock_Default
 		 */
 		$path = 'classes/product/manager/stock/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'warehouse' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'warehouse' ), $withsub );
 	}
 
 

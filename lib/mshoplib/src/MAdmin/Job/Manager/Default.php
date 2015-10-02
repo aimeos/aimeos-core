@@ -546,7 +546,7 @@ class MAdmin_Job_Manager_Default
 		 */
 		$path = 'classes/job/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

@@ -386,7 +386,7 @@ class MShop_Product_Manager_Property_Default
 		 */
 		$path = 'classes/product/manager/property/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 

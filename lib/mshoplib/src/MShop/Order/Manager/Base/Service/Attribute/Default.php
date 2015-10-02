@@ -434,7 +434,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 */
 		$path = 'classes/order/manager/base/service/attribute/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

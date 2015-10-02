@@ -222,7 +222,7 @@ class MShop_Plugin_Manager_Default
 		 */
 		$path = 'classes/plugin/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 

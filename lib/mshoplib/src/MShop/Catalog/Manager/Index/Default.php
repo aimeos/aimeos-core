@@ -119,7 +119,7 @@ class MShop_Catalog_Manager_Index_Default
 		$path = 'mshop/catalog/manager/index/default/submanagers';
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
-		$list += $this->_getSearchAttributes( array(), $path, $default, $withsub );
+		$list += $this->getSearchAttributesBase( array(), $path, $default, $withsub );
 
 		return $list;
 	}

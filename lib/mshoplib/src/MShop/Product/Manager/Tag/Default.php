@@ -350,7 +350,7 @@ class MShop_Product_Manager_Tag_Default
 		 */
 		$path = 'classes/product/manager/tag/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 

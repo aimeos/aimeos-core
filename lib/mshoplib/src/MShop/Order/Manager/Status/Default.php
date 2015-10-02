@@ -409,7 +409,7 @@ class MShop_Order_Manager_Status_Default
 		 */
 		$path = 'classes/order/manager/status/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

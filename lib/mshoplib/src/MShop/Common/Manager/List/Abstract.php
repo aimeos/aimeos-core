@@ -305,7 +305,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array Returns a list of items implementing MW_Common_Criteria_Attribute_Interface
-	 * @deprecated Use _getSearchAttributes() instead
+	 * @deprecated Use getSearchAttributesBase() instead
 	 * @todo 2015.03 Remove method
 	 */
 	public function getSearchAttributes( $withsub = true )
@@ -547,9 +547,9 @@ abstract class MShop_Common_Manager_List_Abstract
 	 * @todo 2015.03 Remove method as it's a workaround for backward compatibility
 	 * @since 2014.09
 	 */
-	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		return parent::_getSearchAttributes( $this->_getSearchConfig(), $path, $default, $withsub );
+		return parent::getSearchAttributesBase( $this->_getSearchConfig(), $path, $default, $withsub );
 	}
 
 

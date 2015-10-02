@@ -285,7 +285,7 @@ class MShop_Catalog_Manager_Default
 		 */
 		$path = 'classes/catalog/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'list' ), $withsub );
 	}
 
 

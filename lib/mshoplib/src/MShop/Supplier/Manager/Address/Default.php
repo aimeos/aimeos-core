@@ -263,7 +263,7 @@ class MShop_Supplier_Manager_Address_Default
 		 */
 		$path = 'classes/supplier/manager/address/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

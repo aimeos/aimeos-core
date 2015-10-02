@@ -581,7 +581,7 @@ class MShop_Product_Manager_Default
 		$path = 'classes/product/manager/submanagers';
 		$default = array( 'type', 'property', 'list', 'stock' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, $default, $withsub );
 	}
 
 

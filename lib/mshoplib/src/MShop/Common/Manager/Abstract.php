@@ -273,7 +273,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
 	 * @since 2014.09
 	 */
-	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
 		if( !isset( $this->_searchAttributes[0] ) )
 		{

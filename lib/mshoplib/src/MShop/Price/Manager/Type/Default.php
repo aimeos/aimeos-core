@@ -142,7 +142,7 @@ class MShop_Price_Manager_Type_Default
 		 */
 		$path = 'classes/price/manager/type/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

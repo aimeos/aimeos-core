@@ -274,7 +274,7 @@ class MShop_Coupon_Manager_Code_Default
 		 */
 		$path = 'classes/coupon/manager/code/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

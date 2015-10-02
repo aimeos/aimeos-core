@@ -179,7 +179,7 @@ class MShop_Attribute_Manager_List_Default
 		 */
 		$path = 'classes/attribute/manager/list/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 

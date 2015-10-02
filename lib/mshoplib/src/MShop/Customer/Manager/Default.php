@@ -269,7 +269,7 @@ class MShop_Customer_Manager_Default
 		 */
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
 	}
 
 

@@ -300,7 +300,7 @@ class MShop_Locale_Manager_Currency_Default
 		 */
 		$path = 'classes/locale/manager/currency/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array(), $withsub );
 	}
 
 

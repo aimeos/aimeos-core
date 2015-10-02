@@ -487,7 +487,7 @@ class MShop_Order_Manager_Default
 		$path = 'classes/order/manager/submanagers';
 		$default = array( 'base', 'status' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, $default, $withsub );
 	}
 
 

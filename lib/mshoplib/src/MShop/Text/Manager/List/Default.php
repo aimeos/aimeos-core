@@ -179,7 +179,7 @@ class MShop_Text_Manager_List_Default
 		 */
 		$path = 'classes/text/manager/list/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 

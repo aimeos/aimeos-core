@@ -163,7 +163,7 @@ class MShop_Service_Manager_Default
 		 */
 		$path = 'classes/service/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->_searchConfig, $path, array( 'type', 'list' ), $withsub );
 	}
 
 
