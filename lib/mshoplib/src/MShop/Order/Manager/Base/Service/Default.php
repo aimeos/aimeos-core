@@ -196,7 +196,7 @@ class MShop_Order_Manager_Base_Service_Default
 		 * @see mshop/order/manager/base/service/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/service/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.service' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.service' ) );
 	}
 
 

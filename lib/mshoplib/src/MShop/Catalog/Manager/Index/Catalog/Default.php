@@ -96,7 +96,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
-		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
 
 

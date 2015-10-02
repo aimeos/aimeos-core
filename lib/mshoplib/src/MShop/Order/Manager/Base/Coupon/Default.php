@@ -147,7 +147,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		 * @see mshop/order/manager/base/coupon/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/coupon/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.coupon' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.coupon' ) );
 	}
 
 

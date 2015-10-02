@@ -186,7 +186,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		 * @see mshop/order/manager/base/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ) );
 	}
 
 

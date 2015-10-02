@@ -169,7 +169,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 * @see mshop/order/manager/base/service/attribute/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/service/attribute/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.service.attribute' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.service.attribute' ) );
 	}
 
 

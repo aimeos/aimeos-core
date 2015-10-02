@@ -280,7 +280,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/address/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.address' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.address' ) );
 	}
 
 

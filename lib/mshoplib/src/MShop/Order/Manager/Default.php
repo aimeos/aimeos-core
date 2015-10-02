@@ -188,7 +188,7 @@ class MShop_Order_Manager_Default
 		 * @see mshop/order/manager/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order' ) );
 	}
 
 

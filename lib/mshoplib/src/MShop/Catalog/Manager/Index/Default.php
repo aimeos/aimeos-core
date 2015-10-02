@@ -70,7 +70,7 @@ class MShop_Catalog_Manager_Index_Default
 		 * @see mshop/catalog/manager/index/default/item/optimize
 		 * @see mshop/catalog/manager/index/default/item/search
 		 */
-		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate', array( 'product' ) );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate', array( 'product' ) );
 	}
 
 

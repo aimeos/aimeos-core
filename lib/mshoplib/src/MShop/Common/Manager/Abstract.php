@@ -106,7 +106,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
 	{
 		$list = array();
 		$context = $this->_getContext();

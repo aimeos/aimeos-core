@@ -61,7 +61,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
 		$required = array( trim( $this->_prefix, '.' ) );
-		return $this->_aggregate( $search, $key, $this->_configPath . 'aggregate', $required );
+		return $this->aggregateBase( $search, $key, $this->_configPath . 'aggregate', $required );
 	}
 
 
