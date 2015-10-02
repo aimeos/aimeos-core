@@ -75,7 +75,7 @@ class MShop_Coupon_Manager_Factory
 		$iface = 'MShop_Coupon_Manager_Interface';
 		$classname = 'MShop_Coupon_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/coupon/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the coupon manager

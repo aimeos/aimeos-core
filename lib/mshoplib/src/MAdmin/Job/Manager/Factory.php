@@ -73,7 +73,7 @@ class MAdmin_Job_Manager_Factory
 		$iface = 'MAdmin_Job_Manager_Interface';
 		$classname = 'MAdmin_Job_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** madmin/job/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the job manager

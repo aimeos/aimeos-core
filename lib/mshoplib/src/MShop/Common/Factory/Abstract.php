@@ -137,7 +137,7 @@ abstract class MShop_Common_Factory_Abstract
 	 * @param string $interface Name of the manager interface
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected static function _createManager( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function createManagerBase( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
 		if( isset( self::$_objects[$classname] ) ) {
 			return self::$_objects[$classname];

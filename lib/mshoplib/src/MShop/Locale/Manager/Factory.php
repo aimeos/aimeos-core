@@ -74,7 +74,7 @@ class MShop_Locale_Manager_Factory
 		$iface = 'MShop_Locale_Manager_Interface';
 		$classname = 'MShop_Locale_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/locale/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the locale manager

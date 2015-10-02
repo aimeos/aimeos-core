@@ -75,7 +75,7 @@ class MShop_Customer_Manager_Factory
 		$iface = 'MShop_Customer_Manager_Interface';
 		$classname = 'MShop_Customer_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/customer/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer manager

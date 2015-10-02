@@ -75,7 +75,7 @@ class MShop_Attribute_Manager_Factory
 		$iface = 'MShop_Attribute_Manager_Interface';
 		$classname = 'MShop_Attribute_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/attribute/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the attribute manager
