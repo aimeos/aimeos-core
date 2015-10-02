@@ -250,7 +250,7 @@ class MAdmin_Cache_Manager_Default
 		 * @see madmin/cache/manager/default/count
 		 */
 
-		$this->_cleanup( $siteids, 'madmin/cache/manager/default/delete' );
+		$this->cleanupBase( $siteids, 'madmin/cache/manager/default/delete' );
 	}
 
 

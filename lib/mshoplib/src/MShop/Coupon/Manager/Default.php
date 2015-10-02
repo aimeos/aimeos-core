@@ -124,7 +124,7 @@ class MShop_Coupon_Manager_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/coupon/manager/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/coupon/manager/default/item/delete' );
 	}
 
 

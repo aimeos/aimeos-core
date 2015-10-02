@@ -132,7 +132,7 @@ class MShop_Service_Manager_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/service/manager/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/service/manager/default/item/delete' );
 	}
 
 

@@ -114,7 +114,7 @@ class MShop_Product_Manager_Stock_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/product/manager/stock/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/product/manager/stock/default/item/delete' );
 	}
 
 

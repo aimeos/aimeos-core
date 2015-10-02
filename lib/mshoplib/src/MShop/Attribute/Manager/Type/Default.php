@@ -111,7 +111,7 @@ class MShop_Attribute_Manager_Type_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/attribute/manager/type/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/attribute/manager/type/default/item/delete' );
 	}
 
 

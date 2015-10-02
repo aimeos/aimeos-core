@@ -137,7 +137,7 @@ class MAdmin_Log_Manager_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'madmin/log/manager/default/delete' );
+		$this->cleanupBase( $siteids, 'madmin/log/manager/default/delete' );
 	}
 
 

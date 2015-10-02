@@ -163,7 +163,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/coupon/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/coupon/default/item/delete' );
 	}
 
 

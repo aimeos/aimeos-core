@@ -116,7 +116,7 @@ class MAdmin_Job_Manager_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'madmin/job/manager/default/delete' );
+		$this->cleanupBase( $siteids, 'madmin/job/manager/default/delete' );
 	}
 
 

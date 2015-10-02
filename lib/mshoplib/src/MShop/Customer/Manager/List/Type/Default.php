@@ -111,7 +111,7 @@ class MShop_Customer_Manager_List_Type_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/customer/manager/list/type/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/list/type/default/item/delete' );
 	}
 
 

@@ -101,7 +101,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	{
 		parent::cleanup( $siteids );
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
 	}
 
 

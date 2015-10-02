@@ -204,7 +204,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/default/item/delete' );
 	}
 
 

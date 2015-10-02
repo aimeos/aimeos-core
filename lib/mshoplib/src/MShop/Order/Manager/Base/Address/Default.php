@@ -296,7 +296,7 @@ class MShop_Order_Manager_Base_Address_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/address/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/address/default/item/delete' );
 	}
 
 

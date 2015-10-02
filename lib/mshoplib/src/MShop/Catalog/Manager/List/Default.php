@@ -148,7 +148,7 @@ class MShop_Catalog_Manager_List_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/list/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/list/default/item/delete' );
 	}
 
 

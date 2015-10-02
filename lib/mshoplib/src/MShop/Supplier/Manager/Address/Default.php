@@ -232,7 +232,7 @@ class MShop_Supplier_Manager_Address_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/supplier/manager/address/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/supplier/manager/address/default/item/delete' );
 	}
 
 

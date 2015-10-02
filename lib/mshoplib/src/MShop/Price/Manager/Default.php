@@ -153,7 +153,7 @@ class MShop_Price_Manager_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/price/manager/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/price/manager/default/item/delete' );
 	}
 
 

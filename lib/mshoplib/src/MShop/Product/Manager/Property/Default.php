@@ -112,7 +112,7 @@ class MShop_Product_Manager_Property_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/product/manager/property/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/product/manager/property/default/item/delete' );
 	}
 
 

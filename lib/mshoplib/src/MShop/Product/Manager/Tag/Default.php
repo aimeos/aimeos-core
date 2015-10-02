@@ -104,7 +104,7 @@ class MShop_Product_Manager_Tag_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/product/manager/tag/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/product/manager/tag/default/item/delete' );
 	}
 
 

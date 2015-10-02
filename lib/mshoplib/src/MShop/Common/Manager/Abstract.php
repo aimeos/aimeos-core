@@ -177,7 +177,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 */
-	protected function _cleanup( array $siteids, $cfgpath )
+	protected function cleanupBase( array $siteids, $cfgpath )
 	{
 		$dbm = $this->_context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

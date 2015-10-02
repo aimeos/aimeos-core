@@ -111,7 +111,7 @@ class MShop_Supplier_Manager_List_Type_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/supplier/manager/list/type/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/supplier/manager/list/type/default/item/delete' );
 	}
 
 

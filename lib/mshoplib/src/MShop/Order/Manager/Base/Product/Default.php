@@ -280,7 +280,7 @@ class MShop_Order_Manager_Base_Product_Default
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/product/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/product/default/item/delete' );
 	}
 
 
