@@ -175,7 +175,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$this->deleteItemsBase( $ids, $this->_config['delete'] );
 	}
 
 

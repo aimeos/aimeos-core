@@ -91,7 +91,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	public function deleteItems( array $ids )
 	{
 		$path = $this->_getConfigPath() . '/delete';
-		$this->_deleteItems( $ids, $this->_context->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_context->getConfig()->get( $path, $path ) );
 	}
 
 

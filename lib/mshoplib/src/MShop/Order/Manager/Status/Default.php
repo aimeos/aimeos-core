@@ -378,7 +378,7 @@ class MShop_Order_Manager_Status_Default
 		 * @see mshop/order/manager/status/default/item/count
 		 */
 		$path = 'mshop/order/manager/status/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

@@ -424,7 +424,7 @@ class MShop_Order_Manager_Base_Service_Default
 		 * @see mshop/order/manager/base/service/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/service/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

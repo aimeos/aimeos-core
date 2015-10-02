@@ -218,7 +218,7 @@ class MShop_Media_Manager_Default
 		 * @see mshop/media/manager/default/item/count
 		 */
 		$path = 'mshop/media/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

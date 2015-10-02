@@ -330,7 +330,7 @@ class MShop_Text_Manager_Default
 		 * @see mshop/text/manager/default/item/count
 		 */
 		$path = 'mshop/text/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

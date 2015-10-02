@@ -211,7 +211,7 @@ class MShop_Service_Manager_Default
 		 * @see mshop/service/manager/default/item/count
 		 */
 		$path = 'mshop/service/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

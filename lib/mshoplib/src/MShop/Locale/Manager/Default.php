@@ -235,7 +235,7 @@ class MShop_Locale_Manager_Default
 		 * @see mshop/locale/manager/default/item/count
 		 */
 		$path = 'mshop/locale/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

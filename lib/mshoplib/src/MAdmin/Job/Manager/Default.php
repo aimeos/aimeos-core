@@ -337,7 +337,7 @@ class MAdmin_Job_Manager_Default
 		 * @see madmin/job/manager/default/count
 		 */
 		$path = 'madmin/job/manager/default/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

@@ -349,7 +349,7 @@ class MAdmin_Log_Manager_Default
 		 * @see madmin/log/manager/default/count
 		 */
 		$path = 'madmin/log/manager/default/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

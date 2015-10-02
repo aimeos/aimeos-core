@@ -849,7 +849,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 */
-	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id' )
+	protected function deleteItemsBase( array $ids, $sql, $siteidcheck = true, $name = 'id' )
 	{
 		if( empty( $ids ) ) { return; }
 

@@ -255,7 +255,7 @@ class MShop_Locale_Manager_Currency_Default
 		 * @see mshop/locale/manager/currency/default/item/count
 		 */
 		$path = 'mshop/locale/manager/currency/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

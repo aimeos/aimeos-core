@@ -368,7 +368,7 @@ class MShop_Product_Manager_Default
 		 * @see mshop/product/manager/default/item/count
 		 */
 		$path = 'mshop/product/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

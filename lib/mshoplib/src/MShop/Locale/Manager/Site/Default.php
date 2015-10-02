@@ -251,7 +251,7 @@ class MShop_Locale_Manager_Site_Default
 		 * @see mshop/locale/manager/site/default/item/newid
 		 */
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems( $ids, $config->get( $path, $path ), false );
+		$this->deleteItemsBase( $ids, $config->get( $path, $path ), false );
 
 		/** mshop/locale/manager/site/cleanup/shop/domains
 		 * List of madmin domains names whose items referring to the same site should be deleted as well

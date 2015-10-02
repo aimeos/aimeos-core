@@ -320,7 +320,7 @@ class MShop_Product_Manager_Stock_Default
 		 * @see mshop/product/manager/stock/default/item/stocklevel
 		 */
 		$path = 'mshop/product/manager/stock/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

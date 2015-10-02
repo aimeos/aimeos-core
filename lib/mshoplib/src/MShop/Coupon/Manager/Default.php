@@ -375,7 +375,7 @@ class MShop_Coupon_Manager_Default
 		 * @see mshop/coupon/manager/default/item/count
 		 */
 		$path = 'mshop/coupon/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

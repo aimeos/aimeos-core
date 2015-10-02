@@ -516,7 +516,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/address/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

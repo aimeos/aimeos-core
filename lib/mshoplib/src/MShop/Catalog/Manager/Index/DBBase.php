@@ -176,7 +176,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 		$sql = $this->_getContext()->getConfig()->get( $path, $path );
 
-		$this->_deleteItems( $ids, $sql, true, 'prodid' );
+		$this->deleteItemsBase( $ids, $sql, true, 'prodid' );
 	}
 
 

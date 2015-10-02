@@ -176,7 +176,7 @@ class MShop_Customer_Manager_Group_Default
 		 * @see mshop/customer/manager/group/default/item/count
 		 */
 		$path = 'mshop/customer/manager/group/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
