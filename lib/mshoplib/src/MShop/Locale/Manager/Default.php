@@ -124,7 +124,7 @@ class MShop_Locale_Manager_Default
 
 		$siteIds = array( $siteItem->getId() );
 
-		return $this->_bootstrap( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds );
+		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds );
 	}
 
 
@@ -456,7 +456,7 @@ class MShop_Locale_Manager_Default
 	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
-	protected function _bootstrap( $site, $lang, $currency, $active,
+	protected function bootstrapBase( $site, $lang, $currency, $active,
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		$siteId = $siteItem->getId();
