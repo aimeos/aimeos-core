@@ -149,7 +149,7 @@ class Client_Html_Common_Factory_Abstract
 	 * @return Client_Html__Interface Client object
 	 * @throws Client_Html_Exception If client couldn't be found or doesn't implement the interface
 	 */
-	protected static function _createClient( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
+	protected static function createClientBase( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
 	{
 		if( isset( self::$_objects[$classname] ) ) {
 			return self::$_objects[$classname];

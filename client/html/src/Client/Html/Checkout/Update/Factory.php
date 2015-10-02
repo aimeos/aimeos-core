@@ -75,7 +75,7 @@ class Client_Html_Checkout_Update_Factory
 		$iface = 'Client_Html_Interface';
 		$classname = 'Client_Html_Checkout_Update_' . $name;
 
-		$client = self::_createClient( $context, $classname, $iface, $templatePaths );
+		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
 		return self::_addClientDecorators( $context, $client, $templatePaths, 'checkout/update' );
 	}
