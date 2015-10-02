@@ -75,7 +75,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function begin()
 	{
-		$this->_begin( $this->_getResourceName() );
+		$this->beginTransation( $this->_getResourceName() );
 	}
 
 
@@ -84,7 +84,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function commit()
 	{
-		$this->_commit( $this->_getResourceName() );
+		$this->commitTransaction( $this->_getResourceName() );
 	}
 
 
@@ -93,7 +93,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function rollback()
 	{
-		$this->_rollback( $this->_getResourceName() );
+		$this->rollbackTransaction( $this->_getResourceName() );
 	}
 
 
@@ -891,7 +891,7 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Starts a database transaction on the connection identified by the given name.
 	 */
-	protected function _begin( $dbname = 'db' )
+	protected function beginTransation( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
 
@@ -904,7 +904,7 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Commits the running database transaction on the connection identified by the given name.
 	 */
-	protected function _commit( $dbname = 'db' )
+	protected function commitTransaction( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
 
@@ -917,7 +917,7 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name.
 	 */
-	protected function _rollback( $dbname = 'db' )
+	protected function rollbackTransaction( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
 
