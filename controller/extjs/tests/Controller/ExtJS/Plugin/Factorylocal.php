@@ -33,7 +33,7 @@ class Controller_ExtJS_Plugin_Factorylocal
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Plugin_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$manager = self::createControllerBase( $context, $classname, $iface );
 		return self::_addControllerDecorators( $context, $manager, $domainToTest );
 	}
 }

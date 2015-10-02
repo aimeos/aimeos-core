@@ -66,7 +66,7 @@ class Controller_ExtJS_Product_Property_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Product_Property_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/product/property/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product property ExtJS controllers

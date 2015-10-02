@@ -50,7 +50,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Service_Delivery_Process_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/service/delivery/process/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service job controllers

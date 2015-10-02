@@ -65,7 +65,7 @@ class Controller_Frontend_Service_Factory
 		$iface = 'Controller_Frontend_Service_Interface';
 		$classname = 'Controller_Frontend_Service_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$manager = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/frontend/service/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service frontend controllers

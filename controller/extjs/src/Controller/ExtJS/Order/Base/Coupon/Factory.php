@@ -60,7 +60,7 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		$interface = 'Controller_ExtJS_Interface';
 		$classname = 'Controller_ExtJS_Order_Base_Coupon_' . $name;
 
-		$controller = self::_createController( $context, $classname, $interface );
+		$controller = self::createControllerBase( $context, $classname, $interface );
 
 		/** controller/extjs/order/base/coupon/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order base coupon ExtJS controllers

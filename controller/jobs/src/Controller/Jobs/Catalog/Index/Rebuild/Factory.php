@@ -74,7 +74,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Catalog_Index_Rebuild_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/catalog/index/rebuild/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog index rebuild controllers

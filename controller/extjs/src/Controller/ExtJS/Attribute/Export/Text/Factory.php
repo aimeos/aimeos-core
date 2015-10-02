@@ -66,6 +66,6 @@ class Controller_ExtJS_Attribute_Export_Text_Factory
 		$iface = 'Controller_ExtJS_Common_Load_Text_Interface';
 		$classname = 'Controller_ExtJS_Attribute_Export_Text_' . $name;
 
-		return self::_createController( $context, $classname, $iface );
+		return self::createControllerBase( $context, $classname, $iface );
 	}
 }

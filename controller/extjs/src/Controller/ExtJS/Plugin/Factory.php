@@ -66,7 +66,7 @@ class Controller_ExtJS_Plugin_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Plugin_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/plugin/decorators/excludes
 		 * Excludes decorators added by the "common" option from the plugin ExtJS controllers

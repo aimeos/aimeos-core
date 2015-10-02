@@ -74,7 +74,7 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Product_Export_Sitemap_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/product/export/sitemap/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product export sitemap job controller

@@ -66,7 +66,7 @@ class Controller_Frontend_Catalog_Factory
 		$iface = 'Controller_Frontend_Catalog_Interface';
 		$classname = 'Controller_Frontend_Catalog_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$manager = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/frontend/catalog/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog frontend controllers

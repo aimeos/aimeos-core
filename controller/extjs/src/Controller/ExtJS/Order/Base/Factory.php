@@ -66,7 +66,7 @@ class Controller_ExtJS_Order_Base_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Order_Base_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/order/base/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order base ExtJS controllers

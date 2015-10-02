@@ -74,7 +74,7 @@ class Controller_Jobs_Product_Bought_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Product_Bought_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/product/bought/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product bought job controller

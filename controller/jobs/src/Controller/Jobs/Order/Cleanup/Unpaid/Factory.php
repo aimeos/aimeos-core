@@ -74,7 +74,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Cleanup_Unpaid_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/cleanup/unpaid/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order cleanup unpaid controllers

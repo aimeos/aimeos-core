@@ -66,7 +66,7 @@ class Controller_ExtJS_Product_Stock_Warehouse_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Product_Stock_Warehouse_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/product/stock/warehouse/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product stock warehouse ExtJS controllers

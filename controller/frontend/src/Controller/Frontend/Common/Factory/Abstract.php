@@ -144,7 +144,7 @@ class Controller_Frontend_Common_Factory_Abstract
 	 * @param string $interface Name of the controller interface
 	 * @return Controller_Frontend_Common_Interface Controller object
 	 */
-	protected static function _createController( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function createControllerBase( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
 		if( isset( self::$_objects[$classname] ) ) {
 			return self::$_objects[$classname];

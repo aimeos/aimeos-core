@@ -147,7 +147,7 @@ abstract class Controller_Jobs_Common_Factory_Abstract
 	 * @param string $interface Name of the controller interface
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */
-	protected static function _createController( MShop_Context_Item_Interface $context, Aimeos $aimeos,
+	protected static function createControllerBase( MShop_Context_Item_Interface $context, Aimeos $aimeos,
 		$classname, $interface )
 	{
 		if( isset( self::$_objects[$classname] ) ) {

@@ -49,7 +49,7 @@ class Controller_Jobs_Order_Product_Stock_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Product_Stock_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/product/stock/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order product stock controllers

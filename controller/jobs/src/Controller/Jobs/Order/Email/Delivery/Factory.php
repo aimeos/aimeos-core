@@ -74,7 +74,7 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Email_Delivery_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/email/delivery/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order email delivery controllers

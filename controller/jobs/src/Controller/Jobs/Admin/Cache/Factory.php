@@ -74,7 +74,7 @@ class Controller_Jobs_Admin_Cache_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Admin_Cache_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/admin/cache/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin cache controllers
