@@ -19,12 +19,12 @@ class MW_View_Helper_NavTree_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_target;
-	private $_controller;
-	private $_action;
-	private $_config;
-	private $_encoder;
-	private $_contentUrl;
+	private $target;
+	private $controller;
+	private $action;
+	private $config;
+	private $encoder;
+	private $contentUrl;
 
 
 	/**
@@ -36,13 +36,13 @@ class MW_View_Helper_NavTree_Default
 	{
 		parent::__construct( $view );
 
-		$this->_target = $view->config( 'client/html/catalog/list/url/target' );
-		$this->_controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
-		$this->_action = $view->config( 'client/html/catalog/list/url/action', 'list' );
-		$this->_config = $view->config( 'client/html/catalog/list/url/config', array() );
-		$this->_contentUrl = $this->config( 'client/html/common/content/baseurl' );
+		$this->target = $view->config( 'client/html/catalog/list/url/target' );
+		$this->controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
+		$this->action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+		$this->config = $view->config( 'client/html/catalog/list/url/config', array() );
+		$this->contentUrl = $this->config( 'client/html/common/content/baseurl' );
 
-		$this->_encoder = $view->encoder();
+		$this->encoder = $view->encoder();
 	}
 
 
@@ -61,7 +61,7 @@ class MW_View_Helper_NavTree_Default
 		}
 
 		$id = $item->getId();
-		$enc = $this->_encoder;
+		$enc = $this->encoder;
 		$config = $item->getConfig();
 
 		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
@@ -71,7 +71,7 @@ class MW_View_Helper_NavTree_Default
 		$params['f_name'] = $item->getName( 'url' );
 		$params['f_catid'] = $id;
 
-		$url = $enc->attr( $this->_getView()->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
+		$url = $enc->attr( $this->getView()->url( $this->target, $this->controller, $this->action, $params, array(), $this->config ) );
 
 		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" >';
 		$output .= '<a class="cat-item" href="' . $url . '"><div class="media-list">';
@@ -79,7 +79,7 @@ class MW_View_Helper_NavTree_Default
 		foreach( $item->getListItems( 'media', 'icon' ) as $listItem )
 		{
 			if( ( $mediaItem = $listItem->getRefItem() ) !== null ) {
-				$output .= $this->media( $mediaItem, $this->_contentUrl, array( 'class' => 'media-item' ) );
+				$output .= $this->media( $mediaItem, $this->contentUrl, array( 'class' => 'media-item' ) );
 			}
 		}
 

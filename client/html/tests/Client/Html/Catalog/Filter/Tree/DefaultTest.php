@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Filter_Tree_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Filter_Tree_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,7 +32,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -40,7 +40,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -53,13 +53,13 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $node->getChild( 1 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( 'Groups', $output );
 		$this->assertContains( 'Neu', $output );
@@ -75,7 +75,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
 		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-always' => 2 ) ) ) ) ) ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
@@ -86,7 +86,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( 'level-2', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -99,7 +99,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
 		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-only' => 1 ) ) ) ) ) ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
@@ -110,7 +110,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertNotContains( 'level-2', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -121,7 +121,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 }

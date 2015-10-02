@@ -16,7 +16,7 @@
  */
 class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements MW_DB_Statement_Interface
 {
-	private $_stmt = null;
+	private $stmt = null;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements M
 	 */
 	public function __construct( PDOStatement $stmt )
 	{
-		$this->_stmt = $stmt;
+		$this->stmt = $stmt;
 	}
 
 
@@ -63,7 +63,7 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements M
 		}
 
 		try {
-			$this->_stmt->bindValue( $position, $value, $pdotype );
+			$this->stmt->bindValue( $position, $value, $pdotype );
 		} catch ( PDOException $pe ) {
 			throw new MW_DB_Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
@@ -79,11 +79,11 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements M
 	public function execute()
 	{
 		try {
-			$this->_stmt->execute();
+			$this->stmt->execute();
 		} catch ( PDOException $pe ) {
 			throw new MW_DB_Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
 
-		return new MW_DB_Result_PDO( $this->_stmt );
+		return new MW_DB_Result_PDO( $this->stmt );
 	}
 }

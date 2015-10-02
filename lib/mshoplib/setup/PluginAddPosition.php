@@ -11,7 +11,7 @@
 
 class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'ALTER TABLE "mshop_plugin" ADD "pos" INTEGER NOT NULL AFTER "config"';
+	private $mysql = 'ALTER TABLE "mshop_plugin" ADD "pos" INTEGER NOT NULL AFTER "config"';
 
 
 	/**
@@ -39,9 +39,9 @@ class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -50,19 +50,19 @@ class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
 	 *
 	 * @param string $stmt SQL statement to execute for adding columns
 	 */
-	protected function _process( $stmt )
+	protected function process( $stmt )
 	{
-		$this->_msg( 'Adding position column to mshop_plugin table', 0 );
+		$this->msg( 'Adding position column to mshop_plugin table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_plugin' ) === true
-			&& $this->_schema->columnExists( 'mshop_plugin', 'pos' ) === false )
+		if( $this->schema->tableExists( 'mshop_plugin' ) === true
+			&& $this->schema->columnExists( 'mshop_plugin', 'pos' ) === false )
 		{
-			$this->_execute( $stmt );
-			$this->_status( 'added' );
+			$this->execute( $stmt );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

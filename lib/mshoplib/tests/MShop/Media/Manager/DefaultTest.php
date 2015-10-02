@@ -11,8 +11,8 @@
  */
 class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object = null;
-	private $_editor = '';
+	private $object = null;
+	private $editor = '';
 
 
 	/**
@@ -20,8 +20,8 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = MShop_Media_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = TestHelper::getContext()->getEditor();
+		$this->object = MShop_Media_Manager_Factory::createManager( TestHelper::getContext() );
 	}
 
 	/**
@@ -29,37 +29,37 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Media_Item_Interface', $item );
 	}
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
 	}
 
 	public function testSearchItem()
 	{
 		//search without base criteria
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'media.id', null );
@@ -74,7 +74,7 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'media.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'media.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
@@ -84,7 +84,7 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'media.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'media.type.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'media.list.id', null );
 		$expr[] = $search->compare( '!=', 'media.list.siteid', null );
@@ -99,7 +99,7 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'media.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.list.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'media.list.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'media.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.list.type.siteid', null );
@@ -109,23 +109,23 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'media.list.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.list.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.list.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'media.list.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'media.editor', $this->_editor ),
+			$search->compare( '==', 'media.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 4 );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 4, count( $results ) );
 		$this->assertEquals( 11, $total );
 
@@ -136,30 +136,30 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'media.label', 'cn_colombie_123x103' ),
-			$search->compare( '==', 'media.editor', $this->_editor )
+			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No media item with label "cn_colombie_123x103" found' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '~=', 'media.label', 'example' ),
-			$search->compare( '==', 'media.editor', $this->_editor )
+			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No media item with label "cn_colombie_123x103" found' );
@@ -173,15 +173,15 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$item->setUrl( 'test.jpg' );
 		$item->setPreview( 'xxxtest-preview.jpg' );
 
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setPreview( 'test-preview.jpg' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -197,7 +197,7 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getPreview(), $itemSaved->getPreview() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -213,31 +213,31 @@ class MShop_Media_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getPreview(), $itemUpd->getPreview() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'list', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'list', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'list', 'unknown' );
+		$this->object->getSubManager( 'list', 'unknown' );
 	}
 }

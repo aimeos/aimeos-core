@@ -27,15 +27,15 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/property' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
 		$manager->begin();
 
 		try
 		{
 			$pos = 0;
 			$delete = array();
-			$map = $this->_getMappedChunk( $data );
-			$items = $this->_getPropertyItems( $product->getId() );
+			$map = $this->getMappedChunk( $data );
+			$items = $this->getPropertyItems( $product->getId() );
 
 			foreach( $items as $id => $item )
 			{
@@ -73,7 +73,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Default
 				}
 
 				$typecode = $list['product.property.type'];
-				$list['product.property.typeid'] = $this->_getTypeId( 'product/property/type', 'product/property', $typecode );
+				$list['product.property.typeid'] = $this->getTypeId( 'product/property/type', 'product/property', $typecode );
 				$list['product.property.parentid'] = $product->getId();
 
 				if( ( $item = array_shift( $items ) ) === null ) {
@@ -84,7 +84,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Default
 				$manager->saveItem( $item );
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -104,9 +104,9 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Default
 	 * @param string $prodid Unique product ID
 	 * @return array Associative list of product property items
 	 */
-	protected function _getPropertyItems( $prodid )
+	protected function getPropertyItems( $prodid )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/property' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodid ) );

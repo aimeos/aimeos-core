@@ -18,12 +18,12 @@ abstract class MShop_Common_Manager_Abstract
 	extends MW_Common_Manager_Abstract
 	implements MShop_Common_Manager_Interface
 {
-	private $_context;
-	private $_resourceName;
-	private $_stmts = array();
-	private $_keySeparator = '.';
-	private $_subManagers = array();
-	private $_searchAttributes = array();
+	private $context;
+	private $resourceName;
+	private $stmts = array();
+	private $keySeparator = '.';
+	private $subManagers = array();
+	private $searchAttributes = array();
 
 
 	/**
@@ -33,7 +33,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_context = $context;
+		$this->context = $context;
 	}
 
 
@@ -75,7 +75,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function begin()
 	{
-		$this->_begin( $this->_getResourceName() );
+		$this->beginTransation( $this->getResourceName() );
 	}
 
 
@@ -84,7 +84,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function commit()
 	{
-		$this->_commit( $this->_getResourceName() );
+		$this->commitTransaction( $this->getResourceName() );
 	}
 
 
@@ -93,7 +93,7 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	public function rollback()
 	{
-		$this->_rollback( $this->_getResourceName() );
+		$this->rollbackTransaction( $this->getResourceName() );
 	}
 
 
@@ -106,12 +106,12 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
 	{
 		$list = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
@@ -132,7 +132,7 @@ abstract class MShop_Common_Manager_Abstract
 			$total = null;
 
 			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
-			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[$row['key']] = $row['count'];
@@ -158,7 +158,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return string ID of the last record that was inserted by using the given connection
 	 * @throws MShop_Common_Exception if there's no ID of the last record available
 	 */
-	protected function _newId( MW_DB_Connection_Interface $conn, $sql )
+	protected function newId( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$result = $conn->create( $sql )->execute();
 
@@ -177,15 +177,15 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 */
-	protected function _cleanup( array $siteids, $cfgpath )
+	protected function cleanupBase( array $siteids, $cfgpath )
 	{
-		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->context->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			$sql = $this->_context->getConfig()->get( $cfgpath, $cfgpath );
+			$sql = $this->context->getConfig()->get( $cfgpath, $cfgpath );
 			$sql = str_replace( ':cond', '1=1', $sql );
 
 			$stmt = $conn->create( $sql );
@@ -213,10 +213,10 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
 	 * @return MW_Common_Criteria_Interface Search critery object
 	 */
-	protected function _createSearch( $domain )
+	protected function createSearchBase( $domain )
 	{
-		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->context->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
@@ -236,19 +236,19 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $key Unique key for the SQL
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
 	 */
-	protected function _getCachedStatement( MW_DB_Connection_Interface $conn, $key, $sql = null )
+	protected function getCachedStatement( MW_DB_Connection_Interface $conn, $key, $sql = null )
 	{
-		if( !isset( $this->_stmts['stmt'][$key] ) || !isset( $this->_stmts['conn'][$key] ) || $conn !== $this->_stmts['conn'][$key] )
+		if( !isset( $this->stmts['stmt'][$key] ) || !isset( $this->stmts['conn'][$key] ) || $conn !== $this->stmts['conn'][$key] )
 		{
 			if( $sql === null ) {
-				$sql = $this->_context->getConfig()->get( $key, $key );
+				$sql = $this->context->getConfig()->get( $key, $key );
 			}
 
-			$this->_stmts['stmt'][$key] = $conn->create( $sql );
-			$this->_stmts['conn'][$key] = $conn;
+			$this->stmts['stmt'][$key] = $conn->create( $sql );
+			$this->stmts['conn'][$key] = $conn;
 		}
 
-		return $this->_stmts['stmt'][$key];
+		return $this->stmts['stmt'][$key];
 	}
 
 
@@ -257,9 +257,9 @@ abstract class MShop_Common_Manager_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -273,9 +273,9 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
 	 * @since 2014.09
 	 */
-	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		if( !isset( $this->_searchAttributes[0] ) )
+		if( !isset( $this->searchAttributes[0] ) )
 		{
 			$attr = array();
 
@@ -283,27 +283,27 @@ abstract class MShop_Common_Manager_Abstract
 				$attr[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 			}
 
-			$this->_searchAttributes[0] = $attr;
+			$this->searchAttributes[0] = $attr;
 		}
 
 		if( $withsub === true )
 		{
-			if( !isset( $this->_searchAttributes[1] ) )
+			if( !isset( $this->searchAttributes[1] ) )
 			{
-				$attr = $this->_searchAttributes[0];
-				$domains = $this->_context->getConfig()->get( $path, $default );
+				$attr = $this->searchAttributes[0];
+				$domains = $this->context->getConfig()->get( $path, $default );
 
 				foreach( $domains as $domain ) {
 					$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
 				}
 
-				$this->_searchAttributes[1] = $attr;
+				$this->searchAttributes[1] = $attr;
 			}
 
-			return $this->_searchAttributes[1];
+			return $this->searchAttributes[1];
 		}
 
-		return $this->_searchAttributes[0];
+		return $this->searchAttributes[0];
 	}
 
 
@@ -313,9 +313,9 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param integer $sitelevel Site level constant from MShop_Locale_Manager_Abstract
 	 * @return string[] List of site IDs
 	 */
-	private function _getSiteIds( $sitelevel )
+	private function getSiteIds( $sitelevel )
 	{
-		$locale = $this->_context->getLocale();
+		$locale = $this->context->getLocale();
 		$siteIds = array( $locale->getSiteId() );
 
 		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_PATH ) {
@@ -340,13 +340,13 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return MShop_Common_Manager_Interface Manager for different extensions
 	 */
-	protected function _getSubManager( $domain, $manager, $name )
+	protected function getSubManagerBase( $domain, $manager, $name )
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
 		$key = $domain . $manager . $name;
 
-		if( !isset( $this->_subManagers[$key] ) )
+		if( !isset( $this->subManagers[$key] ) )
 		{
 			if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
 				throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
@@ -358,7 +358,7 @@ abstract class MShop_Common_Manager_Abstract
 
 			if( $name === null ) {
 				$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
-				$name = $this->_context->getConfig()->get( $path, 'Default' );
+				$name = $this->context->getConfig()->get( $path, 'Default' );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false ) {
@@ -366,7 +366,7 @@ abstract class MShop_Common_Manager_Abstract
 			}
 
 			$domainname = ucfirst( $domain );
-			$subnames = $this->_createSubNames( $manager );
+			$subnames = $this->createSubNames( $manager );
 
 			$classname = 'MShop_' . $domainname . '_Manager_' . $subnames . '_' . $name;
 			$interface = 'MShop_' . $domainname . '_Manager_' . $subnames . '_Interface';
@@ -375,16 +375,16 @@ abstract class MShop_Common_Manager_Abstract
 				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$subManager = new $classname( $this->_context );
+			$subManager = new $classname( $this->context );
 
 			if( ( $subManager instanceof $interface ) === false ) {
 				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 			}
 
-			$this->_subManagers[$key] = $this->_addManagerDecorators( $subManager, $manager, $domain );
+			$this->subManagers[$key] = $this->addManagerDecorators( $subManager, $manager, $domain );
 		}
 
-		return $this->_subManagers[$key];
+		return $this->subManagers[$key];
 	}
 
 
@@ -395,13 +395,13 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function _getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Interface $expr = null )
+	private function getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Interface $expr = null )
 	{
 		if( $expr === null ) { return array(); }
 
 		$result = array();
 
-		foreach( $this->_getCriteriaNames( $expr ) as $item )
+		foreach( $this->getCriteriaNames( $expr ) as $item )
 		{
 			if( ( $pos = strpos( $item, '(' ) ) !== false ) {
 				$item = substr( $item, 0, $pos );
@@ -411,7 +411,7 @@ abstract class MShop_Common_Manager_Abstract
 				$item = substr( $item, $pos + 1 );
 			}
 
-			$result = array_merge( $result, $this->_cutNameTail( $prefix, $item ) );
+			$result = array_merge( $result, $this->cutNameTail( $prefix, $item ) );
 		}
 
 		return $result;
@@ -425,12 +425,12 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
-	private function _getCriteriaKeyList( MW_Common_Criteria_Interface $criteria, array $required )
+	private function getCriteriaKeyList( MW_Common_Criteria_Interface $criteria, array $required )
 	{
-		$keys = array_merge( $required, $this->_getCriteriaKeys( $required, $criteria->getConditions() ) );
+		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
 		foreach( $criteria->getSortations() as $sortation ) {
-			$keys = array_merge( $keys, $this->_getCriteriaKeys( $required, $sortation ) );
+			$keys = array_merge( $keys, $this->getCriteriaKeys( $required, $sortation ) );
 		}
 
 		$keys = array_unique( array_merge( $required, $keys ) );
@@ -447,12 +447,12 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $string String containing parts separated by dots
 	 * @return array List of resulting strings
 	 */
-	private function _cutNameTail( array $prefix, $string )
+	private function cutNameTail( array $prefix, $string )
 	{
 		$result = array();
 		$noprefix = true;
 		$strlen = strlen( $string );
-		$sep = $this->_getKeySeparator();
+		$sep = $this->getKeySeparator();
 
 		foreach( $prefix as $key )
 		{
@@ -463,7 +463,7 @@ abstract class MShop_Common_Manager_Abstract
 				if( $strlen > $len && ( $pos = strrpos( $string, $sep ) ) !== false )
 				{
 					$result[] = $string = substr( $string, 0, $pos );
-					$result = array_merge( $result, $this->_cutNameTail( $prefix, $string ) );
+					$result = array_merge( $result, $this->cutNameTail( $prefix, $string ) );
 				}
 
 				$noprefix = false;
@@ -492,7 +492,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _addDecorators( MShop_Context_Item_Interface $context,
+	protected function addDecorators( MShop_Context_Item_Interface $context,
 		MShop_Common_Manager_Interface $manager, array $decorators, $classprefix )
 	{
 		$iface = 'MShop_Common_Manager_Decorator_Interface';
@@ -527,9 +527,9 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 */
-	protected function _addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 
 		$decorators = $config->get( 'mshop/common/manager/decorators/default', array() );
 		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', array() );
@@ -542,17 +542,17 @@ abstract class MShop_Common_Manager_Abstract
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager = $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager = $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
-		$subpath = $this->_createSubNames( $managerpath );
+		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
 
-		return $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		return $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 	}
 
 
@@ -562,7 +562,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $manager Path of manager names, e.g. "list/type"
 	 * @return string Class names, e.g. "List_Type"
 	 */
-	protected function _createSubNames( $manager )
+	protected function createSubNames( $manager )
 	{
 		$names = explode( '/', $manager );
 
@@ -585,7 +585,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Expression_Interface Criteria object
 	 * @return array List of criteria names
 	 */
-	private function _getCriteriaNames( MW_Common_Criteria_Expression_Interface $expr )
+	private function getCriteriaNames( MW_Common_Criteria_Expression_Interface $expr )
 	{
 		if( $expr instanceof MW_Common_Criteria_Expression_Compare_Interface ) {
 			return array( $expr->getName() );
@@ -595,7 +595,7 @@ abstract class MShop_Common_Manager_Abstract
 		{
 			$list = array();
 			foreach( $expr->getExpressions() as $item ) {
-				$list = array_merge( $list, $this->_getCriteriaNames( $item ) );
+				$list = array_merge( $list, $this->getCriteriaNames( $item ) );
 			}
 			return $list;
 		}
@@ -616,7 +616,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return MShop_Common_Item_Interface Requested item
 	 * @throws MShop_Exception if no item with the given ID found
 	 */
-	protected function _getItem( $key, $id, array $ref = array() )
+	protected function getItemBase( $key, $id, array $ref = array() )
 	{
 		$criteria = $this->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', $key, $id ) );
@@ -637,10 +637,10 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param string $prefix Search key prefix
 	 * @return array List of JOIN SQL strings
 	 */
-	private function _getJoins( array $attributes, $prefix )
+	private function getJoins( array $attributes, $prefix )
 	{
 		$iface = 'MW_Common_Criteria_Attribute_Interface';
-		$sep = $this->_getKeySeparator();
+		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
 		if( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
@@ -659,9 +659,9 @@ abstract class MShop_Common_Manager_Abstract
 	 *
 	 * @return string Separator string (default: ".")
 	 */
-	protected function _getKeySeparator()
+	protected function getKeySeparator()
 	{
-		return $this->_keySeparator;
+		return $this->keySeparator;
 	}
 
 
@@ -670,13 +670,13 @@ abstract class MShop_Common_Manager_Abstract
 	 *
 	 * @return string Name of the resource
 	 */
-	protected function _getResourceName()
+	protected function getResourceName()
 	{
-		if( $this->_resourceName === null ) {
-			$this->_resourceName = $this->_context->getConfig()->get( 'resource/default', 'db' );
+		if( $this->resourceName === null ) {
+			$this->resourceName = $this->context->getConfig()->get( 'resource/default', 'db' );
 		}
 
-		return $this->_resourceName;
+		return $this->resourceName;
 	}
 
 
@@ -685,14 +685,14 @@ abstract class MShop_Common_Manager_Abstract
 	 *
 	 * @param string $name Name of the resource
 	 */
-	protected function _setResourceName( $name )
+	protected function setResourceName( $name )
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 
 		if( $config->get( 'resource/' . $name ) === null ) {
-			$this->_resourceName = $config->get( 'resource/default', 'db' );
+			$this->resourceName = $config->get( 'resource/default', 'db' );
 		} else {
-			$this->_resourceName = $name;
+			$this->resourceName = $name;
 		}
 	}
 
@@ -705,7 +705,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param integer|array $value Site ID or list of site IDs
 	 * @param string $marker Marker to replace
 	 */
-	protected function _replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
+	protected function replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
 	{
 		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
 		$translations = array( 'siteid' => $column );
@@ -730,10 +730,10 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Interface
 	 * @since 2015.01
 	 */
-	protected function _getSearchSiteConditions( MW_Common_Criteria_Interface $search, array $keys, array $attributes, array $siteIds )
+	protected function getSearchSiteConditions( MW_Common_Criteria_Interface $search, array $keys, array $attributes, array $siteIds )
 	{
 		$cond = array();
-		$sep = $this->_getKeySeparator();
+		$sep = $this->getKeySeparator();
 
 		foreach( $keys as $key )
 		{
@@ -761,26 +761,26 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return MW_DB_Result_Interface SQL result object for accessing the found records
 	 * @throws MShop_Exception if no number of all matching records is available
 	 */
-	protected function _searchItems( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
+	protected function searchItemsBase( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ALL, array $plugins = array() )
 	{
 		$joins = array();
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
-		$siteIds = $this->_getSiteIds( $sitelevel );
-		$keys = $this->_getCriteriaKeyList( $search, $required );
+		$siteIds = $this->getSiteIds( $sitelevel );
+		$keys = $this->getCriteriaKeyList( $search, $required );
 
 		$basekey = array_shift( $required );
 
 		foreach( $keys as $key )
 		{
 			if( $key !== $basekey ) {
-				$joins = array_merge( $joins, $this->_getJoins( $attributes, $key ) );
+				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
 			}
 		}
 
-		$cond = $this->_getSearchSiteConditions( $search, $keys, $attributes, $siteIds );
+		$cond = $this->getSearchSiteConditions( $search, $keys, $attributes, $siteIds );
 
 		if( $conditions !== null ) {
 			$cond[] = $conditions;
@@ -790,8 +790,8 @@ abstract class MShop_Common_Manager_Abstract
 		$search->setConditions( $search->combine( '&&', $cond ) );
 
 
-		$types = $this->_getSearchTypes( $attributes );
-		$translations = $this->_getSearchTranslations( $attributes );
+		$types = $this->getSearchTypes( $attributes );
+		$translations = $this->getSearchTranslations( $attributes );
 
 		$find = array( ':joins', ':cond', ':start', ':size' );
 		$replace = array(
@@ -811,7 +811,7 @@ abstract class MShop_Common_Manager_Abstract
 
 		if( $total !== null )
 		{
-			$sql = new MW_Template_SQL( $this->_context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
+			$sql = new MW_Template_SQL( $this->context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
 			$sql->replace( $find, $replace )->enable( $keys );
 
 			$time = microtime( true );
@@ -819,7 +819,7 @@ abstract class MShop_Common_Manager_Abstract
 			$results = $stmt->execute();
 			$row = $results->fetch();
 			$results->finish();
-			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
+			$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if( $row === false ) {
 				throw new MShop_Exception( sprintf( 'Total results value not found' ) );
@@ -829,13 +829,13 @@ abstract class MShop_Common_Manager_Abstract
 		}
 
 
-		$sql = new MW_Template_SQL( $this->_context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
+		$sql = new MW_Template_SQL( $this->context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
 		$sql->replace( $find, $replace )->enable( $keys );
 
 		$time = microtime( true );
 		$stmt = $conn->create( $sql->str() );
 		$results = $stmt->execute();
-		$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
+		$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 		return $results;
 	}
@@ -849,12 +849,12 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 */
-	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id' )
+	protected function deleteItemsBase( array $ids, $sql, $siteidcheck = true, $name = 'id' )
 	{
 		if( empty( $ids ) ) { return; }
 
-		$context = $this->_getContext();
-		$dbname = $this->_getResourceName();
+		$context = $this->getContext();
+		$dbname = $this->getResourceName();
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', $name, $ids ) );
@@ -891,9 +891,9 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Starts a database transaction on the connection identified by the given name.
 	 */
-	protected function _begin( $dbname = 'db' )
+	protected function beginTransation( $dbname = 'db' )
 	{
-		$dbm = $this->_context->getDatabaseManager();
+		$dbm = $this->context->getDatabaseManager();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->begin();
@@ -904,9 +904,9 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Commits the running database transaction on the connection identified by the given name.
 	 */
-	protected function _commit( $dbname = 'db' )
+	protected function commitTransaction( $dbname = 'db' )
 	{
-		$dbm = $this->_context->getDatabaseManager();
+		$dbm = $this->context->getDatabaseManager();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->commit();
@@ -917,9 +917,9 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name.
 	 */
-	protected function _rollback( $dbname = 'db' )
+	protected function rollbackTransaction( $dbname = 'db' )
 	{
-		$dbm = $this->_context->getDatabaseManager();
+		$dbm = $this->context->getDatabaseManager();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->rollback();

@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Admin_Cache_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -22,7 +22,7 @@ class Controller_Jobs_Admin_Cache_DefaultTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Admin_Cache_Default( $context, $aimeos );
+		$this->object = new Controller_Jobs_Admin_Cache_Default( $context, $aimeos );
 	}
 
 
@@ -34,25 +34,25 @@ class Controller_Jobs_Admin_Cache_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Cache cleanup', $this->_object->getName() );
+		$this->assertEquals( 'Cache cleanup', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Removes the expired entries from the cache';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
-		$this->_object->run();
+		$this->object->run();
 	}
 }

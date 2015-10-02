@@ -27,8 +27,8 @@ class MShop_Common_Manager_Decorator_Sitecheck
 	{
 		if( $item->getId() !== null )
 		{
-			$actual = $this->_getManager()->getItem( $item->getId() )->getSiteId();
-			$siteId = $this->_getContext()->getLocale()->getSiteId();
+			$actual = $this->getManager()->getItem( $item->getId() )->getSiteId();
+			$siteId = $this->getContext()->getLocale()->getSiteId();
 
 			if( $actual !== null && $actual != $siteId ) {
 				return;
@@ -46,8 +46,8 @@ class MShop_Common_Manager_Decorator_Sitecheck
 	 */
 	public function deleteItem( $id )
 	{
-		$actual = $this->_getManager()->getItem( $id )->getSiteId();
-		$siteId = $this->_getContext()->getLocale()->getSiteId();
+		$actual = $this->getManager()->getItem( $id )->getSiteId();
+		$siteId = $this->getContext()->getLocale()->getSiteId();
 
 		if( $actual !== null && $actual != $siteId ) {
 			throw new MShop_Exception( sprintf( 'Item can not be deleted. Site ID of item differs from present site ID.' ) );

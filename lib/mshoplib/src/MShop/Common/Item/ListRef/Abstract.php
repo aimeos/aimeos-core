@@ -16,9 +16,9 @@
  */
 abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abstract
 {
-	private $_listItems;
-	private $_refItems;
-	private $_sortedLists = array();
+	private $listItems;
+	private $refItems;
+	private $sortedLists = array();
 
 
 	/**
@@ -33,8 +33,8 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->_listItems = $listItems;
-		$this->_refItems = $refItems;
+		$this->listItems = $listItems;
+		$this->refItems = $refItems;
 	}
 
 
@@ -55,30 +55,30 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 		{
 			$listItems = array();
 
-			foreach( $this->_listItems as $domain => $items ) {
+			foreach( $this->listItems as $domain => $items ) {
 				$listItems += $items;
 			}
 
 			return $listItems;
 		}
 
-		if( !isset( $this->_listItems[$domain] ) ) {
+		if( !isset( $this->listItems[$domain] ) ) {
 			return array();
 		}
 
-		if( !isset( $this->_sortedLists[$domain] ) )
+		if( !isset( $this->sortedLists[$domain] ) )
 		{
-			foreach( $this->_listItems[$domain] as $listItem )
+			foreach( $this->listItems[$domain] as $listItem )
 			{
 				$refId = $listItem->getRefId();
 
-				if( isset( $this->_refItems[$domain][$refId] ) ) {
-					$listItem->setRefItem( $this->_refItems[$domain][$refId] );
+				if( isset( $this->refItems[$domain][$refId] ) ) {
+					$listItem->setRefItem( $this->refItems[$domain][$refId] );
 				}
 			}
 
-			uasort( $this->_listItems[$domain], array( $this, '_comparePosition' ) );
-			$this->_sortedLists[$domain] = true;
+			uasort( $this->listItems[$domain], array( $this, 'comparePosition' ) );
+			$this->sortedLists[$domain] = true;
 		}
 
 		if( $type !== null )
@@ -87,7 +87,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 			$iface = 'MShop_Common_Item_Typeid_Interface';
 			$listTypes = ( is_array( $type ) ? $type : array( $type ) );
 
-			foreach( $this->_listItems[$domain] as $id => $item )
+			foreach( $this->listItems[$domain] as $id => $item )
 			{
 				if( $item instanceof $iface && in_array( $item->getType(), $listTypes ) ) {
 					$list[$id] = $item;
@@ -96,7 +96,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 		}
 		else
 		{
-			$list = $this->_listItems[$domain];
+			$list = $this->listItems[$domain];
 		}
 
 		return $list;
@@ -117,7 +117,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getRefItems( $domain, $type = null, $listtype = null )
 	{
-		if( !isset( $this->_refItems[$domain] ) || !isset( $this->_listItems[$domain] ) ) {
+		if( !isset( $this->refItems[$domain] ) || !isset( $this->listItems[$domain] ) ) {
 			return array();
 		}
 
@@ -126,20 +126,20 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
-		foreach( $this->_listItems[$domain] as $listItem )
+		foreach( $this->listItems[$domain] as $listItem )
 		{
 			$refId = $listItem->getRefId();
 
-			if( isset( $this->_refItems[$domain][$refId] ) && $listItem instanceof $iface
-				&& ( $type === null || in_array( $this->_refItems[$domain][$refId]->getType(), $types ) )
+			if( isset( $this->refItems[$domain][$refId] ) && $listItem instanceof $iface
+				&& ( $type === null || in_array( $this->refItems[$domain][$refId]->getType(), $types ) )
 				&& ( $listtype === null || in_array( $listItem->getType(), $listtypes ) )
 			) {
-				$list[$refId] = $this->_refItems[$domain][$refId];
-				$list[$refId]->_position = $listItem->getPosition();
+				$list[$refId] = $this->refItems[$domain][$refId];
+				$list[$refId]->position = $listItem->getPosition();
 			}
 		}
 
-		uasort( $list, array( $this, '_compareRefPosition' ) );
+		uasort( $list, array( $this, 'compareRefPosition' ) );
 
 		return $list;
 	}
@@ -182,7 +182,7 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	 * @param MShop_Common_Item_Position_Interface $b Second item
 	 * @return integer -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
 	 */
-	protected function _comparePosition( MShop_Common_Item_Position_Interface $a, MShop_Common_Item_Position_Interface $b )
+	protected function comparePosition( MShop_Common_Item_Position_Interface $a, MShop_Common_Item_Position_Interface $b )
 	{
 		if( $a->getPosition() === $b->getPosition() ) {
 			return 0;
@@ -199,12 +199,12 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 	 * @param MShop_Common_Item_Interface $b Second referenced item
 	 * @return integer -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
 	 */
-	protected function _compareRefPosition( MShop_Common_Item_Interface $a, MShop_Common_Item_Interface $b )
+	protected function compareRefPosition( MShop_Common_Item_Interface $a, MShop_Common_Item_Interface $b )
 	{
-		if( $a->_position === $b->_position ) {
+		if( $a->position === $b->position ) {
 			return 0;
 		}
 
-		return ( $a->_position < $b->_position ) ? -1 : 1;
+		return ( $a->position < $b->position ) ? -1 : 1;
 	}
 }

@@ -16,7 +16,7 @@
  */
 class Controller_Jobs_Factory
 {
-	static private $_prefix = 'Controller_Jobs';
+	static private $prefix = 'Controller_Jobs';
 
 
 	/**
@@ -80,7 +80,7 @@ class Controller_Jobs_Factory
 	static public function getControllers( MShop_Context_Item_Interface $context, Aimeos $aimeos, array $cntlPaths )
 	{
 		$cntlList = array();
-		$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, self::$_prefix );
+		$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, self::$prefix );
 
 		foreach( $cntlPaths as $path => $list )
 		{
@@ -91,7 +91,7 @@ class Controller_Jobs_Factory
 				if( is_dir( $path ) )
 				{
 					$it = new DirectoryIterator( $path );
-					$list = self::_createControllers( $it, $context, $aimeos );
+					$list = self::createControllers( $it, $context, $aimeos );
 
 					$cntlList = array_merge( $cntlList, $list );
 				}
@@ -113,7 +113,7 @@ class Controller_Jobs_Factory
 	 * @param string $prefix Part of the class name between "Controller_Jobs" and "Factory"
 	 * @throws Controller_Jobs_Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
-	static protected function _createControllers( DirectoryIterator $dir, MShop_Context_Item_Interface $context,
+	static protected function createControllers( DirectoryIterator $dir, MShop_Context_Item_Interface $context,
 		Aimeos $aimeos, $prefix = '' )
 	{
 		$list = array();
@@ -125,7 +125,7 @@ class Controller_Jobs_Factory
 				$name = strtolower( $entry->getBaseName() );
 				$it = new DirectoryIterator( $entry->getPathName() );
 				$pref = ( $prefix !== '' ? $prefix . '/' : '' ) . $name;
-				$subList = self::_createControllers( $it, $context, $aimeos, $pref );
+				$subList = self::createControllers( $it, $context, $aimeos, $pref );
 
 				$list = array_merge( $list, $subList );
 			}

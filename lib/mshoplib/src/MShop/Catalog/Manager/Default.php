@@ -18,10 +18,10 @@ class MShop_Catalog_Manager_Default
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Catalog_Manager_Interface, MShop_Common_Manager_Factory_Interface
 {
-	private $_filter = array();
-	private $_treeManagers = array();
+	private $filter = array();
+	private $treeManagers = array();
 
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'id' => array(
 			'code'=>'catalog.id',
 			'internalcode'=>'mcat."id"',
@@ -129,7 +129,7 @@ class MShop_Catalog_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-catalog' );
+		$this->setResourceName( 'db-catalog' );
 	}
 
 
@@ -140,7 +140,7 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$search = $this->createSearch();
 
@@ -150,7 +150,7 @@ class MShop_Catalog_Manager_Default
 		}
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -186,9 +186,9 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -201,7 +201,7 @@ class MShop_Catalog_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'catalog' );
+			return $this->createSearchBase( 'catalog' );
 		}
 
 		return parent::createSearch();
@@ -215,12 +215,12 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function deleteItem( $id )
 	{
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$this->begin();
 
 		try
 		{
-			$this->_createTreeManager( $siteid )->deleteNode( $id );
+			$this->createTreeManager( $siteid )->deleteNode( $id );
 			$this->commit();
 		}
 		catch( Exception $e )
@@ -254,7 +254,7 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'catalog.id', $id, $ref );
+		return $this->getItemBase( 'catalog.id', $id, $ref );
 	}
 
 
@@ -285,7 +285,7 @@ class MShop_Catalog_Manager_Default
 		 */
 		$path = 'classes/catalog/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'list' ), $withsub );
 	}
 
 
@@ -296,14 +296,14 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
 	{
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
 		$this->begin();
 
 		try
 		{
-			$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
-			$this->_updateUsage( $node->getId(), $item, true );
+			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
+			$this->updateUsage( $node->getId(), $item, true );
 			$this->commit();
 		}
 		catch( Exception $e )
@@ -324,15 +324,15 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$item = $this->getItem( $id );
 
 		$this->begin();
 
 		try
 		{
-			$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
-			$this->_updateUsage( $id, $item );
+			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
+			$this->updateUsage( $id, $item );
 			$this->commit();
 		}
 		catch( Exception $e )
@@ -356,14 +356,14 @@ class MShop_Catalog_Manager_Default
 			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
 		$this->begin();
 
 		try
 		{
-			$this->_createTreeManager( $siteid )->saveNode( $node );
-			$this->_updateUsage( $node->getId(), $item );
+			$this->createTreeManager( $siteid )->saveNode( $node );
+			$this->updateUsage( $node->getId(), $item );
 			$this->commit();
 		}
 		catch( Exception $e )
@@ -386,9 +386,9 @@ class MShop_Catalog_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$nodeMap = $siteMap = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
@@ -507,13 +507,13 @@ class MShop_Catalog_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$siteMap[$row['siteid']][$row['id']] = new MW_Tree_Node_Default( $row );
 			}
 
-			$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
+			$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
 			foreach( $sitePath as $siteId )
 			{
@@ -532,7 +532,7 @@ class MShop_Catalog_Manager_Default
 			throw $e;
 		}
 
-		return $this->_buildItems( $nodeMap, $ref, 'catalog' );
+		return $this->buildItems( $nodeMap, $ref, 'catalog' );
 	}
 
 
@@ -545,12 +545,12 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
-		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
 			try {
-				$path = $this->_createTreeManager( $siteId )->getPath( $id );
+				$path = $this->createTreeManager( $siteId )->getPath( $id );
 			} catch( Exception $e ) {
 				continue;
 			}
@@ -563,7 +563,7 @@ class MShop_Catalog_Manager_Default
 					$itemMap[$node->getId()] = $node;
 				}
 
-				return $this->_buildItems( $itemMap, $ref, 'catalog' );
+				return $this->buildItems( $itemMap, $ref, 'catalog' );
 			}
 		}
 
@@ -582,21 +582,21 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
-		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
 			try {
-				$node = $this->_createTreeManager( $siteId )->getNode( $id, $level, $criteria );
+				$node = $this->createTreeManager( $siteId )->getNode( $id, $level, $criteria );
 			} catch( Exception $e ) {
 				continue;
 			}
 
 			$listItems = $listItemMap = $refIdMap = array();
-			$nodeMap = $this->_getNodeMap( $node );
+			$nodeMap = $this->getNodeMap( $node );
 
 			if( count( $ref ) > 0 ) {
-				$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
+				$listItems = $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
 			}
 
 			foreach( $listItems as $listItem )
@@ -608,7 +608,7 @@ class MShop_Catalog_Manager_Default
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->_getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap );
 			$nodeid = $node->getId();
 
 			$listItems = array();
@@ -621,8 +621,8 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$nodeid];
 			}
 
-			$item = $this->_createItem( array(), $listItems, $refItems, array(), $node );
-			$this->_createTree( $node, $item, $listItemMap, $refItemMap );
+			$item = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
+			$this->createTree( $node, $item, $listItemMap, $refItemMap );
 
 			return $item;
 		}
@@ -640,7 +640,7 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'catalog', $manager, $name );
+		return $this->getSubManagerBase( 'catalog', $manager, $name );
 	}
 
 
@@ -663,7 +663,7 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function registerItemFilter( $name, Closure $fcn )
 	{
-		$this->_filter[$name] = $fcn;
+		$this->filter[$name] = $fcn;
 	}
 
 
@@ -675,13 +675,13 @@ class MShop_Catalog_Manager_Default
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing MShop_Catalog_Item_Interface
 	 */
-	protected function _buildItems( array $itemMap, array $domains, $prefix )
+	protected function buildItems( array $itemMap, array $domains, $prefix )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = array();
 
 		if( count( $domains ) > 0 )
 		{
-			$listItems = $this->_getListItems( array_keys( $itemMap ), $domains, $prefix );
+			$listItems = $this->getListItems( array_keys( $itemMap ), $domains, $prefix );
 
 			foreach( $listItems as $listItem )
 			{
@@ -692,7 +692,7 @@ class MShop_Catalog_Manager_Default
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->_getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap );
 		}
 
 		foreach( $itemMap as $id => $node )
@@ -707,7 +707,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->_createItem( array(), $listItems, $refItems, array(), $node );
+			$items[$id] = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
 		}
 
 		return $items;
@@ -723,7 +723,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $refItems Associative list of referenced items grouped by domain
 	 * @return MShop_Catalog_Item_Interface New catalog item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array(),
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array(),
 		array $children = array(), MW_Tree_Node_Interface $node = null )
 	{
 		if( $node === null )
@@ -732,7 +732,7 @@ class MShop_Catalog_Manager_Default
 				throw new MShop_Catalog_Exception( 'No site ID available for creating a catalog item' );
 			}
 
-			$node = $this->_createTreeManager( $values['siteid'] )->createNode();
+			$node = $this->createTreeManager( $values['siteid'] )->createNode();
 			$node->siteid = $values['siteid'];
 		}
 
@@ -752,7 +752,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $listItemMap Associative list of parent-item-ID / list items for the catalog item
 	 * @param array $refItemMap Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function _createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
+	protected function createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
 		array $listItemMap, array $refItemMap )
 	{
 		foreach( $node->getChildren() as $idx => $child )
@@ -767,17 +767,17 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$child->getId()];
 			}
 
-			$newItem = $this->_createItem( array(), $listItems, $refItems, array(), $child );
+			$newItem = $this->createItemBase( array(), $listItems, $refItems, array(), $child );
 
 			$result = true;
-			foreach( $this->_filter as $fcn ) {
+			foreach( $this->filter as $fcn ) {
 				$result = $result && $fcn( $newItem, $idx );
 			}
 
 			if( $result === true )
 			{
 				$item->addChild( $newItem );
-				$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
+				$this->createTree( $child, $newItem, $listItemMap, $refItemMap );
 			}
 		}
 	}
@@ -789,18 +789,18 @@ class MShop_Catalog_Manager_Default
 	 * @param integer $siteid Site ID for the specific tree
 	 * @return MW_Tree_Manager_Interface Tree manager
 	 */
-	protected function _createTreeManager( $siteid )
+	protected function createTreeManager( $siteid )
 	{
-		if( !isset( $this->_treeManagers[$siteid] ) )
+		if( !isset( $this->treeManagers[$siteid] ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 			$dbm = $context->getDatabaseManager();
 
 
 			$treeConfig = array(
-				'search' => $this->_searchConfig,
-				'dbname' => $this->_getResourceName(),
+				'search' => $this->searchConfig,
+				'dbname' => $this->getResourceName(),
 				'sql' => array(
 
 					/** mshop/catalog/manager/default/item/delete
@@ -1139,10 +1139,10 @@ class MShop_Catalog_Manager_Default
 				),
 			);
 
-			$this->_treeManagers[$siteid] = MW_Tree_Factory::createManager( 'DBNestedSet', $treeConfig, $dbm );
+			$this->treeManagers[$siteid] = MW_Tree_Factory::createManager( 'DBNestedSet', $treeConfig, $dbm );
 		}
 
-		return $this->_treeManagers[$siteid];
+		return $this->treeManagers[$siteid];
 	}
 
 
@@ -1152,14 +1152,14 @@ class MShop_Catalog_Manager_Default
 	 * @param MW_Tree_Node_Interface $node Root node
 	 * @return Associated list of ID / node object pairs
 	 */
-	protected function _getNodeMap( MW_Tree_Node_Interface $node )
+	protected function getNodeMap( MW_Tree_Node_Interface $node )
 	{
 		$map = array();
 
 		$map[(string) $node->getId()] = $node;
 
 		foreach( $node->getChildren() as $child ) {
-			$map += $this->_getNodeMap( $child );
+			$map += $this->getNodeMap( $child );
 		}
 
 		return $map;
@@ -1174,13 +1174,13 @@ class MShop_Catalog_Manager_Default
 	 * @param boolean $case True if the record shoud be added or false for an update
 	 *
 	 */
-	private function _updateUsage( $id, MShop_Catalog_Item_Interface $item, $case = false )
+	private function updateUsage( $id, MShop_Catalog_Item_Interface $item, $case = false )
 	{
 		$date = date( 'Y-m-d H:i:s' );
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

@@ -11,7 +11,7 @@
  */
 class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$this->_object = MShop_Catalog_Manager_Factory::createManager( $context );
+		$this->object = MShop_Catalog_Manager_Factory::createManager( $context );
 	}
 
 
@@ -35,14 +35,14 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetTreePath()
 	{
-		$parent = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
-		$pathNodes = $this->_object->getPath( $parent->getId() );
+		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$pathNodes = $this->object->getPath( $parent->getId() );
 
 		if( ( $node = reset( $pathNodes ) ) === false ) {
 			throw new Exception( 'No node found' );
@@ -54,14 +54,14 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 
 	public function testInsertMoveItem()
 	{
-		$item = $this->_object->createItem();
-		$parent = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$item = $this->object->createItem();
+		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$this->_object->insertItem( $item, $parent->getId() );
-		$this->_object->moveItem( $item->getId(), $parent->getId(), $parent->getId() );
-		$savedItem = $this->_object->getItem( $item->getId() );
+		$this->object->insertItem( $item, $parent->getId() );
+		$this->object->moveItem( $item->getId(), $parent->getId(), $parent->getId() );
+		$savedItem = $this->object->getItem( $item->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$this->assertEquals( $item->getId(), $savedItem->getId() );
 		$this->assertEquals( TestHelper::getContext()->getEditor(), $savedItem->getEditor() );

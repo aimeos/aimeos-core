@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_text" CHANGE "langid" "langid" CHAR(2) DEFAULT NULL',
 	);
 
@@ -40,9 +40,9 @@ class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -51,24 +51,24 @@ class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing langid of mshop_text table', 0 ); $this->_status( '' );
+		$this->msg( 'Changing langid of mshop_text table', 0 ); $this->status( '' );
 
 		foreach( $stmts as $column => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
+			$this->msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
-			if( $this->_schema->tableExists( 'mshop_text' ) === true
-				&& $this->_schema->columnExists( 'mshop_text', $column ) === true
-				&& $this->_schema->getColumnDetails( 'mshop_text', $column )->isNullable() === false )
+			if( $this->schema->tableExists( 'mshop_text' ) === true
+				&& $this->schema->columnExists( 'mshop_text', $column ) === true
+				&& $this->schema->getColumnDetails( 'mshop_text', $column )->isNullable() === false )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'migrated' );
+				$this->execute( $stmt );
+				$this->status( 'migrated' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

@@ -36,28 +36,28 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds plugin test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding plugin test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding plugin test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
-		$this->_addPluginData();
+		$this->addPluginData();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -66,9 +66,9 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 	 *
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _addPluginData()
+	private function addPluginData()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Default' );
 		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Default' );
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -81,7 +81,7 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 		$plugTypeIds = array();
 		$type = $pluginTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['plugin/type'] as $key => $dataset )
 		{
@@ -111,6 +111,6 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 			$pluginManager->saveItem( $plugin, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

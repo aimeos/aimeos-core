@@ -17,7 +17,7 @@
 class MShop_Service_Provider_Decorator_OrderCheck
 extends MShop_Service_Provider_Decorator_Abstract
 {
-	private $_beConfig = array(
+	private $beConfig = array(
 		'ordercheck.total-number-min' => array(
 			'code' => 'ordercheck.total-number-min',
 			'internalcode'=> 'ordercheck.total-number-min',
@@ -48,8 +48,8 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->_getProvider()->checkConfigBE( $attributes );
-		$error += $this->_checkConfig( $this->_beConfig, $attributes );
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
 
 		return $error;
 	}
@@ -63,9 +63,9 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function getConfigBE()
 	{
-		$list = $this->_getProvider()->getConfigBE();
+		$list = $this->getProvider()->getConfigBE();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -82,7 +82,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $this->getServiceItem()->getConfig();
 
 		if( ( $customerId = $context->getUserId() ) === null ) {
@@ -130,6 +130,6 @@ extends MShop_Service_Provider_Decorator_Abstract
 			}
 		}
 
-		return $this->_getProvider()->isAvailable( $basket );
+		return $this->getProvider()->isAvailable( $basket );
 	}
 }

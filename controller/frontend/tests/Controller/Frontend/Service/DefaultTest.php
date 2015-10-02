@@ -7,13 +7,13 @@
 
 class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private static $_basket;
+	private $object;
+	private static $basket;
 
 
 	protected function setUp()
 	{
-		$this->_object = new Controller_Frontend_Service_Default( TestHelper::getContext() );
+		$this->object = new Controller_Frontend_Service_Default( TestHelper::getContext() );
 	}
 
 
@@ -21,13 +21,13 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseMgr = $orderManager->getSubManager( 'base' );
-		self::$_basket = $orderBaseMgr->createItem();
+		self::$basket = $orderBaseMgr->createItem();
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$services = $this->_object->getServices( 'delivery', $basket );
+		$services = $this->object->getServices( 'delivery', $basket );
 		$this->assertGreaterThan( 0, count( $services ) );
 
 		foreach( $services as $service ) {
@@ -50,8 +50,8 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$this->_object->getServices( 'delivery', $basket );
-		$services = $this->_object->getServices( 'delivery', $basket );
+		$this->object->getServices( 'delivery', $basket );
+		$services = $this->object->getServices( 'delivery', $basket );
 
 		$this->assertGreaterThan( 0, count( $services ) );
 	}
@@ -59,8 +59,8 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetServiceAttributes()
 	{
-		$service = $this->_getServiceItem();
-		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId(), self::$_basket );
+		$service = $this->getServiceItem();
+		$attributes = $this->object->getServiceAttributes( 'delivery', $service->getId(), self::$basket );
 
 		$this->assertEquals( 0, count( $attributes ) );
 	}
@@ -71,13 +71,13 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$services = $this->_object->getServices( 'delivery', $basket );
+		$services = $this->object->getServices( 'delivery', $basket );
 
 		if( ( $service = reset( $services ) ) === false ) {
 			throw new Exception( 'No service item found' );
 		}
 
-		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId(), self::$_basket );
+		$attributes = $this->object->getServiceAttributes( 'delivery', $service->getId(), self::$basket );
 
 		$this->assertEquals( 0, count( $attributes ) );
 	}
@@ -86,7 +86,7 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetServiceAttributesNoItems()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$this->_object->getServiceAttributes( 'invalid', -1, self::$_basket );
+		$this->object->getServiceAttributes( 'invalid', -1, self::$basket );
 	}
 
 
@@ -95,8 +95,8 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$service = $this->_getServiceItem();
-		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
+		$service = $this->getServiceItem();
+		$price = $this->object->getServicePrice( 'delivery', $service->getId(), $basket );
 
 		$this->assertEquals( '12.95', $price->getValue() );
 		$this->assertEquals( '1.99', $price->getCosts() );
@@ -108,13 +108,13 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$services = $this->_object->getServices( 'delivery', $basket );
+		$services = $this->object->getServices( 'delivery', $basket );
 
 		if( ( $service = reset( $services ) ) === false ) {
 			throw new Exception( 'No service item found' );
 		}
 
-		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
+		$price = $this->object->getServicePrice( 'delivery', $service->getId(), $basket );
 
 		$this->assertEquals( '12.95', $price->getValue() );
 		$this->assertEquals( '1.99', $price->getCosts() );
@@ -127,14 +127,14 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$this->_object->getServicePrice( 'invalid', -1, $basket );
+		$this->object->getServicePrice( 'invalid', -1, $basket );
 	}
 
 
 	public function testCheckServiceAttributes()
 	{
-		$service = $this->_getServiceItem();
-		$attributes = $this->_object->checkServiceAttributes( 'delivery', $service->getId(), array() );
+		$service = $this->getServiceItem();
+		$attributes = $this->object->checkServiceAttributes( 'delivery', $service->getId(), array() );
 
 		$this->assertEquals( array(), $attributes );
 	}
@@ -143,7 +143,7 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @return MShop_Order_Item_Base_Interface
 	 */
-	protected function _getServiceItem()
+	protected function getServiceItem()
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 

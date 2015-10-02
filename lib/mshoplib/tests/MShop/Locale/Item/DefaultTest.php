@@ -11,17 +11,17 @@
  */
 class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_siteItem;
-	private $_values;
+	private $object;
+	private $siteItem;
+	private $values;
 
 
 	protected function setUp()
 	{
 		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_siteItem = $manager->getSubManager( 'site' )->createItem();
+		$this->siteItem = $manager->getSubManager( 'site' )->createItem();
 
-		$this->_values = array(
+		$this->values = array(
 			'id' => 1,
 			'siteid' => 1,
 			'langid' => 'de',
@@ -33,9 +33,9 @@ class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Locale_Item_Default(
-			$this->_values,
-			$this->_siteItem,
+		$this->object = new MShop_Locale_Item_Default(
+			$this->values,
+			$this->siteItem,
 			array( 1, 2 ),
 			array( 1, 3, 4 )
 		);
@@ -44,13 +44,13 @@ class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_values );
+		unset( $this->object, $this->values );
 	}
 
 
 	public function testGetSite()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->_object->getSite() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->object->getSite() );
 
 		$wrongobject = new MShop_Locale_Item_Default();
 		$this->setExpectedException( 'MShop_Locale_Exception' );
@@ -60,140 +60,140 @@ class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( '1', $this->_object->getSiteId() );
+		$this->assertEquals( '1', $this->object->getSiteId() );
 	}
 
 
 	public function testGetSitePath()
 	{
-		$this->assertEquals( array( 1, 2 ), $this->_object->getSitePath() );
+		$this->assertEquals( array( 1, 2 ), $this->object->getSitePath() );
 	}
 
 
 	public function testGetSiteSubTree()
 	{
-		$this->assertEquals( array( 1, 3, 4 ), $this->_object->getSiteSubTree() );
+		$this->assertEquals( array( 1, 3, 4 ), $this->object->getSiteSubTree() );
 	}
 
 
 	public function testSetSiteId()
 	{
-		$this->_object->setSiteId( 5 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '5', $this->_object->getSiteId() );
-		$this->assertEquals( array( 5 ), $this->_object->getSitePath() );
-		$this->assertEquals( array( 5 ), $this->_object->getSiteSubTree() );
+		$this->object->setSiteId( 5 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '5', $this->object->getSiteId() );
+		$this->assertEquals( array( 5 ), $this->object->getSitePath() );
+		$this->assertEquals( array( 5 ), $this->object->getSiteSubTree() );
 	}
 
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'de', $this->_object->getLanguageId() );
+		$this->assertEquals( 'de', $this->object->getLanguageId() );
 	}
 
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId( 'en' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'en', $this->_object->getLanguageId() );
+		$this->object->setLanguageId( 'en' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'en', $this->object->getLanguageId() );
 	}
 
 
 	public function testSetLanguageIdNull()
 	{
-		$this->_object->setLanguageId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( null, $this->_object->getLanguageId() );
+		$this->object->setLanguageId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( null, $this->object->getLanguageId() );
 	}
 
 
 	public function testSetLanguageIdCountry()
 	{
-		$this->_object->setLanguageId( 'en_GB' );
-		$this->assertEquals( 'en_GB', $this->_object->getLanguageId() );
+		$this->object->setLanguageId( 'en_GB' );
+		$this->assertEquals( 'en_GB', $this->object->getLanguageId() );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setLanguageId( 'test' );
+		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setLanguageId( 'en-GB' );
+		$this->object->setLanguageId( 'en-GB' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalidLowerCase()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setLanguageId( 'en_gb' );
+		$this->object->setLanguageId( 'en_gb' );
 	}
 
 
 	public function testGetCurrencyId()
 	{
-		$this->assertEquals( 'EUR', $this->_object->getCurrencyId() );
+		$this->assertEquals( 'EUR', $this->object->getCurrencyId() );
 	}
 
 
 	public function testSetCurrencyId()
 	{
-		$this->_object->setCurrencyId( 'AWG' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'AWG', $this->_object->getCurrencyId() );
+		$this->object->setCurrencyId( 'AWG' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'AWG', $this->object->getCurrencyId() );
 	}
 
 
 	public function testSetCurrencyIdNull()
 	{
-		$this->_object->setCurrencyId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( null, $this->_object->getCurrencyId() );
+		$this->object->setCurrencyId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( null, $this->object->getCurrencyId() );
 	}
 
 
 	public function testSetCurrencyIdInvalid()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setCurrencyId( 'TEST' );
+		$this->object->setCurrencyId( 'TEST' );
 	}
 
 
 	public function testGetPosition()
 	{
-		$this->assertEquals( 1, $this->_object->getPosition() );
+		$this->assertEquals( 1, $this->object->getPosition() );
 	}
 
 
 	public function testSetPosition()
 	{
-		$this->_object->setPosition( 2 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 2, $this->_object->getPosition() );
+		$this->object->setPosition( 2 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 2, $this->object->getPosition() );
 	}
 
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -225,18 +225,18 @@ class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['locale.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['locale.siteid'] );
-		$this->assertEquals( $this->_object->getLanguageId(), $arrayObject['locale.languageid'] );
-		$this->assertEquals( $this->_object->getCurrencyId(), $arrayObject['locale.currencyid'] );
-		$this->assertEquals( $this->_object->getPosition(), $arrayObject['locale.position'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['locale.status'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['locale.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['locale.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['locale.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['locale.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['locale.siteid'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['locale.languageid'] );
+		$this->assertEquals( $this->object->getCurrencyId(), $arrayObject['locale.currencyid'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['locale.position'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['locale.status'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.editor'] );
 	}
 
 }

@@ -51,7 +51,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 		}
 
 		$ids = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$services = $order->getServices();
 
 

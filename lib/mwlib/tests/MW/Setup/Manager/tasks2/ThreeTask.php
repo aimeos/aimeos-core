@@ -16,9 +16,9 @@ class MW_Setup_Task_ThreeTask extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Executing ThreeTask' );
-		$this->_status( 'OK' );
+		$this->msg( 'Executing ThreeTask' );
+		$this->status( 'OK' );
 	}
 }

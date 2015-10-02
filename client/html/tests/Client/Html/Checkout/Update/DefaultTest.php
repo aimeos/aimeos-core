@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Update_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,10 +20,10 @@ class Client_Html_Checkout_Update_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$this->_object = new Client_Html_Checkout_Update_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Update_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,34 +35,34 @@ class Client_Html_Checkout_Update_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->assertEquals( '', $this->_object->getBody() );
+		$this->assertEquals( '', $this->object->getBody() );
 	}
 
 
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
@@ -70,29 +70,29 @@ class Client_Html_Checkout_Update_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$params = array(
 			'code' => 'paypalexpress',
-			'orderid' => $this->_getOrder( '2011-09-17 16:14:32' )->getId(),
+			'orderid' => $this->getOrder( '2011-09-17 16:14:32' )->getId(),
 		);
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, $params );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessNoService()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	/**
 	 * @param string $date
 	 */
-	protected function _getOrder( $date )
+	protected function getOrder( $date )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );

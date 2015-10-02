@@ -16,8 +16,8 @@
  */
 abstract class Controller_Jobs_Abstract
 {
-	private $_aimeos;
-	private $_context;
+	private $aimeos;
+	private $context;
 
 
 	/**
@@ -28,8 +28,8 @@ abstract class Controller_Jobs_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos )
 	{
-		$this->_context = $context;
-		$this->_aimeos = $aimeos;
+		$this->context = $context;
+		$this->aimeos = $aimeos;
 	}
 
 
@@ -38,9 +38,9 @@ abstract class Controller_Jobs_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -49,9 +49,9 @@ abstract class Controller_Jobs_Abstract
 	 *
 	 * @return Aimeos Aimeos object
 	 */
-	protected function _getAimeos()
+	protected function getAimeos()
 	{
-		return $this->_aimeos;
+		return $this->aimeos;
 	}
 
 
@@ -64,14 +64,14 @@ abstract class Controller_Jobs_Abstract
 	 * @return string path the to the template file
 	 * @throws Controller_Jobs_Exception If no template file was found
 	 */
-	protected function _getTemplate( $confpath, $default )
+	protected function getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$templatePaths = $this->_aimeos->getCustomPaths( 'controller/jobs/layouts' );
+		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/layouts' );
 	
 		foreach( (array) $default as $fname )
 		{
-			$file = $this->_context->getConfig()->get( $confpath, $fname );
+			$file = $this->context->getConfig()->get( $confpath, $fname );
 	
 			foreach( array_reverse( $templatePaths ) as $path => $relPaths )
 			{
@@ -102,9 +102,9 @@ abstract class Controller_Jobs_Abstract
 	 * @return MShop_Common_Item_Type_Interface Type item
 	 * @throws Controller_Jobs_Exception If no item is found
 	 */
-	protected function _getTypeItem( $prefix, $domain, $code )
+	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), $prefix );
+		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();

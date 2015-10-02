@@ -18,8 +18,8 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Decorator_Interface
 {
-	private $_context = null;
-	private $_controller = null;
+	private $context = null;
+	private $controller = null;
 
 
 	/**
@@ -30,8 +30,8 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Controller_ExtJS_Interface $controller )
 	{
-		$this->_context = $context;
-		$this->_controller = $controller;
+		$this->context = $context;
+		$this->controller = $controller;
 	}
 
 
@@ -45,7 +45,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false ) {
+		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
@@ -60,7 +60,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_controller->deleteItems( $params );
+		$this->controller->deleteItems( $params );
 	}
 
 
@@ -71,7 +71,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function saveItems( stdClass $params )
 	{
-		return $this->_controller->saveItems( $params );
+		return $this->controller->saveItems( $params );
 	}
 
 
@@ -83,7 +83,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function searchItems( stdClass $params )
 	{
-		return $this->_controller->searchItems( $params );
+		return $this->controller->searchItems( $params );
 	}
 
 
@@ -95,7 +95,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function getServiceDescription()
 	{
-		return $this->_controller->getServiceDescription();
+		return $this->controller->getServiceDescription();
 	}
 
 
@@ -107,7 +107,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function getItemSchema()
 	{
-		return $this->_controller->getItemSchema();
+		return $this->controller->getItemSchema();
 	}
 
 
@@ -119,7 +119,7 @@ abstract class Controller_ExtJS_Common_Decorator_Abstract
 	 */
 	public function getSearchSchema()
 	{
-		return $this->_controller->getSearchSchema();
+		return $this->controller->getSearchSchema();
 	}
 
 }

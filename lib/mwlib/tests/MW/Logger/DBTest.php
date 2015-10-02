@@ -8,8 +8,8 @@
  */
 class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 {
-	private $_dbm;
-	private $_object;
+	private $dbm;
+	private $object;
 
 
 	/**
@@ -25,9 +25,9 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_dbm = TestHelper::getDBManager();
+		$this->dbm = TestHelper::getDBManager();
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$conn->create( '
 			CREATE TABLE IF NOT EXISTS "mw_log_test" (
@@ -39,9 +39,9 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 			);' )->execute()->finish();
 
 		$sql = 'INSERT INTO "mw_log_test" ( "facility", "tstamp", "priority", "message", "request" ) VALUES ( ?, ?, ?, ?, ? )';
-		$this->_object = new MW_Logger_DB( $conn->create( $sql ) );
+		$this->object = new MW_Logger_DB( $conn->create( $sql ) );
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 	}
 
 	/**
@@ -56,23 +56,23 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 			return;
 		}
 
-		$this->_dbm = TestHelper::getDBManager();
+		$this->dbm = TestHelper::getDBManager();
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 		$conn->create( 'DROP TABLE "mw_log_test"' )->execute()->finish();
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 	}
 
 	public function testLog()
 	{
-		$this->_object->log( 'error' );
+		$this->object->log( 'error' );
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 		$row = $result->fetch();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		if( $row === false ) {
 			throw new Exception( 'No log record found' );
@@ -86,21 +86,21 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 
 		$this->setExpectedException('MW_Logger_Exception');
-		$this->_object->log( 'wrong log level', -1);
+		$this->object->log( 'wrong log level', -1);
 	}
 
 	public function testScalarLog()
 	{
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 		$conn->create( 'DELETE FROM "mw_log_test"' )->execute()->finish();
 
-		$this->_object->log( array ( 'scalar', 'errortest' ) );
+		$this->object->log( array ( 'scalar', 'errortest' ) );
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 
 		$row = $result->fetch();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		if( $row === false ) {
 			throw new Exception( 'No log record found' );
@@ -115,14 +115,14 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testLogCrit()
 	{
-		$this->_object->log( 'critical', MW_Logger_Abstract::CRIT );
+		$this->object->log( 'critical', MW_Logger_Abstract::CRIT );
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 		$row = $result->fetch();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		if( $row === false ) {
 			throw new Exception( 'No log record found' );
@@ -136,14 +136,14 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testLogWarn()
 	{
-		$this->_object->log( 'debug', MW_Logger_Abstract::WARN );
+		$this->object->log( 'debug', MW_Logger_Abstract::WARN );
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 		$row = $result->fetch();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		if( $row !== false ) {
 			throw new Exception( 'Log record found but none expected' );
@@ -152,14 +152,14 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testFacility()
 	{
-		$this->_object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
+		$this->object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 		$row = $result->fetch();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		if( $row === false ) {
 			throw new Exception( 'No log record found' );

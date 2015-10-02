@@ -16,7 +16,7 @@
  */
 class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expression_Compare_Abstract
 {
-	private static $_operators = array( '==' => '==', '!=' => '!=', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<' );
+	private static $operators = array( '==' => '==', '!=' => '!=', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<' );
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 */
 	public function __construct( $operator, $name, $value )
 	{
-		if( !isset( self::$_operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -43,7 +43,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$_operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -55,10 +55,10 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param mixed $value Value that the variable should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function _createTerm( $name, $type, $value )
+	protected function createTerm( $name, $type, $value )
 	{
-		$escaped = $this->_escape( $this->getOperator(), $type, $value );
-		return $name . ' ' . self::$_operators[$this->getOperator()] . ' ' . $escaped;
+		$escaped = $this->escape( $this->getOperator(), $type, $value );
+		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $escaped;
 	}
 
 
@@ -68,7 +68,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param string $name Translated name of the variable or column
 	 * @return string Created term string (name operator null)
 	 */
-	protected function _createNullTerm( $name )
+	protected function createNullTerm( $name )
 	{
 		switch( $this->getOperator() )
 		{
@@ -89,7 +89,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param string $type Type constant
 	 * @return string Created term string
 	 */
-	protected function _createListTerm( $name, $type )
+	protected function createListTerm( $name, $type )
 	{
 		switch( $this->getOperator() )
 		{
@@ -97,7 +97,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 
 				$list = array();
 				foreach( (array) $this->getValue() as $value ) {
-					$list[] = $this->_createTerm( $name, $type, $value );
+					$list[] = $this->createTerm( $name, $type, $value );
 				}
 				return '( ' . implode( ' || ', $list ) . ' )';
 
@@ -105,7 +105,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 
 				$list = array();
 				foreach( (array) $this->getValue() as $value ) {
-					$list[] = $this->_createTerm( $name, $type, $value );
+					$list[] = $this->createTerm( $name, $type, $value );
 				}
 				return '( ' . implode( ' && ', $list ) . ' )';
 
@@ -122,16 +122,16 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param array $values Value list for the variable
 	 * @return string array-String of comma separated values
 	 */
-	protected function _createValueList( $type, array $values )
+	protected function createValueList( $type, array $values )
 	{
 		if( ( $val = reset( $values ) ) === false ) {
 			return '';
 		}
 
-		$string = $this->_escape( $this->getOperator(), $type, $val );
+		$string = $this->escape( $this->getOperator(), $type, $val );
 
 		while( ( $val = next( $values ) ) !== false ) {
-			$string .= ',' . $this->_escape( $this->getOperator(), $type, $val );
+			$string .= ',' . $this->escape( $this->getOperator(), $type, $val );
 		}
 
 		return 'array(' . $string . ')';
@@ -146,9 +146,9 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param mixed $value Value that the variable should be compared to
 	 * @return mixed Escaped value
 	 */
-	protected function _escape( $operator, $type, $value )
+	protected function escape( $operator, $type, $value )
 	{
-		$value = $this->_translateValue( $this->getName(), $value );
+		$value = $this->translateValue( $this->getName(), $value );
 
 		switch( $type )
 		{
@@ -172,7 +172,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	 * @param string &$item Parameter string to evaluate (double quotes will be removed if necessary)
 	 * @return string Data type (string, float, int)
 	 */
-	protected function _getParamType( &$item )
+	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{

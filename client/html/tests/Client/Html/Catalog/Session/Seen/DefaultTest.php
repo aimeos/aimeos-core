@@ -7,8 +7,8 @@
 
 class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
 
-		$this->_object = new Client_Html_Catalog_Session_Seen_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Session_Seen_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,13 +35,13 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
@@ -49,9 +49,9 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetBody()
 	{
 		$seen = array( 1 => 'html product one', 2 => 'html product two' );
-		$this->_context->getSession()->set( 'aimeos/catalog/session/seen/list', $seen );
+		$this->context->getSession()->set( 'aimeos/catalog/session/seen/list', $seen );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#.*html product two.*html product one.*#smU', $output ); // list is reversed
 		$this->assertStringStartsWith( '<section class="catalog-session-seen">', $output );
@@ -61,12 +61,12 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

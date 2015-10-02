@@ -55,7 +55,7 @@ class Client_Html_Checkout_Standard_Address_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/address/default/subparts';
+	private $subPartPath = 'client/html/checkout/standard/address/default/subparts';
 
 	/** client/html/checkout/standard/address/billing/name
 	 * Name of the billing part used by the checkout standard address client implementation
@@ -78,9 +78,9 @@ class Client_Html_Checkout_Standard_Address_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'billing', 'delivery' );
+	private $subPartNames = array( 'billing', 'delivery' );
 
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -101,10 +101,10 @@ class Client_Html_Checkout_Standard_Address_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->addressBody = $html;
@@ -132,7 +132,7 @@ class Client_Html_Checkout_Standard_Address_Default
 		$tplconf = 'client/html/checkout/standard/address/default/template-body';
 		$default = 'checkout/standard/address-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -154,10 +154,10 @@ class Client_Html_Checkout_Standard_Address_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->addressHeader = $html;
@@ -186,7 +186,7 @@ class Client_Html_Checkout_Standard_Address_Default
 		$tplconf = 'client/html/checkout/standard/address/default/template-header';
 		$default = 'checkout/standard/address-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -273,7 +273,7 @@ class Client_Html_Checkout_Standard_Address_Default
 		 * @see client/html/checkout/standard/address/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/address/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/address/' . $type, $name );
 	}
 
 
@@ -290,7 +290,7 @@ class Client_Html_Checkout_Standard_Address_Default
 		{
 			parent::process();
 
-			$basketCntl = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+			$basketCntl = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 
 			// Test if addresses are available
 			$addresses = $basketCntl->get()->getAddresses();
@@ -314,9 +314,9 @@ class Client_Html_Checkout_Standard_Address_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -328,11 +328,11 @@ class Client_Html_Checkout_Standard_Address_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 
 
 			$customerManager = MShop_Factory::createManager( $context, 'customer' );
@@ -464,9 +464,9 @@ class Client_Html_Checkout_Standard_Address_Default
 			$view->addressStates = $view->config( 'client/html/checkout/standard/address/states', array() );
 
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

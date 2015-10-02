@@ -11,7 +11,7 @@
  */
 class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
@@ -30,7 +30,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
 		$serviceProvider = $servManager->getProvider( $item );
-		$this->_object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider );
+		$this->object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider );
 	}
 
 
@@ -42,21 +42,21 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'country', $this->_object->getConfigBE() );
-		$this->assertArrayHasKey( 'default.url', $this->_object->getConfigBE() );
+		$this->assertArrayHasKey( 'country', $this->object->getConfigBE() );
+		$this->assertArrayHasKey( 'default.url', $this->object->getConfigBE() );
 	}
 
 
 	public function testCheckConfigBE()
 	{
 		$attributes = array( 'country' => 'DE', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertInternalType( 'null', $result['country'] );
@@ -68,7 +68,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 
 		$attributes = array( 'country' => '', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertInternalType( 'string', $result['country'] );
@@ -91,7 +91,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 			throw new Exception( 'No order base item found' );
 		}
 
-		$price = $this->_object->calcPrice( $item );
+		$price = $this->object->calcPrice( $item );
 
 		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
@@ -114,13 +114,13 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 		$localeItem->setLanguageId( 'en' );
 		$orderBaseEnItem->setLocale( $localeItem );
 
-		$this->assertFalse( $this->_object->isAvailable( $orderBaseDeItem ) );
-		$this->assertTrue( $this->_object->isAvailable( $orderBaseEnItem ) );
+		$this->assertFalse( $this->object->isAvailable( $orderBaseDeItem ) );
+		$this->assertTrue( $this->object->isAvailable( $orderBaseEnItem ) );
 	}
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
 	}
 
 
@@ -141,6 +141,6 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 			throw new Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
 		}
 
-		$this->_object->buildXML( $order );
+		$this->object->buildXML( $order );
 	}
 }

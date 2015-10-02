@@ -11,9 +11,9 @@
  */
 class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_orderBase;
-	private $_couponItem;
+	private $object;
+	private $orderBase;
+	private $couponItem;
 
 
 	/**
@@ -28,11 +28,11 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 		$context = TestHelper::getContext();
 
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
-		$this->_couponItem = $couponManager->createItem();
+		$this->couponItem = $couponManager->createItem();
 
-		$provider = new MShop_Coupon_Provider_Example( $context, $this->_couponItem, 'abcd' );
-		$this->_object = new MShop_Coupon_Provider_Decorator_BasketValues( $context, $this->_couponItem, 'abcd', $provider );
-		$this->_object->setObject( $this->_object );
+		$provider = new MShop_Coupon_Provider_Example( $context, $this->couponItem, 'abcd' );
+		$this->object = new MShop_Coupon_Provider_Decorator_BasketValues( $context, $this->couponItem, 'abcd', $provider );
+		$this->object->setObject( $this->object );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -56,8 +56,8 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
-		$this->_orderBase->addProduct( $orderProducts['CNC'] );
+		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 
 
@@ -69,9 +69,9 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_orderBase );
-		unset( $this->_couponItem );
+		unset( $this->object );
+		unset( $this->orderBase );
+		unset( $this->couponItem );
 	}
 
 
@@ -82,8 +82,8 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 			'basketvalues.total-value-max' => array( 'EUR' => 1000 ),
 		);
 
-		$this->_couponItem->setConfig( $config );
-		$result = $this->_object->isAvailable( $this->_orderBase );
+		$this->couponItem->setConfig( $config );
+		$result = $this->object->isAvailable( $this->orderBase );
 
 		$this->assertTrue( $result );
 	}
@@ -96,8 +96,8 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 			'basketvalues.total-value-max' => array( 'EUR' => 1000 ),
 		);
 
-		$this->_couponItem->setConfig( $config );
-		$result = $this->_object->isAvailable( $this->_orderBase );
+		$this->couponItem->setConfig( $config );
+		$result = $this->object->isAvailable( $this->orderBase );
 
 		$this->assertFalse( $result );
 	}
@@ -110,8 +110,8 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 			'basketvalues.total-value-max' => array( 'EUR' => 320 ),
 		);
 
-		$this->_couponItem->setConfig( $config );
-		$result = $this->_object->isAvailable( $this->_orderBase );
+		$this->couponItem->setConfig( $config );
+		$result = $this->object->isAvailable( $this->orderBase );
 
 		$this->assertFalse( $result );
 	}

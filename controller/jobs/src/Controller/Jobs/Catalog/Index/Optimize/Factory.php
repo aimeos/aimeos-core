@@ -74,7 +74,7 @@ class Controller_Jobs_Catalog_Index_Optimize_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Catalog_Index_Optimize_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/catalog/index/optimize/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog index optimize controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Catalog_Index_Optimize_Factory
 		 * @see controller/jobs/catalog/index/optimize/decorators/excludes
 		 * @see controller/jobs/catalog/index/optimize/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/optimize' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/optimize' );
 	}
 }

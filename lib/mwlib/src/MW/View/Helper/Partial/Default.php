@@ -18,8 +18,8 @@ class MW_View_Helper_Partial_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_config;
-	private $_paths;
+	private $config;
+	private $paths;
 
 
 	/**
@@ -33,8 +33,8 @@ class MW_View_Helper_Partial_Default
 	{
 		parent::__construct( $view );
 
-		$this->_config = $config;
-		$this->_paths = $paths;
+		$this->config = $config;
+		$this->paths = $paths;
 	}
 
 
@@ -49,12 +49,12 @@ class MW_View_Helper_Partial_Default
 	public function transform( $confpath, $default, array $params = array() )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$file = $this->_config->get( $confpath, $default );
+		$file = $this->config->get( $confpath, $default );
 
-		$view = clone $this->_getView();
+		$view = clone $this->getView();
 		$view->assign( $params );
 
-		foreach( array_reverse( $this->_paths ) as $path => $relPaths )
+		foreach( array_reverse( $this->paths ) as $path => $relPaths )
 		{
 			foreach( $relPaths as $relPath )
 			{

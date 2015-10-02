@@ -26,6 +26,6 @@ class Controller_Jobs_Service_Delivery_Process_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Deprecated: Use order/service/delivery' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Deprecated: Use order/service/delivery' );
 	}
 }

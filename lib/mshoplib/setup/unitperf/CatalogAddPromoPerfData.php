@@ -36,12 +36,12 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Inserts catalog promotion products.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding catalog promotion performance data', 0 );
+		$this->msg( 'Adding catalog promotion performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'list' );
@@ -74,7 +74,7 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 		do
 		{
-			$this->_txBegin();
+			$this->txBegin();
 
 			$result = $catalogManager->searchItems( $search );
 
@@ -106,11 +106,11 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 			$start += $count;
 			$search->setSlice( $start );
 
-			$this->_txCommit();
+			$this->txCommit();
 		}
 		while( $count == $search->getSliceSize() );
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

@@ -18,9 +18,9 @@ class MW_Config_Decorator_Memory
 	extends MW_Config_Decorator_Abstract
 	implements MW_Config_Decorator_Interface
 {
-	private $_negCache = array();
-	private $_cache = array();
-	private $_config;
+	private $negCache = array();
+	private $cache = array();
+	private $config;
 
 
 	/**
@@ -33,7 +33,7 @@ class MW_Config_Decorator_Memory
 	{
 		parent::__construct( $object );
 
-		$this->_config = $config;
+		$this->config = $config;
 	}
 
 
@@ -48,27 +48,27 @@ class MW_Config_Decorator_Memory
 	{
 		$name = trim( $name, '/' );
 
-		if( isset( $this->_negCache[ $name ] ) ) {
+		if( isset( $this->negCache[ $name ] ) ) {
 			return $default;
 		}
 
-		if( array_key_exists( $name, $this->_cache ) ) {
-			return $this->_cache[ $name ];
+		if( array_key_exists( $name, $this->cache ) ) {
+			return $this->cache[ $name ];
 		}
 
-		if( ( $return = $this->_getValueFromArray( $this->_config, explode( '/', $name ) ) ) !== null ) {
+		if( ( $return = $this->getValueFromArray( $this->config, explode( '/', $name ) ) ) !== null ) {
 			return $return;
 		}
 
-		$return = $this->_getObject()->get( $name, null );
+		$return = $this->getObject()->get( $name, null );
 
 		if( $return === null )
 		{
-			$this->_negCache[ $name ] = true;
+			$this->negCache[ $name ] = true;
 			return $default;
 		}
 
-		$this->_cache[ $name ] = $return;
+		$this->cache[ $name ] = $return;
 		return $return;
 	}
 
@@ -85,15 +85,15 @@ class MW_Config_Decorator_Memory
 
 		if( $value !== null )
 		{
-			$this->_cache[ $name ] = $value;
+			$this->cache[ $name ] = $value;
 
-			if( isset( $this->_negCache[ $name ] ) ) {
-				unset( $this->_negCache[ $name ] );
+			if( isset( $this->negCache[ $name ] ) ) {
+				unset( $this->negCache[ $name ] );
 			}
 		}
 		else
 		{
-			$this->_negCache[ $name ] = true;
+			$this->negCache[ $name ] = true;
 		}
 
 		// don't store local configuration
@@ -107,12 +107,12 @@ class MW_Config_Decorator_Memory
 	 * @param array $parts Configuration path parts to look for inside the array
 	 * @return mixed Found configuration value or null if not available
 	 */
-	protected function _getValueFromArray( $config, $parts )
+	protected function getValueFromArray( $config, $parts )
 	{
 		if( ( $key = array_shift( $parts ) ) !== null && isset( $config[$key] ) )
 		{
 			if( count( $parts ) > 0 ) {
-				return $this->_getValueFromArray( $config[$key], $parts );
+				return $this->getValueFromArray( $config[$key], $parts );
 			}
 
 			return $config[$key];

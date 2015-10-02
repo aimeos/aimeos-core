@@ -29,13 +29,13 @@ class MW_Convert_Factory
 			$list = array();
 
 			foreach( $keys as $key ) {
-				$list[] = self::_createObject( $key );
+				$list[] = self::createObject( $key );
 			}
 
 			return new MW_Convert_Compose( $list );
 		}
 
-		return self::_createObject( $keys );;
+		return self::createObject( $keys );;
 	}
 
 
@@ -45,7 +45,7 @@ class MW_Convert_Factory
 	 * @param string $key Key of the converter class
 	 * @return MW_Convert_Interface Instance of converter class
 	 */
-	protected static function _createObject( $key )
+	protected static function createObject( $key )
 	{
 		$key = str_replace( '/', '_', $key );
 

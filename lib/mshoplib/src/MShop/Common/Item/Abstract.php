@@ -16,9 +16,9 @@
  */
 abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 {
-	private $_prefix;
-	private $_values;
-	private $_modified = false;
+	private $prefix;
+	private $values;
+	private $modified = false;
 
 	/**
 	 * Initializes the class properties.
@@ -28,8 +28,8 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function __construct( $prefix, array $values )
 	{
-		$this->_prefix = (string) $prefix;
-		$this->_values = $values;
+		$this->prefix = (string) $prefix;
+		$this->values = $values;
 	}
 
 
@@ -40,7 +40,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getId()
 	{
-		return ( isset( $this->_values['id'] ) && $this->_values['id'] != '' ? (string) $this->_values['id'] : null );
+		return ( isset( $this->values['id'] ) && $this->values['id'] != '' ? (string) $this->values['id'] : null );
 	}
 
 
@@ -51,10 +51,10 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
-			$this->_modified = true;
+		if( ( $this->values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
+			$this->modified = true;
 		} else {
-			$this->_modified = false;
+			$this->modified = false;
 		}
 	}
 
@@ -66,7 +66,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->_values['siteid'] ) ? (int) $this->_values['siteid'] : null );
+		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
 	}
 
 
@@ -77,7 +77,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getTimeModified()
 	{
-		return ( isset( $this->_values['mtime'] ) ? (string) $this->_values['mtime'] : null );
+		return ( isset( $this->values['mtime'] ) ? (string) $this->values['mtime'] : null );
 	}
 
 
@@ -88,7 +88,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getTimeCreated()
 	{
-		return ( isset( $this->_values['ctime'] ) ? (string) $this->_values['ctime'] : null );
+		return ( isset( $this->values['ctime'] ) ? (string) $this->values['ctime'] : null );
 	}
 
 
@@ -99,7 +99,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getEditor()
 	{
-		return ( isset( $this->_values['editor'] ) ? (string) $this->_values['editor'] : '' );
+		return ( isset( $this->values['editor'] ) ? (string) $this->values['editor'] : '' );
 	}
 
 
@@ -110,7 +110,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function isModified()
 	{
-		return $this->_modified;
+		return $this->modified;
 	}
 
 
@@ -119,7 +119,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function setModified()
 	{
-		$this->_modified = true;
+		$this->modified = true;
 	}
 
 
@@ -131,16 +131,16 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function fromArray( array $list )
 	{
-		if( array_key_exists( $this->_prefix . 'id', $list ) )
+		if( array_key_exists( $this->prefix . 'id', $list ) )
 		{
-			$this->setId( $list[$this->_prefix . 'id'] );
-			unset( $list[$this->_prefix . 'id'] );
+			$this->setId( $list[$this->prefix . 'id'] );
+			unset( $list[$this->prefix . 'id'] );
 		}
 
-		unset( $list[$this->_prefix . 'siteid'] );
-		unset( $list[$this->_prefix . 'ctime'] );
-		unset( $list[$this->_prefix . 'mtime'] );
-		unset( $list[$this->_prefix . 'editor'] );
+		unset( $list[$this->prefix . 'siteid'] );
+		unset( $list[$this->prefix . 'ctime'] );
+		unset( $list[$this->prefix . 'mtime'] );
+		unset( $list[$this->prefix . 'editor'] );
 
 		return $list;
 	}
@@ -154,11 +154,11 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	public function toArray()
 	{
 		return array(
-			$this->_prefix . 'id' => $this->getId(),
-			$this->_prefix . 'siteid' => $this->getSiteId(),
-			$this->_prefix . 'ctime' => $this->getTimeCreated(),
-			$this->_prefix . 'mtime' => $this->getTimeModified(),
-			$this->_prefix . 'editor' => $this->getEditor(),
+			$this->prefix . 'id' => $this->getId(),
+			$this->prefix . 'siteid' => $this->getSiteId(),
+			$this->prefix . 'ctime' => $this->getTimeCreated(),
+			$this->prefix . 'mtime' => $this->getTimeModified(),
+			$this->prefix . 'editor' => $this->getEditor(),
 		);
 	}
 
@@ -187,7 +187,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
 	 * @throws MShop_Exception If the date is invalid
 	 */
-	protected function _checkDateFormat( $date )
+	protected function checkDateFormat( $date )
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
@@ -203,7 +203,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param string $code New code for an item
 	 * @throws MShop_Exception If the code is invalid
 	 */
-	protected function _checkCode( $code )
+	protected function checkCode( $code )
 	{
 		if( strlen( $code ) > 32 ) {
 			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
@@ -218,7 +218,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param boolean $null True if null is allowed, false if not
 	 * @throws MShop_Exception If the currency ID is invalid
 	 */
-	protected function _checkCurrencyId( $currencyid, $null = true )
+	protected function checkCurrencyId( $currencyid, $null = true )
 	{
 		if( $null === false && $currencyid === null ) {
 			throw new MShop_Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
@@ -236,7 +236,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param string|null $langid ISO language format, e.g. de or de_DE
 	 * @throws MShop_Exception If the language ID is invalid
 	 */
-	protected function _checkLanguageId( $langid )
+	protected function checkLanguageId( $langid )
 	{
 		if( $langid !== null && preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
 			throw new MShop_Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
@@ -249,8 +249,8 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 *
 	 * @return array Associative list of key/value pairs
 	 */
-	protected function _getRawValues()
+	protected function getRawValues()
 	{
-		return $this->_values;
+		return $this->values;
 	}
 }

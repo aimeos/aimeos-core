@@ -25,17 +25,17 @@ class MShop_Coupon_Provider_PercentRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( !isset( $config['percentrebate.productcode'] ) || !isset( $config['percentrebate.rebate'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
+				$this->getItemBase()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
 			) );
 		}
 
@@ -46,8 +46,8 @@ class MShop_Coupon_Provider_PercentRebate
 		}
 
 		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
-		$orderProducts = $this->_createMonetaryRebateProducts( $base, $config['percentrebate.productcode'], $rebate );
+		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['percentrebate.productcode'], $rebate );
 
-		$base->addCoupon( $this->_getCode(), $orderProducts );
+		$base->addCoupon( $this->getCode(), $orderProducts );
 	}
 }

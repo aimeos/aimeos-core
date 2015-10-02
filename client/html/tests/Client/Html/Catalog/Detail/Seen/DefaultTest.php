@@ -7,8 +7,8 @@
 
 class Client_Html_Catalog_Detail_Seen_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
 
-		$this->_object = new Client_Html_Catalog_Detail_Seen_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Detail_Seen_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,46 +35,46 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertEquals( '', $output );
 	}
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$view = $this->_object->getView();
-		$param = array( 'd_prodid' => $this->_getProductItem()->getId() );
+		$view = $this->object->getView();
+		$param = array( 'd_prodid' => $this->getProductItem()->getId() );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$str = $this->_context->getSession()->get( 'aimeos/catalog/session/seen/list' );
+		$str = $this->context->getSession()->get( 'aimeos/catalog/session/seen/list' );
 		$this->assertInternalType( 'array', $str );
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();

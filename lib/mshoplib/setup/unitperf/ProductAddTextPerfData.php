@@ -36,9 +36,9 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 	/**
 	 * Insert text data and product/text relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product text performance data', 0 );
+		$this->msg( 'Adding product text performance data', 0 );
 
 
 		$attribute = array(
@@ -68,7 +68,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		);
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$textManager = MShop_Factory::createManager( $context, 'text' );
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
@@ -81,8 +81,8 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$attrIds = $attrManager->searchItems( $attrSearch );
 
 
-		$textListItem = $this->_getProductListItem( 'text', 'default' );
-		$textTypes = $this->_getTextTypeIds();
+		$textListItem = $this->getProductListItem( 'text', 'default' );
+		$textTypes = $this->getTextTypeIds();
 
 		$textItem = $textManager->createItem();
 		$textItem->setLanguageId( 'en' );
@@ -99,7 +99,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$search->setSortations( array( $search->sort( '+', 'product.list.id' ) ) );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = 0;
 
@@ -177,16 +177,16 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getTextTypeIds()
+	protected function getTextTypeIds()
 	{
-		$textTypeManager = MShop_Factory::createManager( $this->_getContext(), 'text/type' );
+		$textTypeManager = MShop_Factory::createManager( $this->getContext(), 'text/type' );
 
 		$search = $textTypeManager->createSearch();
 		$expr = array(

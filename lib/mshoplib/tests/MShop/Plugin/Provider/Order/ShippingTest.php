@@ -11,9 +11,9 @@
  */
 class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCase
 {
-	private $_order;
-	private $_object;
-	private $_product;
+	private $order;
+	private $object;
+	private $product;
 
 
 	/**
@@ -58,9 +58,9 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		}
 		$price->setValue( 10.00 );
 
-		$this->_product = $orderBaseProductManager->createItem();
-		$this->_product->copyFrom( $products['CNE'] );
-		$this->_product->setPrice( $price );
+		$this->product = $orderBaseProductManager->createItem();
+		$this->product->copyFrom( $products['CNE'] );
+		$this->product->setPrice( $price );
 
 		$product2 = $orderBaseProductManager->createItem();
 		$product2->copyFrom( $products['CNC'] );
@@ -84,14 +84,14 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 			throw new Exception( 'No order base item found' );
 		}
 
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 
-		$this->_order->setService( $delivery, 'delivery' );
-		$this->_order->addProduct( $this->_product );
-		$this->_order->addProduct( $product2 );
-		$this->_order->addProduct( $product3 );
+		$this->order->setService( $delivery, 'delivery' );
+		$this->order->addProduct( $this->product );
+		$this->order->addProduct( $product2 );
+		$this->order->addProduct( $product3 );
 
-		$this->_object = new MShop_Plugin_Provider_Order_Shipping( $context, $plugin );
+		$this->object = new MShop_Plugin_Provider_Order_Shipping( $context, $plugin );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_product );
+		unset( $this->object, $this->product );
 	}
 
 	/**
@@ -121,12 +121,12 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 	 */
 	public function testUpdate()
 	{
-		$this->assertEquals( 5.00, $this->_order->getPrice()->getCosts() );
-		$this->_object->update( $this->_order, 'addProduct' );
+		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
+		$this->object->update( $this->order, 'addProduct' );
 
-		$this->_order->addProduct( $this->_product );
-		$this->_object->update( $this->_order, 'addProduct' );
+		$this->order->addProduct( $this->product );
+		$this->object->update( $this->order, 'addProduct' );
 
-		$this->assertEquals( 0.00, $this->_order->getPrice()->getCosts() );
+		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts() );
 	}
 }

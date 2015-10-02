@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Address_Delivery_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Address_Delivery_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,23 +35,23 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-address-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryMandatory ) );
@@ -62,20 +62,20 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
@@ -98,11 +98,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
 		$this->assertEquals( 'hamburg', $basket->getAddress( 'delivery' )->getCity() );
 	}
 
@@ -124,11 +124,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		try
 		{
-			$this->_object->process();
+			$this->object->process();
 		}
 		catch( Client_Html_Exception $e )
 		{
@@ -162,10 +162,10 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
-		$this->_object->process();
+		$this->object->setView( $view );
+		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
 		$this->assertEquals( 0, $basket->getAddress( 'delivery' )->getFlag() );
 	}
 
@@ -174,7 +174,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 	{
 		$view = TestHelper::getView();
 
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
@@ -195,11 +195,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		try
 		{
-			$this->_object->process();
+			$this->object->process();
 		}
 		catch( Client_Html_Exception $e )
 		{
@@ -214,7 +214,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 
 	public function testProcessAddressDelete()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context )->getSubManager( 'address' );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context )->getSubManager( 'address' );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $manager->searchItems( $search );
@@ -227,14 +227,14 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$manager->saveItem( $item );
 
 		$view = TestHelper::getView();
-		$this->_context->setUserId( $item->getRefId() );
+		$this->context->setUserId( $item->getRefId() );
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
-		$this->_object->process();
+		$this->object->setView( $view );
+		$this->object->process();
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$manager->getItem( $item->getId() );
@@ -249,16 +249,16 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessAddressDeleteNoLogin()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context )->getSubManager( 'address' );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context )->getSubManager( 'address' );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $manager->searchItems( $search );
@@ -273,16 +273,16 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessExistingAddress()
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $customerManager->searchItems( $search );
@@ -300,7 +300,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 			throw new Exception( 'Customer address item not found' );
 		}
 
-		$this->_context->setUserId( $customer->getId() );
+		$this->context->setUserId( $customer->getId() );
 
 		$view = TestHelper::getView();
 
@@ -308,12 +308,12 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$this->_object->process();
+		$this->object->process();
 
-		$this->_context->setEditor( null );
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$this->context->setEditor( null );
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
 		$this->assertEquals( 'Example company', $basket->getAddress( 'delivery' )->getCompany() );
 	}
 
@@ -326,9 +326,9 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends PHPUnit
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->process();
+		$this->object->process();
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base' => array(
 			'ALTER TABLE "mshop_order_base" ADD "siteid" INTEGER NULL AFTER "id"',
 			'UPDATE "mshop_order_base" as t1, "mshop_global_site" as t3
@@ -98,9 +98,9 @@ class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -109,22 +109,22 @@ class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding siteid to order tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding siteid to order tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true &&
-				$this->_schema->columnExists( $table, 'siteid' ) === false )
+			if( $this->schema->tableExists( $table ) === true &&
+				$this->schema->columnExists( $table, 'siteid' ) === false )
 			{
-				$this->_executeList( $stmt );
-				$this->_status( 'added' );
+				$this->executeList( $stmt );
+				$this->status( 'added' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

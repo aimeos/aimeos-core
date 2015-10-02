@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Update_FactoryTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_templatePaths;
+	private $context;
+	private $templatePaths;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Checkout_Update_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_templatePaths = TestHelper::getHtmlTemplatePaths();
+		$this->context = TestHelper::getContext();
+		$this->templatePaths = TestHelper::getHtmlTemplatePaths();
 	}
 
 
@@ -32,20 +32,20 @@ class Client_Html_Checkout_Update_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCreateClient()
 	{
-		$client = Client_Html_Checkout_Update_Factory::createClient( $this->_context, $this->_templatePaths );
+		$client = Client_Html_Checkout_Update_Factory::createClient( $this->context, $this->templatePaths );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Checkout_Update_Factory::createClient( $this->_context, $this->_templatePaths, 'Default' );
+		$client = Client_Html_Checkout_Update_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
@@ -53,14 +53,14 @@ class Client_Html_Checkout_Update_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateClientNameInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Checkout_Update_Factory::createClient( $this->_context, $this->_templatePaths, '$$$' );
+		Client_Html_Checkout_Update_Factory::createClient( $this->context, $this->templatePaths, '$$$' );
 	}
 
 
 	public function testCreateClientNameNotFound()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Checkout_Update_Factory::createClient( $this->_context, $this->_templatePaths, 'notfound' );
+		Client_Html_Checkout_Update_Factory::createClient( $this->context, $this->templatePaths, 'notfound' );
 	}
 
 }

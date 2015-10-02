@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Csrf_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Csrf_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Csrf_Default( $view, 'cname', 'cvalue' );
+		$this->object = new MW_View_Helper_Csrf_Default( $view, 'cname', 'cvalue' );
 	}
 
 
@@ -35,25 +35,25 @@ class MW_View_Helper_Csrf_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->_object->transform() );
+		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->object->transform() );
 	}
 
 
 	public function testTransformName()
 	{
-		$this->assertEquals( 'cname', $this->_object->transform()->name() );
+		$this->assertEquals( 'cname', $this->object->transform()->name() );
 	}
 
 
 	public function testTransformValue()
 	{
-		$this->assertEquals( 'cvalue', $this->_object->transform()->value() );
+		$this->assertEquals( 'cvalue', $this->object->transform()->value() );
 	}
 
 
@@ -61,7 +61,7 @@ class MW_View_Helper_Csrf_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$expected = '<input class="csrf-token" type="hidden" name="cname" value="cvalue" />';
 
-		$this->assertEquals( $expected, $this->_object->transform()->formfield() );
+		$this->assertEquals( $expected, $this->object->transform()->formfield() );
 	}
 
 

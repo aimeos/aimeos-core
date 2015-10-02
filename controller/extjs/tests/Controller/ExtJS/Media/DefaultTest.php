@@ -8,8 +8,8 @@
 
 class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_directory;
+	private $object;
+	private $directory;
 
 
 	/**
@@ -21,16 +21,16 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$this->_object = new Controller_ExtJS_Media_Default( $context );
+		$this->object = new Controller_ExtJS_Media_Default( $context );
 
 		$tempdir = $context->getConfig()->get( 'controller/extjs/media/default/upload/directory', 'tmp/media' );
-		$this->_directory = PATH_TESTS . DIRECTORY_SEPARATOR . $tempdir;
+		$this->directory = PATH_TESTS . DIRECTORY_SEPARATOR . $tempdir;
 		$testfiledir = dirname( __FILE__ ) . '/testfiles';
 
-		if( !is_dir( $this->_directory ) && mkdir( $this->_directory, 0755, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create directory "%1%s"', $this->_directory ) );
+		if( !is_dir( $this->directory ) && mkdir( $this->directory, 0755, true ) === false ) {
+			throw new Exception( sprintf( 'Unable to create directory "%1%s"', $this->directory ) );
 		}
-		exec( sprintf( 'cp -r -f %1$s %2$s', escapeshellarg( $testfiledir ), escapeshellarg( $this->_directory ) ) );
+		exec( sprintf( 'cp -r -f %1$s %2$s', escapeshellarg( $testfiledir ), escapeshellarg( $this->directory ) ) );
 	}
 
 
@@ -42,9 +42,9 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 
-		exec( 'rm -rf ' . escapeshellarg( $this->_directory ) );
+		exec( 'rm -rf ' . escapeshellarg( $this->directory ) );
 	}
 
 
@@ -59,7 +59,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 6, $result['total'] );
@@ -97,12 +97,12 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'media.label' => 'controller test media' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'media.id'} );
@@ -124,11 +124,11 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$_FILES['unittest'] = array(
 			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->_directory . '/testfiles/test.jpeg',
+			'tmp_name' => $this->directory . '/testfiles/test.jpeg',
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$mediaItem = $this->_object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
 		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
@@ -141,11 +141,11 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$_FILES['unittest'] = array(
 			'name' => 'test-pdf.pdf',
-			'tmp_name' => $this->_directory . '/testfiles/test.pdf',
+			'tmp_name' => $this->directory . '/testfiles/test.pdf',
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$mediaItem = $this->_object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
 		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
@@ -158,11 +158,11 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
-			'tmp_name' => $this->_directory . '/testfiles/test.bin',
+			'tmp_name' => $this->directory . '/testfiles/test.bin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$mediaItem = $this->_object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
 		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
@@ -175,7 +175,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$_FILES = array();
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
@@ -186,7 +186,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
-			'tmp_name' => $this->_directory . '/testfiles/test.bin',
+			'tmp_name' => $this->directory . '/testfiles/test.bin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -205,7 +205,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->_directory . '/testfiles/test.jpeg',
+			'tmp_name' => $this->directory . '/testfiles/test.jpeg',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -223,7 +223,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
-			'tmp_name' => $this->_directory . '/testfiles/test.bin',
+			'tmp_name' => $this->directory . '/testfiles/test.bin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -245,7 +245,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
-			'tmp_name' => $this->_directory . '/testfiles/test.bin',
+			'tmp_name' => $this->directory . '/testfiles/test.bin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -266,7 +266,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
-			'tmp_name' => $this->_directory . '/testfiles/test.bin',
+			'tmp_name' => $this->directory . '/testfiles/test.bin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -279,11 +279,11 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$_FILES['unittest'] = array(
 			'name' => 'testbin',
-			'tmp_name' => $this->_directory . '/testfiles/testbin',
+			'tmp_name' => $this->directory . '/testfiles/testbin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$mediaItem = $this->_object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
 		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
@@ -301,7 +301,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$_FILES['unittest'] = array(
 			'name' => 'testbin',
-			'tmp_name' => $this->_directory . '/testfiles/testbin',
+			'tmp_name' => $this->directory . '/testfiles/testbin',
 			'error' => UPLOAD_ERR_OK,
 		);
 
@@ -362,7 +362,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -370,7 +370,7 @@ class Controller_ExtJS_Media_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$result = $this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+		$result = $this->object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
 
 		$this->assertEquals( array( 'success' => true ), $result );
 	}

@@ -46,12 +46,12 @@ class MShop_Plugin_Provider_Order_Autofill
 		}
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$services = $order->getServices();
 		$addresses = $order->getAddresses();
 
 		if( ( $userid = $context->getUserId() ) !== null
-			&& $this->_getConfigValue( 'autofill.useorder', true ) == true
+			&& $this->getConfigValue( 'autofill.useorder', true ) == true
 			&& ( empty( $addresses ) || empty( $services ) )
 		) {
 			$orderManager = MShop_Factory::createManager( $context, 'order' );
@@ -65,12 +65,12 @@ class MShop_Plugin_Provider_Order_Autofill
 
 			if( ( $item = reset( $result ) ) !== false )
 			{
-				$this->_setAddresses( $order, $item );
-				$this->_setServices( $order, $item );
+				$this->setAddresses( $order, $item );
+				$this->setServices( $order, $item );
 			}
 		}
 
-		$this->_setServicesDefault( $order );
+		$this->setServicesDefault( $order );
 
 		return true;
 	}
@@ -84,9 +84,9 @@ class MShop_Plugin_Provider_Order_Autofill
 	 * @param string|null $code Service item code
 	 * @param MShop_Order_Item_Base_Service_Interface|null Order service item if available or null otherwise
 	 */
-	protected function _getServiceItem( MShop_Order_Item_Base_Interface $order, $type, $code = null )
+	protected function getServiceItem( MShop_Order_Item_Base_Interface $order, $type, $code = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 		$search = $serviceManager->createSearch( true );
@@ -128,13 +128,13 @@ class MShop_Plugin_Provider_Order_Autofill
 	 * @param MShop_Order_Item_Base_Interface $order Basket object
 	 * @param MShop_Order_Item_Interface $item Existing order to fetch the addresses from
 	 */
-	protected function _setAddresses( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
+	protected function setAddresses( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
 	{
 		$addresses = $order->getAddresses();
 
-		if( empty( $addresses ) && $this->_getConfigValue( 'autofill.orderaddress', true ) == true )
+		if( empty( $addresses ) && $this->getConfigValue( 'autofill.orderaddress', true ) == true )
 		{
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/address' );
+			$manager = MShop_Factory::createManager( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
 			$addresses = $manager->searchItems( $search );
@@ -152,13 +152,13 @@ class MShop_Plugin_Provider_Order_Autofill
 	 * @param MShop_Order_Item_Base_Interface $order Basket object
 	 * @param MShop_Order_Item_Interface $item Existing order to fetch the services from
 	 */
-	protected function _setServices( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
+	protected function setServices( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
 	{
 		$services = $order->getServices();
 
-		if( empty( $services ) && $this->_getConfigValue( 'autofill.orderservice', true ) == true )
+		if( empty( $services ) && $this->getConfigValue( 'autofill.orderservice', true ) == true )
 		{
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service' );
+			$manager = MShop_Factory::createManager( $this->getContext(), 'order/base/service' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
 			$services = $manager->searchItems( $search );
@@ -167,7 +167,7 @@ class MShop_Plugin_Provider_Order_Autofill
 			{
 				$type = $service->getType();
 
-				if( ( $item = $this->_getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
+				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
 					$order->setService( $item, $type );
 				}
 			}
@@ -180,15 +180,15 @@ class MShop_Plugin_Provider_Order_Autofill
 	 *
 	 * @param MShop_Order_Item_Base_Interface $order Basket object
 	 */
-	protected function _setServicesDefault( MShop_Order_Item_Base_Interface $order )
+	protected function setServicesDefault( MShop_Order_Item_Base_Interface $order )
 	{
 		$services = $order->getServices();
 
 		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
 
-		if( !isset( $services[$type] ) && (bool) $this->_getConfigValue( 'autofill.delivery', false ) === true
-			&& ( ( $item = $this->_getServiceItem( $order, $type, $this->_getConfigValue( 'autofill.deliverycode' ) ) ) !== null
-			|| ( $item = $this->_getServiceItem( $order, $type ) ) !== null )
+		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.delivery', false ) === true
+			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.deliverycode' ) ) ) !== null
+			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
 			$order->setService( $item, $type );
 		}
@@ -196,9 +196,9 @@ class MShop_Plugin_Provider_Order_Autofill
 
 		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
 
-		if( !isset( $services[$type] ) && (bool) $this->_getConfigValue( 'autofill.payment', false ) === true
-			&& ( ( $item = $this->_getServiceItem( $order, $type, $this->_getConfigValue( 'autofill.paymentcode' ) ) ) !== null
-			|| ( $item = $this->_getServiceItem( $order, $type ) ) !== null )
+		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.payment', false ) === true
+			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.paymentcode' ) ) ) !== null
+			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
 			$order->setService( $item, $type );
 		}

@@ -50,7 +50,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailable
 			$problems = array();
 			$availableServices = $order->getServices();
 
-			foreach( $this->_getItem()->getConfig() as $type => $value )
+			foreach( $this->getItemBase()->getConfig() as $type => $value )
 			{
 				if( $value == true && !isset( $availableServices[$type] ) ) {
 					$problems[$type] = 'available.none';

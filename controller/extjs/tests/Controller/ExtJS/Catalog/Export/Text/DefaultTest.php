@@ -8,8 +8,8 @@
 
 class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,8 +20,8 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
 	}
 
 
@@ -33,13 +33,13 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testExportCSVFile()
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$search = $manager->createSearch();
@@ -53,9 +53,9 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 		$params = new stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$result = $this->_object->exportFile( $params );
+		$result = $this->object->exportFile( $params );
 
 		$this->assertTrue( array_key_exists( 'file', $result ) );
 
@@ -120,7 +120,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 
 	public function testGetServiceDescription()
 	{
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 		$expected = array(
 			'Catalog_Export_Text.createHttpOutput' => array(
 				"parameters" => array(

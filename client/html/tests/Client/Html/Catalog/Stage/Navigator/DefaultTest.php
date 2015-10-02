@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,8 +20,8 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Stage_Navigator_Default( $context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Stage_Navigator_Default( $context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -33,20 +33,20 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
 		$view->navigationNext = '#';
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 
 		$this->assertContains( '<link rel="prev"', $output );
 		$this->assertContains( '<link rel="next prefetch"', $output );
@@ -55,14 +55,14 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
 		$view->navigationNext = '#';
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertStringStartsWith( '<!-- catalog.stage.navigator -->', $output );
 		$this->assertContains( '<a class="prev"', $output );
@@ -72,12 +72,12 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 
 	public function testModifyHeader()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
-		$output = $this->_object->modifyHeader( $content, 1 );
+		$output = $this->object->modifyHeader( $content, 1 );
 
 		$this->assertContains( '<!-- catalog.stage.navigator -->', $output );
 	}
@@ -85,12 +85,12 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 
 	public function testModifyBody()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
-		$output = $this->_object->modifyBody( $content, 1 );
+		$output = $this->object->modifyBody( $content, 1 );
 
 		$this->assertContains( '<div class="catalog-stage-navigator">', $output );
 	}
@@ -99,12 +99,12 @@ class Client_Html_Catalog_Stage_Navigator_DefaultTest extends PHPUnit_Framework_
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

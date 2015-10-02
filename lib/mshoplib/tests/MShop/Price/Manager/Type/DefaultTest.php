@@ -11,8 +11,8 @@
  */
 class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -21,9 +21,9 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $manager->getSubManager( 'type' );
+		$this->object = $manager->getSubManager( 'type' );
 	}
 
 
@@ -33,27 +33,27 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->object->createItem() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.type.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
@@ -61,15 +61,15 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTestSave2' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -80,7 +80,7 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -91,37 +91,37 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'price.type.code', 'default' ),
-			$search->compare( '==', 'price.type.editor', $this->_editor )
+			$search->compare( '==', 'price.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
 			throw new Exception( sprintf( 'No type item found for code "%1$s"', 'product' ) );
 		}
 
-		$actual = $this->_object->getItem( $expected->getId() );
+		$actual = $this->object->getItem( $expected->getId() );
 		$this->assertEquals( $expected, $actual );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -130,7 +130,7 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'price.type.id', null );
@@ -141,23 +141,23 @@ class MShop_Price_Manager_Type_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.type.status', 1 );
 		$expr[] = $search->compare( '!=', 'price.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'price.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'price.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '~=', 'price.type.code', '' ),
-			$search->compare( '==', 'price.type.editor', $this->_editor )
+			$search->compare( '==', 'price.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );

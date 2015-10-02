@@ -8,8 +8,8 @@
 
 class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,8 +20,8 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new Controller_ExtJS_Product_Export_Text_Default( $this->context );
 	}
 
 
@@ -33,13 +33,13 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testExportCSVFile()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$criteria = $productManager->createSearch();
 
 		$expr = array();
@@ -53,11 +53,11 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 		}
 
 		$params = new stdClass();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
 		$params->lang = 'de';
 
-		$result = $this->_object->exportFile( $params );
+		$result = $this->object->exportFile( $params );
 		$file = substr( $result['file'], 9, -14 );
 
 		$this->assertTrue( file_exists( $file ) );
@@ -127,7 +127,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends PHPUnit_Framework
 			),
 		);
 
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertEquals( $expected, $actual );
 	}

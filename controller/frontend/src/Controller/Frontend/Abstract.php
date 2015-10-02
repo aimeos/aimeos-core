@@ -16,7 +16,7 @@
  */
 abstract class Controller_Frontend_Abstract
 {
-	private $_context = null;
+	private $context = null;
 
 
 	/**
@@ -26,7 +26,7 @@ abstract class Controller_Frontend_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_context = $context;
+		$this->context = $context;
 	}
 
 
@@ -35,8 +35,8 @@ abstract class Controller_Frontend_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface context object implementing MShop_Context_Item_Interface
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 }

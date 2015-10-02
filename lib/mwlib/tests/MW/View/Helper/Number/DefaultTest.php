@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Number_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Number_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Number_Default( $view, '.', ' ' );
+		$this->object = new MW_View_Helper_Number_Default( $view, '.', ' ' );
 	}
 
 
@@ -35,23 +35,23 @@ class MW_View_Helper_Number_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertEquals( '1.00', $this->_object->transform( 1 ) );
-		$this->assertEquals( '1.00', $this->_object->transform( 1.0 ) );
-		$this->assertEquals( '1 000.00', $this->_object->transform( 1000.0 ) );
+		$this->assertEquals( '1.00', $this->object->transform( 1 ) );
+		$this->assertEquals( '1.00', $this->object->transform( 1.0 ) );
+		$this->assertEquals( '1 000.00', $this->object->transform( 1000.0 ) );
 	}
 
 
 	public function testTransformNoDecimals()
 	{
-		$this->assertEquals( '1', $this->_object->transform( 1, 0 ) );
-		$this->assertEquals( '1', $this->_object->transform( 1.0, 0 ) );
-		$this->assertEquals( '1 000', $this->_object->transform( 1000.0, 0 ) );
+		$this->assertEquals( '1', $this->object->transform( 1, 0 ) );
+		$this->assertEquals( '1', $this->object->transform( 1.0, 0 ) );
+		$this->assertEquals( '1 000', $this->object->transform( 1000.0, 0 ) );
 	}
 
 }

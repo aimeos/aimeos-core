@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_listTypes;
+	private $listTypes;
 
 
 	/**
@@ -52,7 +52,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 		 * @see controller/common/product/import/csv/processor/price/listtypes
 		 * @see controller/common/product/import/csv/processor/product/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/text/listtypes' );
+		$this->listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/text/listtypes' );
 	}
 
 
@@ -65,19 +65,19 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$listManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'text' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'text' );
 		$manager->begin();
 
 		try
 		{
 			$listItems = $product->getListItems( 'text' );
-			$map = $this->_getMappedChunk( $data );
+			$map = $this->getMappedChunk( $data );
 
 			foreach( $map as $pos => $list )
 			{
 				if( !isset( $list['text.content'] ) || $list['text.content'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -90,19 +90,19 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 				}
 
 				$typecode = ( isset( $list['text.type'] ) ? $list['text.type'] : 'name' );
-				$list['text.typeid'] = $this->_getTypeId( 'text/type', 'product', $typecode );
+				$list['text.typeid'] = $this->getTypeId( 'text/type', 'product', $typecode );
 				$list['text.domain'] = 'product';
 
-				$refItem->fromArray( $this->_addItemDefaults( $list ) );
+				$refItem->fromArray( $this->addItemDefaults( $list ) );
 				$manager->saveItem( $refItem );
 
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'text', $typecode );
+				$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'text', $typecode );
 				$list['product.list.parentid'] = $product->getId();
 				$list['product.list.refid'] = $refItem->getId();
 				$list['product.list.domain'] = 'text';
 
-				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
+				$listItem->fromArray( $this->addListItemDefaults( $list, $pos ) );
 				$listManager->saveItem( $listItem );
 			}
 
@@ -112,7 +112,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 				$listManager->deleteItem( $listItem->getId() );
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -132,14 +132,14 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Default
 	 * @param array $list Associative list of domain item keys and their values, e.g. "text.status" => 1
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addItemDefaults( array $list )
+	protected function addItemDefaults( array $list )
 	{
 		if( !isset( $list['text.label'] ) ) {
 			$list['text.label'] = mb_strcut( $list['text.content'], 0, 255 );
 		}
 
 		if( !isset( $list['text.languageid'] ) ) {
-			$list['text.languageid'] = $this->_getContext()->getLocale()->getLanguageId();
+			$list['text.languageid'] = $this->getContext()->getLocale()->getLanguageId();
 		}
 
 		if( !isset( $list['text.status'] ) ) {

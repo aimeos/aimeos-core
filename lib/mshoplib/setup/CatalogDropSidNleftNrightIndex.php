@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'idx_mscat_sid_nleft_nright' => 'ALTER TABLE "mshop_catalog" DROP INDEX "idx_mscat_sid_nleft_nright"',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstrac
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,24 +52,24 @@ class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstrac
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Drop old index in mshop_catalog table', 0 );
-		$this->_status( '' );
+		$this->msg( 'Drop old index in mshop_catalog table', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $index => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
+			$this->msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
-			if( $this->_schema->tableExists( 'mshop_catalog' ) === true
-				&& $this->_schema->indexExists( 'mshop_catalog', $index ) === true )
+			if( $this->schema->tableExists( 'mshop_catalog' ) === true
+				&& $this->schema->indexExists( 'mshop_catalog', $index ) === true )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'dropped' );
+				$this->execute( $stmt );
+				$this->status( 'dropped' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Attribute_List_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Attribute_List_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_Test
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 'media', $result['items'][0]->{'attribute.list.domain'} );
@@ -96,12 +96,12 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends PHPUnit_Framework_Test
 		);
 
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'attribute.list.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'attribute.list.id'} );

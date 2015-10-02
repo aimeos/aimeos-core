@@ -19,7 +19,7 @@ class Controller_ExtJS_Text_List_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,12 +41,12 @@ class Controller_ExtJS_Text_List_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		$totalList = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
-		$result = $this->_getManager()->searchItems( $search, array(), $totalList );
+		$search = $this->initCriteria( $this->getManager()->createSearch(), $params );
+		$result = $this->getManager()->searchItems( $search, array(), $totalList );
 
 		$idLists = array();
 		$listItems = array();
@@ -62,7 +62,7 @@ class Controller_ExtJS_Text_List_Default
 		return array(
 			'items' => $listItems,
 			'total' => $totalList,
-			'graph' => $this->_getDomainItems( $idLists ),
+			'graph' => $this->getDomainItems( $idLists ),
 			'success' => true,
 		);
 	}
@@ -73,13 +73,13 @@ class Controller_ExtJS_Text_List_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'text/list' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'text/list' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -88,7 +88,7 @@ class Controller_ExtJS_Text_List_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'text.list';
 	}
@@ -100,7 +100,7 @@ class Controller_ExtJS_Text_List_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'text.list.datestart'} ) && $entry->{'text.list.datestart'} != '' ) {
 			$entry->{'text.list.datestart'} = str_replace( 'T', ' ', $entry->{'text.list.datestart'} );

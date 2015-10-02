@@ -15,7 +15,7 @@
  */
 class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base_coupon' => array(
 			'fk_msordbaco_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_order_base_coupon" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
@@ -52,9 +52,9 @@ class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abs
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -63,30 +63,30 @@ class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abs
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Change order coupon siteid foreign key constraints', 0 ); $this->_status( '' );
+		$this->msg( 'Change order coupon siteid foreign key constraints', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
 			foreach( $stmtList as $constraint => $stmts )
 			{
-				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
+				$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
-				if( $this->_schema->tableExists( $table )
-					&& $this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() === false )
+				if( $this->schema->tableExists( $table )
+					&& $this->schema->getColumnDetails( $table, 'siteid' )->isNullable() === false )
 				{
-					$this->_execute( $stmts['column'] );
+					$this->execute( $stmts['column'] );
 
-					if( $this->_schema->constraintExists( $table, $constraint ) === true ) {
-						$this->_execute( $stmts['drop'] );
+					if( $this->schema->constraintExists( $table, $constraint ) === true ) {
+						$this->execute( $stmts['drop'] );
 					}
 
-					$this->_status( 'changed' );
+					$this->status( 'changed' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

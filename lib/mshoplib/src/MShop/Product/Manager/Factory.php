@@ -75,7 +75,7 @@ class MShop_Product_Manager_Factory
 		$iface = 'MShop_Product_Manager_Interface';
 		$classname = 'MShop_Product_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/product/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product manager
@@ -151,6 +151,6 @@ class MShop_Product_Manager_Factory
 		 * @see mshop/product/manager/decorators/excludes
 		 * @see mshop/product/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'product' );
+		return self::addManagerDecorators( $context, $manager, 'product' );
 	}
 }

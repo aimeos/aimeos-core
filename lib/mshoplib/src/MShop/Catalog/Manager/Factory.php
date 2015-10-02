@@ -74,7 +74,7 @@ class MShop_Catalog_Manager_Factory
 		$iface = 'MShop_Catalog_Manager_Interface';
 		$classname = 'MShop_Catalog_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/catalog/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog manager
@@ -150,6 +150,6 @@ class MShop_Catalog_Manager_Factory
 		 * @see mshop/catalog/manager/decorators/excludes
 		 * @see mshop/catalog/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'catalog' );
+		return self::addManagerDecorators( $context, $manager, 'catalog' );
 	}
 }

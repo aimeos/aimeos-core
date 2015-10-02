@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Stage_Breadcrumb_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_Stage_Breadcrumb_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -35,7 +35,7 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework
 
 		$view->stageCatPath = $catalogManager->getPath( $catItem->getId() );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -47,20 +47,20 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertRegExp( '#Root.*.Categories.*.Kaffee.*#smU', $output );
 		$this->assertStringStartsWith( '<div class="catalog-stage-breadcrumb">', $output );
 	}
@@ -68,9 +68,9 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework
 
 	public function testGetBodyNoCatId()
 	{
-		$this->_object->setView( TestHelper::getView() );
+		$this->object->setView( TestHelper::getView() );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertRegExp( '#Your search result#smU', $output );
 		$this->assertStringStartsWith( '<div class="catalog-stage-breadcrumb">', $output );
 	}
@@ -79,12 +79,12 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends PHPUnit_Framework
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

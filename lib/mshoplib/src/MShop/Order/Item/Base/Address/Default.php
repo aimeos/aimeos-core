@@ -18,7 +18,7 @@ class MShop_Order_Item_Base_Address_Default
 	extends MShop_Order_Item_Base_Address_Abstract
 	implements MShop_Order_Item_Base_Address_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the objects with the given array of values.
@@ -29,7 +29,7 @@ class MShop_Order_Item_Base_Address_Default
 	{
 		parent::__construct( 'order.base.address.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -40,7 +40,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->_values['baseid'] ) ? (int) $this->_values['baseid'] : null );
+		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
 	}
 
 
@@ -53,7 +53,7 @@ class MShop_Order_Item_Base_Address_Default
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -65,7 +65,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function getAddressId()
 	{
-		return ( isset( $this->_values['addrid'] ) ? (string) $this->_values['addrid'] : '' );
+		return ( isset( $this->values['addrid'] ) ? (string) $this->values['addrid'] : '' );
 	}
 
 
@@ -78,7 +78,7 @@ class MShop_Order_Item_Base_Address_Default
 	{
 		if( $addrid == $this->getAddressId() ) { return; }
 
-		$this->_values['addrid'] = (string) $addrid;
+		$this->values['addrid'] = (string) $addrid;
 		$this->setModified();
 	}
 
@@ -90,7 +90,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 	}
 
 
@@ -103,9 +103,9 @@ class MShop_Order_Item_Base_Address_Default
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->_checkType( $type );
+		$this->checkType( $type );
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 		$this->setModified();
 	}
 

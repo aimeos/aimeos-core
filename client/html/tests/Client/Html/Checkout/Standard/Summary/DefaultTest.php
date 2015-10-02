@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Summary_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Summary_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Summary_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,49 +35,49 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
 
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'summary';
 		$view->standardBasket = $controller->get();
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetHeaderOtherStep()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertEquals( '', $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
 
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'summary';
 		$view->standardBasket = $controller->get();
 		$view->standardSteps = array( 'before', 'summary' );
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="checkout-standard-summary common-summary">', $output );
 	}
 
 
 	public function testGetBodyOtherStep()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertEquals( '', $output );
 	}
 
@@ -85,19 +85,19 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends PHPUnit_Framewor
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

@@ -36,24 +36,24 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds price test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding price-list test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding price-list test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'price-list.php';
@@ -68,11 +68,11 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$refIds = array();
-		$refIds['customer'] = $this->_getCustomerData( $refKeys['customer'] );
+		$refIds['customer'] = $this->getCustomerData( $refKeys['customer'] );
 
-		$this->_addPriceListData( $testdata, $refIds );
+		$this->addPriceListData( $testdata, $refIds );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -83,9 +83,9 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getCustomerData( array $keys )
+	private function getCustomerData( array $keys )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -116,9 +116,9 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addPriceListData( array $testdata, array $refIds )
+	private function addPriceListData( array $testdata, array $refIds )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
 		$priceListManager = $priceManager->getSubManager( 'list', 'Default' );
 		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Default' );
@@ -166,7 +166,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 		$listItemTypeIds = array();
 		$listItemType = $priceListTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['price/list/type'] as $key => $dataset )
 		{
@@ -209,6 +209,6 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 			$priceListManager->saveItem( $listItem, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

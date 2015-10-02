@@ -16,13 +16,13 @@
  */
 class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interface
 {
-	private $_tablename = '';
-	private $_name = '';
-	private $_type;
-	private $_length = 0;
-	private $_default;
-	private $_nullable = false;
-	private $_collation = '';
+	private $tablename = '';
+	private $name = '';
+	private $type;
+	private $length = 0;
+	private $default;
+	private $nullable = false;
+	private $collation = '';
 
 
 	/**
@@ -38,19 +38,19 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $collation )
 	{
-		$this->_tablename = (string) $tablename;
-		$this->_name = (string) $name;
-		$this->_type = (string) $type;
-		$this->_length = (int) $length;
-		$this->_default = $default;
-		$this->_collation = (string) $collation;
+		$this->tablename = (string) $tablename;
+		$this->name = (string) $name;
+		$this->type = (string) $type;
+		$this->length = (int) $length;
+		$this->default = $default;
+		$this->collation = (string) $collation;
 
 		switch( $nullable )
 		{
 			case 'YES':
-				$this->_nullable = true; break;
+				$this->nullable = true; break;
 			case 'NO':
-				$this->_nullable = false; break;
+				$this->nullable = false; break;
 			default:
 				throw new MW_Setup_Exception( sprintf( 'Invalid value for allowing null: "%1$s', $nullable ) );
 		}
@@ -64,7 +64,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getCollationType()
 	{
-		return $this->_collation;
+		return $this->collation;
 	}
 
 
@@ -75,7 +75,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getDataType()
 	{
-		return $this->_type;
+		return $this->type;
 	}
 
 
@@ -86,7 +86,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getDefaultValue()
 	{
-		return $this->_default;
+		return $this->default;
 	}
 
 
@@ -97,7 +97,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getMaxLength()
 	{
-		return $this->_length;
+		return $this->length;
 	}
 
 
@@ -108,7 +108,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -119,7 +119,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function getTableName()
 	{
-		return $this->_tablename;
+		return $this->tablename;
 	}
 
 
@@ -130,6 +130,6 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 */
 	public function isNullable()
 	{
-		return $this->_nullable;
+		return $this->nullable;
 	}
 }

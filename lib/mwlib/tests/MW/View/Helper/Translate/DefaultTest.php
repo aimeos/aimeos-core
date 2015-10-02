@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Translate_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -24,7 +24,7 @@ class MW_View_Helper_Translate_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$view = new MW_View_Default();
 		$translate = new MW_Translation_None( 'en_GB' );
-		$this->_object = new MW_View_Helper_Translate_Default( $view, $translate );
+		$this->object = new MW_View_Helper_Translate_Default( $view, $translate );
 	}
 
 
@@ -36,14 +36,14 @@ class MW_View_Helper_Translate_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertEquals( 'File', $this->_object->transform( 'test', 'File', 'Files', 1 ) );
-		$this->assertEquals( 'Files', $this->_object->transform( 'test', 'File', 'Files', 2 ) );
+		$this->assertEquals( 'File', $this->object->transform( 'test', 'File', 'Files', 1 ) );
+		$this->assertEquals( 'Files', $this->object->transform( 'test', 'File', 'Files', 2 ) );
 	}
 
 }

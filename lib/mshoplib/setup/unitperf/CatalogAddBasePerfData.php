@@ -36,12 +36,12 @@ class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBaseP
 	/**
 	 * Insert catalog nodes and product/catalog relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding catalog performance data', 0 );
+		$this->msg( 'Adding catalog performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
 		$catalogRootItem = $catalogManager->createItem();
@@ -82,6 +82,6 @@ class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBaseP
 		}
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

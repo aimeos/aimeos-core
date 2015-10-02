@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'prodcode' => 'ALTER TABLE "mshop_order_base_product" MODIFY "prodcode" VARCHAR(32) NOT NULL COLLATE utf8_bin',
 		'suppliercode' => 'ALTER TABLE "mshop_order_base_product" MODIFY "suppliercode" VARCHAR(32) NOT NULL COLLATE utf8_bin'
 	);
@@ -41,9 +41,9 @@ class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -51,27 +51,27 @@ class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
 		$tablename = 'mshop_order_base_product';
 		
-		$this->_msg( 'Changing collation in mshop_order_base_product', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing collation in mshop_order_base_product', 0 );
+		$this->status( '' );
 		
 		foreach( $stmts as $columnname => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking column "%1$s": ', $columnname ), 1 );
+			$this->msg( sprintf( 'Checking column "%1$s": ', $columnname ), 1 );
 			
-			if( $this->_schema->tableExists( $tablename ) === true
-				&& $this->_schema->columnExists( $tablename, $columnname ) === true
-				&& $this->_schema->getColumnDetails( $tablename, $columnname )->getCollationType() !== 'utf8_bin' )
+			if( $this->schema->tableExists( $tablename ) === true
+				&& $this->schema->columnExists( $tablename, $columnname ) === true
+				&& $this->schema->getColumnDetails( $tablename, $columnname )->getCollationType() !== 'utf8_bin' )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'changed' );
+				$this->execute( $stmt );
+				$this->status( 'changed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

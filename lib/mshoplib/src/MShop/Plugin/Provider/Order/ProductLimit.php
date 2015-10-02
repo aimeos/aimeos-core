@@ -43,8 +43,8 @@ class MShop_Plugin_Provider_Order_ProductLimit
 			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$this->_checkWithoutCurrency( $order, $value );
-		$this->_checkWithCurrency( $order, $value );
+		$this->checkWithoutCurrency( $order, $value );
+		$this->checkWithCurrency( $order, $value );
 
 		return true;
 	}
@@ -57,10 +57,10 @@ class MShop_Plugin_Provider_Order_ProductLimit
 	 * @param MShop_Order_Item_Base_Product_Interface $value Order product item
 	 * @throws MShop_Plugin_Provider_Exception If one limit is exceeded
 	 */
-	protected function _checkWithoutCurrency( MShop_Order_Item_Base_Interface $order,
+	protected function checkWithoutCurrency( MShop_Order_Item_Base_Interface $order,
 		MShop_Order_Item_Base_Product_Interface $value )
 	{
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( isset( $config['single-number-max'] )
 			&& !is_array( $config['single-number-max'] )
@@ -95,10 +95,10 @@ class MShop_Plugin_Provider_Order_ProductLimit
 	 * @param MShop_Order_Item_Base_Product_Interface $value Order product item
 	 * @throws MShop_Plugin_Provider_Exception If one limit is exceeded
 	 */
-	protected function _checkWithCurrency( MShop_Order_Item_Base_Interface $order,
+	protected function checkWithCurrency( MShop_Order_Item_Base_Interface $order,
 		MShop_Order_Item_Base_Product_Interface $value )
 	{
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 		$currencyId = $value->getPrice()->getCurrencyId();
 
 		if( isset( $config['single-value-max'][$currencyId] )

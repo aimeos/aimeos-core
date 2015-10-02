@@ -75,7 +75,7 @@ class MShop_Coupon_Manager_Factory
 		$iface = 'MShop_Coupon_Manager_Interface';
 		$classname = 'MShop_Coupon_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/coupon/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the coupon manager
@@ -151,6 +151,6 @@ class MShop_Coupon_Manager_Factory
 		 * @see mshop/coupon/manager/decorators/excludes
 		 * @see mshop/coupon/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'coupon' );
+		return self::addManagerDecorators( $context, $manager, 'coupon' );
 	}
 }

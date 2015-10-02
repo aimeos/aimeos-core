@@ -155,7 +155,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @throws MShop_Order_Exception If validating the date string failed
 	 */
-	protected function _checkDateFormat( $date )
+	protected function checkDateFormat( $date )
 	{
 		if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
 			throw new MShop_Order_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
@@ -169,7 +169,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	 * @param integer $value Delivery status constant defined in MShop_Order_Item_Abstract
 	 * @throws MShop_Order_Exception If delivery status is invalid
 	 */
-	protected function _checkDeliveryStatus( $value )
+	protected function checkDeliveryStatus( $value )
 	{
 		$temp = (int) $value;
 
@@ -185,7 +185,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	 * @param integer $value Payment status constant defined in MShop_Order_Item_Abstract
 	 * @throws MShop_Order_Exception If payment status is invalid
 	 */
-	protected function _checkPaymentStatus( $value )
+	protected function checkPaymentStatus( $value )
 	{
 		$temp = (int) $value;
 
@@ -201,7 +201,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	 * @param integer $value Type constant defined in MShop_Order_Item_Abstract
 	 * @throws MShop_Order_Exception If order type is invalid
 	 */
-	protected function _checkType( $value )
+	protected function checkType( $value )
 	{
 		switch( $value )
 		{

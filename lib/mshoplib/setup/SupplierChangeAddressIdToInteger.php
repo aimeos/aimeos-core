@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_supplier_address' => '
 			ALTER TABLE "mshop_supplier_address" MODIFY "id" INTEGER NOT NULL AUTO_INCREMENT
 		',
@@ -43,9 +43,9 @@ class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstr
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,21 +54,21 @@ class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstr
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Altering type of supplier_address id', 0 );
+		$this->msg( 'Altering type of supplier_address id', 0 );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			if( $this->_schema->tableExists( $table )
-				&& strtolower( $this->_schema->getColumnDetails( $table, 'id' )->getDataType() ) == 'bigint' )
+			if( $this->schema->tableExists( $table )
+				&& strtolower( $this->schema->getColumnDetails( $table, 'id' )->getDataType() ) == 'bigint' )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'changed' );
+				$this->execute( $stmt );
+				$this->status( 'changed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_MediaAddDomain extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_media" ADD "domain" VARCHAR(8) NOT NULL AFTER "typeid"',
 	);
 
@@ -41,11 +41,11 @@ class MW_Setup_Task_MediaAddDomain extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Adding domain column to media table', 0 ); $this->_status( '' );
+		$this->msg( 'Adding domain column to media table', 0 ); $this->status( '' );
 
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,19 +54,19 @@ class MW_Setup_Task_MediaAddDomain extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( sprintf( 'Checking column "%1$s": ', 'domain' ), 1 );
+		$this->msg( sprintf( 'Checking column "%1$s": ', 'domain' ), 1 );
 
-		if( $this->_schema->tableExists( 'mshop_media' ) === true
-			&& $this->_schema->columnExists( 'mshop_media', 'domain' ) === false )
+		if( $this->schema->tableExists( 'mshop_media' ) === true
+			&& $this->schema->columnExists( 'mshop_media', 'domain' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

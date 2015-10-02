@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_SupplierAddCode extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_supplier' => 'ALTER TABLE "mshop_supplier" ADD "code" VARCHAR(32) NOT NULL DEFAULT \'\' AFTER "siteid"',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_SupplierAddCode extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -51,19 +51,19 @@ class MW_Setup_Task_SupplierAddCode extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding code column to mshop_supplier', 0 );
+		$this->msg( 'Adding code column to mshop_supplier', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_supplier' ) === true
-			&& $this->_schema->columnExists( 'mshop_supplier', 'code' ) === false )
+		if( $this->schema->tableExists( 'mshop_supplier' ) === true
+			&& $this->schema->columnExists( 'mshop_supplier', 'code' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

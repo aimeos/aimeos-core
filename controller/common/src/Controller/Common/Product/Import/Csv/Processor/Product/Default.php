@@ -18,8 +18,8 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_cache;
-	private $_listTypes;
+	private $cache;
+	private $listTypes;
 
 
 	/**
@@ -61,9 +61,9 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 		 */
 		$default = array( 'default', 'suggestion' );
 		$key = 'controller/common/product/import/csv/processor/product/listtypes';
-		$this->_listTypes = $context->getConfig()->get( $key, $default );
+		$this->listTypes = $context->getConfig()->get( $key, $default );
 
-		$this->_cache = $this->_getCache( 'product' );
+		$this->cache = $this->getCache( 'product' );
 	}
 
 
@@ -76,25 +76,25 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 		$listManager = MShop_Factory::createManager( $context, 'product/list' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
-		$this->_cache->set( $product );
+		$this->cache->set( $product );
 
 		$manager->begin();
 
 		try
 		{
 			$pos = 0;
-			$map = $this->_getMappedChunk( $data );
-			$listItems = $this->_getListItemPool( $product, $map );
+			$map = $this->getMappedChunk( $data );
+			$listItems = $this->getListItemPool( $product, $map );
 
 			foreach( $map as $list )
 			{
 				if( !isset( $list['product.code'] ) || $list['product.code'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -104,7 +104,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 
 				foreach( $codes as $code )
 				{
-					if( ( $prodid = $this->_cache->get( $code ) ) === null )
+					if( ( $prodid = $this->cache->get( $code ) ) === null )
 					{
 						$msg = 'No product for code "%1$s" available when importing product with code "%2$s"';
 						throw new Controller_Jobs_Exception( sprintf( $msg, $code, $product->getCode() ) );
@@ -114,17 +114,17 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 						$listItem = $listManager->createItem();
 					}
 
-					$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'product', $type );
+					$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'product', $type );
 					$list['product.list.parentid'] = $product->getId();
 					$list['product.list.refid'] = $prodid;
 					$list['product.list.domain'] = 'product';
 
-					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos++ ) );
+					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
 				}
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -145,11 +145,11 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 	 * @param array $map List of associative arrays containing the chunked properties
 	 * @return array List of list items implementing MShop_Common_Item_List_Interface
 	 */
-	protected function _getListItemPool( MShop_Product_Item_Interface $product, array $map )
+	protected function getListItemPool( MShop_Product_Item_Interface $product, array $map )
 	{
 		$pos = 0;
 		$delete = array();
-		$listItems = $product->getListItems( 'product', $this->_listTypes );
+		$listItems = $product->getListItems( 'product', $this->listTypes );
 
 		foreach( $listItems as $listId => $listItem )
 		{
@@ -167,7 +167,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Default
 			$pos++;
 		}
 
-		$listManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
 		$listManager->deleteItems( $delete );
 
 		return $listItems;

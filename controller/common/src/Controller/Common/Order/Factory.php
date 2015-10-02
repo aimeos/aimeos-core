@@ -16,7 +16,7 @@
  */
 class Controller_Common_Order_Factory
 {
-	private static $_objects = array();
+	private static $objects = array();
 
 
 	/**
@@ -30,7 +30,7 @@ class Controller_Common_Order_Factory
 	 */
 	public static function injectController( $classname, Controller_Common_Order_Interface $controller = null )
 	{
-		self::$_objects[$classname] = $controller;
+		self::$objects[$classname] = $controller;
 	}
 
 
@@ -89,8 +89,8 @@ class Controller_Common_Order_Factory
 		$iface = 'Controller_Common_Order_Interface';
 		$classname = 'Controller_Common_Order_' . $name;
 
-		if( isset( self::$_objects[$classname] ) ) {
-			return self::$_objects[$classname];
+		if( isset( self::$objects[$classname] ) ) {
+			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

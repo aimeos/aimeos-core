@@ -18,7 +18,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Order_Item_Base_Coupon_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the order base coupon item.
@@ -30,7 +30,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	{
 		parent::__construct( 'order.base.coupon.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -41,7 +41,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->_values['baseid'] ) ? (int) $this->_values['baseid'] : null );
+		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	{
 		if( $baseid == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = (int) $baseid;
+		$this->values['baseid'] = (int) $baseid;
 		$this->setModified();
 	}
 
@@ -66,7 +66,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->_values['ordprodid'] ) ? (int) $this->_values['ordprodid'] : null );
+		return ( isset( $this->values['ordprodid'] ) ? (int) $this->values['ordprodid'] : null );
 	}
 
 
@@ -79,7 +79,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	{
 		if( $productid == $this->getProductId() ) { return; }
 
-		$this->_values['ordprodid'] = (int) $productid;
+		$this->values['ordprodid'] = (int) $productid;
 		$this->setModified();
 	}
 
@@ -91,7 +91,7 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : null );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : null );
 	}
 
 
@@ -102,11 +102,11 @@ class MShop_Order_Item_Base_Coupon_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 

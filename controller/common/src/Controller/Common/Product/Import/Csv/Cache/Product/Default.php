@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Abstract
 	implements Controller_Common_Product_Import_Csv_Cache_Interface
 {
-	private $_prodmap = array();
+	private $prodmap = array();
 
 
 	/**
@@ -30,11 +30,11 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Default
 	 */
 	public function get( $code, $type = null )
 	{
-		if( isset( $this->_prodmap[$code] ) ) {
-			return $this->_prodmap[$code];
+		if( isset( $this->prodmap[$code] ) ) {
+			return $this->prodmap[$code];
 		}
 
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -43,8 +43,8 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Default
 
 		if( ( $item = reset( $result ) ) !== false )
 		{
-			$this->_prodmap[$code] = $item->getId();
-			return $this->_prodmap[$code];
+			$this->prodmap[$code] = $item->getId();
+			return $this->prodmap[$code];
 		}
 	}
 
@@ -56,6 +56,6 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Default
 	 */
 	public function set( MShop_Common_Item_Interface $item )
 	{
-		$this->_prodmap[ $item->getCode() ] = $item->getId();
+		$this->prodmap[ $item->getCode() ] = $item->getId();
 	}
 }

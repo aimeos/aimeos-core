@@ -18,7 +18,7 @@ class MShop_Price_Manager_Default
 	extends MShop_Price_Manager_Abstract
 	implements MShop_Price_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'price.id' => array(
 			'code' => 'price.id',
 			'internalcode' => 'mpri."id"',
@@ -137,7 +137,7 @@ class MShop_Price_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-price' );
+		$this->setResourceName( 'db-price' );
 	}
 
 
@@ -149,11 +149,11 @@ class MShop_Price_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/price/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/price/manager/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/price/manager/default/item/delete' );
 	}
 
 
@@ -184,7 +184,7 @@ class MShop_Price_Manager_Default
 		 */
 		$path = 'classes/price/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
 	}
 
 
@@ -195,14 +195,14 @@ class MShop_Price_Manager_Default
 	 */
 	public function createItem()
 	{
-		$locale = $this->_getContext()->getLocale();
+		$locale = $this->getContext()->getLocale();
 		$values = array( 'siteid' => $locale->getSiteId() );
 
 		if( $locale->getCurrencyId() !== null ) {
 			$values['currencyid'] = $locale->getCurrencyId();
 		}
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -238,7 +238,7 @@ class MShop_Price_Manager_Default
 		 * @see mshop/price/manager/default/item/count
 		 */
 		$path = 'mshop/price/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -252,7 +252,7 @@ class MShop_Price_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'price.id', $id, $ref );
+		return $this->getItemBase( 'price.id', $id, $ref );
 	}
 
 
@@ -271,10 +271,10 @@ class MShop_Price_Manager_Default
 			throw new MShop_Price_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -346,7 +346,7 @@ class MShop_Price_Manager_Default
 				$path = 'mshop/price/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
@@ -404,7 +404,7 @@ class MShop_Price_Manager_Default
 				 * @see mshop/price/manager/default/item/count
 				 */
 				$path = 'mshop/price/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -432,10 +432,10 @@ class MShop_Price_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -543,7 +543,7 @@ class MShop_Price_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/price/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
@@ -575,7 +575,7 @@ class MShop_Price_Manager_Default
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'price' );
+		return $this->buildItems( $map, $ref, 'price' );
 	}
 
 
@@ -589,8 +589,8 @@ class MShop_Price_Manager_Default
 	{
 		if( $default === true )
 		{
-			$object = $this->_createSearch( 'price' );
-			$currencyid = $this->_getContext()->getLocale()->getCurrencyId();
+			$object = $this->createSearchBase( 'price' );
+			$currencyid = $this->getContext()->getLocale()->getCurrencyId();
 
 			if( $currencyid !== null )
 			{
@@ -618,7 +618,7 @@ class MShop_Price_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'price', $manager, $name );
+		return $this->getSubManagerBase( 'price', $manager, $name );
 	}
 
 
@@ -630,7 +630,7 @@ class MShop_Price_Manager_Default
 	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Price_Item_Interface New price item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Price_Item_Default( $values, $listItems, $refItems );
 	}

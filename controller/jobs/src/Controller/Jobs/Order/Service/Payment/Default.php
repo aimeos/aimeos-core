@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Capture authorized payments' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Capture authorized payments' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Authorized payments of orders will be captured after dispatching or after a configurable amount of time' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Authorized payments of orders will be captured after dispatching or after a configurable amount of time' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 

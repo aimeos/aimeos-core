@@ -38,24 +38,24 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds product test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding product test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding product test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'product.php';
@@ -64,9 +64,9 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$this->_addProductData( $testdata );
+		$this->addProductData( $testdata );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -77,15 +77,15 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _addProductData( array $testdata )
+	private function addProductData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
 		$productTypeManager = $productManager->getSubManager( 'type', 'Default' );
 
 		$typeIds = array();
 		$type = $productTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['product/type'] as $key => $dataset )
 		{
@@ -120,6 +120,6 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 			$productManager->saveItem( $product, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

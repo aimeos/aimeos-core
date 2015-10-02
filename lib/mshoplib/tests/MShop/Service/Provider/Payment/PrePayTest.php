@@ -11,7 +11,7 @@
  */
 class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,8 +28,8 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
-			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 	}
@@ -43,13 +43,13 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( 4, count( $this->_object->getConfigBE() ) );
+		$this->assertEquals( 4, count( $this->object->getConfigBE() ) );
 	}
 
 
@@ -59,7 +59,7 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 			'payment.url-success' => 'http://returnUrl'
 		);
 
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( null, $result['payment.url-success'] );
@@ -71,14 +71,14 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 		// Currently does nothing.
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$this->_object->process( $manager->createItem() );
+		$this->object->process( $manager->createItem() );
 	}
 
 
 	public function testIsImplemented()
 	{
-		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
 	}
 
 
@@ -86,7 +86,7 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderItem = $manager->createItem();
-		$this->_object->cancel( $orderItem );
+		$this->object->cancel( $orderItem );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $orderItem->getPaymentStatus() );
 	}
@@ -95,7 +95,7 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	public function testSetConfigFE()
 	{
 		$item = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/service' )->createItem();
-		$this->_object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
+		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
 		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'payment' ) );

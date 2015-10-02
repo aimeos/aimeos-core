@@ -16,7 +16,7 @@
  */
 abstract class MW_Common_Criteria_Expression_Abstract
 {
-	private $_plugins = array();
+	private $plugins = array();
 
 
 	/**
@@ -28,7 +28,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 */
 	public static function createFunction( $name, array $params )
 	{
-		return $name . '(' . self::_createSignature( $params ) . ')';
+		return $name . '(' . self::createSignature( $params ) . ')';
 	}
 
 
@@ -38,7 +38,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, etc.
 	 * @return string Parameter signature
 	 */
-	protected static function _createSignature( array $params )
+	protected static function createSignature( array $params )
 	{
 		$list = array();
 
@@ -51,7 +51,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 				case 'double':
 					$list[] = $param; break;
 				case 'array':
-					$list[] = '[' . self::_createSignature( $param ) . ']'; break;
+					$list[] = '[' . self::createSignature( $param ) . ']'; break;
 				default:
 					$list[] = '"' . $param . '"';
 			}
@@ -70,7 +70,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @param array $params Array that will contain the list of parameters afterwards
 	 * @return boolean True if string is an expression function, false if not
 	 */
-	protected function _isFunction( &$name, array &$params )
+	protected function isFunction( &$name, array &$params )
 	{
 		$len = strlen( $name );
 		if( $len === 0 || $name[$len-1] !== ')' ) { return false; }
@@ -95,7 +95,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 		}
 
 		if( isset( $matches[1] ) ) {
-			$params = $this->_extractParams( $matches[1] );
+			$params = $this->extractParams( $matches[1] );
 		}
 
 		$name = $namestr . '()';
@@ -111,11 +111,11 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * (may include parameter if a name is an expression function)
 	 * @return string Translated name (with replaced parameters if the name is an expression function)
 	 */
-	protected function _translateName( &$name, array $translations = array() )
+	protected function translateName( &$name, array $translations = array() )
 	{
 		$params = array();
 
-		if( $this->_isFunction( $name, $params ) === true )
+		if( $this->isFunction( $name, $params ) === true )
 		{
 			$transname = $name;
 			if( isset( $translations[$name] ) ) {
@@ -147,10 +147,10 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @param mixed $value Original value
 	 * @return string Translated value
 	 */
-	protected function _translateValue( $name, $value )
+	protected function translateValue( $name, $value )
 	{
-		if( isset( $this->_plugins[$name] ) ) {
-			return $this->_plugins[$name]->translate( $value );
+		if( isset( $this->plugins[$name] ) ) {
+			return $this->plugins[$name]->translate( $value );
 		}
 
 		return $value;
@@ -162,11 +162,11 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 *
 	 * @param array $plugins Associative list of names and the plugin implementing MW_Common_Criteria_Plugin_Interface
 	 */
-	protected function _setPlugins( array $plugins )
+	protected function setPlugins( array $plugins )
 	{
 		MW_Common_Abstract::checkClassList('MW_Common_Criteria_Plugin_Interface', $plugins);
 
-		$this->_plugins = $plugins;
+		$this->plugins = $plugins;
 	}
 
 
@@ -178,7 +178,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @param string $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
-	abstract protected function _escape( $operator, $type, $value );
+	abstract protected function escape( $operator, $type, $value );
 
 
 	/**
@@ -188,7 +188,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @return integer Internal parameter type
 	 * @throws MW_Common_Exception If an error occurs
 	 */
-	abstract protected function _getParamType( &$item );
+	abstract protected function getParamType( &$item );
 
 
 	/**
@@ -197,7 +197,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 * @param string[] $strings List of matched strings
 	 * @return array List of found parameters
 	 */
-	private function _extractParams( array $strings )
+	private function extractParams( array $strings )
 	{
 		$params = array();
 
@@ -217,7 +217,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 					$list = array();
 
 					foreach( $items[1] as $item ) {
-						$list[] = $this->_escape( '==', $this->_getParamType( $item ), $item );
+						$list[] = $this->escape( '==', $this->getParamType( $item ), $item );
 					}
 
 					$params[] = implode( ',', $list );
@@ -225,7 +225,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 			}
 			else
 			{
-				$params[] = $this->_escape( '==', $this->_getParamType( $string ), $string );
+				$params[] = $this->escape( '==', $this->getParamType( $string ), $string );
 			}
 		}
 

@@ -36,24 +36,24 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds text test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding text-list test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding text-list test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'text-list.php';
@@ -68,11 +68,11 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$refIds = array();
-		$refIds['media'] = $this->_getMediaData( $refKeys['media'] );
+		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 
-		$this->_addTextData( $testdata, $refIds );
+		$this->addTextData( $testdata, $refIds );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -83,9 +83,9 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getMediaData( array $keys )
+	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -117,9 +117,9 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addTextData( array $testdata, array $refIds )
+	private function addTextData( array $testdata, array $refIds )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
 		$textListManager = $textManager->getSubManager( 'list', 'Default' );
 		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Default' );
 
@@ -144,7 +144,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 		$tListTypeIds = array();
 		$tListType = $textListTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['text/list/type'] as $key => $dataset )
 		{
@@ -187,6 +187,6 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 			$textListManager->saveItem( $tList, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

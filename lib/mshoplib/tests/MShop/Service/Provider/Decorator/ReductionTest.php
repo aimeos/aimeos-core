@@ -11,39 +11,39 @@
  */
 class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_basket;
-	private $_context;
-	private $_servItem;
-	private $_mockProvider;
+	private $object;
+	private $basket;
+	private $context;
+	private $servItem;
+	private $mockProvider;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$servManager = MShop_Factory::createManager( $this->_context, 'service' );
-		$this->_servItem = $servManager->createItem();
+		$servManager = MShop_Factory::createManager( $this->context, 'service' );
+		$this->servItem = $servManager->createItem();
 
-		$this->_mockProvider = $this->getMockBuilder( 'MShop_Service_Provider_Decorator_Reduction' )
+		$this->mockProvider = $this->getMockBuilder( 'MShop_Service_Provider_Decorator_Reduction' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->_basket = MShop_Order_Manager_Factory::createManager( $this->_context )
+		$this->basket = MShop_Order_Manager_Factory::createManager( $this->context )
 			->getSubManager( 'base' )->createItem();
 
-		$this->_object = new MShop_Service_Provider_Decorator_Reduction( $this->_context, $this->_servItem, $this->_mockProvider );
+		$this->object = new MShop_Service_Provider_Decorator_Reduction( $this->context, $this->servItem, $this->mockProvider );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_basket, $this->_mockProvider, $this->_servItem, $this->_context );
+		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$result = $this->_object->getConfigBE();
+		$result = $this->object->getConfigBE();
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'reduction.percent', $result );
@@ -54,7 +54,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	public function testCheckConfigBE()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
@@ -63,7 +63,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 			'reduction.basket-value-min' => array( 'EUR' => '10.00' ),
 			'reduction.basket-value-max' => array( 'EUR' => '100.00' ),
 		);
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertInternalType( 'null', $result['reduction.percent'] );
@@ -74,11 +74,11 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	public function testCheckConfigBEFailurePercentage()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
-		$result = $this->_object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( array() );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertInternalType( 'null', $result['reduction.percent'] );
@@ -89,11 +89,11 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	public function testCheckConfigBEFailureBasketValueMin()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
-		$result = $this->_object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
+		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertInternalType( 'string', $result['reduction.basket-value-min'] );
@@ -102,11 +102,11 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	public function testCheckConfigBEFailureBasketValueMax()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
-		$result = $this->_object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
+		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertInternalType( 'string', $result['reduction.basket-value-max'] );
@@ -115,15 +115,15 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	public function testCalcPrice()
 	{
-		$this->_servItem->setConfig( array( 'reduction.percent' => 50 ) );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->servItem->setConfig( array( 'reduction.percent' => 50 ) );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '5.00', $price->getCosts() );
 		$this->assertEquals( '5.00', $price->getRebate() );
 	}
@@ -132,16 +132,16 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 	public function testCalcPriceMin()
 	{
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.00' ) );
-		$this->_servItem->setConfig( $config );
-		$this->_basket->addProduct( $this->_getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->servItem->setConfig( $config );
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '5.00', $price->getCosts() );
 		$this->assertEquals( '5.00', $price->getRebate() );
 	}
@@ -150,16 +150,16 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 	public function testCalcPriceMinNotReached()
 	{
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.01' ) );
-		$this->_servItem->setConfig( $config );
-		$this->_basket->addProduct( $this->_getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->servItem->setConfig( $config );
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '10.00', $price->getCosts() );
 		$this->assertEquals( '0.00', $price->getRebate() );
 	}
@@ -168,16 +168,16 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 	public function testCalcPriceMax()
 	{
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '20.00' ) );
-		$this->_servItem->setConfig( $config );
-		$this->_basket->addProduct( $this->_getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->servItem->setConfig( $config );
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '5.00', $price->getCosts() );
 		$this->assertEquals( '5.00', $price->getRebate() );
 	}
@@ -186,26 +186,26 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 	public function testCalcPriceMaxExceeded()
 	{
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '19.99' ) );
-		$this->_servItem->setConfig( $config );
-		$this->_basket->addProduct( $this->_getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->servItem->setConfig( $config );
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '10.00', $price->getCosts() );
 		$this->assertEquals( '0.00', $price->getRebate() );
 	}
 
 
-	protected function _getOrderProduct()
+	protected function getOrderProduct()
 	{
-		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
-		$productManager = MShop_Factory::createManager( $this->_context, 'product' );
-		$orderProductManager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
+		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
+		$productManager = MShop_Factory::createManager( $this->context, 'product' );
+		$orderProductManager = MShop_Factory::createManager( $this->context, 'order/base/product' );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );

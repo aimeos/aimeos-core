@@ -18,7 +18,7 @@ class MW_View_Helper_Parameter_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_params;
+	private $params;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_Parameter_Default
 	{
 		parent::__construct( $view );
 
-		$this->_params = $params;
+		$this->params = $params;
 	}
 
 
@@ -45,11 +45,11 @@ class MW_View_Helper_Parameter_Default
 	public function transform( $name = null, $default = null )
 	{
 		if( $name === null ) {
-			return $this->_params;
+			return $this->params;
 		}
 
 		$parts = explode( '/', trim( $name, '/' ) );
-		$param = $this->_params;
+		$param = $this->params;
 
 		foreach( $parts as $part )
 		{

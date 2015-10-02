@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'CREATE UNIQUE INDEX "unq_msordbaprat_opid_type_code" ON "mshop_order_base_product_attr" ("ordprodid","type","code")',
 		'DROP INDEX "unq_msordbaprat_ordprodid_code" ON "mshop_order_base_product_attr"',
 	);
@@ -41,9 +41,9 @@ class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,20 +52,20 @@ class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Abst
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_order_base_product_attr';
-		$this->_msg( sprintf( 'Adding type to unique index to "%1$s"', $table ), 0 );
+		$this->msg( sprintf( 'Adding type to unique index to "%1$s"', $table ), 0 );
 
-		if( $this->_schema->tableExists( $table ) === true
-			&& $this->_schema->constraintExists( $table, 'unq_msordbaprat_ordprodid_code' ) === true )
+		if( $this->schema->tableExists( $table ) === true
+			&& $this->schema->constraintExists( $table, 'unq_msordbaprat_ordprodid_code' ) === true )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'done' );
+			$this->executeList( $stmts );
+			$this->status( 'done' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

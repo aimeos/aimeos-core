@@ -11,8 +11,8 @@
  */
 class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 15,
 			'siteid'=>99,
 			'type' => MShop_Order_Item_Abstract::TYPE_WEB,
@@ -38,7 +38,7 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Order_Item_Default( $this->_values );
+		$this->object = new MShop_Order_Item_Default( $this->values );
 	}
 
 	/**
@@ -49,145 +49,145 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->_values['id'], $this->_object->getId() );
+		$this->assertEquals( $this->values['id'], $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->_object->setId( 15 );
-		$this->assertEquals( 15, $this->_object->getId() );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->object->setId( 15 );
+		$this->assertEquals( 15, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setId( 6 );
+		$this->object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setId( 'test' );
+		$this->object->setId( 'test' );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetBaseId()
 	{
-		$this->assertSame( $this->_values['baseid'], $this->_object->getBaseId() );
+		$this->assertSame( $this->values['baseid'], $this->object->getBaseId() );
 	}
 
 	public function testSetBaseId()
 	{
-		$this->_object->setBaseId( 15 );
-		$this->assertEquals( 15, $this->_object->getBaseId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setBaseId( 15 );
+		$this->assertEquals( 15, $this->object->getBaseId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->_values['type'], $this->_object->getType() );
+		$this->assertEquals( $this->values['type'], $this->object->getType() );
 	}
 
 	public function testSetType()
 	{
-		$this->_object->setType( MShop_Order_Item_Abstract::TYPE_PHONE );
-		$this->assertEquals( MShop_Order_Item_Abstract::TYPE_PHONE, $this->_object->getType() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setType( MShop_Order_Item_Abstract::TYPE_PHONE );
+		$this->assertEquals( MShop_Order_Item_Abstract::TYPE_PHONE, $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->setType( 500 );
+		$this->object->setType( 500 );
 	}
 
 	public function testGetDateDelivery()
 	{
-		$this->assertEquals( $this->_values['datedelivery'], $this->_object->getDateDelivery() );
+		$this->assertEquals( $this->values['datedelivery'], $this->object->getDateDelivery() );
 	}
 
 	public function testSetDateDelivery()
 	{
-		$this->_object->setDateDelivery( '2008-04-12 12:34:56' );
-		$this->assertEquals( '2008-04-12 12:34:56', $this->_object->getDateDelivery() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setDateDelivery( '2008-04-12 12:34:56' );
+		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDateDelivery() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->setDateDelivery( '2008-34-12' );
+		$this->object->setDateDelivery( '2008-34-12' );
 	}
 
 	public function testGetDatePayment()
 	{
-		$this->assertEquals( $this->_values['datepayment'], $this->_object->getDatePayment() );
+		$this->assertEquals( $this->values['datepayment'], $this->object->getDatePayment() );
 	}
 
 	public function testSetDatePayment()
 	{
-		$this->_object->setDatePayment( '2008-04-12 12:34:56' );
-		$this->assertEquals( '2008-04-12 12:34:56', $this->_object->getDatePayment() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setDatePayment( '2008-04-12 12:34:56' );
+		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDatePayment() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->setDatePayment( '2008-34-12' );
+		$this->object->setDatePayment( '2008-34-12' );
 	}
 
 	public function testGetDeliveryStatus()
 	{
-		$this->assertEquals( $this->_values['statusdelivery'], $this->_object->getDeliveryStatus() );
+		$this->assertEquals( $this->values['statusdelivery'], $this->object->getDeliveryStatus() );
 	}
 
 	public function testSetDeliveryStatus()
 	{
-		$this->_object->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $this->_object->getDeliveryStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $this->object->getDeliveryStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetPaymentStatus()
 	{
-		$this->assertEquals( $this->_values['statuspayment'], $this->_object->getPaymentStatus() );
+		$this->assertEquals( $this->values['statuspayment'], $this->object->getPaymentStatus() );
 	}
 
 	public function testSetPaymentStatus()
 	{
-		$this->_object->setPaymentStatus( MShop_Order_Item_Abstract::PAY_DELETED );
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_DELETED, $this->_object->getPaymentStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setPaymentStatus( MShop_Order_Item_Abstract::PAY_DELETED );
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_DELETED, $this->object->getPaymentStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetRelatedId()
 	{
-		$this->assertEquals( $this->_values['relatedid'], $this->_object->getRelatedId() );
+		$this->assertEquals( $this->values['relatedid'], $this->object->getRelatedId() );
 	}
 
 	public function testSetRelatedId()
 	{
-		$this->_object->setRelatedId( 22 );
-		$this->assertEquals( 22, $this->_object->getRelatedId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setRelatedId( 22 );
+		$this->assertEquals( 22, $this->object->getRelatedId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -223,41 +223,41 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$list = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $list ) );
+		$list = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $list ) );
 
-		$this->assertEquals( $this->_object->getId(), $list['order.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $list['order.siteid'] );
-		$this->assertEquals( $this->_object->getType(), $list['order.type'] );
-		$this->assertEquals( $this->_object->getDeliveryStatus(), $list['order.statusdelivery'] );
-		$this->assertEquals( $this->_object->getPaymentStatus(), $list['order.statuspayment'] );
-		$this->assertEquals( $this->_object->getDatePayment(), $list['order.datepayment'] );
-		$this->assertEquals( $this->_object->getDateDelivery(), $list['order.datedelivery'] );
-		$this->assertEquals( $this->_object->getBaseId(), $list['order.baseid'] );
-		$this->assertEquals( $this->_object->getRelatedId(), $list['order.relatedid'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $list['order.mtime'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $list['order.ctime'] );
-		$this->assertEquals( $this->_object->getEditor(), $list['order.editor'] );
+		$this->assertEquals( $this->object->getId(), $list['order.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $list['order.siteid'] );
+		$this->assertEquals( $this->object->getType(), $list['order.type'] );
+		$this->assertEquals( $this->object->getDeliveryStatus(), $list['order.statusdelivery'] );
+		$this->assertEquals( $this->object->getPaymentStatus(), $list['order.statuspayment'] );
+		$this->assertEquals( $this->object->getDatePayment(), $list['order.datepayment'] );
+		$this->assertEquals( $this->object->getDateDelivery(), $list['order.datedelivery'] );
+		$this->assertEquals( $this->object->getBaseId(), $list['order.baseid'] );
+		$this->assertEquals( $this->object->getRelatedId(), $list['order.relatedid'] );
+		$this->assertEquals( $this->object->getTimeModified(), $list['order.mtime'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $list['order.ctime'] );
+		$this->assertEquals( $this->object->getEditor(), $list['order.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 	public function testMagicGetOldPaymentStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_object->oldPaymentStatus );
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->object->oldPaymentStatus );
 	}
 
 	public function testMagicGetOldDeliveryStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PENDING, $this->_object->oldDeliveryStatus );
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PENDING, $this->object->oldDeliveryStatus );
 	}
 
 	public function testMagicGetException()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->notExisting;
+		$this->object->notExisting;
 	}
 }

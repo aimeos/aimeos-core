@@ -8,8 +8,8 @@
 class MShop_Plugin_Provider_Order_ServicesUpdateTest
 	extends PHPUnit_Framework_TestCase
 {
-	private $_order;
-	private $_plugin;
+	private $order;
+	private $plugin;
 
 
 	/**
@@ -23,12 +23,12 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$context = TestHelper::getContext();
 
 		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setProvider( 'ServicesUpdate' );
-		$this->_plugin->setStatus( 1 );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setProvider( 'ServicesUpdate' );
+		$this->plugin->setStatus( 1 );
 
 		$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 	}
 
 
@@ -40,22 +40,22 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_plugin );
-		unset( $this->_order );
+		unset( $this->plugin );
+		unset( $this->order );
 	}
 
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( TestHelper::getContext(), $this->_plugin );
-		$object->register( $this->_order );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( TestHelper::getContext(), $this->plugin );
+		$object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
 		$context = TestHelper::getContext();
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$localeManager = MShop_Factory::createManager( $context, 'locale' );
@@ -115,7 +115,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 	public function testUpdateNotAvailable()
 	{
 		$context = TestHelper::getContext();
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$localeManager = MShop_Factory::createManager( $context, 'locale' );
@@ -174,7 +174,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 	public function testUpdateServicesGone()
 	{
 		$context = TestHelper::getContext();
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$localeManager = MShop_Factory::createManager( $context, 'locale' );
@@ -212,7 +212,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 	public function testUpdateNoProducts()
 	{
 		$context = TestHelper::getContext();
-		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$orderBaseServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
@@ -227,12 +227,12 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$servicePayment->setPrice( $priceItem );
 		$servicePayment->setId( 2 );
 
-		$this->_order->setService( $serviceDelivery, 'delivery' );
-		$this->_order->setService( $servicePayment, 'payment' );
+		$this->order->setService( $serviceDelivery, 'delivery' );
+		$this->order->setService( $servicePayment, 'payment' );
 
 
-		$this->assertTrue( $object->update( $this->_order, 'addProduct.after' ) );
-		$this->assertEquals( '0.00', $this->_order->getService( 'delivery' )->getPrice()->getCosts() );
-		$this->assertEquals( '0.00', $this->_order->getService( 'payment' )->getPrice()->getCosts() );
+		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
+		$this->assertEquals( '0.00', $this->order->getService( 'delivery' )->getPrice()->getCosts() );
+		$this->assertEquals( '0.00', $this->order->getService( 'payment' )->getPrice()->getCosts() );
 	}
 }

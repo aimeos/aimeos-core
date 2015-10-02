@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Fr
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Order_Address_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Order_Address_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,21 +35,21 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Fr
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertNotNull( $output );
 	}
 
@@ -57,21 +57,21 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Fr
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
 		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$addrManager = $manager->getSubManager( 'address' );
 
 		$search = $manager->createSearch();
@@ -85,15 +85,15 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Fr
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setId( null );
 
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 
 		$view = TestHelper::getView();
 		$view->orderBasket = $basketCntl->get();
 		$view->orderBasket->setCustomerId( $customerItem->getId() );
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$this->_object->process();
+		$this->object->process();
 
 		$orderAddress = $view->orderBasket->getAddress( $type );
 		$actual = $addrManager->getItem( $orderAddress->getAddressId() );

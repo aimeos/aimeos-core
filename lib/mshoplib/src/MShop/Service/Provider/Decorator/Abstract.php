@@ -18,7 +18,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	extends MShop_Service_Provider_Abstract
 	implements MShop_Service_Provider_Decorator_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -33,7 +33,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	{
 		parent::__construct( $context, $serviceItem );
 
-		$this->_object = $provider;
+		$this->object = $provider;
 	}
 
 
@@ -47,7 +47,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->calcPrice( $basket );
+		return $this->object->calcPrice( $basket );
 	}
 
 
@@ -60,7 +60,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return $this->_object->checkConfigBE( $attributes );
+		return $this->object->checkConfigBE( $attributes );
 	}
 
 
@@ -73,7 +73,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigFE( array $attributes )
 	{
-		return $this->_object->checkConfigFE( $attributes );
+		return $this->object->checkConfigFE( $attributes );
 	}
 
 
@@ -85,7 +85,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function getConfigBE()
 	{
-		return $this->_object->getConfigBE();
+		return $this->object->getConfigBE();
 	}
 
 
@@ -98,7 +98,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->getConfigFE( $basket );
+		return $this->object->getConfigFE( $basket );
 	}
 
 
@@ -120,7 +120,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	{
 		parent::injectGlobalConfigBE( $config );
 
-		$this->_object->injectGlobalConfigBE( $config );
+		$this->object->injectGlobalConfigBE( $config );
 	}
 
 
@@ -133,7 +133,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->isAvailable( $basket );
+		return $this->object->isAvailable( $basket );
 	}
 
 
@@ -145,7 +145,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function isImplemented( $what )
 	{
-		return $this->_object->isImplemented( $what );
+		return $this->object->isImplemented( $what );
 	}
 
 
@@ -156,7 +156,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function query( MShop_Order_Item_Interface $order )
 	{
-		$this->_object->query( $order );
+		$this->object->query( $order );
 	}
 
 
@@ -169,7 +169,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	{
 		parent::setCommunication( $communication );
 
-		$this->_object->setCommunication( $communication );
+		$this->object->setCommunication( $communication );
 	}
 
 
@@ -181,7 +181,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		$this->_object->setConfigFE( $orderServiceItem, $attributes );
+		$this->object->setConfigFE( $orderServiceItem, $attributes );
 	}
 
 
@@ -194,7 +194,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function updateAsync()
 	{
-		return $this->_object->updateAsync();
+		return $this->object->updateAsync();
 	}
 
 
@@ -210,7 +210,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
-		return $this->_object->updateSync( $params, $body, $response, $header );
+		return $this->object->updateSync( $params, $body, $response, $header );
 	}
 
 
@@ -219,9 +219,9 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 *
 	 * @return MShop_Service_Provider_Interface Service provider object
 	 */
-	protected function _getProvider()
+	protected function getProvider()
 	{
-		return $this->_object;
+		return $this->object;
 	}
 
 
@@ -235,7 +235,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = @call_user_func_array( array( $this->_object, $name ), $param ) ) === null ) {
+		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === null ) {
 			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 

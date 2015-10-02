@@ -19,7 +19,7 @@ class Controller_ExtJS_Admin_Job_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -38,13 +38,13 @@ class Controller_ExtJS_Admin_Job_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MAdmin_Factory::createManager( $this->_getContext(), 'job' );
+		if( $this->manager === null ) {
+			$this->manager = MAdmin_Factory::createManager( $this->getContext(), 'job' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -53,7 +53,7 @@ class Controller_ExtJS_Admin_Job_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'job';
 	}
@@ -65,7 +65,7 @@ class Controller_ExtJS_Admin_Job_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'job.parameter'} ) && is_string( $entry->{'job.parameter'} ) ) {
 			$entry->{'job.parameter'} = json_decode( $entry->{'job.parameter'}, true );

@@ -12,7 +12,7 @@
 class MW_Setup_Task_ListsChangeTypeidNotNull
 	extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_list' => array(
 			'UPDATE "mshop_attribute_list" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_list_type" type WHERE type."code" = \'default\' AND type."domain" = \'attribute\' ) WHERE "domain" = \'attribute\' AND "typeid" IS NULL',
 			'UPDATE "mshop_attribute_list" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_list_type" type WHERE type."code" = \'default\' AND type."domain" = \'catalog\' ) WHERE "domain" = \'catalog\' AND "typeid" IS NULL',
@@ -95,22 +95,22 @@ class MW_Setup_Task_ListsChangeTypeidNotNull
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Changing typeid to not allow NULL values', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing typeid to not allow NULL values', 0 );
+		$this->status( '' );
 
-		foreach( $this->_mysql as $table => $stmt ) {
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+		foreach( $this->mysql as $table => $stmt ) {
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, 'typeid' ) === true
-				&& $this->_schema->getColumnDetails( $table, 'typeid' )->isNullable() === true )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, 'typeid' ) === true
+				&& $this->schema->getColumnDetails( $table, 'typeid' )->isNullable() === true )
 			{
-				$this->_executeList( $stmt );
-				$this->_status( 'migrated' );
+				$this->executeList( $stmt );
+				$this->status( 'migrated' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

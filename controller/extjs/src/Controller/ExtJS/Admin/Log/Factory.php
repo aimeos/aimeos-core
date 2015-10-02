@@ -66,7 +66,7 @@ class Controller_ExtJS_Admin_Log_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Admin_Log_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/admin/log/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin log ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Admin_Log_Factory
 		 * @see controller/extjs/admin/log/decorators/excludes
 		 * @see controller/extjs/admin/log/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'admin/log' );
+		return self::addControllerDecorators( $context, $controller, 'admin/log' );
 	}
 }

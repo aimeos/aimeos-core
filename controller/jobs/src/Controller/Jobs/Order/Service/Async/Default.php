@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Service_Async_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Batch update of payment/delivery status' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Batch update of payment/delivery status' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Service_Async_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Executes payment or delivery service providers that uses batch updates' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Executes payment or delivery service providers that uses batch updates' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Order_Service_Async_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 		$search = $serviceManager->createSearch();

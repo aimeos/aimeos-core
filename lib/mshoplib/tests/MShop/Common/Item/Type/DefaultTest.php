@@ -11,8 +11,8 @@
  */
 class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id'   => 1,
 			'code' => 'code',
 			'domain' => 'domain',
@@ -35,7 +35,7 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Common_Item_Type_Default( '', $this->_values );
+		$this->object = new MShop_Common_Item_Type_Default( '', $this->values );
 	}
 
 	/**
@@ -46,87 +46,87 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertNull( $this->_object->getId() );
+		$this->object->setId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'code', $this->_object->getCode() );
+		$this->assertEquals( 'code', $this->object->getCode() );
 	}
 
 	public function testSetCode()
 	{
-		$this->_object->setCode( 'code' );
-		$this->assertFalse( $this->_object->isModified() );
-		$this->assertEquals( 'code', $this->_object->getCode() );
+		$this->object->setCode( 'code' );
+		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'code', $this->object->getCode() );
 	}
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'domain', $this->_object->getDomain() );
+		$this->assertEquals( 'domain', $this->object->getDomain() );
 	}
 
 	public function testSetDomain()
 	{
-		$this->_object->setDomain( 'domain' );
-		$this->assertFalse( $this->_object->isModified() );
-		$this->assertEquals( 'domain', $this->_object->getDomain() );
+		$this->object->setDomain( 'domain' );
+		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'domain', $this->object->getDomain() );
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'label', $this->_object->getLabel() );
+		$this->assertEquals( 'label', $this->object->getLabel() );
 	}
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'label' );
-		$this->assertFalse( $this->_object->isModified() );
-		$this->assertEquals( 'label', $this->_object->getLabel() );
+		$this->object->setLabel( 'label' );
+		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'label', $this->object->getLabel() );
 	}
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 1 );
-		$this->assertFalse( $this->_object->isModified() );
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->object->setStatus( 1 );
+		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 1, $this->_object->getSiteId() );
+		$this->assertEquals( 1, $this->object->getSiteId() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -155,22 +155,22 @@ class MShop_Common_Item_Type_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['id'] );
-		$this->assertEquals( $this->_object->getCode(), $arrayObject['code'] );
-		$this->assertEquals( $this->_object->getDomain(), $arrayObject['domain'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['label'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['status'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['siteid'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['id'] );
+		$this->assertEquals( $this->object->getCode(), $arrayObject['code'] );
+		$this->assertEquals( $this->object->getDomain(), $arrayObject['domain'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['label'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['status'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['siteid'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

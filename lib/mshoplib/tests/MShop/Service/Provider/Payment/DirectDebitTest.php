@@ -11,8 +11,8 @@
  */
 class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_ordServItem;
+	private $object;
+	private $ordServItem;
 
 
 	/**
@@ -25,12 +25,12 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 	{
 		$context = TestHelper::getContext();
 
-		$this->_ordServItem = MShop_Factory::createManager( $context, 'order/base/service' )->createItem();
+		$this->ordServItem = MShop_Factory::createManager( $context, 'order/base/service' )->createItem();
 		$serviceItem = MShop_Factory::createManager( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_DirectDebit' )
-			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_DirectDebit' )
+			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 	}
@@ -44,13 +44,13 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( 4, count( $this->_object->getConfigBE() ) );
+		$this->assertEquals( 4, count( $this->object->getConfigBE() ) );
 	}
 
 
@@ -60,7 +60,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 			'payment.url-success' => 'http://returnUrl'
 		);
 
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( null, $result['payment.url-success'] );
@@ -85,7 +85,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 
 		$basket = $orderBaseManager->load( $order->getBaseId() );
 
-		$config = $this->_object->getConfigFE( $basket );
+		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertArrayHasKey( 'directdebit.accountowner', $config );
 		$this->assertArrayHasKey( 'directdebit.accountno', $config );
@@ -104,7 +104,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 			'directdebit.bankname' => 'Federal reserve',
 		);
 
-		$result = $this->_object->checkConfigFE( $config );
+		$result = $this->object->checkConfigFE( $config );
 
 		$expected = array(
 			'directdebit.accountowner' => null,
@@ -126,7 +126,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 			'directdebit.bankname' => 'Federal reserve',
 		);
 
-		$result = $this->_object->checkConfigFE( $config );
+		$result = $this->object->checkConfigFE( $config );
 
 		$this->assertArrayHasKey( 'directdebit.accountowner', $result );
 		$this->assertArrayHasKey( 'directdebit.accountno', $result );
@@ -140,13 +140,13 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 
 	public function testSetConfigFE()
 	{
-		$this->_object->setConfigFE( $this->_ordServItem, array( 'directdebit.accountno' => '123456' ) );
+		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
-		$attrItem = $this->_ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
+		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
-		$attrItem = $this->_ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
+		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
@@ -157,7 +157,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$order = $manager->createItem();
 
-		$this->_object->process( $order );
+		$this->object->process( $order );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $order->getPaymentStatus() );
 	}
@@ -165,8 +165,8 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
 	}
 }

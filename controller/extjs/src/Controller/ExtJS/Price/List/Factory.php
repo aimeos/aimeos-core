@@ -66,7 +66,7 @@ class Controller_ExtJS_Price_List_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Price_List_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/price/list/decorators/excludes
 		 * Excludes decorators added by the "common" option from the price list ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Price_List_Factory
 		 * @see controller/extjs/price/list/decorators/excludes
 		 * @see controller/extjs/price/list/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'price/list' );
+		return self::addControllerDecorators( $context, $controller, 'price/list' );
 	}
 }

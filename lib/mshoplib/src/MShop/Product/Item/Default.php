@@ -19,7 +19,7 @@ class MShop_Product_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Product_Item_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -33,7 +33,7 @@ class MShop_Product_Item_Default
 	{
 		parent::__construct( 'product.', $values, $listItems, $refItems );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -44,7 +44,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -57,7 +57,7 @@ class MShop_Product_Item_Default
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $typeid;
+		$this->values['typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -69,7 +69,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -80,7 +80,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -93,7 +93,7 @@ class MShop_Product_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -105,7 +105,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -116,11 +116,11 @@ class MShop_Product_Item_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -132,7 +132,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getSupplierCode()
 	{
-		return ( isset( $this->_values['suppliercode'] ) ? (string) $this->_values['suppliercode'] : '' );
+		return ( isset( $this->values['suppliercode'] ) ? (string) $this->values['suppliercode'] : '' );
 	}
 
 
@@ -145,7 +145,7 @@ class MShop_Product_Item_Default
 	{
 		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
-		$this->_values['suppliercode'] = (string) $suppliercode;
+		$this->values['suppliercode'] = (string) $suppliercode;
 		$this->setModified();
 	}
 
@@ -157,7 +157,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -170,7 +170,7 @@ class MShop_Product_Item_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -182,7 +182,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->_values['start'] ) ? (string) $this->_values['start'] : null );
+		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
 	}
 
 
@@ -195,9 +195,9 @@ class MShop_Product_Item_Default
 	{
 		if( $date === $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['start'] = ( $date !== null ? (string) $date : null );
+		$this->values['start'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
 	}
 
@@ -209,7 +209,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->_values['end'] ) ? (string) $this->_values['end'] : null );
+		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
 	}
 
 
@@ -222,9 +222,9 @@ class MShop_Product_Item_Default
 	{
 		if( $date === $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['end'] = ( $date !== null ? (string) $date : null );
+		$this->values['end'] = ( $date !== null ? (string) $date : null );
 		$this->setModified();
 	}
 
@@ -236,7 +236,7 @@ class MShop_Product_Item_Default
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
 	}
 
 
@@ -247,7 +247,7 @@ class MShop_Product_Item_Default
 	 */
 	public function setConfig( array $config )
 	{
-		$this->_values['config'] = $config;
+		$this->values['config'] = $config;
 		$this->setModified();
 	}
 

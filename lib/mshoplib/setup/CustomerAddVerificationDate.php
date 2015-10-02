@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CustomerAddVerificationDate extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_customer" ADD "vdate" DATE NULL AFTER "status"',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_CustomerAddVerificationDate extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,18 +52,18 @@ class MW_Setup_Task_CustomerAddVerificationDate extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_customer';
-		$this->_msg( sprintf( 'Adding verification date column to table "%1$s"', $table ), 0 );
+		$this->msg( sprintf( 'Adding verification date column to table "%1$s"', $table ), 0 );
 
-		if( $this->_schema->tableExists( $table )
-			&& $this->_schema->columnExists( $table, 'vdate' ) === false )
+		if( $this->schema->tableExists( $table )
+			&& $this->schema->columnExists( $table, 'vdate' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'done' );
+			$this->executeList( $stmts );
+			$this->status( 'done' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

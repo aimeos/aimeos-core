@@ -7,7 +7,7 @@
 
 class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 {
-	private $_codes;
+	private $codes;
 
 
 	/**
@@ -18,20 +18,20 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
+		$this->codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
 
 	}
 
 	public function test()
 	{
 		try {
-			throw new MShop_Plugin_Provider_Exception( 'msg', 13, null, $this->_codes );
+			throw new MShop_Plugin_Provider_Exception( 'msg', 13, null, $this->codes );
 		}
 		catch( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( 13, $mppe->getCode() );
 			$this->assertEquals( 'msg', $mppe->getMessage() );
-			$this->assertEquals( $this->_codes, $mppe->getErrorCodes() );
+			$this->assertEquals( $this->codes, $mppe->getErrorCodes() );
 
 		}
 

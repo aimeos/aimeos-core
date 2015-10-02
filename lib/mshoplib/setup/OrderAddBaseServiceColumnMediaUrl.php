@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mediaurl' => 'ALTER TABLE "mshop_order_base_service" ADD "mediaurl" VARCHAR(255) NOT NULL AFTER "name"',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,22 +52,22 @@ class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abst
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_order_base_service';
 		$column = 'mediaurl';
 		
-		$this->_msg( sprintf( 'Adding column to table "%1$s"', $table ), 0 ); $this->_status( '' );
+		$this->msg( sprintf( 'Adding column to table "%1$s"', $table ), 0 ); $this->status( '' );
 
-		$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s": ', $table, $column ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s" for column "%2$s": ', $table, $column ), 1 );
 
-		if( $this->_schema->tableExists( $table )
-			&& $this->_schema->columnExists( $table, $column ) === false )
+		if( $this->schema->tableExists( $table )
+			&& $this->schema->columnExists( $table, $column ) === false )
 		{
-			$this->_execute( $stmts[$column] );
-			$this->_status( 'added' );
+			$this->execute( $stmts[$column] );
+			$this->status( 'added' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 	

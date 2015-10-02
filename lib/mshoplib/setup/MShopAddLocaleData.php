@@ -36,32 +36,32 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Creates new locale data if necessary
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding locale data if not yet present', 0 );
+		$this->msg( 'Adding locale data if not yet present', 0 );
 
 
 		// Set editor for further tasks
-		$this->_additional->setEditor( 'core:setup' );
+		$this->additional->setEditor( 'core:setup' );
 
 
-		$code = $this->_additional->getConfig()->get( 'setup/site', 'default' );
+		$code = $this->additional->getConfig()->get( 'setup/site', 'default' );
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
 		try
@@ -74,7 +74,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 		}
 		catch( MW_DB_Exception $e ) // already in the database
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 			return;
 		}
 
@@ -85,7 +85,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 
 		$localeManager->saveItem( $localeItem, false );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -98,9 +98,9 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 * @param integer|null $parentId Parent id of the locale item
 	 * @return array Associative list of keys from the data and generated site ID
 	 */
-	protected function _addLocaleSiteData( MShop_Common_Manager_Interface $localeManager, array $data, $manager = 'Default', $parentId = null )
+	protected function addLocaleSiteData( MShop_Common_Manager_Interface $localeManager, array $data, $manager = 'Default', $parentId = null )
 	{
-		$this->_msg( 'Adding data for MShop locale sites', 1 );
+		$this->msg( 'Adding data for MShop locale sites', 1 );
 
 		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
 		$siteItem = $localeSiteManager->createItem();
@@ -133,7 +133,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			}
 		}
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 
 		return $siteIds;
 	}
@@ -145,9 +145,9 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
 	 * @param array $data Associative list of locale currency data
 	 */
-	protected function _addLocaleCurrencyData( MShop_Common_Manager_Interface $localeManager, array $data )
+	protected function addLocaleCurrencyData( MShop_Common_Manager_Interface $localeManager, array $data )
 	{
-		$this->_msg( 'Adding data for MShop locale currencies', 1 );
+		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
 		$currencyItemManager = $localeManager->getSubManager( 'currency', 'Default' );
 
@@ -168,7 +168,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			} catch( Exception $e ) {; } // if currency was already available
 		}
 
-		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
+		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 
 
@@ -178,9 +178,9 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
 	 * @param array $data Associative list of locale language data
 	 */
-	protected function _addLocaleLanguageData( MShop_Common_Manager_Interface $localeManager, array $data )
+	protected function addLocaleLanguageData( MShop_Common_Manager_Interface $localeManager, array $data )
 	{
-		$this->_msg( 'Adding data for MShop locale languages', 1 );
+		$this->msg( 'Adding data for MShop locale languages', 1 );
 
 		$languageItemManager = $localeManager->getSubManager( 'language', 'Default' );
 
@@ -200,7 +200,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			} catch( Exception $e ) {; } // if language was already available
 		}
 
-		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
+		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 
 
@@ -210,9 +210,9 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Manager_Interface $localeItemManager Locale manager
 	 * @param array $data Associative list of locale data
 	 */
-	protected function _addLocaleData( MShop_Common_Manager_Interface $localeItemManager, array $data, array $siteIds )
+	protected function addLocaleData( MShop_Common_Manager_Interface $localeItemManager, array $data, array $siteIds )
 	{
-		$this->_msg( 'Adding data for MShop locales', 1 );
+		$this->msg( 'Adding data for MShop locales', 1 );
 
 		$localeItem = $localeItemManager->createItem();
 
@@ -234,6 +234,6 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			} catch( Exception $e ) {; } // if locale combination was already available
 		}
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

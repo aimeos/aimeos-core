@@ -18,7 +18,7 @@ class MW_Translation_Decorator_Memory
 	extends MW_Translation_Decorator_Abstract
 	implements MW_Translation_Decorator_Interface
 {
-	private $_translations;
+	private $translations;
 
 
 	/**
@@ -32,7 +32,7 @@ class MW_Translation_Decorator_Memory
 	public function __construct( MW_Translation_Interface $object, array $translations = array() )
 	{
 		parent::__construct( $object );
-		$this->_translations = $translations;
+		$this->translations = $translations;
 	}
 
 
@@ -45,8 +45,8 @@ class MW_Translation_Decorator_Memory
 	 */
 	public function dt( $domain, $string )
 	{
-		if( isset( $this->_translations[$domain][$string][0] ) ) {
-			return $this->_translations[$domain][$string][0];
+		if( isset( $this->translations[$domain][$string][0] ) ) {
+			return $this->translations[$domain][$string][0];
 		}
 
 		return parent::dt( $domain, $string );
@@ -64,10 +64,10 @@ class MW_Translation_Decorator_Memory
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		$index = $this->_getPluralIndex( $number, $this->getLocale() );
+		$index = $this->getPluralIndex( $number, $this->getLocale() );
 
-		if( isset( $this->_translations[$domain][$singular][$index] ) ) {
-			return $this->_translations[$domain][$singular][$index];
+		if( isset( $this->translations[$domain][$singular][$index] ) ) {
+			return $this->translations[$domain][$singular][$index];
 		}
 
 		return parent::dn( $domain, $singular, $plural, $number );

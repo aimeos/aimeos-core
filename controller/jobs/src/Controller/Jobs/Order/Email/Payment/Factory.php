@@ -74,7 +74,7 @@ class Controller_Jobs_Order_Email_Payment_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Email_Payment_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/email/payment/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order email payment controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Email_Payment_Factory
 		 * @see controller/jobs/order/email/payment/decorators/excludes
 		 * @see controller/jobs/order/email/payment/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/email/payment' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/email/payment' );
 	}
 }

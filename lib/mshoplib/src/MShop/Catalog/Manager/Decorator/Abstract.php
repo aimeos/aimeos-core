@@ -27,7 +27,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
-		return $this->_getManager()->getPath( $id, $ref );
+		return $this->getManager()->getPath( $id, $ref );
 	}
 
 
@@ -42,7 +42,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 */
 	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
-		return $this->_getManager()->getTree( $id, $ref, $level, $criteria );
+		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}
 
 
@@ -53,7 +53,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
 	{
-		$this->_getManager()->insertItem( $item, $parentId, $refId );
+		$this->getManager()->insertItem( $item, $parentId, $refId );
 	}
 
 
@@ -67,7 +67,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		$this->_getManager()->moveItem( $id, $oldParentId, $newParentId, $refId );
+		$this->getManager()->moveItem( $id, $oldParentId, $newParentId, $refId );
 	}
 
 
@@ -77,6 +77,6 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 */
 	public function rebuildIndex()
 	{
-		$this->_getManager()->rebuildIndex();
+		$this->getManager()->rebuildIndex();
 	}
 }

@@ -8,8 +8,8 @@
 
 class TestHelper
 {
-	private static $_aimeos;
-	private static $_context;
+	private static $aimeos;
+	private static $context;
 
 
 	public static function bootstrap()
@@ -21,24 +21,24 @@ class TestHelper
 
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$_context[$site] ) ) {
-			self::$_context[$site] = self::_createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone self::$_context[$site];
+		return clone self::$context[$site];
 	}
 
 
 	public static function getAimeos()
 	{
-		if( !isset( self::$_aimeos ) )
+		if( !isset( self::$aimeos ) )
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$_aimeos = new Aimeos( array(), false );
+			self::$aimeos = new Aimeos( array(), false );
 		}
 
-		return self::$_aimeos;
+		return self::$aimeos;
 	}
 
 
@@ -51,7 +51,7 @@ class TestHelper
 	/**
 	 * @param string $site
 	 */
-	private static function _createContext( $site )
+	private static function createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
 		$aimeos = self::getAimeos();
@@ -88,7 +88,7 @@ class TestHelper
 		$ctx->setLocale( $locale );
 
 
-		$view = self::_createView( $conf );
+		$view = self::createView( $conf );
 		$ctx->setView( $view );
 
 
@@ -98,7 +98,7 @@ class TestHelper
 	}
 
 
-	protected static function _createView( MW_Config_Interface $config )
+	protected static function createView( MW_Config_Interface $config )
 	{
 		$tmplpaths = self::getAimeos()->getCustomPaths( 'client/html' );
 		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );

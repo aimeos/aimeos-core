@@ -19,7 +19,7 @@ class Controller_ExtJS_Media_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,10 +41,10 @@ class Controller_ExtJS_Media_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/media/default/basedir
 		 * Base directory used by all relative directory configuration options
@@ -97,8 +97,8 @@ class Controller_ExtJS_Media_Default
 
 		$idList = array();
 		$ids = (array) $params->items;
-		$context = $this->_getContext();
-		$manager = $this->_getManager();
+		$context = $this->getContext();
+		$manager = $this->getManager();
 
 
 		$search = $manager->createSearch();
@@ -114,13 +114,13 @@ class Controller_ExtJS_Media_Default
 				&& unlink( $basedir . $item->getPreview() ) === false
 			) {
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getPreview() );
-				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 
 			if( is_file( $basedir . $item->getUrl() ) && unlink( $basedir . $item->getUrl() ) === false )
 			{
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getUrl() );
-				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 		}
 
@@ -154,7 +154,7 @@ class Controller_ExtJS_Media_Default
 		}
 
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
 		return array(
 			'success' => true,
@@ -164,15 +164,15 @@ class Controller_ExtJS_Media_Default
 
 	public function uploadItem( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'domain' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'domain' ) );
+		$this->setLocale( $params->site );
 
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
 			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
 		}
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/media/default/options
 		 * Options used for processing the uploaded media files
@@ -211,14 +211,14 @@ class Controller_ExtJS_Media_Default
 		 * @category Developer
 		 */
 		if( $config->get( 'controller/extjs/media/default/enablecheck', true ) ) {
-			$this->_checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
+			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
 
 		$filename = md5( $fileinfo['name'] . microtime( true ) );
 		$mediaFile = MW_Media_Factory::get( $fileinfo['tmp_name'], $options );
 
-		$item = $this->_getManager()->createItem();
+		$item = $this->getManager()->createItem();
 		$item->setDomain( $params->domain );
 		$item->setLabel( basename( $fileinfo['name'] ) );
 		$item->setMimeType( $mediaFile->getMimetype() );
@@ -226,19 +226,19 @@ class Controller_ExtJS_Media_Default
 
 		if( $mediaFile instanceof MW_Media_Image_Interface )
 		{
-			$item->setPreview( $this->_createImage( $mediaFile, 'preview', $params->domain, $fileinfo['tmp_name'], $filename ) );
-			$item->setUrl( $this->_createImage( $mediaFile, 'files', $params->domain, $fileinfo['tmp_name'], $filename ) );
+			$item->setPreview( $this->createImage( $mediaFile, 'preview', $params->domain, $fileinfo['tmp_name'], $filename ) );
+			$item->setUrl( $this->createImage( $mediaFile, 'files', $params->domain, $fileinfo['tmp_name'], $filename ) );
 		}
 		else
 		{
-			$item->setPreview( $this->_getMimeIcon( $mediaFile->getMimetype() ) );
-			$item->setUrl( $this->_copyFile( $mediaFile, $params->domain, $filename ) );
+			$item->setPreview( $this->getMimeIcon( $mediaFile->getMimetype() ) );
+			$item->setUrl( $this->copyFile( $mediaFile, $params->domain, $filename ) );
 		}
 
 		if( unlink( $fileinfo['tmp_name'] ) === false )
 		{
 			$msg = sprintf( 'Deleting file "%1$s" failed', $fileinfo['tmp_name'] );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
 
@@ -273,13 +273,13 @@ class Controller_ExtJS_Media_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'media' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -288,7 +288,7 @@ class Controller_ExtJS_Media_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'media';
 	}
@@ -300,7 +300,7 @@ class Controller_ExtJS_Media_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'media.languageid'} ) && $entry->{'media.languageid'} === '' ) {
 			$entry->{'media.languageid'} = null;
@@ -317,7 +317,7 @@ class Controller_ExtJS_Media_Default
 	 * @param integer $errcode Error code from file upload
 	 * @throws Controller_ExtJS_Exception If file upload isn't valid or the error code represents an error state
 	 */
-	protected function _checkFileUpload( $filename, $errcode )
+	protected function checkFileUpload( $filename, $errcode )
 	{
 		if( is_uploaded_file( $filename ) === false ) {
 			throw new Controller_ExtJS_Exception( 'File was not uploaded' );
@@ -352,9 +352,9 @@ class Controller_ExtJS_Media_Default
 	 * @param string $relativeDir Relative directory name
 	 * @throws Controller_ExtJS_Exception If base directory is not available or the full directory couldn't be created
 	 */
-	protected function _getAbsoluteDirectory( $relativeDir )
+	protected function getAbsoluteDirectory( $relativeDir )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		if( ( $dir = $config->get( 'controller/extjs/media/default/basedir', null ) ) === null ) {
 			throw new Controller_ExtJS_Exception( 'No base directory configured' );
@@ -410,7 +410,7 @@ class Controller_ExtJS_Media_Default
 	 * @param string $mimetype Mime type like "image/png"
 	 * @return string|null File extension including the dot (e.g. ".png") or null if unknown
 	 */
-	protected function _getFileExtension( $mimetype )
+	protected function getFileExtension( $mimetype )
 	{
 		switch( $mimetype )
 		{
@@ -432,9 +432,9 @@ class Controller_ExtJS_Media_Default
 	 * @param string $mimetype Mime type like "image/png"
 	 * @return string Relative path to the mime icon
 	 */
-	protected function _getMimeIcon( $mimetype )
+	protected function getMimeIcon( $mimetype )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/media/default/mimeicon/directory
 		 * Directory that contains the icons for the different mime types
@@ -468,7 +468,7 @@ class Controller_ExtJS_Media_Default
 		 */
 		if( ( $mimedir = $config->get( 'controller/extjs/media/default/mimeicon/directory', null ) ) === null )
 		{
-			$this->_getContext()->getLogger()->log( 'No directory for mime type images configured' );
+			$this->getContext()->getLogger()->log( 'No directory for mime type images configured' );
 			return '';
 		}
 
@@ -486,7 +486,7 @@ class Controller_ExtJS_Media_Default
 		 * @category Developer
 		 */
 		$ext = $config->get( 'controller/extjs/media/default/mimeicon/extension', '.png' );
-		$abspath = $this->_getAbsoluteDirectory( $mimedir ) . DIRECTORY_SEPARATOR . $mimetype . $ext;
+		$abspath = $this->getAbsoluteDirectory( $mimedir ) . DIRECTORY_SEPARATOR . $mimetype . $ext;
 		$mimeicon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
 
 		if( is_file( $abspath ) === false ) {
@@ -508,10 +508,10 @@ class Controller_ExtJS_Media_Default
 	 * @return string Relative path to the new file
 	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function _createImage( MW_Media_Image_Interface $mediaFile, $type, $domain, $src, $filename )
+	protected function createImage( MW_Media_Image_Interface $mediaFile, $type, $domain, $src, $filename )
 	{
 		$mimetype = $mediaFile->getMimetype();
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/extjs/media/default/files/allowedtypes
 		 * A list of image mime types that are allowed for uploaded image files
@@ -557,9 +557,9 @@ class Controller_ExtJS_Media_Default
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
-		$fileext = $this->_getFileExtension( $mimetype );
+		$fileext = $this->getFileExtension( $mimetype );
 		$filepath = $mediadir . $ds . $type . $ds . $domain . $ds . $filename[0] . $ds . $filename[1];
-		$dest = $this->_getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
+		$dest = $this->getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
 
 
 		/** controller/extjs/media/default/files/maxwidth
@@ -671,7 +671,7 @@ class Controller_ExtJS_Media_Default
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
 		return "${mediadir}/${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
@@ -686,18 +686,18 @@ class Controller_ExtJS_Media_Default
 	 * @param string $filename Name of the new file without file extension
 	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function _copyFile( MW_Media_Interface $mediaFile, $domain, $filename )
+	protected function copyFile( MW_Media_Interface $mediaFile, $domain, $filename )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		if( ( $mediadir = $config->get( 'controller/extjs/media/default/upload/directory', null ) ) === null ) {
 				throw new Controller_ExtJS_Exception( 'No media directory configured' );
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
-		$fileext = $this->_getFileExtension( $mediaFile->getMimetype() );
+		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
 		$filepath = $mediadir . $ds . 'files' . $ds . $domain . $ds . $filename[0] . $ds . $filename[1];
-		$dest = $this->_getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
+		$dest = $this->getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
 
 		$mediaFile->save( $dest, $mediaFile->getMimetype() );
 
@@ -706,7 +706,7 @@ class Controller_ExtJS_Media_Default
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
 		return "${mediadir}/files/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";

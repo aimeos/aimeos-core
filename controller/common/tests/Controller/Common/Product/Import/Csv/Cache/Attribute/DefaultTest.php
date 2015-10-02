@@ -8,7 +8,7 @@
 
 class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
@@ -16,7 +16,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends P
 		MShop_Factory::setCache( true );
 
 		$context = TestHelper::getContext();
-		$this->_object = new Controller_Common_Product_Import_Csv_Cache_Attribute_Default( $context );
+		$this->object = new Controller_Common_Product_Import_Csv_Cache_Attribute_Default( $context );
 	}
 
 
@@ -29,7 +29,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends P
 
 	public function testGet()
 	{
-		$item = $this->_object->get( 'black', 'color' );
+		$item = $this->object->get( 'black', 'color' );
 
 		$this->assertInstanceOf( 'MShop_Attribute_Item_Interface', $item );
 		$this->assertEquals( 'black', $item->getCode() );
@@ -39,17 +39,17 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends P
 
 	public function testGetUnknown()
 	{
-		$this->assertEquals( null, $this->_object->get( 'cache-test', 'color' ) );
+		$this->assertEquals( null, $this->object->get( 'cache-test', 'color' ) );
 	}
 
 
 	public function testSet()
 	{
-		$item = $this->_object->get( 'black', 'color' );
+		$item = $this->object->get( 'black', 'color' );
 		$item->setCode( 'cache-test' );
 
-		$this->_object->set( $item );
-		$item = $this->_object->get( 'cache-test', 'color' );
+		$this->object->set( $item );
+		$item = $this->object->get( 'cache-test', 'color' );
 
 		$this->assertInstanceOf( 'MShop_Attribute_Item_Interface', $item );
 		$this->assertEquals( 'cache-test', $item->getCode() );

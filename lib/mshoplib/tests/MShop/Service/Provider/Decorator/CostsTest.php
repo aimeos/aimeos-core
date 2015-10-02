@@ -11,39 +11,39 @@
  */
 class MShop_Service_Provider_Decorator_CostsTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_basket;
-	private $_context;
-	private $_servItem;
-	private $_mockProvider;
+	private $object;
+	private $basket;
+	private $context;
+	private $servItem;
+	private $mockProvider;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$servManager = MShop_Factory::createManager( $this->_context, 'service' );
-		$this->_servItem = $servManager->createItem();
+		$servManager = MShop_Factory::createManager( $this->context, 'service' );
+		$this->servItem = $servManager->createItem();
 
-		$this->_mockProvider = $this->getMockBuilder( 'MShop_Service_Provider_Decorator_Costs' )
+		$this->mockProvider = $this->getMockBuilder( 'MShop_Service_Provider_Decorator_Costs' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->_basket = MShop_Order_Manager_Factory::createManager( $this->_context )
+		$this->basket = MShop_Order_Manager_Factory::createManager( $this->context )
 			->getSubManager( 'base' )->createItem();
 
-		$this->_object = new MShop_Service_Provider_Decorator_Costs( $this->_context, $this->_servItem, $this->_mockProvider );
+		$this->object = new MShop_Service_Provider_Decorator_Costs( $this->context, $this->servItem, $this->mockProvider );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_basket, $this->_mockProvider, $this->_servItem, $this->_context );
+		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$result = $this->_object->getConfigBE();
+		$result = $this->object->getConfigBE();
 
 		$this->assertArrayHasKey( 'costs.percent', $result );
 	}
@@ -51,12 +51,12 @@ class MShop_Service_Provider_Decorator_CostsTest extends PHPUnit_Framework_TestC
 
 	public function testCheckConfigBE()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
 		$attributes = array( 'costs.percent' => '1.5' );
-		$result = $this->_object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertInternalType( 'null', $result['costs.percent'] );
@@ -65,11 +65,11 @@ class MShop_Service_Provider_Decorator_CostsTest extends PHPUnit_Framework_TestC
 
 	public function testCheckConfigBEFailure()
 	{
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
 			->will( $this->returnValue( array() ) );
 
-		$result = $this->_object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( array() );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertInternalType( 'string', $result['costs.percent'] );
@@ -78,25 +78,25 @@ class MShop_Service_Provider_Decorator_CostsTest extends PHPUnit_Framework_TestC
 
 	public function testCalcPrice()
 	{
-		$this->_basket->addProduct( $this->_getOrderProduct() );
-		$this->_servItem->setConfig( array( 'costs.percent' => 1.5 ) );
-		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$this->servItem->setConfig( array( 'costs.percent' => 1.5 ) );
+		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
 
-		$this->_mockProvider->expects( $this->once() )
+		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );
 
-		$price = $this->_object->calcPrice( $this->_basket );
+		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '0.00', $price->getValue() );
 		$this->assertEquals( '0.30', $price->getCosts() );
 	}
 
 
-	protected function _getOrderProduct()
+	protected function getOrderProduct()
 	{
-		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
-		$productManager = MShop_Factory::createManager( $this->_context, 'product' );
-		$orderProductManager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
+		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
+		$productManager = MShop_Factory::createManager( $this->context, 'product' );
+		$orderProductManager = MShop_Factory::createManager( $this->context, 'order/base/product' );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );

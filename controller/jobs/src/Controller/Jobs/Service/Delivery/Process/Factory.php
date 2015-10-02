@@ -50,7 +50,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Service_Delivery_Process_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/service/delivery/process/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service job controllers
@@ -87,6 +87,6 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 * @see controller/jobs/service/delivery/process/decorators/global
 		 * @deprecated Use controller/jobs/order/service/delivery/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'service/delivery/process' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'service/delivery/process' );
 	}
 }

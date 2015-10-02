@@ -17,7 +17,7 @@
 abstract class MShop_Service_Manager_Abstract
 	extends MShop_Common_Manager_ListRef_Abstract
 {
-	protected function _addServiceDecorators( MShop_Service_Item_Interface $serviceItem,
+	protected function addServiceDecorators( MShop_Service_Item_Interface $serviceItem,
 		MShop_Service_Provider_Interface $provider, $names )
 	{
 		$iface = 'MShop_Service_Provider_Decorator_Interface';
@@ -35,7 +35,7 @@ abstract class MShop_Service_Manager_Abstract
 				throw new MShop_Service_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->_getContext(), $serviceItem, $provider );
+			$provider = new $classname( $this->getContext(), $serviceItem, $provider );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );

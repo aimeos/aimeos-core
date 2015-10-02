@@ -18,7 +18,7 @@ class MW_View_Helper_Url_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_baseUrl;
+	private $baseUrl;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_Url_Default
 	{
 		parent::__construct( $view );
 
-		$this->_baseUrl = rtrim( $baseUrl, '/' );
+		$this->baseUrl = rtrim( $baseUrl, '/' );
 	}
 
 
@@ -58,6 +58,6 @@ class MW_View_Helper_Url_Default
 		$badchars = array( ' ', '/', '&', '%', '?', '#', '=', '{', '}', '|', '\\', '^', '~', '[', ']', '`' );
 		$pretty = str_replace( $badchars, '-', $pretty );
 
-		return $this->_baseUrl . '/' . $path . $pretty . $parameter;
+		return $this->baseUrl . '/' . $path . $pretty . $parameter;
 	}
 }

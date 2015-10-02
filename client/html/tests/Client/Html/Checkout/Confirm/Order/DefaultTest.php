@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Confirm_Order_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Confirm_Order_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->_context = clone TestHelper::getContext();
+		$this->context = clone TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Confirm_Order_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Confirm_Order_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,28 +35,28 @@ class Client_Html_Checkout_Confirm_Order_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$customer = $this->_getCustomerItem( 'UTC001' );
-		$view->confirmOrderItem = $this->_getOrderItem( $customer->getId() );
+		$view = $this->object->getView();
+		$customer = $this->getCustomerItem( 'UTC001' );
+		$view->confirmOrderItem = $this->getOrderItem( $customer->getId() );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$customer = $this->_getCustomerItem( 'UTC001' );
-		$view->confirmOrderItem = $this->_getOrderItem( $customer->getId() );
+		$view = $this->object->getView();
+		$customer = $this->getCustomerItem( 'UTC001' );
+		$view->confirmOrderItem = $this->getOrderItem( $customer->getId() );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertStringStartsWith( '<div class="checkout-confirm-detail common-summary">', $output );
 	}
@@ -65,23 +65,23 @@ class Client_Html_Checkout_Confirm_Order_DefaultTest extends PHPUnit_Framework_T
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	/**
 	 * @param string $code
 	 */
-	protected function _getCustomerItem( $code )
+	protected function getCustomerItem( $code )
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
 		$items = $manager->searchItems( $search );
@@ -94,9 +94,9 @@ class Client_Html_Checkout_Confirm_Order_DefaultTest extends PHPUnit_Framework_T
 	}
 
 
-	protected function _getOrderItem( $customerid )
+	protected function getOrderItem( $customerid )
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Order_Manager_Factory::createManager( $this->context );
 		$search = $manager->createSearch( true );
 		$expr = array(
 			$search->getConditions(),

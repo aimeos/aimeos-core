@@ -25,7 +25,7 @@ class Controller_Jobs_Admin_Cache_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Cache cleanup' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Cache cleanup' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Admin_Cache_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Removes the expired entries from the cache' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Removes the expired entries from the cache' );
 	}
 
 
@@ -47,6 +47,6 @@ class Controller_Jobs_Admin_Cache_Default
 	 */
 	public function run()
 	{
-		MAdmin_Cache_Manager_Factory::createManager( $this->_getContext() )->getCache()->cleanup();
+		MAdmin_Cache_Manager_Factory::createManager( $this->getContext() )->getCache()->cleanup();
 	}
 }

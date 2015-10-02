@@ -74,7 +74,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Customer_Email_Watch_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/customer/email/watch/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer email watch controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @see controller/jobs/customer/email/watch/decorators/excludes
 		 * @see controller/jobs/customer/email/watch/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'customer/email/watch' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'customer/email/watch' );
 	}
 }

@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -33,7 +33,7 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 	{
 		parent::__construct( $context, $mapping, $object );
 
-		$this->_cache = $this->_getCache( 'warehouse' );
+		$this->cache = $this->getCache( 'warehouse' );
 	}
 
 
@@ -46,15 +46,15 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
 		$manager->begin();
 
 		try
 		{
 			$pos = 0;
 			$delete = array();
-			$map = $this->_getMappedChunk( $data );
-			$items = $this->_getStockItems( $product->getId() );
+			$map = $this->getMappedChunk( $data );
+			$items = $this->getStockItems( $product->getId() );
 
 			foreach( $map as $pos => $list )
 			{
@@ -65,7 +65,7 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 				$whcode = ( isset( $list['product.stock.warehouse'] ) ? $list['product.stock.warehouse'] : 'default' );
 
 				if( !isset( $list['product.stock.warehouseid'] ) ) {
-					$list['product.stock.warehouseid'] = $this->_cache->get( $whcode );
+					$list['product.stock.warehouseid'] = $this->cache->get( $whcode );
 				}
 
 				if( isset( $list['product.stock.dateback'] ) && $list['product.stock.dateback'] === '' ) {
@@ -88,7 +88,7 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 
 			$manager->deleteItems( array_keys( $items ) );
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -108,9 +108,9 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_Default
 	 * @param string $prodid Unique product ID
 	 * @return array Associative list of product stock items
 	 */
-	protected function _getStockItems( $prodid )
+	protected function getStockItems( $prodid )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.stock.productid', $prodid ) );

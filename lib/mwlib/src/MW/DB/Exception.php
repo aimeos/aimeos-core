@@ -16,8 +16,8 @@
  */
 class MW_DB_Exception extends MW_Exception
 {
-	protected $_info;
-	protected $_state;
+	protected $info;
+	protected $state;
 
 
 	/**
@@ -31,8 +31,8 @@ class MW_DB_Exception extends MW_Exception
 	{
 		parent::__construct( $message );
 
-		$this->_state = $state;
-		$this->_info = $info;
+		$this->state = $state;
+		$this->info = $info;
 	}
 
 
@@ -43,7 +43,7 @@ class MW_DB_Exception extends MW_Exception
 	 */
 	public function getSqlState()
 	{
-		return $this->_state;
+		return $this->state;
 	}
 
 
@@ -54,6 +54,6 @@ class MW_DB_Exception extends MW_Exception
 	 */
 	public function getInfo()
 	{
-		return $this->_info;
+		return $this->info;
 	}
 }

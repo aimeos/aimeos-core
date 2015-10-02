@@ -19,7 +19,7 @@ class Controller_ExtJS_Text_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,13 +41,13 @@ class Controller_ExtJS_Text_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$idList = array();
 		$ids = (array) $params->items;
-		$context = $this->_getContext();
-		$manager = $this->_getManager();
+		$context = $this->getContext();
+		$manager = $this->getManager();
 
 
 		$search = $manager->createSearch();
@@ -88,7 +88,7 @@ class Controller_ExtJS_Text_Default
 		}
 
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
 		return array(
 				'items' => $params->items,
@@ -102,13 +102,13 @@ class Controller_ExtJS_Text_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'text' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'text' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -117,7 +117,7 @@ class Controller_ExtJS_Text_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'text';
 	}
@@ -129,7 +129,7 @@ class Controller_ExtJS_Text_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'text.languageid'} ) && $entry->{'text.languageid'} === '' ) {
 			$entry->{'text.languageid'} = null;

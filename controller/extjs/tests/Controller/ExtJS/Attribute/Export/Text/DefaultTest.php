@@ -8,8 +8,8 @@
 
 class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,8 +20,8 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->context );
 	}
 
 
@@ -33,13 +33,13 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testExportCSVFile()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$ids = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
@@ -51,7 +51,7 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framewo
 		$params->items = $ids;
 		$params->site = 'unittest';
 
-		$result = $this->_object->exportFile( $params );
+		$result = $this->object->exportFile( $params );
 
 		$this->assertTrue( array_key_exists( 'file', $result ) );
 
@@ -114,7 +114,7 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends PHPUnit_Framewo
 
 	public function testGetServiceDescription()
 	{
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 		$expected = array(
 			'Attribute_Export_Text.createHttpOutput' => array(
 				"parameters" => array(

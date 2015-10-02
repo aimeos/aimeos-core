@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Plugin_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Plugin_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Plugin_Type_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Plugin_Type_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Plugin_Type_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -43,7 +43,7 @@ class Controller_ExtJS_Plugin_Type_DefaultTest extends PHPUnit_Framework_TestCas
 			'sort' => 'plugin.type.code'
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		if( ( $type = reset( $result ) ) === false ) {
 			throw new Exception( 'No plugin type found' );
@@ -71,12 +71,12 @@ class Controller_ExtJS_Plugin_Type_DefaultTest extends PHPUnit_Framework_TestCas
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'plugin.type.code' => 'test code' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'plugin.type.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'plugin.type.id'} );

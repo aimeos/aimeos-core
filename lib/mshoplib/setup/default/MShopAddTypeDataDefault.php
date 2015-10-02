@@ -25,8 +25,8 @@ class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeDa
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 }

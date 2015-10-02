@@ -19,7 +19,7 @@ class MShop_Service_Provider_Delivery_Default
 	implements MShop_Service_Provider_Delivery_Interface
 {
 
-	private $_beConfig = array(
+	private $beConfig = array(
 		'default.project' => array(
 			'code' => 'default.project',
 			'internalcode'=> 'default.project',
@@ -75,16 +75,16 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
-		$logger = $this->_getContext()->getLogger();
+		$logger = $this->getContext()->getLogger();
 		$xml = $this->buildXML( $order );
 
 		$logger->log( __METHOD__ . ": XML request =\n" . $xml, MW_Logger_Abstract::INFO );
 
-		$response = $this->_sendRequest( $xml );
+		$response = $this->sendRequest( $xml );
 
 		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), MW_Logger_Abstract::INFO );
 
-		$this->_checkResponse( $response, $order->getId() );
+		$this->checkResponse( $response, $order->getId() );
 
 		$order->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
 	}
@@ -100,7 +100,7 @@ class MShop_Service_Provider_Delivery_Default
 	{
 		$list = array();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -117,7 +117,7 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return $this->_checkConfig( $this->_beConfig, $attributes );
+		return $this->checkConfig( $this->beConfig, $attributes );
 	}
 
 
@@ -128,9 +128,9 @@ class MShop_Service_Provider_Delivery_Default
 	 * @return string response body of a http request
 	 * @throws MShop_Service_Exception If the request couldn't be sent
 	 */
-	protected function _sendRequest( $xml )
+	protected function sendRequest( $xml )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$response = '';
 		$config = $this->getServiceItem()->getConfig();
 
@@ -214,7 +214,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param integer $invoiceid Number of the order invoice sent to the fulfillment partner
 	 * @throws MShop_Service_Exception If the response is invalid
 	 */
-	protected function _checkResponse( $response, $invoiceid )
+	protected function checkResponse( $response, $invoiceid )
 	{
 		$responseXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-response_v1.xsd';
 
@@ -269,7 +269,7 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function buildXML( MShop_Order_Item_Interface $invoice )
 	{
-		$base = $this->_getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$base = $this->getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
 
 		try
 		{
@@ -278,12 +278,12 @@ class MShop_Service_Provider_Delivery_Default
 			$orderlist = $dom->createElement( 'orderlist' );
 			$orderitem = $dom->createElement( 'orderitem' );
 
-			$this->_buildXMLHeader( $invoice, $base, $dom, $orderitem );
-			$this->_buildXMLService( $base, $dom, $orderitem );
-			$this->_buildXMLPrice( $base, $dom, $orderitem );
-			$this->_buildXMLProducts( $base, $dom, $orderitem );
-			$this->_buildXMLAddresses( $base, $dom, $orderitem );
-			$this->_buildXMLAdditional( $base, $dom, $orderitem );
+			$this->buildXMLHeader( $invoice, $base, $dom, $orderitem );
+			$this->buildXMLService( $base, $dom, $orderitem );
+			$this->buildXMLPrice( $base, $dom, $orderitem );
+			$this->buildXMLProducts( $base, $dom, $orderitem );
+			$this->buildXMLAddresses( $base, $dom, $orderitem );
+			$this->buildXMLAdditional( $base, $dom, $orderitem );
 
 			$orderlist->appendChild( $orderitem );
 			$dom->appendChild( $orderlist );
@@ -321,7 +321,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLHeader( MShop_Order_Item_Interface $invoice, MShop_Order_Item_Base_Interface $base,
+	protected function buildXMLHeader( MShop_Order_Item_Interface $invoice, MShop_Order_Item_Base_Interface $base,
 		DOMDocument $dom, DOMElement $orderitem )
 	{
 		$regex = '/^(\d+)\-(\d+)\-(\d+) (\d+)\:(\d+)\:(\d+)$/i';
@@ -339,18 +339,18 @@ class MShop_Service_Provider_Delivery_Default
 			throw new MShop_Service_Exception( sprintf( $msg, "project" ), parent::ERR_TEMP );
 		}
 
-		$this->_appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );
-		$this->_appendChildCDATA( 'type', $invoice->getType(), $dom, $orderitem );
-		$this->_appendChildCDATA( 'datetime', $pdate, $dom, $orderitem );
+		$this->appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );
+		$this->appendChildCDATA( 'type', $invoice->getType(), $dom, $orderitem );
+		$this->appendChildCDATA( 'datetime', $pdate, $dom, $orderitem );
 
 		if( $invoice->getRelatedId() !== null ) {
-			$this->_appendChildCDATA( 'relatedid', $invoice->getRelatedId(), $dom, $orderitem );
+			$this->appendChildCDATA( 'relatedid', $invoice->getRelatedId(), $dom, $orderitem );
 		}
 
-		$this->_appendChildCDATA( 'customerid', $base->getCustomerId(), $dom, $orderitem );
-		$this->_appendChildCDATA( 'projectcode', $config['default.project'], $dom, $orderitem );
-		$this->_appendChildCDATA( 'languagecode', strtoupper( $base->getLocale()->getLanguageId() ), $dom, $orderitem );
-		$this->_appendChildCDATA( 'currencycode', $base->getPrice()->getCurrencyId(), $dom, $orderitem );
+		$this->appendChildCDATA( 'customerid', $base->getCustomerId(), $dom, $orderitem );
+		$this->appendChildCDATA( 'projectcode', $config['default.project'], $dom, $orderitem );
+		$this->appendChildCDATA( 'languagecode', strtoupper( $base->getLocale()->getLanguageId() ), $dom, $orderitem );
+		$this->appendChildCDATA( 'currencycode', $base->getPrice()->getCurrencyId(), $dom, $orderitem );
 	}
 
 
@@ -362,7 +362,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLService( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLService( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		foreach( $base->getServices() as $service )
 		{
@@ -371,8 +371,8 @@ class MShop_Service_Provider_Delivery_Default
 				case 'delivery':
 
 					$deliveryitem = $dom->createElement( 'deliveryitem' );
-					$this->_appendChildCDATA( 'code', $service->getCode(), $dom, $deliveryitem );
-					$this->_appendChildCDATA( 'name', $service->getName(), $dom, $deliveryitem );
+					$this->appendChildCDATA( 'code', $service->getCode(), $dom, $deliveryitem );
+					$this->appendChildCDATA( 'name', $service->getName(), $dom, $deliveryitem );
 
 					$orderitem->appendChild( $deliveryitem );
 					break;
@@ -380,16 +380,16 @@ class MShop_Service_Provider_Delivery_Default
 				case 'payment':
 
 					$paymentitem = $dom->createElement( 'paymentitem' );
-					$this->_appendChildCDATA( 'code', $service->getCode(), $dom, $paymentitem );
-					$this->_appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
+					$this->appendChildCDATA( 'code', $service->getCode(), $dom, $paymentitem );
+					$this->appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
 
 					$fieldlist = $dom->createElement( 'fieldlist' );
 					foreach( $service->getAttributes() as $attribute )
 					{
 						$fielditem = $dom->createElement( 'fielditem' );
-						$this->_appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );
-						$this->_appendChildCDATA( 'value', $attribute->getValue(), $dom, $fielditem );
-						$this->_appendChildCDATA( 'type', $attribute->getType(), $dom, $fielditem );
+						$this->appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );
+						$this->appendChildCDATA( 'value', $attribute->getValue(), $dom, $fielditem );
+						$this->appendChildCDATA( 'type', $attribute->getType(), $dom, $fielditem );
 						$fieldlist->appendChild( $fielditem );
 					}
 
@@ -409,16 +409,16 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLPrice( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLPrice( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$price = $base->getPrice();
 		$total = $price->getValue() + $price->getCosts();
 
 		$priceitem = $dom->createElement( 'priceitem' );
-		$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-		$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
-		$this->_appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
-		$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
+		$this->appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
+		$this->appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
+		$this->appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
+		$this->appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 
 		$orderitem->appendChild( $priceitem );
 	}
@@ -432,7 +432,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLProducts( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLProducts( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$productlist = $dom->createElement( 'productlist' );
 
@@ -443,20 +443,20 @@ class MShop_Service_Provider_Delivery_Default
 
 			$productitem = $dom->createElement( 'productitem' );
 
-			$this->_appendChildCDATA( 'position', $product->getPosition(), $dom, $productitem );
-			$this->_appendChildCDATA( 'code', $product->getProductCode(), $dom, $productitem );
-			$this->_appendChildCDATA( 'name', $product->getName(), $dom, $productitem );
-			$this->_appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $productitem );
+			$this->appendChildCDATA( 'position', $product->getPosition(), $dom, $productitem );
+			$this->appendChildCDATA( 'code', $product->getProductCode(), $dom, $productitem );
+			$this->appendChildCDATA( 'name', $product->getName(), $dom, $productitem );
+			$this->appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $productitem );
 
 			$priceitem = $dom->createElement( 'priceitem' );
-			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$productitem->appendChild( $priceitem );
 
 			if( $product->getType() === 'bundle' ) {
-				$this->_buildXMLChildList( $product, $product->getProducts(), $dom, $productitem );
+				$this->buildXMLChildList( $product, $product->getProducts(), $dom, $productitem );
 			}
 
 			$productlist->appendChild( $productitem );
@@ -474,7 +474,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $productelement DOM element to which the child products are added
 	 */
-	protected function _buildXMLChildList( MShop_Order_Item_Base_Product_Interface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
+	protected function buildXMLChildList( MShop_Order_Item_Base_Product_Interface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
 	{
 		$childlist = $dom->createElement( 'childlist' );
 
@@ -485,16 +485,16 @@ class MShop_Service_Provider_Delivery_Default
 
 			$childproductitem = $dom->createElement( 'productitem' );
 
-			$this->_appendChildCDATA( 'position', $product->getPosition(), $dom, $childproductitem );
-			$this->_appendChildCDATA( 'code', $product->getProductCode(), $dom, $childproductitem );
-			$this->_appendChildCDATA( 'name', $product->getName(), $dom, $childproductitem );
-			$this->_appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $childproductitem );
+			$this->appendChildCDATA( 'position', $product->getPosition(), $dom, $childproductitem );
+			$this->appendChildCDATA( 'code', $product->getProductCode(), $dom, $childproductitem );
+			$this->appendChildCDATA( 'name', $product->getName(), $dom, $childproductitem );
+			$this->appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $childproductitem );
 
 			$priceitem = $dom->createElement( 'priceitem' );
-			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'discount', number_format( $price->getRebate(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'discount', number_format( $price->getRebate(), 2, '.', '' ), $dom, $priceitem );
+			$this->appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$childproductitem->appendChild( $priceitem );
 
 			$childlist->appendChild( $childproductitem );
@@ -512,12 +512,12 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLAddresses( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAddresses( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$addresslist = $dom->createElement( 'addresslist' );
 
 		foreach( $base->getAddresses() as $address ) {
-			$this->_buildXMLAddress( $address, $dom, $addresslist );
+			$this->buildXMLAddress( $address, $dom, $addresslist );
 		}
 
 		$orderitem->appendChild( $addresslist );
@@ -532,27 +532,27 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $addresslist DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLAddress( MShop_Order_Item_Base_Address_Interface $address,
+	protected function buildXMLAddress( MShop_Order_Item_Base_Address_Interface $address,
 		DOMDocument $dom, DOMElement $addresslist )
 	{
 		$addressitem = $dom->createElement( 'addressitem' );
 
-		$this->_appendChildCDATA( 'type', $address->getType(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'salutation', $address->getSalutation(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'title', $address->getTitle(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'firstname', $address->getFirstname(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'lastname', $address->getLastname(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'company', $address->getCompany(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'address1', $address->getAddress1(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'address2', $address->getAddress2(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'address3', $address->getAddress3(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'postalcode', $address->getPostal(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'city', $address->getCity(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'state', $address->getState(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'countrycode', strtoupper( $address->getCountryId() ), $dom, $addressitem );
-		$this->_appendChildCDATA( 'email', $address->getEmail(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'phone', $address->getTelephone(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'vatid', $address->getVatID(), $dom, $addressitem );
+		$this->appendChildCDATA( 'type', $address->getType(), $dom, $addressitem );
+		$this->appendChildCDATA( 'salutation', $address->getSalutation(), $dom, $addressitem );
+		$this->appendChildCDATA( 'title', $address->getTitle(), $dom, $addressitem );
+		$this->appendChildCDATA( 'firstname', $address->getFirstname(), $dom, $addressitem );
+		$this->appendChildCDATA( 'lastname', $address->getLastname(), $dom, $addressitem );
+		$this->appendChildCDATA( 'company', $address->getCompany(), $dom, $addressitem );
+		$this->appendChildCDATA( 'address1', $address->getAddress1(), $dom, $addressitem );
+		$this->appendChildCDATA( 'address2', $address->getAddress2(), $dom, $addressitem );
+		$this->appendChildCDATA( 'address3', $address->getAddress3(), $dom, $addressitem );
+		$this->appendChildCDATA( 'postalcode', $address->getPostal(), $dom, $addressitem );
+		$this->appendChildCDATA( 'city', $address->getCity(), $dom, $addressitem );
+		$this->appendChildCDATA( 'state', $address->getState(), $dom, $addressitem );
+		$this->appendChildCDATA( 'countrycode', strtoupper( $address->getCountryId() ), $dom, $addressitem );
+		$this->appendChildCDATA( 'email', $address->getEmail(), $dom, $addressitem );
+		$this->appendChildCDATA( 'phone', $address->getTelephone(), $dom, $addressitem );
+		$this->appendChildCDATA( 'vatid', $address->getVatID(), $dom, $addressitem );
 
 		$addresslist->appendChild( $addressitem );
 	}
@@ -566,15 +566,15 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _buildXMLAdditional( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAdditional( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$additional = $dom->createElement( 'additional' );
-		$this->_appendChildCDATA( 'comment', '', $dom, $additional );
+		$this->appendChildCDATA( 'comment', '', $dom, $additional );
 
 		$couponItem = $dom->createElement( 'discount' );
 
 		foreach( $base->getCoupons() as $code => $products ) {
-			$this->_appendChildCDATA( 'code', $code, $dom, $couponItem );
+			$this->appendChildCDATA( 'code', $code, $dom, $couponItem );
 		}
 
 		$additional->appendChild( $couponItem );
@@ -591,7 +591,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * @param DOMElement $parent DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function _appendChildCDATA( $name, $value, DOMDocument $dom, DOMElement $parent )
+	protected function appendChildCDATA( $name, $value, DOMDocument $dom, DOMElement $parent )
 	{
 		$child = $dom->createElement( $name );
 		$child->appendChild( $dom->createCDATASection( $value ) );

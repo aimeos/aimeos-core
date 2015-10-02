@@ -74,7 +74,7 @@ class Controller_Jobs_Product_Export_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Product_Export_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/product/export/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product export job controller
@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Export_Factory
 		 * @see controller/jobs/product/export/decorators/excludes
 		 * @see controller/jobs/product/export/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/export' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/export' );
 	}
 }

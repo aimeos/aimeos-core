@@ -11,13 +11,13 @@
  */
 class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 {
-	private $_mysqlColumns = array(
+	private $mysqlColumns = array(
 		'level' => 'ALTER TABLE "mshop_locale_site" ADD "level" INTEGER NOT NULL',
 		'nleft' => 'ALTER TABLE "mshop_locale_site" ADD "nleft" INTEGER NOT NULL',
 		'nright' => 'ALTER TABLE "mshop_locale_site" ADD "nright" INTEGER NOT NULL',
 	);
 
-	private $_mysqlMigrate = array(
+	private $mysqlMigrate = array(
 		'insert' => '
 			INSERT INTO "mshop_locale_site" ("code", "label", "config", "status", "mtime", "ctime", "editor", "level", "nleft", "nright")
 			SELECT \'default\', \'Default\', \'{}\', 0, NOW(), NOW(), \'\', 0,
@@ -56,9 +56,9 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysqlColumns, $this->_mysqlMigrate );
+		$this->process( $this->mysqlColumns, $this->mysqlMigrate );
 	}
 
 
@@ -68,36 +68,36 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	 * @param array $colstmts Associative array of table name and lists of ALTER TABLE SQL statements to execute
 	 * @param array $migstmts Associative array of action and SQL statements for content migration to execute
 	 */
-	protected function _process( array $colstmts, array $migstmts )
+	protected function process( array $colstmts, array $migstmts )
 	{
 		$migrate = false;
-		$this->_msg( 'Changeing locale sites to tree of sites', 0 ); $this->_status( '' );
+		$this->msg( 'Changeing locale sites to tree of sites', 0 ); $this->status( '' );
 
 		foreach( $colstmts as $column => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking column "%1$s.%2$s": ', 'mshop_locale_site', $column ), 1 );
+			$this->msg( sprintf( 'Checking column "%1$s.%2$s": ', 'mshop_locale_site', $column ), 1 );
 
-			if( $this->_schema->tableExists( 'mshop_locale_site' ) === true
-				&& $this->_schema->columnExists( 'mshop_locale_site', $column ) === false )
+			if( $this->schema->tableExists( 'mshop_locale_site' ) === true
+				&& $this->schema->columnExists( 'mshop_locale_site', $column ) === false )
 			{
 				$migrate = true;
-				$this->_execute( $stmt );
-				$this->_status( 'added' );
+				$this->execute( $stmt );
+				$this->status( 'added' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 
 
 		if( $migrate === true )
 		{
-			$this->_msg( 'Migrating site items to tree structure', 1 );
+			$this->msg( 'Migrating site items to tree structure', 1 );
 
-			$this->_conn->create( $migstmts['insert'] )->execute();
+			$this->conn->create( $migstmts['insert'] )->execute();
 
-			$stmt = $this->_conn->create( $migstmts['search'] );
+			$stmt = $this->conn->create( $migstmts['search'] );
 			$result = $stmt->execute();
 			$sites = array();
 
@@ -109,7 +109,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 
 			if( $cnt > 0 )
 			{
-				$stmt = $this->_conn->create( $migstmts['update'] );
+				$stmt = $this->conn->create( $migstmts['update'] );
 
 				foreach( $sites as $key => $site )
 				{
@@ -126,11 +126,11 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 				$stmt->bind( 4, 'default' );
 				$stmt->execute()->finish();
 
-				$this->_status( 'done' );
+				$this->status( 'done' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_order" SET "type" = \'repeat\' WHERE "type" = \'0\'',
 		'UPDATE "mshop_order" SET "type" = \'web\' WHERE "type"=\'1\'',
 		'UPDATE "mshop_order" SET "type" = \'phone\' WHERE "type"=\'2\''
@@ -43,9 +43,9 @@ class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,31 +54,31 @@ class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating order type', 0 ); $this->_status( '' );
+		$this->msg( 'Migrating order type', 0 ); $this->status( '' );
 		$cntRows = 0;
 		$table = 'mshop_order';
 
-		$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-		if( $this->_schema->tableExists( $table ) === true )
+		if( $this->schema->tableExists( $table ) === true )
 		{
 			foreach( $stmts as $sql ) {
-				$stmt = $this->_conn->create( $sql );
+				$stmt = $this->conn->create( $sql );
 				$result = $stmt->execute();
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
 			if( $cntRows ) {
-				$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
+				$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 
 	}

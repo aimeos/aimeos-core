@@ -74,7 +74,7 @@ class Controller_Jobs_Order_Service_Async_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Service_Async_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/service/async/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order service async controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Service_Async_Factory
 		 * @see controller/jobs/order/service/async/decorators/excludes
 		 * @see controller/jobs/order/service/async/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/service/async' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/service/async' );
 	}
 }

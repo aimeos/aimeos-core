@@ -7,8 +7,8 @@
 
 class MAdmin_Log_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -19,7 +19,7 @@ class MAdmin_Log_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 1,
 			'siteid' => 2,
 			'facility' => 'UT facility',
@@ -32,7 +32,7 @@ class MAdmin_Log_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'editor foo'
 		);
 
-		$this->_object = new MAdmin_Log_Item_Default( $this->_values );
+		$this->object = new MAdmin_Log_Item_Default( $this->values );
 	}
 
 
@@ -44,104 +44,104 @@ class MAdmin_Log_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertEquals( 1, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->_object->setId( 1 );
-		$this->assertEquals( 1, $this->_object->getId() );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->object->setId( 1 );
+		$this->assertEquals( 1, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setId( 6 );
+		$this->object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setId( 'test' );
+		$this->object->setId( 'test' );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 2, $this->_object->getSiteId() );
+		$this->assertEquals( 2, $this->object->getSiteId() );
 	}
 
 
 	public function testGetFacility()
 	{
-		$this->assertEquals( 'UT facility', $this->_object->getFacility() );
+		$this->assertEquals( 'UT facility', $this->object->getFacility() );
 	}
 
 
 	public function testSetFacility()
 	{
-		$this->_object->setFacility( 'UT facility' );
-		$this->assertEquals( 'UT facility', $this->_object->getFacility() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setFacility( 'UT facility' );
+		$this->assertEquals( 'UT facility', $this->object->getFacility() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetPriority()
 	{
-		$this->assertEquals( 1, $this->_object->getPriority() );
+		$this->assertEquals( 1, $this->object->getPriority() );
 	}
 
 
 	public function testSetPriority()
 	{
-		$this->_object->setPriority( 1 );
-		$this->assertEquals( 1, $this->_object->getPriority() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setPriority( 1 );
+		$this->assertEquals( 1, $this->object->getPriority() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetMessage()
 	{
-		$this->assertEquals( 'unittest log message', $this->_object->getMessage() );
+		$this->assertEquals( 'unittest log message', $this->object->getMessage() );
 	}
 
 
 	public function testSetMessage()
 	{
-		$this->_object->setMessage( 'unittest log message' );
-		$this->assertEquals( 'unittest log message', $this->_object->getMessage() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setMessage( 'unittest log message' );
+		$this->assertEquals( 'unittest log message', $this->object->getMessage() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetRequest()
 	{
-		$this->assertEquals( 'UT request', $this->_object->getRequest() );
+		$this->assertEquals( 'UT request', $this->object->getRequest() );
 	}
 
 
 	public function testSetRequest()
 	{
-		$this->_object->setRequest( 'UT request' );
-		$this->assertEquals( 'UT request', $this->_object->getRequest() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setRequest( 'UT request' );
+		$this->assertEquals( 'UT request', $this->object->getRequest() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetTimestamp()
 	{
-		$this->assertEquals( '2010-01-01 00:00:00', $this->_object->getTimestamp() );
+		$this->assertEquals( '2010-01-01 00:00:00', $this->object->getTimestamp() );
 	}
 
 
@@ -174,9 +174,9 @@ class MAdmin_Log_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$list = $this->_object->toArray();
+		$list = $this->object->toArray();
 
-		$this->assertEquals( count( $this->_values ), count( $list ) );
+		$this->assertEquals( count( $this->values ), count( $list ) );
 
 		$this->assertEquals( 1, $list['log.id'] );
 		$this->assertEquals( 2, $list['log.siteid'] );

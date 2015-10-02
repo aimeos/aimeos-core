@@ -17,7 +17,7 @@
 class Controller_Common_Product_Import_Csv_Abstract
 	extends Controller_Jobs_Abstract
 {
-	private static $_types = array();
+	private static $types = array();
 
 
 	/**
@@ -27,7 +27,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param array $data Associative list of product codes and lists of CSV field indexes and their data
 	 * @return array Associative list of CSV field indexes and their converted data
 	 */
-	protected function _convertData( array $convlist, array $data )
+	protected function convertData( array $convlist, array $data )
 	{
 		foreach( $convlist as $idx => $converter )
 		{
@@ -50,9 +50,9 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param string|null Name of the cache implementation
 	 * @return Controller_Common_Product_Import_Csv_Cache_Interface Cache object
 	 */
-	protected function _getCache( $type, $name = null )
+	protected function getCache( $type, $name = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$iface = 'Controller_Common_Product_Import_Csv_Cache_Interface';
 
@@ -88,7 +88,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param array $convmap List of converter names for the values at the position in the CSV file
 	 * @return array Associative list of positions and converter objects
 	 */
-	protected function _getConverterList( array $convmap )
+	protected function getConverterList( array $convmap )
 	{
 		$convlist = array();
 
@@ -107,7 +107,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
 	 * @return array List of arrays with product codes as keys and list of values from the CSV file
 	 */
-	protected function _getData( MW_Container_Content_Interface $content, $maxcnt )
+	protected function getData( MW_Container_Content_Interface $content, $maxcnt )
 	{
 		$count = 0;
 		$data = array();
@@ -162,7 +162,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @return array Associative list of domains as keys ("item" is special for the product itself) and a list of
 	 * 	positions and the domain item keys as values.
 	 */
-	protected function _getDefaultMapping()
+	protected function getDefaultMapping()
 	{
 		return array(
 			'item' => array(
@@ -212,7 +212,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param array $list List of CSV fields with the CSV field position as key
 	 * @return Associative list of domain item keys and the converted values
 	 */
-	protected function _getMappedData( array $mapping, array $list )
+	protected function getMappedData( array $mapping, array $list )
 	{
 		$map = array();
 
@@ -235,9 +235,9 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param array $mapping Associative list of processor types as keys and index/data mappings as values
 	 * @return Controller_Common_Product_Import_Csv_Processor_Interface Processor object
 	 */
-	protected function _getProcessors( array $mappings )
+	protected function getProcessors( array $mappings )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$iface = 'Controller_Common_Product_Import_Csv_Processor_Interface';
 		$object = new Controller_Common_Product_Import_Csv_Processor_Done( $context, array() );
@@ -276,10 +276,10 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param array $domains List of domains whose items should be fetched too
 	 * @return array Associative list of product codes as key and product items as value
 	 */
-	protected function _getProducts( array $codes, array $domains )
+	protected function getProducts( array $codes, array $domains )
 	{
 		$result = array();
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
@@ -301,25 +301,25 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 * @param string $code Unique code of the type item
 	 * @return string Unique ID of the type item
 	 */
-	protected function _getTypeId( $path, $domain, $code )
+	protected function getTypeId( $path, $domain, $code )
 	{
-		if( !isset( self::$_types[$path][$domain] ) )
+		if( !isset( self::$types[$path][$domain] ) )
 		{
-			$manager = MShop_Factory::createManager( $this->_getContext(), $path );
+			$manager = MShop_Factory::createManager( $this->getContext(), $path );
 			$key = str_replace( '/', '.', $path );
 
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', $key . '.domain', $domain ) );
 
 			foreach( $manager->searchItems( $search ) as $id => $item ) {
-				self::$_types[$path][$domain][ $item->getCode() ] = $id;
+				self::$types[$path][$domain][ $item->getCode() ] = $id;
 			}
 		}
 
-		if( !isset( self::$_types[$path][$domain][$code] ) ) {
+		if( !isset( self::$types[$path][$domain][$code] ) ) {
 			throw new Controller_Jobs_Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $path ) );
 		}
 
-		return self::$_types[$path][$domain][$code];
+		return self::$types[$path][$domain][$code];
 	}
 }

@@ -11,9 +11,9 @@
  */
 class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
-	private $_address;
+	private $object;
+	private $values;
+	private $address;
 
 
 	/**
@@ -29,9 +29,9 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'pos' => 1,
 		);
 
-		$this->_address = new MShop_Common_Item_Address_Default( 'common.address.', $addressValues );
+		$this->address = new MShop_Common_Item_Address_Default( 'common.address.', $addressValues );
 
-		$this->_values = array(
+		$this->values = array(
 			'id' => 541,
 			'siteid' => 123,
 			'label' => 'unitObject',
@@ -63,7 +63,7 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Customer_Item_Default( $this->_address, $this->_values, array(), array(), 'mshop', null );
+		$this->object = new MShop_Customer_Item_Default( $this->address, $this->values, array(), array(), 'mshop', null );
 	}
 
 	/**
@@ -74,120 +74,120 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_address, $this->_values );
+		unset( $this->object, $this->address, $this->values );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 541, $this->_object->getId() );
+		$this->assertEquals( 541, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertNull( $this->_object->getId() );
+		$this->object->setId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 123, $this->_object->getSiteId() );
+		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'unitObject', $this->_object->getLabel() );
+		$this->assertEquals( 'unitObject', $this->object->getLabel() );
 	}
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'newName' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'newName', $this->_object->getLabel() );
+		$this->object->setLabel( 'newName' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'newName', $this->object->getLabel() );
 	}
 
 	public function testGetCode()
 	{
-		$this->assertEquals( '12345ABCDEF', $this->_object->getCode() );
+		$this->assertEquals( '12345ABCDEF', $this->object->getCode() );
 	}
 
 	public function testSetCode()
 	{
-		$this->_object->setCode( 'neuerUser@unittest.com' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'neuerUser@unittest.com', $this->_object->getCode() );
+		$this->object->setCode( 'neuerUser@unittest.com' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'neuerUser@unittest.com', $this->object->getCode() );
 	}
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetAndGetPassword()
 	{
-		$this->_object->setPassword( '08154712' );
-		$this->assertEquals( '08154712', $this->_object->getPassword() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setPassword( '08154712' );
+		$this->assertEquals( '08154712', $this->object->getPassword() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2010-01-01 00:00:00', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2010-01-01 00:00:00', $this->object->getTimeCreated() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2010-01-05 00:00:05', $this->_object->getTimeModified() );
+		$this->assertEquals( '2010-01-05 00:00:05', $this->object->getTimeModified() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 	public function testGetBirthday()
 	{
-		$this->assertEquals( '2010-01-01', $this->_object->getBirthday() );
+		$this->assertEquals( '2010-01-01', $this->object->getBirthday() );
 	}
 
 	public function testSetBirthday()
 	{
-		$this->_object->setBirthday( '2010-02-01' );
-		$this->assertEquals( '2010-02-01', $this->_object->getBirthday() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setBirthday( '2010-02-01' );
+		$this->assertEquals( '2010-02-01', $this->object->getBirthday() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDateVerified()
 	{
-		$this->assertEquals( null, $this->_object->getDateVerified() );
+		$this->assertEquals( null, $this->object->getDateVerified() );
 	}
 
 	public function testSetDateVerified()
 	{
-		$this->_object->setDateVerified( '2010-02-01' );
-		$this->assertEquals( '2010-02-01', $this->_object->getDateVerified() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setDateVerified( '2010-02-01' );
+		$this->assertEquals( '2010-02-01', $this->object->getDateVerified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetGroups()
 	{
 		$listValues = array( 'domain' => 'customer/group', 'refid' => 123 );
 		$listItems = array( 'customer/group' => array( new MShop_Common_Item_List_Default( '', $listValues ) ) );
-		$object = new MShop_Customer_Item_Default( $this->_address, array(), $listItems );
+		$object = new MShop_Customer_Item_Default( $this->address, array(), $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );
 	}
 
 	public function testGetPaymentAddress()
 	{
-		$address = $this->_object->getPaymentAddress();
+		$address = $this->object->getPaymentAddress();
 		$this->assertEquals( $address->getRefId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
@@ -211,9 +211,9 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetPaymentAddress()
 	{
-		$this->_address->setCompany( 'unitCompany0815' );
-		$this->_object->setPaymentAddress( $this->_address );
-		$this->assertEquals( $this->_address, $this->_object->getPaymentAddress() );
+		$this->address->setCompany( 'unitCompany0815' );
+		$this->object->setPaymentAddress( $this->address );
+		$this->assertEquals( $this->address, $this->object->getPaymentAddress() );
 	}
 
 
@@ -286,20 +286,20 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['customer.id'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['customer.label'] );
-		$this->assertEquals( $this->_object->getCode(), $arrayObject['customer.code'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['customer.status'] );
-		$this->assertEquals( $this->_object->getPassword(), $arrayObject['customer.password'] );
-		$this->assertEquals( $this->_object->getBirthday(), $arrayObject['customer.birthday'] );
-		$this->assertEquals( $this->_object->getDateVerified(), $arrayObject['customer.dateverified'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['customer.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['customer.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['customer.editor'] );
-		$address = $this->_object->getPaymentAddress();
+		$this->assertEquals( $this->object->getId(), $arrayObject['customer.id'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['customer.label'] );
+		$this->assertEquals( $this->object->getCode(), $arrayObject['customer.code'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['customer.status'] );
+		$this->assertEquals( $this->object->getPassword(), $arrayObject['customer.password'] );
+		$this->assertEquals( $this->object->getBirthday(), $arrayObject['customer.birthday'] );
+		$this->assertEquals( $this->object->getDateVerified(), $arrayObject['customer.dateverified'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['customer.editor'] );
+		$address = $this->object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), $arrayObject['customer.company'] );
 		$this->assertEquals( $address->getVatID(), $arrayObject['customer.vatid'] );
 		$this->assertEquals( $address->getSalutation(), $arrayObject['customer.salutation'] );
@@ -322,6 +322,6 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

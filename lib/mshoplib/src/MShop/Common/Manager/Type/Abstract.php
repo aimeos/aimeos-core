@@ -18,10 +18,10 @@ abstract class MShop_Common_Manager_Type_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Type_Interface
 {
-	private $_prefix;
-	private $_context;
-	private $_config;
-	private $_searchConfig;
+	private $prefix;
+	private $context;
+	private $config;
+	private $searchConfig;
 
 
 	/**
@@ -34,8 +34,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		$conf = $context->getConfig();
-		$confpath = $this->_getConfigPath();
-		$this->_config = array(
+		$confpath = $this->getConfigPath();
+		$this->config = array(
 			'insert' => $conf->get( $confpath . 'insert' ),
 			'update' => $conf->get( $confpath . 'update' ),
 			'delete' => $conf->get( $confpath . 'delete' ),
@@ -44,10 +44,10 @@ abstract class MShop_Common_Manager_Type_Abstract
 			'newid' => $conf->get( $confpath . 'newid' ),
 		);
 
-		$this->_searchConfig = $this->_getSearchConfig();
+		$this->searchConfig = $this->getSearchConfig();
 
 		$required = array( 'count', 'delete', 'insert', 'newid', 'search', 'update' );
-		$isList = array_keys( $this->_config );
+		$isList = array_keys( $this->config );
 
 		foreach( $required as $key )
 		{
@@ -58,9 +58,9 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 		parent::__construct( $context );
 
-		$this->_context = $context;
+		$this->context = $context;
 
-		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
@@ -68,7 +68,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
-		if( ( $this->_prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
+		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 	}
@@ -81,8 +81,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_context->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid' => $this->context->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -95,7 +95,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( substr( $this->_prefix, 0, strlen( $this->_prefix ) - 1 ) );
+			return $this->createSearchBase( substr( $this->prefix, 0, strlen( $this->prefix ) - 1 ) );
 		}
 
 		return parent::createSearch();
@@ -117,8 +117,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 		if( $item->isModified() === false ) { return; }
 
-		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->context->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -126,20 +126,20 @@ abstract class MShop_Common_Manager_Type_Abstract
 			$id = $item->getId();
 
 			if( $id === null ) {
-				$sql = $this->_config['insert'];
+				$sql = $this->config['insert'];
 			} else {
-				$sql = $this->_config['update'];
+				$sql = $this->config['update'];
 			}
 
 			$statement = $conn->create( $sql );
 
-			$statement->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 1, $this->context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 2, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 3, $item->getDomain(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 4, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 5, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 6, date( 'Y-m-d H:i:s', time() ) ); //mtime
-			$statement->bind( 7, $this->_context->getEditor() );
+			$statement->bind( 7, $this->context->getEditor() );
 
 			if( $id !== null ) {
 				$statement->bind( 8, $id, MW_DB_Statement_Abstract::PARAM_INT );
@@ -152,7 +152,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );
+					$item->setId( $this->newId( $conn, $this->config['newid'] ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -175,7 +175,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$this->deleteItemsBase( $ids, $this->config['delete'] );
 	}
 
 
@@ -189,7 +189,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		$conf = reset( $this->_searchConfig );
+		$conf = reset( $this->searchConfig );
 
 		$criteria = $this->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', $conf['code'], $id ) );
@@ -215,26 +215,26 @@ abstract class MShop_Common_Manager_Type_Abstract
 	{
 		$items = array();
 
-		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->context->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			$domain = explode( '.', $this->_prefix );
+			$domain = explode( '.', $this->prefix );
 
 			if( ( $topdomain = array_shift( $domain ) ) === null ) {
 				throw new MShop_Exception( 'No configuration available.' );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_config['search'];
-			$cfgPathCount = $this->_config['count'];
-			$required = array( trim( $this->_prefix, '.' ) );
+			$cfgPathSearch = $this->config['search'];
+			$cfgPathCount = $this->config['count'];
+			$required = array( trim( $this->prefix, '.' ) );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -254,14 +254,14 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
-	 * @deprecated Use _getSearchAttributes() instead
+	 * @deprecated Use getSearchAttributesBase() instead
 	 * @todo 2015.03 Remove method
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
 		$list = array();
 
-		foreach( $this->_searchConfig as $key => $fields ) {
+		foreach( $this->searchConfig as $key => $fields ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
@@ -278,7 +278,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'common', 'type/' . $manager, $name );
+		return $this->getSubManagerBase( 'common', 'type/' . $manager, $name );
 	}
 
 
@@ -287,7 +287,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 *
 	 * @return string Configuration path
 	 */
-	abstract protected function _getConfigPath();
+	abstract protected function getConfigPath();
 
 
 	/**
@@ -295,7 +295,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	abstract protected function _getSearchConfig();
+	abstract protected function getSearchConfig();
 
 
 	/**
@@ -309,9 +309,9 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 * @todo 2015.03 Remove method as it's a workaround for backward compatibility
 	 * @since 2014.09
 	 */
-	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		return parent::_getSearchAttributes( $this->_getSearchConfig(), $path, $default, $withsub );
+		return parent::getSearchAttributesBase( $this->getSearchConfig(), $path, $default, $withsub );
 	}
 
 
@@ -321,14 +321,14 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 * @param array $values Associative list of key/value pairs
 	 * @return MShop_Common_Item_Type_Default New type item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Common_Item_Type_Default( $this->_prefix, $values );
+		return new MShop_Common_Item_Type_Default( $this->prefix, $values );
 	}
 
 
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
-		return $this->_prefix;
+		return $this->prefix;
 	}
 }

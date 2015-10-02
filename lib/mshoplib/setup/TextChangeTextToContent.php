@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_TextChangeTextToContent extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_text" CHANGE "text" "content" TEXT NOT NULL DEFAULT \'\'',
 	);
 
@@ -40,9 +40,9 @@ class MW_Setup_Task_TextChangeTextToContent extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -51,19 +51,19 @@ class MW_Setup_Task_TextChangeTextToContent extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing mshop_text.text to mshop_text.content', 0 );
+		$this->msg( 'Changing mshop_text.text to mshop_text.content', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_text' ) === true
-			&& $this->_schema->columnExists( 'mshop_text', 'content' ) === false )
+		if( $this->schema->tableExists( 'mshop_text' ) === true
+			&& $this->schema->columnExists( 'mshop_text', 'content' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'migrated' );
+			$this->executeList( $stmts );
+			$this->status( 'migrated' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

@@ -33,7 +33,7 @@ abstract class MShop_Order_Item_Base_Address_Abstract extends MShop_Common_Item_
 	 * @param string $value Address type defined in MShop_Order_Item_Base_Address_Abstract
 	 * @throws MShop_Order_Exception If type is invalid
 	 */
-	protected function _checkType( $value )
+	protected function checkType( $value )
 	{
 		switch( $value )
 		{

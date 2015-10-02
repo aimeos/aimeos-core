@@ -8,9 +8,9 @@
 
 class Controller_Jobs_Product_Bought_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_aimeos;
+	private $object;
+	private $context;
+	private $aimeos;
 
 
 	/**
@@ -23,10 +23,10 @@ class Controller_Jobs_Product_Bought_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_aimeos = TestHelper::getAimeos();
+		$this->context = TestHelper::getContext();
+		$this->aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Product_Bought_Default( $this->_context, $this->_aimeos );
+		$this->object = new Controller_Jobs_Product_Bought_Default( $this->context, $this->aimeos );
 	}
 
 
@@ -41,35 +41,35 @@ class Controller_Jobs_Product_Bought_DefaultTest extends PHPUnit_Framework_TestC
 		MShop_Factory::setCache( false );
 		MShop_Factory::clear();
 
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Products bought together', $this->_object->getName() );
+		$this->assertEquals( 'Products bought together', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Creates bought together product suggestions';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$stub = $this->getMockBuilder( 'MShop_Product_Manager_List_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'deleteItems', 'saveItem' ) )
 			->getMock();
 
-		MShop_Factory::injectManager( $this->_context, 'product/list', $stub );
+		MShop_Factory::injectManager( $this->context, 'product/list', $stub );
 
 		$stub->expects( $this->atLeastOnce() )->method( 'deleteItems' );
 		$stub->expects( $this->atLeastOnce() )->method( 'saveItem' );
 
-		$this->_object->run();
+		$this->object->run();
 	}
 }

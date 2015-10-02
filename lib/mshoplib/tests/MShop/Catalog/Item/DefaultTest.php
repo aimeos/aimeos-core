@@ -10,10 +10,10 @@
  */
 class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_node;
-	private $_object;
-	private $_values;
-	private $_listItems;
+	private $node;
+	private $object;
+	private $values;
+	private $listItems;
 
 
 	/**
@@ -25,9 +25,9 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
-		$this->_listItems = array( 1 => new MShop_Common_Item_List_Default( 'catalog.list.', $listValues ) );
+		$this->listItems = array( 1 => new MShop_Common_Item_List_Default( 'catalog.list.', $listValues ) );
 
-		$this->_values = array(
+		$this->values = array(
 			'id' => 2,
 			'code' => 'unit-test',
 			'label' => 'unittest',
@@ -40,10 +40,10 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'hasChildren' => true
 		);
 
-		$this->_node = new MW_Tree_Node_Default( $this->_values );
-		$child = new MShop_Catalog_Item_Default( $this->_node );
+		$this->node = new MW_Tree_Node_Default( $this->values );
+		$child = new MShop_Catalog_Item_Default( $this->node );
 
-		$this->_object = new MShop_Catalog_Item_Default( $this->_node, array( $child ), $this->_listItems );
+		$this->object = new MShop_Catalog_Item_Default( $this->node, array( $child ), $this->listItems );
 	}
 
 
@@ -55,111 +55,111 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 2, $this->_object->getId() );
+		$this->assertEquals( 2, $this->object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId( 5 );
-		$this->assertEquals( 5, $this->_object->getId() );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->object->setId( 5 );
+		$this->assertEquals( 5, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'unit-test', $this->_object->getCode() );
+		$this->assertEquals( 'unit-test', $this->object->getCode() );
 	}
 
 
 	public function testSetCode()
 	{
-		$this->_object->setCode( 'unit test' );
-		$this->assertEquals( 'unit test', $this->_object->getCode() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setCode( 'unit test' );
+		$this->assertEquals( 'unit test', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'unittest', $this->_object->getLabel() );
+		$this->assertEquals( 'unittest', $this->object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'unit test' );
-		$this->assertEquals( 'unit test', $this->_object->getLabel() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLabel( 'unit test' );
+		$this->assertEquals( 'unit test', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array( 'testcategory' => '10' ), $this->_object->getConfig() );
+		$this->assertEquals( array( 'testcategory' => '10' ), $this->object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array( 'unitcategory' => '12' ) );
-		$this->assertEquals( array( 'unitcategory' => '12' ), $this->_object->getConfig() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setConfig( array( 'unitcategory' => '12' ) );
+		$this->assertEquals( array( 'unitcategory' => '12' ), $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetSiteid()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 
@@ -189,32 +189,32 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$values = $this->_object->toArray();
+		$values = $this->object->toArray();
 
-		$this->assertEquals( count( $this->_values ), count( $values ) );
+		$this->assertEquals( count( $this->values ), count( $values ) );
 
-		$this->assertEquals( $this->_values['id'], $values['catalog.id'] );
-		$this->assertEquals( $this->_values['label'], $values['catalog.label'] );
-		$this->assertEquals( $this->_values['config'], $values['catalog.config'] );
-		$this->assertEquals( $this->_values['status'], $values['catalog.status'] );
-		$this->assertEquals( $this->_values['siteid'], $values['catalog.siteid'] );
-		$this->assertEquals( $this->_values['code'], $values['catalog.code'] );
-		$this->assertEquals( $this->_values['ctime'], $values['catalog.ctime'] );
-		$this->assertEquals( $this->_values['mtime'], $values['catalog.mtime'] );
-		$this->assertEquals( $this->_values['editor'], $values['catalog.editor'] );
-		$this->assertEquals( $this->_values['hasChildren'], $values['catalog.hasChildren'] );
+		$this->assertEquals( $this->values['id'], $values['catalog.id'] );
+		$this->assertEquals( $this->values['label'], $values['catalog.label'] );
+		$this->assertEquals( $this->values['config'], $values['catalog.config'] );
+		$this->assertEquals( $this->values['status'], $values['catalog.status'] );
+		$this->assertEquals( $this->values['siteid'], $values['catalog.siteid'] );
+		$this->assertEquals( $this->values['code'], $values['catalog.code'] );
+		$this->assertEquals( $this->values['ctime'], $values['catalog.ctime'] );
+		$this->assertEquals( $this->values['mtime'], $values['catalog.mtime'] );
+		$this->assertEquals( $this->values['editor'], $values['catalog.editor'] );
+		$this->assertEquals( $this->values['hasChildren'], $values['catalog.hasChildren'] );
 	}
 
 
 	public function testHasChildren()
 	{
-		$this->assertTrue( $this->_object->hasChildren() );
+		$this->assertTrue( $this->object->hasChildren() );
 	}
 
 
 	public function testGetChildren()
 	{
-		$children = $this->_object->getChildren();
+		$children = $this->object->getChildren();
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
@@ -225,22 +225,22 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAddChild()
 	{
-		$this->_object->addChild( $this->_object );
-		$this->assertEquals( 2, count( $this->_object->getChildren() ) );
+		$this->object->addChild( $this->object );
+		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $this->_object->getChild( 0 ) );
+		$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $this->object->getChild( 0 ) );
 
 		$this->setExpectedException( 'MShop_Catalog_Exception' );
-		$this->_object->getChild( 1 );
+		$this->object->getChild( 1 );
 	}
 
 
 	public function testGetNode()
 	{
-		$this->assertInstanceOf( 'MW_Tree_Node_Interface', $this->_object->getNode() );
+		$this->assertInstanceOf( 'MW_Tree_Node_Interface', $this->object->getNode() );
 	}
 }

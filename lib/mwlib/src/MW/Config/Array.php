@@ -18,8 +18,8 @@ class MW_Config_Array
 	extends MW_Config_Abstract
 	implements MW_Config_Interface
 {
-	private $_config;
-	private $_paths;
+	private $config;
+	private $paths;
 
 
 	/**
@@ -30,8 +30,8 @@ class MW_Config_Array
 	 */
 	public function __construct( $config = array(), $paths = array() )
 	{
-		$this->_config = $config;
-		$this->_paths = (array) $paths;
+		$this->config = $config;
+		$this->paths = (array) $paths;
 	}
 
 
@@ -46,15 +46,15 @@ class MW_Config_Array
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
 
-		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+		if( ( $value = $this->getPart( $this->config, $parts ) ) !== null ) {
 			return $value;
 		}
 
-		foreach( $this->_paths as $fspath ) {
-			$this->_config = $this->_load( $this->_config, $fspath, $parts );
+		foreach( $this->paths as $fspath ) {
+			$this->config = $this->load( $this->config, $fspath, $parts );
 		}
 
-		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+		if( ( $value = $this->getPart( $this->config, $parts ) ) !== null ) {
 			return $value;
 		}
 
@@ -71,7 +71,7 @@ class MW_Config_Array
 	public function set( $name, $value )
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
-		$this->_config = $this->_set( $this->_config, $parts, $value );
+		$this->config = $this->setPart( $this->config, $parts, $value );
 	}
 
 
@@ -82,12 +82,12 @@ class MW_Config_Array
 	 * @param array $parts Configuration path parts to look for inside the array
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function _get( $config,  $parts )
+	protected function getPart( $config,  $parts )
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
 			if( count( $parts ) > 0 ) {
-				return $this->_get( $config[$current], $parts );
+				return $this->getPart( $config[$current], $parts );
 			}
 
 			return $config[$current];
@@ -104,14 +104,14 @@ class MW_Config_Array
 	 * @param array $path Configuration path parts
 	 * @param array $value The new value
 	 */
-	protected function _set( $config, $path, $value )
+	protected function setPart( $config, $path, $value )
 	{
 		if( ( $current = array_shift( $path ) ) !== null )
 		{
 			if( isset( $config[$current] ) ) {
-				$config[$current] = $this->_set( $config[$current], $path, $value );
+				$config[$current] = $this->setPart( $config[$current], $path, $value );
 			} else {
-				$config[$current] = $this->_set( array(), $path, $value );
+				$config[$current] = $this->setPart( array(), $path, $value );
 			}
 
 			return $config;
@@ -129,7 +129,7 @@ class MW_Config_Array
 	 * @param array $parts List of config name parts to look for
 	 * @return array Merged configuration
 	 */
-	protected function _load( array $config, $path, array $parts )
+	protected function load( array $config, $path, array $parts )
 	{
 		if( ( $key = array_shift( $parts ) ) !== null )
 		{
@@ -141,7 +141,7 @@ class MW_Config_Array
 					$config[$key] = array();
 				}
 
-				$config[$key] = $this->_load( $config[$key], $newPath, $parts );
+				$config[$key] = $this->load( $config[$key], $newPath, $parts );
 			}
 
 			if( file_exists( $newPath . '.php' ) )
@@ -150,7 +150,7 @@ class MW_Config_Array
 					$config[$key] = array();
 				}
 
-				$config[$key] = $this->_merge( $config[$key], $this->_include( $newPath . '.php' ) );
+				$config[$key] = $this->merge( $config[$key], $this->includeFile( $newPath . '.php' ) );
 			}
 		}
 
@@ -164,12 +164,12 @@ class MW_Config_Array
 	 * @param array $left Array to be merged into
 	 * @param array $right Array to merge in
 	 */
-	protected function _merge( array $left, array $right )
+	protected function merge( array $left, array $right )
 	{
 		foreach( $right as $key => $value )
 		{
 			if( isset( $left[$key] ) && is_array( $left[$key] ) && is_array( $value ) ) {
-				$left[$key] = $this->_merge( $left[$key], $value );
+				$left[$key] = $this->merge( $left[$key], $value );
 			} else {
 				$left[$key] = $value;
 			}

@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_Helper_Password_Default implements MShop_Common_Item_Helper_Password_Interface
 {
-	private $_options = array();
+	private $options = array();
 	
 
 	/**
@@ -26,7 +26,7 @@ class MShop_Common_Item_Helper_Password_Default implements MShop_Common_Item_Hel
 	 */
 	public function __construct( array $options )
 	{
-		$this->_options = $options;
+		$this->options = $options;
 	}
 
 
@@ -39,7 +39,7 @@ class MShop_Common_Item_Helper_Password_Default implements MShop_Common_Item_Hel
 	 */
 	public function encode( $password, $salt = null )
 	{
-		$format = ( isset( $this->_options['format'] ) ? $this->_options['format'] : '%1$s%2$s' );
+		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
 
 		return sha1( sprintf( $format, $password, $salt ) );
 	}

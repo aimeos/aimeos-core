@@ -11,12 +11,12 @@
  */
 class Aimeos
 {
-	private $_manifests = array();
-	private $_extensions = array();
-	private $_extensionsDone = array();
-	private $_dependencies = array();
-	private static $_includePaths = array();
-	private static $_autoloader = false;
+	private $manifests = array();
+	private $extensions = array();
+	private $extensionsDone = array();
+	private $dependencies = array();
+	private static $includePaths = array();
+	private static $autoloader = false;
 
 
 	/**
@@ -36,16 +36,16 @@ class Aimeos
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
-		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
+		$this->manifests[$basedir] = $this->getManifestFile( $basedir );
 
-		self::$_includePaths = $this->getIncludePaths();
-		$this->_registerAutoloader();
+		self::$includePaths = $this->getIncludePaths();
+		$this->registerAutoloader();
 
-		foreach( $this->_getManifests( $extdirs ) as $location => $manifest )
+		foreach( $this->getManifests( $extdirs ) as $location => $manifest )
 		{
-			if( isset( $this->_extensions[$manifest['name']] ) )
+			if( isset( $this->extensions[$manifest['name']] ) )
 			{
-				$location2 = $this->_extensions[$manifest['name']]['location'];
+				$location2 = $this->extensions[$manifest['name']]['location'];
 				$msg = 'Extension "%1$s" exists twice in "%2$s" and in "%3$s"';
 				throw new Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
 			}
@@ -55,15 +55,15 @@ class Aimeos
 			}
 
 			$manifest['location'] = $location;
-			$this->_extensions[$manifest['name']] = $manifest;
+			$this->extensions[$manifest['name']] = $manifest;
 
 			foreach( $manifest['depends'] as $name ) {
-				$this->_dependencies[$manifest['name']][$name] = $name;
+				$this->dependencies[$manifest['name']][$name] = $name;
 			}
 		}
 
-		$this->_addManifests( $this->_dependencies );
-		self::$_includePaths = $this->getIncludePaths();
+		$this->addManifests( $this->dependencies );
+		self::$includePaths = $this->getIncludePaths();
 	}
 
 
@@ -77,7 +77,7 @@ class Aimeos
 	{
 		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
-		foreach( self::$_includePaths as $path )
+		foreach( self::$includePaths as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $fileName;
 
@@ -108,7 +108,7 @@ class Aimeos
 	{
 		$paths = array();
 
-		foreach( $this->_manifests as $basePath => $manifest )
+		foreach( $this->manifests as $basePath => $manifest )
 		{
 			if( !isset( $manifest['i18n'] ) ) {
 				continue;
@@ -132,7 +132,7 @@ class Aimeos
 	{
 		$includes = array();
 
-		foreach( $this->_manifests as $path => $manifest )
+		foreach( $this->manifests as $path => $manifest )
 		{
 			if( !isset( $manifest['include'] ) ) {
 				continue;
@@ -157,7 +157,7 @@ class Aimeos
 	{
 		$confpaths = array();
 
-		foreach( $this->_manifests as $path => $manifest )
+		foreach( $this->manifests as $path => $manifest )
 		{
 			if( !isset( $manifest['config'][$dbtype] ) ) {
 				continue;
@@ -182,7 +182,7 @@ class Aimeos
 	{
 		$paths = array();
 
-		foreach( $this->_manifests as $path => $manifest )
+		foreach( $this->manifests as $path => $manifest )
 		{
 			if( isset( $manifest['custom'][$section] ) ) {
 				$paths[$path] = $manifest['custom'][$section];
@@ -203,7 +203,7 @@ class Aimeos
 	{
 		$setupPaths = array();
 
-		foreach( $this->_manifests as $path => $manifest )
+		foreach( $this->manifests as $path => $manifest )
 		{
 			if( !isset( $manifest['setup'] ) ) {
 				continue;
@@ -231,13 +231,13 @@ class Aimeos
 	 * @param array $directories List of directories where the manifest files are stored
 	 * @return array Associative list of directory / configuration array pairs
 	 */
-	protected function _getManifests( array $directories )
+	protected function getManifests( array $directories )
 	{
 		$manifests = array();
 
 		foreach( $directories as $directory )
 		{
-			$manifest = $this->_getManifestFile( $directory );
+			$manifest = $this->getManifestFile( $directory );
 
 			if( $manifest !== false )
 			{
@@ -253,7 +253,7 @@ class Aimeos
 					continue;
 				}
 
-				$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
+				$manifest = $this->getManifestFile( $dirinfo->getPathName() );
 				if( $manifest === false ) {
 					continue;
 				}
@@ -272,7 +272,7 @@ class Aimeos
 	 * @param string $dir Directory that includes the manifest file
 	 * @return array|false Associative list of configurations or false if the file doesn't exist
 	 */
-	protected function _getManifestFile( $dir )
+	protected function getManifestFile( $dir )
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
@@ -287,12 +287,12 @@ class Aimeos
 	/**
 	 * Registers the Aimeos autoloader.
 	 */
-	protected function _registerAutoloader()
+	protected function registerAutoloader()
 	{
-		if( self::$_autoloader === false )
+		if( self::$autoloader === false )
 		{
 			spl_autoload_register( array( $this, 'autoload' ), true, false );
-			self::$_autoloader = true;
+			self::$autoloader = true;
 		}
 	}
 
@@ -304,11 +304,11 @@ class Aimeos
 	 * @param array $stack List of task names that are scheduled after this task
 	 * @todo version checks
 	 */
-	private function _addManifests( array $deps, array $stack = array( ) )
+	private function addManifests( array $deps, array $stack = array( ) )
 	{
 		foreach( $deps as $extName => $name )
 		{
-			if( in_array( $extName, $this->_extensionsDone ) ) {
+			if( in_array( $extName, $this->extensionsDone ) ) {
 				continue;
 			}
 
@@ -320,15 +320,15 @@ class Aimeos
 			$stack[] = $extName;
 
 			/** @todo test for expression object or array when implementing version checks */
-			if( isset( $this->_dependencies[$extName] ) ) {
-				$this->_addManifests( (array) $this->_dependencies[$extName], $stack );
+			if( isset( $this->dependencies[$extName] ) ) {
+				$this->addManifests( (array) $this->dependencies[$extName], $stack );
 			}
 
-			if( isset( $this->_extensions[$extName] ) ) {
-				$this->_manifests[$this->_extensions[$extName]['location']] = $this->_extensions[$extName];
+			if( isset( $this->extensions[$extName] ) ) {
+				$this->manifests[$this->extensions[$extName]['location']] = $this->extensions[$extName];
 			}
 
-			$this->_extensionsDone[] = $extName;
+			$this->extensionsDone[] = $extName;
 		}
 	}
 }

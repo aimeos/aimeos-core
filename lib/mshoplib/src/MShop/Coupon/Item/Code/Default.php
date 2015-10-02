@@ -18,7 +18,7 @@ class MShop_Coupon_Item_Code_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Coupon_Item_Code_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the coupon code instance
@@ -29,7 +29,7 @@ class MShop_Coupon_Item_Code_Default
 	{
 		parent::__construct( 'coupon.code.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -40,7 +40,7 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function getCouponId()
 	{
-		return ( isset( $this->_values['couponid'] ) ? (int) $this->_values['couponid'] : null );
+		return ( isset( $this->values['couponid'] ) ? (int) $this->values['couponid'] : null );
 	}
 
 
@@ -53,7 +53,7 @@ class MShop_Coupon_Item_Code_Default
 	{
 		if( $id == $this->getCouponId() ) { return; }
 
-		$this->_values['couponid'] = (int) $id;
+		$this->values['couponid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -65,7 +65,7 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : null );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : null );
 	}
 
 
@@ -76,11 +76,11 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -92,7 +92,7 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function getCount()
 	{
-		return ( isset( $this->_values['count'] ) ? (int) $this->_values['count'] : 0 );
+		return ( isset( $this->values['count'] ) ? (int) $this->values['count'] : 0 );
 	}
 
 
@@ -105,7 +105,7 @@ class MShop_Coupon_Item_Code_Default
 	{
 		if( $count == $this->getCount() ) { return; }
 
-		$this->_values['count'] = (string) $count;
+		$this->values['count'] = (string) $count;
 		$this->setModified();
 	}
 
@@ -117,7 +117,7 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->_values['start'] ) ? (string) $this->_values['start'] : null );
+		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
 	}
 
 
@@ -130,9 +130,9 @@ class MShop_Coupon_Item_Code_Default
 	{
 		if( $date == $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['start'] = ( $date !== null ? (string) $date : null );
+		$this->values['start'] = ( $date !== null ? (string) $date : null );
 
 		$this->setModified();
 	}
@@ -145,7 +145,7 @@ class MShop_Coupon_Item_Code_Default
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->_values['end'] ) ? (string) $this->_values['end'] : null );
+		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
 	}
 
 
@@ -158,9 +158,9 @@ class MShop_Coupon_Item_Code_Default
 	{
 		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['end'] = ( $date !== null ? (string) $date : null );
+		$this->values['end'] = ( $date !== null ? (string) $date : null );
 
 		$this->setModified();
 	}

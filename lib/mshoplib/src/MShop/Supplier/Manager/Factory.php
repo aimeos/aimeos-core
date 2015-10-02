@@ -75,7 +75,7 @@ class MShop_Supplier_Manager_Factory
 		$iface = 'MShop_Supplier_Manager_Interface';
 		$classname = 'MShop_Supplier_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/supplier/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the supplier manager
@@ -151,7 +151,7 @@ class MShop_Supplier_Manager_Factory
 		 * @see mshop/supplier/manager/decorators/excludes
 		 * @see mshop/supplier/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'supplier' );
+		return self::addManagerDecorators( $context, $manager, 'supplier' );
 	}
 
 }

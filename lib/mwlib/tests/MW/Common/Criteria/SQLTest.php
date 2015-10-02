@@ -36,7 +36,7 @@ class Criteria_Plugin_SQLTest implements MW_Common_Criteria_Plugin_Interface
  */
 class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -55,7 +55,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$dbm = TestHelper::getDBManager();
 
 		$conn = $dbm->acquire();
-		$this->_object = new MW_Common_Criteria_SQL( $conn );
+		$this->object = new MW_Common_Criteria_SQL( $conn );
 		$dbm->release( $conn );
 	}
 
@@ -68,13 +68,13 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testCreateFunction()
 	{
-		$func = $this->_object->createFunction( 'test', array( 1, 2, 3 ) );
+		$func = $this->object->createFunction( 'test', array( 1, 2, 3 ) );
 		$this->assertEquals( 'test(1,2,3)', $func );
 	}
 
@@ -86,26 +86,26 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 			'compare' => array( '==', '!=', '~=', '>=', '<=', '>', '<', '&', '|', '=~' ),
 			'sort' => array( '+', '-' ),
 		);
-		$actual = $this->_object->getOperators();
+		$actual = $this->object->getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_SQL', $this->_object->combine( '||', array() ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_SQL', $this->object->combine( '||', array() ) );
 	}
 
 
 	public function testCompare()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_SQL', $this->_object->compare( '!=', 'name', 'value' ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_SQL', $this->object->compare( '!=', 'name', 'value' ) );
 	}
 
 
 	public function testSort()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Sort_SQL', $this->_object->sort( '+', 'name' ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Sort_SQL', $this->object->sort( '+', 'name' ) );
 	}
 
 
@@ -115,40 +115,40 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new Criteria_Plugin_SQLTest() );
 
-		$this->assertEquals( "1 = 1", $this->_object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "1 = 1", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', 'a' ), $this->_object->compare( '==', 'str_column', 'test' ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 10 AND str_col = 'test' )", $this->_object->getConditionString( $types, $translations, $plugins ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 'a' ), $this->object->compare( '==', 'str_column', 'test' ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col = 10 AND str_col = 'test' )", $this->object->getConditionString( $types, $translations, $plugins ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', array( 1, 2, 4, 8 ) ), $this->_object->compare( '==', 'str_column', 'test' ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col IN (1,2,4,8) AND str_col = 'test' )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'int_column', array( 1, 2, 4, 8 ) ), $this->object->compare( '==', 'str_column', 'test' ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col IN (1,2,4,8) AND str_col = 'test' )", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', 1 ), $this->_object->compare( '~=', 'str_column', array( 't1', 't2', 't3' ) ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' OR str_col LIKE '%t2%' OR str_col LIKE '%t3%') )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '~=', 'str_column', array( 't1', 't2', 't3' ) ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' OR str_col LIKE '%t2%' OR str_col LIKE '%t3%') )", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', 1 ), $this->_object->compare( '!=', 'int_column', 2 ) );
-		$this->_object->setConditions( $this->_object->combine( '!', array( $this->_object->combine( '&&', $expr ) ) ) );
-		$this->assertEquals( " NOT ( int_col = 1 AND int_col <> 2 )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '!=', 'int_column', 2 ) );
+		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );
+		$this->assertEquals( " NOT ( int_col = 1 AND int_col <> 2 )", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', null ), $this->_object->compare( '!=', 'str_column', null ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col IS NULL AND str_col IS NOT NULL )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'int_column', null ), $this->object->compare( '!=', 'str_column', null ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col IS NULL AND str_col IS NOT NULL )", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'int_column', 1 ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 1 ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col = 1 )", $this->object->getConditionString( $types, $translations ) );
 
-		$expr = array( $this->_object->compare( '==', 'str_column', 'test' ) );
-		$expr = array( $this->_object->compare( '==', 'int_column', 1 ), $this->_object->combine( '&&', $expr ) );
-		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->_object->getConditionString( $types, $translations ) );
+		$expr = array( $this->object->compare( '==', 'str_column', 'test' ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionString( $types, $translations ) );
 
 		$types = array( 'column' => MW_DB_Statement_Abstract::PARAM_BOOL);
-		$this->_object->setConditions( $this->_object->compare( '==', 'column', 1 ) );
-		$this->assertEquals( "column = 1", $this->_object->getConditionString( $types ) );
+		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
+		$this->assertEquals( "column = 1", $this->object->getConditionString( $types ) );
 	}
 
 
@@ -157,10 +157,10 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		// test exception in _createTerm:  'null value not allowed for operator'
 		$types = array( 'str_column' => MW_DB_Statement_Abstract::PARAM_STR );
 
-		$this->_object->setConditions( $this->_object->compare( '~=', 'str_column', null ) );
+		$this->object->setConditions( $this->object->compare( '~=', 'str_column', null ) );
 
 		$this->setExpectedException('MW_Common_Exception');
-		$this->_object->getConditionString( $types );
+		$this->object->getConditionString( $types );
 	}
 
 
@@ -168,26 +168,26 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 	{
 		$types = array( 'int_column' => MW_DB_Statement_Abstract::PARAM_INT );
 
-		$this->_object->setConditions( $this->_object->compare( '==', 'icol', 10 ) );
+		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
 		$this->setExpectedException('MW_Common_Exception');
-		$this->_object->getConditionString( $types );
+		$this->object->getConditionString( $types );
 	}
 
 
 	public function testGetConditionStringInvalidOperator()
 	{
 		$this->setExpectedException('MW_Common_Exception');
-		$this->_object->setConditions( $this->_object->compare( '?', 'int_column', 10 ) );
+		$this->object->setConditions( $this->object->compare( '?', 'int_column', 10 ) );
 	}
 
 
 	public function testGetConditions()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_SQL', $this->_object->getConditions() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_SQL', $this->object->getConditions() );
 
-		$conditions = $this->_object->compare( '==', 'int_column', 10 );
-		$this->_object->setConditions( $conditions );
-		$this->assertEquals( $conditions, $this->_object->getConditions() );
+		$conditions = $this->object->compare( '==', 'int_column', 10 );
+		$this->object->setConditions( $conditions );
+		$this->assertEquals( $conditions, $this->object->getConditions() );
 	}
 
 
@@ -197,10 +197,10 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
 
 		$sortations = array();
-		$sortations[] = $this->_object->sort( '+', 'asc_column' );
-		$sortations[] = $this->_object->sort( '-', 'desc_column' );
-		$this->_object->setSortations( $sortations );
-		$this->assertEquals( 'asc_int_col ASC, desc_str_col DESC', $this->_object->getSortationString( $types, $translations ) );
+		$sortations[] = $this->object->sort( '+', 'asc_column' );
+		$sortations[] = $this->object->sort( '-', 'desc_column' );
+		$this->object->setSortations( $sortations );
+		$this->assertEquals( 'asc_int_col ASC, desc_str_col DESC', $this->object->getSortationString( $types, $translations ) );
 	}
 
 
@@ -209,16 +209,16 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$types = array( 'asc_column' => MW_DB_Statement_Abstract::PARAM_INT );
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
-		$this->_object->setSortations( array( $this->_object->sort( '+', 'asc_col' ) ) );
+		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
 		$this->setExpectedException('MW_Common_Exception');
-		$this->_object->getSortationString( $types, $translations );
+		$this->object->getSortationString( $types, $translations );
 	}
 
 
 	public function testGetSortationStringInvalidDirection()
 	{
 		$this->setExpectedException('MW_Common_Exception');
-		$this->_object->setSortations( array( $this->_object->sort( '/', 'asc_column' ) ) );
+		$this->object->setSortations( array( $this->object->sort( '/', 'asc_column' ) ) );
 	}
 
 
@@ -226,38 +226,38 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 	{
 		$types = array( 'asc_column' => MW_DB_Statement_Abstract::PARAM_INT, 'desc_column' => MW_DB_Statement_Abstract::PARAM_STR );
 
-		$this->assertEquals('asc_column ASC', $this->_object->getSortationString( $types ) );
+		$this->assertEquals('asc_column ASC', $this->object->getSortationString( $types ) );
 
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
-		$this->assertEquals('asc_int_col ASC', $this->_object->getSortationString( $types, $translations ));
+		$this->assertEquals('asc_int_col ASC', $this->object->getSortationString( $types, $translations ));
 	}
 
 
 	public function testGetSortations()
 	{
-		$this->assertEquals( array(), $this->_object->getSortations() );
+		$this->assertEquals( array(), $this->object->getSortations() );
 
-		$sortations = array( $this->_object->sort( '+', 'asc_column' ) );
-		$this->_object->setSortations( $sortations );
-		$this->assertEquals( $sortations, $this->_object->getSortations() );
+		$sortations = array( $this->object->sort( '+', 'asc_column' ) );
+		$this->object->setSortations( $sortations );
+		$this->assertEquals( $sortations, $this->object->getSortations() );
 	}
 
 
 	public function testSlice()
 	{
-		$this->assertEquals( 0, $this->_object->getSliceStart() );
-		$this->assertEquals( 100, $this->_object->getSliceSize() );
+		$this->assertEquals( 0, $this->object->getSliceStart() );
+		$this->assertEquals( 100, $this->object->getSliceSize() );
 
-		$this->_object->setSlice( 10, 20 );
+		$this->object->setSlice( 10, 20 );
 
-		$this->assertEquals( 10, $this->_object->getSliceStart() );
-		$this->assertEquals( 20, $this->_object->getSliceSize() );
+		$this->assertEquals( 10, $this->object->getSliceStart() );
+		$this->assertEquals( 20, $this->object->getSliceSize() );
 	}
 
 
 	public function testToConditionsEmptyArray()
 	{
-		$condition = $this->_object->toConditions( array() );
+		$condition = $this->object->toConditions( array() );
 		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_SQL', $condition );
 	}
 
@@ -265,7 +265,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 	public function testToConditionsInvalidOperator()
 	{
 		$this->setExpectedException( 'MW_Common_Exception' );
-		$this->_object->toConditions( array( '><' => array( 'name', 'value' ) ) );
+		$this->object->toConditions( array( '><' => array( 'name', 'value' ) ) );
 	}
 
 
@@ -275,7 +275,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 			'==' => array( 'name' => 'value' ),
 		);
 
-		$condition = $this->_object->toConditions( $array );
+		$condition = $this->object->toConditions( $array );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Interface', $condition );
 		$this->assertEquals( '==', $condition->getOperator() );
@@ -297,7 +297,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$condition = $this->_object->toConditions( $array );
+		$condition = $this->object->toConditions( $array );
 		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Interface', $condition );
 		$this->assertEquals( '&&', $condition->getOperator() );
 		$this->assertEquals( 2, count( $condition->getExpressions() ) );
@@ -319,7 +319,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 			'name2' => '-',
 		);
 
-		$sortations = $this->_object->toSortations( $array );
+		$sortations = $this->object->toSortations( $array );
 		$this->assertEquals( 2, count( $sortations ) );
 
 		foreach( $sortations as $sort ) {

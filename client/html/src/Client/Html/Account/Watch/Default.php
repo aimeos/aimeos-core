@@ -51,9 +51,9 @@ class Client_Html_Account_Watch_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/account/watch/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/account/watch/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
 
 	/**
@@ -66,32 +66,32 @@ class Client_Html_Account_Watch_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->watchBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -125,7 +125,7 @@ class Client_Html_Account_Watch_Default
 		$tplconf = 'client/html/account/watch/default/template-body';
 		$default = 'account/watch/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -141,10 +141,10 @@ class Client_Html_Account_Watch_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->watchHeader = $html;
@@ -173,11 +173,11 @@ class Client_Html_Account_Watch_Default
 			$tplconf = 'client/html/account/watch/default/template-header';
 			$default = 'account/watch/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -265,7 +265,7 @@ class Client_Html_Account_Watch_Default
 		 * @see client/html/account/watch/decorators/global
 		 */
 
-		return $this->_createSubClient( 'account/watch/' . $type, $name );
+		return $this->createSubClient( 'account/watch/' . $type, $name );
 	}
 
 
@@ -277,12 +277,12 @@ class Client_Html_Account_Watch_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$ids = $view->param( 'wat_id', array() );
 
 		if( $context->getUserId() != null && !empty( $ids ) )
 		{
-			$typeItem = $this->_getTypeItem( 'customer/list/type', 'product', 'watch' );
+			$typeItem = $this->getTypeItem( 'customer/list/type', 'product', 'watch' );
 			$manager = MShop_Factory::createManager( $context, 'customer/list' );
 
 			$search = $manager->createSearch();
@@ -416,9 +416,9 @@ class Client_Html_Account_Watch_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -428,7 +428,7 @@ class Client_Html_Account_Watch_Default
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page number starting from 1
 	 */
-	protected function _getProductListPage( MW_View_Interface $view )
+	protected function getProductListPage( MW_View_Interface $view )
 	{
 		$page = (int) $view->param( 'wat_page', 1 );
 		return ( $page < 1 ? 1 : $page );
@@ -441,7 +441,7 @@ class Client_Html_Account_Watch_Default
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page size
 	 */
-	protected function _getProductListSize( MW_View_Interface $view )
+	protected function getProductListSize( MW_View_Interface $view )
 	{
 		/** client/html/account/watch/size
 		 * The number of products shown in a list page for watch products
@@ -462,7 +462,7 @@ class Client_Html_Account_Watch_Default
 		 * @category Developer
 		 * @see client/html/catalog/list/size
 		 */
-		$defaultSize = $this->_getContext()->getConfig()->get( 'client/html/account/watch/size', 48 );
+		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/account/watch/size', 48 );
 
 		$size = (int) $view->param( 'watch-size', $defaultSize );
 		return ( $size < 1 || $size > 100 ? $defaultSize : $size );
@@ -477,17 +477,17 @@ class Client_Html_Account_Watch_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$total = 0;
 			$productIds = array();
-			$context = $this->_getContext();
-			$typeItem = $this->_getTypeItem( 'customer/list/type', 'product', 'watch' );
+			$context = $this->getContext();
+			$typeItem = $this->getTypeItem( 'customer/list/type', 'product', 'watch' );
 
-			$size = $this->_getProductListSize( $view );
-			$current = $this->_getProductListPage( $view );
+			$size = $this->getProductListSize( $view );
+			$current = $this->getProductListPage( $view );
 			$last = ( $total != 0 ? ceil( $total / $size ) : 1 );
 
 
@@ -538,9 +538,9 @@ class Client_Html_Account_Watch_Default
 			$view->watchPageLast = $last;
 			$view->watchPageCurr = $current;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

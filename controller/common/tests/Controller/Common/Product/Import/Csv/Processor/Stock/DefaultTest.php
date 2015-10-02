@@ -8,16 +8,16 @@
 
 class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_endpoint;
+	private $context;
+	private $endpoint;
 
 
 	protected function setUp()
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->_context, array() );
+		$this->context = TestHelper::getContext();
+		$this->endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
 	}
 
 
@@ -40,13 +40,13 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 			1 => '2000-01-01 00:00:00',
 		);
 
-		$product = $this->_create( 'job_csv_test' );
+		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
-		$items = $this->_getStockItems( $product->getId() );
-		$this->_delete( $product );
+		$items = $this->getStockItems( $product->getId() );
+		$this->delete( $product );
 
 
 		$this->assertEquals( 1, count( $items ) );
@@ -75,13 +75,13 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 			3 => '200',
 		);
 
-		$product = $this->_create( 'job_csv_test' );
+		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
-		$items = $this->_getStockItems( $product->getId() );
-		$this->_delete( $product );
+		$items = $this->getStockItems( $product->getId() );
+		$this->delete( $product );
 
 
 		$this->assertEquals( 2, count( $items ) );
@@ -106,15 +106,15 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 			0 => '20',
 		);
 
-		$product = $this->_create( 'job_csv_test' );
+		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, $mapping, $this->endpoint );
 
 		$result = $object->process( $product, $data );
 		$result = $object->process( $product, $dataUpdate );
 
-		$items = $this->_getStockItems( $product->getId() );
-		$this->_delete( $product );
+		$items = $this->getStockItems( $product->getId() );
+		$this->delete( $product );
 
 
 		$item = reset( $items );
@@ -134,16 +134,16 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 			0 => 50,
 		);
 
-		$product = $this->_create( 'job_csv_test' );
+		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, array(), $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, array(), $this->endpoint );
 		$result = $object->process( $product, array() );
 
-		$items = $this->_getStockItems( $product->getId() );
-		$this->_delete( $product );
+		$items = $this->getStockItems( $product->getId() );
+		$this->delete( $product );
 
 
 		$this->assertEquals( 0, count( $items ) );
@@ -164,13 +164,13 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 			2 => '',
 		);
 
-		$product = $this->_create( 'job_csv_test' );
+		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->_context, $mapping, $this->_endpoint );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Stock_Default( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
-		$items = $this->_getStockItems( $product->getId() );
-		$this->_delete( $product );
+		$items = $this->getStockItems( $product->getId() );
+		$this->delete( $product );
 
 		$this->assertEquals( 1, count( $items ) );
 
@@ -182,9 +182,9 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 	}
 
 
-	protected function _create( $code )
+	protected function create( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$typeSearch = $typeManager->createSearch();
@@ -205,16 +205,16 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 	}
 
 
-	protected function _delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Interface $product )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$manager->deleteItem( $product->getId() );
 	}
 
 
-	protected function _getStockItems( $prodid )
+	protected function getStockItems( $prodid )
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'product/stock' );
+		$manager = MShop_Factory::createManager( $this->context, 'product/stock' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.stock.productid', $prodid ) );

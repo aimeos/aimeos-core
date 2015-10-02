@@ -24,7 +24,7 @@ abstract class MW_Common_Manager_Abstract
 	 * 	and 'internaltype' keys
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
-	protected function _getSearchTypes( array $attributes )
+	protected function getSearchTypes( array $attributes )
 	{
 		$types = array();
 		$iface = 'MW_Common_Criteria_Attribute_Interface';
@@ -52,7 +52,7 @@ abstract class MW_Common_Manager_Abstract
 	 * 	and 'internalcode' keys
 	 * @return array Associative array of attribute code and internal attribute code
 	 */
-	protected function _getSearchTranslations( array $attributes )
+	protected function getSearchTranslations( array $attributes )
 	{
 		$translations = array();
 		$iface = 'MW_Common_Criteria_Attribute_Interface';

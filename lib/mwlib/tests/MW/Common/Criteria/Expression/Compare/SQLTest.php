@@ -8,7 +8,7 @@
  */
 class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_conn = null;
+	private $conn = null;
 
 
 	/**
@@ -25,7 +25,7 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 
 
 		$dbm = TestHelper::getDBManager();
-		$this->_conn = $dbm->acquire();
+		$this->conn = $dbm->acquire();
 	}
 
 	/**
@@ -37,7 +37,7 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	protected function tearDown()
 	{
 		$dbm = TestHelper::getDBManager();
-		$dbm->release( $this->_conn );
+		$dbm->release( $this->conn );
 	}
 
 
@@ -57,19 +57,19 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'name', 'value' );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( '==', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'name', 'value' );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( 'name', $expr->getName() );
 	}
 
 	public function testGetValue()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'name', 'value' );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
 
@@ -93,31 +93,31 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 			'bool' => 't.bool',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'list', array('a', 'b', 'c') );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
 		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '!=', 'list', array('a', 'b', 'c') );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '~=', 'string', 'value' );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '~=', 'string', 'value' );
 		$this->assertEquals( "t.string LIKE '%value%'", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '<', 'float', 0.1 );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '>', 'int', 10 );
+		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '>', 'int', 10 );
 		$this->assertEquals( "t.int > 10", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '!=', 'undefined', null );
+		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '!=', 'undefined', null );
 		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'bool', true );
+		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 1", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '&', 'int', 0x2 );
+		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '&', 'int', 0x2 );
 		$this->assertEquals( "t.int & 2", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '|', 'int', 0x4 );
+		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '|', 'int', 0x4 );
 		$this->assertEquals( "t.int | 4", $expr->toString( $types, $translations ) );
 	}
 
@@ -135,16 +135,16 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 			'lcounter()' => 'count(name IN ($1))',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'pcounter("name",10,0.1)', 3 );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'pcounter("name",10,0.1)', 3 );
 		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '~=', 'strconcat("hello","world")', 'low' );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
 		$this->assertEquals( "concat('hello','world') LIKE '%low%'", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
 		$this->assertEquals( "count(name IN ('a','b','c','''d')) = 4", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, '==', 'lcounter([])', 0 );
+		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'lcounter([])', 0 );
 		$this->assertEquals( "count(name IN ()) = 0", $expr->toString( $types, $translations ) );
 	}
 }

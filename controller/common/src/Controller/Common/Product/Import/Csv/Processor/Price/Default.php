@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_listTypes;
+	private $listTypes;
 
 
 	/**
@@ -52,7 +52,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 		 * @see controller/common/product/import/csv/processor/product/listtypes
 		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/price/listtypes' );
+		$this->listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/price/listtypes' );
 	}
 
 
@@ -65,19 +65,19 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$listManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'price' );
 		$manager->begin();
 
 		try
 		{
 			$listItems = $product->getListItems( 'price' );
-			$map = $this->_getMappedChunk( $data );
+			$map = $this->getMappedChunk( $data );
 
 			foreach( $map as $pos => $list )
 			{
 				if( !isset( $list['price.value'] ) || $list['price.value'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -90,19 +90,19 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 				}
 
 				$typecode = ( isset( $list['price.type'] ) ? $list['price.type'] : 'default' );
-				$list['price.typeid'] = $this->_getTypeId( 'price/type', 'product', $typecode );
+				$list['price.typeid'] = $this->getTypeId( 'price/type', 'product', $typecode );
 				$list['price.domain'] = 'product';
 
-				$refItem->fromArray( $this->_addItemDefaults( $list ) );
+				$refItem->fromArray( $this->addItemDefaults( $list ) );
 				$manager->saveItem( $refItem );
 
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-				$list['product.list.typeid'] = $this->_getTypeId( 'product/list/type', 'price', $typecode );
+				$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'price', $typecode );
 				$list['product.list.parentid'] = $product->getId();
 				$list['product.list.refid'] = $refItem->getId();
 				$list['product.list.domain'] = 'price';
 
-				$listItem->fromArray( $this->_addListItemDefaults( $list, $pos ) );
+				$listItem->fromArray( $this->addListItemDefaults( $list, $pos ) );
 				$listManager->saveItem( $listItem );
 			}
 
@@ -112,7 +112,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 				$listManager->deleteItem( $listItem->getId() );
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -132,10 +132,10 @@ class Controller_Common_Product_Import_Csv_Processor_Price_Default
 	 * @param array $list Associative list of domain item keys and their values, e.g. "price.status" => 1
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addItemDefaults( array $list )
+	protected function addItemDefaults( array $list )
 	{
 		if( !isset( $list['price.currencyid'] ) ) {
-			$list['price.currencyid'] = $this->_getContext()->getLocale()->getCurrencyId();
+			$list['price.currencyid'] = $this->getContext()->getLocale()->getCurrencyId();
 		}
 
 		if( !isset( $list['price.label'] ) ) {

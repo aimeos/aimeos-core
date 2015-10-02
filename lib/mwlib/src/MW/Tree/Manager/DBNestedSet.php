@@ -16,10 +16,10 @@
  */
 class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 {
-	private $_searchConfig = array();
-	private $_config;
-	private $_dbname;
-	private $_dbm;
+	private $searchConfig = array();
+	private $config;
+	private $dbname;
+	private $dbm;
 
 
 	/**
@@ -82,13 +82,13 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			throw new MW_Tree_Exception( 'SQL config is missing' );
 		}
 
-		$this->_checkSearchConfig( $config['search'] );
-		$this->_checkSqlConfig( $config['sql'] );
+		$this->checkSearchConfig( $config['search'] );
+		$this->checkSqlConfig( $config['sql'] );
 
-		$this->_dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
-		$this->_searchConfig = $config['search'];
-		$this->_config = $config['sql'];
-		$this->_dbm = $resource;
+		$this->dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
+		$this->searchConfig = $config['search'];
+		$this->config = $config['sql'];
+		$this->dbm = $resource;
 	}
 
 
@@ -101,7 +101,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	{
 		$attributes = array();
 
-		foreach( $this->_searchConfig as $values ) {
+		foreach( $this->searchConfig as $values ) {
 			$attributes[] = new MW_Common_Criteria_Attribute_Default( $values );
 		}
 
@@ -116,9 +116,9 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function createSearch()
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 		$search = new MW_Common_Criteria_SQL( $conn );
-		$this->_dbm->release( $conn, $this->_dbname );
+		$this->dbm->release( $conn, $this->dbname );
 
 		return $search;
 	}
@@ -131,7 +131,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function createNode()
 	{
-		return $this->_createNode();
+		return $this->createNodeBase();
 	}
 
 
@@ -144,35 +144,35 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	{
 		$node = $this->getNode( $id, MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( $this->_config['delete'] );
+			$stmt = $conn->create( $this->config['delete'] );
 			$stmt->bind( 1, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$diff = $node->right - $node->left + 1;
 
-			$stmt = $conn->create( $this->_config['move-left'] );
+			$stmt = $conn->create( $this->config['move-left'] );
 			$stmt->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $node->right + 1, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$stmt = $conn->create( $this->_config['move-right'] );
+			$stmt = $conn->create( $this->config['move-right'] );
 			$stmt->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $node->right + 1, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -190,7 +190,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	{
 		if( $id === null )
 		{
-			if( ( $node = $this->_getRootNode() ) === null ) {
+			if( ( $node = $this->getRootNode() ) === null ) {
 				throw new MW_Tree_Exception( 'No root node available' );
 			}
 
@@ -200,7 +200,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 		else
 		{
-			$node = $this->_getNodeById( $id );
+			$node = $this->getNodeById( $id );
 
 			if( $level === MW_Tree_Manager_Abstract::LEVEL_ONE ) {
 				return $node;
@@ -210,7 +210,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		$id = $node->getId();
 
-		$numlevel = $this->_getLevelFromConstant( $level );
+		$numlevel = $this->getLevelFromConstant( $level );
 		$search = $this->createSearch();
 
 		if( $condition !== null )
@@ -222,16 +222,16 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$search->setConditions( $search->combine('&&', $expr) );
 		}
 
-		$types = $this->_getSearchTypes( $this->_searchConfig );
-		$translations = $this->_getSearchTranslations( $this->_searchConfig );
+		$types = $this->getSearchTypes( $this->searchConfig );
+		$translations = $this->getSearchTranslations( $this->searchConfig );
 		$conditions = $search->getConditionString( $types, $translations );
 
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_config['get'] ) );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
 			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $numlevel, MW_DB_Statement_Abstract::PARAM_INT );
 			$result = $stmt->execute();
@@ -240,14 +240,14 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 				throw new MW_Tree_Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 			}
 
-			$node = $this->_createNode( $row );
-			$this->_createTree( $result, $node );
+			$node = $this->createNodeBase( $row );
+			$this->createTree( $result, $node );
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 
@@ -287,7 +287,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->level = 0;
 			$node->parentid = 0;
 
-			if( ( $root = $this->_getRootNode( '-' ) ) !== null )
+			if( ( $root = $this->getRootNode( '-' ) ) !== null )
 			{
 				$node->left = $root->right + 1;
 				$node->right = $root->right + 2;
@@ -295,24 +295,24 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( $this->_config['move-left'] );
+			$stmt = $conn->create( $this->config['move-left'] );
 			$stmt->bind( 1, 2, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$stmt = $conn->create( $this->_config['move-right'] );
+			$stmt = $conn->create( $this->config['move-right'] );
 			$stmt->bind( 1, 2, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$stmt = $conn->create( $this->_config['insert'] );
+			$stmt = $conn->create( $this->config['insert'] );
 			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Abstract::PARAM_BOOL );
@@ -323,7 +323,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->execute()->finish();
 
 
-			$result = $conn->create( $this->_config['newid'] )->execute();
+			$result = $conn->create( $this->config['newid'] )->execute();
 
 			if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
 				throw new MW_Tree_Exception( sprintf( 'No new record ID available' ) );
@@ -332,11 +332,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 			$node->setId( $row[0] );
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -391,7 +391,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			if( $newParentId === null )
 			{
 				//make virtual root
-				if( ( $root = $this->_getRootNode( '-' ) ) !== null )
+				if( ( $root = $this->getRootNode( '-' ) ) !== null )
 				{
 					$refNode->left = $root->right;
 					$refNode->right = $root->right + 1;
@@ -425,13 +425,13 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmtLeft = $conn->create( $this->_config['move-left'], MW_DB_Connection_Abstract::TYPE_PREP );
-			$stmtRight = $conn->create( $this->_config['move-right'], MW_DB_Connection_Abstract::TYPE_PREP );
-			$updateParentId = $conn->create( $this->_config['update-parentid'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmtLeft = $conn->create( $this->config['move-left'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmtRight = $conn->create( $this->config['move-right'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$updateParentId = $conn->create( $this->config['update-parentid'], MW_DB_Connection_Abstract::TYPE_PREP );
 			// open gap for inserting node or subtree
 
 			$stmtLeft->bind( 1, $diff, MW_DB_Statement_Abstract::PARAM_INT );
@@ -476,11 +476,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$updateParentId->bind( 2, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			$updateParentId->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -504,22 +504,22 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			return;
 		}
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( $this->_config['update'] );
+			$stmt = $conn->create( $this->config['update'] );
 			$stmt->bind( 1, $node->getLabel() );
 			$stmt->bind( 2, $node->getCode() );
 			$stmt->bind( 3, $node->getStatus() );
 			$stmt->bind( 4, $node->getId() );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -539,24 +539,24 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		if( $id !== null )
 		{
-			$node = $this->_getNodeById( $id );
+			$node = $this->getNodeById( $id );
 
 			$left =  $node->left;
 			$right = $node->right;
 		}
 
-		$types = $this->_getSearchTypes( $this->_searchConfig );
-		$translations = $this->_getSearchTranslations( $this->_searchConfig );
+		$types = $this->getSearchTypes( $this->searchConfig );
+		$translations = $this->getSearchTranslations( $this->searchConfig );
 		$conditions = $search->getConditionString( $types, $translations );
 		$sortations = $search->getSortationString( $types, $translations );
 
 		$sql = str_replace(
 			array( ':cond', ':order' ),
 			array( $conditions, $sortations ),
-			$this->_config['search']
+			$this->config['search']
 		);
 
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
@@ -569,7 +569,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			{
 				$nodes = array();
 				while( ( $row = $result->fetch() ) !== false ) {
-					$nodes[$row['id']] = $this->_createNode( $row );
+					$nodes[$row['id']] = $this->createNodeBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -578,11 +578,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 				throw $e;
 			}
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 
@@ -604,12 +604,12 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		$search = $this->createSearch();
 
 		$expr = array(
-			$search->compare( '<=', $this->_searchConfig['left']['code'], $node->left ),
-			$search->compare( '>=', $this->_searchConfig['right']['code'], $node->right ),
+			$search->compare( '<=', $this->searchConfig['left']['code'], $node->left ),
+			$search->compare( '>=', $this->searchConfig['right']['code'], $node->right ),
 		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', $this->_searchConfig['left']['code'] ) ) );
+		$search->setSortations( array( $search->sort( '+', $this->searchConfig['left']['code'] ) ) );
 
 		$results = $this->searchNodes( $search );
 
@@ -627,7 +627,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param array $config Associative list of search configurations
 	 * @throws MW_Tree_Exception If one ore more search configurations are missing
 	 */
-	protected function _checkSearchConfig( array $config )
+	protected function checkSearchConfig( array $config )
 	{
 		$required = array( 'id', 'label', 'status', 'level', 'left', 'right' );
 
@@ -652,7 +652,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param array $config Associative list of SQL statements
 	 * @throws MW_Tree_Exception If one ore more SQL statements are missing
 	 */
-	protected function _checkSqlConfig( array $config )
+	protected function checkSqlConfig( array $config )
 	{
 		$required = array(
 			'delete', 'get', 'insert', 'move-left',
@@ -681,7 +681,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param array List of children implementing MW_Tree_Node_Interface
 	 * @return MW_Tree_Node_Interface Empty node object
 	 */
-	protected function _createNode( array $values = array(), array $children = array() )
+	protected function createNodeBase( array $values = array(), array $children = array() )
 	{
 		return new MW_Tree_Node_DBNestedSet( $values, $children );
 	}
@@ -694,17 +694,17 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param MW_Tree_Node_Interface $node Current node to add children to
 	 * @return MW_Tree_Node_Interface Parent node containing the children
 	 */
-	protected function _createTree( MW_DB_Result_Interface $result, MW_Tree_Node_Interface $node )
+	protected function createTree( MW_DB_Result_Interface $result, MW_Tree_Node_Interface $node )
 	{
 		while( ( $record = $result->fetch() ) !== false )
 		{
-			$newNode = $this->_createNode( $record );
+			$newNode = $this->createNodeBase( $record );
 
-			while( $this->_isChild( $newNode, $node ) )
+			while( $this->isChild( $newNode, $node ) )
 			{
 				$node->addChild( $newNode );
 
-				if( ( $newNode = $this->_createTree( $result, $newNode ) ) === false ) {
+				if( ( $newNode = $this->createTree( $result, $newNode ) ) === false ) {
 					return false;
 				}
 			}
@@ -723,7 +723,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param MW_Tree_Node_Interface $parent Parent node
 	 * @return boolean True if not is a child of the second node, false if not
 	 */
-	protected function _isChild( MW_Tree_Node_Interface $node, MW_Tree_Node_Interface $parent )
+	protected function isChild( MW_Tree_Node_Interface $node, MW_Tree_Node_Interface $parent )
 	{
 		return $node->__get('left') > $parent->__get('left') && $node->__get('right') < $parent->__get('right');
 	}
@@ -735,7 +735,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param integer $level Level constant from MW_Tree_Manager_Abstract
 	 * @throws MW_Tree_Exception if level constant is invalid
 	 */
-	protected function _getLevelFromConstant( $level )
+	protected function getLevelFromConstant( $level )
 	{
 		switch( $level )
 		{
@@ -759,13 +759,13 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @throws Exception If anything unexcepted occurs
 	 * @return MW_Tree_Node_Interface Tree node
 	 */
-	protected function _getNodeById( $id )
+	protected function getNodeById( $id )
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->_config['get'] ) );
+			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
 			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
 			$result = $stmt->execute();
@@ -774,13 +774,13 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 				throw new MW_Tree_Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 			}
 
-			$node = $this->_createNode( $row );
+			$node = $this->createNodeBase( $row );
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 
@@ -794,11 +794,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * @param string $sort Sort direction, '+' is ascending, '-' is descending
 	 * @return MW_Tree_Node_Interface|null Tree root node
 	 */
-	protected function _getRootNode( $sort = '+' )
+	protected function getRootNode( $sort = '+' )
 	{
 		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', $this->_searchConfig['level']['code'], 0 ) );
-		$search->setSortations( array( $search->sort( $sort, $this->_searchConfig['left']['code'] ) ) );
+		$search->setConditions( $search->compare( '==', $this->searchConfig['level']['code'], 0 ) );
+		$search->setSortations( array( $search->sort( $sort, $this->searchConfig['left']['code'] ) ) );
 		$nodes = $this->searchNodes( $search );
 
 		if( ( $node = reset( $nodes ) ) !== false ) {

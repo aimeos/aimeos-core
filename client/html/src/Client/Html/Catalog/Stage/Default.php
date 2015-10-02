@@ -51,7 +51,7 @@ class Client_Html_Catalog_Stage_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/stage/default/subparts';
+	private $subPartPath = 'client/html/catalog/stage/default/subparts';
 
 	/** client/html/catalog/stage/image/name
 	 * Name of the image part used by the catalog stage client implementation
@@ -85,12 +85,12 @@ class Client_Html_Catalog_Stage_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'image', 'breadcrumb', 'navigator' );
+	private $subPartNames = array( 'image', 'breadcrumb', 'navigator' );
 
-	private $_tags = array();
-	private $_expire;
-	private $_params;
-	private $_cache;
+	private $tags = array();
+	private $expire;
+	private $params;
+	private $cache;
 
 
 	/**
@@ -117,17 +117,17 @@ class Client_Html_Catalog_Stage_Default
 		 */
 		$confkey = 'client/html/catalog/stage';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->stageBody = $output;
@@ -178,9 +178,9 @@ class Client_Html_Catalog_Stage_Default
 			$tplconf = 'client/html/catalog/stage/default/template-body';
 			$default = 'catalog/stage/body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$this->_setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
+			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
@@ -204,16 +204,16 @@ class Client_Html_Catalog_Stage_Default
 		$prefixes = array( 'f' );
 		$confkey = 'client/html/catalog/stage';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->stageHeader = $html;
@@ -242,13 +242,13 @@ class Client_Html_Catalog_Stage_Default
 				$tplconf = 'client/html/catalog/stage/default/template-header';
 				$default = 'catalog/stage/header-default.html';
 
-				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-				$this->_setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
+				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -342,7 +342,7 @@ class Client_Html_Catalog_Stage_Default
 		 * @see client/html/catalog/stage/decorators/excludes
 		 * @see client/html/catalog/stage/decorators/global
 		 */
-		return $this->_createSubClient( 'catalog/stage/' . $type, $name );
+		return $this->createSubClient( 'catalog/stage/' . $type, $name );
 	}
 
 
@@ -353,28 +353,28 @@ class Client_Html_Catalog_Stage_Default
 	 */
 	public function process()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view->stageParams = $this->_getParamStage( $view );
+			$view->stageParams = $this->getParamStage( $view );
 
 			parent::process();
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -395,14 +395,14 @@ class Client_Html_Catalog_Stage_Default
 	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
 	 * @return string Unique hash
 	 */
-	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
+	protected function getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
 	{
-		$locale = $this->_getContext()->getLocale();
-		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
+		$locale = $this->getContext()->getLocale();
+		$params = $this->getClientParams( $this->getView()->param(), $prefixes );
 
 		if( empty( $params ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$site = $context->getLocale()->getSite()->getCode();
 			$params = (array) $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
 		}
@@ -423,23 +423,23 @@ class Client_Html_Catalog_Stage_Default
 	 * @param MW_View_Interface $view The view object which generates the HTML output
 	 * @return array List of parameters
 	 */
-	protected function _getParamStage( MW_View_Interface $view )
+	protected function getParamStage( MW_View_Interface $view )
 	{
-		if( !isset( $this->_params ) )
+		if( !isset( $this->params ) )
 		{
-			$params = $this->_getClientParams( $view->param(), array( 'f' ) );
+			$params = $this->getClientParams( $view->param(), array( 'f' ) );
 
 			if( empty( $params ) )
 			{
-				$context = $this->_getContext();
+				$context = $this->getContext();
 				$site = $context->getLocale()->getSite()->getCode();
 				$params = $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
 			}
 
-			$this->_params = $params;
+			$this->params = $params;
 		}
 
-		return $this->_params;
+		return $this->params;
 	}
 
 
@@ -448,9 +448,9 @@ class Client_Html_Catalog_Stage_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -462,15 +462,15 @@ class Client_Html_Catalog_Stage_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$params = $this->_getParamStage( $view );
+			$params = $this->getParamStage( $view );
 
 			if( isset( $params['f_catid'] ) && $params['f_catid'] != '' )
 			{
-				$context = $this->_getContext();
+				$context = $this->getContext();
 				$config = $context->getConfig();
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
@@ -511,20 +511,20 @@ class Client_Html_Catalog_Stage_Default
 					$view->stageCurrentCatItem = $categoryItem;
 				}
 
-				$this->_addMetaItem( $stageCatPath, 'catalog', $this->_expire, $this->_tags );
-				$this->_addMetaList( array_keys( $stageCatPath ), 'catalog', $this->_expire );
+				$this->addMetaItem( $stageCatPath, 'catalog', $this->expire, $this->tags );
+				$this->addMetaList( array_keys( $stageCatPath ), 'catalog', $this->expire );
 
 				$view->stageCatPath = $stageCatPath;
 			}
 
 			$view->stageParams = $params;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

@@ -36,24 +36,24 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds catalog test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding catalog test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding catalog test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'catalog.php';
@@ -62,9 +62,9 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
 		}
 
-		$this->_addCatalogData( $testdata );
+		$this->addCatalogData( $testdata );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -74,9 +74,9 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addCatalogData( array $testdata )
+	private function addCatalogData( array $testdata )
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$parentIds = array( 'init' => null );
 		$catalog = $catalogManager->createItem();

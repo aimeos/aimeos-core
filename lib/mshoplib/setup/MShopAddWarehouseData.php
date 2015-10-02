@@ -37,24 +37,24 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
-		// $this->_process();
+		// $this->process();
 	}
 
 
 	/**
 	 * Adds product stock test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding warehouse data', 0 );
+		$this->msg( 'Adding warehouse data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'warehouse.php';
@@ -63,7 +63,7 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
 		}
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_additional );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->additional );
 		$warehouseManager = $manager->getSubManager( 'stock' )->getSubManager( 'warehouse' );
 
 		$num = $total = 0;
@@ -84,6 +84,6 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 			} catch( MW_DB_Exception $e ) { ; } // if warehouse was already available
 		}
 
-		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
+		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 }

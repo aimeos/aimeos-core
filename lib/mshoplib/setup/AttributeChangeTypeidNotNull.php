@@ -12,7 +12,7 @@
  */
 class MW_Setup_Task_AttributeChangeTypeidNotNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_attribute" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_type" type WHERE type."code" = \'default\' AND type."domain" = \'attribute\' ) WHERE "domain" = \'attribute\'',
 		'UPDATE "mshop_attribute" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_type" type WHERE type."code" = \'default\' AND type."domain" = \'catalog\' ) WHERE "domain" = \'catalog\'',
 		'UPDATE "mshop_attribute" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_type" type WHERE type."code" = \'default\' AND type."domain" = \'media\' ) WHERE "domain" = \'media\'',
@@ -47,9 +47,9 @@ class MW_Setup_Task_AttributeChangeTypeidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -58,20 +58,20 @@ class MW_Setup_Task_AttributeChangeTypeidNotNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing typeid of mshop_attribute table', 0 );
+		$this->msg( 'Changing typeid of mshop_attribute table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_attribute' ) === true
-			&& $this->_schema->columnExists( 'mshop_attribute', 'typeid' ) === true
-			&& $this->_schema->getColumnDetails( 'mshop_attribute', 'typeid' )->isNullable() === true )
+		if( $this->schema->tableExists( 'mshop_attribute' ) === true
+			&& $this->schema->columnExists( 'mshop_attribute', 'typeid' ) === true
+			&& $this->schema->getColumnDetails( 'mshop_attribute', 'typeid' )->isNullable() === true )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'migrated' );
+			$this->executeList( $stmts );
+			$this->status( 'migrated' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

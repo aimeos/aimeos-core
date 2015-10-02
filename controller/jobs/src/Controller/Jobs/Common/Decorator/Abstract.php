@@ -17,9 +17,9 @@
 abstract class Controller_Jobs_Common_Decorator_Abstract
 	implements Controller_Jobs_Common_Decorator_Interface
 {
-	private $_context;
-	private $_aimeos;
-	private $_controller;
+	private $context;
+	private $aimeos;
+	private $controller;
 
 
 	/**
@@ -31,9 +31,9 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos,
 		Controller_Jobs_Interface $controller )
 	{
-		$this->_context = $context;
-		$this->_aimeos = $aimeos;
-		$this->_controller = $controller;
+		$this->context = $context;
+		$this->aimeos = $aimeos;
+		$this->controller = $controller;
 	}
 
 
@@ -47,7 +47,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->_controller, $name ), $param ) ) === false ) {
+		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false ) {
 			throw new Controller_Jobs_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
@@ -62,7 +62,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function getName()
 	{
-		return $this->_controller->getName();
+		return $this->controller->getName();
 	}
 
 
@@ -73,7 +73,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function getDescription()
 	{
-		return $this->_controller->getDescription();
+		return $this->controller->getDescription();
 	}
 
 
@@ -84,7 +84,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function run()
 	{
-		$this->_controller->run();
+		$this->controller->run();
 	}
 
 
@@ -93,9 +93,9 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface context object implementing MShop_Context_Item_Interface
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -104,8 +104,8 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 *
 	 * @return Aimeos Aimeos object
 	 */
-	protected function _getAimeos()
+	protected function getAimeos()
 	{
-		return $this->_aimeos;
+		return $this->aimeos;
 	}
 }

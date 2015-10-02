@@ -18,7 +18,7 @@ class MShop_Coupon_Item_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Coupon_Item_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the coupon item.
@@ -30,7 +30,7 @@ class MShop_Coupon_Item_Default
 	{
 		parent::__construct( 'coupon.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -41,7 +41,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Coupon_Item_Default
 	{
 		if( $name == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $name;
+		$this->values['label'] = (string) $name;
 		$this->setModified();
 	}
 
@@ -66,7 +66,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->_values['start'] ) ? (string) $this->_values['start'] : null );
+		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
 	}
 
 
@@ -79,9 +79,9 @@ class MShop_Coupon_Item_Default
 	{
 		if( $date == $this->getDateStart() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['start'] = ( $date !== null ? (string) $date : null );
+		$this->values['start'] = ( $date !== null ? (string) $date : null );
 
 		$this->setModified();
 	}
@@ -94,7 +94,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->_values['end'] ) ? (string) $this->_values['end'] : null );
+		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
 	}
 
 
@@ -107,9 +107,9 @@ class MShop_Coupon_Item_Default
 	{
 		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['end'] = ( $date !== null ? (string) $date : null );
+		$this->values['end'] = ( $date !== null ? (string) $date : null );
 
 		$this->setModified();
 	}
@@ -122,7 +122,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getProvider()
 	{
-		return ( isset( $this->_values['provider'] ) ? (string) $this->_values['provider'] : '' );
+		return ( isset( $this->values['provider'] ) ? (string) $this->values['provider'] : '' );
 	}
 
 
@@ -135,7 +135,7 @@ class MShop_Coupon_Item_Default
 	{
 		if( $provider == $this->getProvider() ) { return; }
 
-		$this->_values['provider'] = (string) $provider;
+		$this->values['provider'] = (string) $provider;
 		$this->setModified();
 	}
 
@@ -147,7 +147,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) && is_array( $this->_values['config'] ) ? (array) $this->_values['config'] : array() );
+		return ( isset( $this->values['config'] ) && is_array( $this->values['config'] ) ? (array) $this->values['config'] : array() );
 	}
 
 
@@ -160,7 +160,7 @@ class MShop_Coupon_Item_Default
 	{
 		if( $config == $this->getConfig() ) { return; }
 
-		$this->_values['config'] = $config;
+		$this->values['config'] = $config;
 		$this->setModified();
 	}
 
@@ -172,7 +172,7 @@ class MShop_Coupon_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -185,7 +185,7 @@ class MShop_Coupon_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 

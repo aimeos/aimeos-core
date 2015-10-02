@@ -18,7 +18,7 @@ class MW_Config_Decorator_Documentor
 	extends MW_Config_Decorator_Abstract
 	implements MW_Config_Decorator_Interface
 {
-	private $_file;
+	private $file;
 
 
 	/**
@@ -32,7 +32,7 @@ class MW_Config_Decorator_Documentor
 		parent::__construct( $object );
 
 		// this object is not cloned!
-		$this->_file = new My_Config_File( $filename );
+		$this->file = new My_Config_File( $filename );
 	}
 
 
@@ -45,9 +45,9 @@ class MW_Config_Decorator_Documentor
 	 */
 	public function get( $name, $default = null )
 	{
-		$value = $this->_getObject()->get( $name, $default );
+		$value = $this->getObject()->get( $name, $default );
 
-		$this->_file->set( $name, $value, $default );
+		$this->file->set( $name, $value, $default );
 
 		return $value;
 	}
@@ -62,8 +62,8 @@ class MW_Config_Decorator_Documentor
  */
 class My_Config_File
 {
-	private $_config = array();
-	private $_file;
+	private $config = array();
+	private $file;
 
 
 	/**
@@ -74,7 +74,7 @@ class My_Config_File
 	 */
 	public function __construct( $filename )
 	{
-		if( ( $this->_file = fopen( $filename, 'w' ) ) === false ) {
+		if( ( $this->file = fopen( $filename, 'w' ) ) === false ) {
 			throw new MW_Config_Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
 		}
 	}
@@ -85,11 +85,11 @@ class My_Config_File
 	 */
 	public function __destruct()
 	{
-		if( fwrite( $this->_file, serialize( $this->_config ) ) === false ) {
+		if( fwrite( $this->file, serialize( $this->config ) ) === false ) {
 			echo 'Unable to write collected configuration to file' . PHP_EOL;
 		}
 
-		fclose( $this->_file );
+		fclose( $this->file );
 	}
 
 
@@ -102,7 +102,7 @@ class My_Config_File
 	 */
 	public function set( $name, $value, $default )
 	{
-		$this->_config[$name]['value'] = $value;
-		$this->_config[$name]['default'] = $default;
+		$this->config[$name]['value'] = $value;
+		$this->config[$name]['default'] = $default;
 	}
 }

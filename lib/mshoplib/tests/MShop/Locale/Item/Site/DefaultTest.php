@@ -10,13 +10,13 @@
  */
 class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 12,
 			'siteid' => 12,
 			'code' => 'ExtID',
@@ -29,117 +29,117 @@ class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 		);
 
 		$children = array( new MShop_Locale_Item_Site_Default() );
-		$this->_object = new MShop_Locale_Item_Site_Default( $this->_values, $children );
+		$this->object = new MShop_Locale_Item_Site_Default( $this->values, $children );
 	}
 
 
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 12, $this->_object->getId() );
+		$this->assertEquals( 12, $this->object->getId() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 12, $this->_object->getSiteId() );
+		$this->assertEquals( 12, $this->object->getSiteId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->_object->setId( 12 );
-		$this->assertFalse( $this->_object->isModified() );
+		$this->object->setId( 12 );
+		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setId( 99 );
+		$this->object->setId( 99 );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'ExtID', $this->_object->getCode() );
+		$this->assertEquals( 'ExtID', $this->object->getCode() );
 	}
 
 
 	public function testSetCode()
 	{
-		$this->_object->setCode( 'OtherExtID' );
-		$this->assertEquals( 'OtherExtID', $this->_object->getCode() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setCode( 'OtherExtID' );
+		$this->assertEquals( 'OtherExtID', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'My Site', $this->_object->getLabel() );
+		$this->assertEquals( 'My Site', $this->object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'Other Name' );
-		$this->assertEquals( 'Other Name', $this->_object->getLabel() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLabel( 'Other Name' );
+		$this->assertEquals( 'Other Name', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array( 'timezone' => 'Europe/Berlin' ), $this->_object->getConfig() );
+		$this->assertEquals( array( 'timezone' => 'Europe/Berlin' ), $this->object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array( 'timezone' => 'Europe/Paris' ) );
-		$this->assertEquals( array( 'timezone' => 'Europe/Paris' ), $this->_object->getConfig() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setConfig( array( 'timezone' => 'Europe/Paris' ) );
+		$this->assertEquals( array( 'timezone' => 'Europe/Paris' ), $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -169,40 +169,40 @@ class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['locale.site.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['locale.site.siteid'] );
-		$this->assertEquals( $this->_object->getCode(), $arrayObject['locale.site.code'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['locale.site.label'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['locale.site.status'] );
-		$this->assertEquals( $this->_object->getConfig(), $arrayObject['locale.site.config'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['locale.site.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['locale.site.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['locale.site.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['locale.site.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['locale.site.siteid'] );
+		$this->assertEquals( $this->object->getCode(), $arrayObject['locale.site.code'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['locale.site.label'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['locale.site.status'] );
+		$this->assertEquals( $this->object->getConfig(), $arrayObject['locale.site.config'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.site.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.site.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.site.editor'] );
 	}
 
 
 	public function testAddChild()
 	{
-		$this->_object->addChild( $this->_object );
-		$this->assertEquals( 2, count( $this->_object->getChildren() ) );
+		$this->object->addChild( $this->object );
+		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->_object->getChild( 0 ) );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->object->getChild( 0 ) );
 
 		$this->setExpectedException( 'MShop_Locale_Exception' );
-		$this->_object->getChild( 1 );
+		$this->object->getChild( 1 );
 	}
 
 
 	public function testGetChildren()
 	{
-		$children = $this->_object->getChildren();
+		$children = $this->object->getChildren();
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
@@ -213,6 +213,6 @@ class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testHasChildren()
 	{
-		$this->assertTrue( $this->_object->hasChildren() );
+		$this->assertTrue( $this->object->hasChildren() );
 	}
 }

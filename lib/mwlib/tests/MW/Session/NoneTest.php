@@ -8,7 +8,7 @@
  */
 class MW_Session_NoneTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Session_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Session_None();
+		$this->object = new MW_Session_None();
 	}
 
 
@@ -31,25 +31,25 @@ class MW_Session_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset($this->object);
 	}
 
 
 	public function testGet()
 	{
-		$this->assertEquals(null, $this->_object->get('test'));
+		$this->assertEquals(null, $this->object->get('test'));
 
-		$this->_object->set('test', '123456789');
-		$this->assertEquals('123456789', $this->_object->get('test'));
+		$this->object->set('test', '123456789');
+		$this->assertEquals('123456789', $this->object->get('test'));
 	}
 
 
 	public function testSet()
 	{
-		$this->_object->set('test', null);
-		$this->assertEquals( null, $this->_object->get( 'test' ) );
+		$this->object->set('test', null);
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 
-		$this->_object->set('test', '234');
-		$this->assertEquals( '234', $this->_object->get( 'test' ) );
+		$this->object->set('test', '234');
+		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }

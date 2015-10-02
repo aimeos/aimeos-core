@@ -26,8 +26,8 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 	{
 		if( $parentId !== null ) {
 
-			$parent = $this->_getManager()->getItem( $parentId );
-			$siteId = $this->_getContext()->getLocale()->getSiteId();
+			$parent = $this->getManager()->getItem( $parentId );
+			$siteId = $this->getContext()->getLocale()->getSiteId();
 
 			if( $parent->getSiteId() != $siteId ) {
 				throw new MShop_Exception( sprintf( 'Site can not be inserted. Site ID of site differs from site ID of parent site.' ) );
@@ -49,9 +49,9 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
 		$ids = array( $id, $oldParentId, $newParentId );
-		$siteId = $this->_getContext()->getLocale()->getSiteId();
+		$siteId = $this->getContext()->getLocale()->getSiteId();
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );
 

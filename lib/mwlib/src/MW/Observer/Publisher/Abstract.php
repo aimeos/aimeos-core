@@ -17,7 +17,7 @@
 
 abstract class MW_Observer_Publisher_Abstract implements MW_Observer_Publisher_Interface
 {
-	private $_listeners = array();
+	private $listeners = array();
 
 
 	/**
@@ -28,7 +28,7 @@ abstract class MW_Observer_Publisher_Abstract implements MW_Observer_Publisher_I
 	 */
 	public function addListener( MW_Observer_Listener_Interface $l, $action )
 	{
-		$this->_listeners[$action][] = $l;
+		$this->listeners[$action][] = $l;
 	}
 
 
@@ -40,12 +40,12 @@ abstract class MW_Observer_Publisher_Abstract implements MW_Observer_Publisher_I
 	 */
 	public function removeListener( MW_Observer_Listener_Interface $l, $action )
 	{
-		if( isset( $this->_listeners[$action] ) )
+		if( isset( $this->listeners[$action] ) )
 		{
-			foreach( $this->_listeners[$action] as $key => $listener )
+			foreach( $this->listeners[$action] as $key => $listener )
 			{
 				if( $listener === $l ) {
-					unset( $this->_listeners[$action][$key] );
+					unset( $this->listeners[$action][$key] );
 				}
 			}
 		}
@@ -59,11 +59,11 @@ abstract class MW_Observer_Publisher_Abstract implements MW_Observer_Publisher_I
 	 * @param mixed|null $value Value or object given to the listeners
 	 * @return boolean Status of the operations
 	 */
-	protected function _notifyListeners( $action, $value = null )
+	protected function notifyListeners( $action, $value = null )
 	{
-		if( isset( $this->_listeners[$action] ) )
+		if( isset( $this->listeners[$action] ) )
 		{
-			foreach( $this->_listeners[$action] as $key => $listener )
+			foreach( $this->listeners[$action] as $key => $listener )
 			{
 				if( $listener->update( $this, $action, $value ) === false ) {
 					return false;
@@ -78,8 +78,8 @@ abstract class MW_Observer_Publisher_Abstract implements MW_Observer_Publisher_I
 	/**
 	 * Removes all attached listeners from the publisher
 	 */
-	protected function _clearListeners()
+	protected function clearListeners()
 	{
-		$this->_listeners = array();
+		$this->listeners = array();
 	}
 }

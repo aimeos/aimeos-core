@@ -8,7 +8,7 @@
  */
 class MW_Translation_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_Translation_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 		) );
 
 		$conf = new MW_Translation_None( 'cs' );
-		$this->_object = new MW_Translation_Decorator_Memory( $conf, $strings );
+		$this->object = new MW_Translation_Decorator_Memory( $conf, $strings );
 	}
 
 	/**
@@ -43,35 +43,35 @@ class MW_Translation_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 
 	public function testDt()
 	{
-		$this->assertEquals( 'translation singular', $this->_object->dt( 'domain', 'test singular' ) );
+		$this->assertEquals( 'translation singular', $this->object->dt( 'domain', 'test singular' ) );
 	}
 
 	public function testDtNone()
 	{
-		$this->assertEquals( 'test none', $this->_object->dt( 'domain', 'test none' ) );
+		$this->assertEquals( 'test none', $this->object->dt( 'domain', 'test none' ) );
 	}
 
 	public function testDn()
 	{
-		$translation = $this->_object->dn( 'domain', 'test plural', 'test plural 2', 1 );
+		$translation = $this->object->dn( 'domain', 'test plural', 'test plural 2', 1 );
 		$this->assertEquals( 'plural translation singular', $translation );
 	}
 
 	public function testDnNone()
 	{
-		$translation = $this->_object->dn( 'domain', 'test none', 'test none plural', 0 );
+		$translation = $this->object->dn( 'domain', 'test none', 'test none plural', 0 );
 		$this->assertEquals( 'test none plural', $translation );
 	}
 
 	public function testDnPlural()
 	{
-		$translation = $this->_object->dn( 'domain', 'test plural', 'test plural 2', 2 );
+		$translation = $this->object->dn( 'domain', 'test plural', 'test plural 2', 2 );
 		$this->assertEquals( 'plural translation plural', $translation );
 	}
 
 	public function testDnPluralCs()
 	{
-		$translation = $this->_object->dn( 'domain', 'test plural', 'test plural 2', 5 );
+		$translation = $this->object->dn( 'domain', 'test plural', 'test plural 2', 5 );
 		$this->assertEquals( 'plural translation plural (cs)', $translation );
 	}
 }

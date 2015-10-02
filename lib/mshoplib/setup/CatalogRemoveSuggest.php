@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'gettypeid' => 'SELECT "id" FROM "mshop_product_list_type" WHERE "code" = \'suggestion\'',
 		'migrate' => '
 			INSERT INTO "mshop_product_list" ("parentid", "siteid", "typeid", "domain", "refid", "pos")
@@ -51,9 +51,9 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -62,14 +62,14 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of table name and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating catalog suggest tables', 0 ); $this->_status( '' );
-		$this->_msg( sprintf( 'Checking table "%1$s": ', 'mshop_catalog_suggest' ), 1 );
+		$this->msg( 'Migrating catalog suggest tables', 0 ); $this->status( '' );
+		$this->msg( sprintf( 'Checking table "%1$s": ', 'mshop_catalog_suggest' ), 1 );
 
-		if( $this->_schema->tableExists( 'mshop_catalog_suggest' ) === true )
+		if( $this->schema->tableExists( 'mshop_catalog_suggest' ) === true )
 		{
-			$result = $this->_conn->create( $stmts['gettypeid'] )->execute();
+			$result = $this->conn->create( $stmts['gettypeid'] )->execute();
 
 			if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
 				throw new MW_Setup_Exception( 'Product list type "suggestion" is missing' );
@@ -78,18 +78,18 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 			$result->finish();
 
 
-			$result = $this->_conn->create( str_replace( ':typeid', $row[0], $stmts['migrate'] ) )->execute();
+			$result = $this->conn->create( str_replace( ':typeid', $row[0], $stmts['migrate'] ) )->execute();
 			$count = $result->affectedRows();
 			$result->finish();
 
 
-			$this->_executeList( $stmts['drop'] );
+			$this->executeList( $stmts['drop'] );
 
-			$this->_status( sprintf( 'migrated (%1$d)', $count ) );
+			$this->status( sprintf( 'migrated (%1$d)', $count ) );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

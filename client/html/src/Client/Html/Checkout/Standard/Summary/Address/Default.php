@@ -17,7 +17,7 @@
 class Client_Html_Checkout_Standard_Summary_Address_Default
 	extends Client_Html_Common_Summary_Address_Default
 {
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -103,7 +103,7 @@ class Client_Html_Checkout_Standard_Summary_Address_Default
 		 * @see client/html/checkout/standard/summary/address/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/summary/address/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/summary/address/' . $type, $name );
 	}
 
 
@@ -115,11 +115,11 @@ class Client_Html_Checkout_Standard_Summary_Address_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		$view = parent::_setViewParams( $view, $tags, $expire );
+		$view = parent::setViewParams( $view, $tags, $expire );
 
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$target = $view->config( 'client/html/checkout/standard/url/target' );
 			$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
@@ -132,9 +132,9 @@ class Client_Html_Checkout_Standard_Summary_Address_Default
 			$view->summaryUrlAddressDelivery = $url;
 			$view->summaryBasket = $view->standardBasket;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

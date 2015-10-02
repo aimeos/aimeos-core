@@ -14,8 +14,8 @@
  */
 class MShop_Factory
 {
-	static private $_cache = true;
-	static private $_managers = array();
+	static private $cache = true;
+	static private $managers = array();
 
 
 	/**
@@ -31,15 +31,15 @@ class MShop_Factory
 		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_managers[$id][$path] = null;
+				self::$managers[$id][$path] = null;
 			} else {
-				self::$_managers[$id] = array();
+				self::$managers[$id] = array();
 			}
 
 			return;
 		}
 
-		self::$_managers = array();
+		self::$managers = array();
 	}
 
 
@@ -67,7 +67,7 @@ class MShop_Factory
 
 		$id = (string) $context;
 
-		if( self::$_cache === false || !isset( self::$_managers[$id][$path] ) )
+		if( self::$cache === false || !isset( self::$managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -83,7 +83,7 @@ class MShop_Factory
 			}
 
 
-			if( self::$_cache === false || !isset( self::$_managers[$id][$name] ) )
+			if( self::$cache === false || !isset( self::$managers[$id][$name] ) )
 			{
 				$factory = 'MShop_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -97,7 +97,7 @@ class MShop_Factory
 					throw new MShop_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$_managers[$id][$name] = $manager;
+				self::$managers[$id][$name] = $manager;
 			}
 
 
@@ -105,15 +105,15 @@ class MShop_Factory
 			{
 				$tmpname = $name . '/' . $part;
 
-				if( self::$_cache === false || !isset( self::$_managers[$id][$tmpname] ) ) {
-					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );
+				if( self::$cache === false || !isset( self::$managers[$id][$tmpname] ) ) {
+					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$_managers[$id][$path];
+		return self::$managers[$id][$path];
 	}
 
 
@@ -130,7 +130,7 @@ class MShop_Factory
 	static public function injectManager( MShop_Context_Item_Interface $context, $path, MShop_Common_Manager_Interface $object )
 	{
 		$id = (string) $context;
-		self::$_managers[$id][$path] = $object;
+		self::$managers[$id][$path] = $object;
 	}
 
 
@@ -142,8 +142,8 @@ class MShop_Factory
 	 */
 	static public function setCache( $value )
 	{
-		$old = self::$_cache;
-		self::$_cache = (boolean) $value;
+		$old = self::$cache;
+		self::$cache = (boolean) $value;
 
 		return $old;
 	}

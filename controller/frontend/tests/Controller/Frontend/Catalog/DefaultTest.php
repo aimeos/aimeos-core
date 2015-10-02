@@ -7,30 +7,30 @@
 
 class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
 	{
-		$this->_object = new Controller_Frontend_Catalog_Default( TestHelper::getContext() );
+		$this->object = new Controller_Frontend_Catalog_Default( TestHelper::getContext() );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCreateManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->createManager( 'product' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->createManager( 'product' ) );
 	}
 
 
 	public function testCreateCatalogFilter()
 	{
-		$filter = $this->_object->createCatalogFilter( true );
+		$filter = $this->object->createCatalogFilter( true );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Interface', $filter->getConditions() );
@@ -44,7 +44,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 		$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
 
 		$list = array();
-		foreach( $this->_object->getCatalogPath( $item->getChild( 0 )->getId(), array( 'text' ) ) as $item ) {
+		foreach( $this->object->getCatalogPath( $item->getChild( 0 )->getId(), array( 'text' ) ) as $item ) {
 			$list[$item->getCode()] = $item;
 		}
 
@@ -56,7 +56,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetCatalogTree()
 	{
-		$item = $this->_object->getCatalogTree( null, array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$item = $this->object->getCatalogTree( null, array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$this->assertEquals( 'Root', $item->getName() );
 		$this->assertEquals( 0, count( $item->getChildren() ) );
@@ -65,8 +65,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAggregateIndex()
 	{
-		$filter = $this->_object->createIndexFilter();
-		$list = $this->_object->aggregateIndex( $filter, 'catalog.index.attribute.id' );
+		$filter = $this->object->createIndexFilter();
+		$list = $this->object->aggregateIndex( $filter, 'catalog.index.attribute.id' );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 	}
@@ -74,7 +74,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilter()
 	{
-		$filter = $this->_object->createIndexFilter();
+		$filter = $this->object->createIndexFilter();
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
@@ -85,7 +85,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategory()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0 );
+		$filter = $this->object->createIndexFilterCategory( 0 );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -107,7 +107,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategoryPosition()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0, 'relevance', '-', 1, 2, 'test' );
+		$filter = $this->object->createIndexFilterCategory( 0, 'relevance', '-', 1, 2, 'test' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -126,7 +126,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategoryCode()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0, 'code' );
+		$filter = $this->object->createIndexFilterCategory( 0, 'code' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -141,7 +141,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategoryName()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0, 'name' );
+		$filter = $this->object->createIndexFilterCategory( 0, 'name' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -156,7 +156,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategoryPrice()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0, 'price' );
+		$filter = $this->object->createIndexFilterCategory( 0, 'price' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -171,7 +171,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterCategoryInvalidSortation()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 0, 'failure' );
+		$filter = $this->object->createIndexFilterCategory( 0, 'failure' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
@@ -180,8 +180,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAddIndexFilterCategory()
 	{
-		$filter = $this->_object->createIndexFilter();
-		$filter = $this->_object->addIndexFilterCategory( $filter, 0 );
+		$filter = $this->object->createIndexFilter();
+		$filter = $this->object->addIndexFilterCategory( $filter, 0 );
 
 		$list = $filter->getConditions()->getExpressions();
 
@@ -197,7 +197,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterText()
 	{
-		$filter = $this->_object->createIndexFilterText( 'Espresso' );
+		$filter = $this->object->createIndexFilterText( 'Espresso' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -219,7 +219,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterTextRelevance()
 	{
-		$filter = $this->_object->createIndexFilterText( 'Espresso', 'relevance', '-', 1, 2, 'test' );
+		$filter = $this->object->createIndexFilterText( 'Espresso', 'relevance', '-', 1, 2, 'test' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
@@ -230,7 +230,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterTextCode()
 	{
-		$filter = $this->_object->createIndexFilterText( 'Espresso', 'code' );
+		$filter = $this->object->createIndexFilterText( 'Espresso', 'code' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -245,7 +245,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterTextName()
 	{
-		$filter = $this->_object->createIndexFilterText( 'Espresso', 'name' );
+		$filter = $this->object->createIndexFilterText( 'Espresso', 'name' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -260,7 +260,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterTextPrice()
 	{
-		$filter = $this->_object->createIndexFilterCategory( 'Espresso', 'price' );
+		$filter = $this->object->createIndexFilterCategory( 'Espresso', 'price' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
@@ -275,7 +275,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateIndexFilterTextInvalidSortation()
 	{
-		$filter = $this->_object->createIndexFilterText( '', 'failure' );
+		$filter = $this->object->createIndexFilterText( '', 'failure' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
@@ -284,8 +284,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAddIndexFilterText()
 	{
-		$filter = $this->_object->createIndexFilterText( 'Espresso' );
-		$filter = $this->_object->addIndexFilterText( $filter, 'Espresso' );
+		$filter = $this->object->createIndexFilterText( 'Espresso' );
+		$filter = $this->object->addIndexFilterText( $filter, 'Espresso' );
 
 		$list = $filter->getConditions()->getExpressions();
 
@@ -313,8 +313,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$total = 0;
-		$filter = $this->_object->createIndexFilterCategory( $item->getId(), 'position', '+', 1, 1 );
-		$results = $this->_object->getIndexItems( $filter, array(), $total );
+		$filter = $this->object->createIndexFilterCategory( $item->getId(), 'position', '+', 1, 1 );
+		$results = $this->object->getIndexItems( $filter, array(), $total );
 
 		$this->assertEquals( 3, $total );
 		$this->assertEquals( 1, count( $results ) );
@@ -324,8 +324,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetIndexItemsText()
 	{
 		$total = 0;
-		$filter = $this->_object->createIndexFilterText( 'Expresso', 'relevance', '+', 0, 1, 'unittype13' );
-		$results = $this->_object->getIndexItems( $filter, array(), $total );
+		$filter = $this->object->createIndexFilterText( 'Expresso', 'relevance', '+', 0, 1, 'unittype13' );
+		$results = $this->object->getIndexItems( $filter, array(), $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $results ) );
@@ -334,7 +334,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateTextFilter()
 	{
-		$filter = $this->_object->createTextFilter( 'Expresso', 'name', '+', 0, 1 );
+		$filter = $this->object->createTextFilter( 'Expresso', 'name', '+', 0, 1 );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Interface', $filter->getConditions() );
@@ -344,8 +344,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTextListName()
 	{
-		$filter = $this->_object->createTextFilter( 'cafe noire', 'relevance', '-', 0, 25, 'unittype19', 'name' );
-		$results = $this->_object->getTextList( $filter );
+		$filter = $this->object->createTextFilter( 'cafe noire', 'relevance', '-', 0, 25, 'unittype19', 'name' );
+		$results = $this->object->getTextList( $filter );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertContains( 'Cafe Noire Cappuccino', $results );

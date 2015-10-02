@@ -11,7 +11,7 @@
  */
 class MShop_Common_Item_Helper_Password_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MShop_Common_Item_Helper_Password_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MShop_Common_Item_Helper_Password_Default( array( 'format' => '{%2$s}%1$s' ) );
+		$this->object = new MShop_Common_Item_Helper_Password_Default( array( 'format' => '{%2$s}%1$s' ) );
 	}
 
 
@@ -28,12 +28,12 @@ class MShop_Common_Item_Helper_Password_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	
 	public function testEncode()
 	{
-		$this->assertEquals( '14f40cc1311a52a6021b93a155ed719aac2bdb70', $this->_object->encode( 'unittest', 'salt' ) );
+		$this->assertEquals( '14f40cc1311a52a6021b93a155ed719aac2bdb70', $this->object->encode( 'unittest', 'salt' ) );
 	}
 }

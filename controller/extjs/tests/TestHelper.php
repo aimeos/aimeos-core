@@ -8,15 +8,15 @@
 
 class TestHelper
 {
-	private static $_aimeos;
-	private static $_context;
+	private static $aimeos;
+	private static $context;
 
 
 	public static function bootstrap()
 	{
 		set_error_handler( 'TestHelper::errorHandler' );
 
-		self::_getAimeos();
+		self::getAimeos();
 		MShop_Factory::setCache( false );
 		Controller_ExtJS_Factory::setCache( false );
 	}
@@ -24,40 +24,40 @@ class TestHelper
 
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$_context[$site] ) ) {
-			self::$_context[$site] = self::_createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone self::$_context[$site];
+		return clone self::$context[$site];
 	}
 
 
-	private static function _getAimeos()
+	private static function getAimeos()
 	{
-		if( !isset( self::$_aimeos ) )
+		if( !isset( self::$aimeos ) )
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$_aimeos = new Aimeos();
+			self::$aimeos = new Aimeos();
 		}
 
-		return self::$_aimeos;
+		return self::$aimeos;
 	}
 
 
 	public static function getControllerPaths()
 	{
-		return self::_getAimeos()->getCustomPaths( 'controller/extjs' );
+		return self::getAimeos()->getCustomPaths( 'controller/extjs' );
 	}
 
 
 	/**
 	 * @param string $site
 	 */
-	private static function _createContext( $site )
+	private static function createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$aimeos = self::_getAimeos();
+		$aimeos = self::getAimeos();
 
 
 		$paths = $aimeos->getConfigPaths( 'mysql' );

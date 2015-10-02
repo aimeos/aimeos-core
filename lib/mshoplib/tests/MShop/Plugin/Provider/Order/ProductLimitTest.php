@@ -10,10 +10,10 @@
  */
 class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_plugin;
-	private $_order;
-	private $_products;
+	private $object;
+	private $plugin;
+	private $order;
+	private $products;
 
 
 	/**
@@ -25,11 +25,11 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 	protected function setUp()
 	{
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setTypeId( 2 );
-		$this->_plugin->setProvider( 'ProductLimit' );
-		$this->_plugin->setConfig( array( 'single-number-max' => 10 ) );
-		$this->_plugin->setStatus( '1' );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setTypeId( 2 );
+		$this->plugin->setProvider( 'ProductLimit' );
+		$this->plugin->setConfig( array( 'single-number-max' => 10 ) );
+		$this->plugin->setStatus( '1' );
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
@@ -46,19 +46,19 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 			throw new Exception( 'Wrong number of products' );
 		}
 
-		$this->_products = array();
+		$this->products = array();
 
 		foreach( $products as $product )
 		{
 			$item = $orderBaseProductManager->createItem();
 			$item->copyFrom( $product );
 
-			$this->_products[$product->getCode()] = $item;
+			$this->products[$product->getCode()] = $item;
 		}
 
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 
-		$this->_object = new MShop_Plugin_Provider_Order_ProductLimit( TestHelper::getContext(), $this->_plugin );
+		$this->object = new MShop_Plugin_Provider_Order_ProductLimit( TestHelper::getContext(), $this->plugin );
 
 	}
 
@@ -71,30 +71,30 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_order, $this->_plugin, $this->_products );
+		unset( $this->object, $this->order, $this->plugin, $this->products );
 	}
 
 
 	public function testRegister()
 	{
-		$this->_object->register( $this->_order );
+		$this->object->register( $this->order );
 	}
 
 
 	public function testUpdateSingleNumberMax()
 	{
-		$this->_plugin->setConfig( array( 'single-number-max' => 10 ) );
+		$this->plugin->setConfig( array( 'single-number-max' => 10 ) );
 
 
-		$this->_products['CNC']->setQuantity( 10 );
+		$this->products['CNC']->setQuantity( 10 );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 
-		$this->_products['CNE']->setQuantity( 11 );
+		$this->products['CNE']->setQuantity( 11 );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
 
@@ -102,44 +102,44 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$this->_plugin->setConfig( array( 'single-value-max' => array( 'EUR' => '10.00' ) ) );
+		$this->plugin->setConfig( array( 'single-value-max' => array( 'EUR' => '10.00' ) ) );
 
 
 		$price = $priceManager->createItem();
 		$price->setValue( '10.00' );
 
-		$this->_products['CNC']->setPrice( $price );
-		$this->_products['CNC']->setQuantity( 1 );
+		$this->products['CNC']->setPrice( $price );
+		$this->products['CNC']->setQuantity( 1 );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 
 		$price = $priceManager->createItem();
 		$price->setValue( '3.50' );
 
-		$this->_products['CNE']->setPrice( $price );
-		$this->_products['CNE']->setQuantity( 3 );
+		$this->products['CNE']->setPrice( $price );
+		$this->products['CNE']->setQuantity( 3 );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
 
 	public function testUpdateTotalNumberMax()
 	{
-		$this->_plugin->setConfig( array( 'total-number-max' => 10 ) );
+		$this->plugin->setConfig( array( 'total-number-max' => 10 ) );
 
 
-		$this->_products['CNC']->setQuantity( 10 );
+		$this->products['CNC']->setQuantity( 10 );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 
-		$this->_order->addProduct( $this->_products['CNC'] );
-		$this->_products['CNE']->setQuantity( 1 );
+		$this->order->addProduct( $this->products['CNC'] );
+		$this->products['CNE']->setQuantity( 1 );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
 
@@ -147,27 +147,27 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$this->_plugin->setConfig( array( 'total-value-max' => array( 'EUR' => '110.00' ) ) );
+		$this->plugin->setConfig( array( 'total-value-max' => array( 'EUR' => '110.00' ) ) );
 
 
 		$price = $priceManager->createItem();
 		$price->setValue( '100.00' );
 
-		$this->_products['CNC']->setPrice( $price );
-		$this->_products['CNC']->setQuantity( 1 );
+		$this->products['CNC']->setPrice( $price );
+		$this->products['CNC']->setQuantity( 1 );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 
-		$this->_order->addProduct( $this->_products['CNC'] );
+		$this->order->addProduct( $this->products['CNC'] );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '10.00' );
 
-		$this->_products['CNE']->setPrice( $price );
-		$this->_products['CNE']->setQuantity( 2 );
+		$this->products['CNE']->setPrice( $price );
+		$this->products['CNE']->setQuantity( 2 );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 }

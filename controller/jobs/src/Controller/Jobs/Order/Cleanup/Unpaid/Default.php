@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Removes unpaid orders' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Removes unpaid orders' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Deletes unpaid orders to keep the database clean' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Deletes unpaid orders to keep the database clean' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$controller = Controller_Common_Order_Factory::createController( $context );
 		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
 		$manager = MShop_Factory::createManager( $context, 'order' );

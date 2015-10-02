@@ -18,7 +18,7 @@ class MShop_Catalog_Manager_Index_Catalog_MySQL
 	extends MShop_Catalog_Manager_Index_Catalog_Default
 	implements MShop_Catalog_Manager_Index_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
 			'internalcode'=>'mcatinca."catid"',
@@ -41,7 +41,7 @@ class MShop_Catalog_Manager_Index_Catalog_MySQL
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
-		foreach( $this->_searchConfig as $key => $fields ) {
+		foreach( $this->searchConfig as $key => $fields ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 

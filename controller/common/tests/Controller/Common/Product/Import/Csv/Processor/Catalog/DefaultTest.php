@@ -8,9 +8,9 @@
 
 class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private static $_product;
-	private $_context;
-	private $_endpoint;
+	private static $product;
+	private $context;
+	private $endpoint;
 
 
 	public static function setUpBeforeClass()
@@ -33,14 +33,14 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 
 		$manager->saveItem( $item );
 
-		self::$_product = $item;
+		self::$product = $item;
 	}
 
 
 	public static function tearDownAfterClass()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$manager->deleteItem( self::$_product->getId() );
+		$manager->deleteItem( self::$product->getId() );
 	}
 
 
@@ -48,8 +48,8 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->_context, array() );
+		$this->context = TestHelper::getContext();
+		$this->endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
 	}
 
 
@@ -76,13 +76,13 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			3 => 'job_csv_test',
 		);
 
-		$category = $this->_create( 'job_csv_test' );
+		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
 
-		$category = $this->_get( 'job_csv_test' );
-		$this->_delete( $category );
+		$category = $this->get( 'job_csv_test' );
+		$this->delete( $category );
 
 
 		$pos = 0;
@@ -121,17 +121,17 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			3 => "job_csv_test\njob_csv_test2",
 		);
 
-		$category = $this->_create( 'job_csv_test' );
-		$category2 = $this->_create( 'job_csv_test2' );
+		$category = $this->create( 'job_csv_test' );
+		$category2 = $this->create( 'job_csv_test2' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
 
-		$category = $this->_get( 'job_csv_test' );
-		$category2 = $this->_get( 'job_csv_test2' );
+		$category = $this->get( 'job_csv_test' );
+		$category2 = $this->get( 'job_csv_test2' );
 
-		$this->_delete( $category );
-		$this->_delete( $category2 );
+		$this->delete( $category );
+		$this->delete( $category2 );
 
 
 		$pos = 0;
@@ -170,14 +170,14 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			1 => 'job_csv_test',
 		);
 
-		$category = $this->_create( 'job_csv_test' );
+		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
-		$result = $object->process( self::$_product, $dataUpdate );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
+		$result = $object->process( self::$product, $dataUpdate );
 
-		$category = $this->_get( 'job_csv_test' );
-		$this->_delete( $category );
+		$category = $this->get( 'job_csv_test' );
+		$this->delete( $category );
 
 
 		$listItems = $category->getListItems();
@@ -202,16 +202,16 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			1 => 'job_csv_test',
 		);
 
-		$category = $this->_create( 'job_csv_test' );
+		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, array(), $this->_endpoint );
-		$result = $object->process( self::$_product, array() );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, array(), $this->endpoint );
+		$result = $object->process( self::$product, array() );
 
-		$category = $this->_get( 'job_csv_test' );
-		$this->_delete( $category );
+		$category = $this->get( 'job_csv_test' );
+		$this->delete( $category );
 
 
 		$listItems = $category->getListItems();
@@ -236,13 +236,13 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			3 => 'job_csv_test',
 		);
 
-		$category = $this->_create( 'job_csv_test' );
+		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
 
-		$category = $this->_get( 'job_csv_test' );
-		$this->_delete( $category );
+		$category = $this->get( 'job_csv_test' );
+		$this->delete( $category );
 
 
 		$listItems = $category->getListItems();
@@ -267,15 +267,15 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 			3 => 'job_csv_test',
 		);
 
-		$this->_context->getConfig()->set( 'controller/common/product/import/csv/processor/catalog/listtypes', array( 'default' ) );
+		$this->context->getConfig()->set( 'controller/common/product/import/csv/processor/catalog/listtypes', array( 'default' ) );
 
-		$category = $this->_create( 'job_csv_test' );
+		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->_context, $mapping, $this->_endpoint );
-		$result = $object->process( self::$_product, $data );
+		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Default( $this->context, $mapping, $this->endpoint );
+		$result = $object->process( self::$product, $data );
 
-		$category = $this->_get( 'job_csv_test' );
-		$this->_delete( $category );
+		$category = $this->get( 'job_csv_test' );
+		$this->delete( $category );
 
 
 		$listItems = $category->getListItems();
@@ -289,9 +289,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 	}
 
 
-	protected function _create( $code )
+	protected function create( $code )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$item = $manager->createItem();
 		$item->setCode( $code );
@@ -302,9 +302,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 	}
 
 
-	protected function _delete( MShop_Catalog_Item_Interface $catItem )
+	protected function delete( MShop_Catalog_Item_Interface $catItem )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'list' );
 
 		foreach( $catItem->getListItems('product') as $listItem ) {
@@ -315,9 +315,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_DefaultTest extends
 	}
 
 
-	protected function _get( $code )
+	protected function get( $code )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', $code ) );

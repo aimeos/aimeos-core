@@ -36,20 +36,20 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert service data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Processing service demo data', 0 );
+		$this->msg( 'Processing service demo data', 0 );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'service' );
 
 		$search = $manager->createSearch();
@@ -59,9 +59,9 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		foreach( $services as $item )
 		{
-			$this->_removeItems( $item->getId(), 'service/list', 'service', 'media' );
-			$this->_removeItems( $item->getId(), 'service/list', 'service', 'price' );
-			$this->_removeItems( $item->getId(), 'service/list', 'service', 'text' );
+			$this->removeItems( $item->getId(), 'service/list', 'service', 'media' );
+			$this->removeItems( $item->getId(), 'service/list', 'service', 'price' );
+			$this->removeItems( $item->getId(), 'service/list', 'service', 'text' );
 		}
 
 		$manager->deleteItems( array_keys( $services ) );
@@ -80,7 +80,7 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 			foreach( $data as $entry )
 			{
 				$item = $manager->createItem();
-				$item->setTypeId( $this->_getTypeId( 'service/type', 'service', $entry['type'] ) );
+				$item->setTypeId( $this->getTypeId( 'service/type', 'service', $entry['type'] ) );
 				$item->setCode( $entry['code'] );
 				$item->setLabel( $entry['label'] );
 				$item->setProvider( $entry['provider'] );
@@ -92,23 +92,23 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 
 
 				if( isset( $entry['media'] ) ) {
-					$this->_addMedia( $item->getId(), $entry['media'], 'service' );
+					$this->addMedia( $item->getId(), $entry['media'], 'service' );
 				}
 
 				if( isset( $entry['price'] ) ) {
-					$this->_addPrices( $item->getId(), $entry['price'], 'service' );
+					$this->addPrices( $item->getId(), $entry['price'], 'service' );
 				}
 
 				if( isset( $entry['text'] ) ) {
-					$this->_addTexts( $item->getId(), $entry['text'], 'service' );
+					$this->addTexts( $item->getId(), $entry['text'], 'service' );
 				}
 			}
 
-			$this->_status( 'added' );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'removed' );
+			$this->status( 'removed' );
 		}
 	}
 }

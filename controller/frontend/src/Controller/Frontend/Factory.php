@@ -14,8 +14,8 @@
  */
 class Controller_Frontend_Factory
 {
-	static private $_cache = true;
-	static private $_controllers = array();
+	static private $cache = true;
+	static private $controllers = array();
 
 
 	/**
@@ -31,15 +31,15 @@ class Controller_Frontend_Factory
 		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_controllers[$id][$path] = null;
+				self::$controllers[$id][$path] = null;
 			} else {
-				self::$_controllers[$id] = array();
+				self::$controllers[$id] = array();
 			}
 
 			return;
 		}
 
-		self::$_controllers = array();
+		self::$controllers = array();
 	}
 
 
@@ -65,7 +65,7 @@ class Controller_Frontend_Factory
 
 		$id = (string) $context;
 
-		if( self::$_cache === false || !isset( self::$_controllers[$id][$path] ) )
+		if( self::$cache === false || !isset( self::$controllers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -90,10 +90,10 @@ class Controller_Frontend_Factory
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$_controllers[$id][$path] = $manager;
+			self::$controllers[$id][$path] = $manager;
 		}
 
-		return self::$_controllers[$id][$path];
+		return self::$controllers[$id][$path];
 	}
 
 
@@ -105,8 +105,8 @@ class Controller_Frontend_Factory
 	 */
 	static public function setCache( $value )
 	{
-		$old = self::$_cache;
-		self::$_cache = (boolean) $value;
+		$old = self::$cache;
+		self::$cache = (boolean) $value;
 
 		return $old;
 	}

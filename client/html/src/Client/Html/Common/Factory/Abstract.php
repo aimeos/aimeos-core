@@ -16,7 +16,7 @@
  */
 class Client_Html_Common_Factory_Abstract
 {
-	private static $_objects = array();
+	private static $objects = array();
 
 
 	/**
@@ -29,7 +29,7 @@ class Client_Html_Common_Factory_Abstract
 	 */
 	public static function injectClient( $classname, Client_Html_Interface $client = null )
 	{
-		self::$_objects[$classname] = $client;
+		self::$objects[$classname] = $client;
 	}
 
 
@@ -43,7 +43,7 @@ class Client_Html_Common_Factory_Abstract
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected static function _addDecorators( MShop_Context_Item_Interface $context,
+	protected static function addDecorators( MShop_Context_Item_Interface $context,
 		Client_Html_Interface $client, array $templatePaths, array $decorators, $classprefix )
 	{
 		$iface = 'Client_Html_Common_Decorator_Interface';
@@ -82,7 +82,7 @@ class Client_Html_Common_Factory_Abstract
 	 * @param string $path Path of the client in lower case, e.g. "catalog/detail"
 	 * @return Client_Html_Interface Client object
 	 */
-	protected static function _addClientDecorators( MShop_Context_Item_Interface $context,
+	protected static function addClientDecorators( MShop_Context_Item_Interface $context,
 		Client_Html_Interface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
@@ -125,15 +125,15 @@ class Client_Html_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Client_Html_Common_Decorator_';
-		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
+		$client = self::addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_Common_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
-		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
+		$client = self::addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
-		$client = self::_addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
+		$client = self::addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
 		return $client;
 	}
@@ -149,10 +149,10 @@ class Client_Html_Common_Factory_Abstract
 	 * @return Client_Html__Interface Client object
 	 * @throws Client_Html_Exception If client couldn't be found or doesn't implement the interface
 	 */
-	protected static function _createClient( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
+	protected static function createClientBase( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
 	{
-		if( isset( self::$_objects[$classname] ) ) {
-			return self::$_objects[$classname];
+		if( isset( self::$objects[$classname] ) ) {
+			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

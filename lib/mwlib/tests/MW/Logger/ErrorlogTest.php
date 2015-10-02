@@ -9,7 +9,7 @@
 
 class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG );
+		$this->object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG );
 	}
 
 
@@ -44,12 +44,12 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 
 		ini_set( "error_log", "error.log" );
 
-		$this->_object->log( 'error test' );
-		$this->_object->log( 'warning test', MW_Logger_Abstract::WARN );
-		$this->_object->log( 'notice test', MW_Logger_Abstract::NOTICE );
-		$this->_object->log( 'info test', MW_Logger_Abstract::INFO );
-		$this->_object->log( 'debug test', MW_Logger_Abstract::DEBUG );
-		$this->_object->log( array( 'scalar', 'test' ) );
+		$this->object->log( 'error test' );
+		$this->object->log( 'warning test', MW_Logger_Abstract::WARN );
+		$this->object->log( 'notice test', MW_Logger_Abstract::NOTICE );
+		$this->object->log( 'info test', MW_Logger_Abstract::INFO );
+		$this->object->log( 'debug test', MW_Logger_Abstract::DEBUG );
+		$this->object->log( array( 'scalar', 'test' ) );
 
 		if( ( $content = file( 'error.log' ) ) === false ) {
 			throw new Exception( 'Unable to open file "error.log"' );
@@ -71,8 +71,8 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 
 		ini_set( "error_log", "error.log" );
 
-		$this->_object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG, array('test') );
-		$this->_object->log( 'info test', MW_Logger_Abstract::INFO, 'info' );
+		$this->object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG, array('test') );
+		$this->object->log( 'info test', MW_Logger_Abstract::INFO, 'info' );
 
 		ini_restore( "error_log" );
 
@@ -85,6 +85,6 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 	public function testLogLevel()
 	{
 		$this->setExpectedException( 'MW_Logger_Exception' );
-		$this->_object->log( 'wrong loglevel test', -1 );
+		$this->object->log( 'wrong loglevel test', -1 );
 	}
 }

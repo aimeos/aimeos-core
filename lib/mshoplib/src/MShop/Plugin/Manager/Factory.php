@@ -75,7 +75,7 @@ class MShop_Plugin_Manager_Factory
 		$iface = 'MShop_Plugin_Manager_Interface';
 		$classname = 'MShop_Plugin_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/plugin/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the plugin manager
@@ -151,7 +151,7 @@ class MShop_Plugin_Manager_Factory
 		 * @see mshop/plugin/manager/decorators/excludes
 		 * @see mshop/plugin/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'plugin' );
+		return self::addManagerDecorators( $context, $manager, 'plugin' );
 	}
 
 }

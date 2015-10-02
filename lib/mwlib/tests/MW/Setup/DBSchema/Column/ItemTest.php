@@ -8,7 +8,7 @@
  */
 class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Setup_DBSchema_Column_Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8_bin' );
+		$this->object = new MW_Setup_DBSchema_Column_Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8_bin' );
 	}
 
 	/**
@@ -30,42 +30,42 @@ class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testGetDataType()
 	{
-		$this->assertEquals( 'varchar', $this->_object->getDataType() );
+		$this->assertEquals( 'varchar', $this->object->getDataType() );
 	}
 
 	public function testGetDefaultValue()
 	{
-		$this->assertEquals( 'default', $this->_object->getDefaultValue() );
+		$this->assertEquals( 'default', $this->object->getDefaultValue() );
 	}
 
 	public function testGetMaxLength()
 	{
-		$this->assertEquals( 255, $this->_object->getMaxLength() );
+		$this->assertEquals( 255, $this->object->getMaxLength() );
 	}
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'testcol', $this->_object->getName() );
+		$this->assertEquals( 'testcol', $this->object->getName() );
 	}
 
 	public function testGetTableName()
 	{
-		$this->assertEquals( 'testtable', $this->_object->getTableName() );
+		$this->assertEquals( 'testtable', $this->object->getTableName() );
 	}
 
 	public function testGetCollationType()
 	{
-		$this->assertEquals( 'utf8_bin', $this->_object->getCollationType() );
+		$this->assertEquals( 'utf8_bin', $this->object->getCollationType() );
 	}
 
 	public function testIsNullable()
 	{
-		$this->assertTrue( $this->_object->isNullable() );
+		$this->assertTrue( $this->object->isNullable() );
 
 		$item = new MW_Setup_DBSchema_Column_Item( '', '', '', 0, '', 'NO', '' );
 		$this->assertFalse( $item->isNullable() );

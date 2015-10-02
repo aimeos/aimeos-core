@@ -74,7 +74,7 @@ class Controller_Jobs_Product_Import_Csv_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Product_Import_Csv_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/product/import/csv/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product import CSV job controller
@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Import_Csv_Factory
 		 * @see controller/jobs/product/import/csv/decorators/excludes
 		 * @see controller/jobs/product/import/csv/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'product/import/csv' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/import/csv' );
 	}
 }

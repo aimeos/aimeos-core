@@ -19,7 +19,7 @@ class Controller_ExtJS_Catalog_List_Type_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -38,13 +38,13 @@ class Controller_ExtJS_Catalog_List_Type_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list/type' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog/list/type' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -53,7 +53,7 @@ class Controller_ExtJS_Catalog_List_Type_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'catalog.list.type';
 	}

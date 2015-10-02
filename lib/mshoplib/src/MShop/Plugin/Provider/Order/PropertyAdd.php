@@ -18,8 +18,8 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	extends MShop_Plugin_Provider_Factory_Abstract
 	implements MShop_Plugin_Provider_Factory_Interface
 {
-	private $_orderAttrManager;
-	private $_type;
+	private $orderAttrManager;
+	private $type;
 
 
 	/**
@@ -32,8 +32,8 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	{
 		parent::__construct( $context, $item );
 
-		$this->_orderAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
-		$this->_type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
+		$this->orderAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
+		$this->type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
 
@@ -69,9 +69,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		foreach( $config as $key => $properties )
 		{
@@ -95,7 +95,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 
 			foreach( $result as $item )
 			{
-				$attributes = $this->_addAttributes( $item, $value, $properties );
+				$attributes = $this->addAttributes( $item, $value, $properties );
 				$value->setAttributes( $attributes );
 			}
 		}
@@ -112,7 +112,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	 * @param Array $properties List of item properties to be converted
 	 * @return Array List of attributes
 	 */
-	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product, array $properties )
+	protected function addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();
 		$itemProperties = $item->toArray();
@@ -120,11 +120,11 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 		foreach( $properties as $code )
 		{
 			if( array_key_exists( $code, $itemProperties )
-				&& $product->getAttribute( $code, $this->_type ) === null
+				&& $product->getAttribute( $code, $this->type ) === null
 			) {
-				$new = $this->_orderAttrManager->createItem();
+				$new = $this->orderAttrManager->createItem();
 				$new->setCode( $code );
-				$new->setType( $this->_type );
+				$new->setType( $this->type );
 				$new->setValue( $itemProperties[$code] );
 
 				$attributeList[] = $new;

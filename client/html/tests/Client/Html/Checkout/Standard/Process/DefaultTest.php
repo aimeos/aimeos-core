@@ -8,8 +8,8 @@
 
 class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -22,11 +22,11 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Process_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Process_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -38,24 +38,24 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
 		MShop_Factory::setCache( false );
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->_object->getView()->standardStepActive = 'process';
+		$this->object->getView()->standardStepActive = 'process';
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-process">', $output );
 	}
 
@@ -63,34 +63,34 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcessNoService()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$orderid = $this->_getOrder( '2008-02-15 12:34:56' )->getId();
-		$this->_context->getSession()->set( 'aimeos/orderid', $orderid );
+		$orderid = $this->getOrder( '2008-02-15 12:34:56' )->getId();
+		$this->context->getSession()->set( 'aimeos/orderid', $orderid );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$mock = $this->getMockBuilder( 'Client_Html_Checkout_Standard_Process_Default' )
-			->setConstructorArgs( array( $this->_context, $paths ) )
-			->setMethods( array( '_getOrderServiceCode' ) )
+			->setConstructorArgs( array( $this->context, $paths ) )
+			->setMethods( array( 'getOrderServiceCode' ) )
 			->getMock();
 
-		$mock->expects( $this->once() )->method( '_getOrderServiceCode' )
+		$mock->expects( $this->once() )->method( 'getOrderServiceCode' )
 			->will( $this->returnValue( null ) );
 
 		$mock->setView( $view );
@@ -106,21 +106,21 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 	public function testProcessDirectDebit()
 	{
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem', ) )
 			->getMock();
 
-		MShop_Factory::injectManager( $this->_context, 'order', $mock );
+		MShop_Factory::injectManager( $this->context, 'order', $mock );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$orderid = $this->_getOrder( '2009-03-18 16:14:32' )->getId();
-		$this->_context->getSession()->set( 'aimeos/orderid', $orderid );
+		$orderid = $this->getOrder( '2009-03-18 16:14:32' )->getId();
+		$this->context->getSession()->set( 'aimeos/orderid', $orderid );
 
-		$this->_object->process();
+		$this->object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertEquals( 'POST', $view->standardMethod );
@@ -132,16 +132,16 @@ class Client_Html_Checkout_Standard_Process_DefaultTest extends PHPUnit_Framewor
 
 	public function testProcessNoStep()
 	{
-		$this->assertNull( $this->_object->process() );
+		$this->assertNull( $this->object->process() );
 	}
 
 
 	/**
 	 * @param string $date
 	 */
-	protected function _getOrder( $date )
+	protected function getOrder( $date )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );

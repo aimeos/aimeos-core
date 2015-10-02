@@ -51,7 +51,7 @@ class Client_Html_Email_Account_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/account/default/subparts';
+	private $subPartPath = 'client/html/email/account/default/subparts';
 
 	/** client/html/email/account/text/name
 	 * Name of the text part used by the account creation e-mail client implementation
@@ -74,7 +74,7 @@ class Client_Html_Email_Account_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'text', 'html' );
+	private $subPartNames = array( 'text', 'html' );
 
 
 	/**
@@ -87,10 +87,10 @@ class Client_Html_Email_Account_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->accountBody = $content;
@@ -124,7 +124,7 @@ class Client_Html_Email_Account_Default
 		 */
 		$tplconf = 'client/html/email/account/default/template-body';
 
-		return $view->render( $this->_getTemplate( $tplconf, 'email/account/body-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/account/body-default.html' ) );
 	}
 
 
@@ -138,10 +138,10 @@ class Client_Html_Email_Account_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->accountHeader = $content;
@@ -313,7 +313,7 @@ class Client_Html_Email_Account_Default
 		 */
 		$tplconf = 'client/html/email/account/default/template-header';
 
-		return $view->render( $this->_getTemplate( $tplconf, 'email/account/header-default.html' ) ); ;
+		return $view->render( $this->getTemplate( $tplconf, 'email/account/header-default.html' ) ); ;
 	}
 
 
@@ -400,7 +400,7 @@ class Client_Html_Email_Account_Default
 		 * @see client/html/email/account/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/account/' . $type, $name );
+		return $this->createSubClient( 'email/account/' . $type, $name );
 	}
 
 
@@ -409,8 +409,8 @@ class Client_Html_Email_Account_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

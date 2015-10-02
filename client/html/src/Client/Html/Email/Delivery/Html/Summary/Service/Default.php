@@ -100,6 +100,6 @@ class Client_Html_Email_Delivery_Html_Summary_Service_Default
 		 * @see client/html/email/delivery/html/summary/service/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/delivery/html/summary/service/' . $type, $name );
+		return $this->createSubClient( 'email/delivery/html/summary/service/' . $type, $name );
 	}
 }

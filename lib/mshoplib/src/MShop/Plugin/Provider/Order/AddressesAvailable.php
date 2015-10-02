@@ -50,7 +50,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 			$problems = array();
 			$availableAddresses = $order->getAddresses();
 
-			foreach( $this->_getItem()->getConfig() as $type => $value )
+			foreach( $this->getItemBase()->getConfig() as $type => $value )
 			{
 				if( $value == true && !isset( $availableAddresses[$type] ) ) {
 					$problems[$type] = 'available.none';

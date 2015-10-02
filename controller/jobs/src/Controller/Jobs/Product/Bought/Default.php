@@ -25,7 +25,7 @@ class Controller_Jobs_Product_Bought_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Products bought together' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Products bought together' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Product_Bought_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Creates bought together product suggestions' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Creates bought together product suggestions' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Product_Bought_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 
@@ -150,7 +150,7 @@ class Controller_Jobs_Product_Bought_Default
 		$date = date( 'Y-m-d H:i:s', time() - $days * 86400 );
 
 
-		$typeItem = $this->_getTypeItem( 'product/list/type', 'product', 'bought-together' );
+		$typeItem = $this->getTypeItem( 'product/list/type', 'product', 'bought-together' );
 
 		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
 		$search = $baseManager->createSearch();
@@ -171,12 +171,12 @@ class Controller_Jobs_Product_Bought_Default
 
 			foreach( $totalCounts as $id => $count )
 			{
-				$this->_removeListItems( $id, $typeItem->getId() );
+				$this->removeListItems( $id, $typeItem->getId() );
 
 				if( $count / $totalOrders > $minSupport )
 				{
-					$productIds = $this->_getSuggestions( $id, $prodIds, $count, $totalOrders, $maxItems, $minSupport, $minConfidence, $date );
-					$this->_addListItems( $id, $typeItem->getId(), $productIds );
+					$productIds = $this->getSuggestions( $id, $prodIds, $count, $totalOrders, $maxItems, $minSupport, $minConfidence, $date );
+					$this->addListItems( $id, $typeItem->getId(), $productIds );
 				}
 			}
 
@@ -201,10 +201,10 @@ class Controller_Jobs_Product_Bought_Default
 	 * @param string $date Date in YYYY-MM-DD HH:mm:ss format after which orders should be used for calculations
 	 * @return array List of suggested product IDs as key and their confidence as value
 	 */
-	protected function _getSuggestions( $id, $prodIds, $count, $total, $maxItems, $minSupport, $minConfidence, $date )
+	protected function getSuggestions( $id, $prodIds, $count, $total, $maxItems, $minSupport, $minConfidence, $date )
 	{
 		$refIds = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
 		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
@@ -264,13 +264,13 @@ class Controller_Jobs_Product_Bought_Default
 	 * @param integer $typeId Unique ID of the list type used for the referenced products
 	 * @param array $productIds List of position as key and product ID as value
 	 */
-	protected function _addListItems( $productId, $typeId, array $productIds )
+	protected function addListItems( $productId, $typeId, array $productIds )
 	{
 		if( empty( $productIds ) ) {
 			return;
 		}
 
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
 		$item = $manager->createItem();
 
 		foreach( $productIds as $pos => $refid )
@@ -294,9 +294,9 @@ class Controller_Jobs_Product_Bought_Default
 	 * @param string $productId Unique ID of the product the references should be removed from
 	 * @param integer $typeId Unique ID of the list type the referenced products should be removed from
 	 */
-	protected function _removeListItems( $productId, $typeId )
+	protected function removeListItems( $productId, $typeId )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
 
 		$search = $manager->createSearch();
 		$expr = array(

@@ -11,8 +11,8 @@
  */
 class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_code;
+	private $object;
+	private $code;
 
 
 	/**
@@ -33,30 +33,30 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Code item not found' );
 		};
 
-		$this->_object = $couponManager->getSubManager( 'code' );
-		$this->_code = $this->_object->createItem();
-		$this->_code->setCode( 'abcd' );
-		$this->_code->setCount( '1' );
-		$this->_code->setCouponId( $item->getId() );
+		$this->object = $couponManager->getSubManager( 'code' );
+		$this->code = $this->object->createItem();
+		$this->code->setCode( 'abcd' );
+		$this->code->setCount( '1' );
+		$this->code->setCouponId( $item->getId() );
 
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_code );
+		unset( $this->object, $this->code );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $obj ) {
+		foreach( $this->object->getSearchAttributes() as $obj ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
 		}
 	}
@@ -64,30 +64,30 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Coupon_Item_Code_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Coupon_Item_Code_Interface', $this->object->createItem() );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
 			throw new Exception( 'no item found exception' );
 		}
 
-		$item = $this->_object->getItem( $codeItem->getId() );
+		$item = $this->object->getItem( $codeItem->getId() );
 		$this->assertEquals( $codeItem, $item );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No coupon code item found' );
@@ -95,17 +95,17 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$item->setId( null );
 		$item->setCode( 'unittest' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 
 		$itemExp->setCount( '231199' );
-		$this->_object->saveItem( $itemExp );
+		$this->object->saveItem( $itemExp );
 
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$context = TestHelper::getContext();
 
@@ -135,19 +135,19 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->object->createSearch() );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
@@ -163,35 +163,35 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$this->assertEquals( 4, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 4, count( $this->object->searchItems( $search ) ) );
 	}
 
 
 	public function testDecrease()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
 			throw new Exception( 'No coupon code item found.' );
 		}
 
-		$this->_object->decrease( $codeItem->getCode(), 1 );
-		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->increase( $codeItem->getCode(), 1 );
+		$this->object->decrease( $codeItem->getCode(), 1 );
+		$actual = $this->object->getItem( $codeItem->getId() );
+		$this->object->increase( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
 	}
@@ -199,17 +199,17 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testIncrease()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
 			throw new Exception( 'No coupon code item found.' );
 		}
 
-		$this->_object->increase( $codeItem->getCode(), 1 );
-		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->decrease( $codeItem->getCode(), 1 );
+		$this->object->increase( $codeItem->getCode(), 1 );
+		$actual = $this->object->getItem( $codeItem->getId() );
+		$this->object->decrease( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() + 1, $actual->getCount() );
 	}
@@ -218,6 +218,6 @@ class MShop_Coupon_Manager_Code_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

@@ -16,7 +16,7 @@
  */
 class MW_Convert_Compose implements MW_Convert_Interface
 {
-	private $_converter;
+	private $converter;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_Convert_Compose implements MW_Convert_Interface
 	 */
 	public function __construct( array $converter )
 	{
-		$this->_converter = $converter;
+		$this->converter = $converter;
 	}
 
 
@@ -38,7 +38,7 @@ class MW_Convert_Compose implements MW_Convert_Interface
 	 */
 	public function translate( $value )
 	{
-		foreach( $this->_converter as $object ) {
+		foreach( $this->converter as $object ) {
 			$value = $object->translate( $value );
 		}
 
@@ -54,7 +54,7 @@ class MW_Convert_Compose implements MW_Convert_Interface
 	 */
 	public function reverse( $value )
 	{
-		foreach( $this->_converter as $object ) {
+		foreach( $this->converter as $object ) {
 			$value = $object->reverse( $value );
 		}
 

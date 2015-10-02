@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Date_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Date_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Date_Default( $view, 'd.m.Y' );
+		$this->object = new MW_View_Helper_Date_Default( $view, 'd.m.Y' );
 	}
 
 
@@ -35,14 +35,14 @@ class MW_View_Helper_Date_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertEquals( '01.01.2000', $this->_object->transform( '2000-01-01 00:00:00' ) );
-		$this->assertEquals( '01.01.0000', $this->_object->transform( '0000-01-01 00:00:00' ) );
+		$this->assertEquals( '01.01.2000', $this->object->transform( '2000-01-01 00:00:00' ) );
+		$this->assertEquals( '01.01.0000', $this->object->transform( '0000-01-01 00:00:00' ) );
 	}
 
 }

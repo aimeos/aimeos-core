@@ -16,7 +16,7 @@
  */
 class MW_Session_None implements MW_Session_Interface
 {
-	private $_data = array();
+	private $data = array();
 
 
 	/**
@@ -28,8 +28,8 @@ class MW_Session_None implements MW_Session_Interface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( array_key_exists( $name, $this->_data ) !== false ) {
-			return $this->_data[$name];
+		if( array_key_exists( $name, $this->data ) !== false ) {
+			return $this->data[$name];
 		}
 
 		return $default;
@@ -44,6 +44,6 @@ class MW_Session_None implements MW_Session_Interface
 	 */
 	public function set( $name, $value )
 	{
-		$this->_data[$name] = $value;
+		$this->data[$name] = $value;
 	}
 }

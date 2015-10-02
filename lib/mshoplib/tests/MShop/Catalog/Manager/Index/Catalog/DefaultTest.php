@@ -11,7 +11,7 @@
  */
 class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -22,7 +22,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MShop_Catalog_Manager_Index_Catalog_Default( TestHelper::getContext() );
+		$this->object = new MShop_Catalog_Manager_Index_Catalog_Default( TestHelper::getContext() );
 	}
 
 
@@ -34,13 +34,13 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
@@ -58,8 +58,8 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 		}
 
 
-		$search = $this->_object->createSearch( true );
-		$result = $this->_object->aggregate( $search, 'catalog.index.catalog.id' );
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'catalog.index.catalog.id' );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -69,7 +69,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -108,22 +108,22 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 		$catListItem->setRefId( $product->getId() );
 		$listManager->saveItem( $catListItem );
 
-		$this->_object->saveItem( $product );
+		$this->object->saveItem( $product );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.catalog.id', $catListItem->getParentId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 
-		$this->_object->deleteItem( $product->getId() );
+		$this->object->deleteItem( $product->getId() );
 		$listManager->deleteItem( $catListItem->getId() );
 		$productManager->deleteItem( $product->getId() );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.catalog.id', $catListItem->getParentId() ) );
-		$result2 = $this->_object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search );
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -134,7 +134,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
@@ -159,15 +159,15 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 		}
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.catalog.id', $catItem->getId() ) ); // catalog ID
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 2, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.catalog.id', null ) ); // catalog ID
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 8, count( $result ) );
 
@@ -177,7 +177,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 		$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 2, count( $result ) );
 
@@ -186,7 +186,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 		$func = $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count categories
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 	}
@@ -194,7 +194,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends PHPUnit_Framework_
 
 	public function testCleanupIndex()
 	{
-		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
 	}
 
 }

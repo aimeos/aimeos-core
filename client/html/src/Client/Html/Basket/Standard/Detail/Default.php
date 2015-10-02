@@ -18,7 +18,7 @@ class Client_Html_Basket_Standard_Detail_Default
 	extends Client_Html_Common_Summary_Detail_Default
 	implements Client_Html_Common_Client_Factory_Interface
 {
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -103,7 +103,7 @@ class Client_Html_Basket_Standard_Detail_Default
 		 * @see client/html/basket/standard/detail/decorators/excludes
 		 * @see client/html/basket/standard/detail/decorators/global
 		 */
-		return $this->_createSubClient( 'basket/standard/detail/' . $type, $name );
+		return $this->createSubClient( 'basket/standard/detail/' . $type, $name );
 	}
 
 
@@ -115,11 +115,11 @@ class Client_Html_Basket_Standard_Detail_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		$view = parent::_setViewParams( $view );
+		$view = parent::setViewParams( $view );
 
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$basket = $view->standardBasket;
 
@@ -131,13 +131,13 @@ class Client_Html_Basket_Standard_Detail_Default
 			$view->summaryParams = $view->get( 'standardParams', array() );
 			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c_step' => 'payment' ), array(), $config );
 			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c_step' => 'delivery' ), array(), $config );
-			$view->summaryTaxRates = $this->_getTaxRates( $basket );
+			$view->summaryTaxRates = $this->getTaxRates( $basket );
 			$view->summaryEnableModify = true;
 			$view->summaryBasket = $basket;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

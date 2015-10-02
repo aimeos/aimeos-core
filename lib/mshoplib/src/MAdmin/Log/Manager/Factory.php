@@ -73,7 +73,7 @@ class MAdmin_Log_Manager_Factory
 		$iface = 'MAdmin_Log_Manager_Interface';
 		$classname = 'MAdmin_Log_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** madmin/log/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the log manager
@@ -149,6 +149,6 @@ class MAdmin_Log_Manager_Factory
 		 * @see madmin/log/manager/decorators/excludes
 		 * @see madmin/log/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'log' );
+		return self::addManagerDecorators( $context, $manager, 'log' );
 	}
 }

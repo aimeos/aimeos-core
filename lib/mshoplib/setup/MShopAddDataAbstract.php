@@ -47,7 +47,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
 	}
@@ -60,9 +60,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param array $data Two dimensional associative list of attribute data
 	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
 	 */
-	protected function _addAttributes( $parentid, array $data, $domain )
+	protected function addAttributes( $parentid, array $data, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -78,7 +78,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
-			$item->setTypeId( $this->_getTypeId( 'attribute/type', $domain, $entry['type'] ) );
+			$item->setTypeId( $this->getTypeId( 'attribute/type', $domain, $entry['type'] ) );
 			$item->setCode( $entry['code'] );
 			$item->setLabel( $entry['label'] );
 			$item->setPosition( $entry['position'] );
@@ -87,7 +87,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$attrManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->_getTypeId( $domain . '/list/type', 'attribute', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'attribute', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -99,19 +99,19 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 
 
 			if( isset( $entry['attribute'] ) ) {
-				$this->_addAttributes( $item->getId(), $entry['attribute'], 'attribute' );
+				$this->addAttributes( $item->getId(), $entry['attribute'], 'attribute' );
 			}
 
 			if( isset( $entry['media'] ) ) {
-				$this->_addMedia( $item->getId(), $entry['media'], 'attribute' );
+				$this->addMedia( $item->getId(), $entry['media'], 'attribute' );
 			}
 
 			if( isset( $entry['price'] ) ) {
-				$this->_addPrices( $item->getId(), $entry['price'], 'attribute' );
+				$this->addPrices( $item->getId(), $entry['price'], 'attribute' );
 			}
 
 			if( isset( $entry['text'] ) ) {
-				$this->_addTexts( $item->getId(), $entry['text'], 'attribute' );
+				$this->addTexts( $item->getId(), $entry['text'], 'attribute' );
 			}
 		}
 	}
@@ -124,9 +124,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param array $data Two dimensional associative list of media data
 	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
 	 */
-	protected function _addMedia( $parentid, array $data, $domain )
+	protected function addMedia( $parentid, array $data, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -142,7 +142,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
-			$item->setTypeId( $this->_getTypeId( 'media/type', $domain, $entry['type'] ) );
+			$item->setTypeId( $this->getTypeId( 'media/type', $domain, $entry['type'] ) );
 			$item->setLanguageId( $entry['languageid'] );
 			$item->setMimetype( $entry['mimetype'] );
 			$item->setPreview( $entry['preview'] );
@@ -153,7 +153,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->_getTypeId( $domain . '/list/type', 'media', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'media', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -165,19 +165,19 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 
 
 			if( isset( $entry['attribute'] ) ) {
-				$this->_addAttributes( $item->getId(), $entry['attribute'], 'media' );
+				$this->addAttributes( $item->getId(), $entry['attribute'], 'media' );
 			}
 
 			if( isset( $entry['media'] ) ) {
-				$this->_addMedia( $item->getId(), $entry['media'], 'media' );
+				$this->addMedia( $item->getId(), $entry['media'], 'media' );
 			}
 
 			if( isset( $entry['price'] ) ) {
-				$this->_addPrices( $item->getId(), $entry['price'], 'media' );
+				$this->addPrices( $item->getId(), $entry['price'], 'media' );
 			}
 
 			if( isset( $entry['text'] ) ) {
-				$this->_addTexts( $item->getId(), $entry['text'], 'media' );
+				$this->addTexts( $item->getId(), $entry['text'], 'media' );
 			}
 		}
 	}
@@ -190,9 +190,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param array $data Two dimensional associative list of price data
 	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
 	 */
-	protected function _addPrices( $parentid, array $data, $domain )
+	protected function addPrices( $parentid, array $data, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'price' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -209,7 +209,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		{
 			$item->setId( null );
 			$item->setLabel( $entry['label'] );
-			$item->setTypeId( $this->_getTypeId( 'price/type', $domain, $entry['type'] ) );
+			$item->setTypeId( $this->getTypeId( 'price/type', $domain, $entry['type'] ) );
 			$item->setCurrencyId( $entry['currencyid'] );
 			$item->setQuantity( $entry['quantity'] );
 			$item->setValue( $entry['value'] );
@@ -221,7 +221,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->_getTypeId( $domain . '/list/type', 'price', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'price', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -233,19 +233,19 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 
 
 			if( isset( $entry['attribute'] ) ) {
-				$this->_addAttributes( $item->getId(), $entry['attribute'], 'price' );
+				$this->addAttributes( $item->getId(), $entry['attribute'], 'price' );
 			}
 
 			if( isset( $entry['media'] ) ) {
-				$this->_addMedia( $item->getId(), $entry['media'], 'price' );
+				$this->addMedia( $item->getId(), $entry['media'], 'price' );
 			}
 
 			if( isset( $entry['price'] ) ) {
-				$this->_addPrices( $item->getId(), $entry['price'], 'price' );
+				$this->addPrices( $item->getId(), $entry['price'], 'price' );
 			}
 
 			if( isset( $entry['text'] ) ) {
-				$this->_addTexts( $item->getId(), $entry['text'], 'price' );
+				$this->addTexts( $item->getId(), $entry['text'], 'price' );
 			}
 		}
 	}
@@ -258,9 +258,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param array $data Two dimensional associative list text data
 	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
 	 */
-	protected function _addTexts( $parentid, array $data, $domain )
+	protected function addTexts( $parentid, array $data, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$textManager = MShop_Factory::createManager( $context, 'text' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -276,7 +276,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
-			$item->setTypeId( $this->_getTypeId( 'text/type', $domain, $entry['type'] ) );
+			$item->setTypeId( $this->getTypeId( 'text/type', $domain, $entry['type'] ) );
 			$item->setLanguageId( $entry['languageid'] );
 			$item->setContent( $entry['content'] );
 			$item->setLabel( $entry['label'] );
@@ -285,7 +285,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$textManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->_getTypeId( $domain . '/list/type', 'text', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'text', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -297,19 +297,19 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 
 
 			if( isset( $entry['attribute'] ) ) {
-				$this->_addAttributes( $item->getId(), $entry['attribute'], 'text' );
+				$this->addAttributes( $item->getId(), $entry['attribute'], 'text' );
 			}
 
 			if( isset( $entry['media'] ) ) {
-				$this->_addMedia( $item->getId(), $entry['media'], 'text' );
+				$this->addMedia( $item->getId(), $entry['media'], 'text' );
 			}
 
 			if( isset( $entry['price'] ) ) {
-				$this->_addPrices( $item->getId(), $entry['price'], 'text' );
+				$this->addPrices( $item->getId(), $entry['price'], 'text' );
 			}
 
 			if( isset( $entry['text'] ) ) {
-				$this->_addTexts( $item->getId(), $entry['text'], 'text' );
+				$this->addTexts( $item->getId(), $entry['text'], 'text' );
 			}
 		}
 	}
@@ -322,9 +322,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param array $data Two dimensional associative list of product data
 	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
 	 */
-	protected function _addProducts( $parentid, array $data, $domain )
+	protected function addProducts( $parentid, array $data, $domain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
 
@@ -356,7 +356,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			}
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->_getTypeId( $domain . '/list/type', 'product', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'product', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -375,16 +375,16 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param string $productid ID of the product item where the stock levels should be associated to
 	 * @param array $data Two dimensional associative list of product stock data
 	 */
-	protected function _addProductStock( $productid, array $data )
+	protected function addProductStock( $productid, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock/warehouse' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
 
 		$warehouses = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
 			$warehouses[$item->getCode()] = $id;
 		}
 
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$item = $manager->createItem();
 		$item->setProductId( $productid );
@@ -406,9 +406,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context item
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_additional;
+		return $this->additional;
 	}
 
 
@@ -419,10 +419,10 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param string $domain Domain of the type item we are looking for, e.g. 'text'
 	 * @param string $type Type code of the item we are looking for, e.g. 'default'
 	 */
-	protected function _getTypeId( $name, $domain, $type )
+	protected function getTypeId( $name, $domain, $type )
 	{
 		$key = str_replace( '/', '.', $name );
-		$manager = MShop_Factory::createManager( $this->_getContext(), $name );
+		$manager = MShop_Factory::createManager( $this->getContext(), $name );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -449,9 +449,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param string $domain Name of the domain the items are associated to, e.g. 'catalog'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'text'
 	 */
-	protected function _removeItems( $parentid, $name, $domain, $refdomain )
+	protected function removeItems( $parentid, $name, $domain, $refdomain )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = MShop_Factory::createManager( $context, $refdomain );
@@ -489,10 +489,10 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * @param string $name Name of the list manager, e.g. 'catalog/list'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'product'
 	 */
-	protected function _removeListItems( $parentid, $name, $refdomain )
+	protected function removeListItems( $parentid, $name, $refdomain )
 	{
 		$start = 0;
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = MShop_Factory::createManager( $context, $refdomain );
@@ -552,9 +552,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txBegin()
+	protected function txBegin()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -562,9 +562,9 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txCommit()
+	protected function txCommit()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

@@ -35,7 +35,7 @@ abstract class MShop_Order_Item_Base_Product_Abstract extends MShop_Order_Item_A
 	 *
 	 * @param integer $value Flag constant value
 	 */
-	protected function _checkFlags( $value )
+	protected function checkFlags( $value )
 	{
 		$value = (int) $value;
 

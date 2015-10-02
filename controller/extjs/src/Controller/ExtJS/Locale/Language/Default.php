@@ -19,7 +19,7 @@ class Controller_ExtJS_Locale_Language_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -40,10 +40,10 @@ class Controller_ExtJS_Locale_Language_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
 		foreach( (array) $params->items as $id ) {
-			$this->_getManager()->deleteItem( $id );
+			$this->getManager()->deleteItem( $id );
 		}
 
 		return array(
@@ -59,21 +59,21 @@ class Controller_ExtJS_Locale_Language_Default
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items' ) );
+		$this->checkParams( $params, array( 'items' ) );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -85,14 +85,14 @@ class Controller_ExtJS_Locale_Language_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$total = 0;
 		$search = $manager->createSearch();
 
 		if( isset( $params->options->showall ) && $params->options->showall == false )
 		{
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->getContext() );
 
 			$langids = array();
 			foreach( $localeManager->searchItems( $localeManager->createSearch() ) as $item ) {
@@ -104,16 +104,16 @@ class Controller_ExtJS_Locale_Language_Default
 			}
 		}
 
-		$search = $this->_initCriteria( $search, $params );
+		$search = $this->initCriteria( $search, $params );
 
 		$sort = $search->getSortations();
 		$sort[] = $search->sort( '+', 'locale.language.label' );
 		$search->setSortations( $sort );
 
-		$items = $this->_getManager()->searchItems( $search, array(), $total );
+		$items = $this->getManager()->searchItems( $search, array(), $total );
 
 		return array(
-			'items' => $this->_toArray( $items ),
+			'items' => $this->toArray( $items ),
 			'total' => $total,
 			'success' => true,
 		);
@@ -161,13 +161,13 @@ class Controller_ExtJS_Locale_Language_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'locale/language' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'locale/language' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -176,7 +176,7 @@ class Controller_ExtJS_Locale_Language_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'locale.language';
 	}

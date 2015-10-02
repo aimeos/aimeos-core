@@ -55,8 +55,8 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/process/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/checkout/standard/process/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -75,10 +75,10 @@ class Client_Html_Checkout_Standard_Process_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->processBody = $html;
@@ -106,7 +106,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		$tplconf = 'client/html/checkout/standard/process/default/template-body';
 		$default = 'checkout/standard/process-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -126,10 +126,10 @@ class Client_Html_Checkout_Standard_Process_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->processHeader = $html;
@@ -158,7 +158,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		$tplconf = 'client/html/checkout/standard/process/default/template-header';
 		$default = 'checkout/standard/process-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -245,7 +245,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		 * @see client/html/checkout/standard/process/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/process/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/process/' . $type, $name );
 	}
 
 
@@ -262,7 +262,7 @@ class Client_Html_Checkout_Standard_Process_Default
 			return;
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 		$orderid = $session->get( 'aimeos/orderid' );
 		$config = array( 'absoluteUri' => true, 'namespace' => false );
@@ -271,18 +271,18 @@ class Client_Html_Checkout_Standard_Process_Default
 		{
 			$orderItem = MShop_Factory::createManager( $context, 'order' )->getItem( $orderid );
 
-			if( ( $code = $this->_getOrderServiceCode( $orderItem->getBaseId() ) ) !== null )
+			if( ( $code = $this->getOrderServiceCode( $orderItem->getBaseId() ) ) !== null )
 			{
-				$serviceItem = $this->_getServiceItem( $code );
+				$serviceItem = $this->getServiceItem( $code );
 
 				$serviceManager = MShop_Factory::createManager( $context, 'service' );
 				$provider = $serviceManager->getProvider( $serviceItem );
 
 				$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
 				$urls = array(
-					'payment.url-self' => $this->_getUrlSelf( $view, $params + array( 'c_step' => 'process' ), array() ),
-					'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
-					'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+					'payment.url-self' => $this->getUrlSelf( $view, $params + array( 'c_step' => 'process' ), array() ),
+					'payment.url-success' => $this->getUrlConfirm( $view, $params, $config ),
+					'payment.url-update' => $this->getUrlUpdate( $view, $params, $config ),
 					'client.ipaddress' => $view->request()->getClientAddress(),
 				);
 				$provider->injectGlobalConfigBE( $urls );
@@ -300,7 +300,7 @@ class Client_Html_Checkout_Standard_Process_Default
 			}
 			else
 			{
-				$view->standardUrlNext = $this->_getUrlConfirm( $view, array(), array() );
+				$view->standardUrlNext = $this->getUrlConfirm( $view, array(), array() );
 				$view->standardMethod = 'GET';
 			}
 
@@ -330,7 +330,7 @@ class Client_Html_Checkout_Standard_Process_Default
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 
-		$view->standardUrlPayment = $this->_getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
+		$view->standardUrlPayment = $this->getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
 	}
 
 
@@ -340,9 +340,9 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @param string $baseid ID of the order base item
 	 * @return string|null Code of the service item or null if not found
 	 */
-	protected function _getOrderServiceCode( $baseid )
+	protected function getOrderServiceCode( $baseid )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'order/base/service' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -366,9 +366,9 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @throws Client_Html_Exception If no service item for this code is found
 	 * @return MShop_Service_Item_Interface Service item object
 	 */
-	protected function _getServiceItem( $code )
+	protected function getServiceItem( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
@@ -394,9 +394,9 @@ class Client_Html_Checkout_Standard_Process_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -408,7 +408,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
 	{
 		/** client/html/checkout/confirm/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -493,7 +493,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlSelf( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlSelf( MW_View_Interface $view, array $params, array $config )
 	{
 		/** client/html/checkout/standard/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -578,7 +578,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
 	{
 		/** client/html/checkout/update/url/target
 		 * Destination of the URL where the controller specified in the URL is known

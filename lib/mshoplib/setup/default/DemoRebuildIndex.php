@@ -47,21 +47,21 @@ class MW_Setup_Task_DemoRebuildIndex extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Rebuilds the catalog index.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Rebuilding catalog index for demo data', 0 );
+		$this->msg( 'Rebuilding catalog index for demo data', 0 );
 
-		MShop_Factory::createManager( $this->_additional, 'catalog/index' )->rebuildIndex();
+		MShop_Factory::createManager( $this->additional, 'catalog/index' )->rebuildIndex();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

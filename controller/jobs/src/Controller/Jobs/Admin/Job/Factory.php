@@ -74,7 +74,7 @@ class Controller_Jobs_Admin_Job_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Admin_Job_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/admin/job/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin job controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Admin_Job_Factory
 		 * @see controller/jobs/admin/job/decorators/excludes
 		 * @see controller/jobs/admin/job/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'admin/job' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'admin/job' );
 	}
 }

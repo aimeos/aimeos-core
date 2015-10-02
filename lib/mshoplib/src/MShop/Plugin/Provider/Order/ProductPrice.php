@@ -70,8 +70,8 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 
-		$attributes = $this->_getAttributes( array_keys( $attrIds ) );
-		$prodMap = $this->_getProducts( $prodCodes );
+		$attributes = $this->getAttributes( array_keys( $attrIds ) );
+		$prodMap = $this->getProducts( $prodCodes );
 
 
 		foreach( $orderProducts as $pos => $orderProduct )
@@ -84,7 +84,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			}
 
 			$orderPosPrice = $orderProduct->getPrice();
-			$price = $this->_getPrice( $orderProduct, $refPrices, $attributes, $pos );
+			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
 			if( $orderPosPrice->compare( $price ) === false )
 			{
@@ -114,13 +114,13 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 * @param array $ids List of attribute IDs
 	 * @return MShop_Attribute_Item_Interface[] List of attribute items
 	 */
-	protected function _getAttributes( array $ids )
+	protected function getAttributes( array $ids )
 	{
 		if( empty( $ids ) ) {
 			return array();
 		}
 
-		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+		$attrManager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $attrManager->createSearch( true );
 		$expr = array(
@@ -138,13 +138,13 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 *
 	 * @param string[] $prodCodes Product codes
 	 */
-	protected function _getProducts( array $prodCodes )
+	protected function getProducts( array $prodCodes )
 	{
 		if( empty( $prodCodes ) ) {
 			return array();
 		}
 
-		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch( true );
 		$expr = array(
@@ -174,9 +174,9 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 * @param integer $pos Position of the product in the basket
 	 * @return MShop_Price_Item_Interface Price item including the calculated price
 	 */
-	private function _getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes, $pos )
+	private function getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes, $pos )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		// fetch prices of selection/parent products
 		if( empty( $refPrices ) )

@@ -17,10 +17,10 @@
  */
 class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_stmt;
-	private $_loglevel;
-	private $_requestid;
-	private $_facilities;
+	private $stmt;
+	private $loglevel;
+	private $requestid;
+	private $facilities;
 
 
 	/**
@@ -37,14 +37,14 @@ class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 	public function __construct( MW_DB_Statement_Interface $stmt, $loglevel = MW_Logger_Abstract::ERR,
 		$requestid = null, array $facilities = null )
 	{
-		$this->_stmt = $stmt;
-		$this->_loglevel = $loglevel;
-		$this->_facilities = $facilities;
+		$this->stmt = $stmt;
+		$this->loglevel = $loglevel;
+		$this->facilities = $facilities;
 
 		if( $requestid === null ) {
 			$requestid = md5( php_uname('n') . getmypid() . date( 'Y-m-d H:i:s' ) );
 		}
-		$this->_requestid = $requestid;
+		$this->requestid = $requestid;
 	}
 
 
@@ -60,21 +60,21 @@ class MW_Logger_DB extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel
-			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
+		if( $priority <= $this->loglevel
+			&& ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
-			$this->_checkLogLevel( $priority );
+			$this->checkLogLevel( $priority );
 
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
 			}
 
-			$this->_stmt->bind( 1, $facility );
-			$this->_stmt->bind( 2, date( 'Y-m-d H:i:s' ) );
-			$this->_stmt->bind( 3, $priority, MW_DB_Statement_Abstract::PARAM_INT );
-			$this->_stmt->bind( 4, $message );
-			$this->_stmt->bind( 5, $this->_requestid );
-			$this->_stmt->execute()->finish();
+			$this->stmt->bind( 1, $facility );
+			$this->stmt->bind( 2, date( 'Y-m-d H:i:s' ) );
+			$this->stmt->bind( 3, $priority, MW_DB_Statement_Abstract::PARAM_INT );
+			$this->stmt->bind( 4, $message );
+			$this->stmt->bind( 5, $this->requestid );
+			$this->stmt->execute()->finish();
 		}
 	}
 }

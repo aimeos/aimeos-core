@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductWarehouseRenameTable extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'RENAME TABLE "mshop_product_warehouse" TO "mshop_product_stock_warehouse"',
 		'pk_msprowa_id' => 'ALTER TABLE "mshop_product_stock_warehouse" DROP PRIMARY KEY, ADD CONSTRAINT "pk_msprostwa_id" PRIMARY KEY ("id")',
 		'unq_msprowa_code_sid' => 'ALTER TABLE "mshop_product_stock_warehouse" DROP INDEX "unq_msprowa_code_sid", ADD CONSTRAINT "unq_msprostwa_code_sid" UNIQUE ("code", "siteid")',
@@ -44,9 +44,9 @@ class MW_Setup_Task_ProductWarehouseRenameTable extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -55,18 +55,18 @@ class MW_Setup_Task_ProductWarehouseRenameTable extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming product warehouse table', 0 );
+		$this->msg( 'Renaming product warehouse table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_product_warehouse' ) === true )
+		if( $this->schema->tableExists( 'mshop_product_warehouse' ) === true )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'renamed' );
+			$this->executeList( $stmts );
+			$this->status( 'renamed' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

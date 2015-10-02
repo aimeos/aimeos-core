@@ -18,14 +18,14 @@ class MW_Container_Content_CSV
 	extends MW_Container_Content_Abstract
 	implements MW_Container_Content_Interface
 {
-	private $_separator;
-	private $_enclosure;
-	private $_escape;
-	private $_lineend;
-	private $_endsubst;
-	private $_fh;
-	private $_data;
-	private $_position = 0;
+	private $separator;
+	private $enclosure;
+	private $escape;
+	private $lineend;
+	private $endsubst;
+	private $fh;
+	private $data;
+	private $position = 0;
 
 
 	/**
@@ -52,20 +52,20 @@ class MW_Container_Content_CSV
 			$name .= '.csv';
 		}
 
-		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
-			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
+		if( ( $this->fh = @fopen( $resource, 'a+' ) ) === false
+			&& ( $this->fh = fopen( $resource, 'r' ) ) === false
 		) {
 			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
 
-		$this->_separator = $this->_getOption( 'csv-separator', ',' );
-		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
-		$this->_escape = $this->_getOption( 'csv-escape', '"' );
-		$this->_lineend = $this->_getOption( 'csv-lineend', chr( 10 ) );
-		$this->_endsubst = $this->_getOption( 'csv-lineend-subst', ' ' );
-		$this->_data = $this->_getData();
+		$this->separator = $this->getOption( 'csv-separator', ',' );
+		$this->enclosure = $this->getOption( 'csv-enclosure', '"' );
+		$this->escape = $this->getOption( 'csv-escape', '"' );
+		$this->lineend = $this->getOption( 'csv-lineend', chr( 10 ) );
+		$this->endsubst = $this->getOption( 'csv-lineend-subst', ' ' );
+		$this->data = $this->getData();
 	}
 
 
@@ -76,11 +76,11 @@ class MW_Container_Content_CSV
 	 */
 	public function close()
 	{
-		if( fflush( $this->_fh ) === false ) {
+		if( fflush( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
 		}
 
-		if( fclose( $this->_fh ) === false ) {
+		if( fclose( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
@@ -93,15 +93,15 @@ class MW_Container_Content_CSV
 	 */
 	public function add( $data )
 	{
-		$enclosure = $this->_enclosure;
+		$enclosure = $this->enclosure;
 
 		foreach( (array) $data as $key => $entry )
 		{
-			$entry = str_replace( $this->_lineend, $this->_endsubst, $entry );
-			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
+			$entry = str_replace( $this->lineend, $this->endsubst, $entry );
+			$data[$key] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
 		}
 
-		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . $this->_lineend ) === false ) {
+		if( fwrite( $this->fh, implode( $this->separator, $data ) . $this->lineend ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
@@ -114,7 +114,7 @@ class MW_Container_Content_CSV
 	 */
 	function current()
 	{
-		return $this->_data;
+		return $this->data;
 	}
 
 
@@ -125,8 +125,8 @@ class MW_Container_Content_CSV
 	 */
 	function key()
 	{
-		if( $this->_data !== null ) {
-			return $this->_position;
+		if( $this->data !== null ) {
+			return $this->position;
 		}
 
 		return null;
@@ -138,8 +138,8 @@ class MW_Container_Content_CSV
 	 */
 	function next()
 	{
-		$this->_position++;
-		$this->_data = $this->_getData();
+		$this->position++;
+		$this->data = $this->getData();
 	}
 
 
@@ -150,16 +150,16 @@ class MW_Container_Content_CSV
 	{
 		$filename = $this->getResource();
 
-		if( fclose( $this->_fh ) === false ) {
+		if( fclose( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to close file handle for %1$s', $filename ) );
 		}
 
-		if( ( $this->_fh = fopen( $filename, 'r' ) ) === false ) {
+		if( ( $this->fh = fopen( $filename, 'r' ) ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to open file %1$s', $filename ) );
 		}
 
-		$this->_position = 0;
-		$this->_data = $this->_getData();
+		$this->position = 0;
+		$this->data = $this->getData();
 	}
 
 
@@ -170,7 +170,7 @@ class MW_Container_Content_CSV
 	 */
 	function valid()
 	{
-		return ( $this->_data === null ? !feof( $this->_fh ) : true );
+		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}
 
 
@@ -179,11 +179,11 @@ class MW_Container_Content_CSV
 	 *
 	 * @return array List of values
 	 */
-	protected function _getData()
+	protected function getData()
 	{
 		do
 		{
-			$data = fgetcsv( $this->_fh, 0, $this->_separator, $this->_enclosure, $this->_escape );
+			$data = fgetcsv( $this->fh, 0, $this->separator, $this->enclosure, $this->escape );
 
 			if( $data === false || $data === null ) {
 				return null;

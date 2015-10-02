@@ -49,7 +49,7 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Coupon_Count_' . $name;
 
-		$controller = self::_createController( $context, $aimeos, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/coupon/count/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order coupon count controllers
@@ -86,6 +86,6 @@ class Controller_Jobs_Order_Coupon_Count_Factory
 		 * @see controller/jobs/order/coupon/count/decorators/global
 		 * @deprecated Use controller/jobs/order/cleanup/unfinished/decorators/local instead
 		 */
-		return self::_addControllerDecorators( $context, $aimeos, $controller, 'order/coupon/count' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/coupon/count' );
 	}
 }

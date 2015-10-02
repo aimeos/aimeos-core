@@ -11,9 +11,9 @@
  */
 class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 {
-	private $_mysqlProductUser = 'ALTER TABLE "mshop_product" CHANGE "user" "editor" VARCHAR(255) NOT NULL';
+	private $mysqlProductUser = 'ALTER TABLE "mshop_product" CHANGE "user" "editor" VARCHAR(255) NOT NULL';
 
-	private $_mysql = array(
+	private $mysql = array(
 		// attribute
 		'mshop_attribute' => array(
 			'mtime' => array(
@@ -739,9 +739,9 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -750,35 +750,35 @@ class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding ctime/mtime/user columns to tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding ctime/mtime/user columns to tables', 0 );
+		$this->status( '' );
 
-		if( $this->_schema->tableExists( 'mshop_product' ) && $this->_schema->columnExists( 'mshop_product', 'user' ) )
+		if( $this->schema->tableExists( 'mshop_product' ) && $this->schema->columnExists( 'mshop_product', 'user' ) )
 		{
-			$this->_msg( sprintf( 'Checking table "%2$s" for column "%1$s": ', 'user', 'mshop_product' ), 1 );
+			$this->msg( sprintf( 'Checking table "%2$s" for column "%1$s": ', 'user', 'mshop_product' ), 1 );
 
-			$this->_execute( $this->_mysqlProductUser );
-			$this->_status( 'migrated' );
+			$this->execute( $this->mysqlProductUser );
+			$this->status( 'migrated' );
 		}
 
 		foreach( $stmts as $table=>$colList )
 		{
-			if( $this->_schema->tableExists( $table ) === true )
+			if( $this->schema->tableExists( $table ) === true )
 			{
 				foreach( $colList as $column=>$stmtList )
 				{
-					$this->_msg( sprintf( 'Checking table "%2$s" for column "%1$s": ', $column, $table ), 1 );
+					$this->msg( sprintf( 'Checking table "%2$s" for column "%1$s": ', $column, $table ), 1 );
 
-					if( $this->_schema->columnExists( $table, $column ) === false )
+					if( $this->schema->columnExists( $table, $column ) === false )
 					{
-						$this->_executeList( $stmtList );
-						$this->_status( 'added' );
+						$this->executeList( $stmtList );
+						$this->status( 'added' );
 					}
 					else
 					{
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 			}

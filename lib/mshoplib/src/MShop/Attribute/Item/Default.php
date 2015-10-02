@@ -18,7 +18,7 @@ class MShop_Attribute_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Attribute_Item_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -32,7 +32,7 @@ class MShop_Attribute_Item_Default
 	{
 		parent::__construct( 'attribute.', $values, $listItems, $refItems );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -43,7 +43,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->_values['domain'] ) ? (string) $this->_values['domain'] : '' );
+		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
 	}
 
 
@@ -56,7 +56,7 @@ class MShop_Attribute_Item_Default
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->_values['domain'] = (string) $domain;
+		$this->values['domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -68,7 +68,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -81,7 +81,7 @@ class MShop_Attribute_Item_Default
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $typeid;
+		$this->values['typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -93,7 +93,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -104,7 +104,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -115,11 +115,11 @@ class MShop_Attribute_Item_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -131,7 +131,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -144,7 +144,7 @@ class MShop_Attribute_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -156,7 +156,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 
@@ -169,7 +169,7 @@ class MShop_Attribute_Item_Default
 	{
 		if( $pos == $this->getPosition() ) { return; }
 
-		$this->_values['pos'] = (int) $pos;
+		$this->values['pos'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -181,7 +181,7 @@ class MShop_Attribute_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -194,7 +194,7 @@ class MShop_Attribute_Item_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 

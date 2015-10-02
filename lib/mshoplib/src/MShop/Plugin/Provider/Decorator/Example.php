@@ -25,7 +25,7 @@ class MShop_Plugin_Provider_Decorator_Example
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$this->_getProvider()->register( $p );
+		$this->getProvider()->register( $p );
 	}
 
 
@@ -38,6 +38,6 @@ class MShop_Plugin_Provider_Decorator_Example
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		return $this->_getProvider()->update( $order, $action, $value );
+		return $this->getProvider()->update( $order, $action, $value );
 	}
 }

@@ -16,7 +16,7 @@
  */
 abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -26,7 +26,7 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 */
 	public function __construct( MW_Config_Interface $object )
 	{
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -35,7 +35,7 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 */
 	public function __clone()
 	{
-		$this->_object = clone $this->_object;
+		$this->object = clone $this->object;
 	}
 
 
@@ -48,7 +48,7 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 */
 	public function get( $path, $default = null )
 	{
-		$this->_object->get( $path, $default );
+		$this->object->get( $path, $default );
 	}
 
 
@@ -60,7 +60,7 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 */
 	public function set( $path, $value )
 	{
-		$this->_object->set( $path, $value );
+		$this->object->set( $path, $value );
 	}
 
 
@@ -69,8 +69,8 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 *
 	 * @return MW_Config_Interface Config object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		return $this->_object;
+		return $this->object;
 	}
 }

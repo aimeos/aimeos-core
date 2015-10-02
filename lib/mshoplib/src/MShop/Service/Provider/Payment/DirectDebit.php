@@ -18,7 +18,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	extends MShop_Service_Provider_Payment_Abstract
 	implements MShop_Service_Provider_Payment_Interface
 {
-	private $_feConfig = array(
+	private $feConfig = array(
 		'directdebit.accountowner' => array(
 			'code' => 'directdebit.accountowner',
 			'internalcode'=> 'accountowner',
@@ -68,7 +68,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
 		$list = array();
-		$feconfig = $this->_feConfig;
+		$feconfig = $this->feConfig;
 
 		try
 		{
@@ -97,7 +97,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 */
 	public function checkConfigFE( array $attributes )
 	{
-		return $this->_checkConfig( $this->_feConfig, $attributes );
+		return $this->checkConfig( $this->feConfig, $attributes );
 	}
 
 	/**
@@ -108,12 +108,12 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		$this->_setAttributes( $orderServiceItem, $attributes, 'payment' );
+		$this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 
 		if( ( $attrItem = $orderServiceItem->getAttributeItem( 'directdebit.accountno', 'payment' ) ) !== null )
 		{
 			$attrList = array( $attrItem->getCode() => $attrItem->getValue() );
-			$this->_setAttributes( $orderServiceItem, $attrList, 'payment/hidden' );
+			$this->setAttributes( $orderServiceItem, $attrList, 'payment/hidden' );
 
 			$value = $attrItem->getValue();
 			$len = strlen( $value );
@@ -137,7 +137,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
-		$this->_saveOrder( $order );
+		$this->saveOrder( $order );
 
 		return parent::process( $order, $params );
 	}

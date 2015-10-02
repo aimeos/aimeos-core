@@ -11,8 +11,8 @@
  */
 class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -23,11 +23,11 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$listManager = $manager->getSubManager( 'list' );
-		$this->_object = $listManager->getSubManager( 'type' );
+		$this->object = $listManager->getSubManager( 'type' );
 	}
 
 
@@ -39,42 +39,42 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $item );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new Exception( 'No list type item found' );
 		}
 
-		$this->assertEquals( $expected, $this->_object->getItem( $expected->getId() ) );
+		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->_editor ) );
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No type item found' );
@@ -82,15 +82,15 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTestSave2' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -101,7 +101,7 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -112,19 +112,19 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$conditions = array(
 			$search->compare( '!=', 'service.list.type.id', null ),
@@ -135,23 +135,23 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 			$search->compare( '==', 'service.list.type.status', 1 ),
 			$search->compare( '>=', 'service.list.type.mtime', '1970-01-01 00:00:00' ),
 			$search->compare( '>=', 'service.list.type.ctime', '1970-01-01 00:00:00' ),
-			$search->compare( '==', 'service.list.type.editor', $this->_editor ),
+			$search->compare( '==', 'service.list.type.editor', $this->editor ),
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'service.list.type.domain', 'text' ),
-			$search->compare( '==', 'service.list.type.editor', $this->_editor ),
+			$search->compare( '==', 'service.list.type.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 3 );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 3, count( $results ) );
 		$this->assertEquals( 5, $total );
 
@@ -164,7 +164,7 @@ class MShop_Service_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 }

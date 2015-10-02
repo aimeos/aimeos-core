@@ -100,6 +100,6 @@ class Client_Html_Checkout_Confirm_Order_Service_Default
 		 * @see client/html/checkout/confirm/order/service/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/confirm/order/service/' . $type, $name );
+		return $this->createSubClient( 'checkout/confirm/order/service/' . $type, $name );
 	}
 }

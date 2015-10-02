@@ -99,6 +99,6 @@ class Client_Html_Account_History_Order_Coupon_Default
 		 * @see client/html/account/history/order/coupon/decorators/excludes
 		 * @see client/html/account/history/order/coupon/decorators/global
 		 */
-		return $this->_createSubClient( 'account/history/order/coupon/' . $type, $name );
+		return $this->createSubClient( 'account/history/order/coupon/' . $type, $name );
 	}
 }

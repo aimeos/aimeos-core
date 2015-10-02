@@ -25,22 +25,22 @@ class MShop_Coupon_Provider_Present
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'present.productcode, present.quantity'
+				$this->getItemBase()->getProvider(), 'present.productcode, present.quantity'
 			) );
 		}
 
-		$orderProduct = $this->_createProduct( $config['present.productcode'], $config['present.quantity'] );
+		$orderProduct = $this->createProduct( $config['present.productcode'], $config['present.quantity'] );
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->getCode(), array( $orderProduct ) );
 	}
 }

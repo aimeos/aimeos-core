@@ -19,7 +19,7 @@ class Controller_ExtJS_Catalog_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,10 +41,10 @@ class Controller_ExtJS_Catalog_Default
 	 */
 	public function getTree( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$result = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
@@ -53,7 +53,7 @@ class Controller_ExtJS_Catalog_Default
 		{
 			$entry = ( $entry != 'root' ? $entry : null );
 			$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
-			$result[] = $this->_createNodeArray( $item );
+			$result[] = $this->createNodeArray( $item );
 		}
 
 		return array(
@@ -71,11 +71,11 @@ class Controller_ExtJS_Catalog_Default
 	 */
 	public function insertItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$parentId = ( isset( $params->parentid ) ? $params->parentid : null );
@@ -84,18 +84,18 @@ class Controller_ExtJS_Catalog_Default
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->insertItem( $item, $parentId, $refId );
 
 			$ids[] = $item->getId();
 		}
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $manager->searchItems( $search ) );
+		$items = $this->toArray( $manager->searchItems( $search ) );
 
 		return array(
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
@@ -112,10 +112,10 @@ class Controller_ExtJS_Catalog_Default
 	 */
 	public function moveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items', 'oldparentid', 'newparentid' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items', 'oldparentid', 'newparentid' ) );
+		$this->setLocale( $params->site );
 
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$ids = array();
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
@@ -127,7 +127,7 @@ class Controller_ExtJS_Catalog_Default
 			$ids[] = $id;
 		}
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
 		return array(
 			'success' => true,
@@ -183,12 +183,12 @@ class Controller_ExtJS_Catalog_Default
 	 *
 	 * @param MShop_Catalog_Item_Interface $node Catalog node
 	 */
-	protected function _createNodeArray( MShop_Catalog_Item_Interface $node )
+	protected function createNodeArray( MShop_Catalog_Item_Interface $node )
 	{
 		$result = $node->toArray();
 
 		foreach( $node->getChildren() as $child ) {
-			$result['children'][] = $this->_createNodeArray( $child );
+			$result['children'][] = $this->createNodeArray( $child );
 		}
 
 		return (object) $result;
@@ -200,13 +200,13 @@ class Controller_ExtJS_Catalog_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'catalog' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -215,7 +215,7 @@ class Controller_ExtJS_Catalog_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'catalog';
 	}
@@ -227,7 +227,7 @@ class Controller_ExtJS_Catalog_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'catalog.config'} ) ) {
 			$entry->{'catalog.config'} = (array) $entry->{'catalog.config'};

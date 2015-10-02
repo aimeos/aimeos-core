@@ -33,7 +33,7 @@ class Controller_Frontend_Service_Factorylocal
 		$iface = 'Controller_Frontend_Service_Interface';
 		$classname = 'Controller_Frontend_Service_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
-		return self::_addControllerDecorators( $context, $manager, $domainToTest );
+		$manager = self::createControllerBase( $context, $classname, $iface );
+		return self::addControllerDecorators( $context, $manager, $domainToTest );
 	}
 }

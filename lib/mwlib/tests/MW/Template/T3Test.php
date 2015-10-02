@@ -8,7 +8,7 @@
  */
 class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -21,7 +21,7 @@ class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 	{
 		$template = 'TYPO3 Template <!--###NAME-->Name<!--NAME###-->';
 
-		$this->_object = new MW_Template_T3( $template );
+		$this->object = new MW_Template_T3( $template );
 	}
 
 
@@ -38,7 +38,7 @@ class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 
 	public function testToString()
 	{
-		$template = $this->_object->get('NAME');
+		$template = $this->object->get('NAME');
 		$this->assertInstanceOf( 'MW_Template_Interface', $template );
 
 		$this->assertEquals( 'Name', $template->str() );

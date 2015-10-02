@@ -16,7 +16,7 @@
  */
 class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.base.id'=> array(
 			'code'=>'order.base.id',
 			'internalcode'=>'mordba."id"',
@@ -129,7 +129,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -186,7 +186,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		 * @see mshop/order/manager/base/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ) );
 	}
 
 
@@ -200,11 +200,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$path = 'classes/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
-		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/default/item/delete' );
 	}
 
 
@@ -215,11 +215,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function createItem()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
-		$base = $this->_createItem( $priceManager->createItem(), clone $context->getLocale(), $values );
+		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
 
 		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
 		$pluginManager->register( $base, 'order' );
@@ -260,7 +260,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		 * @see mshop/order/manager/base/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -274,7 +274,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.base.id', $id, $ref );
+		return $this->getItemBase( 'order.base.id', $id, $ref );
 	}
 
 
@@ -306,7 +306,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$path = 'classes/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
@@ -428,7 +428,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		 * @see mshop/order/manager/base/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/' . $manager, $name );
 	}
 
 
@@ -447,10 +447,10 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -525,7 +525,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$priceItem = $item->getPrice();
 			$localeItem = $context->getLocale();
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $localeItem->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getCustomerId() );
@@ -582,7 +582,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				 * @see mshop/order/manager/base/default/item/count
 				 */
 				$path = 'mshop/order/manager/base/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -609,12 +609,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$items = array();
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -722,7 +722,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false )
@@ -739,7 +739,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$localeItem->setCurrencyId( $row['currencyid'] );
 				$localeItem->setSiteId( $row['siteid'] );
 
-				$items[$row['id']] = $this->_createItem( $price, $localeItem, $row );
+				$items[$row['id']] = $this->createItemBase( $price, $localeItem, $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -762,7 +762,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function getSession( $type = '' )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -798,7 +798,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function getSessionLock( $type = '' )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -822,7 +822,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function setSession( MShop_Order_Item_Base_Interface $order, $type = '' )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -844,9 +844,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function setSessionLock( $lock, $type = '' )
 	{
-		$this->_checkLock( $lock );
+		$this->checkLock( $lock );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -873,9 +873,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.id', $id ) );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -886,7 +886,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$required = array( 'order.base' );
 			$total = null;
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
 
 			if( ( $row = $results->fetch() ) === false ) {
 				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
@@ -917,9 +917,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$localeItem->setSiteId( $row['siteid'] );
 
 		if( $fresh === false ) {
-			$basket = $this->_load( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadItems( $id, $price, $localeItem, $row, $parts );
 		} else {
-			$basket = $this->_loadFresh( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
 
 		return $basket;
@@ -939,19 +939,19 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
 			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
 		) {
-			$this->_storeProducts( $basket );
+			$this->storeProducts( $basket );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
-			$this->_storeCoupons( $basket );
+			$this->storeCoupons( $basket );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
-			$this->_storeAddresses( $basket );
+			$this->storeAddresses( $basket );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
-			$this->_storeServices( $basket );
+			$this->storeServices( $basket );
 		}
 	}
 
@@ -961,7 +961,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @return MShop_Order_Item_Base_Interface Order base object
 	 */
-	protected function _createItem( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
+	protected function createItemBase( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
@@ -977,7 +977,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array List of items implementing MShop_Order_Item_Product_Interface
 	 */
-	protected function _loadProducts( $id, $fresh )
+	protected function loadProducts( $id, $fresh )
 	{
 		$attributes = $products = $subProducts = array();
 		$manager = $this->getSubManager( 'product' );
@@ -1044,7 +1044,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array List of items implementing MShop_Order_Item_Address_Interface
 	 */
-	protected function _loadAddresses( $id, $fresh )
+	protected function loadAddresses( $id, $fresh )
 	{
 		$items = array();
 		$manager = $this->getSubManager( 'address' );
@@ -1076,7 +1076,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param array List of order products from the basket
 	 * @return array Associative list of coupon codes as keys and items implementing MShop_Order_Item_Product_Interface
 	 */
-	protected function _loadCoupons( $id, $fresh, array $products )
+	protected function loadCoupons( $id, $fresh, array $products )
 	{
 		$items = array();
 		$manager = $this->getSubManager( 'coupon' );
@@ -1113,7 +1113,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array List of items implementing MShop_Order_Item_Service_Interface
 	 */
-	protected function _loadServices( $id, $fresh )
+	protected function loadServices( $id, $fresh )
 	{
 		$items = array();
 		$manager = $this->getSubManager( 'service' );
@@ -1148,7 +1148,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing ordered products or bundles
 	 */
-	protected function _storeProducts( MShop_Order_Item_Base_Interface $basket )
+	protected function storeProducts( MShop_Order_Item_Base_Interface $basket )
 	{
 		$position = 1;
 		$manager = $this->getSubManager( 'product' );
@@ -1204,7 +1204,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing address items
 	 */
-	protected function _storeAddresses( MShop_Order_Item_Base_Interface $basket )
+	protected function storeAddresses( MShop_Order_Item_Base_Interface $basket )
 	{
 		$manager = $this->getSubManager( 'address' );
 
@@ -1222,7 +1222,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing coupon items
 	 */
-	protected function _storeCoupons( MShop_Order_Item_Base_Interface $basket )
+	protected function storeCoupons( MShop_Order_Item_Base_Interface $basket )
 	{
 		$manager = $this->getSubManager( 'coupon' );
 
@@ -1255,7 +1255,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing service items
 	 */
-	protected function _storeServices( MShop_Order_Item_Base_Interface $basket )
+	protected function storeServices( MShop_Order_Item_Base_Interface $basket )
 	{
 		$manager = $this->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );
@@ -1285,29 +1285,29 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _load( $id, $price, $localeItem, $row, $parts )
+	protected function loadItems( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $coupons = $addresses = $services = array();
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
 			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
 		) {
-			$products = $this->_loadProducts( $id, false );
+			$products = $this->loadProducts( $id, false );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
-			$coupons = $this->_loadCoupons( $id, false, $products );
+			$coupons = $this->loadCoupons( $id, false, $products );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
-			$addresses = $this->_loadAddresses( $id, false );
+			$addresses = $this->loadAddresses( $id, false );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
-			$services = $this->_loadServices( $id, false );
+			$services = $this->loadServices( $id, false );
 		}
 
-		$basket = $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
+		$basket = $this->createItemBase( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
 		return $basket;
 	}
@@ -1323,27 +1323,27 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _loadFresh( $id, $price, $localeItem, $row, $parts )
+	protected function loadFresh( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $addresses = $services = array();
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT ) {
-			$products = $this->_loadProducts( $id, true );
+			$products = $this->loadProducts( $id, true );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
-			$addresses = $this->_loadAddresses( $id, true );
+			$addresses = $this->loadAddresses( $id, true );
 		}
 
 		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
-			$services = $this->_loadServices( $id, true );
+			$services = $this->loadServices( $id, true );
 		}
 
 
-		$basket = $this->_createItem( $price, $localeItem, $row );
+		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
-		$pluginManager = MShop_Factory::createManager( $this->_getContext(), 'plugin' );
+		$pluginManager = MShop_Factory::createManager( $this->getContext(), 'plugin' );
 		$pluginManager->register( $basket, 'order' );
 
 		foreach( $products as $item ) {

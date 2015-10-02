@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper_Password_Interface
 {
-	private $_options = array();
+	private $options = array();
 	
 
 	/**
@@ -34,7 +34,7 @@ class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper
 			throw new MShop_Exception( sprintf( 'The algorithm "%1$s" is not supported', $options['algorithm'] ) );
 		}
 		
-		$this->_options = $options;
+		$this->options = $options;
 	}
 
 
@@ -47,16 +47,16 @@ class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper
 	 */
 	public function encode( $password, $salt = null )
 	{
-		$encode = isset( $this->_options['base64'] ) && $this->_options['base64'] == true;
-		$format = ( isset( $this->_options['format'] ) ? $this->_options['format'] : '%1$s%2$s' );
-		$iterations = ( isset( $this->_options['iterations'] ) ? (int) $this->_options['iterations'] : 1 );
+		$encode = isset( $this->options['base64'] ) && $this->options['base64'] == true;
+		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
+		$iterations = ( isset( $this->options['iterations'] ) ? (int) $this->options['iterations'] : 1 );
 		
 		$salted = sprintf( $format, $password, $salt );
-		$digest = hash( $this->_options['algorithm'], $salted, true);
+		$digest = hash( $this->options['algorithm'], $salted, true);
 		
 		// "stretch" hash
 		for ($i = 1; $i < $iterations; $i++ ) {
-			$digest = hash( $this->_options['algorithm'], $digest . $salted, true);
+			$digest = hash( $this->options['algorithm'], $digest . $salted, true);
 		}
 		
 		return ( $encode ? base64_encode( $digest ) : bin2hex( $digest ) );

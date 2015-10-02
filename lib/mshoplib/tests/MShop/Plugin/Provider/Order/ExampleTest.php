@@ -11,7 +11,7 @@
  */
 class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -29,7 +29,7 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 		$plugin->setConfig( array( 'key'=>1 ) );
 		$plugin->setStatus( '1' );
 
-		$this->_object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $plugin );
+		$this->object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $plugin );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	/**

@@ -8,20 +8,20 @@
 
 class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 {
-	private static $_object;
-	private $_testdir;
+	private static $object;
+	private $testdir;
 
 
 	public static function setUpBeforeClass()
 	{
 		$cntlPaths = TestHelper::getControllerPaths();
-		self::$_object = new Controller_ExtJS_JsonRpc( TestHelper::getContext(), $cntlPaths );
+		self::$object = new Controller_ExtJS_JsonRpc( TestHelper::getContext(), $cntlPaths );
 	}
 
 
 	public static function tearDownAfterClass()
 	{
-		self::$_object = null;
+		self::$object = null;
 	}
 
 
@@ -34,7 +34,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->_testdir = dirname( __FILE__ ) . $ds . '_testfiles' . $ds . 'jsonrpc' . $ds;
+		$this->testdir = dirname( __FILE__ ) . $ds . '_testfiles' . $ds . 'jsonrpc' . $ds;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testGetJsonItemSchemas()
 	{
-		$result = self::$_object->getJsonItemSchemas();
+		$result = self::$object->getJsonItemSchemas();
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'Order_Base_Service_Attribute', $object );
@@ -66,7 +66,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testGetJsonSearchSchemas()
 	{
-		$result = self::$_object->getJsonSearchSchemas();
+		$result = self::$object->getJsonSearchSchemas();
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'Order_Base_Service_Attribute', $object );
@@ -81,7 +81,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testGetJsonSmd()
 	{
-		$result = self::$_object->getJsonSmd( 'http://localhost' );
+		$result = self::$object->getJsonSmd( 'http://localhost' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'target', $object );
@@ -105,7 +105,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'items', $object );
@@ -127,7 +127,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'method' => 'Product.searchItems',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -141,7 +141,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -155,7 +155,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -169,7 +169,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -183,7 +183,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -203,7 +203,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$result = self::$_object->process( $params, '' );
+		$result = self::$object->process( $params, '' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -212,7 +212,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonObject()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'object.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'object.txt' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'jsonrpc', $object );
@@ -233,7 +233,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonArray()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'array.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'array.txt' );
 		$list = json_decode( $result );
 
 		$this->assertEquals( 2, count( $list ) );
@@ -254,7 +254,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonWrongInputstream()
 	{
-		$result = self::$_object->process( array(), 'invalid' );
+		$result = self::$object->process( array(), 'invalid' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -264,7 +264,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonWrongFormat()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'invalid.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'invalid.txt' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -274,7 +274,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonWrongType()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'string.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'string.txt' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -284,7 +284,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoMethod()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'nomethod.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'nomethod.txt' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -294,7 +294,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoParams()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'noparams.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'noparams.txt' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -304,7 +304,7 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoId()
 	{
-		$result = self::$_object->process( array(), $this->_testdir . 'noid.txt' );
+		$result = self::$object->process( array(), $this->testdir . 'noid.txt' );
 		$this->assertEquals( null, $result );
 	}
 

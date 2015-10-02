@@ -7,7 +7,7 @@
 
 class Controller_Frontend_DemoTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -18,7 +18,7 @@ class Controller_Frontend_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->_object = new Controller_Frontend_Demo_Default( TestHelper::getContext() );
+		// $this->object = new Controller_Frontend_Demo_Default( TestHelper::getContext() );
 	}
 
 
@@ -30,7 +30,7 @@ class Controller_Frontend_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 
 		Controller_Frontend_Factory::clear();
 		MShop_Factory::clear();

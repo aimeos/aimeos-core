@@ -10,7 +10,7 @@
  */
 class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_locale_currency' => '
 			ALTER TABLE "mshop_locale_currency" DROP PRIMARY KEY,
 			ADD CONSTRAINT "pk_msloccu_id" PRIMARY KEY ("id")
@@ -48,9 +48,9 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -59,9 +59,9 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing PRIMARY KEYS for locale', 0 ); $this->_status( '' );
+		$this->msg( 'Changing PRIMARY KEYS for locale', 0 ); $this->status( '' );
 
 		$search = '
 			SELECT COUNT(INDEX_NAME) "counter" FROM
@@ -72,17 +72,17 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s" for PRIMARY": ', $table ), 1 );
-			$counter = $this->_getValue( sprintf( $search, $table ), 'counter' );
+			$this->msg( sprintf( 'Checking table "%1$s" for PRIMARY": ', $table ), 1 );
+			$counter = $this->getValue( sprintf( $search, $table ), 'counter' );
 
 			if( $counter == 2 )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'changed' );
+				$this->execute( $stmt );
+				$this->status( 'changed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

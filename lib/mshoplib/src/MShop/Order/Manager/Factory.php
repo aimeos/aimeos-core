@@ -75,7 +75,7 @@ class MShop_Order_Manager_Factory
 		$iface = 'MShop_Order_Manager_Interface';
 		$classname = 'MShop_Order_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/order/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order manager
@@ -151,7 +151,7 @@ class MShop_Order_Manager_Factory
 		 * @see mshop/order/manager/decorators/excludes
 		 * @see mshop/order/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'order' );
+		return self::addManagerDecorators( $context, $manager, 'order' );
 	}
 
 }

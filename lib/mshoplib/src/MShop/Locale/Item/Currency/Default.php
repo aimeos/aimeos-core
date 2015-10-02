@@ -18,8 +18,8 @@ class MShop_Locale_Item_Currency_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Locale_Item_Currency_Interface
 {
-	private $_modified = false;
-	private $_values;
+	private $modified = false;
+	private $values;
 
 	/**
 	 * Initializes the currency object object.
@@ -30,7 +30,7 @@ class MShop_Locale_Item_Currency_Default
 	{
 		parent::__construct( 'locale.currency.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 
 		if( isset( $values['id'] ) ) {
 			$this->setId( $values['id'] );
@@ -48,13 +48,13 @@ class MShop_Locale_Item_Currency_Default
 		if( $key !== null )
 		{
 			$this->setCode( $key );
-			$this->_values['id'] = $this->_values['code'];
-			$this->_modified = false;
+			$this->values['id'] = $this->values['code'];
+			$this->modified = false;
 		}
 		else
 		{
-			$this->_values['id'] = null;
-			$this->_modified = true;
+			$this->values['id'] = null;
+			$this->modified = true;
 		}
 	}
 
@@ -66,7 +66,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function getId()
 	{
-		return ( isset( $this->_values['id'] ) ? (string) $this->_values['id'] : null );
+		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
 	}
 
 
@@ -77,7 +77,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -94,8 +94,8 @@ class MShop_Locale_Item_Currency_Default
 			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
-		$this->_values['code'] = strtoupper( $key );
-		$this->_modified = true;
+		$this->values['code'] = strtoupper( $key );
+		$this->modified = true;
 	}
 
 
@@ -106,7 +106,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -119,7 +119,7 @@ class MShop_Locale_Item_Currency_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -131,7 +131,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -144,7 +144,7 @@ class MShop_Locale_Item_Currency_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -200,7 +200,7 @@ class MShop_Locale_Item_Currency_Default
 	 */
 	public function isModified()
 	{
-		return $this->_modified || parent::isModified();
+		return $this->modified || parent::isModified();
 	}
 
 }

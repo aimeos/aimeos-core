@@ -100,6 +100,6 @@ class Client_Html_Checkout_Confirm_Order_Address_Default
 		 * @see client/html/checkout/confirm/order/address/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/confirm/order/address/' . $type, $name );
+		return $this->createSubClient( 'checkout/confirm/order/address/' . $type, $name );
 	}
 }

@@ -36,30 +36,30 @@ class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Rebuilds the catalog index.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 
-		$this->_msg( 'Rebuilding catalog index for test data', 0 );
+		$this->msg( 'Rebuilding catalog index for test data', 0 );
 
-		$catalogIndexManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional )->getSubManager( 'index' );
+		$catalogIndexManager = MShop_Catalog_Manager_Factory::createManager( $this->additional )->getSubManager( 'index' );
 
 		$catalogIndexManager->rebuildIndex();
 		$catalogIndexManager->optimize();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

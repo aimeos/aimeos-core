@@ -17,7 +17,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	extends MShop_Catalog_Manager_Index_DBBase
 	implements MShop_Catalog_Manager_Index_Catalog_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
 			'internalcode'=>'mcatinca."catid"',
@@ -67,7 +67,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		)
 	);
 
-	private $_subManagers;
+	private $subManagers;
 
 
 	/**
@@ -81,9 +81,9 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalog.position'], 'mcatinca."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalogaggregate'], 'mcatinca_agg."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalogcount'], 'mcatinca_cnt."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalog.position'], 'mcatinca."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogaggregate'], 'mcatinca_agg."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogcount'], 'mcatinca_cnt."siteid"', $site );
 	}
 
 
@@ -96,7 +96,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
-		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
 
 
@@ -109,7 +109,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	{
 		parent::cleanup( $siteids );
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/catalog/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/index/catalog/default/item/delete' );
 	}
 
 
@@ -145,7 +145,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @see mshop/catalog/manager/index/catalog/default/item/insert
 		 * @see mshop/catalog/manager/index/catalog/default/item/search
 		 */
-		$this->_doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/catalog/default/cleanup' );
+		$this->doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/catalog/default/cleanup' );
 	}
 
 
@@ -179,7 +179,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @see mshop/catalog/manager/index/catalog/default/item/insert
 		 * @see mshop/catalog/manager/index/catalog/default/item/search
 		 */
-		$this->_doDeleteItems( $ids, 'mshop/catalog/manager/index/catalog/default/item/delete' );
+		$this->doDeleteItems( $ids, 'mshop/catalog/manager/index/catalog/default/item/delete' );
 	}
 
 
@@ -212,7 +212,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 */
 		$path = 'classes/catalog/manager/index/catalog/submanagers';
 
-		$list += $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 
 		return $list;
 	}
@@ -336,7 +336,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @see mshop/catalog/manager/index/catalog/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/catalog/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/catalog/' . $manager, $name );
 	}
 
 
@@ -366,7 +366,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 * @see mshop/catalog/manager/index/catalog/default/item/search
 		 * @see mshop/catalog/manager/index/catalog/default/item/aggregate
 		 */
-		$this->_doOptimize( 'mshop/catalog/manager/index/catalog/default/optimize' );
+		$this->doOptimize( 'mshop/catalog/manager/index/catalog/default/optimize' );
 	}
 
 
@@ -383,7 +383,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$ids = $listItems = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$listManager = MShop_Factory::createManager( $context, 'catalog/list' );
 
 		foreach( $items as $id => $item ) {
@@ -410,7 +410,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$siteid = $context->getLocale()->getSiteId();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -447,7 +447,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				 * @see mshop/catalog/manager/index/catalog/default/item/search
 				 * @see mshop/catalog/manager/index/catalog/default/item/count
 				 */
-				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
+				$stmt = $this->getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
 				if( !array_key_exists( $parentId, $listItems ) ) { continue; }
 
@@ -477,7 +477,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		}
 
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
 	}
@@ -589,7 +589,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		 */
 		$cfgPathCount = 'mshop/catalog/manager/index/catalog/default/item/count';
 
-		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 
@@ -598,11 +598,11 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 *
 	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
-	protected function _getSubManagers()
+	protected function getSubManagers()
 	{
-		if( $this->_subManagers === null )
+		if( $this->subManagers === null )
 		{
-			$this->_subManagers = array();
+			$this->subManagers = array();
 
 			/** mshop/catalog/manager/index/catalog/submanagers
 			 * A list of sub-manager names used for indexing associated items to categories
@@ -624,13 +624,13 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			 */
 			$path = 'classes/catalog/manager/index/catalog/submanagers';
 
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$this->_subManagers[$domain] = $this->getSubManager( $domain );
+			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+				$this->subManagers[$domain] = $this->getSubManager( $domain );
 			}
 
-			return $this->_subManagers;
+			return $this->subManagers;
 		}
 
-		return $this->_subManagers;
+		return $this->subManagers;
 	}
 }

@@ -51,8 +51,8 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/detail/seen/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/catalog/detail/seen/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -166,7 +166,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 		 * @see client/html/catalog/detail/seen/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/detail/seen/' . $type, $name );
+		return $this->createSubClient( 'catalog/detail/seen/' . $type, $name );
 	}
 
 
@@ -175,9 +175,9 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -190,7 +190,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 	{
 		if( ( $id = $this->getView()->param( 'd_prodid' ) ) !== null )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$session = $context->getSession();
 			$lastSeen = $session->get( 'aimeos/catalog/session/seen/list', array() );
 
@@ -214,9 +214,9 @@ class Client_Html_Catalog_Detail_Seen_Default
 				 * @category User
 				 * @category Developer
 				 */
-				$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
+				$max = $this->getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
 
-				$lastSeen[$id] = $this->_getHtml( $id );
+				$lastSeen[$id] = $this->getHtml( $id );
 				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
 			}
 
@@ -237,9 +237,9 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 * @param string $id Product ID
 	 * @return string HTML of the last seen item for the given product ID
 	 */
-	protected function _getHtml( $id )
+	protected function getHtml( $id )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$cache = $context->getCache();
 		$key = md5( $id . 'product:detail-seen' );
 
@@ -275,11 +275,11 @@ class Client_Html_Catalog_Detail_Seen_Default
 
 			$view->seenProductItem = MShop_Factory::createManager( $context, 'product' )->getItem( $id, $domains );
 
-			$this->_addMetaItem( $view->seenProductItem, 'product', $expire, $tags );
-			$this->_addMetaList( $view->seenProductItem->getId(), 'product', $expire );
+			$this->addMetaItem( $view->seenProductItem, 'product', $expire, $tags );
+			$this->addMetaList( $view->seenProductItem->getId(), 'product', $expire );
 
 			$output = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$output .= $subclient->setView( $view )->getBody( '', $tags, $expire );
 			}
 			$view->seenBody = $output;
@@ -307,7 +307,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 			$tplconf = 'client/html/catalog/detail/seen/default/template-body';
 			$default = 'catalog/detail/seen-body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
 			$cache->set( $key, $html, $tags, $expire );
 		}

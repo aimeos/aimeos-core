@@ -37,24 +37,24 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds product test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding product-list test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding product-list test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'product-list.php';
@@ -68,18 +68,18 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$refIds = array();
-		$refIds['attribute'] = $this->_getAttributeData( $refKeys['attribute'] );
-		$refIds['media'] = $this->_getMediaData( $refKeys['media'] );
-		$refIds['price'] = $this->_getPriceData( $refKeys['price'] );
-		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
-		$refIds['product/tag'] = $this->_getProductTagData( $productManager, $refKeys['product/tag'] );
+		$refIds['attribute'] = $this->getAttributeData( $refKeys['attribute'] );
+		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
+		$refIds['price'] = $this->getPriceData( $refKeys['price'] );
+		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$refIds['product/tag'] = $this->getProductTagData( $productManager, $refKeys['product/tag'] );
 
-		$this->_addProductData( $testdata, $productManager, $refIds, $refKeys['product'] );
+		$this->addProductData( $testdata, $productManager, $refIds, $refKeys['product'] );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -90,9 +90,9 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getAttributeData( array $keys )
+	protected function getAttributeData( array $keys )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
 
 		$codes = $typeCodes = $domains = array();
@@ -144,9 +144,9 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getMediaData( array $keys )
+	protected function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -177,9 +177,9 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getPriceData( array $keys )
+	protected function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
 
 		$value = $ship = $domain = $code = array();
@@ -232,9 +232,9 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getTextData( array $keys )
+	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -266,7 +266,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function _getProductTagData( $productManager, array $keys )
+	protected function getProductTagData( $productManager, array $keys )
 	{
 		$productTagManager = $productManager->getSubManager( 'tag', 'Default' );
 
@@ -302,18 +302,18 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $refIds Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _addProductData( array $testdata, $productManager, array $refIds, array $keys )
+	private function addProductData( array $testdata, $productManager, array $refIds, array $keys )
 	{
-		$parentIds = $this->_getProductIds( $productManager, $testdata );
-		$refIds['product'] = $this->_getProductRefIds( $productManager, $keys );
+		$parentIds = $this->getProductIds( $productManager, $testdata );
+		$refIds['product'] = $this->getProductRefIds( $productManager, $keys );
 
 		$productListManager = $productManager->getSubManager( 'list', 'Default' );
 		$listItem = $productListManager->createItem();
 
 		//LIST-PRODUCT
-		$this->_conn->begin();
+		$this->conn->begin();
 
-		$listItemTypeIds = $this->_addListTypeData( $productListManager, $testdata );
+		$listItemTypeIds = $this->addListTypeData( $productListManager, $testdata );
 
 		foreach( $testdata['product/list'] as $dataset )
 		{
@@ -343,7 +343,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 			$productListManager->saveItem( $listItem, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 
 
@@ -354,7 +354,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Test data
 	 * @param array List of type IDs
 	 */
-	private function _addListTypeData( MShop_Common_Manager_Interface $manager, array $testdata )
+	private function addListTypeData( MShop_Common_Manager_Interface $manager, array $testdata )
 	{
 		$listItemTypeIds = array();
 		$productListTypeManager = $manager->getSubmanager( 'type', 'Default' );
@@ -383,7 +383,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Test data
 	 * @throws MW_Setup_Exception
 	 */
-	private function _getProductIds( MShop_Common_Manager_Interface $manager, array $testdata )
+	private function getProductIds( MShop_Common_Manager_Interface $manager, array $testdata )
 	{
 		$parentCodes = $parentIds = array();
 
@@ -416,7 +416,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param string[] keys Unique keys to identify the products
 	 * @throws MW_Setup_Exception
 	 */
-	private function _getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )
+	private function getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )
 	{
 		$codes = $refIds = array();
 

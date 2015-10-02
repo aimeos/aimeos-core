@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'type' => array(
 			'ALTER TABLE "mshop_catalog_index_attribute" ADD "type" VARCHAR(32) NOT NULL AFTER "listtype"',
 		),
@@ -46,9 +46,9 @@ class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 	
 	/**
@@ -56,31 +56,31 @@ class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding reference ID columns to catalog index tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding reference ID columns to catalog index tables', 0 );
+		$this->status( '' );
 	
-		if( $this->_schema->tableExists( 'mshop_catalog_index_attribute' ) === true )
+		if( $this->schema->tableExists( 'mshop_catalog_index_attribute' ) === true )
 		{
 			foreach( $stmts as $id => $sql )
 			{
-				$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', 'mshop_catalog_index_attribute', $id ), 1 );
+				$this->msg( sprintf( 'Checking table "%1$s" for column "%2$s"', 'mshop_catalog_index_attribute', $id ), 1 );
 				
-				if( $this->_schema->columnExists( 'mshop_catalog_index_attribute', $id ) === false )
+				if( $this->schema->columnExists( 'mshop_catalog_index_attribute', $id ) === false )
 				{
-					$this->_executeList( $sql );
-					$this->_status( 'added' );
+					$this->executeList( $sql );
+					$this->status( 'added' );
 				} 
 				else 
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

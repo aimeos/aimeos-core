@@ -36,24 +36,24 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds service test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding service test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding service test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'service.php';
@@ -62,9 +62,9 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 		}
 
-		$this->_addServiceData( $testdata );
+		$this->addServiceData( $testdata );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -74,15 +74,15 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addServiceData( array $testdata )
+	private function addServiceData( array $testdata )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Default' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Default' );
 
 		$typeIds = array();
 		$type = $serviceTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['service/type'] as $key => $dataset )
 		{
@@ -116,6 +116,6 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 			$serviceManager->saveItem( $parent, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

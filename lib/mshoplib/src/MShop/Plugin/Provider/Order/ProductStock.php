@@ -50,7 +50,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 		}
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$outOfStock = $productQuantities = $positions = array();
 		$siteConfig = $context->getLocale()->getSite()->getConfig();
 

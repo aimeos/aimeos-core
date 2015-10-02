@@ -25,11 +25,11 @@ class MShop_Common_Manager_Decorator_Changelog
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$manager->saveItem( $item, $fetch );
 		$new = $manager->getItem( $item->getId() );
 
-		$this->_getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Abstract::NOTICE, 'changelog' );
+		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Abstract::NOTICE, 'changelog' );
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 {
-	private $_count = 9000;
+	private $count = 9000;
 
 
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
@@ -50,23 +50,23 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert product data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product base performance data', 0 );
+		$this->msg( 'Adding product base performance data', 0 );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-		$productTypeItem = $this->_getTypeItem( 'product/type', 'product', 'default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
+		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$productItem = $productManager->createItem();
 		$productItem->setTypeId( $productTypeItem->getId() );
@@ -74,7 +74,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$productItem->setSupplierCode( 'My brand' );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 
-		for( $i = 0; $i < $this->_count; $i++ )
+		for( $i = 0; $i < $this->count; $i++ )
 		{
 			$code = 'perf-' . str_pad( $i, 5, '0', STR_PAD_LEFT );
 
@@ -84,15 +84,15 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 			$productManager->saveItem( $productItem, false );
 		}
 
-		$this->_txCommit();
+		$this->txCommit();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_additional;
+		return $this->additional;
 	}
 
 
@@ -100,9 +100,9 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	 * @param string $domain
 	 * @param string $code
 	 */
-	protected function _getProductListItem( $domain, $code )
+	protected function getProductListItem( $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list/type' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -118,7 +118,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		}
 
 
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
 
 		$listItem = $manager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
@@ -137,9 +137,9 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	 * @return MShop_Common_Item_Type_Interface Type item
 	 * @throws Exception If no item is found
 	 */
-	protected function _getTypeItem( $prefix, $domain, $code )
+	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), $prefix );
+		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();
@@ -158,9 +158,9 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txBegin()
+	protected function txBegin()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -168,9 +168,9 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txCommit()
+	protected function txCommit()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'ALTER TABLE "madmin_log" CHANGE COLUMN "siteid" "siteid" INTEGER';
+	private $mysql = 'ALTER TABLE "madmin_log" CHANGE COLUMN "siteid" "siteid" INTEGER';
 
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -36,9 +36,9 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -46,22 +46,22 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param string $stmt SQL statement to execute
 	 */
-	protected function _process( $stmt )
+	protected function process( $stmt )
 	{
 		$table = 'madmin_log';
 
-		$this->_msg( 'Changing site ID to NULL in madmin_log', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing site ID to NULL in madmin_log', 0 );
+		$this->status( '' );
 
-		$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+		$this->msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
 
-		if( $this->_schema->tableExists( $table ) &&
-			!$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
+		if( $this->schema->tableExists( $table ) &&
+			!$this->schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 		{
-			$this->_execute( $stmt );
-			$this->_status( 'done' );
+			$this->execute( $stmt );
+			$this->status( 'done' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 
 	}

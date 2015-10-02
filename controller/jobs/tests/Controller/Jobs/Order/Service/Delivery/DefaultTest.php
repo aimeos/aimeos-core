@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -22,7 +22,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
+		$this->object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $aimeos );
 	}
 
 
@@ -34,20 +34,20 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Process order delivery services', $this->_object->getName() );
+		$this->assertEquals( 'Process order delivery services', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Sends paid orders to the ERP system or logistic partner';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 

@@ -296,11 +296,11 @@ class Crypt_AES extends Crypt_Rijndael {
     {
         if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
             $changed = $this->changed;
-            $this->_mcryptSetup();
+            $this->mcryptSetup();
             /*
             if ($this->mode == CRYPT_AES_MODE_CTR) {
                 $iv = $this->encryptIV;
-                $xor = mcrypt_generic($this->enmcrypt, $this->_generate_xor(strlen($plaintext), $iv));
+                $xor = mcrypt_generic($this->enmcrypt, $this->generate_xor(strlen($plaintext), $iv));
                 $ciphertext = $plaintext ^ $xor;
                 if ($this->continuousBuffer) {
                     $this->encryptIV = $iv;
@@ -346,7 +346,7 @@ class Crypt_AES extends Crypt_Rijndael {
             }
 
             if ($this->paddable) {
-                $plaintext = $this->_pad($plaintext);
+                $plaintext = $this->pad($plaintext);
             }
 
             $ciphertext = mcrypt_generic($this->enmcrypt, $plaintext);
@@ -374,11 +374,11 @@ class Crypt_AES extends Crypt_Rijndael {
     {
         if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
             $changed = $this->changed;
-            $this->_mcryptSetup();
+            $this->mcryptSetup();
             /*
             if ($this->mode == CRYPT_AES_MODE_CTR) {
                 $iv = $this->decryptIV;
-                $xor = mcrypt_generic($this->enmcrypt, $this->_generate_xor(strlen($ciphertext), $iv));
+                $xor = mcrypt_generic($this->enmcrypt, $this->generate_xor(strlen($ciphertext), $iv));
                 $plaintext = $ciphertext ^ $xor;
                 if ($this->continuousBuffer) {
                     $this->decryptIV = $iv;
@@ -433,7 +433,7 @@ class Crypt_AES extends Crypt_Rijndael {
                 mcrypt_generic_init($this->demcrypt, $this->key, $this->iv);
             }
 
-            return $this->paddable ? $this->_unpad($plaintext) : $plaintext;
+            return $this->paddable ? $this->unpad($plaintext) : $plaintext;
         }
 
         return parent::decrypt($ciphertext);
@@ -446,14 +446,14 @@ class Crypt_AES extends Crypt_Rijndael {
      *
      * @access private
      */
-    function _mcryptSetup()
+    function mcryptSetup()
     {
         if (!$this->changed) {
             return;
         }
 
         if (!$this->explicit_key_length) {
-            // this just copied from Crypt_Rijndael::_setup()
+            // this just copied from Crypt_Rijndael::setup()
             $length = strlen($this->key) >> 2;
             if ($length > 8) {
                 $length = 8;
@@ -499,12 +499,12 @@ class Crypt_AES extends Crypt_Rijndael {
      *
      * Optimized over Crypt_Rijndael's implementation by means of loop unrolling.
      *
-     * @see Crypt_Rijndael::_encryptBlock()
+     * @see Crypt_Rijndael::encryptBlock()
      * @access private
      * @param String $in
      * @return String
      */
-    function _encryptBlock($in)
+    function encryptBlock($in)
     {
         $state = unpack('N*word', $in);
 
@@ -538,10 +538,10 @@ class Crypt_AES extends Crypt_Rijndael {
 
         // subWord
         $state = array(
-            $this->_subWord($state[0]),
-            $this->_subWord($state[1]),
-            $this->_subWord($state[2]),
-            $this->_subWord($state[3])
+            $this->subWord($state[0]),
+            $this->subWord($state[1]),
+            $this->subWord($state[2]),
+            $this->subWord($state[3])
         );
 
         // shiftRows + addRoundKey
@@ -560,12 +560,12 @@ class Crypt_AES extends Crypt_Rijndael {
      *
      * Optimized over Crypt_Rijndael's implementation by means of loop unrolling.
      *
-     * @see Crypt_Rijndael::_decryptBlock()
+     * @see Crypt_Rijndael::decryptBlock()
      * @access private
      * @param String $in
      * @return String
      */
-    function _decryptBlock($in)
+    function decryptBlock($in)
     {
         $state = unpack('N*word', $in);
 
@@ -597,10 +597,10 @@ class Crypt_AES extends Crypt_Rijndael {
 
         // invShiftRows + invSubWord + addRoundKey
         $state = array(
-            $this->_invSubWord(($state[0] & 0xFF000000) ^ ($state[3] & 0x00FF0000) ^ ($state[2] & 0x0000FF00) ^ ($state[1] & 0x000000FF)) ^ $dw[0][0],
-            $this->_invSubWord(($state[1] & 0xFF000000) ^ ($state[0] & 0x00FF0000) ^ ($state[3] & 0x0000FF00) ^ ($state[2] & 0x000000FF)) ^ $dw[0][1],
-            $this->_invSubWord(($state[2] & 0xFF000000) ^ ($state[1] & 0x00FF0000) ^ ($state[0] & 0x0000FF00) ^ ($state[3] & 0x000000FF)) ^ $dw[0][2],
-            $this->_invSubWord(($state[3] & 0xFF000000) ^ ($state[2] & 0x00FF0000) ^ ($state[1] & 0x0000FF00) ^ ($state[0] & 0x000000FF)) ^ $dw[0][3]
+            $this->invSubWord(($state[0] & 0xFF000000) ^ ($state[3] & 0x00FF0000) ^ ($state[2] & 0x0000FF00) ^ ($state[1] & 0x000000FF)) ^ $dw[0][0],
+            $this->invSubWord(($state[1] & 0xFF000000) ^ ($state[0] & 0x00FF0000) ^ ($state[3] & 0x0000FF00) ^ ($state[2] & 0x000000FF)) ^ $dw[0][1],
+            $this->invSubWord(($state[2] & 0xFF000000) ^ ($state[1] & 0x00FF0000) ^ ($state[0] & 0x0000FF00) ^ ($state[3] & 0x000000FF)) ^ $dw[0][2],
+            $this->invSubWord(($state[3] & 0xFF000000) ^ ($state[2] & 0x00FF0000) ^ ($state[1] & 0x0000FF00) ^ ($state[0] & 0x000000FF)) ^ $dw[0][3]
         );
 
         return pack('N*', $state[0], $state[1], $state[2], $state[3]);

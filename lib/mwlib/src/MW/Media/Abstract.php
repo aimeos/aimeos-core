@@ -16,7 +16,7 @@
  */
 class MW_Media_Abstract
 {
-	private $_mimetype;
+	private $mimetype;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_Media_Abstract
 	 */
 	public function __construct( $mimetype )
 	{
-		$this->_mimetype = $mimetype;
+		$this->mimetype = $mimetype;
 	}
 
 
@@ -37,6 +37,6 @@ class MW_Media_Abstract
 	 */
 	public function getMimetype()
 	{
-		return $this->_mimetype;
+		return $this->mimetype;
 	}
 }

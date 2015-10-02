@@ -11,9 +11,9 @@
  */
 class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_orderBase;
-	private $_couponItem;
+	private $object;
+	private $orderBase;
+	private $couponItem;
 
 
 	/**
@@ -26,11 +26,11 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 	{
 		$orderProducts = array();
 		$context = TestHelper::getContext();
-		$this->_couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$this->couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
 
-		$provider = new MShop_Coupon_Provider_Example( $context, $this->_couponItem, 'abcd' );
-		$this->_object = new MShop_Coupon_Provider_Decorator_Required( $context, $this->_couponItem, 'abcd', $provider );
-		$this->_object->setObject( $this->_object );
+		$provider = new MShop_Coupon_Provider_Example( $context, $this->couponItem, 'abcd' );
+		$this->object = new MShop_Coupon_Provider_Decorator_Required( $context, $this->couponItem, 'abcd', $provider );
+		$this->object->setObject( $this->object );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -54,8 +54,8 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
-		$this->_orderBase->addProduct( $orderProducts['CNC'] );
+		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 
 
@@ -67,31 +67,31 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_orderBase );
-		unset( $this->_couponItem );
+		unset( $this->object );
+		unset( $this->orderBase );
+		unset( $this->couponItem );
 	}
 
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 
 	public function testIsAvailableWithProduct()
 	{
-		$this->_couponItem->setConfig( array( 'required.productcode' => 'CNC' ) );
+		$this->couponItem->setConfig( array( 'required.productcode' => 'CNC' ) );
 
-		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 
 	public function testIsAvailableWithoutProduct()
 	{
-		$this->_couponItem->setConfig( array( 'required.productcode' => 'CNE' ) );
+		$this->couponItem->setConfig( array( 'required.productcode' => 'CNE' ) );
 
-		$this->assertFalse( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 }

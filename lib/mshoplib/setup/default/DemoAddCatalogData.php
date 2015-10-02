@@ -36,21 +36,21 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert catalog nodes and relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Processing catalog demo data', 0 );
+		$this->msg( 'Processing catalog demo data', 0 );
 
 		$item = null;
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'catalog' );
 
 		try
@@ -58,9 +58,9 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 			// Don't delete the catalog node because users are likely use it for production
 			$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-			$this->_removeItems( $item->getId(), 'catalog/list', 'catalog', 'media' );
-			$this->_removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );
-			$this->_removeListItems( $item->getId(), 'catalog/list', 'product' );
+			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'media' );
+			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );
+			$this->removeListItems( $item->getId(), 'catalog/list', 'product' );
 		}
 		catch( Exception $e ) {; } // If no root node was already inserted into the database
 
@@ -87,22 +87,22 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 
 
 			if( isset( $data['media'] ) ) {
-				$this->_addMedia( $item->getId(), $data['media'], 'catalog' );
+				$this->addMedia( $item->getId(), $data['media'], 'catalog' );
 			}
 
 			if( isset( $data['product'] ) ) {
-				$this->_addProducts( $item->getId(), $data['product'], 'catalog' );
+				$this->addProducts( $item->getId(), $data['product'], 'catalog' );
 			}
 
 			if( isset( $data['text'] ) ) {
-				$this->_addTexts( $item->getId(), $data['text'], 'catalog' );
+				$this->addTexts( $item->getId(), $data['text'], 'catalog' );
 			}
 
-			$this->_status( 'added' );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'removed' );
+			$this->status( 'removed' );
 		}
 	}
 }

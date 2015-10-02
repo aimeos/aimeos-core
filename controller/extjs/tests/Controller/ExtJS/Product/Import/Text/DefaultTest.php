@@ -8,10 +8,10 @@
 
 class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_testdir;
-	private $_testfile;
-	private $_context;
+	private $object;
+	private $testdir;
+	private $testfile;
+	private $context;
 
 
 	/**
@@ -22,16 +22,16 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/product/import/text/default/uploaddir', './tmp' );
-		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
+		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/product/import/text/default/uploaddir', './tmp' );
+		$this->testfile = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
-		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
+		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
+			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Product_Import_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Product_Import_Text_Default( $this->context );
 	}
 
 
@@ -43,13 +43,13 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetServiceDescription()
 	{
-		$desc = $this->_object->getServiceDescription();
+		$desc = $this->object->getServiceDescription();
 		$this->assertInternalType( 'array', $desc );
 		$this->assertEquals( 2, count( $desc['Product_Import_Text.uploadFile'] ) );
 		$this->assertEquals( 2, count( $desc['Product_Import_Text.importFile'] ) );
@@ -87,12 +87,12 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 
 
 		$params = new stdClass();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
-		$this->_object->importFile( $params );
+		$this->object->importFile( $params );
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -112,7 +112,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$listManager = $productManager->getSubManager( 'list' );
 		$criteria = $listManager->createSearch();
 
@@ -143,24 +143,24 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 
 	public function testUploadFile()
 	{
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
+		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 
 		$_FILES['unittest'] = array(
 			'name' => 'file.txt',
-			'tmp_name' => $this->_testfile,
+			'tmp_name' => $this->testfile,
 			'error' => UPLOAD_ERR_OK,
 		);
 
 		$params = new stdClass();
-		$params->items = $this->_testfile;
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->items = $this->testfile;
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$result = $this->_object->uploadFile( $params );
+		$result = $this->object->uploadFile( $params );
 
 		$this->assertTrue( file_exists( $result['items'] ) );
 		unlink( $result['items'] );
@@ -191,9 +191,9 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends PHPUnit_Framework
 
 		$params = new stdClass();
 		$params->items = 'file.txt';
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->uploadFile( $params );
+		$this->object->uploadFile( $params );
 	}
 }

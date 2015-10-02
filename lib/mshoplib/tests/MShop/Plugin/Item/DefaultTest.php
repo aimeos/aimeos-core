@@ -11,8 +11,8 @@
  */
 class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -20,7 +20,7 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 123,
 			'siteid'=>99,
 			'typeid' => 2,
@@ -35,7 +35,7 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Plugin_Item_Default( $this->_values );
+		$this->object = new MShop_Plugin_Item_Default( $this->values );
 	}
 
 
@@ -44,129 +44,129 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 123, $this->_object->getId() );
+		$this->assertEquals( 123, $this->object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 2, $this->_object->getTypeId() );
+		$this->assertEquals( 2, $this->object->getTypeId() );
 	}
 
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId( 99 );
-		$this->assertEquals( 99, $this->_object->getTypeId() );
+		$this->object->setTypeId( 99 );
+		$this->assertEquals( 99, $this->object->getTypeId() );
 
-		$this->assertTrue( $this->_object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'unitTestPlugin', $this->_object->getLabel() );
+		$this->assertEquals( 'unitTestPlugin', $this->object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'anotherLabel' );
-		$this->assertEquals( 'anotherLabel', $this->_object->getLabel() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setLabel( 'anotherLabel' );
+		$this->assertEquals( 'anotherLabel', $this->object->getLabel() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetProvider()
 	{
-		$this->assertEquals( 'provider', $this->_object->getProvider() );
+		$this->assertEquals( 'provider', $this->object->getProvider() );
 	}
 
 
 	public function testSetProvider()
 	{
-		$this->_object->setProvider( 'newProvider' );
-		$this->assertEquals( 'newProvider', $this->_object->getProvider() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setProvider( 'newProvider' );
+		$this->assertEquals( 'newProvider', $this->object->getProvider() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array( 'limit'=>'40' ), $this->_object->getConfig() );
+		$this->assertEquals( array( 'limit'=>'40' ), $this->object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array( 'threshold'=>'20.00' ) );
-		$this->assertEquals( array( 'threshold'=>'20.00' ), $this->_object->getConfig() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setConfig( array( 'threshold'=>'20.00' ) );
+		$this->assertEquals( array( 'threshold'=>'20.00' ), $this->object->getConfig() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetPosition()
 	{
-		$this->assertEquals( 0, $this->_object->getPosition() );
+		$this->assertEquals( 0, $this->object->getPosition() );
 	}
 
 
 	public function testSetPosition()
 	{
-		$this->_object->setPosition( 1 );
-		$this->assertEquals( 1, $this->_object->getPosition() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setPosition( 1 );
+		$this->assertEquals( 1, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -198,19 +198,19 @@ class MShop_Plugin_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['plugin.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['plugin.siteid'] );
-		$this->assertEquals( $this->_object->getType(), $arrayObject['plugin.type'] );
-		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['plugin.typeid'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['plugin.label'] );
-		$this->assertEquals( $this->_object->getProvider(), $arrayObject['plugin.provider'] );
-		$this->assertEquals( $this->_object->getConfig(), $arrayObject['plugin.config'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['plugin.status'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['plugin.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['plugin.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['plugin.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['plugin.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['plugin.siteid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['plugin.type'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['plugin.typeid'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['plugin.label'] );
+		$this->assertEquals( $this->object->getProvider(), $arrayObject['plugin.provider'] );
+		$this->assertEquals( $this->object->getConfig(), $arrayObject['plugin.config'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['plugin.status'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['plugin.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['plugin.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['plugin.editor'] );
 	}
 }

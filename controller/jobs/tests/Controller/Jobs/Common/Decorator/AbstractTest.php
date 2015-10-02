@@ -11,8 +11,8 @@
  */
 class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_stub;
-	private $_object;
+	private $stub;
+	private $object;
 
 
 	/**
@@ -26,55 +26,55 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->_stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Default' )
+		$this->stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Default' )
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
-		$this->_object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $aimeos, $this->_stub );
+		$this->object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $aimeos, $this->stub );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetName()
 	{
-		$this->_stub->expects( $this->once() )
+		$this->stub->expects( $this->once() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'test name' ) );
 
-		$this->assertEquals( 'test name', $this->_object->getName() );
+		$this->assertEquals( 'test name', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-		$this->_stub->expects( $this->once() )
+		$this->stub->expects( $this->once() )
 			->method( 'getDescription' )
 			->will( $this->returnValue( 'test description' ) );
 
-		$this->assertEquals( 'test description', $this->_object->getDescription() );
+		$this->assertEquals( 'test description', $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
-		$this->_object->run();
+		$this->object->run();
 	}
 
 
 	public function testGetContext()
 	{
-		$this->assertInstanceOf( 'MShop_Context_Item_Interface', $this->_object->getContext() );
+		$this->assertInstanceOf( 'MShop_Context_Item_Interface', $this->object->getContextPublic() );
 	}
 
 
 	public function testGetAimeos()
 	{
-		$this->assertInstanceOf( 'Aimeos', $this->_object->getAimeos() );
+		$this->assertInstanceOf( 'Aimeos', $this->object->getAimeosPublic() );
 	}
 
 
@@ -89,13 +89,13 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 class Controller_Jobs_Common_Decorator_AbstractImpl
 	extends Controller_Jobs_Common_Decorator_Abstract
 {
-	public function getContext()
+	public function getContextPublic()
 	{
-		return $this->_getContext();
+		return $this->getContext();
 	}
 
-	public function getAimeos()
+	public function getAimeosPublic()
 	{
-		return $this->_getAimeos();
+		return $this->getAimeos();
 	}
 }

@@ -36,8 +36,8 @@ class MW_Setup_Task_MShopAddWarehouseDataUnitperf extends MW_Setup_Task_MShopAdd
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 }

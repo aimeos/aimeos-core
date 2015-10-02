@@ -17,10 +17,10 @@
 class Controller_Common_Product_Import_Csv_Processor_Abstract
 	extends Controller_Common_Product_Import_Csv_Abstract
 {
-	private static $_types = array();
-	private $_context;
-	private $_mapping;
-	private $_object;
+	private static $types = array();
+	private $context;
+	private $mapping;
+	private $object;
 
 
 	/**
@@ -33,9 +33,9 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
 		Controller_Common_Product_Import_Csv_Processor_Interface $object = null )
 	{
-		$this->_context = $context;
-		$this->_mapping = $mapping;
-		$this->_object = $object;
+		$this->context = $context;
+		$this->mapping = $mapping;
+		$this->object = $object;
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	 * @param integer $pos Computed position of the list item in the associated list of items
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addListItemDefaults( array $list, $pos )
+	protected function addListItemDefaults( array $list, $pos )
 	{
 		if( !isset( $list['product.list.position'] ) ) {
 			$list['product.list.position'] = $pos;
@@ -65,9 +65,9 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -76,9 +76,9 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	 *
 	 * @return array Associative list of field positions in CSV as keys and domain item keys as values
 	 */
-	protected function _getMapping()
+	protected function getMapping()
 	{
-		return $this->_mapping;
+		return $this->mapping;
 	}
 
 
@@ -88,13 +88,13 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	 * @return Controller_Common_Product_Import_Csv_Processor_Interface Processor object
 	 * @throws Controller_Jobs_Exception If no processor object is available
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		if( $this->_object === null ) {
+		if( $this->object === null ) {
 			throw new Controller_Jobs_Exception( 'No processor object available' );
 		}
 
-		return $this->_object;
+		return $this->object;
 	}
 
 
@@ -104,12 +104,12 @@ class Controller_Common_Product_Import_Csv_Processor_Abstract
 	 * @param array $data List of CSV fields with position as key and domain item key as value
 	 * @return array List of associative arrays containing the chunked properties
 	 */
-	protected function _getMappedChunk( array &$data )
+	protected function getMappedChunk( array &$data )
 	{
 		$idx = 0;
 		$map = array();
 
-		foreach( $this->_getMapping() as $pos => $key )
+		foreach( $this->getMapping() as $pos => $key )
 		{
 			if( isset( $map[$idx][$key] ) ) {
 				$idx++;

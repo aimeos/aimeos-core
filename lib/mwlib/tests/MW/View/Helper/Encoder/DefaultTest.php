@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,7 +23,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Encoder_Default( $view );
+		$this->object = new MW_View_Helper_Encoder_Default( $view );
 	}
 
 
@@ -35,19 +35,19 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->_object->transform() );
+		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->object->transform() );
 	}
 
 
 	public function testTransformAttrTrusted()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'an attribute', $enc->attr( 'an attribute', $enc::TRUST ) );
 	}
@@ -55,7 +55,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformAttrValid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'an attribute', $enc->attr( 'an attribute' ) );
 	}
@@ -63,7 +63,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformAttrInvalid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '&lt;a&gt;&quot;attribute&#039;&lt;/a&gt;', $enc->attr( '<a>"attribute\'</a>' ) );
 	}
@@ -71,7 +71,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformHtmlTrusted()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '<a>link</a>', $enc->html( '<a>link</a>', $enc::TRUST ) );
 	}
@@ -79,7 +79,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformHtmlValid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'a text', $enc->html( 'a text' ) );
 	}
@@ -87,7 +87,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformHtmlInvalid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '&lt;a&gt;text&lt;/a&gt;', $enc->html( '<a>text</a>' ) );
 	}
@@ -95,7 +95,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformXmlTrusted()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '<a>link</a>', $enc->xml( '<a>link</a>', $enc::TRUST ) );
 	}
@@ -103,7 +103,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformXmlValid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'a "text"', $enc->xml( 'a "text"' ) );
 	}
@@ -111,7 +111,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformXmlInvalid()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'a ]]&gt;&lt;b&gt;text&lt;/b&gt;', $enc->xml( 'a ]]><b>text</b>' ) );
 	}
@@ -119,7 +119,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformUrl()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '__-', $enc->url( ' _-' ) );
 	}
@@ -127,7 +127,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformUrlSpecial()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( '%5C%27%22%3B%23%2B%7E%2A%24%25%2F%28%29%3D%3F%26', $enc->url( '\\\'";#+~*$%/()=?&' ) );
 	}
@@ -135,7 +135,7 @@ class MW_View_Helper_Encoder_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformUrlHtml()
 	{
-		$enc = $this->_object->transform();
+		$enc = $this->object->transform();
 
 		$this->assertEquals( 'test', $enc->url( '<p>test</p>' ) );
 	}

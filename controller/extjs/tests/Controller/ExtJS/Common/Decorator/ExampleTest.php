@@ -11,7 +11,7 @@
  */
 class Controller_ExtJS_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
@@ -19,58 +19,58 @@ class Controller_ExtJS_Common_Decorator_ExampleTest extends PHPUnit_Framework_Te
 		$context = TestHelper::getContext();
 
 		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $context );
-		$this->_object = new Controller_ExtJS_Common_Decorator_Example( $context, $controller );
+		$this->object = new Controller_ExtJS_Common_Decorator_Example( $context, $controller );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCall()
 	{
-		$this->_object->additionalMethod();
+		$this->object->additionalMethod();
 	}
 
 
 	public function testDeleteItems()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->deleteItems( new stdClass() );
+		$this->object->deleteItems( new stdClass() );
 	}
 
 
 	public function testSaveItems()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( new stdClass() );
+		$this->object->saveItems( new stdClass() );
 	}
 
 
 	public function testSearchItems()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->searchItems( new stdClass() );
+		$this->object->searchItems( new stdClass() );
 	}
 
 
 	public function testGetServiceDescription()
 	{
-		$this->_object->getServiceDescription();
+		$this->object->getServiceDescription();
 	}
 
 
 	public function testGetItemSchema()
 	{
-		$this->_object->getItemSchema();
+		$this->object->getItemSchema();
 	}
 
 
 	public function testGetSearchSchema()
 	{
-		$this->_object->getSearchSchema();
+		$this->object->getSearchSchema();
 	}
 
 }

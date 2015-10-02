@@ -26,7 +26,7 @@ class MShop_Catalog_Manager_Index_MySQL
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
+		$dbm = $this->getContext()->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		$object = new MW_Common_Criteria_MySQL( $conn );

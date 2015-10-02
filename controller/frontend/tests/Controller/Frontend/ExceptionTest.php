@@ -7,12 +7,12 @@
 
 class Controller_Frontend_ExceptionTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
 	{
-		$this->_object = new Controller_Frontend_Exception( 'msg', 1, null, array( 'key' => 'value' ) );
+		$this->object = new Controller_Frontend_Exception( 'msg', 1, null, array( 'key' => 'value' ) );
 	}
 
 
@@ -23,18 +23,18 @@ class Controller_Frontend_ExceptionTest extends PHPUnit_Framework_TestCase
 
 	public function testGetMessage()
 	{
-		$this->assertEquals( 'msg', $this->_object->getMessage() );
+		$this->assertEquals( 'msg', $this->object->getMessage() );
 	}
 
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 1, $this->_object->getCode() );
+		$this->assertEquals( 1, $this->object->getCode() );
 	}
 
 
 	public function testGetErrorList()
 	{
-		$this->assertEquals( array( 'key' => 'value' ), $this->_object->getErrorList() );
+		$this->assertEquals( array( 'key' => 'value' ), $this->object->getErrorList() );
 	}
 }

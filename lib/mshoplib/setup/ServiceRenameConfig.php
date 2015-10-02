@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
 			SET "config" = REPLACE("config", \'"project"\', \'"default.project"\')
 			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"project"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
@@ -90,9 +90,9 @@ class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -101,31 +101,31 @@ class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming service configuration', 0 );
+		$this->msg( 'Renaming service configuration', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_service' )
-			&& $this->_schema->columnExists( 'mshop_service', 'config' ) === true
+		if( $this->schema->tableExists( 'mshop_service' )
+			&& $this->schema->columnExists( 'mshop_service', 'config' ) === true
 		) {
 			$cntRows = 0;
 
 			foreach( $stmts as $stmt )
 			{
-				$result = $this->_conn->create( $stmt )->execute();
+				$result = $this->conn->create( $stmt )->execute();
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
 
 			if( $cntRows > 0 ) {
-				$this->_status( sprintf( 'done (%1$d)', $cntRows ) );
+				$this->status( sprintf( 'done (%1$d)', $cntRows ) );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

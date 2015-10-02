@@ -38,7 +38,7 @@ class MW_Setup_Task_OrderAddFlags extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// 2013-08-01: flag column was removed in favour of entries in mshop_order_status
 	}
