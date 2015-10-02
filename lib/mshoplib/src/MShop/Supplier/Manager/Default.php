@@ -196,7 +196,7 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'supplier.id', $id, $ref );
+		return $this->getItemBase( 'supplier.id', $id, $ref );
 	}
 
 

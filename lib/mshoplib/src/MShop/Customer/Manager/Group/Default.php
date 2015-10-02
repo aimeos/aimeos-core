@@ -190,7 +190,7 @@ class MShop_Customer_Manager_Group_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'customer.group.id', $id, $ref );
+		return $this->getItemBase( 'customer.group.id', $id, $ref );
 	}
 
 

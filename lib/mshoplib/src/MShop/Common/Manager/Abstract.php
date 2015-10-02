@@ -616,7 +616,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @return MShop_Common_Item_Interface Requested item
 	 * @throws MShop_Exception if no item with the given ID found
 	 */
-	protected function _getItem( $key, $id, array $ref = array() )
+	protected function getItemBase( $key, $id, array $ref = array() )
 	{
 		$criteria = $this->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', $key, $id ) );

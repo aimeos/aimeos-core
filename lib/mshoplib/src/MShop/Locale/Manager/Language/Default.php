@@ -264,7 +264,7 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'locale.language.id', $id, $ref );
+		return $this->getItemBase( 'locale.language.id', $id, $ref );
 	}
 
 

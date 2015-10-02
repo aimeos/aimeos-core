@@ -342,7 +342,7 @@ class MShop_Order_Manager_Status_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.status.id', $id, $ref );
+		return $this->getItemBase( 'order.status.id', $id, $ref );
 	}
 
 

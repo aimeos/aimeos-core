@@ -181,7 +181,7 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'coupon.id', $id, $ref );
+		return $this->getItemBase( 'coupon.id', $id, $ref );
 	}
 
 

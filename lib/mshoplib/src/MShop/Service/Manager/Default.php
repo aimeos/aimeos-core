@@ -225,7 +225,7 @@ class MShop_Service_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'service.id', $id, $ref );
+		return $this->getItemBase( 'service.id', $id, $ref );
 	}
 
 

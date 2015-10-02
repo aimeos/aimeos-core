@@ -274,7 +274,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.base.id', $id, $ref );
+		return $this->getItemBase( 'order.base.id', $id, $ref );
 	}
 
 

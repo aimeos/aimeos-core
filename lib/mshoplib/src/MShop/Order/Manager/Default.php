@@ -419,7 +419,7 @@ class MShop_Order_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.id', $id, $ref );
+		return $this->getItemBase( 'order.id', $id, $ref );
 	}
 
 

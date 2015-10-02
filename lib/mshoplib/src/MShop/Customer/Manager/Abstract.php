@@ -91,7 +91,7 @@ abstract class MShop_Customer_Manager_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'customer.id', $id, $ref );
+		return $this->getItemBase( 'customer.id', $id, $ref );
 	}
 
 

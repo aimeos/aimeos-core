@@ -97,7 +97,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 	protected function _checkLimits( MShop_Price_Item_Interface $sum, $count )
 	{
 		$currencyId = $sum->getCurrencyId();
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{

@@ -71,7 +71,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 
 		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		foreach( $config as $key => $properties )
 		{

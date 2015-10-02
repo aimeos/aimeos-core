@@ -38,7 +38,7 @@ abstract class MShop_Plugin_Provider_Abstract
 	 *
 	 * @return MShop_Plugin_Item_Interface Plugin item object
 	 */
-	protected function _getItem()
+	protected function getItemBase()
 	{
 		return $this->_item;
 	}

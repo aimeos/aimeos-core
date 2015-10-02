@@ -181,7 +181,7 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'attribute.id', $id, $ref );
+		return $this->getItemBase( 'attribute.id', $id, $ref );
 	}
 
 

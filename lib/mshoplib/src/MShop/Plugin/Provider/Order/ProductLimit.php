@@ -60,7 +60,7 @@ class MShop_Plugin_Provider_Order_ProductLimit
 	protected function _checkWithoutCurrency( MShop_Order_Item_Base_Interface $order,
 		MShop_Order_Item_Base_Product_Interface $value )
 	{
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( isset( $config['single-number-max'] )
 			&& !is_array( $config['single-number-max'] )
@@ -98,7 +98,7 @@ class MShop_Plugin_Provider_Order_ProductLimit
 	protected function _checkWithCurrency( MShop_Order_Item_Base_Interface $order,
 		MShop_Order_Item_Base_Product_Interface $value )
 	{
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 		$currencyId = $value->getPrice()->getCurrencyId();
 
 		if( isset( $config['single-value-max'][$currencyId] )

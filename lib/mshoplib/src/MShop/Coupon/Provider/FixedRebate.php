@@ -31,13 +31,13 @@ class MShop_Coupon_Provider_FixedRebate
 
 		$rebate = '0.00';
 		$currency = $base->getPrice()->getCurrencyId();
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate'
+				$this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate'
 			) );
 		}
 

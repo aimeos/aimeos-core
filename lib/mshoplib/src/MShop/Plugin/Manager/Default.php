@@ -249,7 +249,7 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'plugin.id', $id, $ref );
+		return $this->getItemBase( 'plugin.id', $id, $ref );
 	}
 
 

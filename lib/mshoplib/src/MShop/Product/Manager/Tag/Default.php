@@ -319,7 +319,7 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'product.tag.id', $id, $ref );
+		return $this->getItemBase( 'product.tag.id', $id, $ref );
 	}
 
 

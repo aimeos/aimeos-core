@@ -169,7 +169,7 @@ class MShop_Locale_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'locale.id', $id, $ref );
+		return $this->getItemBase( 'locale.id', $id, $ref );
 	}
 
 

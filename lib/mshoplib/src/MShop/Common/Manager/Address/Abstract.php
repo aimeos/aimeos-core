@@ -109,7 +109,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 			throw new MShop_Exception( sprintf( 'Address search configuration not available' ) );
 		}
 
-		return $this->_getItem( $conf['code'], $id, $ref );
+		return $this->getItemBase( $conf['code'], $id, $ref );
 	}
 
 

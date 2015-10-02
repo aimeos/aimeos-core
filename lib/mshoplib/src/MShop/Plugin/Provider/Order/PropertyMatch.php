@@ -50,7 +50,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( $config === array() ) {
 			return true;

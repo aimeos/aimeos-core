@@ -278,7 +278,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	 * @param array $row List of coupon data (code, count, start and end)
 	 * @return MShop_Coupon_Item_Code_Interface Populated coupon item
 	 */
-	protected function _getItem( MShop_Coupon_Item_Code_Interface $item, array $row )
+	protected function getItemBase( MShop_Coupon_Item_Code_Interface $item, array $row )
 	{
 		foreach( $row as $idx => $value ) {
 			$row[$idx] = trim( $value );
@@ -349,7 +349,7 @@ class Controller_ExtJS_Coupon_Code_Default
 					continue;
 				}
 
-				$item = $this->_getItem( $item, $row );
+				$item = $this->getItemBase( $item, $row );
 				$manager->saveItem( $item, false );
 			}
 

@@ -48,7 +48,7 @@ class MShop_Plugin_Provider_Order_Shipping
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 		if( !isset( $config['threshold'] ) ) { return true; }
 
 		try {

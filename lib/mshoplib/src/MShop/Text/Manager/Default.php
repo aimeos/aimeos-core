@@ -344,7 +344,7 @@ class MShop_Text_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'text.id', $id, $ref );
+		return $this->getItemBase( 'text.id', $id, $ref );
 	}
 
 

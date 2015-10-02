@@ -29,13 +29,13 @@ class MShop_Coupon_Provider_PercentRebate
 			return;
 		}
 
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( !isset( $config['percentrebate.productcode'] ) || !isset( $config['percentrebate.rebate'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
+				$this->getItemBase()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
 			) );
 		}
 

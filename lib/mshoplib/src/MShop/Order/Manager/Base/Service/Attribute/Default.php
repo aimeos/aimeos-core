@@ -211,7 +211,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.base.service.attribute.id', $id, $ref );
+		return $this->getItemBase( 'order.base.service.attribute.id', $id, $ref );
 	}
 
 

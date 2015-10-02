@@ -133,7 +133,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 *
 	 * @return MShop_Coupon_Item_Interface Coupon item
 	 */
-	protected function _getItem()
+	protected function getItemBase()
 	{
 		return $this->_item;
 	}
