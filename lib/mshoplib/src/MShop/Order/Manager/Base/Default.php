@@ -917,9 +917,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$localeItem->setSiteId( $row['siteid'] );
 
 		if( $fresh === false ) {
-			$basket = $this->_load( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadItems( $id, $price, $localeItem, $row, $parts );
 		} else {
-			$basket = $this->_loadFresh( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
 
 		return $basket;
@@ -1285,7 +1285,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _load( $id, $price, $localeItem, $row, $parts )
+	protected function loadItems( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $coupons = $addresses = $services = array();
 
@@ -1323,7 +1323,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
-	protected function _loadFresh( $id, $price, $localeItem, $row, $parts )
+	protected function loadFresh( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $addresses = $services = array();
 
