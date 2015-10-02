@@ -8,13 +8,13 @@
 
 class TestHelper
 {
-	private static $_aimeos;
-	private static $_context;
+	private static $aimeos;
+	private static $context;
 
 
 	public static function bootstrap()
 	{
-		$aimeos = self::_getAimeos();
+		$aimeos = self::getAimeos();
 
 		$includepaths = $aimeos->getIncludePaths();
 		$includepaths[] = get_include_path();
@@ -26,26 +26,26 @@ class TestHelper
 
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$_context[$site] ) ) {
-			self::$_context[$site] = self::_createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone self::$_context[$site];
+		return clone self::$context[$site];
 	}
 
 
-	private static function _getAimeos()
+	private static function getAimeos()
 	{
-		if( !isset( self::$_aimeos ) )
+		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Aimeos.php';
 			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
-			self::$_aimeos = new Aimeos( array( $extdir ), false );
+			self::$aimeos = new Aimeos( array( $extdir ), false );
 		}
 
-		return self::$_aimeos;
+		return self::$aimeos;
 	}
 
 
@@ -55,10 +55,10 @@ class TestHelper
 	}
 
 
-	private static function _createContext( $site )
+	private static function createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$aimeos = self::_getAimeos();
+		$aimeos = self::getAimeos();
 
 
 		$paths = $aimeos->getConfigPaths( 'mysql' );
@@ -94,7 +94,7 @@ class TestHelper
 		$ctx->setLocale( $locale );
 
 
-		$view = self::_createView( $conf );
+		$view = self::createView( $conf );
 		$ctx->setView( $view );
 
 
@@ -104,7 +104,7 @@ class TestHelper
 	}
 
 
-	protected static function _createView( MW_Config_Interface $config )
+	protected static function createView( MW_Config_Interface $config )
 	{
 		$view = new MW_View_Default();
 
