@@ -60,7 +60,6 @@ class PHP_CodeSniffer_Standards_Metaways_MetawaysCodingStandard extends PHP_Code
 			'PEAR/Sniffs/NamingConventions/ValidClassNameSniff.php',
 			'Squiz/Sniffs/Functions/GlobalFunctionSniff.php',
 			'Zend/Sniffs/Files/ClosingTagSniff.php',
-			'Zend/Sniffs/NamingConventions/ValidVariableNameSniff.php',
 		);
 
 	}//end getIncludedSniffs()
