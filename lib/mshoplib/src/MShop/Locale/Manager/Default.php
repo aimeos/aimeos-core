@@ -136,9 +136,9 @@ class MShop_Locale_Manager_Default
 	public function createItem()
 	{
 		try {
-			return $this->_createItem( array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() ) );
+			return $this->createItemBase( array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() ) );
 		} catch( Exception $e ) {
-			return $this->_createItem();
+			return $this->createItemBase();
 		}
 	}
 
@@ -196,7 +196,7 @@ class MShop_Locale_Manager_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $this->_search( $search, $ref, $total ) as $row ) {
-			$items[$row['id']] = $this->_createItem( $row );
+			$items[$row['id']] = $this->createItemBase( $row );
 		}
 
 		return $items;
@@ -526,14 +526,14 @@ class MShop_Locale_Manager_Default
 		foreach( $result as $row )
 		{
 			if( $row['siteid'] == $siteId ) {
-				return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
 
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['siteid'] = $siteId;
-			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
 		return false;
@@ -581,7 +581,7 @@ class MShop_Locale_Manager_Default
 		foreach( $result as $row )
 		{
 			if( $row['siteid'] == $siteId && $row['langid'] == $lang ) {
-				return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
 
@@ -591,7 +591,7 @@ class MShop_Locale_Manager_Default
 			if( $row['langid'] == $lang )
 			{
 				$row['siteid'] = $siteId;
-				return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
 
@@ -599,7 +599,7 @@ class MShop_Locale_Manager_Default
 		foreach( $result as $row )
 		{
 			if( $row['siteid'] == $siteId ) {
-				return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
 
@@ -607,7 +607,7 @@ class MShop_Locale_Manager_Default
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['siteid'] = $siteId;
-			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
+			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
 		return false;
@@ -623,7 +623,7 @@ class MShop_Locale_Manager_Default
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Default Locale item
 	 */
-	protected function _createItem( array $values = array( ), MShop_Locale_Item_Site_Interface $site = null,
+	protected function createItemBase( array $values = array( ), MShop_Locale_Item_Site_Interface $site = null,
 		array $sitePath = array(), array $siteSubTree = array() )
 	{
 		return new MShop_Locale_Item_Default( $values, $site, $sitePath, $siteSubTree );

@@ -139,7 +139,7 @@ class MShop_Plugin_Manager_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -673,7 +673,7 @@ class MShop_Plugin_Manager_Default
 					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 
-				$items[$id] = $this->_createItem( $row );
+				$items[$id] = $this->createItemBase( $row );
 			}
 		}
 
@@ -686,7 +686,7 @@ class MShop_Plugin_Manager_Default
 	 *
 	 * @return MShop_Plugin_Item_Interface New plugin object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Plugin_Item_Default( $values );
 	}

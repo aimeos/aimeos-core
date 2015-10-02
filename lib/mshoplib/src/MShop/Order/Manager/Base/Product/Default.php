@@ -295,7 +295,7 @@ class MShop_Order_Manager_Base_Product_Default
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$values = array( 'siteid' => $context->getLocale()->getSiteId() );
 
-		return $this->_createItem( $priceManager->createItem(), $values );
+		return $this->createItemBase( $priceManager->createItem(), $values );
 	}
 
 
@@ -827,7 +827,7 @@ class MShop_Order_Manager_Base_Product_Default
 		foreach( $items as $id => $row )
 		{
 			$attrList = ( isset( $attributes[$id] ) ? $attributes[$id] : array() );
-			$result[$id] = $this->_createItem( $row['price'], $row['item'], $attrList );
+			$result[$id] = $this->createItemBase( $row['price'], $row['item'], $attrList );
 		}
 
 		return $result;
@@ -839,7 +839,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 *
 	 * @return MShop_Order_Item_Base_Product_Interface
 	 */
-	protected function _createItem( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array() )
+	protected function createItemBase( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array() )
 	{
 		return new MShop_Order_Item_Base_Product_Default( $price, $values, $attributes );
 	}

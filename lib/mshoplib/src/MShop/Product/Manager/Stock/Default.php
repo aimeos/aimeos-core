@@ -126,7 +126,7 @@ class MShop_Product_Manager_Stock_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -501,7 +501,7 @@ class MShop_Product_Manager_Stock_Default
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -757,7 +757,7 @@ class MShop_Product_Manager_Stock_Default
 	 * id, prodid, siteid, warehouseid, stocklevel, backdate
 	 * @return MShop_Product_Item_Stock_Default New stock item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Product_Item_Stock_Default( $values );
 	}

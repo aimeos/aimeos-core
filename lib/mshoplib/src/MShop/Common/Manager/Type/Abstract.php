@@ -82,7 +82,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_context->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -234,7 +234,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -321,7 +321,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 * @param array $values Associative list of key/value pairs
 	 * @return MShop_Common_Item_Type_Default New type item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Common_Item_Type_Default( $this->_prefix, $values );
 	}

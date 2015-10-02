@@ -79,7 +79,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_context->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -227,7 +227,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -305,7 +305,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 * @param array $values List of attributes for address item
 	 * @return MShop_Common_Item_Address_Interface New address item
 	 */
-	protected function _createItem( array $values = array( ) )
+	protected function createItemBase( array $values = array( ) )
 	{
 		return new MShop_Common_Item_Address_Default( $this->_prefix, $values );
 	}

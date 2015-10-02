@@ -219,7 +219,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
-		$base = $this->_createItem( $priceManager->createItem(), clone $context->getLocale(), $values );
+		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
 
 		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
 		$pluginManager->register( $base, 'order' );
@@ -739,7 +739,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$localeItem->setCurrencyId( $row['currencyid'] );
 				$localeItem->setSiteId( $row['siteid'] );
 
-				$items[$row['id']] = $this->_createItem( $price, $localeItem, $row );
+				$items[$row['id']] = $this->createItemBase( $price, $localeItem, $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -961,7 +961,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 *
 	 * @return MShop_Order_Item_Base_Interface Order base object
 	 */
-	protected function _createItem( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
+	protected function createItemBase( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
@@ -1307,7 +1307,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$services = $this->_loadServices( $id, false );
 		}
 
-		$basket = $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
+		$basket = $this->createItemBase( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
 		return $basket;
 	}
@@ -1340,7 +1340,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		}
 
 
-		$basket = $this->_createItem( $price, $localeItem, $row );
+		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
 		$pluginManager = MShop_Factory::createManager( $this->_getContext(), 'plugin' );

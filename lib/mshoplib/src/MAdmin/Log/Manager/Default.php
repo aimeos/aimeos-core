@@ -155,7 +155,7 @@ class MAdmin_Log_Manager_Default
 		}
 
 		$values = array( 'siteid' => $siteid );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -500,7 +500,7 @@ class MAdmin_Log_Manager_Default
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -565,7 +565,7 @@ class MAdmin_Log_Manager_Default
 	 * @param array $values Associative list of key/value pairs of a job
 	 * @return MAdmin_Log_Item_Interface
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MAdmin_Log_Item_Default( $values );
 	}

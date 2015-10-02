@@ -175,7 +175,7 @@ class MShop_Service_Manager_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -686,7 +686,7 @@ class MShop_Service_Manager_Default
 	 * @param array $textItems List of items implementing MShop_Text_Item_Interface
 	 * @return MShop_Service_Item_Interface New service item
 	 */
-	protected function _createItem( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
+	protected function createItemBase( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
 	{
 		return new MShop_Service_Item_Default( $values, $listitems, $textItems );
 	}

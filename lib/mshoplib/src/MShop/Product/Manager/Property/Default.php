@@ -124,7 +124,7 @@ class MShop_Product_Manager_Property_Default
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -543,7 +543,7 @@ class MShop_Product_Manager_Property_Default
 					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
 				}
 
-				$items[$id] = $this->_createItem( $row );
+				$items[$id] = $this->createItemBase( $row );
 			}
 		}
 
@@ -681,7 +681,7 @@ class MShop_Product_Manager_Property_Default
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, value
 	 * @return MShop_Product_Item_Property_Default New property item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Product_Item_Property_Default( $values );
 	}

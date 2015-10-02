@@ -26,7 +26,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Common_Item_Interface New item
 	 */
-	abstract protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() );
+	abstract protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() );
 
 
 	/**
@@ -69,7 +69,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->_createItem( $values, $listItems, $refItems );
+			$items[$id] = $this->createItemBase( $values, $listItems, $refItems );
 		}
 
 		return $items;

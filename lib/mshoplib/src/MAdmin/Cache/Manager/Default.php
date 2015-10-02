@@ -267,7 +267,7 @@ class MAdmin_Cache_Manager_Default
 			$values = array( 'siteid' => null );
 		}
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -385,7 +385,7 @@ class MAdmin_Cache_Manager_Default
 			throw new MAdmin_Cache_Exception( sprintf( 'Item with ID "%1$s" not found', $id ) );
 		}
 
-		return $this->_createItem( array( 'id' => $id, 'value' => $value ) );
+		return $this->createItemBase( array( 'id' => $id, 'value' => $value ) );
 	}
 
 
@@ -487,7 +487,7 @@ class MAdmin_Cache_Manager_Default
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -552,7 +552,7 @@ class MAdmin_Cache_Manager_Default
 	 * @param array $values Associative list of key/value pairs of a job
 	 * @return MAdmin_Cache_Item_Interface
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
 

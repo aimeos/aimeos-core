@@ -107,7 +107,7 @@ class MShop_Locale_Manager_Currency_Default
 			$values = array( 'siteid' => null );
 		}
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -395,7 +395,7 @@ class MShop_Locale_Manager_Currency_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -638,7 +638,7 @@ class MShop_Locale_Manager_Currency_Default
 	 * @return MShop_Locale_Item_Currency_Interface
 	 * @throws MShop_Locale_Exception On failures with the language item object
 	 */
-	protected function _createItem( array $data = array() )
+	protected function createItemBase( array $data = array() )
 	{
 		return new MShop_Locale_Item_Currency_Default( $data );
 	}

@@ -134,7 +134,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		return $this->createItemBase();
 	}
 
 
@@ -577,7 +577,7 @@ class MShop_Locale_Manager_Site_Default
 						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -877,7 +877,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @return MShop_Locale_Item_Site_Interface
 	 */
-	protected function _createItem( array $data = array( ) )
+	protected function createItemBase( array $data = array( ) )
 	{
 		return new MShop_Locale_Item_Site_Default( $data );
 	}

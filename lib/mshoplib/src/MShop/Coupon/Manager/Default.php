@@ -167,7 +167,7 @@ class MShop_Coupon_Manager_Default
 	public function createItem()
 	{
 		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -517,7 +517,7 @@ class MShop_Coupon_Manager_Default
 						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -661,7 +661,7 @@ class MShop_Coupon_Manager_Default
 	 * @param array $values Values of the coupon item from the storage
 	 * @return MShop_Coupon_Item_Default Returns a new created coupon item instance
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Coupon_Item_Default( $values );
 	}

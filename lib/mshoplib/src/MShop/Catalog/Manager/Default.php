@@ -188,7 +188,7 @@ class MShop_Catalog_Manager_Default
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -621,7 +621,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$nodeid];
 			}
 
-			$item = $this->_createItem( array(), $listItems, $refItems, array(), $node );
+			$item = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
 			$this->_createTree( $node, $item, $listItemMap, $refItemMap );
 
 			return $item;
@@ -707,7 +707,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->_createItem( array(), $listItems, $refItems, array(), $node );
+			$items[$id] = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
 		}
 
 		return $items;
@@ -723,7 +723,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $refItems Associative list of referenced items grouped by domain
 	 * @return MShop_Catalog_Item_Interface New catalog item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array(),
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array(),
 		array $children = array(), MW_Tree_Node_Interface $node = null )
 	{
 		if( $node === null )
@@ -767,7 +767,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$child->getId()];
 			}
 
-			$newItem = $this->_createItem( array(), $listItems, $refItems, array(), $child );
+			$newItem = $this->createItemBase( array(), $listItems, $refItems, array(), $child );
 
 			$result = true;
 			foreach( $this->_filter as $fcn ) {

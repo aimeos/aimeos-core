@@ -109,7 +109,7 @@ class MShop_Customer_Manager_Group_Default
 	{
 		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -473,7 +473,7 @@ class MShop_Customer_Manager_Group_Default
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $this->_createItem( $row );
+				$map[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -617,7 +617,7 @@ class MShop_Customer_Manager_Group_Default
 	 * @param array $values List of attributes for customer group item
 	 * @return MShop_Customer_Item_Group_Interface New customer group item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Customer_Item_Group_Default( $values );
 	}

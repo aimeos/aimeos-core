@@ -202,7 +202,7 @@ class MShop_Price_Manager_Default
 			$values['currencyid'] = $locale->getCurrencyId();
 		}
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -630,7 +630,7 @@ class MShop_Price_Manager_Default
 	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Price_Item_Interface New price item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Price_Item_Default( $values, $listItems, $refItems );
 	}

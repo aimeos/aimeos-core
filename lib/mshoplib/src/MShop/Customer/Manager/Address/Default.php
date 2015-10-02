@@ -395,7 +395,7 @@ class MShop_Customer_Manager_Address_Default
 	 * @param array $values List of attributes for address item
 	 * @return MShop_Customer_Item_Address_Interface New address item
 	 */
-	protected function _createItem( array $values = array( ) )
+	protected function createItemBase( array $values = array( ) )
 	{
 		return new MShop_Customer_Item_Address_Default( $this->_getPrefix(), $values );
 	}

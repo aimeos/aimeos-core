@@ -146,7 +146,7 @@ class MShop_Supplier_Manager_Default
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		return $this->createItemBase($values);
 	}
 
 
@@ -528,7 +528,7 @@ class MShop_Supplier_Manager_Default
 	 * @param array $values List of attributes for supplier item
 	 * @return MShop_Supplier_Item_Interface New supplier item
 	 */
-	protected function _createItem( array $values = array(), array $listitems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
 		return new MShop_Supplier_Item_Default( $values, $listitems, $refItems );
 	}

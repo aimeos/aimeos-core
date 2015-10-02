@@ -73,7 +73,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 
 	}
 
@@ -390,7 +390,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				if( isset( $typeItems[$row['typeid']] ) ) {
 					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 		}
 
@@ -560,7 +560,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	 * @param array $values Possible optional array keys can be given: id, parentid, refid, domain, pos, start, end
 	 * @return MShop_Common_Item_List_Default New common list item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Common_Item_List_Default( $this->_prefix, $values );
 	}

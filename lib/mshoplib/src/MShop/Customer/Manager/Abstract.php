@@ -61,7 +61,7 @@ abstract class MShop_Customer_Manager_Abstract
 	{
 		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -103,7 +103,7 @@ abstract class MShop_Customer_Manager_Abstract
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		if( !isset( $this->_addressManager ) ) {
 			$this->_addressManager = $this->getSubManager( 'address' );

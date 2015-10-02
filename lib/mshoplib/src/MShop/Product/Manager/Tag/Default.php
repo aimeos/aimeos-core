@@ -116,7 +116,7 @@ class MShop_Product_Manager_Tag_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -507,7 +507,7 @@ class MShop_Product_Manager_Tag_Default
 					$row['type'] = $typeItems[$row['typeid']]->getCode();
 				}
 
-				$items[$id] = $this->_createItem( $row );
+				$items[$id] = $this->createItemBase( $row );
 			}
 		}
 
@@ -645,7 +645,7 @@ class MShop_Product_Manager_Tag_Default
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, label
 	 * @return MShop_Product_Item_Tag_Default New tag item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Product_Item_Tag_Default( $values );
 	}

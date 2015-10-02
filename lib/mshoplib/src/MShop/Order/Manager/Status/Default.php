@@ -173,7 +173,7 @@ class MShop_Order_Manager_Status_Default
 	public function createItem()
 	{
 		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -661,7 +661,7 @@ class MShop_Order_Manager_Status_Default
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -683,7 +683,7 @@ class MShop_Order_Manager_Status_Default
 	 * @param array $values List of attributes for the order status object
 	 * @return MShop_Order_Item_Status_Interface New order status object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Status_Default( $values );
 	}

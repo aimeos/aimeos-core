@@ -167,7 +167,7 @@ class MShop_Attribute_Manager_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -577,7 +577,7 @@ class MShop_Attribute_Manager_Default
 	 * @param array $refItems List of items implementing MShop_Text_Item_Interface
 	 * @return MShop_Attribute_Item_Interface New product item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Attribute_Item_Default( $values, $listItems, $refItems );
 	}

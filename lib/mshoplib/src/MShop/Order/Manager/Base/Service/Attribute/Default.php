@@ -197,7 +197,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	public function createItem()
 	{
 		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -571,7 +571,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
 						$row['value'] = $value;
 					}
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -719,7 +719,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 *
 	 * @return MShop_Order_Item_Base_Service_Attribute_Default New item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Base_Service_Attribute_Default( $values );
 	}

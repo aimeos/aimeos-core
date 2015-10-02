@@ -286,7 +286,7 @@ class MShop_Coupon_Manager_Code_Default
 	public function createItem()
 	{
 		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -632,7 +632,7 @@ class MShop_Coupon_Manager_Code_Default
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -743,7 +743,7 @@ class MShop_Coupon_Manager_Code_Default
 	 *
 	 * @return MShop_Coupon_Item_Code_Interface Emtpy coupon code object
 	 */
-	public function _createItem( array $values = array() )
+	public function createItemBase( array $values = array() )
 	{
 		return new MShop_Coupon_Item_Code_Default( $values );
 	}
