@@ -340,30 +340,6 @@ abstract class Client_Html_Abstract
 
 
 	/**
-	 * Transforms the client path to the appropriate class names.
-	 *
-	 * @param string $path Path of client names, e.g. "catalog/navigation"
-	 * @return string Class names, e.g. "Catalog_Navigation"
-	 * @deprecated 2015.10 Remove method, use str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) )
-	 */
-	protected function createSubNames( $path )
-	{
-		$names = explode( '/', $path );
-
-		foreach( $names as $key => $subname )
-		{
-			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $path ) );
-			}
-
-			$names[$key] = ucfirst( $subname );
-		}
-
-		return implode( '_', $names );
-	}
-
-
-	/**
 	 * Returns the sub-client given by its name.
 	 *
 	 * @param string $path Name of the sub-part in lower case (can contain a path like catalog/filter/tree)
