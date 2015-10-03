@@ -234,12 +234,8 @@ abstract class Controller_ExtJS_Abstract
 	 * This method has to be implemented in the derived classes
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
-	 * @todo 2015.10 Make abstract
 	 */
-	protected function getPrefix()
-	{
-		return '';
-	}
+	abstract protected function getPrefix();
 
 
 	/**

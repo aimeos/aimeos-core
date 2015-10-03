@@ -66,4 +66,15 @@ class Controller_ExtJS_Admin_Log_Default
 	{
 		return $this->manager;
 	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function getPrefix()
+	{
+		return 'log';
+	}
 }

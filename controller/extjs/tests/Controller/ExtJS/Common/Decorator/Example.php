@@ -26,4 +26,9 @@ class Controller_ExtJS_Common_Decorator_Example
 	protected function getManager()
 	{
 	}
+
+
+	protected function getPrefix()
+	{
+	}
 }
