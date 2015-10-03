@@ -110,11 +110,11 @@ class MShop_Context_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
 	}
 
-	/**
-	 * @todo Implement test for setMail() as soon as a default implementation is available
-	 */
 	public function testSetMail()
 	{
+		$mail = new MW_Mail_None();
+		$this->object->setMail( $mail );
+		$this->assertInstanceOf( 'MW_Mail_Interface', $this->object->getMail() );
 	}
 
 	public function testSetView()
