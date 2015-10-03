@@ -487,7 +487,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket
 	 * @param array $params
-	 * @todo 2016.03 Remove $baseManager parameter
 	 */
 	protected function checkIPN( $basket, $params )
 	{
