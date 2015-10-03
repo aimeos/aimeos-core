@@ -52,26 +52,6 @@ abstract class MShop_Common_Manager_Address_Abstract
 
 
 	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
-	 * @deprecated Use getSearchAttributesBase() instead
-	 * @todo 2015.03 Remove method
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		$list = array();
-
-		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Instantiates a new common address item object.
 	 *
 	 * @return MShop_Common_Item_Address_Interface
@@ -269,23 +249,6 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 * @return array Associative list of search keys and search definitions
 	 */
 	abstract protected function getSearchConfig();
-
-
-	/**
-	 * Returns the search attribute objects used for searching.
-	 *
-	 * @param array $list Associative list of search keys and the lists of search definitions
-	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
-	 * @param array $default List of sub-domains if no others are configured
-	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
-	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
-	 * @todo 2015.03 Remove method as it's a workaround for backward compatibility
-	 * @since 2014.09
-	 */
-	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
-	{
-		return parent::getSearchAttributesBase( $this->getSearchConfig(), $path, $default, $withsub );
-	}
 
 
 	/**
