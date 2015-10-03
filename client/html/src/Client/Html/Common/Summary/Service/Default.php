@@ -14,7 +14,7 @@
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Common_Summary_Service_Default
+abstract class Client_Html_Common_Summary_Service_Default
 	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
@@ -143,20 +143,6 @@ class Client_Html_Common_Summary_Service_Default
 		$default = 'common/summary/service-header-default.html';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
-	}
-
-
-	/**
-	 * Returns the sub-client given by its name.
-	 *
-	 * @param string $type Name of the client type
-	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
-	 * @deprecated 2015.10 Make class abstract and remove method
-	 */
-	public function getSubClient( $type, $name = null )
-	{
-		return $this->createSubClient( 'common/summary/service/' . $type, $name );
 	}
 
 
