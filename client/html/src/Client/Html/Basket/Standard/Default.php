@@ -302,22 +302,6 @@ class Client_Html_Basket_Standard_Default
 
 		try
 		{
-			/** client/html/basket/standard/require-stock
-			 * Customers can order products only if there are enough products in stock
-			 *
-			 * @deprecated Use "client/html/basket/require-stock" instead
-			 * @see client/html/basket/require-stock
-			 */
-			$reqstock = $view->config( 'client/html/basket/standard/require-stock', true );
-
-			/** client/html/basket/standard/require-variant
-			 * A variant of a selection product must be chosen
-			 *
-			 * @deprecated Use "client/html/basket/require-variant" instead
-			 * @see client/html/basket/require-variant
-			 */
-			$reqvariant = $view->config( 'client/html/basket/standard/require-variant', true );
-
 			$options = array(
 
 				/** client/html/basket/require-stock
@@ -332,7 +316,7 @@ class Client_Html_Basket_Standard_Default
 				 * @category Developer
 				 * @category User
 				 */
-				'stock' => $view->config( 'client/html/basket/require-stock', $reqstock ),
+				'stock' => $view->config( 'client/html/basket/require-stock', true ),
 
 				/** client/html/basket/require-variant
 				 * A variant of a selection product must be chosen
@@ -350,7 +334,7 @@ class Client_Html_Basket_Standard_Default
 				 * @category Developer
 				 * @category User
 				 */
-				'variant' => $view->config( 'client/html/basket/require-variant', $reqvariant ),
+				'variant' => $view->config( 'client/html/basket/require-variant', true ),
 			);
 
 			switch( $view->param( 'b_action' ) )
