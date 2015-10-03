@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Address_Billing_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/address/billing/default/subparts
@@ -291,7 +291,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			 * @see client/html/checkout/standard/address/billing/hidden
 			 */
 			$disable = $view->config( 'client/html/checkout/standard/address/billing/disable-new', false );
-			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
+			$type = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT;
 
 			if( ( $option = $view->param( 'ca_billingoption', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
@@ -635,7 +635,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 
 		if( isset( $params['order.base.address.salutation'] )
-			&& $params['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
+			&& $params['order.base.address.salutation'] === MShop_Common_Item_Address_Base::SALUTATION_COMPANY
 			&& in_array( 'order.base.address.company', $mandatory ) === false
 		) {
 			$mandatory[] = 'order.base.address.company';

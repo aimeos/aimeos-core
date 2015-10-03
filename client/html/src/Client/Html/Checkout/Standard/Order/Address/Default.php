@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Order_Address_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/order/address/default/subparts
@@ -246,7 +246,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 
 		try
 		{
-			$addr = $basket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+			$addr = $basket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 
 			if( $customerId != '' && $addr->getAddressId() == '' )
 			{
@@ -266,7 +266,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		catch( Exception $e )
 		{
 			$msg = sprintf( 'Unable to save address for customer "%1$s": %2$s', $customerId, $e->getMessage() );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::INFO );
 		}
 
 		parent::process();

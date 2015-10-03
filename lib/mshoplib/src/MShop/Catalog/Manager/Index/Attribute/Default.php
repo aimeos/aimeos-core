@@ -24,7 +24,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_attribute" AS mcatinat ON mcatinat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.attribute.code' => array(
@@ -32,7 +32,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			'internalcode'=>':site AND mcatinat."listtype" = $1 AND mcatinat."type" = $2 AND mcatinat."code"',
 			'label'=>'Attribute code, parameter(<list type code>,<attribute type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.attributecount' => array(
@@ -43,7 +43,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				AND mcatinat_cnt."attrid" IN ( $2 ) AND mcatinat_cnt."listtype" = $1 )',
 			'label'=>'Number of product attributes, parameter(<list type code>,<attribute IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.attributeaggregate' => array(
@@ -54,7 +54,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				AND mcatinat_agg."attrid" IN ( $1 ) )',
 			'label'=>'Number of product attributes, parameter(<attribute IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -372,7 +372,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
+		MW_Common_Base::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
@@ -433,9 +433,9 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 					foreach( $listTypes[$refId] as $listType )
 					{
-						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Base::PARAM_INT );
 						$stmt->bind( 4, $listType );
 						$stmt->bind( 5, $refItem->getType() );
 						$stmt->bind( 6, $refItem->getCode() );

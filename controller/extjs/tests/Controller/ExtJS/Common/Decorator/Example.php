@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Common_Decorator_Example
-	extends Controller_ExtJS_Common_Decorator_Abstract
+	extends Controller_ExtJS_Common_Decorator_Base
 	implements Controller_ExtJS_Common_Decorator_Interface
 {
 	public function additionalMethod()

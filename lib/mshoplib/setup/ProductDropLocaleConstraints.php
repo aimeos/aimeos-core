@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from product tables.
  */
-class MW_Setup_Task_ProductDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_product_list_type' => array(

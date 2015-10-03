@@ -9,7 +9,7 @@
 /**
  * Adds product test data and all items from other domains.
  */
-class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 {
 
 	/**

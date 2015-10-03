@@ -32,7 +32,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
 	{
-		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
 
 		$this->url = (string) $url;
 		$this->external = (bool) $external;

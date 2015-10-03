@@ -7,7 +7,7 @@
 /**
  * Adds parentid column to catalog and locale site table.
  */
-class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_catalog' => array(

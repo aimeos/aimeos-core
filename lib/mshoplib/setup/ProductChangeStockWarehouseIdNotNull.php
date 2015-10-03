@@ -9,7 +9,7 @@
 /**
  * Changes warehouse ID to NOT NULL in stock table.
  */
-class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product_stock" st

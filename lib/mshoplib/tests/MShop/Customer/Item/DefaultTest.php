@@ -42,7 +42,7 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'vdate' => null,
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'title' => 'Dr.',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -191,7 +191,7 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $address->getRefId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
-		$this->assertEquals( $address->getSalutation(), MShop_Common_Item_Address_Abstract::SALUTATION_MR );
+		$this->assertEquals( $address->getSalutation(), MShop_Common_Item_Address_Base::SALUTATION_MR );
 		$this->assertEquals( $address->getTitle(), 'Dr.' );
 		$this->assertEquals( $address->getFirstname(), 'firstunit' );
 		$this->assertEquals( $address->getLastname(), 'lastunit' );
@@ -232,7 +232,7 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
-			'customer.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'customer.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'customer.title' => 'Dr.',
 			'customer.firstname' => 'firstunit',
 			'customer.lastname' => 'lastunit',

@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class Controller_Common_Product_Import_Csv_Cache_Product_Default
-	extends Controller_Common_Product_Import_Csv_Cache_Abstract
+	extends Controller_Common_Product_Import_Csv_Cache_Base
 	implements Controller_Common_Product_Import_Csv_Cache_Interface
 {
 	private $prodmap = array();

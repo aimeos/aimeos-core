@@ -137,8 +137,8 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array() );
 
 		$this->mockProvider->expects( $this->once() )
@@ -154,7 +154,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -168,7 +168,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -182,7 +182,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -196,7 +196,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -212,7 +212,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -228,7 +228,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -244,7 +244,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -258,7 +258,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -272,7 +272,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -286,7 +286,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -302,7 +302,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -318,7 +318,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -334,7 +334,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -348,7 +348,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -362,7 +362,7 @@ class MShop_Service_Provider_Decorator_CountryTest extends PHPUnit_Framework_Tes
 		$address = MShop_Factory::createManager( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->basket->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );

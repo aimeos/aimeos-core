@@ -14,7 +14,7 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Base_Product_Default
-	extends MShop_Order_Item_Base_Product_Abstract
+	extends MShop_Order_Item_Base_Product_Base
 	implements MShop_Order_Item_Base_Product_Interface
 {
 	private $price;
@@ -38,10 +38,10 @@ class MShop_Order_Item_Base_Product_Default
 		$this->price = $price;
 		$this->values = $values;
 
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
 		$this->attributes = $attributes;
 
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
 		$this->products = $products;
 	}
 
@@ -145,7 +145,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setProducts( array $products )
 	{
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
 		$this->products = $products;
 		$this->setModified();
 	}
@@ -391,7 +391,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getFlags()
 	{
-		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : MShop_Order_Item_Base_Product_Abstract::FLAG_NONE );
+		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : MShop_Order_Item_Base_Product_Base::FLAG_NONE );
 	}
 
 
@@ -443,20 +443,20 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the current delivery status of the order product item.
 	 * The returned status values are the STAT_* constants from the
-	 * MShop_Order_Item_Abstract class
+	 * MShop_Order_Item_Base class
 	 *
 	 * @return integer Delivery status of the product
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : MShop_Order_Item_Abstract::STAT_UNFINISHED );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : MShop_Order_Item_Base::STAT_UNFINISHED );
 	}
 
 
 	/**
 	 * Sets the new delivery status of the order product item.
 	 * Possible status values are the STAT_* constants from the
-	 * MShop_Order_Item_Abstract class
+	 * MShop_Order_Item_Base class
 	 *
 	 * @param integer $value New delivery status of the product
 	 */
@@ -560,7 +560,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setAttributes( array $attributes )
 	{
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;

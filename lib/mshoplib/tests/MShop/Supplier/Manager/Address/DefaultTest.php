@@ -177,7 +177,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$conditions[] = $search->compare( '!=', 'supplier.address.refid', null );
 		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
-		$conditions[] = $search->compare( '==', 'supplier.address.salutation', MShop_Common_Item_Address_Abstract::SALUTATION_MRS );
+		$conditions[] = $search->compare( '==', 'supplier.address.salutation', MShop_Common_Item_Address_Base::SALUTATION_MRS );
 		$conditions[] = $search->compare( '==', 'supplier.address.title', '' );
 		$conditions[] = $search->compare( '==', 'supplier.address.firstname', 'Good' );
 		$conditions[] = $search->compare( '==', 'supplier.address.lastname', 'Unittest' );

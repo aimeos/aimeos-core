@@ -26,9 +26,9 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->values = array(
 			'id' => 15,
 			'siteid'=>99,
-			'type' => MShop_Order_Item_Abstract::TYPE_WEB,
-			'statusdelivery' => MShop_Order_Item_Abstract::STAT_PENDING,
-			'statuspayment' => MShop_Order_Item_Abstract::PAY_RECEIVED,
+			'type' => MShop_Order_Item_Base::TYPE_WEB,
+			'statusdelivery' => MShop_Order_Item_Base::STAT_PENDING,
+			'statuspayment' => MShop_Order_Item_Base::PAY_RECEIVED,
 			'datepayment' => '2004-12-01 12:34:56',
 			'datedelivery' => '2004-01-03 12:34:56',
 			'relatedid' => 1,
@@ -101,8 +101,8 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( MShop_Order_Item_Abstract::TYPE_PHONE );
-		$this->assertEquals( MShop_Order_Item_Abstract::TYPE_PHONE, $this->object->getType() );
+		$this->object->setType( MShop_Order_Item_Base::TYPE_PHONE );
+		$this->assertEquals( MShop_Order_Item_Base::TYPE_PHONE, $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
@@ -146,8 +146,8 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetDeliveryStatus()
 	{
-		$this->object->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $this->object->getDeliveryStatus() );
+		$this->object->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
+		$this->assertEquals( MShop_Order_Item_Base::STAT_PROGRESS, $this->object->getDeliveryStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -158,8 +158,8 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSetPaymentStatus()
 	{
-		$this->object->setPaymentStatus( MShop_Order_Item_Abstract::PAY_DELETED );
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_DELETED, $this->object->getPaymentStatus() );
+		$this->object->setPaymentStatus( MShop_Order_Item_Base::PAY_DELETED );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_DELETED, $this->object->getPaymentStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -197,7 +197,7 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$list = array(
 			'order.id' => 1,
-			'order.type' => MShop_Order_Item_Abstract::TYPE_WEB,
+			'order.type' => MShop_Order_Item_Base::TYPE_WEB,
 			'order.baseid' => 2,
 			'order.relatedid' => 3,
 			'order.statusdelivery' => 4,
@@ -247,12 +247,12 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testMagicGetOldPaymentStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->object->oldPaymentStatus );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_RECEIVED, $this->object->oldPaymentStatus );
 	}
 
 	public function testMagicGetOldDeliveryStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PENDING, $this->object->oldDeliveryStatus );
+		$this->assertEquals( MShop_Order_Item_Base::STAT_PENDING, $this->object->oldDeliveryStatus );
 	}
 
 	public function testMagicGetException()

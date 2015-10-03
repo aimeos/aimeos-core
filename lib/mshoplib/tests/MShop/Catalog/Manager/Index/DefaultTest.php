@@ -748,8 +748,8 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 		try
 		{
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteId, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $productId, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $siteId, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $productId, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {

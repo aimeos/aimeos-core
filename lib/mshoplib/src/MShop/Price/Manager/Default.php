@@ -15,7 +15,7 @@
  * @subpackage Price
  */
 class MShop_Price_Manager_Default
-	extends MShop_Price_Manager_Abstract
+	extends MShop_Price_Manager_Base
 	implements MShop_Price_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Price_Manager_Default
 			'internalcode' => 'mpri."id"',
 			'label' => 'Price ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.siteid' => array(
 			'code' => 'price.siteid',
 			'internalcode' => 'mpri."siteid"',
 			'label' => 'Price site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.typeid' => array(
@@ -39,7 +39,7 @@ class MShop_Price_Manager_Default
 			'code' => 'price.typeid',
 			'internalcode' => 'mpri."typeid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.currencyid' => array(
@@ -47,84 +47,84 @@ class MShop_Price_Manager_Default
 			'internalcode' => 'mpri."currencyid"',
 			'label' => 'Price currency code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.domain' => array(
 			'code' => 'price.domain',
 			'internalcode' => 'mpri."domain"',
 			'label' => 'Price domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.label' => array(
 			'code' => 'price.label',
 			'internalcode' => 'mpri."label"',
 			'label' => 'Price label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.quantity' => array(
 			'code' => 'price.quantity',
 			'internalcode' => 'mpri."quantity"',
 			'label' => 'Price quantity',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.value' => array(
 			'code' => 'price.value',
 			'internalcode' => 'mpri."value"',
 			'label' => 'Price regular value',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.costs' => array(
 			'code' => 'price.costs',
 			'internalcode' => 'mpri."costs"',
 			'label' => 'Price shipping costs',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.rebate' => array(
 			'code' => 'price.rebate',
 			'internalcode' => 'mpri."rebate"',
 			'label' => 'Price rebate amount',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.taxrate' => array(
 			'code' => 'price.taxrate',
 			'internalcode' => 'mpri."taxrate"',
 			'label' => 'Price tax in percent',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.status' => array(
 			'code' => 'price.status',
 			'internalcode' => 'mpri."status"',
 			'label' => 'Price status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.mtime'=> array(
 			'code'=>'price.mtime',
 			'internalcode'=>'mpri."mtime"',
 			'label'=>'Price modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.ctime'=> array(
 			'code'=>'price.ctime',
 			'internalcode'=>'mpri."ctime"',
 			'label'=>'Price creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.editor'=> array(
 			'code'=>'price.editor',
 			'internalcode'=>'mpri."editor"',
 			'label'=>'Price editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -348,22 +348,22 @@ class MShop_Price_Manager_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getCurrencyId() );
 			$stmt->bind( 4, $item->getDomain() );
 			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getQuantity(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 7, $item->getValue() );
 			$stmt->bind( 8, $item->getCosts() );
 			$stmt->bind( 9, $item->getRebate() );
 			$stmt->bind( 10, $item->getTaxRate() );
-			$stmt->bind( 11, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 11, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 12, $date ); //mtime
 			$stmt->bind( 13, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 14, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 14, $date ); //ctime
@@ -441,7 +441,7 @@ class MShop_Price_Manager_Default
 		try
 		{
 			$required = array( 'price' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/price/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

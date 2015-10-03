@@ -15,7 +15,7 @@
  * @subpackage Media
  */
 class MW_Media_Application_Default
-	extends MW_Media_Abstract
+	extends MW_Media_Base
 	implements MW_Media_Application_Interface
 {
 	private $options;

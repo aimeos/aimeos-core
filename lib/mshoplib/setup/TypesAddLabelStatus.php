@@ -9,7 +9,7 @@
 /**
  * Adds label and status columns to all type tables.
  */
-class MW_Setup_Task_TypesAddLabelStatus extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TypesAddLabelStatus extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_type' => array(

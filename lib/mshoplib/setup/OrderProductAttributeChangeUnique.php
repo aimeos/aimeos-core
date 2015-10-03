@@ -9,7 +9,7 @@
 /**
  * Adds type column to unique index in order base product attribute table.
  */
-class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderProductAttributeChangeUnique extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'CREATE UNIQUE INDEX "unq_msordbaprat_opid_type_code" ON "mshop_order_base_product_attr" ("ordprodid","type","code")',

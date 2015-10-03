@@ -16,7 +16,7 @@
  * @subpackage Customer
  */
 class Controller_Jobs_Customer_Email_Watch_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	private $client;

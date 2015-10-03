@@ -29,7 +29,7 @@ interface MShop_Order_Manager_Base_Interface
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see MShop_Order_Manager_Base_Abstract)
+	 * @return integer Lock status (@see MShop_Order_Manager_Base_Base)
 	 */
 	public function getSessionLock( $type = '' );
 
@@ -45,7 +45,7 @@ interface MShop_Order_Manager_Base_Interface
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Abstract)
+	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Base)
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @throws MShop_Order_Exception if the lock value is invalid
 	 */
@@ -61,7 +61,7 @@ interface MShop_Order_Manager_Base_Interface
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
 	 * @return MShop_Order_Item_Base_Interface Basket including all items
 	 */
-	public function load( $baseId, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL, $fresh = false );
+	public function load( $baseId, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL, $fresh = false );
 
 	/**
 	 * Saves the complete basket to the storage including the items attached.
@@ -69,5 +69,5 @@ interface MShop_Order_Manager_Base_Interface
 	 * @param MShop_Order_Item_Base_Interface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL );
 }

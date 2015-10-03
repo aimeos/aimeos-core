@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
+class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 {
 	private $searchConfig = array();
 	private $config;
@@ -142,30 +142,30 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function deleteNode( $id = null )
 	{
-		$node = $this->getNode( $id, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $this->getNode( $id, MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$stmt = $conn->create( $this->config['delete'] );
-			$stmt->bind( 1, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $node->left, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $node->right, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$diff = $node->right - $node->left + 1;
 
 			$stmt = $conn->create( $this->config['move-left'] );
-			$stmt->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $node->right + 1, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, -$diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $node->right + 1, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$stmt = $conn->create( $this->config['move-right'] );
-			$stmt->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $node->right + 1, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, -$diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $node->right + 1, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -182,11 +182,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
 	 * * @param MW_Common_Criteria_Interface|null $condition Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )
+	public function getNode( $id = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )
 	{
 		if( $id === null )
 		{
@@ -194,7 +194,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 				throw new MW_Tree_Exception( 'No root node available' );
 			}
 
-			if( $level === MW_Tree_Manager_Abstract::LEVEL_ONE ) {
+			if( $level === MW_Tree_Manager_Base::LEVEL_ONE ) {
 				return $node;
 			}
 		}
@@ -202,7 +202,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		{
 			$node = $this->getNodeById( $id );
 
-			if( $level === MW_Tree_Manager_Abstract::LEVEL_ONE ) {
+			if( $level === MW_Tree_Manager_Base::LEVEL_ONE ) {
 				return $node;
 			}
 		}
@@ -232,8 +232,8 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		try
 		{
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $numlevel, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $id, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $numlevel, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
@@ -268,14 +268,14 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		if( $refId !== null )
 		{
-			$refNode = $this->getNode( $refId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$refNode = $this->getNode( $refId, MW_Tree_Manager_Base::LEVEL_ONE );
 			$node->left = $refNode->left;
 			$node->right = $refNode->left + 1;
 			$node->level = $refNode->level;
 		}
 		else if( $parentId !== null )
 		{
-			$parentNode = $this->getNode( $parentId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$parentNode = $this->getNode( $parentId, MW_Tree_Manager_Base::LEVEL_ONE );
 			$node->left = $parentNode->right;
 			$node->right = $parentNode->right + 1;
 			$node->level = $parentNode->level + 1;
@@ -300,32 +300,32 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		try
 		{
 			$stmt = $conn->create( $this->config['move-left'] );
-			$stmt->bind( 1, 2, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, 2, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $node->left, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$stmt = $conn->create( $this->config['move-right'] );
-			$stmt->bind( 1, 2, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, 2, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $node->left, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$stmt = $conn->create( $this->config['insert'] );
-			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Abstract::PARAM_BOOL );
-			$stmt->bind( 4, (int) $node->parentid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 5, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 6, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 7, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Base::PARAM_BOOL );
+			$stmt->bind( 4, (int) $node->parentid, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 5, $node->level, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 6, $node->left, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $node->right, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 
 			$result = $conn->create( $this->config['newid'] )->execute();
 
-			if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
+			if( ( $row = $result->fetch( MW_DB_Result_Base::FETCH_NUM ) ) === false ) {
 				throw new MW_Tree_Exception( sprintf( 'No new record ID available' ) );
 			}
 			$result->finish();
@@ -352,12 +352,12 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $newRefId = null )
 	{
-		$node = $this->getNode( $id, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $this->getNode( $id, MW_Tree_Manager_Base::LEVEL_ONE );
 		$diff = $node->right - $node->left + 1;
 
 		if( $newRefId !== null )
 		{
-			$refNode = $this->getNode( $newRefId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$refNode = $this->getNode( $newRefId, MW_Tree_Manager_Base::LEVEL_ONE );
 
 			$leveldiff = $refNode->level - $node->level;
 
@@ -386,7 +386,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 		else
 		{
-			$refNode = $this->getNode( $newParentId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$refNode = $this->getNode( $newParentId, MW_Tree_Manager_Base::LEVEL_ONE );
 
 			if( $newParentId === null )
 			{
@@ -429,51 +429,51 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		try
 		{
-			$stmtLeft = $conn->create( $this->config['move-left'], MW_DB_Connection_Abstract::TYPE_PREP );
-			$stmtRight = $conn->create( $this->config['move-right'], MW_DB_Connection_Abstract::TYPE_PREP );
-			$updateParentId = $conn->create( $this->config['update-parentid'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmtLeft = $conn->create( $this->config['move-left'], MW_DB_Connection_Base::TYPE_PREP );
+			$stmtRight = $conn->create( $this->config['move-right'], MW_DB_Connection_Base::TYPE_PREP );
+			$updateParentId = $conn->create( $this->config['update-parentid'], MW_DB_Connection_Base::TYPE_PREP );
 			// open gap for inserting node or subtree
 
-			$stmtLeft->bind( 1, $diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 3, $openNodeLeftBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtLeft->bind( 1, $diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 2, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 3, $openNodeLeftBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmtLeft->execute()->finish();
 
-			$stmtRight->bind( 1, $diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 2, $openNodeRightBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtRight->bind( 1, $diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 2, $openNodeRightBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmtRight->execute()->finish();
 
 			// move node or subtree to the new gap
 
-			$stmtLeft->bind( 1, $movesize, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 2, $leveldiff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 3, $moveNodeLeftBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 4, $moveNodeLeftEnd, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtLeft->bind( 1, $movesize, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 2, $leveldiff, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 3, $moveNodeLeftBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 4, $moveNodeLeftEnd, MW_DB_Statement_Base::PARAM_INT );
 			$stmtLeft->execute()->finish();
 
-			$stmtRight->bind( 1, $movesize, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 2, $moveNodeRightBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 3, $moveNodeRightEnd, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtRight->bind( 1, $movesize, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 2, $moveNodeRightBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 3, $moveNodeRightEnd, MW_DB_Statement_Base::PARAM_INT );
 			$stmtRight->execute()->finish();
 
 			// close gap opened by moving the node or subtree to the new location
 
-			$stmtLeft->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 3, $closeNodeLeftBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtLeft->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtLeft->bind( 1, -$diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 2, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 3, $closeNodeLeftBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtLeft->bind( 4, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmtLeft->execute()->finish();
 
-			$stmtRight->bind( 1, -$diff, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 2, $closeNodeRightBegin, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmtRight->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmtRight->bind( 1, -$diff, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 2, $closeNodeRightBegin, MW_DB_Statement_Base::PARAM_INT );
+			$stmtRight->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmtRight->execute()->finish();
 
 
-			$updateParentId->bind( 1, $newParentId, MW_DB_Statement_Abstract::PARAM_INT );
-			$updateParentId->bind( 2, $id, MW_DB_Statement_Abstract::PARAM_INT );
+			$updateParentId->bind( 1, $newParentId, MW_DB_Statement_Base::PARAM_INT );
+			$updateParentId->bind( 2, $id, MW_DB_Statement_Base::PARAM_INT );
 			$updateParentId->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -561,8 +561,8 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		try
 		{
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $right, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $left, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $right, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			try
@@ -599,7 +599,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	public function getPath( $id )
 	{
 		$result = array();
-		$node = $this->getNode( $id, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $this->getNode( $id, MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$search = $this->createSearch();
 
@@ -732,18 +732,18 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	/**
 	 * Converts the level constant to the depth of the tree.
 	 *
-	 * @param integer $level Level constant from MW_Tree_Manager_Abstract
+	 * @param integer $level Level constant from MW_Tree_Manager_Base
 	 * @throws MW_Tree_Exception if level constant is invalid
 	 */
 	protected function getLevelFromConstant( $level )
 	{
 		switch( $level )
 		{
-			case MW_Tree_Manager_Abstract::LEVEL_ONE:
+			case MW_Tree_Manager_Base::LEVEL_ONE:
 				return 0;
-			case MW_Tree_Manager_Abstract::LEVEL_LIST:
+			case MW_Tree_Manager_Base::LEVEL_LIST:
 				return 1;
-			case MW_Tree_Manager_Abstract::LEVEL_TREE:
+			case MW_Tree_Manager_Base::LEVEL_TREE:
 				return 0x7FFFFFFF; // max. possible level
 			default:
 				throw new MW_Tree_Exception( sprintf( 'Invalid level constant "%1$d"', $level ) );
@@ -766,8 +766,8 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		try
 		{
 			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, 0, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $id, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, 0, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {

@@ -15,7 +15,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Property_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Product_Manager_Property_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Product_Manager_Property_Default
 			'internalcode'=>'mpropr."id"',
 			'label'=>'Product property ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.property.parentid'=> array(
 			'code'=>'product.property.parentid',
 			'internalcode'=>'mpropr."parentid"',
 			'label'=>'Product property parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.siteid'=> array(
@@ -39,7 +39,7 @@ class MShop_Product_Manager_Property_Default
 			'internalcode'=>'mpropr."siteid"',
 			'label'=>'Product property site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.typeid' => array(
@@ -47,7 +47,7 @@ class MShop_Product_Manager_Property_Default
 			'internalcode'=>'mpropr."typeid"',
 			'label'=>'Product property type id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.languageid' => array(
@@ -55,35 +55,35 @@ class MShop_Product_Manager_Property_Default
 			'internalcode'=>'mpropr."langid"',
 			'label'=>'Product property language id',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.value' => array(
 			'code'=>'product.property.value',
 			'internalcode'=>'mpropr."value"',
 			'label'=>'Product property value',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.mtime'=> array(
 			'code'=>'product.property.mtime',
 			'internalcode'=>'mpropr."mtime"',
 			'label'=>'Product property modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.ctime'=> array(
 			'code'=>'product.property.ctime',
 			'internalcode'=>'mpropr."ctime"',
 			'label'=>'Product property creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.editor'=> array(
 			'code'=>'product.property.editor',
 			'internalcode'=>'mpropr."editor"',
 			'label'=>'Product property editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -246,16 +246,16 @@ class MShop_Product_Manager_Property_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getParentId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLanguageId() );
 			$stmt->bind( 5, $item->getValue() );
 			$stmt->bind( 6, $date ); //mtime
 			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 8, $date ); //ctime
@@ -412,7 +412,7 @@ class MShop_Product_Manager_Property_Default
 		try
 		{
 			$required = array( 'product.property' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/product/manager/property/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

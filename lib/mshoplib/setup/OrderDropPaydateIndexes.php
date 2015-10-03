@@ -9,7 +9,7 @@
 /**
  * Drops the old *_pdate_* indexes in the order tables.
  */
-class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'idx_msord_sid_pdate_pstat_dstat' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_sid_pdate_pstat_dstat"',

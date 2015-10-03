@@ -16,7 +16,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Attribute_Export_Text_Default
-	extends Controller_ExtJS_Common_Load_Text_Abstract
+	extends Controller_ExtJS_Common_Load_Text_Base
 	implements Controller_ExtJS_Common_Load_Text_Interface
 {
 
@@ -179,7 +179,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		$context->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
+		$context->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Base::DEBUG );
 
 		$filename = $this->exportData( $items, $lang, $tmpfolder );
 		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );

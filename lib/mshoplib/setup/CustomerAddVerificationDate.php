@@ -9,7 +9,7 @@
 /**
  * Adds verification date column to customer table.
  */
-class MW_Setup_Task_CustomerAddVerificationDate extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CustomerAddVerificationDate extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_customer" ADD "vdate" DATE NULL AFTER "status"',

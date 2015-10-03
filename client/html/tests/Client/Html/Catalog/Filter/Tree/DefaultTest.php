@@ -51,7 +51,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetBody()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_LIST );
 
 		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $node->getChild( 1 )->getId() ) );
@@ -73,7 +73,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetBodyLevelsAlways()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$view = $this->object->getView();
 
@@ -97,7 +97,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetBodyLevelsOnly()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$view = $this->object->getView();
 

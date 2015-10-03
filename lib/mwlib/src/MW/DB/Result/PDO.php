@@ -14,12 +14,12 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Interface
+class MW_DB_Result_PDO extends MW_DB_Result_Base implements MW_DB_Result_Interface
 {
 	private $statement = null;
 	private $style = array(
-		MW_DB_Result_Abstract::FETCH_ASSOC => PDO::FETCH_ASSOC,
-		MW_DB_Result_Abstract::FETCH_NUM => PDO::FETCH_NUM,
+		MW_DB_Result_Base::FETCH_ASSOC => PDO::FETCH_ASSOC,
+		MW_DB_Result_Base::FETCH_NUM => PDO::FETCH_NUM,
 	);
 
 
@@ -57,7 +57,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	 * @return Array Numeric or associative array of columns returned by the SQL statement
 	 * @throws MW_DB_Exception if an error occured in the unterlying driver or the fetch style is unknown
 	 */
-	public function fetch( $style = MW_DB_Result_Abstract::FETCH_ASSOC )
+	public function fetch( $style = MW_DB_Result_Base::FETCH_ASSOC )
 	{
 		try {
 			return $this->statement->fetch( $this->style[$style] );

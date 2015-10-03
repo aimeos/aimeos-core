@@ -10,7 +10,7 @@
 /**
  * Adds product test data.
  */
-class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Base
 {
 
 	/**

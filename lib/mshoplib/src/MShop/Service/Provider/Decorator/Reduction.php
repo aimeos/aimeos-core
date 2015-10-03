@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Decorator_Reduction
-extends MShop_Service_Provider_Decorator_Abstract
+extends MShop_Service_Provider_Decorator_Base
 {
 	private $beConfig = array(
 		'reduction.percent' => array(

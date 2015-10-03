@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Order_Service_Delivery_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -89,8 +89,8 @@ class Controller_Jobs_Order_Service_Delivery_Default
 					$expr = array(
 						$orderSearch->compare( '==', 'order.siteid', $serviceItem->getSiteId() ),
 						$orderSearch->compare( '>', 'order.datepayment', $date ),
-						$orderSearch->compare( '>', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_PENDING ),
-						$orderSearch->compare( '==', 'order.statusdelivery', MShop_Order_Item_Abstract::STAT_UNFINISHED ),
+						$orderSearch->compare( '>', 'order.statuspayment', MShop_Order_Item_Base::PAY_PENDING ),
+						$orderSearch->compare( '==', 'order.statusdelivery', MShop_Order_Item_Base::STAT_UNFINISHED ),
 						$orderSearch->compare( '==', 'order.base.service.code', $serviceItem->getCode() ),
 						$orderSearch->compare( '==', 'order.base.service.type', 'delivery' ),
 					);

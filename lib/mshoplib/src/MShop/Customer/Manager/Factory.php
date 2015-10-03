@@ -15,7 +15,7 @@
  * @subpackage Customer
  */
 class MShop_Customer_Manager_Factory
-	extends MShop_Common_Factory_Abstract
+	extends MShop_Common_Factory_Base
 	implements MShop_Common_Factory_Interface
 {
 	/**

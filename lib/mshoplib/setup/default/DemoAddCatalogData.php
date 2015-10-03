@@ -56,7 +56,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 		try
 		{
 			// Don't delete the catalog node because users are likely use it for production
-			$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$item = $manager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
 			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'media' );
 			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );

@@ -9,7 +9,7 @@
 /**
  * Adds price-list test data and all items from other domains.
  */
-class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

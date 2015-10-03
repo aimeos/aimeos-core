@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from log tables.
  */
-class MW_Setup_Task_LogDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LogDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_log' => array(

@@ -15,7 +15,7 @@
  * @subpackage Log
  */
 class MAdmin_Log_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MAdmin_Log_Item_Interface
 {
 	private $values;

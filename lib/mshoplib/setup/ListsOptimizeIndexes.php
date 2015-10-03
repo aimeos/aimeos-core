@@ -9,7 +9,7 @@
 /**
  * Optimizes the list unique constraints and indexes.
  */
-class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'add' => array(

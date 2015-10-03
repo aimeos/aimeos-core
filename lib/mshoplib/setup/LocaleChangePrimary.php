@@ -8,7 +8,7 @@
 /*
  * Removing siteid from PRIMARY KEY on locale tables.
  */
-class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_locale_currency' => '

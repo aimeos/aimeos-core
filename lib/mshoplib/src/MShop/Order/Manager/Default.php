@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Order_Manager_Default
 			'internalcode'=>'mord."id"',
 			'label'=>'Order invoice ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.siteid'=> array(
 			'code'=>'order.siteid',
 			'internalcode'=>'mord."siteid"',
 			'label'=>'Order invoice site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.baseid'=> array(
@@ -39,7 +39,7 @@ class MShop_Order_Manager_Default
 			'internalcode'=>'mord."baseid"',
 			'label'=>'Order base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.type'=> array(
@@ -47,63 +47,63 @@ class MShop_Order_Manager_Default
 			'internalcode'=>'mord."type"',
 			'label'=>'Order type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.datepayment'=> array(
 			'code'=>'order.datepayment',
 			'internalcode'=>'mord."datepayment"',
 			'label'=>'Order purchase date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.datedelivery'=> array(
 			'code'=>'order.datedelivery',
 			'internalcode'=>'mord."datedelivery"',
 			'label'=>'Order delivery date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.statusdelivery'=> array(
 			'code'=>'order.statusdelivery',
 			'internalcode'=>'mord."statusdelivery"',
 			'label'=>'Order delivery status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.statuspayment'=> array(
 			'code'=>'order.statuspayment',
 			'internalcode'=>'mord."statuspayment"',
 			'label'=>'Order payment status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.relatedid'=> array(
 			'code'=>'order.relatedid',
 			'internalcode'=>'mord."relatedid"',
 			'label'=>'Order related order ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.mtime'=> array(
 			'code'=>'order.mtime',
 			'internalcode'=>'mord."mtime"',
 			'label'=>'Order modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.ctime'=> array(
 			'code'=>'order.ctime',
 			'internalcode'=>'mord."ctime"',
 			'label'=>'Order creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.editor'=> array(
 			'code'=>'order.editor',
 			'internalcode'=>'mord."editor"',
 			'label'=>'Order editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.containsStatus' => array(
 			'code'=>'order.containsStatus()',
@@ -113,7 +113,7 @@ class MShop_Order_Manager_Default
 				AND mordst_cs."type" = $1 AND mordst_cs."value" IN ( $2 ) )',
 			'label'=>'Number of order status items, parameter(<type>,<value>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -234,7 +234,7 @@ class MShop_Order_Manager_Default
 		{
 			$expr = array(
 				$search->getConditions(),
-				$search->compare( '!=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_UNFINISHED ),
+				$search->compare( '!=', 'order.statuspayment', MShop_Order_Item_Base::PAY_UNFINISHED ),
 			);
 
 			$search->setConditions( $search->combine( '&&', $expr ) );
@@ -340,19 +340,19 @@ class MShop_Order_Manager_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 3, $item->getType() );
 			$stmt->bind( 4, $item->getDatePayment() );
 			$stmt->bind( 5, $item->getDateDelivery() );
-			$stmt->bind( 6, $item->getDeliveryStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 7, $item->getPaymentStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 8, $item->getRelatedId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getDeliveryStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $item->getPaymentStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 8, $item->getRelatedId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 9, $date ); //mtime
 			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 11, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 11, $date ); //ctime
@@ -514,7 +514,7 @@ class MShop_Order_Manager_Default
 		try
 		{
 			$required = array( 'order' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -671,7 +671,7 @@ class MShop_Order_Manager_Default
 		if( $item->getPaymentStatus() != $item->oldPaymentStatus )
 		{
 			$statusItem->setId( null );
-			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT );
+			$statusItem->setType( MShop_Order_Item_Status_Base::STATUS_PAYMENT );
 			$statusItem->setValue( $item->getPaymentStatus() );
 
 			$statusManager->saveItem( $statusItem, false );
@@ -680,7 +680,7 @@ class MShop_Order_Manager_Default
 		if( $item->getDeliveryStatus() != $item->oldDeliveryStatus )
 		{
 			$statusItem->setId( null );
-			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY );
+			$statusItem->setType( MShop_Order_Item_Status_Base::STATUS_DELIVERY );
 			$statusItem->setValue( $item->getDeliveryStatus() );
 
 			$statusManager->saveItem( $statusItem, false );

@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Summary_Option_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Interface
 {
 	/** client/html/checkout/standard/summary/option/default/subparts

@@ -9,7 +9,7 @@
 /**
  * Modifies indexes in the locale tables.
  */
-class MW_Setup_Task_LocaleModifyIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleModifyIndexes extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'add' => array(

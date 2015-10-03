@@ -9,7 +9,7 @@
 /**
  * Converts job table to InnoDB.
  */
-class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
+class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'convert' => 'ALTER TABLE "madmin_job" ENGINE=InnoDB',

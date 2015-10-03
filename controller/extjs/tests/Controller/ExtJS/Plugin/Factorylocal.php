@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Plugin_Factorylocal
-	extends Controller_ExtJS_Common_Factory_Abstract
+	extends Controller_ExtJS_Common_Factory_Base
 {
 	/**
 	 * @param string $name

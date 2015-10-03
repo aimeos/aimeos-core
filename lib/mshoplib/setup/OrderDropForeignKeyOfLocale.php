@@ -9,7 +9,7 @@
 /**
  * Removes foreign key constraints to locale tables from order tables.
  */
-class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base' => array(

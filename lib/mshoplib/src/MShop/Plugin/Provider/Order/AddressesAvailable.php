@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Order_AddressesAvailable
-	extends MShop_Plugin_Provider_Factory_Abstract
+	extends MShop_Plugin_Provider_Factory_Base
 	implements MShop_Plugin_Provider_Factory_Interface
 {
 	/**
@@ -45,7 +45,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		if( $value & MShop_Order_Item_Base_Abstract::PARTS_ADDRESS )
+		if( $value & MShop_Order_Item_Base_Base::PARTS_ADDRESS )
 		{
 			$problems = array();
 			$availableAddresses = $order->getAddresses();

@@ -28,10 +28,10 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 			'siteid' => 123,
 			'baseid' => 99,
 			'addrid' => 11,
-			'type' => MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY,
+			'type' => MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY,
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Order_Item_Base_Address_Abstract::SALUTATION_MR,
+			'salutation' => MShop_Order_Item_Base_Address_Base::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -123,14 +123,14 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetType()
 	{
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $this->object->getType() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $this->object->getType() );
 	}
 
 	public function testSetType()
 	{
-		$this->object->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->object->setType( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->object->getType() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $this->object->getType() );
 	}
 
 	public function testGetCompany()
@@ -159,14 +159,14 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $this->object->getSalutation() );
+		$this->assertEquals( MShop_Order_item_Base_Address_Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
 
 	public function testSetSalutation()
 	{
-		$this->object->setSalutation( MShop_Order_item_Base_Address_Abstract::SALUTATION_COMPANY );
+		$this->object->setSalutation( MShop_Order_item_Base_Address_Base::SALUTATION_COMPANY );
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_COMPANY, $this->object->getSalutation() );
+		$this->assertEquals( MShop_Order_item_Base_Address_Base::SALUTATION_COMPANY, $this->object->getSalutation() );
 	}
 
 	public function testGetTitle()
@@ -390,10 +390,10 @@ class MShop_Order_Item_Base_Address_DefaultTest extends PHPUnit_Framework_TestCa
 		$addressCopy->copyFrom( $address );
 
 		$this->assertEquals( 23, $addressCopy->getAddressId() );
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $addressCopy->getType() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $addressCopy->getType() );
 		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
 		$this->assertEquals( 'DE999999999', $addressCopy->getVatID() );
-		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $addressCopy->getSalutation() );
+		$this->assertEquals( MShop_Order_item_Base_Address_Base::SALUTATION_MR, $addressCopy->getSalutation() );
 		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
 		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );
 		$this->assertEquals( 'lastunit', $addressCopy->getLastname() );

@@ -15,7 +15,7 @@
  * @subpackage Translation
  */
 class MW_Translation_None
-	extends MW_Translation_Abstract
+	extends MW_Translation_Base
 	implements MW_Translation_Interface
 {
 	/**

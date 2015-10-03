@@ -30,7 +30,7 @@ interface MW_DB_Result_Interface
 	 * @param integer $style The data can be returned as associative or numerical array
 	 * @return List (numeric or associative array) of columns returned by the SQL statement
 	 */
-	public function fetch( $style = MW_DB_Result_Abstract::ASSOC );
+	public function fetch( $style = MW_DB_Result_Base::ASSOC );
 
 
 	/**

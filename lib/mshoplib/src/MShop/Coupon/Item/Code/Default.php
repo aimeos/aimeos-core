@@ -15,7 +15,7 @@
  * @subpackage Coupon
  */
 class MShop_Coupon_Item_Code_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Coupon_Item_Code_Interface
 {
 	private $values;

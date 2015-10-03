@@ -9,7 +9,7 @@
 /**
  * Changes the unique constraint for table mshop_product_stock.
  */
-class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_product_stock"

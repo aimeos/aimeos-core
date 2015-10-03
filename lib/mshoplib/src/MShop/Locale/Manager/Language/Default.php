@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Manager_Language_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Locale_Manager_Language_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Locale_Manager_Language_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ),
 			'label' => 'Locale language ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.siteid' => array(
@@ -33,7 +33,7 @@ class MShop_Locale_Manager_Language_Default
 			'internalcode' => 'mlocla."siteid"',
 			'label' => 'Locale language site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.language.label' => array(
@@ -41,42 +41,42 @@ class MShop_Locale_Manager_Language_Default
 			'internalcode' => 'mlocla."label"',
 			'label' => 'Locale language label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.language.code' => array(
 			'code' => 'locale.language.code',
 			'internalcode' => 'mlocla."id"',
 			'label' => 'Locale language code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.language.status' => array(
 			'code' => 'locale.language.status',
 			'internalcode' => 'mlocla."status"',
 			'label' => 'Locale language status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'locale.language.ctime'=> array(
 			'code'=>'locale.language.ctime',
 			'internalcode'=>'mlocla."ctime"',
 			'label'=>'Locale language create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.language.mtime'=> array(
 			'code'=>'locale.language.mtime',
 			'internalcode'=>'mlocla."mtime"',
 			'label'=>'Locale language modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.language.editor'=> array(
 			'code'=>'locale.language.editor',
 			'internalcode'=>'mlocla."editor"',
 			'label'=>'Locale language editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -194,8 +194,8 @@ class MShop_Locale_Manager_Language_Default
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLabel() );
-			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $date ); // mtime
 			$stmt->bind( 5, $context->getEditor() );
 			// code and ID are identical after saving and ID is the flag to detect updates or inserts
@@ -619,7 +619,7 @@ class MShop_Locale_Manager_Language_Default
 	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
 
 		$results = $statement->execute();
 

@@ -9,7 +9,7 @@
 /**
  * Adds name column in order base product attribute table.
  */
-class MW_Setup_Task_OrderAddProductAttributeName extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddProductAttributeName extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_order_base_product_attr" ADD "name" VARCHAR(255) NOT NULL AFTER "value"',

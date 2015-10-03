@@ -44,14 +44,14 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$search = $orderManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED )
+			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_WEB ),
+			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $this->order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Base::PAY_AUTHORIZED, MShop_Order_Item_Base::TYPE_WEB ) );
 		}
 
 
@@ -99,10 +99,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 	public function testIsImplemented()
 	{
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_REFUND ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CANCEL ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_REFUND ) );
 	}
 
 
@@ -210,7 +210,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$orderItem = $this->object->updateSync( $response );
 		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $orderItem );
 
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
+		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 
@@ -228,7 +228,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $orderItem->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_RECEIVED, $orderItem->getPaymentStatus() );
 	}
 
 
@@ -271,7 +271,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUND, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_REFUND, $this->order->getPaymentStatus() );
 	}
 
 
@@ -298,7 +298,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$this->object->capture( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
 	}
 
 	public function testQueryPaymentReceived()
@@ -316,7 +316,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -335,7 +335,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUSED, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_REFUSED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -354,7 +354,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$this->object->cancel( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_CANCELED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -373,7 +373,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
 	}
 
 

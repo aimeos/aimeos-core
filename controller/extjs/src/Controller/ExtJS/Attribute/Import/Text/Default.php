@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Attribute_Import_Text_Default
-	extends Controller_ExtJS_Common_Load_Text_Abstract
+	extends Controller_ExtJS_Common_Load_Text_Base
 	implements Controller_ExtJS_Common_Load_Text_Interface
 {
 	/**

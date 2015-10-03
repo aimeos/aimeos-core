@@ -14,7 +14,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_List_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Catalog_Manager_List_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Catalog_Manager_List_Type_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_list_type" as mcatlity ON ( mcatli."typeid" = mcatlity."id" )' ),
 			'label'=>'Catalog list type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.list.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Catalog_Manager_List_Type_Default
 			'internalcode'=>'mcatlity."siteid"',
 			'label'=>'Catalog list type site ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.list.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Catalog_Manager_List_Type_Default
 			'internalcode'=>'mcatlity."code"',
 			'label'=>'Catalog list type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.list.type.domain' => array(
 			'code'=>'catalog.list.type.domain',
 			'internalcode'=>'mcatlity."domain"',
 			'label'=>'Catalog list type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.list.type.label' => array(
 			'code' => 'catalog.list.type.label',
 			'internalcode' => 'mcatlity."label"',
 			'label' => 'Catalog list type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.list.type.status' => array(
 			'code' => 'catalog.list.type.status',
 			'internalcode' => 'mcatlity."status"',
 			'label' => 'Catalog list type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'catalog.list.type.ctime'=> array(
 			'label' => 'Catalog list type creation time',
 			'code' => 'catalog.list.type.ctime',
 			'internalcode' => 'mcatlity."ctime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.list.type.mtime'=> array(
 			'label' => 'Catalog list type modification time',
 			'code' => 'catalog.list.type.mtime',
 			'internalcode' => 'mcatlity."mtime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.list.type.editor'=> array(
 			'code'=>'catalog.list.type.editor',
 			'internalcode'=>'mcatlity."editor"',
 			'label'=>'Catalog list type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

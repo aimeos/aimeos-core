@@ -14,7 +14,7 @@
  * @subpackage Media
  */
 class MShop_Media_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Media_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Media_Manager_Type_Default
 			'internalcode' => 'mmedty."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_media_type" AS mmedty ON ( mmed."typeid" = mmedty."id" )' ),
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Media_Manager_Type_Default
 			'code' => 'media.type.siteid',
 			'internalcode' => 'mmedty."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Media_Manager_Type_Default
 			'code' => 'media.type.code',
 			'internalcode' => 'mmedty."code"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.type.domain' => array(
 			'label' => 'Media type domain',
 			'code' => 'media.type.domain',
 			'internalcode' => 'mmedty."domain"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.type.label' => array(
 			'label' => 'Media type label',
 			'code' => 'media.type.label',
 			'internalcode' => 'mmedty."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.type.status' => array(
 			'label' => 'Media type status',
 			'code' => 'media.type.status',
 			'internalcode' => 'mmedty."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'media.type.ctime'=> array(
 			'code'=>'media.type.ctime',
 			'internalcode'=>'mmedty."ctime"',
 			'label'=>'Media type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.type.mtime'=> array(
 			'code'=>'media.type.mtime',
 			'internalcode'=>'mmedty."mtime"',
 			'label'=>'Media type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.type.editor'=> array(
 			'code'=>'media.type.editor',
 			'internalcode'=>'mmedty."editor"',
 			'label'=>'Media type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

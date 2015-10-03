@@ -41,7 +41,7 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 
 	public function testGetTreePath()
 	{
-		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 		$pathNodes = $this->object->getPath( $parent->getId() );
 
 		if( ( $node = reset( $pathNodes ) ) === false ) {
@@ -55,7 +55,7 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends PHPUnit_Framework_Te
 	public function testInsertMoveItem()
 	{
 		$item = $this->object->createItem();
-		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$parent = $this->object->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$this->object->insertItem( $item, $parent->getId() );
 		$this->object->moveItem( $item->getId(), $parent->getId(), $parent->getId() );

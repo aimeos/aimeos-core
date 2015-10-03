@@ -15,7 +15,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Tag_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Product_Manager_Tag_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Product_Manager_Tag_Default
 			'internalcode'=>'mprota."id"',
 			'label'=>'Product tag ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.tag.siteid'=> array(
 			'code'=>'product.tag.siteid',
 			'internalcode'=>'mprota."siteid"',
 			'label'=>'Product tag site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.typeid' => array(
@@ -39,7 +39,7 @@ class MShop_Product_Manager_Tag_Default
 			'internalcode'=>'mprota."typeid"',
 			'label'=>'Product tag type id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.languageid' => array(
@@ -47,35 +47,35 @@ class MShop_Product_Manager_Tag_Default
 			'internalcode'=>'mprota."langid"',
 			'label'=>'Product tag language id',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.label' => array(
 			'code'=>'product.tag.label',
 			'internalcode'=>'mprota."label"',
 			'label'=>'Product tag label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.mtime'=> array(
 			'code'=>'product.tag.mtime',
 			'internalcode'=>'mprota."mtime"',
 			'label'=>'Product tag modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.ctime'=> array(
 			'code'=>'product.tag.ctime',
 			'internalcode'=>'mprota."ctime"',
 			'label'=>'Product tag creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.editor'=> array(
 			'code'=>'product.tag.editor',
 			'internalcode'=>'mprota."editor"',
 			'label'=>'Product tag editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -211,15 +211,15 @@ class MShop_Product_Manager_Tag_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $date ); //mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 7, $date ); //ctime
@@ -376,7 +376,7 @@ class MShop_Product_Manager_Tag_Default
 		try
 		{
 			$required = array( 'product.tag' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/product/manager/tag/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

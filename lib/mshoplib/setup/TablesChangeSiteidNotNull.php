@@ -9,7 +9,7 @@
 /**
  * Changes site ID to NOT NULL in all tables.
  */
-class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Base
 {
 	private $site = '
 		INSERT INTO "mshop_locale_site" ("code", "label", "config", "status", "level", "nleft", "nright", "mtime", "ctime", "editor")

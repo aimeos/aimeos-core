@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Decorator_OrderCheck
-extends MShop_Service_Provider_Decorator_Abstract
+extends MShop_Service_Provider_Decorator_Base
 {
 	private $beConfig = array(
 		'ordercheck.total-number-min' => array(
@@ -96,7 +96,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 			$search = $manager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
-				$search->compare( '>=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED ),
+				$search->compare( '>=', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
@@ -117,7 +117,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
 				$search->compare( '==', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
-				$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_PENDING ),
+				$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_PENDING ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );

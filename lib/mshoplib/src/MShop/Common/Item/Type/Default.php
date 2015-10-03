@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class MShop_Common_Item_Type_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Common_Item_Type_Interface
 {
 	private $prefix;

@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Order_Coupon
-	extends MShop_Plugin_Provider_Factory_Abstract
+	extends MShop_Plugin_Provider_Factory_Base
 	implements MShop_Plugin_Provider_Factory_Interface
 {
 	protected static $lock = false;

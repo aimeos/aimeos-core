@@ -9,7 +9,7 @@
 /**
  * Removes attribute option tables.
  */
-class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
+class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'column' => array(

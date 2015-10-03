@@ -14,7 +14,7 @@
  * @subpackage Text
  */
 class MShop_Text_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Text_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Text_Manager_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_text_type" AS mtexty ON ( mtex."typeid" = mtexty."id" )' ),
 			'label'=>'Text type ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.type.siteid'=> array(
@@ -32,7 +32,7 @@ class MShop_Text_Manager_Type_Default
 			'internalcode'=>'mtexty."siteid"',
 			'label'=>'Text type site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Text_Manager_Type_Default
 			'internalcode'=>'mtexty."code"',
 			'label'=>'Text type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.type.domain' => array(
 			'code'=>'text.type.domain',
 			'internalcode'=>'mtexty."domain"',
 			'label'=>'Text type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.type.label' => array(
 			'code'=>'text.type.label',
 			'internalcode'=>'mtexty."label"',
 			'label'=>'Text type label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.type.status' => array(
 			'code'=>'text.type.status',
 			'internalcode'=>'mtexty."status"',
 			'label'=>'Text type status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'text.type.ctime'=> array(
 			'code'=>'text.type.ctime',
 			'internalcode'=>'mtexty."ctime"',
 			'label'=>'Text type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.type.mtime'=> array(
 			'code'=>'text.type.mtime',
 			'internalcode'=>'mtexty."mtime"',
 			'label'=>'Text type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.type.editor'=> array(
 			'code'=>'text.type.editor',
 			'internalcode'=>'mtexty."editor"',
 			'label'=>'Text type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

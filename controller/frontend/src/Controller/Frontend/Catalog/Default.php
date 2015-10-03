@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Catalog_Default
-	extends Controller_Frontend_Abstract
+	extends Controller_Frontend_Base
 	implements Controller_Frontend_Catalog_Interface
 {
 	/**
@@ -63,14 +63,14 @@ class Controller_Frontend_Catalog_Default
 	 *
 	 * @param integer|null $id Category ID to start from, null for root node
 	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
-	 * @param integer $level Constant from MW_Tree_Manager_Abstract for the depth of the returned tree, LEVEL_ONE for
+	 * @param integer $level Constant from MW_Tree_Manager_Base for the depth of the returned tree, LEVEL_ONE for
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
 	 * @param MW_Common_Criteria_Interface|null $search Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant
 	 * @since 2015.08
 	 */
 	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ),
-		$level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $search = null )
+		$level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $search = null )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog' )->getTree( $id, $domains, $level, $search );
 	}

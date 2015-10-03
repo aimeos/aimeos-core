@@ -16,7 +16,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Suggest_Factory
-	extends Client_Html_Common_Factory_Abstract
+	extends Client_Html_Common_Factory_Base
 	implements Client_Html_Common_Factory_Interface
 {
 	/**

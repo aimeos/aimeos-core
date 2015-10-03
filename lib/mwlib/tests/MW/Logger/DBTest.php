@@ -81,7 +81,7 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Abstract::ERR, $row['priority'] );
+		$this->assertEquals( MW_Logger_Base::ERR, $row['priority'] );
 		$this->assertEquals( 'error', $row['message'] );
 
 
@@ -109,13 +109,13 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Abstract::ERR, $row['priority'] );
+		$this->assertEquals( MW_Logger_Base::ERR, $row['priority'] );
 		$this->assertEquals( '["scalar","errortest"]', $row['message'] );
 	}
 
 	public function testLogCrit()
 	{
-		$this->object->log( 'critical', MW_Logger_Abstract::CRIT );
+		$this->object->log( 'critical', MW_Logger_Base::CRIT );
 
 		$conn = $this->dbm->acquire();
 
@@ -130,13 +130,13 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Abstract::CRIT, $row['priority'] );
+		$this->assertEquals( MW_Logger_Base::CRIT, $row['priority'] );
 		$this->assertEquals( 'critical', $row['message'] );
 	}
 
 	public function testLogWarn()
 	{
-		$this->object->log( 'debug', MW_Logger_Abstract::WARN );
+		$this->object->log( 'debug', MW_Logger_Base::WARN );
 
 		$conn = $this->dbm->acquire();
 
@@ -152,7 +152,7 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testFacility()
 	{
-		$this->object->log( 'user auth', MW_Logger_Abstract::ERR, 'auth' );
+		$this->object->log( 'user auth', MW_Logger_Base::ERR, 'auth' );
 
 		$conn = $this->dbm->acquire();
 

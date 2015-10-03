@@ -15,7 +15,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Stock_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Product_Manager_Stock_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Product_Manager_Stock_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock" AS mprost ON ( mprost."prodid" = mpro."id" )' ),
 			'label'=>'Product stock ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.siteid'=> array(
@@ -33,7 +33,7 @@ class MShop_Product_Manager_Stock_Default
 			'internalcode'=>'mprost."siteid"',
 			'label'=>'Product stock site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.productid'=> array(
@@ -41,7 +41,7 @@ class MShop_Product_Manager_Stock_Default
 			'internalcode'=>'mprost."prodid"',
 			'label'=>'Product stock product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.warehouseid' => array(
@@ -49,7 +49,7 @@ class MShop_Product_Manager_Stock_Default
 			'internalcode'=>'mprost."warehouseid"',
 			'label'=>'Product stock warehouse ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.stocklevel' => array(
@@ -57,35 +57,35 @@ class MShop_Product_Manager_Stock_Default
 			'internalcode'=>'mprost."stocklevel"',
 			'label'=>'Product stock level',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.stock.dateback' => array(
 			'code'=>'product.stock.dateback',
 			'internalcode'=>'mprost."backdate"',
 			'label'=>'Product stock back in stock date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.mtime'=> array(
 			'code'=>'product.stock.mtime',
 			'internalcode'=>'mprost."mtime"',
 			'label'=>'Product stock modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.ctime'=> array(
 			'code'=>'product.stock.ctime',
 			'internalcode'=>'mprost."ctime"',
 			'label'=>'Product stock creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.editor'=> array(
 			'code'=>'product.stock.editor',
 			'internalcode'=>'mprost."editor"',
 			'label'=>'Product stock editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -223,16 +223,16 @@ class MShop_Product_Manager_Stock_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getWarehouseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 4, $item->getStocklevel(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getProductId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getWarehouseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $item->getStocklevel(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $item->getDateBack() );
 			$stmt->bind( 6, $date ); //mtime
 			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); // modified false
 			} else {
 				$stmt->bind( 8, $date ); //ctime
@@ -394,7 +394,7 @@ class MShop_Product_Manager_Stock_Default
 		try
 		{
 			$required = array( 'product.stock' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/product/manager/stock/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -734,7 +734,7 @@ class MShop_Product_Manager_Stock_Default
 			$path = 'mshop/product/manager/stock/default/item/stocklevel';
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $context->getConfig()->get( $path, $path ) ) );
 
-			$stmt->bind( 1, $amount, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $amount, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 			$stmt->bind( 3, $context->getEditor() );
 

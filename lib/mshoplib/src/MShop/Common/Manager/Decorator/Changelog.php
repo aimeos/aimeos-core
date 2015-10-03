@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class MShop_Common_Manager_Decorator_Changelog
-	extends MShop_Common_Manager_Decorator_Abstract
+	extends MShop_Common_Manager_Decorator_Base
 {
 	/**
 	 * Adds or updates an item object.
@@ -30,6 +30,6 @@ class MShop_Common_Manager_Decorator_Changelog
 		$manager->saveItem( $item, $fetch );
 		$new = $manager->getItem( $item->getId() );
 
-		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Abstract::NOTICE, 'changelog' );
+		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Base::NOTICE, 'changelog' );
 	}
 }

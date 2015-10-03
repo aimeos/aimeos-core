@@ -9,7 +9,7 @@
 /**
  * Renames constraints for price tables.
  */
-class MW_Setup_Task_PriceRenameConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PriceRenameConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_price' => array(

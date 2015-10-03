@@ -9,7 +9,7 @@
 /**
  * Moves service price references to list table.
  */
-class MW_Setup_Task_ServicePriceToList extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ServicePriceToList extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_service_price' => array(

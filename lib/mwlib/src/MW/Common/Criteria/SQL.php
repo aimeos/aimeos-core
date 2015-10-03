@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
+class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 {
 	private $conditions;
 	private $sortations = array();
@@ -119,7 +119,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getConditionString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		$types['1'] = MW_DB_Statement_Abstract::PARAM_INT;
+		$types['1'] = MW_DB_Statement_Base::PARAM_INT;
 
 		if( ( $string = $this->conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
 			return $string;
@@ -210,7 +210,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function setSortations( array $sortations )
 	{
-		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
 
 		$this->sortations = $sortations;
 		return $this;

@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Basket_Default
-	extends Controller_Frontend_Abstract
+	extends Controller_Frontend_Base
 	implements Controller_Frontend_Basket_Interface
 {
 	private $basket;
@@ -134,7 +134,7 @@ class Controller_Frontend_Basket_Default
 	{
 		$product = $this->basket->getProduct( $position );
 
-		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
+		if( $product->getFlags() === MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE )
 		{
 			$msg = sprintf( 'Basket item at position "%1$d" cannot be deleted manually', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
@@ -160,7 +160,7 @@ class Controller_Frontend_Basket_Default
 		$product = $this->basket->getProduct( $position );
 		$product->setQuantity( $quantity ); // Enforce check immediately
 
-		if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
+		if( $product->getFlags() & MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE )
 		{
 			$msg = sprintf( 'Basket item at position "%1$d" cannot be changed', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
@@ -265,7 +265,7 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Sets the address of the customer in the basket.
 	 *
-	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
+	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Base
 	 * @param MShop_Common_Item_Address_Interface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
@@ -564,7 +564,7 @@ class Controller_Frontend_Basket_Default
 			{
 				$logger = $this->getContext()->getLogger();
 				$str = 'Error migrating address with type "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
+				$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Base::INFO );
 				$errors['address'][$type] = $e->getMessage();
 			}
 		}
@@ -594,7 +594,7 @@ class Controller_Frontend_Basket_Default
 			{
 				$logger = $this->getContext()->getLogger();
 				$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Base::INFO );
 				$errors['coupon'][$code] = $e->getMessage();
 			}
 		}
@@ -615,7 +615,7 @@ class Controller_Frontend_Basket_Default
 	{
 		foreach( $basket->getProducts() as $pos => $product )
 		{
-			if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
+			if( $product->getFlags() & MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE ) {
 				continue;
 			}
 
@@ -645,7 +645,7 @@ class Controller_Frontend_Basket_Default
 				$code = $product->getProductCode();
 				$logger = $this->getContext()->getLogger();
 				$str = 'Error migrating product with code "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Base::INFO );
 				$errors['product'][$pos] = $e->getMessage();
 			}
 		}

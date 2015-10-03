@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Product_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Product_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product" AS mordbapr ON ( mordba."id" = mordbapr."baseid" )' ),
 			'label'=>'Order base product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.baseid' => array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."baseid"',
 			'label'=>'Order base product base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.siteid' => array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."siteid"',
 			'label'=>'Order base product site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.orderproductid' => array(
@@ -49,7 +49,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."ordprodid"',
 			'label'=>'Order base product parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.type' => array(
@@ -57,7 +57,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."type"',
 			'label'=>'Order base product type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 			'public' => true,
 		),
 		'order.base.product.productid' => array(
@@ -65,7 +65,7 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."prodid"',
 			'label'=>'Order base product original ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.prodcode' => array(
@@ -73,119 +73,119 @@ class MShop_Order_Manager_Base_Product_Default
 			'internalcode'=>'mordbapr."prodcode"',
 			'label'=>'Order base product code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.suppliercode' => array(
 			'code'=>'order.base.product.suppliercode',
 			'internalcode'=>'mordbapr."suppliercode"',
 			'label'=>'Order base product supplier code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.warehousecode' => array(
 			'code'=>'order.base.product.warehousecode',
 			'internalcode'=>'mordbapr."warehousecode"',
 			'label'=>'Order base product warehouse code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.name' => array(
 			'code'=>'order.base.product.name',
 			'internalcode'=>'mordbapr."name"',
 			'label'=>'Order base product name',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.mediaurl' => array(
 			'code'=>'order.base.product.mediaurl',
 			'internalcode'=>'mordbapr."mediaurl"',
 			'label'=>'Order base product media url',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.quantity' => array(
 			'code'=>'order.base.product.quantity',
 			'internalcode'=>'mordbapr."amount"',
 			'label'=>'Order base product quantity',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.product.price' => array(
 			'code'=>'order.base.product.price',
 			'internalcode'=>'mordbapr."price"',
 			'label'=>'Order base product price',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.costs' => array(
 			'code'=>'order.base.product.costs',
 			'internalcode'=>'mordbapr."costs"',
 			'label'=>'Order base product shipping',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.rebate' => array(
 			'code'=>'order.base.product.rebate',
 			'internalcode'=>'mordbapr."rebate"',
 			'label'=>'Order base product rebate',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.taxrate' => array(
 			'code'=>'order.base.product.taxrate',
 			'internalcode'=>'mordbapr."taxrate"',
 			'label'=>'Order base product taxrate',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.quantity' => array(
 			'code'=>'order.base.product.quantity',
 			'internalcode'=>'mordbapr."quantity"',
 			'label'=>'Order base product quantity',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.product.flags' => array(
 			'code'=>'order.base.product.flags',
 			'internalcode'=>'mordbapr."flags"',
 			'label'=>'Order base product flags',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.product.position' => array(
 			'code'=>'order.base.product.position',
 			'internalcode'=>'mordbapr."pos"',
 			'label'=>'Order base product position',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.product.status' => array(
 			'code'=>'order.base.product.status',
 			'internalcode'=>'mordbapr."status"',
 			'label'=>'Order base product status',
 			'type'=> 'boolean',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_BOOL,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_BOOL,
 		),
 		'order.base.product.mtime' => array(
 			'code'=>'order.base.product.mtime',
 			'internalcode'=>'mordbapr."mtime"',
 			'label'=>'Order base product modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.ctime'=> array(
 			'code'=>'order.base.product.ctime',
 			'internalcode'=>'mordbapr."ctime"',
 			'label'=>'Order base product create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'order.base.product.editor'=> array(
 			'code'=>'order.base.product.editor',
 			'internalcode'=>'mordbapr."editor"',
 			'label'=>'Order base product editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'order.base.product.count()' => array(
 			'code'=>'order.base.product.count()',
@@ -193,7 +193,7 @@ class MShop_Order_Manager_Base_Product_Default
 				WHERE mordbapr."baseid" = mordbapr_count."baseid" AND mordbapr_count."prodid" = $1 )',
 			'label'=>'Order base product count, parameter(<product IDs>)',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -405,9 +405,9 @@ class MShop_Order_Manager_Base_Product_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getOrderProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getOrderProductId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getProductId() );
 			$stmt->bind( 6, $item->getProductCode() );
@@ -420,14 +420,14 @@ class MShop_Order_Manager_Base_Product_Default
 			$stmt->bind( 13, $price->getCosts() );
 			$stmt->bind( 14, $price->getRebate() );
 			$stmt->bind( 15, $price->getTaxRate() );
-			$stmt->bind( 16, $item->getFlags(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 17, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 18, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 16, $item->getFlags(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 17, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 18, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 19, $date ); // mtime
 			$stmt->bind( 20, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 21, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 21, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 21, $date ); // ctime
@@ -690,7 +690,7 @@ class MShop_Order_Manager_Base_Product_Default
 		try
 		{
 			$required = array( 'order.base.product' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/product/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

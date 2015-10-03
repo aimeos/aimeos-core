@@ -14,7 +14,7 @@
  * @subpackage Attribute
  */
 class MShop_Attribute_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Attribute_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Attribute_Manager_Type_Default
 			'internalcode' => 'mattty."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_type" AS mattty ON ( matt."typeid" = mattty."id" )' ),
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Attribute_Manager_Type_Default
 			'internalcode' => 'mattty."siteid"',
 			'label' => 'Attribute type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Attribute_Manager_Type_Default
 			'code' => 'attribute.type.code',
 			'internalcode' => 'mattty."code"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.type.domain' => array(
 			'label' => 'Attribute type domain',
 			'code' => 'attribute.type.domain',
 			'internalcode' => 'mattty."domain"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.type.label' => array(
 			'code' => 'attribute.type.label',
 			'internalcode' => 'mattty."label"',
 			'label' => 'Attribute type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.type.status' => array(
 			'code' => 'attribute.type.status',
 			'internalcode' => 'mattty."status"',
 			'label' => 'Attribute type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'attribute.type.ctime'=> array(
 			'code'=>'attribute.type.ctime',
 			'internalcode'=>'mattty."ctime"',
 			'label'=>'Attribute type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.type.mtime'=> array(
 			'code'=>'attribute.type.mtime',
 			'internalcode'=>'mattty."mtime"',
 			'label'=>'Attribute type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.type.editor'=> array(
 			'code'=>'attribute.type.editor',
 			'internalcode'=>'mattty."editor"',
 			'label'=>'Attribute type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

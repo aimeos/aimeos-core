@@ -14,7 +14,7 @@
  * @subpackage Common
  */
 class MShop_Common_Item_Address_Default
-	extends MShop_Common_Item_Address_Abstract
+	extends MShop_Common_Item_Address_Base
 	implements MShop_Common_Item_Address_Interface
 {
 	private $prefix;

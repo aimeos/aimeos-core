@@ -15,7 +15,7 @@
  * @subpackage DB
  */
 class MW_DB_Connection_None
-	extends MW_DB_Connection_Abstract
+	extends MW_DB_Connection_Base
 	implements MW_DB_Connection_Interface
 {
 	/**
@@ -27,7 +27,7 @@ class MW_DB_Connection_None
 	 * @param integer $type Simple or prepared statement type constant from abstract class
 	 * @throws MW_DB_Exception
 	 */
-	public function create( $sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE )
+	public function create( $sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE )
 	{
 		throw new MW_DB_Exception( 'This method is not implemented' );
 	}

@@ -15,7 +15,7 @@
  * @subpackage Media
  */
 class MShop_Media_Item_Default
-	extends MShop_Common_Item_ListRef_Abstract
+	extends MShop_Common_Item_ListRef_Base
 	implements MShop_Media_Item_Interface
 {
 	private $values;

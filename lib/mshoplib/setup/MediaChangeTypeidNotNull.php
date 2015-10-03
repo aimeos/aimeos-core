@@ -9,7 +9,7 @@
 /**
  * Changes typeid column in media table to allow no NULL values any more.
  */
-class MW_Setup_Task_MediaChangeTypeidNotNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_MediaChangeTypeidNotNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_media" SET "typeid" = ( SELECT type."id" FROM "mshop_media_type" type WHERE type."code" = \'default\' AND type."domain" = \'attribute\' ) WHERE "domain" = \'attribute\' AND "typeid" IS NULL',

@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Service_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Service_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Service_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service" AS mordbase ON ( mordba."id" = mordbase."baseid" )' ),
 			'label' => 'Order base service ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.siteid' => array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Service_Default
 			'internalcode' => 'mordbase."siteid"',
 			'label' => 'Order base service site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.baseid' => array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Service_Default
 			'internalcode' => 'mordbase."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.serviceid' => array(
@@ -49,84 +49,84 @@ class MShop_Order_Manager_Base_Service_Default
 			'internalcode' => 'mordbase."servid"',
 			'label' => 'Order base service original service ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.type' => array(
 			'code' => 'order.base.service.type',
 			'internalcode' => 'mordbase."type"',
 			'label' => 'Order base service type',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.code' => array(
 			'code' => 'order.base.service.code',
 			'internalcode' => 'mordbase."code"',
 			'label' => 'Order base service code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.name' => array(
 			'code' => 'order.base.service.name',
 			'internalcode' => 'mordbase."name"',
 			'label' => 'Order base service name',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.mediaurl' => array(
 			'code'=>'order.base.service.mediaurl',
 			'internalcode'=>'mordbase."mediaurl"',
 			'label'=>'Order base service media url',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
 			'internalcode' => 'mordbase."price"',
 			'label' => 'Order base service price',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.costs' => array(
 			'code' => 'order.base.service.costs',
 			'internalcode' => 'mordbase."costs"',
 			'label' => 'Order base service shipping',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.rebate' => array(
 			'code' => 'order.base.service.rebate',
 			'internalcode' => 'mordbase."rebate"',
 			'label' => 'Order base service rebate',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.taxrate' => array(
 			'code' => 'order.base.service.taxrate',
 			'internalcode' => 'mordbase."taxrate"',
 			'label' => 'Order base service taxrate',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.mtime' => array(
 			'code' => 'order.base.service.mtime',
 			'internalcode' => 'mordbase."mtime"',
 			'label' => 'Order base service modification time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.ctime'=> array(
 			'code'=>'order.base.service.ctime',
 			'internalcode'=>'mordbase."ctime"',
 			'label'=>'Order base service create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'order.base.service.editor'=> array(
 			'code'=>'order.base.service.editor',
 			'internalcode'=>'mordbase."editor"',
 			'label'=>'Order base service editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -323,22 +323,22 @@ class MShop_Order_Manager_Base_Service_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 5, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 6, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 7, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 8, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 9, $price->getCosts(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 10, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 11, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 5, $item->getCode(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 6, $item->getName(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 7, $item->getMediaUrl(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 8, $price->getValue(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 9, $price->getCosts(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 10, $price->getRebate(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 11, $price->getTaxRate(), MW_DB_Statement_Base::PARAM_STR );
 			$stmt->bind( 12, $date); // mtime
 			$stmt->bind( 13, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 14, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 14, $date ); // ctime
@@ -463,7 +463,7 @@ class MShop_Order_Manager_Base_Service_Default
 		try
 		{
 			$required = array( 'order.base.service' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/service/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

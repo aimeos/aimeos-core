@@ -9,7 +9,7 @@
 /**
  * Adds constraint for typeid in product tag table.
  */
-class MW_Setup_Task_ProductTagTypeidAddConstraint extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductTagTypeidAddConstraint extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 			'fk_msprota_typeid' => 'ALTER TABLE "mshop_product_tag" ADD CONSTRAINT "fk_msprota_typeid" FOREIGN KEY ("typeid") REFERENCES "mshop_product_tag_type" ("id") ON DELETE CASCADE ON UPDATE CASCADE',

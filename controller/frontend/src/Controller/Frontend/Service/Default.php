@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Service_Default
-	extends Controller_Frontend_Abstract
+	extends Controller_Frontend_Base
 	implements Controller_Frontend_Service_Interface
 {
 	private $items = array();
@@ -67,7 +67,7 @@ class Controller_Frontend_Service_Default
 			catch( MShop_Service_Exception $e )
 			{
 				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 			}
 		}
 

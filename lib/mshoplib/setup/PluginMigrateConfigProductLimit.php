@@ -9,7 +9,7 @@
 * Migrates product limit plugin configuration.
 */
 
-class MW_Setup_Task_PluginMigrateConfigProductLimit extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PluginMigrateConfigProductLimit extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'select' => 'SELECT COUNT(*) AS "cnt" FROM "mshop_plugin" WHERE "config" LIKE \'%"limit"%\'',

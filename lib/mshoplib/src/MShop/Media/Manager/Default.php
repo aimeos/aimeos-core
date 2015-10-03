@@ -15,7 +15,7 @@
  * @subpackage Media
  */
 class MShop_Media_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Media_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Media_Manager_Default
 			'code' => 'media.id',
 			'internalcode' => 'mmed."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'media.siteid' => array(
 			'label' => 'Media site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.typeid' => array(
@@ -39,7 +39,7 @@ class MShop_Media_Manager_Default
 			'code' => 'media.typeid',
 			'internalcode' => 'mmed."typeid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.languageid' => array(
@@ -47,70 +47,70 @@ class MShop_Media_Manager_Default
 			'code' => 'media.languageid',
 			'internalcode' => 'mmed."langid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.domain' => array(
 			'label' => 'Media domain',
 			'code' => 'media.domain',
 			'internalcode' => 'mmed."domain"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.label' => array(
 			'label' => 'Media label',
 			'code' => 'media.label',
 			'internalcode' => 'mmed."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.mimetype' => array(
 			'label' => 'Media mimetype',
 			'code' => 'media.mimetype',
 			'internalcode' => 'mmed."mimetype"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.url' => array(
 			'label' => 'Media URL',
 			'code' => 'media.url',
 			'internalcode' => 'mmed."link"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.preview' => array(
 			'label' => 'Media preview URL',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.status' => array(
 			'label' => 'Media status',
 			'code' => 'media.status',
 			'internalcode' => 'mmed."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'media.ctime'=> array(
 			'code'=>'media.ctime',
 			'internalcode'=>'mmed."ctime"',
 			'label'=>'Media create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.mtime'=> array(
 			'code'=>'media.mtime',
 			'internalcode'=>'mmed."mtime"',
 			'label'=>'Media modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'media.editor'=> array(
 			'code'=>'media.editor',
 			'internalcode'=>'mmed."editor"',
 			'label'=>'Media editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -328,20 +328,20 @@ class MShop_Media_Manager_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $item->getMimeType() );
 			$stmt->bind( 6, $item->getUrl() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 8, $item->getDomain() );
 			$stmt->bind( 9, $item->getPreview() );
 			$stmt->bind( 10, $date ); // mtime
 			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 12, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 12, $date ); // ctime
@@ -416,7 +416,7 @@ class MShop_Media_Manager_Default
 		try
 		{
 			$required = array( 'media' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/media/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

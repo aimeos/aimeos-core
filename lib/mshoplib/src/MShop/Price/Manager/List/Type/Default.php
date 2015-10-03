@@ -14,7 +14,7 @@
  * @subpackage Price
  */
 class MShop_Price_Manager_List_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Price_Manager_List_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Price_Manager_List_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_price_list_type" AS mprility ON ( mprili."typeid" = mprility."id" )' ),
 			'label' => 'Price list type Id',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Price_Manager_List_Type_Default
 			'internalcode' => 'mprility."siteid"',
 			'label' => 'Price list type site Id',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Price_Manager_List_Type_Default
 			'internalcode' => 'mprility."code"',
 			'label' => 'Price list type code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.type.domain' => array(
 			'code' => 'price.list.type.domain',
 			'internalcode' => 'mprility."domain"',
 			'label' => 'Price list type domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.type.label' => array(
 			'label' => 'Price list type label',
 			'code' => 'price.list.type.label',
 			'internalcode' => 'mprility."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.type.status' => array(
 			'label' => 'Price list type status',
 			'code' => 'price.list.type.status',
 			'internalcode' => 'mprility."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.list.type.ctime' => array(
 			'code' => 'price.list.type.ctime',
 			'internalcode' => 'mprility."ctime"',
 			'label' => 'Price list type create date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.type.mtime' => array(
 			'code' => 'price.list.type.mtime',
 			'internalcode' => 'mprility."mtime"',
 			'label' => 'Price list type modification date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.type.editor' => array(
 			'code' => 'price.list.type.editor',
 			'internalcode' => 'mprility."editor"',
 			'label' => 'Price list type editor',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

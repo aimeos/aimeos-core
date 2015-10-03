@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Coupon_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Coupon_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_coupon" AS mordbaco ON ( mordba."id" = mordbaco."baseid" )' ),
 			'label'=>'Order base coupon ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.coupon.siteid'=> array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			'internalcode'=>'mordbaco."siteid"',
 			'label'=>'Order base coupon site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.coupon.baseid'=> array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 			'internalcode'=>'mordbaco."baseid"',
 			'label'=>'Order base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.coupon.ordprodid'=> array(
@@ -49,35 +49,35 @@ class MShop_Order_Manager_Base_Coupon_Default
 			'internalcode'=>'mordbaco."ordprodid"',
 			'label'=>'Order coupon product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.coupon.code'=> array(
 			'code'=>'order.base.coupon.code',
 			'internalcode'=>'mordbaco."code"',
 			'label'=>'Order base coupon code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.coupon.mtime'=> array(
 			'code'=>'order.base.coupon.mtime',
 			'internalcode'=>'mordbaco."mtime"',
 			'label'=>'Order base coupon modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.coupon.ctime'=> array(
 			'code'=>'order.base.coupon.ctime',
 			'internalcode'=>'mordbaco."ctime"',
 			'label'=>'Order base coupon creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.coupon.editor'=> array(
 			'code'=>'order.base.coupon.editor',
 			'internalcode'=>'mordbaco."editor"',
 			'label'=>'Order base coupon editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -285,15 +285,15 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, $date ); // mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 7, $date ); // ctime
@@ -435,7 +435,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 		try
 		{
 			$required = array( 'order.base.coupon' );
-			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$level = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/coupon/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

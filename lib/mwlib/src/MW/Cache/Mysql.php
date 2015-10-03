@@ -91,7 +91,7 @@ class MW_Cache_Mysql
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
-		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
+		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Base::TYPE_PREP : MW_DB_Connection_Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
@@ -104,7 +104,7 @@ class MW_Cache_Mysql
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -117,7 +117,7 @@ class MW_Cache_Mysql
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTagPart->bind( 1, $key );
-						$stmtTagPart->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmtTagPart->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 						$stmtTagPart->bind( 3, $name );
 
 						$parts[] = (string) $stmtTagPart;

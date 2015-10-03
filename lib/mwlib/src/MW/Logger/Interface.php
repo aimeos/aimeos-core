@@ -24,5 +24,5 @@ interface MW_Logger_Interface
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return void
 	 */
-	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' );
+	public function log( $message, $priority = MW_Logger_Base::ERR, $facility = 'message' );
 }

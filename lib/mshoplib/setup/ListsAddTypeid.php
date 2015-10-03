@@ -9,7 +9,7 @@
 /**
  * Adds typeid column to list tables and migrates data in type column.
  */
-class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_list' => array(

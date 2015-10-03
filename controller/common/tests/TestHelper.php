@@ -65,7 +65,7 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new MW_Logger_File( 'unittest.log', MW_Logger_Abstract::DEBUG );
+		$logger = new MW_Logger_File( 'unittest.log', MW_Logger_Base::DEBUG );
 		$ctx->setLogger( $logger );
 
 

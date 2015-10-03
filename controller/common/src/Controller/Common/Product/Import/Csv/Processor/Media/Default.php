@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class Controller_Common_Product_Import_Csv_Processor_Media_Default
-	extends Controller_Common_Product_Import_Csv_Processor_Abstract
+	extends Controller_Common_Product_Import_Csv_Processor_Base
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
 	private $listTypes;

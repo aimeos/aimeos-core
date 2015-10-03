@@ -15,7 +15,7 @@
  * @subpackage Coupon
  */
 class MShop_Coupon_Provider_FreeShipping
-	extends MShop_Coupon_Provider_Factory_Abstract
+	extends MShop_Coupon_Provider_Factory_Base
 	implements MShop_Coupon_Provider_Factory_Interface
 {
 	/**

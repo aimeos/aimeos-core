@@ -24,7 +24,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_price" AS mcatinpr ON mcatinpr."prodid" = mpro."id"' ),
 			'label'=>'Product index price ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.price.quantity' => array(
@@ -32,7 +32,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>'mcatinpr."quantity"',
 			'label'=>'Product price quantity',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.price.value' => array(
@@ -40,7 +40,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."value"',
 			'label'=>'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.value' => array(
@@ -48,7 +48,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>'mcatinpr."value"',
 			'label'=>'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.costs' => array(
@@ -56,7 +56,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."costs"',
 			'label'=>'Product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.costs' => array(
@@ -64,7 +64,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>'mcatinpr."costs"',
 			'label'=>'Sort product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.rebate' => array(
@@ -72,7 +72,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."rebate"',
 			'label'=>'Product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.rebate' => array(
@@ -80,7 +80,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>'mcatinpr."rebate"',
 			'label'=>'Sort product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.taxrate' => array(
@@ -88,7 +88,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."taxrate"',
 			'label'=>'Product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.taxrate' => array(
@@ -96,7 +96,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internalcode'=>'mcatinpr."taxrate"',
 			'label'=>'Sort product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -416,7 +416,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
+		MW_Common_Base::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
@@ -477,9 +477,9 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 					foreach( $listTypes[$refId] as $listType )
 					{
-						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $refId, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 3, $refId, MW_DB_Statement_Base::PARAM_INT );
 						$stmt->bind( 4, $refItem->getCurrencyId() );
 						$stmt->bind( 5, $listType );
 						$stmt->bind( 6, $refItem->getType() );
@@ -487,7 +487,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 						$stmt->bind( 8, $refItem->getCosts() );
 						$stmt->bind( 9, $refItem->getRebate() );
 						$stmt->bind( 10, $refItem->getTaxRate() );
-						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Base::PARAM_INT );
 						$stmt->bind( 12, $date ); //mtime
 						$stmt->bind( 13, $editor );
 						$stmt->bind( 14, $date ); //ctime

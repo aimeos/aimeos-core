@@ -9,7 +9,7 @@
 /**
  * Changes action on delete on mshop_locale_site FOREIGN KEY CONSTRAINTS for mshop_locale tables.
  */
-class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_locale_currency' => array(

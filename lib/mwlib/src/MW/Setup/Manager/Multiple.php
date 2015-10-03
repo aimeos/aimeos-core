@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
+class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Base
 {
 	private $dbm;
 	private $additional;

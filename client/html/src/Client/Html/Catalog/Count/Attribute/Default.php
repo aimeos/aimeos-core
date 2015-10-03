@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Count_Attribute_Default
-	extends Client_Html_Catalog_Abstract
+	extends Client_Html_Catalog_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/catalog/count/attribute/default/subparts

@@ -9,7 +9,7 @@
 /**
  * Migrates type values in order table.
  */
-class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_order" SET "type" = \'repeat\' WHERE "type" = \'0\'',

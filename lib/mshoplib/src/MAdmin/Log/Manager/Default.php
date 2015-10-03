@@ -15,7 +15,7 @@
  * @subpackage Log
  */
 class MAdmin_Log_Manager_Default
-	extends MAdmin_Common_Manager_Abstract
+	extends MAdmin_Common_Manager_Base
 	implements MAdmin_Log_Manager_Interface, MW_Logger_Interface
 {
 	private $loglevel;
@@ -27,49 +27,49 @@ class MAdmin_Log_Manager_Default
 			'internalcode' => 'malog."id"',
 			'label' => 'Log ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
 			'internalcode' => 'malog."siteid"',
 			'label' => 'Log site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'log.timestamp' => array(
 			'code' => 'log.timestamp',
 			'internalcode' => 'malog."timestamp"',
 			'label' => 'Log create date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'log.priority' => array(
 			'code' => 'log.priority',
 			'internalcode' => 'malog."priority"',
 			'label' => 'Log priority',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'log.message' => array(
 			'code' => 'log.message',
 			'internalcode' => 'malog."message"',
 			'label' => 'Log message',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'log.request' => array(
 			'code' => 'log.request',
 			'internalcode' => 'malog."request"',
 			'label' => 'Log request',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		)
 	);
 
@@ -120,7 +120,7 @@ class MAdmin_Log_Manager_Default
 		 * @category Developer
 		 * @category User
 		 */
-		$this->loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Abstract::WARN );
+		$this->loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Base::WARN );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 
@@ -257,15 +257,15 @@ class MAdmin_Log_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getFacility() );
 			$stmt->bind( 3, date( 'Y-m-d H:i:s' ) );
-			$stmt->bind( 4, $item->getPriority(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getPriority(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $item->getMessage() );
 			$stmt->bind( 6, $item->getRequest() );
 
 			if( $item->getId() !== null ) {
-				$stmt->bind( 7, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $item->getId(), MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			}
 
@@ -395,7 +395,7 @@ class MAdmin_Log_Manager_Default
 		try
 		{
 			$required = array( 'log' );
-			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$level = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** madmin/log/manager/default/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -584,9 +584,9 @@ class MAdmin_Log_Manager_Default
 		$statement = $conn->create( $sql );
 
 		try {
-			$statement->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 		} catch( Exception $e ) {
-			$statement->bind( 1, null, MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 1, null, MW_DB_Statement_Base::PARAM_INT );
 		}
 
 		return $statement->execute();
@@ -600,7 +600,7 @@ class MAdmin_Log_Manager_Default
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 */
-	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
+	public function log( $message, $priority = MW_Logger_Base::ERR, $facility = 'message' )
 	{
 		if( $priority <= $this->loglevel )
 		{

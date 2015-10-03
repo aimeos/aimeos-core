@@ -79,14 +79,14 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from MShop_Order_Item_Abstract
+	 * @return integer Status code constant from MShop_Order_Item_Base
 	 */
 	public function getDeliveryStatus();
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from MShop_Order_Item_Abstract
+	 * @param integer $status Status code constant from MShop_Order_Item_Base
 	 * @return void
 	 */
 	public function setDeliveryStatus( $status );
@@ -94,14 +94,14 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from MShop_Order_Item_Abstract
+	 * @return integer Payment constant from MShop_Order_Item_Base
 	 */
 	public function getPaymentStatus();
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from MShop_Order_Item_Abstract
+	 * @param integer $status Payment constant from MShop_Order_Item_Base
 	 * @return void
 	 */
 	public function setPaymentStatus( $status );

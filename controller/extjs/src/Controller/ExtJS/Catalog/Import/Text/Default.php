@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Catalog_Import_Text_Default
-	extends Controller_ExtJS_Common_Load_Text_Abstract
+	extends Controller_ExtJS_Common_Load_Text_Base
 	implements Controller_ExtJS_Common_Load_Text_Interface
 {
 	/**
@@ -330,7 +330,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 				}
 				catch( Exception $e )
 				{
-					$this->getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
+					$this->getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Base::ERR, 'import' );
 				}
 			}
 		}

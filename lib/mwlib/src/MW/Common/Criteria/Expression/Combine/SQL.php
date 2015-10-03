@@ -33,7 +33,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Expression_Interface', $list );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Interface', $list );
 
 		$this->operator = $operator;
 		$this->expressions = $list;

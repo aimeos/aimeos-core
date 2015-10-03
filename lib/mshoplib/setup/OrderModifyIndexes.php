@@ -9,7 +9,7 @@
 /**
  * Modifies indexes in the order tables.
  */
-class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'add' => array(

@@ -40,7 +40,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends PHPUnit_Framework
 	public function testExportCSVFile()
 	{
 		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $manager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );

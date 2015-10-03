@@ -14,7 +14,7 @@
  * @subpackage Price
  */
 class MShop_Price_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Price_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Price_Manager_Type_Default
 			'internaldeps'=> array( 'LEFT JOIN "mshop_price_type" AS mprity ON mpri.typeid = mprity.id' ),
 			'label'=>'Price type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Price_Manager_Type_Default
 			'internalcode'=>'mprity."siteid"',
 			'label'=>'Price type site ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Price_Manager_Type_Default
 			'internalcode'=>'mprity."code"',
 			'label'=>'Price type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.type.domain' => array(
 			'code'=>'price.type.domain',
 			'internalcode'=>'mprity."domain"',
 			'label'=>'Price type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.type.label' => array(
 			'code'=>'price.type.label',
 			'internalcode'=>'mprity."label"',
 			'label'=>'Price type label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.type.status' => array(
 			'code'=>'price.type.status',
 			'internalcode'=>'mprity."status"',
 			'label'=>'Price type status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.type.mtime'=> array(
 			'code'=>'price.type.mtime',
 			'internalcode'=>'mprity."mtime"',
 			'label'=>'Price type modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.type.ctime'=> array(
 			'code'=>'price.type.ctime',
 			'internalcode'=>'mprity."ctime"',
 			'label'=>'Price type creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.type.editor'=> array(
 			'code'=>'price.type.editor',
 			'internalcode'=>'mprity."editor"',
 			'label'=>'Price type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

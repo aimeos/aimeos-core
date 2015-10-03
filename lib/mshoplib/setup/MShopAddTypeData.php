@@ -9,7 +9,7 @@
 /**
  * Adds default records to tables.
  */
-class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Base
 {
 	private $editor = '';
 	private $domainManagers = array();

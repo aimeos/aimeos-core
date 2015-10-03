@@ -9,7 +9,7 @@
 /**
  * Adds config column to catalog table.
  */
-class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "mshop_catalog" ADD "config" TEXT NOT NULL AFTER "label"';
 

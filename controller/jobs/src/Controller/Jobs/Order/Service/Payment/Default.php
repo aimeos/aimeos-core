@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Order_Service_Payment_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -90,7 +90,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 		$orderManager = MShop_Factory::createManager( $context, 'order' );
 		$orderSearch = $orderManager->createSearch();
 
-		$status = array( MShop_Order_Item_Abstract::STAT_DISPATCHED, MShop_Order_Item_Abstract::STAT_DELIVERED );
+		$status = array( MShop_Order_Item_Base::STAT_DISPATCHED, MShop_Order_Item_Base::STAT_DELIVERED );
 		$start = 0;
 
 		do
@@ -103,7 +103,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 				{
 					$serviceProvider = $serviceManager->getProvider( $serviceItem );
 
-					if( !$serviceProvider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) ) {
+					if( !$serviceProvider->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) ) {
 						continue;
 					}
 
@@ -122,7 +122,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 						$expr[] = $orderSearch->compare( '==', 'order.statusdelivery', $status );
 					}
 
-					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.code', $serviceItem->getCode() );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.type', 'payment' );
 

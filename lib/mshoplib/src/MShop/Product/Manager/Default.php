@@ -16,7 +16,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Product_Manager_Interface
 {
 	private $searchConfig = array(
@@ -25,14 +25,14 @@ class MShop_Product_Manager_Default
 			'internalcode'=>'mpro."id"',
 			'label'=>'Product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.siteid'=> array(
 			'code'=>'product.siteid',
 			'internalcode'=>'mpro."siteid"',
 			'label'=>'Product site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.typeid'=> array(
@@ -40,7 +40,7 @@ class MShop_Product_Manager_Default
 			'internalcode'=>'mpro."typeid"',
 			'label'=>'Product type ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.code'=> array(
@@ -48,77 +48,77 @@ class MShop_Product_Manager_Default
 			'internalcode'=>'mpro."code"',
 			'label'=>'Product code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.label'=> array(
 			'code'=>'product.label',
 			'internalcode'=>'mpro."label"',
 			'label'=>'Product label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
 			'label' => 'Product config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.suppliercode'=> array(
 			'code'=>'product.suppliercode',
 			'internalcode'=>'mpro."suppliercode"',
 			'label'=>'Product supplier code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.datestart'=> array(
 			'code'=>'product.datestart',
 			'internalcode'=>'mpro."start"',
 			'label'=>'Product start date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.dateend'=> array(
 			'code'=>'product.dateend',
 			'internalcode'=>'mpro."end"',
 			'label'=>'Product end date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.ctime'=> array(
 			'code'=>'product.ctime',
 			'internalcode'=>'mpro."ctime"',
 			'label'=>'Product create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.mtime'=> array(
 			'code'=>'product.mtime',
 			'internalcode'=>'mpro."mtime"',
 			'label'=>'Product modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.editor'=> array(
 			'code'=>'product.editor',
 			'internalcode'=>'mpro."editor"',
 			'label'=>'Product editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.status'=> array(
 			'code'=>'product.status',
 			'internalcode'=>'mpro."status"',
 			'label'=>'Product status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.contains' => array(
 			'code'=>'product.contains()',
 			'internalcode'=>'',
 			'label'=>'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -269,12 +269,12 @@ class MShop_Product_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getSupplierCode() );
 			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 7, $item->getDateStart() );
 			$stmt->bind( 8, $item->getDateEnd() );
 			$stmt->bind( 9, json_encode( $item->getConfig() ) );
@@ -282,7 +282,7 @@ class MShop_Product_Manager_Default
 			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 12, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
 				$stmt->bind( 12, $date ); // ctime
@@ -407,7 +407,7 @@ class MShop_Product_Manager_Default
 		try
 		{
 			$required = array( 'product' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/product/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -518,7 +518,7 @@ class MShop_Product_Manager_Default
 				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 				}
 
 				$map[$row['id']] = $row;

@@ -9,7 +9,7 @@
 /**
  * Adds siteid column to locale language and currency tables.
  */
-class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Base
 {
 
 	private $mysql = array(

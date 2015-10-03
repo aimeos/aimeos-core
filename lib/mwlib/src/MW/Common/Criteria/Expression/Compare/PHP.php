@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expression_Compare_Abstract
+class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expression_Compare_Base
 {
 	private static $operators = array( '==' => '==', '!=' => '!=', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<' );
 

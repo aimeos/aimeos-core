@@ -74,6 +74,6 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 }
 
 
-class MShop_Publisher_Test extends MW_Observer_Publisher_Abstract
+class MShop_Publisher_Test extends MW_Observer_Publisher_Base
 {
 }

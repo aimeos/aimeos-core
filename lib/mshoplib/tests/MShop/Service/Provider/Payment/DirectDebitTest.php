@@ -73,14 +73,14 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED )
+			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_WEB ),
+			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Base::PAY_AUTHORIZED, MShop_Order_Item_Base::TYPE_WEB ) );
 		}
 
 		$basket = $orderBaseManager->load( $order->getBaseId() );
@@ -159,14 +159,14 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 
 		$this->object->process( $order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::PAY_AUTHORIZED, $order->getPaymentStatus() );
 	}
 
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CANCEL ) );
 	}
 }

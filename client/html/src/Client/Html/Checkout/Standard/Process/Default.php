@@ -19,7 +19,7 @@ sprintf( 'process' );
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Process_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/process/default/subparts
@@ -347,7 +347,7 @@ class Client_Html_Checkout_Standard_Process_Default
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'order.base.service.baseid', $baseid ),
-			$search->compare( '==', 'order.base.service.type', MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT ),
+			$search->compare( '==', 'order.base.service.type', MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

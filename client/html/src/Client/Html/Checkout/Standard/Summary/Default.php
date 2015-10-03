@@ -19,7 +19,7 @@ sprintf( 'summary' );
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Summary_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/summary/default/subparts
@@ -324,7 +324,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 		try
 		{
 			$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
-			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
+			$controller->get()->check( MShop_Order_Item_Base_Base::PARTS_ALL );
 
 			parent::process();
 		}

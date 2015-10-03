@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from catalog tables.
  */
-class MW_Setup_Task_CatalogDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_catalog_list_type' => array(

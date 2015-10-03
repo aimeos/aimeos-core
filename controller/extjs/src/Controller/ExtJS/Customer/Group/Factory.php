@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Customer_Group_Factory
-	extends Controller_ExtJS_Common_Factory_Abstract
+	extends Controller_ExtJS_Common_Factory_Base
 	implements Controller_ExtJS_Common_Factory_Interface
 {
 	public static function createController( MShop_Context_Item_Interface $context, $name = null )

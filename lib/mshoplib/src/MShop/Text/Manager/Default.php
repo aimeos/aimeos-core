@@ -15,7 +15,7 @@
  * @subpackage Text
  */
 class MShop_Text_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Text_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Text_Manager_Default
 			'internalcode'=>'mtex."id"',
 			'label'=>'Text ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'text.siteid'=> array(
 			'code'=>'text.siteid',
 			'internalcode'=>'mtex."siteid"',
 			'label'=>'Text site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.languageid' => array(
@@ -39,14 +39,14 @@ class MShop_Text_Manager_Default
 			'internalcode'=>'mtex."langid"',
 			'label'=>'Text language code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.typeid' => array(
 			'code'=>'text.typeid',
 			'internalcode'=>'mtex."typeid"',
 			'label'=>'Text type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.label' => array(
@@ -54,49 +54,49 @@ class MShop_Text_Manager_Default
 			'internalcode'=>'mtex."label"',
 			'label'=>'Text label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.domain' => array(
 			'code'=>'text.domain',
 			'internalcode'=>'mtex."domain"',
 			'label'=>'Text domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.content' => array(
 			'code'=>'text.content',
 			'internalcode'=>'mtex."content"',
 			'label'=>'Text content',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.status' => array(
 			'code'=>'text.status',
 			'internalcode'=>'mtex."status"',
 			'label'=>'Text status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'text.ctime'=> array(
 			'code'=>'text.ctime',
 			'internalcode'=>'mtex."ctime"',
 			'label'=>'Text create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.mtime'=> array(
 			'code'=>'text.mtime',
 			'internalcode'=>'mtex."mtime"',
 			'label'=>'Text modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'text.editor'=> array(
 			'code'=>'text.editor',
 			'internalcode'=>'mtex."editor"',
 			'label'=>'Text editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -233,18 +233,18 @@ class MShop_Text_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getDomain() );
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getContent() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -399,7 +399,7 @@ class MShop_Text_Manager_Default
 		try
 		{
 			$required = array( 'text' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/text/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

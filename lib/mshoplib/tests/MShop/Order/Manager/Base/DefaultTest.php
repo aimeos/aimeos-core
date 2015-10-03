@@ -375,7 +375,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_NONE );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_NONE );
 
 		$this->assertEquals( array(), $order->getProducts() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -387,7 +387,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ADDRESS );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -399,7 +399,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_PRODUCT );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -411,7 +411,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_COUPON );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_COUPON );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
@@ -423,7 +423,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -435,7 +435,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFresh()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
 
 
 		$this->assertEquals( 0, count( $order->getCoupons() ) );
@@ -464,7 +464,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_NONE, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_NONE, true );
 
 		$this->assertEquals( array(), $order->getAddresses() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -476,7 +476,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ADDRESS, true );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -488,7 +488,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_PRODUCT, true );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -500,7 +500,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_COUPON, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_COUPON, true );
 
 		$this->assertEquals( array(), $order->getAddresses() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -512,7 +512,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE, true );
+		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE, true );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -525,7 +525,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -572,7 +572,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 		$newBasketId = $basket->getId();
 		$this->object->store( $basket );
@@ -620,7 +620,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -651,12 +651,12 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Abstract::PARTS_NONE );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_NONE );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertEquals( array(), $basket->getCoupons() );
@@ -670,12 +670,12 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_ADDRESS );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
@@ -689,12 +689,12 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_PRODUCT );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
@@ -708,12 +708,12 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_SERVICE );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
@@ -733,7 +733,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
 
 		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
 		$this->assertEquals( '32.00', $basket->getPrice()->getCosts() );
@@ -771,12 +771,12 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSetSessionLock()
 	{
 		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( MShop_Order_Manager_Base_Abstract::LOCK_DISABLE, $lock );
+		$this->assertEquals( MShop_Order_Manager_Base_Base::LOCK_DISABLE, $lock );
 
-		$this->object->setSessionLock( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, 'test' );
+		$this->object->setSessionLock( MShop_Order_Manager_Base_Base::LOCK_ENABLE, 'test' );
 
 		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, $lock );
+		$this->assertEquals( MShop_Order_Manager_Base_Base::LOCK_ENABLE, $lock );
 	}
 
 

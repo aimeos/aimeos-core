@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Manager_Currency_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Locale_Manager_Currency_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Locale_Manager_Currency_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")' ),
 			'label' => 'Locale currency ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.currency.siteid' => array(
@@ -33,7 +33,7 @@ class MShop_Locale_Manager_Currency_Default
 			'internalcode' => 'mloccu."siteid"',
 			'label' => 'Locale currency site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.currency.label' => array(
@@ -41,42 +41,42 @@ class MShop_Locale_Manager_Currency_Default
 			'internalcode' => 'mloccu."label"',
 			'label' => 'Locale currency label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.currency.code' => array(
 			'code' => 'locale.currency.code',
 			'internalcode' => 'mloccu."id"',
 			'label' => 'Locale currency code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.currency.status' => array(
 			'code' => 'locale.currency.status',
 			'internalcode' => 'mloccu."status"',
 			'label' => 'Locale currency status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'locale.currency.ctime'=> array(
 			'code'=>'locale.currency.ctime',
 			'internalcode'=>'mloccu."ctime"',
 			'label'=>'Locale currency create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.currency.mtime'=> array(
 			'code'=>'locale.currency.mtime',
 			'internalcode'=>'mloccu."mtime"',
 			'label'=>'Locale currency modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.currency.editor'=> array(
 			'code'=>'locale.currency.editor',
 			'internalcode'=>'mloccu."editor"',
 			'label'=>'Locale currency editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -198,8 +198,8 @@ class MShop_Locale_Manager_Currency_Default
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLabel() );
-			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $date ); // mtime
 			$stmt->bind( 5, $context->getEditor() );
 			// bind ID but code and id are identical after saveing the stuff
@@ -625,7 +625,7 @@ class MShop_Locale_Manager_Currency_Default
 	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
 
 		$results = $statement->execute();
 

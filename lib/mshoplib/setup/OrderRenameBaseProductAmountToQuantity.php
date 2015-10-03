@@ -9,7 +9,7 @@
 /**
  * Renames column amount to quantity in order base product table.
  */
-class MW_Setup_Task_OrderRenameBaseProductAmountToQuantity extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderRenameBaseProductAmountToQuantity extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base_product' => 

@@ -9,7 +9,7 @@
 /**
  * Adds langid column in order base address table.
  */
-class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base_address.langid' => array(

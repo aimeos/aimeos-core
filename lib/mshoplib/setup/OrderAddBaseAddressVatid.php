@@ -9,7 +9,7 @@
 /**
  * Adds vatid column to address tables.
  */
-class MW_Setup_Task_OrderAddBaseAddressVatid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddBaseAddressVatid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base_address' => 'ALTER TABLE "mshop_order_base_address" ADD "vatid" VARCHAR(32) AFTER "company"',

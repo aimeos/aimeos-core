@@ -9,7 +9,7 @@
 /**
  * Adds comment column to order base table.
  */
-class MW_Setup_Task_OrderAddComment extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddComment extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'comment' => 'ALTER TABLE "mshop_order_base" ADD "comment" TEXT NOT NULL DEFAULT \'\' AFTER "discount"',

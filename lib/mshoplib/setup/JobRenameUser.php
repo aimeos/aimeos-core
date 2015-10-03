@@ -9,7 +9,7 @@
 /**
  * Renames "user" column to "editor" in job table.
  */
-class MW_Setup_Task_JobRenameUser extends MW_Setup_Task_Abstract
+class MW_Setup_Task_JobRenameUser extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'user' => 'ALTER TABLE "madmin_job" CHANGE "user" "editor" VARCHAR(255) NOT NULL',

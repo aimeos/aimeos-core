@@ -14,7 +14,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Tag_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Product_Manager_Tag_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Product_Manager_Tag_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_product_tag_type" AS mprotaty ON ( mprota."typeid" = mprotaty."id" )' ),
 			'label' => 'Product tag type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Product_Manager_Tag_Type_Default
 			'internalcode' => 'mprotaty."siteid"',
 			'label' => 'Product tag type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Product_Manager_Tag_Type_Default
 			'internalcode' => 'mprotaty."code"',
 			'label' => 'Product tag type code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.type.domain' => array(
 			'code' => 'product.tag.type.domain',
 			'internalcode' => 'mprotaty."domain"',
 			'label' => 'Product tag type domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.type.label' => array(
 			'code' => 'product.tag.type.label',
 			'internalcode' => 'mprotaty."label"',
 			'label' => 'Product tag type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.type.status' => array(
 			'code' => 'product.tag.type.status',
 			'internalcode' => 'mprotaty."status"',
 			'label' => 'Product tag type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.tag.type.mtime'=> array(
 			'code'=>'product.tag.type.mtime',
 			'internalcode'=>'mprotaty."mtime"',
 			'label'=>'Product tag type modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.type.ctime'=> array(
 			'code'=>'product.tag.type.ctime',
 			'internalcode'=>'mprotaty."ctime"',
 			'label'=>'Product tag type creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.tag.type.editor'=> array(
 			'code'=>'product.tag.type.editor',
 			'internalcode'=>'mprotaty."editor"',
 			'label'=>'Product tag type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

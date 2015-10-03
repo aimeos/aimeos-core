@@ -9,7 +9,7 @@
 /**
  * Moves data from subject tables to customer and supplier tables.
  */
-class MW_Setup_Task_SubjectToCustomerSupplier extends MW_Setup_Task_Abstract
+class MW_Setup_Task_SubjectToCustomerSupplier extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_subject_customer' => array(

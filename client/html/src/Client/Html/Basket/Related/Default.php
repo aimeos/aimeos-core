@@ -14,7 +14,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Related_Default
-	extends Client_Html_Basket_Abstract
+	extends Client_Html_Basket_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/basket/related/default/subparts

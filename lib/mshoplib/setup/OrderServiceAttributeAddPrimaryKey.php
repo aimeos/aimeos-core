@@ -9,7 +9,7 @@
 /**
  * Adds primary key to order base service attribute table.
  */
-class MW_Setup_Task_OrderServiceAttributeAddPrimaryKey extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderServiceAttributeAddPrimaryKey extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'CREATE TEMPORARY TABLE "mshop_order_base_service_attr_temp" LIKE "mshop_order_base_service_attr"',

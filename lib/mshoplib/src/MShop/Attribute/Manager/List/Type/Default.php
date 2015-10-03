@@ -14,7 +14,7 @@
  * @subpackage Attribute
  */
 class MShop_Attribute_Manager_List_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Attribute_Manager_List_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Attribute_Manager_List_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_list_type" AS mattlity ON ( mattli."typeid" = mattlity."id" )' ),
 			'label'=>'Attribute list type Id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.list.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Attribute_Manager_List_Type_Default
 			'internalcode'=>'mattlity."siteid"',
 			'label'=>'Attribute list type site Id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.list.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Attribute_Manager_List_Type_Default
 			'internalcode'=>'mattlity."code"',
 			'label'=>'Attribute list type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.list.type.domain' => array(
 			'code'=>'attribute.list.type.domain',
 			'internalcode'=>'mattlity."domain"',
 			'label'=>'Attribute list type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.list.type.label' => array(
 			'code' => 'attribute.list.type.label',
 			'internalcode' => 'mattlity."label"',
 			'label' => 'Attribute list type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.list.type.status' => array(
 			'code' => 'attribute.list.type.status',
 			'internalcode' => 'mattlity."status"',
 			'label' => 'Attribute list type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'attribute.list.type.ctime'=> array(
 			'code'=>'attribute.list.type.ctime',
 			'internalcode'=>'mattlity."ctime"',
 			'label'=>'Attribute list type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.list.type.mtime'=> array(
 			'code'=>'attribute.list.type.mtime',
 			'internalcode'=>'mattlity."mtime"',
 			'label'=>'Attribute list type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.list.type.editor'=> array(
 			'code'=>'attribute.list.type.editor',
 			'internalcode'=>'mattlity."editor"',
 			'label'=>'Attribute list type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

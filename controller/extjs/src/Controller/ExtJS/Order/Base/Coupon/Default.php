@@ -15,7 +15,7 @@
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Abstract implements Controller_ExtJS_Interface
+class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Base implements Controller_ExtJS_Interface
 {
 	private $manager = null;
 

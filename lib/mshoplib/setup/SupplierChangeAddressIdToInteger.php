@@ -9,7 +9,7 @@
 /**
  * Changes type of supplier_address_id from BIGINT to INT.
  */
-class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstract
+class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_supplier_address' => '

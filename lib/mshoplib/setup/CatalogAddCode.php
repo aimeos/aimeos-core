@@ -9,7 +9,7 @@
 /**
  * Adds code column to catalog table.
  */
-class MW_Setup_Task_CatalogAddCode extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogAddCode extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_catalog" ADD "code" VARCHAR(32) NOT NULL DEFAULT \'\' AFTER "level"',

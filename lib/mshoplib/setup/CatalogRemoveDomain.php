@@ -9,7 +9,7 @@
 /**
  * Removes domain column from catalog table.
  */
-class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_catalog" DROP "domain"',

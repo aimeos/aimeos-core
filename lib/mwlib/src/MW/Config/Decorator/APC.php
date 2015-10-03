@@ -15,7 +15,7 @@
  * @subpackage Config
  */
 class MW_Config_Decorator_APC
-	extends MW_Config_Decorator_Abstract
+	extends MW_Config_Decorator_Base
 	implements MW_Config_Decorator_Interface
 {
 	private $prefix;

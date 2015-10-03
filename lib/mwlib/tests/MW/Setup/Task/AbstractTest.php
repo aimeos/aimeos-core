@@ -1,7 +1,7 @@
 <?php
 
 
-class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
+class MW_Setup_Task_BaseImpl extends MW_Setup_Task_Base
 {
 	public function getPreDependencies()
 	{
@@ -28,12 +28,12 @@ class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
 
 
 /**
- * Test class for MW_Setup_Task_Abstract.
+ * Test class for MW_Setup_Task_Base.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
+class MW_Setup_Task_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -57,7 +57,7 @@ class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
 		$conn = $dbm->acquire();
 
 		$schema = new MW_Setup_DBSchema_Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
-		$this->object = new MW_Setup_Task_AbstractImpl( $schema, $conn );
+		$this->object = new MW_Setup_Task_BaseImpl( $schema, $conn );
 
 		$dbm->release( $conn );
 	}

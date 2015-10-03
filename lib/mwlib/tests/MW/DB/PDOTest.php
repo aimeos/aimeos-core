@@ -254,8 +254,8 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
-		$stmt2->bind( 2, 0.12, MW_DB_Statement_Abstract::PARAM_FLOAT);
+		$stmt2->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL);
+		$stmt2->bind( 2, 0.12, MW_DB_Statement_Base::PARAM_FLOAT);
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
@@ -270,7 +270,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert3 );
-		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
+		$stmt2->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL);
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
@@ -285,7 +285,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_NULL);
+		$stmt2->bind( 1, 0, MW_DB_Statement_Base::PARAM_NULL);
 		$stmt2->bind( 2, 0.15, 123);
 		$result = $stmt2->execute();
 		$rows = $result->affectedRows();
@@ -319,7 +319,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
 		$stmt->bind( 1, 'test' );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
@@ -336,7 +336,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert2, MW_DB_Connection_Abstract::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert2, MW_DB_Connection_Base::TYPE_PREP );
 		$stmt->bind( 1, null );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
@@ -354,7 +354,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
@@ -376,17 +376,17 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL );
-		$stmt->bind( 2, 1, MW_DB_Statement_Abstract::PARAM_BOOL );
+		$stmt->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL );
+		$stmt->bind( 2, 1, MW_DB_Statement_Base::PARAM_BOOL );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, 123, MW_DB_Statement_Abstract::PARAM_LOB );
-		$stmt->bind( 2, 0.1, MW_DB_Statement_Abstract::PARAM_FLOAT );
+		$stmt->bind( 1, 123, MW_DB_Statement_Base::PARAM_LOB );
+		$stmt->bind( 2, 0.1, MW_DB_Statement_Base::PARAM_FLOAT );
 		$stmt->execute()->finish();
 
 
@@ -424,7 +424,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		try
 		{
-			$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
 			$stmt->bind( 1, 1 );
 			$stmt->bind( 2, 'test', 123 );
 		}
@@ -513,7 +513,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 class MW_DB_Connection_TestForPDOException implements MW_DB_Connection_Interface
 {
-	public function create($sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE)
+	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)
 	{
 	}
 

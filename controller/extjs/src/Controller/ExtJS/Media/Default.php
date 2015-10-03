@@ -16,7 +16,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Media_Default
-	extends Controller_ExtJS_Abstract
+	extends Controller_ExtJS_Base
 	implements Controller_ExtJS_Common_Interface
 {
 	private $manager = null;
@@ -114,13 +114,13 @@ class Controller_ExtJS_Media_Default
 				&& unlink( $basedir . $item->getPreview() ) === false
 			) {
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getPreview() );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 			}
 
 			if( is_file( $basedir . $item->getUrl() ) && unlink( $basedir . $item->getUrl() ) === false )
 			{
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getUrl() );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 			}
 		}
 
@@ -238,7 +238,7 @@ class Controller_ExtJS_Media_Default
 		if( unlink( $fileinfo['tmp_name'] ) === false )
 		{
 			$msg = sprintf( 'Deleting file "%1$s" failed', $fileinfo['tmp_name'] );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 		}
 
 
@@ -671,7 +671,7 @@ class Controller_ExtJS_Media_Default
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 		}
 
 		return "${mediadir}/${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
@@ -706,7 +706,7 @@ class Controller_ExtJS_Media_Default
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 		}
 
 		return "${mediadir}/files/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";

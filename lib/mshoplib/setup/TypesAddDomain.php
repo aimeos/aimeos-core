@@ -9,7 +9,7 @@
 /**
  * Adds domain columns to all type tables.
  */
-class MW_Setup_Task_TypesAddDomain extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TypesAddDomain extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_list_type' => 'ALTER TABLE "mshop_attribute_list_type" ADD "domain" VARCHAR(8) NOT NULL AFTER "siteid"',

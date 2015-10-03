@@ -16,7 +16,7 @@
  */
 
 class MShop_Service_Provider_Payment_PayPalExpress
-	extends MShop_Service_Provider_Payment_Abstract
+	extends MShop_Service_Provider_Payment_Base
 	implements MShop_Service_Provider_Payment_Interface
 {
 	private $apiendpoint;
@@ -174,7 +174,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
 		$orderid = $order->getId();
-		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_ALL );
 
 		$values = $this->getOrderDetails( $orderBaseItem );
 		$values['METHOD'] = 'SetExpressCheckout';
@@ -189,7 +189,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
 		$paypalUrl = sprintf( $this->getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
 
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT;
 		$this->setAttributes( $orderBaseItem->getService( $type ), array( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
 		$this->saveOrderBase( $orderBaseItem );
 
@@ -232,7 +232,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	{
 		$baseid = $order->getBaseId();
 		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -276,7 +276,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	public function refund( MShop_Order_Item_Interface $order )
 	{
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -299,7 +299,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
 		$this->saveOrderBase( $baseItem );
 
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUND );
+		$order->setPaymentStatus( MShop_Order_Item_Base::PAY_REFUND );
 		$this->saveOrder( $order );
 	}
 
@@ -325,7 +325,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
 		$this->checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$order->setPaymentStatus( MShop_Order_Item_Base::PAY_CANCELED );
 		$this->saveOrder( $order );
 	}
 
@@ -366,7 +366,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		$order = $this->getOrder( $params['invoice'] );
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 
 		$this->checkIPN( $baseItem, $params );
 
@@ -397,10 +397,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	{
 		switch( $what )
 		{
-			case MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_QUERY:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_REFUND:
+			case MShop_Service_Provider_Payment_Base::FEAT_CAPTURE:
+			case MShop_Service_Provider_Payment_Base::FEAT_QUERY:
+			case MShop_Service_Provider_Payment_Base::FEAT_CANCEL:
+			case MShop_Service_Provider_Payment_Base::FEAT_REFUND:
 				return true;
 		}
 
@@ -418,7 +418,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$order = $this->getOrder( $params['orderid'] );
 		$baseid = $order->getBaseId();
 		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 
 		$values = $this->getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
@@ -468,7 +468,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $rvals['ACK'] !== 'Success' )
 		{
 			$msg = 'PayPal Express: method = ' . $method . ', order ID = ' . $orderid . ', response = ' . print_r( $rvals, true );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::INFO );
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
@@ -542,46 +542,46 @@ class MShop_Service_Provider_Payment_PayPalExpress
 				{
 					if( $response['PENDINGREASON'] === 'authorization' )
 					{
-						$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+						$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_AUTHORIZED );
 						break;
 					}
 
 					$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', PENDINGREASON = ' . $response['PENDINGREASON'];
-					$this->getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
+					$this->getContext()->getLogger()->log( $str, MW_Logger_Base::INFO );
 				}
 
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
 				break;
 
 			case 'In-Progress':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
 				break;
 
 			case 'Completed':
 			case 'Processed':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_RECEIVED );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_RECEIVED );
 				break;
 
 			case 'Failed':
 			case 'Denied':
 			case 'Expired':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUSED );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_REFUSED );
 				break;
 
 			case 'Refunded':
 			case 'Partially-Refunded':
 			case 'Reversed':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUND );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_REFUND );
 				break;
 
 			case 'Canceled-Reversal':
 			case 'Voided':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+				$invoice->setPaymentStatus( MShop_Order_Item_Base::PAY_CANCELED );
 				break;
 
 			default:
 				$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', response = ' . print_r( $response, true );
-				$this->getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
+				$this->getContext()->getLogger()->log( $str, MW_Logger_Base::INFO );
 		}
 	}
 
@@ -598,7 +598,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		try
 		{
-			$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+			$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 
 			/* setting up the shipping address details (ReviewOrder) */
 			$values['ADDROVERRIDE'] = 1;
@@ -695,7 +695,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	protected function getOrderServiceItem( $baseid )
 	{
-		$basket = $this->getOrderBase( $baseid, MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
-		return $basket->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$basket = $this->getOrderBase( $baseid, MShop_Order_Manager_Base_Base::PARTS_SERVICE );
+		return $basket->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 	}
 }

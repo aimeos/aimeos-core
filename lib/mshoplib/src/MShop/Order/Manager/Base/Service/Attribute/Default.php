@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Service_Attribute_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Service_Attribute_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service_attr" AS mordbaseat ON ( mordbase."id" = mordbaseat."ordservid" )' ),
 			'label' => 'Order base service attribute ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.attribute.siteid' => array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internalcode' => 'mordbaseat."siteid"',
 			'label' => 'Order base service attribute site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.attribute.attributeid' => array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internalcode' => 'mordbaseat."attrid"',
 			'label' => 'Order base service attribute original ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.attribute.serviceid' => array(
@@ -49,7 +49,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internalcode' => 'mordbaseat."ordservid"',
 			'label' => 'Order base service ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.attribute.type' => array(
@@ -57,49 +57,49 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internalcode' => 'mordbaseat."type"',
 			'label' => 'Order base service attribute type',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.attribute.code' => array(
 			'code' => 'order.base.service.attribute.code',
 			'internalcode' => 'mordbaseat."code"',
 			'label' => 'Order base service attribute code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.attribute.value' => array(
 			'code' => 'order.base.service.attribute.value',
 			'internalcode' => 'mordbaseat."value"',
 			'label' => 'Order base service attribute value',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.attribute.name' => array(
 			'code' => 'order.base.service.attribute.name',
 			'internalcode' => 'mordbaseat."name"',
 			'label' => 'Order base service attribute name',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.attribute.mtime' => array(
 			'code' => 'order.base.service.attribute.mtime',
 			'internalcode' => 'mordbaseat."mtime"',
 			'label' => 'Order base service attribute modification time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.service.attribute.ctime'=> array(
 			'code'=>'order.base.service.attribute.ctime',
 			'internalcode'=>'mordbaseat."ctime"',
 			'label'=>'Order base service attribute create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'order.base.service.attribute.editor'=> array(
 			'code'=>'order.base.service.attribute.editor',
 			'internalcode'=>'mordbaseat."editor"',
 			'label'=>'Order base service attribute editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -306,9 +306,9 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
-			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
 			$stmt->bind( 6, json_encode( $item->getValue() ) );
@@ -317,7 +317,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -459,7 +459,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		try
 		{
 			$required = array( 'order.base.service.attribute' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/service/attribute/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

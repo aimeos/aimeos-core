@@ -100,7 +100,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	/**
 	 * Sets the address of the customer in the basket.
 	 *
-	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
+	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Base
 	 * @param MShop_Common_Item_Address_Interface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs

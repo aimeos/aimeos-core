@@ -15,7 +15,7 @@
  * @subpackage Container
  */
 class MW_Container_Directory
-	extends MW_Container_Abstract
+	extends MW_Container_Base
 	implements MW_Container_Interface
 {
 	private $content = array();

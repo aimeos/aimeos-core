@@ -9,7 +9,7 @@
 /**
  * Renames shipping column to costs in price table.
  */
-class MW_Setup_Task_PriceRenameShippingToCosts extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PriceRenameShippingToCosts extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_price' => array(

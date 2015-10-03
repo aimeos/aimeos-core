@@ -9,7 +9,7 @@
 /**
  * Changes product tag langid column to allow NULL values.
  */
-class MW_Setup_Task_ProductTagLangidNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductTagLangidNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_product_tag" CHANGE "langid" "langid" CHAR( 2 ) NULL',

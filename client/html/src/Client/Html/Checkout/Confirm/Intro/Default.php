@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Checkout_Confirm_Intro_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/confirm/intro/default/subparts

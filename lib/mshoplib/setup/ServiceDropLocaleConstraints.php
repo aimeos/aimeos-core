@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from service tables.
  */
-class MW_Setup_Task_ServiceDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ServiceDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_service_list_type' => array(

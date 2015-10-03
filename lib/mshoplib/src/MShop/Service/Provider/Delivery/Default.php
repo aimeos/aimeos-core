@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Delivery_Default
-	extends MShop_Service_Provider_Delivery_Abstract
+	extends MShop_Service_Provider_Delivery_Base
 	implements MShop_Service_Provider_Delivery_Interface
 {
 
@@ -78,15 +78,15 @@ class MShop_Service_Provider_Delivery_Default
 		$logger = $this->getContext()->getLogger();
 		$xml = $this->buildXML( $order );
 
-		$logger->log( __METHOD__ . ": XML request =\n" . $xml, MW_Logger_Abstract::INFO );
+		$logger->log( __METHOD__ . ": XML request =\n" . $xml, MW_Logger_Base::INFO );
 
 		$response = $this->sendRequest( $xml );
 
-		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), MW_Logger_Abstract::INFO );
+		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), MW_Logger_Base::INFO );
 
 		$this->checkResponse( $response, $order->getId() );
 
-		$order->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
+		$order->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
 	}
 
 
@@ -158,7 +158,7 @@ class MShop_Service_Provider_Delivery_Default
 
 			if( isset( $config['default.username'] ) && isset( $config['default.password'] ) )
 			{
-				$context->getLogger()->log( 'Using user name and password for authentication', MW_Logger_Abstract::NOTICE );
+				$context->getLogger()->log( 'Using user name and password for authentication', MW_Logger_Base::NOTICE );
 				curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 				curl_setopt( $curl, CURLOPT_USERPWD, $config['default.username'] . ':' . $config['default.password'] );
 			}
@@ -168,20 +168,20 @@ class MShop_Service_Provider_Delivery_Default
 			{
 				if( isset( $config['default.ssl'] ) && $config['default.ssl'] == 'weak' )
 				{
-					$context->getLogger()->log( 'Using weak SSL options', MW_Logger_Abstract::NOTICE );
+					$context->getLogger()->log( 'Using weak SSL options', MW_Logger_Base::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, true );
 				}
 				else
 				{
-					$context->getLogger()->log( 'Using strict SSL options', MW_Logger_Abstract::NOTICE );
+					$context->getLogger()->log( 'Using strict SSL options', MW_Logger_Base::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 ); // check CN and match host name
 				}
 			}
 			else
 			{
-				$context->getLogger()->log( 'Using no SSL encryption', MW_Logger_Abstract::NOTICE );
+				$context->getLogger()->log( 'Using no SSL encryption', MW_Logger_Base::NOTICE );
 			}
 
 			if( ( $response = curl_exec( $curl ) ) === false ) {
@@ -269,7 +269,7 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function buildXML( MShop_Order_Item_Interface $invoice )
 	{
-		$base = $this->getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$base = $this->getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_ALL );
 
 		try
 		{

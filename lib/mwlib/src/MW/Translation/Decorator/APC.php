@@ -15,7 +15,7 @@
  * @subpackage Translation
  */
 class MW_Translation_Decorator_APC
-	extends MW_Translation_Decorator_Abstract
+	extends MW_Translation_Decorator_Base
 	implements MW_Translation_Decorator_Interface
 {
 	private $prefix;

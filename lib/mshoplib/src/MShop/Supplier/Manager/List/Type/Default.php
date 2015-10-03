@@ -14,7 +14,7 @@
  * @subpackage Supplier
  */
 class MShop_Supplier_Manager_List_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Supplier_Manager_List_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Supplier_Manager_List_Type_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_supplier_list_type" AS msuplity ON ( msupli."typeid" = msuplity."id" )' ),
 			'label'=>'Supplier list type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.list.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Supplier_Manager_List_Type_Default
 			'internalcode'=>'msuplity."siteid"',
 			'label'=>'Supplier list type site ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.list.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Supplier_Manager_List_Type_Default
 			'internalcode'=>'msuplity."code"',
 			'label'=>'Supplier list type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.list.type.domain' => array(
 			'code'=>'supplier.list.type.domain',
 			'internalcode'=>'msuplity."domain"',
 			'label'=>'Supplier list type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.list.type.label' => array(
 			'code'=>'supplier.list.type.label',
 			'internalcode'=>'msuplity."label"',
 			'label'=>'Supplier list type label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.list.type.status' => array(
 			'code'=>'supplier.list.type.status',
 			'internalcode'=>'msuplity."status"',
 			'label'=>'Supplier list type status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'supplier.list.type.ctime'=> array(
 			'code'=>'supplier.list.type.ctime',
 			'internalcode'=>'msuplity."ctime"',
 			'label'=>'Supplier list type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.list.type.mtime'=> array(
 			'code'=>'supplier.list.type.mtime',
 			'internalcode'=>'msuplity."mtime"',
 			'label'=>'Supplier list type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.list.type.editor'=> array(
 			'code'=>'supplier.list.type.editor',
 			'internalcode'=>'msuplity."editor"',
 			'label'=>'Supplier list type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

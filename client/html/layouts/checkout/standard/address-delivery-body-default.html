@@ -34,7 +34,7 @@ $action = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 $config = $this->config( 'client/html/checkout/standard/url/config', array() );
 
 try {
-	$addrArray = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )->toArray();
+	$addrArray = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY )->toArray();
 } catch( Exception $e ) {
 	$addrArray = array();
 }

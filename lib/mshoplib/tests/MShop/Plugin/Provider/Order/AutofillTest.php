@@ -130,9 +130,9 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems' ) )->getMock();
 
 		$item1 = $orderBaseAddressStub->createItem();
-		$item1->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$item1->setType( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$item2 = $orderBaseAddressStub->createItem();
-		$item2->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$item2->setType( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseAddressStub ) );
@@ -180,11 +180,11 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems' ) )->getMock();
 
 		$item1 = $orderBaseServiceStub->createItem();
-		$item1->setType( MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY );
+		$item1->setType( MShop_Order_Item_Base_Service_Base::TYPE_DELIVERY );
 		$item1->setCode( 'unitcode' );
 
 		$item2 = $orderBaseServiceStub->createItem();
-		$item2->setType( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$item2->setType( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 		$item2->setCode( 'unitpaymentcode' );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
@@ -211,7 +211,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdateDelivery()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 
@@ -224,7 +224,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdateDeliveryCode()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1', 'autofill.deliverycode' => 'unitcode' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 
@@ -238,7 +238,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdateDeliveryCodeNotExists()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1', 'autofill.deliverycode' => 'xyz' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 
@@ -251,7 +251,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdatePayment()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 
@@ -264,7 +264,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdatePaymentCode()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1', 'autofill.paymentcode' => 'unitpaymentcode' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 
@@ -278,7 +278,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 	public function testUpdatePaymentCodeNotExists()
 	{
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1', 'autofill.paymentcode' => 'xyz' ) );
 		$object = new MShop_Plugin_Provider_Order_Autofill( TestHelper::getContext(), $this->plugin );
 

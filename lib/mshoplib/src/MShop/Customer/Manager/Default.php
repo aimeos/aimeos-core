@@ -15,7 +15,7 @@
  * @subpackage Customer
  */
 class MShop_Customer_Manager_Default
-	extends MShop_Customer_Manager_Abstract
+	extends MShop_Customer_Manager_Base
 	implements MShop_Customer_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Customer_Manager_Default
 			'code' => 'customer.id',
 			'internalcode' => 'mcus."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'customer.siteid' => array(
 			'label' => 'Customer site ID',
 			'code' => 'customer.siteid',
 			'internalcode' => 'mcus."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.label' => array(
@@ -39,189 +39,189 @@ class MShop_Customer_Manager_Default
 			'code' => 'customer.label',
 			'internalcode' => 'mcus."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.code' => array(
 			'label' => 'Customer code',
 			'code' => 'customer.code',
 			'internalcode' => 'mcus."code"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.salutation' => array(
 			'label' => 'Customer salutation',
 			'code' => 'customer.salutation',
 			'internalcode' => 'mcus."salutation"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.company'=> array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
 			'internalcode' => 'mcus."company"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.vatid'=> array(
 			'label' => 'Customer vatid',
 			'code' => 'customer.vatid',
 			'internalcode' => 'mcus."vatid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
 			'internalcode' => 'mcus."title"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Customer firstname',
 			'code' => 'customer.firstname',
 			'internalcode' => 'mcus."firstname"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Customer lastname',
 			'code' => 'customer.lastname',
 			'internalcode' => 'mcus."lastname"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Customer address part one',
 			'code' => 'customer.address1',
 			'internalcode' => 'mcus."address1"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Customer address part two',
 			'code' => 'customer.address2',
 			'internalcode' => 'mcus."address2"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Customer address part three',
 			'code' => 'customer.address3',
 			'internalcode' => 'mcus."address3"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Customer postal',
 			'code' => 'customer.postal',
 			'internalcode' => 'mcus."postal"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'Customer city',
 			'code' => 'customer.city',
 			'internalcode' => 'mcus."city"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'Customer state',
 			'code' => 'customer.state',
 			'internalcode' => 'mcus."state"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Customer language',
 			'code' => 'customer.languageid',
 			'internalcode' => 'mcus."langid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
 			'internalcode' => 'mcus."countryid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Customer telephone',
 			'code' => 'customer.telephone',
 			'internalcode' => 'mcus."telephone"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'Customer email',
 			'code' => 'customer.email',
 			'internalcode' => 'mcus."email"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 'mcus."telefax"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Customer website',
 			'code' => 'customer.website',
 			'internalcode' => 'mcus."website"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
 			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.status'=> array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
 			'internalcode' => 'mcus."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'mcus."vdate"',
 			'type' => 'date',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.password'=> array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
 			'internalcode' => 'mcus."password"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.ctime'=> array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
 			'internalcode' => 'mcus."ctime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.mtime'=> array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
 			'internalcode' => 'mcus."mtime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.editor'=> array(
 			'code'=>'customer.editor',
 			'internalcode'=>'mcus."editor"',
 			'label'=>'Customer editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -402,7 +402,7 @@ class MShop_Customer_Manager_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $billingAddress->getCompany() );
@@ -424,14 +424,14 @@ class MShop_Customer_Manager_Default
 			$stmt->bind( 20, $billingAddress->getTelefax() );
 			$stmt->bind( 21, $billingAddress->getWebsite() );
 			$stmt->bind( 22, $item->getBirthday() );
-			$stmt->bind( 23, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 23, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 24, $item->getDateVerified() );
 			$stmt->bind( 25, $item->getPassword() );
 			$stmt->bind( 26, $date ); // Modification time
 			$stmt->bind( 27, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 28, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 28, $id, MW_DB_Statement_Base::PARAM_INT );
 				$billingAddress->setId( $id ); // enforce ID to be present
 				$item->setId( $id );
 			} else {
@@ -506,7 +506,7 @@ class MShop_Customer_Manager_Default
 		try
 		{
 			$required = array( 'customer' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/customer/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

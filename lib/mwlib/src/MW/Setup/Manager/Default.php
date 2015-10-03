@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
+class MW_Setup_Manager_Default extends MW_Setup_Manager_Base
 {
 	private $conn;
 	private $schema;

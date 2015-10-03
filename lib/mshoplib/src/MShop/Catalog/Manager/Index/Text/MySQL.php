@@ -25,7 +25,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_text" AS mcatinte USE INDEX ("idx_mscatinte_value", "idx_mscatinte_p_s_lt_la_ty_va") ON mcatinte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.text.relevance' => array(
@@ -33,7 +33,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 			'internalcode' => ':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND MATCH( mcatinte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:catalog.index.text.relevance' => array(
@@ -41,7 +41,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 			'internalcode' => 'MATCH( mcatinte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_FLOAT,
 			'public' => false,
 		),
 	);

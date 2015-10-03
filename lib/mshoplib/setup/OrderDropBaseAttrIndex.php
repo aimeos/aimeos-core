@@ -9,7 +9,7 @@
 /**
  * Drops old indexes in mshop_order_base_product_attr and mshop_order_base_service_attr.
  */
-class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base_product_attr' => array(

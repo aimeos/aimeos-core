@@ -9,7 +9,7 @@
 /**
  * Adds foreign key for langid column to text table.
  */
-class MW_Setup_Task_TextAddForeignKey extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TextAddForeignKey extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

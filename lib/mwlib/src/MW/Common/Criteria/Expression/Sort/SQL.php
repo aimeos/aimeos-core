@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class MW_Common_Criteria_Expression_Sort_SQL
-	extends MW_Common_Criteria_Expression_Abstract
+	extends MW_Common_Criteria_Expression_Base
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
 	private static $operators = array( '+' => 'ASC', '-' => 'DESC' );
@@ -116,13 +116,13 @@ class MW_Common_Criteria_Expression_Sort_SQL
 
 		switch( $type )
 		{
-			case MW_DB_Statement_Abstract::PARAM_BOOL:
+			case MW_DB_Statement_Base::PARAM_BOOL:
 				$value = (bool) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_INT:
+			case MW_DB_Statement_Base::PARAM_INT:
 				$value = (int) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_FLOAT:
+			case MW_DB_Statement_Base::PARAM_FLOAT:
 				$value = (float) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_STR:
+			case MW_DB_Statement_Base::PARAM_STR:
 				if( $operator == '~=' ) {
 					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
@@ -149,17 +149,17 @@ class MW_Common_Criteria_Expression_Sort_SQL
 				throw new MW_Common_Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
 			}
 
-			return MW_DB_Statement_Abstract::PARAM_STR;
+			return MW_DB_Statement_Base::PARAM_STR;
 		}
 		else if( strpos( $item, '.' ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_FLOAT;
+			return MW_DB_Statement_Base::PARAM_FLOAT;
 		}
 		else if( ctype_digit( $item ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_INT;
+			return MW_DB_Statement_Base::PARAM_INT;
 		}
 
-		return MW_DB_Statement_Abstract::PARAM_STR;
+		return MW_DB_Statement_Base::PARAM_STR;
 	}
 }

@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Item_Default
-	extends MShop_Common_Item_ListRef_Abstract
+	extends MShop_Common_Item_ListRef_Base
 	implements MShop_Catalog_Item_Interface
 {
 	private $node;
@@ -35,7 +35,7 @@ class MShop_Catalog_Item_Default
 	{
 		parent::__construct( '', array(), $listItems, $refItems );
 
-		MW_Common_Abstract::checkClassList( 'MShop_Catalog_Item_Interface', $children );
+		MW_Common_Base::checkClassList( 'MShop_Catalog_Item_Interface', $children );
 
 		$this->children = $children;
 		$this->node = $node;

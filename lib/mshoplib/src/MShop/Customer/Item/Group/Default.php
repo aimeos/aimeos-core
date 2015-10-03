@@ -15,7 +15,7 @@
  * @subpackage Customer
  */
 class MShop_Customer_Item_Group_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Customer_Item_Group_Interface
 {
 	private $values;

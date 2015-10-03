@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Decorator_Log
-	extends MShop_Plugin_Provider_Decorator_Abstract
+	extends MShop_Plugin_Provider_Decorator_Base
 	implements MShop_Plugin_Provider_Decorator_Interface
 {
 	/**
@@ -25,7 +25,7 @@ class MShop_Plugin_Provider_Decorator_Log
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$this->getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, MW_Logger_Base::DEBUG );
 
 		$this->getProvider()->register( $p );
 	}
@@ -41,7 +41,7 @@ class MShop_Plugin_Provider_Decorator_Log
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
 		$msg = 'Plugin: ' . __METHOD__ . ', action: ' . $action . ( is_scalar( $value ) ? ', value: ' . $value : '' );
-		$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::DEBUG );
 
 		return $this->getProvider()->update( $order, $action, $value );
 	}

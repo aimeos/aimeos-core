@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Delivery_Manual
-	extends MShop_Service_Provider_Delivery_Abstract
+	extends MShop_Service_Provider_Delivery_Base
 	implements MShop_Service_Provider_Delivery_Interface
 {
 	/**
@@ -25,7 +25,7 @@ class MShop_Service_Provider_Delivery_Manual
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
-		$order->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
+		$order->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
 	}
 
 }

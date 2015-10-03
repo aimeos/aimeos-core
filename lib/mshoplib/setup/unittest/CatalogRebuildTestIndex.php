@@ -9,7 +9,7 @@
 /**
  * Rebuilds the catalog index.
  */
-class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

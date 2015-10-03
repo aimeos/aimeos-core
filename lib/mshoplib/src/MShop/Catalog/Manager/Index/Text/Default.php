@@ -24,7 +24,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_text" AS mcatinte ON mcatinte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.text.relevance' => array(
@@ -35,7 +35,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:catalog.index.text.relevance' => array(
@@ -46,7 +46,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'catalog.index.text.value' => array(
@@ -54,7 +54,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
 			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.text.value' => array(
@@ -62,7 +62,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>'mcatinte."value"',
 			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		)
 	);
@@ -386,7 +386,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
+		MW_Common_Base::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$context = $this->getContext();
 		$sites = $context->getLocale()->getSitePath();
@@ -627,7 +627,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		try
 		{
 			$required = array( 'product' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/catalog/manager/index/text/default/text/search
 			 * Retrieves the text records matched by the given criteria in the database
@@ -836,8 +836,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 	protected function saveText( MW_DB_Statement_Interface $stmt, $id, $siteid, $refid, $lang, $listtype,
 		$reftype, $domain, $content, $date, $editor )
 	{
-		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-		$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+		$stmt->bind( 1, $id, MW_DB_Statement_Base::PARAM_INT );
+		$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
 		$stmt->bind( 3, $refid );
 		$stmt->bind( 4, $lang );
 		$stmt->bind( 5, $listtype );

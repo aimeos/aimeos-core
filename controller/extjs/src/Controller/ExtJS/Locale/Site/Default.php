@@ -16,7 +16,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Locale_Site_Default
-	extends Controller_ExtJS_Abstract
+	extends Controller_ExtJS_Base
 	implements Controller_ExtJS_Common_Interface
 {
 	private $manager = null;
@@ -197,7 +197,7 @@ class Controller_ExtJS_Locale_Site_Default
 			}
 			else
 			{
-				$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+				$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Base::LEVEL_LIST );
 			}
 
 			$result[] = $this->createNodeArray( $item );

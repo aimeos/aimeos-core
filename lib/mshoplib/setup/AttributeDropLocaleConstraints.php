@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from attribute tables.
  */
-class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_list_type' => array(

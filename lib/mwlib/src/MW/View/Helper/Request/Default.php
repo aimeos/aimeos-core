@@ -15,7 +15,7 @@
  * @subpackage View
  */
 class MW_View_Helper_Request_Default
-	extends MW_View_Helper_Abstract
+	extends MW_View_Helper_Base
 	implements MW_View_Helper_Interface
 {
 	private $body;

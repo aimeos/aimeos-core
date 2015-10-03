@@ -70,7 +70,7 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends PHPUnit_Fr
 
 	public function testProcess()
 	{
-		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
 		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$addrManager = $manager->getSubManager( 'address' );
 

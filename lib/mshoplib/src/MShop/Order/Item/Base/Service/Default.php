@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Base_Service_Default
-	extends MShop_Order_Item_Base_Service_Abstract
+	extends MShop_Order_Item_Base_Service_Base
 	implements MShop_Order_Item_Base_Service_Interface
 {
 	private $price;
@@ -37,7 +37,7 @@ class MShop_Order_Item_Base_Service_Default
 		$this->values = $values;
 		$this->price = $price;
 
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
 		$this->attributes = $attributes;
 	}
 
@@ -319,7 +319,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setAttributes( array $attributes )
 	{
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;

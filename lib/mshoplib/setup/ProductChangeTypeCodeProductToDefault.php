@@ -9,7 +9,7 @@
 /**
  * Changes default product type and label values.
  */
-class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_Base
 {
 	private $mysql = 'UPDATE "mshop_product_type" SET "code" = \'default\', "label" = \'Article\' WHERE "code" = \'product\'';
 

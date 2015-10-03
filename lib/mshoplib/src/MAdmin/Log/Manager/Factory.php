@@ -15,7 +15,7 @@
  * @subpackage Log
  */
 class MAdmin_Log_Manager_Factory
-	extends MAdmin_Common_Factory_Abstract
+	extends MAdmin_Common_Factory_Base
 	implements MShop_Common_Factory_Interface
 {
 	/**

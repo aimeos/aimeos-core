@@ -14,7 +14,7 @@
  * @subpackage Service
  */
 class MShop_Service_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Service_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Service_Manager_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_service_type" AS mserty ON ( mser."typeid" = mserty."id" )' ),
 			'label' => 'Service type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'service.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Service_Manager_Type_Default
 			'internalcode' => 'mserty."siteid"',
 			'label' => 'Service type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'service.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Service_Manager_Type_Default
 			'internalcode' => 'mserty."code"',
 			'label' => 'Service type code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.type.domain' => array(
 			'code' => 'service.type.domain',
 			'internalcode' => 'mserty."domain"',
 			'label' => 'Service type domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.type.label' => array(
 			'code' => 'service.type.label',
 			'internalcode' => 'mserty."label"',
 			'label' => 'Service type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.type.status' => array(
 			'code' => 'service.type.status',
 			'internalcode' => 'mserty."status"',
 			'label' => 'Service type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'service.type.ctime'=> array(
 			'code'=>'service.type.ctime',
 			'internalcode'=>'mserty."ctime"',
 			'label'=>'Service type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.type.mtime'=> array(
 			'code'=>'service.type.mtime',
 			'internalcode'=>'mserty."mtime"',
 			'label'=>'Service type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.type.editor'=> array(
 			'code'=>'service.type.editor',
 			'internalcode'=>'mserty."editor"',
 			'label'=>'Service type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

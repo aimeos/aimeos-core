@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_PHP extends MW_Common_Criteria_Abstract
+class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 {
 	private $conditions;
 	private $sortations = array();
@@ -206,7 +206,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Abstract
 	 */
 	public function setSortations( array $sortations )
 	{
-		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
 
 		$this->sortations = $sortations;
 

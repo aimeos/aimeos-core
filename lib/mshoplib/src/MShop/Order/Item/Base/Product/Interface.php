@@ -224,7 +224,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	/**
 	 * Returns the current delivery status of the order product item.
 	 * The returned status values are the STAT_* constants from the
-	 * MShop_Order_Item_Abstract class
+	 * MShop_Order_Item_Base class
 	 *
 	 * @return integer Delivery status of the product
 	 */
@@ -233,7 +233,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	/**
 	 * Sets the new delivery status of the order product item.
 	 * Possible status values are the STAT_* constants from the
-	 * MShop_Order_Item_Abstract class
+	 * MShop_Order_Item_Base class
 	 *
 	 * @param integer $value New delivery status of the product
 	 * @return void

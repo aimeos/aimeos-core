@@ -15,7 +15,7 @@
  * @subpackage Cache
  */
 class MAdmin_Cache_Manager_None
-	extends MAdmin_Common_Manager_Abstract
+	extends MAdmin_Common_Manager_Base
 	implements MAdmin_Cache_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MAdmin_Cache_Manager_None
 			'internalcode' => '"id"',
 			'label' => 'Cache ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Address_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Address_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Address_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_address" AS mordbaad ON ( mordba."id" = mordbaad."baseid" )' ),
 			'label' => 'Order base address ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.baseid' => array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Address_Default
 			'internalcode' => 'mordbaad."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.siteid' => array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Address_Default
 			'internalcode' => 'mordbaad."siteid"',
 			'label' => 'Order base address site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.addressid' => array(
@@ -49,168 +49,168 @@ class MShop_Order_Manager_Base_Address_Default
 			'internalcode' => 'mordbaad."addrid"',
 			'label' => 'Order base customer address ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.type' => array(
 			'code' => 'order.base.address.type',
 			'internalcode' => 'mordbaad."type"',
 			'label' => 'Order base address type',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.company' => array(
 			'code' => 'order.base.address.company',
 			'internalcode' => 'mordbaad."company"',
 			'label' => 'Order base address company',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.vatid' => array(
 			'code' => 'order.base.address.vatid',
 			'internalcode' => 'mordbaad."vatid"',
 			'label' => 'Order base address Vat ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.salutation' => array(
 			'label' => 'Order address salutation',
 			'code' => 'order.base.address.salutation',
 			'internalcode' => 'mordbaad."salutation"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.title' => array(
 			'code' => 'order.base.address.title',
 			'internalcode' => 'mordbaad."title"',
 			'label' => 'Order base address title',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.firstname' => array(
 			'code' => 'order.base.address.firstname',
 			'internalcode' => 'mordbaad."firstname"',
 			'label' => 'Order base address firstname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.lastname' => array(
 			'code' => 'order.base.address.lastname',
 			'internalcode' => 'mordbaad."lastname"',
 			'label' => 'Order base address lastname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.address1' => array(
 			'code' => 'order.base.address.address1',
 			'internalcode' => 'mordbaad."address1"',
 			'label' => 'Order base address part one',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.address2' => array(
 			'code' => 'order.base.address.address2',
 			'internalcode' => 'mordbaad."address2"',
 			'label' => 'Order base address part two',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.address3' => array(
 			'code' => 'order.base.address.address3',
 			'internalcode' => 'mordbaad."address3"',
 			'label' => 'Order base address part three',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.postal' => array(
 			'code' => 'order.base.address.postal',
 			'internalcode' => 'mordbaad."postal"',
 			'label' => 'Order base address postal',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.city' => array(
 			'code' => 'order.base.address.city',
 			'internalcode' => 'mordbaad."city"',
 			'label' => 'Order base address city',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.state' => array(
 			'code' => 'order.base.address.state',
 			'internalcode' => 'mordbaad."state"',
 			'label' => 'Order base address state',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.countryid' => array(
 			'code' => 'order.base.address.countryid',
 			'internalcode' => 'mordbaad."countryid"',
 			'label' => 'Order base address country ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.languageid' => array(
 			'code' => 'order.base.address.languageid',
 			'internalcode' => 'mordbaad."langid"',
 			'label' => 'Order base address language ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.telephone' => array(
 			'code' => 'order.base.address.telephone',
 			'internalcode' => 'mordbaad."telephone"',
 			'label' => 'Order base address telephone',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.email' => array(
 			'code' => 'order.base.address.email',
 			'internalcode' => 'mordbaad."email"',
 			'label' => 'Order base address email',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.telefax' => array(
 			'code' => 'order.base.address.telefax',
 			'internalcode' => 'mordbaad."telefax"',
 			'label' => 'Order base address telefax',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.website' => array(
 			'code' => 'order.base.address.website',
 			'internalcode' => 'mordbaad."website"',
 			'label' => 'Order base address website',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.flag' => array(
 			'code' => 'order.base.address.flag',
 			'internalcode' => 'mordbaad."flag"',
 			'label' => 'Order base address flag',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.address.mtime' => array(
 			'code' => 'order.base.address.mtime',
 			'internalcode' => 'mordbaad."mtime"',
 			'label' => 'Order base address modification date/time',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.ctime'=> array(
 			'code'=>'order.base.address.ctime',
 			'internalcode'=>'mordbaad."ctime"',
 			'label'=>'Order base address create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.address.editor'=> array(
 			'code'=>'order.base.address.editor',
 			'internalcode'=>'mordbaad."editor"',
 			'label'=>'Order base address editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -403,34 +403,34 @@ class MShop_Order_Manager_Base_Address_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 5, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 6, $item->getVatID(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 7, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 8, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 9, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 10, $item->getLastname(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 11, $item->getAddress1(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 12, $item->getAddress2(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 13, $item->getAddress3(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 14, $item->getPostal(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 15, $item->getCity(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 16, $item->getState(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 17, $item->getCountryId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 18, $item->getLanguageId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 19, $item->getTelephone(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 20, $item->getEmail(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 21, $item->getTelefax(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 22, $item->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 23, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 24, $date, MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 5, $item->getCompany(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 6, $item->getVatID(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 7, $item->getSalutation(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 8, $item->getTitle(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 9, $item->getFirstname(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 10, $item->getLastname(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 11, $item->getAddress1(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 12, $item->getAddress2(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 13, $item->getAddress3(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 14, $item->getPostal(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 15, $item->getCity(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 16, $item->getState(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 17, $item->getCountryId(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 18, $item->getLanguageId(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 19, $item->getTelephone(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 20, $item->getEmail(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 21, $item->getTelefax(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 22, $item->getWebsite(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 23, $item->getFlag(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 24, $date, MW_DB_Statement_Base::PARAM_STR );
 			$stmt->bind( 25, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 26, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 26, $date ); // ctime
@@ -586,7 +586,7 @@ class MShop_Order_Manager_Base_Address_Default
 		try
 		{
 			$required = array( 'order.base.address' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/address/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

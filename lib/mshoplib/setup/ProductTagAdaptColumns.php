@@ -9,7 +9,7 @@
 /**
  * Moves domain to separate type table and references tags via product list table.
  */
-class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_product_tag' => array(

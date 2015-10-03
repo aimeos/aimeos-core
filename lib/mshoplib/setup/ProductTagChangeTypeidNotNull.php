@@ -10,7 +10,7 @@
 /**
  * Changes product_tag.typeid to not null.
  */
-class MW_Setup_Task_ProductTagChangeTypeidNotNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductTagChangeTypeidNotNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product_tag"

@@ -29,7 +29,7 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 			'refid' => 'referenceid',
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -116,14 +116,14 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MR, $this->object->getSalutation() );
+		$this->assertEquals( MShop_Common_Item_Address_Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
 
 	public function testSetSalutation()
 	{
-		$this->object->setSalutation( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY );
+		$this->object->setSalutation( MShop_Common_Item_Address_Base::SALUTATION_COMPANY );
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY, $this->object->getSalutation() );
+		$this->assertEquals( MShop_Common_Item_Address_Base::SALUTATION_COMPANY, $this->object->getSalutation() );
 	}
 
 	public function testGetTitle()

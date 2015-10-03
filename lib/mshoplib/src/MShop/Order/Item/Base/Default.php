@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
+class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 {
 	private $price;
 	private $locale;
@@ -38,12 +38,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Address_Interface', $addresses );
-		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Service_Interface', $services );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Address_Interface', $addresses );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Interface', $services );
 
 		foreach( $coupons as $couponProducts ) {
-			MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $couponProducts );
+			MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $couponProducts );
 		}
 
 		$this->price = $price;
@@ -102,7 +102,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->values['id'] = MShop_Common_Item_Abstract::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->values['id'] = MShop_Common_Item_Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
@@ -344,7 +344,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $domain Address domain, usually "billing" or "delivery"
 	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
 	 */
-	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
+	public function getAddress( $domain = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT )
 	{
 		if( !isset( $this->addresses[$domain] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
@@ -362,7 +362,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
 	 */
 	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
-		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
+		$domain = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT )
 	{
 		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return; }
 
@@ -384,9 +384,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
-	 * @param string $type Address type defined in MShop_Order_Item_Base_Address_Abstract
+	 * @param string $type Address type defined in MShop_Order_Item_Base_Address_Base
 	 */
-	public function deleteAddress( $type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY )
+	public function deleteAddress( $type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY )
 	{
 		if( !isset( $this->addresses[$type] ) ) {
 			return;
@@ -565,13 +565,13 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param integer $what Test for the specific type of completeness
 	 * @throws MShop_Order_Exception if there are no products in the basket
 	 */
-	public function check( $what = MShop_Order_Item_Base_Abstract::PARTS_ALL )
+	public function check( $what = MShop_Order_Item_Base_Base::PARTS_ALL )
 	{
 		$this->checkParts( $what );
 
 		$this->notifyListeners( 'check.before', $what );
 
-		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
+		if( ( $what & MShop_Order_Item_Base_Base::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 

@@ -9,7 +9,7 @@
 /**
  * Adds addrid column in order base address table.
  */
-class MW_Setup_Task_OrderAddBaseAddressAddrId extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddBaseAddressAddrId extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "mshop_order_base_address" ADD "addrid" VARCHAR(32) NOT NULL AFTER "siteid"';
 

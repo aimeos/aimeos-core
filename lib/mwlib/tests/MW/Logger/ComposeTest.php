@@ -13,9 +13,9 @@ class MW_Logger_ComposeTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$loggers[] = new MW_Logger_File( 'tmp/error1.log', MW_Logger_Abstract::ERR );
-		$loggers[] = new MW_Logger_File( 'tmp/error2.log', MW_Logger_Abstract::INFO, array( 'test' ) );
-		$loggers[] = new MW_Logger_File( 'tmp/error3.log', MW_Logger_Abstract::DEBUG );
+		$loggers[] = new MW_Logger_File( 'tmp/error1.log', MW_Logger_Base::ERR );
+		$loggers[] = new MW_Logger_File( 'tmp/error2.log', MW_Logger_Base::INFO, array( 'test' ) );
+		$loggers[] = new MW_Logger_File( 'tmp/error3.log', MW_Logger_Base::DEBUG );
 
 		$this->object = new MW_Logger_Compose( $loggers );
 	}
@@ -31,7 +31,7 @@ class MW_Logger_ComposeTest extends PHPUnit_Framework_TestCase
 
 	public function testLog()
 	{
-		$this->object->log( 'warning test', MW_Logger_Abstract::WARN );
+		$this->object->log( 'warning test', MW_Logger_Base::WARN );
 
 		$this->assertEquals( '', file_get_contents( 'tmp/error1.log' ) );
 		$this->assertEquals( '', file_get_contents( 'tmp/error2.log' ) );
@@ -41,7 +41,7 @@ class MW_Logger_ComposeTest extends PHPUnit_Framework_TestCase
 
 	public function testLogFacility()
 	{
-		$this->object->log( 'warning test', MW_Logger_Abstract::WARN, 'test' );
+		$this->object->log( 'warning test', MW_Logger_Base::WARN, 'test' );
 
 		$this->assertEquals( '', file_get_contents( 'tmp/error1.log' ) );
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error2.log' ) );

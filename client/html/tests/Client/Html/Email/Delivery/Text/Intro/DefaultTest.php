@@ -86,7 +86,7 @@ class Client_Html_Email_Delivery_Text_Intro_DefaultTest extends PHPUnit_Framewor
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_DISPATCHED );
+		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_DISPATCHED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -100,7 +100,7 @@ class Client_Html_Email_Delivery_Text_Intro_DefaultTest extends PHPUnit_Framewor
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_REFUSED );
+		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_REFUSED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -114,7 +114,7 @@ class Client_Html_Email_Delivery_Text_Intro_DefaultTest extends PHPUnit_Framewor
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_RETURNED );
+		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_RETURNED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();

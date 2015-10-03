@@ -9,7 +9,7 @@
 /**
  * Adds priceid/textid column to catalog index price/text table.
  */
-class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "mshop_catalog_index_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL';
 

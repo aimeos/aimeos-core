@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Manager_Default
-	extends MShop_Locale_Manager_Abstract
+	extends MShop_Locale_Manager_Base
 	implements MShop_Locale_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Locale_Manager_Default
 			'internalcode' => 'mloc."id"',
 			'label' => 'Locale ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Locale_Manager_Default
 			'internalcode' => 'mloc."siteid"',
 			'label' => 'Locale site',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.languageid' => array(
@@ -40,49 +40,49 @@ class MShop_Locale_Manager_Default
 			'internalcode' => 'mloc."langid"',
 			'label' => 'Locale language ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.currencyid' => array(
 			'code' => 'locale.currencyid',
 			'internalcode' => 'mloc."currencyid"',
 			'label' => 'Locale currency ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.position' => array(
 			'code' => 'locale.position',
 			'internalcode' => 'mloc."pos"',
 			'label' => 'Locale position',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'locale.status' => array(
 			'code' => 'locale.status',
 			'internalcode' => 'mloc."status"',
 			'label' => 'Locale status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'locale.ctime'=> array(
 			'code'=>'locale.ctime',
 			'internalcode'=>'mloc."ctime"',
 			'label'=>'Locale create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.mtime'=> array(
 			'code'=>'locale.mtime',
 			'internalcode'=>'mloc."mtime"',
 			'label'=>'Locale modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.editor'=> array(
 			'code'=>'locale.editor',
 			'internalcode'=>'mloc."editor"',
 			'label'=>'Locale editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -331,16 +331,16 @@ class MShop_Locale_Manager_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
 			$stmt->bind( 3, $item->getCurrencyId() );
-			$stmt->bind( 4, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 6, $date ); // mtime
 			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
 				$stmt->bind( 8, $date ); // ctime
@@ -641,7 +641,7 @@ class MShop_Locale_Manager_Default
 	{
 		$stmt = $conn->create( $sql );
 
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Base::DEBUG );
 
 		return $stmt->execute();
 	}

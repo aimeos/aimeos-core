@@ -111,7 +111,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConditionString()
 	{
-		$types = array( 'int_column' => MW_DB_Statement_Abstract::PARAM_INT, 'str_column' => MW_DB_Statement_Abstract::PARAM_STR );
+		$types = array( 'int_column' => MW_DB_Statement_Base::PARAM_INT, 'str_column' => MW_DB_Statement_Base::PARAM_STR );
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new Criteria_Plugin_SQLTest() );
 
@@ -146,7 +146,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
 		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionString( $types, $translations ) );
 
-		$types = array( 'column' => MW_DB_Statement_Abstract::PARAM_BOOL);
+		$types = array( 'column' => MW_DB_Statement_Base::PARAM_BOOL);
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
 		$this->assertEquals( "column = 1", $this->object->getConditionString( $types ) );
 	}
@@ -155,7 +155,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 	public function testGetConditionStringInvalidOperatorForNull()
 	{
 		// test exception in _createTerm:  'null value not allowed for operator'
-		$types = array( 'str_column' => MW_DB_Statement_Abstract::PARAM_STR );
+		$types = array( 'str_column' => MW_DB_Statement_Base::PARAM_STR );
 
 		$this->object->setConditions( $this->object->compare( '~=', 'str_column', null ) );
 
@@ -166,7 +166,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConditionStringInvalidName()
 	{
-		$types = array( 'int_column' => MW_DB_Statement_Abstract::PARAM_INT );
+		$types = array( 'int_column' => MW_DB_Statement_Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
 		$this->setExpectedException('MW_Common_Exception');
@@ -193,7 +193,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSortationString()
 	{
-		$types = array( 'asc_column' => MW_DB_Statement_Abstract::PARAM_INT, 'desc_column' => MW_DB_Statement_Abstract::PARAM_STR );
+		$types = array( 'asc_column' => MW_DB_Statement_Base::PARAM_INT, 'desc_column' => MW_DB_Statement_Base::PARAM_STR );
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
 
 		$sortations = array();
@@ -206,7 +206,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSortationStringInvalidName()
 	{
-		$types = array( 'asc_column' => MW_DB_Statement_Abstract::PARAM_INT );
+		$types = array( 'asc_column' => MW_DB_Statement_Base::PARAM_INT );
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
@@ -224,7 +224,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSortationNoSortation()
 	{
-		$types = array( 'asc_column' => MW_DB_Statement_Abstract::PARAM_INT, 'desc_column' => MW_DB_Statement_Abstract::PARAM_STR );
+		$types = array( 'asc_column' => MW_DB_Statement_Base::PARAM_INT, 'desc_column' => MW_DB_Statement_Base::PARAM_STR );
 
 		$this->assertEquals('asc_column ASC', $this->object->getSortationString( $types ) );
 

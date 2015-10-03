@@ -9,7 +9,7 @@
 /**
  * Changes countryid column in customer table.
  */
-class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "mshop_customer" MODIFY "countryid" CHAR(2) NULL';
 

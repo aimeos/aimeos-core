@@ -15,7 +15,7 @@
  * @subpackage Customer
  */
 class Controller_Jobs_Customer_Email_Watch_Factory
-	extends Controller_Jobs_Common_Factory_Abstract
+	extends Controller_Jobs_Common_Factory_Base
 	implements Controller_Jobs_Common_Factory_Interface
 {
 	/**

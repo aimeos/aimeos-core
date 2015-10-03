@@ -9,7 +9,7 @@
  * Migrates "Complete" plugin to "BasketLimits".
  */
 
-class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'minorder' => array(

@@ -190,7 +190,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Catalog item not found' );
 		}
 
-		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), MW_Tree_Manager_Base::LEVEL_TREE );
 		$categoryItem = $rootItem->getChild( 0 );
 		$miscItem = $categoryItem->getChild( 2 );
 
@@ -224,7 +224,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
 
-		$tree = $this->object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
+		$tree = $this->object->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_TREE, $search );
 
 		$categorycat = $tree->getChild( 0 );
 		$groupcat = $tree->getChild( 1 );

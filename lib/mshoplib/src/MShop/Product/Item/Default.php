@@ -16,7 +16,7 @@
  * @subpackage Product
  */
 class MShop_Product_Item_Default
-	extends MShop_Common_Item_ListRef_Abstract
+	extends MShop_Common_Item_ListRef_Base
 	implements MShop_Product_Item_Interface
 {
 	private $values;

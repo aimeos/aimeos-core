@@ -149,7 +149,7 @@ try
 	$dbm = new MW_DB_Manager_PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
 
-	$logger = new MW_Logger_Errorlog( MW_Logger_ABSTRACT::INFO );
+	$logger = new MW_Logger_Errorlog( MW_Logger_Base::INFO );
 	$ctx->setLogger( $logger );
 
 	$session = new MW_Session_None();

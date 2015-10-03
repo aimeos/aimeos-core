@@ -9,7 +9,7 @@
 /**
  * Adds code column to supplier table.
  */
-class MW_Setup_Task_SupplierAddCode extends MW_Setup_Task_Abstract
+class MW_Setup_Task_SupplierAddCode extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_supplier' => 'ALTER TABLE "mshop_supplier" ADD "code" VARCHAR(32) NOT NULL DEFAULT \'\' AFTER "siteid"',

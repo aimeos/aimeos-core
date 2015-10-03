@@ -9,7 +9,7 @@
 /**
  * Adds performance records to product table.
  */
-class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 {
 	private $count = 9000;
 

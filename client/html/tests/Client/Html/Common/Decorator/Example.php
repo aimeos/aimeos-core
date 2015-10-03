@@ -10,7 +10,7 @@
  * Provides example decorator for html clients.
  */
 class Client_Html_Common_Decorator_Example
-	extends Client_Html_Common_Decorator_Abstract
+	extends Client_Html_Common_Decorator_Base
 	implements Client_Html_Common_Decorator_Interface
 {
 	public function additionalMethod()

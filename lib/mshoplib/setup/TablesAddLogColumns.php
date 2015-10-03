@@ -9,7 +9,7 @@
 /**
  * Adds mtime, ctime and editor columns to all tables.
  */
-class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TablesAddLogColumns extends MW_Setup_Task_Base
 {
 	private $mysqlProductUser = 'ALTER TABLE "mshop_product" CHANGE "user" "editor" VARCHAR(255) NOT NULL';
 

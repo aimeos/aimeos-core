@@ -53,7 +53,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateNone()
 	{
-		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so update shall not be executed
+		// MShop_Order_Item_Base_Base::PARTS_PRODUCT not set, so update shall not be executed
 		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
@@ -61,7 +61,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateOk()
 	{
-		$constant = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$constant = MShop_Order_Item_Base_Base::PARTS_PRODUCT;
 		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after', $constant ) );
 	}
@@ -74,7 +74,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( MShop_Plugin_Provider_Exception $e )
@@ -87,7 +87,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateNoStockItem()
 	{
-		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$const = MShop_Order_Item_Base_Base::PARTS_PRODUCT;
 		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
 
 		$this->order->addProduct( $this->getOrderProduct( 'QRST' ) );
@@ -98,7 +98,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateStockUnlimited()
 	{
-		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$const = MShop_Order_Item_Base_Base::PARTS_PRODUCT;
 		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
 
 		$this->order->addProduct( $this->getOrderProduct( 'MNOP' ) );

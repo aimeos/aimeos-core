@@ -16,7 +16,7 @@
  */
 
 class MShop_Coupon_Manager_Code_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Coupon_Manager_Code_Interface
 {
 	private $searchConfig = array(
@@ -26,7 +26,7 @@ class MShop_Coupon_Manager_Code_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."couponid")' ),
 			'label'=>'Coupon code ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.code.siteid'=> array(
@@ -34,7 +34,7 @@ class MShop_Coupon_Manager_Code_Default
 			'internalcode'=>'mcouco."siteid"',
 			'label'=>'Coupon code site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.code.couponid'=> array(
@@ -42,7 +42,7 @@ class MShop_Coupon_Manager_Code_Default
 			'internalcode'=>'mcouco."couponid"',
 			'label'=>'Coupon ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.code.code'=> array(
@@ -50,49 +50,49 @@ class MShop_Coupon_Manager_Code_Default
 			'internalcode'=>'mcouco."code"',
 			'label'=>'Coupon code value',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.count'=> array(
 			'code'=>'coupon.code.count',
 			'internalcode'=>'mcouco."count"',
 			'label'=>'Coupon code quantity',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.datestart'=> array(
 			'code'=>'coupon.code.datestart',
 			'internalcode'=>'mcouco."start"',
 			'label'=>'Coupon code start date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.dateend'=> array(
 			'code'=>'coupon.code.dateend',
 			'internalcode'=>'mcouco."end"',
 			'label'=>'Coupon code end date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.ctime'=> array(
 			'code'=>'coupon.code.ctime',
 			'internalcode'=>'mcouco."ctime"',
 			'label'=>'Coupon code create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.mtime'=> array(
 			'code'=>'coupon.code.mtime',
 			'internalcode'=>'mcouco."mtime"',
 			'label'=>'Coupon code modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'coupon.code.editor'=> array(
 			'code'=>'coupon.code.editor',
 			'internalcode'=>'mcouco."editor"',
 			'label'=>'Coupon code editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -398,17 +398,17 @@ class MShop_Coupon_Manager_Code_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getCouponId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCouponId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getCount(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getCount(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $item->getDateStart() );
 			$stmt->bind( 6, $item->getDateEnd() );
 			$stmt->bind( 7, $date ); // mtime
 			$stmt->bind( 8, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 9, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 9, $date ); // ctime
@@ -523,7 +523,7 @@ class MShop_Coupon_Manager_Code_Default
 		try
 		{
 			$required = array( 'coupon.code' );
-			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
+			$level = MShop_Locale_Manager_Base::SITE_PATH;
 
 			/** mshop/coupon/manager/code/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -721,7 +721,7 @@ class MShop_Coupon_Manager_Code_Default
 			$path = 'mshop/coupon/manager/code/default/item/counter';
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $context->getConfig()->get( $path, $path ) ) );
 
-			$stmt->bind( 1, $amount, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $amount, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( 3, $context->getEditor() );
 			$stmt->bind( 4, $code );

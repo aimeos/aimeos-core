@@ -14,7 +14,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Property_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Product_Manager_Property_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Product_Manager_Property_Type_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_product_property_type" AS mproprty ON ( mpropr."typeid" = mproprty."id" )' ),
 			'label' => 'Product property type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.type.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Product_Manager_Property_Type_Default
 			'internalcode' => 'mproprty."siteid"',
 			'label' => 'Product property type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Product_Manager_Property_Type_Default
 			'internalcode' => 'mproprty."code"',
 			'label' => 'Product property type code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.type.domain' => array(
 			'code' => 'product.property.type.domain',
 			'internalcode' => 'mproprty."domain"',
 			'label' => 'Product property type domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.type.label' => array(
 			'code' => 'product.property.type.label',
 			'internalcode' => 'mproprty."label"',
 			'label' => 'Product property type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.type.status' => array(
 			'code' => 'product.property.type.status',
 			'internalcode' => 'mproprty."status"',
 			'label' => 'Product property type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.property.type.mtime'=> array(
 			'code'=>'product.property.type.mtime',
 			'internalcode'=>'mproprty."mtime"',
 			'label'=>'Product property type modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.type.ctime'=> array(
 			'code'=>'product.property.type.ctime',
 			'internalcode'=>'mproprty."ctime"',
 			'label'=>'Product property type creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.property.type.editor'=> array(
 			'code'=>'product.property.type.editor',
 			'internalcode'=>'mproprty."editor"',
 			'label'=>'Product property type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

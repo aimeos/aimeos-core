@@ -7,9 +7,9 @@
 
 
 /**
- * Test class for Controller_Jobs_Common_Factory_AbstractTest.
+ * Test class for Controller_Jobs_Common_Factory_BaseTest.
  */
-class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
+class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $aimeos;
@@ -109,7 +109,7 @@ class Controller_Jobs_Common_Factory_AbstractTest extends PHPUnit_Framework_Test
 
 
 class Controller_Jobs_Common_Factory_TestAbstract
-	extends Controller_Jobs_Common_Factory_Abstract
+	extends Controller_Jobs_Common_Factory_Base
 {
 	public static function addDecoratorsPublic( MShop_Context_Item_Interface $context, Aimeos $aimeos,
 		Controller_Jobs_Interface $controller, array $decorators, $classprefix )

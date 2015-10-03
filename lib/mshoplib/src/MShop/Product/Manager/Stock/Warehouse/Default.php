@@ -15,7 +15,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Stock_Warehouse_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Product_Manager_Stock_Warehouse_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock_warehouse" AS mprostwa ON mprost."warehouseid" = mprostwa."id"' ),
 			'label'=>'Product stock warehouse ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.warehouse.siteid'=> array(
@@ -33,7 +33,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 			'internalcode'=>'mprostwa."siteid"',
 			'label'=>'Product stock warehouse site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.warehouse.code'=> array(
@@ -41,42 +41,42 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 			'internalcode'=>'mprostwa."code"',
 			'label'=>'Product stock warehouse code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.warehouse.label'=> array(
 			'code'=>'product.stock.warehouse.label',
 			'internalcode'=>'mprostwa."label"',
 			'label'=>'Product stock warehouse label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.warehouse.status'=> array(
 			'code'=>'product.stock.warehouse.status',
 			'internalcode'=>'mprostwa."status"',
 			'label'=>'Product stock warehouse status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'product.stock.warehouse.mtime'=> array(
 			'code'=>'product.stock.warehouse.mtime',
 			'internalcode'=>'mprostwa."mtime"',
 			'label'=>'Product stock warehouse modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.warehouse.ctime'=> array(
 			'code'=>'product.stock.warehouse.ctime',
 			'internalcode'=>'mprostwa."ctime"',
 			'label'=>'Product stock warehouse creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'product.stock.warehouse.editor'=> array(
 			'code'=>'product.stock.warehouse.editor',
 			'internalcode'=>'mprostwa."editor"',
 			'label'=>'Product stock warehouse editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -333,15 +333,15 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
 			$stmt->bind( 3, $item->getLabel() );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $date ); //mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 7, $date ); //ctime
@@ -500,7 +500,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 		try
 		{
 			$required = array( 'product.stock.warehouse' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/product/manager/stock/warehouse/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

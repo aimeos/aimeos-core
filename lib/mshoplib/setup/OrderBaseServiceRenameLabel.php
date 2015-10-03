@@ -9,7 +9,7 @@
 /**
  * Rename "label" column to "name" in order service table.
  */
-class MW_Setup_Task_OrderBaseServiceRenameLabel extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderBaseServiceRenameLabel extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'label' => 'ALTER TABLE "mshop_order_base_service" CHANGE "label" "name" VARCHAR( 255 ) NOT NULL',

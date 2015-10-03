@@ -15,7 +15,7 @@
  * @subpackage Attribute
  */
 class MShop_Attribute_Item_Default
-	extends MShop_Common_Item_ListRef_Abstract
+	extends MShop_Common_Item_ListRef_Base
 	implements MShop_Attribute_Item_Interface
 {
 	private $values;

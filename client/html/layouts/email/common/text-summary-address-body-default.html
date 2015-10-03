@@ -6,9 +6,9 @@
  */
 
 $salutations = array(
-	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+	MShop_Common_Item_Address_Base::SALUTATION_MR,
+	MShop_Common_Item_Address_Base::SALUTATION_MRS,
+	MShop_Common_Item_Address_Base::SALUTATION_MISS,
 );
 
 ?>
@@ -18,7 +18,7 @@ $salutations = array(
 <?php
 	try
 	{
-		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 		echo preg_replace( array( "/\n+/m", '/  /' ), array( "\n", ' ' ), trim( strip_tags( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
@@ -68,7 +68,7 @@ $salutations = array(
 <?php
 	try
 	{
-		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 
 		echo preg_replace( array( "/\n+/m", '/  /' ), array( "\n", ' ' ), trim( strip_tags( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

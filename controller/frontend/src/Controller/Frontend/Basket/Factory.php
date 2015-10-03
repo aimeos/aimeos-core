@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Basket_Factory
-	extends Controller_Frontend_Common_Factory_Abstract
+	extends Controller_Frontend_Common_Factory_Base
 	implements Controller_Frontend_Common_Factory_Interface
 {
 	public static function createController( MShop_Context_Item_Interface $context, $name = null )

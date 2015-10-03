@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Catalog_Index_Optimize_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**

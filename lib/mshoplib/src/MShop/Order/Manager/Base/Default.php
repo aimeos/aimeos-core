@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
+class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 {
 	private $searchConfig = array(
 		'order.base.id'=> array(
@@ -23,7 +23,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base" AS mordba ON ( mord."baseid" = mordba."id" )' ),
 			'label'=>'Order base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.siteid'=> array(
@@ -31,7 +31,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			'internalcode'=>'mordba."siteid"',
 			'label'=>'Order base site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.sitecode'=> array(
@@ -39,84 +39,84 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			'internalcode'=>'mordba."sitecode"',
 			'label'=>'Order base site code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.customerid'=> array(
 			'code'=>'order.base.customerid',
 			'internalcode'=>'mordba."customerid"',
 			'label'=>'Order base customer ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.languageid'=> array(
 			'code'=>'order.base.languageid',
 			'internalcode'=>'mordba."langid"',
 			'label'=>'Order base language code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.currencyid'=> array(
 			'code'=>'order.base.currencyid',
 			'internalcode'=>'mordba."currencyid"',
 			'label'=>'Order base currencyid code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.price'=> array(
 			'code'=>'order.base.price',
 			'internalcode'=>'mordba."price"',
 			'label'=>'Order base price amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.costs'=> array(
 			'code'=>'order.base.costs',
 			'internalcode'=>'mordba."costs"',
 			'label'=>'Order base shipping amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.rebate'=> array(
 			'code'=>'order.base.rebate',
 			'internalcode'=>'mordba."rebate"',
 			'label'=>'Order base rebate amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.comment'=> array(
 			'code'=>'order.base.comment',
 			'internalcode'=>'mordba."comment"',
 			'label'=>'Order base comment',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.status'=> array(
 			'code'=>'order.base.status',
 			'internalcode'=>'mordba."status"',
 			'label'=>'Order base status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'order.base.mtime'=> array(
 			'code'=>'order.base.mtime',
 			'internalcode'=>'mordba."mtime"',
 			'label'=>'Order base modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.ctime'=> array(
 			'code'=>'order.base.ctime',
 			'internalcode'=>'mordba."ctime"',
 			'label'=>'Order base create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.editor'=> array(
 			'code'=>'order.base.editor',
 			'internalcode'=>'mordba."editor"',
 			'label'=>'Order base editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -527,7 +527,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $localeItem->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $localeItem->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCustomerId() );
 			$stmt->bind( 3, $localeItem->getSite()->getCode() );
 			$stmt->bind( 4, $item->getLocale()->getLanguageId() );
@@ -541,7 +541,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$stmt->bind( 12, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 13, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 13, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 13, $date ); // ctime
@@ -620,7 +620,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		try
 		{
 			$required = array( 'order.base' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -779,7 +779,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{
 			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
-			$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$context->getLogger()->log( $msg, MW_Logger_Base::WARN );
 
 			return $this->createItem();
 		}
@@ -794,7 +794,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see MShop_Order_Manager_Base_Abstract)
+	 * @return integer Lock status (@see MShop_Order_Manager_Base_Base)
 	 */
 	public function getSessionLock( $type = '' )
 	{
@@ -810,7 +810,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			return (int) $value;
 		}
 
-		return MShop_Order_Manager_Base_Abstract::LOCK_DISABLE;
+		return MShop_Order_Manager_Base_Base::LOCK_DISABLE;
 	}
 
 
@@ -838,7 +838,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Abstract)
+	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Base)
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @throws MShop_Order_Exception if the lock value is invalid
 	 */
@@ -868,7 +868,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
 	 * @return MShop_Order_Item_Base_Interface Basket including all items
 	 */
-	public function load( $id, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL, $fresh = false )
+	public function load( $id, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL, $fresh = false )
 	{
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.id', $id ) );
@@ -880,7 +880,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		try
 		{
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/default/item/search';
 			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
 			$required = array( 'order.base' );
@@ -932,25 +932,25 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param MShop_Order_Item_Base_Interface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Abstract::PARTS_ALL )
+	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL )
 	{
 		$this->saveItem( $basket );
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
-			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT
+			|| $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON
 		) {
 			$this->storeProducts( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON ) {
 			$this->storeCoupons( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
 			$this->storeAddresses( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
 			$this->storeServices( $basket );
 		}
 	}
@@ -1289,21 +1289,21 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$products = $coupons = $addresses = $services = array();
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT
-			|| $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT
+			|| $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON
 		) {
 			$products = $this->loadProducts( $id, false );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_COUPON ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON ) {
 			$coupons = $this->loadCoupons( $id, false, $products );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, false );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, false );
 		}
 
@@ -1327,15 +1327,15 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$products = $addresses = $services = array();
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_PRODUCT ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT ) {
 			$products = $this->loadProducts( $id, true );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_ADDRESS ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, true );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Abstract::PARTS_SERVICE ) {
+		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, true );
 		}
 

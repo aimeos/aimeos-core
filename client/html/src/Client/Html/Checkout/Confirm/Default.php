@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Checkout_Confirm_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/confirm/default/subparts
@@ -339,7 +339,7 @@ class Client_Html_Checkout_Confirm_Default
 			parent::process();
 
 
-			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
+			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Base::PAY_REFUSED )
 			{
 				foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
@@ -512,8 +512,8 @@ class Client_Html_Checkout_Confirm_Default
 		$reqParams['orderid'] = $orderid;
 
 		if( ( $orderItem = $provider->updateSync( $reqParams, $view->request()->getBody() ) ) !== null
-			&& $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
-			&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
+			&& $orderItem->getPaymentStatus() === MShop_Order_Item_Base::PAY_UNFINISHED
+			&& $provider->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY )
 		) {
 			$provider->query( $orderItem );
 		}

@@ -15,7 +15,7 @@
  * @subpackage Customer
  */
 class MShop_Customer_Manager_Group_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Customer_Manager_Group_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Customer_Manager_Group_Default
 			'internalcode' => 'mcusgr."id"',
 			'label' => 'Customer group ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'customer.group.siteid' => array(
 			'code' => 'customer.group.siteid',
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Customer group site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.group.code' => array(
@@ -39,35 +39,35 @@ class MShop_Customer_Manager_Group_Default
 			'internalcode' => 'mcusgr."code"',
 			'label' => 'Customer group code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."label"',
 			'label' => 'Customer group label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.group.ctime'=> array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."ctime"',
 			'label' => 'Customer group creation time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.group.mtime'=> array(
 			'code' => 'customer.group.mtime',
 			'internalcode' => 'mcusgr."mtime"',
 			'label' => 'Customer group modification time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'customer.group.editor'=> array(
 			'code' => 'customer.group.editor',
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Customer group editor',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -286,14 +286,14 @@ class MShop_Customer_Manager_Group_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
 			$stmt->bind( 3, $item->getLabel() );
 			$stmt->bind( 4, $date ); // mtime
 			$stmt->bind( 5, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 6, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 6, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 6, $date ); // ctime
@@ -368,7 +368,7 @@ class MShop_Customer_Manager_Group_Default
 		try
 		{
 			$required = array( 'customer.group' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/customer/manager/group/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

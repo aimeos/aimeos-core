@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Payment_PrePay
-	extends MShop_Service_Provider_Payment_Abstract
+	extends MShop_Service_Provider_Payment_Base
 	implements MShop_Service_Provider_Payment_Interface
 {
 	/**
@@ -25,7 +25,7 @@ class MShop_Service_Provider_Payment_PrePay
 	 */
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$order->setPaymentStatus( MShop_Order_Item_Base::PAY_CANCELED );
 		$this->saveOrder( $order );
 	}
 
@@ -41,7 +41,7 @@ class MShop_Service_Provider_Payment_PrePay
 	 */
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+		$order->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
 		$this->saveOrder( $order );
 
 		return parent::process( $order, $params );
@@ -56,6 +56,6 @@ class MShop_Service_Provider_Payment_PrePay
 	 */
 	public function isImplemented( $what )
 	{
-		return $what === MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL;
+		return $what === MShop_Service_Provider_Payment_Base::FEAT_CANCEL;
 	}
 }

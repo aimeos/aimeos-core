@@ -9,7 +9,7 @@
 /**
  * Adds product property test data.
  */
-class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 {
 
 	/**

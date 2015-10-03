@@ -24,7 +24,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca ON mcatinca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.catalogaggregate' => array(
@@ -35,7 +35,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				AND mcatinca_agg."catid" IN ( $1 ) )',
 			'label'=>'Number of product categories, parameter(<category IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.catalogcount' => array(
@@ -46,7 +46,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				AND mcatinca_cnt."catid" IN ( $2 ) AND mcatinca_cnt."listtype" = $1 )',
 			'label'=>'Number of product categories, parameter(<list type code>,<category IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.catalog.position' => array(
@@ -54,7 +54,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			'internalcode'=>':site AND mcatinca."catid" = $2 AND mcatinca."listtype" = $1 AND mcatinca."pos"',
 			'label'=>'Product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'sort:catalog.index.catalog.position' => array(
@@ -62,7 +62,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			'internalcode'=>'mcatinca."pos"',
 			'label'=>'Sort product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		)
 	);
@@ -380,7 +380,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
+		MW_Common_Base::checkClassList( 'MShop_Product_Item_Interface', $items );
 
 		$ids = $listItems = array();
 		$context = $this->getContext();
@@ -453,11 +453,11 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 				foreach( (array) $listItems[$parentId] as $listItem )
 				{
-					$stmt->bind( 1, $parentId, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 3, $listItem->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 1, $parentId, MW_DB_Statement_Base::PARAM_INT );
+					$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
+					$stmt->bind( 3, $listItem->getParentId(), MW_DB_Statement_Base::PARAM_INT );
 					$stmt->bind( 4, $listItem->getType() );
-					$stmt->bind( 5, $listItem->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 5, $listItem->getPosition(), MW_DB_Statement_Base::PARAM_INT );
 					$stmt->bind( 6, $date ); //mtime
 					$stmt->bind( 7, $editor );
 					$stmt->bind( 8, $date ); //ctime

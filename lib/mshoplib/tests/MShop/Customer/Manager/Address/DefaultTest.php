@@ -10,7 +10,7 @@
  * Test class for MShop_Customer_Manager_Address_Default
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $fixture = null;
 	private $object = null;
@@ -40,8 +40,8 @@ class MShop_Common_Manager_Address_AbstractTest extends PHPUnit_Framework_TestCa
 			'refid' => $customerItem->getId(),
 			'company' => 'Example company',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-			'titlekey' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'titlekey' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',

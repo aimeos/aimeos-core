@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_Node_Interface, Countable
+class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_Interface, Countable
 {
 	private $values;
 	private $children = array();
@@ -30,7 +30,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function __construct( array $values = array(), $children = array() )
 	{
-		MW_Common_Abstract::checkClassList( 'MW_Tree_Node_Interface', $children );
+		MW_Common_Base::checkClassList( 'MW_Tree_Node_Interface', $children );
 
 		$this->values = $values;
 		$this->children = $children;

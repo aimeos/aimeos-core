@@ -9,7 +9,7 @@
 /**
  * Removes locale constraints from supplier tables.
  */
-class MW_Setup_Task_SupplierDropLocaleConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_SupplierDropLocaleConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_supplier_address' => array(

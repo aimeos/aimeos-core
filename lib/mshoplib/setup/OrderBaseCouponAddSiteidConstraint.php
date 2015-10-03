@@ -13,7 +13,7 @@
  * because of future dependency. see: MW_Setup_Task_OrderDropForeignKeyOfLocale
  * -> Order domain table can be used on a differend database/ server
  */
-class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base_coupon' => array(

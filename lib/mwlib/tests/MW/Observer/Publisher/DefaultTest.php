@@ -65,7 +65,7 @@ class MW_Observer_Publisher_DefaultTest extends PHPUnit_Framework_TestCase
 }
 
 
-class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Abstract
+class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Base
 {
 	/**
 	 * @param string $action

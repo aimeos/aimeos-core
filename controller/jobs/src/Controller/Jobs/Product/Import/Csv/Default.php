@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Product_Import_Csv_Default
-	extends Controller_Common_Product_Import_Csv_Abstract
+	extends Controller_Common_Product_Import_Csv_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -320,7 +320,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 			$path = $container->getName();
 
 			$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
-			$logger->log( $msg, MW_Logger_Abstract::NOTICE );
+			$logger->log( $msg, MW_Logger_Base::NOTICE );
 
 			foreach( $container as $content )
 			{
@@ -338,7 +338,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 					$chunkcnt = count( $data );
 
 					$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
-					$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+					$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Base::NOTICE );
 
 					$errors += $errcnt;
 					$total += $chunkcnt;
@@ -357,7 +357,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 		}
 
 		$msg = 'Finished product import from "%1$s": %2$d successful, %3$s errors, %4$s total (%5$s)';
-		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), MW_Logger_Abstract::NOTICE );
+		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), MW_Logger_Base::NOTICE );
 
 		if( $errors > 0 )
 		{

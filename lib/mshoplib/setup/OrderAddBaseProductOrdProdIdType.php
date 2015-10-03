@@ -9,7 +9,7 @@
 /**
  * Adds orderprodid and type column to order base product table.
  */
-class MW_Setup_Task_OrderAddBaseProductOrdProdIdType extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddBaseProductOrdProdIdType extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ordprodid' => 'ALTER TABLE "mshop_order_base_product" ADD "ordprodid" BIGINT DEFAULT NULL AFTER "siteid"',

@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Plugin_Manager_DefaultTest_Publisher extends MW_Observer_Publisher_Abstract
+class MShop_Plugin_Manager_DefaultTest_Publisher extends MW_Observer_Publisher_Base
 {
 }
 

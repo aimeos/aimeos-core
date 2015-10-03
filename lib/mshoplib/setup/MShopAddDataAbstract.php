@@ -9,7 +9,7 @@
 /**
  * Adds records to tables.
  */
-class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
+class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 {
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
 	{

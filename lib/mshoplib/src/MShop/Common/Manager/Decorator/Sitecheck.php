@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class MShop_Common_Manager_Decorator_Sitecheck
-	extends MShop_Common_Manager_Decorator_Abstract
+	extends MShop_Common_Manager_Decorator_Base
 {
 	/**
 	 * Adds or updates an item object.

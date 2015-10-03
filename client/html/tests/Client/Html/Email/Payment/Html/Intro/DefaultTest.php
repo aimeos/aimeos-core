@@ -87,7 +87,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends PHPUnit_Framework
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUND );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_REFUND );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -102,7 +102,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends PHPUnit_Framework
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -117,7 +117,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends PHPUnit_Framework
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_RECEIVED );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_RECEIVED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();

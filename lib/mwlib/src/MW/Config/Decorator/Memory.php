@@ -15,7 +15,7 @@
  * @subpackage Config
  */
 class MW_Config_Decorator_Memory
-	extends MW_Config_Decorator_Abstract
+	extends MW_Config_Decorator_Base
 	implements MW_Config_Decorator_Interface
 {
 	private $negCache = array();

@@ -8,7 +8,7 @@
 /**
  * Renames the foreign key constraints for customer tables to match style guidlines.
  */
-class MW_Setup_Task_CustomerRenameConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CustomerRenameConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_customer' => array(

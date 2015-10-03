@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Decorator_Costs
-extends MShop_Service_Provider_Decorator_Abstract
+extends MShop_Service_Provider_Decorator_Base
 {
 	private $beConfig = array(
 		'costs.percent' => array(

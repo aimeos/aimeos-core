@@ -73,8 +73,8 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CANCEL ) );
 	}
 }

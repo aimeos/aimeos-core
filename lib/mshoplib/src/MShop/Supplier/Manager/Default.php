@@ -15,7 +15,7 @@
  * @subpackage Supplier
  */
 class MShop_Supplier_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Supplier_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Supplier_Manager_Default
 			'internalcode' => 'msup."id"',
 			'label' => 'Supplier ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'supplier.siteid' => array(
 			'code' => 'supplier.siteid',
 			'internalcode' => 'msup."siteid"',
 			'label' => 'Supplier site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.code' => array(
@@ -39,42 +39,42 @@ class MShop_Supplier_Manager_Default
 			'internalcode' => 'msup."code"',
 			'label' => 'Supplier code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.label' => array(
 			'code' => 'supplier.label',
 			'internalcode' => 'msup."label"',
 			'label' => 'Supplier label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.status'=> array(
 			'code' => 'supplier.status',
 			'internalcode' => 'msup."status"',
 			'label' => 'Supplier status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'supplier.ctime'=> array(
 			'code'=>'supplier.ctime',
 			'internalcode'=>'msup."ctime"',
 			'label'=>'Supplier create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.mtime'=> array(
 			'code'=>'supplier.mtime',
 			'internalcode'=>'msup."mtime"',
 			'label'=>'Supplier modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'supplier.editor'=> array(
 			'code'=>'supplier.editor',
 			'internalcode'=>'msup."editor"',
 			'label'=>'Supplier editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -291,15 +291,15 @@ class MShop_Supplier_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
 			$stmt->bind( 3, $item->getLabel() );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $date ); // mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 7, $date ); // ctime
@@ -373,7 +373,7 @@ class MShop_Supplier_Manager_Default
 		try
 		{
 			$required = array( 'supplier' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/supplier/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

@@ -523,7 +523,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->object->addProduct( $this->testItem->getId(), 2 );
 
 		$item = $this->object->get()->getProduct( 0 );
-		$item->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
+		$item->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->object->deleteProduct( 0 );
@@ -691,7 +691,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->object->addProduct( $this->testItem->getId(), 2 );
 
 		$item = $this->object->get()->getProduct( 0 );
-		$item->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
+		$item->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->object->editProduct( 0, 4 );
@@ -748,9 +748,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getAddress( 'Example company' );
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $item );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
@@ -761,7 +761,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
-			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',
 			'order.base.address.lastname' => 'lastunit',
 			'order.base.address.address1' => 'unit str.',
@@ -779,9 +779,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.flag' => 0,
 		);
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $fixture );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $fixture );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
@@ -791,14 +791,14 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetBillingAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, array( 'error' => false ) );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, array( 'error' => false ) );
 	}
 
 
 	public function testSetBillingAddressParameterError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, 'error' );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, 'error' );
 	}
 
 
@@ -806,9 +806,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getAddress( 'Example company' );
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $item );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
@@ -819,7 +819,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
-			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',
 			'order.base.address.lastname' => 'lastunit',
 			'order.base.address.address1' => 'unit str.',
@@ -836,9 +836,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $fixture );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $fixture );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
@@ -848,14 +848,14 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetDeliveryAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, array( 'error' => false ) );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, array( 'error' => false ) );
 	}
 
 
 	public function testSetDeliveryAddressTypeError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, 'error' );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, 'error' );
 	}
 
 
@@ -906,7 +906,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$price->setCurrencyId( 'CHF' );
 
 		$this->context->getLocale()->setCurrencyId( 'CHF' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->getAddress( 'Example company' ) );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $this->getAddress( 'Example company' ) );
 
 		$this->context->getSession()->set( 'aimeos/basket/currency', 'CHF' );
 		$this->context->getLocale()->setCurrencyId( 'EUR' );

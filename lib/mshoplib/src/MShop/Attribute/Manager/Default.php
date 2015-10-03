@@ -14,7 +14,7 @@
  * @subpackage Attribute
  */
 class MShop_Attribute_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Attribute_Manager_Interface
 {
 	private $searchConfig = array(
@@ -23,14 +23,14 @@ class MShop_Attribute_Manager_Default
 			'internalcode'=>'matt."id"',
 			'label'=>'Attribute ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'attribute.siteid'=> array(
 			'code'=>'attribute.siteid',
 			'internalcode'=>'matt."siteid"',
 			'label'=>'Attribute site',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.typeid'=> array(
@@ -38,7 +38,7 @@ class MShop_Attribute_Manager_Default
 			'internalcode'=>'matt."typeid"',
 			'label'=>'Attribute type',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.domain'=> array(
@@ -46,56 +46,56 @@ class MShop_Attribute_Manager_Default
 			'internalcode'=>'matt."domain"',
 			'label'=>'Attribute domain',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.code'=> array(
 			'code'=>'attribute.code',
 			'internalcode'=>'matt."code"',
 			'label'=>'Attribute code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.position'=> array(
 			'code'=>'attribute.position',
 			'internalcode'=>'matt."pos"',
 			'label'=>'Attribute position',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'attribute.label'=> array(
 			'code'=>'attribute.label',
 			'internalcode'=>'matt."label"',
 			'label'=>'Attribute label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.status'=> array(
 			'code'=>'attribute.status',
 			'internalcode'=>'matt."status"',
 			'label'=>'Attribute status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'attribute.ctime'=> array(
 			'code'=>'attribute.ctime',
 			'internalcode'=>'matt."ctime"',
 			'label'=>'Attribute create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.mtime'=> array(
 			'code'=>'attribute.mtime',
 			'internalcode'=>'matt."mtime"',
 			'label'=>'Attribute modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'attribute.editor'=> array(
 			'code'=>'attribute.editor',
 			'internalcode'=>'matt."editor"',
 			'label'=>'Attribute editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -281,14 +281,14 @@ class MShop_Attribute_Manager_Default
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getCode() );
-			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 7, $item->getLabel() );
 			$stmt->bind( 8, $date );
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date );
@@ -402,7 +402,7 @@ class MShop_Attribute_Manager_Default
 		try
 		{
 			$required = array( 'attribute' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 
 			/** mshop/attribute/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

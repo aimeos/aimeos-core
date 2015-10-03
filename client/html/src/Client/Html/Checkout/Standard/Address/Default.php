@@ -19,7 +19,7 @@ sprintf( 'address' );
  * @subpackage Html
  */
 class Client_Html_Checkout_Standard_Address_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/checkout/standard/address/default/subparts

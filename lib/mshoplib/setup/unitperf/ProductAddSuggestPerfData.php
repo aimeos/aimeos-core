@@ -9,7 +9,7 @@
 /**
  * Adds suggestion performance records to products.
  */
-class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Base
 {
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
 	{

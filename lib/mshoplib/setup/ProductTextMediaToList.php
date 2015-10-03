@@ -9,7 +9,7 @@
 /**
  * Moves product text and media references to product list table.
  */
-class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_product_text' => array(

@@ -9,7 +9,7 @@
 /**
  * Changes countryid/langid columns in order address table.
  */
-class MW_Setup_Task_OrderChangeAddressLangidCountryidNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderChangeAddressLangidCountryidNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_order_base_address" MODIFY "langid" VARCHAR(5) NULL',

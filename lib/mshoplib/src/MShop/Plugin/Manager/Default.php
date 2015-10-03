@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Manager_Default
-	extends MShop_Plugin_Manager_Abstract
+	extends MShop_Plugin_Manager_Base
 	implements MShop_Plugin_Manager_Interface
 {
 	private $plugins = array();
@@ -26,14 +26,14 @@ class MShop_Plugin_Manager_Default
 			'code' => 'plugin.id',
 			'internalcode' => 'mplu."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'plugin.siteid' => array(
 			'label' => 'Plugin site ID',
 			'code' => 'plugin.siteid',
 			'internalcode' => 'mplu."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'plugin.typeid' => array(
@@ -41,7 +41,7 @@ class MShop_Plugin_Manager_Default
 			'code' => 'plugin.typeid',
 			'internalcode' => 'mplu."typeid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.label' => array(
@@ -49,56 +49,56 @@ class MShop_Plugin_Manager_Default
 			'code' => 'plugin.label',
 			'internalcode' => 'mplu."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.provider' => array(
 			'label' => 'Plugin provider',
 			'code' => 'plugin.provider',
 			'internalcode' => 'mplu."provider"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.config' => array(
 			'label' => 'Plugin config',
 			'code' => 'plugin.config',
 			'internalcode' => 'mplu."config"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.position' => array(
 			'label' => 'Plugin position',
 			'code' => 'plugin.position',
 			'internalcode' => 'mplu."pos"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'plugin.status' => array(
 			'label' => 'Plugin status',
 			'code' => 'plugin.status',
 			'internalcode' => 'mplu."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'plugin.mtime'=> array(
 			'code'=>'plugin.mtime',
 			'internalcode'=>'mplu."mtime"',
 			'label'=>'Plugin modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.ctime'=> array(
 			'code'=>'plugin.ctime',
 			'internalcode'=>'mplu."ctime"',
 			'label'=>'Plugin creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.editor'=> array(
 			'code'=>'plugin.editor',
 			'internalcode'=>'mplu."editor"',
 			'label'=>'Plugin editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -447,18 +447,18 @@ class MShop_Plugin_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getLabel() );
 			$stmt->bind( 4, $item->getProvider() );
 			$stmt->bind( 5, json_encode( $item->getConfig() ) );
-			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 8, $date ); //mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); //ctime
@@ -534,7 +534,7 @@ class MShop_Plugin_Manager_Default
 		try
 		{
 			$required = array( 'plugin' );
-			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
+			$level = MShop_Locale_Manager_Base::SITE_PATH;
 
 			/** mshop/plugin/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -644,7 +644,7 @@ class MShop_Plugin_Manager_Default
 				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 				}
 
 				$map[$row['id']] = $row;

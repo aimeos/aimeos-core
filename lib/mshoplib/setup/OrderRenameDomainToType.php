@@ -9,7 +9,7 @@
 /**
  * Renames domain column to type in order tables.
  */
-class MW_Setup_Task_OrderRenameDomainToType extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderRenameDomainToType extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order' => array(

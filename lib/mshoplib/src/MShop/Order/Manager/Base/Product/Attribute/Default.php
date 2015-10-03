@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Base_Product_Attribute_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Base_Product_Attribute_Interface
 {
 	private $searchConfig = array(
@@ -25,7 +25,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."ordprodid" )' ),
 			'label'=>'Order base product attribute ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.siteid' => array(
@@ -33,7 +33,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internalcode'=>'mordbaprat."siteid"',
 			'label'=>'Order base product attribute site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.attributeid' => array(
@@ -41,7 +41,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internalcode'=>'mordbaprat."attrid"',
 			'label'=>'Order base product attribute original ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.productid' => array(
@@ -49,7 +49,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internalcode'=>'mordbaprat."ordprodid"',
 			'label'=>'Order base product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.type' => array(
@@ -57,49 +57,49 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internalcode'=>'mordbaprat."type"',
 			'label'=>'Order base product attribute type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.attribute.code' => array(
 			'code'=>'order.base.product.attribute.code',
 			'internalcode'=>'mordbaprat."code"',
 			'label'=>'Order base product attribute code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.attribute.value' => array(
 			'code'=>'order.base.product.attribute.value',
 			'internalcode'=>'mordbaprat."value"',
 			'label'=>'Order base product attribute value',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.attribute.name' => array(
 			'code'=>'order.base.product.attribute.name',
 			'internalcode'=>'mordbaprat."name"',
 			'label'=>'Order base product attribute name',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.attribute.mtime' => array(
 			'code'=>'order.base.product.attribute.mtime',
 			'internalcode'=>'mordbaprat."mtime"',
 			'label'=>'Order base product attribute modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.base.product.attribute.ctime'=> array(
 			'code'=>'order.base.product.attribute.ctime',
 			'internalcode'=>'mordbaprat."ctime"',
 			'label'=>'Order base product attribute create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'order.base.product.attribute.editor'=> array(
 			'code'=>'order.base.product.attribute.editor',
 			'internalcode'=>'mordbaprat."editor"',
 			'label'=>'Order base product attribute editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 	);
 
@@ -307,9 +307,9 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
-			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
 			$stmt->bind( 6, $item->getValue() );
@@ -318,7 +318,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -581,7 +581,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		try
 		{
 			$required = array( 'order.base.product.attribute' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/product/attribute/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

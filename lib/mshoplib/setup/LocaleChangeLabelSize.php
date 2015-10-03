@@ -9,7 +9,7 @@
 /**
  * Changes size of column label for locale tables.
  */
-class MW_Setup_Task_LocaleChangeLabelSize extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleChangeLabelSize extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_locale_site' => 'ALTER TABLE "mshop_locale_site" CHANGE "label" "label" VARCHAR(255) NOT NULL DEFAULT \'\'',

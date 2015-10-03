@@ -9,7 +9,7 @@
 /**
  * Changes status columns to SMALLINT values.
  */
-class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Abstract
+class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute' => 'ALTER TABLE "mshop_attribute" CHANGE "status" "status" SMALLINT NOT NULL DEFAULT 0',

@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 abstract class MShop_Catalog_Manager_Index_DBBase
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Catalog_Manager_Index_Interface
 {
 	/**
@@ -139,7 +139,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $timestamp ); // ctime
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
@@ -236,7 +236,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = MShop_Locale_Manager_Base::SITE_ALL;
 			$required = array( 'product' );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );

@@ -9,7 +9,7 @@
 /**
  * Renames configuration values for service providers.
  */
-class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype

@@ -9,7 +9,7 @@
 /**
  * Adds address columns to customer table.
  */
-class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'code' => 'ALTER TABLE "mshop_customer" ADD "code" VARCHAR(32) NOT NULL AFTER "label"',

@@ -15,7 +15,7 @@
  * @subpackage Media
  */
 class MW_Media_Image_Default
-	extends MW_Media_Image_Abstract
+	extends MW_Media_Image_Base
 	implements MW_Media_Image_Interface
 {
 	private $image;

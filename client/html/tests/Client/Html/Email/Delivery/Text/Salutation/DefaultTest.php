@@ -48,7 +48,7 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Fra
 		$view = TestHelper::getView();
 		$view->extOrderItem = self::$orderItem;
 		$view->extOrderBaseItem = self::$orderBaseItem;
-		$view->extAddressItem = self::$orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$view->extAddressItem = self::$orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->emailMock ) );
 
 		$this->object->setView( $view );

@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class Controller_Jobs_Order_Email_Payment_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -83,10 +83,10 @@ class Controller_Jobs_Order_Email_Payment_Default
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
 		$default = array(
-			MShop_Order_Item_Abstract::PAY_REFUND,
-			MShop_Order_Item_Abstract::PAY_PENDING,
-			MShop_Order_Item_Abstract::PAY_AUTHORIZED,
-			MShop_Order_Item_Abstract::PAY_RECEIVED,
+			MShop_Order_Item_Base::PAY_REFUND,
+			MShop_Order_Item_Base::PAY_PENDING,
+			MShop_Order_Item_Base::PAY_AUTHORIZED,
+			MShop_Order_Item_Base::PAY_RECEIVED,
 		);
 
 		/** controller/jobs/order/email/payment/default/status
@@ -116,7 +116,7 @@ class Controller_Jobs_Order_Email_Payment_Default
 		{
 			$orderSearch = $orderManager->createSearch();
 
-			$param = array( MShop_Order_Item_Status_Abstract::EMAIL_PAYMENT, $status );
+			$param = array( MShop_Order_Item_Status_Base::EMAIL_PAYMENT, $status );
 			$orderFunc = $orderSearch->createFunction( 'order.containsStatus', $param );
 
 			$expr = array(
@@ -138,7 +138,7 @@ class Controller_Jobs_Order_Email_Payment_Default
 					{
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
 
-						$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+						$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 						$view->extAddressItem = $addr;
 						$view->extOrderBaseItem = $orderBaseItem;
@@ -159,7 +159,7 @@ class Controller_Jobs_Order_Email_Payment_Default
 
 						$statusItem = $orderStatusManager->createItem();
 						$statusItem->setParentId( $id );
-						$statusItem->setType( MShop_Order_Item_Status_Abstract::EMAIL_PAYMENT );
+						$statusItem->setType( MShop_Order_Item_Status_Base::EMAIL_PAYMENT );
 						$statusItem->setValue( $status );
 
 						$orderStatusManager->saveItem( $statusItem );

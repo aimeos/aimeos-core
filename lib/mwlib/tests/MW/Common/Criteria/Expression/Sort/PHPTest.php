@@ -51,7 +51,7 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestC
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => MW_DB_Statement_Abstract::PARAM_STR,
+			'test()' => MW_DB_Statement_Base::PARAM_STR,
 		);
 		$translations = array(
 			'test()' => 'testfunc($1,$2)',
@@ -85,7 +85,7 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestC
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => MW_DB_Statement_Abstract::PARAM_STR,
+			'test()' => MW_DB_Statement_Base::PARAM_STR,
 		);
 
 		$translations = array(

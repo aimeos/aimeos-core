@@ -7,9 +7,9 @@
 
 
 /**
- * Test class for Controller_ExtJS_Common_Factory_AbstractTest.
+ * Test class for Controller_ExtJS_Common_Factory_BaseTest.
  */
-class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
+class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $context;
 

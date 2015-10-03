@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Email_Account_Html_Detail_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/email/account/html/detail/default/subparts

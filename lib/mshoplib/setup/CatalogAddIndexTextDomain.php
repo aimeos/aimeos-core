@@ -9,7 +9,7 @@
 /**
  * Adds domain column to catalog index text table.
  */
-class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',

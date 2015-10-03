@@ -9,7 +9,7 @@
 /**
  * Renames shipping column to costs the order tables.
  */
-class MW_Setup_Task_OrderRenameShippingToCosts extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderRenameShippingToCosts extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base' => array(

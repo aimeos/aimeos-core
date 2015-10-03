@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Decorator_Country
-	extends MShop_Service_Provider_Decorator_Abstract
+	extends MShop_Service_Provider_Decorator_Base
 {
 	private $beConfig = array(
 		'country.billing-include' => array(
@@ -101,8 +101,8 @@ class MShop_Service_Provider_Decorator_Country
 	{
 		$addresses = $basket->getAddresses();
 
-		$paymentType = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
-		$deliveryType = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+		$paymentType = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT;
+		$deliveryType = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
 
 
 		if( isset( $addresses[$deliveryType] ) )

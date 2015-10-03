@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Locale_Item_Interface
 {
 	private $site;

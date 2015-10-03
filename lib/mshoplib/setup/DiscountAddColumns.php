@@ -8,7 +8,7 @@
 /*
  * Creates all required columns
  */
-class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Abstract
+class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_discount' => array(

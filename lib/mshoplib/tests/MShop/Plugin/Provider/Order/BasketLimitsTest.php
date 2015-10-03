@@ -90,7 +90,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->products['CNE']->setQuantity( 4 );
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT ) );
 	}
 
 
@@ -99,7 +99,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->order->addProduct( $this->products['CNC'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -109,7 +109,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->order->addProduct( $this->products['CNE'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -118,7 +118,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->order->addProduct( $this->products['CNE'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -128,6 +128,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->order->addProduct( $this->products['CNC'] );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 }

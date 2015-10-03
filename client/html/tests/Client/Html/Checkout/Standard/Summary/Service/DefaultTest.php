@@ -88,8 +88,8 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 		}
 
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $customer->getPaymentAddress() );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getPaymentAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $customer->getPaymentAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $customer->getPaymentAddress() );
 
 		return $controller->get();
 	}

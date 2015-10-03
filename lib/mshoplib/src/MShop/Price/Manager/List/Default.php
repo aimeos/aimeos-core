@@ -14,7 +14,7 @@
  * @subpackage Price
  */
 class MShop_Price_Manager_List_Default
-	extends MShop_Common_Manager_List_Abstract
+	extends MShop_Common_Manager_List_Base
 	implements MShop_Price_Manager_List_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Price_Manager_List_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_price_list" AS mprili ON ( mpri."id" = mprili."parentid" )' ),
 			'label' => 'Price list ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.siteid' => array(
@@ -32,7 +32,7 @@ class MShop_Price_Manager_List_Default
 			'internalcode' => 'mprili."siteid"',
 			'label' => 'Price list site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.parentid' => array(
@@ -40,7 +40,7 @@ class MShop_Price_Manager_List_Default
 			'internalcode' => 'mprili."parentid"',
 			'label' => 'Price list price ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.domain' => array(
@@ -48,14 +48,14 @@ class MShop_Price_Manager_List_Default
 			'internalcode' => 'mprili."domain"',
 			'label' => 'Price list domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.typeid' => array(
 			'code' => 'price.list.typeid',
 			'internalcode' => 'mprili."typeid"',
 			'label' => 'Price list type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.list.refid' => array(
@@ -63,63 +63,63 @@ class MShop_Price_Manager_List_Default
 			'internalcode' => 'mprili."refid"',
 			'label' => 'Price list reference ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.datestart' => array(
 			'code' => 'price.list.datestart',
 			'internalcode' => 'mprili."start"',
 			'label' => 'Price list start date',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.dateend' => array(
 			'code' => 'price.list.dateend',
 			'internalcode' => 'mprili."end"',
 			'label' => 'Price list end date',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.config' => array(
 			'code' => 'price.list.config',
 			'internalcode' => 'mprili."config"',
 			'label' => 'Price list config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.position' => array(
 			'code' => 'price.list.position',
 			'internalcode' => 'mprili."pos"',
 			'label' => 'Price list position',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.list.status' => array(
 			'code' => 'price.list.status',
 			'internalcode' => 'mprili."status"',
 			'label' => 'Price list status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'price.list.ctime' => array(
 			'code' => 'price.list.ctime',
 			'internalcode' => 'mprili."ctime"',
 			'label' => 'Price list create date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.mtime' => array(
 			'code' => 'price.list.mtime',
 			'internalcode' => 'mprili."mtime"',
 			'label' => 'Price list modification date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'price.list.editor' => array(
 			'code' => 'price.list.editor',
 			'internalcode' => 'mprili."editor"',
 			'label' => 'Price list editor',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

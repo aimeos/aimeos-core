@@ -56,8 +56,8 @@ class MShop_Order_Item_Base_Product_DefaultTest extends PHPUnit_Framework_TestCa
 			'name' => 'UnitProduct',
 			'mediaurl' => 'testurl',
 			'quantity' => 11,
-			'flags' => MShop_Order_Item_Base_Product_Abstract::FLAG_NONE,
-			'status' => MShop_Order_Item_Abstract::STAT_PROGRESS,
+			'flags' => MShop_Order_Item_Base_Product_Base::FLAG_NONE,
+			'status' => MShop_Order_Item_Base::STAT_PROGRESS,
 			'pos' => 1,
 			'mtime' => '2000-12-31 23:59:59',
 			'ctime' => '2011-01-01 00:00:01',
@@ -297,8 +297,8 @@ class MShop_Order_Item_Base_Product_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testSetFlags()
 	{
-		$this->object->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
-		$this->assertEquals( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE, $this->object->getFlags() );
+		$this->object->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
+		$this->assertEquals( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE, $this->object->getFlags() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -334,8 +334,8 @@ class MShop_Order_Item_Base_Product_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( MShop_Order_Item_Abstract::STAT_LOST );
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_LOST, $this->object->getStatus() );
+		$this->object->setStatus( MShop_Order_Item_Base::STAT_LOST );
+		$this->assertEquals( MShop_Order_Item_Base::STAT_LOST, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -610,7 +610,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends PHPUnit_Framework_TestCa
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_UNFINISHED, $productCopy->getStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::STAT_UNFINISHED, $productCopy->getStatus() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 
 		$this->assertTrue( $productCopy->isModified() );

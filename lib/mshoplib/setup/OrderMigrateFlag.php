@@ -9,7 +9,7 @@
 /**
  * Migrates the flag values in order table to the order status table.
  */
-class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'migrate' => '

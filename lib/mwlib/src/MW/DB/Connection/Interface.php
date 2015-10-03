@@ -23,7 +23,7 @@ interface MW_DB_Connection_Interface
 	 * @param integer $type Simple or prepared statement type
 	 * @return MW_DB_Statement_Interface
 	 */
-	public function create( $sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE );
+	public function create( $sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE );
 
 
 	/**

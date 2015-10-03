@@ -101,7 +101,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 				'order.base.address.type' => 'payment',
 				'order.base.address.company' => 'MusterMax',
 				'order.base.address.vatid' => 'DE999999999',
-				'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+				'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
 				'order.base.address.title' => 'Herr',
 				'order.base.address.firstname' => 'Max',
 				'order.base.address.lastname' => 'Mustermann',

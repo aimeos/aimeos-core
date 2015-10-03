@@ -14,7 +14,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Manager_Type_Default
-	extends MShop_Common_Manager_Type_Abstract
+	extends MShop_Common_Manager_Type_Base
 	implements MShop_Plugin_Manager_Type_Interface
 {
 	private $searchConfig = array(
@@ -24,7 +24,7 @@ class MShop_Plugin_Manager_Type_Default
 			'internaldeps'=> array( 'LEFT JOIN "mshop_plugin_type" AS mpluty ON ( mpluty."id" = mplu."typeid" )' ),
 			'label'=>'Plugin type ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'plugin.type.siteid'=> array(
@@ -32,7 +32,7 @@ class MShop_Plugin_Manager_Type_Default
 			'internalcode'=>'mpluty."siteid"',
 			'label'=>'Plugin type site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'plugin.type.code' => array(
@@ -40,49 +40,49 @@ class MShop_Plugin_Manager_Type_Default
 			'internalcode'=>'mpluty."code"',
 			'label'=>'Plugin type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.type.domain' => array(
 			'code'=>'plugin.type.domain',
 			'internalcode'=>'mpluty."domain"',
 			'label'=>'Plugin type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.type.label' => array(
 			'code'=>'plugin.type.label',
 			'internalcode'=>'mpluty."label"',
 			'label'=>'Plugin type label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.type.status' => array(
 			'code'=>'plugin.type.status',
 			'internalcode'=>'mpluty."status"',
 			'label'=>'Plugin type status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'plugin.type.mtime'=> array(
 			'code'=>'plugin.type.mtime',
 			'internalcode'=>'mpluty."mtime"',
 			'label'=>'Plugin type modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.type.ctime'=> array(
 			'code'=>'plugin.type.ctime',
 			'internalcode'=>'mpluty."ctime"',
 			'label'=>'Plugin type creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'plugin.type.editor'=> array(
 			'code'=>'plugin.type.editor',
 			'internalcode'=>'mpluty."editor"',
 			'label'=>'Plugin type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 

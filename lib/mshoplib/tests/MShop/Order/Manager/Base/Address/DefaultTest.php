@@ -45,8 +45,8 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$result = $this->object->aggregate( $search, 'order.base.address.salutation' );
 	
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( MShop_Common_Item_Address_Abstract::SALUTATION_MRS, $result );
-		$this->assertEquals( 4, $result[MShop_Common_Item_Address_Abstract::SALUTATION_MRS] );
+		$this->assertArrayHasKey( MShop_Common_Item_Address_Base::SALUTATION_MRS, $result );
+		$this->assertEquals( 4, $result[MShop_Common_Item_Address_Base::SALUTATION_MRS] );
 	}
 	
 
@@ -79,7 +79,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetItem()
 	{
-		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -99,7 +99,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
 
 		$search = $this->object->createSearch();
 		$conditions = array(

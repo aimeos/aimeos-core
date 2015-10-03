@@ -16,7 +16,7 @@
  * @subpackage Cache
  */
 class MW_Cache_None
-	extends MW_Cache_Abstract
+	extends MW_Cache_Base
 	implements MW_Cache_Interface
 {
 	/**

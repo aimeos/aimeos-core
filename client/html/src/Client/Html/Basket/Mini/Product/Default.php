@@ -16,7 +16,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Mini_Product_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Base
 {
 	/** client/html/basket/mini/product/default/subparts
 	 * List of HTML sub-clients rendered within the basket mini product section

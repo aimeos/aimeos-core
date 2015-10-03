@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Connection_Interface
+class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connection_Interface
 {
 	private $connection = null;
 	private $txnumber = 0;
@@ -39,14 +39,14 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 * @return MW_DB_Statement_Interface PDO statement object
 	 * @throws MW_DB_Exception if type is invalid or the PDO object throws an exception
 	 */
-	public function create($sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE)
+	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)
 	{
 		try {
 			switch ($type)
 			{
-				case MW_DB_Connection_Abstract::TYPE_SIMPLE:
+				case MW_DB_Connection_Base::TYPE_SIMPLE:
 					return new MW_DB_Statement_PDO_Simple($this->connection, $sql);
-				case MW_DB_Connection_Abstract::TYPE_PREP:
+				case MW_DB_Connection_Base::TYPE_PREP:
 					return new MW_DB_Statement_PDO_Prepared($this->connection->prepare($sql));
 				default:
 					throw new MW_DB_Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );

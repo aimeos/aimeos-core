@@ -28,14 +28,14 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$this->config = array();
 
 		$this->config['search'] = array(
-			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'parentid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'label', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'code', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'status', 'type' => 'boolean', 'internaltype' => MW_DB_Statement_Abstract::PARAM_BOOL ),
-			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'level', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'nleft', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'nright', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
+			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Base::PARAM_INT ),
+			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'parentid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Base::PARAM_INT ),
+			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'label', 'type' => 'string', 'internaltype' => MW_DB_Statement_Base::PARAM_STR ),
+			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'code', 'type' => 'string', 'internaltype' => MW_DB_Statement_Base::PARAM_STR ),
+			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'status', 'type' => 'boolean', 'internaltype' => MW_DB_Statement_Base::PARAM_BOOL ),
+			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'level', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Base::PARAM_INT ),
+			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'nleft', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Base::PARAM_INT ),
+			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'nright', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Base::PARAM_INT ),
 
 		);
 
@@ -263,7 +263,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException( 'MW_DB_Exception' );
 
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE  );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE  );
 		$manager->deleteNode($root->getId());
 	}
 
@@ -272,16 +272,16 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
 
-		$node = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE );
 		$this->assertEquals( 0, $node->level );
 		$this->assertEquals( 0, count( $node->getChildren() ) );
 
-		$node = $manager->getNode( $node->getId(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+		$node = $manager->getNode( $node->getId(), MW_Tree_Manager_Base::LEVEL_LIST );
 		$this->assertEquals( 3, count( $node->getChildren() ) );
 		$this->assertEquals( 0, count( $node->getChild( 0 )->getChildren() ) );
 		$this->assertEquals( 0, count( $node->getChild( 1 )->getChildren() ) );
 
-		$node = $manager->getNode( $node->getId(), MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$node = $manager->getNode( $node->getId(), MW_Tree_Manager_Base::LEVEL_TREE );
 		$this->assertEquals( 3, count( $node->getChildren() ) );
 		$this->assertEquals( 1, count( $node->getChild( 0 )->getChildren() ) );
 		$this->assertEquals( 1, count( $node->getChild( 0 )->getChild( 0 )->getChildren() ) );
@@ -326,13 +326,13 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testInsertNode()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$newNode = $manager->createNode();
 		$newNode->setLabel( 'l1n4' );
 		$manager->insertNode( $newNode, $root->getId() );
 
-		$root = $manager->getNode( $root->getId(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+		$root = $manager->getNode( $root->getId(), MW_Tree_Manager_Base::LEVEL_LIST );
 		$this->assertEquals( 4, count( $root->getChildren() ) );
 		$this->assertEquals( 'l1n4', $root->getChild( 3 )->getLabel() );
 		$this->assertEquals( $newNode->getId(), $root->getChild( 3 )->getId() );
@@ -345,7 +345,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$newNode->setLabel( 'new l1n3' );
 		$manager->insertNode( $newNode, $root->getId(), reset( $nodes )->getId() );
 
-		$root = $manager->getNode( $root->getId(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+		$root = $manager->getNode( $root->getId(), MW_Tree_Manager_Base::LEVEL_LIST );
 		$this->assertEquals( 5, count( $root->getChildren() ) );
 		$this->assertEquals( 'l1n2', $root->getChild( 1 )->getLabel() );
 		$this->assertEquals( 'new l1n3', $root->getChild( 2 )->getLabel() );
@@ -384,7 +384,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode1()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 0 )->getChild( 0 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 0 )->getChild( 0 )->getId();
@@ -393,7 +393,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -445,7 +445,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode2()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -454,7 +454,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -506,7 +506,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode3()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -515,7 +515,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -567,7 +567,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode4()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -576,7 +576,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -628,7 +628,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode5()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -637,7 +637,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -689,7 +689,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode6()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -699,7 +699,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 2 )->getId();
 		$oldparentid = $root->getId();
@@ -709,7 +709,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -761,7 +761,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode7()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 1 )->getId();
@@ -771,7 +771,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getId();
 		$oldparentid = $root->getId();
@@ -781,7 +781,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -833,7 +833,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testMoveNode8()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getId();
 		$oldparentid = $root->getId();
@@ -843,7 +843,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
-		$testroot = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$testroot = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
 		$this->assertEquals( 1, $testroot->left );
@@ -909,7 +909,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 		$manager = new MW_Tree_Manager_DBNestedSet($this->config, $this->dbm);
 
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_TREE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_TREE );
 
 		$nodeid = $root->getChild( 1 )->getId();
 		$oldparentid = $root->getId();
@@ -923,12 +923,12 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	public function testSaveNode()
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$root->setLabel( 'rooot' );
 		$manager->saveNode( $root );
 
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE );
 		$this->assertEquals( 'rooot', $root->getLabel() );
 	}
 
@@ -950,7 +950,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		';
 
 		$manager = new MW_Tree_Manager_DBNestedSet($this->config, $this->dbm);
-		$root = $manager->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$root = $manager->getNode( null, MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$root->setLabel( 'rooot' );
 

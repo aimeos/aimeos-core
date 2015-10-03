@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Email_Delivery_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/email/delivery/default/subparts
@@ -151,7 +151,7 @@ class Client_Html_Email_Delivery_Default
 
 
 		$addr = $view->extAddressItem;
-		$billAddr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$billAddr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 		$msg = $view->mail();
 		$msg->addHeader( 'X-MailGenerator', 'Aimeos' );

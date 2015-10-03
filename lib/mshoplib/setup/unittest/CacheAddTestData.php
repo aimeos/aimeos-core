@@ -9,7 +9,7 @@
 /**
  * Adds admin cache test data.
  */
-class MW_Setup_Task_CacheAddTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CacheAddTestData extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Abstract
+class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Base
 {
 	function getLabel()
 	{
@@ -16,9 +16,9 @@ class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Abstract
 
 
 /**
- * Test class for MShop_Common_Item_ListRef_Abstract
+ * Test class for MShop_Common_Item_ListRef_Base
  */
-class MShop_Common_Item_ListRef_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $textItem1;

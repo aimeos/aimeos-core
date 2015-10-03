@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements MW_DB_Statement_Interface
+class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB_Statement_Interface
 {
 	private $stmt = null;
 
@@ -35,24 +35,24 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Abstract implements M
 	 *
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in MW_DB_Statement_Abstract as constant
+	 * @param integer $type Type of given value defined in MW_DB_Statement_Base as constant
 	 * @throws MW_DB_Exception If an error occured in the unterlying driver
 	 */
-	public function bind( $position, $value, $type = MW_DB_Statement_Abstract::PARAM_STR )
+	public function bind( $position, $value, $type = MW_DB_Statement_Base::PARAM_STR )
 	{
 		switch( $type )
 		{
-			case MW_DB_Statement_Abstract::PARAM_NULL:
+			case MW_DB_Statement_Base::PARAM_NULL:
 				$pdotype = PDO::PARAM_NULL; break;
-			case MW_DB_Statement_Abstract::PARAM_BOOL:
+			case MW_DB_Statement_Base::PARAM_BOOL:
 				$pdotype = PDO::PARAM_BOOL; break;
-			case MW_DB_Statement_Abstract::PARAM_INT:
+			case MW_DB_Statement_Base::PARAM_INT:
 				$pdotype = PDO::PARAM_INT; break;
-			case MW_DB_Statement_Abstract::PARAM_FLOAT:
+			case MW_DB_Statement_Base::PARAM_FLOAT:
 				$pdotype = PDO::PARAM_STR; break;
-			case MW_DB_Statement_Abstract::PARAM_STR:
+			case MW_DB_Statement_Base::PARAM_STR:
 				$pdotype = PDO::PARAM_STR; break;
-			case MW_DB_Statement_Abstract::PARAM_LOB:
+			case MW_DB_Statement_Base::PARAM_LOB:
 				$pdotype = PDO::PARAM_LOB; break;
 			default:
 				throw new MW_DB_Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );

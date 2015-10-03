@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Standard_Default
-	extends Client_Html_Basket_Abstract
+	extends Client_Html_Basket_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/basket/standard/default/subparts
@@ -352,7 +352,7 @@ class Client_Html_Basket_Standard_Default
 			parent::process();
 
 			$controller = Controller_Frontend_Factory::createController( $context, 'basket' );
-			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			$controller->get()->check( MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 		}
 		catch( Client_Html_Exception $e )
 		{

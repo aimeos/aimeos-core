@@ -9,7 +9,7 @@
 /**
  * Renames domain column to typeid in plugin table and migriates data.
  */
-class MW_Setup_Task_PluginRenameDomainToTypeid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PluginRenameDomainToTypeid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_plugin' => array(

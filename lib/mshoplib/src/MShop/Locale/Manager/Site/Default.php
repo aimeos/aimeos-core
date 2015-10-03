@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Manager_Site_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Locale_Manager_Site_Interface
 {
 	private $cache = array();
@@ -27,7 +27,7 @@ class MShop_Locale_Manager_Site_Default
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")' ),
 			'label' => 'Locale site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.siteid' => array(
@@ -35,7 +35,7 @@ class MShop_Locale_Manager_Site_Default
 			'internalcode' => 'mlocsi."id"',
 			'label' => 'Locale site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.code' => array(
@@ -43,56 +43,56 @@ class MShop_Locale_Manager_Site_Default
 			'internalcode' => 'mlocsi."code"',
 			'label' => 'Locale site code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.site.label' => array(
 			'code' => 'locale.site.label',
 			'internalcode' => 'mlocsi."label"',
 			'label' => 'Locale site label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.site.config' => array(
 			'code' => 'locale.site.config',
 			'internalcode' => 'mlocsi."config"',
 			'label' => 'Locale site config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
 			'internalcode' => 'mlocsi."status"',
 			'label' => 'Locale site status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'locale.site.ctime'=> array(
 			'code'=>'locale.site.ctime',
 			'internalcode'=>'mlocsi."ctime"',
 			'label'=>'Locale site create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.site.mtime'=> array(
 			'code'=>'locale.site.mtime',
 			'internalcode'=>'mlocsi."mtime"',
 			'label'=>'Locale site modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'locale.site.editor'=> array(
 			'code'=>'locale.site.editor',
 			'internalcode'=>'mlocsi."editor"',
 			'label'=>'Locale site editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
 		'level' => array(
 			'code'=>'locale.site.level',
 			'internalcode'=>'mlocsi."level"',
 			'label'=>'Locale site tree level',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'left' => array(
@@ -100,7 +100,7 @@ class MShop_Locale_Manager_Site_Default
 			'internalcode'=>'mlocsi."nleft"',
 			'label'=>'Locale site left value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'right' => array(
@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Site_Default
 			'internalcode'=>'mlocsi."nright"',
 			'label'=>'Locale site right value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -198,10 +198,10 @@ class MShop_Locale_Manager_Site_Default
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 5, $context->getEditor() );
 			$stmt->bind( 6, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
@@ -574,7 +574,7 @@ class MShop_Locale_Manager_Site_Default
 					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+						$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 					}
 
 					$items[$row['id']] = $this->createItemBase( $row );
@@ -694,7 +694,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
-		$item = $this->getTree( $id, $ref, MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$item = $this->getTree( $id, $ref, MW_Tree_Manager_Base::LEVEL_ONE );
 		return array( $item->getId() => $item );
 	}
 
@@ -704,10 +704,10 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
 	 * @return MShop_Locale_Item_Site_Interface Site item
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE )
 	{
 		if( $id !== null )
 		{
@@ -789,8 +789,8 @@ class MShop_Locale_Manager_Site_Default
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 5, 0, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 5, 0, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 6, $context->getEditor() );
 			$stmt->bind( 7, $date ); // mtime
 			$stmt->bind( 8, $date ); // ctime
@@ -864,7 +864,7 @@ class MShop_Locale_Manager_Site_Default
 	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
 
 		$results = $statement->execute();
 

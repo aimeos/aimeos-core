@@ -15,7 +15,7 @@
  * @subpackage Cache
  */
 class MW_Cache_DB
-	extends MW_Cache_Abstract
+	extends MW_Cache_Base
 	implements MW_Cache_Interface
 {
 	private $sql;
@@ -108,7 +108,7 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -144,7 +144,7 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -180,8 +180,8 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -208,7 +208,7 @@ class MW_Cache_DB
 		try
 		{
 			$stmt = $conn->create( str_replace( ':cond', '1', $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -255,7 +255,7 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -308,8 +308,8 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['getbytag'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -347,21 +347,21 @@ class MW_Cache_DB
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteList( array_keys( $pairs ) );
 
-		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
+		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Base::TYPE_PREP : MW_DB_Connection_Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$conn->begin();
 			$stmt = $conn->create( $this->sql['set'], $type );
-			$stmtTag = $conn->create( $this->sql['settag'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmtTag = $conn->create( $this->sql['settag'], MW_DB_Connection_Base::TYPE_PREP );
 
 			foreach( $pairs as $key => $value )
 			{
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -371,7 +371,7 @@ class MW_Cache_DB
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTag->bind( 1, $key );
-						$stmtTag->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmtTag->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
 						$stmtTag->bind( 3, $name );
 						$stmtTag->execute()->finish();
 					}

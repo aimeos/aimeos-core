@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Email_Delivery_Text_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Interface
 {
 	/** client/html/email/delivery/text/default/subparts

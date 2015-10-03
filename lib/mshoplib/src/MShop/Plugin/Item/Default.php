@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Plugin_Item_Interface
 {
 	private $values;

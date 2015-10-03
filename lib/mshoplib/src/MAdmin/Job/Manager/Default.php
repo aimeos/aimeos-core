@@ -15,7 +15,7 @@
  * @subpackage Job
  */
 class MAdmin_Job_Manager_Default
-	extends MAdmin_Common_Manager_Abstract
+	extends MAdmin_Common_Manager_Base
 	implements MAdmin_Job_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,70 +24,70 @@ class MAdmin_Job_Manager_Default
 			'internalcode'=>'majob."id"',
 			'label'=>'Job ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'job.siteid'=> array(
 			'code'=>'job.siteid',
 			'internalcode'=>'majob."siteid"',
 			'label'=>'Job site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'job.label'=> array(
 			'code'=>'job.label',
 			'internalcode'=>'majob."label"',
 			'label'=>'Job label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.method'=> array(
 			'code'=>'job.method',
 			'internalcode'=>'majob."method"',
 			'label'=>'Job method',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.parameter'=> array(
 			'code'=>'job.parameter',
 			'internalcode'=>'majob."parameter"',
 			'label'=>'Job parameter',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.result'=> array(
 			'code'=>'job.result',
 			'internalcode'=>'majob."result"',
 			'label'=>'Job result',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.status'=> array(
 			'code'=>'job.status',
 			'internalcode'=>'majob."status"',
 			'label'=>'Job status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'job.ctime'=> array(
 			'code'=>'job.ctime',
 			'internalcode'=>'majob."ctime"',
 			'label'=>'Job create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.mtime'=> array(
 			'code'=>'job.mtime',
 			'internalcode'=>'majob."mtime"',
 			'label'=>'Job modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'job.editor'=> array(
 			'code'=>'job.editor',
 			'internalcode'=>'majob."editor"',
 			'label'=>'Job editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -241,17 +241,17 @@ class MAdmin_Job_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getMethod() );
 			$stmt->bind( 4, json_encode( $item->getParameter() ) );
 			$stmt->bind( 5, json_encode( $item->getResult() ) );
-			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 7, $context->getEditor() );
 			$stmt->bind( 8, $date );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 9, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); // so item is no longer modified
 			} else {
 				$stmt->bind( 9, $date );
@@ -384,7 +384,7 @@ class MAdmin_Job_Manager_Default
 		try
 		{
 			$required = array( 'job' );
-			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$level = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** madmin/job/manager/default/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -494,14 +494,14 @@ class MAdmin_Job_Manager_Default
 				if( ( $row['parameter'] = json_decode( $row['parameter'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
-					$logger->log( $msg, MW_Logger_Abstract::WARN );
+					$logger->log( $msg, MW_Logger_Base::WARN );
 				}
 
 				$config = $row['result'];
 				if( ( $row['result'] = json_decode( $row['result'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
-					$logger->log( $msg, MW_Logger_Abstract::WARN );
+					$logger->log( $msg, MW_Logger_Base::WARN );
 				}
 
 				$items[$row['id']] = $this->createItemBase( $row );
@@ -588,9 +588,9 @@ class MAdmin_Job_Manager_Default
 		$siteId = $context->getLocale()->getSiteId();
 
 		$statement = $conn->create( $sql );
-		$statement->bind( 1, $siteId, MW_DB_Statement_Abstract::PARAM_INT );
+		$statement->bind( 1, $siteId, MW_DB_Statement_Base::PARAM_INT );
 
-		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
 
 		return $statement->execute();
 	}

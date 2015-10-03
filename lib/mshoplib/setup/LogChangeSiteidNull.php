@@ -9,7 +9,7 @@
 /**
  * Changes madmin log table to allow site id to be null.
  */
-class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "madmin_log" CHANGE COLUMN "siteid" "siteid" INTEGER';
 

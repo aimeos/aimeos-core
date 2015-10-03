@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Decorator_Sitecheck
-	extends MShop_Catalog_Manager_Decorator_Abstract
+	extends MShop_Catalog_Manager_Decorator_Base
 {
 	/**
 	 * Adds a new item object.

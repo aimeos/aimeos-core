@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -107,7 +107,7 @@ class MShop_Service_Provider_Payment_AbstractTest extends PHPUnit_Framework_Test
 }
 
 
-class MShop_Service_Provider_Payment_Test extends MShop_Service_Provider_Payment_Abstract
+class MShop_Service_Provider_Payment_Test extends MShop_Service_Provider_Payment_Base
 {
 
 }

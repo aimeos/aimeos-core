@@ -9,7 +9,7 @@
 /**
  * Fixes the old email flag values migrated from the order table.
  */
-class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'update' => '
@@ -85,7 +85,7 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 			foreach( $mapping as $value => $type )
 			{
 				$stmt = $this->conn->create( $stmts['change'] );
-				$stmt->bind( 1, $value, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 1, $value, MW_DB_Statement_Base::PARAM_INT );
 				$stmt->bind( 2, $type );
 
 				$result = $stmt->execute();

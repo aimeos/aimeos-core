@@ -9,7 +9,7 @@
 /**
  * Adds typeid column to attribute table.
  */
-class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Abstract
+class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute' => array(

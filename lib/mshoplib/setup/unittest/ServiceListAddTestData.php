@@ -9,7 +9,7 @@
 /**
  * Adds service list test data.
  */
-class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

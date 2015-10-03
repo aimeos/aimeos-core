@@ -43,7 +43,7 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 
 	public function testCreateFunction()
 	{
-		$func = MW_Common_Criteria_Expression_Compare_Abstract::createFunction( 'test', array( true, 1, 0.1, 'string', array( 2, 3 ) ) );
+		$func = MW_Common_Criteria_Expression_Compare_Base::createFunction( 'test', array( true, 1, 0.1, 'string', array( 2, 3 ) ) );
 		$this->assertEquals( 'test(1,1,0.1,"string",[2,3])', $func );
 	}
 
@@ -76,12 +76,12 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	public function testToString()
 	{
 		$types = array(
-			'list' => MW_DB_Statement_Abstract::PARAM_STR,
-			'string' => MW_DB_Statement_Abstract::PARAM_STR,
-			'float' => MW_DB_Statement_Abstract::PARAM_FLOAT,
-			'int' => MW_DB_Statement_Abstract::PARAM_INT,
-			'undefined' => MW_DB_Statement_Abstract::PARAM_INT,
-			'bool' => MW_DB_Statement_Abstract::PARAM_BOOL,
+			'list' => MW_DB_Statement_Base::PARAM_STR,
+			'string' => MW_DB_Statement_Base::PARAM_STR,
+			'float' => MW_DB_Statement_Base::PARAM_FLOAT,
+			'int' => MW_DB_Statement_Base::PARAM_INT,
+			'undefined' => MW_DB_Statement_Base::PARAM_INT,
+			'bool' => MW_DB_Statement_Base::PARAM_BOOL,
 		);
 
 		$translations = array(
@@ -124,9 +124,9 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	public function testToStringFunction()
 	{
 		$types = array(
-			'pcounter()' => MW_DB_Statement_Abstract::PARAM_INT,
-			'strconcat()' => MW_DB_Statement_Abstract::PARAM_STR,
-			'lcounter()' => MW_DB_Statement_Abstract::PARAM_INT,
+			'pcounter()' => MW_DB_Statement_Base::PARAM_INT,
+			'strconcat()' => MW_DB_Statement_Base::PARAM_STR,
+			'lcounter()' => MW_DB_Statement_Base::PARAM_INT,
 		);
 
 		$translations = array(

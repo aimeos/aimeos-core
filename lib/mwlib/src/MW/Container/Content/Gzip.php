@@ -15,7 +15,7 @@
  * @subpackage Container
  */
 class MW_Container_Content_Gzip
-	extends MW_Container_Content_Abstract
+	extends MW_Container_Content_Base
 	implements MW_Container_Content_Interface
 {
 	private $fh;

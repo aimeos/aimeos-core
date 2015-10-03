@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Order_Cleanup_Unpaid_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -73,7 +73,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Default
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '<', 'order.mtime', $limit ),
-			$search->compare( '<', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_REFUND ),
+			$search->compare( '<', 'order.statuspayment', MShop_Order_Item_Base::PAY_REFUND ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

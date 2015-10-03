@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Base_Product_Attribute_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Order_Item_Base_Product_Attribute_Interface
 {
 	private $values;

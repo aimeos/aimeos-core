@@ -91,7 +91,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 	public function testUpdateNone()
 	{
-		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so check shall not be executed
+		// MShop_Order_Item_Base_Base::PARTS_PRODUCT not set, so check shall not be executed
 		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 		$this->AssertTrue( $object->update( $this->order, 'check.after' ) );
 	}
@@ -100,7 +100,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 	public function testUpdateOk()
 	{
 		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
-		$result = $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$result = $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 
 		$this->assertTrue( $result );
 	}
@@ -120,7 +120,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -141,7 +141,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -162,7 +162,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -191,7 +191,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 			$this->fail( 'MShop_Plugin_Provider_Exception not thrown.' );
 		}
 		catch( MShop_Plugin_Provider_Exception $e )

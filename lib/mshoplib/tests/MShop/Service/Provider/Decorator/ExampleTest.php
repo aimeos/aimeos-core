@@ -120,7 +120,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
 	}
 
 
@@ -129,7 +129,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
 		$expr = array(
-			$criteria->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
+			$criteria->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_WEB ),
 			$criteria->compare( '==', 'order.statuspayment', '6' )
 		);
 

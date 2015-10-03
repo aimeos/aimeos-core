@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Base_Address_Default
-	extends MShop_Order_Item_Base_Address_Abstract
+	extends MShop_Order_Item_Base_Address_Base
 	implements MShop_Order_Item_Base_Address_Interface
 {
 	private $values;
@@ -90,7 +90,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 	}
 
 

@@ -62,7 +62,7 @@ class Client_Html_Checkout_Standard_Order_Account_DefaultTest extends PHPUnit_Fr
 
 	public function testProcess()
 	{
-		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT;
 		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();

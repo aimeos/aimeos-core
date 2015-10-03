@@ -15,7 +15,7 @@
  * @subpackage Config
  */
 class MW_Config_Array
-	extends MW_Config_Abstract
+	extends MW_Config_Base
 	implements MW_Config_Interface
 {
 	private $config;

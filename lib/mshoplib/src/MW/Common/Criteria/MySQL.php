@@ -51,6 +51,6 @@ class MW_Common_Criteria_MySQL extends MW_Common_Criteria_SQL
 				break;
 		}
 
-		return MW_Common_Criteria_Expression_Abstract::createFunction( $name, $params );
+		return MW_Common_Criteria_Expression_Base::createFunction( $name, $params );
 	}
 }

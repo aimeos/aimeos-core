@@ -20,7 +20,7 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG );
+		$this->object = new MW_Logger_Errorlog( MW_Logger_Base::DEBUG );
 	}
 
 
@@ -45,10 +45,10 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 		ini_set( "error_log", "error.log" );
 
 		$this->object->log( 'error test' );
-		$this->object->log( 'warning test', MW_Logger_Abstract::WARN );
-		$this->object->log( 'notice test', MW_Logger_Abstract::NOTICE );
-		$this->object->log( 'info test', MW_Logger_Abstract::INFO );
-		$this->object->log( 'debug test', MW_Logger_Abstract::DEBUG );
+		$this->object->log( 'warning test', MW_Logger_Base::WARN );
+		$this->object->log( 'notice test', MW_Logger_Base::NOTICE );
+		$this->object->log( 'info test', MW_Logger_Base::INFO );
+		$this->object->log( 'debug test', MW_Logger_Base::DEBUG );
 		$this->object->log( array( 'scalar', 'test' ) );
 
 		if( ( $content = file( 'error.log' ) ) === false ) {
@@ -71,8 +71,8 @@ class MW_Logger_ErrorlogTest extends PHPUnit_Framework_TestCase
 
 		ini_set( "error_log", "error.log" );
 
-		$this->object = new MW_Logger_Errorlog( MW_Logger_Abstract::DEBUG, array('test') );
-		$this->object->log( 'info test', MW_Logger_Abstract::INFO, 'info' );
+		$this->object = new MW_Logger_Errorlog( MW_Logger_Base::DEBUG, array('test') );
+		$this->object->log( 'info test', MW_Logger_Base::INFO, 'info' );
 
 		ini_restore( "error_log" );
 

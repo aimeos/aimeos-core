@@ -16,7 +16,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Service_Default
-	extends Controller_ExtJS_Abstract
+	extends Controller_ExtJS_Base
 	implements Controller_ExtJS_Common_Interface
 {
 	private $manager = null;

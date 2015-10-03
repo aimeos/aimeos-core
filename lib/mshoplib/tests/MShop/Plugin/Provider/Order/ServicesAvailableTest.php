@@ -58,7 +58,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 
 	public function testUpdateNone()
 	{
-		// MShop_Order_Item_Base_Abstract::PARTS_SERVICE not set, so update shall not be executed
+		// MShop_Order_Item_Base_Base::PARTS_SERVICE not set, so update shall not be executed
 		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
@@ -66,11 +66,11 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 	public function testUpdateEmptyConfig()
 	{
 		$object = new MShop_Plugin_Provider_Order_ServicesAvailable( TestHelper::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 		$this->order->setService( $this->service, 'payment' );
 		$this->order->setService( $this->service, 'delivery' );
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 	}
 
@@ -83,14 +83,14 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 				'payment' => false
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => null,
 				'payment' => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
@@ -98,7 +98,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 		) );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE );
 	}
 
 	public function testUpdateWithServices()
@@ -113,14 +113,14 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 				'payment' => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
 				'payment' => true
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => false,
@@ -128,6 +128,6 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 		) );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_SERVICE );
 	}
 }

@@ -9,7 +9,7 @@
 /**
  * Adds product tag test data.
  */
-class MW_Setup_Task_ProductAddTagTestData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddTagTestData extends MW_Setup_Task_Base
 {
 
 	/**

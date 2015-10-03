@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Order_Service_Async_Factory
-	extends Controller_Jobs_Common_Factory_Abstract
+	extends Controller_Jobs_Common_Factory_Base
 	implements Controller_Jobs_Common_Factory_Interface
 {
 	/**

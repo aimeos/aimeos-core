@@ -194,21 +194,21 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_UNFINISHED );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_UNFINISHED );
 
 		$object = new Controller_Common_Order_Default( $context );
 		$object->update( $orderItem );
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
 
 		$object = new Controller_Common_Order_Default( $context );
 		$object->update( $orderItem );
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Abstract::PAY_DELETED );
+		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_DELETED );
 
 		$object = new Controller_Common_Order_Default( $context );
 		$object->update( $orderItem );

@@ -7,9 +7,9 @@
 
 
 /**
- * Test class for Controller_Jobs_Common_Decorator_AbstractTest.
+ * Test class for Controller_Jobs_Common_Decorator_BaseTest.
  */
-class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
+class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $stub;
 	private $object;
@@ -30,7 +30,7 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
-		$this->object = new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $aimeos, $this->stub );
+		$this->object = new Controller_Jobs_Common_Decorator_BaseImpl( $context, $aimeos, $this->stub );
 	}
 
 
@@ -86,8 +86,8 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends PHPUnit_Framework_Te
 }
 
 
-class Controller_Jobs_Common_Decorator_AbstractImpl
-	extends Controller_Jobs_Common_Decorator_Abstract
+class Controller_Jobs_Common_Decorator_BaseImpl
+	extends Controller_Jobs_Common_Decorator_Base
 {
 	public function getContextPublic()
 	{

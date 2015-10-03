@@ -9,7 +9,7 @@
 /**
  * Adds product stock test data.
  */
-class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Base
 {
 
 	/**

@@ -8,7 +8,7 @@
 /**
  * Renames the foreign key constraint on siteid for table mshop_attribute_list.
  */
-class MW_Setup_Task_AttributeListRenameSiteidConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_AttributeListRenameSiteidConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_list' => array(

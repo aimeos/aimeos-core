@@ -9,7 +9,7 @@
 /**
  * Changes locale site table to nested set.
  */
-class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Base
 {
 	private $mysqlColumns = array(
 		'level' => 'ALTER TABLE "mshop_locale_site" ADD "level" INTEGER NOT NULL',
@@ -113,16 +113,16 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 
 				foreach( $sites as $key => $site )
 				{
-					$stmt->bind( 1, 1, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, ( $key + 1 ) * 2, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 3, ( $key + 1 ) * 2 + 1, MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 1, 1, MW_DB_Statement_Base::PARAM_INT );
+					$stmt->bind( 2, ( $key + 1 ) * 2, MW_DB_Statement_Base::PARAM_INT );
+					$stmt->bind( 3, ( $key + 1 ) * 2 + 1, MW_DB_Statement_Base::PARAM_INT );
 					$stmt->bind( 4, $site['code'] );
 					$stmt->execute()->finish();
 				}
 
-				$stmt->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 2, 1, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 3, ( $cnt + 1 ) * 2, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 1, 0, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 2, 1, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 3, ( $cnt + 1 ) * 2, MW_DB_Statement_Base::PARAM_INT );
 				$stmt->bind( 4, 'default' );
 				$stmt->execute()->finish();
 

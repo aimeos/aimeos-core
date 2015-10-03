@@ -9,7 +9,7 @@
 /**
  * Adds label and status to warehouse table.
  */
-class MW_Setup_Task_ProductWarehouseAddLabelStatus extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductWarehouseAddLabelStatus extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_product_warehouse' => array(

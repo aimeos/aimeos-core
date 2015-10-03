@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Manager_Default
-	extends MShop_Service_Manager_Abstract
+	extends MShop_Service_Manager_Base
 	implements MShop_Service_Manager_Interface
 {
 	private $searchConfig = array(
@@ -24,14 +24,14 @@ class MShop_Service_Manager_Default
 			'internalcode' => 'mser."id"',
 			'label' => 'Service ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'service.siteid' => array(
 			'code' => 'service.siteid',
 			'internalcode' => 'mser."siteid"',
 			'label' => 'Service site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'service.typeid' => array(
@@ -39,7 +39,7 @@ class MShop_Service_Manager_Default
 			'internalcode' => 'mser."typeid"',
 			'label' => 'Service type ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.code' => array(
@@ -47,63 +47,63 @@ class MShop_Service_Manager_Default
 			'internalcode' => 'mser."code"',
 			'label' => 'Service code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.position' => array(
 			'code' => 'service.position',
 			'internalcode' => 'mser."pos"',
 			'label' => 'Service position',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.provider' => array(
 			'code' => 'service.provider',
 			'internalcode' => 'mser."provider"',
 			'label' => 'Service provider',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.config' => array(
 			'code' => 'service.config',
 			'internalcode' => 'mser."config"',
 			'label' => 'Service config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.status' => array(
 			'code' => 'service.status',
 			'internalcode' => 'mser."status"',
 			'label' => 'Service status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'service.label' => array(
 			'code' => 'service.label',
 			'internalcode' => 'mser."label"',
 			'label' => 'Service label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.ctime'=> array(
 			'code'=>'service.ctime',
 			'internalcode'=>'mser."ctime"',
 			'label'=>'Service create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.mtime'=> array(
 			'code'=>'service.mtime',
 			'internalcode'=>'mser."mtime"',
 			'label'=>'Service modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'service.editor'=> array(
 			'code'=>'service.editor',
 			'internalcode'=>'mser."editor"',
 			'label'=>'Service editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -320,19 +320,19 @@ class MShop_Service_Manager_Default
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 3, $item->getTypeId() );
 			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getProvider() );
 			$stmt->bind( 7, json_encode( $item->getConfig() ) );
-			$stmt->bind( 8, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 8, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 9, $date ); // mtime
 			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 11, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 11, $date ); // ctime
@@ -410,7 +410,7 @@ class MShop_Service_Manager_Default
 		try
 		{
 			$required = array( 'service' );
-			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
+			$level = MShop_Locale_Manager_Base::SITE_PATH;
 
 			/** mshop/service/manager/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -521,7 +521,7 @@ class MShop_Service_Manager_Default
 				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
 				}
 
 				$map[$row['id']] = $row;

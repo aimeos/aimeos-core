@@ -9,7 +9,7 @@
 /**
  * Renames nodeid column to parentid in catalog list table.
  */
-class MW_Setup_Task_CatalogListNodeidToParentid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogListNodeidToParentid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_catalog_list' => array(

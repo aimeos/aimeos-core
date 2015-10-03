@@ -53,7 +53,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	/**
 	 * Returns the salutation constant for the person described by the address.
 	 *
-	 * @return string Saluatation constant defined in MShop_Common_Item_Address_Abstract
+	 * @return string Saluatation constant defined in MShop_Common_Item_Address_Base
 	 */
 	public function getSalutation();
 
@@ -61,7 +61,7 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	/**
 	 * Sets the new salutation for the person described by the address.
 	 *
-	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Abstract
+	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Base
 	 * @return void
 	 */
 	public function setSalutation( $salutation );

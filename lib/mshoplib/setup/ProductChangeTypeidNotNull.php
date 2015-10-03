@@ -9,7 +9,7 @@
 /**
  * Changes product typeid column to NOT NULL.
  */
-class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product"

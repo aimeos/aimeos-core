@@ -57,12 +57,12 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends PHPUnit_Framework_Te
 		$dbm->release( $conn );
 
 		$types = array(
-			'list' => MW_DB_Statement_Abstract::PARAM_STR,
-			'string' => MW_DB_Statement_Abstract::PARAM_STR,
-			'float' => MW_DB_Statement_Abstract::PARAM_FLOAT,
-			'int' => MW_DB_Statement_Abstract::PARAM_INT,
-			'undefined' => MW_DB_Statement_Abstract::PARAM_INT,
-			'bool' => MW_DB_Statement_Abstract::PARAM_BOOL,
+			'list' => MW_DB_Statement_Base::PARAM_STR,
+			'string' => MW_DB_Statement_Base::PARAM_STR,
+			'float' => MW_DB_Statement_Base::PARAM_FLOAT,
+			'int' => MW_DB_Statement_Base::PARAM_INT,
+			'undefined' => MW_DB_Statement_Base::PARAM_INT,
+			'bool' => MW_DB_Statement_Base::PARAM_BOOL,
 		);
 
 		$expr1 = array();

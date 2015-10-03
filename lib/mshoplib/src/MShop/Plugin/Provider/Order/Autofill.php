@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Order_Autofill
-	extends MShop_Plugin_Provider_Factory_Abstract
+	extends MShop_Plugin_Provider_Factory_Base
 	implements MShop_Plugin_Provider_Factory_Interface
 {
 	/**
@@ -80,7 +80,7 @@ class MShop_Plugin_Provider_Order_Autofill
 	 * Returns the order service item for the given type and code if available.
 	 *
 	 * @param MShop_Order_Item_Base_Interface $order Basket of the customer
-	 * @param string $type Service type constant from MShop_Order_Item_Base_Service_Abstract
+	 * @param string $type Service type constant from MShop_Order_Item_Base_Service_Base
 	 * @param string|null $code Service item code
 	 * @param MShop_Order_Item_Base_Service_Interface|null Order service item if available or null otherwise
 	 */
@@ -184,7 +184,7 @@ class MShop_Plugin_Provider_Order_Autofill
 	{
 		$services = $order->getServices();
 
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_DELIVERY;
 
 		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.delivery', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.deliverycode' ) ) ) !== null
@@ -194,7 +194,7 @@ class MShop_Plugin_Provider_Order_Autofill
 		}
 
 
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT;
 
 		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.payment', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.paymentcode' ) ) ) !== null

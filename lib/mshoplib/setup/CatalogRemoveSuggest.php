@@ -9,7 +9,7 @@
 /**
  * Removes catalog suggest tables.
  */
-class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'gettypeid' => 'SELECT "id" FROM "mshop_product_list_type" WHERE "code" = \'suggestion\'',
@@ -71,7 +71,7 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Abstract
 		{
 			$result = $this->conn->create( $stmts['gettypeid'] )->execute();
 
-			if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
+			if( ( $row = $result->fetch( MW_DB_Result_Base::FETCH_NUM ) ) === false ) {
 				throw new MW_Setup_Exception( 'Product list type "suggestion" is missing' );
 			}
 

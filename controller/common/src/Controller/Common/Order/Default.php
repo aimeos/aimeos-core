@@ -51,8 +51,8 @@ class Controller_Common_Order_Default
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem )
 	{
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 1, -1 );
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 1, -1 );
 	}
 
 
@@ -76,8 +76,8 @@ class Controller_Common_Order_Default
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem )
 	{
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 0, +1 );
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 0, +1 );
 	}
 
 
@@ -99,16 +99,16 @@ class Controller_Common_Order_Default
 	{
 		switch( $orderItem->getPaymentStatus() )
 		{
-			case MShop_Order_Item_Abstract::PAY_DELETED:
-			case MShop_Order_Item_Abstract::PAY_CANCELED:
-			case MShop_Order_Item_Abstract::PAY_REFUSED:
-			case MShop_Order_Item_Abstract::PAY_REFUND:
+			case MShop_Order_Item_Base::PAY_DELETED:
+			case MShop_Order_Item_Base::PAY_CANCELED:
+			case MShop_Order_Item_Base::PAY_REFUSED:
+			case MShop_Order_Item_Base::PAY_REFUND:
 				$this->unblock( $orderItem );
 				break;
 
-			case MShop_Order_Item_Abstract::PAY_PENDING:
-			case MShop_Order_Item_Abstract::PAY_AUTHORIZED:
-			case MShop_Order_Item_Abstract::PAY_RECEIVED:
+			case MShop_Order_Item_Base::PAY_PENDING:
+			case MShop_Order_Item_Base::PAY_AUTHORIZED:
+			case MShop_Order_Item_Base::PAY_RECEIVED:
 				$this->block( $orderItem );
 				break;
 		}
@@ -221,7 +221,7 @@ class Controller_Common_Order_Default
 	 * Increases or decreases the stock level or the coupon code count for referenced items of the given order.
 	 *
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
-	 * @param string $type Constant from MShop_Order_Item_Status_Abstract, e.g. STOCK_UPDATE or COUPON_UPDATE
+	 * @param string $type Constant from MShop_Order_Item_Status_Base, e.g. STOCK_UPDATE or COUPON_UPDATE
 	 * @param string $status New status value stored along with the order item
 	 * @param integer $value Number to increse or decrease the stock level or coupon code count
 	 */
@@ -233,9 +233,9 @@ class Controller_Common_Order_Default
 			return;
 		}
 
-		if( $type == MShop_Order_Item_Status_Abstract::STOCK_UPDATE ) {
+		if( $type == MShop_Order_Item_Status_Base::STOCK_UPDATE ) {
 			$this->updateStock( $orderItem, $value );
-		} elseif( $type == MShop_Order_Item_Status_Abstract::COUPON_UPDATE ) {
+		} elseif( $type == MShop_Order_Item_Status_Base::COUPON_UPDATE ) {
 			$this->updateCoupons( $orderItem, $value );
 		}
 

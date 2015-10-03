@@ -9,7 +9,7 @@
 /**
  * Remove column listflag from product table.
  */
-class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'column' => array(

@@ -164,7 +164,7 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 
 	public function testGetConditionStringInvalidName()
 	{
-		$types = array( 'int_value' => MW_DB_Statement_Abstract::PARAM_INT );
+		$types = array( 'int_value' => MW_DB_Statement_Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'ival', 10 ) );
 		$this->setExpectedException('MW_Common_Exception');

@@ -15,7 +15,7 @@
  * @subpackage Order
  */
 class Controller_Jobs_Order_Email_Delivery_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**
@@ -84,10 +84,10 @@ class Controller_Jobs_Order_Email_Delivery_Default
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
 		$default = array(
-			MShop_Order_Item_Abstract::STAT_PROGRESS,
-			MShop_Order_Item_Abstract::STAT_DISPATCHED,
-			MShop_Order_Item_Abstract::STAT_REFUSED,
-			MShop_Order_Item_Abstract::STAT_RETURNED,
+			MShop_Order_Item_Base::STAT_PROGRESS,
+			MShop_Order_Item_Base::STAT_DISPATCHED,
+			MShop_Order_Item_Base::STAT_REFUSED,
+			MShop_Order_Item_Base::STAT_RETURNED,
 		);
 
 		/** controller/jobs/order/email/delivery/default/status
@@ -118,7 +118,7 @@ class Controller_Jobs_Order_Email_Delivery_Default
 		{
 			$orderSearch = $orderManager->createSearch();
 
-			$param = array( MShop_Order_Item_Status_Abstract::EMAIL_DELIVERY, $status );
+			$param = array( MShop_Order_Item_Status_Base::EMAIL_DELIVERY, $status );
 			$orderFunc = $orderSearch->createFunction( 'order.containsStatus', $param );
 
 			$expr = array(
@@ -141,9 +141,9 @@ class Controller_Jobs_Order_Email_Delivery_Default
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
 
 						try {
-							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 						} catch( Exception $e ) {
-							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 						}
 
 						$view->extAddressItem = $addr;
@@ -165,7 +165,7 @@ class Controller_Jobs_Order_Email_Delivery_Default
 
 						$statusItem = $orderStatusManager->createItem();
 						$statusItem->setParentId( $id );
-						$statusItem->setType( MShop_Order_Item_Status_Abstract::EMAIL_DELIVERY );
+						$statusItem->setType( MShop_Order_Item_Status_Base::EMAIL_DELIVERY );
 						$statusItem->setValue( $status );
 
 						$orderStatusManager->saveItem( $statusItem );

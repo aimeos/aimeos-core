@@ -9,7 +9,7 @@
 /**
  * Changes site ID to NOT NULL in madmin tables.
  */
-class MW_Setup_Task_TablesChangeSiteidNotNullMAdmin extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TablesChangeSiteidNotNullMAdmin extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'madmin_job' => array(

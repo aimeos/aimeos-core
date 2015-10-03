@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Service_Provider_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $mock;
 	private $object;
@@ -115,7 +115,7 @@ class MShop_Service_Provider_Decorator_AbstractTest extends PHPUnit_Framework_Te
 	{
 		$this->mock->expects( $this->once() )->method( 'isImplemented' )->will( $this->returnValue( true ) );
 
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
 	}
 
 
@@ -173,7 +173,7 @@ class MShop_Service_Provider_Decorator_AbstractTest extends PHPUnit_Framework_Te
 }
 
 
-class MShop_Service_Provider_Decorator_Test extends MShop_Service_Provider_Decorator_Abstract
+class MShop_Service_Provider_Decorator_Test extends MShop_Service_Provider_Decorator_Base
 {
 
 }

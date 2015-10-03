@@ -106,28 +106,28 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	/**
 	 * Returns the billing or delivery address depending on the given domain.
 	 *
-	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
+	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Base
 	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
 	 */
-	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+	public function getAddress( $domain = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Order address item for the given domain
-	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
+	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Base
 	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
 	 */
 	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
-		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY
+		$domain = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY
 	);
 
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
-	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
+	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Base
 	 */
-	public function deleteAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+	public function deleteAddress( $domain = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 
 	/**
 	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.
@@ -192,7 +192,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 * @param integer $what Test for the specifice type of completeness
 	 * @return bool
 	 */
-	public function check( $what = MShop_Order_Item_Base_Abstract::PARTS_ALL );
+	public function check( $what = MShop_Order_Item_Base_Base::PARTS_ALL );
 
 	/**
 	 * Notifies listeners before the basket becomes an order.

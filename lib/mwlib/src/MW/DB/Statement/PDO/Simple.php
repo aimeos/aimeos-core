@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_DB_Statement_Interface
+class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_Statement_Interface
 {
 	private $conn = null;
 	private $binds = array();
@@ -60,9 +60,9 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 	 *
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in MW_DB_Statement_Abstract as constant
+	 * @param integer $type Type of given value defined in MW_DB_Statement_Base as constant
 	 */
-	public function bind( $position, $value, $type = MW_DB_Statement_Abstract::PARAM_STR )
+	public function bind( $position, $value, $type = MW_DB_Statement_Base::PARAM_STR )
 	{
 		if( is_null( $value ) ) {
 			$this->binds[$position] = 'NULL'; return;
@@ -70,15 +70,15 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Abstract implements MW_
 
 		switch( $type )
 		{
-			case MW_DB_Statement_Abstract::PARAM_NULL:
+			case MW_DB_Statement_Base::PARAM_NULL:
 				$this->binds[$position] = 'NULL'; break;
-			case MW_DB_Statement_Abstract::PARAM_BOOL:
+			case MW_DB_Statement_Base::PARAM_BOOL:
 				$this->binds[$position] = (int) (bool) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_INT:
+			case MW_DB_Statement_Base::PARAM_INT:
 				$this->binds[$position] = (int) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_FLOAT:
+			case MW_DB_Statement_Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_STR:
+			case MW_DB_Statement_Base::PARAM_STR:
 				// PDO quote isn't available for ODBC driver
 				$value = str_replace( '\'', '\'\'', str_replace( '\\', '\\\\', $value ) );
 				$this->binds[$position] = '\'' . $value . '\''; break;

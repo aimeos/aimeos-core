@@ -9,7 +9,7 @@
 /**
  * Adds label column to text table.
  */
-class MW_Setup_Task_TextAddLabel extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TextAddLabel extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_text" ADD "label" VARCHAR(255) NOT NULL AFTER "domain"',

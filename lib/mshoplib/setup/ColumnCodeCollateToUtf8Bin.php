@@ -9,7 +9,7 @@
 /**
  * Changes collation of code columns.
  */
-class MW_Setup_Task_ColumnCodeCollateToUtf8Bin extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ColumnCodeCollateToUtf8Bin extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_catalog' => 'ALTER TABLE "mshop_catalog" CHANGE "code" "code" VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL',

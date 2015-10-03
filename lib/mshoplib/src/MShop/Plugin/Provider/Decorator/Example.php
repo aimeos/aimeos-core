@@ -15,7 +15,7 @@
  * @subpackage Plugin
  */
 class MShop_Plugin_Provider_Decorator_Example
-	extends MShop_Plugin_Provider_Decorator_Abstract
+	extends MShop_Plugin_Provider_Decorator_Base
 	implements MShop_Plugin_Provider_Decorator_Interface
 {
 	/**

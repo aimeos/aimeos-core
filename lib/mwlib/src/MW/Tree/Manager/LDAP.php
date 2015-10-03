@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Abstract
+class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 {
 	/**
 	 * Initializes the tree manager.
@@ -76,11 +76,11 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Abstract
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param mixed $relbase Relative base of the tree which can be an ID, a path, etc
-	 * @param int $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param int $level One of the level constants from MW_Tree_Manager_Base
 	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $relbase = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
+	public function getNode( $relbase = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		throw new MW_Tree_Exception( 'Not yet implemented' );
 	}

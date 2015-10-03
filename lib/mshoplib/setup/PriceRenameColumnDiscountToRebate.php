@@ -9,7 +9,7 @@
 /**
  * Renames discount column to rebate in price table.
  */
-class MW_Setup_Task_PriceRenameColumnDiscountToRebate extends MW_Setup_Task_Abstract
+class MW_Setup_Task_PriceRenameColumnDiscountToRebate extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_price' => 'ALTER TABLE "mshop_price" CHANGE "discount" "rebate" DECIMAL(12,2) NOT NULL',

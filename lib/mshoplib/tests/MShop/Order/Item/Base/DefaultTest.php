@@ -81,8 +81,8 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->coupons = array( 'OPQR' => array( $prod1 ) );
 
 		$this->addresses = array(
-			MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => $orderAddressManager->createItem(),
-			MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => $orderAddressManager->createItem(),
+			MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => $orderAddressManager->createItem(),
+			MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => $orderAddressManager->createItem(),
 		);
 
 		$this->services = array(
@@ -430,8 +430,8 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->addresses, $this->object->getAddresses() );
 
-		$address = $this->object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertEquals( $this->addresses[MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT], $address );
+		$address = $this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->assertEquals( $this->addresses[MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT], $address );
 	}
 
 
@@ -445,12 +445,12 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$result = $this->object->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$item = $this->object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$result = $this->object->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$item = $this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
 		$this->assertEquals( $result, $item );
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item->getType() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $item->getType() );
 		$this->assertTrue( $item->isModified() );
 		$this->assertNull( $item->getId() );
 	}
@@ -462,12 +462,12 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$this->object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->object->deleteAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->object->deleteAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 	}
 
 
@@ -513,12 +513,12 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->object->setService( $service, $type );
 		}
 
-		$this->object->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
-		$this->object->deleteService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$this->object->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
+		$this->object->deleteService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$this->object->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
 	}
 
 
@@ -563,14 +563,14 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCheckAllFailure()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ALL );
 	}
 
 
 	public function testCheckProductsFailure()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_PRODUCT );
 	}
 
 
@@ -584,7 +584,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ADDRESS );
 	}
 
 
@@ -595,7 +595,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ADDRESS );
 	}
 
 
@@ -613,7 +613,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->object->setService( $service, $type );
 		}
 
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_SERVICE );
 	}
 
 
@@ -629,7 +629,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
+		$this->object->check( MShop_Order_Item_Base_Base::PARTS_SERVICE );
 	}
 
 

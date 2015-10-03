@@ -9,7 +9,7 @@
 /**
  * Adds type/code column to catalog index attribute table.
  */
-class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'type' => array(

@@ -7,9 +7,9 @@
 
 
 /**
- * Test class for MShop_Service_Provider_Abstract.
+ * Test class for MShop_Service_Provider_Base.
  */
-class MShop_Service_Provider_AbstractTest extends PHPUnit_Framework_TestCase
+class MShop_Service_Provider_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -26,7 +26,7 @@ class MShop_Service_Provider_AbstractTest extends PHPUnit_Framework_TestCase
 		$this->context = TestHelper::getContext();
 		$serviceItem = MShop_Service_Manager_Factory::createManager( $this->context )->createItem();
 
-		$this->object = new Test_MShop_Service_Provider_Abstract( $this->context, $serviceItem );
+		$this->object = new Test_MShop_Service_Provider_Base( $this->context, $serviceItem );
 	}
 
 	/**
@@ -98,7 +98,7 @@ class MShop_Service_Provider_AbstractTest extends PHPUnit_Framework_TestCase
 }
 
 
-class Test_MShop_Service_Provider_Abstract extends MShop_Service_Provider_Abstract
+class Test_MShop_Service_Provider_Base extends MShop_Service_Provider_Base
 {
 	/**
 	 * @param integer $ts

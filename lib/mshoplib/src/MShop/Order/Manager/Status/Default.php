@@ -13,7 +13,7 @@
  * @subpackage Order
  */
 class MShop_Order_Manager_Status_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_Base
 	implements MShop_Order_Manager_Status_Interface
 {
 	private $searchConfig = array(
@@ -23,7 +23,7 @@ class MShop_Order_Manager_Status_Default
 			'internaldeps'=> array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
 			'label'=>'Order status ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.siteid'=> array(
@@ -31,7 +31,7 @@ class MShop_Order_Manager_Status_Default
 			'internalcode'=>'mordst."siteid"',
 			'label'=>'Order status site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.parentid'=> array(
@@ -39,7 +39,7 @@ class MShop_Order_Manager_Status_Default
 			'internalcode'=>'mordst."parentid"',
 			'label'=>'Order status parent id',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.type'=> array(
@@ -47,35 +47,35 @@ class MShop_Order_Manager_Status_Default
 			'internalcode'=>'mordst."type"',
 			'label'=>'Order status type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.status.value'=> array(
 			'code'=>'order.status.value',
 			'internalcode'=>'mordst."value"',
 			'label'=>'Order status value',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.status.mtime'=> array(
 			'code'=>'order.status.mtime',
 			'internalcode'=>'mordst."mtime"',
 			'label'=>'Order status modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.status.ctime'=> array(
 			'code'=>'order.status.ctime',
 			'internalcode'=>'mordst."ctime"',
 			'label'=>'Order status create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'order.status.editor'=> array(
 			'code'=>'order.status.editor',
 			'internalcode'=>'mordst."editor"',
 			'label'=>'Order status editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -269,15 +269,15 @@ class MShop_Order_Manager_Status_Default
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getParentID(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, $item->getParentID(), MW_DB_Statement_Base::PARAM_INT );
 			$stmt->bind( 3, $item->getType() );
 			$stmt->bind( 4, $item->getValue() );
 			$stmt->bind( 5, $date ); //mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 7, $date ); //ctime
@@ -555,7 +555,7 @@ class MShop_Order_Manager_Status_Default
 		try
 		{
 			$required = array( 'order.status' );
-			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/status/default/item/search
 			 * Retrieves the records matched by the given criteria in the database

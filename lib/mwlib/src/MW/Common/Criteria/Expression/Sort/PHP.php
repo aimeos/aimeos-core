@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class MW_Common_Criteria_Expression_Sort_PHP
-	extends MW_Common_Criteria_Expression_Abstract
+	extends MW_Common_Criteria_Expression_Base
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
 	private static $operators = array( '+' => 'asort', '-' => 'arsort' );

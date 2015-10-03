@@ -65,7 +65,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 		$order = $manager->createItem();
 		$this->object->process( $order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $order->getDeliveryStatus() );
+		$this->assertEquals( MShop_Order_Item_Base::STAT_PROGRESS, $order->getDeliveryStatus() );
 	}
 
 

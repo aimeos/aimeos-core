@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Payment_DirectDebit
-	extends MShop_Service_Provider_Payment_Abstract
+	extends MShop_Service_Provider_Payment_Base
 	implements MShop_Service_Provider_Payment_Interface
 {
 	private $feConfig = array(
@@ -136,7 +136,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 */
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+		$order->setPaymentStatus( MShop_Order_Item_Base::PAY_AUTHORIZED );
 		$this->saveOrder( $order );
 
 		return parent::process( $order, $params );

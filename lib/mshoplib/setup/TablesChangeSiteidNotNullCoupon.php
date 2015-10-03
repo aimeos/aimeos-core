@@ -9,7 +9,7 @@
 /**
  * Changes site ID to NOT NULL.
  */
-class MW_Setup_Task_TablesChangeSiteidNotNullCoupon extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TablesChangeSiteidNotNullCoupon extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_coupon' => array(

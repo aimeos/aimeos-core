@@ -15,7 +15,7 @@
  * @subpackage Cache
  */
 class MAdmin_Cache_Manager_Default
-	extends MAdmin_Common_Manager_Abstract
+	extends MAdmin_Common_Manager_Base
 	implements MAdmin_Cache_Manager_Interface
 {
 	private $object;
@@ -26,7 +26,7 @@ class MAdmin_Cache_Manager_Default
 			'internalcode' => '"id"',
 			'label' => 'Cache ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'cache.siteid' => array(
 			'code' => 'cache.siteid',
@@ -34,7 +34,7 @@ class MAdmin_Cache_Manager_Default
 			'label' => 'Cache site ID',
 			'type' => 'integer',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
 		'cache.value' => array(
 			'code' => 'cache.value',
@@ -42,7 +42,7 @@ class MAdmin_Cache_Manager_Default
 			'label' => 'Cached value',
 			'type' => 'string',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'cache.expire' => array(
 			'code' => 'cache.expire',
@@ -50,7 +50,7 @@ class MAdmin_Cache_Manager_Default
 			'label' => 'Cache expiration date/time',
 			'type' => 'datetime',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'cache.tag.name' => array(
 			'code' => 'cache.tag.name',
@@ -58,7 +58,7 @@ class MAdmin_Cache_Manager_Default
 			'label' => 'Cache tag name',
 			'type' => 'string',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -409,7 +409,7 @@ class MAdmin_Cache_Manager_Default
 		try
 		{
 			$required = array( 'cache' );
-			$level = MShop_Locale_Manager_Abstract::SITE_ONE;
+			$level = MShop_Locale_Manager_Base::SITE_ONE;
 
 			/** madmin/cache/manager/default/search
 			 * Retrieves the records matched by the given criteria in the database

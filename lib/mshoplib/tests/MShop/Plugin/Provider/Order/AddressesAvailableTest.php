@@ -59,7 +59,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 
 	public function testUpdateNone()
 	{
-		// MShop_Order_Item_Base_Abstract::PARTS_ADDRESS not set, so update shall not be executed
+		// MShop_Order_Item_Base_Base::PARTS_ADDRESS not set, so update shall not be executed
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable( TestHelper::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
@@ -67,11 +67,11 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 	public function testEmptyConfig()
 	{
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable( TestHelper::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 
-		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 	}
 
 	public function testUpdateAddressesNotAvailable()
@@ -79,55 +79,55 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable( TestHelper::getContext(), $this->plugin );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => false,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => false
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => false,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => false
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => null,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => null
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => null,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => true,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => true
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => true,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => true
 		) );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS );
 	}
 
 	public function testUpdateAddressesAvailable()
 	{
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable( TestHelper::getContext(), $this->plugin );
 
-		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->order->setAddress( $this->address, MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => null,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => null
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => null,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => true,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => true
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => true,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => true
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS ) );
 
 		$this->plugin->setConfig( array(
-				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => false,
-				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => false
+				MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => false,
+				MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => false
 		) );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_ADDRESS );
 	}
 }

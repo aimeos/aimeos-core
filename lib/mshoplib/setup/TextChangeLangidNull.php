@@ -9,7 +9,7 @@
 /**
  * Changes langid column to allow NULL values.
  */
-class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_text" CHANGE "langid" "langid" CHAR(2) DEFAULT NULL',

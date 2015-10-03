@@ -14,7 +14,7 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Status_Default
-	extends MShop_Order_Item_Status_Abstract
+	extends MShop_Order_Item_Status_Base
 	implements MShop_Order_Item_Status_Interface
 {
 	private $values;

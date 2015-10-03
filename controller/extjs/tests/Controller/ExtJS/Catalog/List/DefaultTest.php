@@ -57,7 +57,7 @@ class Controller_ExtJS_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testSaveDeleteItem()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$params = (object) array(
 			'site' => 'unittest',

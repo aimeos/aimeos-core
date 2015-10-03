@@ -15,7 +15,7 @@
  * @subpackage Job
  */
 class MAdmin_Job_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MAdmin_Job_Item_Interface
 {
 	private $values;

@@ -132,7 +132,7 @@ class MShop_Order_Item_Status_DefaultTest extends PHPUnit_Framework_TestCase
 		$list = array(
 			'order.status.id' => 1,
 			'order.status.parentid' => 2,
-			'order.status.type' => MShop_Order_Item_Status_Abstract::STATUS_PAYMENT,
+			'order.status.type' => MShop_Order_Item_Status_Base::STATUS_PAYMENT,
 			'order.status.value' => 'value',
 		);
 

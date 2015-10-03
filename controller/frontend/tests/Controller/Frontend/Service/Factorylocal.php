@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Service_Factorylocal
-	extends Controller_Frontend_Common_Factory_Abstract
+	extends Controller_Frontend_Common_Factory_Base
 {
 	/**
 	 * @param string $name

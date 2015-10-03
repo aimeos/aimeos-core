@@ -48,11 +48,11 @@ interface MW_Tree_Manager_Interface
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param int $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param int $level One of the level constants from MW_Tree_Manager_Base
 	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null );
+	public function getNode( $id = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null );
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.

@@ -9,7 +9,7 @@
 /**
  * Adds config column to list tables.
  */
-class MW_Setup_Task_ListsAddConfig extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ListsAddConfig extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute_list' => 'ALTER TABLE "mshop_attribute_list" ADD "config" TEXT NOT NULL AFTER "end"',

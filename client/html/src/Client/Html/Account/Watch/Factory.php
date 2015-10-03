@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Account_Watch_Factory
-	extends Client_Html_Common_Factory_Abstract
+	extends Client_Html_Common_Factory_Base
 	implements Client_Html_Common_Factory_Interface
 {
 	/**

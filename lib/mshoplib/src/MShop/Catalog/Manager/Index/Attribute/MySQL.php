@@ -25,7 +25,7 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_attribute" AS mcatinat USE INDEX ("idx_mscatinat_s_at_lt", "idx_mscatinat_p_s_at_lt") ON mcatinat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		)
 	);

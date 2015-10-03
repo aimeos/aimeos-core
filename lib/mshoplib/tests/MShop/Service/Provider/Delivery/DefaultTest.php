@@ -136,7 +136,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Delivery_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Delivery_Base::FEAT_QUERY ) );
 	}
 
 	public function testProcess()
@@ -152,7 +152,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends PHPUnit_Framework_Test
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $order = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', MShop_Order_Item_Abstract::STAT_REFUSED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', MShop_Order_Item_Base::STAT_REFUSED, MShop_Order_Item_Base::TYPE_WEB ) );
 		}
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );

@@ -9,7 +9,7 @@
 /**
  * Renames the foreign key constraints for supplier tables to match style guidlines.
  */
-class MW_Setup_Task_SupplierRenameConstraints extends MW_Setup_Task_Abstract
+class MW_Setup_Task_SupplierRenameConstraints extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_supplier' => array(

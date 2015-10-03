@@ -7,9 +7,9 @@
 
 
 /**
- * Test class for Client_Html_Common_Factory_AbstractTest.
+ * Test class for Client_Html_Common_Factory_BaseTest.
  */
-class Client_Html_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
+class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $context;
 

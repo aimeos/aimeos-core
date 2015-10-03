@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_AbstractTest extends PHPUnit_Framework_TestCase
+class Controller_Jobs_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -36,7 +36,7 @@ class Controller_Jobs_AbstractTest extends PHPUnit_Framework_TestCase
 
 
 
-class Controller_Jobs_TestAbstract extends Controller_Jobs_Abstract
+class Controller_Jobs_TestAbstract extends Controller_Jobs_Base
 {
 	public function getTemplatePublic( $confpath, $default )
 	{

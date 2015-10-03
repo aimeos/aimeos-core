@@ -9,7 +9,7 @@
 /**
  * Adds config column to product table.
  */
-class MW_Setup_Task_ProductAddConfig extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddConfig extends MW_Setup_Task_Base
 {
 	private $mysql = 'ALTER TABLE "mshop_product" ADD "config" TEXT NOT NULL AFTER "label"';
 

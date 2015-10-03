@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 class MShop_Service_Manager_Factory
-	extends MShop_Common_Factory_Abstract
+	extends MShop_Common_Factory_Base
 	implements MShop_Common_Factory_Interface
 {
 	/**

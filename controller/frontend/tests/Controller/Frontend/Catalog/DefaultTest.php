@@ -41,7 +41,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetCatalogPath()
 	{
 		$manager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+		$item = $manager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_LIST );
 
 		$list = array();
 		foreach( $this->object->getCatalogPath( $item->getChild( 0 )->getId(), array( 'text' ) ) as $item ) {
@@ -56,7 +56,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetCatalogTree()
 	{
-		$item = $this->object->getCatalogTree( null, array( 'text' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$item = $this->object->getCatalogTree( null, array( 'text' ), MW_Tree_Manager_Base::LEVEL_ONE );
 
 		$this->assertEquals( 'Root', $item->getName() );
 		$this->assertEquals( 0, count( $item->getChildren() ) );

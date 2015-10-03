@@ -18,12 +18,12 @@
  * @subpackage Order
  */
 class MShop_Order_Item_Default
-	extends MShop_Order_Item_Abstract
+	extends MShop_Order_Item_Base
 	implements MShop_Order_Item_Interface
 {
 	private $values;
-	private $oldPaymentStatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
-	private $oldDeliveryStatus = MShop_Order_Item_Abstract::STAT_UNFINISHED;
+	private $oldPaymentStatus = MShop_Order_Item_Base::PAY_UNFINISHED;
+	private $oldDeliveryStatus = MShop_Order_Item_Base::STAT_UNFINISHED;
 
 
 	/**
@@ -160,7 +160,7 @@ class MShop_Order_Item_Default
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from MShop_Order_Item_Abstract
+	 * @return integer Status code constant from MShop_Order_Item_Base
 	 */
 	public function getDeliveryStatus()
 	{
@@ -168,14 +168,14 @@ class MShop_Order_Item_Default
 			return (int) $this->values['statusdelivery'];
 		}
 
-		return MShop_Order_Item_Abstract::STAT_UNFINISHED;
+		return MShop_Order_Item_Base::STAT_UNFINISHED;
 	}
 
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from MShop_Order_Item_Abstract
+	 * @param integer $status Status code constant from MShop_Order_Item_Base
 	 */
 	public function setDeliveryStatus( $status )
 	{
@@ -187,7 +187,7 @@ class MShop_Order_Item_Default
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from MShop_Order_Item_Abstract
+	 * @return integer Payment constant from MShop_Order_Item_Base
 	 */
 	public function getPaymentStatus()
 	{
@@ -195,14 +195,14 @@ class MShop_Order_Item_Default
 			return (int) $this->values['statuspayment'];
 		}
 
-		return MShop_Order_Item_Abstract::PAY_UNFINISHED;
+		return MShop_Order_Item_Base::PAY_UNFINISHED;
 	}
 
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from MShop_Order_Item_Abstract
+	 * @param integer $status Payment constant from MShop_Order_Item_Base
 	 */
 	public function setPaymentStatus( $status )
 	{

@@ -9,7 +9,7 @@
 /**
  * Renames index in the attribute tables.
  */
-class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
+class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_attribute' => array(

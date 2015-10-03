@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
+	extends MShop_Common_Manager_ListRef_Base
 	implements MShop_Catalog_Manager_Interface, MShop_Common_Manager_Factory_Interface
 {
 	private $filter = array();
@@ -27,42 +27,42 @@ class MShop_Catalog_Manager_Default
 			'internalcode'=>'mcat."id"',
 			'label'=>'Catalog node ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'label' => array(
 			'code'=>'catalog.label',
 			'internalcode'=>'mcat."label"',
 			'label'=>'Catalog node label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'config' => array(
 			'code' => 'catalog.config',
 			'internalcode' => 'mcat."config"',
 			'label' => 'Catalog node config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'code' => array(
 			'code'=>'catalog.code',
 			'internalcode'=>'mcat."code"',
 			'label'=>'Catalog node code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 		'status' => array(
 			'code'=>'catalog.status',
 			'internalcode'=>'mcat."status"',
 			'label'=>'Catalog node status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 		),
 		'parentid' => array(
 			'code'=>'catalog.parentid',
 			'internalcode'=>'mcat."parentid"',
 			'label'=>'Catalog node parentid',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'level' => array(
@@ -70,7 +70,7 @@ class MShop_Catalog_Manager_Default
 			'internalcode'=>'mcat."level"',
 			'label'=>'Catalog node tree level',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'left' => array(
@@ -78,7 +78,7 @@ class MShop_Catalog_Manager_Default
 			'internalcode'=>'mcat."nleft"',
 			'label'=>'Catalog node left value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'right' => array(
@@ -86,7 +86,7 @@ class MShop_Catalog_Manager_Default
 			'internalcode'=>'mcat."nright"',
 			'label'=>'Catalog node right value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.siteid' => array(
@@ -94,7 +94,7 @@ class MShop_Catalog_Manager_Default
 			'internalcode'=>'mcat."siteid"',
 			'label'=>'Catalog node site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.ctime'=> array(
@@ -102,21 +102,21 @@ class MShop_Catalog_Manager_Default
 			'code' => 'catalog.ctime',
 			'internalcode' => 'mcat."ctime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.mtime'=> array(
 			'label' => 'Catalog modification time',
 			'code' => 'catalog.mtime',
 			'internalcode' => 'mcat."mtime"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
 		'catalog.editor'=> array(
 			'code'=>'catalog.editor',
 			'internalcode'=>'mcat."editor"',
 			'label'=>'Catalog editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
 	);
 
@@ -158,15 +158,15 @@ class MShop_Catalog_Manager_Default
 			$path = 'mshop/catalog/manager/default/item/delete';
 			$sql = $config->get( $path, $path );
 
-			$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_STR );
+			$types = array( 'siteid' => MW_DB_Statement_Base::PARAM_STR );
 			$translations = array( 'siteid' => '"siteid"' );
 
 			$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
 			$sql = str_replace( ':siteid', $search->getConditionString( $types, $translations ), $sql );
 
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 2, 0x7FFFFFFF, MW_DB_Statement_Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
@@ -395,7 +395,7 @@ class MShop_Catalog_Manager_Default
 		try
 		{
 			$required = array( 'catalog' );
-			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
+			$level = MShop_Locale_Manager_Base::SITE_PATH;
 
 			/** mshop/catalog/manager/default/item/search-item
 			 * Retrieves the records matched by the given criteria in the database
@@ -576,11 +576,11 @@ class MShop_Catalog_Manager_Default
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
 	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
@@ -1273,14 +1273,14 @@ class MShop_Catalog_Manager_Default
 
 			if( $case !== true )
 			{
-				$stmt->bind( 4, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 5, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 4, $siteid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 5, $id, MW_DB_Statement_Base::PARAM_INT );
 			}
 			else
 			{
 				$stmt->bind( 4, $date ); // ctime
-				$stmt->bind( 5, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 6, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 5, $siteid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 6, $id, MW_DB_Statement_Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

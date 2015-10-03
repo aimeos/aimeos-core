@@ -9,7 +9,7 @@
 /**
  * Changes default value of mtime column in order tables.
  */
-class MW_Setup_Task_OrderChangeColumnMTimeDefaultValue extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderChangeColumnMTimeDefaultValue extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_order_base' => 'ALTER TABLE "mshop_order_base" CHANGE "mtime" "mtime" DATETIME NOT NULL',

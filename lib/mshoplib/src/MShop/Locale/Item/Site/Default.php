@@ -15,7 +15,7 @@
  * @subpackage Locale
  */
 class MShop_Locale_Item_Site_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_Base
 	implements MShop_Locale_Item_Site_Interface
 {
 	private $children;
@@ -28,7 +28,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function __construct( array $values = array( ), array $children = array() )
 	{
-		MW_Common_Abstract::checkClassList( 'MShop_Locale_Item_Site_Interface', $children );
+		MW_Common_Base::checkClassList( 'MShop_Locale_Item_Site_Interface', $children );
 		parent::__construct( 'locale.site.', $values );
 
 		$this->values = $values;

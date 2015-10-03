@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 class Controller_Jobs_Product_Export_Default
-	extends Controller_Jobs_Abstract
+	extends Controller_Jobs_Base
 	implements Controller_Jobs_Interface
 {
 	/**

@@ -9,7 +9,7 @@
 /**
  * Renames domain column to typeid and updates records.
  */
-class MW_Setup_Task_ServiceRenameDomainToTypeid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ServiceRenameDomainToTypeid extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_service' => array(

@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framework_TestCase
+class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -104,7 +104,7 @@ class Controller_Common_Product_Import_Csv_AbstractTest extends PHPUnit_Framewor
 
 
 class Controller_Common_Product_Import_Csv_TestAbstract
-	extends Controller_Common_Product_Import_Csv_Abstract
+	extends Controller_Common_Product_Import_Csv_Base
 {
 	public function getCachePublic( $type, $name = null )
 	{

@@ -9,7 +9,7 @@
 /**
  * Adds unique constraint on siteid and code for table mshop_customer.
  */
-class MW_Setup_Task_CustomerChangeCodeSiteidUnique extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CustomerChangeCodeSiteidUnique extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'mshop_customer' => array(

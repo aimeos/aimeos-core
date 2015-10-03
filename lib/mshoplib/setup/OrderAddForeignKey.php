@@ -14,7 +14,7 @@
  * see: MW_Setup_Task_OrderDropForeignKeyOfLocale
  * -> Order domain table can be used on a differend database/ server
  */
-class MW_Setup_Task_OrderAddForeignKey extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddForeignKey extends MW_Setup_Task_Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

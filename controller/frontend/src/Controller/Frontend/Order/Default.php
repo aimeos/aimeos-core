@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 class Controller_Frontend_Order_Default
-	extends Controller_Frontend_Abstract
+	extends Controller_Frontend_Base
 	implements Controller_Frontend_Order_Interface
 {
 	/**
@@ -42,7 +42,7 @@ class Controller_Frontend_Order_Default
 
 		$orderItem = $orderManager->createItem();
 		$orderItem->setBaseId( $basket->getId() );
-		$orderItem->setType( MShop_Order_Item_Abstract::TYPE_WEB );
+		$orderItem->setType( MShop_Order_Item_Base::TYPE_WEB );
 		$orderManager->saveItem( $orderItem );
 
 

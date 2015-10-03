@@ -18,7 +18,7 @@ class Perf_CatalogTest extends PHPUnit_Framework_TestCase
 		// parser warm up so files are already parsed (same as APC is used)
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$this->root = $catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$this->root = $catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Base::LEVEL_ONE );
 	}
 
 

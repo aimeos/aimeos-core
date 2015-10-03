@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Tree_Default
-	extends Client_Html_Common_Client_Factory_Abstract
+	extends Client_Html_Common_Client_Factory_Base
 	implements Client_Html_Common_Client_Factory_Interface
 {
 	/** client/html/catalog/filter/tree/default/subparts
@@ -325,7 +325,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			if( ( $node = reset( $catItems ) ) === false )
 			{
-				$node = $controller->getCatalogTree( $startid, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+				$node = $controller->getCatalogTree( $startid, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 				$catItems = array( $node->getId() => $node );
 			}
 
@@ -389,7 +389,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$search->setConditions( $expr );
 
-			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
+			$level = MW_Tree_Manager_Base::LEVEL_TREE;
 
 			$view->treeCatalogPath = $catItems;
 			$view->treeCatalogTree = $controller->getCatalogTree( $startid, $ref, $level, $search );

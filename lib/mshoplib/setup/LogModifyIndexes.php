@@ -9,7 +9,7 @@
 /**
  * Modifies indexes in madmin_log.
  */
-class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Base
 {
 	private $mysql = array(
 		'delete' => array(
