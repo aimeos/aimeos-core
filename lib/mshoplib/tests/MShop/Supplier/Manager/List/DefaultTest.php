@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Supplier_Manager_List.
  */
-class MShop_Supplier_Manager_List_DefaultTest extends MW_Unittest_Testcase
+class MShop_Supplier_Manager_List_DefaultTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
