@@ -166,4 +166,15 @@ abstract class Client_Html_Common_Decorator_Abstract
 	{
 		return $this->client;
 	}
+
+
+	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function getSubClientNames()
+	{
+		return array();
+	}
 }
