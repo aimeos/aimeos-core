@@ -91,17 +91,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use aggregateIndex() instead
-	 * @param MW_Common_Criteria_Interface $filter
-	 * @param string $key
-	 */
-	public function aggregate( MW_Common_Criteria_Interface $filter, $key )
-	{
-		return $this->aggregateIndex( $filter, $key );
-	}
-
-
-	/**
 	 * Returns the default index filter.
 	 *
 	 * @param string|null $sort Sortation of the product list like "name", "code", "price" and "position", null for no sortation
@@ -158,20 +147,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use createIndexFilter() instead
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterDefault( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
-	}
-
-
-	/**
 	 * Returns the index filter for the given category ID.
 	 *
 	 * @param integer $catid ID of the category to get the product list from
@@ -205,21 +180,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use createIndexFilterCategory() instead
-	 * @param string $catid
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterByCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilterCategory( $catid, $sort, $direction, $start, $size, $listtype );
-	}
-
-
-	/**
 	 * Returns the index filter for the given search string.
 	 *
 	 * @param string $input Search string entered by the user
@@ -234,7 +194,7 @@ class Controller_Frontend_Catalog_Default
 	public function createIndexFilterText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
 		$langid = $this->getContext()->getLocale()->getLanguageId();
-		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
+		$search = $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
 		// we don't need to sort by 'sort:catalog.index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
@@ -243,20 +203,6 @@ class Controller_Frontend_Catalog_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $search;
-	}
-
-	/**
-	 * @deprecated 2015.10 use createIndexFilterText() instead
-	 * @param string $input
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterByText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilterText( $input, $sort, $direction, $start, $size, $listtype );
 	}
 
 
@@ -276,17 +222,6 @@ class Controller_Frontend_Catalog_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $search;
-	}
-
-
-	/**
-	 * @deprecated 2015.10 use addIndexFilterCategory() instead
-	 * @param MW_Common_Criteria_Interface $search
-	 * @param string $catid
-	 */
-	public function addProductFilterCategory( MW_Common_Criteria_Interface $search, $catid )
-	{
-		return $this->addIndexFilterCategory( $search, $catid );
 	}
 
 
@@ -312,18 +247,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use addIndexFilterText() instead
-	 * @param MW_Common_Criteria_Interface $search
-	 * @param string $input
-	 * @param string $listtype
-	 */
-	public function addProductFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
-	{
-		return $this->addIndexFilterText( $search, $input, $listtype );
-	}
-
-
-	/**
 	 * Returns the products from the index filtered by the given criteria object.
 	 *
 	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
@@ -335,18 +258,6 @@ class Controller_Frontend_Catalog_Default
 	public function getIndexItems( MW_Common_Criteria_Interface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog/index' )->searchItems( $filter, $domains, $total );
-	}
-
-
-	/**
-	 * @deprecated 2015.10 use getIndexItems() instead
-	 * @param MW_Common_Criteria_Interface $filter
-	 * @param integer|null $total
-	 * @param string[] $domains
-	 */
-	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text' ) )
-	{
-		return $this->getIndexItems( $filter, $domains, $total );
 	}
 
 
