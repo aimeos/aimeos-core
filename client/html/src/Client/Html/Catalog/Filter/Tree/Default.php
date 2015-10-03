@@ -70,9 +70,6 @@ class Client_Html_Catalog_Filter_Tree_Default
 	{
 		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
-		$navHelper = new MW_View_Helper_NavTree_Default( $view );
-		$view->addHelper( 'navtree', $navHelper );
-
 		$html = '';
 		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
