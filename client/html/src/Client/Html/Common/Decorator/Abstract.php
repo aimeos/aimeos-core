@@ -121,20 +121,6 @@ abstract class Client_Html_Common_Decorator_Abstract
 
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 * @deprecated Not used anymore, caching is done internally
-	 * @todo 2015.03 Remove method from API
-	 */
-	public function isCachable( $what )
-	{
-		return $this->client->isCachable( $what );
-	}
-
-
-	/**
 	 * Modifies the cached body content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
