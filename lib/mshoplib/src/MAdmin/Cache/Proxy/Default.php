@@ -154,20 +154,6 @@ class MAdmin_Cache_Proxy_Default
 
 
 	/**
-	 * Tests if caching is available.
-	 *
-	 * @inheritDoc
-	 *
-	 * @return boolean True if available, false if not
-	 * @deprecated
-	 */
-	public function isAvailable()
-	{
-		return $this->getObject()->isAvailable();
-	}
-
-
-	/**
 	 * Sets the value for the given key in the cache.
 	 *
 	 * @inheritDoc

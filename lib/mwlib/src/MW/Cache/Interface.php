@@ -257,20 +257,6 @@ interface MW_Cache_Interface
 
 
 	/**
-	 * Tests if caching is available.
-	 *
-	 * This method checks if caching is available at all and if the cache server
-	 * is still available. If caching is disabled or a timeout occurs while
-	 * waiting for the response of the cache server, the methode will return
-	 * false. If everything is OK and caching is possible, then it returns true.
-	 *
-	 * @return boolean True if available, false if not
-	 * @deprecated
-	 */
-	public function isAvailable();
-
-
-	/**
 	 * Sets the value for the given key in the cache.
 	 *
 	 * Adding or overwriting a single cache entry can be done by calling the
