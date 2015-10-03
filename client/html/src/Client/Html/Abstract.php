@@ -449,12 +449,8 @@ abstract class Client_Html_Abstract
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of HTML client names
-	 * @todo 2015.03 Make abstract so clients have to implement it
 	 */
-	protected function getSubClientNames()
-	{
-		return array();
-	}
+	abstract protected function getSubClientNames();
 
 
 	/**
