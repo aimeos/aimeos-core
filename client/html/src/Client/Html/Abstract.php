@@ -456,24 +456,15 @@ abstract class Client_Html_Abstract
 	/**
 	 * Returns the configured sub-clients or the ones named in the default parameter if none are configured.
 	 *
-	 * @param string|null $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
-	 * @todo 2015.03 Remove $confpath and $default parameters
 	 */
-	protected function getSubClients( $confpath = null, array $default = array() )
+	protected function getSubClients()
 	{
 		if( !isset( $this->subclients ) )
 		{
 			$this->subclients = array();
 
-			if( $confpath !== null ) {
-				$names = $this->context->getConfig()->get( $confpath, $default );
-			} else {
-				$names = $this->getSubClientNames();
-			}
-
-			foreach( $names as $name ) {
+			foreach( $this->getSubClientNames() as $name ) {
 				$this->subclients[] = $this->getSubClient( $name );
 			}
 		}
