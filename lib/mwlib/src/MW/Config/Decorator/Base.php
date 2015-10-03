@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Config
  */
-abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Interface
+abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Iface
 {
 	private $object;
 
@@ -22,9 +22,9 @@ abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Interface
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param MW_Config_Iface $object Config object or decorator
 	 */
-	public function __construct( MW_Config_Interface $object )
+	public function __construct( MW_Config_Iface $object )
 	{
 		$this->object = $object;
 	}
@@ -67,7 +67,7 @@ abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Interface
 	/**
 	 * Returns the wrapped config object.
 	 *
-	 * @return MW_Config_Interface Config object
+	 * @return MW_Config_Iface Config object
 	 */
 	protected function getObject()
 	{

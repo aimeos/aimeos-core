@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Interface
+abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 {
 	/**
 	 * Creates a function signature for expressions.
@@ -50,7 +50,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Interface
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return MW_Common_Criteria_Expression_Interface Condition expressions (maybe nested)
+	 * @return MW_Common_Criteria_Expression_Iface Condition expressions (maybe nested)
 	 * @throws MW_Common_Exception If given array is invalid
 	 */
 	public function toConditions( array $array )
@@ -86,7 +86,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Interface
 	 * 	);
 	 *
 	 * @param array $array Single-dimensional array of name and operator pairs
-	 * @return array List of sort expressions implementing MW_Common_Criteria_Expression_Sort_Interface
+	 * @return array List of sort expressions implementing MW_Common_Criteria_Expression_Sort_Iface
 	 */
 	public function toSortations( array $array )
 	{

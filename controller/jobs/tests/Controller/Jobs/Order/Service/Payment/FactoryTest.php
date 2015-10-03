@@ -14,7 +14,7 @@ class Controller_Jobs_Order_Service_Payment_FactoryTest extends PHPUnit_Framewor
 		$aimeos = TestHelper::getAimeos();
 
 		$obj = Controller_Jobs_Order_Service_Payment_Factory::createController( $context, $aimeos );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $obj );
 	}
 
 

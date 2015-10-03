@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Manager_Address_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Address_Interface
+	implements MShop_Common_Manager_Address_Iface
 {
 	private $context;
 	private $searchConfig;
@@ -26,11 +26,11 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Initializes a new common address manager object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 *
 	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -54,7 +54,7 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Instantiates a new common address item object.
 	 *
-	 * @return MShop_Common_Item_Address_Interface
+	 * @return MShop_Common_Item_Address_Iface
 	 */
 	public function createItem()
 	{
@@ -80,7 +80,7 @@ abstract class MShop_Common_Manager_Address_Base
 	 *
 	 * @param integer $id Unique common address ID referencing an existing address
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Address_Interface Returns the address item of the given id
+	 * @return MShop_Common_Item_Address_Iface Returns the address item of the given id
 	 * @throws MShop_Exception If address search configuration isn't available
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -96,12 +96,12 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Saves a common address item object.
 	 *
-	 * @param MShop_Common_Item_Address_Interface $item common address item object
+	 * @param MShop_Common_Item_Address_Iface $item common address item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_Address_Interface';
+		$iface = 'MShop_Common_Item_Address_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -179,12 +179,12 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Address_Interface
+	 * @return array List of items implementing MShop_Common_Item_Address_Iface
 	 * @throws MShop_Common_Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -227,7 +227,7 @@ abstract class MShop_Common_Manager_Address_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g type, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -266,7 +266,7 @@ abstract class MShop_Common_Manager_Address_Base
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
-	 * @return MShop_Common_Item_Address_Interface New address item
+	 * @return MShop_Common_Item_Address_Iface New address item
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{

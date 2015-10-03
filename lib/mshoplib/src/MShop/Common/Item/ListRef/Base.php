@@ -26,8 +26,8 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	 *
 	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative list of key/value pairs of the item properties
-	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement MShop_Common_Item_List_Interface
-	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement MShop_Common_Item_Interface
+	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement MShop_Common_Item_List_Iface
+	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement MShop_Common_Item_Iface
 	 */
 	public function __construct( $prefix, array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -47,7 +47,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	 *
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_List_Interface
+	 * @return array List of items implementing MShop_Common_Item_List_Iface
 	 */
 	public function getListItems( $domain = null, $type = null )
 	{
@@ -84,7 +84,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 		if( $type !== null )
 		{
 			$list = array();
-			$iface = 'MShop_Common_Item_Typeid_Interface';
+			$iface = 'MShop_Common_Item_Typeid_Iface';
 			$listTypes = ( is_array( $type ) ? $type : array( $type ) );
 
 			foreach( $this->listItems[$domain] as $id => $item )
@@ -113,7 +113,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
 	public function getRefItems( $domain, $type = null, $listtype = null )
 	{
@@ -122,7 +122,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 		}
 
 		$list = array();
-		$iface = 'MShop_Common_Item_List_Interface';
+		$iface = 'MShop_Common_Item_List_Iface';
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
@@ -178,11 +178,11 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	/**
 	 * Compares the positions of two items for sorting.
 	 *
-	 * @param MShop_Common_Item_Position_Interface $a First item
-	 * @param MShop_Common_Item_Position_Interface $b Second item
+	 * @param MShop_Common_Item_Position_Iface $a First item
+	 * @param MShop_Common_Item_Position_Iface $b Second item
 	 * @return integer -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
 	 */
-	protected function comparePosition( MShop_Common_Item_Position_Interface $a, MShop_Common_Item_Position_Interface $b )
+	protected function comparePosition( MShop_Common_Item_Position_Iface $a, MShop_Common_Item_Position_Iface $b )
 	{
 		if( $a->getPosition() === $b->getPosition() ) {
 			return 0;
@@ -195,11 +195,11 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	/**
 	 * Compares the positions of two referenced items for sorting.
 	 *
-	 * @param MShop_Common_Item_Interface $a First referenced item
-	 * @param MShop_Common_Item_Interface $b Second referenced item
+	 * @param MShop_Common_Item_Iface $a First referenced item
+	 * @param MShop_Common_Item_Iface $b Second referenced item
 	 * @return integer -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
 	 */
-	protected function compareRefPosition( MShop_Common_Item_Interface $a, MShop_Common_Item_Interface $b )
+	protected function compareRefPosition( MShop_Common_Item_Iface $a, MShop_Common_Item_Iface $b )
 	{
 		if( $a->position === $b->position ) {
 			return 0;

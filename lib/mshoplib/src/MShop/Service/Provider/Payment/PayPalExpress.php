@@ -17,7 +17,7 @@
 
 class MShop_Service_Provider_Payment_PayPalExpress
 	extends MShop_Service_Provider_Payment_Base
-	implements MShop_Service_Provider_Payment_Interface
+	implements MShop_Service_Provider_Payment_Iface
 {
 	private $apiendpoint;
 
@@ -100,11 +100,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Initializes the provider object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration
+	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration
 	 * @throws MShop_Service_Exception If one of the required configuration values isn't available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Service_Item_Iface $serviceItem )
 	{
 		parent::__construct( $context, $serviceItem );
 
@@ -133,7 +133,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -166,12 +166,12 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
 	 * separately isn't supported or not configured by the shop owner.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 * @param array $params Request parameter if available
 	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( MShop_Order_Item_Interface $order, array $params = array() )
+	public function process( MShop_Order_Item_Iface $order, array $params = array() )
 	{
 		$orderid = $order->getId();
 		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_ALL );
@@ -200,9 +200,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Interface $order )
+	public function query( MShop_Order_Item_Iface $order )
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -226,9 +226,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Captures the money later on request for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function capture( MShop_Order_Item_Interface $order )
+	public function capture( MShop_Order_Item_Iface $order )
 	{
 		$baseid = $order->getBaseId();
 		$baseItem = $this->getOrderBase( $baseid );
@@ -271,9 +271,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Refunds the money for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function refund( MShop_Order_Item_Interface $order )
+	public function refund( MShop_Order_Item_Iface $order )
 	{
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
 		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
@@ -307,9 +307,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Cancels the authorization for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function cancel( MShop_Order_Item_Interface $order )
+	public function cancel( MShop_Order_Item_Iface $order )
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -337,7 +337,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
@@ -411,7 +411,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Begins paypalexpress transaction and saves transaction id.
 	 *
 	 * @param mixed $params Update information whose format depends on the payment provider
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 */
 	protected function doExpressCheckoutPayment( $params )
 	{
@@ -485,7 +485,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Checks if IPN message from paypal is valid.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket
+	 * @param MShop_Order_Item_Base_Iface $basket
 	 * @param array $params
 	 */
 	protected function checkIPN( $basket, $params )
@@ -526,10 +526,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Maps the PayPal status to the appropriate payment status and sets it in the order object.
 	 *
-	 * @param MShop_Order_Item_Interface $invoice Order invoice object
+	 * @param MShop_Order_Item_Iface $invoice Order invoice object
 	 * @param array $response Associative list of key/value pairs containing the PayPal response
 	 */
-	protected function setPaymentStatus( MShop_Order_Item_Interface $invoice, array $response )
+	protected function setPaymentStatus( MShop_Order_Item_Iface $invoice, array $response )
 	{
 		if( !isset( $response['PAYMENTSTATUS'] ) ) {
 			return;
@@ -589,10 +589,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Returns an list of order data required by PayPal.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $orderBase Order base item
+	 * @param MShop_Order_Item_Base_Iface $orderBase Order base item
 	 * @return array Associative list of key/value pairs with order data required by PayPal
 	 */
-	protected function getOrderDetails( MShop_Order_Item_Base_Interface $orderBase )
+	protected function getOrderDetails( MShop_Order_Item_Base_Iface $orderBase )
 	{
 		$values = $this->getAuthParameter();
 
@@ -691,7 +691,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Returns order service item for specified base ID.
 	 *
 	 * @param integer $baseid Base ID of the order
-	 * @return MShop_Order_Item_Base_Service_Interface Order service item
+	 * @return MShop_Order_Item_Base_Service_Iface Order service item
 	 */
 	protected function getOrderServiceItem( $baseid )
 	{

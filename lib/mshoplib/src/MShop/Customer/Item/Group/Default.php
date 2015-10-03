@@ -16,7 +16,7 @@
  */
 class MShop_Customer_Item_Group_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Customer_Item_Group_Interface
+	implements MShop_Customer_Item_Group_Iface
 {
 	private $values;
 

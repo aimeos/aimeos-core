@@ -16,7 +16,7 @@
  */
 class MShop_Coupon_Item_Code_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Coupon_Item_Code_Interface
+	implements MShop_Coupon_Item_Code_Iface
 {
 	private $values;
 

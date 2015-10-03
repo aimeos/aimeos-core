@@ -16,7 +16,7 @@
  */
 class Controller_Jobs_Product_Export_Default
 	extends Controller_Jobs_Base
-	implements Controller_Jobs_Interface
+	implements Controller_Jobs_Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -56,10 +56,10 @@ class Controller_Jobs_Product_Export_Default
 	/**
 	 * Adds the given products to the content object for the site map file
 	 *
-	 * @param MW_Container_Content_Interface $content File content object
-	 * @param MShop_Product_Item_Interface[] $items List of product items
+	 * @param MW_Container_Content_Iface $content File content object
+	 * @param MShop_Product_Item_Iface[] $items List of product items
 	 */
-	protected function addItems( MW_Container_Content_Interface $content, array $items )
+	protected function addItems( MW_Container_Content_Iface $content, array $items )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -99,7 +99,7 @@ class Controller_Jobs_Product_Export_Default
 	/**
 	 * Creates a new container for the site map file
 	 *
-	 * @return MW_Container_Interface Container object
+	 * @return MW_Container_Iface Container object
 	 */
 	protected function createContainer()
 	{
@@ -181,11 +181,11 @@ class Controller_Jobs_Product_Export_Default
 	/**
 	 * Creates a new site map content object
 	 *
-	 * @param MW_Container_Interface $container Container object
+	 * @param MW_Container_Iface $container Container object
 	 * @param integer $filenum New file number
-	 * @return MW_Container_Content_Interface New content object
+	 * @return MW_Container_Content_Iface New content object
 	 */
-	protected function createContent( MW_Container_Interface $container, $filenum )
+	protected function createContent( MW_Container_Iface $container, $filenum )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -227,9 +227,9 @@ class Controller_Jobs_Product_Export_Default
 	/**
 	 * Closes the site map content object
 	 *
-	 * @param MW_Container_Content_Interface $content
+	 * @param MW_Container_Content_Iface $content
 	 */
-	protected function closeContent( MW_Container_Content_Interface $content )
+	protected function closeContent( MW_Container_Content_Iface $content )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -267,10 +267,10 @@ class Controller_Jobs_Product_Export_Default
 	/**
 	 * Exports the products into the given container
 	 *
-	 * @param MW_Container_Interface $container Container object
+	 * @param MW_Container_Iface $container Container object
 	 * @return array List of content (file) names
 	 */
-	protected function export( MW_Container_Interface $container )
+	protected function export( MW_Container_Iface $container )
 	{
 		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
 

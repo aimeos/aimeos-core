@@ -108,7 +108,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_DefaultTest extend
 		$item = reset( $items );
 
 		$this->assertEquals( 1, count( $items ) );
-		$this->assertInstanceOf( 'MShop_Product_Item_Property_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Product_Item_Property_Iface', $item );
 
 		$this->assertEquals( 'package-height', $item->getType() );
 		$this->assertEquals( '10', $item->getValue() );
@@ -199,7 +199,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_DefaultTest extend
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'list' );

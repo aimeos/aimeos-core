@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Manager_Type_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Type_Interface
+	implements MShop_Common_Manager_Type_Iface
 {
 	private $prefix;
 	private $context;
@@ -27,11 +27,11 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Creates the type manager using the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 *
 	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$conf = $context->getConfig();
 		$confpath = $this->getConfigPath();
@@ -77,7 +77,7 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Creates new type item object.
 	 *
-	 * @return MShop_Common_Item_Type_Interface New type item object
+	 * @return MShop_Common_Item_Type_Iface New type item object
 	 */
 	public function createItem()
 	{
@@ -90,7 +90,7 @@ abstract class MShop_Common_Manager_Type_Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @return MW_Common_Criteria_Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -105,12 +105,12 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Adds or updates a type item object.
 	 *
-	 * @param MShop_Common_Item_Type_Interface $item Type item object which should be saved
+	 * @param MShop_Common_Item_Type_Iface $item Type item object which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_Type_Interface';
+		$iface = 'MShop_Common_Item_Type_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -184,7 +184,7 @@ abstract class MShop_Common_Manager_Type_Base
 	 *
 	 * @param integer $id Id of type item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Type_Interface Returns the type item of the given id
+	 * @return MShop_Common_Item_Type_Iface Returns the type item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -206,12 +206,12 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Searches for all type items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of type items implementing MShop_Common_Item_Type_Interface
+	 * @return array List of type items implementing MShop_Common_Item_Type_Iface
 	 * @throws MShop_Common_Exception if creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 
@@ -254,7 +254,7 @@ abstract class MShop_Common_Manager_Type_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions
+	 * @return MShop_Common_Manager_Iface Manager for different extensions
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

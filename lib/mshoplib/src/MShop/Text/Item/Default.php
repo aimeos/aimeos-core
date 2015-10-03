@@ -16,7 +16,7 @@
  */
 class MShop_Text_Item_Default
 	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Text_Item_Interface
+	implements MShop_Text_Item_Iface
 {
 	private $values;
 
@@ -25,8 +25,8 @@ class MShop_Text_Item_Default
 	 * Initializes the text item object with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
-	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

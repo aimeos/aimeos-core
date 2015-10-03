@@ -17,14 +17,14 @@
  */
 class Controller_ExtJS_Catalog_Export_Text_Default
 	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Interface
+	implements Controller_ExtJS_Common_Load_Text_Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Catalog_Export_Text' );
 	}
@@ -327,9 +327,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 *
 	 * @param string $langid Language id
 	 * @param array $ids List of of item ids whose texts should be added
-	 * @param MW_Container_Content_Interface $contentItem Content item
+	 * @param MW_Container_Content_Iface $contentItem Content item
 	 */
-	protected function addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
+	protected function addLanguage( MW_Container_Content_Iface $contentItem, $langid, array $ids )
 	{
 		$manager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
 
@@ -345,11 +345,11 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	/**
 	 * Adds all texts belonging to an catalog item.
 	 *
-	 * @param MW_Container_Content_Interface $contentItem Content item
-	 * @param MShop_Catalog_Item_Interface $item product item object
+	 * @param MW_Container_Content_Iface $contentItem Content item
+	 * @param MShop_Catalog_Item_Iface $item product item object
 	 * @param string $langid Language id
 	 */
-	protected function addItem( MW_Container_Content_Interface $contentItem, MShop_Catalog_Item_Interface $item, $langid )
+	protected function addItem( MW_Container_Content_Iface $contentItem, MShop_Catalog_Item_Iface $item, $langid )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
@@ -391,10 +391,10 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	/**
 	 * Get all child nodes.
 	 *
-	 * @param MShop_Catalog_Item_Interface $node
-	 * @return MShop_Catalog_Item_Interface[] $nodes List of nodes
+	 * @param MShop_Catalog_Item_Iface $node
+	 * @return MShop_Catalog_Item_Iface[] $nodes List of nodes
 	 */
-	protected function getNodeList( MShop_Catalog_Item_Interface $node )
+	protected function getNodeList( MShop_Catalog_Item_Iface $node )
 	{
 		$nodes = array( $node );
 

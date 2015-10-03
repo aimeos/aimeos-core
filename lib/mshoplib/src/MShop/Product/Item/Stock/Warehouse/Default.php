@@ -15,7 +15,7 @@
  */
 class MShop_Product_Item_Stock_Warehouse_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Product_Item_Stock_Warehouse_Interface
+	implements MShop_Product_Item_Stock_Warehouse_Iface
 {
 	private $values;
 

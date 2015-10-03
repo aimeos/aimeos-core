@@ -16,7 +16,7 @@
  */
 class MShop_Product_Manager_Stock_Warehouse_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Product_Manager_Stock_Warehouse_Interface
+	implements MShop_Product_Manager_Stock_Warehouse_Iface
 {
 	private $searchConfig = array(
 		'product.stock.warehouse.id'=> array(
@@ -84,9 +84,9 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -114,7 +114,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Product_Manager_Interface manager
+	 * @return MShop_Product_Manager_Iface manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -246,12 +246,12 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	/**
 	 * Inserts the new warehouse item
 	 *
-	 * @param MShop_Product_Item_Stock_Warehouse_Interface $item Warehouse item which should be saved
+	 * @param MShop_Product_Item_Stock_Warehouse_Iface $item Warehouse item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Stock_Warehouse_Interface';
+		$iface = 'MShop_Product_Item_Stock_Warehouse_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -436,7 +436,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 *
 	 * @param integer $id Id of the warehouse item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Interface Returns product warehouse item of the given id
+	 * @return MShop_Common_Item_Iface Returns product warehouse item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -449,7 +449,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -481,14 +481,14 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 *
 	 * Possible search keys: 'product.warehouse.id', 'product.warehouse.siteid', 'product.warehouse.code'
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of warehouse items implementing MShop_Product_Item_Warehouse_Interface
+	 * @return array List of warehouse items implementing MShop_Product_Item_Warehouse_Iface
 	 * @throws MShop_Product_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();

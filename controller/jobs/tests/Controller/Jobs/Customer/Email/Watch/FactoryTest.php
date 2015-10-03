@@ -14,7 +14,7 @@ class Controller_Jobs_Customer_Email_Watch_FactoryTest extends PHPUnit_Framework
 		$aimeos = TestHelper::getAimeos();
 
 		$obj = Controller_Jobs_Customer_Email_Watch_Factory::createController( $context, $aimeos );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $obj );
 	}
 
 

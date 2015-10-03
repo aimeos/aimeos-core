@@ -39,14 +39,14 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Supplier_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Supplier_Item_Iface', $item );
 	}
 
 	public function testGetItem()
@@ -120,7 +120,7 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 
@@ -196,8 +196,8 @@ class MShop_Supplier_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );

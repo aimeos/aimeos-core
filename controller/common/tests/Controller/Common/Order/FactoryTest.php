@@ -9,7 +9,7 @@ class Controller_Common_Order_FactoryTest extends PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$target = 'Controller_Common_Order_Interface';
+		$target = 'Controller_Common_Order_Iface';
 
 		$controller = Controller_Common_Order_Factory::createController( TestHelper::getContext() );
 		$this->assertInstanceOf( $target, $controller );

@@ -93,7 +93,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_List_Interface', $listItem );
+			$this->assertInstanceof( 'MShop_Common_Item_List_Iface', $listItem );
 		}
 	}
 
@@ -109,7 +109,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_List_Interface', $listItem );
+			$this->assertInstanceof( 'MShop_Common_Item_List_Iface', $listItem );
 		}
 
 		$this->assertEquals( array(), $this->object->getListItems( 'undefined' ) );
@@ -144,7 +144,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 
 		foreach( $result as $listItem )
 		{
-			$this->assertInstanceof( 'MShop_Text_Item_Interface', $listItem->getRefItem() );
+			$this->assertInstanceof( 'MShop_Text_Item_Iface', $listItem->getRefItem() );
 			$this->assertSame( $expected[$listItem->getRefId()], $listItem->getRefItem() );
 		}
 	}
@@ -161,7 +161,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $item ) {
-			$this->assertInstanceof( 'MShop_Common_Item_Interface', $item );
+			$this->assertInstanceof( 'MShop_Common_Item_Iface', $item );
 		}
 
 		$this->assertEquals( array(), $this->object->getRefItems( 'undefined' ) );

@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB_Statement_Interface
+class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB_Statement_Iface
 {
 	private $stmt = null;
 
@@ -73,7 +73,7 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB
 	/**
 	 * Executes the statement.
 	 *
-	 * @return MW_DB_Result_Interface Result object
+	 * @return MW_DB_Result_Iface Result object
 	 * @throws MW_DB_Exception If an error occured in the unterlying driver
 	 */
 	public function execute()

@@ -47,7 +47,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -75,10 +75,10 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Base
 	/**
 	 * Adds plugin data.
 	 *
-	 * @param MShop_Common_Manager_Interface $pluginManager Plugin manager
+	 * @param MShop_Common_Manager_Iface $pluginManager Plugin manager
 	 * @param array $data Associative list of plugin data
 	 */
-	protected function addPluginData( MShop_Common_Manager_Interface $pluginManager, array $data )
+	protected function addPluginData( MShop_Common_Manager_Iface $pluginManager, array $data )
 	{
 		$this->msg( 'Adding data for MShop plugins', 1 );
 

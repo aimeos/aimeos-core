@@ -16,7 +16,7 @@
  */
 class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Interface
+	implements Controller_Common_Product_Import_Csv_Cache_Iface
 {
 	private $attributes = array();
 
@@ -24,9 +24,9 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -44,7 +44,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	 *
 	 * @param string $code Attribute code
 	 * @param string|null $type Attribute type
-	 * @return MShop_Attribute_Item_Interface|null Attribute object or null if not found
+	 * @return MShop_Attribute_Item_Iface|null Attribute object or null if not found
 	 */
 	public function get( $code, $type = null )
 	{
@@ -74,9 +74,9 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	/**
 	 * Adds the attribute item to the cache
 	 *
-	 * @param MShop_Common_Item_Interface $item Attribute object
+	 * @param MShop_Common_Item_Iface $item Attribute object
 	 */
-	public function set( MShop_Common_Item_Interface $item )
+	public function set( MShop_Common_Item_Iface $item )
 	{
 		$code = $item->getCode();
 

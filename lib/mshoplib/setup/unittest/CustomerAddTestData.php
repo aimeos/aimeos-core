@@ -47,7 +47,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -83,12 +83,12 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Interface $customerManager Customer manager
-	 * @param MShop_Common_Item_Address_Interface $address Customer address item
+	 * @param MShop_Common_Manager_Iface $customerManager Customer manager
+	 * @param MShop_Common_Item_Address_Iface $address Customer address item
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function addCustomerData( array $testdata, MShop_Common_Manager_Interface $customerManager,
-		MShop_Common_Item_Address_Interface $address )
+	protected function addCustomerData( array $testdata, MShop_Common_Manager_Iface $customerManager,
+		MShop_Common_Item_Address_Iface $address )
 	{
 		$parentIds = array();
 		$customer = $customerManager->createItem();
@@ -134,11 +134,11 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer address test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Interface $customerAddressManager Customer address manager
+	 * @param MShop_Common_Manager_Iface $customerAddressManager Customer address manager
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function addCustomerAddressData( array $testdata, MShop_Common_Manager_Interface $customerAddressManager,
+	protected function addCustomerAddressData( array $testdata, MShop_Common_Manager_Iface $customerAddressManager,
 		array $parentIds )
 	{
 		$address = $customerAddressManager->createItem();
@@ -181,11 +181,11 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer group test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Interface $customerGroupManager Customer group manager
+	 * @param MShop_Common_Manager_Iface $customerGroupManager Customer group manager
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function addCustomerGroupData( array $testdata, MShop_Common_Manager_Interface $customerGroupManager,
+	protected function addCustomerGroupData( array $testdata, MShop_Common_Manager_Iface $customerGroupManager,
 		array $parentIds )
 	{
 		$group = $customerGroupManager->createItem();

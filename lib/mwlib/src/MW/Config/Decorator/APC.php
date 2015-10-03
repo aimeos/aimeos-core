@@ -16,7 +16,7 @@
  */
 class MW_Config_Decorator_APC
 	extends MW_Config_Decorator_Base
-	implements MW_Config_Decorator_Interface
+	implements MW_Config_Decorator_Iface
 {
 	private $prefix;
 
@@ -24,10 +24,10 @@ class MW_Config_Decorator_APC
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param MW_Config_Iface $object Config object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Config_Interface $object, $prefix = '' )
+	public function __construct( MW_Config_Iface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
 			throw new MW_Config_Exception( 'APC not available' );

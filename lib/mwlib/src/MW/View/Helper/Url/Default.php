@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Url_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $baseUrl;
 
@@ -24,7 +24,7 @@ class MW_View_Helper_Url_Default
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $baseUrl URL which acts as base for all constructed URLs
 	 */
 	public function __construct( $view, $baseUrl )

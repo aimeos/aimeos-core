@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Base
-	implements Client_Html_Interface
+	implements Client_Html_Iface
 {
 	private $view;
 	private $cache;
@@ -27,11 +27,11 @@ abstract class Client_Html_Base
 	/**
 	 * Initializes the class instance.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths )
+	public function __construct( MShop_Context_Item_Iface $context, array $templatePaths )
 	{
 		$this->context = $context;
 		$this->templatePaths = $templatePaths;
@@ -41,7 +41,7 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
-	 * @return MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Iface $view The view object which generates the HTML output
 	 */
 	public function getView()
 	{
@@ -122,10 +122,10 @@ abstract class Client_Html_Base
 	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return Client_Html_Interface Reference to this object for fluent calls
+	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @return Client_Html_Iface Reference to this object for fluent calls
 	 */
-	public function setView( MW_View_Interface $view )
+	public function setView( MW_View_Iface $view )
 	{
 		$this->view = $view;
 		return $this;
@@ -135,16 +135,16 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param Client_Html_Interface $client Client object
+	 * @param Client_Html_Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
-	 * @return Client_Html_Interface Client object
+	 * @return Client_Html_Iface Client object
 	 */
-	protected function addDecorators( Client_Html_Interface $client, array $templatePaths,
+	protected function addDecorators( Client_Html_Iface $client, array $templatePaths,
 		array $decorators, $classprefix )
 	{
-		$iface = 'Client_Html_Common_Decorator_Interface';
+		$iface = 'Client_Html_Common_Decorator_Iface';
 
 		foreach( $decorators as $name )
 		{
@@ -174,12 +174,12 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param Client_Html_Interface $client Client object
+	 * @param Client_Html_Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
-	 * @return Client_Html_Interface Client object
+	 * @return Client_Html_Iface Client object
 	 */
-	protected function addClientDecorators( Client_Html_Interface $client, array $templatePaths, $path )
+	protected function addClientDecorators( Client_Html_Iface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
@@ -216,7 +216,7 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
-	 * @param array|MShop_Common_Item_Interface $items Item or list of items, maybe with associated list items
+	 * @param array|MShop_Common_Item_Iface $items Item or list of items, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
@@ -274,13 +274,13 @@ abstract class Client_Html_Base
 	/**
 	 * Adds expire date and tags for a single item.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param MShop_Common_Item_Iface $item Item, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 * @param boolean $tagAll True of tags for all items should be added, false if only for the main item
 	 */
-	private function addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
+	private function addMetaItemSingle( MShop_Common_Item_Iface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
 		$expires = array();
 		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
@@ -289,11 +289,11 @@ abstract class Client_Html_Base
 			$tags[] = $domain . '-' . $item->getId();
 		}
 
-		if( $item instanceof MShop_Common_Item_Time_Interface && ( $date = $item->getDateEnd() ) !== null ) {
+		if( $item instanceof MShop_Common_Item_Time_Iface && ( $date = $item->getDateEnd() ) !== null ) {
 			$expires[] = $date;
 		}
 
-		if( $item instanceof MShop_Common_Item_ListRef_Interface )
+		if( $item instanceof MShop_Common_Item_ListRef_Iface )
 		{
 			foreach( $item->getListItems() as $listitem )
 			{
@@ -344,7 +344,7 @@ abstract class Client_Html_Base
 	 *
 	 * @param string $path Name of the sub-part in lower case (can contain a path like catalog/filter/tree)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return Client_Html_Interface Sub-part object
+	 * @return Client_Html_Iface Sub-part object
 	 */
 	protected function createSubClient( $path, $name )
 	{
@@ -361,7 +361,7 @@ abstract class Client_Html_Base
 		$subnames = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
 
 		$classname = 'Client_Html_' . $subnames . '_' . $name;
-		$interface = 'Client_Html_Interface';
+		$interface = 'Client_Html_Iface';
 
 		if( class_exists( $classname ) === false ) {
 			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -415,7 +415,7 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -456,7 +456,7 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the configured sub-clients or the ones named in the default parameter if none are configured.
 	 *
-	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
+	 * @return array List of sub-clients implementing Client_Html_Iface	ordered in the same way as the names
 	 */
 	protected function getSubClients()
 	{
@@ -528,7 +528,7 @@ abstract class Client_Html_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Interface Type item
+	 * @return MShop_Common_Item_Type_Iface Type item
 	 * @throws Controller_Jobs_Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )
@@ -675,12 +675,12 @@ abstract class Client_Html_Base
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param MW_View_Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		return $view;
 	}

@@ -16,16 +16,16 @@
  */
 class MAdmin_Job_Manager_Factory
 	extends MAdmin_Common_Factory_Base
-	implements MShop_Common_Factory_Interface
+	implements MShop_Common_Factory_Iface
 {
 	/**
 	 * Creates an admin job manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/job/manager/name
 		 * Class name of the used job manager implementation
@@ -70,7 +70,7 @@ class MAdmin_Job_Manager_Factory
 			throw new MAdmin_Job_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MAdmin_Job_Manager_Interface';
+		$iface = 'MAdmin_Job_Manager_Iface';
 		$classname = 'MAdmin_Job_Manager_' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );

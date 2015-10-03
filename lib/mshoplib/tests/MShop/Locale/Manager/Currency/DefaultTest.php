@@ -28,7 +28,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Currency_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Currency_Iface', $this->object->createItem() );
 	}
 
 
@@ -126,7 +126,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Config_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $config;
 
@@ -24,10 +24,10 @@ class MW_View_Helper_Config_Default
 	/**
 	 * Initializes the config view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param MW_Config_Interface $config Configuration object
+	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param MW_Config_Iface $config Configuration object
 	 */
-	public function __construct( $view, MW_Config_Interface $config )
+	public function __construct( $view, MW_Config_Iface $config )
 	{
 		parent::__construct( $view );
 

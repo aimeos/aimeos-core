@@ -16,16 +16,16 @@
  */
 class Controller_Common_Product_Import_Csv_Processor_Property_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Base
-	implements Controller_Common_Product_Import_Csv_Processor_Interface
+	implements Controller_Common_Product_Import_Csv_Processor_Iface
 {
 	/**
 	 * Saves the product property related data to the storage
 	 *
-	 * @param MShop_Product_Item_Interface $product Product item with associated items
+	 * @param MShop_Product_Item_Iface $product Product item with associated items
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function process( MShop_Product_Item_Interface $product, array $data )
+	public function process( MShop_Product_Item_Iface $product, array $data )
 	{
 		$manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
 		$manager->begin();

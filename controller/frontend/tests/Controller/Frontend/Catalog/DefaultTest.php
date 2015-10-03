@@ -24,7 +24,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->createManager( 'product' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->createManager( 'product' ) );
 	}
 
 
@@ -32,8 +32,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createCatalogFilter( true );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Interface', $filter->getConditions() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Iface', $filter->getConditions() );
 		$this->assertEquals( 'catalog.status', $filter->getConditions()->getName() );
 	}
 
@@ -76,7 +76,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilter();
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 0, $filter->getSliceStart() );
 		$this->assertEquals( 100, $filter->getSliceSize() );
@@ -87,12 +87,12 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0 );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$list = $filter->getConditions()->getExpressions();
 
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Iface ) ) {
 			throw new Exception( 'Wrong expression' );
 		}
 		$this->assertEquals( 'catalog.index.catalog.id', $list[0]->getName() );
@@ -109,7 +109,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'relevance', '-', 1, 2, 'test' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -128,7 +128,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'code' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -143,7 +143,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'name' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -158,7 +158,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'price' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -173,7 +173,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'failure' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
 
@@ -185,7 +185,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$list = $filter->getConditions()->getExpressions();
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Iface ) ) {
 			throw new Exception( 'Wrong expression' );
 		}
 
@@ -199,12 +199,12 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$list = $filter->getConditions()->getExpressions();
 
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Iface ) ) {
 			throw new Exception( 'Wrong expression' );
 		}
 		$this->assertEquals( 'catalog.index.text.relevance("default","de","Espresso")', $list[0]->getName() );
@@ -221,7 +221,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'relevance', '-', 1, 2, 'test' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 1, $filter->getSliceStart() );
 		$this->assertEquals( 2, $filter->getSliceSize() );
@@ -232,7 +232,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'code' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -247,7 +247,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'name' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -262,7 +262,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 'Espresso', 'price' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -277,7 +277,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( '', 'failure' );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
 
@@ -289,7 +289,7 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$list = $filter->getConditions()->getExpressions();
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Iface ) ) {
 			throw new Exception( 'Wrong expression' );
 		}
 
@@ -336,8 +336,8 @@ class Controller_Frontend_Catalog_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createTextFilter( 'Expresso', 'name', '+', 0, 1 );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Interface', $filter->getConditions() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $filter );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Iface', $filter->getConditions() );
 		$this->assertEquals( 3, count( $filter->getConditions()->getExpressions() ) );
 	}
 

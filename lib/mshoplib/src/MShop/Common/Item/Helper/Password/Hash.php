@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper_Password_Interface
+class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper_Password_Iface
 {
 	private $options = array();
 	

@@ -137,7 +137,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 
 		$baseManager->deleteItem( $item->getId() );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $view->orderItem );
+		$this->assertInstanceOf( 'MShop_Order_Item_Iface', $view->orderItem );
 		$this->assertEquals( $item->getId(), $view->orderItem->getBaseId() );
 	}
 }

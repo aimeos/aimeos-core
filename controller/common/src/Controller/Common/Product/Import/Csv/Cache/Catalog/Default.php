@@ -16,7 +16,7 @@
  */
 class Controller_Common_Product_Import_Csv_Cache_Catalog_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Interface
+	implements Controller_Common_Product_Import_Csv_Cache_Iface
 {
 	private $categories = array();
 
@@ -24,9 +24,9 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_Default
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -70,9 +70,9 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_Default
 	/**
 	 * Adds the catalog item to the cache
 	 *
-	 * @param MShop_Common_Item_Interface $item Catalog object
+	 * @param MShop_Common_Item_Iface $item Catalog object
 	 */
-	public function set( MShop_Common_Item_Interface $item )
+	public function set( MShop_Common_Item_Iface $item )
 	{
 		$this->categories[ $item->getCode() ] = $item->getId();
 	}

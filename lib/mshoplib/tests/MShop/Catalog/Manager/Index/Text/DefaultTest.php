@@ -96,7 +96,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

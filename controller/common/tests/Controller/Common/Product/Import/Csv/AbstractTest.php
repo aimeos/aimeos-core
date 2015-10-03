@@ -33,7 +33,7 @@ class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_Te
 	{
 		$cache = $this->object->getCachePublic( 'attribute' );
 
-		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Cache_Interface', $cache );
+		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Cache_Iface', $cache );
 	}
 
 
@@ -62,7 +62,7 @@ class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_Te
 	{
 		$processor = $this->object->getProcessorsPublic( array( 'attribute' => array() ) );
 
-		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Processor_Interface', $processor );
+		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Processor_Iface', $processor );
 	}
 
 

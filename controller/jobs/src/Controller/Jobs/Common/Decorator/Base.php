@@ -15,7 +15,7 @@
  * @subpackage Jobs
  */
 abstract class Controller_Jobs_Common_Decorator_Base
-	implements Controller_Jobs_Common_Decorator_Interface
+	implements Controller_Jobs_Common_Decorator_Iface
 {
 	private $context;
 	private $aimeos;
@@ -25,11 +25,11 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param Controller_Jobs_Interface $controller Controller object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param Controller_Jobs_Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos,
-		Controller_Jobs_Interface $controller )
+	public function __construct( MShop_Context_Item_Iface $context, Aimeos $aimeos,
+		Controller_Jobs_Iface $controller )
 	{
 		$this->context = $context;
 		$this->aimeos = $aimeos;
@@ -91,7 +91,7 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface context object implementing MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Iface context object implementing MShop_Context_Item_Iface
 	 */
 	protected function getContext()
 	{

@@ -84,7 +84,7 @@ class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
 		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
 
 		$result = $this->object->process( $item, array() );
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $result );
+		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Iface', $result );
 	}
 
 

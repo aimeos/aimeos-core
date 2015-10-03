@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_Form_Interface
+class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_Form_Iface
 {
 	private $url;
 	private $method;
@@ -27,12 +27,12 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param array $values Form parameters implementing MW_Common_Criteria_Attribute_Interface
+	 * @param array $values Form parameters implementing MW_Common_Criteria_Attribute_Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 */
 	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
 	{
-		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Attribute_Iface', $values );
 
 		$this->url = (string) $url;
 		$this->external = (bool) $external;
@@ -111,7 +111,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return MW_Common_Criteria_Attribute_Interface Attribute item for the given key
+	 * @return MW_Common_Criteria_Attribute_Iface Attribute item for the given key
 	 */
 	public function getValue( $key )
 	{
@@ -127,9 +127,9 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param MW_Common_Criteria_Attribute_Interface $value Attribute item for the given key
+	 * @param MW_Common_Criteria_Attribute_Iface $value Attribute item for the given key
 	 */
-	public function setValue( $key, MW_Common_Criteria_Attribute_Interface $value )
+	public function setValue( $key, MW_Common_Criteria_Attribute_Iface $value )
 	{
 		$this->values[$key] = $value;
 	}
@@ -138,7 +138,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getValues()
 	{

@@ -13,9 +13,9 @@
  *
  * @method string|array config(string $name = null, string|array $default = null) Returns the config value for the given key
  * @method string date(string $date) Returns the formatted date
- * @method MW_View_Helper_Interface encoder() Returns the encoder object
+ * @method MW_View_Helper_Iface encoder() Returns the encoder object
  * @method string formparam(string|array $names) Returns the name for the HTML form parameter
- * @method MW_Mail_Message_Interface mail() Returns the e-mail message object
+ * @method MW_Mail_Message_Iface mail() Returns the e-mail message object
  * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
  * @method string|array param(string|null $name, string|array $default) Returns the parameter value
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
@@ -24,7 +24,7 @@
  * @package MW
  * @subpackage View
  */
-class MW_View_Default implements MW_View_Interface
+class MW_View_Default implements MW_View_Iface
 {
 	private $helper = array();
 	private $values = array();
@@ -47,7 +47,7 @@ class MW_View_Default implements MW_View_Interface
 				throw new MW_View_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$iface = 'MW_View_Helper_Interface';
+			$iface = 'MW_View_Helper_Iface';
 			$classname = 'MW_View_Helper_' . ucfirst( $name ) . '_Default';
 
 			if( class_exists( $classname ) === false ) {
@@ -140,9 +140,9 @@ class MW_View_Default implements MW_View_Interface
 	 * Adds a view helper instance to the view.
 	 *
 	 * @param string $name Name of the view helper as called in the template
-	 * @param MW_View_Helper_Interface $helper View helper instance
+	 * @param MW_View_Helper_Iface $helper View helper instance
 	 */
-	public function addHelper( $name, MW_View_Helper_Interface $helper )
+	public function addHelper( $name, MW_View_Helper_Iface $helper )
 	{
 		$this->helper[$name] = $helper;
 	}

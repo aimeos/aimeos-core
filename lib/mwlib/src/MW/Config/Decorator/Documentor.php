@@ -16,7 +16,7 @@
  */
 class MW_Config_Decorator_Documentor
 	extends MW_Config_Decorator_Base
-	implements MW_Config_Decorator_Interface
+	implements MW_Config_Decorator_Iface
 {
 	private $file;
 
@@ -24,10 +24,10 @@ class MW_Config_Decorator_Documentor
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param MW_Config_Iface $object Config object or decorator
 	 * @param string $filename File name the collected configuration is written to
 	 */
-	public function __construct( MW_Config_Interface $object, $filename = 'confdoc.ser' )
+	public function __construct( MW_Config_Iface $object, $filename = 'confdoc.ser' )
 	{
 		parent::__construct( $object );
 

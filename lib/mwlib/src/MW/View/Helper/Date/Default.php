@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Date_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $format;
 
@@ -24,7 +24,7 @@ class MW_View_Helper_Date_Default
 	/**
 	 * Initializes the Date view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $format New date format
 	 * @see http://php.net/manual/en/datetime.createfromformat.php
 	 */

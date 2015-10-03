@@ -39,14 +39,14 @@ class Client_Html_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateClient()
 	{
 		$client = Client_Html_Factory::createClient( $this->context, $this->templatePaths, 'account/favorite' );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
 		$client = Client_Html_Factory::createClient( $this->context, $this->templatePaths, 'account/favorite', 'Default' );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 
 

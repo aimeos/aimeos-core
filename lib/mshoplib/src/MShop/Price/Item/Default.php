@@ -16,7 +16,7 @@
  */
 class MShop_Price_Item_Default
 	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Price_Item_Interface
+	implements MShop_Price_Item_Iface
 {
 	private $values;
 
@@ -25,8 +25,8 @@ class MShop_Price_Item_Default
 	 * Initalizes the object with the given values
 	 *
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
-	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
-	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -310,10 +310,10 @@ class MShop_Price_Item_Default
 	/**
 	 * Add the given price to the current one.
 	 *
-	 * @param MShop_Price_Item_Interface $item Price item which should be added
+	 * @param MShop_Price_Item_Iface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
 	 */
-	public function addItem( MShop_Price_Item_Interface $item, $quantity = 1 )
+	public function addItem( MShop_Price_Item_Iface $item, $quantity = 1 )
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
@@ -339,11 +339,11 @@ class MShop_Price_Item_Default
 	 *
 	 * All other item properties are not compared.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item to compare with
+	 * @param MShop_Price_Item_Iface $price Price item to compare with
 	 * @return boolean True if equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Price_Item_Interface $price )
+	public function compare( MShop_Price_Item_Iface $price )
 	{
 		if( $this->getValue() === $price->getValue()
 			&& $this->getCosts() === $price->getCosts()

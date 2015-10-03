@@ -11,7 +11,7 @@
  */
 class Client_Html_Common_Decorator_Example
 	extends Client_Html_Common_Decorator_Base
-	implements Client_Html_Common_Decorator_Interface
+	implements Client_Html_Common_Decorator_Iface
 {
 	public function additionalMethod()
 	{

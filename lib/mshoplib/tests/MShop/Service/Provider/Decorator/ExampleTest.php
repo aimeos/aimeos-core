@@ -93,7 +93,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 		$price = $this->object->calcPrice( $item );
 
-		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $price );
+		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
 
 	}

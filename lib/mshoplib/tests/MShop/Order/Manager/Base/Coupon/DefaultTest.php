@@ -61,21 +61,21 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Iface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch( true ) );
 	}
 
 

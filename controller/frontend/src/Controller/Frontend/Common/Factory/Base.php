@@ -25,9 +25,9 @@ class Controller_Frontend_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param Controller_Frontend_Interface|null $controller Frontend controller object
+	 * @param Controller_Frontend_Iface|null $controller Frontend controller object
 	 */
-	public static function injectController( $classname, Controller_Frontend_Interface $controller = null )
+	public static function injectController( $classname, Controller_Frontend_Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -36,15 +36,15 @@ class Controller_Frontend_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param Controller_Frontend_Common_Interface $controller Controller object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param Controller_Frontend_Common_Iface $controller Controller object
 	 * @param string $classprefix Decorator class prefix, e.g. "Controller_Frontend_Basket_Decorator_"
-	 * @return Controller_Frontend_Common_Interface Controller object
+	 * @return Controller_Frontend_Common_Iface Controller object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Interface $context,
-		Controller_Frontend_Interface $controller, array $decorators, $classprefix )
+	protected static function addDecorators( MShop_Context_Item_Iface $context,
+		Controller_Frontend_Iface $controller, array $decorators, $classprefix )
 	{
-		$iface = 'Controller_Frontend_Common_Decorator_Interface';
+		$iface = 'Controller_Frontend_Common_Decorator_Iface';
 
 		foreach( $decorators as $name )
 		{
@@ -74,13 +74,13 @@ class Controller_Frontend_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param Controller_Frontend_Common_Interface $controller Controller object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param Controller_Frontend_Common_Iface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return Controller_Frontend_Common_Interface Controller object
+	 * @return Controller_Frontend_Common_Iface Controller object
 	 */
-	protected static function addControllerDecorators( MShop_Context_Item_Interface $context,
-		Controller_Frontend_Interface $controller, $domain )
+	protected static function addControllerDecorators( MShop_Context_Item_Iface $context,
+		Controller_Frontend_Iface $controller, $domain )
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
@@ -139,12 +139,12 @@ class Controller_Frontend_Common_Factory_Base
 	/**
 	 * Creates a controller object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
-	 * @return Controller_Frontend_Common_Interface Controller object
+	 * @return Controller_Frontend_Common_Iface Controller object
 	 */
-	protected static function createControllerBase( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function createControllerBase( MShop_Context_Item_Iface $context, $classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

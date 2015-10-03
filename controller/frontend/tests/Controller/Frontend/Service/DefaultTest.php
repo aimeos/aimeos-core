@@ -40,7 +40,7 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 0, count( $services ) );
 
 		foreach( $services as $service ) {
-			$this->assertInstanceOf( 'MShop_Service_Item_Interface', $service );
+			$this->assertInstanceOf( 'MShop_Service_Item_Iface', $service );
 		}
 	}
 
@@ -141,7 +141,7 @@ class Controller_Frontend_Service_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 	/**
-	 * @return MShop_Order_Item_Base_Interface
+	 * @return MShop_Order_Item_Base_Iface
 	 */
 	protected function getServiceItem()
 	{

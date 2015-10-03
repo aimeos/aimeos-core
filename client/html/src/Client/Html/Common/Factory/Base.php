@@ -25,9 +25,9 @@ class Client_Html_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param Client_Html_Interface|null $client ExtJS client object
+	 * @param Client_Html_Iface|null $client ExtJS client object
 	 */
-	public static function injectClient( $classname, Client_Html_Interface $client = null )
+	public static function injectClient( $classname, Client_Html_Iface $client = null )
 	{
 		self::$objects[$classname] = $client;
 	}
@@ -36,17 +36,17 @@ class Client_Html_Common_Factory_Base
 	/**
 	 * Adds the decorators to the client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param Client_Html_Interface $client Client object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param Client_Html_Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
-	 * @return Client_Html_Interface Client object
+	 * @return Client_Html_Iface Client object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, array $templatePaths, array $decorators, $classprefix )
+	protected static function addDecorators( MShop_Context_Item_Iface $context,
+		Client_Html_Iface $client, array $templatePaths, array $decorators, $classprefix )
 	{
-		$iface = 'Client_Html_Common_Decorator_Interface';
+		$iface = 'Client_Html_Common_Decorator_Iface';
 
 		foreach( $decorators as $name )
 		{
@@ -76,14 +76,14 @@ class Client_Html_Common_Factory_Base
 	/**
 	 * Adds the decorators to the client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param Client_Html_Interface $client Client object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param Client_Html_Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Path of the client in lower case, e.g. "catalog/detail"
-	 * @return Client_Html_Interface Client object
+	 * @return Client_Html_Iface Client object
 	 */
-	protected static function addClientDecorators( MShop_Context_Item_Interface $context,
-		Client_Html_Interface $client, array $templatePaths, $path )
+	protected static function addClientDecorators( MShop_Context_Item_Iface $context,
+		Client_Html_Iface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
 			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
@@ -142,14 +142,14 @@ class Client_Html_Common_Factory_Base
 	/**
 	 * Creates a client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
 	 * @param string $classname Name of the client class
 	 * @param string $interface Name of the client interface
 	 * @param array $templatePaths List of file system paths where the templates are stored
-	 * @return Client_Html__Interface Client object
+	 * @return Client_Html__Iface Client object
 	 * @throws Client_Html_Exception If client couldn't be found or doesn't implement the interface
 	 */
-	protected static function createClientBase( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
+	protected static function createClientBase( MShop_Context_Item_Iface $context, $classname, $interface, $templatePaths )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

@@ -47,13 +47,13 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $object ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $object );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $object );
 		}
 	}
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $this->object->createItem() );
 	}
 
 	public function testGetItem()
@@ -211,8 +211,8 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Default' ) );
 	}
 
 

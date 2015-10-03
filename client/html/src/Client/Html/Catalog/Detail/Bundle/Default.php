@@ -15,7 +15,7 @@
  */
 class Client_Html_Catalog_Detail_Bundle_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/catalog/detail/bundle/default/subparts
 	 * List of HTML sub-clients rendered within the catalog detail bundle section
@@ -153,7 +153,7 @@ class Client_Html_Catalog_Detail_Bundle_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -249,12 +249,12 @@ class Client_Html_Catalog_Detail_Bundle_Default
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param MW_View_Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{

@@ -28,12 +28,12 @@ class Controller_Jobs_Factory
 	 * a specific implementation, you need to use the factory class of the
 	 * controller to hand over specifc implementation names.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by controllers
+	 * @param MShop_Context_Item_Iface $context Context object required by controllers
 	 * @param Aimeos $aimeos Aimeos object
 	 * @param string $path Name of the domain
 	 * @throws Controller_Jobs_Exception If the given path is invalid or the controllers wasn't found
 	 */
-	static public function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $path )
+	static public function createController( MShop_Context_Item_Iface $context, Aimeos $aimeos, $path )
 	{
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
@@ -71,13 +71,13 @@ class Controller_Jobs_Factory
 	/**
 	 * Returns all available controller instances.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by controllers
+	 * @param MShop_Context_Item_Iface $context Context object required by controllers
 	 * @param Aimeos $aimeos Aimeos object
 	 * @param array $cntlPaths Associative list of the base path as key and all
 	 * 	relative job controller paths (core and extensions)
 	 * @return array Associative list of controller names as key and the class instance as value
 	 */
-	static public function getControllers( MShop_Context_Item_Interface $context, Aimeos $aimeos, array $cntlPaths )
+	static public function getControllers( MShop_Context_Item_Iface $context, Aimeos $aimeos, array $cntlPaths )
 	{
 		$cntlList = array();
 		$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, self::$prefix );
@@ -108,12 +108,12 @@ class Controller_Jobs_Factory
 	 * Instantiates all found factories and stores the controller instances in the class variable.
 	 *
 	 * @param DirectoryIterator $dir Iterator over the (sub-)directory which might contain a factory
-	 * @param MShop_Context_Item_Interface $context Context object required by controllers
+	 * @param MShop_Context_Item_Iface $context Context object required by controllers
 	 * @param Aimeos $aimeos Aimeos object
 	 * @param string $prefix Part of the class name between "Controller_Jobs" and "Factory"
 	 * @throws Controller_Jobs_Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
-	static protected function createControllers( DirectoryIterator $dir, MShop_Context_Item_Interface $context,
+	static protected function createControllers( DirectoryIterator $dir, MShop_Context_Item_Iface $context,
 		Aimeos $aimeos, $prefix = '' )
 	{
 		$list = array();

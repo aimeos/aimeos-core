@@ -22,7 +22,7 @@ class Client_Html_Checkout_Confirm_Order_Address_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{

@@ -16,15 +16,15 @@
  */
 class MShop_Coupon_Provider_Decorator_Required
 	extends MShop_Coupon_Provider_Decorator_Base
-	implements MShop_Coupon_Provider_Decorator_Interface
+	implements MShop_Coupon_Provider_Decorator_Iface
 {
 	/**
 	 * Checks for requirements.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 * @return boolean True if the requirements are met, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( MShop_Order_Item_Base_Iface $base )
 	{
 		if( ( $prodcode = $this->getConfigValue( 'required.productcode' ) ) !== null )
 		{

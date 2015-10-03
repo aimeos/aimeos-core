@@ -17,10 +17,10 @@
 abstract class MShop_Service_Manager_Base
 	extends MShop_Common_Manager_ListRef_Base
 {
-	protected function addServiceDecorators( MShop_Service_Item_Interface $serviceItem,
-		MShop_Service_Provider_Interface $provider, $names )
+	protected function addServiceDecorators( MShop_Service_Item_Iface $serviceItem,
+		MShop_Service_Provider_Iface $provider, $names )
 	{
-		$iface = 'MShop_Service_Provider_Decorator_Interface';
+		$iface = 'MShop_Service_Provider_Decorator_Iface';
 		$classprefix = 'MShop_Service_Provider_Decorator_';
 
 		foreach( $names as $name )

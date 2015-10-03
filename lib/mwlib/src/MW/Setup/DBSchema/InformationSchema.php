@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_Interface
+abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_Iface
 {
 	private $conn;
 	private $dbname = '';
@@ -23,10 +23,10 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	/**
 	 * Initializes the database schema object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param string $dbname Database name
 	 */
-	public function __construct( MW_DB_Connection_Interface $conn, $dbname )
+	public function __construct( MW_DB_Connection_Iface $conn, $dbname )
 	{
 		$this->conn = $conn;
 		$this->dbname = $dbname;
@@ -129,7 +129,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return MW_Setup_DBSchema_Column_Interface Object which contains the details
+	 * @return MW_Setup_DBSchema_Column_Iface Object which contains the details
 	 */
 	public function getColumnDetails( $tablename, $columnname )
 	{
@@ -170,7 +170,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 *
 	 * @param array $record Associative array with TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,
 	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
-	 * @return MW_Setup_DBSchema_Column_Interface Column item
+	 * @return MW_Setup_DBSchema_Column_Iface Column item
 	 */
 	protected function createColumnItem( array $record = array() )
 	{
@@ -183,7 +183,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	/**
 	 * Returns the database connection.
 	 *
-	 * @return MW_DB_Connection_Interface Database connection
+	 * @return MW_DB_Connection_Iface Database connection
 	 */
 	protected function getConnection()
 	{

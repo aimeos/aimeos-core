@@ -26,13 +26,13 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Base
 	/**
 	 * Initializes the setup manager.
 	 *
-	 * @param MW_DB_Manager_Interface $dbm Database manager
+	 * @param MW_DB_Manager_Iface $dbm Database manager
 	 * @param array $dbconfig Associative list of database configurations, each with the db resource
 	 * 	name as key and an associative list of "adapter", "host", "database", "username" and "password" keys
 	 * @param array|string $taskpath Filesystem paths to the directory which contains the task classes
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
 	 */
-	public function __construct( MW_DB_Manager_Interface $dbm, array $dbconfig, $taskpath, $additional = null )
+	public function __construct( MW_DB_Manager_Iface $dbm, array $dbconfig, $taskpath, $additional = null )
 	{
 		if( empty( $dbconfig ) ) {
 			throw new MW_Setup_Exception( 'No databases configured in resource config file' );

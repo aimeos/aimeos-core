@@ -62,7 +62,7 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 	
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Status_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Order_Item_Status_Iface', $this->object->createItem() );
 	}
 
 	
@@ -133,7 +133,7 @@ class MShop_Order_Manager_Status_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 	public function testSearchItems()

@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Compose extends MW_Logger_Base implements MW_Logger_Interface
+class MW_Logger_Compose extends MW_Logger_Base implements MW_Logger_Iface
 {
 	private $loggers;
 

@@ -14,7 +14,7 @@ class Controller_Jobs_Product_Export_FactoryTest extends PHPUnit_Framework_TestC
 		$aimeos = TestHelper::getAimeos();
 
 		$obj = Controller_Jobs_Product_Export_Factory::createController( $context, $aimeos );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $obj);
 	}
 
 

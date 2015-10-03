@@ -156,7 +156,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	}
 
 
-	protected function getLowestPrice( MShop_Price_Item_Interface $price = null, array $prices = array() )
+	protected function getLowestPrice( MShop_Price_Item_Iface $price = null, array $prices = array() )
 	{
 		foreach( $prices as $item )
 		{

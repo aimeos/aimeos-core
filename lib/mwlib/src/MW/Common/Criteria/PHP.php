@@ -41,7 +41,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	 *
 	 * @param string $operator One of the known operators
 	 * @param array $list List of expression objects that should be combined
-	 * @return MW_Common_Criteria_Expression_Combine_Interface Combine expression object
+	 * @return MW_Common_Criteria_Expression_Combine_Iface Combine expression object
 	 */
 	public function combine( $operator, array $list )
 	{
@@ -64,7 +64,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for comparison
 	 * @param mixed $value Value the variable or column should be compared to
-	 * @return MW_Common_Criteria_Expression_Compare_Interface Compare expression object
+	 * @return MW_Common_Criteria_Expression_Compare_Iface Compare expression object
 	 */
 	public function compare( $operator, $name, $value )
 	{
@@ -81,7 +81,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	 *
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for sorting
-	 * @return MW_Common_Criteria_Expression_Sort_Interface Sort expression object
+	 * @return MW_Common_Criteria_Expression_Sort_Iface Sort expression object
 	 */
 	public function sort( $operator, $name )
 	{
@@ -109,7 +109,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	 *
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
+	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
 	 * @return string Expression string for searching
 	 */
 	public function getConditionString( array $types, array $translations = array(), array $plugins = array() )
@@ -127,7 +127,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	/**
 	 * Returns the original condition expression objects.
 	 *
-	 * @return MW_Common_Criteria_Expression_Interface Original expression objects
+	 * @return MW_Common_Criteria_Expression_Iface Original expression objects
 	 */
 	public function getConditions()
 	{
@@ -138,12 +138,12 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	/**
 	 * Sets the expression objects.
 	 *
-	 * @param MW_Common_Criteria_Expression_Interface $conditions Expression object
-	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
+	 * @param MW_Common_Criteria_Expression_Iface $conditions Expression object
+	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
 	 */
-	public function setConditions( MW_Common_Criteria_Expression_Interface $conditions )
+	public function setConditions( MW_Common_Criteria_Expression_Iface $conditions )
 	{
-		if( $conditions instanceof MW_Common_Criteria_Expression_Sort_Interface ) {
+		if( $conditions instanceof MW_Common_Criteria_Expression_Sort_Iface ) {
 			throw new MW_Common_Exception( 'Sortation objects are not allowed' );
 		}
 
@@ -201,12 +201,12 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Base
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param MW_Common_Criteria_Expression_Sort_PHP[] $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
-	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
+	 * @param MW_Common_Criteria_Expression_Sort_PHP[] $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Iface
+	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortations )
 	{
-		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Sort_Iface', $sortations );
 
 		$this->sortations = $sortations;
 

@@ -104,7 +104,7 @@ class TestHelper
 	}
 
 
-	protected static function createView( MW_Config_Interface $config )
+	protected static function createView( MW_Config_Iface $config )
 	{
 		$view = new MW_View_Default();
 

@@ -15,6 +15,6 @@
  */
 class MShop_Customer_Item_Address_Default
 	extends MShop_Common_Item_Address_Default
-	implements MShop_Customer_Item_Address_Interface
+	implements MShop_Customer_Item_Address_Iface
 {
 }

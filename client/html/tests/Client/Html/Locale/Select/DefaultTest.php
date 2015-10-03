@@ -63,7 +63,7 @@ class Client_Html_Locale_Select_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'language', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

@@ -15,7 +15,7 @@
  */
 class MShop_Order_Item_Status_Default
 	extends MShop_Order_Item_Status_Base
-	implements MShop_Order_Item_Status_Interface
+	implements MShop_Order_Item_Status_Iface
 {
 	private $values;
 

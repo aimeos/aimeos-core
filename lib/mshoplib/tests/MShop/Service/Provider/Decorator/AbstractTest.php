@@ -55,7 +55,7 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
 
-		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $this->object->calcPrice( $item ) );
+		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $this->object->calcPrice( $item ) );
 	}
 
 

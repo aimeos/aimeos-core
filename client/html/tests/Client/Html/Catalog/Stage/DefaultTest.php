@@ -98,7 +98,7 @@ class Client_Html_Catalog_Stage_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'image', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

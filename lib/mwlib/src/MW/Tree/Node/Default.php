@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_Interface, Countable
+class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_Iface, Countable
 {
 	private $values;
 	private $children = array();
@@ -25,12 +25,12 @@ class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_I
 	 * Initializes the instance with the given values.
 	 *
 	 * @param array $values Node values for internal use
-	 * @param array $children Children of the node implementing MW_Tree_Node_Interface
+	 * @param array $children Children of the node implementing MW_Tree_Node_Iface
 	 * @throws MW_Common_Exception if the children doesn't implement the interface
 	 */
 	public function __construct( array $values = array(), $children = array() )
 	{
-		MW_Common_Base::checkClassList( 'MW_Tree_Node_Interface', $children );
+		MW_Common_Base::checkClassList( 'MW_Tree_Node_Iface', $children );
 
 		$this->values = $values;
 		$this->children = $children;
@@ -200,7 +200,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_I
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MW_Tree_Node_Interface Selected node
+	 * @return MW_Tree_Node_Iface Selected node
 	 * @throws MW_Tree_Exception If there's no child at the given position
 	 */
 	public function getChild($index)
@@ -238,9 +238,9 @@ class MW_Tree_Node_Default extends MW_Common_Item_Base implements MW_Tree_Node_I
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MW_Tree_Node_Interface $node Child node to add
+	 * @param MW_Tree_Node_Iface $node Child node to add
 	 */
-	public function addChild( MW_Tree_Node_Interface $node )
+	public function addChild( MW_Tree_Node_Iface $node )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $node;

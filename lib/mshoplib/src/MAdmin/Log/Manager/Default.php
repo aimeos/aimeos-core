@@ -16,7 +16,7 @@
  */
 class MAdmin_Log_Manager_Default
 	extends MAdmin_Common_Manager_Base
-	implements MAdmin_Log_Manager_Interface, MW_Logger_Interface
+	implements MAdmin_Log_Manager_Iface, MW_Logger_Iface
 {
 	private $loglevel;
 	private $requestid;
@@ -77,9 +77,9 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Creates the log manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-log' );
@@ -144,7 +144,7 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Create new log item object.
 	 *
-	 * @return MAdmin_Log_Item_Interface
+	 * @return MAdmin_Log_Item_Iface
 	 */
 	public function createItem()
 	{
@@ -162,12 +162,12 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Adds a new log to the storage.
 	 *
-	 * @param MAdmin_Log_Item_Interface $item Log item that should be saved to the storage
+	 * @param MAdmin_Log_Item_Iface $item Log item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MAdmin_Log_Item_Interface';
+		$iface = 'MAdmin_Log_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MAdmin_Log_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -358,7 +358,7 @@ class MAdmin_Log_Manager_Default
 	 *
 	 * @param integer $id Log ID to fetch log object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MAdmin_Log_Item_Interface Returns the log item of the given id
+	 * @return MAdmin_Log_Item_Iface Returns the log item of the given id
 	 * @throws MAdmin_Log_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -378,12 +378,12 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Search for log entries based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of jobs implementing MAdmin_Job_Item_Interface
+	 * @return array List of jobs implementing MAdmin_Job_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -519,7 +519,7 @@ class MAdmin_Log_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -551,7 +551,7 @@ class MAdmin_Log_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -563,7 +563,7 @@ class MAdmin_Log_Manager_Default
 	 * Create new admin log item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return MAdmin_Log_Item_Interface
+	 * @return MAdmin_Log_Item_Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
@@ -574,11 +574,11 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Returns the search result object for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param string $sql SQL-statement to execute
-	 * @return MW_DB_Result_Interface Returns db result set from given sql statment
+	 * @return MW_DB_Result_Iface Returns db result set from given sql statment
 	 */
-	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
 	{
 		$context = $this->getContext();
 		$statement = $conn->create( $sql );

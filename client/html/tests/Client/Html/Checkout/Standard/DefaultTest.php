@@ -131,7 +131,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'address', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

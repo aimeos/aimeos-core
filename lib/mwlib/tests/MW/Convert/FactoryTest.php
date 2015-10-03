@@ -6,14 +6,14 @@ class MW_Convert_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateConverter()
 	{
 		$object = MW_Convert_Factory::createConverter( 'Text/LatinUTF8' );
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 	}
 
 
 	public function testCreateConverterCompose()
 	{
 		$object = MW_Convert_Factory::createConverter( array( 'Text/LatinUTF8', 'DateTime/EnglishISO' ) );
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 	}
 
 

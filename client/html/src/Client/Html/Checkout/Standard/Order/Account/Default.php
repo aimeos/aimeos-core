@@ -16,7 +16,7 @@
  */
 class Client_Html_Checkout_Standard_Order_Account_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/checkout/standard/order/account/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard order account section
@@ -151,7 +151,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -300,12 +300,12 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	/**
 	 * Adds the customer and address data to the given customer item
 	 *
-	 * @param MShop_Customer_Item_Interface $customer Customer object
-	 * @param MShop_Common_Item_Address_Interface $address Billing address object
-	 * @return MShop_Customer_Item_Interface Customer object filled with data
+	 * @param MShop_Customer_Item_Iface $customer Customer object
+	 * @param MShop_Common_Item_Address_Iface $address Billing address object
+	 * @return MShop_Customer_Item_Iface Customer object filled with data
 	 */
-	protected function addCustomerData( MShop_Customer_Item_Interface $customer,
-		MShop_Common_Item_Address_Interface $address, $code, $password )
+	protected function addCustomerData( MShop_Customer_Item_Iface $customer,
+		MShop_Common_Item_Address_Iface $address, $code, $password )
 	{
 		$label = $address->getLastname();
 
@@ -330,11 +330,11 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	/**
 	 * Sends the account creation e-mail to the e-mail address of the customer
 	 *
-	 * @param MShop_Common_Item_Address_Interface $address Payment address item of the customer
+	 * @param MShop_Common_Item_Address_Iface $address Payment address item of the customer
 	 * @param string $code Customer login name
 	 * @param string $password Customer clear text password
 	 */
-	protected function sendEmail( MShop_Common_Item_Address_Interface $address, $code, $password )
+	protected function sendEmail( MShop_Common_Item_Address_Iface $address, $code, $password )
 	{
 		$context = $this->getContext();
 		$client = Client_Html_Email_Account_Factory::createClient( $context, $this->getTemplatePaths() );

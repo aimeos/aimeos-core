@@ -16,7 +16,7 @@
  */
 class MShop_Supplier_Manager_Default
 	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Supplier_Manager_Interface
+	implements MShop_Supplier_Manager_Iface
 {
 	private $searchConfig = array(
 		'supplier.id' => array(
@@ -82,9 +82,9 @@ class MShop_Supplier_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
@@ -111,7 +111,7 @@ class MShop_Supplier_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -141,7 +141,7 @@ class MShop_Supplier_Manager_Default
 	/**
 	 * Instantiates a new supplier item object.
 	 *
-	 * @return MShop_Supplier_Item_Interface
+	 * @return MShop_Supplier_Item_Iface
 	 */
 	public function createItem()
 	{
@@ -191,7 +191,7 @@ class MShop_Supplier_Manager_Default
 	 *
 	 * @param integer $id Unique supplier ID referencing an existing supplier
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Supplier_Item_Interface Returns the supplier item of the given id
+	 * @return MShop_Supplier_Item_Iface Returns the supplier item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -203,12 +203,12 @@ class MShop_Supplier_Manager_Default
 	/**
 	 * Saves a supplier item object.
 	 *
-	 * @param MShop_Supplier_Item_Interface $item Supplier item object
+	 * @param MShop_Supplier_Item_Iface $item Supplier item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Supplier_Item_Interface';
+		$iface = 'MShop_Supplier_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Supplier_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -356,12 +356,12 @@ class MShop_Supplier_Manager_Default
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Supplier_Item_Interface
+	 * @return array List of items implementing MShop_Supplier_Item_Iface
 	 * @throws MShop_Supplier_Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
 		$context = $this->getContext();
@@ -497,7 +497,7 @@ class MShop_Supplier_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Address_Interface Returns a address manager
+	 * @return MShop_Common_Manager_Address_Iface Returns a address manager
 	 * @throws MShop_Supplier_Exception If creating manager failed
 	 */
 	public function getSubManager( $manager, $name = null )
@@ -510,7 +510,7 @@ class MShop_Supplier_Manager_Default
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch($default = false)
 	{
@@ -526,7 +526,7 @@ class MShop_Supplier_Manager_Default
 	 * Creates a new supplier item.
 	 *
 	 * @param array $values List of attributes for supplier item
-	 * @return MShop_Supplier_Item_Interface New supplier item
+	 * @return MShop_Supplier_Item_Iface New supplier item
 	 */
 	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{

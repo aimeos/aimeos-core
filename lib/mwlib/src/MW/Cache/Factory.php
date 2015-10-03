@@ -22,7 +22,7 @@ class MW_Cache_Factory
 	 * @param string $name Object type name
 	 * @param array $config Associative list of configuration strings for the cache object
 	 * @param mixed $resource Reference to the resource which should be used by the cache
-	 * @return MW_Cache_Interface Cache object of the requested type
+	 * @return MW_Cache_Iface Cache object of the requested type
 	 * @throws MW_Cache_Exception if class isn't found
 	 */
 	static public function createManager( $name, array $config, $resource )
@@ -33,7 +33,7 @@ class MW_Cache_Factory
 			throw new MW_Cache_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MW_Cache_Interface';
+		$iface = 'MW_Cache_Iface';
 		$classname = 'MW_Cache_' . ucwords( $name );
 
 		if( class_exists( $classname ) === false ) {

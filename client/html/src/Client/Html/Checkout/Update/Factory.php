@@ -16,18 +16,18 @@
  */
 class Client_Html_Checkout_Update_Factory
 	extends Client_Html_Common_Factory_Base
-	implements Client_Html_Common_Factory_Interface
+	implements Client_Html_Common_Factory_Iface
 {
 	/**
 	 * Creates a update checkout client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string|null $name Client name (default: "Default")
-	 * @return Client_Html_Interface Filter part implementing Client_Html_Interface
+	 * @return Client_Html_Iface Filter part implementing Client_Html_Iface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
 	 */
-	public static function createClient( MShop_Context_Item_Interface $context, array $templatePaths, $name = null )
+	public static function createClient( MShop_Context_Item_Iface $context, array $templatePaths, $name = null )
 	{
 		/** classes/client/html/checkout/update/name
 		 * Class name of the used checkout update client implementation
@@ -72,7 +72,7 @@ class Client_Html_Checkout_Update_Factory
 			throw new Client_Html_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Client_Html_Interface';
+		$iface = 'Client_Html_Iface';
 		$classname = 'Client_Html_Checkout_Update_' . $name;
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );

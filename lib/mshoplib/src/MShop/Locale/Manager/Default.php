@@ -16,7 +16,7 @@
  */
 class MShop_Locale_Manager_Default
 	extends MShop_Locale_Manager_Base
-	implements MShop_Locale_Manager_Interface
+	implements MShop_Locale_Manager_Iface
 {
 	private $searchConfig = array(
 		'locale.id' => array(
@@ -90,9 +90,9 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Default
 	 * @param boolean $active Flag to get only active items (optional)
 	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
 	 * 	based on config or value for SITE_PATH if null
-	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
+	 * @return MShop_Locale_Item_Iface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null )
@@ -131,7 +131,7 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Creates a new locale item object.
 	 *
-	 * @return MShop_Locale_Item_Interface
+	 * @return MShop_Locale_Item_Iface
 	 */
 	public function createItem()
 	{
@@ -147,7 +147,7 @@ class MShop_Locale_Manager_Default
 	 * Creates a search object and sets base criteria.
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -164,7 +164,7 @@ class MShop_Locale_Manager_Default
 	 *
 	 * @param integer $id Unique ID of the locale item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Interface Returns the locale item of the given id
+	 * @return MShop_Locale_Item_Iface Returns the locale item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -176,12 +176,12 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$locale = $this->getContext()->getLocale();
 		$siteIds = $locale->getSitePath();
@@ -242,12 +242,12 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param MShop_Common_Item_Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Locale_Item_Interface';
+		$iface = 'MShop_Locale_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -399,7 +399,7 @@ class MShop_Locale_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g site, language, currency.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g site, language, currency.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -411,7 +411,7 @@ class MShop_Locale_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -450,14 +450,14 @@ class MShop_Locale_Manager_Default
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
-	 * @param MShop_Locale_Item_Site_Interface Site item
+	 * @param MShop_Locale_Item_Site_Iface Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
-	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
+	 * @return MShop_Locale_Item_Iface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
 	protected function bootstrapBase( $site, $lang, $currency, $active,
-		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
+		MShop_Locale_Item_Site_Iface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		$siteId = $siteItem->getId();
 
@@ -488,13 +488,13 @@ class MShop_Locale_Manager_Default
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
-	 * @param MShop_Locale_Item_Site_Interface Site item
+	 * @param MShop_Locale_Item_Site_Iface Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
-	 * @return MShop_Locale_Item_Interface|boolean Locale item for the given parameters or false if no item was found
+	 * @return MShop_Locale_Item_Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapMatch( $siteId, $lang, $currency, $active,
-		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
+		MShop_Locale_Item_Site_Iface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find exact match
 		$search = $this->createSearch( $active );
@@ -550,13 +550,13 @@ class MShop_Locale_Manager_Default
 	 * @param string $siteId Site ID
 	 * @param string $lang Language code
 	 * @param boolean $active Flag to get only active items
-	 * @param MShop_Locale_Item_Site_Interface Site item
+	 * @param MShop_Locale_Item_Site_Iface Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
-	 * @return MShop_Locale_Item_Interface|boolean Locale item for the given parameters or false if no item was found
+	 * @return MShop_Locale_Item_Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapClosest( $siteId, $lang, $active,
-		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
+		MShop_Locale_Item_Site_Iface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find the best matching locale
 		$search = $this->createSearch( $active );
@@ -618,12 +618,12 @@ class MShop_Locale_Manager_Default
 	 * Instances a new locale item object.
 	 *
 	 * @param array $values Parameter to initialise the item
-	 * @param MShop_Locale_Item_Site_Interface $site Site item
+	 * @param MShop_Locale_Item_Site_Iface $site Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Default Locale item
 	 */
-	protected function createItemBase( array $values = array( ), MShop_Locale_Item_Site_Interface $site = null,
+	protected function createItemBase( array $values = array( ), MShop_Locale_Item_Site_Iface $site = null,
 		array $sitePath = array(), array $siteSubTree = array() )
 	{
 		return new MShop_Locale_Item_Default( $values, $site, $sitePath, $siteSubTree );
@@ -633,11 +633,11 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param $sql SQL statement
-	 * @return MW_DB_Result_Interface Search result object
+	 * @return MW_DB_Result_Iface Search result object
 	 */
-	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
 	{
 		$stmt = $conn->create( $sql );
 
@@ -650,11 +650,11 @@ class MShop_Locale_Manager_Default
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
-	protected function search( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	protected function search( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();

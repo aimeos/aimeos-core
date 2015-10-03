@@ -16,18 +16,18 @@
  */
 class MShop_Attribute_Manager_Factory
 	extends MShop_Common_Factory_Base
-	implements MShop_Common_Factory_Interface
+	implements MShop_Common_Factory_Iface
 {
 	/**
 	 * Creates a attribute manager DAO object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Attribute manager implementing MShop_Common_Manager_Interface
+	 * @return MShop_Common_Manager_Iface Attribute manager implementing MShop_Common_Manager_Iface
 	 * @throws MShop_Attribute_Exception|MShop_Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/attribute/manager/name
 		 * Class name of the used attribute manager implementation
@@ -72,7 +72,7 @@ class MShop_Attribute_Manager_Factory
 			throw new MShop_Attribute_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Attribute_Manager_Interface';
+		$iface = 'MShop_Attribute_Manager_Iface';
 		$classname = 'MShop_Attribute_Manager_' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );

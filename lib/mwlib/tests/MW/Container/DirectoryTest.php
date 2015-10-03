@@ -54,7 +54,7 @@ class MW_Container_DirectoryTest extends PHPUnit_Framework_TestCase
 	{
 		$dir = new MW_Container_Directory( __DIR__ . DIRECTORY_SEPARATOR . '_testdir', 'CSV' );
 
-		$this->assertInstanceOf( 'MW_Container_Content_Interface', $dir->get( 'testfile.csv' ) );
+		$this->assertInstanceOf( 'MW_Container_Content_Iface', $dir->get( 'testfile.csv' ) );
 	}
 
 

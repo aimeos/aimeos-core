@@ -23,7 +23,7 @@ class MAdmin_Factory
 	 *
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Iface)
 	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
 	 */
 	static public function clear( $id = null, $path = null )
@@ -54,11 +54,11 @@ class MAdmin_Factory
 	 * domain or the getSubManager() method to hand over specifc implementation
 	 * names.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by managers
+	 * @param MShop_Context_Item_Iface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "log"
 	 * @throws MAdmin_Exception If the given path is invalid or the manager wasn't found
 	 */
-	static public function createManager( MShop_Context_Item_Interface $context, $path )
+	static public function createManager( MShop_Context_Item_Iface $context, $path )
 	{
 		if( empty( $path ) ) {
 			throw new MAdmin_Exception( sprintf( 'Manager path is empty' ) );

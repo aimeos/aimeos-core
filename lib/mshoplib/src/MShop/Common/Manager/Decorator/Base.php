@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Manager_Decorator_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Decorator_Interface
+	implements MShop_Common_Manager_Decorator_Iface
 {
 	private $manager;
 
@@ -24,10 +24,10 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Initializes the manager decorator.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Common_Manager_Interface $manager )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Common_Manager_Iface $manager )
 	{
 		parent::__construct( $context );
 		$this->manager = $manager;
@@ -66,7 +66,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Creates new item object.
 	 *
-	 * @return MShop_Common_Item_Interface New item object
+	 * @return MShop_Common_Item_Iface New item object
 	 */
 	public function createItem()
 	{
@@ -78,7 +78,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @return MW_Common_Criteria_Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -113,7 +113,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	 *
 	 * @param integer $id Unique ID of the item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Interface Item object
+	 * @return MShop_Common_Item_Iface Item object
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -125,7 +125,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -136,7 +136,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Creates a new extension manager in the domain.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager extending the domain functionality
+	 * @return MShop_Common_Manager_Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $domain, $name = null )
 	{
@@ -147,10 +147,10 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param MShop_Common_Item_Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
 		$this->manager->saveItem( $item, $fetch );
 	}
@@ -159,11 +159,11 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		return $this->manager->searchItems( $search, $ref, $total );
 	}
@@ -175,13 +175,13 @@ abstract class MShop_Common_Manager_Decorator_Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing MShop_Common_Item_List_Interface
+	 * @return array List of list items implementing MShop_Common_Item_List_Iface
 	 * @throws MShop_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
-	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		return $this->manager->searchRefItems( $search, $ref, $total );
 	}
@@ -191,7 +191,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	/**
 	 * Returns the manager object.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

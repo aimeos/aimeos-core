@@ -111,14 +111,14 @@ class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 class Controller_Jobs_Common_Factory_TestAbstract
 	extends Controller_Jobs_Common_Factory_Base
 {
-	public static function addDecoratorsPublic( MShop_Context_Item_Interface $context, Aimeos $aimeos,
-		Controller_Jobs_Interface $controller, array $decorators, $classprefix )
+	public static function addDecoratorsPublic( MShop_Context_Item_Iface $context, Aimeos $aimeos,
+		Controller_Jobs_Iface $controller, array $decorators, $classprefix )
 	{
 		self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 	}
 
-	public static function addControllerDecoratorsPublic( MShop_Context_Item_Interface $context, Aimeos $aimeos,
-		Controller_Jobs_Interface $controller, $domain )
+	public static function addControllerDecoratorsPublic( MShop_Context_Item_Iface $context, Aimeos $aimeos,
+		Controller_Jobs_Iface $controller, $domain )
 	{
 		self::addControllerDecorators( $context, $aimeos, $controller, $domain );
 	}

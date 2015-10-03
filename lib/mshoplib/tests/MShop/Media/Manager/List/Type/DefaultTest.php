@@ -52,7 +52,7 @@ class MShop_Media_Manager_List_Type_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $item );
 	}
 
 

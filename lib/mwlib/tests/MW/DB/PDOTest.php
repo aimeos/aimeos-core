@@ -499,7 +499,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf('MW_DB_Manager_Interface', $this->object);
+		$this->assertInstanceOf('MW_DB_Manager_Iface', $this->object);
 	}
 
 	public function testFactoryFail()
@@ -511,7 +511,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 
 
-class MW_DB_Connection_TestForPDOException implements MW_DB_Connection_Interface
+class MW_DB_Connection_TestForPDOException implements MW_DB_Connection_Iface
 {
 	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)
 	{

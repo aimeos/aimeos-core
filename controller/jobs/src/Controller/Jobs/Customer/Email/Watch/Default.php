@@ -17,7 +17,7 @@
  */
 class Controller_Jobs_Customer_Email_Watch_Default
 	extends Controller_Jobs_Base
-	implements Controller_Jobs_Interface
+	implements Controller_Jobs_Iface
 {
 	private $client;
 	private $warehouses;
@@ -103,11 +103,11 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Sends product notifications for the given customers in their language
 	 *
-	 * @param MShop_Context_Item_Interface $context Context item object
-	 * @param array $customers List of customer items implementing MShop_Customer_Item_Interface
+	 * @param MShop_Context_Item_Iface $context Context item object
+	 * @param array $customers List of customer items implementing MShop_Customer_Item_Iface
 	 * @param string $listTypeId Customer list type ID
 	 */
-	protected function execute( MShop_Context_Item_Interface $context, array $customers, $listTypeId )
+	protected function execute( MShop_Context_Item_Iface $context, array $customers, $listTypeId )
 	{
 		$prodIds = $custIds = array();
 		$whItem = $this->getWarehouseItem( 'default' );
@@ -164,10 +164,10 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Returns the product notification e-mail client
 	 *
-	 * @param MShop_Context_Item_Interface $context Context item object
-	 * @return Client_Html_Interface Product notification e-mail client
+	 * @param MShop_Context_Item_Iface $context Context item object
+	 * @return Client_Html_Iface Product notification e-mail client
 	 */
-	protected function getClient( MShop_Context_Item_Interface $context )
+	protected function getClient( MShop_Context_Item_Iface $context )
 	{
 		if( !isset( $this->client ) )
 		{
@@ -182,12 +182,12 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Returns the list items for the given customer IDs and list type ID
 	 *
-	 * @param MShop_Context_Item_Interface $context Context item object
+	 * @param MShop_Context_Item_Iface $context Context item object
 	 * @param array $custIds List of customer IDs
 	 * @param string $listTypeId Customer list type ID
-	 * @return array List of customer list items implementing MShop_Common_Item_List_Interface
+	 * @return array List of customer list items implementing MShop_Common_Item_List_Iface
 	 */
-	protected function getListItems( MShop_Context_Item_Interface $context, array $custIds, $listTypeId )
+	protected function getListItems( MShop_Context_Item_Iface $context, array $custIds, $listTypeId )
 	{
 		$listManager = MShop_Factory::createManager( $context, 'customer/list' );
 
@@ -207,8 +207,8 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Returns a filtered list of products for which a notification should be sent
 	 *
-	 * @param array $listItems List of customer list items implementing MShop_Common_Item_List_Interface
-	 * @param array $products List of product items implementing MShop_Product_Item_Interface
+	 * @param array $listItems List of customer list items implementing MShop_Common_Item_List_Iface
+	 * @param array $products List of product items implementing MShop_Product_Item_Iface
 	 * @return array Multi-dimensional associative list of list IDs as key and product / price item maps as values
 	 */
 	protected function getListProducts( array $listItems, array $products )
@@ -249,11 +249,11 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Returns the products for the given IDs which are in stock in the warehouse
 	 *
-	 * @param MShop_Context_Item_Interface $context Context item object
+	 * @param MShop_Context_Item_Iface $context Context item object
 	 * @param array $prodIds List of product IDs
 	 * @param string $whId Unique warehouse ID
 	 */
-	protected function getProducts( MShop_Context_Item_Interface $context, array $prodIds, $whId )
+	protected function getProducts( MShop_Context_Item_Iface $context, array $prodIds, $whId )
 	{
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch( true );
@@ -281,7 +281,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * Returns the customer list type item for the given type code.
 	 *
 	 * @param string $code Unique code of the list type item
-	 * @return MShop_Common_Item_Type_Interface List type item
+	 * @return MShop_Common_Item_Type_Iface List type item
 	 * @throws Controller_Jobs_Exception If the list type item wasn't found
 	 */
 	protected function getListTypeItem( $code )
@@ -304,7 +304,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * Returns the warehouse item for the given code.
 	 *
 	 * @param string $code Unique code of the warehouse item
-	 * @return MShop_Product_Item_Stock_Warehouse_Interface Warehouse item
+	 * @return MShop_Product_Item_Stock_Warehouse_Iface Warehouse item
 	 * @throws Controller_Jobs_Exception If the warehouse item wasn't found
 	 */
 	protected function getWarehouseItem( $code )
@@ -331,12 +331,12 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	/**
 	 * Sends the notification e-mail for the given customer address and products
 	 *
-	 * @param MShop_Context_Item_Interface $context Context item object
-	 * @param MShop_Common_Item_Address_Interface $address Payment address of the customer
+	 * @param MShop_Context_Item_Iface $context Context item object
+	 * @param MShop_Common_Item_Address_Iface $address Payment address of the customer
 	 * @param array $products List of products a notification should be sent for
 	 */
-	protected function sendMail( MShop_Context_Item_Interface $context,
-		MShop_Common_Item_Address_Interface $address, array $products )
+	protected function sendMail( MShop_Context_Item_Iface $context,
+		MShop_Common_Item_Address_Iface $address, array $products )
 	{
 		$view = $context->getView();
 		$view->extProducts = $products;

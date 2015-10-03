@@ -49,24 +49,24 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'list' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'list', 'default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list', 'default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );
@@ -177,7 +177,7 @@ class MShop_Attribute_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->createSearch();
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $search );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $search );
 	}
 
 

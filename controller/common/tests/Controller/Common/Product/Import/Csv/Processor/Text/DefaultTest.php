@@ -70,7 +70,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_DefaultTest extends PH
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -177,7 +177,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_DefaultTest extends PH
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );
 		$this->assertEquals( 'Short: Job CSV test', $listItem->getRefItem()->getContent() );
@@ -282,7 +282,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_DefaultTest extends PH
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );
@@ -313,7 +313,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_DefaultTest extends PH
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );

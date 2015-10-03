@@ -98,7 +98,7 @@ class TestHelper
 	}
 
 
-	protected static function createView( MW_Config_Interface $config )
+	protected static function createView( MW_Config_Iface $config )
 	{
 		$tmplpaths = self::getAimeos()->getCustomPaths( 'client/html' );
 		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );

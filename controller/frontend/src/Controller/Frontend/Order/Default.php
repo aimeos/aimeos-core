@@ -16,7 +16,7 @@
  */
 class Controller_Frontend_Order_Default
 	extends Controller_Frontend_Base
-	implements Controller_Frontend_Order_Interface
+	implements Controller_Frontend_Order_Iface
 {
 	/**
 	 * Creates a new order from the given basket.
@@ -25,10 +25,10 @@ class Controller_Frontend_Order_Default
 	 * products, services, etc. and creates/stores a new order item for that
 	 * order.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object to be stored
-	 * @return MShop_Order_Item_Interface Order item that belongs to the stored basket
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object to be stored
+	 * @return MShop_Order_Item_Iface Order item that belongs to the stored basket
 	 */
-	public function store( MShop_Order_Item_Base_Interface $basket )
+	public function store( MShop_Order_Item_Base_Iface $basket )
 	{
 		$context = $this->getContext();
 
@@ -66,9 +66,9 @@ class Controller_Frontend_Order_Default
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function block( MShop_Order_Item_Interface $orderItem )
+	public function block( MShop_Order_Item_Iface $orderItem )
 	{
 		Controller_Common_Order_Factory::createController( $this->getContext() )->block( $orderItem );
 	}
@@ -90,9 +90,9 @@ class Controller_Frontend_Order_Default
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function unblock( MShop_Order_Item_Interface $orderItem )
+	public function unblock( MShop_Order_Item_Iface $orderItem )
 	{
 		Controller_Common_Order_Factory::createController( $this->getContext() )->unblock( $orderItem );
 	}
@@ -110,9 +110,9 @@ class Controller_Frontend_Order_Default
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function update( MShop_Order_Item_Interface $orderItem )
+	public function update( MShop_Order_Item_Iface $orderItem )
 	{
 		Controller_Common_Order_Factory::createController( $this->getContext() )->update( $orderItem );
 	}

@@ -49,14 +49,14 @@ class MShop_Product_Manager_Property_Type_DefaultTest extends PHPUnit_Framework_
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

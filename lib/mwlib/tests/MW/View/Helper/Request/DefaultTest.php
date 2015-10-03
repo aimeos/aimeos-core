@@ -38,7 +38,7 @@ class MW_View_Helper_Request_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Interface', $this->object->transform() );
+		$this->assertInstanceOf( 'MW_View_Helper_Iface', $this->object->transform() );
 	}
 
 

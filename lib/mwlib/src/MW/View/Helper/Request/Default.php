@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Request_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $body;
 	private $clientaddr;
@@ -25,7 +25,7 @@ class MW_View_Helper_Request_Default
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
 	 */
@@ -41,7 +41,7 @@ class MW_View_Helper_Request_Default
 	/**
 	 * Returns the request view helper.
 	 *
-	 * @return MW_View_Helper_Interface Request view helper
+	 * @return MW_View_Helper_Iface Request view helper
 	 */
 	public function transform()
 	{

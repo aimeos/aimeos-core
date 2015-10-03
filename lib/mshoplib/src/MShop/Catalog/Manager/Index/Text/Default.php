@@ -15,7 +15,7 @@
  */
 class MShop_Catalog_Manager_Index_Text_Default
 	extends MShop_Catalog_Manager_Index_DBBase
-	implements MShop_Catalog_Manager_Index_Text_Interface
+	implements MShop_Catalog_Manager_Index_Text_Iface
 {
 	private $searchConfig = array(
 		'catalog.index.text.id' => array(
@@ -74,9 +74,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Initializes the manager instance.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -91,11 +91,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
@@ -190,7 +190,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -226,7 +226,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -380,13 +380,13 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * Rebuilds the catalog index text for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Iface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Base::checkClassList( 'MShop_Product_Item_Interface', $items );
+		MW_Common_Base::checkClassList( 'MShop_Product_Item_Iface', $items );
 
 		$context = $this->getContext();
 		$sites = $context->getLocale()->getSitePath();
@@ -496,12 +496,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
+	 * @return array List of items implementing MShop_Product_Item_Iface with ids as keys
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		/** mshop/catalog/manager/index/text/default/item/search
 		 * Retrieves the records matched by the given criteria in the database
@@ -612,10 +612,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Returns product IDs and texts that matches the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @return array Associative list of the product ID as key and the product text as value
 	 */
-	public function searchTexts( MW_Common_Criteria_Interface $search )
+	public function searchTexts( MW_Common_Criteria_Iface $search )
 	{
 		$list = array();
 		$context = $this->getContext();
@@ -697,7 +697,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Saves texts associated with attributes to catalog_index_text.
 	 *
-	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Iface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
 	 */
 	protected function saveAttributeTexts( array $items )
 	{
@@ -821,7 +821,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Saves the text record with given set of parameters.
 	 *
-	 * @param MW_DB_Statement_Interface $stmt Prepared SQL statement with place holders
+	 * @param MW_DB_Statement_Iface $stmt Prepared SQL statement with place holders
 	 * @param integer $id ID of the product item
 	 * @param integer $siteid Site ID
 	 * @param string $refid ID of the text item that contains the text
@@ -833,7 +833,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
 	 * @param string $editor Name of the editor who stored the product
 	 */
-	protected function saveText( MW_DB_Statement_Interface $stmt, $id, $siteid, $refid, $lang, $listtype,
+	protected function saveText( MW_DB_Statement_Iface $stmt, $id, $siteid, $refid, $lang, $listtype,
 		$reftype, $domain, $content, $date, $editor )
 	{
 		$stmt->bind( 1, $id, MW_DB_Statement_Base::PARAM_INT );

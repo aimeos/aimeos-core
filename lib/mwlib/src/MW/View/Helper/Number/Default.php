@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Number_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $dsep;
 	private $tsep;
@@ -25,7 +25,7 @@ class MW_View_Helper_Number_Default
 	/**
 	 * Initializes the Number view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $decimalSeparator Character for the decimal point
 	 * @param string $thousandsSeperator Character separating groups of thousands
 	 */

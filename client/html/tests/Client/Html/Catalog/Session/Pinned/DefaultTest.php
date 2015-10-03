@@ -111,7 +111,7 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends PHPUnit_Framework_T
 	 *
 	 * @param string $code Unique product code
 	 * @throws Exception If no product is found
-	 * @return MShop_Product_Item_Interface
+	 * @return MShop_Product_Item_Iface
 	 */
 	protected function getProductItem( $code )
 	{

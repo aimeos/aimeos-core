@@ -16,14 +16,14 @@
  */
 class MShop_Coupon_Provider_FixedRebate
 	extends MShop_Coupon_Provider_Factory_Base
-	implements MShop_Coupon_Provider_Factory_Interface
+	implements MShop_Coupon_Provider_Factory_Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Interface $base )
+	public function addCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;

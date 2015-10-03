@@ -16,7 +16,7 @@
  */
 class MShop_Order_Manager_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Interface
+	implements MShop_Order_Manager_Iface
 {
 	private $searchConfig = array(
 		'order.id'=> array(
@@ -122,9 +122,9 @@ class MShop_Order_Manager_Default
 	/**
 	 * Creates the manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -138,11 +138,11 @@ class MShop_Order_Manager_Default
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		/** mshop/order/manager/default/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -211,7 +211,7 @@ class MShop_Order_Manager_Default
 	/**
 	 * Returns a new and empty invoice.
 	 *
-	 * @return MShop_Order_Item_Interface Invoice without assigned values or items
+	 * @return MShop_Order_Item_Iface Invoice without assigned values or items
 	 */
 	public function createItem()
 	{
@@ -224,7 +224,7 @@ class MShop_Order_Manager_Default
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -247,12 +247,12 @@ class MShop_Order_Manager_Default
 	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Order item with necessary values
+	 * @param MShop_Common_Item_Iface $item Order item with necessary values
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Interface';
+		$iface = 'MShop_Order_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -414,7 +414,7 @@ class MShop_Order_Manager_Default
 	 *
 	 * @param integer $id Unique id of the order invoice
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Interface Returns order invoice item of the given id
+	 * @return MShop_Order_Item_Iface Returns order invoice item of the given id
 	 * @throws MShop_Order_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -463,7 +463,7 @@ class MShop_Order_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -494,14 +494,14 @@ class MShop_Order_Manager_Default
 	/**
 	 * Searches for orders based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Interface
+	 * @return array List of items implementing MShop_Order_Item_Iface
 	 * @throws MShop_Order_Exception If creating items failed
 	 * @throws MW_DB_Exception If a database operation fails
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -648,7 +648,7 @@ class MShop_Order_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g base, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g base, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -659,9 +659,9 @@ class MShop_Order_Manager_Default
 	/**
 	 * Adds the new payment and delivery values to the order status log.
 	 *
-	 * @param MShop_Order_Item_Interface $item Order item object
+	 * @param MShop_Order_Item_Iface $item Order item object
 	 */
-	protected function addStatus( MShop_Order_Item_Interface $item )
+	protected function addStatus( MShop_Order_Item_Iface $item )
 	{
 		$statusManager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
 
@@ -692,7 +692,7 @@ class MShop_Order_Manager_Default
 	 * Creates a new order item.
 	 *
 	 * @param array $values List of attributes for order item
-	 * @return MShop_Order_Item_Interface New order item
+	 * @return MShop_Order_Item_Iface New order item
 	 */
 	protected function createItemBase( array $values = array() )
 	{

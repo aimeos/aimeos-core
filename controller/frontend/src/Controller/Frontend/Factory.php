@@ -23,7 +23,7 @@ class Controller_Frontend_Factory
 	 *
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Iface)
 	 * @param string $path Path describing the controller to clear, e.g. "basket"
 	 */
 	static public function clear( $id = null, $path = null )
@@ -53,11 +53,11 @@ class Controller_Frontend_Factory
 	 * a specific implementation, you need to use the factory class of the
 	 * controller to hand over specifc implementation names.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by managers
+	 * @param MShop_Context_Item_Iface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "basket"
 	 * @throws Controller_Frontend_Exception If the given path is invalid or the manager wasn't found
 	 */
-	static public function createController( MShop_Context_Item_Interface $context, $path )
+	static public function createController( MShop_Context_Item_Iface $context, $path )
 	{
 		if( empty( $path ) ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Controller path is empty' ) );

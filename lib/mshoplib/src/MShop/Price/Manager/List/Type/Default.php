@@ -15,7 +15,7 @@
  */
 class MShop_Price_Manager_List_Type_Default
 	extends MShop_Common_Manager_Type_Base
-	implements MShop_Price_Manager_List_Type_Interface
+	implements MShop_Price_Manager_List_Type_Iface
 {
 	private $searchConfig = array(
 		'price.list.type.id' => array(
@@ -90,9 +90,9 @@ class MShop_Price_Manager_List_Type_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-price' );
@@ -119,7 +119,7 @@ class MShop_Price_Manager_List_Type_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -151,7 +151,7 @@ class MShop_Price_Manager_List_Type_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g types, lists etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

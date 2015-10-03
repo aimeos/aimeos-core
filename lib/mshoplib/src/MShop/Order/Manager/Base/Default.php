@@ -124,9 +124,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -136,11 +136,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		/** mshop/order/manager/base/default/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -211,7 +211,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
-	 * @return MShop_Order_Item_Base_Interface Order base object
+	 * @return MShop_Order_Item_Base_Iface Order base object
 	 */
 	public function createItem()
 	{
@@ -269,7 +269,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Unique id of the order base
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Interface Returns Order base item of the given id
+	 * @return MShop_Order_Item_Base_Iface Returns Order base item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -282,7 +282,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -315,7 +315,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g address, coupon, product, service, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g address, coupon, product, service, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -435,12 +435,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Adds or updates an order base item in the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item Order base object (sub-items are not saved)
+	 * @param MShop_Common_Item_Iface $item Order base object (sub-items are not saved)
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Interface';
+		$iface = 'MShop_Order_Item_Base_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -598,14 +598,14 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Search for orders based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Base_Interface
+	 * @return array List of items implementing MShop_Order_Item_Base_Iface
 	 * @throws MShop_Order_Exception If creating items fails
 	 * @throws MW_DB_Exception If a database operation fails
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 
@@ -758,7 +758,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 * Returns the current basket of the customer.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return MShop_Order_Item_Base_Interface Shopping basket
+	 * @return MShop_Order_Item_Base_Iface Shopping basket
 	 */
 	public function getSession( $type = '' )
 	{
@@ -774,7 +774,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 			return $this->createItem();
 		}
 
-		$iface = 'MShop_Order_Item_Base_Interface';
+		$iface = 'MShop_Order_Item_Base_Iface';
 
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{
@@ -817,10 +817,10 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the current shopping basket of the customer.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $order Shopping basket
+	 * @param MShop_Order_Item_Base_Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
 	 */
-	public function setSession( MShop_Order_Item_Base_Interface $order, $type = '' )
+	public function setSession( MShop_Order_Item_Base_Iface $order, $type = '' )
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -866,7 +866,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 * @param integer $id Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
-	 * @return MShop_Order_Item_Base_Interface Basket including all items
+	 * @return MShop_Order_Item_Base_Iface Basket including all items
 	 */
 	public function load( $id, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL, $fresh = false )
 	{
@@ -929,10 +929,10 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object containing all information
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Interface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL )
+	public function store( MShop_Order_Item_Base_Iface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL )
 	{
 		$this->saveItem( $basket );
 
@@ -959,9 +959,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
-	 * @return MShop_Order_Item_Base_Interface Order base object
+	 * @return MShop_Order_Item_Base_Iface Order base object
 	 */
-	protected function createItemBase( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
+	protected function createItemBase( MShop_Price_Item_Iface $price, MShop_Locale_Item_Iface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
@@ -975,7 +975,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Product_Interface
+	 * @return array List of items implementing MShop_Order_Item_Product_Iface
 	 */
 	protected function loadProducts( $id, $fresh )
 	{
@@ -1042,7 +1042,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Address_Interface
+	 * @return array List of items implementing MShop_Order_Item_Address_Iface
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
@@ -1074,7 +1074,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array List of order products from the basket
-	 * @return array Associative list of coupon codes as keys and items implementing MShop_Order_Item_Product_Interface
+	 * @return array Associative list of coupon codes as keys and items implementing MShop_Order_Item_Product_Iface
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
@@ -1111,7 +1111,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Service_Interface
+	 * @return array List of items implementing MShop_Order_Item_Service_Iface
 	 */
 	protected function loadServices( $id, $fresh )
 	{
@@ -1146,9 +1146,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the ordered products to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing ordered products or bundles
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing ordered products or bundles
 	 */
-	protected function storeProducts( MShop_Order_Item_Base_Interface $basket )
+	protected function storeProducts( MShop_Order_Item_Base_Iface $basket )
 	{
 		$position = 1;
 		$manager = $this->getSubManager( 'product' );
@@ -1202,9 +1202,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the addresses of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing address items
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing address items
 	 */
-	protected function storeAddresses( MShop_Order_Item_Base_Interface $basket )
+	protected function storeAddresses( MShop_Order_Item_Base_Iface $basket )
 	{
 		$manager = $this->getSubManager( 'address' );
 
@@ -1220,9 +1220,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the coupons of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing coupon items
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing coupon items
 	 */
-	protected function storeCoupons( MShop_Order_Item_Base_Interface $basket )
+	protected function storeCoupons( MShop_Order_Item_Base_Iface $basket )
 	{
 		$manager = $this->getSubManager( 'coupon' );
 
@@ -1253,9 +1253,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the services of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing service items
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing service items
 	 */
-	protected function storeServices( MShop_Order_Item_Base_Interface $basket )
+	protected function storeServices( MShop_Order_Item_Base_Iface $basket )
 	{
 		$manager = $this->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );

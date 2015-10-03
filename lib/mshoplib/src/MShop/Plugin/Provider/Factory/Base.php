@@ -24,10 +24,10 @@ abstract class MShop_Plugin_Provider_Factory_Base
 	 * compatible with the constructor of the factory interface if this
 	 * intermediate constructor isn't implemented!
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Plugin_Item_Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
 	{
 		parent::__construct( $context, $item );
 	}

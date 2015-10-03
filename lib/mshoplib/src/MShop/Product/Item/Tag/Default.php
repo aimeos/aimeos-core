@@ -16,7 +16,7 @@
  */
 class MShop_Product_Item_Tag_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Product_Item_Tag_Interface
+	implements MShop_Product_Item_Tag_Iface
 {
 	private $values;
 

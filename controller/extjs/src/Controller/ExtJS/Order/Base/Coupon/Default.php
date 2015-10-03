@@ -15,7 +15,7 @@
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Base implements Controller_ExtJS_Interface
+class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Base implements Controller_ExtJS_Iface
 {
 	private $manager = null;
 
@@ -23,9 +23,9 @@ class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Base i
 	/**
 	 * Initializes the Order base coupon controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Order_Base_Coupon' );
 	}
@@ -34,7 +34,7 @@ class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Base i
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

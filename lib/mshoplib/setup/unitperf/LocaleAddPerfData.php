@@ -48,7 +48,7 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}

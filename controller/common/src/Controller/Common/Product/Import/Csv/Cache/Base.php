@@ -22,9 +22,9 @@ class Controller_Common_Product_Import_Csv_Cache_Base
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -33,7 +33,7 @@ class Controller_Common_Product_Import_Csv_Cache_Base
 	/**
 	 * Returns the context object
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{

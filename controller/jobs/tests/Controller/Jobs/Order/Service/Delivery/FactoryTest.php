@@ -14,7 +14,7 @@ class Controller_Jobs_Order_Service_Delivery_FactoryTest extends PHPUnit_Framewo
 		$aimeos = TestHelper::getAimeos();
 
 		$obj = Controller_Jobs_Order_Service_Delivery_Factory::createController( $context, $aimeos );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $obj );
 	}
 
 

@@ -16,7 +16,7 @@
  */
 class MShop_Locale_Manager_Site_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Locale_Manager_Site_Interface
+	implements MShop_Locale_Manager_Site_Iface
 {
 	private $cache = array();
 
@@ -117,9 +117,9 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
@@ -129,7 +129,7 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Creates a new site object.
 	 *
-	 * @return MShop_Locale_Item_Site_Interface
+	 * @return MShop_Locale_Item_Site_Iface
 	 * @throws MShop_Locale_Exception
 	 */
 	public function createItem()
@@ -141,13 +141,13 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
-	 * @param MShop_Common_Item_Interface $item New site item for saving to the storage
+	 * @param MShop_Common_Item_Iface $item New site item for saving to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Locale_Exception
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Locale_Item_Site_Interface';
+		$iface = 'MShop_Locale_Item_Site_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -316,7 +316,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @param string $id Unique ID of the site data in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Site_Interface Returns the site item of the given id
+	 * @return MShop_Locale_Item_Site_Iface Returns the site item of the given id
 	 * @throws MShop_Exception If the item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -329,7 +329,7 @@ class MShop_Locale_Manager_Site_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -361,7 +361,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Locale_Manager_Interface manager
+	 * @return MShop_Locale_Manager_Iface manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -481,12 +481,12 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Searches for site items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object
+	 * @param MW_Common_Criteria_Iface $search Search object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of site items implementing MShop_Locale_Item_Site_Interface
+	 * @return array List of site items implementing MShop_Locale_Item_Site_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -664,7 +664,7 @@ class MShop_Locale_Manager_Site_Default
 	 * Creates a search object and sets base criteria.
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -690,7 +690,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Site_Interface[] Associative list of items implementing MShop_Locale_Item_Site_Interface with IDs as keys
+	 * @return MShop_Locale_Item_Site_Iface[] Associative list of items implementing MShop_Locale_Item_Site_Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
@@ -705,7 +705,7 @@ class MShop_Locale_Manager_Site_Default
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @return MShop_Locale_Item_Site_Interface Site item
+	 * @return MShop_Locale_Item_Site_Iface Site item
 	 */
 	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE )
 	{
@@ -741,11 +741,11 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Locale_Item_Site_Interface $item Item which should be inserted
+	 * @param MShop_Locale_Item_Site_Iface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
 	 */
-	public function insertItem( MShop_Locale_Item_Site_Interface $item, $parentId = null, $refId = null )
+	public function insertItem( MShop_Locale_Item_Site_Iface $item, $parentId = null, $refId = null )
 	{
 		$context = $this->getContext();
 
@@ -857,11 +857,11 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param $sql SQL statement
-	 * @return MW_DB_Result_Interface Search result object
+	 * @return MW_DB_Result_Iface Search result object
 	 */
-	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
 		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
@@ -875,7 +875,7 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Create new item object initialized with given parameters.
 	 *
-	 * @return MShop_Locale_Item_Site_Interface
+	 * @return MShop_Locale_Item_Site_Iface
 	 */
 	protected function createItemBase( array $data = array( ) )
 	{

@@ -16,7 +16,7 @@
  */
 class MW_Translation_Decorator_APC
 	extends MW_Translation_Decorator_Base
-	implements MW_Translation_Decorator_Interface
+	implements MW_Translation_Decorator_Iface
 {
 	private $prefix;
 
@@ -24,10 +24,10 @@ class MW_Translation_Decorator_APC
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @param MW_Translation_Iface $object Translation object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Translation_Interface $object, $prefix = '' )
+	public function __construct( MW_Translation_Iface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
 			throw new MW_Translation_Exception( 'APC not available' );

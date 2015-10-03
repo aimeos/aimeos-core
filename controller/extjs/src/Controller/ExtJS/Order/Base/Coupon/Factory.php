@@ -16,9 +16,9 @@
  */
 class Controller_ExtJS_Order_Base_Coupon_Factory
 	extends Controller_ExtJS_Common_Factory_Base
-	implements Controller_ExtJS_Common_Factory_Interface
+	implements Controller_ExtJS_Common_Factory_Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/order/base/coupon/name
 		 * Class name of the used ExtJS order base coupon controller implementation
@@ -57,7 +57,7 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 			$name = $context->getConfig()->get( 'classes/controller/extjs/order/base/coupon/name', 'Default' );
 		}
 
-		$interface = 'Controller_ExtJS_Interface';
+		$interface = 'Controller_ExtJS_Iface';
 		$classname = 'Controller_ExtJS_Order_Base_Coupon_' . $name;
 
 		$controller = self::createControllerBase( $context, $classname, $interface );

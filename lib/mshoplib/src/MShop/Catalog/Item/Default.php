@@ -16,7 +16,7 @@
  */
 class MShop_Catalog_Item_Default
 	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Catalog_Item_Interface
+	implements MShop_Catalog_Item_Iface
 {
 	private $node;
 	private $children;
@@ -25,17 +25,17 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Initializes the catalog item.
 	 *
-	 * @param MW_Tree_Node_Interface $node Tree node
-	 * @param MShop_Catalog_Item_Interface[] $children List of children of the item
-	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
-	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param MW_Tree_Node_Iface $node Tree node
+	 * @param MShop_Catalog_Item_Iface[] $children List of children of the item
+	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
-	public function __construct( MW_Tree_Node_Interface $node, array $children = array(),
+	public function __construct( MW_Tree_Node_Iface $node, array $children = array(),
 		array $listItems = array(), array $refItems = array() )
 	{
 		parent::__construct( '', array(), $listItems, $refItems );
 
-		MW_Common_Base::checkClassList( 'MShop_Catalog_Item_Interface', $children );
+		MW_Common_Base::checkClassList( 'MShop_Catalog_Item_Iface', $children );
 
 		$this->children = $children;
 		$this->node = $node;
@@ -275,7 +275,7 @@ class MShop_Catalog_Item_Default
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Catalog_Item_Interface Selected node
+	 * @return MShop_Catalog_Item_Iface Selected node
 	 */
 	public function getChild( $index )
 	{
@@ -313,9 +313,9 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Catalog_Item_Interface $item Child node to add
+	 * @param MShop_Catalog_Item_Iface $item Child node to add
 	 */
-	public function addChild( MShop_Catalog_Item_Interface $item )
+	public function addChild( MShop_Catalog_Item_Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;
@@ -325,7 +325,7 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Returns the internal node.
 	 *
-	 * @return MW_Tree_Node_Interface Internal node object
+	 * @return MW_Tree_Node_Iface Internal node object
 	 */
 	public function getNode()
 	{

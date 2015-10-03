@@ -16,7 +16,7 @@
  */
 class MShop_Supplier_Manager_Address_Default
 	extends MShop_Common_Manager_Address_Base
-	implements MShop_Supplier_Manager_Address_Interface
+	implements MShop_Supplier_Manager_Address_Iface
 {
 	private $searchConfig = array(
 		'supplier.address.id' => array(
@@ -211,9 +211,9 @@ class MShop_Supplier_Manager_Address_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
@@ -240,7 +240,7 @@ class MShop_Supplier_Manager_Address_Default
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -272,7 +272,7 @@ class MShop_Supplier_Manager_Address_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g type, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -393,7 +393,7 @@ class MShop_Supplier_Manager_Address_Default
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
-	 * @return MShop_Supplier_Item_Address_Interface New address item
+	 * @return MShop_Supplier_Item_Address_Iface New address item
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{

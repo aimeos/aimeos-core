@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Media_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Media_Default
 	/**
 	 * Initializes the media controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Media' );
 	}
@@ -224,7 +224,7 @@ class Controller_ExtJS_Media_Default
 		$item->setMimeType( $mediaFile->getMimetype() );
 
 
-		if( $mediaFile instanceof MW_Media_Image_Interface )
+		if( $mediaFile instanceof MW_Media_Image_Iface )
 		{
 			$item->setPreview( $this->createImage( $mediaFile, 'preview', $params->domain, $fileinfo['tmp_name'], $filename ) );
 			$item->setUrl( $this->createImage( $mediaFile, 'files', $params->domain, $fileinfo['tmp_name'], $filename ) );
@@ -271,7 +271,7 @@ class Controller_ExtJS_Media_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{
@@ -500,7 +500,7 @@ class Controller_ExtJS_Media_Default
 	/**
 	 * Creates a scaled image and returns it's new file name.
 	 *
-	 * @param MW_Media_Image_Interface $mediaFile Media object
+	 * @param MW_Media_Image_Iface $mediaFile Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @param string $domain Domain the image belongs to, e.g. "product", "attribute", etc.
 	 * @param string $src Path to original file
@@ -508,7 +508,7 @@ class Controller_ExtJS_Media_Default
 	 * @return string Relative path to the new file
 	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function createImage( MW_Media_Image_Interface $mediaFile, $type, $domain, $src, $filename )
+	protected function createImage( MW_Media_Image_Iface $mediaFile, $type, $domain, $src, $filename )
 	{
 		$mimetype = $mediaFile->getMimetype();
 		$config = $this->getContext()->getConfig();
@@ -681,12 +681,12 @@ class Controller_ExtJS_Media_Default
 	/**
 	 * Copies the given file to a new location.
 	 *
-	 * @param MW_Media_Image_Interface $mediaFile Media object
+	 * @param MW_Media_Image_Iface $mediaFile Media object
 	 * @param unknown_type $domain Domain the image belongs to, e.g. "product", "attribute", etc.
 	 * @param string $filename Name of the new file without file extension
 	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function copyFile( MW_Media_Interface $mediaFile, $domain, $filename )
+	protected function copyFile( MW_Media_Iface $mediaFile, $domain, $filename )
 	{
 		$config = $this->getContext()->getConfig();
 

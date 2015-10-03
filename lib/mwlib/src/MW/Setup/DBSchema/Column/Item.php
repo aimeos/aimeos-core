@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interface
+class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Iface
 {
 	private $tablename = '';
 	private $name = '';

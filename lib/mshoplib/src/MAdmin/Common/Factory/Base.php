@@ -20,13 +20,13 @@ abstract class MAdmin_Common_Factory_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	protected static function addManagerDecorators( MShop_Context_Item_Interface $context,
-		MShop_Common_Manager_Interface $manager, $domain )
+	protected static function addManagerDecorators( MShop_Context_Item_Iface $context,
+		MShop_Common_Manager_Iface $manager, $domain )
 	{
 		$config = $context->getConfig();
 

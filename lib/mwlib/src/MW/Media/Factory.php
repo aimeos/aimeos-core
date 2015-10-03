@@ -26,7 +26,7 @@ class MW_Media_Factory
 	 *
 	 * @param string|null $filename Path to media file or null for new files
 	 * @param array $options Associative list of options for configuring the media class
-	 * @return MW_Media_Interface Media object
+	 * @return MW_Media_Iface Media object
 	 */
 	public static function get( $filename, array $options = array() )
 	{

@@ -218,7 +218,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 	}
 
 
@@ -231,7 +231,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 		$this->assertEquals( 'unitcode', $this->order->getService( $type )->getCode() );
 	}
 
@@ -245,7 +245,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 	}
 
 
@@ -258,7 +258,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 	}
 
 
@@ -271,7 +271,7 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 		$this->assertEquals( 'unitpaymentcode', $this->order->getService( $type )->getCode() );
 	}
 
@@ -285,6 +285,6 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $this->order->getService( $type ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $this->order->getService( $type ) );
 	}
 }

@@ -16,7 +16,7 @@
  */
 abstract class MShop_Service_Provider_Decorator_Base
 	extends MShop_Service_Provider_Base
-	implements MShop_Service_Provider_Decorator_Interface
+	implements MShop_Service_Provider_Decorator_Iface
 {
 	private $object;
 
@@ -24,12 +24,12 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Initializes a new service provider object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
-	 * @param MShop_Service_Provider_Interface $provider Service provider or decorator
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration for the provider
+	 * @param MShop_Service_Provider_Iface $provider Service provider or decorator
 	 */
-	public function __construct( MShop_Context_Item_Interface $context,
-		MShop_Service_Item_Interface $serviceItem, MShop_Service_Provider_Interface $provider )
+	public function __construct( MShop_Context_Item_Iface $context,
+		MShop_Service_Item_Iface $serviceItem, MShop_Service_Provider_Iface $provider )
 	{
 		parent::__construct( $context, $serviceItem );
 
@@ -42,10 +42,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return MShop_Price_Item_Interface Price item containing the price, shipping, rebate
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
+	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
 	{
 		return $this->object->calcPrice( $basket );
 	}
@@ -81,7 +81,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -93,10 +93,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
-	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
+	public function getConfigFE( MShop_Order_Item_Base_Iface $basket )
 	{
 		return $this->object->getConfigFE( $basket );
 	}
@@ -128,10 +128,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
+	public function isAvailable( MShop_Order_Item_Base_Iface $basket )
 	{
 		return $this->object->isAvailable( $basket );
 	}
@@ -152,9 +152,9 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Interface $order )
+	public function query( MShop_Order_Item_Iface $order )
 	{
 		$this->object->query( $order );
 	}
@@ -163,9 +163,9 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Sets the communication object for a service provider.
 	 *
-	 * @param MW_Communication_Interface $communication Object of communication
+	 * @param MW_Communication_Iface $communication Object of communication
 	 */
-	public function setCommunication( MW_Communication_Interface $communication )
+	public function setCommunication( MW_Communication_Iface $communication )
 	{
 		parent::setCommunication( $communication );
 
@@ -176,10 +176,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 */
-	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
 	{
 		$this->object->setConfigFE( $orderServiceItem, $attributes );
 	}
@@ -205,7 +205,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
@@ -217,7 +217,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Returns the provider object.
 	 *
-	 * @return MShop_Service_Provider_Interface Service provider object
+	 * @return MShop_Service_Provider_Iface Service provider object
 	 */
 	protected function getProvider()
 	{

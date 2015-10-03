@@ -16,7 +16,7 @@
  */
 abstract class Client_Html_Common_Summary_Detail_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/common/summary/detail/default/subparts
 	 * List of HTML sub-clients rendered within the common summary detail section
@@ -160,10 +160,10 @@ abstract class Client_Html_Common_Summary_Detail_Default
 	/**
 	 * Returns a list of tax rates and values for the given basket.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing the products, services, etc.
 	 * @return array Associative list of tax rates as key and corresponding amounts as value
 	 */
-	protected function getTaxRates( MShop_Order_Item_Base_Interface $basket )
+	protected function getTaxRates( MShop_Order_Item_Base_Iface $basket )
 	{
 		$taxrates = array();
 

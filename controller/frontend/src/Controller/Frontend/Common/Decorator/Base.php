@@ -15,7 +15,7 @@
  * @subpackage Frontend
  */
 abstract class Controller_Frontend_Common_Decorator_Base
-	implements Controller_Frontend_Common_Decorator_Interface
+	implements Controller_Frontend_Common_Decorator_Iface
 {
 	private $context = null;
 	private $controller = null;
@@ -24,10 +24,10 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param Controller_Frontend_Interface $controller Controller object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param Controller_Frontend_Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Controller_Frontend_Interface $controller )
+	public function __construct( MShop_Context_Item_Iface $context, Controller_Frontend_Iface $controller )
 	{
 		$this->context = $context;
 		$this->controller = $controller;
@@ -57,7 +57,7 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Returns the context item
 	 *
-	 * @return MShop_Context_Item_Interface Context item object
+	 * @return MShop_Context_Item_Iface Context item object
 	 */
 	protected function getContext()
 	{
@@ -68,7 +68,7 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Returns the frontend controller
 	 *
-	 * @return Controller_Frontend_Common_Interface Frontend controller object
+	 * @return Controller_Frontend_Common_Iface Frontend controller object
 	 */
 	protected function getController()
 	{

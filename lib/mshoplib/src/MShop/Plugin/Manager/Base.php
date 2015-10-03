@@ -17,10 +17,10 @@
 abstract class MShop_Plugin_Manager_Base
 	extends MShop_Common_Manager_Base
 {
-	protected function addPluginDecorators( MShop_Plugin_Item_Interface $serviceItem,
-		MShop_Plugin_Provider_Interface $provider, $names )
+	protected function addPluginDecorators( MShop_Plugin_Item_Iface $serviceItem,
+		MShop_Plugin_Provider_Iface $provider, $names )
 	{
-		$iface = 'MShop_Plugin_Provider_Decorator_Interface';
+		$iface = 'MShop_Plugin_Provider_Decorator_Iface';
 		$classprefix = 'MShop_Plugin_Provider_Decorator_';
 
 		foreach( $names as $name )

@@ -14,7 +14,7 @@ class MShop_Customer_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManager()
 	{
 		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 
 	}
 
@@ -22,7 +22,7 @@ class MShop_Customer_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManagerName()
 	{
 		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 

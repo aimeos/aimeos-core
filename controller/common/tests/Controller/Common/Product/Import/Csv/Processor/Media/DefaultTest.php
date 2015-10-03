@@ -72,7 +72,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -195,7 +195,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
 	}
@@ -289,7 +289,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'path/to/file2', $listItem->getRefItem()->getUrl() );
@@ -319,7 +319,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );

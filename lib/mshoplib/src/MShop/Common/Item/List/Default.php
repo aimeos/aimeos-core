@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_List_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Common_Item_List_Interface
+	implements MShop_Common_Item_List_Iface
 {
 	private $prefix;
 	private $values;
@@ -287,7 +287,7 @@ class MShop_Common_Item_List_Default
 	/**
 	 * Returns the referenced item if it's available.
 	 *
-	 * @return MShop_Common_Item_Interface Referenced list item
+	 * @return MShop_Common_Item_Iface Referenced list item
 	 */
 	public function getRefItem()
 	{
@@ -298,9 +298,9 @@ class MShop_Common_Item_List_Default
 	/**
 	 * Stores the item referenced by the list item.
 	 *
-	 * @param MShop_Common_Item_Interface $refItem Item referenced by the list item
+	 * @param MShop_Common_Item_Iface $refItem Item referenced by the list item
 	 */
-	public function setRefItem( MShop_Common_Item_Interface $refItem )
+	public function setRefItem( MShop_Common_Item_Iface $refItem )
 	{
 		$this->refItem = $refItem;
 	}

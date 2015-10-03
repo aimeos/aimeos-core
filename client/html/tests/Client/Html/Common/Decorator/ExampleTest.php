@@ -40,7 +40,7 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubClient()
 	{
-		$this->assertInstanceOf( 'Client_Html_Interface', $this->object->getSubClient( 'tree' ) );
+		$this->assertInstanceOf( 'Client_Html_Iface', $this->object->getSubClient( 'tree' ) );
 	}
 
 
@@ -60,7 +60,7 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 
 	public function testGetView()
 	{
-		$this->assertInstanceOf( 'MW_View_Interface', $this->object->getView() );
+		$this->assertInstanceOf( 'MW_View_Iface', $this->object->getView() );
 	}
 
 

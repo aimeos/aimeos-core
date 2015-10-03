@@ -70,7 +70,7 @@ test template
 	public function testGet()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( 'MW_Template_Iface', $template );
 
 		$this->assertEquals('
 test template
@@ -171,7 +171,7 @@ test template
 	public function testStr()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( 'MW_Template_Iface', $template );
 
 		$this->assertEquals('
 test template

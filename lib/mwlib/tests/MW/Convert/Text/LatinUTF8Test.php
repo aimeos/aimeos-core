@@ -7,7 +7,7 @@ class MW_Convert_Text_LatinUTF8Test extends PHPUnit_Framework_TestCase
 	{
 		$object = new MW_Convert_Text_LatinUTF8();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 		$this->assertEquals( 'abc', $object->translate( 'abc' ) );
 	}
 
@@ -16,7 +16,7 @@ class MW_Convert_Text_LatinUTF8Test extends PHPUnit_Framework_TestCase
 	{
 		$object = new MW_Convert_Text_LatinUTF8();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 		$this->assertEquals( 'abc', $object->reverse( 'abc' ) );
 	}
 }

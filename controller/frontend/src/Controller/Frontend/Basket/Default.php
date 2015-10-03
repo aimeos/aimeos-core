@@ -16,7 +16,7 @@
  */
 class Controller_Frontend_Basket_Default
 	extends Controller_Frontend_Base
-	implements Controller_Frontend_Basket_Interface
+	implements Controller_Frontend_Basket_Iface
 {
 	private $basket;
 	private $domainManager;
@@ -26,10 +26,10 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Initializes the frontend controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context Object storing the required instances for manaing databases
+	 * @param MShop_Context_Item_Iface $context Object storing the required instances for manaing databases
 	 *  connections, logger, session, etc.
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -53,7 +53,7 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Returns the basket object.
 	 *
-	 * @return MShop_Order_Item_Base_Interface Basket holding products, addresses and delivery/payment options
+	 * @return MShop_Order_Item_Base_Iface Basket holding products, addresses and delivery/payment options
 	 */
 	public function get()
 	{
@@ -266,7 +266,7 @@ class Controller_Frontend_Basket_Default
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Base
-	 * @param MShop_Common_Item_Address_Interface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
+	 * @param MShop_Common_Item_Address_Iface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 */
@@ -275,7 +275,7 @@ class Controller_Frontend_Basket_Default
 		$address = MShop_Factory::createManager( $this->getContext(), 'order/base/address' )->createItem();
 		$address->setType( $type );
 
-		if( $value instanceof MShop_Common_Item_Address_Interface )
+		if( $value instanceof MShop_Common_Item_Address_Iface )
 		{
 			$address->copyFrom( $value );
 			$this->basket->setAddress( $address, $type );
@@ -350,14 +350,14 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Edits the changed product to the basket if it's in stock.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Old order product from basket
+	 * @param MShop_Order_Item_Base_Product_Iface $orderBaseProductItem Old order product from basket
 	 * @param string $productId Unique ID of the product item that belongs to the order product
 	 * @param integer $quantity Number of products to add to the basket
 	 * @param array $options Associative list of options
 	 * @param string $warehouse Warehouse code for retrieving the stock level
 	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
 	 */
-	private function addProductInStock( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
+	private function addProductInStock( MShop_Order_Item_Base_Product_Iface $orderBaseProductItem,
 		$productId, $quantity, array $options, $warehouse )
 	{
 		$stocklevel = null;
@@ -392,15 +392,15 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Edits the changed product to the basket if it's in stock.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $product Old order product from basket
-	 * @param MShop_Product_Item_Interface $productItem Product item that belongs to the order product
+	 * @param MShop_Order_Item_Base_Product_Iface $product Old order product from basket
+	 * @param MShop_Product_Item_Iface $productItem Product item that belongs to the order product
 	 * @param integer $quantity New product quantity
 	 * @param integer $position Position of the old order product in the basket
 	 * @param array Associative list of options
 	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
 	 */
-	private function editProductInStock( MShop_Order_Item_Base_Product_Interface $product,
-		MShop_Product_Item_Interface $productItem, $quantity, $position, array $options )
+	private function editProductInStock( MShop_Order_Item_Base_Product_Iface $product,
+		MShop_Product_Item_Iface $productItem, $quantity, $position, array $options )
 	{
 		$stocklevel = null;
 		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
@@ -428,13 +428,13 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Adds the bundled products to the order product item.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Order product item
-	 * @param MShop_Product_Item_Interface $productItem Bundle product item
+	 * @param MShop_Order_Item_Base_Product_Iface $orderBaseProductItem Order product item
+	 * @param MShop_Product_Item_Iface $productItem Bundle product item
 	 * @param array $variantAttributeIds List of product variant attribute IDs
 	 * @param string $warehouse
 	 */
-	protected function addBundleProducts( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
-		MShop_Product_Item_Interface $productItem, array $variantAttributeIds, $warehouse )
+	protected function addBundleProducts( MShop_Order_Item_Base_Product_Iface $orderBaseProductItem,
+		MShop_Product_Item_Iface $productItem, array $variantAttributeIds, $warehouse )
 	{
 		$quantity = $orderBaseProductItem->getQuantity();
 		$products = $subProductIds = $orderProducts = array();
@@ -546,12 +546,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the addresses from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyAddresses( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
+	private function copyAddresses( MShop_Order_Item_Base_Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getAddresses() as $type => $item )
 		{
@@ -576,12 +576,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the coupons from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyCoupons( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
+	private function copyCoupons( MShop_Order_Item_Base_Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getCoupons() as $code => $list )
 		{
@@ -606,12 +606,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the products from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyProducts( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
+	private function copyProducts( MShop_Order_Item_Base_Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getProducts() as $pos => $product )
 		{
@@ -657,11 +657,11 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the services from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @return array Associative list of errors occured
 	 */
-	private function copyServices( MShop_Order_Item_Base_Interface $basket, array $errors )
+	private function copyServices( MShop_Order_Item_Base_Iface $basket, array $errors )
 	{
 		foreach( $basket->getServices() as $type => $item )
 		{
@@ -765,14 +765,14 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Creates the order product attribute items from the given attribute IDs and updates the price item if necessary.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item of the ordered product
+	 * @param MShop_Price_Item_Iface $price Price item of the ordered product
 	 * @param string $prodid Unique product ID where the given attributes must be attached to
 	 * @param integer $quantity Number of products that should be added to the basket
 	 * @param array $attributeIds List of attributes IDs of the given type
 	 * @param string $type Attribute type
-	 * @return array List of items implementing MShop_Order_Item_Product_Attribute_Interface
+	 * @return array List of items implementing MShop_Order_Item_Product_Attribute_Iface
 	 */
-	protected function createOrderProductAttributes( MShop_Price_Item_Interface $price, $prodid, $quantity,
+	protected function createOrderProductAttributes( MShop_Price_Item_Iface $price, $prodid, $quantity,
 		array $attributeIds, $type, array $attributeValues = array() )
 	{
 		if( empty( $attributeIds ) ) {
@@ -814,12 +814,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Fills the order address object with the values from the array.
 	 *
-	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
+	 * @param MShop_Order_Item_Base_Address_Iface $address Address item to store the values into
 	 * @param array $map Associative array of key/value pairs. The keys must be the same as when calling toArray() from
 	 * 	an address item.
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
-	protected function setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
+	protected function setAddressFromArray( MShop_Order_Item_Base_Address_Iface $address, array $map )
 	{
 		foreach( $map as $key => $value ) {
 			$map[$key] = strip_tags( $value ); // prevent XSS
@@ -839,7 +839,7 @@ class Controller_Frontend_Basket_Default
 	 * Returns the attribute items using the given order attribute items.
 	 *
 	 * @param MShop_Order_Item_Base_Product_Attribute_Item[] $orderAttributes List of order product attribute items
-	 * @return MShop_Attribute_Item_Interface[] Associative list of attribute IDs as key and attribute items as values
+	 * @return MShop_Attribute_Item_Iface[] Associative list of attribute IDs as key and attribute items as values
 	 */
 	private function getAttributeItems( array $orderAttributes )
 	{
@@ -874,7 +874,7 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param array $attributeIds List of attribute IDs
 	 * @param string[] $domains Names of the domain items that should be fetched too
-	 * @return array List of items implementing MShop_Attribute_Item_Interface
+	 * @return array List of items implementing MShop_Attribute_Item_Iface
 	 * @throws Controller_Frontend_Basket_Exception If the actual attribute number doesn't match the expected one
 	 */
 	protected function getAttributes( array $attributeIds, array $domains = array( 'price', 'text' ) )
@@ -911,12 +911,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Calculates and returns the current price for the given order product and product prices.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $product Ordered product item
-	 * @param MShop_Price_Item_Interface[] $prices List of price items
+	 * @param MShop_Order_Item_Base_Product_Iface $product Ordered product item
+	 * @param MShop_Price_Item_Iface[] $prices List of price items
 	 * @param integer $quantity New product quantity
-	 * @return MShop_Price_Item_Interface Price item with calculated price
+	 * @return MShop_Price_Item_Iface Price item with calculated price
 	 */
-	private function calcPrice( MShop_Order_Item_Base_Product_Interface $product, array $prices, $quantity )
+	private function calcPrice( MShop_Order_Item_Base_Product_Iface $product, array $prices, $quantity )
 	{
 		$context = $this->getContext();
 
@@ -954,7 +954,7 @@ class Controller_Frontend_Basket_Default
 	 * @param string $key Domain manager search key
 	 * @param string $value Unique domain identifier
 	 * @param string[] $ref List of referenced items that should be fetched too
-	 * @return MShop_Common_Item_Interface Domain item object
+	 * @return MShop_Common_Item_Iface Domain item object
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
 	protected function getDomainItem( $domain, $key, $value, array $ref )
@@ -985,7 +985,7 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param string $domain Domain name of the list type
 	 * @param string $code Code of the list type
-	 * @return MShop_Common_Item_Type_Interface List type item
+	 * @return MShop_Common_Item_Type_Iface List type item
 	 */
 	protected function getProductListTypeItem( $domain, $code )
 	{
@@ -1019,12 +1019,12 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Returns the product variants of a selection product that match the given attributes.
 	 *
-	 * @param MShop_Product_Item_Interface $productItem Product item including sub-products
+	 * @param MShop_Product_Item_Iface $productItem Product item including sub-products
 	 * @param array $variantAttributeIds IDs for the variant-building attributes
 	 * @param array $domains Names of the domain items that should be fetched too
 	 * @return array List of products matching the given attributes
 	 */
-	protected function getProductVariants( MShop_Product_Item_Interface $productItem, array $variantAttributeIds,
+	protected function getProductVariants( MShop_Product_Item_Iface $productItem, array $variantAttributeIds,
 		array $domains = array( 'attribute', 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
@@ -1063,16 +1063,16 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Returns the variant attributes and updates the price list if necessary.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Order product item
-	 * @param MShop_Product_Item_Interface &$productItem Product item which is replaced if necessary
+	 * @param MShop_Order_Item_Base_Product_Iface $orderBaseProductItem Order product item
+	 * @param MShop_Product_Item_Iface &$productItem Product item which is replaced if necessary
 	 * @param array &$prices List of product prices that will be updated if necessary
 	 * @param array $variantAttributeIds List of product variant attribute IDs
 	 * @param array $options Associative list of options
-	 * @return MShop_Order_Item_Base_Product_Attribute_Interface[] List of order product attributes
+	 * @return MShop_Order_Item_Base_Product_Attribute_Iface[] List of order product attributes
 	 * @throws Controller_Frontend_Basket_Exception If no product variant is found
 	 */
-	private function getVariantDetails( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
-		MShop_Product_Item_Interface &$productItem, array &$prices, array $variantAttributeIds, array $options )
+	private function getVariantDetails( MShop_Order_Item_Base_Product_Iface $orderBaseProductItem,
+		MShop_Product_Item_Iface &$productItem, array &$prices, array $variantAttributeIds, array $options )
 	{
 		$attr = array();
 		$productItems = $this->getProductVariants( $productItem, $variantAttributeIds );

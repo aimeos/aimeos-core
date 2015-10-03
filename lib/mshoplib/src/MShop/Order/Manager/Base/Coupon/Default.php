@@ -16,7 +16,7 @@
  */
 class MShop_Order_Manager_Base_Coupon_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Coupon_Interface
+	implements MShop_Order_Manager_Base_Coupon_Iface
 {
 	private $searchConfig = array(
 		'order.base.coupon.id'=> array(
@@ -85,9 +85,9 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -97,11 +97,11 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		/** mshop/order/manager/base/coupon/default/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -170,7 +170,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Creates a new order base coupon object.
 	 *
-	 * @return MShop_Order_Item_Base_Coupon_Interface New order coupon object
+	 * @return MShop_Order_Item_Base_Coupon_Iface New order coupon object
 	 */
 	public function createItem()
 	{
@@ -183,7 +183,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 * Returns the order coupon item for the given ID.
 	 *
 	 * @param integer $id ID of the item that should be retrieved
-	 * @return MShop_Order_Item_Base_Coupon_Interface Item for the given ID
+	 * @return MShop_Order_Item_Base_Coupon_Iface Item for the given ID
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -194,12 +194,12 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Adds a new item to the storage or updates an existing one.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item that should be saved to the storage
+	 * @param MShop_Common_Item_Iface $item Item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Coupon_Interface';
+		$iface = 'MShop_Order_Item_Base_Coupon_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -387,7 +387,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attributes implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array Returns a list of attributes implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -417,13 +417,13 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array Return a list of items implementing MShop_Order_Item_Base_Coupon_Interface
+	 * @return array Return a list of items implementing MShop_Order_Item_Base_Coupon_Iface
 	 * @throws MShop_Order_Exception If creation of an item fails
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -568,7 +568,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

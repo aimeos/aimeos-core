@@ -30,7 +30,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->createItem() );
 	}
 
 
@@ -94,7 +94,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$actual = $this->object->getItem( $expected->getId() );
 
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $actual );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -141,7 +141,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

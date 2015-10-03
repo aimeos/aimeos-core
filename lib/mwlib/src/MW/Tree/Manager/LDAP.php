@@ -31,7 +31,7 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return array List of search attribute objects implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of search attribute objects implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes()
 	{
@@ -42,7 +42,7 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return MW_Common_Criteria_Interface Search object instance
+	 * @return MW_Common_Criteria_Iface Search object instance
 	 */
 	public function createSearch()
 	{
@@ -53,7 +53,7 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	/**
 	 * Creates a new node object.
 	 *
-	 * @return MW_Tree_Node_Interface Empty node object
+	 * @return MW_Tree_Node_Iface Empty node object
 	 */
 	public function createNode()
 	{
@@ -77,10 +77,10 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	 *
 	 * @param mixed $relbase Relative base of the tree which can be an ID, a path, etc
 	 * @param int $level One of the level constants from MW_Tree_Manager_Base
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
-	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
+	 * @param MW_Common_Criteria_Iface|null $criteria Optional criteria object with conditions
+	 * @return MW_Tree_Node_Iface Node, maybe with subnodes
 	 */
-	public function getNode( $relbase = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
+	public function getNode( $relbase = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $criteria = null )
 	{
 		throw new MW_Tree_Exception( 'Not yet implemented' );
 	}
@@ -88,11 +88,11 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
-	 * @param MW_Tree_Node_Interface $node New node that should be inserted
+	 * @param MW_Tree_Node_Iface $node New node that should be inserted
 	 * @param mixed $parentId ID of the parent node where the new node should be inserted below (null for root node)
 	 * @param mixed $refId ID of the node where the node node should be inserted before (null to append)
 	 */
-	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
+	public function insertNode( MW_Tree_Node_Iface $node, $parentId = null, $refId = null )
 	{
 		throw new MW_Tree_Exception( 'Not yet implemented' );
 	}
@@ -118,9 +118,9 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	 * This method does only store values like the node label but doesn't change
 	 * the tree layout by adding, moving or deleting nodes.
 	 *
-	 * @param MW_Tree_Node_Interface $node Node, maybe with subnodes
+	 * @param MW_Tree_Node_Iface $node Node, maybe with subnodes
 	 */
-	public function saveNode( MW_Tree_Node_Interface $node )
+	public function saveNode( MW_Tree_Node_Iface $node )
 	{
 		throw new MW_Tree_Exception( 'Not yet implemented' );
 	}
@@ -129,11 +129,11 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Base
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param mixed $relbase Relative base of the tree which can be an ID, a path, etc
-	 * @return array List of nodes implementing MW_Tree_Node_Interface
+	 * @return array List of nodes implementing MW_Tree_Node_Iface
 	 */
-	public function searchNodes( MW_Common_Criteria_Interface $search, $relbase = null )
+	public function searchNodes( MW_Common_Criteria_Iface $search, $relbase = null )
 	{
 		throw new MW_Tree_Exception( 'Not yet implemented' );
 	}

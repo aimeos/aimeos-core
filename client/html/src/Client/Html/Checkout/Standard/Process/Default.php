@@ -20,7 +20,7 @@ sprintf( 'process' );
  */
 class Client_Html_Checkout_Standard_Process_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/checkout/standard/process/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard process section
@@ -167,7 +167,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -364,7 +364,7 @@ class Client_Html_Checkout_Standard_Process_Default
 	 *
 	 * @param string $code Unique service code
 	 * @throws Client_Html_Exception If no service item for this code is found
-	 * @return MShop_Service_Item_Interface Service item object
+	 * @return MShop_Service_Item_Iface Service item object
 	 */
 	protected function getServiceItem( $code )
 	{
@@ -403,12 +403,12 @@ class Client_Html_Checkout_Standard_Process_Default
 	/**
 	 * Returns the URL to the confirm page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/confirm/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -488,12 +488,12 @@ class Client_Html_Checkout_Standard_Process_Default
 	/**
 	 * Returns the URL to the current page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlSelf( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlSelf( MW_View_Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/standard/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -573,12 +573,12 @@ class Client_Html_Checkout_Standard_Process_Default
 	/**
 	 * Returns the URL to the update page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/update/url/target
 		 * Destination of the URL where the controller specified in the URL is known

@@ -23,10 +23,10 @@ abstract class Controller_Jobs_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 * @param Aimeos $aimeos Aimeos main object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos )
+	public function __construct( MShop_Context_Item_Iface $context, Aimeos $aimeos )
 	{
 		$this->context = $context;
 		$this->aimeos = $aimeos;
@@ -36,7 +36,7 @@ abstract class Controller_Jobs_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -99,7 +99,7 @@ abstract class Controller_Jobs_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Interface Type item
+	 * @return MShop_Common_Item_Type_Iface Type item
 	 * @throws Controller_Jobs_Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )

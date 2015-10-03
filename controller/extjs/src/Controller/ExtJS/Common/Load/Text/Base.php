@@ -26,10 +26,10 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 * @param string $name Domain name of the export class
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, $name )
+	public function __construct( MShop_Context_Item_Iface $context, $name )
 	{
 		$this->context = $context;
 		$this->name = $name;
@@ -113,7 +113,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Returns the actual context item
 	 *
-	 * @return MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Iface
 	 */
 	protected function getContext()
 	{
@@ -124,11 +124,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Associates the texts with the products.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.) for associating the list items
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
+	protected function importReferences( MShop_Common_Manager_Iface $manager, array $itemTextMap, $domain )
 	{
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
@@ -189,7 +189,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 			{
 				try
 				{
-					$iface = 'MShop_Common_Item_Type_Interface';
+					$iface = 'MShop_Common_Item_Type_Iface';
 					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
 						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
 					}
@@ -213,11 +213,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Returns a list of list type items.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.)
+	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.)
 	 * @param string $domain Domain the list items must be associated to
-	 * @return array Associative list of list type codes and items implementing MShop_Common_Item_Type_Interface
+	 * @return array Associative list of list type codes and items implementing MShop_Common_Item_Type_Iface
 	 */
-	protected function getTextListTypes( MShop_Common_Manager_Interface $manager, $domain )
+	protected function getTextListTypes( MShop_Common_Manager_Iface $manager, $domain )
 	{
 		if( isset( $this->textListTypes[$domain] ) ) {
 			return $this->textListTypes[$domain];
@@ -255,7 +255,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	 * Returns a list of text type items.
 	 *
 	 * @param string $domain Domain the text items must be associated to
-	 * @return array List of text type items implementing MShop_Common_Item_Type_Interface
+	 * @return array List of text type items implementing MShop_Common_Item_Type_Iface
 	 */
 	protected function getTextTypes( $domain )
 	{
@@ -329,12 +329,12 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Imports the text content using the given text types.
 	 *
-	 * @param MW_Container_Content_Interface $contentItem Content item containing texts and associated data
+	 * @param MW_Container_Content_Iface $contentItem Content item containing texts and associated data
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return void
 	 */
-	protected function importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
+	protected function importTextsFromContent( MW_Container_Content_Iface $contentItem, array $textTypeMap, $domain )
 	{
 		$count = 0;
 		$codeIdMap = array();
@@ -367,14 +367,14 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Inserts a single text item from the given import row.
 	 *
-	 * @param MShop_Common_Manager_Interface $textManager Text manager object
+	 * @param MShop_Common_Manager_Iface $textManager Text manager object
 	 * @param array $row Row from import file
 	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @throws Controller_ExtJS_Exception If text type is invalid
 	 */
-	private function importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
+	private function importTextRow( MShop_Common_Manager_Iface $textManager, array $row, array $textTypeMap,
 		array $codeIdMap, $domain )
 	{
 		if( count( $row ) !== 7 )
@@ -406,14 +406,14 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Saves a text item from the given data.
 	 *
-	 * @param MShop_Common_Manager_Interface $textManager Text manager object
+	 * @param MShop_Common_Manager_Iface $textManager Text manager object
 	 * @param array $row Row from import file
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return array Updated two dimensional associated list of codes and text IDs as key
 	 */
-	private function saveTextItem( MShop_Common_Manager_Interface $textManager, array $row,
+	private function saveTextItem( MShop_Common_Manager_Iface $textManager, array $row,
 		array $textTypeMap, array $codeIdMap, $domain )
 	{
 		$value = isset( $row[6] ) ? $row[6] : '';
@@ -448,7 +448,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	 *
 	 * @param string $resource Path to the file
 	 * @param string $key Configuration key prefix for the container type/format/options keys
-	 * @return MW_Container_Interface Container item
+	 * @return MW_Container_Iface Container item
 	 */
 	protected function createContainer( $resource, $key )
 	{

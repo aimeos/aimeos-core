@@ -49,7 +49,7 @@ class MShop_Product_Manager_List_Type_DefaultTest extends PHPUnit_Framework_Test
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $item );
 	}
 
 	public function testGetItem()

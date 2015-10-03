@@ -16,7 +16,7 @@
  */
 class MShop_Order_Item_Base_Service_Attribute_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Order_Item_Base_Service_Attribute_Interface
+	implements MShop_Order_Item_Base_Service_Attribute_Iface
 {
 	private $values;
 
@@ -187,9 +187,9 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Copys all data from a given attribute item.
 	 *
-	 * @param MShop_Attribute_Item_Interface $item Attribute item to copy from
+	 * @param MShop_Attribute_Item_Iface $item Attribute item to copy from
 	 */
-	public function copyFrom( MShop_Attribute_Item_Interface $item )
+	public function copyFrom( MShop_Attribute_Item_Iface $item )
 	{
 		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );

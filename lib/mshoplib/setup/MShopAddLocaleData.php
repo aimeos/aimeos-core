@@ -47,7 +47,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -92,13 +92,13 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	/**
 	 * Adds locale site data.
 	 *
-	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
+	 * @param MShop_Common_Manager_Iface $localeManager Locale manager
 	 * @param array $data Associative list of locale site data
 	 * @param string $manager Manager implementation name
 	 * @param integer|null $parentId Parent id of the locale item
 	 * @return array Associative list of keys from the data and generated site ID
 	 */
-	protected function addLocaleSiteData( MShop_Common_Manager_Interface $localeManager, array $data, $manager = 'Default', $parentId = null )
+	protected function addLocaleSiteData( MShop_Common_Manager_Iface $localeManager, array $data, $manager = 'Default', $parentId = null )
 	{
 		$this->msg( 'Adding data for MShop locale sites', 1 );
 
@@ -142,10 +142,10 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	/**
 	 * Adds locale currency data.
 	 *
-	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
+	 * @param MShop_Common_Manager_Iface $localeManager Locale manager
 	 * @param array $data Associative list of locale currency data
 	 */
-	protected function addLocaleCurrencyData( MShop_Common_Manager_Interface $localeManager, array $data )
+	protected function addLocaleCurrencyData( MShop_Common_Manager_Iface $localeManager, array $data )
 	{
 		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
@@ -175,10 +175,10 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	/**
 	 * Adds locale language data.
 	 *
-	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
+	 * @param MShop_Common_Manager_Iface $localeManager Locale manager
 	 * @param array $data Associative list of locale language data
 	 */
-	protected function addLocaleLanguageData( MShop_Common_Manager_Interface $localeManager, array $data )
+	protected function addLocaleLanguageData( MShop_Common_Manager_Iface $localeManager, array $data )
 	{
 		$this->msg( 'Adding data for MShop locale languages', 1 );
 
@@ -207,10 +207,10 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	/**
 	 * Adds locale data.
 	 *
-	 * @param MShop_Common_Manager_Interface $localeItemManager Locale manager
+	 * @param MShop_Common_Manager_Iface $localeItemManager Locale manager
 	 * @param array $data Associative list of locale data
 	 */
-	protected function addLocaleData( MShop_Common_Manager_Interface $localeItemManager, array $data, array $siteIds )
+	protected function addLocaleData( MShop_Common_Manager_Iface $localeItemManager, array $data, array $siteIds )
 	{
 		$this->msg( 'Adding data for MShop locales', 1 );
 

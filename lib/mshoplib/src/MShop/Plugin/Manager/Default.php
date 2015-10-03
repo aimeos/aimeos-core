@@ -16,7 +16,7 @@
  */
 class MShop_Plugin_Manager_Default
 	extends MShop_Plugin_Manager_Base
-	implements MShop_Plugin_Manager_Interface
+	implements MShop_Plugin_Manager_Iface
 {
 	private $plugins = array();
 
@@ -106,9 +106,9 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-plugin' );
@@ -134,7 +134,7 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Creates a new plugin object.
 	 *
-	 * @return MShop_Plugin_Item_Interface New plugin object
+	 * @return MShop_Plugin_Item_Iface New plugin object
 	 */
 	public function createItem()
 	{
@@ -147,7 +147,7 @@ class MShop_Plugin_Manager_Default
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Prepopulate object with default criterias
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -199,7 +199,7 @@ class MShop_Plugin_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -231,7 +231,7 @@ class MShop_Plugin_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g types, lists etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -244,7 +244,7 @@ class MShop_Plugin_Manager_Default
 	 *
 	 * @param integer $id Unique ID of the plugin item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Plugin_Item_Interface Returns the plugin item of the given id
+	 * @return MShop_Plugin_Item_Iface Returns the plugin item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -256,11 +256,11 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Returns the plugin provider which is responsible for the plugin item.
 	 *
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 * @return MShop_Plugin_Provider_Interface Returns the decoratad plugin provider object
+	 * @param MShop_Plugin_Item_Iface $item Plugin item object
+	 * @return MShop_Plugin_Provider_Iface Returns the decoratad plugin provider object
 	 * @throws MShop_Plugin_Exception If provider couldn't be found
 	 */
-	public function getProvider( MShop_Plugin_Item_Interface $item )
+	public function getProvider( MShop_Plugin_Item_Iface $item )
 	{
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
@@ -277,7 +277,7 @@ class MShop_Plugin_Manager_Default
 			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$interface = 'MShop_Plugin_Provider_Factory_Interface';
+		$interface = 'MShop_Plugin_Provider_Factory_Iface';
 		$classname = 'MShop_Plugin_Provider_' . $type . '_' . $provider;
 
 		if( class_exists( $classname ) === false ) {
@@ -326,10 +326,10 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Registers plugins to the given publisher.
 	 *
-	 * @param MW_Observer_Publisher_Interface $publisher Publisher object
+	 * @param MW_Observer_Publisher_Iface $publisher Publisher object
 	 * @param string $type Unique plugin type code
 	 */
-	public function register( MW_Observer_Publisher_Interface $publisher, $type )
+	public function register( MW_Observer_Publisher_Iface $publisher, $type )
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
@@ -359,12 +359,12 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Saves a new or modified plugin to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item Plugin item
+	 * @param MShop_Common_Item_Iface $item Plugin item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Plugin_Item_Interface';
+		$iface = 'MShop_Plugin_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -517,12 +517,12 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Searches for plugin items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
 	 *
-	 * @return array List of plugin items implementing MShop_Plugin_Item_Interface
+	 * @return array List of plugin items implementing MShop_Plugin_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 		$context = $this->getContext();
@@ -684,7 +684,7 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Creates a new plugin object.
 	 *
-	 * @return MShop_Plugin_Item_Interface New plugin object
+	 * @return MShop_Plugin_Item_Iface New plugin object
 	 */
 	protected function createItemBase( array $values = array() )
 	{

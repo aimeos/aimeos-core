@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Catalog_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Catalog_Default
 	/**
 	 * Initializes the RPC catalog controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Catalog' );
 	}
@@ -181,9 +181,9 @@ class Controller_ExtJS_Catalog_Default
 	/**
 	 * Creates a list of nodes with children.
 	 *
-	 * @param MShop_Catalog_Item_Interface $node Catalog node
+	 * @param MShop_Catalog_Item_Iface $node Catalog node
 	 */
-	protected function createNodeArray( MShop_Catalog_Item_Interface $node )
+	protected function createNodeArray( MShop_Catalog_Item_Iface $node )
 	{
 		$result = $node->toArray();
 
@@ -198,7 +198,7 @@ class Controller_ExtJS_Catalog_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

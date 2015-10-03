@@ -16,7 +16,7 @@
  */
 class MShop_Order_Item_Base_Service_Default
 	extends MShop_Order_Item_Base_Service_Base
-	implements MShop_Order_Item_Base_Service_Interface
+	implements MShop_Order_Item_Base_Service_Iface
 {
 	private $price;
 	private $attributes;
@@ -26,18 +26,18 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Initializes the order base service item
 	 *
-	 * @param MShop_Price_Item_Interface $price
+	 * @param MShop_Price_Item_Iface $price
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
-	public function __construct( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array() )
+	public function __construct( MShop_Price_Item_Iface $price, array $values = array(), array $attributes = array() )
 	{
 		parent::__construct( 'order.base.service.', $values );
 
 		$this->values = $values;
 		$this->price = $price;
 
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attributes );
 		$this->attributes = $attributes;
 	}
 
@@ -208,7 +208,7 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Returns the price object which belongs to the service item.
 	 *
-	 * @return MShop_Price_Item_Interface Price item
+	 * @return MShop_Price_Item_Iface Price item
 	 */
 	public function getPrice()
 	{
@@ -219,9 +219,9 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Sets a new price object for the service item.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item
+	 * @param MShop_Price_Item_Iface $price Price item
 	 */
-	public function setPrice( MShop_Price_Item_Interface $price )
+	public function setPrice( MShop_Price_Item_Iface $price )
 	{
 		if( $price === $this->price ) { return; }
 
@@ -253,7 +253,7 @@ class MShop_Order_Item_Base_Service_Default
 	 *
 	 * @param string $code Code of the service attribute item
 	 * @param string $type Type of the service attribute item
-	 * @return MShop_Order_Item_Base_Service_Attribute_Interface|null Attribute item for the service and the given code
+	 * @return MShop_Order_Item_Base_Service_Attribute_Iface|null Attribute item for the service and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
@@ -270,9 +270,9 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Attribute_Interface $item Service attribute item
+	 * @param MShop_Order_Item_Base_Service_Attribute_Iface $item Service attribute item
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Service_Attribute_Interface $item )
+	public function setAttributeItem( MShop_Order_Item_Base_Service_Attribute_Iface $item )
 	{
 		$this->getAttributeMap();
 
@@ -294,7 +294,7 @@ class MShop_Order_Item_Base_Service_Default
 	 * Returns the list of attribute items for the service.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Interface
+	 * @return array List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Iface
 	 */
 	public function getAttributes( $type = null )
 	{
@@ -315,11 +315,11 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Interface
+	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Iface
 	 */
 	public function setAttributes( array $attributes )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;
@@ -389,9 +389,9 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Copys all data from a given service item.
 	 *
-	 * @param MShop_Service_Item_Interface $service New service item
+	 * @param MShop_Service_Item_Iface $service New service item
 	 */
-	public function copyFrom( MShop_Service_Item_Interface $service )
+	public function copyFrom( MShop_Service_Item_Iface $service )
 	{
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
@@ -410,7 +410,7 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Returns the attribute map for the service.
 	 *
-	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Service_Attribute_Interface as value
+	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Service_Attribute_Iface as value
 	 */
 	protected function getAttributeMap()
 	{

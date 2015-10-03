@@ -17,14 +17,14 @@
  */
 class MShop_Plugin_Provider_Order_Shipping
 	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Interface
+	implements MShop_Plugin_Provider_Factory_Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( MW_Observer_Publisher_Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.after' );
 		$p->addListener( $this, 'deleteProduct.after' );
@@ -37,13 +37,13 @@ class MShop_Plugin_Provider_Order_Shipping
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = 'MShop_Order_Item_Base_Iface';
 		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}

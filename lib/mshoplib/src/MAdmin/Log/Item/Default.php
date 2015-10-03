@@ -16,7 +16,7 @@
  */
 class MAdmin_Log_Item_Default
 	extends MShop_Common_Item_Base
-	implements MAdmin_Log_Item_Interface
+	implements MAdmin_Log_Item_Iface
 {
 	private $values;
 

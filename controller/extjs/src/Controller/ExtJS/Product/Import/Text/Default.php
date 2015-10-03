@@ -17,14 +17,14 @@
  */
 class Controller_ExtJS_Product_Import_Text_Default
 	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Interface
+	implements Controller_ExtJS_Common_Load_Text_Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Product_Import_Text' );
 	}

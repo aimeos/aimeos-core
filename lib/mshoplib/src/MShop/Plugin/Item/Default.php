@@ -16,7 +16,7 @@
  */
 class MShop_Plugin_Item_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Plugin_Item_Interface
+	implements MShop_Plugin_Item_Iface
 {
 	private $values;
 

@@ -26,9 +26,9 @@ class Controller_ExtJS_JsonRpc
 	 * Initializes the ExtJS frontend controller.
 	 * Should not be instantiated directly. Use getInstance() instead.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $cntlPaths )
+	public function __construct( MShop_Context_Item_Iface $context, array $cntlPaths )
 	{
 		$this->cntlPaths = $cntlPaths;
 		$this->context = $context;

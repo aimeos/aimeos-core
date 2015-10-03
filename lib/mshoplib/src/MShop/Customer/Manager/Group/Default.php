@@ -16,7 +16,7 @@
  */
 class MShop_Customer_Manager_Group_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Customer_Manager_Group_Interface
+	implements MShop_Customer_Manager_Group_Iface
 {
 	private $searchConfig = array(
 		'customer.group.id' => array(
@@ -75,9 +75,9 @@ class MShop_Customer_Manager_Group_Default
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-customer' );
@@ -103,7 +103,7 @@ class MShop_Customer_Manager_Group_Default
 	/**
 	 * Instantiates a new customer group item object
 	 *
-	 * @return MShop_Customer_Item_Group_Interface
+	 * @return MShop_Customer_Item_Group_Iface
 	 */
 	public function createItem()
 	{
@@ -117,7 +117,7 @@ class MShop_Customer_Manager_Group_Default
 	 * Returns the attributes that can be used for searching
 	 *
 	 * @param boolean $withsub Return attributes of sub-managers too if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -185,7 +185,7 @@ class MShop_Customer_Manager_Group_Default
 	 *
 	 * @param integer $id Unique customer ID referencing an existing customer group
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Customer_Item_Group_Interface Returns the customer group item for the given ID
+	 * @return MShop_Customer_Item_Group_Iface Returns the customer group item for the given ID
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -197,12 +197,12 @@ class MShop_Customer_Manager_Group_Default
 	/**
 	 * Inserts a new or updates an existing customer group item
 	 *
-	 * @param MShop_Customer_Item_Group_Interface $item Customer group item
+	 * @param MShop_Customer_Item_Group_Iface $item Customer group item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Customer_Item_Group_Interface';
+		$iface = 'MShop_Customer_Item_Group_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -350,13 +350,13 @@ class MShop_Customer_Manager_Group_Default
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Customer_Item_Group_Interface
+	 * @return array List of items implementing MShop_Customer_Item_Group_Iface
 	 * @throws MShop_Exception If retrieving items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
 		$context = $this->getContext();
@@ -493,7 +493,7 @@ class MShop_Customer_Manager_Group_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions
+	 * @return MShop_Common_Manager_Iface Manager for different extensions
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -615,7 +615,7 @@ class MShop_Customer_Manager_Group_Default
 	 * Creates a new customer group item
 	 *
 	 * @param array $values List of attributes for customer group item
-	 * @return MShop_Customer_Item_Group_Interface New customer group item
+	 * @return MShop_Customer_Item_Group_Iface New customer group item
 	 */
 	protected function createItemBase( array $values = array() )
 	{

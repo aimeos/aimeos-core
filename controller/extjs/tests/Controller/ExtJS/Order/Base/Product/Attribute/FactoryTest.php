@@ -11,7 +11,7 @@ class Controller_ExtJS_Order_Base_Product_Attribute_FactoryTest extends PHPUnit_
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Order_Base_Product_Attribute_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Iface', $obj );
 	}
 
 

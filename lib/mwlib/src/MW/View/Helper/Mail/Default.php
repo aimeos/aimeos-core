@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Mail_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $message;
 
@@ -24,10 +24,10 @@ class MW_View_Helper_Mail_Default
 	/**
 	 * Initializes the Mail view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param MW_Mail_Message_Interface $message E-mail message object
+	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param MW_Mail_Message_Iface $message E-mail message object
 	 */
-	public function __construct( $view, MW_Mail_Message_Interface $message )
+	public function __construct( $view, MW_Mail_Message_Iface $message )
 	{
 		parent::__construct( $view );
 
@@ -38,7 +38,7 @@ class MW_View_Helper_Mail_Default
 	/**
 	 * Returns the e-mail message object.
 	 *
-	 * @return MW_Mail_Message_Interface E-mail message object
+	 * @return MW_Mail_Message_Iface E-mail message object
 	 */
 	public function transform()
 	{

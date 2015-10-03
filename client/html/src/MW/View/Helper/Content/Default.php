@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Content_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $baseurl;
 	private $enc;
@@ -25,10 +25,10 @@ class MW_View_Helper_Content_Default
 	/**
 	 * Initializes the content view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $baseurl Base URL for the content
 	 */
-	public function __construct( MW_View_Interface $view, $baseurl = null )
+	public function __construct( MW_View_Iface $view, $baseurl = null )
 	{
 		parent::__construct( $view );
 

@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 abstract class MShop_Service_Provider_Base
-implements MShop_Service_Provider_Interface
+implements MShop_Service_Provider_Iface
 {
 	private $context;
 	private $serviceItem;
@@ -26,10 +26,10 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Initializes the service provider object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration for the provider
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Service_Item_Iface $serviceItem )
 	{
 		$this->context = $context;
 		$this->serviceItem = $serviceItem;
@@ -41,10 +41,10 @@ implements MShop_Service_Provider_Interface
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return MShop_Price_Item_Interface Price item containing the price, shipping, rebate
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
+	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
 	{
 		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
@@ -87,7 +87,7 @@ implements MShop_Service_Provider_Interface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -99,10 +99,10 @@ implements MShop_Service_Provider_Interface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
-	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
+	public function getConfigFE( MShop_Order_Item_Base_Iface $basket )
 	{
 		return array();
 	}
@@ -111,7 +111,7 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Returns the service item which also includes the configuration for the service provider.
 	 *
-	 * @return MShop_Service_Item_Interface Service item
+	 * @return MShop_Service_Item_Iface Service item
 	 */
 	public function getServiceItem()
 	{
@@ -143,10 +143,10 @@ implements MShop_Service_Provider_Interface
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, RMS, etc. -> in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
+	public function isAvailable( MShop_Order_Item_Base_Iface $basket )
 	{
 		return true;
 	}
@@ -167,9 +167,9 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Interface $order )
+	public function query( MShop_Order_Item_Iface $order )
 	{
 		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
 	}
@@ -195,7 +195,7 @@ implements MShop_Service_Provider_Interface
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
@@ -211,9 +211,9 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Sets the communication object for a service provider.
 	 *
-	 * @param MW_Communication_Interface $communication Object of communication
+	 * @param MW_Communication_Iface $communication Object of communication
 	 */
-	public function setCommunication( MW_Communication_Interface $communication )
+	public function setCommunication( MW_Communication_Iface $communication )
 	{
 		$this->communication = $communication;
 	}
@@ -222,7 +222,7 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Returns the communication object for the service provider.
 	 *
-	 * @return MW_Communication_Interface Object for communication
+	 * @return MW_Communication_Iface Object for communication
 	 */
 	protected function getCommunication()
 	{
@@ -410,7 +410,7 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Returns the context item.
 	 *
-	 * @return MShop_Context_Item_Interface Context item
+	 * @return MShop_Context_Item_Iface Context item
 	 */
 	protected function getContext()
 	{
@@ -422,7 +422,7 @@ implements MShop_Service_Provider_Interface
 	 * Returns the order item for the given ID.
 	 *
 	 * @param string $id Unique order ID
-	 * @return MShop_Order_Item_Interface $item Order object
+	 * @return MShop_Order_Item_Iface $item Order object
 	 */
 	protected function getOrder( $id )
 	{
@@ -435,7 +435,7 @@ implements MShop_Service_Provider_Interface
 	 *
 	 * @param string $baseId Order base ID stored in the order item
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @return MShop_Order_Item_Base_Interface Basket, optional with addresses, products, services and coupons
+	 * @return MShop_Order_Item_Base_Iface Basket, optional with addresses, products, services and coupons
 	 */
 	protected function getOrderBase( $baseId, $parts = MShop_Order_Manager_Base_Base::PARTS_SERVICE )
 	{
@@ -446,9 +446,9 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Saves the order item.
 	 *
-	 * @param MShop_Order_Item_Interface $item Order object
+	 * @param MShop_Order_Item_Iface $item Order object
 	 */
-	protected function saveOrder( MShop_Order_Item_Interface $item )
+	protected function saveOrder( MShop_Order_Item_Iface $item )
 	{
 		MShop_Factory::createManager( $this->context, 'order' )->saveItem( $item );
 	}
@@ -457,10 +457,10 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Saves the base order which is equivalent to the basket and its dependent objects.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object with associated items
+	 * @param MShop_Order_Item_Base_Iface $base Order base object with associated items
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	protected function saveOrderBase( MShop_Order_Item_Base_Interface $base, $parts = MShop_Order_Manager_Base_Base::PARTS_SERVICE )
+	protected function saveOrderBase( MShop_Order_Item_Base_Iface $base, $parts = MShop_Order_Manager_Base_Base::PARTS_SERVICE )
 	{
 		MShop_Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
 	}
@@ -469,11 +469,11 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Sets the attributes in the given service item.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 */
-	protected function setAttributes( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
+	protected function setAttributes( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes, $type )
 	{
 		$manager = MShop_Factory::createManager( $this->context, 'order/base/service/attribute' );
 

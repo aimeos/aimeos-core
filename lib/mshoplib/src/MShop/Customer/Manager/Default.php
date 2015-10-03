@@ -16,7 +16,7 @@
  */
 class MShop_Customer_Manager_Default
 	extends MShop_Customer_Manager_Base
-	implements MShop_Customer_Manager_Interface
+	implements MShop_Customer_Manager_Iface
 {
 	private $searchConfig = array(
 		'customer.id' => array(
@@ -246,7 +246,7 @@ class MShop_Customer_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -312,12 +312,12 @@ class MShop_Customer_Manager_Default
 	/**
 	 * Saves a customer item object.
 	 *
-	 * @param MShop_Customer_Item_Interface $item Customer item object
+	 * @param MShop_Customer_Item_Iface $item Customer item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Customer_Item_Interface';
+		$iface = 'MShop_Customer_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -489,12 +489,12 @@ class MShop_Customer_Manager_Default
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Customer_Item_Interface
+	 * @return array List of items implementing MShop_Customer_Item_Iface
 	 * @throws MShop_Customer_Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
 		$context = $this->getContext();
@@ -630,7 +630,7 @@ class MShop_Customer_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

@@ -59,7 +59,7 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -77,10 +77,10 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
+	public function isAvailable( MShop_Order_Item_Base_Iface $basket )
 	{
 		$context = $this->getContext();
 		$config = $this->getServiceItem()->getConfig();

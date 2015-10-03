@@ -36,7 +36,7 @@ class MShop_Common_Manager_Group_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
@@ -44,7 +44,7 @@ class MShop_Common_Manager_Group_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Customer_Item_Group_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Customer_Item_Group_Iface', $item );
 	}
 
 
@@ -105,7 +105,7 @@ class MShop_Common_Manager_Group_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 

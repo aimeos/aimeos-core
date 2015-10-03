@@ -19,14 +19,14 @@ class Client_Html_Factory
 	/**
 	 * Creates a new client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
 	 * @param string $type Type of the client, e.g 'account/favorite' for Client_Html_Account_Favorite_Default
 	 * @param string|null $name Client name (default: "Default")
-	 * @return Client_Html_Interface HTML client implementing Client_Html_Interface
+	 * @return Client_Html_Iface HTML client implementing Client_Html_Iface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
 	 */
-	public static function createClient( MShop_Context_Item_Interface $context, array $templatePaths, $type, $name = null )
+	public static function createClient( MShop_Context_Item_Iface $context, array $templatePaths, $type, $name = null )
 	{
 		if( empty( $type ) ) {
 			throw new Client_Html_Exception( sprintf( 'Client HTML type is empty' ) );

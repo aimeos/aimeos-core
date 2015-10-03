@@ -14,14 +14,14 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
 	}
 
 
 	public function testCreateSubController()
 	{
 		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/list/type' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
 	}
 
 

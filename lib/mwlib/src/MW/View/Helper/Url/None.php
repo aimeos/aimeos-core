@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Url_None
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	/**
 	 * Returns an empty string as URL.

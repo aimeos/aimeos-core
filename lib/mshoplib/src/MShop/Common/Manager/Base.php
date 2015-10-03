@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Manager_Base
 	extends MW_Common_Manager_Base
-	implements MShop_Common_Manager_Interface
+	implements MShop_Common_Manager_Iface
 {
 	private $context;
 	private $resourceName;
@@ -29,9 +29,9 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Initialization of class.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -51,7 +51,7 @@ abstract class MShop_Common_Manager_Base
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -100,13 +100,13 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function aggregateBase( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( MW_Common_Criteria_Iface $search, $key, $cfgPath, $required = array() )
 	{
 		$list = array();
 		$context = $this->getContext();
@@ -153,12 +153,12 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection used to insert the new record
+	 * @param MW_DB_Connection_Iface $conn Database connection used to insert the new record
 	 * @param string $sql SQL statement for retrieving the new ID of the last record which was inserted
 	 * @return string ID of the last record that was inserted by using the given connection
 	 * @throws MShop_Common_Exception if there's no ID of the last record available
 	 */
-	protected function newId( MW_DB_Connection_Interface $conn, $sql )
+	protected function newId( MW_DB_Connection_Iface $conn, $sql )
 	{
 		$result = $conn->create( $sql )->execute();
 
@@ -211,7 +211,7 @@ abstract class MShop_Common_Manager_Base
 	 * (setConditions overwrites the base criteria)
 	 *
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
-	 * @return MW_Common_Criteria_Interface Search critery object
+	 * @return MW_Common_Criteria_Iface Search critery object
 	 */
 	protected function createSearchBase( $domain )
 	{
@@ -232,11 +232,11 @@ abstract class MShop_Common_Manager_Base
 	 * Returns the cached statement for the given key or creates a new prepared statement.
 	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param string $key Unique key for the SQL
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
 	 */
-	protected function getCachedStatement( MW_DB_Connection_Interface $conn, $key, $sql = null )
+	protected function getCachedStatement( MW_DB_Connection_Iface $conn, $key, $sql = null )
 	{
 		if( !isset( $this->stmts['stmt'][$key] ) || !isset( $this->stmts['conn'][$key] ) || $conn !== $this->stmts['conn'][$key] )
 		{
@@ -255,7 +255,7 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -270,7 +270,7 @@ abstract class MShop_Common_Manager_Base
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
 	 * @param array $default List of sub-domains if no others are configured
 	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
-	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Iface
 	 * @since 2014.09
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
@@ -338,7 +338,7 @@ abstract class MShop_Common_Manager_Base
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions
+	 * @return MShop_Common_Manager_Iface Manager for different extensions
 	 */
 	protected function getSubManagerBase( $domain, $manager, $name )
 	{
@@ -369,7 +369,7 @@ abstract class MShop_Common_Manager_Base
 			$subnames = $this->createSubNames( $manager );
 
 			$classname = 'MShop_' . $domainname . '_Manager_' . $subnames . '_' . $name;
-			$interface = 'MShop_' . $domainname . '_Manager_' . $subnames . '_Interface';
+			$interface = 'MShop_' . $domainname . '_Manager_' . $subnames . '_Iface';
 
 			if( class_exists( $classname ) === false ) {
 				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -392,10 +392,10 @@ abstract class MShop_Common_Manager_Base
 	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param string[] $prefix Required base prefixes of the search keys
-	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
+	 * @param MW_Common_Criteria_Expression_Iface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Interface $expr = null )
+	private function getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Iface $expr = null )
 	{
 		if( $expr === null ) { return array(); }
 
@@ -421,11 +421,11 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns a sorted list of required criteria keys.
 	 *
-	 * @param MW_Common_Criteria_Interface $criteria Search criteria object
+	 * @param MW_Common_Criteria_Iface $criteria Search criteria object
 	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
-	private function getCriteriaKeyList( MW_Common_Criteria_Interface $criteria, array $required )
+	private function getCriteriaKeyList( MW_Common_Criteria_Iface $criteria, array $required )
 	{
 		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
@@ -487,15 +487,15 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	protected function addDecorators( MShop_Context_Item_Interface $context,
-		MShop_Common_Manager_Interface $manager, array $decorators, $classprefix )
+	protected function addDecorators( MShop_Context_Item_Iface $context,
+		MShop_Common_Manager_Iface $manager, array $decorators, $classprefix )
 	{
-		$iface = 'MShop_Common_Manager_Decorator_Interface';
+		$iface = 'MShop_Common_Manager_Decorator_Iface';
 
 		foreach( $decorators as $name )
 		{
@@ -523,11 +523,11 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Adds the configured decorators to the given manager object.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 */
-	protected function addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( MShop_Common_Manager_Iface $manager, $managerpath, $domain )
 	{
 		$config = $this->context->getConfig();
 
@@ -582,16 +582,16 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns a list of criteria names from a expression and its sub-expressions.
 	 *
-	 * @param MW_Common_Criteria_Expression_Interface Criteria object
+	 * @param MW_Common_Criteria_Expression_Iface Criteria object
 	 * @return array List of criteria names
 	 */
-	private function getCriteriaNames( MW_Common_Criteria_Expression_Interface $expr )
+	private function getCriteriaNames( MW_Common_Criteria_Expression_Iface $expr )
 	{
-		if( $expr instanceof MW_Common_Criteria_Expression_Compare_Interface ) {
+		if( $expr instanceof MW_Common_Criteria_Expression_Compare_Iface ) {
 			return array( $expr->getName() );
 		}
 
-		if( $expr instanceof MW_Common_Criteria_Expression_Combine_Interface )
+		if( $expr instanceof MW_Common_Criteria_Expression_Combine_Iface )
 		{
 			$list = array();
 			foreach( $expr->getExpressions() as $item ) {
@@ -600,7 +600,7 @@ abstract class MShop_Common_Manager_Base
 			return $list;
 		}
 
-		if( $expr instanceof MW_Common_Criteria_Expression_Sort_Interface ) {
+		if( $expr instanceof MW_Common_Criteria_Expression_Sort_Iface ) {
 			return array( $expr->getName() );
 		}
 
@@ -613,7 +613,7 @@ abstract class MShop_Common_Manager_Base
 	 *
 	 * @param string $key Search key for the requested ID
 	 * @param integer $id Unique ID to search for
-	 * @return MShop_Common_Item_Interface Requested item
+	 * @return MShop_Common_Item_Iface Requested item
 	 * @throws MShop_Exception if no item with the given ID found
 	 */
 	protected function getItemBase( $key, $id, array $ref = array() )
@@ -639,7 +639,7 @@ abstract class MShop_Common_Manager_Base
 	 */
 	private function getJoins( array $attributes, $prefix )
 	{
-		$iface = 'MW_Common_Criteria_Attribute_Interface';
+		$iface = 'MW_Common_Criteria_Attribute_Iface';
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
@@ -723,14 +723,14 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the site coditions for the search request
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string[] Sorted list of criteria keys
-	 * @param array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 * @param array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Iface
 	 * @param string[] $siteIds List of site IDs that should be used for searching
-	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Interface
+	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Iface
 	 * @since 2015.01
 	 */
-	protected function getSearchSiteConditions( MW_Common_Criteria_Interface $search, array $keys, array $attributes, array $siteIds )
+	protected function getSearchSiteConditions( MW_Common_Criteria_Iface $search, array $keys, array $attributes, array $siteIds )
 	{
 		$cond = array();
 		$sep = $this->getKeySeparator();
@@ -751,17 +751,17 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
 	 * @param integer $sitelevel Constant from MShop_Locale_Manager_Base for defining which site IDs should be used for searching
-	 * @return MW_DB_Result_Interface SQL result object for accessing the found records
+	 * @return MW_DB_Result_Iface SQL result object for accessing the found records
 	 * @throws MShop_Exception if no number of all matching records is available
 	 */
-	protected function searchItemsBase( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
+	protected function searchItemsBase( MW_DB_Connection_Iface $conn, MW_Common_Criteria_Iface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = MShop_Locale_Manager_Base::SITE_ALL, array $plugins = array() )
 	{

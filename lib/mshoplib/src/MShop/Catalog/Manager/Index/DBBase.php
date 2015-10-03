@@ -16,14 +16,14 @@
  */
 abstract class MShop_Catalog_Manager_Index_DBBase
 	extends MShop_Common_Manager_Base
-	implements MShop_Catalog_Manager_Index_Interface
+	implements MShop_Catalog_Manager_Index_Iface
 {
 	/**
 	 * Initializes the manager object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -47,7 +47,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Creates new product item
 	 *
-	 * @return MShop_Product_Item_Interface Product item object
+	 * @return MShop_Product_Item_Iface Product item object
 	 */
 	public function createItem()
 	{
@@ -59,7 +59,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Creates a search object and optionally sets its base criteria
 	 *
 	 * @param boolean $default True to add the default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @return MW_Common_Criteria_Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -71,7 +71,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Returns the product item for the given ID
 	 *
 	 * @param integer $id Id of item
-	 * @return MShop_Product_Item_Interface Product item object
+	 * @return MShop_Product_Item_Iface Product item object
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -83,7 +83,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Returns a list of attribute objects describing the available criteria for searching
 	 *
 	 * @param boolean $withsub True to return attributes of sub-managers too
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -94,7 +94,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Rebuilds the customer catalog index
 	 *
-	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Iface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -107,10 +107,10 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Stores a new item into the index
 	 *
-	 * @param MShop_Common_Item_Interface $item Product item
+	 * @param MShop_Common_Item_Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be set in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
 		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
@@ -217,14 +217,14 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
-	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
+	 * @return array List of items implementing MShop_Product_Item_Iface with ids as keys
 	 */
-	protected function doSearchItems( MW_Common_Criteria_Interface $search,
+	protected function doSearchItems( MW_Common_Criteria_Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();

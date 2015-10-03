@@ -26,9 +26,9 @@ class Controller_Common_Order_Factory
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param null|Controller_Common_Order_Interface $controller Frontend controller object
+	 * @param null|Controller_Common_Order_Iface $controller Frontend controller object
 	 */
-	public static function injectController( $classname, Controller_Common_Order_Interface $controller = null )
+	public static function injectController( $classname, Controller_Common_Order_Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -37,12 +37,12 @@ class Controller_Common_Order_Factory
 	/**
 	 * Creates a new controller specified by the given name.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by controllers
+	 * @param MShop_Context_Item_Iface $context Context object required by controllers
 	 * @param string|null $name Name of the controller or "Default" if null
-	 * @return Controller_Common_Order_Interface New order controller object
+	 * @return Controller_Common_Order_Iface New order controller object
 	 * @throws Controller_Common_Exception
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/controller/common/order/name
 		 * Class name of the used order common controller implementation
@@ -86,7 +86,7 @@ class Controller_Common_Order_Factory
 			throw new Controller_Common_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Common_Order_Interface';
+		$iface = 'Controller_Common_Order_Iface';
 		$classname = 'Controller_Common_Order_' . $name;
 
 		if( isset( self::$objects[$classname] ) ) {

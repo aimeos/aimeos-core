@@ -18,7 +18,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribute_Interface
+class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribute_Iface
 {
 	/**
 	 * @var string Public data type used in the frontend

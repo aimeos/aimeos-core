@@ -16,7 +16,7 @@
  */
 class MShop_Catalog_Manager_Default
 	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Catalog_Manager_Interface, MShop_Common_Manager_Factory_Interface
+	implements MShop_Catalog_Manager_Iface, MShop_Common_Manager_Factory_Iface
 {
 	private $filter = array();
 	private $treeManagers = array();
@@ -124,9 +124,9 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-catalog' );
@@ -182,7 +182,7 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Creates new item object.
 	 *
-	 * @return MShop_Common_Item_Interface New item object
+	 * @return MShop_Common_Item_Iface New item object
 	 */
 	public function createItem()
 	{
@@ -196,7 +196,7 @@ class MShop_Catalog_Manager_Default
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Returns the Search object
+	 * @return MW_Common_Criteria_Iface Returns the Search object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -249,7 +249,7 @@ class MShop_Catalog_Manager_Default
 	 *
 	 * @param integer $id Unique ID of the catalog item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Catalog_Item_Interface Returns the catalog item of the given id
+	 * @return MShop_Catalog_Item_Iface Returns the catalog item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -262,7 +262,7 @@ class MShop_Catalog_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -292,9 +292,9 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item which should be inserted
+	 * @param MShop_Common_Item_Iface $item Item which should be inserted
 	 */
-	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
+	public function insertItem( MShop_Catalog_Item_Iface $item, $parentId = null, $refId = null )
 	{
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
@@ -346,12 +346,12 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param MShop_Common_Item_Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Catalog_Item_Interface';
+		$iface = 'MShop_Catalog_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -377,13 +377,13 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total No function. Reference will be set to null in this case.
 	 * @param integer $total
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$nodeMap = $siteMap = array();
 		$context = $this->getContext();
@@ -541,7 +541,7 @@ class MShop_Catalog_Manager_Default
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return array Associative list of items implementing MShop_Catalog_Item_Interface with IDs as keys
+	 * @return array Associative list of items implementing MShop_Catalog_Item_Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
@@ -577,10 +577,10 @@ class MShop_Catalog_Manager_Default
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
-	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
+	 * @param MW_Common_Criteria_Iface|null $criteria Optional criteria object with conditions
+	 * @return MShop_Catalog_Item_Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
@@ -636,7 +636,7 @@ class MShop_Catalog_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type
 	 * @param string $name Name of the implementation, will be from configuration (or Default)
-	 * @return MShop_Common_Manager_Interface Manager extending the domain functionality
+	 * @return MShop_Common_Manager_Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -651,7 +651,7 @@ class MShop_Catalog_Manager_Default
 	 * closure function that checks if the item should be part of the category
 	 * tree or not. The function signature must be:
 	 *
-	 * function( MShop_Common_Item_ListRef_Interface $item, $index )
+	 * function( MShop_Common_Item_ListRef_Iface $item, $index )
 	 *
 	 * It must accept an item implementing the list reference interface and the
 	 * index of the category in the list starting from 0. Its return value must
@@ -673,7 +673,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $itemMap Associative list of catalog ID / tree node pairs
 	 * @param array $domains List of domains (e.g. text, media) whose items should be attached to the catalog items
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Catalog_Item_Interface
+	 * @return array List of items implementing MShop_Catalog_Item_Iface
 	 */
 	protected function buildItems( array $itemMap, array $domains, $prefix )
 	{
@@ -717,14 +717,14 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Creates a new catalog item.
 	 *
-	 * @param MW_Tree_Node_Interface $node Nested set tree node
+	 * @param MW_Tree_Node_Iface $node Nested set tree node
 	 * @param array $children List of children of this catalog item
 	 * @param array $listItems List of list items that belong to the catalog item
 	 * @param array $refItems Associative list of referenced items grouped by domain
-	 * @return MShop_Catalog_Item_Interface New catalog item
+	 * @return MShop_Catalog_Item_Iface New catalog item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array(),
-		array $children = array(), MW_Tree_Node_Interface $node = null )
+		array $children = array(), MW_Tree_Node_Iface $node = null )
 	{
 		if( $node === null )
 		{
@@ -747,12 +747,12 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Builds the tree of catalog items.
 	 *
-	 * @param MW_Tree_Node_Interface $node Parent tree node
-	 * @param MShop_Catalog_Item_Interface $item Parent tree catalog Item
+	 * @param MW_Tree_Node_Iface $node Parent tree node
+	 * @param MShop_Catalog_Item_Iface $item Parent tree catalog Item
 	 * @param array $listItemMap Associative list of parent-item-ID / list items for the catalog item
 	 * @param array $refItemMap Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
+	protected function createTree( MW_Tree_Node_Iface $node, MShop_Catalog_Item_Iface $item,
 		array $listItemMap, array $refItemMap )
 	{
 		foreach( $node->getChildren() as $idx => $child )
@@ -787,7 +787,7 @@ class MShop_Catalog_Manager_Default
 	 * Creates an object for managing the nested set.
 	 *
 	 * @param integer $siteid Site ID for the specific tree
-	 * @return MW_Tree_Manager_Interface Tree manager
+	 * @return MW_Tree_Manager_Iface Tree manager
 	 */
 	protected function createTreeManager( $siteid )
 	{
@@ -1149,10 +1149,10 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Creates a flat list node items.
 	 *
-	 * @param MW_Tree_Node_Interface $node Root node
+	 * @param MW_Tree_Node_Iface $node Root node
 	 * @return Associated list of ID / node object pairs
 	 */
-	protected function getNodeMap( MW_Tree_Node_Interface $node )
+	protected function getNodeMap( MW_Tree_Node_Iface $node )
 	{
 		$map = array();
 
@@ -1170,11 +1170,11 @@ class MShop_Catalog_Manager_Default
 	 * Updates the usage information of a node.
 	 *
 	 * @param integer $id Id of the record
-	 * @param MShop_Catalog_Item_Interface $item Catalog item
+	 * @param MShop_Catalog_Item_Iface $item Catalog item
 	 * @param boolean $case True if the record shoud be added or false for an update
 	 *
 	 */
-	private function updateUsage( $id, MShop_Catalog_Item_Interface $item, $case = false )
+	private function updateUsage( $id, MShop_Catalog_Item_Iface $item, $case = false )
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();

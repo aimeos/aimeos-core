@@ -15,7 +15,7 @@
  */
 class MShop_Attribute_Manager_Default
 	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Attribute_Manager_Interface
+	implements MShop_Attribute_Manager_Iface
 {
 	private $searchConfig = array(
 		'attribute.id'=> array(
@@ -103,9 +103,9 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
@@ -132,7 +132,7 @@ class MShop_Attribute_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -162,7 +162,7 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Creates a new empty attribute item instance.
 	 *
-	 * @return MShop_Attribute_Item_Interface Creates a blank Attribute item
+	 * @return MShop_Attribute_Item_Iface Creates a blank Attribute item
 	 */
 	public function createItem()
 	{
@@ -176,7 +176,7 @@ class MShop_Attribute_Manager_Default
 	 *
 	 * @param integer $id Unique ID of the attribute item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Attribute_Item_Interface Returns the attribute item of the given id
+	 * @return MShop_Attribute_Item_Iface Returns the attribute item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -188,13 +188,13 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Saves an attribute item to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item Attribute item
+	 * @param MShop_Common_Item_Iface $item Attribute item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Attribute_Exception If Attribute couldn't be saved
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Attribute_Item_Interface';
+		$iface = 'MShop_Attribute_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Attribute_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -381,16 +381,16 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Searches for attribute items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of attribute items implementing MShop_Attribute_Item_Interface
+	 * @return array List of attribute items implementing MShop_Attribute_Item_Iface
 	 *
 	 * @throws MW_DB_Exception On failures with the db object
 	 * @throws MShop_Common_Exception On failures with the MW_Common_Criteria_ object
 	 * @throws MShop_Attribute_Exception On failures with the Attribute items
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -544,7 +544,7 @@ class MShop_Attribute_Manager_Default
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -561,7 +561,7 @@ class MShop_Attribute_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g Type, List's etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g Type, List's etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -573,9 +573,9 @@ class MShop_Attribute_Manager_Default
 	 * Creates a new attribute item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $refItems List of items implementing MShop_Text_Item_Interface
-	 * @return MShop_Attribute_Item_Interface New product item
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $refItems List of items implementing MShop_Text_Item_Iface
+	 * @return MShop_Attribute_Item_Iface New product item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

@@ -16,7 +16,7 @@
  */
 class MW_Cache_DB
 	extends MW_Cache_Base
-	implements MW_Cache_Interface
+	implements MW_Cache_Iface
 {
 	private $sql;
 	private $dbm;
@@ -63,9 +63,9 @@ class MW_Cache_DB
 	 *  config['siteid'] = 123
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
-	 * @param MW_DB_Manager_Interface $dbm Database manager
+	 * @param MW_DB_Manager_Iface $dbm Database manager
 	 */
-	public function __construct( array $config, MW_DB_Manager_Interface $dbm )
+	public function __construct( array $config, MW_DB_Manager_Iface $dbm )
 	{
 		if( !isset( $config['search'] ) ) {
 			throw new MW_Cache_Exception( 'Search config is missing' );

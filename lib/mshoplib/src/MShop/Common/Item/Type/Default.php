@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_Type_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Common_Item_Type_Interface
+	implements MShop_Common_Item_Type_Iface
 {
 	private $prefix;
 	private $values;

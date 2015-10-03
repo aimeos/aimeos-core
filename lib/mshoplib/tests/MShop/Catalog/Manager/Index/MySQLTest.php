@@ -81,7 +81,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 		foreach( $list as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 
 			switch( $attribute->getCode() )
 			{

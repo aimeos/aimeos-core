@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Result_PDO extends MW_DB_Result_Base implements MW_DB_Result_Interface
+class MW_DB_Result_PDO extends MW_DB_Result_Base implements MW_DB_Result_Iface
 {
 	private $statement = null;
 	private $style = array(

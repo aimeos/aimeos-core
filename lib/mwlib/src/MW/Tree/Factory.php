@@ -21,8 +21,8 @@ class MW_Tree_Factory
 	 *
 	 * @param string $name Manager type name
 	 * @param array $config Associative list of configuration strings for managing the tree
-	 * @param MW_DB_Manager_Interface|null $resource Reference to the resource which should be used for managing the tree
-	 * @return MW_Tree_Manager_Interface Tree manager object of the requested type
+	 * @param MW_DB_Manager_Iface|null $resource Reference to the resource which should be used for managing the tree
+	 * @return MW_Tree_Manager_Iface Tree manager object of the requested type
 	 * @throws MW_Tree_Exception if class isn't found
 	 */
 	static public function createManager( $name, array $config, $resource )
@@ -33,7 +33,7 @@ class MW_Tree_Factory
 			throw new MW_Tree_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MW_Tree_Manager_Interface';
+		$iface = 'MW_Tree_Manager_Iface';
 		$classname = 'MW_Tree_Manager_' . $name;
 
 		if( class_exists( $classname ) === false ) {

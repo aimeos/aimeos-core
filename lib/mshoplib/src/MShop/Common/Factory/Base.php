@@ -25,9 +25,9 @@ abstract class MShop_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param MShop_Common_Manager_Interface|null $manager Manager object or null for removing the manager object
+	 * @param MShop_Common_Manager_Iface|null $manager Manager object or null for removing the manager object
 	 */
-	public static function injectManager( $classname, MShop_Common_Manager_Interface $manager = null )
+	public static function injectManager( $classname, MShop_Common_Manager_Iface $manager = null )
 	{
 		self::$objects[$classname] = $manager;
 	}
@@ -36,15 +36,15 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Interface $context,
-		MShop_Common_Manager_Interface $manager, array $decorators, $classprefix )
+	protected static function addDecorators( MShop_Context_Item_Iface $context,
+		MShop_Common_Manager_Iface $manager, array $decorators, $classprefix )
 	{
-		$iface = 'MShop_Common_Manager_Decorator_Interface';
+		$iface = 'MShop_Common_Manager_Decorator_Iface';
 
 		foreach( $decorators as $name )
 		{
@@ -72,13 +72,13 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	protected static function addManagerDecorators( MShop_Context_Item_Interface $context,
-		MShop_Common_Manager_Interface $manager, $domain )
+	protected static function addManagerDecorators( MShop_Context_Item_Iface $context,
+		MShop_Common_Manager_Iface $manager, $domain )
 	{
 		$config = $context->getConfig();
 
@@ -132,12 +132,12 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Creates a manager object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
 	 * @param string $classname Name of the manager class
 	 * @param string $interface Name of the manager interface
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
-	protected static function createManagerBase( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function createManagerBase( MShop_Context_Item_Iface $context, $classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

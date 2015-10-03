@@ -15,7 +15,7 @@
  * @subpackage Cache
  */
 class MAdmin_Cache_Proxy_Default
-	implements MW_Cache_Interface
+	implements MW_Cache_Iface
 {
 	private $object;
 	private $context;
@@ -24,9 +24,9 @@ class MAdmin_Cache_Proxy_Default
 	/**
 	 * Initializes the cache controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -195,7 +195,7 @@ class MAdmin_Cache_Proxy_Default
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return MW_Cache_Interface Cache object
+	 * @return MW_Cache_Iface Cache object
 	 */
 	protected function getObject()
 	{

@@ -16,7 +16,7 @@
  */
 class Client_Html_Basket_Standard_Default
 	extends Client_Html_Basket_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/basket/standard/default/subparts
 	 * List of HTML sub-clients rendered within the basket standard section
@@ -210,7 +210,7 @@ class Client_Html_Basket_Standard_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -401,12 +401,12 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param MW_View_Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -432,10 +432,10 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Adds the products specified by the view parameters to the basket.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $options List of options for addProducts() in basket controller
 	 */
-	protected function addProducts( MW_View_Interface $view, array $options )
+	protected function addProducts( MW_View_Iface $view, array $options )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );
@@ -463,11 +463,11 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Adds a single product specified by its values to the basket.
 	 *
-	 * @param Controller_Frontend_Interface $controller Basket frontend controller
+	 * @param Controller_Frontend_Iface $controller Basket frontend controller
 	 * @param array $values Associative list of key/value pairs from the view specifying the product
 	 * @param array $options List of options for addProducts() in basket frontend controller
 	 */
-	protected function addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
+	protected function addProduct( Controller_Frontend_Iface $controller, array $values, array $options )
 	{
 		$controller->addProduct(
 			( isset( $values['prodid'] ) ? (string) $values['prodid'] : '' ),
@@ -485,9 +485,9 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Removes the products specified by the view parameters from the basket.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 */
-	protected function deleteProducts( MW_View_Interface $view )
+	protected function deleteProducts( MW_View_Iface $view )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_position', array() );
@@ -502,10 +502,10 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Edits the products specified by the view parameters to the basket.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $options List of options for editProducts() in basket controller
 	 */
-	protected function editProducts( MW_View_Interface $view, array $options )
+	protected function editProducts( MW_View_Iface $view, array $options )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );

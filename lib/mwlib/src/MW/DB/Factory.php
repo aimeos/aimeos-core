@@ -19,12 +19,12 @@ class MW_DB_Factory
 	/**
 	 * Creates and returns a database manager.
 	 *
-	 * @param MW_Config_Interface $config Configuration class instance
+	 * @param MW_Config_Iface $config Configuration class instance
 	 * @param string $type Name of the manager
-	 * @return MW_DB_Manager_Interface Instance of a database manager
+	 * @return MW_DB_Manager_Iface Instance of a database manager
 	 * @throws MW_DB_Exception if database manager class isn't found
 	 */
-	static public function createManager( MW_Config_Interface $config, $type = 'Default' )
+	static public function createManager( MW_Config_Iface $config, $type = 'Default' )
 	{
 		$classname = 'MW_DB_Manager_' . $type;
 		$filename = str_replace( '_', '/', $classname ) . '.php';

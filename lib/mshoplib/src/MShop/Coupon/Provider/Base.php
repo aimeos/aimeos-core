@@ -24,11 +24,11 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Initializes the coupon model.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param MShop_Coupon_Item_Interface $item Coupon item to set
+	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param MShop_Coupon_Item_Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Coupon_Item_Iface $item, $code )
 	{
 		$this->context = $context;
 		$this->item = $item;
@@ -39,9 +39,9 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
+	public function updateCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 		if( $this->getObject()->isAvailable( $base ) !== true )
 		{
@@ -57,9 +57,9 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
+	public function deleteCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 		$base->deleteCoupon( $this->code, true );
 	}
@@ -68,9 +68,9 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Tests if a coupon should be granted
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base
+	 * @param MShop_Order_Item_Base_Iface $base
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( MShop_Order_Item_Base_Iface $base )
 	{
 		return true;
 	}
@@ -79,9 +79,9 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Sets the reference of the outside object.
 	 *
-	 * @param MShop_Coupon_Provider_Interface $object Reference to the outside provider or decorator
+	 * @param MShop_Coupon_Provider_Iface $object Reference to the outside provider or decorator
 	 */
-	public function setObject( MShop_Coupon_Provider_Interface $object )
+	public function setObject( MShop_Coupon_Provider_Iface $object )
 	{
 		$this->object = $object;
 	}
@@ -90,7 +90,7 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Returns the stored context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -131,7 +131,7 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Returns the stored coupon item.
 	 *
-	 * @return MShop_Coupon_Item_Interface Coupon item
+	 * @return MShop_Coupon_Item_Iface Coupon item
 	 */
 	protected function getItemBase()
 	{
@@ -142,7 +142,7 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Returns the outmost decorator or a reference to the provider itself.
 	 *
-	 * @return MShop_Coupon_Provider_Interface Outmost object
+	 * @return MShop_Coupon_Provider_Iface Outmost object
 	 */
 	protected function getObject()
 	{
@@ -160,7 +160,7 @@ abstract class MShop_Coupon_Provider_Base
 	 * @param string $productCode Unique product code
 	 * @param integer $quantity Number of products in basket
 	 * @param string $warehouse Unique code of the warehouse the product is from
-	 * @return MShop_Order_Item_Base_Product_Interface Ordered product
+	 * @return MShop_Order_Item_Base_Product_Iface Ordered product
 	 */
 	protected function createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
 	{
@@ -198,14 +198,14 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Creates the order products for monetary rebates.
 	 *
-	 * @param MShop_Order_Item_Base_Interface Basket object
+	 * @param MShop_Order_Item_Base_Iface Basket object
 	 * @param string $productCode Unique product code
 	 * @param float $rebate Rebate amount that should be granted
 	 * @param integer $quantity Number of products in basket
 	 * @param string $warehouse Unique code of the warehouse the product is from
-	 * @return MShop_Order_Item_Base_Product_Interface[] Order products with monetary rebates
+	 * @return MShop_Order_Item_Base_Product_Iface[] Order products with monetary rebates
 	 */
-	protected function createMonetaryRebateProducts( MShop_Order_Item_Base_Interface $base,
+	protected function createMonetaryRebateProducts( MShop_Order_Item_Base_Iface $base,
 		$productCode, $rebate, $quantity = 1, $warehouse = 'default' )
 	{
 		$orderProducts = array();
@@ -255,10 +255,10 @@ abstract class MShop_Coupon_Provider_Base
 	/**
 	 * Returns a list of tax rates and their price items for the given basket.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
+	 * @param MShop_Order_Item_Base_Iface $basket Basket containing the products, services, etc.
 	 * @return array Associative list of tax rates as key and corresponding price items as value
 	 */
-	protected function getPriceByTaxRate( MShop_Order_Item_Base_Interface $basket )
+	protected function getPriceByTaxRate( MShop_Order_Item_Base_Iface $basket )
 	{
 		$taxrates = array();
 		$manager = MShop_Factory::createManager( $this->getContext(), 'price' );

@@ -14,7 +14,7 @@ class MAdmin_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManager()
 	{
 		$manager = MAdmin_Factory::createManager( TestHelper::getContext(), 'job' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 

@@ -16,14 +16,14 @@
  */
 class MShop_Coupon_Provider_Decorator_Example
 	extends MShop_Coupon_Provider_Decorator_Base
-	implements MShop_Coupon_Provider_Decorator_Interface
+	implements MShop_Coupon_Provider_Decorator_Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Interface $base )
+	public function addCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 	}
 
@@ -31,9 +31,9 @@ class MShop_Coupon_Provider_Decorator_Example
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
+	public function updateCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 	}
 
@@ -41,9 +41,9 @@ class MShop_Coupon_Provider_Decorator_Example
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 */
-	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
+	public function deleteCoupon( MShop_Order_Item_Base_Iface $base )
 	{
 	}
 
@@ -51,9 +51,9 @@ class MShop_Coupon_Provider_Decorator_Example
 	/**
 	 * Tests if a coupon should be granted
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base
+	 * @param MShop_Order_Item_Base_Iface $base
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( MShop_Order_Item_Base_Iface $base )
 	{
 		return true;
 	}

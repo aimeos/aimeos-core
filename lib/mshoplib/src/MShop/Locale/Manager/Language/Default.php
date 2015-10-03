@@ -16,7 +16,7 @@
  */
 class MShop_Locale_Manager_Language_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Locale_Manager_Language_Interface
+	implements MShop_Locale_Manager_Language_Iface
 {
 	private $searchConfig = array(
 		'locale.language.id' => array(
@@ -84,9 +84,9 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
@@ -113,12 +113,12 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Saves the language object to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item Language object
+	 * @param MShop_Common_Item_Iface $item Language object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Locale_Item_Language_Interface';
+		$iface = 'MShop_Locale_Item_Language_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -258,7 +258,7 @@ class MShop_Locale_Manager_Language_Default
 	 * Create a Language object from a given Language ID/Key.
 	 *
 	 * @param string $id Language id to create the Language object
-	 * @return MShop_Locale_Item_Language_Interface Returns the language item of the given id
+	 * @return MShop_Locale_Item_Language_Iface Returns the language item of the given id
 	 * @throws MW_DB_Exception If language object couldn't be fetched
 	 * @throws MShop_Exception If item couldn't be found
 	 */
@@ -272,7 +272,7 @@ class MShop_Locale_Manager_Language_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -304,7 +304,7 @@ class MShop_Locale_Manager_Language_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Locale_Manager_Interface manager
+	 * @return MShop_Locale_Manager_Iface manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -424,12 +424,12 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Searches for language items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object
+	 * @param MW_Common_Criteria_Iface $search Search object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Locale_Language_Item_Interface
+	 * @return array List of items implementing MShop_Locale_Language_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -597,7 +597,7 @@ class MShop_Locale_Manager_Language_Default
 	 * Creates a search object and sets base criteria.
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -612,11 +612,11 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param $sql SQL statement
-	 * @return MW_DB_Result_Interface Search result object
+	 * @return MW_DB_Result_Iface Search result object
 	 */
-	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
 		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
@@ -630,7 +630,7 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Create new item object initialized with given parameters.
 	 *
-	 * @return MShop_Locale_Item_Language_Interface
+	 * @return MShop_Locale_Item_Language_Iface
 	 * @throws MShop_Locale_Exception On failures with the language item object
 	 */
 	protected function createItemBase( array $data = array( ) )

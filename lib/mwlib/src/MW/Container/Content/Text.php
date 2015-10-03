@@ -16,7 +16,7 @@
  */
 class MW_Container_Content_Text
 	extends MW_Container_Content_Base
-	implements MW_Container_Content_Interface
+	implements MW_Container_Content_Iface
 {
 	private $fh;
 	private $data;

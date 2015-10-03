@@ -54,7 +54,7 @@ class Client_Html_Catalog_Count_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'tree', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

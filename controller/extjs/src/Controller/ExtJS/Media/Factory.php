@@ -16,9 +16,9 @@
  */
 class Controller_ExtJS_Media_Factory
 	extends Controller_ExtJS_Common_Factory_Base
-	implements Controller_ExtJS_Common_Factory_Interface
+	implements Controller_ExtJS_Common_Factory_Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/media/name
 		 * Class name of the used ExtJS media controller implementation
@@ -63,7 +63,7 @@ class Controller_ExtJS_Media_Factory
 			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_ExtJS_Common_Interface';
+		$iface = 'Controller_ExtJS_Common_Iface';
 		$classname = 'Controller_ExtJS_Media_' . $name;
 
 		$controller = self::createControllerBase( $context, $classname, $iface );

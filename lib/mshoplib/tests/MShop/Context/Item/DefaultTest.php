@@ -114,14 +114,14 @@ class MShop_Context_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$mail = new MW_Mail_None();
 		$this->object->setMail( $mail );
-		$this->assertInstanceOf( 'MW_Mail_Interface', $this->object->getMail() );
+		$this->assertInstanceOf( 'MW_Mail_Iface', $this->object->getMail() );
 	}
 
 	public function testSetView()
 	{
 		$view = new MW_View_Default();
 		$this->object->setView( $view );
-		$this->assertInstanceOf( 'MW_View_Interface', $this->object->getView() );
+		$this->assertInstanceOf( 'MW_View_Iface', $this->object->getView() );
 	}
 
 	public function testGetSetEditor()

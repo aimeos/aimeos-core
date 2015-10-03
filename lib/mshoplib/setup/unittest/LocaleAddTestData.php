@@ -47,7 +47,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -96,10 +96,10 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	/**
 	 * Gets recursive all sub-sites of a site sorted on their level.
 	 *
-	 * @param MShop_Locale_Item_Site_Interface $site Site which can contain sub-sites
-	 * @return MShop_Locale_Item_Site_Interface[] $sites List with sites
+	 * @param MShop_Locale_Item_Site_Iface $site Site which can contain sub-sites
+	 * @return MShop_Locale_Item_Site_Iface[] $sites List with sites
 	 */
-	private function getSites( MShop_Locale_Item_Site_Interface $site )
+	private function getSites( MShop_Locale_Item_Site_Iface $site )
 	{
 		$sites = array( $site );
 
@@ -115,7 +115,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 *
 	 * Deletes old sites and their subsites.
 	 *
-	 * @param MShop_Locale_Manager_Interface $localeManager
+	 * @param MShop_Locale_Manager_Iface $localeManager
 	 */
 	private function cleanupSites( $localeManager )
 	{

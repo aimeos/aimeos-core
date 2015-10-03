@@ -15,7 +15,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_FactoryTest
 		$aimeos = TestHelper::getAimeos();
 
 		$obj = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $aimeos );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $obj );
 	}
 
 

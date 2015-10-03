@@ -16,7 +16,7 @@
  */
 class MShop_Supplier_Item_Default
 	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Supplier_Item_Interface
+	implements MShop_Supplier_Item_Iface
 {
 	private $values;
 
@@ -24,8 +24,8 @@ class MShop_Supplier_Item_Default
 	 * Initializes the supplier item object
 	 *
 	 * @param array $values List of attributes that belong to the supplier item
-	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
-	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

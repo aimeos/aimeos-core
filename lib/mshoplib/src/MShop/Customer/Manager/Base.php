@@ -16,7 +16,7 @@
  */
 abstract class MShop_Customer_Manager_Base
 	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Customer_Manager_Interface
+	implements MShop_Customer_Manager_Iface
 {
 	private $salt;
 	private $helper;
@@ -26,9 +26,9 @@ abstract class MShop_Customer_Manager_Base
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-customer' );
@@ -55,7 +55,7 @@ abstract class MShop_Customer_Manager_Base
 	/**
 	 * Instantiates a new customer item object.
 	 *
-	 * @return MShop_Customer_Item_Interface
+	 * @return MShop_Customer_Item_Iface
 	 */
 	public function createItem()
 	{
@@ -69,7 +69,7 @@ abstract class MShop_Customer_Manager_Base
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Include default criteria like the status
-	 * @return MW_Common_Criteria_Interface Search criteria object
+	 * @return MW_Common_Criteria_Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -86,7 +86,7 @@ abstract class MShop_Customer_Manager_Base
 	 *
 	 * @param integer $id Unique customer ID referencing an existing customer
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Customer_Item_Interface Returns the customer item of the given id
+	 * @return MShop_Customer_Item_Iface Returns the customer item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -101,7 +101,7 @@ abstract class MShop_Customer_Manager_Base
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @return MShop_Customer_Item_Interface New customer item
+	 * @return MShop_Customer_Item_Iface New customer item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -119,7 +119,7 @@ abstract class MShop_Customer_Manager_Base
 	/**
 	 * Returns a password helper object based on the configuration.
 	 *
-	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
+	 * @return MShop_Common_Item_Helper_Password_Iface Password helper object
 	 * @throws MShop_Exception If the name is invalid or the class isn't found
 	 */
 	protected function getPasswordHelper()
@@ -167,7 +167,7 @@ abstract class MShop_Customer_Manager_Base
 			throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Common_Item_Helper_Password_Interface';
+		$iface = 'MShop_Common_Item_Helper_Password_Iface';
 		$classname = 'MShop_Common_Item_Helper_Password_' . $name;
 
 		if( class_exists( $classname ) === false ) {

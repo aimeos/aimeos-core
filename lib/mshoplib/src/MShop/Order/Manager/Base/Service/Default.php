@@ -16,7 +16,7 @@
  */
 class MShop_Order_Manager_Base_Service_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Service_Interface
+	implements MShop_Order_Manager_Base_Service_Iface
 {
 	private $searchConfig = array(
 		'order.base.service.id' => array(
@@ -134,9 +134,9 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -146,11 +146,11 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		/** mshop/order/manager/base/service/default/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -219,7 +219,7 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Creates new order service item object.
 	 *
-	 * @return MShop_Order_Item_Base_Service_Interface New object
+	 * @return MShop_Order_Item_Base_Service_Iface New object
 	 */
 	public function createItem()
 	{
@@ -234,12 +234,12 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Adds or updates an order base service item to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item Order base service object
+	 * @param MShop_Common_Item_Iface $item Order base service object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Service_Interface';
+		$iface = 'MShop_Order_Item_Base_Service_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -433,7 +433,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 *
 	 * @param integer $id Order service ID
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Service_Interface Returns order base service item of the given id
+	 * @return MShop_Order_Item_Base_Service_Iface Returns order base service item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -445,12 +445,12 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Searches for order service items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Base_Service_Interface
+	 * @return array List of items implementing MShop_Order_Item_Base_Service_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -614,7 +614,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * Returns the search attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -646,7 +646,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation (from configuration or "Default" if null)
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g attribute
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g attribute
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -766,12 +766,12 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Creates a new order service item object initialized with given parameters.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price object
+	 * @param MShop_Price_Item_Iface $price Price object
 	 * @param array $values Associative list of values from the database
 	 * @param array $attributes List of order service attribute items
-	 * @return MShop_Order_Item_Base_Service_Interface Order item service object
+	 * @return MShop_Order_Item_Base_Service_Iface Order item service object
 	 */
-	protected function createItemBase( MShop_Price_Item_Interface $price,
+	protected function createItemBase( MShop_Price_Item_Iface $price,
 		array $values = array(), array $attributes = array() )
 	{
 		return new MShop_Order_Item_Base_Service_Default( $price, $values, $attributes );
@@ -782,7 +782,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * Searches for attribute items connected with order service item.
 	 *
 	 * @param string[] $ids List of order service item IDs
-	 * @return array List of items implementing MShop_Order_Item_Base_Service_Attribute_Interface
+	 * @return array List of items implementing MShop_Order_Item_Base_Service_Attribute_Iface
 	 */
 	protected function getAttributeItems( $ids )
 	{

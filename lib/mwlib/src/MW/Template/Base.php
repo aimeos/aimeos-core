@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Template
  */
-class MW_Template_Base implements MW_Template_Interface
+class MW_Template_Base implements MW_Template_Iface
 {
 	private $begin;
 	private $end;
@@ -40,7 +40,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Removes the maker and enables content in template.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return MW_Template_Iface Own Instance for method chaining
 	 */
 	public function enable( $name )
 	{
@@ -62,7 +62,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Removes the content between the marker.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return MW_Template_Iface Own Instance for method chaining
 	 */
 	public function disable( $name )
 	{
@@ -82,7 +82,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Returns a new template object containing the requested part from the template.
 	 *
 	 * @param string $name Marker whose content should be returned
-	 * @return MW_Template_Interface Subtemplate object containing the template between the given marker name
+	 * @return MW_Template_Iface Subtemplate object containing the template between the given marker name
 	 */
 	public function get( $name )
 	{
@@ -123,7 +123,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 *
 	 * @param string|array $old String or list of strings to remove
 	 * @param string|array $new String or list of strings to insert instead
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return MW_Template_Iface Own Instance for method chaining
 	 */
 	public function replace( $old, $new )
 	{
@@ -137,7 +137,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Substitutes the marker by given text.
 	 *
 	 * @param array $substitute Array of marker names (keys) and text to substitute (values)
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return MW_Template_Iface Own Instance for method chaining
 	 */
 	public function substitute( array $substitute )
 	{

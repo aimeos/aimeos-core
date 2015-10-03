@@ -16,13 +16,13 @@
  */
 class Controller_Frontend_Catalog_Default
 	extends Controller_Frontend_Base
-	implements Controller_Frontend_Catalog_Interface
+	implements Controller_Frontend_Catalog_Iface
 {
 	/**
 	 * Returns the manager for the given name
 	 *
 	 * @param string $name Name of the manager
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 * @since 2015.08
 	 */
 	public function createManager( $name )
@@ -35,7 +35,7 @@ class Controller_Frontend_Catalog_Default
 	 * Returns the default catalog filter
 	 *
 	 * @param boolean True to add default criteria, e.g. status > 0
-	 * @return MW_Common_Criteria_Interface Criteria object for filtering
+	 * @return MW_Common_Criteria_Iface Criteria object for filtering
 	 * @since 2015.08
 	 */
 	public function createCatalogFilter( $default = true )
@@ -49,7 +49,7 @@ class Controller_Frontend_Catalog_Default
 	 *
 	 * @param integer $id Category ID to start from, null for root node
 	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
-	 * @return array Associative list of items implementing MShop_Catalog_Item_Interface with their IDs as keys
+	 * @return array Associative list of items implementing MShop_Catalog_Item_Iface with their IDs as keys
 	 * @since 2015.08
 	 */
 	public function getCatalogPath( $id, array $domains = array( 'text', 'media' ) )
@@ -65,12 +65,12 @@ class Controller_Frontend_Catalog_Default
 	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @param integer $level Constant from MW_Tree_Manager_Base for the depth of the returned tree, LEVEL_ONE for
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
-	 * @param MW_Common_Criteria_Interface|null $search Optional criteria object with conditions
-	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant
+	 * @param MW_Common_Criteria_Iface|null $search Optional criteria object with conditions
+	 * @return MShop_Catalog_Item_Iface Catalog node, maybe with children depending on the level constant
 	 * @since 2015.08
 	 */
 	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ),
-		$level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $search = null )
+		$level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $search = null )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog' )->getTree( $id, $domains, $level, $search );
 	}
@@ -79,12 +79,12 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * Returns the aggregated count of products for the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param MW_Common_Criteria_Iface $filter Critera object which contains the filter conditions
 	 * @param string $key Search key to aggregate for, e.g. "catalog.index.attribute.id"
 	 * @return array Associative list of key values as key and the product count for this key as value
 	 * @since 2015.08
 	 */
-	public function aggregateIndex( MW_Common_Criteria_Interface $filter, $key )
+	public function aggregateIndex( MW_Common_Criteria_Iface $filter, $key )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog/index' )->aggregate( $filter, $key );
 	}
@@ -98,7 +98,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype Type of the product list, e.g. default, promotion, etc.
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 * @since 2015.08
 	 */
 	public function createIndexFilter( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
@@ -155,7 +155,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype Type of the product list, e.g. default, promotion, etc.
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 * @since 2015.08
 	 */
 	public function createIndexFilterCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
@@ -188,7 +188,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype List type of the text associated to the product, usually "default"
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 * @since 2015.08
 	 */
 	public function createIndexFilterText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
@@ -209,12 +209,12 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * Returns the given search filter with the conditions attached for filtering by category.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object used for product search
+	 * @param MW_Common_Criteria_Iface $search Criteria object used for product search
 	 * @param string $catid Selected category by the user
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 * @since 2015.08
 	 */
-	public function addIndexFilterCategory( MW_Common_Criteria_Interface $search, $catid )
+	public function addIndexFilterCategory( MW_Common_Criteria_Iface $search, $catid )
 	{
 		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
 
@@ -228,13 +228,13 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * Returns the given search filter with the conditions attached for filtering by text.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Criteria object used for product search
+	 * @param MW_Common_Criteria_Iface $search Criteria object used for product search
 	 * @param string $input Search string entered by the user
 	 * @param string $listtype List type of the text associated to the product, usually "default"
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 * @since 2015.08
 	 */
-	public function addIndexFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
+	public function addIndexFilterText( MW_Common_Criteria_Iface $search, $input, $listtype = 'default' )
 	{
 		$langid = $this->getContext()->getLocale()->getLanguageId();
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
@@ -249,13 +249,13 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * Returns the products from the index filtered by the given criteria object.
 	 *
-	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param MW_Common_Criteria_Iface $filter Critera object which contains the filter conditions
 	 * @param string[] $domains Domain names of items that are associated with the products and that should be fetched too
 	 * @param integer &$total Parameter where the total number of found products will be stored in
-	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
+	 * @return array Ordered list of product items implementing MShop_Product_Item_Iface
 	 * @since 2015.08
 	 */
-	public function getIndexItems( MW_Common_Criteria_Interface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
+	public function getIndexItems( MW_Common_Criteria_Iface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog/index' )->searchItems( $filter, $domains, $total );
 	}
@@ -266,7 +266,7 @@ class Controller_Frontend_Catalog_Default
 	 *
 	 * @param array $ids List of product IDs
 	 * @param array $domains Domain names of items that are associated with the products and that should be fetched too
-	 * @return string[] List of product items implementing MShop_Product_Item_Interface
+	 * @return string[] List of product items implementing MShop_Product_Item_Iface
 	 * @throws Controller_Frontend_Catalog_Exception If product isn't available
 	 * @since 2015.08
 	 */
@@ -296,7 +296,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype List type of the text associated to the product, usually "default"
 	 * @param string $type Type of the text like "name", "short", "long", etc.
-	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 * @return MW_Common_Criteria_Iface Criteria object containing the conditions for searching
 	 */
 	public function createTextFilter( $input, $sort = null, $direction = '+', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
 	{
@@ -337,10 +337,10 @@ class Controller_Frontend_Catalog_Default
 	/**
 	 * Returns an list of product text strings matched by the filter.
 	 *
-	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param MW_Common_Criteria_Iface $filter Critera object which contains the filter conditions
 	 * @return array Associative list of the product ID as key and the product text as value
 	 */
-	public function getTextList( MW_Common_Criteria_Interface $filter )
+	public function getTextList( MW_Common_Criteria_Iface $filter )
 	{
 		return MShop_Factory::createManager( $this->getContext(), 'catalog/index/text' )->searchTexts( $filter );
 	}

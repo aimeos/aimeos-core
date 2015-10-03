@@ -15,7 +15,7 @@
  */
 class MShop_Order_Item_Base_Product_Default
 	extends MShop_Order_Item_Base_Product_Base
-	implements MShop_Order_Item_Base_Product_Interface
+	implements MShop_Order_Item_Base_Product_Iface
 {
 	private $price;
 	private $attributes;
@@ -26,22 +26,22 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Initializes the order product instance.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item
+	 * @param MShop_Price_Item_Iface $price Price item
 	 * @param array $values Associative list of order product values
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
 
-	public function __construct( MShop_Price_Item_Interface $price, array $values = array(), array $attributes = array(), array $products = array() )
+	public function __construct( MShop_Price_Item_Iface $price, array $values = array(), array $attributes = array(), array $products = array() )
 	{
 		parent::__construct( 'order.base.product.', $values );
 
 		$this->price = $price;
 		$this->values = $values;
 
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Iface', $attributes );
 		$this->attributes = $attributes;
 
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $products );
 		$this->products = $products;
 	}
 
@@ -131,7 +131,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns a array of order base product items
 	 *
-	 * @return array Associative list of product items that implements MShop_Order_Item_Base_Product_Interface
+	 * @return array Associative list of product items that implements MShop_Order_Item_Base_Product_Iface
 	 */
 	public function getProducts()
 	{
@@ -141,11 +141,11 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Sets a array of order base product items
 	 *
-	 * @param array Associative list of product items which must implement the MShop_Order_Item_Base_Product_Interface
+	 * @param array Associative list of product items which must implement the MShop_Order_Item_Base_Product_Iface
 	 */
 	public function setProducts( array $products )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $products );
 		$this->products = $products;
 		$this->setModified();
 	}
@@ -345,7 +345,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the price item for the product.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, costs and rebate
+	 * @return MShop_Price_Item_Iface Price item with price, costs and rebate
 	 */
 	public function getPrice()
 	{
@@ -356,9 +356,9 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Sets the price item for the product.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item containing price and additional costs
+	 * @param MShop_Price_Item_Iface $price Price item containing price and additional costs
 	 */
-	public function setPrice( MShop_Price_Item_Interface $price )
+	public function setPrice( MShop_Price_Item_Iface $price )
 	{
 		if( $price === $this->price ) { return; }
 
@@ -370,7 +370,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, additional costs and rebate
+	 * @return MShop_Price_Item_Iface Price item with price, additional costs and rebate
 	 */
 	public function getSumPrice()
 	{
@@ -491,7 +491,7 @@ class MShop_Order_Item_Base_Product_Default
 	 *
 	 * @param string $code code of the product attribute item
 	 * @param string $type Type of the product attribute item
-	 * @return MShop_Order_Item_Base_Product_Attribute_Interface|null Attribute item for the ordered product and the given code
+	 * @return MShop_Order_Item_Base_Product_Attribute_Iface|null Attribute item for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
@@ -509,7 +509,7 @@ class MShop_Order_Item_Base_Product_Default
 	 * Returns the list of attribute items for the ordered product.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Interface
+	 * @return array List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
 	 */
 	public function getAttributes( $type = null )
 	{
@@ -533,9 +533,9 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Attribute_Interface $item Service attribute item
+	 * @param MShop_Order_Item_Base_Product_Attribute_Iface $item Service attribute item
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Interface $item )
+	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Iface $item )
 	{
 		$this->getAttributeMap();
 
@@ -556,11 +556,11 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Sets the new list of attribute items for the product.
 	 *
-	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Interface
+	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
 	 */
 	public function setAttributes( array $attributes )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Iface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;
@@ -639,11 +639,11 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Compares the properties of the given order product item with its own ones.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
 	 * @return boolean True if the item properties are equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Order_Item_Base_Product_Interface $item )
+	public function compare( MShop_Order_Item_Base_Product_Iface $item )
 	{
 		if( $this->getFlags() === $item->getFlags()
 			&& $this->getName() === $item->getName()
@@ -661,9 +661,9 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Copys all data from a given product item.
 	 *
-	 * @param MShop_Product_Item_Interface $product Product item to copy from
+	 * @param MShop_Product_Item_Iface $product Product item to copy from
 	 */
-	public function copyFrom( MShop_Product_Item_Interface $product )
+	public function copyFrom( MShop_Product_Item_Iface $product )
 	{
 		$this->setName( $product->getName() );
 		$this->setType( $product->getType() );
@@ -683,7 +683,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the attribute map for the ordered products.
 	 *
-	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Product_Attribute_Interface as value
+	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Product_Attribute_Iface as value
 	 */
 	protected function getAttributeMap()
 	{

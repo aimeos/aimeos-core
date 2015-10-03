@@ -162,7 +162,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_DefaultTest exten
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );
 		$this->assertEquals( '29', $listItem->getRefItem()->getCode() );
@@ -267,7 +267,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_DefaultTest exten
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );
@@ -298,7 +298,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_DefaultTest exten
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'list' );

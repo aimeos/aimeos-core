@@ -56,7 +56,7 @@ class Client_Html_Basket_Related_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'bought', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

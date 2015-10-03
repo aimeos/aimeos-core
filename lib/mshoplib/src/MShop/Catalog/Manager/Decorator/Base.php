@@ -16,14 +16,14 @@
  */
 abstract class MShop_Catalog_Manager_Decorator_Base
 	extends MShop_Common_Manager_Decorator_Base
-	implements MShop_Common_Manager_Decorator_Interface, MShop_Catalog_Manager_Interface
+	implements MShop_Common_Manager_Decorator_Iface, MShop_Catalog_Manager_Iface
 {
 	/**
 	 * Returns a list of items starting with the given category that are in the path to the root node
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return array Associative list of items implementing MShop_Catalog_Item_Interface with IDs as keys
+	 * @return array Associative list of items implementing MShop_Catalog_Item_Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
@@ -37,10 +37,10 @@ abstract class MShop_Catalog_Manager_Decorator_Base
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
-	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
+	 * @param MW_Common_Criteria_Iface|null $criteria Optional criteria object with conditions
+	 * @return MW_Tree_Node_Iface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $criteria = null )
 	{
 		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}
@@ -49,9 +49,9 @@ abstract class MShop_Catalog_Manager_Decorator_Base
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item which should be inserted
+	 * @param MShop_Common_Item_Iface $item Item which should be inserted
 	 */
-	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
+	public function insertItem( MShop_Catalog_Item_Iface $item, $parentId = null, $refId = null )
 	{
 		$this->getManager()->insertItem( $item, $parentId, $refId );
 	}

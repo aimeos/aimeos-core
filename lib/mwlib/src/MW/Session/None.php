@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Session
  */
-class MW_Session_None implements MW_Session_Interface
+class MW_Session_None implements MW_Session_Iface
 {
 	private $data = array();
 

@@ -11,7 +11,7 @@ class Controller_ExtJS_Media_List_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Media_List_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Iface', $obj );
 	}
 
 

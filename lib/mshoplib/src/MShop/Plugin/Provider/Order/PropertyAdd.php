@@ -16,7 +16,7 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAdd
 	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Interface
+	implements MShop_Plugin_Provider_Factory_Iface
 {
 	private $orderAttrManager;
 	private $type;
@@ -25,10 +25,10 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Initializes the plugin instance
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Plugin_Item_Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
 	{
 		parent::__construct( $context, $item );
 
@@ -40,9 +40,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( MW_Observer_Publisher_Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.before' );
 	}
@@ -51,20 +51,20 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @throws MShop_Plugin_Exception in case of faulty configuration or parameters
 	 * @return bool true if attributes have been added successfully
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = 'MShop_Order_Item_Base_Iface';
 		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$class = 'MShop_Order_Item_Base_Product_Interface';
+		$class = 'MShop_Order_Item_Base_Product_Iface';
 		if( !( $value instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
@@ -107,12 +107,12 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Adds attribute items to an array.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
-	 * @param MShop_Order_Item_Base_Product_Interface $product Product containing attributes
+	 * @param MShop_Common_Item_Iface $item Item containing the properties to be added as attributes
+	 * @param MShop_Order_Item_Base_Product_Iface $product Product containing attributes
 	 * @param Array $properties List of item properties to be converted
 	 * @return Array List of attributes
 	 */
-	protected function addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product, array $properties )
+	protected function addAttributes( MShop_Common_Item_Iface $item, MShop_Order_Item_Base_Product_Iface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();
 		$itemProperties = $item->toArray();

@@ -16,7 +16,7 @@
  */
 class MShop_Locale_Item_Currency_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Currency_Interface
+	implements MShop_Locale_Item_Currency_Iface
 {
 	private $modified = false;
 	private $values;

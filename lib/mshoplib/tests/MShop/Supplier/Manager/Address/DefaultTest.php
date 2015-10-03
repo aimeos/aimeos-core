@@ -42,7 +42,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
@@ -50,7 +50,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Common_Item_Address_Iface', $item );
 	}
 
 
@@ -162,7 +162,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 

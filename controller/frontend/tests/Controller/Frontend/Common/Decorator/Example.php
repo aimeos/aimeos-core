@@ -16,7 +16,7 @@
  */
 class Controller_Frontend_Common_Decorator_Example
 	extends Controller_Frontend_Common_Decorator_Base
-	implements Controller_Frontend_Common_Decorator_Interface
+	implements Controller_Frontend_Common_Decorator_Iface
 {
 
 }

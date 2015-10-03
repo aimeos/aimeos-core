@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Translate_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $translator;
 
@@ -24,10 +24,10 @@ class MW_View_Helper_Translate_Default
 	/**
 	 * Initializes the translator view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param MW_Translation_Interface $translator Translation object
+	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param MW_Translation_Iface $translator Translation object
 	 */
-	public function __construct( MW_View_Interface $view, MW_Translation_Interface $translator )
+	public function __construct( MW_View_Iface $view, MW_Translation_Iface $translator )
 	{
 		parent::__construct( $view );
 

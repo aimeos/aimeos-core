@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_FormParam_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $names;
 
@@ -24,7 +24,7 @@ class MW_View_Helper_FormParam_Default
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string[] $names Prefix names when generating form parameters (will be "name1[name2][name3]..." )
 	 */
 	public function __construct( $view, array $names = array() )

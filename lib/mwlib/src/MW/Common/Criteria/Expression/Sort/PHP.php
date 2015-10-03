@@ -16,7 +16,7 @@
  */
 class MW_Common_Criteria_Expression_Sort_PHP
 	extends MW_Common_Criteria_Expression_Base
-	implements MW_Common_Criteria_Expression_Sort_Interface
+	implements MW_Common_Criteria_Expression_Sort_Iface
 {
 	private static $operators = array( '+' => 'asort', '-' => 'arsort' );
 	private $operator;
@@ -78,7 +78,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
+	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )

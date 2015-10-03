@@ -24,11 +24,11 @@ abstract class MShop_Coupon_Provider_Factory_Base
 	 * compatible with the constructor of the factory interface if this
 	 * intermediate constructor isn't implemented!
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param MShop_Coupon_Item_Interface $item Coupon item
+	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param MShop_Coupon_Item_Iface $item Coupon item
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Coupon_Item_Iface $item, $code )
 	{
 		parent::__construct( $context, $item, $code );
 	}

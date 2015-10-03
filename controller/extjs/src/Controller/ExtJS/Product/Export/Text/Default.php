@@ -17,14 +17,14 @@
  */
 class Controller_ExtJS_Product_Export_Text_Default
 	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Interface
+	implements Controller_ExtJS_Common_Load_Text_Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Product_Export_Text' );
 	}
@@ -325,11 +325,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 	/**
 	 * Adds data for the given language.
 	 *
-	 * @param MW_Container_Content_Interface $contentItem Content object
+	 * @param MW_Container_Content_Iface $contentItem Content object
 	 * @param string $langid Language id
 	 * @param array $ids List of product IDs
 	 */
-	protected function addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
+	protected function addLanguage( MW_Container_Content_Iface $contentItem, $langid, array $ids )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
 		$search = $manager->createSearch();
@@ -362,11 +362,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 	/**
 	 * Adds all texts belonging to an product item.
 	 *
-	 * @param MW_Container_Content_Interface $contentItem Content item
-	 * @param MShop_Product_Item_Interface $item product item object
+	 * @param MW_Container_Content_Iface $contentItem Content item
+	 * @param MShop_Product_Item_Iface $item product item object
 	 * @param string $langid Language id
 	 */
-	protected function addItem( MW_Container_Content_Interface $contentItem, MShop_Product_Item_Interface $item, $langid )
+	protected function addItem( MW_Container_Content_Iface $contentItem, MShop_Product_Item_Iface $item, $langid )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {

@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Encoder_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	const TAINT = 0;
 	const TRUST = 1;
@@ -25,7 +25,7 @@ class MW_View_Helper_Encoder_Default
 	/**
 	 * Returns the encoder.
 	 *
-	 * @return MW_View_Helper_Interface Encoder object
+	 * @return MW_View_Helper_Iface Encoder object
 	 */
 	public function transform()
 	{

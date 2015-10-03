@@ -16,7 +16,7 @@
  */
 class Client_Html_Checkout_Update_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/checkout/update/default/subparts
 	 * List of HTML sub-clients rendered within the checkout update section
@@ -186,7 +186,7 @@ class Client_Html_Checkout_Update_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -349,7 +349,7 @@ class Client_Html_Checkout_Update_Default
 	 *
 	 * @param string $code Unique service code
 	 * @throws Client_Html_Exception If no service item could be found
-	 * @return MShop_Service_Provider_Interface Service provider object
+	 * @return MShop_Service_Provider_Iface Service provider object
 	 */
 	protected function getServiceProvider( $code )
 	{
@@ -384,12 +384,12 @@ class Client_Html_Checkout_Update_Default
 	/**
 	 * Returns the URL to the confirm page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
@@ -403,12 +403,12 @@ class Client_Html_Checkout_Update_Default
 	/**
 	 * Returns the URL to the update page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );

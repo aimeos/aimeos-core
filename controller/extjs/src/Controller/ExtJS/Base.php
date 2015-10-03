@@ -24,11 +24,11 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 * @param string $name Name of the manager/item the controller is responsible for
 	 * @param string|null $sort Attribute code used for default sortation
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, $name, $sort = null )
+	public function __construct( MShop_Context_Item_Iface $context, $name, $sort = null )
 	{
 		$this->context = $context;
 		$this->name = $name;
@@ -233,7 +233,7 @@ abstract class Controller_ExtJS_Base
 	 * Template method for returning the search key prefix of the used manager
 	 * This method has to be implemented in the derived classes
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	abstract protected function getPrefix();
 
@@ -314,14 +314,14 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the item properties suitable for creating a JSON schema.
 	 *
-	 * @param array $attributes List of attribute object implementing MW_Common_Criteria_Attribute_Interface
+	 * @param array $attributes List of attribute object implementing MW_Common_Criteria_Attribute_Iface
 	 * @param boolean $all True if all search attributes should be returned or false for only public ones
-	 * @throws Controller_ExtJS_Exception if list item doesn't implement MW_Common_Criteria_Attribute_Interface
+	 * @throws Controller_ExtJS_Exception if list item doesn't implement MW_Common_Criteria_Attribute_Iface
 	 */
 	protected function getAttributeSchema( array $attributes, $all = true )
 	{
 		$properties = array();
-		$iface = 'MW_Common_Criteria_Attribute_Interface';
+		$iface = 'MW_Common_Criteria_Attribute_Iface';
 
 		foreach( $attributes as $attribute )
 		{
@@ -366,11 +366,11 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param MW_Common_Criteria_Iface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
-	 * @return MW_Common_Criteria_Interface Initialized criteria object
+	 * @return MW_Common_Criteria_Iface Initialized criteria object
 	 */
-	protected function initCriteria( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	protected function initCriteria( MW_Common_Criteria_Iface $criteria, stdClass $params )
 	{
 		$this->initCriteriaConditions( $criteria, $params );
 		$this->initCriteriaSortations( $criteria, $params );
@@ -383,10 +383,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with conditions based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param MW_Common_Criteria_Iface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaConditions( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaConditions( MW_Common_Criteria_Iface $criteria, stdClass $params )
 	{
 		if( isset( $params->condition ) && is_object( $params->condition ) )
 		{
@@ -405,10 +405,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with the slice based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param MW_Common_Criteria_Iface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSlice( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaSlice( MW_Common_Criteria_Iface $criteria, stdClass $params )
 	{
 		if( isset( $params->start ) && isset( $params->limit ) )
 		{
@@ -423,10 +423,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with sortations based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param MW_Common_Criteria_Iface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSortations( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaSortations( MW_Common_Criteria_Iface $criteria, stdClass $params )
 	{
 		if( isset( $params->sort ) && isset( $params->dir ) )
 		{
@@ -558,7 +558,7 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -569,10 +569,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the list of site IDs of the whole tree.
 	 *
-	 * @param MShop_Locale_Item_Site_Interface $item Locale item, maybe with children
+	 * @param MShop_Locale_Item_Site_Iface $item Locale item, maybe with children
 	 * @return array List of site IDs
 	 */
-	private function getSiteIdsFromTree( MShop_Locale_Item_Site_Interface $item )
+	private function getSiteIdsFromTree( MShop_Locale_Item_Site_Iface $item )
 	{
 		$list = array( $item->getId() );
 

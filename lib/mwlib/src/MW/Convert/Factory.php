@@ -20,7 +20,7 @@ class MW_Convert_Factory
 	 * Creates the converter objects
 	 *
 	 * @param string|array $keys Key or list of keys of the converter classes
-	 * @return MW_Convert_Interface Instance of converter class
+	 * @return MW_Convert_Iface Instance of converter class
 	 */
 	public static function createConverter( $keys )
 	{
@@ -43,7 +43,7 @@ class MW_Convert_Factory
 	 * Creates a new converter object
 	 *
 	 * @param string $key Key of the converter class
-	 * @return MW_Convert_Interface Instance of converter class
+	 * @return MW_Convert_Iface Instance of converter class
 	 */
 	protected static function createObject( $key )
 	{
@@ -58,7 +58,7 @@ class MW_Convert_Factory
 			}
 		}
 
-		$iface = 'MW_Convert_Interface';
+		$iface = 'MW_Convert_Iface';
 		$classname = 'MW_Convert_' . $key;
 
 		if( class_exists( $classname ) === false ) {

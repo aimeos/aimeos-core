@@ -23,12 +23,12 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection object
+	 * @param MW_DB_Connection_Iface $conn Database connection object
 	 * @param string $operator Operator used for the expression
 	 * @param string $name Name of variable or column that should be compared.
 	 * @param mixed $value Value that the variable or column should be compared to
 	 */
-	public function __construct( MW_DB_Connection_Interface $conn, $operator, $name, $value )
+	public function __construct( MW_DB_Connection_Iface $conn, $operator, $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );

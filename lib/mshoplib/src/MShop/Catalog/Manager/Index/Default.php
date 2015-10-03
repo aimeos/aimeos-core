@@ -16,7 +16,7 @@
  */
 class MShop_Catalog_Manager_Index_Default
 	extends MShop_Catalog_Manager_Index_DBBase
-	implements MShop_Catalog_Manager_Index_Interface
+	implements MShop_Catalog_Manager_Index_Iface
 {
 	private $subManagers;
 
@@ -24,11 +24,11 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		/** mshop/catalog/manager/index/default/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -93,7 +93,7 @@ class MShop_Catalog_Manager_Index_Default
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -130,7 +130,7 @@ class MShop_Catalog_Manager_Index_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -456,12 +456,12 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Stores a new item in the index.
 	 *
-	 * @param MShop_Common_Item_Interface $item Product item
+	 * @param MShop_Common_Item_Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Interface';
+		$iface = 'MShop_Product_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -477,12 +477,12 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Interface
+	 * @return array List of items implementing MShop_Product_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		/** mshop/catalog/manager/index/default/item/search
 		 * Retrieves the records matched by the given criteria in the database
@@ -604,11 +604,11 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param array $domains List of domains to be
 	 * @param integer $size Size of a chunk of products to handle at a time
 	 */
-	protected function writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
+	protected function writeIndex( MW_Common_Criteria_Iface $search, array $domains, $size )
 	{
 		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = $this->getSubManagers();
@@ -652,7 +652,7 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
-	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
 	 */
 	protected function saveSubProducts( array $items )
 	{
@@ -731,12 +731,12 @@ class MShop_Catalog_Manager_Index_Default
 	/**
 	 * Saves one chunk of the sub products.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criterias for retrieving the sub-products
+	 * @param MW_Common_Criteria_Iface $search Search criterias for retrieving the sub-products
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
 	 * @param integer $size Number of products per chunk
 	 */
-	protected function saveSubProductsChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
+	protected function saveSubProductsChunk( MW_Common_Criteria_Iface $search, array $domains, array $list, $size )
 	{
 		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = array();

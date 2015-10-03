@@ -16,14 +16,14 @@
  */
 class MShop_Plugin_Provider_Decorator_Log
 	extends MShop_Plugin_Provider_Decorator_Base
-	implements MShop_Plugin_Provider_Decorator_Interface
+	implements MShop_Plugin_Provider_Decorator_Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( MW_Observer_Publisher_Iface $p )
 	{
 		$this->getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, MW_Logger_Base::DEBUG );
 
@@ -34,11 +34,11 @@ class MShop_Plugin_Provider_Decorator_Log
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
 	{
 		$msg = 'Plugin: ' . __METHOD__ . ', action: ' . $action . ( is_scalar( $value ) ? ', value: ' . $value : '' );
 		$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::DEBUG );

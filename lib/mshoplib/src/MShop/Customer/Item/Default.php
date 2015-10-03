@@ -16,7 +16,7 @@
  */
 class MShop_Customer_Item_Default
 	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Customer_Item_Interface
+	implements MShop_Customer_Item_Iface
 {
 	private $billingaddress;
 	private $values;
@@ -28,15 +28,15 @@ class MShop_Customer_Item_Default
 	 * Initializes the customer item object
 	 *
 	 * @param array $values List of attributes that belong to the customer item
-	 * @param MShop_Common_Item_Address_Interface $address Payment address item object
-	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
-	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
+	 * @param MShop_Common_Item_Address_Iface $address Payment address item object
+	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 * @param string $salt Password salt (optional)
-	 * @param MShop_Common_Item_Helper_Password_Interface $helper Password encryption helper object
+	 * @param MShop_Common_Item_Helper_Password_Iface $helper Password encryption helper object
 	 */
-	public function __construct( MShop_Common_Item_Address_Interface $address, array $values = array(),
+	public function __construct( MShop_Common_Item_Address_Iface $address, array $values = array(),
 		array $listItems = array(), array $refItems = array(), $salt = '',
-		MShop_Common_Item_Helper_Password_Interface $helper = null )
+		MShop_Common_Item_Helper_Password_Iface $helper = null )
 	{
 		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
@@ -170,7 +170,7 @@ class MShop_Customer_Item_Default
 	/**
 	 * Returns the billingaddress of the customer item.
 	 *
-	 * @return MShop_Common_Item_Address_Interface
+	 * @return MShop_Common_Item_Address_Iface
 	 */
 	public function getPaymentAddress()
 	{
@@ -181,9 +181,9 @@ class MShop_Customer_Item_Default
 	/**
 	 * Sets the billingaddress of the customer item.
 	 *
-	 * @param MShop_Common_Item_Address_Interface $address Billingaddress of the customer item
+	 * @param MShop_Common_Item_Address_Iface $address Billingaddress of the customer item
 	 */
-	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address )
+	public function setPaymentAddress( MShop_Common_Item_Address_Iface $address )
 	{
 		if( $address === $this->billingaddress && $address->isModified() === false ) { return; }
 

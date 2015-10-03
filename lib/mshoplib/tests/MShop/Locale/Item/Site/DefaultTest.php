@@ -193,7 +193,7 @@ class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->object->getChild( 0 ) );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->getChild( 0 ) );
 
 		$this->setExpectedException( 'MShop_Locale_Exception' );
 		$this->object->getChild( 1 );
@@ -206,7 +206,7 @@ class MShop_Locale_Item_Site_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
-			$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $child );
+			$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $child );
 		}
 	}
 

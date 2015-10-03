@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Session
  */
-class MW_Session_PHP implements MW_Session_Interface
+class MW_Session_PHP implements MW_Session_Iface
 {
 	public function __construct()
 	{

@@ -42,14 +42,14 @@ class MAdmin_Job_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Job_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MAdmin_Job_Item_Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attr );
 		}
 	}
 

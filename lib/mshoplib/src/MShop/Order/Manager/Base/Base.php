@@ -16,7 +16,7 @@
  */
 abstract class MShop_Order_Manager_Base_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Interface
+	implements MShop_Order_Manager_Base_Iface
 {
 	/**
 	 * Unlock basket.

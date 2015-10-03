@@ -16,7 +16,7 @@
  */
 class MShop_Service_Manager_Default
 	extends MShop_Service_Manager_Base
-	implements MShop_Service_Manager_Interface
+	implements MShop_Service_Manager_Iface
 {
 	private $searchConfig = array(
 		'service.id' => array(
@@ -111,9 +111,9 @@ class MShop_Service_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
@@ -140,7 +140,7 @@ class MShop_Service_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -170,7 +170,7 @@ class MShop_Service_Manager_Default
 	/**
 	 * Instanciates a new service item depending on the kind of service manager.
 	 *
-	 * @return MShop_Service_Item_Interface Service item
+	 * @return MShop_Service_Item_Iface Service item
 	 */
 	public function createItem()
 	{
@@ -220,7 +220,7 @@ class MShop_Service_Manager_Default
 	 *
 	 * @param int $id Unique ID of the service item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Service_Item_Interface Returns the service item of the given id
+	 * @return MShop_Service_Item_Iface Returns the service item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -232,12 +232,12 @@ class MShop_Service_Manager_Default
 	/**
 	 * Adds a new or updates an existing service item in the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $item New or existing service item that should be saved to the storage
+	 * @param MShop_Common_Item_Iface $item New or existing service item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Service_Item_Interface';
+		$iface = 'MShop_Service_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Service_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -389,16 +389,16 @@ class MShop_Service_Manager_Default
 	/**
 	 * Searches for service items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of service items implementing MShop_Service_Item_Interface
+	 * @return array List of service items implementing MShop_Service_Item_Iface
 	 *
 	 * @throws MShop_Service_Exception if creating items failed
 	 * @throws MW_Common_Exception If a failure in the search object occurred
 	 * @throws MW_DB_Exception If errors regarding database access occured
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -559,11 +559,11 @@ class MShop_Service_Manager_Default
 	/**
 	 * Returns the service provider which is responsible for the service item.
 	 *
-	 * @param MShop_Service_Item_Interface $item Delivery or payment service item object
-	 * @return MShop_Service_Provider_Interface Returns a service provider implementing MShop_Service_Provider_Interface
+	 * @param MShop_Service_Item_Iface $item Delivery or payment service item object
+	 * @return MShop_Service_Provider_Iface Returns a service provider implementing MShop_Service_Provider_Iface
 	 * @throws MShop_Service_Exception If provider couldn't be found
 	 */
-	public function getProvider( MShop_Service_Item_Interface $item )
+	public function getProvider( MShop_Service_Item_Iface $item )
 	{
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
@@ -580,7 +580,7 @@ class MShop_Service_Manager_Default
 			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$interface = 'MShop_Service_Provider_Factory_Interface';
+		$interface = 'MShop_Service_Provider_Factory_Iface';
 		$classname = 'MShop_Service_Provider_' . $type . '_' . $provider;
 
 		if( class_exists( $classname ) === false ) {
@@ -654,7 +654,7 @@ class MShop_Service_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_List_Interface List manager
+	 * @return MShop_Common_Manager_List_Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -666,7 +666,7 @@ class MShop_Service_Manager_Default
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default Prepopulate object with default criterias
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -682,9 +682,9 @@ class MShop_Service_Manager_Default
 	 * Creates a new service item initialized with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $textItems List of items implementing MShop_Text_Item_Interface
-	 * @return MShop_Service_Item_Interface New service item
+	 * @param array $listitems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $textItems List of items implementing MShop_Text_Item_Iface
+	 * @return MShop_Service_Item_Iface New service item
 	 */
 	protected function createItemBase( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
 	{

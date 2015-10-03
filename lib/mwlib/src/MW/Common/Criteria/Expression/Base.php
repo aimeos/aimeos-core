@@ -160,11 +160,11 @@ abstract class MW_Common_Criteria_Expression_Base
 	/**
 	 * Sets the new plugins for translating values.
 	 *
-	 * @param array $plugins Associative list of names and the plugin implementing MW_Common_Criteria_Plugin_Interface
+	 * @param array $plugins Associative list of names and the plugin implementing MW_Common_Criteria_Plugin_Iface
 	 */
 	protected function setPlugins( array $plugins )
 	{
-		MW_Common_Base::checkClassList('MW_Common_Criteria_Plugin_Interface', $plugins);
+		MW_Common_Base::checkClassList('MW_Common_Criteria_Plugin_Iface', $plugins);
 
 		$this->plugins = $plugins;
 	}

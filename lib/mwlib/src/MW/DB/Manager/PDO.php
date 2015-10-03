@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
+class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 {
 	private $config = null;
 	private $connections = array();
@@ -24,9 +24,9 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	/**
 	 * Initializes the database manager object
 	 *
-	 * @param MW_Config_Interface $config Object holding the configuration data
+	 * @param MW_Config_Iface $config Object holding the configuration data
 	 */
-	public function __construct( MW_Config_Interface $config )
+	public function __construct( MW_Config_Iface $config )
 	{
 		$this->config = $config;
 	}
@@ -45,7 +45,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	 * Returns a database connection.
 	 *
 	 * @param string $name Name of the resource in configuration
-	 * @return MW_DB_Connection_Interface
+	 * @return MW_DB_Connection_Iface
 	 */
 	public function acquire( $name = 'db' )
 	{
@@ -91,10 +91,10 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	/**
 	 * Releases the connection for reuse
 	 *
-	 * @param MW_DB_Connection_Interface $connection Connection object
+	 * @param MW_DB_Connection_Iface $connection Connection object
 	 * @param string $name Name of resource
 	 */
-	public function release( MW_DB_Connection_Interface $connection, $name = 'db' )
+	public function release( MW_DB_Connection_Iface $connection, $name = 'db' )
 	{
 		if( ( $connection instanceof MW_DB_Connection_PDO ) === false ) {
 			throw new MW_DB_Exception( 'Connection object isn\'t of type PDO' );
@@ -109,7 +109,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	 *
 	 * @param string $name Name to the database configuration in the resource file
 	 * @param string $adapter Name of the database adapter, e.g. "mysql"
-	 * @return MW_DB_Connection_Interface Database connection
+	 * @return MW_DB_Connection_Iface Database connection
 	 */
 	protected function createConnection( $name, $adapter )
 	{

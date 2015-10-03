@@ -30,26 +30,26 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testBootstrap()
 	{
 		$item = $this->object->bootstrap( 'unittest', 'de', 'EUR', false );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Iface', $item );
 		$this->assertEquals( 'de', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $item->getSite() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $item->getSite() );
 		$this->assertEquals( 'unittest', $item->getSite()->getCode() );
 		$this->assertEquals( 1, count( $item->getSitePath() ) );
 
 		$item = $this->object->bootstrap( 'unittest', 'de', '', false );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Iface', $item );
 		$this->assertEquals( 'de', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $item->getSite() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $item->getSite() );
 		$this->assertEquals( 'unittest', $item->getSite()->getCode() );
 		$this->assertEquals( 1, count( $item->getSitePath() ) );
 
 		$item = $this->object->bootstrap( 'unittest', '', '', false );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Iface', $item );
 		$this->assertEquals( 'de', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $item->getSite() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $item->getSite() );
 		$this->assertEquals( 'unittest', $item->getSite()->getCode() );
 		$this->assertEquals( 1, count( $item->getSitePath() ) );
 
@@ -60,20 +60,20 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'site' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'site', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'site' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'site', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'language' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'language', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'language' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'language', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'currency' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'currency', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'currency' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'currency', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );
@@ -219,7 +219,7 @@ class MShop_Locale_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

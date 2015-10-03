@@ -44,7 +44,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Stock_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Product_Item_Stock_Iface', $this->object->createItem() );
 	}
 
 
@@ -135,7 +135,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 

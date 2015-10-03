@@ -20,7 +20,7 @@ abstract class MShop_Price_Manager_Base
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param array $priceItems List of price items implementing MShop_Price_Item_Interface
+	 * @param array $priceItems List of price items implementing MShop_Price_Item_Iface
 	 * @param integer $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
 	 * @throws MShop_Price_Exception if no price item is available
@@ -31,7 +31,7 @@ abstract class MShop_Price_Manager_Base
 
 		foreach( $priceItems as $priceItem )
 		{
-			$iface = 'MShop_Price_Item_Interface';
+			$iface = 'MShop_Price_Item_Iface';
 			if( ( $priceItem instanceof $iface ) === false ) {
 				throw new MShop_Price_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 			}

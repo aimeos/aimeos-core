@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Context
  */
-class MShop_Context_Item_Default implements MShop_Context_Item_Interface
+class MShop_Context_Item_Default implements MShop_Context_Item_Iface
 {
 	private $cache;
 	private $config;
@@ -84,9 +84,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the cache object.
 	 *
-	 * @param MW_Cache_Interface $cache Cache object
+	 * @param MW_Cache_Iface $cache Cache object
 	 */
-	public function setCache( MW_Cache_Interface $cache )
+	public function setCache( MW_Cache_Iface $cache )
 	{
 		$this->cache = $cache;
 	}
@@ -95,7 +95,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the cache object.
 	 *
-	 * @return MW_Cache_Interface Cache object
+	 * @return MW_Cache_Iface Cache object
 	 */
 	public function getCache()
 	{
@@ -110,9 +110,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the configuration object.
 	 *
-	 * @param MW_Config_Interface $config Configuration object
+	 * @param MW_Config_Iface $config Configuration object
 	 */
-	public function setConfig( MW_Config_Interface $config )
+	public function setConfig( MW_Config_Iface $config )
 	{
 		$this->config = $config;
 	}
@@ -121,7 +121,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return MShop_Config_Interface Configuration object
+	 * @return MShop_Config_Iface Configuration object
 	 */
 	public function getConfig()
 	{
@@ -136,9 +136,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param MW_DB_Manager_Interface $manager Database manager object
+	 * @param MW_DB_Manager_Iface $manager Database manager object
 	 */
-	public function setDatabaseManager( MW_DB_Manager_Interface $manager )
+	public function setDatabaseManager( MW_DB_Manager_Iface $manager )
 	{
 		$this->dbm = $manager;
 	}
@@ -147,7 +147,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return MW_DB_Manager_Interface Database manager object
+	 * @return MW_DB_Manager_Iface Database manager object
 	 */
 	public function getDatabaseManager()
 	{
@@ -163,7 +163,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
 	 * @param string $locale Two letter language ISO code for specific language instead of default one
-	 * @return MW_Translation_Interface Internationalization object
+	 * @return MW_Translation_Iface Internationalization object
 	 */
 	public function getI18n( $locale = null )
 	{
@@ -182,7 +182,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
-	 * 	MW_Translation_Interface with locale as key
+	 * 	MW_Translation_Iface with locale as key
 	 */
 	public function setI18n( array $translations )
 	{
@@ -193,9 +193,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the localization object.
 	 *
-	 * @param MShop_Locale_Item_Interface $locale Localization object
+	 * @param MShop_Locale_Item_Iface $locale Localization object
 	 */
-	public function setLocale( MShop_Locale_Item_Interface $locale )
+	public function setLocale( MShop_Locale_Item_Iface $locale )
 	{
 		$this->locale = $locale;
 	}
@@ -204,7 +204,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the localization object.
 	 *
-	 * @return MShop_Locale_Item_Interface Localization object
+	 * @return MShop_Locale_Item_Iface Localization object
 	 */
 	public function getLocale()
 	{
@@ -219,9 +219,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the logger object.
 	 *
-	 * @param MW_Logger_Interface $logger Logger object
+	 * @param MW_Logger_Iface $logger Logger object
 	 */
-	public function setLogger( MW_Logger_Interface $logger )
+	public function setLogger( MW_Logger_Iface $logger )
 	{
 		$this->logger = $logger;
 	}
@@ -230,7 +230,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the logger object.
 	 *
-	 * @return MW_Logger_Interface Logger object
+	 * @return MW_Logger_Iface Logger object
 	 */
 	public function getLogger()
 	{
@@ -245,9 +245,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the session object.
 	 *
-	 * @param MW_Session_Interface $session Session object
+	 * @param MW_Session_Iface $session Session object
 	 */
-	public function setSession( MW_Session_Interface $session )
+	public function setSession( MW_Session_Iface $session )
 	{
 		$this->session = $session;
 	}
@@ -256,7 +256,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the session object.
 	 *
-	 * @return MW_Session_Interface Session object
+	 * @return MW_Session_Iface Session object
 	 */
 	public function getSession()
 	{
@@ -271,9 +271,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the mail object.
 	 *
-	 * @param MW_Mail_Interface $mail Mail object
+	 * @param MW_Mail_Iface $mail Mail object
 	 */
-	public function setMail( MW_Mail_Interface $mail )
+	public function setMail( MW_Mail_Iface $mail )
 	{
 		$this->mail = $mail;
 	}
@@ -282,7 +282,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the mail object.
 	 *
-	 * @return MW_Mail_Interface Mail object
+	 * @return MW_Mail_Iface Mail object
 	 */
 	public function getMail()
 	{
@@ -297,9 +297,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the view object.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 */
-	public function setView( MW_View_Interface $view )
+	public function setView( MW_View_Iface $view )
 	{
 		$this->view = $view;
 	}
@@ -308,7 +308,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the view object.
 	 *
-	 * @return MW_View_Interface View object
+	 * @return MW_View_Iface View object
 	 */
 	public function getView()
 	{

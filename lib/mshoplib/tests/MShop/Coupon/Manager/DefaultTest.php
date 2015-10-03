@@ -54,21 +54,21 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$attribs = $this->object->getSearchAttributes();
 		foreach( $attribs as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $obj );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Coupon_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Coupon_Item_Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'code' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'code', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'code' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'code', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );
@@ -168,7 +168,7 @@ class MShop_Coupon_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$item->setProvider( 'Present,Example' );
 		$provider = $this->object->getProvider( $item, 'abcd' );
 
-		$this->assertInstanceOf( 'MShop_Coupon_Provider_Interface', $provider );
+		$this->assertInstanceOf( 'MShop_Coupon_Provider_Iface', $provider );
 		$this->assertInstanceOf( 'MShop_Coupon_Provider_Decorator_Example', $provider );
 
 

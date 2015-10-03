@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Csrf_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $name;
 	private $value;
@@ -26,7 +26,7 @@ class MW_View_Helper_Csrf_Default
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 * @param string $name CSRF token name
 	 * @param string $value CSRF token value
 	 */
@@ -46,7 +46,7 @@ class MW_View_Helper_Csrf_Default
 	/**
 	 * Returns the CSRF partial object.
 	 *
-	 * @return MW_View_Helper_Interface CSRF partial object
+	 * @return MW_View_Helper_Iface CSRF partial object
 	 */
 	public function transform()
 	{

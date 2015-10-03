@@ -83,7 +83,7 @@ class Client_Html_Basket_Related_Bought_DefaultTest extends PHPUnit_Framework_Te
 
 	/**
 	 * @param string $code
-	 * @return MShop_Order_Item_Base_Product_Interface
+	 * @return MShop_Order_Item_Base_Product_Iface
 	 */
 	protected function getOrderProductItem( $code )
 	{

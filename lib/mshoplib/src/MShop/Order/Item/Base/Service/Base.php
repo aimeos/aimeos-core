@@ -15,7 +15,7 @@
  */
 abstract class MShop_Order_Item_Base_Service_Base
 	extends MShop_Common_Item_Base
-	implements MShop_Order_Item_Base_Service_Interface
+	implements MShop_Order_Item_Base_Service_Iface
 {
 	/**
 	 * Delivery service.

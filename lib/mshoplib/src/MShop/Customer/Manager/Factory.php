@@ -16,18 +16,18 @@
  */
 class MShop_Customer_Manager_Factory
 	extends MShop_Common_Factory_Base
-	implements MShop_Common_Factory_Interface
+	implements MShop_Common_Factory_Iface
 {
 	/**
 	 * Creates a customer DAO object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 * @throws MShop_Customer_Exception|MShop_Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/customer/manager/name
 		 * Class name of the used customer manager implementation
@@ -72,7 +72,7 @@ class MShop_Customer_Manager_Factory
 			throw new MShop_Customer_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Customer_Manager_Interface';
+		$iface = 'MShop_Customer_Manager_Iface';
 		$classname = 'MShop_Customer_Manager_' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );

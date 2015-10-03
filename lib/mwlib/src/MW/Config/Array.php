@@ -16,7 +16,7 @@
  */
 class MW_Config_Array
 	extends MW_Config_Base
-	implements MW_Config_Interface
+	implements MW_Config_Iface
 {
 	private $config;
 	private $paths;

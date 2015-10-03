@@ -29,21 +29,21 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Initializes the shopping cart.
 	 *
-	 * @param MShop_Price_Item_Interface $price Default price of the basket (usually 0.00)
-	 * @param MShop_Locale_Item_Interface $locale Locale item containing the site, language and currency
+	 * @param MShop_Price_Item_Iface $price Default price of the basket (usually 0.00)
+	 * @param MShop_Locale_Item_Iface $locale Locale item containing the site, language and currency
 	 * @param array $values Associative list of key/value pairs containing
 	 * 	e.g. the order or user ID
 	 */
-	public function __construct( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
+	public function __construct( MShop_Price_Item_Iface $price, MShop_Locale_Item_Iface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Address_Interface', $addresses );
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Interface', $services );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $products );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Address_Iface', $addresses );
+		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Service_Iface', $services );
 
 		foreach( $coupons as $couponProducts ) {
-			MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $couponProducts );
+			MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $couponProducts );
 		}
 
 		$this->price = $price;
@@ -190,7 +190,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Returns the locales for the basic order item.
 	 *
-	 * @return MShop_Locale_Item_Interface Object containing information
+	 * @return MShop_Locale_Item_Iface Object containing information
 	 *  about site, language, country and currency
 	 */
 	public function getLocale()
@@ -202,10 +202,10 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Sets the locales for the basic order item.
 	 *
-	 * @param MShop_Locale_Item_Interface $locale Object containing information
+	 * @param MShop_Locale_Item_Iface $locale Object containing information
 	 *  about site, language, country and currency
 	 */
-	public function setLocale( MShop_Locale_Item_Interface $locale )
+	public function setLocale( MShop_Locale_Item_Iface $locale )
 	{
 		$this->notifyListeners( 'setLocale.before', $locale );
 
@@ -219,7 +219,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Returns the product items that are or should be part of an (future) order.
 	 *
-	 * @return array Array of order product items implementing MShop_Order_Item_Base_Product_Interface
+	 * @return array Array of order product items implementing MShop_Order_Item_Base_Product_Iface
 	 */
 	public function getProducts()
 	{
@@ -231,7 +231,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Returns the product item of an (future) order specified by its key.
 	 *
 	 * @param integer $key Key returned by getProducts() identifying the requested product
-	 * @return MShop_Order_Item_Base_Product_Interface Product item of an order
+	 * @return MShop_Order_Item_Base_Product_Iface Product item of an order
 	 */
 	public function getProduct( $key )
 	{
@@ -247,11 +247,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Adds an order product item to the (future) order.
 	 * If a similar item is found, only the quantity is increased.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item to be added
+	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
 	 * @return integer Position the product item was inserted at
 	 */
-	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null )
+	public function addProduct( MShop_Order_Item_Base_Product_Iface $item, $position = null )
 	{
 		$this->checkProduct( $item );
 		$this->checkPrice( $item->getPrice() );
@@ -330,7 +330,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Returns all addresses that are part of the basket.
 	 *
 	 * @return array Associative list of address items implementing
-	 *  MShop_Order_Item_Base_Address_Interface with "billing" or "delivery" as key
+	 *  MShop_Order_Item_Base_Address_Iface with "billing" or "delivery" as key
 	 */
 	public function getAddresses()
 	{
@@ -342,7 +342,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Returns the billing or delivery address depending on the given domain.
 	 *
 	 * @param string $domain Address domain, usually "billing" or "delivery"
-	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
+	 * @return MShop_Order_Item_Base_Address_Iface Order address item for the requested domain
 	 */
 	public function getAddress( $domain = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT )
 	{
@@ -357,11 +357,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
 	 *
-	 * @param MShop_Order_Item_Base_Address_Interface $address Order address item for the given domain
+	 * @param MShop_Order_Item_Base_Address_Iface $address Order address item for the given domain
 	 * @param string $domain Address domain, usually "billing" or "delivery"
-	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
+	 * @return MShop_Order_Item_Base_Address_Iface Item that was really added to the basket
 	 */
-	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
+	public function setAddress( MShop_Order_Item_Base_Address_Iface $address,
 		$domain = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT )
 	{
 		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return; }
@@ -405,7 +405,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Returns all services that are part of the basket.
 	 *
-	 * @return array Associative list of service items implementing MShop_Order_Service_Interface
+	 * @return array Associative list of service items implementing MShop_Order_Service_Iface
 	 *  with "delivery" or "payment" as key
 	 */
 	public function getServices()
@@ -418,7 +418,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Returns the delivery or payment service depending on the given type.
 	 *
 	 * @param string $type Service type code like 'payment', 'delivery', etc.
-	 * @return MShop_Order_Item_Base_Serive_Interface Order service item for the requested type
+	 * @return MShop_Order_Item_Base_Serive_Iface Order service item for the requested type
 	 */
 	public function getService( $type )
 	{
@@ -433,11 +433,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Sets a service as delivery or payment service for an order.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $service Order service item for the given domain
+	 * @param MShop_Order_Item_Base_Service_Iface $service Order service item for the given domain
 	 * @param string $type Service type
-	 * @return MShop_Order_Item_Base_Service_Interface Item that was really added to the basket
+	 * @return MShop_Order_Item_Base_Service_Iface Item that was really added to the basket
 	 */
-	public function setService( MShop_Order_Item_Base_Service_Interface $service, $type )
+	public function setService( MShop_Order_Item_Base_Service_Iface $service, $type )
 	{
 		$this->checkPrice( $service->getPrice() );
 
@@ -479,7 +479,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Returns the available coupon codes and the lists of affected product items.
 	 *
 	 * @return array Associative array of codes and lists of product items
-	 *  implementing MShop_Order_Product_Interface
+	 *  implementing MShop_Order_Product_Iface
 	 */
 	public function getCoupons()
 	{
@@ -491,7 +491,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @param MShop_Order_Item_Base_Product_Interface[] $products List of coupon products
+	 * @param MShop_Order_Item_Base_Product_Iface[] $products List of coupon products
 	 */
 	public function addCoupon( $code, array $products = array() )
 	{
@@ -524,7 +524,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 *
 	 * @param string $code Coupon code
 	 * @param boolean $removecode If the coupon code should also be removed
-	 * @return array List of affected product items implementing MShop_Order_Item_Base_Product_Interface
+	 * @return array List of affected product items implementing MShop_Order_Item_Base_Product_Iface
 	 *  or an empty list if no products are affected by a coupon
 	 */
 	public function deleteCoupon( $code, $removecode = false )
@@ -593,7 +593,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Returns a price item with amounts calculated for the products, costs, etc.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, costs and rebate the customer has to pay
+	 * @return MShop_Price_Item_Iface Price item with price, costs and rebate the customer has to pay
 	 */
 	public function getPrice()
 	{
@@ -763,9 +763,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	/**
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
-	 * @param MShop_Price_Item_Interface $item Price item
+	 * @param MShop_Price_Item_Iface $item Price item
 	 */
-	protected function checkPrice( MShop_Price_Item_Interface $item )
+	protected function checkPrice( MShop_Price_Item_Iface $item )
 	{
 		$price = clone $this->price;
 		$price->addItem( $item );
@@ -777,11 +777,11 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Base
 	 * Similarity is described by the equality of properties so the quantity of
 	 * the existing product can be updated.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
 	 * @return integer Positon of the same product in the product list
 	 * @throws MShop_Order_Exception If no similar item was found
 	 */
-	protected function getSameProduct( MShop_Order_Item_Base_Product_Interface $item )
+	protected function getSameProduct( MShop_Order_Item_Base_Product_Iface $item )
 	{
 		$attributeMap = array();
 

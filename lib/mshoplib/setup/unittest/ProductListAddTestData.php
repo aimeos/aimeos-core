@@ -48,7 +48,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -261,7 +261,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Returns the product tag test data.
 	 *
-	 * @param MShop_Product_Manager_Interface $productManager Product Manager
+	 * @param MShop_Product_Manager_Iface $productManager Product Manager
 	 * @param array $keys List of keys for tag lookup
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
@@ -298,7 +298,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 * Adds the product-list test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Product_Manager_Interface $productManager Product Manager
+	 * @param MShop_Product_Manager_Iface $productManager Product Manager
 	 * @param array $refIds Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
@@ -350,11 +350,11 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the list types from the test data and returns their IDs.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Product list manager
+	 * @param MShop_Common_Manager_Iface $manager Product list manager
 	 * @param array $testdata Test data
 	 * @param array List of type IDs
 	 */
-	private function addListTypeData( MShop_Common_Manager_Interface $manager, array $testdata )
+	private function addListTypeData( MShop_Common_Manager_Iface $manager, array $testdata )
 	{
 		$listItemTypeIds = array();
 		$productListTypeManager = $manager->getSubmanager( 'type', 'Default' );
@@ -379,11 +379,11 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Returns the product IDs from the test data.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Product manager
+	 * @param MShop_Common_Manager_Iface $manager Product manager
 	 * @param array $testdata Test data
 	 * @throws MW_Setup_Exception
 	 */
-	private function getProductIds( MShop_Common_Manager_Interface $manager, array $testdata )
+	private function getProductIds( MShop_Common_Manager_Iface $manager, array $testdata )
 	{
 		$parentCodes = $parentIds = array();
 
@@ -412,11 +412,11 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Returns the referenced product IDs from the test data.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Product manager
+	 * @param MShop_Common_Manager_Iface $manager Product manager
 	 * @param string[] keys Unique keys to identify the products
 	 * @throws MW_Setup_Exception
 	 */
-	private function getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )
+	private function getProductRefIds( MShop_Common_Manager_Iface $manager, array $keys )
 	{
 		$codes = $refIds = array();
 

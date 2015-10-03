@@ -68,7 +68,7 @@ class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testGetContext()
 	{
-		$this->assertInstanceOf( 'MShop_Context_Item_Interface', $this->object->getContextPublic() );
+		$this->assertInstanceOf( 'MShop_Context_Item_Iface', $this->object->getContextPublic() );
 	}
 
 

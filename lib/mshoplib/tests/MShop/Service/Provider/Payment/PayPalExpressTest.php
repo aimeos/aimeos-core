@@ -130,7 +130,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
+		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Iface', $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( array(), $helperForm->getValues() );
@@ -167,7 +167,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			'orderid' => $this->order->getId()
 		);
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->object->updateSync( $response ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Iface', $this->object->updateSync( $response ) );
 
 		//IPN Call
 		$price = $orderBaseManager->getItem( $this->order->getBaseId() )->getPrice();
@@ -208,7 +208,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		);
 
 		$orderItem = $this->object->updateSync( $response );
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $orderItem );
+		$this->assertInstanceOf( 'MShop_Order_Item_Iface', $orderItem );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();

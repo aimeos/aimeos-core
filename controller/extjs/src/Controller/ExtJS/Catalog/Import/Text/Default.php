@@ -16,14 +16,14 @@
  */
 class Controller_ExtJS_Catalog_Import_Text_Default
 	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Interface
+	implements Controller_ExtJS_Common_Load_Text_Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Catalog_Import_Text' );
 	}
@@ -262,11 +262,11 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	/**
 	 * Associates the texts with the products.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.) for associating the list items
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
+	protected function importReferences( MShop_Common_Manager_Iface $manager, array $itemTextMap, $domain )
 	{
 		$catalogStart = $catalogTotal = 0;
 		$listManager = $manager->getSubManager( 'list' );
@@ -315,7 +315,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 			{
 				try
 				{
-					$iface = 'MShop_Common_Item_Type_Interface';
+					$iface = 'MShop_Common_Item_Type_Iface';
 					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
 						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
 					}

@@ -22,9 +22,9 @@ abstract class Controller_Frontend_Base
 	/**
 	 * Common initialization for controller classes.
 	 *
-	 * @param MShop_Context_Item_Interface $context Common MShop context object
+	 * @param MShop_Context_Item_Iface $context Common MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -33,7 +33,7 @@ abstract class Controller_Frontend_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface context object implementing MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Iface context object implementing MShop_Context_Item_Iface
 	 */
 	protected function getContext()
 	{

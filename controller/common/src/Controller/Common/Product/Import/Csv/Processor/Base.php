@@ -26,12 +26,12 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
-	 * @param Controller_Common_Product_Import_Csv_Processor_Interface $object Decorated processor
+	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $object Decorated processor
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Interface $object = null )
+	public function __construct( MShop_Context_Item_Iface $context, array $mapping,
+		Controller_Common_Product_Import_Csv_Processor_Iface $object = null )
 	{
 		$this->context = $context;
 		$this->mapping = $mapping;
@@ -63,7 +63,7 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Returns the context item
 	 *
-	 * @return MShop_Context_Item_Interface Context object
+	 * @return MShop_Context_Item_Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -85,7 +85,7 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Returns the decorated processor object
 	 *
-	 * @return Controller_Common_Product_Import_Csv_Processor_Interface Processor object
+	 * @return Controller_Common_Product_Import_Csv_Processor_Iface Processor object
 	 * @throws Controller_Jobs_Exception If no processor object is available
 	 */
 	protected function getObject()

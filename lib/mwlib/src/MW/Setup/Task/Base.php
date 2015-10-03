@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-abstract class MW_Setup_Task_Base implements MW_Setup_Task_Interface
+abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 {
 	private $connections = array();
 	private $schemas = array();
@@ -30,11 +30,11 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Interface
 	/**
 	 * Initializes the task object.
 	 *
-	 * @param MW_Setup_DBSchema_Interface $schema Database schema object
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param MW_Setup_DBSchema_Iface $schema Database schema object
+	 * @param MW_DB_Connection_Iface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
 	 */
-	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
+	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
 	{
 		$this->schema = $schema;
 		$this->conn = $conn;
@@ -143,7 +143,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Interface
 	 * Returns the connection specified by the given resource name.
 	 *
 	 * @param string $name Name from resource configuration
-	 * @return MW_DB_Connection_Interface
+	 * @return MW_DB_Connection_Iface
 	 */
 	protected function getConnection( $name )
 	{
@@ -159,7 +159,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Interface
 	 * Returns the schemas specified by the given resource name.
 	 *
 	 * @param string $name Name from resource configuration
-	 * @return MW_Setup_DBSchema_Interface
+	 * @return MW_Setup_DBSchema_Iface
 	 */
 	protected function getSchema( $name )
 	{

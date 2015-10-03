@@ -11,7 +11,7 @@ class Controller_ExtJS_Order_Base_Address_FactoryTest extends PHPUnit_Framework_
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Order_Base_Address_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Iface', $obj );
 	}
 
 

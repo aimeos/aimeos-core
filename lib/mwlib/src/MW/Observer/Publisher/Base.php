@@ -15,7 +15,7 @@
  * @subpackage Observer
  */
 
-abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Interface
+abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Iface
 {
 	private $listeners = array();
 
@@ -23,10 +23,10 @@ abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Inter
 	/**
 	 * Adds a listener object to the publisher.
 	 *
-	 * @param MW_Observer_Listener_Interface $l Object implementing listener interface
+	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to listen for
 	 */
-	public function addListener( MW_Observer_Listener_Interface $l, $action )
+	public function addListener( MW_Observer_Listener_Iface $l, $action )
 	{
 		$this->listeners[$action][] = $l;
 	}
@@ -35,10 +35,10 @@ abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Inter
 	/**
 	 * Removes a listener from the publisher object.
 	 *
-	 * @param MW_Observer_Listener_Interface $l Object implementing listener interface
+	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to remove the listener from
 	 */
-	public function removeListener( MW_Observer_Listener_Interface $l, $action )
+	public function removeListener( MW_Observer_Listener_Iface $l, $action )
 	{
 		if( isset( $this->listeners[$action] ) )
 		{

@@ -50,29 +50,29 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->object->createItem();
 
-		$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $item );
 		$this->assertEquals( TestHelper::getContext()->getLocale()->getSiteId(), $item->getNode()->siteid );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch( true ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
 
 	public function testRegisterItemFilter()
 	{
-		$callback = function( MShop_Common_Item_ListRef_Interface $item, $index )
+		$callback = function( MShop_Common_Item_ListRef_Iface $item, $index )
 		{
 			return true;
 		};
@@ -133,7 +133,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $items ) );
 
 		foreach( $items as $itemId => $item ) {
-			$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $item );
+			$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $item );
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 
@@ -255,7 +255,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals( 2, count( $this->object->getTree()->getChildren() ) );
 
-		$callback = function( MShop_Common_Item_ListRef_Interface $item, $index )
+		$callback = function( MShop_Common_Item_ListRef_Iface $item, $index )
 		{
 			return (bool) $index % 2;
 		};
@@ -357,7 +357,7 @@ class MShop_Catalog_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$target = 'MShop_Common_Manager_Interface';
+		$target = 'MShop_Common_Manager_Iface';
 		$this->assertInstanceOf( $target, $this->object->getSubManager( 'list' ) );
 		$this->assertInstanceOf( $target, $this->object->getSubManager( 'list', 'Default' ) );
 

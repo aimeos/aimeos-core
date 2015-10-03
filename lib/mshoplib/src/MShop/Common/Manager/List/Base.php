@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Manager_List_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_List_Interface
+	implements MShop_Common_Manager_List_Iface
 {
 	private $prefix;
 	private $configPath;
@@ -26,11 +26,11 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Creates the common list manager using the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 *
 	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->configPath = $this->getConfigPath();
 		$this->searchConfig = $this->getSearchConfig();
@@ -54,11 +54,11 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param MW_Common_Criteria_Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
 		$required = array( trim( $this->prefix, '.' ) );
 		return $this->aggregateBase( $search, $key, $this->configPath . 'aggregate', $required );
@@ -68,7 +68,7 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Creates new common list item object.
 	 *
-	 * @return MShop_Common_Item_List_Interface New list item object
+	 * @return MShop_Common_Item_List_Iface New list item object
 	 */
 	public function createItem()
 	{
@@ -81,12 +81,12 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Updates or adds a common list item object.
 	 *
-	 * @param MShop_Common_Item_List_Interface $item List item object which should be saved
+	 * @param MShop_Common_Item_List_Iface $item List item object which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_List_Interface';
+		$iface = 'MShop_Common_Item_List_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -170,7 +170,7 @@ abstract class MShop_Common_Manager_List_Base
 	 *
 	 * @param integer $id Id of common list item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_List_Interface Returns common list item object of the given id
+	 * @return MShop_Common_Item_List_Iface Returns common list item object of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -303,14 +303,14 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Search for all list items based on the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing MShop_Common_Item_List_Interface
+	 * @return array List of list items implementing MShop_Common_Item_List_Iface
 	 * @throws MShop_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 
@@ -380,15 +380,15 @@ abstract class MShop_Common_Manager_List_Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
-	 *	of IDs and items implementing MShop_Common_Item_Interface
+	 *	of IDs and items implementing MShop_Common_Item_Iface
 	 * @throws MShop_Exception If creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
-	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = array();
 		$context = $this->getContext();
@@ -450,7 +450,7 @@ abstract class MShop_Common_Manager_List_Base
 	 * Creates a search object including the base criteria (optionally).
 	 *
 	 * @param boolean $default Include default criteria
-	 * @return MW_Common_Criteria_Interface Critera object
+	 * @return MW_Common_Criteria_Iface Critera object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -488,7 +488,7 @@ abstract class MShop_Common_Manager_List_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g type, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

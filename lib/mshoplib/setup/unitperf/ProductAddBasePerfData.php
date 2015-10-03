@@ -14,9 +14,9 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	private $count = 9000;
 
 
-	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
+	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -134,7 +134,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Interface Type item
+	 * @return MShop_Common_Item_Type_Iface Type item
 	 * @throws Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )

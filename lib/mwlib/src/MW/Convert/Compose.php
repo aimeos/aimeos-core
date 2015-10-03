@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Compose implements MW_Convert_Interface
+class MW_Convert_Compose implements MW_Convert_Iface
 {
 	private $converter;
 

@@ -28,7 +28,7 @@ class MW_Cache_FactoryTest extends PHPUnit_Framework_TestCase
 		);
 
 		$object = MW_Cache_Factory::createManager( 'DB', $config, TestHelper::getDBManager() );
-		$this->assertInstanceOf( 'MW_Cache_Interface', $object );
+		$this->assertInstanceOf( 'MW_Cache_Iface', $object );
 	}
 
 

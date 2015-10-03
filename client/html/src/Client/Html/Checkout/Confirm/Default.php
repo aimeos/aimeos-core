@@ -16,7 +16,7 @@
  */
 class Client_Html_Checkout_Confirm_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/checkout/confirm/default/subparts
 	 * List of HTML sub-clients rendered within the checkout confirm section
@@ -231,7 +231,7 @@ class Client_Html_Checkout_Confirm_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -381,7 +381,7 @@ class Client_Html_Checkout_Confirm_Default
 	 *
 	 * @param string $code Unique service code
 	 * @throws Client_Html_Exception If no payment service item could be found
-	 * @return MShop_Service_Provider_Interface Service provider object
+	 * @return MShop_Service_Provider_Iface Service provider object
 	 */
 	protected function getServiceProvider( $code )
 	{
@@ -420,12 +420,12 @@ class Client_Html_Checkout_Confirm_Default
 	/**
 	 * Returns the URL to the confirm page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
@@ -439,12 +439,12 @@ class Client_Html_Checkout_Confirm_Default
 	/**
 	 * Returns the URL to the update page.
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
@@ -458,12 +458,12 @@ class Client_Html_Checkout_Confirm_Default
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param MW_View_Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -486,11 +486,11 @@ class Client_Html_Checkout_Confirm_Default
 	/**
 	 * Updates the payment status for the given order ID and returns the order item
 	 *
-	 * @param MW_View_Interface $view View object of the HTML client
+	 * @param MW_View_Iface $view View object of the HTML client
 	 * @param string $orderid ID of the order whose payment status should be updated
-	 * @return void|MShop_Order_Item_Interface Order item that has been updated
+	 * @return void|MShop_Order_Item_Iface Order item that has been updated
 	 */
-	protected function updatePayment( MW_View_Interface $view, $orderid )
+	protected function updatePayment( MW_View_Iface $view, $orderid )
 	{
 		if( ( $code = $view->param( 'code' ) ) === null ) {
 			return;

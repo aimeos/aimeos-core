@@ -16,7 +16,7 @@
  */
 abstract class MShop_Order_Item_Base_Base
 	extends MW_Observer_Publisher_Base
-	implements MShop_Order_Item_Base_Interface
+	implements MShop_Order_Item_Base_Iface
 {
 	/**
 	 * Check no basket content.
@@ -69,10 +69,10 @@ abstract class MShop_Order_Item_Base_Base
 	/**
 	 * Checks if a order product contains all required values.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
 	 * @throws MShop_Exception if the price item or product code is missing
 	 */
-	protected function checkProduct( MShop_Order_Item_Base_Product_Interface $item )
+	protected function checkProduct( MShop_Order_Item_Base_Product_Iface $item )
 	{
 		if( $item->getProductCode() === '' ) {
 			throw new MShop_Order_Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );

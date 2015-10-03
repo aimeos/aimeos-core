@@ -16,15 +16,15 @@
  */
 class MShop_Coupon_Provider_Decorator_BasketValues
 	extends MShop_Coupon_Provider_Decorator_Base
-	implements MShop_Coupon_Provider_Decorator_Interface
+	implements MShop_Coupon_Provider_Decorator_Iface
 {
 	/**
 	 * Checks for the min/max order value.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
 	 * @return boolean True if the basket matches the constraints, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( MShop_Order_Item_Base_Iface $base )
 	{
 		$price = $base->getPrice();
 		$currency = $price->getCurrencyId();

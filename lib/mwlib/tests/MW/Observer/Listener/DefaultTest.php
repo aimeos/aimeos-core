@@ -49,13 +49,13 @@ class MW_Observer_Listener_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 
-class MW_Observer_Listener_Test implements MW_Observer_Listener_Interface
+class MW_Observer_Listener_Test implements MW_Observer_Listener_Iface
 {
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( MW_Observer_Publisher_Iface $p )
 	{
 	}
 
-	public function update( MW_Observer_Publisher_Interface $p, $action, $value = null )
+	public function update( MW_Observer_Publisher_Iface $p, $action, $value = null )
 	{
 		if ($action == 'test') {
 			return false;

@@ -16,7 +16,7 @@
  */
 class MShop_Coupon_Manager_Default
 	extends MShop_Coupon_Manager_Base
-	implements MShop_Coupon_Manager_Interface
+	implements MShop_Coupon_Manager_Iface
 {
 	private $searchConfig = array(
 		'coupon.id'=> array(
@@ -103,9 +103,9 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-coupon' );
@@ -132,7 +132,7 @@ class MShop_Coupon_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -162,7 +162,7 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Creates a new empty coupon item instance
 	 *
-	 * @return MShop_Coupon_Item_Interface Creates a blank coupon item
+	 * @return MShop_Coupon_Item_Iface Creates a blank coupon item
 	 */
 	public function createItem()
 	{
@@ -176,7 +176,7 @@ class MShop_Coupon_Manager_Default
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Coupon_Item_Interface Returns the coupon item of the given ID
+	 * @return MShop_Coupon_Item_Iface Returns the coupon item of the given ID
 	 * @throws MShop_Exception If coupon couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -188,13 +188,13 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Saves a coupon item to the storage.
 	 *
-	 * @param MShop_Coupon_Item_Interface $item Coupon implementing the coupon interface
+	 * @param MShop_Coupon_Item_Iface $item Coupon implementing the coupon interface
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Coupon_Exception If coupon couldn't be saved
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Coupon_Item_Interface';
+		$iface = 'MShop_Coupon_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -382,16 +382,16 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array Returns a list of coupon items implementing MShop_Coupon_Item_Interface
+	 * @return array Returns a list of coupon items implementing MShop_Coupon_Item_Iface
 	 *
 	 * @throws MW_DB_Exception On failures with the db object
 	 * @throws MShop_Common_Exception On failures with the MW_Common_Criteria_ object
 	 * @throws MShop_Coupon_Exception On failures with the coupon items
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -543,7 +543,7 @@ class MShop_Coupon_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_List_Interface List manager
+	 * @return MShop_Common_Manager_List_Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -554,11 +554,11 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Returns the coupon model which belongs to the given code.
 	 *
-	 * @param MShop_Coupon_Item_Interface $item Coupon item interface
-	 * @return MShop_Coupon_Provider_Interface Returns a coupon provider instance
+	 * @param MShop_Coupon_Item_Iface $item Coupon item interface
+	 * @return MShop_Coupon_Provider_Iface Returns a coupon provider instance
 	 * @throws MShop_Coupon_Exception If coupon couldn't be found
 	 */
-	public function getProvider( MShop_Coupon_Item_Interface $item, $code )
+	public function getProvider( MShop_Coupon_Item_Iface $item, $code )
 	{
 		$names = explode( ',', $item->getProvider() );
 
@@ -570,7 +570,7 @@ class MShop_Coupon_Manager_Default
 			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
 		}
 
-		$interface = 'MShop_Coupon_Provider_Factory_Interface';
+		$interface = 'MShop_Coupon_Provider_Factory_Iface';
 		$classname = 'MShop_Coupon_Provider_' . $providername;
 
 		if( class_exists( $classname ) === false ) {
@@ -624,7 +624,7 @@ class MShop_Coupon_Manager_Default
 	 * Creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{

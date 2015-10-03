@@ -16,7 +16,7 @@
  */
 class Controller_Jobs_Order_Service_Delivery_Default
 	extends Controller_Jobs_Base
-	implements Controller_Jobs_Interface
+	implements Controller_Jobs_Iface
 {
 	/**
 	 * Returns the localized name of the job.

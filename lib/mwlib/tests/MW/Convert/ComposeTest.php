@@ -12,7 +12,7 @@ class MW_Convert_ComposeTest extends PHPUnit_Framework_TestCase
 
 		$object = new MW_Convert_Compose( $list );
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 		$this->assertEquals( '2000-01-02 00:00:00', $object->translate( '01/02/2000' ) );
 	}
 
@@ -26,7 +26,7 @@ class MW_Convert_ComposeTest extends PHPUnit_Framework_TestCase
 
 		$object = new MW_Convert_Compose( $list );
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( 'MW_Convert_Iface', $object );
 		$this->assertEquals( '01/02/2000 00:00:00 AM', $object->reverse( '2000-01-02 00:00:00' ) );
 	}
 }

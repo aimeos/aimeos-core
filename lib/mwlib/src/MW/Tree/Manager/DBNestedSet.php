@@ -66,11 +66,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 *		SELECT LAST_INSERT_ID()
 	 *
 	 * @param array $config Associative array holding the SQL statements
-	 * @param MW_DB_Manager_Interface $resource Database manager
+	 * @param MW_DB_Manager_Iface $resource Database manager
 	 */
 	public function __construct( array $config, $resource )
 	{
-		if( !( $resource instanceof MW_DB_Manager_Interface ) ) {
+		if( !( $resource instanceof MW_DB_Manager_Iface ) ) {
 			throw new MW_Tree_Exception( 'Given resource isn\'t a database manager object' );
 		}
 
@@ -95,7 +95,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return array List of search attribute objects implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of search attribute objects implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes()
 	{
@@ -112,7 +112,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return MW_Common_Criteria_Interface Search object instance
+	 * @return MW_Common_Criteria_Iface Search object instance
 	 */
 	public function createSearch()
 	{
@@ -127,7 +127,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Creates a new node object.
 	 *
-	 * @return MW_Tree_Node_Interface Empty node object
+	 * @return MW_Tree_Node_Iface Empty node object
 	 */
 	public function createNode()
 	{
@@ -183,10 +183,10 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * * @param MW_Common_Criteria_Interface|null $condition Optional criteria object with conditions
-	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
+	 * * @param MW_Common_Criteria_Iface|null $condition Optional criteria object with conditions
+	 * @return MW_Tree_Node_Iface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )
+	public function getNode( $id = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $condition = null )
 	{
 		if( $id === null )
 		{
@@ -258,11 +258,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
-	 * @param MW_Tree_Node_Interface $node New node that should be inserted
+	 * @param MW_Tree_Node_Iface $node New node that should be inserted
 	 * @param mixed $parentId ID of the parent node where the new node should be inserted below (null for root node)
 	 * @param mixed $refId ID of the node where the node should be inserted before (null to append)
 	 */
-	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
+	public function insertNode( MW_Tree_Node_Iface $node, $parentId = null, $refId = null )
 	{
 		$node->parentid = $parentId;
 
@@ -492,9 +492,9 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 * This method does only store values like the node label but doesn't change
 	 * the tree layout by adding, moving or deleting nodes.
 	 *
-	 * @param MW_Tree_Node_Interface $node Tree node object
+	 * @param MW_Tree_Node_Iface $node Tree node object
 	 */
-	public function saveNode( MW_Tree_Node_Interface $node )
+	public function saveNode( MW_Tree_Node_Iface $node )
 	{
 		if( $node->getId() === null ) {
 			throw new MW_Tree_Exception( sprintf( 'Unable to save newly created nodes, use insert method instead' ) );
@@ -528,11 +528,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param MW_Common_Criteria_Iface $search Search criteria object
 	 * @param integer|null $id Search nodes starting at the node with the given ID
-	 * @return array List of nodes implementing MW_Tree_Node_Interface
+	 * @return array List of nodes implementing MW_Tree_Node_Iface
 	 */
-	public function searchNodes( MW_Common_Criteria_Interface $search, $id = null )
+	public function searchNodes( MW_Common_Criteria_Iface $search, $id = null )
 	{
 		$left =  1;
 		$right = 0x7FFFFFFF;
@@ -594,7 +594,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 * Returns a list if node IDs, that are in the path of given node ID.
 	 *
 	 * @param integer $id ID of node to get the path for
-	 * @return array Associative list of nodes implementing MW_Tree_Node_Interface with IDs as keys
+	 * @return array Associative list of nodes implementing MW_Tree_Node_Iface with IDs as keys
 	 */
 	public function getPath( $id )
 	{
@@ -678,8 +678,8 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 * Creates a new node object.
 	 *
 	 * @param array List of attributes that should be stored in the new node
-	 * @param array List of children implementing MW_Tree_Node_Interface
-	 * @return MW_Tree_Node_Interface Empty node object
+	 * @param array List of children implementing MW_Tree_Node_Iface
+	 * @return MW_Tree_Node_Iface Empty node object
 	 */
 	protected function createNodeBase( array $values = array(), array $children = array() )
 	{
@@ -690,11 +690,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Creates a tree from the result set returned by the database.
 	 *
-	 * @param MW_DB_Result_Interface $result Database result
-	 * @param MW_Tree_Node_Interface $node Current node to add children to
-	 * @return MW_Tree_Node_Interface Parent node containing the children
+	 * @param MW_DB_Result_Iface $result Database result
+	 * @param MW_Tree_Node_Iface $node Current node to add children to
+	 * @return MW_Tree_Node_Iface Parent node containing the children
 	 */
-	protected function createTree( MW_DB_Result_Interface $result, MW_Tree_Node_Interface $node )
+	protected function createTree( MW_DB_Result_Iface $result, MW_Tree_Node_Iface $node )
 	{
 		while( ( $record = $result->fetch() ) !== false )
 		{
@@ -719,11 +719,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Tests if the first node is a child of the second node.
 	 *
-	 * @param MW_Tree_Node_Interface $node Node to test
-	 * @param MW_Tree_Node_Interface $parent Parent node
+	 * @param MW_Tree_Node_Iface $node Node to test
+	 * @param MW_Tree_Node_Iface $parent Parent node
 	 * @return boolean True if not is a child of the second node, false if not
 	 */
-	protected function isChild( MW_Tree_Node_Interface $node, MW_Tree_Node_Interface $parent )
+	protected function isChild( MW_Tree_Node_Iface $node, MW_Tree_Node_Iface $parent )
 	{
 		return $node->__get('left') > $parent->__get('left') && $node->__get('right') < $parent->__get('right');
 	}
@@ -757,7 +757,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 * @param string $id Unique ID
 	 * @throws MW_Tree_Exception If node is not found
 	 * @throws Exception If anything unexcepted occurs
-	 * @return MW_Tree_Node_Interface Tree node
+	 * @return MW_Tree_Node_Iface Tree node
 	 */
 	protected function getNodeById( $id )
 	{
@@ -792,7 +792,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	 * Returns the first tree root node depending on the sorting direction.
 	 *
 	 * @param string $sort Sort direction, '+' is ascending, '-' is descending
-	 * @return MW_Tree_Node_Interface|null Tree root node
+	 * @return MW_Tree_Node_Iface|null Tree root node
 	 */
 	protected function getRootNode( $sort = '+' )
 	{

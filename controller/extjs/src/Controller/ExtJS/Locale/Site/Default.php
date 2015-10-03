@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Locale_Site_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Locale_Site_Default
 	/**
 	 * Initializes the site controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Locale_Site' );
 	}
@@ -272,9 +272,9 @@ class Controller_ExtJS_Locale_Site_Default
 	/**
 	 * Creates a list of items with children.
 	 *
-	 * @param MShop_Locale_Item_Site_Interface $item Locale site item
+	 * @param MShop_Locale_Item_Site_Iface $item Locale site item
 	 */
-	protected function createNodeArray( MShop_Locale_Item_Site_Interface $item )
+	protected function createNodeArray( MShop_Locale_Item_Site_Iface $item )
 	{
 		$result = $item->toArray();
 
@@ -292,7 +292,7 @@ class Controller_ExtJS_Locale_Site_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

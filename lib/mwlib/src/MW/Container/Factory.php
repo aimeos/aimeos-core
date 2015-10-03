@@ -31,7 +31,7 @@ class MW_Container_Factory
 			throw new MW_Container_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MW_Container_Interface';
+		$iface = 'MW_Container_Iface';
 		$classname = 'MW_Container_' . $type;
 
 		if( class_exists( $classname ) === false ) {

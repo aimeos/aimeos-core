@@ -16,7 +16,7 @@
  */
 class MW_Translation_Decorator_Memory
 	extends MW_Translation_Decorator_Base
-	implements MW_Translation_Decorator_Interface
+	implements MW_Translation_Decorator_Iface
 {
 	private $translations;
 
@@ -24,12 +24,12 @@ class MW_Translation_Decorator_Memory
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @param MW_Translation_Iface $object Translation object or decorator
 	 * @param array $translations Associative list of domains and singular
 	 * 	strings as key and list of translation number and translations as value:
 	 * 	array( <domain> => array( <singular> => array( <index> => <translations> ) ) )
 	 */
-	public function __construct( MW_Translation_Interface $object, array $translations = array() )
+	public function __construct( MW_Translation_Iface $object, array $translations = array() )
 	{
 		parent::__construct( $object );
 		$this->translations = $translations;

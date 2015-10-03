@@ -62,7 +62,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Iface', $this->object->createItem() );
 	}
 
 
@@ -163,7 +163,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 
@@ -307,17 +307,17 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'coupon' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'coupon', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'coupon' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'coupon', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'product' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'product', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'product' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'product', 'Default' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'service' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'service', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'service' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'service', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );
@@ -351,7 +351,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 			$this->assertNotEquals( '', $code );
 
 			foreach( $products as $product ) {
-				$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Interface', $product );
+				$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Iface', $product );
 			}
 		}
 
@@ -762,7 +762,7 @@ class MShop_Order_Manager_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->object->setSession( $order, 'test' );
 		$session = $this->object->getSession( 'test' );
 
-		$this->assertInstanceof( 'MShop_Order_Item_Base_Interface', $session );
+		$this->assertInstanceof( 'MShop_Order_Item_Base_Iface', $session );
 		$this->assertEquals( 'test comment', $order->getComment() );
 		$this->assertEquals( $order, $session );
 	}

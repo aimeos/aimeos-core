@@ -16,7 +16,7 @@
  */
 abstract class MW_Cache_Base
 	extends MW_Common_Manager_Base
-	implements MW_Cache_Interface
+	implements MW_Cache_Iface
 {
 	/**
 	 * Removes all expired cache entries.

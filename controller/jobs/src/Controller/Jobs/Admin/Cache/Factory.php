@@ -16,17 +16,17 @@
  */
 class Controller_Jobs_Admin_Cache_Factory
 	extends Controller_Jobs_Common_Factory_Base
-	implements Controller_Jobs_Common_Factory_Interface
+	implements Controller_Jobs_Common_Factory_Iface
 {
 	/**
 	 * Creates a new controller specified by the given name.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object required by controllers
+	 * @param MShop_Context_Item_Iface $context Context object required by controllers
 	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
-	 * @return Controller_Jobs_Interface New controller object
+	 * @return Controller_Jobs_Iface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
+	public static function createController( MShop_Context_Item_Iface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/admin/cache/name
 		 * Class name of the used admin cache scheduler controller implementation
@@ -71,7 +71,7 @@ class Controller_Jobs_Admin_Cache_Factory
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Jobs_Interface';
+		$iface = 'Controller_Jobs_Iface';
 		$classname = 'Controller_Jobs_Admin_Cache_' . $name;
 
 		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );

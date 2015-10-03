@@ -39,14 +39,14 @@ class Client_Html_Catalog_Count_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateClient()
 	{
 		$client = Client_Html_Catalog_Count_Factory::createClient( $this->context, $this->templatePaths );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
 		$client = Client_Html_Catalog_Count_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 
 

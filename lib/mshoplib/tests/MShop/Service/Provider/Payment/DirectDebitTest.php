@@ -143,11 +143,11 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
 

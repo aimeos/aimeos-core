@@ -16,7 +16,7 @@
  */
 class MW_View_Helper_Partial_Default
 	extends MW_View_Helper_Base
-	implements MW_View_Helper_Interface
+	implements MW_View_Helper_Iface
 {
 	private $config;
 	private $paths;
@@ -25,11 +25,11 @@ class MW_View_Helper_Partial_Default
 	/**
 	 * Initializes the parital view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param MW_Config_Interface $config Configuration object
+	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param MW_Config_Iface $config Configuration object
 	 * @param array $paths Associative list of base path / relative paths combinations
 	 */
-	public function __construct( MW_View_Interface $view, MW_Config_Interface $config, array $paths )
+	public function __construct( MW_View_Iface $view, MW_Config_Iface $config, array $paths )
 	{
 		parent::__construct( $view );
 

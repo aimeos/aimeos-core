@@ -50,7 +50,7 @@ class MShop_Locale_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSite()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Interface', $this->object->getSite() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->getSite() );
 
 		$wrongobject = new MShop_Locale_Item_Default();
 		$this->setExpectedException( 'MShop_Locale_Exception' );

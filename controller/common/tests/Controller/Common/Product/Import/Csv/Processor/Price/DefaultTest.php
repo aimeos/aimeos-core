@@ -78,7 +78,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_DefaultTest extends P
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -170,7 +170,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_DefaultTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( '2.00', $listItem->getRefItem()->getValue() );
 	}
@@ -264,7 +264,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_DefaultTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( '2.00', $listItem->getRefItem()->getValue() );
@@ -294,7 +294,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_DefaultTest extends P
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );

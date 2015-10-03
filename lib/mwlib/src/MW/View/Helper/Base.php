@@ -13,9 +13,9 @@
  *
  * @method string|array config(string $name = null, string|array $default = null) Returns the config value for the given key
  * @method string date(string $date) Returns the formatted date
- * @method MW_View_Helper_Interface encoder() Returns the encoder object
+ * @method MW_View_Helper_Iface encoder() Returns the encoder object
  * @method string formparam(string|array $names) Returns the name for the HTML form parameter
- * @method MW_Mail_Message_Interface mail() Returns the e-mail message object
+ * @method MW_Mail_Message_Iface mail() Returns the e-mail message object
  * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
  * @method string|array param(string|null $name, string|array $default) Returns the parameter value
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
@@ -32,9 +32,9 @@ abstract class MW_View_Helper_Base
 	/**
 	 * Initializes the view helper classes.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
+	 * @param MW_View_Iface $view View instance with registered view helpers
 	 */
-	public function __construct( MW_View_Interface $view )
+	public function __construct( MW_View_Iface $view )
 	{
 		$this->view = $view;
 	}
@@ -56,9 +56,9 @@ abstract class MW_View_Helper_Base
 	/**
 	 * Sets a new view object for changing views afterwards
 	 *
-	 * @param MW_View_Interface $view View object
+	 * @param MW_View_Iface $view View object
 	 */
-	public function setView( MW_View_Interface $view )
+	public function setView( MW_View_Iface $view )
 	{
 		$this->view = $view;
 	}
@@ -67,7 +67,7 @@ abstract class MW_View_Helper_Base
 	/**
 	 * Returns the view object.
 	 *
-	 * @return MW_View_Interface View object
+	 * @return MW_View_Iface View object
 	 */
 	protected function getView()
 	{

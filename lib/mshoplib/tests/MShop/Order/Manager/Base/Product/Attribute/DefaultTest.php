@@ -51,7 +51,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends PHPUnit_Fra
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
@@ -59,14 +59,14 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends PHPUnit_Fra
 	public function testCreateItem()
 	{
 		$actual = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Attribute_Interface', $actual );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Attribute_Iface', $actual );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch( true ) );
 	}
 
 

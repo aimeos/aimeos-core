@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Communication
  */
-class MW_Communication_Curl implements MW_Communication_Interface
+class MW_Communication_Curl implements MW_Communication_Iface
 {
 
 	/**

@@ -19,7 +19,7 @@
  */
 class MShop_Order_Item_Default
 	extends MShop_Order_Item_Base
-	implements MShop_Order_Item_Interface
+	implements MShop_Order_Item_Iface
 {
 	private $values;
 	private $oldPaymentStatus = MShop_Order_Item_Base::PAY_UNFINISHED;

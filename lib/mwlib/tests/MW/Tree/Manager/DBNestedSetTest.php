@@ -164,7 +164,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
 
 		foreach( $manager->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
@@ -181,7 +181,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->config, $this->dbm );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $manager->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $manager->createSearch() );
 	}
 
 
@@ -197,7 +197,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 3, count( $nodes ) );
 
 		foreach( $nodes as $node ) {
-			$this->assertInstanceOf( 'MW_Tree_Node_Interface', $node );
+			$this->assertInstanceOf( 'MW_Tree_Node_Iface', $node );
 		}
 
 
@@ -211,7 +211,7 @@ class MW_Tree_Manager_DBNestedSetTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $nodes ) );
 
 		foreach( $nodes as $node ) {
-			$this->assertInstanceOf( 'MW_Tree_Node_Interface', $node );
+			$this->assertInstanceOf( 'MW_Tree_Node_Iface', $node );
 		}
 	}
 

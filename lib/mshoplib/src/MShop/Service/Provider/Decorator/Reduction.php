@@ -68,7 +68,7 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -87,10 +87,10 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return MShop_Price_Item_Interface Price item containing the price, shipping, rebate
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
+	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
 	{
 		$config = $this->getServiceItem()->getConfig();
 

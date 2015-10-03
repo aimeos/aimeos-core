@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Coupon_Code_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Initializes the coupon controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Coupon_Code' );
 	}
@@ -274,11 +274,11 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Returns the item populated by the data from the row.
 	 *
-	 * @param MShop_Coupon_Item_Code_Interface $item Empty coupon item
+	 * @param MShop_Coupon_Item_Code_Iface $item Empty coupon item
 	 * @param array $row List of coupon data (code, count, start and end)
-	 * @return MShop_Coupon_Item_Code_Interface Populated coupon item
+	 * @return MShop_Coupon_Item_Code_Iface Populated coupon item
 	 */
-	protected function getItemBase( MShop_Coupon_Item_Code_Interface $item, array $row )
+	protected function getItemBase( MShop_Coupon_Item_Code_Iface $item, array $row )
 	{
 		foreach( $row as $idx => $value ) {
 			$row[$idx] = trim( $value );
@@ -301,7 +301,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{
@@ -327,11 +327,11 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Imports the coupon codes and meta data from the content object.
 	 *
-	 * @param MW_Container_Content_Interface $content Content object with coupon codes and optional meta data
+	 * @param MW_Container_Content_Iface $content Content object with coupon codes and optional meta data
 	 * @param string $couponId Unique ID of the coupon configuration for which the codes should be imported
 	 * @throws Exception If a code or its meta data can't be imported
 	 */
-	protected function importContent( MW_Container_Content_Interface $content, $couponId )
+	protected function importContent( MW_Container_Content_Iface $content, $couponId )
 	{
 		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'coupon/code' );

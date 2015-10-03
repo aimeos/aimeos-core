@@ -14,14 +14,14 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManager()
 	{
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 
 	public function testCreateSubManager()
 	{
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute/list/type' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 

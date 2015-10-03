@@ -17,7 +17,7 @@
 
 class MShop_Coupon_Manager_Code_Default
 	extends MShop_Common_Manager_Base
-	implements MShop_Coupon_Manager_Code_Interface
+	implements MShop_Coupon_Manager_Code_Iface
 {
 	private $searchConfig = array(
 		'coupon.code.id'=> array(
@@ -100,9 +100,9 @@ class MShop_Coupon_Manager_Code_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-coupon' );
@@ -130,7 +130,7 @@ class MShop_Coupon_Manager_Code_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_List_Interface List manager
+	 * @return MShop_Common_Manager_List_Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -251,7 +251,7 @@ class MShop_Coupon_Manager_Code_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -281,7 +281,7 @@ class MShop_Coupon_Manager_Code_Default
 	/**
 	 * Creates a new empty coupon code instance
 	 *
-	 * @return MShop_Coupon_Item_Code_Interface Emtpy coupon code object
+	 * @return MShop_Coupon_Item_Code_Iface Emtpy coupon code object
 	 */
 	public function createItem()
 	{
@@ -294,7 +294,7 @@ class MShop_Coupon_Manager_Code_Default
 	 * Returns the coupon code object specified by its ID.
 	 *
 	 * @param integer $id Unique ID of the coupon code in the storage
-	 * @return MShop_Coupon_Item_Code_Interface Coupon code object
+	 * @return MShop_Coupon_Item_Code_Iface Coupon code object
 	 * @throws MShop_Coupon_Exception If coupon couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -306,13 +306,13 @@ class MShop_Coupon_Manager_Code_Default
 	/**
 	 * Saves a modified code object to the storage.
 	 *
-	 * @param MShop_Coupon_Item_Code_Interface $item Coupon code object
+	 * @param MShop_Coupon_Item_Code_Iface $item Coupon code object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Coupon_Exception If coupon couldn't be saved
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Coupon_Item_Code_Interface';
+		$iface = 'MShop_Coupon_Item_Code_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -503,17 +503,17 @@ class MShop_Coupon_Manager_Code_Default
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * Possible search keys: 'coupon.code.id', 'coupon.code.couponid',
 	 * 'coupon.code.code', 'coupon.code.count'.
 	 *
 	 * @param integer &$total Number of items that are available in total (not yet implemented)
-	 * @return array List of code items implementing MShop_Coupon_Item_Code_Interface's
+	 * @return array List of code items implementing MShop_Coupon_Item_Code_Iface's
 	 * @throws MShop_Coupon_Exception
 	 * @throws MW_Common_Exception
 	 * @throws MW_DB_Exception
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -741,7 +741,7 @@ class MShop_Coupon_Manager_Code_Default
 	/**
 	 * Creates a new code instance
 	 *
-	 * @return MShop_Coupon_Item_Code_Interface Emtpy coupon code object
+	 * @return MShop_Coupon_Item_Code_Iface Emtpy coupon code object
 	 */
 	public function createItemBase( array $values = array() )
 	{
@@ -753,7 +753,7 @@ class MShop_Coupon_Manager_Code_Default
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Interface
+	 * @return MW_Common_Criteria_Iface
 	 */
 	public function createSearch( $default = false )
 	{

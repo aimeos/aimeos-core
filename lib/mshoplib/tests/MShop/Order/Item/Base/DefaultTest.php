@@ -448,7 +448,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 		$item = $this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Iface', $result );
 		$this->assertEquals( $result, $item );
 		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $item->getType() );
 		$this->assertTrue( $item->isModified() );
@@ -499,7 +499,7 @@ class MShop_Order_Item_Base_DefaultTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->setService( $service, $type );
 		$item = $this->object->getService( $type );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $result );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $result );
 		$this->assertEquals( $result, $item );
 		$this->assertEquals( $type, $item->getType() );
 		$this->assertTrue( $item->isModified() );

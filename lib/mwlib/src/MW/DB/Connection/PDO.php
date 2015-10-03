@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connection_Interface
+class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connection_Iface
 {
 	private $connection = null;
 	private $txnumber = 0;
@@ -36,7 +36,7 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connec
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
 	 * @param integer $type Simple or prepared statement type constant from abstract class
-	 * @return MW_DB_Statement_Interface PDO statement object
+	 * @return MW_DB_Statement_Iface PDO statement object
 	 * @throws MW_DB_Exception if type is invalid or the PDO object throws an exception
 	 */
 	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)

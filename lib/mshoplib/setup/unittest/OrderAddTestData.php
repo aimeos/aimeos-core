@@ -47,7 +47,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -92,13 +92,13 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base data.
 	 *
-	 * @param MShop_Locale_Manager_Interface $localeManager Locale Manager
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order Base Manager
+	 * @param MShop_Locale_Manager_Iface $localeManager Locale Manager
+	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function addOrderBaseData( MShop_Common_Manager_Interface $localeManager,
-		MShop_Common_Manager_Interface $orderBaseManager, array $testdata )
+	protected function addOrderBaseData( MShop_Common_Manager_Iface $localeManager,
+		MShop_Common_Manager_Iface $orderBaseManager, array $testdata )
 	{
 		$bases = array();
 		$locale = $localeManager->createItem();
@@ -135,10 +135,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order address data.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager
+	 * @param MShop_Common_Manager_Iface $manager
 	 * @param array $testdata
 	 */
-	protected function addOrderBaseAddressData( MShop_Common_Manager_Interface $manager,
+	protected function addOrderBaseAddressData( MShop_Common_Manager_Iface $manager,
 		array $bases, array $testdata )
 	{
 		$orderAddr = $manager->createItem();
@@ -181,12 +181,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base service data.
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order Base Manager
+	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function addOrderBaseServiceData( MShop_Common_Manager_Interface $orderBaseManager,
+	protected function addOrderBaseServiceData( MShop_Common_Manager_Iface $orderBaseManager,
 		array $bases, array $testdata )
 	{
 		$ordServices = array();
@@ -244,12 +244,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base product data.
 	 *
-	 * @param MShop_Order_Manager_Base_Interface $orderBaseManager Order Base Manager
+	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function addOrderBaseProductData( MShop_Common_Manager_Interface$orderBaseManager,
+	protected function addOrderBaseProductData( MShop_Common_Manager_Iface$orderBaseManager,
 		array $bases, array $testdata )
 	{
 		$ordProds = array();
@@ -321,13 +321,13 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order product attribute test data.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager
+	 * @param MShop_Common_Manager_Iface $manager
 	 * @param array $testdata
 	 * @param array $ordProds
-	 * @param MShop_Product_Item_Interface[] $products
+	 * @param MShop_Product_Item_Iface[] $products
 	 * @throws MW_Setup_Exception
 	 */
-	protected function addOrderBaseProductAttributeData( MShop_Common_Manager_Interface $manager,
+	protected function addOrderBaseProductAttributeData( MShop_Common_Manager_Iface $manager,
 		array $testdata, array $ordProds, array $products )
 	{
 		$attrCodes = array();
@@ -374,12 +374,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order service attributes.
 	 *
-	 * @param MShop_Order_Manager_Base_Service_Attribute_Interface $manager
+	 * @param MShop_Order_Manager_Base_Service_Attribute_Iface $manager
 	 * @param array $testdata
 	 * @param array $ordServices
 	 * @throws MW_Setup_Exception
 	 */
-	protected function addOrderBaseServiceAttributeData( MShop_Common_Manager_Interface $manager,
+	protected function addOrderBaseServiceAttributeData( MShop_Common_Manager_Iface $manager,
 		array $testdata, array $ordServices )
 	{
 		$ordServAttr = $manager->createItem();
@@ -409,12 +409,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order test data.
 	 *
-	 * @param MShop_Order_Manager_Interface $orderManager Order Manager
+	 * @param MShop_Order_Manager_Iface $orderManager Order Manager
 	 * @param array $baseIds List of ids
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	protected function addOrderData( MShop_Common_Manager_Interface $orderManager, array $baseIds, array $testdata )
+	protected function addOrderData( MShop_Common_Manager_Iface $orderManager, array $baseIds, array $testdata )
 	{
 		$orderStatusManager = $orderManager->getSubManager( 'status', 'Default' );
 
@@ -491,7 +491,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	 * Returns the product items for the given test data.
 	 *
 	 * @param array $testdata Test data
-	 * @return MShop_Product_Item_Interface[] Product Items
+	 * @return MShop_Product_Item_Iface[] Product Items
 	 */
 	protected function getProductItems( array $testdata )
 	{

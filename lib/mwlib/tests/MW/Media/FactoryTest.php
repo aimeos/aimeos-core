@@ -13,8 +13,8 @@ class MW_Media_FactoryTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$object = MW_Media_Factory::get( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
 
-		$this->assertInstanceOf( 'MW_Media_Interface', $object );
-		$this->assertInstanceOf( 'MW_Media_Image_Interface', $object );
+		$this->assertInstanceOf( 'MW_Media_Iface', $object );
+		$this->assertInstanceOf( 'MW_Media_Image_Iface', $object );
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
@@ -24,8 +24,8 @@ class MW_Media_FactoryTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$object = MW_Media_Factory::get( __DIR__ . $ds . '_testfiles' . $ds . 'application.txt' );
 
-		$this->assertInstanceOf( 'MW_Media_Interface', $object );
-		$this->assertInstanceOf( 'MW_Media_Application_Interface', $object );
+		$this->assertInstanceOf( 'MW_Media_Iface', $object );
+		$this->assertInstanceOf( 'MW_Media_Application_Iface', $object );
 		$this->assertEquals( 'text/plain', $object->getMimetype() );
 	}
 

@@ -71,13 +71,13 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( 'MShop_Product_Item_Iface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 
@@ -127,7 +127,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
@@ -725,7 +725,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Returns value of a catalog_index column.
 	 *
-	 * @param MW_DB_Manager_Interface $dbm Database Manager for connection
+	 * @param MW_DB_Manager_Iface $dbm Database Manager for connection
 	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
 	 * @param integer $siteId Siteid of the db entry
@@ -733,7 +733,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 	 * @return string $value Value returned for specified sql statement
 	 * @throws Exception If column not available or error during a connection to db
 	 */
-	protected function getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
+	protected function getValue( MW_DB_Manager_Iface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$config = $this->context->getConfig();
 

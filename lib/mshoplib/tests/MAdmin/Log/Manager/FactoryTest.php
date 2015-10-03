@@ -13,14 +13,14 @@ class MAdmin_Log_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateManager()
 	{
 		$manager = MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 
 	public function testCreateManagerName()
 	{
 		$manager = MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
 

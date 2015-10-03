@@ -16,7 +16,7 @@
  */
 class Controller_ExtJS_Plugin_Decorator_Example
 	extends Controller_ExtJS_Common_Decorator_Base
-	implements Controller_ExtJS_Common_Decorator_Interface
+	implements Controller_ExtJS_Common_Decorator_Iface
 {
 	protected function getManager()
 	{

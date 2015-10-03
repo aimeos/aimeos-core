@@ -23,10 +23,10 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Initializes the plugin instance.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param MShop_Plugin_Item_Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
+	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
 	{
 		$this->item = $item;
 		$this->context = $context;
@@ -36,7 +36,7 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Returns the plugin item the provider is configured with.
 	 *
-	 * @return MShop_Plugin_Item_Interface Plugin item object
+	 * @return MShop_Plugin_Item_Iface Plugin item object
 	 */
 	protected function getItemBase()
 	{
@@ -66,7 +66,7 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Interface Context item object
+	 * @return MShop_Context_Item_Iface Context item object
 	 */
 	protected function getContext()
 	{

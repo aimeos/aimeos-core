@@ -16,7 +16,7 @@
  */
 class MW_DB_Connection_None
 	extends MW_DB_Connection_Base
-	implements MW_DB_Connection_Interface
+	implements MW_DB_Connection_Iface
 {
 	/**
 	 * Creates a database statement.

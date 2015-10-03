@@ -11,7 +11,7 @@ class Controller_ExtJS_Attribute_List_Type_FactoryTest extends PHPUnit_Framework
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Attribute_List_Type_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $obj );
 
 	}
 

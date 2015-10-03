@@ -16,7 +16,7 @@
  */
 class Controller_Jobs_Product_Import_Csv_Default
 	extends Controller_Common_Product_Import_Csv_Base
-	implements Controller_Jobs_Interface
+	implements Controller_Jobs_Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -374,7 +374,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	/**
 	 * Opens and returns the container which includes the product data
 	 *
-	 * @return MW_Container_Interface Container object
+	 * @return MW_Container_Iface Container object
 	 */
 	protected function getContainer()
 	{
@@ -473,16 +473,16 @@ class Controller_Jobs_Product_Import_Csv_Default
 	/**
 	 * Imports the CSV data and creates new products or updates existing ones
 	 *
-	 * @param array $products List of products items implementing MShop_Product_Item_Interface
+	 * @param array $products List of products items implementing MShop_Product_Item_Iface
 	 * @param array $data Associative list of import data as index/value pairs
 	 * @param array $mappings Associative list of positions and domain item keys
-	 * @param Controller_Common_Product_Import_Csv_Processor_Interface $processor Processor object
+	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $processor Processor object
 	 * @param boolean $strict Log columns not mapped or silently ignore them
 	 * @return integer Number of products that couldn't be imported
 	 * @throws Controller_Jobs_Exception
 	 */
 	protected function import( array $products, array $data, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Interface $processor, $strict )
+		Controller_Common_Product_Import_Csv_Processor_Iface $processor, $strict )
 	{
 		$errors = 0;
 		$context = $this->getContext();

@@ -69,7 +69,7 @@ class MShop_Attribute_Manager_List_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $item );
 	}
 
 
@@ -295,8 +295,8 @@ class MShop_Attribute_Manager_List_DefaultTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );

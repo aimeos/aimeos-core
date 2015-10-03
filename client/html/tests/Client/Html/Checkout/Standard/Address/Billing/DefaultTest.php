@@ -274,7 +274,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends PHPUnit_
 	 *
 	 * @param string $code Unique customer code
 	 * @throws Exception If no customer item is found
-	 * @return MShop_Customer_Item_Interface Customer item object
+	 * @return MShop_Customer_Item_Iface Customer item object
 	 */
 	protected function getCustomerItem( $code = 'UTC001' )
 	{

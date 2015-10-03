@@ -15,7 +15,7 @@
  */
 class MShop_Common_Item_Address_Default
 	extends MShop_Common_Item_Address_Base
-	implements MShop_Common_Item_Address_Interface
+	implements MShop_Common_Item_Address_Iface
 {
 	private $prefix;
 	private $values;
@@ -88,9 +88,9 @@ class MShop_Common_Item_Address_Default
 	/**
 	 * Copies the values of the order address item into the address item.
 	 *
-	 * @param MShop_Order_Item_Base_Address_Interface $item Order address item
+	 * @param MShop_Order_Item_Base_Address_Iface $item Order address item
 	 */
-	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item )
+	public function copyFrom( MShop_Order_Item_Base_Address_Iface $item )
 	{
 		$this->setCompany( $item->getCompany() );
 		$this->setVatID( $item->getVatID() );

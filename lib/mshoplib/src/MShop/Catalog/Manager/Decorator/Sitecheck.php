@@ -20,9 +20,9 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item which should be inserted
+	 * @param MShop_Common_Item_Iface $item Item which should be inserted
 	 */
-	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
+	public function insertItem( MShop_Catalog_Item_Iface $item, $parentId = null, $refId = null )
 	{
 		if( $parentId !== null ) {
 

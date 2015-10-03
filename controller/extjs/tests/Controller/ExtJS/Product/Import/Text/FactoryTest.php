@@ -11,7 +11,7 @@ class Controller_ExtJS_Product_Import_Text_FactoryTest extends PHPUnit_Framework
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Product_Import_Text_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Load_Text_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Load_Text_Iface', $obj );
 	}
 
 

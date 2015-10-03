@@ -20,7 +20,7 @@ class Controller_Frontend_Service_Factorylocal
 	/**
 	 * @param string $name
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest = 'service' )
+	public static function createController( MShop_Context_Item_Iface $context, $name = null, $domainToTest = 'service' )
 	{
 		if( $name === null ) {
 			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Default' );
@@ -30,7 +30,7 @@ class Controller_Frontend_Service_Factorylocal
 			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 
-		$iface = 'Controller_Frontend_Service_Interface';
+		$iface = 'Controller_Frontend_Service_Iface';
 		$classname = 'Controller_Frontend_Service_' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );

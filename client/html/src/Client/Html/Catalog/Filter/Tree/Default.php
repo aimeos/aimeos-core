@@ -16,7 +16,7 @@
  */
 class Client_Html_Catalog_Filter_Tree_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/catalog/filter/tree/default/subparts
 	 * List of HTML sub-clients rendered within the catalog filter tree section
@@ -154,7 +154,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -250,10 +250,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
+	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -413,13 +413,13 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 *
 	 * Only the IDs of the children of the current category are returned.
 	 *
-	 * @param MShop_Catalog_Item_Interface $tree Catalog node as entry point of the tree
+	 * @param MShop_Catalog_Item_Iface $tree Catalog node as entry point of the tree
 	 * @param array $path Associative list of category IDs as keys and the catalog
 	 * 	nodes from the currently selected category up to the root node
 	 * @param string $currentId Currently selected category
 	 * @return array List of category IDs
 	 */
-	protected function getCatalogIds( MShop_Catalog_Item_Interface $tree, array $path, $currentId )
+	protected function getCatalogIds( MShop_Catalog_Item_Iface $tree, array $path, $currentId )
 	{
 		if( $tree->getId() == $currentId )
 		{
@@ -445,11 +445,11 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given catalog tree.
 	 *
-	 * @param MShop_Catalog_Item_Interface $tree Tree node, maybe with sub-nodes
+	 * @param MShop_Catalog_Item_Iface $tree Tree node, maybe with sub-nodes
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function addMetaItemCatalog( MShop_Catalog_Item_Interface $tree, &$expire, array &$tags = array() )
+	protected function addMetaItemCatalog( MShop_Catalog_Item_Iface $tree, &$expire, array &$tags = array() )
 	{
 		$this->addMetaItem( $tree, 'catalog', $expire, $tags );
 

@@ -16,14 +16,14 @@
  */
 class MShop_Service_Provider_Delivery_Manual
 	extends MShop_Service_Provider_Delivery_Base
-	implements MShop_Service_Provider_Delivery_Interface
+	implements MShop_Service_Provider_Delivery_Iface
 {
 	/**
 	 * Updates the delivery status.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order instance
+	 * @param MShop_Order_Item_Iface $order Order instance
 	 */
-	public function process( MShop_Order_Item_Interface $order )
+	public function process( MShop_Order_Item_Iface $order )
 	{
 		$order->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
 	}

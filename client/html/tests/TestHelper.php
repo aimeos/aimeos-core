@@ -30,7 +30,7 @@ class TestHelper
 	}
 
 
-	public static function getView( $site = 'unittest', MW_Config_Interface $config = null )
+	public static function getView( $site = 'unittest', MW_Config_Iface $config = null )
 	{
 		if( $config === null ) {
 			$config = self::getContext( $site )->getConfig();

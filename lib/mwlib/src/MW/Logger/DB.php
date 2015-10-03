@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_DB extends MW_Logger_Base implements MW_Logger_Interface
+class MW_Logger_DB extends MW_Logger_Base implements MW_Logger_Iface
 {
 	private $stmt;
 	private $loglevel;
@@ -29,12 +29,12 @@ class MW_Logger_DB extends MW_Logger_Base implements MW_Logger_Interface
 	 * The log statement must be like:
 	 *		INSERT INTO logtable (facility, logtime, priority, message, requestid) VALUES (?, ?, ?, ?, ?)
 	 *
-	 * @param MW_DB_Statement_Interface $stmt Database statement object for inserting data
+	 * @param MW_DB_Statement_Iface $stmt Database statement object for inserting data
 	 * @param integer $priority Minimum priority for logging
 	 * @param string|null $requestid Unique identifier for the request so multiple log entries which belong together can be found faster
 	 * @param array|null $facilities Facilities for which messages should be logged
 	 */
-	public function __construct( MW_DB_Statement_Interface $stmt, $loglevel = MW_Logger_Base::ERR,
+	public function __construct( MW_DB_Statement_Iface $stmt, $loglevel = MW_Logger_Base::ERR,
 		$requestid = null, array $facilities = null )
 	{
 		$this->stmt = $stmt;

@@ -15,7 +15,7 @@
  * @subpackage Common
  */
 class Controller_Common_Order_Default
-	implements Controller_Common_Order_Interface
+	implements Controller_Common_Order_Iface
 {
 	private $context;
 
@@ -23,9 +23,9 @@ class Controller_Common_Order_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context
+	 * @param MShop_Context_Item_Iface $context
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -47,9 +47,9 @@ class Controller_Common_Order_Default
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function block( MShop_Order_Item_Interface $orderItem )
+	public function block( MShop_Order_Item_Iface $orderItem )
 	{
 		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 1, -1 );
 		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 1, -1 );
@@ -72,9 +72,9 @@ class Controller_Common_Order_Default
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function unblock( MShop_Order_Item_Interface $orderItem )
+	public function unblock( MShop_Order_Item_Iface $orderItem )
 	{
 		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 0, +1 );
 		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 0, +1 );
@@ -93,9 +93,9 @@ class Controller_Common_Order_Default
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 */
-	public function update( MShop_Order_Item_Interface $orderItem )
+	public function update( MShop_Order_Item_Iface $orderItem )
 	{
 		switch( $orderItem->getPaymentStatus() )
 		{
@@ -138,7 +138,7 @@ class Controller_Common_Order_Default
 	/**
 	 * Returns the context item object.
 	 *
-	 * @return MShop_Context_Item_Interface Context item object
+	 * @return MShop_Context_Item_Iface Context item object
 	 */
 	protected function getContext()
 	{
@@ -150,7 +150,7 @@ class Controller_Common_Order_Default
 	 * Returns the last status item for the given order ID.
 	 *
 	 * @param string $parentid Order ID
-	 * @return MShop_Order_Item_Status_Interface|false Order status item or false if no item is available
+	 * @return MShop_Order_Item_Status_Iface|false Order status item or false if no item is available
 	 */
 	protected function getLastStatusItem( $parentid, $type )
 	{
@@ -175,10 +175,10 @@ class Controller_Common_Order_Default
 	/**
 	 * Increases or decreses the coupon code counts referenced in the order by the given value.
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the coupon count
 	 */
-	protected function updateCoupons( MShop_Order_Item_Interface $orderItem, $how = +1 )
+	protected function updateCoupons( MShop_Order_Item_Iface $orderItem, $how = +1 )
 	{
 		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'order/base/coupon' );
@@ -220,12 +220,12 @@ class Controller_Common_Order_Default
 	/**
 	 * Increases or decreases the stock level or the coupon code count for referenced items of the given order.
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 * @param string $type Constant from MShop_Order_Item_Status_Base, e.g. STOCK_UPDATE or COUPON_UPDATE
 	 * @param string $status New status value stored along with the order item
 	 * @param integer $value Number to increse or decrease the stock level or coupon code count
 	 */
-	protected function updateStatus( MShop_Order_Item_Interface $orderItem, $type, $status, $value )
+	protected function updateStatus( MShop_Order_Item_Iface $orderItem, $type, $status, $value )
 	{
 		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type );
 
@@ -246,10 +246,10 @@ class Controller_Common_Order_Default
 	/**
 	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
 	 *
-	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param MShop_Order_Item_Iface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
 	 */
-	protected function updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
+	protected function updateStock( MShop_Order_Item_Iface $orderItem, $how = +1 )
 	{
 		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
@@ -308,7 +308,7 @@ class Controller_Common_Order_Default
 	/**
 	 * Updates the stock levels of bundles for a specific warehouse
 	 *
-	 * @param array $bundleItems List of items implementing MShop_Product_Item_Interface
+	 * @param array $bundleItems List of items implementing MShop_Product_Item_Iface
 	 * @param string $whcode Unique warehouse code
 	 */
 	protected function updateStockBundle( array $bundleItems, $whcode )

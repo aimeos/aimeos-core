@@ -205,7 +205,7 @@ class Controller_Common_Product_Import_Csv_Processor_Stock_DefaultTest extends P
 	}
 
 
-	protected function delete( MShop_Product_Item_Interface $product )
+	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$manager->deleteItem( $product->getId() );

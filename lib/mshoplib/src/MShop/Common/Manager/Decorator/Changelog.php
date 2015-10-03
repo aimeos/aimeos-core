@@ -20,10 +20,10 @@ class MShop_Common_Manager_Decorator_Changelog
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param MShop_Common_Item_Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
 		$manager = $this->getManager();
 

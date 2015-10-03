@@ -31,7 +31,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends P
 	{
 		$item = $this->object->get( 'black', 'color' );
 
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $item );
 		$this->assertEquals( 'black', $item->getCode() );
 		$this->assertEquals( 'color', $item->getType() );
 	}
@@ -51,7 +51,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_DefaultTest extends P
 		$this->object->set( $item );
 		$item = $this->object->get( 'cache-test', 'color' );
 
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $item );
 		$this->assertEquals( 'cache-test', $item->getCode() );
 		$this->assertEquals( 'color', $item->getType() );
 	}

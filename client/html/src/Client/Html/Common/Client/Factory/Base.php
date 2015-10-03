@@ -16,17 +16,17 @@
  */
 abstract class Client_Html_Common_Client_Factory_Base
 	extends Client_Html_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/**
 	 * Initializes the object instance
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
-	 * @param Client_Html_Interface $client Client object
+	 * @param Client_Html_Iface $client Client object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths )
+	public function __construct( MShop_Context_Item_Iface $context, array $templatePaths )
 	{
 		parent::__construct( $context, $templatePaths );
 	}

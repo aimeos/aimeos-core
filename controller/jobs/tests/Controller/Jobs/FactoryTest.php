@@ -17,7 +17,7 @@ class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
 		$aimeos = TestHelper::getAimeos();
 
 		$controller = Controller_Jobs_Factory::createController( $context, $aimeos, 'admin/job' );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_Jobs_Iface', $controller );
 	}
 
 
@@ -61,7 +61,7 @@ class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 0, count( $list ) );
 
 		foreach( $list as $key => $object ) {
-			$this->assertInstanceOf( 'Controller_Jobs_Interface', $object );
+			$this->assertInstanceOf( 'Controller_Jobs_Iface', $object );
 		}
 	}
 }

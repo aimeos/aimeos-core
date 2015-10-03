@@ -11,7 +11,7 @@ class MW_Container_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testFactory()
 	{
 		$object = MW_Container_Factory::getContainer( 'tempfile', 'Zip', 'CSV', array() );
-		$this->assertInstanceOf( 'MW_Container_Interface', $object );
+		$this->assertInstanceOf( 'MW_Container_Iface', $object );
 	}
 
 	public function testFactoryFail()

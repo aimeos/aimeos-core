@@ -16,7 +16,7 @@
  */
 abstract class Controller_ExtJS_Common_Decorator_Base
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Decorator_Interface
+	implements Controller_ExtJS_Common_Decorator_Iface
 {
 	private $context = null;
 	private $controller = null;
@@ -25,10 +25,10 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param Controller_ExtJS_Interface $controller Controller object
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param Controller_ExtJS_Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Controller_ExtJS_Interface $controller )
+	public function __construct( MShop_Context_Item_Iface $context, Controller_ExtJS_Iface $controller )
 	{
 		$this->context = $context;
 		$this->controller = $controller;

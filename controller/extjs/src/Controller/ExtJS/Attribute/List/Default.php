@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Attribute_List_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Attribute_List_Default
 	/**
 	 * Initializes the product list controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Attribute_List' );
 	}
@@ -71,7 +71,7 @@ class Controller_ExtJS_Attribute_List_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Config
  */
-abstract class MW_Config_Base implements MW_Config_Interface
+abstract class MW_Config_Base implements MW_Config_Iface
 {
 	private $includeCache = array();
 

@@ -113,7 +113,7 @@ class Test_MShop_Service_Provider_Base extends MShop_Service_Provider_Base
 		return $this->getConfigValue( $keys );
 	}
 
-	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
 	{
 	}
 }

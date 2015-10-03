@@ -9,7 +9,7 @@
 /**
  * Test plugin class
  */
-class Criteria_Plugin_PHPTest implements MW_Common_Criteria_Plugin_Interface
+class Criteria_Plugin_PHPTest implements MW_Common_Criteria_Plugin_Iface
 {
 	public function translate( $value )
 	{

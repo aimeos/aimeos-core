@@ -16,7 +16,7 @@
  */
 class MShop_Text_Manager_Default
 	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Text_Manager_Interface
+	implements MShop_Text_Manager_Iface
 {
 	private $searchConfig = array(
 		'text.id'=> array(
@@ -104,9 +104,9 @@ class MShop_Text_Manager_Default
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param MShop_Context_Item_Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-text' );
@@ -132,7 +132,7 @@ class MShop_Text_Manager_Default
 	/**
 	 * Creates new text item object.
 	 *
-	 * @return MShop_Text_Item_Interface New text item object
+	 * @return MShop_Text_Item_Iface New text item object
 	 */
 	public function createItem()
 	{
@@ -145,12 +145,12 @@ class MShop_Text_Manager_Default
 	 * Updates or adds a text item object.
 	 * This method doesn't update the type string that belongs to the type ID
 	 *
-	 * @param MShop_Text_Item_Interface $item Text item which should be saved
+	 * @param MShop_Text_Item_Iface $item Text item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Text_Item_Interface';
+		$iface = 'MShop_Text_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Text_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -339,7 +339,7 @@ class MShop_Text_Manager_Default
 	 *
 	 * @param integer $id Id of the text item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Text_Item_Interface Returns the text item of the given id
+	 * @return MShop_Text_Item_Iface Returns the text item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -352,7 +352,7 @@ class MShop_Text_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -382,12 +382,12 @@ class MShop_Text_Manager_Default
 	/**
 	 * Searches for all text items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of text items implementing MShop_Text_Item_Interface
+	 * @return array List of text items implementing MShop_Text_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -542,7 +542,7 @@ class MShop_Text_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g types, lists etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -554,7 +554,7 @@ class MShop_Text_Manager_Default
 	 * Creates a search object.
 	 *
 	 * @param boolean $default If base criteria should be added
-	 * @return MW_Common_Criteria_Interface Search criteria object
+	 * @return MW_Common_Criteria_Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -589,9 +589,9 @@ class MShop_Text_Manager_Default
 	 * Creates a new text item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $refItems List of items implementing MShop_Text_Item_Interface
-	 * @return MShop_Text_Item_Interface New product item
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $refItems List of items implementing MShop_Text_Item_Iface
+	 * @return MShop_Text_Item_Iface New product item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

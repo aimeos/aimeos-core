@@ -16,14 +16,14 @@
  */
 class MShop_Plugin_Provider_Order_Autofill
 	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Interface
+	implements MShop_Plugin_Provider_Factory_Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( MW_Observer_Publisher_Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.after' );
 	}
@@ -32,15 +32,15 @@ class MShop_Plugin_Provider_Order_Autofill
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @throws MShop_Plugin_Provider_Exception if an error occurs
 	 * @return bool true if subsequent plugins should be processed
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = 'MShop_Order_Item_Base_Iface';
 		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
@@ -79,12 +79,12 @@ class MShop_Plugin_Provider_Order_Autofill
 	/**
 	 * Returns the order service item for the given type and code if available.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $order Basket of the customer
+	 * @param MShop_Order_Item_Base_Iface $order Basket of the customer
 	 * @param string $type Service type constant from MShop_Order_Item_Base_Service_Base
 	 * @param string|null $code Service item code
-	 * @param MShop_Order_Item_Base_Service_Interface|null Order service item if available or null otherwise
+	 * @param MShop_Order_Item_Base_Service_Iface|null Order service item if available or null otherwise
 	 */
-	protected function getServiceItem( MShop_Order_Item_Base_Interface $order, $type, $code = null )
+	protected function getServiceItem( MShop_Order_Item_Base_Iface $order, $type, $code = null )
 	{
 		$context = $this->getContext();
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
@@ -125,10 +125,10 @@ class MShop_Plugin_Provider_Order_Autofill
 	/**
 	 * Adds the addresses from the given order item to the basket.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $order Basket object
-	 * @param MShop_Order_Item_Interface $item Existing order to fetch the addresses from
+	 * @param MShop_Order_Item_Base_Iface $order Basket object
+	 * @param MShop_Order_Item_Iface $item Existing order to fetch the addresses from
 	 */
-	protected function setAddresses( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
+	protected function setAddresses( MShop_Order_Item_Base_Iface $order, MShop_Order_Item_Iface $item )
 	{
 		$addresses = $order->getAddresses();
 
@@ -149,10 +149,10 @@ class MShop_Plugin_Provider_Order_Autofill
 	/**
 	 * Adds the services from the given order item to the basket.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $order Basket object
-	 * @param MShop_Order_Item_Interface $item Existing order to fetch the services from
+	 * @param MShop_Order_Item_Base_Iface $order Basket object
+	 * @param MShop_Order_Item_Iface $item Existing order to fetch the services from
 	 */
-	protected function setServices( MShop_Order_Item_Base_Interface $order, MShop_Order_Item_Interface $item )
+	protected function setServices( MShop_Order_Item_Base_Iface $order, MShop_Order_Item_Iface $item )
 	{
 		$services = $order->getServices();
 
@@ -178,9 +178,9 @@ class MShop_Plugin_Provider_Order_Autofill
 	/**
 	 * Adds the default services to the basket if they are not available.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $order Basket object
+	 * @param MShop_Order_Item_Base_Iface $order Basket object
 	 */
-	protected function setServicesDefault( MShop_Order_Item_Base_Interface $order )
+	protected function setServicesDefault( MShop_Order_Item_Base_Iface $order )
 	{
 		$services = $order->getServices();
 

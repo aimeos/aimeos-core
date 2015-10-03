@@ -69,7 +69,7 @@ class MW_View_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testCallCreateHelper()
 	{
 		$enc = $this->object->encoder();
-		$this->assertInstanceOf( 'MW_View_Helper_Interface', $enc );
+		$this->assertInstanceOf( 'MW_View_Helper_Iface', $enc );
 	}
 
 

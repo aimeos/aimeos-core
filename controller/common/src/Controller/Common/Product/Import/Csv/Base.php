@@ -48,13 +48,13 @@ class Controller_Common_Product_Import_Csv_Base
 	 *
 	 * @param string $type Type of the cached data
 	 * @param string|null Name of the cache implementation
-	 * @return Controller_Common_Product_Import_Csv_Cache_Interface Cache object
+	 * @return Controller_Common_Product_Import_Csv_Cache_Iface Cache object
 	 */
 	protected function getCache( $type, $name = null )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$iface = 'Controller_Common_Product_Import_Csv_Cache_Interface';
+		$iface = 'Controller_Common_Product_Import_Csv_Cache_Iface';
 
 		if( $name === null ) {
 			$name = $config->get( 'classes/controller/common/product/import/csv/cache/' . $type . '/name', 'Default' );
@@ -103,11 +103,11 @@ class Controller_Common_Product_Import_Csv_Base
 	/**
 	 * Returns the rows from the CSV file up to the maximum count
 	 *
-	 * @param MW_Container_Content_Interface $content CSV content object
+	 * @param MW_Container_Content_Iface $content CSV content object
 	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
 	 * @return array List of arrays with product codes as keys and list of values from the CSV file
 	 */
-	protected function getData( MW_Container_Content_Interface $content, $maxcnt )
+	protected function getData( MW_Container_Content_Iface $content, $maxcnt )
 	{
 		$count = 0;
 		$data = array();
@@ -233,13 +233,13 @@ class Controller_Common_Product_Import_Csv_Base
 	 * Returns the processor object for saving the product related information
 	 *
 	 * @param array $mapping Associative list of processor types as keys and index/data mappings as values
-	 * @return Controller_Common_Product_Import_Csv_Processor_Interface Processor object
+	 * @return Controller_Common_Product_Import_Csv_Processor_Iface Processor object
 	 */
 	protected function getProcessors( array $mappings )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$iface = 'Controller_Common_Product_Import_Csv_Processor_Interface';
+		$iface = 'Controller_Common_Product_Import_Csv_Processor_Iface';
 		$object = new Controller_Common_Product_Import_Csv_Processor_Done( $context, array() );
 
 		foreach( $mappings as $type => $mapping )

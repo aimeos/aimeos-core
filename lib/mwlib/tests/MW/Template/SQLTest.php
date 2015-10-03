@@ -32,7 +32,7 @@ class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
 	public function testToString()
 	{
 		$template = $this->object->get('FROM');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( 'MW_Template_Iface', $template );
 
 		$this->assertEquals( 'table', $template->str() );
 	}

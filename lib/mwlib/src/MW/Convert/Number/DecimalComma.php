@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Number_DecimalComma implements MW_Convert_Interface
+class MW_Convert_Number_DecimalComma implements MW_Convert_Iface
 {
 	/**
 	 * Translates a value to another one.

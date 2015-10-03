@@ -16,13 +16,13 @@
  */
 class MShop_Catalog_Manager_Index_MySQL
 	extends MShop_Catalog_Manager_Index_Default
-	implements MShop_Catalog_Manager_Index_Interface
+	implements MShop_Catalog_Manager_Index_Iface
 {
 	/**
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @return MW_Common_Criteria_Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{

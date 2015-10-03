@@ -36,7 +36,7 @@ class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testFactory()
 	{
-		$this->assertInstanceOf('MW_Tree_Manager_Interface', $this->object);
+		$this->assertInstanceOf('MW_Tree_Manager_Iface', $this->object);
 	}
 
 	public function testFactoryFail()

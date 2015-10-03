@@ -9,7 +9,7 @@
 /**
  * Test plugin class
  */
-class Criteria_Plugin_SQLTest implements MW_Common_Criteria_Plugin_Interface
+class Criteria_Plugin_SQLTest implements MW_Common_Criteria_Plugin_Iface
 {
 	public function translate( $value )
 	{
@@ -277,7 +277,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 
 		$condition = $this->object->toConditions( $array );
 
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Interface', $condition );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Iface', $condition );
 		$this->assertEquals( '==', $condition->getOperator() );
 		$this->assertEquals( 'name', $condition->getName() );
 		$this->assertEquals( 'value', $condition->getValue() );
@@ -298,13 +298,13 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		);
 
 		$condition = $this->object->toConditions( $array );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Interface', $condition );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_Iface', $condition );
 		$this->assertEquals( '&&', $condition->getOperator() );
 		$this->assertEquals( 2, count( $condition->getExpressions() ) );
 
 		foreach( $condition->getExpressions() as $expr )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Interface', $expr );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_Iface', $expr );
 			$this->assertEquals( '==', $expr->getOperator() );
 			$this->assertEquals( 'name', $expr->getName() );
 			$this->assertEquals( 'value', $expr->getValue() );
@@ -323,7 +323,7 @@ class MW_Common_Criteria_SQLTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, count( $sortations ) );
 
 		foreach( $sortations as $sort ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Sort_Interface', $sort );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Sort_Iface', $sort );
 		}
 
 		$this->assertEquals( '+', $sortations[0]->getOperator() );

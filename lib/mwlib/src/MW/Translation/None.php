@@ -16,7 +16,7 @@
  */
 class MW_Translation_None
 	extends MW_Translation_Base
-	implements MW_Translation_Interface
+	implements MW_Translation_Iface
 {
 	/**
 	 * Returns the given string for the given domain.

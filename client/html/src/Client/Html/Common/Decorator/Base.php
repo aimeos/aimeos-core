@@ -16,7 +16,7 @@
  */
 abstract class Client_Html_Common_Decorator_Base
 	extends Client_Html_Base
-	implements Client_Html_Common_Decorator_Interface
+	implements Client_Html_Common_Decorator_Iface
 {
 	private $client;
 
@@ -24,12 +24,12 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Initializes the client decorator.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
-	 * @param Client_Html_Interface $client Client object
+	 * @param Client_Html_Iface $client Client object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths, Client_Html_Interface $client )
+	public function __construct( MShop_Context_Item_Iface $context, array $templatePaths, Client_Html_Iface $client )
 	{
 		parent::__construct( $context, $templatePaths );
 
@@ -60,7 +60,7 @@ abstract class Client_Html_Common_Decorator_Base
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -99,7 +99,7 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
-	 * @return MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Iface $view The view object which generates the HTML output
 	 */
 	public function getView()
 	{
@@ -110,10 +110,10 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return Client_Html_Interface Reference to this object for fluent calls
+	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @return Client_Html_Iface Reference to this object for fluent calls
 	 */
-	public function setView( MW_View_Interface $view )
+	public function setView( MW_View_Iface $view )
 	{
 		$this->client->setView( $view );
 		return $this;
@@ -160,7 +160,7 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Returns the inner client object
 	 *
-	 * @return Client_Html_Interface HTML client
+	 * @return Client_Html_Iface HTML client
 	 */
 	protected function getClient()
 	{

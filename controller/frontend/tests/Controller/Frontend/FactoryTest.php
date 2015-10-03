@@ -14,7 +14,7 @@ class Controller_Frontend_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$controller = Controller_Frontend_Factory::createController( TestHelper::getContext(), 'basket' );
-		$this->assertInstanceOf( 'Controller_Frontend_Common_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_Frontend_Common_Iface', $controller );
 	}
 
 

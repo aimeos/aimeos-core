@@ -39,7 +39,7 @@ class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 	public function testToString()
 	{
 		$template = $this->object->get('NAME');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( 'MW_Template_Iface', $template );
 
 		$this->assertEquals( 'Name', $template->str() );
 	}

@@ -24,7 +24,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$obj = Controller_ExtJS_Plugin_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj );
+		$this->assertInstanceOf( 'Controller_ExtJS_Iface', $obj );
 	}
 
 
@@ -59,7 +59,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
 	}
 
 
@@ -81,7 +81,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 
 		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
 
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Decorator_Interface', $controller );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Decorator_Iface', $controller );
 	}
 
 

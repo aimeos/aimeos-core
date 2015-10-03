@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Errorlog extends MW_Logger_Base implements MW_Logger_Interface
+class MW_Logger_Errorlog extends MW_Logger_Base implements MW_Logger_Iface
 {
 	private $loglevel;
 	private $facilities;

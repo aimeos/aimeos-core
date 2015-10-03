@@ -14,17 +14,17 @@
  * @package MW
  * @subpackage Setup
  */
-abstract class MW_Setup_Manager_Base implements MW_Setup_Manager_Interface
+abstract class MW_Setup_Manager_Base implements MW_Setup_Manager_Iface
 {
 	/**
 	 * Creates a new database schema object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection object
+	 * @param MW_DB_Connection_Iface $conn Database connection object
 	 * @param string $adapter Database adapter, e.g. "mysql", "pgsql", etc.
 	 * @param string $dbname Name of the database that will be used
-	 * @return MW_Setup_DBSchema_Interface Database schema object
+	 * @return MW_Setup_DBSchema_Iface Database schema object
 	 */
-	protected  function createSchema( MW_DB_Connection_Interface $conn, $adapter, $dbname )
+	protected  function createSchema( MW_DB_Connection_Iface $conn, $adapter, $dbname )
 	{
 		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
@@ -57,12 +57,12 @@ abstract class MW_Setup_Manager_Base implements MW_Setup_Manager_Interface
 	 * Creates the tasks from the given directories.
 	 *
 	 * @param array $paths List of paths containing setup task classes
-	 * @param MW_Setup_DBSchema_Interface $schema Database schema object
-	 * @param MW_DB_Connection_Interface $conn Database connection object
+	 * @param MW_Setup_DBSchema_Iface $schema Database schema object
+	 * @param MW_DB_Connection_Iface $conn Database connection object
 	 * @param mixed $additional Additional data that should be handed over to the setup tasks
-	 * @return MW_Setup_Task_Interface[] List of setup task objects
+	 * @return MW_Setup_Task_Iface[] List of setup task objects
 	 */
-	protected function createTasks( array $paths, MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional )
+	protected function createTasks( array $paths, MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional )
 	{
 		$tasks = array();
 
@@ -81,11 +81,11 @@ abstract class MW_Setup_Manager_Base implements MW_Setup_Manager_Interface
 					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 				}
 
-				$interface = 'MW_Setup_Task_Interface';
+				$interface = 'MW_Setup_Task_Iface';
 				$task = new $classname( $schema, $conn, $additional );
 
 				if( ( $task instanceof $interface ) === false ) {
-					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, 'MW_Setup_Task_Interface' ) );
+					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, 'MW_Setup_Task_Iface' ) );
 				}
 
 				$tasks[$taskname] = $task;

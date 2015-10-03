@@ -16,7 +16,7 @@
  */
 class Controller_Common_Product_Import_Csv_Cache_Product_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Interface
+	implements Controller_Common_Product_Import_Csv_Cache_Iface
 {
 	private $prodmap = array();
 
@@ -52,9 +52,9 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Default
 	/**
 	 * Adds the product ID to the cache
 	 *
-	 * @param MShop_Common_Item_Interface $item Product object
+	 * @param MShop_Common_Item_Iface $item Product object
 	 */
-	public function set( MShop_Common_Item_Interface $item )
+	public function set( MShop_Common_Item_Iface $item )
 	{
 		$this->prodmap[ $item->getCode() ] = $item->getId();
 	}

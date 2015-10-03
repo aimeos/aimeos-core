@@ -24,7 +24,7 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() );
 
-		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
+		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Iface', $object );
 	}
 
 
@@ -35,7 +35,7 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() );
 
-		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
+		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Iface', $object );
 	}
 
 
@@ -46,7 +46,7 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() )->getSubClient( 'tree' );
 
-		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
+		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Iface', $object );
 	}
 
 
@@ -57,6 +57,6 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() )->getSubClient( 'tree' );
 
-		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
+		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Iface', $object );
 	}
 }

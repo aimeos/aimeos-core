@@ -52,7 +52,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = 'MShop_Context_Item_Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
@@ -146,7 +146,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Base
 
 			if( !isset( $this->domainManagers[$domainname] ) )
 			{
-				$iface = 'MShop_Common_Manager_Interface';
+				$iface = 'MShop_Common_Manager_Iface';
 				$factory = 'MShop_' . ucwords( $domainname ) . '_Manager_Factory';
 				$manager = call_user_func_array( $factory . '::createManager', array( $this->additional ) );
 

@@ -16,7 +16,7 @@
  */
 class MW_Container_Zip
 	extends MW_Container_Base
-	implements MW_Container_Interface
+	implements MW_Container_Iface
 {
 	private $container;
 	private $classname;
@@ -65,7 +65,7 @@ class MW_Container_Zip
 	 * the cron jobs.
 	 *
 	 * @param string $name Name of the content
-	 * @return MW_Container_Content_Interface New content object
+	 * @return MW_Container_Content_Iface New content object
 	 */
 	public function create( $name )
 	{
@@ -78,9 +78,9 @@ class MW_Container_Zip
 	/**
 	 * Adds content data to the container.
 	 *
-	 * @param MW_Container_Content_Interface $content Content object
+	 * @param MW_Container_Content_Iface $content Content object
 	 */
-	public function add( MW_Container_Content_Interface $content )
+	public function add( MW_Container_Content_Iface $content )
 	{
 		$this->content[] = $content;
 	}
@@ -90,7 +90,7 @@ class MW_Container_Zip
 	 * Returns the element specified by its name.
 	 *
 	 * @param string $name Name of the content object that should be returned
-	 * @return MW_Container_Content_Interface Content object
+	 * @return MW_Container_Content_Iface Content object
 	 */
 	public function get( $name )
 	{
@@ -134,7 +134,7 @@ class MW_Container_Zip
 	/**
 	 * Returns the current element.
 	 *
-	 * @return MW_Container_Content_Interface Current content object
+	 * @return MW_Container_Content_Iface Current content object
 	 */
 	function current()
 	{

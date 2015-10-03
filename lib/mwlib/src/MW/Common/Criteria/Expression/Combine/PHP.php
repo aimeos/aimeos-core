@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Combine_PHP implements MW_Common_Criteria_Expression_Combine_Interface
+class MW_Common_Criteria_Expression_Combine_PHP implements MW_Common_Criteria_Expression_Combine_Iface
 {
 	private static $operators = array( '&&' => '&&', '||' => '||', '!' => '!' );
 	private $operator = '&&';
@@ -33,7 +33,7 @@ class MW_Common_Criteria_Expression_Combine_PHP implements MW_Common_Criteria_Ex
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Interface', $list );
+		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Iface', $list );
 
 		$this->operator = $operator;
 		$this->expressions = $list;
@@ -78,7 +78,7 @@ class MW_Common_Criteria_Expression_Combine_PHP implements MW_Common_Criteria_Ex
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
+	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )

@@ -62,7 +62,7 @@ class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
 	{
 		$zip = new MW_Container_Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
-		$this->assertInstanceOf( 'MW_Container_Content_Interface', $zip->get( 'tempfile.csv' ) );
+		$this->assertInstanceOf( 'MW_Container_Content_Iface', $zip->get( 'tempfile.csv' ) );
 	}
 
 

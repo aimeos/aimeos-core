@@ -16,7 +16,7 @@
  */
 class Controller_Frontend_Service_Default
 	extends Controller_Frontend_Base
-	implements Controller_Frontend_Service_Interface
+	implements Controller_Frontend_Service_Iface
 {
 	private $items = array();
 	private $providers = array();
@@ -26,12 +26,12 @@ class Controller_Frontend_Service_Default
 	 * Returns the service items that are available for the service type and the content of the basket.
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
-	 * @param MShop_Order_Item_Base_Interface $basket Basket of the user
+	 * @param MShop_Order_Item_Base_Iface $basket Basket of the user
 	 * @param array $ref List of domains for which the items referenced by the services should be fetched too
-	 * @return array List of service items implementing MShop_Service_Item_Interface with referenced items
+	 * @return array List of service items implementing MShop_Service_Item_Iface with referenced items
 	 * @throws Exception If an error occurs
 	 */
-	public function getServices( $type, MShop_Order_Item_Base_Interface $basket,
+	public function getServices( $type, MShop_Order_Item_Base_Iface $basket,
 		$ref = array( 'media', 'price', 'text' ) )
 	{
 		if( isset( $this->items[$type] ) ) {
@@ -81,13 +81,13 @@ class Controller_Frontend_Service_Default
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Interface
+	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Iface
 	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
 	 * @throws MShop_Exception If service provider isn't available
 	 * @throws Exception If an error occurs
 	 */
-	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
+	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Iface $basket )
 	{
 		if( isset( $this->providers[$type][$serviceId] ) ) {
 			return $this->providers[$type][$serviceId]->getConfigFE( $basket );
@@ -105,13 +105,13 @@ class Controller_Frontend_Service_Default
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Interface $basket Basket with products
-	 * @return MShop_Price_Item_Interface Price item
+	 * @param MShop_Order_Item_Base_Iface $basket Basket with products
+	 * @return MShop_Price_Item_Iface Price item
 	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
 	 * @throws MShop_Exception If service provider isn't available
 	 * @throws Exception If an error occurs
 	 */
-	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
+	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Iface $basket )
 	{
 		if( isset( $this->providers[$type][$serviceId] ) ) {
 			return $this->providers[$type][$serviceId]->calcPrice( $basket );

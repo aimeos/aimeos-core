@@ -17,7 +17,7 @@
  */
 class MW_Cache_None
 	extends MW_Cache_Base
-	implements MW_Cache_Interface
+	implements MW_Cache_Iface
 {
 	/**
 	 * Removes the cache entry identified by the given key.

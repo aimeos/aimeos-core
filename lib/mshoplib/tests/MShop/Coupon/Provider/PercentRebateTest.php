@@ -147,7 +147,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Return the order products.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Interface[]
+	 * @return MShop_Order_Item_Base_Product_Iface[]
 	 * @throws Exception
 	 */
 	protected function getOrderProducts()

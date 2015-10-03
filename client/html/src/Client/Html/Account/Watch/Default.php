@@ -16,7 +16,7 @@
  */
 class Client_Html_Account_Watch_Default
 	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Interface
+	implements Client_Html_Common_Client_Factory_Iface
 {
 	/** client/html/account/watch/default/subparts
 	 * List of HTML sub-clients rendered within the account watch section
@@ -187,7 +187,7 @@ class Client_Html_Account_Watch_Default
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
+	 * @return Client_Html_Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -425,10 +425,10 @@ class Client_Html_Account_Watch_Default
 	/**
 	 * Returns the sanitized page from the parameters for the product list.
 	 *
-	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
+	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page number starting from 1
 	 */
-	protected function getProductListPage( MW_View_Interface $view )
+	protected function getProductListPage( MW_View_Iface $view )
 	{
 		$page = (int) $view->param( 'wat_page', 1 );
 		return ( $page < 1 ? 1 : $page );
@@ -438,10 +438,10 @@ class Client_Html_Account_Watch_Default
 	/**
 	 * Returns the sanitized page size from the parameters for the product list.
 	 *
-	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
+	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page size
 	 */
-	protected function getProductListSize( MW_View_Interface $view )
+	protected function getProductListSize( MW_View_Iface $view )
 	{
 		/** client/html/account/watch/size
 		 * The number of products shown in a list page for watch products
@@ -472,12 +472,12 @@ class Client_Html_Account_Watch_Default
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param MW_View_Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
+	 * @return MW_View_Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{

@@ -16,9 +16,9 @@
  */
 class Controller_Frontend_Order_Factory
 	extends Controller_Frontend_Common_Factory_Base
-	implements Controller_Frontend_Common_Factory_Interface
+	implements Controller_Frontend_Common_Factory_Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/controller/frontend/order/name
 		 * Class name of the used order frontend controller implementation
@@ -62,7 +62,7 @@ class Controller_Frontend_Order_Factory
 			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Frontend_Order_Interface';
+		$iface = 'Controller_Frontend_Order_Iface';
 		$classname = 'Controller_Frontend_Order_' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );

@@ -16,7 +16,7 @@
  */
 class MShop_Locale_Item_Site_Default
 	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Site_Interface
+	implements MShop_Locale_Item_Site_Iface
 {
 	private $children;
 	private $values;
@@ -28,7 +28,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function __construct( array $values = array( ), array $children = array() )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Locale_Item_Site_Interface', $children );
+		MW_Common_Base::checkClassList( 'MShop_Locale_Item_Site_Iface', $children );
 		parent::__construct( 'locale.site.', $values );
 
 		$this->values = $values;
@@ -197,7 +197,7 @@ class MShop_Locale_Item_Site_Default
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Locale_Item_Site_Interface Selected node
+	 * @return MShop_Locale_Item_Site_Iface Selected node
 	 */
 	public function getChild( $index )
 	{
@@ -234,9 +234,9 @@ class MShop_Locale_Item_Site_Default
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Locale_Item_Site_Interface $item Child node to add
+	 * @param MShop_Locale_Item_Site_Iface $item Child node to add
 	 */
-	public function addChild( MShop_Locale_Item_Site_Interface $item )
+	public function addChild( MShop_Locale_Item_Site_Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;

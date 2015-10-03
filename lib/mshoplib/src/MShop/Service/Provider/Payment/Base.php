@@ -16,7 +16,7 @@
  */
 abstract class MShop_Service_Provider_Payment_Base
 	extends MShop_Service_Provider_Base
-	implements MShop_Service_Provider_Payment_Interface
+	implements MShop_Service_Provider_Payment_Iface
 {
 	/**
 	 * Feature constant if querying for status updates for an order is supported.
@@ -105,7 +105,7 @@ abstract class MShop_Service_Provider_Payment_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -122,9 +122,9 @@ abstract class MShop_Service_Provider_Payment_Base
 	/**
 	 * Cancels the authorization for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function cancel( MShop_Order_Item_Interface $order )
+	public function cancel( MShop_Order_Item_Iface $order )
 	{
 		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'cancel' ) );
 	}
@@ -133,9 +133,9 @@ abstract class MShop_Service_Provider_Payment_Base
 	/**
 	 * Captures the money later on request for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function capture( MShop_Order_Item_Interface $order )
+	public function capture( MShop_Order_Item_Iface $order )
 	{
 		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'capture' ) );
 	}
@@ -145,12 +145,12 @@ abstract class MShop_Service_Provider_Payment_Base
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
 	 * separately isn't supported or not configured by the shop owner.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 * @param array $params Request parameter if available
 	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( MShop_Order_Item_Interface $order, array $params = array() )
+	public function process( MShop_Order_Item_Iface $order, array $params = array() )
 	{
 		$url = $this->getConfigValue( array( 'payment.url-success' ) );
 
@@ -161,9 +161,9 @@ abstract class MShop_Service_Provider_Payment_Base
 	/**
 	 * Refunds the money for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 */
-	public function refund( MShop_Order_Item_Interface $order )
+	public function refund( MShop_Order_Item_Iface $order )
 	{
 		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
 	}
@@ -172,10 +172,10 @@ abstract class MShop_Service_Provider_Payment_Base
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 */
-	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
 	{
 		$this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}

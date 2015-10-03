@@ -16,7 +16,7 @@
  */
 class MShop_Service_Provider_Delivery_Default
 	extends MShop_Service_Provider_Delivery_Base
-	implements MShop_Service_Provider_Delivery_Interface
+	implements MShop_Service_Provider_Delivery_Iface
 {
 
 	private $beConfig = array(
@@ -71,9 +71,9 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Sends the order details to the ERP system for further processing.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object to process
+	 * @param MShop_Order_Item_Iface $order Order invoice object to process
 	 */
-	public function process( MShop_Order_Item_Interface $order )
+	public function process( MShop_Order_Item_Iface $order )
 	{
 		$logger = $this->getContext()->getLogger();
 		$xml = $this->buildXML( $order );
@@ -94,7 +94,7 @@ class MShop_Service_Provider_Delivery_Default
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
 	 */
 	public function getConfigBE()
 	{
@@ -263,11 +263,11 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Builds a complete XML string including the order data
 	 *
-	 * @param MShop_Order_Item_Interface $invoice Order of the customer
+	 * @param MShop_Order_Item_Iface $invoice Order of the customer
 	 * @return string Validated XML string with order data
 	 * @throws MShop_Service_Exception If an error occurs
 	 */
-	public function buildXML( MShop_Order_Item_Interface $invoice )
+	public function buildXML( MShop_Order_Item_Iface $invoice )
 	{
 		$base = $this->getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_ALL );
 
@@ -315,13 +315,13 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the header elements to the XML object
 	 *
-	 * @param MShop_Order_Item_Interface $invoice Order of the customer
-	 * @param MShop_Order_Item_Base_Interface $base Order base item of the customer
+	 * @param MShop_Order_Item_Iface $invoice Order of the customer
+	 * @param MShop_Order_Item_Base_Iface $base Order base item of the customer
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLHeader( MShop_Order_Item_Interface $invoice, MShop_Order_Item_Base_Interface $base,
+	protected function buildXMLHeader( MShop_Order_Item_Iface $invoice, MShop_Order_Item_Base_Iface $base,
 		DOMDocument $dom, DOMElement $orderitem )
 	{
 		$regex = '/^(\d+)\-(\d+)\-(\d+) (\d+)\:(\d+)\:(\d+)$/i';
@@ -357,12 +357,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the delivery/payment item to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object
+	 * @param MShop_Order_Item_Base_Iface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLService( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLService( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		foreach( $base->getServices() as $service )
 		{
@@ -404,12 +404,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the price item to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object
+	 * @param MShop_Order_Item_Base_Iface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLPrice( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLPrice( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$price = $base->getPrice();
 		$total = $price->getValue() + $price->getCosts();
@@ -427,12 +427,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the product list to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object
+	 * @param MShop_Order_Item_Base_Iface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLProducts( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLProducts( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$productlist = $dom->createElement( 'productlist' );
 
@@ -469,12 +469,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the list of child products to the bundle products in the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $parent The bundle product
+	 * @param MShop_Order_Item_Base_Product_Iface $parent The bundle product
 	 * @param array $products List of child products attached to $parent
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $productelement DOM element to which the child products are added
 	 */
-	protected function buildXMLChildList( MShop_Order_Item_Base_Product_Interface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
+	protected function buildXMLChildList( MShop_Order_Item_Base_Product_Iface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
 	{
 		$childlist = $dom->createElement( 'childlist' );
 
@@ -507,12 +507,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the address list to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object
+	 * @param MShop_Order_Item_Base_Iface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAddresses( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAddresses( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$addresslist = $dom->createElement( 'addresslist' );
 
@@ -527,12 +527,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds a single address item to the address list of the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Address_Interface $address Address object with personal information
+	 * @param MShop_Order_Item_Base_Address_Iface $address Address object with personal information
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $addresslist DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAddress( MShop_Order_Item_Base_Address_Interface $address,
+	protected function buildXMLAddress( MShop_Order_Item_Base_Address_Iface $address,
 		DOMDocument $dom, DOMElement $addresslist )
 	{
 		$addressitem = $dom->createElement( 'addressitem' );
@@ -561,12 +561,12 @@ class MShop_Service_Provider_Delivery_Default
 	/**
 	 * Adds the "additional" section to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object
+	 * @param MShop_Order_Item_Base_Iface $base Order base object
 	 * @param DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAdditional( MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAdditional( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$additional = $dom->createElement( 'additional' );
 		$this->appendChildCDATA( 'comment', '', $dom, $additional );

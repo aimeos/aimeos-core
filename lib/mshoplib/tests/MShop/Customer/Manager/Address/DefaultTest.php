@@ -83,14 +83,14 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
 		}
 	}
 
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $item );
+		$this->assertInstanceOf( 'MShop_Common_Item_Address_Iface', $item );
 	}
 
 	public function testGetItem()
@@ -187,7 +187,7 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
 	}
 
 

@@ -22,7 +22,7 @@ class MW_Template_T3 extends MW_Template_Base
 	 * @param string $text Template as text with Typo3-like markers
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return MW_Template_Interface
+	 * @return MW_Template_Iface
 	 */
 	public function __construct( $text, $begin = '<!--###$-->', $end = '<!--$###-->' )
 	{

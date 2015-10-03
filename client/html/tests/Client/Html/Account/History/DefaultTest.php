@@ -56,7 +56,7 @@ class Client_Html_Account_History_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'list', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

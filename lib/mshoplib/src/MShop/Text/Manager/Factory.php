@@ -16,18 +16,18 @@
  */
 class MShop_Text_Manager_Factory
 	extends MShop_Common_Factory_Base
-	implements MShop_Common_Factory_Interface
+	implements MShop_Common_Factory_Iface
 {
 	/**
 	 *	Creates a text manager DAO object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Manager object implementing the manager interface
+	 * @return MShop_Common_Manager_Iface Manager object implementing the manager interface
 	 * @throws MShop_Text_Exception|MShop_Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
 	{
 		/** classes/text/manager/name
 		 * Class name of the used text manager implementation
@@ -72,7 +72,7 @@ class MShop_Text_Manager_Factory
 			throw new MShop_Text_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Text_Manager_Interface';
+		$iface = 'MShop_Text_Manager_Iface';
 		$classname = 'MShop_Text_Manager_' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );

@@ -218,7 +218,7 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
-			$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $child );
+			$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $child );
 		}
 	}
 
@@ -232,7 +232,7 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Catalog_Item_Interface', $this->object->getChild( 0 ) );
+		$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $this->object->getChild( 0 ) );
 
 		$this->setExpectedException( 'MShop_Catalog_Exception' );
 		$this->object->getChild( 1 );
@@ -241,6 +241,6 @@ class MShop_Catalog_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetNode()
 	{
-		$this->assertInstanceOf( 'MW_Tree_Node_Interface', $this->object->getNode() );
+		$this->assertInstanceOf( 'MW_Tree_Node_Iface', $this->object->getNode() );
 	}
 }

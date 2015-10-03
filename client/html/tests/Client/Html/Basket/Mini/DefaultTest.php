@@ -50,7 +50,7 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$output = $this->object->getBody();
 		$miniBasket = $this->object->getView()->miniBasket;
-		$this->assertTrue( $miniBasket instanceof MShop_Order_Item_Base_Interface );
+		$this->assertTrue( $miniBasket instanceof MShop_Order_Item_Base_Iface );
 		$this->assertStringStartsWith( '<section class="aimeos basket-mini">', $output );
 	}
 
@@ -58,7 +58,7 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'main', 'Default' );
-		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
+		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
 	}
 
 

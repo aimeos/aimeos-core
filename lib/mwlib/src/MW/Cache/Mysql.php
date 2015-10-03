@@ -16,7 +16,7 @@
  */
 class MW_Cache_Mysql
 	extends MW_Cache_DB
-	implements MW_Cache_Interface
+	implements MW_Cache_Iface
 {
 	private $sql;
 	private $dbm;
@@ -62,9 +62,9 @@ class MW_Cache_Mysql
 	 *  config['siteid'] = 123
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
-	 * @param MW_DB_Manager_Interface $dbm Database manager
+	 * @param MW_DB_Manager_Iface $dbm Database manager
 	 */
-	public function __construct( array $config, MW_DB_Manager_Interface $dbm )
+	public function __construct( array $config, MW_DB_Manager_Iface $dbm )
 	{
 		parent::__construct( $config, $dbm );
 

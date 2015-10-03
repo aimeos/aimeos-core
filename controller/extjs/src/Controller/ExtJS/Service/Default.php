@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Service_Default
 	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Interface
+	implements Controller_ExtJS_Common_Iface
 {
 	private $manager = null;
 
@@ -25,9 +25,9 @@ class Controller_ExtJS_Service_Default
 	/**
 	 * Initializes the service controller.
 	 *
-	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context, 'Service' );
 	}
@@ -79,10 +79,10 @@ class Controller_ExtJS_Service_Default
 	/**
 	 * Tests the configuration and throws an exception if it's invalid
 	 *
-	 * @param MShop_Service_Item_Interface $item Service item object
+	 * @param MShop_Service_Item_Iface $item Service item object
 	 * @throws Controller_ExtJS_Exception If configuration is invalid
 	 */
-	protected function checkConfig( MShop_Service_Item_Interface $item )
+	protected function checkConfig( MShop_Service_Item_Iface $item )
 	{
 		$msg = '';
 		$provider = $this->manager->getProvider( $item );
@@ -104,7 +104,7 @@ class Controller_ExtJS_Service_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Interface Manager object
+	 * @return MShop_Common_Manager_Iface Manager object
 	 */
 	protected function getManager()
 	{

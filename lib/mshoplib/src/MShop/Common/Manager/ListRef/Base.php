@@ -16,15 +16,15 @@
  */
 abstract class MShop_Common_Manager_ListRef_Base
 	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_ListRef_Interface
+	implements MShop_Common_Manager_ListRef_Iface
 {
 	/**
 	 * Creates a new item for the specific manager.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
-	 * @return MShop_Common_Item_Interface New item
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
+	 * @return MShop_Common_Item_Iface New item
 	 */
 	abstract protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() );
 
@@ -35,7 +35,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * @param array $map Associative list of IDs as keys and the associative array of values
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_Item_Interface
+	 * @return array List of items implementing MShop_Common_Item_Iface
 	 */
 	protected function buildItems( array $map, array $domains, $prefix )
 	{
@@ -82,7 +82,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * @param array $ids List of IDs
 	 * @param array $domains List of domain names whose referenced items should be attached
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_List_Item_Interface
+	 * @return array List of items implementing MShop_Common_List_Item_Iface
 	 */
 	protected function getListItems( array $ids, array $domains, $prefix )
 	{

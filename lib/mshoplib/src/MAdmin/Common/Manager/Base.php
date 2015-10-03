@@ -19,11 +19,11 @@ abstract class MAdmin_Common_Manager_Base extends MShop_Common_Manager_Base
 	/**
 	 * Adds the configured decorators to the given manager object.
 	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @param MShop_Common_Manager_Iface $manager Manager object
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 */
-	protected function addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( MShop_Common_Manager_Iface $manager, $managerpath, $domain )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -81,7 +81,7 @@ abstract class MAdmin_Common_Manager_Base extends MShop_Common_Manager_Base
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions
+	 * @return MShop_Common_Manager_Iface Manager for different extensions
 	 */
 	protected function getSubManagerBase( $domain, $manager, $name )
 	{
@@ -106,7 +106,7 @@ abstract class MAdmin_Common_Manager_Base extends MShop_Common_Manager_Base
 		$subnames = $this->createSubNames( $manager );
 
 		$classname = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_' . $name;
-		$interface = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_Interface';
+		$interface = 'MAdmin_' . $domainname . '_Manager_' . $subnames . '_Iface';
 
 		if( class_exists( $classname ) === false ) {
 			throw new MAdmin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );

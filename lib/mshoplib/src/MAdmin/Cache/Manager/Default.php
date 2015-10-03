@@ -16,7 +16,7 @@
  */
 class MAdmin_Cache_Manager_Default
 	extends MAdmin_Common_Manager_Base
-	implements MAdmin_Cache_Manager_Interface
+	implements MAdmin_Cache_Manager_Iface
 {
 	private $object;
 
@@ -66,9 +66,9 @@ class MAdmin_Cache_Manager_Default
 	/**
 	 * Creates the cache manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-cache' );
@@ -78,7 +78,7 @@ class MAdmin_Cache_Manager_Default
 	/**
 	 * Returns the cache object
 	 *
-	 * @return MW_Cache_Interface Cache object
+	 * @return MW_Cache_Iface Cache object
 	 */
 	public function getCache()
 	{
@@ -257,7 +257,7 @@ class MAdmin_Cache_Manager_Default
 	/**
 	 * Create new cache item object.
 	 *
-	 * @return MAdmin_Cache_Item_Interface
+	 * @return MAdmin_Cache_Item_Iface
 	 */
 	public function createItem()
 	{
@@ -274,12 +274,12 @@ class MAdmin_Cache_Manager_Default
 	/**
 	 * Adds a new cache to the storage.
 	 *
-	 * @param MAdmin_Cache_Item_Interface $item Cache item that should be saved to the storage
+	 * @param MAdmin_Cache_Item_Iface $item Cache item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
 	{
-		$iface = 'MAdmin_Cache_Item_Interface';
+		$iface = 'MAdmin_Cache_Item_Iface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MAdmin_Cache_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -376,7 +376,7 @@ class MAdmin_Cache_Manager_Default
 	 *
 	 * @param integer $id Cache ID to fetch cache object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MAdmin_Cache_Item_Interface Returns the cache item of the given id
+	 * @return MAdmin_Cache_Item_Iface Returns the cache item of the given id
 	 * @throws MAdmin_Cache_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -392,12 +392,12 @@ class MAdmin_Cache_Manager_Default
 	/**
 	 * Search for cache entries based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of cache items implementing MAdmin_Cache_Item_Interface
+	 * @return array List of cache items implementing MAdmin_Cache_Item_Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -506,7 +506,7 @@ class MAdmin_Cache_Manager_Default
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -538,7 +538,7 @@ class MAdmin_Cache_Manager_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -550,7 +550,7 @@ class MAdmin_Cache_Manager_Default
 	 * Create new admin cache item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return MAdmin_Cache_Item_Interface
+	 * @return MAdmin_Cache_Item_Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
