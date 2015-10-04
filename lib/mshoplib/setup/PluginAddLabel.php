@@ -5,10 +5,10 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
-* Adds label column to plugin table.
-*/
 
+/**
+ * Adds label column to plugin table.
+ */
 class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Base
 {
 	private $mysql = array(

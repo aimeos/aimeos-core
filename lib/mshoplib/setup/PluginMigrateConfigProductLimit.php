@@ -5,10 +5,10 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
-* Migrates product limit plugin configuration.
-*/
 
+/**
+ * Migrates product limit plugin configuration.
+ */
 class MW_Setup_Task_PluginMigrateConfigProductLimit extends MW_Setup_Task_Base
 {
 	private $mysql = array(
