@@ -627,7 +627,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		//build catalog with all products
-		$config->set( 'mshop/catalog/manager/index/default/index', 'all' );
+		$config->set( 'mshop/catalog/manager/index/standard/index', 'all' );
 		$this->object->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
@@ -636,7 +636,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
-		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		$config->set( 'mshop/catalog/manager/index/standard/index', 'categorized' );
 		$this->object->rebuildIndex();
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
@@ -706,7 +706,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$search->setSlice( 0, 0x7fffffff );
 		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
-		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		$config->set( 'mshop/catalog/manager/index/standard/index', 'categorized' );
 		$this->object->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );

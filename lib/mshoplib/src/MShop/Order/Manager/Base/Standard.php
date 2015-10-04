@@ -142,7 +142,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 */
 	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
-		/** mshop/order/manager/base/default/aggregate
+		/** mshop/order/manager/base/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -178,14 +178,14 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/order/manager/base/default/item/insert
-		 * @see mshop/order/manager/base/default/item/update
-		 * @see mshop/order/manager/base/default/item/newid
-		 * @see mshop/order/manager/base/default/item/delete
-		 * @see mshop/order/manager/base/default/item/search
-		 * @see mshop/order/manager/base/default/item/count
+		 * @see mshop/order/manager/base/standard/item/insert
+		 * @see mshop/order/manager/base/standard/item/update
+		 * @see mshop/order/manager/base/standard/item/newid
+		 * @see mshop/order/manager/base/standard/item/delete
+		 * @see mshop/order/manager/base/standard/item/search
+		 * @see mshop/order/manager/base/standard/item/count
 		 */
-		$cfgkey = 'mshop/order/manager/base/default/aggregate';
+		$cfgkey = 'mshop/order/manager/base/standard/aggregate';
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ) );
 	}
 
@@ -204,7 +204,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/order/manager/base/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/standard/item/delete' );
 	}
 
 
@@ -235,7 +235,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/order/manager/base/default/item/delete
+		/** mshop/order/manager/base/standard/item/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the order database.
@@ -253,13 +253,13 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/order/manager/base/default/item/insert
-		 * @see mshop/order/manager/base/default/item/update
-		 * @see mshop/order/manager/base/default/item/newid
-		 * @see mshop/order/manager/base/default/item/search
-		 * @see mshop/order/manager/base/default/item/count
+		 * @see mshop/order/manager/base/standard/item/insert
+		 * @see mshop/order/manager/base/standard/item/update
+		 * @see mshop/order/manager/base/standard/item/newid
+		 * @see mshop/order/manager/base/standard/item/search
+		 * @see mshop/order/manager/base/standard/item/count
 		 */
-		$path = 'mshop/order/manager/base/default/item/delete';
+		$path = 'mshop/order/manager/base/standard/item/delete';
 		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
@@ -460,7 +460,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 			if( $id === null )
 			{
-				/** mshop/order/manager/base/default/item/insert
+				/** mshop/order/manager/base/standard/item/insert
 				 * Inserts a new order record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -483,17 +483,17 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/default/item/update
-				 * @see mshop/order/manager/base/default/item/newid
-				 * @see mshop/order/manager/base/default/item/delete
-				 * @see mshop/order/manager/base/default/item/search
-				 * @see mshop/order/manager/base/default/item/count
+				 * @see mshop/order/manager/base/standard/item/update
+				 * @see mshop/order/manager/base/standard/item/newid
+				 * @see mshop/order/manager/base/standard/item/delete
+				 * @see mshop/order/manager/base/standard/item/search
+				 * @see mshop/order/manager/base/standard/item/count
 				 */
-				$path = 'mshop/order/manager/base/default/item/insert';
+				$path = 'mshop/order/manager/base/standard/item/insert';
 			}
 			else
 			{
-				/** mshop/order/manager/base/default/item/update
+				/** mshop/order/manager/base/standard/item/update
 				 * Updates an existing order record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -513,13 +513,13 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/default/item/insert
-				 * @see mshop/order/manager/base/default/item/newid
-				 * @see mshop/order/manager/base/default/item/delete
-				 * @see mshop/order/manager/base/default/item/search
-				 * @see mshop/order/manager/base/default/item/count
+				 * @see mshop/order/manager/base/standard/item/insert
+				 * @see mshop/order/manager/base/standard/item/newid
+				 * @see mshop/order/manager/base/standard/item/delete
+				 * @see mshop/order/manager/base/standard/item/search
+				 * @see mshop/order/manager/base/standard/item/count
 				 */
-				$path = 'mshop/order/manager/base/default/item/update';
+				$path = 'mshop/order/manager/base/standard/item/update';
 			}
 
 			$priceItem = $item->getPrice();
@@ -551,7 +551,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/order/manager/base/default/item/newid
+				/** mshop/order/manager/base/standard/item/newid
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -575,13 +575,13 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/default/item/insert
-				 * @see mshop/order/manager/base/default/item/update
-				 * @see mshop/order/manager/base/default/item/delete
-				 * @see mshop/order/manager/base/default/item/search
-				 * @see mshop/order/manager/base/default/item/count
+				 * @see mshop/order/manager/base/standard/item/insert
+				 * @see mshop/order/manager/base/standard/item/update
+				 * @see mshop/order/manager/base/standard/item/delete
+				 * @see mshop/order/manager/base/standard/item/search
+				 * @see mshop/order/manager/base/standard/item/count
 				 */
-				$path = 'mshop/order/manager/base/default/item/newid';
+				$path = 'mshop/order/manager/base/standard/item/newid';
 				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
@@ -622,7 +622,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			$required = array( 'order.base' );
 			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
 
-			/** mshop/order/manager/base/default/item/search
+			/** mshop/order/manager/base/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the order
@@ -667,15 +667,15 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/default/item/insert
-			 * @see mshop/order/manager/base/default/item/update
-			 * @see mshop/order/manager/base/default/item/newid
-			 * @see mshop/order/manager/base/default/item/delete
-			 * @see mshop/order/manager/base/default/item/count
+			 * @see mshop/order/manager/base/standard/item/insert
+			 * @see mshop/order/manager/base/standard/item/update
+			 * @see mshop/order/manager/base/standard/item/newid
+			 * @see mshop/order/manager/base/standard/item/delete
+			 * @see mshop/order/manager/base/standard/item/count
 			 */
-			$cfgPathSearch = 'mshop/order/manager/base/default/item/search';
+			$cfgPathSearch = 'mshop/order/manager/base/standard/item/search';
 
-			/** mshop/order/manager/base/default/item/count
+			/** mshop/order/manager/base/standard/item/count
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the order
@@ -714,13 +714,13 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/default/item/insert
-			 * @see mshop/order/manager/base/default/item/update
-			 * @see mshop/order/manager/base/default/item/newid
-			 * @see mshop/order/manager/base/default/item/delete
-			 * @see mshop/order/manager/base/default/item/search
+			 * @see mshop/order/manager/base/standard/item/insert
+			 * @see mshop/order/manager/base/standard/item/update
+			 * @see mshop/order/manager/base/standard/item/newid
+			 * @see mshop/order/manager/base/standard/item/delete
+			 * @see mshop/order/manager/base/standard/item/search
 			 */
-			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
+			$cfgPathCount = 'mshop/order/manager/base/standard/item/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
@@ -881,8 +881,8 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		try
 		{
 			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
-			$cfgPathSearch = 'mshop/order/manager/base/default/item/search';
-			$cfgPathCount = 'mshop/order/manager/base/default/item/count';
+			$cfgPathSearch = 'mshop/order/manager/base/standard/item/search';
+			$cfgPathCount = 'mshop/order/manager/base/standard/item/count';
 			$required = array( 'order.base' );
 			$total = null;
 

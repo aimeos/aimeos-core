@@ -168,7 +168,7 @@ class MShop_Locale_Manager_Site_Standard
 		{
 			$id = $item->getId();
 
-			/** mshop/locale/manager/site/default/item/update
+			/** mshop/locale/manager/site/standard/item/update
 			 * Updates an existing site record in the database
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -185,13 +185,13 @@ class MShop_Locale_Manager_Site_Standard
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/default/item/insert
-			 * @see mshop/locale/manager/site/default/item/delete
-			 * @see mshop/locale/manager/site/default/item/search
-			 * @see mshop/locale/manager/site/default/item/count
-			 * @see mshop/locale/manager/site/default/item/newid
+			 * @see mshop/locale/manager/site/standard/item/insert
+			 * @see mshop/locale/manager/site/standard/item/delete
+			 * @see mshop/locale/manager/site/standard/item/search
+			 * @see mshop/locale/manager/site/standard/item/count
+			 * @see mshop/locale/manager/site/standard/item/newid
 			 */
-			$path = 'mshop/locale/manager/site/default/item/update';
+			$path = 'mshop/locale/manager/site/standard/item/update';
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
@@ -226,7 +226,7 @@ class MShop_Locale_Manager_Site_Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		/** mshop/locale/manager/site/default/item/delete
+		/** mshop/locale/manager/site/standard/item/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the site records specified by the given IDs from the
@@ -244,13 +244,13 @@ class MShop_Locale_Manager_Site_Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/site/default/item/insert
-		 * @see mshop/locale/manager/site/default/item/update
-		 * @see mshop/locale/manager/site/default/item/search
-		 * @see mshop/locale/manager/site/default/item/count
-		 * @see mshop/locale/manager/site/default/item/newid
+		 * @see mshop/locale/manager/site/standard/item/insert
+		 * @see mshop/locale/manager/site/standard/item/update
+		 * @see mshop/locale/manager/site/standard/item/search
+		 * @see mshop/locale/manager/site/standard/item/count
+		 * @see mshop/locale/manager/site/standard/item/newid
 		 */
-		$path = 'mshop/locale/manager/site/default/item/delete';
+		$path = 'mshop/locale/manager/site/standard/item/delete';
 		$this->deleteItemsBase( $ids, $config->get( $path, $path ), false );
 
 		/** mshop/locale/manager/site/cleanup/shop/domains
@@ -509,7 +509,7 @@ class MShop_Locale_Manager_Site_Standard
 				$search->getSliceSize(),
 			);
 
-			/** mshop/locale/manager/site/default/item/search
+			/** mshop/locale/manager/site/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the attribute
@@ -554,13 +554,13 @@ class MShop_Locale_Manager_Site_Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/default/item/insert
-			 * @see mshop/locale/manager/site/default/item/update
-			 * @see mshop/locale/manager/site/default/item/delete
-			 * @see mshop/locale/manager/site/default/item/count
-			 * @see mshop/locale/manager/site/default/item/newid
+			 * @see mshop/locale/manager/site/standard/item/insert
+			 * @see mshop/locale/manager/site/standard/item/update
+			 * @see mshop/locale/manager/site/standard/item/delete
+			 * @see mshop/locale/manager/site/standard/item/count
+			 * @see mshop/locale/manager/site/standard/item/newid
 			 */
-			$path = 'mshop/locale/manager/site/default/item/search';
+			$path = 'mshop/locale/manager/site/standard/item/search';
 
 			$sql = $context->getConfig()->get( $path, $path );
 			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
@@ -588,7 +588,7 @@ class MShop_Locale_Manager_Site_Standard
 
 			if( $total !== null )
 			{
-				/** mshop/locale/manager/site/default/item/count
+				/** mshop/locale/manager/site/standard/item/count
 				 * Counts the number of records matched by the given criteria in the database
 				 *
 				 * Counts all records matched by the given criteria from the attribute
@@ -627,13 +627,13 @@ class MShop_Locale_Manager_Site_Standard
 				 * @param string SQL statement for counting items
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/site/default/item/insert
-				 * @see mshop/locale/manager/site/default/item/update
-				 * @see mshop/locale/manager/site/default/item/delete
-				 * @see mshop/locale/manager/site/default/item/search
-				 * @see mshop/locale/manager/site/default/item/newid
+				 * @see mshop/locale/manager/site/standard/item/insert
+				 * @see mshop/locale/manager/site/standard/item/update
+				 * @see mshop/locale/manager/site/standard/item/delete
+				 * @see mshop/locale/manager/site/standard/item/search
+				 * @see mshop/locale/manager/site/standard/item/newid
 				 */
-				$path = 'mshop/locale/manager/site/default/item/count';
+				$path = 'mshop/locale/manager/site/standard/item/count';
 
 				$sql = $this->getContext()->getConfig()->get( $path, $path );
 				$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
@@ -757,7 +757,7 @@ class MShop_Locale_Manager_Site_Standard
 		{
 			$date = date( 'Y-m-d H:i:s' );
 
-			/** mshop/locale/manager/site/default/item/insert
+			/** mshop/locale/manager/site/standard/item/insert
 			 * Inserts a new currency record into the database table
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -776,13 +776,13 @@ class MShop_Locale_Manager_Site_Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/default/item/update
-			 * @see mshop/locale/manager/site/default/item/delete
-			 * @see mshop/locale/manager/site/default/item/search
-			 * @see mshop/locale/manager/site/default/item/count
-			 * @see mshop/locale/manager/site/default/item/newid
+			 * @see mshop/locale/manager/site/standard/item/update
+			 * @see mshop/locale/manager/site/standard/item/delete
+			 * @see mshop/locale/manager/site/standard/item/search
+			 * @see mshop/locale/manager/site/standard/item/count
+			 * @see mshop/locale/manager/site/standard/item/newid
 			 */
-			$path = 'mshop/locale/manager/site/default/item/insert';
+			$path = 'mshop/locale/manager/site/standard/item/insert';
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
@@ -797,7 +797,7 @@ class MShop_Locale_Manager_Site_Standard
 
 			$stmt->execute()->finish();
 
-			/** mshop/locale/manager/site/default/item/newid
+			/** mshop/locale/manager/site/standard/item/newid
 			 * Retrieves the ID generated by the database when inserting a new record
 			 *
 			 * As soon as a new record is inserted into the database table,
@@ -821,13 +821,13 @@ class MShop_Locale_Manager_Site_Standard
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/default/item/insert
-			 * @see mshop/locale/manager/site/default/item/update
-			 * @see mshop/locale/manager/site/default/item/delete
-			 * @see mshop/locale/manager/site/default/item/search
-			 * @see mshop/locale/manager/site/default/item/count
+			 * @see mshop/locale/manager/site/standard/item/insert
+			 * @see mshop/locale/manager/site/standard/item/update
+			 * @see mshop/locale/manager/site/standard/item/delete
+			 * @see mshop/locale/manager/site/standard/item/search
+			 * @see mshop/locale/manager/site/standard/item/count
 			 */
-			$path = 'mshop/locale/manager/default/item/newid';
+			$path = 'mshop/locale/manager/standard/item/newid';
 			$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 
 			$dbm->release( $conn, $dbname );

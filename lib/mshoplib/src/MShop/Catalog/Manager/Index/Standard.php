@@ -30,7 +30,7 @@ class MShop_Catalog_Manager_Index_Standard
 	 */
 	public function aggregate( MW_Common_Criteria_Iface $search, $key )
 	{
-		/** mshop/catalog/manager/index/default/aggregate
+		/** mshop/catalog/manager/index/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -66,11 +66,11 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/item/count
-		 * @see mshop/catalog/manager/index/default/item/optimize
-		 * @see mshop/catalog/manager/index/default/item/search
+		 * @see mshop/catalog/manager/index/standard/item/count
+		 * @see mshop/catalog/manager/index/standard/item/optimize
+		 * @see mshop/catalog/manager/index/standard/item/search
 		 */
-		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate', array( 'product' ) );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/standard/aggregate', array( 'product' ) );
 	}
 
 
@@ -99,7 +99,7 @@ class MShop_Catalog_Manager_Index_Standard
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
-		/** mshop/catalog/manager/index/default/submanagers
+		/** mshop/catalog/manager/index/standard/submanagers
 		 * List of manager names that can be instantiated by the catalog index manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -116,7 +116,7 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'mshop/catalog/manager/index/default/submanagers';
+		$path = 'mshop/catalog/manager/index/standard/submanagers';
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 		$list += $this->getSearchAttributesBase( array(), $path, $default, $withsub );
@@ -254,7 +254,7 @@ class MShop_Catalog_Manager_Index_Standard
 	 */
 	public function optimize()
 	{
-		/** mshop/catalog/manager/index/default/optimize
+		/** mshop/catalog/manager/index/standard/optimize
 		 * Optimizes the stored product data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -269,11 +269,11 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/item/count
-		 * @see mshop/catalog/manager/index/default/item/search
-		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 * @see mshop/catalog/manager/index/standard/item/count
+		 * @see mshop/catalog/manager/index/standard/item/search
+		 * @see mshop/catalog/manager/index/standard/item/aggregate
 		 */
-		$this->doOptimize( 'mshop/catalog/manager/index/default/optimize' );
+		$this->doOptimize( 'mshop/catalog/manager/index/standard/optimize' );
 	}
 
 
@@ -315,7 +315,7 @@ class MShop_Catalog_Manager_Index_Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		/** mshop/catalog/manager/index/default/chunksize
+		/** mshop/catalog/manager/index/standard/chunksize
 		 * Number of products that should be indexed at once
 		 *
 		 * When rebuilding the product index, several products are updated at
@@ -331,14 +331,14 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/domains
-		 * @see mshop/catalog/manager/index/default/index
-		 * @see mshop/catalog/manager/index/default/subdomains
-		 * @see mshop/catalog/manager/index/default/submanagers
+		 * @see mshop/catalog/manager/index/standard/domains
+		 * @see mshop/catalog/manager/index/standard/index
+		 * @see mshop/catalog/manager/index/standard/subdomains
+		 * @see mshop/catalog/manager/index/standard/submanagers
 		 */
-		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+		$size = $config->get( 'mshop/catalog/manager/index/standard/chunksize', 1000 );
 
-		/** mshop/catalog/manager/index/default/index
+		/** mshop/catalog/manager/index/standard/index
 		 * Index mode for products which determines what products are added to the index
 		 *
 		 * By default, only products that have been added to a category are
@@ -355,14 +355,14 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/chunksize
-		 * @see mshop/catalog/manager/index/default/domains
-		 * @see mshop/catalog/manager/index/default/subdomains
-		 * @see mshop/catalog/manager/index/default/submanagers
+		 * @see mshop/catalog/manager/index/standard/chunksize
+		 * @see mshop/catalog/manager/index/standard/domains
+		 * @see mshop/catalog/manager/index/standard/subdomains
+		 * @see mshop/catalog/manager/index/standard/submanagers
 		 */
-		$mode = $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		$mode = $config->get( 'mshop/catalog/manager/index/standard/index', 'categorized' );
 
-		/** mshop/catalog/manager/index/default/domains
+		/** mshop/catalog/manager/index/standard/domains
 		 * A list of domain names whose items should be retrieved together with the product
 		 *
 		 * To speed up the indexing process, items like texts, prices, media,
@@ -378,13 +378,13 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string List of MShop domain names
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/chunksize
-		 * @see mshop/catalog/manager/index/default/index
-		 * @see mshop/catalog/manager/index/default/subdomains
-		 * @see mshop/catalog/manager/index/default/submanagers
+		 * @see mshop/catalog/manager/index/standard/chunksize
+		 * @see mshop/catalog/manager/index/standard/index
+		 * @see mshop/catalog/manager/index/standard/subdomains
+		 * @see mshop/catalog/manager/index/standard/submanagers
 		 */
 		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
+		$domains = $config->get( 'mshop/catalog/manager/index/standard/domains', $default );
 
 		$manager = MShop_Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
@@ -484,7 +484,7 @@ class MShop_Catalog_Manager_Index_Standard
 	 */
 	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/catalog/manager/index/default/item/search
+		/** mshop/catalog/manager/index/standard/item/search
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the order
@@ -529,13 +529,13 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/item/count
-		 * @see mshop/catalog/manager/index/default/item/optimize
-		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 * @see mshop/catalog/manager/index/standard/item/count
+		 * @see mshop/catalog/manager/index/standard/item/optimize
+		 * @see mshop/catalog/manager/index/standard/item/aggregate
 		 */
-		$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
+		$cfgPathSearch = 'mshop/catalog/manager/index/standard/item/search';
 
-		/** mshop/catalog/manager/index/default/item/count
+		/** mshop/catalog/manager/index/standard/item/count
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the order
@@ -574,11 +574,11 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/item/search
-		 * @see mshop/catalog/manager/index/default/item/optimize
-		 * @see mshop/catalog/manager/index/default/item/aggregate
+		 * @see mshop/catalog/manager/index/standard/item/search
+		 * @see mshop/catalog/manager/index/standard/item/optimize
+		 * @see mshop/catalog/manager/index/standard/item/aggregate
 		 */
-		$cfgPathCount = 'mshop/catalog/manager/index/default/item/count';
+		$cfgPathCount = 'mshop/catalog/manager/index/standard/item/count';
 
 		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
@@ -658,7 +658,7 @@ class MShop_Catalog_Manager_Index_Standard
 	{
 		$context = $this->getContext();
 
-		/** mshop/catalog/manager/index/default/subdomains
+		/** mshop/catalog/manager/index/standard/subdomains
 		 * A list of domains for sub-products whose items should be added to the parent product
 		 *
 		 * Data from sub-products like variants or bundled products can be
@@ -673,15 +673,15 @@ class MShop_Catalog_Manager_Index_Standard
 		 * @param string List of MShop domain names
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/catalog/manager/index/default/chunksize
-		 * @see mshop/catalog/manager/index/default/domains
-		 * @see mshop/catalog/manager/index/default/index
-		 * @see mshop/catalog/manager/index/default/submanagers
+		 * @see mshop/catalog/manager/index/standard/chunksize
+		 * @see mshop/catalog/manager/index/standard/domains
+		 * @see mshop/catalog/manager/index/standard/index
+		 * @see mshop/catalog/manager/index/standard/submanagers
 		 */
 		// Including "text" and "price" messes up the sortation
 		$default = array( 'attribute', 'product' );
-		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/subdomains', $default );
-		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/standard/subdomains', $default );
+		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/standard/chunksize', 1000 );
 
 		$manager = MShop_Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
@@ -787,7 +787,7 @@ class MShop_Catalog_Manager_Index_Standard
 		{
 			$this->subManagers = array();
 
-			/** mshop/catalog/manager/index/default/submanagers
+			/** mshop/catalog/manager/index/standard/submanagers
 			 * A list of sub-manager names used for indexing associated items
 			 *
 			 * All items referenced by a product (e.g. texts, prices, media,
@@ -806,12 +806,12 @@ class MShop_Catalog_Manager_Index_Standard
 			 * @since 2014.09
 			 * @category User
 			 * @category Developer
-			 * @see mshop/catalog/manager/index/default/chunksize
-			 * @see mshop/catalog/manager/index/default/domains
-			 * @see mshop/catalog/manager/index/default/index
-			 * @see mshop/catalog/manager/index/default/subdomains
+			 * @see mshop/catalog/manager/index/standard/chunksize
+			 * @see mshop/catalog/manager/index/standard/domains
+			 * @see mshop/catalog/manager/index/standard/index
+			 * @see mshop/catalog/manager/index/standard/subdomains
 			 */
-			$path = 'mshop/catalog/manager/index/default/submanagers';
+			$path = 'mshop/catalog/manager/index/standard/submanagers';
 			$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 			foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {

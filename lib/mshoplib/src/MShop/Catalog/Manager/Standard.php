@@ -155,7 +155,7 @@ class MShop_Catalog_Manager_Standard
 
 		try
 		{
-			$path = 'mshop/catalog/manager/default/item/delete';
+			$path = 'mshop/catalog/manager/standard/item/delete';
 			$sql = $config->get( $path, $path );
 
 			$types = array( 'siteid' => MW_DB_Statement_Base::PARAM_STR );
@@ -397,7 +397,7 @@ class MShop_Catalog_Manager_Standard
 			$required = array( 'catalog' );
 			$level = MShop_Locale_Manager_Base::SITE_PATH;
 
-			/** mshop/catalog/manager/default/item/search-item
+			/** mshop/catalog/manager/standard/item/search-item
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the catalog
@@ -442,20 +442,20 @@ class MShop_Catalog_Manager_Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/catalog/manager/default/item/delete
-			 * @see mshop/catalog/manager/default/item/get
-			 * @see mshop/catalog/manager/default/item/insert
-			 * @see mshop/catalog/manager/default/item/update
-			 * @see mshop/catalog/manager/default/item/newid
-			 * @see mshop/catalog/manager/default/item/search
-			 * @see mshop/catalog/manager/default/item/count
-			 * @see mshop/catalog/manager/default/item/move-left
-			 * @see mshop/catalog/manager/default/item/move-right
-			 * @see mshop/catalog/manager/default/item/update-parentid
+			 * @see mshop/catalog/manager/standard/item/delete
+			 * @see mshop/catalog/manager/standard/item/get
+			 * @see mshop/catalog/manager/standard/item/insert
+			 * @see mshop/catalog/manager/standard/item/update
+			 * @see mshop/catalog/manager/standard/item/newid
+			 * @see mshop/catalog/manager/standard/item/search
+			 * @see mshop/catalog/manager/standard/item/count
+			 * @see mshop/catalog/manager/standard/item/move-left
+			 * @see mshop/catalog/manager/standard/item/move-right
+			 * @see mshop/catalog/manager/standard/item/update-parentid
 			 */
-			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
+			$cfgPathSearch = 'mshop/catalog/manager/standard/item/search-item';
 
-			/** mshop/catalog/manager/default/item/count
+			/** mshop/catalog/manager/standard/item/count
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the catalog
@@ -494,18 +494,18 @@ class MShop_Catalog_Manager_Standard
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/catalog/manager/default/item/delete
-			 * @see mshop/catalog/manager/default/item/get
-			 * @see mshop/catalog/manager/default/item/insert
-			 * @see mshop/catalog/manager/default/item/update
-			 * @see mshop/catalog/manager/default/item/newid
-			 * @see mshop/catalog/manager/default/item/search
-			 * @see mshop/catalog/manager/default/item/search-item
-			 * @see mshop/catalog/manager/default/item/move-left
-			 * @see mshop/catalog/manager/default/item/move-right
-			 * @see mshop/catalog/manager/default/item/update-parentid
+			 * @see mshop/catalog/manager/standard/item/delete
+			 * @see mshop/catalog/manager/standard/item/get
+			 * @see mshop/catalog/manager/standard/item/insert
+			 * @see mshop/catalog/manager/standard/item/update
+			 * @see mshop/catalog/manager/standard/item/newid
+			 * @see mshop/catalog/manager/standard/item/search
+			 * @see mshop/catalog/manager/standard/item/search-item
+			 * @see mshop/catalog/manager/standard/item/move-left
+			 * @see mshop/catalog/manager/standard/item/move-right
+			 * @see mshop/catalog/manager/standard/item/update-parentid
 			 */
-			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
+			$cfgPathCount = 'mshop/catalog/manager/standard/item/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
@@ -803,7 +803,7 @@ class MShop_Catalog_Manager_Standard
 				'dbname' => $this->getResourceName(),
 				'sql' => array(
 
-					/** mshop/catalog/manager/default/item/delete
+					/** mshop/catalog/manager/standard/item/delete
 					 * Deletes the items matched by the given IDs from the database
 					 *
 					 * Removes the records specified by the given IDs from the database.
@@ -821,22 +821,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for deleting items
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'delete' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/delete' ) ),
+					'delete' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/delete' ) ),
 
-					/** mshop/catalog/manager/default/item/get
+					/** mshop/catalog/manager/standard/item/get
 					 * Returns a node record and its complete subtree optionally limited by the level
 					 *
 					 * Fetches the records matched by the given criteria from the catalog
@@ -861,22 +861,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for searching items
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'get' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/get' ) ),
+					'get' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/get' ) ),
 
-					/** mshop/catalog/manager/default/item/insert
+					/** mshop/catalog/manager/standard/item/insert
 					 * Inserts a new catalog node into the database table
 					 *
 					 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -899,22 +899,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for inserting records
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'insert' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/insert' ) ),
+					'insert' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/insert' ) ),
 
-					/** mshop/catalog/manager/default/item/move-left
+					/** mshop/catalog/manager/standard/item/move-left
 					 * Updates the left values of the nodes that are moved within the catalog tree
 					 *
 					 * When moving nodes or subtrees with the catalog tree, the left
@@ -935,22 +935,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'move-left' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/move-left' ) ),
+					'move-left' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/move-left' ) ),
 
-					/** mshop/catalog/manager/default/item/move-right
+					/** mshop/catalog/manager/standard/item/move-right
 					 * Updates the left values of the nodes that are moved within the catalog tree
 					 *
 					 * When moving nodes or subtrees with the catalog tree, the right
@@ -971,22 +971,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'move-right' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/move-right' ) ),
+					'move-right' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/move-right' ) ),
 
-					/** mshop/catalog/manager/default/item/search
+					/** mshop/catalog/manager/standard/item/search
 					 * Retrieves the records matched by the given criteria in the database
 					 *
 					 * Fetches the records matched by the given criteria from the catalog
@@ -1013,22 +1013,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for searching items
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'search' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/search' ) ),
+					'search' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/search' ) ),
 
-					/** mshop/catalog/manager/default/item/update
+					/** mshop/catalog/manager/standard/item/update
 					 * Updates an existing catalog node in the database
 					 *
 					 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -1048,22 +1048,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'update' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update' ) ),
+					'update' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/update' ) ),
 
-					/** mshop/catalog/manager/default/item/update-parentid
+					/** mshop/catalog/manager/standard/item/update-parentid
 					 * Updates the parent ID after moving a node record
 					 *
 					 * When moving nodes with the catalog tree, the parent ID
@@ -1083,22 +1083,22 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/newid
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/newid
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'update-parentid' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update-parentid' ) ),
+					'update-parentid' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/standard/item/update-parentid' ) ),
 
-					/** mshop/catalog/manager/default/item/newid
+					/** mshop/catalog/manager/standard/item/newid
 					 * Retrieves the ID generated by the database when inserting a new record
 					 *
 					 * As soon as a new record is inserted into the database table,
@@ -1122,20 +1122,20 @@ class MShop_Catalog_Manager_Standard
 					 * @param string SQL statement for retrieving the last inserted record ID
 					 * @since 2014.03
 					 * @category Developer
-					 * @see mshop/catalog/manager/default/item/delete
-					 * @see mshop/catalog/manager/default/item/get
-					 * @see mshop/catalog/manager/default/item/insert
-					 * @see mshop/catalog/manager/default/item/update
-					 * @see mshop/catalog/manager/default/item/search
-					 * @see mshop/catalog/manager/default/item/search-item
-					 * @see mshop/catalog/manager/default/item/count
-					 * @see mshop/catalog/manager/default/item/move-left
-					 * @see mshop/catalog/manager/default/item/move-right
-					 * @see mshop/catalog/manager/default/item/update-parentid
-					 * @see mshop/catalog/manager/default/item/usage/add
-					 * @see mshop/catalog/manager/default/item/usage/update
+					 * @see mshop/catalog/manager/standard/item/delete
+					 * @see mshop/catalog/manager/standard/item/get
+					 * @see mshop/catalog/manager/standard/item/insert
+					 * @see mshop/catalog/manager/standard/item/update
+					 * @see mshop/catalog/manager/standard/item/search
+					 * @see mshop/catalog/manager/standard/item/search-item
+					 * @see mshop/catalog/manager/standard/item/count
+					 * @see mshop/catalog/manager/standard/item/move-left
+					 * @see mshop/catalog/manager/standard/item/move-right
+					 * @see mshop/catalog/manager/standard/item/update-parentid
+					 * @see mshop/catalog/manager/standard/item/usage/add
+					 * @see mshop/catalog/manager/standard/item/usage/update
 					 */
-					'newid' => $config->get( 'mshop/catalog/manager/default/item/newid' ),
+					'newid' => $config->get( 'mshop/catalog/manager/standard/item/newid' ),
 				),
 			);
 
@@ -1189,7 +1189,7 @@ class MShop_Catalog_Manager_Standard
 
 			if( $case !== true )
 			{
-				/** mshop/catalog/manager/default/item/usage/update
+				/** mshop/catalog/manager/standard/item/usage/update
 				 * Updates the config, editor and mtime value of an updated record
 				 *
 				 * Each record contains some usage information like when it was
@@ -1212,23 +1212,23 @@ class MShop_Catalog_Manager_Standard
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/catalog/manager/default/item/delete
-				 * @see mshop/catalog/manager/default/item/get
-				 * @see mshop/catalog/manager/default/item/insert
-				 * @see mshop/catalog/manager/default/item/newid
-				 * @see mshop/catalog/manager/default/item/search
-				 * @see mshop/catalog/manager/default/item/search-item
-				 * @see mshop/catalog/manager/default/item/count
-				 * @see mshop/catalog/manager/default/item/move-left
-				 * @see mshop/catalog/manager/default/item/move-right
-				 * @see mshop/catalog/manager/default/item/update-parentid
-				 * @see mshop/catalog/manager/default/item/usage/add
+				 * @see mshop/catalog/manager/standard/item/delete
+				 * @see mshop/catalog/manager/standard/item/get
+				 * @see mshop/catalog/manager/standard/item/insert
+				 * @see mshop/catalog/manager/standard/item/newid
+				 * @see mshop/catalog/manager/standard/item/search
+				 * @see mshop/catalog/manager/standard/item/search-item
+				 * @see mshop/catalog/manager/standard/item/count
+				 * @see mshop/catalog/manager/standard/item/move-left
+				 * @see mshop/catalog/manager/standard/item/move-right
+				 * @see mshop/catalog/manager/standard/item/update-parentid
+				 * @see mshop/catalog/manager/standard/item/usage/add
 				 */
-				$path = 'mshop/catalog/manager/default/item/usage/update';
+				$path = 'mshop/catalog/manager/standard/item/usage/update';
 			}
 			else
 			{
-				/** mshop/catalog/manager/default/item/usage/add
+				/** mshop/catalog/manager/standard/item/usage/add
 				 * Updates the config, editor, ctime and mtime value of an inserted record
 				 *
 				 * Each record contains some usage information like when it was
@@ -1251,19 +1251,19 @@ class MShop_Catalog_Manager_Standard
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/catalog/manager/default/item/delete
-				 * @see mshop/catalog/manager/default/item/get
-				 * @see mshop/catalog/manager/default/item/insert
-				 * @see mshop/catalog/manager/default/item/newid
-				 * @see mshop/catalog/manager/default/item/search
-				 * @see mshop/catalog/manager/default/item/search-item
-				 * @see mshop/catalog/manager/default/item/count
-				 * @see mshop/catalog/manager/default/item/move-left
-				 * @see mshop/catalog/manager/default/item/move-right
-				 * @see mshop/catalog/manager/default/item/update-parentid
-				 * @see mshop/catalog/manager/default/item/usage/update
+				 * @see mshop/catalog/manager/standard/item/delete
+				 * @see mshop/catalog/manager/standard/item/get
+				 * @see mshop/catalog/manager/standard/item/insert
+				 * @see mshop/catalog/manager/standard/item/newid
+				 * @see mshop/catalog/manager/standard/item/search
+				 * @see mshop/catalog/manager/standard/item/search-item
+				 * @see mshop/catalog/manager/standard/item/count
+				 * @see mshop/catalog/manager/standard/item/move-left
+				 * @see mshop/catalog/manager/standard/item/move-right
+				 * @see mshop/catalog/manager/standard/item/update-parentid
+				 * @see mshop/catalog/manager/standard/item/usage/update
 				 */
-				$path = 'mshop/catalog/manager/default/item/usage/add';
+				$path = 'mshop/catalog/manager/standard/item/usage/add';
 			}
 
 			$stmt = $conn->create( $context->getConfig()->get( $path, $path ) );
