@@ -23,7 +23,7 @@ class Controller_Jobs_Factory
 	 * Creates the required controller specified by the given path of controller names.
 	 *
 	 * Controllers are created by providing only the domain name, e.g.
-	 * "stock" for the Controller_Jobs_Stock_Default.
+	 * "stock" for the Controller_Jobs_Stock_Standard.
 	 * Please note, that only the default controllers can be created. If you need
 	 * a specific implementation, you need to use the factory class of the
 	 * controller to hand over specifc implementation names.

@@ -95,7 +95,7 @@ abstract class MAdmin_Common_Manager_Base extends MShop_Common_Manager_Base
 		}
 
 		if( $name === null ) {
-			$name = $config->get( 'classes/' . $domain . '/manager/' . $manager . '/name', 'Default' );
+			$name = $config->get( 'classes/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {

@@ -85,7 +85,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getCustomerData( array $keys )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -118,10 +118,10 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addPriceListData( array $testdata, array $refIds )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
-		$priceListManager = $priceManager->getSubManager( 'list', 'Default' );
-		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
+		$priceListManager = $priceManager->getSubManager( 'list', 'Standard' );
+		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
 		foreach( $testdata['price/list'] as $dataset )

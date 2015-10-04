@@ -30,7 +30,7 @@ class Controller_ExtJS_Price_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Price_Default
+		 *  Controller_ExtJS_Price_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -54,7 +54,7 @@ class Controller_ExtJS_Price_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/price/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/price/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

@@ -68,8 +68,8 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addPluginData()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Default' );
-		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Default' );
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'plugin.php';

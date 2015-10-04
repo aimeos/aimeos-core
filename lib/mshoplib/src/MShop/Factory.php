@@ -47,9 +47,9 @@ class MShop_Factory
 	 * Creates the required manager specified by the given path of manager names.
 	 *
 	 * Domain managers are created by providing only the domain name, e.g.
-	 * "product" for the MShop_Product_Manager_Default or a path of names to
+	 * "product" for the MShop_Product_Manager_Standard or a path of names to
 	 * retrieve a specific sub-manager, e.g. "product/type" for the
-	 * MShop_Product_Manager_Type_Default manager.
+	 * MShop_Product_Manager_Type_Standard manager.
 	 * Please note, that only the default managers can be created. If you need
 	 * a specific implementation, you need to use the factory class of the
 	 * domain or the getSubManager() method to hand over specifc implementation

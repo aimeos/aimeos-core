@@ -351,7 +351,7 @@ abstract class Client_Html_Base
 		$path = strtolower( $path );
 
 		if( $name === null ) {
-			$name = $this->context->getConfig()->get( 'client/html/' . $path . '/name', 'Default' );
+			$name = $this->context->getConfig()->get( 'client/html/' . $path . '/name', 'Standard' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {

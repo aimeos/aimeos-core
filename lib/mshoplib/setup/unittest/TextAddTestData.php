@@ -76,8 +76,8 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addTextData( array $testdata )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
-		$textTypeManager = $textManager->getSubManager( 'type', 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
 		$ttypeIds = array();
 		$ttype = $textTypeManager->createItem();

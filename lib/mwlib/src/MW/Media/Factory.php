@@ -57,9 +57,9 @@ class MW_Media_Factory
 		switch( $mimeparts[0] )
 		{
 			case 'image':
-				return new MW_Media_Image_Default( $filename, $mimetype, $options );
+				return new MW_Media_Image_Standard( $filename, $mimetype, $options );
 		}
 
-		return new MW_Media_Application_Default( $filename, $mimetype, $options );
+		return new MW_Media_Application_Standard( $filename, $mimetype, $options );
 	}
 }

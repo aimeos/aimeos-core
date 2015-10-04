@@ -68,8 +68,8 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addSupplierData()
 	{
-		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, 'Default' );
-		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Default' );
+		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'supplier.php';

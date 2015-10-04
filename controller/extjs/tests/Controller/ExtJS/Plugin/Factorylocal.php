@@ -23,7 +23,7 @@ class Controller_ExtJS_Plugin_Factorylocal
 	public static function createController( MShop_Context_Item_Iface $context, $name = null, $domainToTest = 'plugin' )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/plugin/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/plugin/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {

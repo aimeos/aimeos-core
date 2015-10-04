@@ -45,7 +45,7 @@ class Client_Html_Checkout_Standard_FactoryTest extends PHPUnit_Framework_TestCa
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Checkout_Standard_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
+		$client = Client_Html_Checkout_Standard_Factory::createClient( $this->context, $this->templatePaths, 'Standard' );
 		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 

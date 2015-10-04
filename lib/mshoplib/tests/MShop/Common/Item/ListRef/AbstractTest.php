@@ -32,20 +32,20 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->textItem1 = new MShop_Text_Item_Default( array( 'type' => 'name' ) );
+		$this->textItem1 = new MShop_Text_Item_Standard( array( 'type' => 'name' ) );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new MShop_Text_Item_Default( array( 'type' => 'name' ) );
+		$this->textItem2 = new MShop_Text_Item_Standard( array( 'type' => 'name' ) );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new MShop_Common_Item_List_Default( 'test', array( 'type' => 'test' ) );
+		$this->listItem1 = new MShop_Common_Item_List_Standard( 'test', array( 'type' => 'test' ) );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setId( 11 );
 
-		$this->listItem2 = new MShop_Common_Item_List_Default( 'test', array( 'type' => 'default' ) );
+		$this->listItem2 = new MShop_Common_Item_List_Standard( 'test', array( 'type' => 'default' ) );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setId( 10 );

@@ -76,8 +76,8 @@ class MW_Setup_Task_MediaAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addMediaData( array $testdata )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
-		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Standard' );
 
 		$mtypeIds = array();
 		$mtype = $mediaTypeManager->createItem();

@@ -18,7 +18,7 @@ class MShop_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new MShop_Demo_Manager_Default( TestHelper::getContext() );
+		// $this->object = new MShop_Demo_Manager_Standard( TestHelper::getContext() );
 	}
 
 

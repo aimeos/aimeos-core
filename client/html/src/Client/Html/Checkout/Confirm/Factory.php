@@ -39,7 +39,7 @@ class Client_Html_Checkout_Confirm_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Client_Html_Checkout_Confirm_Default
+		 *  Client_Html_Checkout_Confirm_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -63,7 +63,7 @@ class Client_Html_Checkout_Confirm_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/checkout/confirm/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/client/html/checkout/confirm/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

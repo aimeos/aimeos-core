@@ -26,7 +26,7 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 		$context = TestHelper::getContext();
 		$methods = array( 'getHeader', 'getBody' );
 
-		$this->client = $this->getMock( 'Client_Html_Catalog_Filter_Default', $methods, array( $context, array() ) );
+		$this->client = $this->getMock( 'Client_Html_Catalog_Filter_Standard', $methods, array( $context, array() ) );
 		$this->object = new Client_Html_Common_Decorator_Example( $context, array(), $this->client );
 		$this->object->setView( TestHelper::getView());
 	}
@@ -66,7 +66,7 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 
 	public function testSetView()
 	{
-		$view = new MW_View_Default();
+		$view = new MW_View_Standard();
 		$this->object->setView( $view );
 
 		$this->assertSame( $view, $this->object->getView() );

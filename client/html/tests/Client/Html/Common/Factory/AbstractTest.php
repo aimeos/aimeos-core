@@ -33,10 +33,10 @@ class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClient()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', $client );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
+		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', $client );
 
-		$injectedClient = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
+		$injectedClient = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
 
 		$this->assertSame( $client, $injectedClient );
 	}
@@ -44,11 +44,11 @@ class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClientReset()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', $client );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Default', null );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
+		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', $client );
+		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', null );
 
-		$new = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Default' );
+		$new = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
 
 		$this->assertNotSame( $client, $new );
 	}

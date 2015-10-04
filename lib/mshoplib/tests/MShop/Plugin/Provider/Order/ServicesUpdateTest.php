@@ -72,10 +72,10 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$servicePayment->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Standard' )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )->setMethods( array( 'getProducts' ) )->getMock();
 
-		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Default' )
+		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_PluginServicesUpdate', $serviceStub );
@@ -85,8 +85,8 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$orderStub->setService( $serviceDelivery, 'delivery' );
 		$orderStub->setService( $servicePayment, 'payment' );
 
-		$serviceItemDelivery = new MShop_Service_Item_Default( array( 'type' => 'delivery' ) );
-		$serviceItemPayment = new MShop_Service_Item_Default( array( 'type' => 'payment' ) );
+		$serviceItemDelivery = new MShop_Service_Item_Standard( array( 'type' => 'delivery' ) );
+		$serviceItemPayment = new MShop_Service_Item_Standard( array( 'type' => 'payment' ) );
 
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
@@ -132,10 +132,10 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$servicePayment->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Standard' )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )->setMethods( array( 'getProducts' ) )->getMock();
 
-		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Default' )
+		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_PluginServicesUpdate', $serviceStub );
@@ -145,8 +145,8 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$orderStub->setService( $serviceDelivery, 'delivery' );
 		$orderStub->setService( $servicePayment, 'payment' );
 
-		$serviceItemDelivery = new MShop_Service_Item_Default( array( 'type' => 'delivery' ) );
-		$serviceItemPayment = new MShop_Service_Item_Default( array( 'type' => 'payment' ) );
+		$serviceItemDelivery = new MShop_Service_Item_Standard( array( 'type' => 'delivery' ) );
+		$serviceItemPayment = new MShop_Service_Item_Standard( array( 'type' => 'payment' ) );
 
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
@@ -191,7 +191,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$servicePayment->setServiceId( -2 );
 
 
-		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Standard' )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )
 			->setMethods( array( 'getProducts' ) )->getMock();
 

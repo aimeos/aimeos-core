@@ -24,7 +24,7 @@ class MW_DB_Factory
 	 * @return MW_DB_Manager_Iface Instance of a database manager
 	 * @throws MW_DB_Exception if database manager class isn't found
 	 */
-	static public function createManager( MW_Config_Iface $config, $type = 'Default' )
+	static public function createManager( MW_Config_Iface $config, $type = 'Standard' )
 	{
 		$classname = 'MW_DB_Manager_' . $type;
 		$filename = str_replace( '_', '/', $classname ) . '.php';

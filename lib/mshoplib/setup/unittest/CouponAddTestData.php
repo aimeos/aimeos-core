@@ -71,7 +71,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addCouponData( array $testdata )
 	{
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->additional, 'Default' );
+		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
 		$couponIds = array();
@@ -118,10 +118,10 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addOrderCouponTestData( array $testdata )
 	{
-		$order = MShop_Order_Manager_Factory::createManager( $this->additional, 'Default' );
-		$orderBase = $order->getSubManager( 'base', 'Default' );
-		$orderBaseProd = $orderBase->getSubManager( 'product', 'Default' );
-		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Default' );
+		$order = MShop_Order_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$orderBase = $order->getSubManager( 'base', 'Standard' );
+		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
+		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
 
 		$orderBaseIds = array();
 		$orderBasePrices = array();

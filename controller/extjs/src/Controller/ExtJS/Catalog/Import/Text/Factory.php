@@ -30,7 +30,7 @@ class Controller_ExtJS_Catalog_Import_Text_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Catalog_Import_Text_Default
+		 *  Controller_ExtJS_Catalog_Import_Text_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -54,7 +54,7 @@ class Controller_ExtJS_Catalog_Import_Text_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/catalog/import/text/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/catalog/import/text/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

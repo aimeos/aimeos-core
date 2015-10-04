@@ -26,7 +26,7 @@ return array(
 			'typeid' => 'service/delivery',
 			'code' => 'unitcode',
 			'label' => 'unitlabel',
-			'provider' => 'Default',
+			'provider' => 'Standard',
 			'config' => array(
 				'default.url' => 'deliveryurl'
 			),

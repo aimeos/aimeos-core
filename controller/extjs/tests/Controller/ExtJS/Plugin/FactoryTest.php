@@ -57,7 +57,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( 'Example' ) );
 		$config->set( 'controller/extjs/plugin/decorators/excludes', array( 'Example' ) );
 
-		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
+		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Standard' );
 
 		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
 	}
@@ -67,7 +67,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factorylocal::createController( TestHelper::getContext(), 'Default', '' );
+		Controller_ExtJS_Plugin_Factorylocal::createController( TestHelper::getContext(), 'Standard', '' );
 	}
 
 
@@ -79,7 +79,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( 'Example', 'Example' ) );
 		$config->set( 'controller/extjs/plugin/decorators/excludes', array() );
 
-		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Default' );
+		$controller = Controller_ExtJS_Plugin_Factory::createController( $context, 'Standard' );
 
 		$this->assertInstanceOf( 'Controller_ExtJS_Common_Decorator_Iface', $controller );
 	}
@@ -92,7 +92,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( '$$' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin' );
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Standard', 'plugin' );
 	}
 
 
@@ -103,7 +103,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/extjs/common/decorators/default', array( 'WrongClass' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin' );
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Standard', 'plugin' );
 	}
 
 }

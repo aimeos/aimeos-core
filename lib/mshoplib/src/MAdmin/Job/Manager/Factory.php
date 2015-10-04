@@ -37,7 +37,7 @@ class MAdmin_Job_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Job_Manager_Default
+		 *  MShop_Job_Manager_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -61,7 +61,7 @@ class MAdmin_Job_Manager_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/job/manager/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/job/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

@@ -34,10 +34,10 @@ class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCas
 
 	public function testInjectController()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', $controller );
+		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
+		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', $controller );
 
-		$injectedController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
+		$injectedController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +45,11 @@ class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCas
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', $controller );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', null );
+		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
+		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', $controller );
+		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', null );
 
-		$new = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
+		$new = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
 
 		$this->assertNotSame( $controller, $new );
 	}

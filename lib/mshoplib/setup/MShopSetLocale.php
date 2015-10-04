@@ -58,7 +58,7 @@ class MW_Setup_Task_MShopSetLocale extends MW_Setup_Task_Base
 		$this->msg( sprintf( 'Setting locale to "%1$s"', $site ), 0 );
 
 		// Set locale for further tasks
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$this->additional->setLocale( $localeManager->bootstrap( $site, '', '', false ) );
 
 		$this->status( 'OK' );

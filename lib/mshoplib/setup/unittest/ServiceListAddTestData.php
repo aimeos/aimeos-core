@@ -86,8 +86,8 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
 		foreach( $keys as $dataset )
@@ -146,7 +146,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -179,7 +179,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -212,10 +212,10 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function addServiceListData( array $testdata, array $refIds )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Default' );
-		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Default' );
-		$serviceListManager = $serviceManager->getSubManager( 'list', 'Default' );
-		$serviceListTypeManager = $serviceListManager->getSubmanager( 'type', 'Default' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
+		$serviceListManager = $serviceManager->getSubManager( 'list', 'Standard' );
+		$serviceListTypeManager = $serviceListManager->getSubmanager( 'type', 'Standard' );
 
 		$typeDomain = $typeCode = $itemCode = array();
 		foreach( $testdata['service/list'] as $dataset )

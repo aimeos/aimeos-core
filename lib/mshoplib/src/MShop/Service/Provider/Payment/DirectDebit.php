@@ -81,7 +81,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
 
 		foreach( $feconfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $config );
 		}
 
 		return $list;
@@ -131,7 +131,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 *
 	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
+	 * @return MShop_Common_Item_Helper_Form_Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Iface $order, array $params = array() )

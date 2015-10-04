@@ -120,13 +120,13 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		}
 
 
-		$orderStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'getSubManager' ) )->getMock();
 
-		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
+		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'getSubManager' ) )->getMock();
 
-		$orderBaseAddressStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Address_Default' )
+		$orderBaseAddressStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Address_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems' ) )->getMock();
 
 		$item1 = $orderBaseAddressStub->createItem();
@@ -170,13 +170,13 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		}
 
 
-		$orderStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'getSubManager' ) )->getMock();
 
-		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Default' )
+		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'getSubManager' ) )->getMock();
 
-		$orderBaseServiceStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Service_Default' )
+		$orderBaseServiceStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Service_Standard' )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems' ) )->getMock();
 
 		$item1 = $orderBaseServiceStub->createItem();

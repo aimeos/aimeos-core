@@ -38,7 +38,7 @@ class Controller_Jobs_Admin_Log_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Admin_Log_Default
+		 *  Controller_Jobs_Admin_Log_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -62,7 +62,7 @@ class Controller_Jobs_Admin_Log_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/jobs/admin/log/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/jobs/admin/log/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

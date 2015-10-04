@@ -39,7 +39,7 @@ class MShop_Text_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Text_Manager_Default
+		 *  MShop_Text_Manager_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -63,7 +63,7 @@ class MShop_Text_Manager_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/text/manager/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/text/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

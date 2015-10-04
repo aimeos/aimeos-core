@@ -59,7 +59,7 @@ class MShopJsbPackageTask extends Task
 
 				try
 				{
-					$jsbParser = new MW_Jsb2_Default( $jsbPath );
+					$jsbParser = new MW_Jsb2_Standard( $jsbPath );
 					$jsbParser->deploy( 'js' );
 				}
 				catch( Exception $e )

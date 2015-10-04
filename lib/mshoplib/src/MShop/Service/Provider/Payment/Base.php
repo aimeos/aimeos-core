@@ -112,7 +112,7 @@ abstract class MShop_Service_Provider_Payment_Base
 		$list = array();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $config );
 		}
 
 		return $list;
@@ -147,14 +147,14 @@ abstract class MShop_Service_Provider_Payment_Base
 	 *
 	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
+	 * @return MShop_Common_Item_Helper_Form_Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Iface $order, array $params = array() )
 	{
 		$url = $this->getConfigValue( array( 'payment.url-success' ) );
 
-		return new MShop_Common_Item_Helper_Form_Default( $url, 'POST', array() );
+		return new MShop_Common_Item_Helper_Form_Standard( $url, 'POST', array() );
 	}
 
 

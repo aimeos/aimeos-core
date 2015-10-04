@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Index_Attribute_MySQL
-	extends MShop_Catalog_Manager_Index_Attribute_Default
+	extends MShop_Catalog_Manager_Index_Attribute_Standard
 	implements MShop_Catalog_Manager_Index_Iface
 {
 	private $searchConfig = array(
@@ -42,7 +42,7 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
+			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $fields );
 		}
 
 		return $list;

@@ -20,7 +20,7 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Standard' );
 		$this->object = new Controller_Frontend_Service_Decorator_Example( $context, $controller );
 	}
 

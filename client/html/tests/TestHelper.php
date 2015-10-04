@@ -36,40 +36,40 @@ class TestHelper
 			$config = self::getContext( $site )->getConfig();
 		}
 
-		$view = new MW_View_Default();
+		$view = new MW_View_Standard();
 
 		$trans = new MW_Translation_None( 'de_DE' );
-		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$helper = new MW_View_Helper_Translate_Standard( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new MW_View_Helper_Url_Default( $view, 'http://baseurl' );
+		$helper = new MW_View_Helper_Url_Standard( $view, 'http://baseurl' );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
+		$helper = new MW_View_Helper_Number_Standard( $view, '.', '' );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
+		$helper = new MW_View_Helper_Date_Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$helper = new MW_View_Helper_Config_Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
+		$helper = new MW_View_Helper_Parameter_Standard( $view, array() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$helper = new MW_View_Helper_FormParam_Standard( $view );
 		$view->addHelper( 'formparam', $helper );
 
-		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$helper = new MW_View_Helper_Encoder_Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new MW_View_Helper_Partial_Default( $view, $config, array( dirname( __DIR__ ) => array( 'layouts' ) ) );
+		$helper = new MW_View_Helper_Partial_Standard( $view, $config, array( dirname( __DIR__ ) => array( 'layouts' ) ) );
 		$view->addHelper( 'partial', $helper );
 
-		$helper = new MW_View_Helper_Request_Default( $view, 'body', '127.0.0.1' );
+		$helper = new MW_View_Helper_Request_Standard( $view, 'body', '127.0.0.1' );
 		$view->addHelper( 'request', $helper );
 
-		$helper = new MW_View_Helper_Csrf_Default( $view, '_csrf_token', '_csrf_value' );
+		$helper = new MW_View_Helper_Csrf_Standard( $view, '_csrf_token', '_csrf_value' );
 		$view->addHelper( 'csrf', $helper );
 
 		return $view;
@@ -100,7 +100,7 @@ class TestHelper
 	 */
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new MShop_Context_Item_Standard();
 		$aimeos = self::getAimeos();
 
 

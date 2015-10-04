@@ -57,7 +57,7 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 
 		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'language.php';

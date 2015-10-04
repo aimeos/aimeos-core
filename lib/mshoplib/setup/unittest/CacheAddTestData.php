@@ -68,7 +68,7 @@ class MW_Setup_Task_CacheAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addCacheTestData()
 	{
-		$manager = MAdmin_Cache_Manager_Factory::createManager( $this->additional, 'Default' );
+		$manager = MAdmin_Cache_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'cache.php';

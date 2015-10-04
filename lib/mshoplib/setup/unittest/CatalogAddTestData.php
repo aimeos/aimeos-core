@@ -76,7 +76,7 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addCatalogData( array $testdata )
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Default' );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$parentIds = array( 'init' => null );
 		$catalog = $catalogManager->createItem();

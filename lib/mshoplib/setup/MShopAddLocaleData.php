@@ -61,7 +61,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 
 		$code = $this->additional->getConfig()->get( 'setup/site', 'default' );
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
 		try
@@ -98,7 +98,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	 * @param integer|null $parentId Parent id of the locale item
 	 * @return array Associative list of keys from the data and generated site ID
 	 */
-	protected function addLocaleSiteData( MShop_Common_Manager_Iface $localeManager, array $data, $manager = 'Default', $parentId = null )
+	protected function addLocaleSiteData( MShop_Common_Manager_Iface $localeManager, array $data, $manager = 'Standard', $parentId = null )
 	{
 		$this->msg( 'Adding data for MShop locale sites', 1 );
 
@@ -149,7 +149,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	{
 		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
-		$currencyItemManager = $localeManager->getSubManager( 'currency', 'Default' );
+		$currencyItemManager = $localeManager->getSubManager( 'currency', 'Standard' );
 
 		$num = $total = 0;
 
@@ -182,7 +182,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Base
 	{
 		$this->msg( 'Adding data for MShop locale languages', 1 );
 
-		$languageItemManager = $localeManager->getSubManager( 'language', 'Default' );
+		$languageItemManager = $localeManager->getSubManager( 'language', 'Standard' );
 
 		$num = $total = 0;
 

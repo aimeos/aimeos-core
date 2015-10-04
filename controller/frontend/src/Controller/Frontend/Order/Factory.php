@@ -30,7 +30,7 @@ class Controller_Frontend_Order_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Frontend_Order_Default
+		 *  Controller_Frontend_Order_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -54,7 +54,7 @@ class Controller_Frontend_Order_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/frontend/order/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/frontend/order/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {

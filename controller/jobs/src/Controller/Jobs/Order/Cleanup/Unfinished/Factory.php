@@ -38,7 +38,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Order_Cleanup_Unfinished_Default
+		 *  Controller_Jobs_Order_Cleanup_Unfinished_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -62,7 +62,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/jobs/order/cleanup/unfinished/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/jobs/order/cleanup/unfinished/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

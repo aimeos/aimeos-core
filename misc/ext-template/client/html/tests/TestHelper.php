@@ -34,31 +34,31 @@ class TestHelper
 
 	public static function getView()
 	{
-		$view = new MW_View_Default();
+		$view = new MW_View_Standard();
 
 		$trans = new MW_Translation_None( 'en' );
-		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$helper = new MW_View_Helper_Translate_Standard( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new MW_View_Helper_Url_Default( $view, 'baseurl' );
+		$helper = new MW_View_Helper_Url_Standard( $view, 'baseurl' );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
+		$helper = new MW_View_Helper_Number_Standard( $view, '.', '' );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
+		$helper = new MW_View_Helper_Date_Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, self::getContext()->getConfig() );
+		$helper = new MW_View_Helper_Config_Standard( $view, self::getContext()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
+		$helper = new MW_View_Helper_Parameter_Standard( $view, array() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$helper = new MW_View_Helper_FormParam_Standard( $view );
 		$view->addHelper( 'formparam', $helper );
 
-		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$helper = new MW_View_Helper_Encoder_Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
 		return $view;
@@ -88,7 +88,7 @@ class TestHelper
 
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new MShop_Context_Item_Standard();
 		$aimeos = self::getAimeos();
 
 

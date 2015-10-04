@@ -39,7 +39,7 @@ class Client_Html_Catalog_Detail_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Client_Html_Catalog_Detail_Default
+		 *  Client_Html_Catalog_Detail_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -63,7 +63,7 @@ class Client_Html_Catalog_Detail_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/detail/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/client/html/catalog/detail/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

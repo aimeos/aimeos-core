@@ -41,7 +41,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 			'f_catid' => $catalogItem->getId(),
 			'd_prodid' => $productItem->getId()
 		);
-		$helper = new MW_View_Helper_Parameter_Default( $this->view, $param );
+		$helper = new MW_View_Helper_Parameter_Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 	}
 

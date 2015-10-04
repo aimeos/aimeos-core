@@ -106,7 +106,7 @@ try
 		throw new Exception( 'Unable to extend include path' );
 	}
 
-	$ctx = new MShop_Context_Item_Default();
+	$ctx = new MShop_Context_Item_Standard();
 
 	$confPaths = $aimeos->getConfigPaths( 'mysql' );
 	if( isset( $options['config'] ) ) {

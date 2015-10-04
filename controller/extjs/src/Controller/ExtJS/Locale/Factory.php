@@ -30,7 +30,7 @@ class Controller_ExtJS_Locale_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Locale_Default
+		 *  Controller_ExtJS_Locale_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -54,7 +54,7 @@ class Controller_ExtJS_Locale_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/locale/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/locale/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

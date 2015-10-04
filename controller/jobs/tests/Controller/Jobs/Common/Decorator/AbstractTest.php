@@ -26,7 +26,7 @@ class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 		$context = TestHelper::getContext();
 		$aimeos = TestHelper::getAimeos();
 
-		$this->stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Default' )
+		$this->stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Standard' )
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 

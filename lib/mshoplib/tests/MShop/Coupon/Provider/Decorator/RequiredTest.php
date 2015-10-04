@@ -54,7 +54,7 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 

@@ -30,7 +30,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 		$couponItem->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, 'zyxw' );
 	}
 

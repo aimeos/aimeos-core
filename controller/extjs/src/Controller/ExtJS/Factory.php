@@ -49,9 +49,9 @@ class Controller_ExtJS_Factory
 	 * Creates the required controller specified by the given path of controller names.
 	 *
 	 * Controllers are created by providing only the domain name, e.g.
-	 * "product" for the Controller_ExtJS_Product_Default or a path of names to
+	 * "product" for the Controller_ExtJS_Product_Standard or a path of names to
 	 * retrieve a specific sub-controller, e.g. "product/type" for the
-	 * Controller_ExtJS_Product_Type_Default controller.
+	 * Controller_ExtJS_Product_Type_Standard controller.
 	 * Please note, that only the default controllers can be created. If you need
 	 * a specific implementation, you need to use the factory class of the
 	 * controller to hand over specifc implementation names.

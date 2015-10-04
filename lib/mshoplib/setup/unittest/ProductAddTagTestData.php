@@ -76,9 +76,9 @@ class MW_Setup_Task_ProductAddTagTestData extends MW_Setup_Task_Base
 	 */
 	private function addProductTagData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
-		$productTagManager = $productManager->getSubManager( 'tag', 'Default' );
-		$productTagTypeManager = $productTagManager->getSubManager( 'type', 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productTagManager = $productManager->getSubManager( 'tag', 'Standard' );
+		$productTagTypeManager = $productTagManager->getSubManager( 'type', 'Standard' );
 
 		$typeIds = array();
 		$type = $productTagTypeManager->createItem();

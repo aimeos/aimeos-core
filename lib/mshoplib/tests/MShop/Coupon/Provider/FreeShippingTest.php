@@ -47,7 +47,7 @@ class MShop_Coupon_Provider_FreeShippingTest extends PHPUnit_Framework_TestCase
 		$delivery->setPrice( $delPrice );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->orderBase->setService( $delivery, 'delivery' );
 	}
 

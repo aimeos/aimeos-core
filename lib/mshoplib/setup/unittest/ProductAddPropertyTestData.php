@@ -76,9 +76,9 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 	 */
 	private function addProductPropertyData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
-		$productPropertyManager = $productManager->getSubManager( 'property', 'Default' );
-		$productPropertyTypeManager = $productPropertyManager->getSubManager( 'type', 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productPropertyManager = $productManager->getSubManager( 'property', 'Standard' );
+		$productPropertyTypeManager = $productPropertyManager->getSubManager( 'type', 'Standard' );
 
 		$typeIds = array();
 		$type = $productPropertyTypeManager->createItem();

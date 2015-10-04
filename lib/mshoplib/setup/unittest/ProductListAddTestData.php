@@ -68,7 +68,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$refIds = array();
 		$refIds['attribute'] = $this->getAttributeData( $refKeys['attribute'] );
@@ -92,8 +92,8 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getAttributeData( array $keys )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = $domains = array();
 		foreach( $keys as $dataset )
@@ -146,7 +146,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -179,8 +179,8 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
 		foreach( $keys as $dataset )
@@ -234,7 +234,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -268,7 +268,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getProductTagData( $productManager, array $keys )
 	{
-		$productTagManager = $productManager->getSubManager( 'tag', 'Default' );
+		$productTagManager = $productManager->getSubManager( 'tag', 'Standard' );
 
 		$prodTag = array();
 		foreach( $keys as $key )
@@ -307,7 +307,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 		$parentIds = $this->getProductIds( $productManager, $testdata );
 		$refIds['product'] = $this->getProductRefIds( $productManager, $keys );
 
-		$productListManager = $productManager->getSubManager( 'list', 'Default' );
+		$productListManager = $productManager->getSubManager( 'list', 'Standard' );
 		$listItem = $productListManager->createItem();
 
 		//LIST-PRODUCT
@@ -357,7 +357,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	private function addListTypeData( MShop_Common_Manager_Iface $manager, array $testdata )
 	{
 		$listItemTypeIds = array();
-		$productListTypeManager = $manager->getSubmanager( 'type', 'Default' );
+		$productListTypeManager = $manager->getSubmanager( 'type', 'Standard' );
 		$listItemType = $productListTypeManager->createItem();
 
 		foreach( $testdata['product/list/type'] as $key => $dataset )

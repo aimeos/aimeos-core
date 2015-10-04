@@ -84,7 +84,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getProductData( array $keys )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -116,7 +116,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -148,7 +148,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 	 * @param string $type Manager type string
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function addSupplierListData( array $testdata, array $refIds, $type = 'Default' )
+	protected function addSupplierListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
 		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, $type );
 		$supplierListManager = $supplierManager->getSubManager( 'list', $type );

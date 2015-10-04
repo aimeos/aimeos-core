@@ -34,10 +34,10 @@ class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_Test
 
 	public function testInjectController()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', $controller );
+		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
+		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', $controller );
 
-		$injectedController = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
+		$injectedController = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +45,11 @@ class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_Test
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', $controller );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Default', null );
+		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
+		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', $controller );
+		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', null );
 
-		$new = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Default' );
+		$new = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
 
 		$this->assertNotSame( $controller, $new );
 	}

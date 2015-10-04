@@ -22,7 +22,7 @@ class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 		$this->context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
 
-		// $this->object = new Client_Html_..._Default( $this->context, $paths );
+		// $this->object = new Client_Html_..._Standard( $this->context, $paths );
 		// $this->object->setView( TestHelper::getView() );
 	}
 

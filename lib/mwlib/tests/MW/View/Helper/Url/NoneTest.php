@@ -22,7 +22,7 @@ class MW_View_Helper_Url_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Default();
+		$view = new MW_View_Standard();
 		$this->object = new MW_View_Helper_Url_None( $view );
 	}
 

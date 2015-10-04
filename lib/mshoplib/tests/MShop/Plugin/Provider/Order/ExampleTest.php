@@ -33,7 +33,7 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 		$this->plugin->setStatus( '1' );
 
 		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$this->order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
+		$this->order = new MShop_Order_Item_Base_Standard( $priceItem, $context->getLocale() );
 	}
 
 

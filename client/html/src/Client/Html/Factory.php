@@ -21,7 +21,7 @@ class Client_Html_Factory
 	 *
 	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
-	 * @param string $type Type of the client, e.g 'account/favorite' for Client_Html_Account_Favorite_Default
+	 * @param string $type Type of the client, e.g 'account/favorite' for Client_Html_Account_Favorite_Standard
 	 * @param string|null $name Client name (default: "Default")
 	 * @return Client_Html_Iface HTML client implementing Client_Html_Iface
 	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails

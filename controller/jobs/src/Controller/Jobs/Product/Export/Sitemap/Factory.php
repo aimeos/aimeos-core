@@ -38,7 +38,7 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Product_Export_Sitemap_Default
+		 *  Controller_Jobs_Product_Export_Sitemap_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -62,7 +62,7 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		 * @category Developer
 		 */
 		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/product/export/sitemap/name', 'Default');
+			$name = $context->getConfig()->get('classes/controller/jobs/product/export/sitemap/name', 'Standard');
 		}
 
 		if ( ctype_alnum($name) === false )

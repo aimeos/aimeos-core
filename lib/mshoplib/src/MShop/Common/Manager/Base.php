@@ -280,7 +280,7 @@ abstract class MShop_Common_Manager_Base
 			$attr = array();
 
 			foreach( $list as $key => $fields ) {
-				$attr[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
+				$attr[$key] = new MW_Common_Criteria_Attribute_Standard( $fields );
 			}
 
 			$this->searchAttributes[0] = $attr;
@@ -358,7 +358,7 @@ abstract class MShop_Common_Manager_Base
 
 			if( $name === null ) {
 				$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
-				$name = $this->context->getConfig()->get( $path, 'Default' );
+				$name = $this->context->getConfig()->get( $path, 'Standard' );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false ) {

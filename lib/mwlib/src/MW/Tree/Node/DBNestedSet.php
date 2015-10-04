@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Node_DBNestedSet extends MW_Tree_Node_Default
+class MW_Tree_Node_DBNestedSet extends MW_Tree_Node_Standard
 {
 	/**
 	 * Tests if a node has children.

@@ -18,7 +18,7 @@ class Controller_Common_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new Controller_Common_Demo_Default( TestHelper::getContext() );
+		// $this->object = new Controller_Common_Demo_Standard( TestHelper::getContext() );
 	}
 
 

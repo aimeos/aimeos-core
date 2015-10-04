@@ -28,7 +28,7 @@ class MShop_Coupon_Provider_ExampleTest extends PHPUnit_Framework_TestCase
 		$item = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->object = new MShop_Coupon_Provider_Example( $context, $item, '1234' );
 	}
 

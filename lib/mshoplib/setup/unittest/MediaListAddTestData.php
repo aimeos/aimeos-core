@@ -85,8 +85,8 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getAttributeData( array $keys )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = $domains = array();
 		foreach( $keys as $dataset )
@@ -140,7 +140,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -173,9 +173,9 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addMediaListData( array $testdata, array $refIds )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
-		$mediaListManager = $mediaManager->getSubmanager( 'list', 'Default' );
-		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$mediaListManager = $mediaManager->getSubmanager( 'list', 'Standard' );
+		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Standard' );
 
 		$urls = array();
 		foreach( $testdata['media/list'] as $dataset )

@@ -57,7 +57,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Base
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Default' );
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 
 		$filename = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';

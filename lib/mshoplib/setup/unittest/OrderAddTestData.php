@@ -55,8 +55,8 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		$this->msg( 'Adding order test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->additional, 'Default' );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->createSearch();
@@ -103,7 +103,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		$bases = array();
 		$locale = $localeManager->createItem();
 		$customerIds = $this->getCustomerIds( $testdata );
-		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Default' );
+		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Standard' );
 
 		$this->conn->begin();
 
@@ -191,9 +191,9 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	{
 		$ordServices = array();
 		$servIds = $this->getServiceIds( $testdata );
-		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Default' );
-		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Default' );
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
+		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
+		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$ordServ = $orderBaseServiceManager->createItem();
 
 		$this->conn->begin();
@@ -254,9 +254,9 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	{
 		$ordProds = array();
 		$products = $this->getProductItems( $testdata );
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Default' );
-		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Default' );
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
+		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
+		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$this->conn->begin();
 
@@ -331,7 +331,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		array $testdata, array $ordProds, array $products )
 	{
 		$attrCodes = array();
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
 
 		foreach( $attributes as $attrItem ) {
@@ -416,7 +416,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function addOrderData( MShop_Common_Manager_Iface $orderManager, array $baseIds, array $testdata )
 	{
-		$orderStatusManager = $orderManager->getSubManager( 'status', 'Default' );
+		$orderStatusManager = $orderManager->getSubManager( 'status', 'Standard' );
 
 		$ords = array();
 		$ordItem = $orderManager->createItem();
@@ -475,7 +475,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 			$customercodes[] = $dataset['customerid'];
 		}
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
@@ -496,7 +496,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	protected function getProductItems( array $testdata )
 	{
 		$codes = $items = array();
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
@@ -526,7 +526,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	protected function getServiceIds( array $testdata )
 	{
 		$services = $servIds = array();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Default' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{

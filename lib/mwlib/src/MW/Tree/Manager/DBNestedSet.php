@@ -25,7 +25,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 	/**
 	 * Initializes the tree manager.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Default:
+	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Standard:
 	 *	[id] => Array describing unique ID codes/types/labels
 	 *	[label] => Array describing codes/types/labels for descriptive labels
 	 *	[status] => Array describing codes/types/labels for status values
@@ -102,7 +102,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Base
 		$attributes = array();
 
 		foreach( $this->searchConfig as $values ) {
-			$attributes[] = new MW_Common_Criteria_Attribute_Default( $values );
+			$attributes[] = new MW_Common_Criteria_Attribute_Standard( $values );
 		}
 
 		return $attributes;

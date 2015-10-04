@@ -36,7 +36,7 @@ class MShop_Service_Provider_Payment_PrePay
 	 *
 	 * @param MShop_Order_Item_Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
+	 * @return MShop_Common_Item_Helper_Form_Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Iface $order, array $params = array() )

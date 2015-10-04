@@ -6,7 +6,7 @@
 
 return array(
 	'price/list/type' => array(
-		'customer/default' => array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'customer/default' => array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'price/list' => array(

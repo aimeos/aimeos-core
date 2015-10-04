@@ -76,8 +76,8 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addPriceData( array $testdata )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$ptypeIds = array();
 		$ptype = $priceTypeManager->createItem();

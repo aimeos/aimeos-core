@@ -18,7 +18,7 @@ class MW_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new MW_View_Helper_Test_Default();
+		// $this->object = new MW_View_Helper_Test_Standard();
 	}
 
 

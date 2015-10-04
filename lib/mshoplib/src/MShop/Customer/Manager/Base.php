@@ -112,7 +112,7 @@ abstract class MShop_Customer_Manager_Base
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->salt, $helper );
+		return new MShop_Customer_Item_Standard( $address, $values, $listItems, $refItems, $this->salt, $helper );
 	}
 
 
@@ -144,7 +144,7 @@ abstract class MShop_Customer_Manager_Base
 		 * @see mshop/customer/manager/salt
 		 * @see mshop/customer/manager/password/options
 		 */
-		$name = $config->get( 'mshop/customer/manager/password/name', 'Default' );
+		$name = $config->get( 'mshop/customer/manager/password/name', 'Standard' );
 
 		/** mshop/customer/manager/password/options
 		 * List of options used by the password helper classes

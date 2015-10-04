@@ -84,7 +84,7 @@ class MShop_Service_Provider_Decorator_Country
 		$list = $this->getProvider()->getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $config );
 		}
 
 		return $list;

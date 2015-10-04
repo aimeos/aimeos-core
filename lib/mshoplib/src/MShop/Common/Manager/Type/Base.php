@@ -282,11 +282,11 @@ abstract class MShop_Common_Manager_Type_Base
 	 * Creates new type item object.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @return MShop_Common_Item_Type_Default New type item object
+	 * @return MShop_Common_Item_Type_Standard New type item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Common_Item_Type_Default( $this->prefix, $values );
+		return new MShop_Common_Item_Type_Standard( $this->prefix, $values );
 	}
 
 

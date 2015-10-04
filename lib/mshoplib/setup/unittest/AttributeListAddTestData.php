@@ -86,7 +86,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -118,7 +118,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -151,8 +151,8 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
 		foreach( $keys as $dataset )
@@ -207,10 +207,10 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addAttributeListData( array $testdata, array $refIds )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
-		$attributeListManager = $attributeManager->getSubManager( 'list', 'Default' );
-		$attributeListTypeManager = $attributeListManager->getSubManager( 'type', 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
+		$attributeListManager = $attributeManager->getSubManager( 'list', 'Standard' );
+		$attributeListTypeManager = $attributeListManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = array();
 		foreach( $testdata['attribute/list'] as $dataset )

@@ -85,7 +85,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getCustomerGroupData( array $keys )
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$groupManager = $manager->getSubManager( 'group' );
 
 		$codes = array();
@@ -118,7 +118,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getProductData( array $keys )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -150,7 +150,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -182,7 +182,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 	 * @param string $type Manager type string
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function addCustomerListData( array $testdata, array $refIds, $type = 'Default' )
+	protected function addCustomerListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, $type );
 		$customerListManager = $customerManager->getSubManager( 'list', $type );

@@ -62,9 +62,9 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
-		$customerAddressManager = $customerManager->getSubManager( 'address', 'Default' );
-		$customerGroupManager = $customerManager->getSubManager( 'group', 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$customerAddressManager = $customerManager->getSubManager( 'address', 'Standard' );
+		$customerGroupManager = $customerManager->getSubManager( 'group', 'Standard' );
 
 		$this->conn->begin();
 

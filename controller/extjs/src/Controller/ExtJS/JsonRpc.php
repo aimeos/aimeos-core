@@ -321,7 +321,7 @@ class Controller_ExtJS_JsonRpc
 	/**
 	 * Returns all available controller instances.
 	 *
-	 * @return array Associative list of base controller name (Controller_ExtJS_Admin_Log_Default becomes Admin_Log)
+	 * @return array Associative list of base controller name (Controller_ExtJS_Admin_Log_Standard becomes Admin_Log)
 	 * 	as key and the class instance as value
 	 */
 	protected function getControllers()

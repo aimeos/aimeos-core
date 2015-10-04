@@ -57,7 +57,7 @@ class Controller_Common_Product_Import_Csv_Base
 		$iface = 'Controller_Common_Product_Import_Csv_Cache_Iface';
 
 		if( $name === null ) {
-			$name = $config->get( 'classes/controller/common/product/import/csv/cache/' . $type . '/name', 'Default' );
+			$name = $config->get( 'classes/controller/common/product/import/csv/cache/' . $type . '/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $type ) === false || ctype_alnum( $name ) === false )
@@ -244,7 +244,7 @@ class Controller_Common_Product_Import_Csv_Base
 
 		foreach( $mappings as $type => $mapping )
 		{
-			$name = $config->get( 'classes/controller/common/product/import/csv/processor/' . $type . '/name', 'Default' );
+			$name = $config->get( 'classes/controller/common/product/import/csv/processor/' . $type . '/name', 'Standard' );
 
 			if( ctype_alnum( $type ) === false )
 			{

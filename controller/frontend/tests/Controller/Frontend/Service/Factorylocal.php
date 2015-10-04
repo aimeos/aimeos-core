@@ -23,7 +23,7 @@ class Controller_Frontend_Service_Factorylocal
 	public static function createController( MShop_Context_Item_Iface $context, $name = null, $domainToTest = 'service' )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {

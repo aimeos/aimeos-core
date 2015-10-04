@@ -49,7 +49,7 @@ class MAdmin_Cache_Manager_None
 	{
 		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 
-		return new MAdmin_Cache_Item_Default( $values );
+		return new MAdmin_Cache_Item_Standard( $values );
 	}
 
 

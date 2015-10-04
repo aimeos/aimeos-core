@@ -68,7 +68,7 @@ class MW_Setup_Task_LogAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addLogTestData()
 	{
-		$adminLogManager = MAdmin_Log_Manager_Factory::createManager( $this->additional, 'Default' );
+		$adminLogManager = MAdmin_Log_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'log.php';

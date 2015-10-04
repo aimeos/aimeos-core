@@ -56,7 +56,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 
 		$this->context->getConfig()->set( 'classes/order/manager/name', 'MockPayPal' );
-		$orderMock = $this->getMock( 'MShop_Order_Manager_Default', array( 'saveItem' ), array( $this->context ) );
+		$orderMock = $this->getMock( 'MShop_Order_Manager_Standard', array( 'saveItem' ), array( $this->context ) );
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_MockPayPal', $orderMock );
 	}
 

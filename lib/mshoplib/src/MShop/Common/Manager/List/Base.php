@@ -515,13 +515,13 @@ abstract class MShop_Common_Manager_List_Base
 	/**
 	 * Creates new common list item object.
 	 *
-	 * @see MShop_Common_Item_List_Default Default list item
+	 * @see MShop_Common_Item_List_Standard Default list item
 	 * @param array $values Possible optional array keys can be given: id, parentid, refid, domain, pos, start, end
-	 * @return MShop_Common_Item_List_Default New common list item object
+	 * @return MShop_Common_Item_List_Standard New common list item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Common_Item_List_Default( $this->prefix, $values );
+		return new MShop_Common_Item_List_Standard( $this->prefix, $values );
 	}
 
 

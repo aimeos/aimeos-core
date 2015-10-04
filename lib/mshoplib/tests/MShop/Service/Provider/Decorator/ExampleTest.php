@@ -20,7 +20,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 		$servManager = MShop_Service_Manager_Factory::createManager( $context );
 		$search = $servManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.provider', 'Default' ) );
+		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $servManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {

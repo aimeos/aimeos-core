@@ -7,7 +7,7 @@
 
 return array (
 	'supplier/list/type' => array (
-		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'supplier/list' => array (

@@ -31,7 +31,7 @@ class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
 	}
 

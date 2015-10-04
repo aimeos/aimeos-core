@@ -45,7 +45,7 @@ class Client_Html_Email_Delivery_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Email_Delivery_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
+		$client = Client_Html_Email_Delivery_Factory::createClient( $this->context, $this->templatePaths, 'Standard' );
 		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 

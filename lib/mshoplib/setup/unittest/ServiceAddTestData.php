@@ -76,8 +76,8 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addServiceData( array $testdata )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Default' );
-		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Default' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 
 		$typeIds = array();
 		$type = $serviceTypeManager->createItem();

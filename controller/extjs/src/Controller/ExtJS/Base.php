@@ -478,7 +478,7 @@ abstract class Controller_ExtJS_Base
 		$sitepath = array_keys( $siteManager->getPath( $siteItem->getId() ) );
 		$sitetree = $this->getSiteIdsFromTree( $siteManager->getTree( $siteItem->getId() ) );
 
-		$localeItem = new MShop_Locale_Item_Default( $values, $siteItem, $sitepath, $sitetree );
+		$localeItem = new MShop_Locale_Item_Standard( $values, $siteItem, $sitepath, $sitetree );
 		$localeItem->setLanguageId( $langid );
 		$localeItem->setCurrencyId( $currencyid );
 

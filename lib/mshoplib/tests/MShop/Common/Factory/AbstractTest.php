@@ -33,16 +33,16 @@ class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', null );
+		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', null );
 	}
 
 
 	public function testInjectManager()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Default' );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', $manager );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
+		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', $manager );
 
-		$injectedManager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'DefaultMock' );
+		$injectedManager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'StandardMock' );
 
 		$this->assertSame( $manager, $injectedManager );
 	}
@@ -50,12 +50,12 @@ class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectManagerReset()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Default' );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', $manager );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_DefaultMock', null );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
+		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', $manager );
+		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', null );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Attribute_Manager_Factory::createManager( $this->context, 'DefaultMock' );
+		MShop_Attribute_Manager_Factory::createManager( $this->context, 'StandardMock' );
 	}
 
 }

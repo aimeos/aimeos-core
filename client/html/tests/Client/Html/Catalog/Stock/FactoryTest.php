@@ -46,7 +46,7 @@ class Client_Html_Catalog_Stock_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
+		$client = Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths, 'Standard' );
 		$this->assertInstanceOf( 'Client_Html_Iface', $client );
 	}
 

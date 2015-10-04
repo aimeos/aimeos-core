@@ -77,9 +77,9 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 	 */
 	private function addProductStockData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
-		$productStockManager = $productManager->getSubManager( 'stock', 'Default' );
-		$productStockWarehouse = $productStockManager->getSubManager( 'warehouse', 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productStockManager = $productManager->getSubManager( 'stock', 'Standard' );
+		$productStockWarehouse = $productStockManager->getSubManager( 'warehouse', 'Standard' );
 
 		$prodcode = array();
 		foreach( $testdata['product/stock'] as $dataset )

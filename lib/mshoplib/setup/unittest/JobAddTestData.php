@@ -69,7 +69,7 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addJobTestData()
 	{
-		$adminJobManager = MAdmin_Job_Manager_Factory::createManager( $this->additional, 'Default' );
+		$adminJobManager = MAdmin_Job_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'job.php';

@@ -86,7 +86,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -118,7 +118,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -150,7 +150,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getProductData( array $keys )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
@@ -183,9 +183,9 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addCatalogListData( array $testdata, array $refIds )
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Default' );
-		$catalogListManager = $catalogManager->getSubManager( 'list', 'Default' );
-		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Default' );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$catalogListManager = $catalogManager->getSubManager( 'list', 'Standard' );
+		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Standard' );
 
 		$itemCode = array();
 		foreach( $testdata['catalog/list'] as $dataset )

@@ -85,7 +85,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -119,9 +119,9 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addTextData( array $testdata, array $refIds )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
-		$textListManager = $textManager->getSubManager( 'list', 'Default' );
-		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$textListManager = $textManager->getSubManager( 'list', 'Standard' );
+		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Standard' );
 
 		$labels = array();
 		foreach( $testdata['text/list'] as $dataset )

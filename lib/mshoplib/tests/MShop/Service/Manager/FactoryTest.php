@@ -20,7 +20,7 @@ class MShop_Service_Manager_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateManagerName()
 	{
-		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
+		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext(), 'Standard' );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 

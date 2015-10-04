@@ -49,7 +49,7 @@ Executing TwoTask                                                     OK
 		$conn = $this->dbm->acquire();
 
 		$taskPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks';
-		$object = new MW_Setup_Manager_Default( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
+		$object = new MW_Setup_Manager_Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
 		$this->dbm->release( $conn );
 
@@ -78,7 +78,7 @@ Executing ThreeTask                                                   OK
 			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks2',
 		);
 
-		$object = new MW_Setup_Manager_Default( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
+		$object = new MW_Setup_Manager_Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
 		$this->dbm->release( $conn );
 

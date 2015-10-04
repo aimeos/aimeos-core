@@ -40,7 +40,7 @@ class Client_Html_Catalog_Suggest_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Client_Html_Catalog_Suggest_Default
+		 *  Client_Html_Catalog_Suggest_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -64,7 +64,7 @@ class Client_Html_Catalog_Suggest_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/suggest/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/client/html/catalog/suggest/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

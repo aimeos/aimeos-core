@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Index_MySQL
-	extends MShop_Catalog_Manager_Index_Default
+	extends MShop_Catalog_Manager_Index_Standard
 	implements MShop_Catalog_Manager_Index_Iface
 {
 	/**

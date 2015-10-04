@@ -270,6 +270,6 @@ abstract class MShop_Common_Manager_Address_Base
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{
-		return new MShop_Common_Item_Address_Default( $this->prefix, $values );
+		return new MShop_Common_Item_Address_Standard( $this->prefix, $values );
 	}
 }

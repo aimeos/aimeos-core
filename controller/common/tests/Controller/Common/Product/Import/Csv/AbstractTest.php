@@ -130,6 +130,6 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Invalid
 }
 
 
-class Controller_Common_Product_Import_Csv_Processor_Invalid_Default
+class Controller_Common_Product_Import_Csv_Processor_Invalid_Standard
 {
 }

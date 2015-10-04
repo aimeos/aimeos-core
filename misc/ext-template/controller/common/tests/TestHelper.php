@@ -51,7 +51,7 @@ class TestHelper
 
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new MShop_Context_Item_Standard();
 		$aimeos = self::getAimeos();
 
 

@@ -47,7 +47,7 @@ class Controller_Frontend_Factory
 	 * Creates the required controller specified by the given path of controller names.
 	 *
 	 * Controllers are created by providing only the domain name, e.g.
-	 * "basket" for the Controller_Frontend_Basket_Default or a path of names to
+	 * "basket" for the Controller_Frontend_Basket_Standard or a path of names to
 	 * retrieve a specific sub-controller if available.
 	 * Please note, that only the default controllers can be created. If you need
 	 * a specific implementation, you need to use the factory class of the

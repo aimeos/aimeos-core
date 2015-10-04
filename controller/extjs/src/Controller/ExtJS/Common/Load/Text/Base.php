@@ -314,7 +314,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 			}
 		}
 
-		$localeItem = new MShop_Locale_Item_Default( array(), $siteItem );
+		$localeItem = new MShop_Locale_Item_Standard( array(), $siteItem );
 		$localeItem->setLanguageId( $locale->getLanguageId() );
 		$localeItem->setCurrencyId( $locale->getCurrencyId() );
 

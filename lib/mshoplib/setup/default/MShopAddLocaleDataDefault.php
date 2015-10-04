@@ -69,7 +69,7 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
 			$siteIds = array();
 
 			if( isset( $data['locale/site'] ) ) {

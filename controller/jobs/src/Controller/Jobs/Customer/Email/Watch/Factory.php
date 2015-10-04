@@ -38,7 +38,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Customer_Email_Watch_Default
+		 *  Controller_Jobs_Customer_Email_Watch_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -62,7 +62,7 @@ class Controller_Jobs_Customer_Email_Watch_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/jobs/customer/email/watch/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/jobs/customer/email/watch/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

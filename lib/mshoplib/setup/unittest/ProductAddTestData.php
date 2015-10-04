@@ -79,8 +79,8 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addProductData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
-		$productTypeManager = $productManager->getSubManager( 'type', 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productTypeManager = $productManager->getSubManager( 'type', 'Standard' );
 
 		$typeIds = array();
 		$type = $productTypeManager->createItem();

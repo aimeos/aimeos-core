@@ -57,7 +57,7 @@ class TestHelper
 
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new MShop_Context_Item_Standard();
 		$aimeos = self::getAimeos();
 
 
@@ -106,17 +106,17 @@ class TestHelper
 
 	protected static function createView( MW_Config_Iface $config )
 	{
-		$view = new MW_View_Default();
+		$view = new MW_View_Standard();
 
-		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$helper = new MW_View_Helper_Config_Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
 		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
 		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
-		$helper = new MW_View_Helper_Number_Default( $view, $sepDec, $sep1000 );
+		$helper = new MW_View_Helper_Number_Standard( $view, $sepDec, $sep1000 );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$helper = new MW_View_Helper_Encoder_Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
 		return $view;

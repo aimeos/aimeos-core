@@ -76,8 +76,8 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Base
 	 */
 	private function addAttributeData( array $testdata )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
 		$atypeIds = array();
 		$atype = $attributeTypeManager->createItem();

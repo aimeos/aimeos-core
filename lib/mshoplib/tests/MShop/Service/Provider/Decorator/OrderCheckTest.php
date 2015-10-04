@@ -38,7 +38,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 
 	protected function tearDown()
 	{
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', null );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_StandardMock', null );
 	}
 
 
@@ -128,10 +128,10 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 	public function testIsAvailableTotal()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
+		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -140,7 +140,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 			->method( 'searchItems' )
 			->will( $this->returnValue( array( $mock->createItem() ) ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_StandardMock', $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -153,10 +153,10 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 	public function testIsAvailableTotalNotEnough()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
+		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -165,7 +165,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 			->method( 'searchItems' )
 			->will( $this->returnValue( array() ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_StandardMock', $mock );
 
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}
@@ -174,10 +174,10 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 	public function testIsAvailableLimit()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
+		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -186,7 +186,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 			->method( 'searchItems' )
 			->will( $this->returnValue( array() ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_StandardMock', $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -199,10 +199,10 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 	public function testIsAvailableLimitTooMuch()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
+		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -211,7 +211,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends PHPUnit_Framework_
 			->method( 'searchItems' )
 			->will( $this->returnValue( array( $mock->createItem() ) ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_StandardMock', $mock );
 
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}

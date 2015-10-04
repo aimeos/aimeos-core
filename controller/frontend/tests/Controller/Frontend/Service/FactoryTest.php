@@ -33,7 +33,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/frontend/common/decorators/default', array( 'Example' ) );
 		$config->set( 'controller/frontend/service/decorators/excludes', array( 'Example' ) );
 
-		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Standard' );
 
 		$this->assertInstanceOf( 'Controller_Frontend_Common_Iface', $controller );
 	}
@@ -42,7 +42,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Service_Factorylocal::createController( TestHelper::getContext(), 'Default', '' );
+		Controller_Frontend_Service_Factorylocal::createController( TestHelper::getContext(), 'Standard', '' );
 	}
 
 	public function testAbstractAddDecorators()
@@ -53,7 +53,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/frontend/common/decorators/default', array( 'Example', 'Example' ) );
 		$config->set( 'controller/frontend/service/decorators/excludes', array() );
 
-		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Standard' );
 
 		$this->assertInstanceOf( 'Controller_Frontend_Common_Decorator_Iface', $controller );
 	}
@@ -65,7 +65,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/frontend/common/decorators/default', array( '$$' ) );
 
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+		Controller_Frontend_Service_Factory::createController( $context, 'Standard' );
 	}
 
 	public function testAbstractAddDecoratorsExceptionWrongClass()
@@ -75,7 +75,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/frontend/common/decorators/default', array( 'WrongClass' ) );
 
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+		Controller_Frontend_Service_Factory::createController( $context, 'Standard' );
 	}
 
 	public function testCreateController()
@@ -89,7 +89,7 @@ class Controller_Frontend_Service_FactoryTest extends PHPUnit_Framework_TestCase
 		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext() );
 		$this->assertInstanceOf( $target, $controller );
 
-		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext(), 'Default' );
+		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext(), 'Standard' );
 		$this->assertInstanceOf( $target, $controller );
 	}
 

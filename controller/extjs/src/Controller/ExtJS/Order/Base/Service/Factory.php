@@ -30,7 +30,7 @@ class Controller_ExtJS_Order_Base_Service_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Order_Base_Service_Default
+		 *  Controller_ExtJS_Order_Base_Service_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
@@ -54,7 +54,7 @@ class Controller_ExtJS_Order_Base_Service_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/order/base/service/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/order/base/service/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

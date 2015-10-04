@@ -28,7 +28,7 @@ class MW_Cache_DB
 	/**
 	 * Initializes the object instance.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Default:
+	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
 	 *	[cache.siteid] => Array containing the codes/types/labels for the site ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value
