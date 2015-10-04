@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Array
+class MW_Config_PHPArray
 	extends MW_Config_Base
 	implements MW_Config_Iface
 {

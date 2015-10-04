@@ -20,7 +20,7 @@ class MW_View_Helper_Partial_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$conf = new MW_Config_Array();
+		$conf = new MW_Config_PHPArray();
 		$paths = array( __DIR__ => array( 'testfiles' ) );
 
 		$this->object = new MW_View_Helper_Partial_Default( $view, $conf, $paths );

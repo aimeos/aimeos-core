@@ -66,7 +66,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	{
 		$view = $this->object->getView();
 
-		$conf = new MW_Config_Array();
+		$conf = new MW_Config_PHPArray();
 		$conf->set( 'client/html/catalog/filter/attribute/types', array( 'color', 'width', 'length' ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );

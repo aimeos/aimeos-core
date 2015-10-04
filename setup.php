@@ -113,7 +113,7 @@ try
 		$confPaths = array_merge( $confPaths, (array) $options['config'] );
 	}
 
-	$conf = new MW_Config_Array( array(), $confPaths );
+	$conf = new MW_Config_PHPArray( array(), $confPaths );
 	$conf = new MW_Config_Decorator_Memory( $conf );
 	$ctx->setConfig( $conf );
 

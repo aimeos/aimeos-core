@@ -64,7 +64,7 @@ class TestHelper
 		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Array( array(), $paths );
+		$conf = new MW_Config_PHPArray( array(), $paths );
 		$conf = new MW_Config_Decorator_Memory( $conf );
 		$ctx->setConfig( $conf );
 

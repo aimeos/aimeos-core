@@ -18,7 +18,7 @@ class Perf_Config_ArrayTest extends PHPUnit_Framework_TestCase
 
 		for( $i = 0; $i < 1000; $i++ )
 		{
-			$conf = new MW_Config_Array( $paths );
+			$conf = new MW_Config_PHPArray( $paths );
 
 			$conf->get( 'test/db/host' );
 			$conf->get( 'test/db/username' );

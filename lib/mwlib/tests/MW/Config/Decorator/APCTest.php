@@ -23,7 +23,7 @@ class MW_Config_Decorator_APCTest extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'APC not installed' );
 		}
 
-		$conf = new MW_Config_Array( array() );
+		$conf = new MW_Config_PHPArray( array() );
 		$this->object = new MW_Config_Decorator_APC( $conf, 'test:' );
 	}
 

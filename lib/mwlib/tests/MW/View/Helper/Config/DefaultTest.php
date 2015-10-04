@@ -31,7 +31,7 @@ class MW_View_Helper_Config_DefaultTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$conf = new MW_Config_Array( $config );
+		$conf = new MW_Config_PHPArray( $config );
 		$this->object = new MW_View_Helper_Config_Default( $view, $conf );
 	}
 
