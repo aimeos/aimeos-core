@@ -49,12 +49,12 @@ class Client_Html_Catalog_Suggest_Standard
 	 * design.
 	 *
 	 * Note: Up to 2015-02, this configuration option was available as
-	 * client/html/catalog/list/simple/subparts
+	 * client/html/catalog/lists/simple/subparts
 	 *
 	 * @param array List of sub-client names
 	 * @since 2015.02
 	 * @category Developer
-	 * @see client/html/catalog/list/simple/subparts
+	 * @see client/html/catalog/lists/simple/subparts
 	 */
 	private $subPartPath = 'client/html/catalog/suggest/default/subparts';
 	private $subPartNames = array();
@@ -103,7 +103,7 @@ class Client_Html_Catalog_Suggest_Standard
 		 * should be replaced by the name of the new class.
 		 *
 		 * Note: Up to 2015-02, this configuration option was available as
-		 * client/html/catalog/list/simple/template-body
+		 * client/html/catalog/lists/simple/template-body
 		 *
 		 * @param string Relative path to the template creating code for the HTML page body
 		 * @since 2015.02
@@ -160,7 +160,7 @@ class Client_Html_Catalog_Suggest_Standard
 		 * should be replaced by the name of the new class.
 		 *
 		 * Note: Up to 2015-02, this configuration option was available as
-		 * client/html/catalog/list/simple/template-header
+		 * client/html/catalog/lists/simple/template-header
 		 *
 		 * @param string Relative path to the template creating code for the HTML page head
 		 * @since 2015.02

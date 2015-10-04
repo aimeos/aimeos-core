@@ -269,7 +269,7 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 	protected function importReferences( MShop_Common_Manager_Iface $manager, array $itemTextMap, $domain )
 	{
 		$catalogStart = $catalogTotal = 0;
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		do
 		{
@@ -290,8 +290,8 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 			{
 				$criteria = $listManager->createSearch();
 				$expr = array(
-					$criteria->compare( '==', 'catalog.list.parentid', $catalogIds ),
-					$criteria->compare( '==', 'catalog.list.domain', 'text' ),
+					$criteria->compare( '==', 'catalog.lists.parentid', $catalogIds ),
+					$criteria->compare( '==', 'catalog.lists.domain', 'text' ),
 				);
 				$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 				$listItems = $listManager->searchItems( $criteria, array(), $listTotal );

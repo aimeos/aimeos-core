@@ -78,7 +78,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 	{
 		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
-		$listManager = MShop_Factory::createManager( $context, 'product/list' );
+		$listManager = MShop_Factory::createManager( $context, 'product/lists' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
 		$this->cache->set( $product );
@@ -93,14 +93,14 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 
 			foreach( $map as $list )
 			{
-				if( !isset( $list['product.code'] ) || $list['product.code'] === '' || isset( $list['product.list.type'] )
-					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
+				if( !isset( $list['product.code'] ) || $list['product.code'] === '' || isset( $list['product.lists.type'] )
+					&& $this->listTypes !== null && !in_array( $list['product.lists.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
 
 				$codes = explode( $separator, $list['product.code'] );
-				$type = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
+				$type = ( isset( $list['product.lists.type'] ) ? $list['product.lists.type'] : 'default' );
 
 				foreach( $codes as $code )
 				{
@@ -114,10 +114,10 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 						$listItem = $listManager->createItem();
 					}
 
-					$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'product', $type );
-					$list['product.list.parentid'] = $product->getId();
-					$list['product.list.refid'] = $prodid;
-					$list['product.list.domain'] = 'product';
+					$list['product.lists.typeid'] = $this->getTypeId( 'product/lists/type', 'product', $type );
+					$list['product.lists.parentid'] = $product->getId();
+					$list['product.lists.refid'] = $prodid;
+					$list['product.lists.domain'] = 'product';
 
 					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
@@ -167,7 +167,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 			$pos++;
 		}
 
-		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 		$listManager->deleteItems( $delete );
 
 		return $listItems;

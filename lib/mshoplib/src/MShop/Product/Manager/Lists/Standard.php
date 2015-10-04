@@ -18,8 +18,8 @@ class MShop_Product_Manager_Lists_Standard
 	implements MShop_Product_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'product.list.id'=> array(
-			'code'=>'product.list.id',
+		'product.lists.id'=> array(
+			'code'=>'product.lists.id',
 			'internalcode'=>'mproli."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_product_list" AS mproli ON ( mpro."id" = mproli."parentid" )' ),
 			'label'=>'Product list ID',
@@ -27,95 +27,95 @@ class MShop_Product_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.list.siteid'=> array(
-			'code'=>'product.list.siteid',
+		'product.lists.siteid'=> array(
+			'code'=>'product.lists.siteid',
 			'internalcode'=>'mproli."siteid"',
 			'label'=>'Product list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.list.parentid'=> array(
-			'code'=>'product.list.parentid',
+		'product.lists.parentid'=> array(
+			'code'=>'product.lists.parentid',
 			'internalcode'=>'mproli."parentid"',
 			'label'=>'Product list parent ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.list.domain'=> array(
-			'code'=>'product.list.domain',
+		'product.lists.domain'=> array(
+			'code'=>'product.lists.domain',
 			'internalcode'=>'mproli."domain"',
 			'label'=>'Product list domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.typeid' => array(
-			'code'=>'product.list.typeid',
+		'product.lists.typeid' => array(
+			'code'=>'product.lists.typeid',
 			'internalcode'=>'mproli."typeid"',
 			'label'=>'Product list type ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.list.refid'=> array(
-			'code'=>'product.list.refid',
+		'product.lists.refid'=> array(
+			'code'=>'product.lists.refid',
 			'internalcode'=>'mproli."refid"',
 			'label'=>'Product list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.datestart' => array(
-			'code'=>'product.list.datestart',
+		'product.lists.datestart' => array(
+			'code'=>'product.lists.datestart',
 			'internalcode'=>'mproli."start"',
 			'label'=>'Product list start date/time',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.dateend' => array(
-			'code'=>'product.list.dateend',
+		'product.lists.dateend' => array(
+			'code'=>'product.lists.dateend',
 			'internalcode'=>'mproli."end"',
 			'label'=>'Product list end date/time',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.config' => array(
-			'code'=>'product.list.config',
+		'product.lists.config' => array(
+			'code'=>'product.lists.config',
 			'internalcode'=>'mproli."config"',
 			'label'=>'Product list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.position' => array(
-			'code'=>'product.list.position',
+		'product.lists.position' => array(
+			'code'=>'product.lists.position',
 			'internalcode'=>'mproli."pos"',
 			'label'=>'Product list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'product.list.status' => array(
-			'code'=>'product.list.status',
+		'product.lists.status' => array(
+			'code'=>'product.lists.status',
 			'internalcode'=>'mproli."status"',
 			'label'=>'Product list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'product.list.ctime'=> array(
-			'code'=>'product.list.ctime',
+		'product.lists.ctime'=> array(
+			'code'=>'product.lists.ctime',
 			'internalcode'=>'mproli."ctime"',
 			'label'=>'Product list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.mtime'=> array(
-			'code'=>'product.list.mtime',
+		'product.lists.mtime'=> array(
+			'code'=>'product.lists.mtime',
 			'internalcode'=>'mproli."mtime"',
 			'label'=>'Product list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'product.list.editor'=> array(
-			'code'=>'product.list.editor',
+		'product.lists.editor'=> array(
+			'code'=>'product.lists.editor',
 			'internalcode'=>'mproli."editor"',
 			'label'=>'Product list editor',
 			'type'=> 'string',

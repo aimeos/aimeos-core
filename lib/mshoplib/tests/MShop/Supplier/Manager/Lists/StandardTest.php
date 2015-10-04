@@ -54,11 +54,11 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'supplier.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'supplier.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'supplier.list.domain' );
+		$result = $this->object->aggregate( $search, 'supplier.lists.domain' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -77,8 +77,8 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'supplier.list.domain', 'text' ),
-			$search->compare( '==', 'supplier.list.editor', $this->editor )
+			$search->compare( '==', 'supplier.lists.domain', 'text' ),
+			$search->compare( '==', 'supplier.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
@@ -107,8 +107,8 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'supplier.list.siteid', $siteid ),
-			$search->compare( '==', 'supplier.list.editor', $this->editor )
+			$search->compare( '==', 'supplier.lists.siteid', $siteid ),
+			$search->compare( '==', 'supplier.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
@@ -257,15 +257,15 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'supplier.list.siteid', $siteid ),
-			$search->compare( '==', 'supplier.list.domain', 'text' ),
-			$search->compare( '==', 'supplier.list.datestart', '2010-01-01 00:00:00' ),
-			$search->compare( '==', 'supplier.list.dateend', '2100-01-01 00:00:00' ),
-			$search->compare( '!=', 'supplier.list.config', null ),
-			$search->compare( '==', 'supplier.list.position', 0 ),
-			$search->compare( '==', 'supplier.list.status', 1 ),
-			$search->compare( '==', 'supplier.list.editor', $this->editor ),
-			$search->compare( '==', 'supplier.list.type.code', 'default' ),
+			$search->compare( '==', 'supplier.lists.siteid', $siteid ),
+			$search->compare( '==', 'supplier.lists.domain', 'text' ),
+			$search->compare( '==', 'supplier.lists.datestart', '2010-01-01 00:00:00' ),
+			$search->compare( '==', 'supplier.lists.dateend', '2100-01-01 00:00:00' ),
+			$search->compare( '!=', 'supplier.lists.config', null ),
+			$search->compare( '==', 'supplier.lists.position', 0 ),
+			$search->compare( '==', 'supplier.lists.status', 1 ),
+			$search->compare( '==', 'supplier.lists.editor', $this->editor ),
+			$search->compare( '==', 'supplier.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -278,20 +278,20 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'supplier.list.id', null );
-		$expr[] = $search->compare( '==', 'supplier.list.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'supplier.list.parentid', null );
-		$expr[] = $search->compare( '!=', 'supplier.list.typeid', null );
-		$expr[] = $search->compare( '==', 'supplier.list.domain', 'text' );
-		$expr[] = $search->compare( '==', 'supplier.list.refid', $listItem->getRefId() );
-		$expr[] = $search->compare( '==', 'supplier.list.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'supplier.list.dateend', '2100-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'supplier.list.config', null );
-		$expr[] = $search->compare( '==', 'supplier.list.position', 0 );
-		$expr[] = $search->compare( '==', 'supplier.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'supplier.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'supplier.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'supplier.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'supplier.lists.id', null );
+		$expr[] = $search->compare( '==', 'supplier.lists.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'supplier.lists.parentid', null );
+		$expr[] = $search->compare( '!=', 'supplier.lists.typeid', null );
+		$expr[] = $search->compare( '==', 'supplier.lists.domain', 'text' );
+		$expr[] = $search->compare( '==', 'supplier.lists.refid', $listItem->getRefId() );
+		$expr[] = $search->compare( '==', 'supplier.lists.datestart', '2010-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'supplier.lists.dateend', '2100-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'supplier.lists.config', null );
+		$expr[] = $search->compare( '==', 'supplier.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'supplier.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'supplier.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'supplier.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'supplier.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine('&&', $expr) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -301,8 +301,8 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		//search with base criteria
 		$search = $this->object->createSearch(true);
 		$expr = array(
-			$search->compare( '==', 'supplier.list.domain', 'text' ),
-			$search->compare( '==', 'supplier.list.editor', $this->editor ),
+			$search->compare( '==', 'supplier.lists.domain', 'text' ),
+			$search->compare( '==', 'supplier.lists.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -322,7 +322,7 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$total = 0;
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.list.domain', array( 'text' ) ) );
+		$search->setConditions( $search->compare( '==', 'supplier.lists.domain', array( 'text' ) ) );
 
 		$result = $this->object->searchRefItems( $search, array( 'text' ), $total );
 
@@ -352,13 +352,13 @@ class MShop_Supplier_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'supplier.list.parentid', $item->getId() ),
-			$search->compare( '==', 'supplier.list.domain', 'text' ),
-			$search->compare( '==', 'supplier.list.editor', $this->editor ),
-			$search->compare( '==', 'supplier.list.type.code', 'default' ),
+			$search->compare( '==', 'supplier.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'supplier.lists.domain', 'text' ),
+			$search->compare( '==', 'supplier.lists.editor', $this->editor ),
+			$search->compare( '==', 'supplier.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'supplier.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'supplier.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

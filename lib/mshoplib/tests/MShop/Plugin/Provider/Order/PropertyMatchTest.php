@@ -127,7 +127,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 
 	public function testUpdateFailList()
 	{
-		$this->plugin->setConfig( array( 'product.list.domain' => 'foobar' ) );
+		$this->plugin->setConfig( array( 'product.lists.domain' => 'foobar' ) );
 		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );

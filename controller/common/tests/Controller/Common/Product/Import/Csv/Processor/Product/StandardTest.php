@@ -31,11 +31,11 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcess()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'product.code',
-			4 => 'product.list.type',
+			4 => 'product.lists.type',
 			5 => 'product.code',
 		);
 
@@ -81,9 +81,9 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcessMultiple()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'product.code',
 		);
 
@@ -124,7 +124,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcessUpdate()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
 		);
 
@@ -164,7 +164,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcessDelete()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
 		);
 
@@ -196,9 +196,9 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcessEmpty()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'product.code',
 		);
 
@@ -227,9 +227,9 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	public function testProcessListtypes()
 	{
 		$mapping = array(
-			0 => 'product.list.type',
+			0 => 'product.lists.type',
 			1 => 'product.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'product.code',
 		);
 
@@ -288,7 +288,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('product') as $listItem ) {
 			$listManager->deleteItem( $listItem->getId() );

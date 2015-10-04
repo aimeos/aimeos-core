@@ -40,7 +40,7 @@ class Controller_ExtJS_Supplier_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'supplier/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'supplier/lists/type' );
 		}
 
 		return $this->manager;
@@ -54,6 +54,6 @@ class Controller_ExtJS_Supplier_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'supplier.list.type';
+		return 'supplier.lists.type';
 	}
 }

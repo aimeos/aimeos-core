@@ -59,7 +59,7 @@ class MShop_Service_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'service.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -73,7 +73,7 @@ class MShop_Service_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'service.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -127,15 +127,15 @@ class MShop_Service_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 		$search = $this->object->createSearch();
 
 		$conditions = array(
-			$search->compare( '!=', 'service.list.type.id', null ),
-			$search->compare( '!=', 'service.list.type.siteid', null ),
-			$search->compare( '==', 'service.list.type.code', 'unittype1' ),
-			$search->compare( '==', 'service.list.type.domain', 'text' ),
-			$search->compare( '>', 'service.list.type.label', '' ),
-			$search->compare( '==', 'service.list.type.status', 1 ),
-			$search->compare( '>=', 'service.list.type.mtime', '1970-01-01 00:00:00' ),
-			$search->compare( '>=', 'service.list.type.ctime', '1970-01-01 00:00:00' ),
-			$search->compare( '==', 'service.list.type.editor', $this->editor ),
+			$search->compare( '!=', 'service.lists.type.id', null ),
+			$search->compare( '!=', 'service.lists.type.siteid', null ),
+			$search->compare( '==', 'service.lists.type.code', 'unittype1' ),
+			$search->compare( '==', 'service.lists.type.domain', 'text' ),
+			$search->compare( '>', 'service.lists.type.label', '' ),
+			$search->compare( '==', 'service.lists.type.status', 1 ),
+			$search->compare( '>=', 'service.lists.type.mtime', '1970-01-01 00:00:00' ),
+			$search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' ),
+			$search->compare( '==', 'service.lists.type.editor', $this->editor ),
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -145,8 +145,8 @@ class MShop_Service_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'service.list.type.domain', 'text' ),
-			$search->compare( '==', 'service.list.type.editor', $this->editor ),
+			$search->compare( '==', 'service.lists.type.domain', 'text' ),
+			$search->compare( '==', 'service.lists.type.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

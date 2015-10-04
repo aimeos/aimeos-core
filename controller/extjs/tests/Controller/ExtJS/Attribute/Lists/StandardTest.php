@@ -41,11 +41,11 @@ class Controller_ExtJS_Attribute_Lists_StandardTest extends PHPUnit_Framework_Te
 			'site' => 'unittest',
 			'condition' => (object) array(
 				'&&' => array(
-					0 => (object) array( '==' => (object) array( 'attribute.list.domain' => 'media' ) ),
-					1 => (object) array( '==' => (object) array( 'attribute.list.editor' => 'core:unittest' ) )
+					0 => (object) array( '==' => (object) array( 'attribute.lists.domain' => 'media' ) ),
+					1 => (object) array( '==' => (object) array( 'attribute.lists.editor' => 'core:unittest' ) )
 				)
 			),
-			'sort' => 'attribute.list.parentid',
+			'sort' => 'attribute.lists.parentid',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -54,7 +54,7 @@ class Controller_ExtJS_Attribute_Lists_StandardTest extends PHPUnit_Framework_Te
 		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
-		$this->assertEquals( 'media', $result['items'][0]->{'attribute.list.domain'} );
+		$this->assertEquals( 'media', $result['items'][0]->{'attribute.lists.domain'} );
 		$this->assertEquals( 1, count( $result['graph']['Media']['items'] ) );
 		$this->assertEquals( 'attribute', $result['graph']['Media']['items'][0]->{'media.domain'} );
 	}
@@ -68,7 +68,7 @@ class Controller_ExtJS_Attribute_Lists_StandardTest extends PHPUnit_Framework_Te
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'attribute.list.type.domain' => 'text' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'attribute.lists.type.domain' => 'text' ) ) ) ),
 			'start' => 0,
 			'limit' => 1,
 		);
@@ -78,43 +78,43 @@ class Controller_ExtJS_Attribute_Lists_StandardTest extends PHPUnit_Framework_Te
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'attribute.list.parentid' => $result['items'][0]->{'attribute.id'},
-				'attribute.list.typeid' => $resultType['items'][0]->{'attribute.list.type.id'},
-				'attribute.list.domain' => 'text',
-				'attribute.list.refid' => -1,
-				'attribute.list.datestart' => '2000-01-01 00:00:00',
-				'attribute.list.dateend' => '2000-01-01 00:00:00',
-				'attribute.list.config' => array( 'test' => 'unit' ),
-				'attribute.list.position' => 1,
-				'attribute.list.status' => 1,
+				'attribute.lists.parentid' => $result['items'][0]->{'attribute.id'},
+				'attribute.lists.typeid' => $resultType['items'][0]->{'attribute.lists.type.id'},
+				'attribute.lists.domain' => 'text',
+				'attribute.lists.refid' => -1,
+				'attribute.lists.datestart' => '2000-01-01 00:00:00',
+				'attribute.lists.dateend' => '2000-01-01 00:00:00',
+				'attribute.lists.config' => array( 'test' => 'unit' ),
+				'attribute.lists.position' => 1,
+				'attribute.lists.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'attribute.list.refid' => -1 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'attribute.lists.refid' => -1 ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'attribute.list.id'} );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'attribute.lists.id'} );
 		$this->object->deleteItems( $deleteParams );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'attribute.list.id'} );
-		$this->assertEquals( $saved['items']->{'attribute.list.id'}, $searched['items'][0]->{'attribute.list.id'});
-		$this->assertEquals( $saved['items']->{'attribute.list.parentid'}, $searched['items'][0]->{'attribute.list.parentid'});
-		$this->assertEquals( $saved['items']->{'attribute.list.typeid'}, $searched['items'][0]->{'attribute.list.typeid'});
-		$this->assertEquals( $saved['items']->{'attribute.list.domain'}, $searched['items'][0]->{'attribute.list.domain'});
-		$this->assertEquals( $saved['items']->{'attribute.list.refid'}, $searched['items'][0]->{'attribute.list.refid'});
-		$this->assertEquals( $saved['items']->{'attribute.list.datestart'}, $searched['items'][0]->{'attribute.list.datestart'});
-		$this->assertEquals( $saved['items']->{'attribute.list.dateend'}, $searched['items'][0]->{'attribute.list.dateend'});
-		$this->assertEquals( $saved['items']->{'attribute.list.config'}, $searched['items'][0]->{'attribute.list.config'});
-		$this->assertEquals( $saved['items']->{'attribute.list.position'}, $searched['items'][0]->{'attribute.list.position'});
-		$this->assertEquals( $saved['items']->{'attribute.list.status'}, $searched['items'][0]->{'attribute.list.status'});
+		$this->assertNotNull( $saved['items']->{'attribute.lists.id'} );
+		$this->assertEquals( $saved['items']->{'attribute.lists.id'}, $searched['items'][0]->{'attribute.lists.id'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.parentid'}, $searched['items'][0]->{'attribute.lists.parentid'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.typeid'}, $searched['items'][0]->{'attribute.lists.typeid'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.domain'}, $searched['items'][0]->{'attribute.lists.domain'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.refid'}, $searched['items'][0]->{'attribute.lists.refid'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.datestart'}, $searched['items'][0]->{'attribute.lists.datestart'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.dateend'}, $searched['items'][0]->{'attribute.lists.dateend'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.config'}, $searched['items'][0]->{'attribute.lists.config'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.position'}, $searched['items'][0]->{'attribute.lists.position'});
+		$this->assertEquals( $saved['items']->{'attribute.lists.status'}, $searched['items'][0]->{'attribute.lists.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

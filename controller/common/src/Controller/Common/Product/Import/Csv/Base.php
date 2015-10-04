@@ -148,7 +148,7 @@ class Controller_Common_Product_Import_Csv_Base
 	 *  ),
 	 *  'product' => array(
 	 *  	10 => 'product.code', // e.g. EAN code of another product
-	 *  	11 => 'product.list.type', // e.g. "suggestion" for suggested product
+	 *  	11 => 'product.lists.type', // e.g. "suggestion" for suggested product
 	 *  ),
 	 *  'property' => array(
 	 *  	12 => 'product.property.type', // e.g. "package-weight"
@@ -156,7 +156,7 @@ class Controller_Common_Product_Import_Csv_Base
 	 *  ),
 	 *  'catalog' => array(
 	 *  	14 => 'catalog.code', // e.g. Unique category code
-	 *  	15 => 'catalog.list.type', // e.g. "promotion" for top seller products
+	 *  	15 => 'catalog.lists.type', // e.g. "promotion" for top seller products
 	 *  ),
 	 *
 	 * @return array Associative list of domains as keys ("item" is special for the product itself) and a list of
@@ -191,7 +191,7 @@ class Controller_Common_Product_Import_Csv_Base
 			),
 			'product' => array(
 				14 => 'product.code',
-				15 => 'product.list.type',
+				15 => 'product.lists.type',
 			),
 			'property' => array(
 				16 => 'product.property.value',
@@ -199,7 +199,7 @@ class Controller_Common_Product_Import_Csv_Base
 			),
 			'catalog' => array(
 				18 => 'catalog.code',
-				19 => 'catalog.list.type',
+				19 => 'catalog.lists.type',
 			),
 		);
 	}
@@ -296,7 +296,7 @@ class Controller_Common_Product_Import_Csv_Base
 	/**
 	 * Returns the ID of the type item with the given code
 	 *
-	 * @param string $path Item/manager path separated by slashes, e.g. "product/list/type"
+	 * @param string $path Item/manager path separated by slashes, e.g. "product/lists/type"
 	 * @param string $domain Domain the type items needs to be from
 	 * @param string $code Unique code of the type item
 	 * @return string Unique ID of the type item

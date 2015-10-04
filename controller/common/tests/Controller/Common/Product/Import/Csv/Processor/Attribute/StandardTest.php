@@ -33,13 +33,13 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 		$mapping = array(
 			0 => 'attribute.type',
 			1 => 'attribute.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'attribute.type',
 			4 => 'attribute.code',
-			5 => 'product.list.type',
+			5 => 'product.lists.type',
 			6 => 'attribute.type',
 			7 => 'attribute.code',
-			8 => 'product.list.type',
+			8 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -90,7 +90,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 		$mapping = array(
 			0 => 'attribute.type',
 			1 => 'attribute.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -237,10 +237,10 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 		$mapping = array(
 			0 => 'attribute.type',
 			1 => 'attribute.code',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'attribute.type',
 			4 => 'attribute.code',
-			5 => 'product.list.type',
+			5 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -301,7 +301,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('attribute') as $listItem ) {
 			$listManager->deleteItem( $listItem->getId() );

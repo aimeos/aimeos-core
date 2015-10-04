@@ -148,7 +148,7 @@ class Controller_ExtJS_Catalog_Lists_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog/lists' );
 		}
 
 		return $this->manager;
@@ -162,7 +162,7 @@ class Controller_ExtJS_Catalog_Lists_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'catalog.list';
+		return 'catalog.lists';
 	}
 
 
@@ -193,20 +193,20 @@ class Controller_ExtJS_Catalog_Lists_Standard
 	 */
 	protected function transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' ) {
-			$entry->{'catalog.list.datestart'} = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
+		if( isset( $entry->{'catalog.lists.datestart'} ) && $entry->{'catalog.lists.datestart'} != '' ) {
+			$entry->{'catalog.lists.datestart'} = str_replace( 'T', ' ', $entry->{'catalog.lists.datestart'} );
 		} else {
-			$entry->{'catalog.list.datestart'} = null;
+			$entry->{'catalog.lists.datestart'} = null;
 		}
 
-		if( isset( $entry->{'catalog.list.dateend'} ) && $entry->{'catalog.list.dateend'} != '' ) {
-			$entry->{'catalog.list.dateend'} = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
+		if( isset( $entry->{'catalog.lists.dateend'} ) && $entry->{'catalog.lists.dateend'} != '' ) {
+			$entry->{'catalog.lists.dateend'} = str_replace( 'T', ' ', $entry->{'catalog.lists.dateend'} );
 		} else {
-			$entry->{'catalog.list.dateend'} = null;
+			$entry->{'catalog.lists.dateend'} = null;
 		}
 
-		if( isset( $entry->{'catalog.list.config'} ) ) {
-			$entry->{'catalog.list.config'} = (array) $entry->{'catalog.list.config'};
+		if( isset( $entry->{'catalog.lists.config'} ) ) {
+			$entry->{'catalog.lists.config'} = (array) $entry->{'catalog.lists.config'};
 		}
 
 		return $entry;

@@ -252,10 +252,10 @@ class Controller_Common_Product_Import_Csv_Processor_Text_StandardTest extends P
 		$mapping = array(
 			0 => 'text.type',
 			1 => 'text.content',
-			2 => 'product.list.type',
+			2 => 'product.lists.type',
 			3 => 'text.type',
 			4 => 'text.content',
-			5 => 'product.list.type',
+			5 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -317,7 +317,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_StandardTest extends P
 	{
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('text') as $listItem )
 		{

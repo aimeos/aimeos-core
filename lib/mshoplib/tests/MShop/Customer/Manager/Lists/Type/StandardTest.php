@@ -127,15 +127,15 @@ class MShop_Customer_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
-		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );

@@ -41,7 +41,7 @@ class Controller_ExtJS_Attribute_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'attribute/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'attribute/lists/type' );
 		}
 
 		return $this->manager;
@@ -55,6 +55,6 @@ class Controller_ExtJS_Attribute_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'attribute.list.type';
+		return 'attribute.lists.type';
 	}
 }

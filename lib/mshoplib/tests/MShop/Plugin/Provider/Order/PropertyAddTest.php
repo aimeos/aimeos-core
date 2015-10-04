@@ -91,8 +91,8 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 
 		$this->products['CNE']->setAttributes( array() );
 		$this->plugin->setConfig( array(
-			'product.list.parentid' => array(
-				'product.list.domain',
+			'product.lists.parentid' => array(
+				'product.lists.domain',
 			),
 			'product.stock.productid' => array(
 				'product.stock.stocklevel'

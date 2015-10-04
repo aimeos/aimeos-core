@@ -76,7 +76,7 @@ class Controller_ExtJS_Price_Lists_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'price/list' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'price/lists' );
 		}
 
 		return $this->manager;
@@ -90,7 +90,7 @@ class Controller_ExtJS_Price_Lists_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'price.list';
+		return 'price.lists';
 	}
 
 
@@ -102,20 +102,20 @@ class Controller_ExtJS_Price_Lists_Standard
 	 */
 	protected function transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'price.list.datestart'} ) && $entry->{'price.list.datestart'} != '' ) {
-			$entry->{'price.list.datestart'} = str_replace( 'T', ' ', $entry->{'price.list.datestart'} );
+		if( isset( $entry->{'price.lists.datestart'} ) && $entry->{'price.lists.datestart'} != '' ) {
+			$entry->{'price.lists.datestart'} = str_replace( 'T', ' ', $entry->{'price.lists.datestart'} );
 		} else {
-			$entry->{'price.list.datestart'} = null;
+			$entry->{'price.lists.datestart'} = null;
 		}
 
-		if( isset( $entry->{'price.list.dateend'} ) && $entry->{'price.list.dateend'} != '' ) {
-			$entry->{'price.list.dateend'} = str_replace( 'T', ' ', $entry->{'price.list.dateend'} );
+		if( isset( $entry->{'price.lists.dateend'} ) && $entry->{'price.lists.dateend'} != '' ) {
+			$entry->{'price.lists.dateend'} = str_replace( 'T', ' ', $entry->{'price.lists.dateend'} );
 		} else {
-			$entry->{'price.list.dateend'} = null;
+			$entry->{'price.lists.dateend'} = null;
 		}
 
-		if( isset( $entry->{'price.list.config'} ) ) {
-			$entry->{'price.list.config'} = (array) $entry->{'price.list.config'};
+		if( isset( $entry->{'price.lists.config'} ) ) {
+			$entry->{'price.lists.config'} = (array) $entry->{'price.lists.config'};
 		}
 
 		return $entry;

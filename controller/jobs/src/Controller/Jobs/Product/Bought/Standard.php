@@ -150,7 +150,7 @@ class Controller_Jobs_Product_Bought_Standard
 		$date = date( 'Y-m-d H:i:s', time() - $days * 86400 );
 
 
-		$typeItem = $this->getTypeItem( 'product/list/type', 'product', 'bought-together' );
+		$typeItem = $this->getTypeItem( 'product/lists/type', 'product', 'bought-together' );
 
 		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
 		$search = $baseManager->createSearch();
@@ -206,7 +206,7 @@ class Controller_Jobs_Product_Bought_Standard
 		$refIds = array();
 		$context = $this->getContext();
 
-		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
+		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/lists' );
 		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
 
 
@@ -224,8 +224,8 @@ class Controller_Jobs_Product_Bought_Standard
 
 		$search = $catalogListManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.refid', array_keys( $relativeCounts ) ),
-			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.refid', array_keys( $relativeCounts ) ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -270,7 +270,7 @@ class Controller_Jobs_Product_Bought_Standard
 			return;
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 		$item = $manager->createItem();
 
 		foreach( $productIds as $pos => $refid )
@@ -296,13 +296,13 @@ class Controller_Jobs_Product_Bought_Standard
 	 */
 	protected function removeListItems( $productId, $typeId )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$search = $manager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.parentid', $productId ),
-			$search->compare( '==', 'product.list.domain', 'product' ),
-			$search->compare( '==', 'product.list.typeid', $typeId ),
+			$search->compare( '==', 'product.lists.parentid', $productId ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.typeid', $typeId ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

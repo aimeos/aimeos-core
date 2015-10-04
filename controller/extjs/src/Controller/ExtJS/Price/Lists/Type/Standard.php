@@ -41,7 +41,7 @@ class Controller_ExtJS_Price_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'price/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'price/lists/type' );
 		}
 
 		return $this->manager;
@@ -55,6 +55,6 @@ class Controller_ExtJS_Price_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'price.list.type';
+		return 'price.lists.type';
 	}
 }

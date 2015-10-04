@@ -54,11 +54,11 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'text.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'text.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'text.list.domain' );
+		$result = $this->object->aggregate( $search, 'text.lists.domain' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'media', $result );
@@ -76,7 +76,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'text.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -90,7 +90,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'text.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -235,26 +235,26 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'text.list.id', null );
-		$expr[] = $search->compare( '!=', 'text.list.siteid', null );
-		$expr[] = $search->compare( '>', 'text.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'text.list.domain', 'media' );
-		$expr[] = $search->compare( '>', 'text.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'text.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'text.list.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.list.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'text.list.config', null );
-		$expr[] = $search->compare( '==', 'text.list.position', 0 );
-		$expr[] = $search->compare( '==', 'text.list.status', 1 );
-		$expr[] = $search->compare( '==', 'text.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'text.lists.id', null );
+		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'text.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'text.lists.domain', 'media' );
+		$expr[] = $search->compare( '>', 'text.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'text.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'text.lists.datestart', '2010-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'text.lists.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'text.lists.config', null );
+		$expr[] = $search->compare( '==', 'text.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'text.lists.status', 1 );
+		$expr[] = $search->compare( '==', 'text.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'text.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'text.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'text.list.type.code', 'align-top' );
-		$expr[] = $search->compare( '==', 'text.list.type.domain', 'media' );
-		$expr[] = $search->compare( '>', 'text.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'text.list.type.status', 1 );
-		$expr[] = $search->compare( '==', 'text.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'text.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'text.lists.type.code', 'align-top' );
+		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
+		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
+		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -263,13 +263,13 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 		//search without base criteria
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'text.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
 		$this->assertEquals( 12, count( $this->object->searchItems( $search ) ) );
 
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'text.list.editor', $this->editor ),
+			$search->compare( '==', 'text.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -315,13 +315,13 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'text.list.parentid', $item->getId() ),
-			$search->compare( '==', 'text.list.domain', 'media' ),
-			$search->compare( '==', 'text.list.editor', $this->editor ),
-			$search->compare( '==', 'text.list.type.code', 'align-left' ),
+			$search->compare( '==', 'text.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'text.lists.domain', 'media' ),
+			$search->compare( '==', 'text.lists.editor', $this->editor ),
+			$search->compare( '==', 'text.lists.type.code', 'align-left' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'text.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'text.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

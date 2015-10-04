@@ -106,8 +106,8 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 
 		$search = $manager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.type.code', $code ),
-			$search->compare( '==', 'product.list.type.domain', $domain ),
+			$search->compare( '==', 'product.lists.type.code', $code ),
+			$search->compare( '==', 'product.lists.type.domain', $domain ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -122,12 +122,12 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 		}
 
 
-		$listManager = $catalogManager->getSubManager( 'list' );
+		$listManager = $catalogManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'catalog.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'catalog.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'catalog.lists.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'catalog.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );

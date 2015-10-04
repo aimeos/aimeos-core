@@ -237,9 +237,9 @@ class Controller_Common_Product_Import_Csv_Processor_Price_StandardTest extends 
 	{
 		$mapping = array(
 			0 => 'price.value',
-			1 => 'product.list.type',
+			1 => 'product.lists.type',
 			2 => 'price.value',
-			3 => 'product.list.type',
+			3 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -298,7 +298,7 @@ class Controller_Common_Product_Import_Csv_Processor_Price_StandardTest extends 
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('price') as $listItem )
 		{

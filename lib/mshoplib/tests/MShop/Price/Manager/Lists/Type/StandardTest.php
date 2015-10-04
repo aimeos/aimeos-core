@@ -59,7 +59,7 @@ class MShop_Price_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -73,7 +73,7 @@ class MShop_Price_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -127,13 +127,13 @@ class MShop_Price_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'price.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'price.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'price.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'price.list.type.domain', 'customer' );
-		$expr[] = $search->compare( '==', 'price.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'price.list.type.status', 1 );
-		$expr[] = $search->compare( '==', 'price.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'price.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'price.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'price.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'price.lists.type.domain', 'customer' );
+		$expr[] = $search->compare( '==', 'price.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'price.lists.type.status', 1 );
+		$expr[] = $search->compare( '==', 'price.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -143,8 +143,8 @@ class MShop_Price_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'price.list.type.code', 'd' ),
-			$search->compare( '==', 'price.list.type.editor', $this->editor )
+			$search->compare( '~=', 'price.lists.type.code', 'd' ),
+			$search->compare( '==', 'price.lists.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );

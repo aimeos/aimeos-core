@@ -174,7 +174,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 			),
 			'media' => array(
 				5 => 'media.url',
-				6 => 'product.list.type',
+				6 => 'product.lists.type',
 			),
 			'price' => array(
 				7 => 'price.type',
@@ -187,7 +187,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 			),
 			'product' => array(
 				12 => 'product.code',
-				13 => 'product.list.type',
+				13 => 'product.lists.type',
 			),
 			'property' => array(
 				14 => 'product.property.type',
@@ -246,9 +246,9 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 
 	protected function delete( array $prodcodes, array $delete, array $nondelete )
 	{
-		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->context )->getSubmanager( 'list' );
+		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->context )->getSubmanager( 'lists' );
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $productManager->getSubManager( 'list' );
+		$listManager = $productManager->getSubManager( 'lists' );
 
 		foreach( $this->get( $prodcodes, $delete + $nondelete ) as $id => $product )
 		{
@@ -272,7 +272,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 			$productManager->deleteItem( $product->getId() );
 
 			$search = $catListManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'catalog.list.refid', $id ) );
+			$search->setConditions( $search->compare( '==', 'catalog.lists.refid', $id ) );
 			$result = $catListManager->searchItems( $search );
 
 			$catListManager->deleteItems( array_keys( $result ) );

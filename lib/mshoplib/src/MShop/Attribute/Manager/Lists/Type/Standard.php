@@ -18,8 +18,8 @@ class MShop_Attribute_Manager_Lists_Type_Standard
 	implements MShop_Attribute_Manager_Lists_Type_Iface
 {
 	private $searchConfig = array(
-		'attribute.list.type.id' => array(
-			'code'=>'attribute.list.type.id',
+		'attribute.lists.type.id' => array(
+			'code'=>'attribute.lists.type.id',
 			'internalcode'=>'mattlity."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_list_type" AS mattlity ON ( mattli."typeid" = mattlity."id" )' ),
 			'label'=>'Attribute list type Id',
@@ -27,58 +27,58 @@ class MShop_Attribute_Manager_Lists_Type_Standard
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'attribute.list.type.siteid' => array(
-			'code'=>'attribute.list.type.siteid',
+		'attribute.lists.type.siteid' => array(
+			'code'=>'attribute.lists.type.siteid',
 			'internalcode'=>'mattlity."siteid"',
 			'label'=>'Attribute list type site Id',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'attribute.list.type.code' => array(
-			'code'=>'attribute.list.type.code',
+		'attribute.lists.type.code' => array(
+			'code'=>'attribute.lists.type.code',
 			'internalcode'=>'mattlity."code"',
 			'label'=>'Attribute list type code',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'attribute.list.type.domain' => array(
-			'code'=>'attribute.list.type.domain',
+		'attribute.lists.type.domain' => array(
+			'code'=>'attribute.lists.type.domain',
 			'internalcode'=>'mattlity."domain"',
 			'label'=>'Attribute list type domain',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'attribute.list.type.label' => array(
-			'code' => 'attribute.list.type.label',
+		'attribute.lists.type.label' => array(
+			'code' => 'attribute.lists.type.label',
 			'internalcode' => 'mattlity."label"',
 			'label' => 'Attribute list type label',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'attribute.list.type.status' => array(
-			'code' => 'attribute.list.type.status',
+		'attribute.lists.type.status' => array(
+			'code' => 'attribute.lists.type.status',
 			'internalcode' => 'mattlity."status"',
 			'label' => 'Attribute list type status',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'attribute.list.type.ctime'=> array(
-			'code'=>'attribute.list.type.ctime',
+		'attribute.lists.type.ctime'=> array(
+			'code'=>'attribute.lists.type.ctime',
 			'internalcode'=>'mattlity."ctime"',
 			'label'=>'Attribute list type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'attribute.list.type.mtime'=> array(
-			'code'=>'attribute.list.type.mtime',
+		'attribute.lists.type.mtime'=> array(
+			'code'=>'attribute.lists.type.mtime',
 			'internalcode'=>'mattlity."mtime"',
 			'label'=>'Attribute list type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'attribute.list.type.editor'=> array(
-			'code'=>'attribute.list.type.editor',
+		'attribute.lists.type.editor'=> array(
+			'code'=>'attribute.lists.type.editor',
 			'internalcode'=>'mattlity."editor"',
 			'label'=>'Attribute list type editor',
 			'type'=> 'string',

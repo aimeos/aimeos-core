@@ -67,7 +67,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Standard
 	{
 		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'media' );
-		$listManager = MShop_Factory::createManager( $context, 'product/list' );
+		$listManager = MShop_Factory::createManager( $context, 'product/lists' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
 		$manager->begin();
@@ -79,15 +79,15 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Standard
 
 			foreach( $map as $pos => $list )
 			{
-				if( !isset( $list['media.url'] ) || $list['media.url'] === '' || isset( $list['product.list.type'] )
-					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
+				if( !isset( $list['media.url'] ) || $list['media.url'] === '' || isset( $list['product.lists.type'] )
+					&& $this->listTypes !== null && !in_array( $list['product.lists.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
 
 				$urls = explode( $separator, $list['media.url'] );
 				$type = ( isset( $list['media.type'] ) ? $list['media.type'] : 'default' );
-				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
+				$typecode = ( isset( $list['product.lists.type'] ) ? $list['product.lists.type'] : 'default' );
 
 				foreach( $urls as $url )
 				{
@@ -105,10 +105,10 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Standard
 					$refItem->fromArray( $this->addItemDefaults( $list ) );
 					$manager->saveItem( $refItem );
 
-					$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'media', $typecode );
-					$list['product.list.parentid'] = $product->getId();
-					$list['product.list.refid'] = $refItem->getId();
-					$list['product.list.domain'] = 'media';
+					$list['product.lists.typeid'] = $this->getTypeId( 'product/lists/type', 'media', $typecode );
+					$list['product.lists.parentid'] = $product->getId();
+					$list['product.lists.refid'] = $refItem->getId();
+					$list['product.lists.domain'] = 'media';
 
 					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );

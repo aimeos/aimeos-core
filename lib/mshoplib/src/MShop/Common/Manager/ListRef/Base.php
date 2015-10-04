@@ -91,8 +91,8 @@ abstract class MShop_Common_Manager_ListRef_Base
 		$search = $manager->createSearch( true );
 
 		$expr = array(
-			$search->compare( '==', $prefix . '.list.parentid', $ids ),
-			$search->compare( '==', $prefix . '.list.domain', $domains ),
+			$search->compare( '==', $prefix . '.lists.parentid', $ids ),
+			$search->compare( '==', $prefix . '.lists.domain', $domains ),
 			$search->getConditions(),
 		);
 

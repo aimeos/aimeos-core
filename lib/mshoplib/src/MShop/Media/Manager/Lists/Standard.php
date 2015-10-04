@@ -18,8 +18,8 @@ class MShop_Media_Manager_Lists_Standard
 	implements MShop_Media_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'media.list.id'=> array(
-			'code'=>'media.list.id',
+		'media.lists.id'=> array(
+			'code'=>'media.lists.id',
 			'internalcode'=>'mmedli."id"',
 			'internaldeps'=> array( 'LEFT JOIN "mshop_media_list" AS mmedli ON ( mmed."id" = mmedli."parentid" )' ),
 			'label'=>'Media list ID',
@@ -27,95 +27,95 @@ class MShop_Media_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.list.siteid'=> array(
-			'code'=>'media.list.siteid',
+		'media.lists.siteid'=> array(
+			'code'=>'media.lists.siteid',
 			'internalcode'=>'mmedli."siteid"',
 			'label'=>'Media list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.list.parentid'=> array(
-			'code'=>'media.list.parentid',
+		'media.lists.parentid'=> array(
+			'code'=>'media.lists.parentid',
 			'internalcode'=>'mmedli."parentid"',
 			'label'=>'Media list media ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.list.domain'=> array(
-			'code'=>'media.list.domain',
+		'media.lists.domain'=> array(
+			'code'=>'media.lists.domain',
 			'internalcode'=>'mmedli."domain"',
 			'label'=>'Media list domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.typeid'=> array(
-			'code'=>'media.list.typeid',
+		'media.lists.typeid'=> array(
+			'code'=>'media.lists.typeid',
 			'internalcode'=>'mmedli."typeid"',
 			'label'=>'Media list type ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.list.refid'=> array(
-			'code'=>'media.list.refid',
+		'media.lists.refid'=> array(
+			'code'=>'media.lists.refid',
 			'internalcode'=>'mmedli."refid"',
 			'label'=>'Media list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.datestart' => array(
-			'code'=>'media.list.datestart',
+		'media.lists.datestart' => array(
+			'code'=>'media.lists.datestart',
 			'internalcode'=>'mmedli."start"',
 			'label'=>'Media list start date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.dateend' => array(
-			'code'=>'media.list.dateend',
+		'media.lists.dateend' => array(
+			'code'=>'media.lists.dateend',
 			'internalcode'=>'mmedli."end"',
 			'label'=>'Media list end date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.config' => array(
-			'code'=>'media.list.config',
+		'media.lists.config' => array(
+			'code'=>'media.lists.config',
 			'internalcode'=>'mmedli."config"',
 			'label'=>'Media list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.position' => array(
-			'code'=>'media.list.position',
+		'media.lists.position' => array(
+			'code'=>'media.lists.position',
 			'internalcode'=>'mmedli."pos"',
 			'label'=>'Media list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'media.list.status' => array(
-			'code'=>'media.list.status',
+		'media.lists.status' => array(
+			'code'=>'media.lists.status',
 			'internalcode'=>'mmedli."status"',
 			'label'=>'Media list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'media.list.ctime'=> array(
-			'code'=>'media.list.ctime',
+		'media.lists.ctime'=> array(
+			'code'=>'media.lists.ctime',
 			'internalcode'=>'mmedli."ctime"',
 			'label'=>'Media list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.mtime'=> array(
-			'code'=>'media.list.mtime',
+		'media.lists.mtime'=> array(
+			'code'=>'media.lists.mtime',
 			'internalcode'=>'mmedli."mtime"',
 			'label'=>'Media list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'media.list.editor'=> array(
-			'code'=>'media.list.editor',
+		'media.lists.editor'=> array(
+			'code'=>'media.lists.editor',
 			'internalcode'=>'mmedli."editor"',
 			'label'=>'Media list editor',
 			'type'=> 'string',

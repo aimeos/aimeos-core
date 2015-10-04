@@ -20,7 +20,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 {
 	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
-		/** classes/controller/extjs/price/list/type/name
+		/** classes/controller/extjs/price/lists/type/name
 		 * Class name of the used ExtJS price list type controller implementation
 		 *
 		 * Each default ExtJS controller can be replace by an alternative imlementation.
@@ -38,7 +38,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/extjs/price/list/type/name = Mytype
+		 *  classes/controller/extjs/price/lists/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -54,7 +54,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/price/list/type/name', 'Standard' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/price/lists/type/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
@@ -68,7 +68,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 
 		$controller = self::createControllerBase( $context, $classname, $iface );
 
-		/** controller/extjs/price/list/type/decorators/excludes
+		/** controller/extjs/price/lists/type/decorators/excludes
 		 * Excludes decorators added by the "common" option from the price list type ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -80,7 +80,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * "controller/extjs/common/decorators/default" before they are wrapped
 		 * around the ExtJS controller.
 		 *
-		 *  controller/extjs/price/list/type/decorators/excludes = array( 'decorator1' )
+		 *  controller/extjs/price/lists/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
@@ -90,11 +90,11 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/price/list/type/decorators/global
-		 * @see controller/extjs/price/list/type/decorators/local
+		 * @see controller/extjs/price/lists/type/decorators/global
+		 * @see controller/extjs/price/lists/type/decorators/local
 		 */
 
-		/** controller/extjs/price/list/type/decorators/global
+		/** controller/extjs/price/lists/type/decorators/global
 		 * Adds a list of globally available decorators only to the price list type ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -105,7 +105,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * This option allows you to wrap global decorators
 		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
 		 *
-		 *  controller/extjs/price/list/type/decorators/global = array( 'decorator1' )
+		 *  controller/extjs/price/lists/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
@@ -114,11 +114,11 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/price/list/type/decorators/excludes
-		 * @see controller/extjs/price/list/type/decorators/local
+		 * @see controller/extjs/price/lists/type/decorators/excludes
+		 * @see controller/extjs/price/lists/type/decorators/local
 		 */
 
-		/** controller/extjs/price/list/type/decorators/local
+		/** controller/extjs/price/lists/type/decorators/local
 		 * Adds a list of local decorators only to the price list type ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -129,7 +129,7 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * This option allows you to wrap local decorators
 		 * ("Controller_ExtJS_Price_Lists_Type_Decorator_*") around the ExtJS controller.
 		 *
-		 *  controller/extjs/price/list/type/decorators/local = array( 'decorator2' )
+		 *  controller/extjs/price/lists/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "Controller_ExtJS_Price_Lists_Type_Decorator_Decorator2" only to the ExtJS
@@ -139,9 +139,9 @@ class Controller_ExtJS_Price_Lists_Type_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/price/list/type/decorators/excludes
-		 * @see controller/extjs/price/list/type/decorators/global
+		 * @see controller/extjs/price/lists/type/decorators/excludes
+		 * @see controller/extjs/price/lists/type/decorators/global
 		 */
-		return self::addControllerDecorators( $context, $controller, 'price/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'price/lists/type' );
 	}
 }

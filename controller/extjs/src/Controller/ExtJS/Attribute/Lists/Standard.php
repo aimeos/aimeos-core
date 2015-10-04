@@ -76,7 +76,7 @@ class Controller_ExtJS_Attribute_Lists_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'attribute/list' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'attribute/lists' );
 		}
 
 		return $this->manager;
@@ -90,7 +90,7 @@ class Controller_ExtJS_Attribute_Lists_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'attribute.list';
+		return 'attribute.lists';
 	}
 
 
@@ -102,20 +102,20 @@ class Controller_ExtJS_Attribute_Lists_Standard
 	 */
 	protected function transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'attribute.list.datestart'} ) && $entry->{'attribute.list.datestart'} != '' ) {
-			$entry->{'attribute.list.datestart'} = str_replace( 'T', ' ', $entry->{'attribute.list.datestart'} );
+		if( isset( $entry->{'attribute.lists.datestart'} ) && $entry->{'attribute.lists.datestart'} != '' ) {
+			$entry->{'attribute.lists.datestart'} = str_replace( 'T', ' ', $entry->{'attribute.lists.datestart'} );
 		} else {
-			$entry->{'attribute.list.datestart'} = null;
+			$entry->{'attribute.lists.datestart'} = null;
 		}
 
-		if( isset( $entry->{'attribute.list.dateend'} ) && $entry->{'attribute.list.dateend'} != '' ) {
-			$entry->{'attribute.list.dateend'} = str_replace( 'T', ' ', $entry->{'attribute.list.dateend'} );
+		if( isset( $entry->{'attribute.lists.dateend'} ) && $entry->{'attribute.lists.dateend'} != '' ) {
+			$entry->{'attribute.lists.dateend'} = str_replace( 'T', ' ', $entry->{'attribute.lists.dateend'} );
 		} else {
-			$entry->{'attribute.list.dateend'} = null;
+			$entry->{'attribute.lists.dateend'} = null;
 		}
 
-		if( isset( $entry->{'attribute.list.config'} ) ) {
-			$entry->{'attribute.list.config'} = (array) $entry->{'attribute.list.config'};
+		if( isset( $entry->{'attribute.lists.config'} ) ) {
+			$entry->{'attribute.lists.config'} = (array) $entry->{'attribute.lists.config'};
 		}
 
 		return $entry;

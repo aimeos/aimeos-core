@@ -404,7 +404,7 @@ class Client_Html_Catalog_Stage_Standard
 		{
 			$context = $this->getContext();
 			$site = $context->getLocale()->getSite()->getCode();
-			$params = (array) $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
+			$params = (array) $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
 		}
 
 		ksort( $params );
@@ -433,7 +433,7 @@ class Client_Html_Catalog_Stage_Standard
 			{
 				$context = $this->getContext();
 				$site = $context->getLocale()->getSite()->getCode();
-				$params = $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
+				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
 			}
 
 			$this->params = $params;
@@ -502,7 +502,7 @@ class Client_Html_Catalog_Stage_Standard
 				 * @category Developer
 				 * @see client/html/catalog/domains
 				 * @see client/html/catalog/detail/domains
-				 * @see client/html/catalog/list/domains
+				 * @see client/html/catalog/lists/domains
 				 */
 				$domains = $config->get( 'client/html/catalog/stage/default/domains', $domains );
 				$stageCatPath = $controller->getCatalogPath( $params['f_catid'], $domains );

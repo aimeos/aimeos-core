@@ -322,15 +322,15 @@ abstract class Client_Html_Base
 	 */
 	protected function addMetaList( $ids, $domain, &$expire )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), $domain . '/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), $domain . '/lists' );
 
 		$search = $manager->createSearch();
 		$expr = array(
-			$search->compare( '==', $domain . '.list.parentid', $ids ),
-			$search->compare( '>', $domain . '.list.datestart', date( 'Y-m-d H:i:00' ) ),
+			$search->compare( '==', $domain . '.lists.parentid', $ids ),
+			$search->compare( '>', $domain . '.lists.datestart', date( 'Y-m-d H:i:00' ) ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', $domain . '.list.datestart' ) ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.lists.datestart' ) ) );
 		$search->setSlice( 0, 1 );
 
 		foreach( $manager->searchItems( $search ) as $listItem ) {

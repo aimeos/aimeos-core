@@ -48,11 +48,11 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'attribute.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'attribute.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'attribute.list.domain' );
+		$result = $this->object->aggregate( $search, 'attribute.lists.domain' );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -233,30 +233,30 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'attribute.list.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.list.siteid', null );
-		$expr[] = $search->compare( '!=', 'attribute.list.parentid', null );
-		$expr[] = $search->compare( '==', 'attribute.list.domain', 'text' );
-		$expr[] = $search->compare( '!=', 'attribute.list.typeid', null );
-		$expr[] = $search->compare( '>', 'attribute.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'attribute.list.datestart', '2000-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.list.dateend', '2001-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'attribute.list.config', null );
-		$expr[] = $search->compare( '==', 'attribute.list.position', 0 );
-		$expr[] = $search->compare( '==', 'attribute.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'attribute.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'attribute.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'attribute.lists.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.lists.siteid', null );
+		$expr[] = $search->compare( '!=', 'attribute.lists.parentid', null );
+		$expr[] = $search->compare( '==', 'attribute.lists.domain', 'text' );
+		$expr[] = $search->compare( '!=', 'attribute.lists.typeid', null );
+		$expr[] = $search->compare( '>', 'attribute.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'attribute.lists.datestart', '2000-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.lists.dateend', '2001-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'attribute.lists.config', null );
+		$expr[] = $search->compare( '==', 'attribute.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'attribute.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'attribute.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'attribute.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'attribute.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'attribute.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'attribute.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'attribute.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'attribute.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'attribute.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -269,7 +269,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'attribute.list.editor', $this->editor ),
+			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -282,8 +282,8 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		// search without base criteria, slice & total
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'attribute.list.domain', 'text' ),
-			$search->compare( '==', 'attribute.list.editor', $this->editor ),
+			$search->compare( '==', 'attribute.lists.domain', 'text' ),
+			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
@@ -325,13 +325,13 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'attribute.list.parentid', $item->getId() ),
-			$search->compare( '==', 'attribute.list.domain', 'text' ),
-			$search->compare( '==', 'attribute.list.editor', $this->editor ),
-			$search->compare( '==', 'attribute.list.type.code', 'default' ),
+			$search->compare( '==', 'attribute.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'attribute.lists.domain', 'text' ),
+			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
+			$search->compare( '==', 'attribute.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'attribute.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'attribute.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

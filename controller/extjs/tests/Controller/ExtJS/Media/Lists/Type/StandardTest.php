@@ -39,8 +39,8 @@ class Controller_ExtJS_Media_Lists_Type_StandardTest extends PHPUnit_Framework_T
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'media.list.type.code' => 'option' ) ) ) ),
-			'sort' => 'media.list.type.code',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'media.lists.type.code' => 'option' ) ) ) ),
+			'sort' => 'media.lists.type.code',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -50,7 +50,7 @@ class Controller_ExtJS_Media_Lists_Type_StandardTest extends PHPUnit_Framework_T
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
-		$this->assertEquals( 'option', $result['items'][0]->{'media.list.type.code'} );
+		$this->assertEquals( 'option', $result['items'][0]->{'media.lists.type.code'} );
 	}
 
 
@@ -59,33 +59,33 @@ class Controller_ExtJS_Media_Lists_Type_StandardTest extends PHPUnit_Framework_T
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'media.list.type.code' => 'test',
-				'media.list.type.label' => 'testLabel',
-				'media.list.type.domain' => 'media',
-				'media.list.type.status' => 1,
+				'media.lists.type.code' => 'test',
+				'media.lists.type.label' => 'testLabel',
+				'media.lists.type.domain' => 'media',
+				'media.lists.type.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'media.list.type.code' => 'test' ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'media.lists.type.code' => 'test' ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.list.type.id'} );
+		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.lists.type.id'} );
 		$this->object->deleteItems( $params );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'media.list.type.id'} );
-		$this->assertEquals( $saved['items']->{'media.list.type.id'}, $searched['items'][0]->{'media.list.type.id'} );
-		$this->assertEquals( $saved['items']->{'media.list.type.code'}, $searched['items'][0]->{'media.list.type.code'} );
-		$this->assertEquals( $saved['items']->{'media.list.type.domain'}, $searched['items'][0]->{'media.list.type.domain'} );
-		$this->assertEquals( $saved['items']->{'media.list.type.label'}, $searched['items'][0]->{'media.list.type.label'} );
-		$this->assertEquals( $saved['items']->{'media.list.type.status'}, $searched['items'][0]->{'media.list.type.status'} );
+		$this->assertNotNull( $saved['items']->{'media.lists.type.id'} );
+		$this->assertEquals( $saved['items']->{'media.lists.type.id'}, $searched['items'][0]->{'media.lists.type.id'} );
+		$this->assertEquals( $saved['items']->{'media.lists.type.code'}, $searched['items'][0]->{'media.lists.type.code'} );
+		$this->assertEquals( $saved['items']->{'media.lists.type.domain'}, $searched['items'][0]->{'media.lists.type.domain'} );
+		$this->assertEquals( $saved['items']->{'media.lists.type.label'}, $searched['items'][0]->{'media.lists.type.label'} );
+		$this->assertEquals( $saved['items']->{'media.lists.type.status'}, $searched['items'][0]->{'media.lists.type.status'} );
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

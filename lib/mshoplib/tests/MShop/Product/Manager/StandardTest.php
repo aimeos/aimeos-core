@@ -185,14 +185,14 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.type.domain', 'product' ),
-			$search->compare( '==', 'product.list.type.code', 'suggestion' ),
-			$search->compare( '==', 'product.list.datestart', null ),
-			$search->compare( '==', 'product.list.dateend', null ),
-			$search->compare( '!=', 'product.list.config', null ),
-			$search->compare( '==', 'product.list.position', 0 ),
-			$search->compare( '==', 'product.list.status', 1 ),
-			$search->compare( '==', 'product.list.editor', $this->editor ),
+			$search->compare( '==', 'product.lists.type.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.code', 'suggestion' ),
+			$search->compare( '==', 'product.lists.datestart', null ),
+			$search->compare( '==', 'product.lists.dateend', null ),
+			$search->compare( '!=', 'product.lists.config', null ),
+			$search->compare( '==', 'product.lists.position', 0 ),
+			$search->compare( '==', 'product.lists.status', 1 ),
+			$search->compare( '==', 'product.lists.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -205,9 +205,9 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $listTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.type.domain', 'product' ),
-			$search->compare( '==', 'product.list.type.code', 'suggestion' ),
-			$search->compare( '==', 'product.list.type.editor', $this->editor ),
+			$search->compare( '==', 'product.lists.type.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.code', 'suggestion' ),
+			$search->compare( '==', 'product.lists.type.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -244,26 +244,26 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'product.type.status', 1 );
 		$expr[] = $search->compare( '==', 'product.type.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'product.list.id', null );
-		$expr[] = $search->compare( '!=', 'product.list.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.list.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.list.typeid', null );
-		$expr[] = $search->compare( '==', 'product.list.domain', 'product' );
-		$expr[] = $search->compare( '>', 'product.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'product.list.datestart', null );
-		$expr[] = $search->compare( '==', 'product.list.dateend', null );
-		$expr[] = $search->compare( '!=', 'product.list.config', null );
-		$expr[] = $search->compare( '==', 'product.list.position', 0 );
-		$expr[] = $search->compare( '==', 'product.list.status', 1 );
-		$expr[] = $search->compare( '==', 'product.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.lists.id', null );
+		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
+		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
+		$expr[] = $search->compare( '!=', 'product.lists.typeid', null );
+		$expr[] = $search->compare( '==', 'product.lists.domain', 'product' );
+		$expr[] = $search->compare( '>', 'product.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'product.lists.datestart', null );
+		$expr[] = $search->compare( '==', 'product.lists.dateend', null );
+		$expr[] = $search->compare( '!=', 'product.lists.config', null );
+		$expr[] = $search->compare( '==', 'product.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
+		$expr[] = $search->compare( '==', 'product.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'product.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'suggestion' );
-		$expr[] = $search->compare( '==', 'product.list.type.label', 'Suggestion' );
-		$expr[] = $search->compare( '==', 'product.list.type.status', 1 );
-		$expr[] = $search->compare( '==', 'product.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'product.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'suggestion' );
+		$expr[] = $search->compare( '==', 'product.lists.type.label', 'Suggestion' );
+		$expr[] = $search->compare( '==', 'product.lists.type.status', 1 );
+		$expr[] = $search->compare( '==', 'product.lists.type.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );

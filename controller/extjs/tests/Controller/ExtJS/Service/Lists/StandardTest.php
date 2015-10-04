@@ -39,8 +39,8 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.list.type.code' => 'unittype1' ) ) ) ),
-			'sort' => 'service.list.position',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.lists.type.code' => 'unittype1' ) ) ) ),
+			'sort' => 'service.lists.position',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -50,7 +50,7 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 6, $result['total'] );
-		$this->assertEquals( 'text', $result['items'][0]->{'service.list.domain'} );
+		$this->assertEquals( 'text', $result['items'][0]->{'service.lists.domain'} );
 	}
 
 
@@ -67,7 +67,7 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.list.type.domain' => 'product' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.lists.type.domain' => 'product' ) ) ) ),
 			'start' => 0,
 			'limit' => 1,
 		);
@@ -77,43 +77,43 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'service.list.parentid' => $item->getId(),
-				'service.list.typeid' => $resultType['items'][0]->{'service.list.type.id'},
-				'service.list.domain' => 'product',
-				'service.list.refid' => -1,
-				'service.list.datestart' => '2000-01-01 00:00:00',
-				'service.list.dateend' => '2001-01-01 00:00:00',
-				'service.list.config' => array( 'test' => 'unit' ),
-				'service.list.position' => 1,
-				'service.list.status' => 1,
+				'service.lists.parentid' => $item->getId(),
+				'service.lists.typeid' => $resultType['items'][0]->{'service.lists.type.id'},
+				'service.lists.domain' => 'product',
+				'service.lists.refid' => -1,
+				'service.lists.datestart' => '2000-01-01 00:00:00',
+				'service.lists.dateend' => '2001-01-01 00:00:00',
+				'service.lists.config' => array( 'test' => 'unit' ),
+				'service.lists.position' => 1,
+				'service.lists.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.list.refid' => -1 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'service.lists.refid' => -1 ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'service.list.id'} );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'service.lists.id'} );
 		$this->object->deleteItems( $deleteParams );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'service.list.id'} );
-		$this->assertEquals( $saved['items']->{'service.list.id'}, $searched['items'][0]->{'service.list.id'});
-		$this->assertEquals( $saved['items']->{'service.list.parentid'}, $searched['items'][0]->{'service.list.parentid'});
-		$this->assertEquals( $saved['items']->{'service.list.typeid'}, $searched['items'][0]->{'service.list.typeid'});
-		$this->assertEquals( $saved['items']->{'service.list.domain'}, $searched['items'][0]->{'service.list.domain'});
-		$this->assertEquals( $saved['items']->{'service.list.refid'}, $searched['items'][0]->{'service.list.refid'});
-		$this->assertEquals( $saved['items']->{'service.list.datestart'}, $searched['items'][0]->{'service.list.datestart'});
-		$this->assertEquals( $saved['items']->{'service.list.dateend'}, $searched['items'][0]->{'service.list.dateend'});
-		$this->assertEquals( $saved['items']->{'service.list.config'}, $searched['items'][0]->{'service.list.config'});
-		$this->assertEquals( $saved['items']->{'service.list.position'}, $searched['items'][0]->{'service.list.position'});
-		$this->assertEquals( $saved['items']->{'service.list.status'}, $searched['items'][0]->{'service.list.status'});
+		$this->assertNotNull( $saved['items']->{'service.lists.id'} );
+		$this->assertEquals( $saved['items']->{'service.lists.id'}, $searched['items'][0]->{'service.lists.id'});
+		$this->assertEquals( $saved['items']->{'service.lists.parentid'}, $searched['items'][0]->{'service.lists.parentid'});
+		$this->assertEquals( $saved['items']->{'service.lists.typeid'}, $searched['items'][0]->{'service.lists.typeid'});
+		$this->assertEquals( $saved['items']->{'service.lists.domain'}, $searched['items'][0]->{'service.lists.domain'});
+		$this->assertEquals( $saved['items']->{'service.lists.refid'}, $searched['items'][0]->{'service.lists.refid'});
+		$this->assertEquals( $saved['items']->{'service.lists.datestart'}, $searched['items'][0]->{'service.lists.datestart'});
+		$this->assertEquals( $saved['items']->{'service.lists.dateend'}, $searched['items'][0]->{'service.lists.dateend'});
+		$this->assertEquals( $saved['items']->{'service.lists.config'}, $searched['items'][0]->{'service.lists.config'});
+		$this->assertEquals( $saved['items']->{'service.lists.position'}, $searched['items'][0]->{'service.lists.position'});
+		$this->assertEquals( $saved['items']->{'service.lists.status'}, $searched['items'][0]->{'service.lists.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

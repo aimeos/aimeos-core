@@ -76,7 +76,7 @@ class Controller_ExtJS_Media_Lists_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media/list' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media/lists' );
 		}
 
 		return $this->manager;
@@ -90,7 +90,7 @@ class Controller_ExtJS_Media_Lists_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'media.list';
+		return 'media.lists';
 	}
 
 
@@ -102,20 +102,20 @@ class Controller_ExtJS_Media_Lists_Standard
 	 */
 	protected function transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'media.list.datestart'} ) && $entry->{'media.list.datestart'} != '' ) {
-			$entry->{'media.list.datestart'} = str_replace( 'T', ' ', $entry->{'media.list.datestart'} );
+		if( isset( $entry->{'media.lists.datestart'} ) && $entry->{'media.lists.datestart'} != '' ) {
+			$entry->{'media.lists.datestart'} = str_replace( 'T', ' ', $entry->{'media.lists.datestart'} );
 		} else {
-			$entry->{'media.list.datestart'} = null;
+			$entry->{'media.lists.datestart'} = null;
 		}
 
-		if( isset( $entry->{'media.list.dateend'} ) && $entry->{'media.list.dateend'} != '' ) {
-			$entry->{'media.list.dateend'} = str_replace( 'T', ' ', $entry->{'media.list.dateend'} );
+		if( isset( $entry->{'media.lists.dateend'} ) && $entry->{'media.lists.dateend'} != '' ) {
+			$entry->{'media.lists.dateend'} = str_replace( 'T', ' ', $entry->{'media.lists.dateend'} );
 		} else {
-			$entry->{'media.list.dateend'} = null;
+			$entry->{'media.lists.dateend'} = null;
 		}
 
-		if( isset( $entry->{'media.list.config'} ) ) {
-			$entry->{'media.list.config'} = (array) $entry->{'media.list.config'};
+		if( isset( $entry->{'media.lists.config'} ) ) {
+			$entry->{'media.lists.config'} = (array) $entry->{'media.lists.config'};
 		}
 
 		return $entry;

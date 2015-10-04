@@ -84,15 +84,15 @@ class Controller_ExtJS_Product_Standard
 
 		foreach( array( 'catalog', 'product' ) as $domain )
 		{
-			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+			$manager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain . '.list.refid', $ids ),
-				$search->compare( '==', $domain . '.list.domain', 'product' )
+				$search->compare( '==', $domain . '.lists.refid', $ids ),
+				$search->compare( '==', $domain . '.lists.domain', 'product' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.lists.id' ) ) );
 
 			$start = 0;
 

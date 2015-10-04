@@ -482,11 +482,11 @@ class Controller_Frontend_Basket_Standard
 	 */
 	protected function checkCategory( $prodid )
 	{
-		$catalogListManager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
+		$catalogListManager = MShop_Factory::createManager( $this->getContext(), 'catalog/lists' );
 
 		$search = $catalogListManager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->compare( '==', 'catalog.lists.refid', $prodid ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -991,12 +991,12 @@ class Controller_Frontend_Basket_Standard
 	{
 		if( !isset( $this->listTypeAttributes[$domain][$code] ) )
 		{
-			$listTypeManager = MShop_Factory::createManager( $this->getContext(), 'product/list/type' );
+			$listTypeManager = MShop_Factory::createManager( $this->getContext(), 'product/lists/type' );
 
 			$listTypeSearch = $listTypeManager->createSearch( true );
 			$expr = array(
-				$listTypeSearch->compare( '==', 'product.list.type.domain', $domain ),
-				$listTypeSearch->compare( '==', 'product.list.type.code', $code ),
+				$listTypeSearch->compare( '==', 'product.lists.type.domain', $domain ),
+				$listTypeSearch->compare( '==', 'product.lists.type.code', $code ),
 				$listTypeSearch->getConditions(),
 			);
 			$listTypeSearch->setConditions( $listTypeSearch->combine( '&&', $expr ) );

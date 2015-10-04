@@ -55,7 +55,7 @@ class MShop_Product_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'product.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -68,7 +68,7 @@ class MShop_Product_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'product.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -121,15 +121,15 @@ class MShop_Product_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'product.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'product.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'product.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'product.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'product.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'product.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'product.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'product.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );

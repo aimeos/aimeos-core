@@ -54,11 +54,11 @@ class MShop_Media_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'media.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'media.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'media.list.domain' );
+		$result = $this->object->aggregate( $search, 'media.lists.domain' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'attribute', $result );
@@ -232,30 +232,30 @@ class MShop_Media_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'media.list.id', null );
-		$expr[] = $search->compare( '!=', 'media.list.siteid', null );
-		$expr[] = $search->compare( '>', 'media.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'media.list.domain', 'text' );
-		$expr[] = $search->compare( '>', 'media.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'media.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'media.list.datestart', null );
-		$expr[] = $search->compare( '==', 'media.list.dateend', null );
-		$expr[] = $search->compare( '!=', 'media.list.config', null );
-		$expr[] = $search->compare( '==', 'media.list.position', 0 );
-		$expr[] = $search->compare( '==', 'media.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'media.lists.id', null );
+		$expr[] = $search->compare( '!=', 'media.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'media.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'media.lists.domain', 'text' );
+		$expr[] = $search->compare( '>', 'media.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'media.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'media.lists.datestart', null );
+		$expr[] = $search->compare( '==', 'media.lists.dateend', null );
+		$expr[] = $search->compare( '!=', 'media.lists.config', null );
+		$expr[] = $search->compare( '==', 'media.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'media.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'media.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'media.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'media.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.list.type.code', 'option' );
-		$expr[] = $search->compare( '==', 'media.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '>', 'media.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'media.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'media.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'media.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
+		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '>', 'media.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'media.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'media.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'media.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'media.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -266,7 +266,7 @@ class MShop_Media_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'media.list.editor', $this->editor ),
+			$search->compare( '==', 'media.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -307,13 +307,13 @@ class MShop_Media_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'media.list.parentid', $item->getId() ),
-			$search->compare( '==', 'media.list.domain', 'attribute' ),
-			$search->compare( '==', 'media.list.editor', $this->editor ),
-			$search->compare( '==', 'media.list.type.code', 'option' ),
+			$search->compare( '==', 'media.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'media.lists.domain', 'attribute' ),
+			$search->compare( '==', 'media.lists.editor', $this->editor ),
+			$search->compare( '==', 'media.lists.type.code', 'option' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'media.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'media.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

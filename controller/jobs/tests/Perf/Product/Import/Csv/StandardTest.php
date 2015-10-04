@@ -312,7 +312,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 			),
 			'product' => array(
 				21 => 'product.code',
-				22 => 'product.list.type',
+				22 => 'product.lists.type',
 			),
 			'property' => array(
 				23 => 'product.property.type',

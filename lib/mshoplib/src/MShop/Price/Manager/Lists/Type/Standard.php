@@ -18,8 +18,8 @@ class MShop_Price_Manager_Lists_Type_Standard
 	implements MShop_Price_Manager_Lists_Type_Iface
 {
 	private $searchConfig = array(
-		'price.list.type.id' => array(
-			'code' => 'price.list.type.id',
+		'price.lists.type.id' => array(
+			'code' => 'price.lists.type.id',
 			'internalcode' => 'mprility."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_price_list_type" AS mprility ON ( mprili."typeid" = mprility."id" )' ),
 			'label' => 'Price list type Id',
@@ -27,58 +27,58 @@ class MShop_Price_Manager_Lists_Type_Standard
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'price.list.type.siteid' => array(
-			'code' => 'price.list.type.siteid',
+		'price.lists.type.siteid' => array(
+			'code' => 'price.lists.type.siteid',
 			'internalcode' => 'mprility."siteid"',
 			'label' => 'Price list type site Id',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'price.list.type.code' => array(
-			'code' => 'price.list.type.code',
+		'price.lists.type.code' => array(
+			'code' => 'price.lists.type.code',
 			'internalcode' => 'mprility."code"',
 			'label' => 'Price list type code',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'price.list.type.domain' => array(
-			'code' => 'price.list.type.domain',
+		'price.lists.type.domain' => array(
+			'code' => 'price.lists.type.domain',
 			'internalcode' => 'mprility."domain"',
 			'label' => 'Price list type domain',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'price.list.type.label' => array(
+		'price.lists.type.label' => array(
 			'label' => 'Price list type label',
-			'code' => 'price.list.type.label',
+			'code' => 'price.lists.type.label',
 			'internalcode' => 'mprility."label"',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'price.list.type.status' => array(
+		'price.lists.type.status' => array(
 			'label' => 'Price list type status',
-			'code' => 'price.list.type.status',
+			'code' => 'price.lists.type.status',
 			'internalcode' => 'mprility."status"',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'price.list.type.ctime' => array(
-			'code' => 'price.list.type.ctime',
+		'price.lists.type.ctime' => array(
+			'code' => 'price.lists.type.ctime',
 			'internalcode' => 'mprility."ctime"',
 			'label' => 'Price list type create date/time',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'price.list.type.mtime' => array(
-			'code' => 'price.list.type.mtime',
+		'price.lists.type.mtime' => array(
+			'code' => 'price.lists.type.mtime',
 			'internalcode' => 'mprility."mtime"',
 			'label' => 'Price list type modification date/time',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'price.list.type.editor' => array(
-			'code' => 'price.list.type.editor',
+		'price.lists.type.editor' => array(
+			'code' => 'price.lists.type.editor',
 			'internalcode' => 'mprility."editor"',
 			'label' => 'Price list type editor',
 			'type' => 'string',

@@ -65,8 +65,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'config' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'config' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 
@@ -170,8 +170,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 		$search = $listTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'attribute.list.type.domain', 'price' ),
-			$search->compare( '==', 'attribute.list.type.code', 'default' ),
+			$search->compare( '==', 'attribute.lists.type.domain', 'price' ),
+			$search->compare( '==', 'attribute.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $listTypeManager->searchItems( $search );

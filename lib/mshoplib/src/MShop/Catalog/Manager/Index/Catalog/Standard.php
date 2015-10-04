@@ -392,8 +392,8 @@ class MShop_Catalog_Manager_Index_Catalog_Standard
 
 		$search = $listManager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'catalog.list.refid', $ids ),
-			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.refid', $ids ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );

@@ -30,7 +30,7 @@ interface MShop_Common_Manager_Lists_Iface
 	 * // second record: domain='text', refid=11
 	 * // third record: domain='media', refid=11
 	 *
-	 * $listManager->aggregate( $listManager->createSearch(), 'catalog.list.domain' );
+	 * $listManager->aggregate( $listManager->createSearch(), 'catalog.lists.domain' );
 	 * </code>
 	 *
 	 * The result in the example will be:
@@ -65,15 +65,15 @@ interface MShop_Common_Manager_Lists_Iface
 	 * $search = $listManager->createSearch();
 	 *
 	 * $search->setSlice( $start, 2 );
-	 * $result = $listManager->aggregate( $search, 'catalog.list.domain' );
+	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
 	 * $start += count( $result );
 	 * $search->setSlice( $start, 2 );
-	 * $result = $listManager->aggregate( $search, 'catalog.list.domain' );
+	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
 	 * $start += count( $result );
 	 * $search->setSlice( $start, 2 );
-	 * $result = $listManager->aggregate( $search, 'catalog.list.domain' );
+	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 * </code>
 	 *
 	 * The problem is to set the value of $start to the number of returned records.
@@ -99,10 +99,10 @@ interface MShop_Common_Manager_Lists_Iface
 	 * $search = $listManager->createSearch();
 	 *
 	 * $search->setSlice( 0, 2 );
-	 * $listManager->aggregate( $search, 'catalog.list.domain' );
+	 * $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
 	 * $search->setSlice( 2, 2 );
-	 * $listManager->aggregate( $search, 'catalog.list.domain' );
+	 * $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 * </code>
 	 *
 	 * The result of the two iterations will be:
@@ -139,11 +139,11 @@ interface MShop_Common_Manager_Lists_Iface
 	 * The method updates the position of the record with the given ID in $id
 	 * and of all records afterwards. The gap left behind by the moved record
 	 * is closed automatically. To retrive the items according to the new
-	 * positions, you have to sort them by the '<domain>.list.position' key:
+	 * positions, you have to sort them by the '<domain>.lists.position' key:
 	 *
 	 * <code>
 	 * $search = $listManager->createSearch();
-	 * $search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
+	 * $search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
 	 * $result = $listManager->searchItems( $search );
 	 * </code>
 	 *
@@ -163,7 +163,7 @@ interface MShop_Common_Manager_Lists_Iface
 	 * <code>
 	 * $search = $listManager->createSearch( true );
 	 * $expr = array(
-	 *     $search->compare( '==', 'product.list.domain', array( 'attribute', 'product' ),
+	 *     $search->compare( '==', 'product.lists.domain', array( 'attribute', 'product' ),
 	 *     $search->getConditions(),
 	 * );
 	 * $search->setConditions( $search->combine( '&&', $expr ) );

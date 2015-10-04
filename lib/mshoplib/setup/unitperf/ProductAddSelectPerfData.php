@@ -213,8 +213,8 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 

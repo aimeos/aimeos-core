@@ -65,7 +65,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 	 */
 	public function process( MShop_Product_Item_Iface $product, array $data )
 	{
-		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 		$manager = MShop_Factory::createManager( $this->getContext(), 'text' );
 		$manager->begin();
 
@@ -76,8 +76,8 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 
 			foreach( $map as $pos => $list )
 			{
-				if( !isset( $list['text.content'] ) || $list['text.content'] === '' || isset( $list['product.list.type'] )
-					&& $this->listTypes !== null && !in_array( $list['product.list.type'], (array) $this->listTypes )
+				if( !isset( $list['text.content'] ) || $list['text.content'] === '' || isset( $list['product.lists.type'] )
+					&& $this->listTypes !== null && !in_array( $list['product.lists.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -96,11 +96,11 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 				$refItem->fromArray( $this->addItemDefaults( $list ) );
 				$manager->saveItem( $refItem );
 
-				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
-				$list['product.list.typeid'] = $this->getTypeId( 'product/list/type', 'text', $typecode );
-				$list['product.list.parentid'] = $product->getId();
-				$list['product.list.refid'] = $refItem->getId();
-				$list['product.list.domain'] = 'text';
+				$typecode = ( isset( $list['product.lists.type'] ) ? $list['product.lists.type'] : 'default' );
+				$list['product.lists.typeid'] = $this->getTypeId( 'product/lists/type', 'text', $typecode );
+				$list['product.lists.parentid'] = $product->getId();
+				$list['product.lists.refid'] = $refItem->getId();
+				$list['product.lists.domain'] = 'text';
 
 				$listItem->fromArray( $this->addListItemDefaults( $list, $pos ) );
 				$listManager->saveItem( $listItem );

@@ -76,7 +76,7 @@ class Controller_ExtJS_Service_Lists_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'service/list' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'service/lists' );
 		}
 
 		return $this->manager;
@@ -90,7 +90,7 @@ class Controller_ExtJS_Service_Lists_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'service.list';
+		return 'service.lists';
 	}
 
 
@@ -102,20 +102,20 @@ class Controller_ExtJS_Service_Lists_Standard
 	 */
 	protected function transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'service.list.datestart'} ) && $entry->{'service.list.datestart'} != '' ) {
-			$entry->{'service.list.datestart'} = str_replace( 'T', ' ', $entry->{'service.list.datestart'} );
+		if( isset( $entry->{'service.lists.datestart'} ) && $entry->{'service.lists.datestart'} != '' ) {
+			$entry->{'service.lists.datestart'} = str_replace( 'T', ' ', $entry->{'service.lists.datestart'} );
 		} else {
-			$entry->{'service.list.datestart'} = null;
+			$entry->{'service.lists.datestart'} = null;
 		}
 
-		if( isset( $entry->{'service.list.dateend'} ) && $entry->{'service.list.dateend'} != '' ) {
-			$entry->{'service.list.dateend'} = str_replace( 'T', ' ', $entry->{'service.list.dateend'} );
+		if( isset( $entry->{'service.lists.dateend'} ) && $entry->{'service.lists.dateend'} != '' ) {
+			$entry->{'service.lists.dateend'} = str_replace( 'T', ' ', $entry->{'service.lists.dateend'} );
 		} else {
-			$entry->{'service.list.dateend'} = null;
+			$entry->{'service.lists.dateend'} = null;
 		}
 
-		if( isset( $entry->{'service.list.config'} ) ) {
-			$entry->{'service.list.config'} = (array) $entry->{'service.list.config'};
+		if( isset( $entry->{'service.lists.config'} ) ) {
+			$entry->{'service.lists.config'} = (array) $entry->{'service.lists.config'};
 		}
 
 		return $entry;

@@ -99,28 +99,28 @@ class MShop_Catalog_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'catalog.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'catalog.list.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.siteid', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.parentid', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.typeid', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.refid', null );
-		$expr[] = $search->compare( '>=', 'catalog.list.datestart', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.list.dateend', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.status', 1 );
-		$expr[] = $search->compare( '!=', 'catalog.list.config', null );
-		$expr[] = $search->compare( '>=', 'catalog.list.position', 0 );
-		$expr[] = $search->compare( '>=', 'catalog.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.parentid', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.typeid', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.refid', null );
+		$expr[] = $search->compare( '>=', 'catalog.lists.datestart', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'catalog.lists.dateend', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.status', 1 );
+		$expr[] = $search->compare( '!=', 'catalog.lists.config', null );
+		$expr[] = $search->compare( '>=', 'catalog.lists.position', 0 );
+		$expr[] = $search->compare( '>=', 'catalog.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'catalog.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'catalog.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.type.siteid', null );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.code', '' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.label', '' );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.type.siteid', null );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.code', '' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.label', '' );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.editor', $this->editor );
 
 
 		$total = 0;

@@ -37,7 +37,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Common_Item_Lists_Standard( 'common.list.', $values );
+		$this->object = new MShop_Common_Item_Lists_Standard( 'common.lists.', $values );
 	}
 
 
@@ -219,52 +219,52 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Common_Item_Lists_Standard( 'common.list.' );
+		$item = new MShop_Common_Item_Lists_Standard( 'common.lists.' );
 
 		$list = array(
-			'common.list.id' => 8,
-			'common.list.parentid' => 2,
-			'common.list.typeid' => 8,
-			'common.list.domain' => 'testDomain',
-			'common.list.refid' => 'unitId',
-			'common.list.config' => array( 'cnt' => '40' ),
-			'common.list.position' => 7,
-			'common.list.status' => 1,
+			'common.lists.id' => 8,
+			'common.lists.parentid' => 2,
+			'common.lists.typeid' => 8,
+			'common.lists.domain' => 'testDomain',
+			'common.lists.refid' => 'unitId',
+			'common.lists.config' => array( 'cnt' => '40' ),
+			'common.lists.position' => 7,
+			'common.lists.status' => 1,
 		);
 
 		$unknown = $item->fromArray( $list );
 
 		$this->assertEquals( array(), $unknown );
 
-		$this->assertEquals( $list['common.list.id'], $item->getId() );
-		$this->assertEquals( $list['common.list.parentid'], $item->getParentId() );
-		$this->assertEquals( $list['common.list.typeid'], $item->getTypeId() );
-		$this->assertEquals( $list['common.list.domain'], $item->getDomain() );
-		$this->assertEquals( $list['common.list.refid'], $item->getRefId() );
-		$this->assertEquals( $list['common.list.config'], $item->getConfig() );
-		$this->assertEquals( $list['common.list.position'], $item->getPosition() );
-		$this->assertEquals( $list['common.list.status'], $item->getStatus() );
+		$this->assertEquals( $list['common.lists.id'], $item->getId() );
+		$this->assertEquals( $list['common.lists.parentid'], $item->getParentId() );
+		$this->assertEquals( $list['common.lists.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['common.lists.domain'], $item->getDomain() );
+		$this->assertEquals( $list['common.lists.refid'], $item->getRefId() );
+		$this->assertEquals( $list['common.lists.config'], $item->getConfig() );
+		$this->assertEquals( $list['common.lists.position'], $item->getPosition() );
+		$this->assertEquals( $list['common.lists.status'], $item->getStatus() );
 	}
 
 
 	public function testToArray()
 	{
 		$expected = array(
-			'common.list.id' => 8,
-			'common.list.siteid' => 99,
-			'common.list.parentid' => 2,
-			'common.list.typeid' => 8,
-			'common.list.type' => 'test',
-			'common.list.domain' => 'testDomain',
-			'common.list.refid' => 'unitId',
-			'common.list.datestart' => '2005-01-01 00:00:00',
-			'common.list.dateend' => '2010-12-31 00:00:00',
-			'common.list.config' => array( 'cnt' => '40' ),
-			'common.list.position' => 7,
-			'common.list.status' => 1,
-			'common.list.ctime' => '2011-01-01 00:00:01',
-			'common.list.mtime' => '2011-01-01 00:00:02',
-			'common.list.editor' => 'unitTestUser',
+			'common.lists.id' => 8,
+			'common.lists.siteid' => 99,
+			'common.lists.parentid' => 2,
+			'common.lists.typeid' => 8,
+			'common.lists.type' => 'test',
+			'common.lists.domain' => 'testDomain',
+			'common.lists.refid' => 'unitId',
+			'common.lists.datestart' => '2005-01-01 00:00:00',
+			'common.lists.dateend' => '2010-12-31 00:00:00',
+			'common.lists.config' => array( 'cnt' => '40' ),
+			'common.lists.position' => 7,
+			'common.lists.status' => 1,
+			'common.lists.ctime' => '2011-01-01 00:00:01',
+			'common.lists.mtime' => '2011-01-01 00:00:02',
+			'common.lists.editor' => 'unitTestUser',
 		);
 
 		$this->assertEquals( $expected, $this->object->toArray() );

@@ -425,19 +425,19 @@ class MShop_Catalog_Manager_Index_Standard
 		$catalogSearch = $catalogListManager->createSearch( true );
 
 		$expr = array(
-			$catalogSearch->compare( '==', 'catalog.list.domain', 'product' ),
+			$catalogSearch->compare( '==', 'catalog.lists.domain', 'product' ),
 			$catalogSearch->getConditions(),
 		);
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
-		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.list.refid' ) ) );
+		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.lists.refid' ) ) );
 
 		$start = 0;
 
 		do
 		{
 			$catalogSearch->setSlice( $start, $size );
-			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.list.refid' );
+			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.lists.refid' );
 
 			$expr = array(
 				$search->compare( '==', 'product.id', array_keys( $result ) ),

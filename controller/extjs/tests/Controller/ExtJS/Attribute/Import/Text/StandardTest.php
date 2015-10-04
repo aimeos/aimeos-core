@@ -116,12 +116,12 @@ class Controller_ExtJS_Attribute_Import_Text_StandardTest extends PHPUnit_Framew
 
 
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
-		$listManager = $attributeManager->getSubManager( 'list' );
+		$listManager = $attributeManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'attribute.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'attribute.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'attribute.lists.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'attribute.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );

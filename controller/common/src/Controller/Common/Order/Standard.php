@@ -277,9 +277,9 @@ class Controller_Common_Order_Standard
 					$search = $productManager->createSearch();
 					$expr = array(
 						$search->compare( '==', 'product.type.code', 'bundle' ),
-						$search->compare( '==', 'product.list.domain', 'product' ),
-						$search->compare( '==', 'product.list.refid', $item->getProductId() ),
-						$search->compare( '==', 'product.list.type.code', 'default' ),
+						$search->compare( '==', 'product.lists.domain', 'product' ),
+						$search->compare( '==', 'product.lists.refid', $item->getProductId() ),
+						$search->compare( '==', 'product.lists.type.code', 'default' ),
 					);
 					$search->setConditions( $search->combine( '&&', $expr ) );
 					$search->setSlice( 0, 0x7fffffff );

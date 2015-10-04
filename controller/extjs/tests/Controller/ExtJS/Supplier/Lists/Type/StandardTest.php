@@ -39,8 +39,8 @@ class Controller_ExtJS_Supplier_Lists_Type_StandardTest extends PHPUnit_Framewor
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'supplier.list.type.code' => 'default' ) ) ) ),
-			'sort' => 'supplier.list.type.code',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'supplier.lists.type.code' => 'default' ) ) ) ),
+			'sort' => 'supplier.lists.type.code',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -50,7 +50,7 @@ class Controller_ExtJS_Supplier_Lists_Type_StandardTest extends PHPUnit_Framewor
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
-		$this->assertEquals( 'default', $result['items'][0]->{'supplier.list.type.code'} );
+		$this->assertEquals( 'default', $result['items'][0]->{'supplier.lists.type.code'} );
 	}
 
 
@@ -59,33 +59,33 @@ class Controller_ExtJS_Supplier_Lists_Type_StandardTest extends PHPUnit_Framewor
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'supplier.list.type.code' => 'test',
-				'supplier.list.type.label' => 'testLabel',
-				'supplier.list.type.domain' => 'supplier',
-				'supplier.list.type.status' => 1,
+				'supplier.lists.type.code' => 'test',
+				'supplier.lists.type.label' => 'testLabel',
+				'supplier.lists.type.domain' => 'supplier',
+				'supplier.lists.type.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'supplier.list.type.code' => 'test' ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'supplier.lists.type.code' => 'test' ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'supplier.list.type.id'} );
+		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'supplier.lists.type.id'} );
 		$this->object->deleteItems( $params );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'supplier.list.type.id'} );
-		$this->assertEquals( $saved['items']->{'supplier.list.type.id'}, $searched['items'][0]->{'supplier.list.type.id'} );
-		$this->assertEquals( $saved['items']->{'supplier.list.type.code'}, $searched['items'][0]->{'supplier.list.type.code'} );
-		$this->assertEquals( $saved['items']->{'supplier.list.type.domain'}, $searched['items'][0]->{'supplier.list.type.domain'} );
-		$this->assertEquals( $saved['items']->{'supplier.list.type.label'}, $searched['items'][0]->{'supplier.list.type.label'} );
-		$this->assertEquals( $saved['items']->{'supplier.list.type.status'}, $searched['items'][0]->{'supplier.list.type.status'} );
+		$this->assertNotNull( $saved['items']->{'supplier.lists.type.id'} );
+		$this->assertEquals( $saved['items']->{'supplier.lists.type.id'}, $searched['items'][0]->{'supplier.lists.type.id'} );
+		$this->assertEquals( $saved['items']->{'supplier.lists.type.code'}, $searched['items'][0]->{'supplier.lists.type.code'} );
+		$this->assertEquals( $saved['items']->{'supplier.lists.type.domain'}, $searched['items'][0]->{'supplier.lists.type.domain'} );
+		$this->assertEquals( $saved['items']->{'supplier.lists.type.label'}, $searched['items'][0]->{'supplier.lists.type.label'} );
+		$this->assertEquals( $saved['items']->{'supplier.lists.type.status'}, $searched['items'][0]->{'supplier.lists.type.status'} );
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

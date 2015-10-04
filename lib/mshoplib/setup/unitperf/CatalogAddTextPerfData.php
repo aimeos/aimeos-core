@@ -50,8 +50,8 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'text' ),
-			$search->compare( '==', 'catalog.list.type.code', 'default' ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'text' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );

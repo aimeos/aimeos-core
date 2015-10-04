@@ -262,9 +262,9 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 	{
 		$mapping = array(
 			0 => 'media.url',
-			1 => 'product.list.type',
+			1 => 'product.lists.type',
 			2 => 'media.url',
-			3 => 'product.list.type',
+			3 => 'product.lists.type',
 		);
 
 		$data = array(
@@ -323,7 +323,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 	{
 		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->context );
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('media') as $listItem )
 		{

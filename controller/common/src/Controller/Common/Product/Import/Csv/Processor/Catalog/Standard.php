@@ -70,7 +70,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 	{
 		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'catalog' );
-		$listManager = MShop_Factory::createManager( $context, 'catalog/list' );
+		$listManager = MShop_Factory::createManager( $context, 'catalog/lists' );
 
 		/** controller/common/product/import/csv/separator
 		 * Single separator character for multiple entries in one field of the import file
@@ -102,14 +102,14 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 
 			foreach( $map as $pos => $list )
 			{
-				if( !isset( $list['catalog.code'] ) || $list['catalog.code'] === '' || isset( $list['catalog.list.type'] )
-					&& $this->listTypes !== null && !in_array( $list['catalog.list.type'], (array) $this->listTypes )
+				if( !isset( $list['catalog.code'] ) || $list['catalog.code'] === '' || isset( $list['catalog.lists.type'] )
+					&& $this->listTypes !== null && !in_array( $list['catalog.lists.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
 
 				$codes = explode( $separator, $list['catalog.code'] );
-				$type = ( isset( $list['catalog.list.type'] ) ? $list['catalog.list.type'] : 'default' );
+				$type = ( isset( $list['catalog.lists.type'] ) ? $list['catalog.lists.type'] : 'default' );
 
 				foreach( $codes as $code )
 				{
@@ -123,10 +123,10 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 						$listItem = $listManager->createItem();
 					}
 
-					$list['catalog.list.typeid'] = $this->getTypeId( 'catalog/list/type', 'product', $type );
-					$list['catalog.list.parentid'] = $catid;
-					$list['catalog.list.refid'] = $prodid;
-					$list['catalog.list.domain'] = 'product';
+					$list['catalog.lists.typeid'] = $this->getTypeId( 'catalog/lists/type', 'product', $type );
+					$list['catalog.lists.parentid'] = $catid;
+					$list['catalog.lists.refid'] = $prodid;
+					$list['catalog.lists.domain'] = 'product';
 
 					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
@@ -150,18 +150,18 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 	/**
 	 * Adds the list item default values and returns the resulting array
 	 *
-	 * @param array $list Associative list of domain item keys and their values, e.g. "catalog.list.status" => 1
+	 * @param array $list Associative list of domain item keys and their values, e.g. "catalog.lists.status" => 1
 	 * @param integer $pos Computed position of the list item in the associated list of items
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
 	protected function addListItemDefaults( array $list, $pos )
 	{
-		if( !isset( $list['catalog.list.position'] ) ) {
-			$list['catalog.list.position'] = $pos;
+		if( !isset( $list['catalog.lists.position'] ) ) {
+			$list['catalog.lists.position'] = $pos;
 		}
 
-		if( !isset( $list['catalog.list.status'] ) ) {
-			$list['catalog.list.status'] = 1;
+		if( !isset( $list['catalog.lists.status'] ) ) {
+			$list['catalog.lists.status'] = 1;
 		}
 
 		return $list;
@@ -177,20 +177,20 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 	 */
 	protected function getListItems( $prodid, $types )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'catalog/lists' );
 		$search = $manager->createSearch();
 
 		$expr = array(
-			$search->compare( '==', 'catalog.list.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.refid', $prodid ),
 		);
 
 		if( $types !== null ) {
-			$expr[] = $search->compare( '==', 'catalog.list.type.code', $types );
+			$expr[] = $search->compare( '==', 'catalog.lists.type.code', $types );
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'catalog.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'catalog.lists.position' ) ) );
 		$search->setSlice( 0, 0x7FFFFFFF );
 
 		return $manager->searchItems( $search );
@@ -224,7 +224,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Standard
 			$pos++;
 		}
 
-		$listManager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'catalog/lists' );
 		$listManager->deleteItems( $delete );
 
 		return $listItems;

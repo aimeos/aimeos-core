@@ -282,15 +282,15 @@ class Client_Html_Account_Favorite_Standard
 
 		if( $context->getUserId() != null && !empty( $ids ) )
 		{
-			$typeItem = $this->getTypeItem( 'customer/list/type', 'product', 'favorite' );
-			$manager = MShop_Factory::createManager( $context, 'customer/list' );
+			$typeItem = $this->getTypeItem( 'customer/lists/type', 'product', 'favorite' );
+			$manager = MShop_Factory::createManager( $context, 'customer/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', 'customer.list.parentid', $context->getUserId() ),
-				$search->compare( '==', 'customer.list.refid', $ids ),
-				$search->compare( '==', 'customer.list.domain', 'product' ),
-				$search->compare( '==', 'customer.list.typeid', $typeItem->getId() ),
+				$search->compare( '==', 'customer.lists.parentid', $context->getUserId() ),
+				$search->compare( '==', 'customer.lists.refid', $ids ),
+				$search->compare( '==', 'customer.lists.domain', 'product' ),
+				$search->compare( '==', 'customer.lists.typeid', $typeItem->getId() ),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -393,7 +393,7 @@ class Client_Html_Account_Favorite_Standard
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
-		 * @see client/html/catalog/list/size
+		 * @see client/html/catalog/lists/size
 		 */
 		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/account/favorite/size', 48 );
 
@@ -417,23 +417,23 @@ class Client_Html_Account_Favorite_Standard
 			$total = 0;
 			$productIds = array();
 			$context = $this->getContext();
-			$typeItem = $this->getTypeItem( 'customer/list/type', 'product', 'favorite' );
+			$typeItem = $this->getTypeItem( 'customer/lists/type', 'product', 'favorite' );
 
 			$size = $this->getProductListSize( $view );
 			$current = $this->getProductListPage( $view );
 			$last = ( $total != 0 ? ceil( $total / $size ) : 1 );
 
 
-			$manager = MShop_Factory::createManager( $context, 'customer/list' );
+			$manager = MShop_Factory::createManager( $context, 'customer/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', 'customer.list.parentid', $context->getUserId() ),
-				$search->compare( '==', 'customer.list.typeid', $typeItem->getId() ),
-				$search->compare( '==', 'customer.list.domain', 'product' ),
+				$search->compare( '==', 'customer.lists.parentid', $context->getUserId() ),
+				$search->compare( '==', 'customer.lists.typeid', $typeItem->getId() ),
+				$search->compare( '==', 'customer.lists.domain', 'product' ),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '-', 'customer.list.position' ) ) );
+			$search->setSortations( array( $search->sort( '-', 'customer.lists.position' ) ) );
 			$search->setSlice( ( $current - 1 ) * $size, $size );
 
 			$view->favoriteListItems = $manager->searchItems( $search, array(), $total );

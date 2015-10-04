@@ -54,11 +54,11 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'service.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'service.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'service.list.domain' );
+		$result = $this->object->aggregate( $search, 'service.lists.domain' );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -76,7 +76,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'service.lists.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -100,7 +100,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'service.lists.editor', $this->editor ) );
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -245,30 +245,30 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'service.list.id', null );
-		$expr[] = $search->compare( '!=', 'service.list.siteid', null );
-		$expr[] = $search->compare( '>', 'service.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'service.list.domain', 'text' );
-		$expr[] = $search->compare( '>', 'service.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'service.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'service.list.datestart', null );
-		$expr[] = $search->compare( '==', 'service.list.dateend', null );
-		$expr[] = $search->compare( '!=', 'service.list.config', null );
-		$expr[] = $search->compare( '==', 'service.list.position', 0 );
-		$expr[] = $search->compare( '==', 'service.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'service.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'service.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'service.lists.id', null );
+		$expr[] = $search->compare( '!=', 'service.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'service.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'service.lists.domain', 'text' );
+		$expr[] = $search->compare( '>', 'service.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'service.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'service.lists.datestart', null );
+		$expr[] = $search->compare( '==', 'service.lists.dateend', null );
+		$expr[] = $search->compare( '!=', 'service.lists.config', null );
+		$expr[] = $search->compare( '==', 'service.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'service.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'service.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'service.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'service.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'service.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'service.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'service.list.type.code', 'unittype1' );
-		$expr[] = $search->compare( '==', 'service.list.type.domain', 'text' );
-		$expr[] = $search->compare( '>', 'service.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'service.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'service.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'service.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'service.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'service.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'service.lists.type.code', 'unittype1' );
+		$expr[] = $search->compare( '==', 'service.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '>', 'service.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'service.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'service.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -278,7 +278,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'service.list.editor', $this->editor ),
+			$search->compare( '==', 'service.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -313,13 +313,13 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'service.list.parentid', $item->getId() ),
-			$search->compare( '==', 'service.list.domain', 'text' ),
-			$search->compare( '==', 'service.list.editor', $this->editor ),
-			$search->compare( '==', 'service.list.type.code', 'default' ),
+			$search->compare( '==', 'service.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'service.lists.domain', 'text' ),
+			$search->compare( '==', 'service.lists.editor', $this->editor ),
+			$search->compare( '==', 'service.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'service.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'service.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

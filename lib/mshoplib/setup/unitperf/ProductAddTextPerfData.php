@@ -92,11 +92,11 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$search = $productListManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.domain', 'attribute' ),
-			$search->compare( '==', 'product.list.type.code', 'variant' ),
+			$search->compare( '==', 'product.lists.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.code', 'variant' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.list.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.lists.id' ) ) );
 
 
 		$this->txBegin();

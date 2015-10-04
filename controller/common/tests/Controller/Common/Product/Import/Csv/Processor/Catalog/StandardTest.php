@@ -63,9 +63,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcess()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
-			2 => 'catalog.list.type',
+			2 => 'catalog.lists.type',
 			3 => 'catalog.code',
 		);
 
@@ -108,9 +108,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcessMultiple()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
-			2 => 'catalog.list.type',
+			2 => 'catalog.lists.type',
 			3 => 'catalog.code',
 		);
 
@@ -156,7 +156,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcessUpdate()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
 		);
 
@@ -193,7 +193,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcessDelete()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
 		);
 
@@ -223,9 +223,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcessEmpty()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
-			2 => 'catalog.list.type',
+			2 => 'catalog.lists.type',
 			3 => 'catalog.code',
 		);
 
@@ -254,9 +254,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	public function testProcessListtypes()
 	{
 		$mapping = array(
-			0 => 'catalog.list.type',
+			0 => 'catalog.lists.type',
 			1 => 'catalog.code',
-			2 => 'catalog.list.type',
+			2 => 'catalog.lists.type',
 			3 => 'catalog.code',
 		);
 
@@ -305,7 +305,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	protected function delete( MShop_Catalog_Item_Iface $catItem )
 	{
 		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $catItem->getListItems('product') as $listItem ) {
 			$listManager->deleteItem( $listItem->getId() );

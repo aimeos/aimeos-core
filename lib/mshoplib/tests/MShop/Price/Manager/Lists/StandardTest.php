@@ -54,11 +54,11 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'price.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'price.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'price.list.domain' );
+		$result = $this->object->aggregate( $search, 'price.lists.domain' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'customer', $result );
@@ -76,7 +76,7 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'price.lists.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -90,7 +90,7 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'price.lists.editor', $this->editor ) );
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -234,30 +234,30 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'price.list.id', null );
-		$expr[] = $search->compare( '!=', 'price.list.siteid', null );
-		$expr[] = $search->compare( '>', 'price.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'price.list.domain', 'customer' );
-		$expr[] = $search->compare( '>', 'price.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'price.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'price.list.datestart', null );
-		$expr[] = $search->compare( '==', 'price.list.dateend', null );
-		$expr[] = $search->compare( '!=', 'price.list.config', null );
-		$expr[] = $search->compare( '==', 'price.list.position', 0 );
-		$expr[] = $search->compare( '==', 'price.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'price.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'price.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'price.lists.id', null );
+		$expr[] = $search->compare( '!=', 'price.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'price.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'price.lists.domain', 'customer' );
+		$expr[] = $search->compare( '>', 'price.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'price.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'price.lists.datestart', null );
+		$expr[] = $search->compare( '==', 'price.lists.dateend', null );
+		$expr[] = $search->compare( '!=', 'price.lists.config', null );
+		$expr[] = $search->compare( '==', 'price.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'price.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'price.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'price.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'price.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'price.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'price.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'price.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'price.list.type.domain', 'customer' );
-		$expr[] = $search->compare( '==', 'price.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'price.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'price.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'price.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'price.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'price.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'price.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'price.lists.type.domain', 'customer' );
+		$expr[] = $search->compare( '==', 'price.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'price.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'price.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'price.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'price.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -268,7 +268,7 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'price.list.editor', $this->editor ),
+			$search->compare( '==', 'price.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -314,13 +314,13 @@ class MShop_Price_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'price.list.parentid', $item->getId() ),
-			$search->compare( '==', 'price.list.domain', 'customer' ),
-			$search->compare( '==', 'price.list.editor', $this->editor ),
-			$search->compare( '==', 'price.list.type.code', 'default' ),
+			$search->compare( '==', 'price.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'price.lists.domain', 'customer' ),
+			$search->compare( '==', 'price.lists.editor', $this->editor ),
+			$search->compare( '==', 'price.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'price.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'price.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

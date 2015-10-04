@@ -71,17 +71,17 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 
 		// find refs
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productsList = $productManager->getSubManager( 'list' );
+		$productsList = $productManager->getSubManager( 'lists' );
 
 		$search = $productsList->createSearch();
 
 		$expr = array(
-			$search->compare( '==', 'product.list.domain', 'price' ),
-			$search->compare( '==', 'product.list.refid', $price['items'][0]->{'price.id'} ),
+			$search->compare( '==', 'product.lists.domain', 'price' ),
+			$search->compare( '==', 'product.lists.refid', $price['items'][0]->{'price.id'} ),
 
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$sort = array( $search->sort( '+', 'product.list.id' ) );
+		$sort = array( $search->sort( '+', 'product.lists.id' ) );
 		$search->setSortations( $sort );
 		$search->setSlice( 0, 1 );
 

@@ -54,11 +54,11 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'customer.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'customer.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'customer.list.domain' );
+		$result = $this->object->aggregate( $search, 'customer.lists.domain' );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -238,30 +238,30 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'customer.list.id', null );
-		$expr[] = $search->compare( '!=', 'customer.list.siteid', null );
-		$expr[] = $search->compare( '>', 'customer.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.domain', 'text' );
-		$expr[] = $search->compare( '>', 'customer.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'customer.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.list.config', null );
-		$expr[] = $search->compare( '>', 'customer.list.position', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.id', null );
+		$expr[] = $search->compare( '!=', 'customer.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'customer.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.domain', 'text' );
+		$expr[] = $search->compare( '>', 'customer.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
+		$expr[] = $search->compare( '>', 'customer.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
-		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 2 );
@@ -275,14 +275,14 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 		//search without base criteria
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$result = $this->object->searchItems( $search );
 		$this->assertEquals( 6, count( $result ) );
 
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'customer.list.editor', $this->editor ),
+			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -316,13 +316,13 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'customer.list.parentid', $item->getId() ),
-			$search->compare( '==', 'customer.list.domain', 'text' ),
-			$search->compare( '==', 'customer.list.editor', $this->editor ),
-			$search->compare( '==', 'customer.list.type.code', 'default' ),
+			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'customer.lists.domain', 'text' ),
+			$search->compare( '==', 'customer.lists.editor', $this->editor ),
+			$search->compare( '==', 'customer.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'customer.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'customer.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

@@ -91,7 +91,7 @@ abstract class Client_Html_Catalog_Base
 
 		if( $catid == '' && $catfilter === true )
 		{
-			/** client/html/catalog/list/catid-default
+			/** client/html/catalog/lists/catid-default
 			 * The default category ID used if none is given as parameter
 			 *
 			 * If users view a product list page without a category ID in the
@@ -105,10 +105,10 @@ abstract class Client_Html_Catalog_Base
 			 * @since 2014.03
 			 * @category User
 			 * @category Developer
-			 * @see client/html/catalog/list/size
-			 * @see client/html/catalog/list/domains
+			 * @see client/html/catalog/lists/size
+			 * @see client/html/catalog/lists/domains
 			 */
-			$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
+			$catid = $config->get( 'client/html/catalog/lists/catid-default', '' );
 		}
 
 		$page = $this->getProductListPageByParam( $params );
@@ -227,7 +227,7 @@ abstract class Client_Html_Catalog_Base
 	 */
 	protected function getProductListSizeByParam( array $params )
 	{
-		/** client/html/catalog/list/size
+		/** client/html/catalog/lists/size
 		 * The number of products shown in a list page
 		 *
 		 * Limits the number of products that is shown in the list pages to the
@@ -244,10 +244,10 @@ abstract class Client_Html_Catalog_Base
 		 * @since 2014.03
 		 * @category User
 		 * @category Developer
-		 * @see client/html/catalog/list/catid-default
-		 * @see client/html/catalog/list/domains
+		 * @see client/html/catalog/lists/catid-default
+		 * @see client/html/catalog/lists/domains
 		 */
-		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
+		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/catalog/lists/size', 48 );
 
 		$size = ( isset( $params['l_size'] ) ? (int) $params['l_size'] : $defaultSize );
 		return ( $size < 1 || $size > 100 ? $defaultSize : $size );
@@ -321,20 +321,20 @@ abstract class Client_Html_Catalog_Base
 		 * the more domains you add to the configuration, the more time is required
 		 * for fetching the content!
 		 *
-		 * This configuration option can be overwritten by the "client/html/catalog/list/domains"
+		 * This configuration option can be overwritten by the "client/html/catalog/lists/domains"
 		 * configuration option that allows to configure the domain names of the
 		 * items fetched specifically for all types of product listings.
 		 *
 		 * @param array List of domain names
 		 * @since 2014.03
 		 * @category Developer
-		 * @see client/html/catalog/list/domains
-		 * @see client/html/catalog/list/catid-default
-		 * @see client/html/catalog/list/size
+		 * @see client/html/catalog/lists/domains
+		 * @see client/html/catalog/lists/catid-default
+		 * @see client/html/catalog/lists/size
 		 */
 		$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
 
-		/** client/html/catalog/list/domains
+		/** client/html/catalog/lists/domains
 		 * A list of domain names whose items should be available in the product list view template
 		 *
 		 * The templates rendering product lists usually add the images, prices
@@ -355,10 +355,10 @@ abstract class Client_Html_Catalog_Base
 		 * @see client/html/catalog/domains
 		 * @see client/html/catalog/detail/domains
 		 * @see client/html/catalog/stage/domains
-		 * @see client/html/catalog/list/catid-default
-		 * @see client/html/catalog/list/size
+		 * @see client/html/catalog/lists/catid-default
+		 * @see client/html/catalog/lists/size
 		 */
-		$domains = $config->get( 'client/html/catalog/list/domains', $domains );
+		$domains = $config->get( 'client/html/catalog/lists/domains', $domains );
 
 		$productFilter = $this->getProductListFilter( $view );
 		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );

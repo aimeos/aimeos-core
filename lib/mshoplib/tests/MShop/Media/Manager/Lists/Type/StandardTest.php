@@ -72,7 +72,7 @@ class MShop_Media_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$conditions = $search->compare( '==', 'media.list.type.editor', $this->editor );
+		$conditions = $search->compare( '==', 'media.lists.type.editor', $this->editor );
 		$search->setConditions( $conditions );
 		$results = $this->object->searchItems( $search );
 
@@ -127,15 +127,15 @@ class MShop_Media_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'media.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'media.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.list.type.code', 'option' );
-		$expr[] = $search->compare( '==', 'media.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '>', 'media.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'media.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'media.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'media.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
+		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '>', 'media.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'media.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'media.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'media.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'media.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -147,7 +147,7 @@ class MShop_Media_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Test
 		// search with base critera
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'media.list.type.editor', $this->editor ),
+			$search->compare( '==', 'media.lists.type.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

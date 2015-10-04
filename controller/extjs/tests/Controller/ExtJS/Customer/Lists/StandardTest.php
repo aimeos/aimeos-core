@@ -27,8 +27,8 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.list.type.code' => 'watch' ) ) ) ),
-			'sort' => 'customer.list.position',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.lists.type.code' => 'watch' ) ) ) ),
+			'sort' => 'customer.lists.position',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -38,7 +38,7 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
-		$this->assertEquals( 'product', $result['items'][0]->{'customer.list.domain'} );
+		$this->assertEquals( 'product', $result['items'][0]->{'customer.lists.domain'} );
 		$this->assertEquals( 1, count( $result['graph']['Product']['items'] ) );
 		$this->assertEquals( 'CNE', $result['graph']['Product']['items'][0]->{'product.code'} );
 	}
@@ -52,7 +52,7 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.list.type.domain' => 'text' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.lists.type.domain' => 'text' ) ) ) ),
 			'start' => 0,
 			'limit' => 1,
 		);
@@ -62,43 +62,43 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'customer.list.parentid' => $result['items'][0]->{'customer.id'},
-				'customer.list.typeid' => $resultType['items'][0]->{'customer.list.type.id'},
-				'customer.list.domain' => 'customer',
-				'customer.list.refid' => -1,
-				'customer.list.datestart' => '2000-01-01 00:00:00',
-				'customer.list.dateend' => '2001-01-01 00:00:00',
-				'customer.list.config' => array( 'test' => 'unit' ),
-				'customer.list.position' => 1,
-				'customer.list.status' => 1,
+				'customer.lists.parentid' => $result['items'][0]->{'customer.id'},
+				'customer.lists.typeid' => $resultType['items'][0]->{'customer.lists.type.id'},
+				'customer.lists.domain' => 'customer',
+				'customer.lists.refid' => -1,
+				'customer.lists.datestart' => '2000-01-01 00:00:00',
+				'customer.lists.dateend' => '2001-01-01 00:00:00',
+				'customer.lists.config' => array( 'test' => 'unit' ),
+				'customer.lists.position' => 1,
+				'customer.lists.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.list.refid' => -1 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'customer.lists.refid' => -1 ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'customer.list.id'} );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'customer.lists.id'} );
 		$this->object->deleteItems( $deleteParams );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'customer.list.id'} );
-		$this->assertEquals( $saved['items']->{'customer.list.id'}, $searched['items'][0]->{'customer.list.id'});
-		$this->assertEquals( $saved['items']->{'customer.list.parentid'}, $searched['items'][0]->{'customer.list.parentid'});
-		$this->assertEquals( $saved['items']->{'customer.list.typeid'}, $searched['items'][0]->{'customer.list.typeid'});
-		$this->assertEquals( $saved['items']->{'customer.list.domain'}, $searched['items'][0]->{'customer.list.domain'});
-		$this->assertEquals( $saved['items']->{'customer.list.refid'}, $searched['items'][0]->{'customer.list.refid'});
-		$this->assertEquals( $saved['items']->{'customer.list.datestart'}, $searched['items'][0]->{'customer.list.datestart'});
-		$this->assertEquals( $saved['items']->{'customer.list.dateend'}, $searched['items'][0]->{'customer.list.dateend'});
-		$this->assertEquals( $saved['items']->{'customer.list.config'}, $searched['items'][0]->{'customer.list.config'});
-		$this->assertEquals( $saved['items']->{'customer.list.position'}, $searched['items'][0]->{'customer.list.position'});
-		$this->assertEquals( $saved['items']->{'customer.list.status'}, $searched['items'][0]->{'customer.list.status'});
+		$this->assertNotNull( $saved['items']->{'customer.lists.id'} );
+		$this->assertEquals( $saved['items']->{'customer.lists.id'}, $searched['items'][0]->{'customer.lists.id'});
+		$this->assertEquals( $saved['items']->{'customer.lists.parentid'}, $searched['items'][0]->{'customer.lists.parentid'});
+		$this->assertEquals( $saved['items']->{'customer.lists.typeid'}, $searched['items'][0]->{'customer.lists.typeid'});
+		$this->assertEquals( $saved['items']->{'customer.lists.domain'}, $searched['items'][0]->{'customer.lists.domain'});
+		$this->assertEquals( $saved['items']->{'customer.lists.refid'}, $searched['items'][0]->{'customer.lists.refid'});
+		$this->assertEquals( $saved['items']->{'customer.lists.datestart'}, $searched['items'][0]->{'customer.lists.datestart'});
+		$this->assertEquals( $saved['items']->{'customer.lists.dateend'}, $searched['items'][0]->{'customer.lists.dateend'});
+		$this->assertEquals( $saved['items']->{'customer.lists.config'}, $searched['items'][0]->{'customer.lists.config'});
+		$this->assertEquals( $saved['items']->{'customer.lists.position'}, $searched['items'][0]->{'customer.lists.position'});
+		$this->assertEquals( $saved['items']->{'customer.lists.status'}, $searched['items'][0]->{'customer.lists.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

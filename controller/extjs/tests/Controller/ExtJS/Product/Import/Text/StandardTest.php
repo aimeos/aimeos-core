@@ -113,12 +113,12 @@ class Controller_ExtJS_Product_Import_Text_StandardTest extends PHPUnit_Framewor
 
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $productManager->getSubManager( 'list' );
+		$listManager = $productManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'product.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'product.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'product.lists.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'product.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );

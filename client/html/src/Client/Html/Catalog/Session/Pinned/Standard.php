@@ -392,7 +392,7 @@ class Client_Html_Catalog_Session_Pinned_Standard
 			 * @since 2015.04
 			 * @category Developer
 			 * @see client/html/catalog/domains
-			 * @see client/html/catalog/list/domains
+			 * @see client/html/catalog/lists/domains
 			 * @see client/html/catalog/detail/domains
 			 */
 			$domains = $config->get( 'client/html/catalog/session/pinned/domains', $domains );

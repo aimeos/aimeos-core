@@ -311,7 +311,7 @@ class Client_Html_Catalog_Detail_Basket_Standard
 			 * @since 2014.03
 			 * @category User
 			 * @category Developer
-			 * @see client/html/catalog/list/stock/enable
+			 * @see client/html/catalog/lists/stock/enable
 			 * @see client/html/catalog/stock/url/target
 			 * @see client/html/catalog/stock/url/controller
 			 * @see client/html/catalog/stock/url/action

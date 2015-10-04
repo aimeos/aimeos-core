@@ -126,8 +126,8 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'variant' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'variant' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 

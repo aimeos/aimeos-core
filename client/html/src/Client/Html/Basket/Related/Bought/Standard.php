@@ -317,18 +317,18 @@ class Client_Html_Basket_Related_Bought_Standard
 	 */
 	protected function getListItems( array $prodIds )
 	{
-		$typeItem = $this->getTypeItem( 'product/list/type', 'product', 'bought-together' );
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$typeItem = $this->getTypeItem( 'product/lists/type', 'product', 'bought-together' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$search = $manager->createSearch( true );
 		$expr = array(
-				$search->compare( '==', 'product.list.parentid', $prodIds ),
-				$search->compare( '==', 'product.list.typeid', $typeItem->getId() ),
-				$search->compare( '==', 'product.list.domain', 'product' ),
+				$search->compare( '==', 'product.lists.parentid', $prodIds ),
+				$search->compare( '==', 'product.lists.typeid', $typeItem->getId() ),
+				$search->compare( '==', 'product.lists.domain', 'product' ),
 				$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
 
 		return $manager->searchItems( $search );
 	}

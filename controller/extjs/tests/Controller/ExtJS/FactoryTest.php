@@ -20,7 +20,7 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSubController()
 	{
-		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/list/type' );
+		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/lists/type' );
 		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
 	}
 
@@ -76,11 +76,11 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
 		Controller_ExtJS_Factory::clear( (string) $context );
 
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
 
 		Controller_ExtJS_Factory::setCache( $cache );
 
@@ -96,11 +96,11 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
 		Controller_ExtJS_Factory::clear( (string) $context, 'attribute' );
 
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
 
 		Controller_ExtJS_Factory::setCache( $cache );
 

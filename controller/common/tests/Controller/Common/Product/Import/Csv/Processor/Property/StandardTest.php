@@ -202,7 +202,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_StandardTest exten
 	protected function delete( MShop_Product_Item_Iface $product )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('attribute') as $listItem ) {
 			$listManager->deleteItem( $listItem->getId() );

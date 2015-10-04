@@ -18,8 +18,8 @@ class MShop_Text_Manager_Lists_Standard
 	implements MShop_Text_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'text.list.id'=> array(
-			'code'=>'text.list.id',
+		'text.lists.id'=> array(
+			'code'=>'text.lists.id',
 			'internalcode'=>'mtexli."id"',
 			'internaldeps'=> array( 'LEFT JOIN "mshop_text_list" AS mtexli ON mtexli."parentid" = mtex."id"' ),
 			'label'=>'Text list ID',
@@ -27,95 +27,95 @@ class MShop_Text_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'text.list.siteid'=> array(
-			'code'=>'text.list.siteid',
+		'text.lists.siteid'=> array(
+			'code'=>'text.lists.siteid',
 			'internalcode'=>'mtexli."siteid"',
 			'label'=>'Text list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'text.list.parentid'=> array(
-			'code'=>'text.list.parentid',
+		'text.lists.parentid'=> array(
+			'code'=>'text.lists.parentid',
 			'internalcode'=>'mtexli."parentid"',
 			'label'=>'Text list parent Id',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'text.list.domain'=> array(
-			'code'=>'text.list.domain',
+		'text.lists.domain'=> array(
+			'code'=>'text.lists.domain',
 			'internalcode'=>'mtexli."domain"',
 			'label'=>'Text list domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.typeid'=> array(
-			'code'=>'text.list.typeid',
+		'text.lists.typeid'=> array(
+			'code'=>'text.lists.typeid',
 			'internalcode'=>'mtexli."typeid"',
 			'label'=>'Text list type ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'text.list.refid'=> array(
-			'code'=>'text.list.refid',
+		'text.lists.refid'=> array(
+			'code'=>'text.lists.refid',
 			'internalcode'=>'mtexli."refid"',
 			'label'=>'Text list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.datestart' => array(
-			'code'=>'text.list.datestart',
+		'text.lists.datestart' => array(
+			'code'=>'text.lists.datestart',
 			'internalcode'=>'mtexli."start"',
 			'label'=>'Text list start date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.dateend' => array(
-			'code'=>'text.list.dateend',
+		'text.lists.dateend' => array(
+			'code'=>'text.lists.dateend',
 			'internalcode'=>'mtexli."end"',
 			'label'=>'Text list end date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.config' => array(
-			'code'=>'text.list.config',
+		'text.lists.config' => array(
+			'code'=>'text.lists.config',
 			'internalcode'=>'mtexli."config"',
 			'label'=>'Text list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.position' => array(
-			'code'=>'text.list.position',
+		'text.lists.position' => array(
+			'code'=>'text.lists.position',
 			'internalcode'=>'mtexli."pos"',
 			'label'=>'Text list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'text.list.status' => array(
-			'code'=>'text.list.status',
+		'text.lists.status' => array(
+			'code'=>'text.lists.status',
 			'internalcode'=>'mtexli."status"',
 			'label'=>'Text list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'text.list.ctime'=> array(
-			'code'=>'text.list.ctime',
+		'text.lists.ctime'=> array(
+			'code'=>'text.lists.ctime',
 			'internalcode'=>'mtexli."ctime"',
 			'label'=>'Text list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.mtime'=> array(
-			'code'=>'text.list.mtime',
+		'text.lists.mtime'=> array(
+			'code'=>'text.lists.mtime',
 			'internalcode'=>'mtexli."mtime"',
 			'label'=>'Text list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'text.list.editor'=> array(
-			'code'=>'text.list.editor',
+		'text.lists.editor'=> array(
+			'code'=>'text.lists.editor',
 			'internalcode'=>'mtexli."editor"',
 			'label'=>'Text list editor',
 			'type'=> 'string',

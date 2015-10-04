@@ -41,7 +41,7 @@ class Controller_ExtJS_Service_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'service/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'service/lists/type' );
 		}
 
 		return $this->manager;
@@ -55,6 +55,6 @@ class Controller_ExtJS_Service_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'service.list.type';
+		return 'service.lists.type';
 	}
 }

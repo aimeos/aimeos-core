@@ -41,7 +41,7 @@ class Controller_ExtJS_Text_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'text/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'text/lists/type' );
 		}
 
 		return $this->manager;
@@ -55,6 +55,6 @@ class Controller_ExtJS_Text_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'text.list.type';
+		return 'text.lists.type';
 	}
 }

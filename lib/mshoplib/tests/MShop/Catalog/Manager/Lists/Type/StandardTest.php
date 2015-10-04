@@ -124,15 +124,15 @@ class MShop_Catalog_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'catalog.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'catalog.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.domain', 'text' );
-		$expr[] = $search->compare( '>', 'catalog.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'catalog.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '>', 'catalog.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -145,9 +145,9 @@ class MShop_Catalog_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 		// search with base criteria
 		$search = $this->object->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'text' ),
-			$search->compare( '==', 'catalog.list.type.code', 'unittype1' ),
-			$search->compare( '==', 'catalog.list.type.editor', $this->editor ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'text' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'unittype1' ),
+			$search->compare( '==', 'catalog.lists.type.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -162,8 +162,8 @@ class MShop_Catalog_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_Te
 		// search without base criteria, slice & total
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'catalog.list.type.code', 'unit' ),
-			$search->compare( '~=', 'catalog.list.type.editor', $this->editor )
+			$search->compare( '~=', 'catalog.lists.type.code', 'unit' ),
+			$search->compare( '~=', 'catalog.lists.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );

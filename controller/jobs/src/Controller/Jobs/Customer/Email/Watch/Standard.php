@@ -76,8 +76,8 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 			$search = $custManager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'customer.languageid', $langId ),
-				$search->compare( '==', 'customer.list.typeid', $typeId ),
-				$search->compare( '==', 'customer.list.domain', 'product' ),
+				$search->compare( '==', 'customer.lists.typeid', $typeId ),
+				$search->compare( '==', 'customer.lists.domain', 'product' ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
@@ -111,7 +111,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	{
 		$prodIds = $custIds = array();
 		$whItem = $this->getWarehouseItem( 'default' );
-		$listManager = MShop_Factory::createManager( $context, 'customer/list' );
+		$listManager = MShop_Factory::createManager( $context, 'customer/lists' );
 		$listItems = $this->getListItems( $context, array_keys( $customers ), $listTypeId );
 
 		foreach( $listItems as $id => $listItem )
@@ -189,13 +189,13 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	 */
 	protected function getListItems( MShop_Context_Item_Iface $context, array $custIds, $listTypeId )
 	{
-		$listManager = MShop_Factory::createManager( $context, 'customer/list' );
+		$listManager = MShop_Factory::createManager( $context, 'customer/lists' );
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'customer.list.parentid', $custIds ),
-			$search->compare( '==', 'customer.list.typeid', $listTypeId ),
-			$search->compare( '==', 'customer.list.domain', 'product' ),
+			$search->compare( '==', 'customer.lists.parentid', $custIds ),
+			$search->compare( '==', 'customer.lists.typeid', $listTypeId ),
+			$search->compare( '==', 'customer.lists.domain', 'product' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
@@ -286,10 +286,10 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	 */
 	protected function getListTypeItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/list/type' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/lists/type' );
 
 		$search = $manager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'customer.list.type.code', $code ) );
+		$search->setConditions( $search->compare( '==', 'customer.lists.type.code', $code ) );
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {

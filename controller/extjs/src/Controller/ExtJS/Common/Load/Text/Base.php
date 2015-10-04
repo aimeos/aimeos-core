@@ -154,15 +154,15 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 		while( $count > 0 );
 
 
-		$listManager = $manager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'lists' );
 
 		$search = $listManager->createSearch();
 		$expr = array(
-				$search->compare( '==', $domain . '.list.parentid', array_keys( $itemIdMap ) ),
-				$search->compare( '==', $domain . '.list.domain', 'text' ),
+				$search->compare( '==', $domain . '.lists.parentid', array_keys( $itemIdMap ) ),
+				$search->compare( '==', $domain . '.lists.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.lists.id' ) ) );
 
 		$start = 0;
 
@@ -225,11 +225,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 
 		$this->textListTypes[$domain] = array();
 
-		$typeManager = $manager->getSubManager( 'list' )->getSubManager( 'type' );
+		$typeManager = $manager->getSubManager( 'lists' )->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
-		$search->setConditions( $search->compare( '==', $domain . '.list.type.domain', 'text' ) );
-		$search->setSortations( array( $search->sort( '+', $domain . '.list.type.code' ) ) );
+		$search->setConditions( $search->compare( '==', $domain . '.lists.type.domain', 'text' ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.lists.type.code' ) ) );
 
 		$start = 0;
 

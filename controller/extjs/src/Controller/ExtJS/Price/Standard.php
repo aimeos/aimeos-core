@@ -50,12 +50,12 @@ class Controller_ExtJS_Price_Standard
 		if( isset( $params->domain ) && isset( $params->parentid )
 			&& ( !isset( $params->options->showall ) || $params->options->showall == false ) )
 		{
-			$listManager = MShop_Factory::createManager( $this->getContext(), $params->domain . '/list' );
+			$listManager = MShop_Factory::createManager( $this->getContext(), $params->domain . '/lists' );
 			$criteria = $listManager->createSearch();
 
 			$expr = array();
-			$expr[] = $criteria->compare( '==', $params->domain . '.list.parentid', $params->parentid );
-			$expr[] = $criteria->compare( '==', $params->domain . '.list.domain', 'price' );
+			$expr[] = $criteria->compare( '==', $params->domain . '.lists.parentid', $params->parentid );
+			$expr[] = $criteria->compare( '==', $params->domain . '.lists.domain', 'price' );
 			$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 			$result = $listManager->searchItems( $criteria );
@@ -152,15 +152,15 @@ class Controller_ExtJS_Price_Standard
 
 		foreach( $idList as $domain => $domainIds )
 		{
-			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+			$manager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain . '.list.refid', $domainIds ),
-				$search->compare( '==', $domain . '.list.domain', 'price' )
+				$search->compare( '==', $domain . '.lists.refid', $domainIds ),
+				$search->compare( '==', $domain . '.lists.domain', 'price' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.lists.id' ) ) );
 
 			$start = 0;
 

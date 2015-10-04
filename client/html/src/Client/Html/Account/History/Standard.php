@@ -53,7 +53,7 @@ class Client_Html_Account_History_Standard
 	 */
 	private $subPartPath = 'client/html/account/history/default/subparts';
 
-	/** client/html/account/history/list/name
+	/** client/html/account/history/lists/name
 	 * Name of the list part used by the account history client implementation
 	 *
 	 * Use "Myname" if your class is named "Client_Html_Account_History_Lists_Myname".
@@ -74,7 +74,7 @@ class Client_Html_Account_History_Standard
 	 * @since 2015.02
 	 * @category Developer
 	 */
-	private $subPartNames = array( 'list', 'order' );
+	private $subPartNames = array( 'lists', 'order' );
 
 
 	/**

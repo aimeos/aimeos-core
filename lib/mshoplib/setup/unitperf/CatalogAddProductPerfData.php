@@ -50,8 +50,8 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.type.code', 'default' ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );

@@ -18,8 +18,8 @@ class MShop_Service_Manager_Lists_Standard
 	implements MShop_Service_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'service.list.id' => array(
-			'code' => 'service.list.id',
+		'service.lists.id' => array(
+			'code' => 'service.lists.id',
 			'internalcode' => 'mserli."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_service_list" AS mserli ON ( mser."id" = mserli."parentid" )' ),
 			'label' => 'Service list ID',
@@ -27,95 +27,95 @@ class MShop_Service_Manager_Lists_Standard
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'service.list.siteid' => array(
-			'code' => 'service.list.siteid',
+		'service.lists.siteid' => array(
+			'code' => 'service.lists.siteid',
 			'internalcode' => 'mserli."siteid"',
 			'label' => 'Service list site ID',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'service.list.parentid' => array(
-			'code' => 'service.list.parentid',
+		'service.lists.parentid' => array(
+			'code' => 'service.lists.parentid',
 			'internalcode' => 'mserli."parentid"',
 			'label' => 'Service list parent ID',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'service.list.domain' => array(
-			'code' => 'service.list.domain',
+		'service.lists.domain' => array(
+			'code' => 'service.lists.domain',
 			'internalcode' => 'mserli."domain"',
 			'label' => 'Service list domain',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.typeid' => array(
-			'code' => 'service.list.typeid',
+		'service.lists.typeid' => array(
+			'code' => 'service.lists.typeid',
 			'internalcode' => 'mserli."typeid"',
 			'label' => 'Service list type ID',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'service.list.refid' => array(
-			'code' => 'service.list.refid',
+		'service.lists.refid' => array(
+			'code' => 'service.lists.refid',
 			'internalcode' => 'mserli."refid"',
 			'label' => 'Service list reference ID',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.datestart' => array(
-			'code' => 'service.list.datestart',
+		'service.lists.datestart' => array(
+			'code' => 'service.lists.datestart',
 			'internalcode' => 'mserli."start"',
 			'label' => 'Service list start date',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.dateend' => array(
-			'code' => 'service.list.dateend',
+		'service.lists.dateend' => array(
+			'code' => 'service.lists.dateend',
 			'internalcode' => 'mserli."end"',
 			'label' => 'Service list end date',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.config' => array(
-			'code' => 'service.list.config',
+		'service.lists.config' => array(
+			'code' => 'service.lists.config',
 			'internalcode' => 'mserli."config"',
 			'label' => 'Service list config',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.position' => array(
-			'code' => 'service.list.position',
+		'service.lists.position' => array(
+			'code' => 'service.lists.position',
 			'internalcode' => 'mserli."pos"',
 			'label' => 'Service list position',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'service.list.status' => array(
-			'code' => 'service.list.status',
+		'service.lists.status' => array(
+			'code' => 'service.lists.status',
 			'internalcode' => 'mserli."status"',
 			'label' => 'Service list status',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'service.list.ctime'=> array(
-			'code'=>'service.list.ctime',
+		'service.lists.ctime'=> array(
+			'code'=>'service.lists.ctime',
 			'internalcode'=>'mserli."ctime"',
 			'label'=>'Service list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.mtime'=> array(
-			'code'=>'service.list.mtime',
+		'service.lists.mtime'=> array(
+			'code'=>'service.lists.mtime',
 			'internalcode'=>'mserli."mtime"',
 			'label'=>'Service list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'service.list.editor'=> array(
-			'code'=>'service.list.editor',
+		'service.lists.editor'=> array(
+			'code'=>'service.lists.editor',
 			'internalcode'=>'mserli."editor"',
 			'label'=>'Service list editor',
 			'type'=> 'string',

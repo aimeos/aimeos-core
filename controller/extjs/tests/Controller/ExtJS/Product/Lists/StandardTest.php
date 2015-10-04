@@ -39,8 +39,8 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.list.type.code' => 'unittype2' ) ) ) ),
-			'sort' => 'product.list.position',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.lists.type.code' => 'unittype2' ) ) ) ),
+			'sort' => 'product.lists.position',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -50,7 +50,7 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
-		$this->assertEquals( 'media', $result['items'][0]->{'product.list.domain'} );
+		$this->assertEquals( 'media', $result['items'][0]->{'product.lists.domain'} );
 		$this->assertEquals( 1, count( $result['graph']['Media']['items'] ) );
 		$this->assertEquals( 'cn_colombie_266x221', $result['graph']['Media']['items'][0]->{'media.label'} );
 	}
@@ -64,7 +64,7 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.list.type.domain' => 'text' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.lists.type.domain' => 'text' ) ) ) ),
 			'start' => 0,
 			'limit' => 1,
 		);
@@ -74,42 +74,42 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'product.list.parentid' => $result['items'][0]->{'product.id'},
-				'product.list.typeid' => $resultType['items'][0]->{'product.list.type.id'},
-				'product.list.domain' => 'text',
-				'product.list.refid' => -1,
-				'product.list.datestart' => '2000-01-01 00:00:00',
-				'product.list.dateend' => '2001-01-01 00:00:00',
-				'product.list.config' => array( 'test' => 'unit' ),
-				'product.list.position' => 1,
-				'product.list.status' => 1,
+				'product.lists.parentid' => $result['items'][0]->{'product.id'},
+				'product.lists.typeid' => $resultType['items'][0]->{'product.lists.type.id'},
+				'product.lists.domain' => 'text',
+				'product.lists.refid' => -1,
+				'product.lists.datestart' => '2000-01-01 00:00:00',
+				'product.lists.dateend' => '2001-01-01 00:00:00',
+				'product.lists.config' => array( 'test' => 'unit' ),
+				'product.lists.position' => 1,
+				'product.lists.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.list.refid' => -1 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.lists.refid' => -1 ) ) ) )
 		);
 
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'product.list.id'} );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'product.lists.id'} );
 		$this->object->deleteItems( $deleteParams );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'product.list.id'} );
-		$this->assertEquals( $saved['items']->{'product.list.id'}, $searched['items'][0]->{'product.list.id'});
-		$this->assertEquals( $saved['items']->{'product.list.parentid'}, $searched['items'][0]->{'product.list.parentid'});
-		$this->assertEquals( $saved['items']->{'product.list.typeid'}, $searched['items'][0]->{'product.list.typeid'});
-		$this->assertEquals( $saved['items']->{'product.list.domain'}, $searched['items'][0]->{'product.list.domain'});
-		$this->assertEquals( $saved['items']->{'product.list.refid'}, $searched['items'][0]->{'product.list.refid'});
-		$this->assertEquals( $saved['items']->{'product.list.datestart'}, $searched['items'][0]->{'product.list.datestart'});
-		$this->assertEquals( $saved['items']->{'product.list.dateend'}, $searched['items'][0]->{'product.list.dateend'});
-		$this->assertEquals( $saved['items']->{'product.list.config'}, $searched['items'][0]->{'product.list.config'});
-		$this->assertEquals( $saved['items']->{'product.list.position'}, $searched['items'][0]->{'product.list.position'});
-		$this->assertEquals( $saved['items']->{'product.list.status'}, $searched['items'][0]->{'product.list.status'});
+		$this->assertNotNull( $saved['items']->{'product.lists.id'} );
+		$this->assertEquals( $saved['items']->{'product.lists.id'}, $searched['items'][0]->{'product.lists.id'});
+		$this->assertEquals( $saved['items']->{'product.lists.parentid'}, $searched['items'][0]->{'product.lists.parentid'});
+		$this->assertEquals( $saved['items']->{'product.lists.typeid'}, $searched['items'][0]->{'product.lists.typeid'});
+		$this->assertEquals( $saved['items']->{'product.lists.domain'}, $searched['items'][0]->{'product.lists.domain'});
+		$this->assertEquals( $saved['items']->{'product.lists.refid'}, $searched['items'][0]->{'product.lists.refid'});
+		$this->assertEquals( $saved['items']->{'product.lists.datestart'}, $searched['items'][0]->{'product.lists.datestart'});
+		$this->assertEquals( $saved['items']->{'product.lists.dateend'}, $searched['items'][0]->{'product.lists.dateend'});
+		$this->assertEquals( $saved['items']->{'product.lists.config'}, $searched['items'][0]->{'product.lists.config'});
+		$this->assertEquals( $saved['items']->{'product.lists.position'}, $searched['items'][0]->{'product.lists.position'});
+		$this->assertEquals( $saved['items']->{'product.lists.status'}, $searched['items'][0]->{'product.lists.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

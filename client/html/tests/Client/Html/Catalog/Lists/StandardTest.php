@@ -105,7 +105,7 @@ class Client_Html_Catalog_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetBodyDefaultCat()
 	{
 		$context = clone $this->context;
-		$context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->getCatalogItem()->getId() );
+		$context->getConfig()->set( 'client/html/catalog/lists/catid-default', $this->getCatalogItem()->getId() );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->object = new Client_Html_Catalog_Lists_Standard( $context, $paths );

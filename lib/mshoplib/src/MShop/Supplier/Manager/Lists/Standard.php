@@ -18,8 +18,8 @@ class MShop_Supplier_Manager_Lists_Standard
 	implements MShop_Supplier_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'supplier.list.id'=> array(
-			'code'=>'supplier.list.id',
+		'supplier.lists.id'=> array(
+			'code'=>'supplier.lists.id',
 			'internalcode'=>'msupli."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_supplier_list" AS msupli ON ( msup."id" = msupli."parentid" )' ),
 			'label'=>'Supplier list ID',
@@ -27,95 +27,95 @@ class MShop_Supplier_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'supplier.list.siteid'=> array(
-			'code'=>'supplier.list.siteid',
+		'supplier.lists.siteid'=> array(
+			'code'=>'supplier.lists.siteid',
 			'internalcode'=>'msupli."siteid"',
 			'label'=>'Supplier list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'supplier.list.parentid'=> array(
-			'code'=>'supplier.list.parentid',
+		'supplier.lists.parentid'=> array(
+			'code'=>'supplier.lists.parentid',
 			'internalcode'=>'msupli."parentid"',
 			'label'=>'Supplier list parent ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'supplier.list.domain'=> array(
-			'code'=>'supplier.list.domain',
+		'supplier.lists.domain'=> array(
+			'code'=>'supplier.lists.domain',
 			'internalcode'=>'msupli."domain"',
 			'label'=>'Supplier list domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.typeid' => array(
-			'code'=>'supplier.list.typeid',
+		'supplier.lists.typeid' => array(
+			'code'=>'supplier.lists.typeid',
 			'internalcode'=>'msupli."typeid"',
 			'label'=>'Supplier list type ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'supplier.list.refid'=> array(
-			'code'=>'supplier.list.refid',
+		'supplier.lists.refid'=> array(
+			'code'=>'supplier.lists.refid',
 			'internalcode'=>'msupli."refid"',
 			'label'=>'Supplier list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.datestart' => array(
-			'code'=>'supplier.list.datestart',
+		'supplier.lists.datestart' => array(
+			'code'=>'supplier.lists.datestart',
 			'internalcode'=>'msupli."start"',
 			'label'=>'Supplier list start date/time',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.dateend' => array(
-			'code'=>'supplier.list.dateend',
+		'supplier.lists.dateend' => array(
+			'code'=>'supplier.lists.dateend',
 			'internalcode'=>'msupli."end"',
 			'label'=>'Supplier list end date/time',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.config' => array(
-			'code'=>'supplier.list.config',
+		'supplier.lists.config' => array(
+			'code'=>'supplier.lists.config',
 			'internalcode'=>'msupli."config"',
 			'label'=>'Supplier list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.position' => array(
-			'code'=>'supplier.list.position',
+		'supplier.lists.position' => array(
+			'code'=>'supplier.lists.position',
 			'internalcode'=>'msupli."pos"',
 			'label'=>'Supplier list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'supplier.list.status' => array(
-			'code'=>'supplier.list.status',
+		'supplier.lists.status' => array(
+			'code'=>'supplier.lists.status',
 			'internalcode'=>'msupli."status"',
 			'label'=>'Supplier list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'supplier.list.ctime'=> array(
-			'code'=>'supplier.list.ctime',
+		'supplier.lists.ctime'=> array(
+			'code'=>'supplier.lists.ctime',
 			'internalcode'=>'msupli."ctime"',
 			'label'=>'Supplier list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.mtime'=> array(
-			'code'=>'supplier.list.mtime',
+		'supplier.lists.mtime'=> array(
+			'code'=>'supplier.lists.mtime',
 			'internalcode'=>'msupli."mtime"',
 			'label'=>'Supplier list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'supplier.list.editor'=> array(
-			'code'=>'supplier.list.editor',
+		'supplier.lists.editor'=> array(
+			'code'=>'supplier.lists.editor',
 			'internalcode'=>'msupli."editor"',
 			'label'=>'Supplier list editor',
 			'type'=> 'string',

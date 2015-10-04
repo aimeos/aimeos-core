@@ -41,7 +41,7 @@ class Controller_ExtJS_Media_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media/lists/type' );
 		}
 
 		return $this->manager;
@@ -55,6 +55,6 @@ class Controller_ExtJS_Media_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'media.list.type';
+		return 'media.lists.type';
 	}
 }

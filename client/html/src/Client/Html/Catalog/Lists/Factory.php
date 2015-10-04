@@ -29,7 +29,7 @@ class Client_Html_Catalog_Lists_Factory
 	 */
 	public static function createClient( MShop_Context_Item_Iface $context, array $templatePaths, $name = null )
 	{
-		/** classes/client/html/catalog/list/name
+		/** classes/client/html/catalog/lists/name
 		 * Class name of the used catalog list client implementation
 		 *
 		 * Each default HTML client can be replace by an alternative imlementation.
@@ -47,7 +47,7 @@ class Client_Html_Catalog_Lists_Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/client/html/catalog/list/name = Mylist
+		 *  classes/client/html/catalog/lists/name = Mylist
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -63,7 +63,7 @@ class Client_Html_Catalog_Lists_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/list/name', 'Standard' );
+			$name = $context->getConfig()->get( 'classes/client/html/catalog/lists/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
@@ -77,7 +77,7 @@ class Client_Html_Catalog_Lists_Factory
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::addClientDecorators( $context, $client, $templatePaths, 'catalog/list' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'catalog/lists' );
 	}
 }
 

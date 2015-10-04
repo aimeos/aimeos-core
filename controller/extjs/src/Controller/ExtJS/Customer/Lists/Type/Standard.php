@@ -40,7 +40,7 @@ class Controller_ExtJS_Customer_Lists_Type_Standard
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'customer/list/type' );
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'customer/lists/type' );
 		}
 
 		return $this->manager;
@@ -54,6 +54,6 @@ class Controller_ExtJS_Customer_Lists_Type_Standard
 	 */
 	protected function getPrefix()
 	{
-		return 'customer.list.type';
+		return 'customer.lists.type';
 	}
 }

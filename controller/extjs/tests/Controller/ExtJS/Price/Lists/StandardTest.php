@@ -39,8 +39,8 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.list.domain' => 'customer' ) ) ) ),
-			'sort' => 'price.list.position',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.lists.domain' => 'customer' ) ) ) ),
+			'sort' => 'price.lists.position',
 			'dir' => 'ASC',
 			'start' => 0,
 			'limit' => 1,
@@ -49,7 +49,7 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$result = $this->object->searchItems( $params );
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 3, $result['total'] );
-		$this->assertEquals( 'customer', $result['items'][0]->{'price.list.domain'} );
+		$this->assertEquals( 'customer', $result['items'][0]->{'price.lists.domain'} );
 		$this->assertEquals( 1, count( $result['graph']['Customer']['items'] ) );
 		$this->assertEquals( 'UTC001', $result['graph']['Customer']['items'][0]->{'customer.code'} );
 	}
@@ -57,13 +57,13 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testSaveDeleteItem()
 	{
-		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'price.list.type.domain' => 'customer' );
+		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'price.lists.type.domain' => 'customer' );
 		$priceManager = new Controller_ExtJS_Price_Standard( TestHelper::getContext() );
 		$result = $priceManager->searchItems( $params );
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.list.type.domain' => 'customer' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.lists.type.domain' => 'customer' ) ) ) ),
 			'start' => 0,
 			'limit' => 1,
 		);
@@ -73,42 +73,42 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'price.list.parentid' => $result['items'][0]->{'price.id'},
-				'price.list.typeid' => $resultType['items'][0]->{'price.list.type.id'},
-				'price.list.domain' => 'customer',
-				'price.list.refid' => -1,
-				'price.list.datestart' => '2000-01-01 00:00:00',
-				'price.list.dateend' => '2001-01-01 00:00:00',
-				'price.list.config' => array( 'test' => 'unit' ),
-				'price.list.position' => 1,
-				'price.list.status' => 1,
+				'price.lists.parentid' => $result['items'][0]->{'price.id'},
+				'price.lists.typeid' => $resultType['items'][0]->{'price.lists.type.id'},
+				'price.lists.domain' => 'customer',
+				'price.lists.refid' => -1,
+				'price.lists.datestart' => '2000-01-01 00:00:00',
+				'price.lists.dateend' => '2001-01-01 00:00:00',
+				'price.lists.config' => array( 'test' => 'unit' ),
+				'price.lists.position' => 1,
+				'price.lists.status' => 1,
 			),
 		);
 
 		$searchParams = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.list.refid' => -1 ) ) ) )
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'price.lists.refid' => -1 ) ) ) )
 		);
 
 		$saved = $this->object->saveItems( $saveParams );
 		$searched = $this->object->searchItems( $searchParams );
 
-		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'price.list.id'} );
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'price.lists.id'} );
 		$this->object->deleteItems( $deleteParams );
 		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
-		$this->assertNotNull( $saved['items']->{'price.list.id'} );
-		$this->assertEquals( $saved['items']->{'price.list.id'}, $searched['items'][0]->{'price.list.id'});
-		$this->assertEquals( $saved['items']->{'price.list.parentid'}, $searched['items'][0]->{'price.list.parentid'});
-		$this->assertEquals( $saved['items']->{'price.list.typeid'}, $searched['items'][0]->{'price.list.typeid'});
-		$this->assertEquals( $saved['items']->{'price.list.domain'}, $searched['items'][0]->{'price.list.domain'});
-		$this->assertEquals( $saved['items']->{'price.list.refid'}, $searched['items'][0]->{'price.list.refid'});
-		$this->assertEquals( $saved['items']->{'price.list.datestart'}, $searched['items'][0]->{'price.list.datestart'});
-		$this->assertEquals( $saved['items']->{'price.list.dateend'}, $searched['items'][0]->{'price.list.dateend'});
-		$this->assertEquals( $saved['items']->{'price.list.config'}, $searched['items'][0]->{'price.list.config'});
-		$this->assertEquals( $saved['items']->{'price.list.position'}, $searched['items'][0]->{'price.list.position'});
-		$this->assertEquals( $saved['items']->{'price.list.status'}, $searched['items'][0]->{'price.list.status'});
+		$this->assertNotNull( $saved['items']->{'price.lists.id'} );
+		$this->assertEquals( $saved['items']->{'price.lists.id'}, $searched['items'][0]->{'price.lists.id'});
+		$this->assertEquals( $saved['items']->{'price.lists.parentid'}, $searched['items'][0]->{'price.lists.parentid'});
+		$this->assertEquals( $saved['items']->{'price.lists.typeid'}, $searched['items'][0]->{'price.lists.typeid'});
+		$this->assertEquals( $saved['items']->{'price.lists.domain'}, $searched['items'][0]->{'price.lists.domain'});
+		$this->assertEquals( $saved['items']->{'price.lists.refid'}, $searched['items'][0]->{'price.lists.refid'});
+		$this->assertEquals( $saved['items']->{'price.lists.datestart'}, $searched['items'][0]->{'price.lists.datestart'});
+		$this->assertEquals( $saved['items']->{'price.lists.dateend'}, $searched['items'][0]->{'price.lists.dateend'});
+		$this->assertEquals( $saved['items']->{'price.lists.config'}, $searched['items'][0]->{'price.lists.config'});
+		$this->assertEquals( $saved['items']->{'price.lists.position'}, $searched['items'][0]->{'price.lists.position'});
+		$this->assertEquals( $saved['items']->{'price.lists.status'}, $searched['items'][0]->{'price.lists.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

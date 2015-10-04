@@ -20,7 +20,7 @@ class Controller_ExtJS_Product_Lists_Factory
 {
 	public static function createController( MShop_Context_Item_Iface $context, $name = null )
 	{
-		/** classes/controller/extjs/product/list/name
+		/** classes/controller/extjs/product/lists/name
 		 * Class name of the used ExtJS product list controller implementation
 		 *
 		 * Each default ExtJS controller can be replace by an alternative imlementation.
@@ -38,7 +38,7 @@ class Controller_ExtJS_Product_Lists_Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/extjs/product/list/name = Mylist
+		 *  classes/controller/extjs/product/lists/name = Mylist
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -54,7 +54,7 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/product/list/name', 'Standard' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/product/lists/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
@@ -68,7 +68,7 @@ class Controller_ExtJS_Product_Lists_Factory
 
 		$controller = self::createControllerBase( $context, $classname, $iface );
 
-		/** controller/extjs/product/list/decorators/excludes
+		/** controller/extjs/product/lists/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product list ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -80,7 +80,7 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * "controller/extjs/common/decorators/default" before they are wrapped
 		 * around the ExtJS controller.
 		 *
-		 *  controller/extjs/product/list/decorators/excludes = array( 'decorator1' )
+		 *  controller/extjs/product/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
@@ -90,11 +90,11 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/product/list/decorators/global
-		 * @see controller/extjs/product/list/decorators/local
+		 * @see controller/extjs/product/lists/decorators/global
+		 * @see controller/extjs/product/lists/decorators/local
 		 */
 
-		/** controller/extjs/product/list/decorators/global
+		/** controller/extjs/product/lists/decorators/global
 		 * Adds a list of globally available decorators only to the product list ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -105,7 +105,7 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * This option allows you to wrap global decorators
 		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
 		 *
-		 *  controller/extjs/product/list/decorators/global = array( 'decorator1' )
+		 *  controller/extjs/product/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
@@ -114,11 +114,11 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/product/list/decorators/excludes
-		 * @see controller/extjs/product/list/decorators/local
+		 * @see controller/extjs/product/lists/decorators/excludes
+		 * @see controller/extjs/product/lists/decorators/local
 		 */
 
-		/** controller/extjs/product/list/decorators/local
+		/** controller/extjs/product/lists/decorators/local
 		 * Adds a list of local decorators only to the product list ExtJS controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -129,7 +129,7 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * This option allows you to wrap local decorators
 		 * ("Controller_ExtJS_Product_Lists_Decorator_*") around the ExtJS controller.
 		 *
-		 *  controller/extjs/product/list/decorators/local = array( 'decorator2' )
+		 *  controller/extjs/product/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "Controller_ExtJS_Product_Lists_Decorator_Decorator2" only to the ExtJS
@@ -139,9 +139,9 @@ class Controller_ExtJS_Product_Lists_Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/extjs/common/decorators/default
-		 * @see controller/extjs/product/list/decorators/excludes
-		 * @see controller/extjs/product/list/decorators/global
+		 * @see controller/extjs/product/lists/decorators/excludes
+		 * @see controller/extjs/product/lists/decorators/global
 		 */
-		return self::addControllerDecorators( $context, $controller, 'product/list' );
+		return self::addControllerDecorators( $context, $controller, 'product/lists' );
 	}
 }

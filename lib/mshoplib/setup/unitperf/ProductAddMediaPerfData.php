@@ -66,8 +66,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'media' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 
@@ -77,8 +77,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'media' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'download' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'download' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 

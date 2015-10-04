@@ -59,7 +59,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'text.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -73,7 +73,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'text.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -127,13 +127,13 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'text.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'text.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'text.list.type.code', 'align-top' );
-		$expr[] = $search->compare( '==', 'text.list.type.domain', 'media' );
-		$expr[] = $search->compare( '>', 'text.list.type.label', '' );
-		$expr[] = $search->compare( '==', 'text.list.type.status', 1 );
-		$expr[] = $search->compare( '==', 'text.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'text.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'text.lists.type.code', 'align-top' );
+		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
+		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
+		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -143,8 +143,8 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'text.list.type.code', 'o' ),
-			$search->compare( '==', 'text.list.type.editor', $this->editor ),
+			$search->compare( '~=', 'text.lists.type.code', 'o' ),
+			$search->compare( '==', 'text.lists.type.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );

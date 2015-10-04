@@ -74,8 +74,8 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'price' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'price' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 

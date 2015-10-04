@@ -18,8 +18,8 @@ class MShop_Customer_Manager_Lists_Standard
 	implements MShop_Customer_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'customer.list.id'=> array(
-			'code'=>'customer.list.id',
+		'customer.lists.id'=> array(
+			'code'=>'customer.lists.id',
 			'internalcode'=>'mcusli."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_customer_list" AS mcusli ON ( mcus."id" = mcusli."parentid" )' ),
 			'label'=>'Customer list ID',
@@ -27,95 +27,95 @@ class MShop_Customer_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.siteid'=> array(
-			'code'=>'customer.list.siteid',
+		'customer.lists.siteid'=> array(
+			'code'=>'customer.lists.siteid',
 			'internalcode'=>'mcusli."siteid"',
 			'label'=>'Customer list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.parentid'=> array(
-			'code'=>'customer.list.parentid',
+		'customer.lists.parentid'=> array(
+			'code'=>'customer.lists.parentid',
 			'internalcode'=>'mcusli."parentid"',
 			'label'=>'Customer list parent Id',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.domain'=> array(
-			'code'=>'customer.list.domain',
+		'customer.lists.domain'=> array(
+			'code'=>'customer.lists.domain',
 			'internalcode'=>'mcusli."domain"',
 			'label'=>'Customer list domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'customer.list.typeid'=> array(
-			'code'=>'customer.list.typeid',
+		'customer.lists.typeid'=> array(
+			'code'=>'customer.lists.typeid',
 			'internalcode'=>'mcusli."typeid"',
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.refid'=> array(
-			'code'=>'customer.list.refid',
+		'customer.lists.refid'=> array(
+			'code'=>'customer.lists.refid',
 			'internalcode'=>'mcusli."refid"',
 			'label'=>'Customer list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'customer.list.datestart' => array(
-			'code'=>'customer.list.datestart',
+		'customer.lists.datestart' => array(
+			'code'=>'customer.lists.datestart',
 			'internalcode'=>'mcusli."start"',
 			'label'=>'Customer list start date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'customer.list.dateend' => array(
-			'code'=>'customer.list.dateend',
+		'customer.lists.dateend' => array(
+			'code'=>'customer.lists.dateend',
 			'internalcode'=>'mcusli."end"',
 			'label'=>'Customer list end date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'customer.list.config' => array(
-			'code'=>'customer.list.config',
+		'customer.lists.config' => array(
+			'code'=>'customer.lists.config',
 			'internalcode'=>'mcusli."config"',
 			'label'=>'Customer list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'customer.list.position' => array(
-			'code'=>'customer.list.position',
+		'customer.lists.position' => array(
+			'code'=>'customer.lists.position',
 			'internalcode'=>'mcusli."pos"',
 			'label'=>'Customer list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'customer.list.status' => array(
-			'code'=>'customer.list.status',
+		'customer.lists.status' => array(
+			'code'=>'customer.lists.status',
 			'internalcode'=>'mcusli."status"',
 			'label'=>'Customer list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'customer.list.ctime'=> array(
-			'code'=>'customer.list.ctime',
+		'customer.lists.ctime'=> array(
+			'code'=>'customer.lists.ctime',
 			'internalcode'=>'mcusli."ctime"',
 			'label'=>'Customer list create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
-		'customer.list.mtime'=> array(
-			'code'=>'customer.list.mtime',
+		'customer.lists.mtime'=> array(
+			'code'=>'customer.lists.mtime',
 			'internalcode'=>'mcusli."mtime"',
 			'label'=>'Customer list modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
 		),
-		'customer.list.editor'=> array(
-			'code'=>'customer.list.editor',
+		'customer.lists.editor'=> array(
+			'code'=>'customer.lists.editor',
 			'internalcode'=>'mcusli."editor"',
 			'label'=>'Customer list editor',
 			'type'=> 'string',

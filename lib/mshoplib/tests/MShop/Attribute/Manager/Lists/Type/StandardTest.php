@@ -125,15 +125,15 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'attribute.list.type.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'attribute.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'attribute.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'attribute.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'attribute.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'attribute.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -144,7 +144,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 
 		// search with base criteria
 		$search = $this->object->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'attribute.list.type.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'attribute.lists.type.editor', $this->editor ) );
 		$search->setSlice( 0, 5 );
 		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 5, count( $results ) );

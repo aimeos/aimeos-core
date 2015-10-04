@@ -90,7 +90,7 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'catalog.list.domain', 'product' ) );
+		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
 		$catListItems = $listManager->searchItems( $search );
 
 		if( ( $catListItem = reset( $catListItems ) ) === false ) {

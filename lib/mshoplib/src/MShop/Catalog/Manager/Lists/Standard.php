@@ -18,8 +18,8 @@ class MShop_Catalog_Manager_Lists_Standard
 	implements MShop_Catalog_Manager_Lists_Iface
 {
 	private $searchConfig = array(
-		'catalog.list.id'=> array(
-			'code'=>'catalog.list.id',
+		'catalog.lists.id'=> array(
+			'code'=>'catalog.lists.id',
 			'internalcode'=>'mcatli."id"',
 			'internaldeps'=> array( 'LEFT JOIN "mshop_catalog_list" AS mcatli ON ( mcat."id" = mcatli."parentid" )' ),
 			'label'=>'Catalog list ID',
@@ -27,95 +27,95 @@ class MShop_Catalog_Manager_Lists_Standard
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.list.siteid'=> array(
-			'code'=>'catalog.list.siteid',
+		'catalog.lists.siteid'=> array(
+			'code'=>'catalog.lists.siteid',
 			'internalcode'=>'mcatli."siteid"',
 			'label'=>'Catalog list site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.list.parentid'=> array(
-			'code'=>'catalog.list.parentid',
+		'catalog.lists.parentid'=> array(
+			'code'=>'catalog.lists.parentid',
 			'internalcode'=>'mcatli."parentid"',
 			'label'=>'Catalog list parent ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.list.domain'=> array(
-			'code'=>'catalog.list.domain',
+		'catalog.lists.domain'=> array(
+			'code'=>'catalog.lists.domain',
 			'internalcode'=>'mcatli."domain"',
 			'label'=>'Catalog list Domain',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.typeid'=> array(
-			'code'=>'catalog.list.typeid',
+		'catalog.lists.typeid'=> array(
+			'code'=>'catalog.lists.typeid',
 			'internalcode'=>'mcatli."typeid"',
 			'label'=>'Catalog list type ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.list.refid'=> array(
-			'code'=>'catalog.list.refid',
+		'catalog.lists.refid'=> array(
+			'code'=>'catalog.lists.refid',
 			'internalcode'=>'mcatli."refid"',
 			'label'=>'Catalog list reference ID',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.datestart' => array(
-			'code'=>'catalog.list.datestart',
+		'catalog.lists.datestart' => array(
+			'code'=>'catalog.lists.datestart',
 			'internalcode'=>'mcatli."start"',
 			'label'=>'Catalog list start date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.dateend' => array(
-			'code'=>'catalog.list.dateend',
+		'catalog.lists.dateend' => array(
+			'code'=>'catalog.lists.dateend',
 			'internalcode'=>'mcatli."end"',
 			'label'=>'Catalog list end date',
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.config' => array(
-			'code'=>'catalog.list.config',
+		'catalog.lists.config' => array(
+			'code'=>'catalog.lists.config',
 			'internalcode'=>'mcatli."config"',
 			'label'=>'Catalog list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.position' => array(
-			'code'=>'catalog.list.position',
+		'catalog.lists.position' => array(
+			'code'=>'catalog.lists.position',
 			'internalcode'=>'mcatli."pos"',
 			'label'=>'Catalog list position',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'catalog.list.status' => array(
-			'code'=>'catalog.list.status',
+		'catalog.lists.status' => array(
+			'code'=>'catalog.lists.status',
 			'internalcode'=>'mcatli."status"',
 			'label'=>'Catalog list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
 		),
-		'catalog.list.ctime'=> array(
+		'catalog.lists.ctime'=> array(
 			'label' => 'Catalog list creation time',
-			'code' => 'catalog.list.ctime',
+			'code' => 'catalog.lists.ctime',
 			'internalcode' => 'mcatli."ctime"',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.mtime'=> array(
+		'catalog.lists.mtime'=> array(
 			'label' => 'Catalog list modification time',
-			'code' => 'catalog.list.mtime',
+			'code' => 'catalog.lists.mtime',
 			'internalcode' => 'mcatli."mtime"',
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
 		),
-		'catalog.list.editor'=> array(
-			'code'=>'catalog.list.editor',
+		'catalog.lists.editor'=> array(
+			'code'=>'catalog.lists.editor',
 			'internalcode'=>'mcatli."editor"',
 			'label'=>'Catalog list editor',
 			'type'=> 'string',

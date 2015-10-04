@@ -129,15 +129,15 @@ class Controller_ExtJS_Media_Standard
 
 		foreach( $idList as $domain => $domainIds )
 		{
-			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+			$manager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain . '.list.refid', $domainIds ),
-				$search->compare( '==', $domain . '.list.domain', 'media' )
+				$search->compare( '==', $domain . '.lists.refid', $domainIds ),
+				$search->compare( '==', $domain . '.lists.domain', 'media' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $domain . '.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain . '.lists.id' ) ) );
 
 			$start = 0;
 

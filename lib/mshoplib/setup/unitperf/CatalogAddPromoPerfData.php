@@ -50,8 +50,8 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.type.code', 'promotion' ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'promotion' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
@@ -84,10 +84,10 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 				$search = $catalogListManager->createSearch();
 				$expr = array(
-					$search->compare( '==', 'catalog.list.parentid', $catId ),
-					$search->compare( '==', 'catalog.list.position', array( 20, 40, 60, 80 ) ),
-					$search->compare( '==', 'catalog.list.domain', 'product' ),
-					$search->compare( '==', 'catalog.list.type.code', 'default' ),
+					$search->compare( '==', 'catalog.lists.parentid', $catId ),
+					$search->compare( '==', 'catalog.lists.position', array( 20, 40, 60, 80 ) ),
+					$search->compare( '==', 'catalog.lists.domain', 'product' ),
+					$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 

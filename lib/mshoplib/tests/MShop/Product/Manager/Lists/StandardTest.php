@@ -54,11 +54,11 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'product.list.editor', 'core:unittest' ),
+			$search->compare( '==', 'product.lists.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'product.list.domain' );
+		$result = $this->object->aggregate( $search, 'product.lists.domain' );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( 'price', $result );
@@ -77,8 +77,8 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.list.domain', 'text' ),
-			$search->compare( '==', 'product.list.editor', $this->editor )
+			$search->compare( '==', 'product.lists.domain', 'text' ),
+			$search->compare( '==', 'product.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
@@ -107,8 +107,8 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.list.siteid', $siteid ),
-			$search->compare( '==', 'product.list.editor', $this->editor )
+			$search->compare( '==', 'product.lists.siteid', $siteid ),
+			$search->compare( '==', 'product.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
@@ -257,15 +257,15 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.siteid', $siteid ),
-			$search->compare( '==', 'product.list.domain', 'media' ),
-			$search->compare( '==', 'product.list.datestart', '2000-01-01 00:00:00' ),
-			$search->compare( '==', 'product.list.dateend', '2100-01-01 00:00:00' ),
-			$search->compare( '!=', 'product.list.config', null ),
-			$search->compare( '==', 'product.list.position', 0 ),
-			$search->compare( '==', 'product.list.status', 1 ),
-			$search->compare( '==', 'product.list.editor', $this->editor ),
-			$search->compare( '==', 'product.list.type.code', 'unittype1' ),
+			$search->compare( '==', 'product.lists.siteid', $siteid ),
+			$search->compare( '==', 'product.lists.domain', 'media' ),
+			$search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' ),
+			$search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' ),
+			$search->compare( '!=', 'product.lists.config', null ),
+			$search->compare( '==', 'product.lists.position', 0 ),
+			$search->compare( '==', 'product.lists.status', 1 ),
+			$search->compare( '==', 'product.lists.editor', $this->editor ),
+			$search->compare( '==', 'product.lists.type.code', 'unittype1' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -278,20 +278,20 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'product.list.id', null );
-		$expr[] = $search->compare( '==', 'product.list.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'product.list.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.list.typeid', null );
-		$expr[] = $search->compare( '==', 'product.list.domain', 'media' );
-		$expr[] = $search->compare( '==', 'product.list.refid', $listItem->getRefId() );
-		$expr[] = $search->compare( '==', 'product.list.datestart', '2000-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.list.dateend', '2100-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'product.list.config', null );
-		$expr[] = $search->compare( '==', 'product.list.position', 0 );
-		$expr[] = $search->compare( '==', 'product.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'product.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.lists.id', null );
+		$expr[] = $search->compare( '==', 'product.lists.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
+		$expr[] = $search->compare( '!=', 'product.lists.typeid', null );
+		$expr[] = $search->compare( '==', 'product.lists.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.lists.refid', $listItem->getRefId() );
+		$expr[] = $search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'product.lists.config', null );
+		$expr[] = $search->compare( '==', 'product.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'product.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'product.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'product.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -301,8 +301,8 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'product.list.domain', 'product' ),
-			$search->compare( '==', 'product.list.editor', $this->editor ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -322,7 +322,7 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$total = 0;
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.domain', array( 'attribute', 'media' ) ) );
+		$search->setConditions( $search->compare( '==', 'product.lists.domain', array( 'attribute', 'media' ) ) );
 
 		$result = $this->object->searchRefItems( $search, array( 'text' ), $total );
 
@@ -355,13 +355,13 @@ class MShop_Product_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.parentid', $item->getId() ),
-			$search->compare( '==', 'product.list.domain', 'product' ),
-			$search->compare( '==', 'product.list.editor', $this->editor ),
-			$search->compare( '==', 'product.list.type.code', 'default' ),
+			$search->compare( '==', 'product.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.editor', $this->editor ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

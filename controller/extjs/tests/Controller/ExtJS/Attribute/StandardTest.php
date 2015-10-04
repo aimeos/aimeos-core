@@ -262,87 +262,87 @@ class Controller_ExtJS_Attribute_StandardTest extends PHPUnit_Framework_TestCase
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.domain' => array(
+				'attribute.lists.domain' => array(
 					'description' => 'Attribute list domain',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.refid' => array(
+				'attribute.lists.refid' => array(
 					'description' => 'Attribute list reference ID',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.datestart' => array(
+				'attribute.lists.datestart' => array(
 					'description' => 'Attribute list start date',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.dateend' => array(
+				'attribute.lists.dateend' => array(
 					'description' => 'Attribute list end date',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.config' => array(
+				'attribute.lists.config' => array(
 					'description' => 'Attribute list config',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.position' => array(
+				'attribute.lists.position' => array(
 					'description' => 'Attribute list position',
 					'optional' => false,
 					'type' => 'integer',
 				),
-				'attribute.list.status' => array(
+				'attribute.lists.status' => array(
 					'description' => 'Attribute list status',
 					'optional' => false,
 					'type' => 'integer',
 				),
-				'attribute.list.ctime' => array(
+				'attribute.lists.ctime' => array(
 					'description' => 'Attribute list create date/time',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.mtime' => array(
+				'attribute.lists.mtime' => array(
 					'description' => 'Attribute list modification date/time',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.editor' => array(
+				'attribute.lists.editor' => array(
 					'description' => 'Attribute list editor',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.type.code' => array(
+				'attribute.lists.type.code' => array(
 					'description' => 'Attribute list type code',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.type.domain' => array(
+				'attribute.lists.type.domain' => array(
 					'description' => 'Attribute list type domain',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.type.label' => array(
+				'attribute.lists.type.label' => array(
 					'description' => 'Attribute list type label',
 					'optional' => false,
 					'type' => 'string',
 				),
-				'attribute.list.type.status' => array(
+				'attribute.lists.type.status' => array(
 					'description' => 'Attribute list type status',
 					'optional' => false,
 					'type' => 'integer',
 				),
-				'attribute.list.type.ctime' => array(
+				'attribute.lists.type.ctime' => array(
 					'description' => 'Attribute list type create date/time',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.type.mtime' => array(
+				'attribute.lists.type.mtime' => array(
 					'description' => 'Attribute list type modification date/time',
 					'optional' => false,
 					'type' => 'datetime',
 				),
-				'attribute.list.type.editor' => array(
+				'attribute.lists.type.editor' => array(
 					'description' => 'Attribute list type editor',
 					'optional' => false,
 					'type' => 'string',

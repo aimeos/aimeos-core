@@ -268,7 +268,7 @@ class Client_Html_Catalog_Detail_Seen_Standard
 			 * @since 2014.07
 			 * @category Developer
 			 * @see client/html/catalog/domains
-			 * @see client/html/catalog/list/domains
+			 * @see client/html/catalog/lists/domains
 			 * @see client/html/catalog/detail/domains
 			 */
 			$domains = $config->get( 'client/html/catalog/detail/seen/domains', $domains );
