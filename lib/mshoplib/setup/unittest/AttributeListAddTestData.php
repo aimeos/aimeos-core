@@ -63,7 +63,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['attribute/list'] as $dataset ) {
+		foreach( $testdata['attribute/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -209,11 +209,11 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 	{
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
-		$attributeListManager = $attributeManager->getSubManager( 'list', 'Standard' );
+		$attributeListManager = $attributeManager->getSubManager( 'lists', 'Standard' );
 		$attributeListTypeManager = $attributeListManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = array();
-		foreach( $testdata['attribute/list'] as $dataset )
+		foreach( $testdata['attribute/lists'] as $dataset )
 		{
 			$exp = explode( '/', $dataset['parentid'] );
 
@@ -254,7 +254,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['attribute/list/type'] as $key => $dataset )
+		foreach( $testdata['attribute/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -267,7 +267,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $attributeListManager->createItem();
-		foreach( $testdata['attribute/list'] as $dataset )
+		foreach( $testdata['attribute/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No attribute ID found for "%1$s"', $dataset['parentid'] ) );

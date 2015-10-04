@@ -165,11 +165,11 @@ class MShop_Product_Manager_Property_Type_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_List_Type_Standard
+		 *  MShop_Product_Manager_Lists_Type_Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_List_Type_Mytype
+		 *  MShop_Product_Manager_Lists_Type_Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *

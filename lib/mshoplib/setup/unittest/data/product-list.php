@@ -5,7 +5,7 @@
  */
 
 return array(
-	'product/list/type' => array(
+	'product/lists/type' => array(
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'attribute/config' => array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
@@ -56,7 +56,7 @@ return array(
 	),
 
 
-	'product/list' => array(
+	'product/lists' => array(
 		array( 'parentid' => 'product/CNC', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/suggestion', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),

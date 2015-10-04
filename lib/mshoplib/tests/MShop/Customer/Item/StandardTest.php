@@ -179,7 +179,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetGroups()
 	{
 		$listValues = array( 'domain' => 'customer/group', 'refid' => 123 );
-		$listItems = array( 'customer/group' => array( new MShop_Common_Item_List_Standard( '', $listValues ) ) );
+		$listItems = array( 'customer/group' => array( new MShop_Common_Item_Lists_Standard( '', $listValues ) ) );
 		$object = new MShop_Customer_Item_Standard( $this->address, array(), $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );

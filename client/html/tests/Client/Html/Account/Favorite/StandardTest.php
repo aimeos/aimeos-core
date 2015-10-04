@@ -88,7 +88,7 @@ class Client_Html_Account_Favorite_StandardTest extends PHPUnit_Framework_TestCa
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Standard' )
+		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
 			->setMethods( array( 'saveItem', 'moveItem' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -130,7 +130,7 @@ class Client_Html_Account_Favorite_StandardTest extends PHPUnit_Framework_TestCa
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Standard' )
+		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
 			->setMethods( array( 'deleteItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();

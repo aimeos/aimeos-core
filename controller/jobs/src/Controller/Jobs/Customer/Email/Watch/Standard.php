@@ -185,7 +185,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	 * @param MShop_Context_Item_Iface $context Context item object
 	 * @param array $custIds List of customer IDs
 	 * @param string $listTypeId Customer list type ID
-	 * @return array List of customer list items implementing MShop_Common_Item_List_Iface
+	 * @return array List of customer list items implementing MShop_Common_Item_Lists_Iface
 	 */
 	protected function getListItems( MShop_Context_Item_Iface $context, array $custIds, $listTypeId )
 	{
@@ -207,7 +207,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Returns a filtered list of products for which a notification should be sent
 	 *
-	 * @param array $listItems List of customer list items implementing MShop_Common_Item_List_Iface
+	 * @param array $listItems List of customer list items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $products List of product items implementing MShop_Product_Item_Iface
 	 * @return array Multi-dimensional associative list of list IDs as key and product / price item maps as values
 	 */

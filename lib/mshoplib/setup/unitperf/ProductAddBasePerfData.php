@@ -102,7 +102,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	 */
 	protected function getProductListItem( $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list/type' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists/type' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -118,7 +118,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 		}
 
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$listItem = $manager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );

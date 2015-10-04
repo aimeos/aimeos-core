@@ -145,7 +145,7 @@ class MShop_Catalog_Manager_Standard
 		$search = $this->createSearch();
 
 		$path = 'classes/catalog/manager/submanagers';
-		foreach( $config->get( $path, array( 'list' ) ) as $domain ) {
+		foreach( $config->get( $path, array( 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -285,7 +285,7 @@ class MShop_Catalog_Manager_Standard
 		 */
 		$path = 'classes/catalog/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'lists' ), $withsub );
 	}
 
 

@@ -56,7 +56,7 @@ class Client_Html_Account_History_Standard
 	/** client/html/account/history/list/name
 	 * Name of the list part used by the account history client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_List_Myname".
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Lists_Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name

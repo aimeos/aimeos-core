@@ -40,12 +40,12 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new MShop_Common_Item_List_Standard( 'test', array( 'type' => 'test' ) );
+		$this->listItem1 = new MShop_Common_Item_Lists_Standard( 'test', array( 'type' => 'test' ) );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setId( 11 );
 
-		$this->listItem2 = new MShop_Common_Item_List_Standard( 'test', array( 'type' => 'default' ) );
+		$this->listItem2 = new MShop_Common_Item_Lists_Standard( 'test', array( 'type' => 'default' ) );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setId( 10 );
@@ -93,7 +93,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_List_Iface', $listItem );
+			$this->assertInstanceof( 'MShop_Common_Item_Lists_Iface', $listItem );
 		}
 	}
 
@@ -109,7 +109,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_List_Iface', $listItem );
+			$this->assertInstanceof( 'MShop_Common_Item_Lists_Iface', $listItem );
 		}
 
 		$this->assertEquals( array(), $this->object->getListItems( 'undefined' ) );

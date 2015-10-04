@@ -62,7 +62,7 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Base
 
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
-		$productListManager = $productManager->getSubManager( 'list' );
+		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
 		$expr = array();

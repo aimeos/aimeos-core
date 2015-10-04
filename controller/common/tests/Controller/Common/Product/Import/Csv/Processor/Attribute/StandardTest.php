@@ -162,7 +162,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );
 		$this->assertEquals( '29', $listItem->getRefItem()->getCode() );
@@ -267,7 +267,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_StandardTest exte
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'width', $listItem->getRefItem()->getType() );

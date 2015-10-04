@@ -63,7 +63,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['customer/list'] as $dataset ) {
+		foreach( $testdata['customer/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -185,11 +185,11 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 	protected function addCustomerListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, $type );
-		$customerListManager = $customerManager->getSubManager( 'list', $type );
+		$customerListManager = $customerManager->getSubManager( 'lists', $type );
 		$customerListTypeManager = $customerListManager->getSubmanager( 'type', $type );
 
 		$itemCode = array();
-		foreach( $testdata['customer/list'] as $dataset )
+		foreach( $testdata['customer/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
@@ -211,7 +211,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['customer/list/type'] as $key => $dataset )
+		foreach( $testdata['customer/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -224,7 +224,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $customerListManager->createItem();
-		foreach( $testdata['customer/list'] as $dataset )
+		foreach( $testdata['customer/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['parentid'] ) );

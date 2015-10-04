@@ -44,7 +44,7 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$context = $this->getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$catalogListManager = $catalogManager->getSubManager( 'list' );
+		$catalogListManager = $catalogManager->getSubManager( 'lists' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type' );
 
 

@@ -7,7 +7,7 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
-    recordName : 'Catalog_List',
+    recordName : 'Catalog_Lists',
     idProperty : 'catalog.list.id',
     siteidProperty : 'catalog.list.siteid',
     itemUiXType : 'MShop.panel.catalog.itemui',

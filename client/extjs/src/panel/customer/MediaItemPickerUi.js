@@ -11,7 +11,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',

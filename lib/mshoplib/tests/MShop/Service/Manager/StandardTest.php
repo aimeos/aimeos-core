@@ -243,8 +243,8 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list', 'Standard' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->object->getSubManager( 'unknown' );
@@ -254,7 +254,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->object->getSubManager( 'list', 'unknown' );
+		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 
 

@@ -58,9 +58,9 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 			// Don't delete the catalog node because users are likely use it for production
 			$item = $manager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
 
-			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'media' );
-			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );
-			$this->removeListItems( $item->getId(), 'catalog/list', 'product' );
+			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'media' );
+			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'text' );
+			$this->removeListItems( $item->getId(), 'catalog/lists', 'product' );
 		}
 		catch( Exception $e ) {; } // If no root node was already inserted into the database
 

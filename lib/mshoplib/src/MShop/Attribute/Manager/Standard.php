@@ -120,7 +120,7 @@ class MShop_Attribute_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/attribute/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -155,7 +155,7 @@ class MShop_Attribute_Manager_Standard
 		 */
 		$path = 'classes/attribute/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}
 
 
@@ -573,7 +573,7 @@ class MShop_Attribute_Manager_Standard
 	 * Creates a new attribute item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $refItems List of items implementing MShop_Text_Item_Iface
 	 * @return MShop_Attribute_Item_Iface New product item
 	 */

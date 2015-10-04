@@ -72,7 +72,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -195,7 +195,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
 	}
@@ -289,7 +289,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'path/to/file2', $listItem->getRefItem()->getUrl() );

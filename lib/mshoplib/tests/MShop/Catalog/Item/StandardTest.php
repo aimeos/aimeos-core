@@ -25,7 +25,7 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
-		$this->listItems = array( 1 => new MShop_Common_Item_List_Standard( 'catalog.list.', $listValues ) );
+		$this->listItems = array( 1 => new MShop_Common_Item_Lists_Standard( 'catalog.list.', $listValues ) );
 
 		$this->values = array(
 			'id' => 2,

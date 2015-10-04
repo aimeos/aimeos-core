@@ -156,7 +156,7 @@ class MShop_Product_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/product/manager/submanagers';
-		$default = array( 'type', 'property', 'stock', 'list' );
+		$default = array( 'type', 'property', 'stock', 'lists' );
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
@@ -579,7 +579,7 @@ class MShop_Product_Manager_Standard
 		 * @category Developer
 		 */
 		$path = 'classes/product/manager/submanagers';
-		$default = array( 'type', 'property', 'list', 'stock' );
+		$default = array( 'type', 'property', 'lists', 'stock' );
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
@@ -663,7 +663,7 @@ class MShop_Product_Manager_Standard
 	 * Create new product item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listitems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
 	 * @return MShop_Product_Item_Iface New product item
 	 */

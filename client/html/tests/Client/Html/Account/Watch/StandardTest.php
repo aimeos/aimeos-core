@@ -88,7 +88,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Standard' )
+		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
 			->setMethods( array( 'saveItem', 'moveItem' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -129,7 +129,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 		$view->addHelper( 'param', $helper );
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Standard' )
+		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -176,7 +176,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_List_Standard' )
+		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
 			->setMethods( array( 'deleteItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();

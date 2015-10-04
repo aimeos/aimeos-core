@@ -61,7 +61,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'list' );
+		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
 		$expr = array();

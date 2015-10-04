@@ -25,7 +25,7 @@ class MShop_Media_Item_Standard
 	 * Initializes the media item object.
 	 *
 	 * @param array $values Initial values of the media item
-	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
 	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )

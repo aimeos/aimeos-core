@@ -421,7 +421,7 @@ class MShop_Catalog_Manager_Index_Standard
 
 
 		// index categorized product items only
-		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
+		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
 		$expr = array(

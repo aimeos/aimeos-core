@@ -6801,7 +6801,7 @@ Ext.ns('MShop.panel.text');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Text_List',
+        recordName : 'Text_Lists',
         idProperty : 'text.list.id',
         siteidProperty : 'text.list.siteid',
         listNamePrefix : 'text.list.',
@@ -6833,7 +6833,7 @@ Ext.ns('MShop.panel.text');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Text_List',
+        recordName : 'Text_Lists',
         idProperty : 'text.list.id',
         siteidProperty : 'text.list.siteid',
         listNamePrefix : 'text.list.',
@@ -7241,7 +7241,7 @@ Ext.ns('MShop.panel.media');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Media_List',
+        recordName : 'Media_Lists',
         idProperty : 'media.list.id',
         siteidProperty : 'media.list.siteid',
         listDomain : 'media',
@@ -7275,7 +7275,7 @@ Ext.ns('MShop.panel.media');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Media_List',
+        recordName : 'Media_Lists',
         idProperty : 'media.list.id',
         siteidProperty : 'media.list.siteid',
         listDomain : 'media',
@@ -7975,7 +7975,7 @@ Ext.ns('MShop.panel.attribute');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Attribute_List',
+        recordName : 'Attribute_Lists',
         idProperty : 'attribute.list.id',
         siteidProperty : 'attribute.list.siteid',
         listNamePrefix : 'attribute.list.',
@@ -8008,7 +8008,7 @@ Ext.ns('MShop.panel.attribute');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Attribute_List',
+        recordName : 'Attribute_Lists',
         idProperty : 'attribute.list.id',
         siteidProperty : 'attribute.list.siteid',
         listNamePrefix : 'attribute.list.',
@@ -8041,7 +8041,7 @@ Ext.ns('MShop.panel.attribute');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.PriceItemPickerUi', {
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
-        recordName : 'Attribute_List',
+        recordName : 'Attribute_Lists',
         idProperty : 'attribute.list.id',
         siteidProperty : 'attribute.list.siteid',
         listNamePrefix : 'attribute.list.',
@@ -8907,7 +8907,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -8939,7 +8939,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -8971,7 +8971,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.PriceItemPickerUi', {
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -9003,7 +9003,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.ProductItemPickerUi', {
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -9034,7 +9034,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -9622,7 +9622,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.ProductTagItemPickerUi', {
     xtype : 'MShop.panel.product.tag.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',
@@ -10197,7 +10197,7 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
-    recordName : 'Catalog_List',
+    recordName : 'Catalog_Lists',
     idProperty : 'catalog.list.id',
     siteidProperty : 'catalog.list.siteid',
     itemUiXType : 'MShop.panel.catalog.itemui',
@@ -10394,7 +10394,7 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
-    recordName : 'Product_List',
+    recordName : 'Product_Lists',
     idProperty : 'product.list.id',
     siteidProperty : 'product.list.siteid',
     itemUiXType : 'MShop.panel.product.itemui',
@@ -10844,7 +10844,7 @@ Ext.ns('MShop.panel.catalog');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Catalog_List',
+        recordName : 'Catalog_Lists',
         idProperty : 'catalog.list.id',
         siteidProperty : 'catalog.list.siteid',
         listNamePrefix : 'catalog.list.',
@@ -10877,7 +10877,7 @@ Ext.ns('MShop.panel.catalog');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Catalog_List',
+        recordName : 'Catalog_Lists',
         idProperty : 'catalog.list.id',
         siteidProperty : 'catalog.list.siteid',
         listNamePrefix : 'catalog.list.',
@@ -10910,7 +10910,7 @@ Ext.ns('MShop.panel.catalog');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.ProductItemPickerUi', {
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
-        recordName : 'Catalog_List',
+        recordName : 'Catalog_Lists',
         idProperty : 'catalog.list.id',
         siteidProperty : 'catalog.list.siteid',
         listNamePrefix : 'catalog.list.',
@@ -10942,7 +10942,7 @@ Ext.ns('MShop.panel.catalog');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Catalog_List',
+        recordName : 'Catalog_Lists',
         idProperty : 'catalog.list.id',
         siteidProperty : 'catalog.list.siteid',
         listNamePrefix : 'catalog.list.',
@@ -11252,7 +11252,7 @@ Ext.ns('MShop.panel.service');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Service_List',
+        recordName : 'Service_Lists',
         idProperty : 'service.list.id',
         siteidProperty : 'service.list.siteid',
         listNamePrefix : 'service.list.',
@@ -11284,7 +11284,7 @@ Ext.ns('MShop.panel.service');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Service_List',
+        recordName : 'Service_Lists',
         idProperty : 'service.list.id',
         siteidProperty : 'service.list.siteid',
         listNamePrefix : 'service.list.',
@@ -11316,7 +11316,7 @@ Ext.ns('MShop.panel.service');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Service_List',
+        recordName : 'Service_Lists',
         idProperty : 'service.list.id',
         siteidProperty : 'service.list.siteid',
         listNamePrefix : 'service.list.',
@@ -11348,7 +11348,7 @@ Ext.ns('MShop.panel.service');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.PriceItemPickerUi', {
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
-        recordName : 'Service_List',
+        recordName : 'Service_Lists',
         idProperty : 'service.list.id',
         siteidProperty : 'service.list.siteid',
         listNamePrefix : 'service.list.',
@@ -11937,7 +11937,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',
@@ -11972,7 +11972,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',
@@ -12007,7 +12007,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',
@@ -12042,7 +12042,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',
@@ -12076,7 +12076,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 
 	xtype : 'MShop.panel.customer.group.itempickerui',
     itemConfig : {
-        recordName : 'Customer_List',
+        recordName : 'Customer_Lists',
         idProperty : 'customer.list.id',
         siteidProperty : 'customer.list.siteid',
         listDomain : 'customer',
@@ -12925,7 +12925,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Supplier_List',
+        recordName : 'Supplier_Lists',
         idProperty : 'supplier.list.id',
         siteidProperty : 'supplier.list.siteid',
         listDomain : 'supplier',
@@ -12960,7 +12960,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 
 	xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Supplier_List',
+        recordName : 'Supplier_Lists',
         idProperty : 'supplier.list.id',
         siteidProperty : 'supplier.list.siteid',
         listDomain : 'supplier',
@@ -12995,7 +12995,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 
 	xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
-        recordName : 'Supplier_List',
+        recordName : 'Supplier_Lists',
         idProperty : 'supplier.list.id',
         siteidProperty : 'supplier.list.siteid',
         listDomain : 'supplier',
@@ -13029,7 +13029,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 
 	xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
-        recordName : 'Supplier_List',
+        recordName : 'Supplier_Lists',
         idProperty : 'supplier.list.id',
         siteidProperty : 'supplier.list.siteid',
         listDomain : 'supplier',

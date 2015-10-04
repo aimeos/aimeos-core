@@ -177,7 +177,7 @@ abstract class MShop_Common_Manager_Decorator_Base
 	 *
 	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing MShop_Common_Item_List_Iface
+	 * @return array List of list items implementing MShop_Common_Item_Lists_Iface
 	 * @throws MShop_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */

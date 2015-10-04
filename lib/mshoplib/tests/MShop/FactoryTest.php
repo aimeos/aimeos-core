@@ -20,7 +20,7 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateSubManager()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute/list/type' );
+		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute/lists/type' );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
 	}
 
@@ -76,11 +76,11 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		$managerB1 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
 		MShop_Factory::clear( (string) $context );
 
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		$managerB2 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
 
 		MShop_Factory::setCache( $cache );
 
@@ -96,11 +96,11 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		$managerB1 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
 		MShop_Factory::clear( (string) $context, 'attribute' );
 
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		$managerB2 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
 
 		MShop_Factory::setCache( $cache );
 

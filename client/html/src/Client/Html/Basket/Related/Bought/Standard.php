@@ -313,7 +313,7 @@ class Client_Html_Basket_Related_Bought_Standard
 	 * Returns the list items of type "bought-together" associated to the given product IDs.
 	 *
 	 * @param string[] $prodIds List of product IDs
-	 * @return MShop_Product_Item_List_Iface[] List of product list items
+	 * @return MShop_Product_Item_Lists_Iface[] List of product list items
 	 */
 	protected function getListItems( array $prodIds )
 	{

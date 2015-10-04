@@ -234,7 +234,7 @@ class MShop_Customer_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -269,7 +269,7 @@ class MShop_Customer_Manager_Standard
 		 */
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
 	}
 
 

@@ -64,7 +64,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['product/list'] as $dataset ) {
+		foreach( $testdata['product/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -307,7 +307,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 		$parentIds = $this->getProductIds( $productManager, $testdata );
 		$refIds['product'] = $this->getProductRefIds( $productManager, $keys );
 
-		$productListManager = $productManager->getSubManager( 'list', 'Standard' );
+		$productListManager = $productManager->getSubManager( 'lists', 'Standard' );
 		$listItem = $productListManager->createItem();
 
 		//LIST-PRODUCT
@@ -315,7 +315,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 
 		$listItemTypeIds = $this->addListTypeData( $productListManager, $testdata );
 
-		foreach( $testdata['product/list'] as $dataset )
+		foreach( $testdata['product/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No product ID found for "%1$s"', $dataset['parentid'] ) );
@@ -360,7 +360,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 		$productListTypeManager = $manager->getSubmanager( 'type', 'Standard' );
 		$listItemType = $productListTypeManager->createItem();
 
-		foreach( $testdata['product/list/type'] as $key => $dataset )
+		foreach( $testdata['product/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -387,7 +387,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Base
 	{
 		$parentCodes = $parentIds = array();
 
-		foreach( $testdata['product/list'] as $dataset )
+		foreach( $testdata['product/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false
 				|| ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false

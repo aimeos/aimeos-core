@@ -384,7 +384,7 @@ class MShop_Catalog_Manager_Index_Catalog_Standard
 
 		$ids = $listItems = array();
 		$context = $this->getContext();
-		$listManager = MShop_Factory::createManager( $context, 'catalog/list' );
+		$listManager = MShop_Factory::createManager( $context, 'catalog/lists' );
 
 		foreach( $items as $id => $item ) {
 			$ids[] = $id;

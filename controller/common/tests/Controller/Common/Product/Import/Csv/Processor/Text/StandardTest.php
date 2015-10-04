@@ -70,7 +70,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_StandardTest extends P
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -177,7 +177,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_StandardTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );
 		$this->assertEquals( 'Short: Job CSV test', $listItem->getRefItem()->getContent() );
@@ -282,7 +282,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_StandardTest extends P
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Iface', $listItem );
+		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'short', $listItem->getRefItem()->getType() );

@@ -63,7 +63,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['text/list'] as $dataset ) {
+		foreach( $testdata['text/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -120,11 +120,11 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 	private function addTextData( array $testdata, array $refIds )
 	{
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
-		$textListManager = $textManager->getSubManager( 'list', 'Standard' );
+		$textListManager = $textManager->getSubManager( 'lists', 'Standard' );
 		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Standard' );
 
 		$labels = array();
-		foreach( $testdata['text/list'] as $dataset )
+		foreach( $testdata['text/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
@@ -146,7 +146,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['text/list/type'] as $key => $dataset )
+		foreach( $testdata['text/lists/type'] as $key => $dataset )
 		{
 			$tListType->setId( null );
 			$tListType->setCode( $dataset['code'] );
@@ -159,7 +159,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$tList = $textListManager->createItem();
-		foreach( $testdata['text/list'] as $dataset )
+		foreach( $testdata['text/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No text ID found for "%1$s"', $dataset['parentid'] ) );

@@ -96,7 +96,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	public function testList()
 	{
 		// parser warm up so files are already parsed (same as APC is used)
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client = Client_Html_Catalog_Lists_Factory::createClient( $this->context, $this->paths );
 		$client->setView( $this->view );
 		$client->getBody();
 		$client->getHeader();
@@ -104,7 +104,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client = Client_Html_Catalog_Lists_Factory::createClient( $this->context, $this->paths );
 		$client->setView( $this->view );
 		$client->getHeader();
 		$client->getBody();
@@ -118,7 +118,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client = Client_Html_Catalog_Lists_Factory::createClient( $this->context, $this->paths );
 		$client->setView( $this->view );
 		$client->getHeader();
 
@@ -131,7 +131,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client = Client_Html_Catalog_Lists_Factory::createClient( $this->context, $this->paths );
 		$client->setView( $this->view );
 		$client->getBody();
 

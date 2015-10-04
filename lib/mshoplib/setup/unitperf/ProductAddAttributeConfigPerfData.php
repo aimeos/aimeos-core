@@ -60,7 +60,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$context = $this->getContext();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'list' );
+		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
 		$expr = array();
@@ -165,8 +165,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$attrItem->setStatus( 1 );
 
 
-		$listManager = MShop_Factory::createManager( $context, 'attribute/list' );
-		$listTypeManager = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		$listManager = MShop_Factory::createManager( $context, 'attribute/lists' );
+		$listTypeManager = MShop_Factory::createManager( $context, 'attribute/lists/type' );
 
 		$search = $listTypeManager->createSearch();
 		$expr = array(

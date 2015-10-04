@@ -24,7 +24,7 @@ class MShop_Factory
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
 	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Iface)
-	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
+	 * @param string $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
 	static public function clear( $id = null, $path = null )
 	{

@@ -63,7 +63,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['price/list'] as $dataset ) {
+		foreach( $testdata['price/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -120,11 +120,11 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
-		$priceListManager = $priceManager->getSubManager( 'list', 'Standard' );
+		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
 		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
-		foreach( $testdata['price/list'] as $dataset )
+		foreach( $testdata['price/lists'] as $dataset )
 		{
 			$exp = explode( '/', $dataset['parentid'] );
 
@@ -168,7 +168,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['price/list/type'] as $key => $dataset )
+		foreach( $testdata['price/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -181,7 +181,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $priceListManager->createItem();
-		foreach( $testdata['price/list'] as $dataset )
+		foreach( $testdata['price/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No price ID found for "%1$s"', $dataset['parentid'] ) );

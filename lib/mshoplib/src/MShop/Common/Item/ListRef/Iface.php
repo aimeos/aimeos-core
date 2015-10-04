@@ -25,7 +25,7 @@ interface MShop_Common_Item_ListRef_Iface
 	 *
 	 * @param string $domain|null Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_List_Iface
+	 * @return array List of items implementing MShop_Common_Item_Lists_Iface
 	 */
 	public function getListItems( $domain = null, $type = null );
 

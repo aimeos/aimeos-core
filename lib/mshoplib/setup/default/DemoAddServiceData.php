@@ -59,9 +59,9 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		foreach( $services as $item )
 		{
-			$this->removeItems( $item->getId(), 'service/list', 'service', 'media' );
-			$this->removeItems( $item->getId(), 'service/list', 'service', 'price' );
-			$this->removeItems( $item->getId(), 'service/list', 'service', 'text' );
+			$this->removeItems( $item->getId(), 'service/lists', 'service', 'media' );
+			$this->removeItems( $item->getId(), 'service/lists', 'service', 'price' );
+			$this->removeItems( $item->getId(), 'service/lists', 'service', 'text' );
 		}
 
 		$manager->deleteItems( array_keys( $services ) );

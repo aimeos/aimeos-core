@@ -143,7 +143,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 	 *
 	 * @param MShop_Product_Item_Iface $product Product item object
 	 * @param array $map List of associative arrays containing the chunked properties
-	 * @return array List of list items implementing MShop_Common_Item_List_Iface
+	 * @return array List of list items implementing MShop_Common_Item_Lists_Iface
 	 */
 	protected function getListItemPool( MShop_Product_Item_Iface $product, array $map )
 	{

@@ -135,7 +135,7 @@ class MShop_Media_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/media/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -170,7 +170,7 @@ class MShop_Media_Manager_Standard
 		 */
 		$path = 'classes/media/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}
 
 
@@ -606,7 +606,7 @@ class MShop_Media_Manager_Standard
 	 * Creates a new media item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $refItems List of items reference to this item
 	 * @return MShop_Media_Item_Iface New product item
 	 */

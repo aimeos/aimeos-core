@@ -64,7 +64,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	{
 		$context = $this->getContext();
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $attrManager->createItem();
@@ -87,7 +87,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 			$attrManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'attribute', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'attribute', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -128,7 +128,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	{
 		$context = $this->getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -153,7 +153,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'media', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'media', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -194,7 +194,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	{
 		$context = $this->getContext();
 		$mediaManager = MShop_Factory::createManager( $context, 'price' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -221,7 +221,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'price', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'price', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -262,7 +262,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	{
 		$context = $this->getContext();
 		$textManager = MShop_Factory::createManager( $context, 'text' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $textManager->createItem();
@@ -285,7 +285,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 			$textManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'text', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'text', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -326,7 +326,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	{
 		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
 
 
 		$listItem = $listManager->createItem();
@@ -356,7 +356,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 			}
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'product', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'product', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -415,7 +415,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	/**
 	 * Returns the type ID for the given type and domain found by the manager
 	 *
-	 * @param string $name Manager name like 'catalog/list/type'
+	 * @param string $name Manager name like 'catalog/lists/type'
 	 * @param string $domain Domain of the type item we are looking for, e.g. 'text'
 	 * @param string $type Type code of the item we are looking for, e.g. 'default'
 	 */
@@ -445,7 +445,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	 * Deletes the demo items from the given parent ID in the database.
 	 *
 	 * @param string $parentid ID of the parent item where the associated items should be removed from
-	 * @param string $name Name of the list manager, e.g. 'catalog/list'
+	 * @param string $name Name of the list manager, e.g. 'catalog/lists'
 	 * @param string $domain Name of the domain the items are associated to, e.g. 'catalog'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'text'
 	 */
@@ -486,7 +486,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	 * Deletes the references to non-existent or demo items in the database.
 	 *
 	 * @param string $parentid ID of the parent item where the associated items should be removed from
-	 * @param string $name Name of the list manager, e.g. 'catalog/list'
+	 * @param string $name Name of the list manager, e.g. 'catalog/lists'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'product'
 	 */
 	protected function removeListItems( $parentid, $name, $refdomain )

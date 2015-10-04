@@ -71,7 +71,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$context = $this->getContext();
 		$textManager = MShop_Factory::createManager( $context, 'text' );
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
 
 
 		$attrSearch = $attrManager->createSearch();

@@ -26,7 +26,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	 *
 	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative list of key/value pairs of the item properties
-	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement MShop_Common_Item_List_Iface
+	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement MShop_Common_Item_Lists_Iface
 	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement MShop_Common_Item_Iface
 	 */
 	public function __construct( $prefix, array $values = array(), array $listItems = array(), array $refItems = array() )
@@ -47,7 +47,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 	 *
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_List_Iface
+	 * @return array List of items implementing MShop_Common_Item_Lists_Iface
 	 */
 	public function getListItems( $domain = null, $type = null )
 	{
@@ -122,7 +122,7 @@ abstract class MShop_Common_Item_ListRef_Base extends MShop_Common_Item_Base
 		}
 
 		$list = array();
-		$iface = 'MShop_Common_Item_List_Iface';
+		$iface = 'MShop_Common_Item_Lists_Iface';
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 

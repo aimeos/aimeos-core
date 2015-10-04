@@ -6,7 +6,7 @@
  */
 
 return array(
-	'attribute/list/type' => array(
+	'attribute/lists/type' => array(
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -16,7 +16,7 @@ return array(
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
-	'attribute/list' => array(
+	'attribute/lists' => array(
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/XS', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/s', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/S', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/m', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/M', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),

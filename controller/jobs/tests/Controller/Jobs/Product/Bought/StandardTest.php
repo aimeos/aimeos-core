@@ -60,7 +60,7 @@ class Controller_Jobs_Product_Bought_StandardTest extends PHPUnit_Framework_Test
 
 	public function testRun()
 	{
-		$stub = $this->getMockBuilder( 'MShop_Product_Manager_List_Standard' )
+		$stub = $this->getMockBuilder( 'MShop_Product_Manager_Lists_Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'deleteItems', 'saveItem' ) )
 			->getMock();

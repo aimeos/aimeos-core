@@ -25,7 +25,7 @@ class MShop_Attribute_Item_Standard
 	 * Initializes the attribute item.
 	 *
 	 * @param array $values Associative array with id, domain, code, and status to initialize the item properties; Optional
-	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
 	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )

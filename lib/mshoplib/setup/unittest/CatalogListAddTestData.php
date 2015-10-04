@@ -63,7 +63,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['catalog/list'] as $dataset ) {
+		foreach( $testdata['catalog/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -184,11 +184,11 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 	private function addCatalogListData( array $testdata, array $refIds )
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Standard' );
-		$catalogListManager = $catalogManager->getSubManager( 'list', 'Standard' );
+		$catalogListManager = $catalogManager->getSubManager( 'lists', 'Standard' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Standard' );
 
 		$itemCode = array();
-		foreach( $testdata['catalog/list'] as $dataset )
+		foreach( $testdata['catalog/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
@@ -210,7 +210,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['catalog/list/type'] as $key => $dataset )
+		foreach( $testdata['catalog/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -223,7 +223,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $catalogListManager->createItem();
-		foreach( $testdata['catalog/list'] as $dataset )
+		foreach( $testdata['catalog/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No catalog ID found for "%1$s"', $dataset['parentid'] ) );

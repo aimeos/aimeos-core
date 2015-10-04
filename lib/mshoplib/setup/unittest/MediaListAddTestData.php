@@ -63,7 +63,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['media/list'] as $dataset ) {
+		foreach( $testdata['media/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -174,11 +174,11 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	private function addMediaListData( array $testdata, array $refIds )
 	{
 		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
-		$mediaListManager = $mediaManager->getSubmanager( 'list', 'Standard' );
+		$mediaListManager = $mediaManager->getSubmanager( 'lists', 'Standard' );
 		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Standard' );
 
 		$urls = array();
-		foreach( $testdata['media/list'] as $dataset )
+		foreach( $testdata['media/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
@@ -202,7 +202,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['media/list/type'] as $key => $dataset )
+		foreach( $testdata['media/lists/type'] as $key => $dataset )
 		{
 			$medListType->setId( null );
 			$medListType->setCode( $dataset['code'] );
@@ -215,7 +215,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$medList = $mediaListManager->createItem();
-		foreach( $testdata['media/list'] as $dataset )
+		foreach( $testdata['media/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No media ID found for "%1$s"', $dataset['parentid'] ) );

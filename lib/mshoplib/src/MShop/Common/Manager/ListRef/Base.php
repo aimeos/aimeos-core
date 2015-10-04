@@ -22,7 +22,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * Creates a new item for the specific manager.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
 	 * @return MShop_Common_Item_Iface New item
 	 */
@@ -82,11 +82,11 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * @param array $ids List of IDs
 	 * @param array $domains List of domain names whose referenced items should be attached
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_List_Item_Iface
+	 * @return array List of items implementing MShop_Common_Lists_Item_Iface
 	 */
 	protected function getListItems( array $ids, array $domains, $prefix )
 	{
-		$manager = $this->getSubManager( 'list' );
+		$manager = $this->getSubManager( 'lists' );
 
 		$search = $manager->createSearch( true );
 

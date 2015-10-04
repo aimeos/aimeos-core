@@ -29,7 +29,7 @@ class MShop_Customer_Item_Standard
 	 *
 	 * @param array $values List of attributes that belong to the customer item
 	 * @param MShop_Common_Item_Address_Iface $address Payment address item object
-	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
 	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 * @param string $salt Password salt (optional)
 	 * @param MShop_Common_Item_Helper_Password_Iface $helper Password encryption helper object

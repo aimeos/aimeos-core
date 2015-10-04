@@ -78,7 +78,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.type.code', 'default' ) );
@@ -133,7 +133,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 		$attrTypeItem = $this->getTypeItem( 'attribute/type', 'product', 'color' );
 		$mediaTypeItem = $this->getTypeItem( 'media/type', 'attribute', 'default' );
-		$attrListTypeItem = $this->getTypeItem( 'attribute/list/type', 'media', 'icon' );
+		$attrListTypeItem = $this->getTypeItem( 'attribute/lists/type', 'media', 'icon' );
 
 
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
@@ -153,7 +153,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$attrItem->setStatus( 1 );
 
 
-		$attrListManager = MShop_Factory::createManager( $context, 'attribute/list' );
+		$attrListManager = MShop_Factory::createManager( $context, 'attribute/lists' );
 
 		$attrListItem = $attrListManager->createItem();
 		$attrListItem->setTypeId( $attrListTypeItem->getId() );

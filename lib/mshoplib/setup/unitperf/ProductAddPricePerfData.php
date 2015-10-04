@@ -70,7 +70,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$priceItem->setStatus( 1 );
 
 
-		$productListTypeManager = MShop_Factory::createManager( $context, 'product/list/type' );
+		$productListTypeManager = MShop_Factory::createManager( $context, 'product/lists/type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
@@ -84,7 +84,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		}
 
 
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );

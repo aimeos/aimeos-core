@@ -149,7 +149,7 @@ class MShop_Price_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/price/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -184,7 +184,7 @@ class MShop_Price_Manager_Standard
 		 */
 		$path = 'classes/price/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}
 
 
@@ -626,7 +626,7 @@ class MShop_Price_Manager_Standard
 	 * Creates a new price item
 	 *
 	 * @param array $values List of attributes for price item
-	 * @param array $listItems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
 	 * @return MShop_Price_Item_Iface New price item
 	 */

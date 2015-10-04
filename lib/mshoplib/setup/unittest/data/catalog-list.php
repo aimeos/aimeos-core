@@ -6,7 +6,7 @@
  */
 
 return array(
-	'catalog/list/type' => array(
+	'catalog/lists/type' => array(
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'catalog/stage' => array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
@@ -55,7 +55,7 @@ return array(
 	),
 
 
-	'catalog/list' => array(
+	'catalog/lists' => array(
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype1', 'domain' => 'text', 'refid' => 'text/cafe', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype1', 'domain' => 'text', 'refid' => 'text/cafe_short_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype1', 'domain' => 'text', 'refid' => 'text/cafe_long_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),

@@ -27,7 +27,7 @@ class MShop_Catalog_Item_Standard
 	 *
 	 * @param MW_Tree_Node_Iface $node Tree node
 	 * @param MShop_Catalog_Item_Iface[] $children List of children of the item
-	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
 	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( MW_Tree_Node_Iface $node, array $children = array(),

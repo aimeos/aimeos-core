@@ -25,7 +25,7 @@ class MShop_Price_Item_Standard
 	 * Initalizes the object with the given values
 	 *
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
-	 * @param MShop_Common_List_Item_Iface[] $listItems List of list items
+	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
 	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )

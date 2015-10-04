@@ -128,7 +128,7 @@ class MShop_Service_Manager_Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/service/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -163,7 +163,7 @@ class MShop_Service_Manager_Standard
 		 */
 		$path = 'classes/service/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}
 
 
@@ -654,7 +654,7 @@ class MShop_Service_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_List_Iface List manager
+	 * @return MShop_Common_Manager_Lists_Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -682,7 +682,7 @@ class MShop_Service_Manager_Standard
 	 * Creates a new service item initialized with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Iface
+	 * @param array $listitems List of items implementing MShop_Common_Item_Lists_Iface
 	 * @param array $textItems List of items implementing MShop_Text_Item_Iface
 	 * @return MShop_Service_Item_Iface New service item
 	 */

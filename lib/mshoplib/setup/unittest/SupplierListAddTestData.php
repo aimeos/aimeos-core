@@ -63,7 +63,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['supplier/list'] as $dataset ) {
+		foreach( $testdata['supplier/lists'] as $dataset ) {
 			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
 		}
 
@@ -151,11 +151,11 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 	protected function addSupplierListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
 		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, $type );
-		$supplierListManager = $supplierManager->getSubManager( 'list', $type );
+		$supplierListManager = $supplierManager->getSubManager( 'lists', $type );
 		$supplierListTypeManager = $supplierListManager->getSubmanager( 'type', $type );
 
 		$itemCode = array();
-		foreach( $testdata['supplier/list'] as $dataset )
+		foreach( $testdata['supplier/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
@@ -177,7 +177,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['supplier/list/type'] as $key => $dataset )
+		foreach( $testdata['supplier/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -190,7 +190,7 @@ class MW_Setup_Task_SupplierListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $supplierListManager->createItem();
-		foreach( $testdata['supplier/list'] as $dataset )
+		foreach( $testdata['supplier/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['parentid'] ) );

@@ -130,7 +130,7 @@ class MShop_Coupon_Manager_Code_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_List_Iface List manager
+	 * @return MShop_Common_Manager_Lists_Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

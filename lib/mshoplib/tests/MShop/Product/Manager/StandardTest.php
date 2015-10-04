@@ -181,7 +181,7 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$listManager = $this->object->getSubManager( 'list' );
+		$listManager = $this->object->getSubManager( 'lists' );
 
 		$search = $listManager->createSearch();
 		$expr = array(
@@ -343,8 +343,8 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'stock' ) );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'stock', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'list', 'Standard' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
 
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
@@ -357,6 +357,6 @@ class MShop_Product_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->object->getSubManager( 'list', 'unknown' );
+		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 }

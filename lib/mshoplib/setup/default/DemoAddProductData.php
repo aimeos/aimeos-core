@@ -59,11 +59,11 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		foreach( $products as $item )
 		{
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'attribute' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'media' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'price' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'text' );
-			$this->removeListItems( $item->getId(), 'product/list', 'product' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'attribute' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'media' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'price' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'text' );
+			$this->removeListItems( $item->getId(), 'product/lists', 'product' );
 		}
 
 		$manager->deleteItems( array_keys( $products ) );

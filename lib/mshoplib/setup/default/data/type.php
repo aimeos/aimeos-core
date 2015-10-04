@@ -15,7 +15,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
 	),
 
-	'attribute/list/type' => array(
+	'attribute/lists/type' => array(
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -26,7 +26,7 @@ return array(
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
-	'catalog/list/type' => array(
+	'catalog/lists/type' => array(
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -39,7 +39,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'promotion', 'label' => 'Promotion', 'status' => 1 ),
 	),
 
-	'customer/list/type' => array(
+	'customer/lists/type' => array(
 		array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
@@ -57,7 +57,7 @@ return array(
 		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 	),
 
-	'media/list/type' => array(
+	'media/lists/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -77,7 +77,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
-	'price/list/type' => array(
+	'price/lists/type' => array(
 	),
 
 	'product/type' => array(
@@ -86,7 +86,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),
 	),
 
-	'product/list/type' => array(
+	'product/lists/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
@@ -120,7 +120,7 @@ return array(
 		array( 'domain' => 'service', 'code' => 'delivery', 'label' => 'Delivery', 'status' => 1 ),
 	),
 
-	'service/list/type' => array(
+	'service/lists/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -131,7 +131,7 @@ return array(
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
-	'supplier/list/type' => array(
+	'supplier/lists/type' => array(
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
@@ -164,7 +164,7 @@ return array(
 		array( 'domain' => 'service', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 	),
 
-	'text/list/type' => array(
+	'text/lists/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),

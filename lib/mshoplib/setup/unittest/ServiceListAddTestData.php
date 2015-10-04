@@ -63,7 +63,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$refKeys = array();
-		foreach( $testdata['service/list'] as $dataset ) {
+		foreach( $testdata['service/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -214,11 +214,11 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
-		$serviceListManager = $serviceManager->getSubManager( 'list', 'Standard' );
+		$serviceListManager = $serviceManager->getSubManager( 'lists', 'Standard' );
 		$serviceListTypeManager = $serviceListManager->getSubmanager( 'type', 'Standard' );
 
 		$typeDomain = $typeCode = $itemCode = array();
-		foreach( $testdata['service/list'] as $dataset )
+		foreach( $testdata['service/lists'] as $dataset )
 		{
 			$exp = explode( '/', $dataset['parentid'] );
 
@@ -260,7 +260,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 
 		$this->conn->begin();
 
-		foreach( $testdata['service/list/type'] as $key => $dataset )
+		foreach( $testdata['service/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -273,7 +273,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 		}
 
 		$listItem = $serviceListManager->createItem();
-		foreach( $testdata['service/list'] as $dataset )
+		foreach( $testdata['service/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new MW_Setup_Exception( sprintf( 'No service ID found for "%1$s"', $dataset['parentid'] ) );

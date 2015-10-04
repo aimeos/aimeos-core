@@ -64,10 +64,10 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 
 		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
-		$listTypeItem = $this->getTypeItem( 'product/list/type', 'product', 'default' );
+		$listTypeItem = $this->getTypeItem( 'product/lists/type', 'product', 'default' );
 
 
-		$productListManager = MShop_Factory::createManager( $this->getContext(), 'product/list' );
+		$productListManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
@@ -134,7 +134,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$this->txCommit();
 
 
-		$listTypeItem = $this->getTypeItem( 'product/list/type', 'price', 'default' );
+		$listTypeItem = $this->getTypeItem( 'product/lists/type', 'price', 'default' );
 
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'price' );
@@ -209,7 +209,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$textItem->setStatus( 1 );
 
 
-		$productListTypeManager = MShop_Factory::createManager( $context, 'product/list/type' );
+		$productListTypeManager = MShop_Factory::createManager( $context, 'product/lists/type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
@@ -223,7 +223,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		}
 
 
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
 
 		$productListItem = $productListManager->createItem();
 		$productListItem->setTypeId( $productListTypeItem->getId() );
