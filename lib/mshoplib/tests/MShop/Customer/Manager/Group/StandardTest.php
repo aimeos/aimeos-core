@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Common\Manager\Group;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object = null;
 	private $editor = '';
@@ -14,10 +15,10 @@ class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
 
-		$this->object = new MShop_Customer_Manager_Group_Standard( $context );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Group\Standard( $context );
 	}
 
 
@@ -36,7 +37,7 @@ class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -44,7 +45,7 @@ class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Customer_Item_Group_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Group\\Iface', $item );
 	}
 
 
@@ -56,7 +57,7 @@ class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No group item with label "Unitgroup" found' );
+			throw new \Exception( 'No group item with label "Unitgroup" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -98,14 +99,14 @@ class MShop_Common_Manager_Group_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 

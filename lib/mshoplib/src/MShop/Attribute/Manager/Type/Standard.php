@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Type;
+
+
 /**
  * Default attribute type manager for creating and handling attribute type items.
  * @package MShop
  * @subpackage Attribute
  */
-class MShop_Attribute_Manager_Type_Standard
-	extends MShop_Common_Manager_Type_Base
-	implements MShop_Attribute_Manager_Type_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Type\Base
+	implements \Aimeos\MShop\Attribute\Manager\Type\Iface
 {
 	private $searchConfig = array(
 		'attribute.type.id' => array(
@@ -24,7 +27,7 @@ class MShop_Attribute_Manager_Type_Standard
 			'internalcode' => 'mattty."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_type" AS mattty ON ( matt."typeid" = mattty."id" )' ),
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.type.siteid' => array(
@@ -32,7 +35,7 @@ class MShop_Attribute_Manager_Type_Standard
 			'internalcode' => 'mattty."siteid"',
 			'label' => 'Attribute type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.type.code' => array(
@@ -40,49 +43,49 @@ class MShop_Attribute_Manager_Type_Standard
 			'code' => 'attribute.type.code',
 			'internalcode' => 'mattty."code"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.type.domain' => array(
 			'label' => 'Attribute type domain',
 			'code' => 'attribute.type.domain',
 			'internalcode' => 'mattty."domain"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.type.label' => array(
 			'code' => 'attribute.type.label',
 			'internalcode' => 'mattty."label"',
 			'label' => 'Attribute type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.type.status' => array(
 			'code' => 'attribute.type.status',
 			'internalcode' => 'mattty."status"',
 			'label' => 'Attribute type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'attribute.type.ctime'=> array(
 			'code'=>'attribute.type.ctime',
 			'internalcode'=>'mattty."ctime"',
 			'label'=>'Attribute type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.type.mtime'=> array(
 			'code'=>'attribute.type.mtime',
 			'internalcode'=>'mattty."mtime"',
 			'label'=>'Attribute type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.type.editor'=> array(
 			'code'=>'attribute.type.editor',
 			'internalcode'=>'mattty."editor"',
 			'label'=>'Attribute type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -90,9 +93,9 @@ class MShop_Attribute_Manager_Type_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
@@ -119,7 +122,7 @@ class MShop_Attribute_Manager_Type_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -151,7 +154,7 @@ class MShop_Attribute_Manager_Type_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -165,11 +168,11 @@ class MShop_Attribute_Manager_Type_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Attribute_Manager_Type_Standard
+		 *  \Aimeos\MShop\Attribute\Manager\Type\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Attribute_Manager_Type_Mytype
+		 *  \Aimeos\MShop\Attribute\Manager\Type\Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -204,7 +207,7 @@ class MShop_Attribute_Manager_Type_Standard
 		 *  mshop/attribute/manager/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the attribute type manager.
 		 *
 		 * @param array List of decorator names
@@ -224,12 +227,12 @@ class MShop_Attribute_Manager_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute type manager.
 		 *
 		 *  mshop/attribute/manager/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the attribute controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the attribute controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -248,12 +251,12 @@ class MShop_Attribute_Manager_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute type manager.
 		 *
 		 *  mshop/attribute/manager/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the attribute
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the attribute
 		 * controller.
 		 *
 		 * @param array List of decorator names

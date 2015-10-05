@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Common class for all cache classes.
  *
  * @package MW
  * @subpackage Cache
  */
-abstract class MW_Cache_Base
-	extends MW_Common_Manager_Base
-	implements MW_Cache_Iface
+abstract class Base
+	extends \Aimeos\MW\Common\Manager\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	/**
 	 * Removes all expired cache entries.
 	 *
 	 * @inheritDoc
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function cleanup()
 	{
@@ -36,7 +39,7 @@ abstract class MW_Cache_Base
 	 * @inheritDoc
 	 *
 	 * @param string $key Key string that identifies the single cache entry
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function delete( $key )
 	{
@@ -53,7 +56,7 @@ abstract class MW_Cache_Base
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key. If no value for the
 	 * key is found in the cache, the given default value is returned
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function get( $key, $default = null )
 	{
@@ -78,12 +81,12 @@ abstract class MW_Cache_Base
 	 * 	given value in the cache
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null )
 	{
 		if( !is_string( $key ) ) {
-			throw new MW_Cache_Exception( 'Key is not a string' );
+			throw new \Aimeos\MW\Cache\Exception( 'Key is not a string' );
 		}
 
 		$expireList = ( $expires !== null ? array( $key => $expires ) : array() );

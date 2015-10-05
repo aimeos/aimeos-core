@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item\Group;
+
+
 /**
  * Interface for customer group objects
  *
  * @package MShop
  * @subpackage Customer
  */
-interface MShop_Customer_Item_Group_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the code of the customer group

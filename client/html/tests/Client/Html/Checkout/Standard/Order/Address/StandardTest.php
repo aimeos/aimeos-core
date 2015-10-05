@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order\Address;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Order_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Order_Address_StandardTest extends PHPUnit_F
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Order_Address_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Order\Address\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Order_Address_StandardTest extends PHPUnit_F
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -56,22 +58,22 @@ class Client_Html_Checkout_Standard_Order_Address_StandardTest extends PHPUnit_F
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 		$addrManager = $manager->getSubManager( 'address' );
 
 		$search = $manager->createSearch();
@@ -79,16 +81,16 @@ class Client_Html_Checkout_Standard_Order_Address_StandardTest extends PHPUnit_F
 		$result = $manager->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer item found' );
+			throw new \Exception( 'No customer item found' );
 		}
 
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setId( null );
 
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$basketCntl = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->orderBasket = $basketCntl->get();
 		$view->orderBasket->setCustomerId( $customerItem->getId() );
 		$this->object->setView( $view );

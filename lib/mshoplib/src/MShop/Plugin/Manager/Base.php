@@ -8,38 +8,41 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Manager;
+
+
 /**
  * Abstract class for plugin managers.
  *
  * @package MShop
  * @subpackage Service
  */
-abstract class MShop_Plugin_Manager_Base
-	extends MShop_Common_Manager_Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
 {
-	protected function addPluginDecorators( MShop_Plugin_Item_Iface $serviceItem,
-		MShop_Plugin_Provider_Iface $provider, $names )
+	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $serviceItem,
+		\Aimeos\MShop\Plugin\Provider\Iface $provider, $names )
 	{
-		$iface = 'MShop_Plugin_Provider_Decorator_Iface';
-		$classprefix = 'MShop_Plugin_Provider_Decorator_';
+		$iface = '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\Iface';
+		$classprefix = '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\';
 
 		foreach( $names as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$provider = new $classname( $this->getContext(), $serviceItem, $provider );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );
-				throw new MShop_Plugin_Exception( $msg );
+				throw new \Aimeos\MShop\Plugin\Exception( $msg );
 			}
 		}
 

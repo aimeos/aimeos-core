@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria;
+
+
 /**
  * SQL search class
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
+class SQL extends \Aimeos\MW\Common\Criteria\Base
 {
 	private $conditions;
 	private $sortations = array();
@@ -26,9 +29,9 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	/**
 	 * Initializes the SQL search object
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection object
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
 	 */
-	public function __construct( MW_DB_Connection_Iface $conn )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn )
 	{
 		$this->conn = $conn;
 		$this->conditions = $this->compare( '==', '1', '1' );
@@ -45,11 +48,11 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	 *
 	 * @param string $operator One of the known operators
 	 * @param array $list List of expression objects that should be combined
-	 * @return MW_Common_Criteria_Expression_Combine_Iface Combine expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Combine\Iface Combine expression object
 	 */
 	public function combine( $operator, array $list )
 	{
-		return new MW_Common_Criteria_Expression_Combine_SQL( $operator, $list );
+		return new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( $operator, $list );
 	}
 
 
@@ -69,11 +72,11 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for comparison
 	 * @param mixed $value Value the variable or column should be compared to
-	 * @return MW_Common_Criteria_Expression_Compare_Iface Compare expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Compare\Iface Compare expression object
 	 */
 	public function compare( $operator, $name, $value )
 	{
-		return new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, $operator, $name, $value );
+		return new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, $operator, $name, $value );
 	}
 
 
@@ -86,11 +89,11 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	 *
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for sorting
-	 * @return MW_Common_Criteria_Expression_Sort_Iface Sort expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Sort\Iface Sort expression object
 	 */
 	public function sort( $operator, $name )
 	{
-		return new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, $operator, $name );
+		return new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, $operator, $name );
 	}
 
 
@@ -102,9 +105,9 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	public function getOperators()
 	{
 		return array(
-			'combine' => MW_Common_Criteria_Expression_Combine_SQL::getOperators(),
-			'compare' => MW_Common_Criteria_Expression_Compare_SQL::getOperators(),
-			'sort' => MW_Common_Criteria_Expression_Sort_SQL::getOperators(),
+			'combine' => \Aimeos\MW\Common\Criteria\Expression\Combine\SQL::getOperators(),
+			'compare' => \Aimeos\MW\Common\Criteria\Expression\Compare\SQL::getOperators(),
+			'sort' => \Aimeos\MW\Common\Criteria\Expression\Sort\SQL::getOperators(),
 		);
 	}
 
@@ -114,12 +117,12 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	 *
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression string for searching
 	 */
 	public function getConditionString( array $types, array $translations = array(), array $plugins = array() )
 	{
-		$types['1'] = MW_DB_Statement_Base::PARAM_INT;
+		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 
 		if( ( $string = $this->conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
 			return $string;
@@ -132,7 +135,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	/**
 	 * Returns the original condition expression objects.
 	 *
-	 * @return MW_Common_Criteria_Expression_Iface Original expression objects
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Iface Original expression objects
 	 */
 	public function getConditions()
 	{
@@ -143,13 +146,13 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	/**
 	 * Sets the expression objects.
 	 *
-	 * @param MW_Common_Criteria_Expression_Iface $conditions Expression object
-	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface $conditions Expression object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setConditions( MW_Common_Criteria_Expression_Iface $conditions )
+	public function setConditions( \Aimeos\MW\Common\Criteria\Expression\Iface $conditions )
 	{
-		if( $conditions instanceof MW_Common_Criteria_Expression_Sort_Iface ) {
-			throw new MW_Common_Exception( 'Sortation objects are not allowed' );
+		if( $conditions instanceof \Aimeos\MW\Common\Criteria\Expression\Sort\Iface ) {
+			throw new \Aimeos\MW\Common\Exception( 'Sortation objects are not allowed' );
 		}
 
 		$this->conditions = $conditions;
@@ -171,7 +174,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 			reset( $types );
 
 			if( ( $name = key( $types ) ) === false ) {
-				throw new MW_Common_Exception( 'No sortation types available' );
+				throw new \Aimeos\MW\Common\Exception( 'No sortation types available' );
 			}
 
 			return $this->sort( '+', $name )->toString( $types, $translations );
@@ -205,12 +208,12 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param MW_Common_Criteria_Expression_Sort_SQL[] $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Iface
-	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortations )
 	{
-		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Expression_Sort_Iface', $sortations );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Sort\\Iface', $sortations );
 
 		$this->sortations = $sortations;
 		return $this;
@@ -244,7 +247,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	 *
 	 * @param integer $start Start number of the items
 	 * @param integer $size Number of items
-	 * @return MW_Common_Criteria_SQL Object instance for fluent interface
+	 * @return \Aimeos\MW\Common\Criteria\SQL Object instance for fluent interface
 	 */
 	public function setSlice( $start, $size = 100 )
 	{
@@ -258,7 +261,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Base
 	/**
 	 * Returns the connection object.
 	 *
-	 * return MW_DB_Connection_Iface Connection object
+	 * return \Aimeos\MW\DB\Connection\Iface Connection object
 	 */
 	public function getConnection()
 	{

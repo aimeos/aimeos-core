@@ -7,18 +7,21 @@
  * @subpackage Service
  */
 
+namespace Aimeos\MShop\Service\Provider\Delivery;
+
+
 /**
  * Interface with specific methods for delivery providers.
  *
  * @package MShop
  * @subpackage Service
  */
-interface MShop_Service_Provider_Delivery_Iface extends MShop_Service_Provider_Factory_Iface
+interface Iface extends \Aimeos\MShop\Service\Provider\Factory\Iface
 {
 	/**
 	 * Sends the order details to the ERP system for further processing.
 	 *
-	 * @param MShop_Order_Item_Iface $order Order invoice object to process
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
 	 */
-	public function process( MShop_Order_Item_Iface $order );
+	public function process( \Aimeos\MShop\Order\Item\Iface $order );
 }

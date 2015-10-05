@@ -7,13 +7,16 @@
  * @subpackage Translation
  */
 
+namespace Aimeos\MW\Translation;
+
+
 /**
  * Translation interface
  *
  * @package MW
  * @subpackage Translation
  */
-interface MW_Translation_Iface
+interface Iface
 {
 	/**
 	 * Returns the translated string.
@@ -21,7 +24,7 @@ interface MW_Translation_Iface
 	 * @param string $domain Translation domain
 	 * @param string $string String to be translated
 	 * @return string The translated string
-	 * @throws @throws MW_Translation_Exception Throws exception on initialization of the translation
+	 * @throws @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
 	public function dt( $domain, $string );
 
@@ -33,7 +36,7 @@ interface MW_Translation_Iface
 	 * @param string $plural String in plural form
 	 * @param integer $number Quantity to chose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number.
-	 * @throws MW_Translation_Exception Throws exception on initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
 	public function dn( $domain, $singular, $plural, $number );
 

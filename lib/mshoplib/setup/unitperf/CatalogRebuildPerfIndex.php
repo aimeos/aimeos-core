@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Rebuilds the catalog index.
  */
-class MW_Setup_Task_CatalogRebuildPerfIndex extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogRebuildPerfIndex extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -49,7 +52,7 @@ class MW_Setup_Task_CatalogRebuildPerfIndex extends MW_Setup_Task_ProductAddBase
 	{
 		$this->msg( 'Rebuilding catalog index for performance data', 0 );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() );
 		$catalogManager->getSubManager( 'index' )->rebuildIndex();
 
 		$this->status( 'done' );

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds unique indexes to all catalog index tables.
  */
-class MW_Setup_Task_CatalogAddIndexUniqueIndexes extends MW_Setup_Task_Base
+class CatalogAddIndexUniqueIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog_index_attribute' => array(

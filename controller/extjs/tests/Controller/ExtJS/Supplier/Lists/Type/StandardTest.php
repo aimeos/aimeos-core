@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Supplier\Lists\Type;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Supplier_Lists_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Supplier_Lists_Type_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Supplier_Lists_Type_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Supplier\Lists\Type\Standard( \TestHelper::getContext() );
 	}
 
 

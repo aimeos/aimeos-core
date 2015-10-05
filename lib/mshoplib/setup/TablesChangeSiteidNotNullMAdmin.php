@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes site ID to NOT NULL in madmin tables.
  */
-class MW_Setup_Task_TablesChangeSiteidNotNullMAdmin extends MW_Setup_Task_Base
+class TablesChangeSiteidNotNullMAdmin extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'madmin_job' => array(

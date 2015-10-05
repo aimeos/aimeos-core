@@ -9,13 +9,16 @@
 
 
 
+namespace Aimeos\Controller\ExtJS\Common\Load\Text;
+
+
 /**
  * ExtJS text export base class.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-abstract class Controller_ExtJS_Common_Load_Text_Base
+abstract class Base
 {
 	private $context;
 	private $textListTypes = array();
@@ -26,10 +29,10 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @param string $name Domain name of the export class
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, $name )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, $name )
 	{
 		$this->context = $context;
 		$this->name = $name;
@@ -71,23 +74,23 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 				break;
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
-				throw new Controller_ExtJS_Exception( 'The uploaded file exceeds the max. allowed filesize' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file exceeds the max. allowed filesize' );
 			case UPLOAD_ERR_PARTIAL:
-				throw new Controller_ExtJS_Exception( 'The uploaded file was only partially uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file was only partially uploaded' );
 			case UPLOAD_ERR_NO_FILE:
-				throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 			case UPLOAD_ERR_NO_TMP_DIR:
-				throw new Controller_ExtJS_Exception( 'Temporary folder is missing' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Temporary folder is missing' );
 			case UPLOAD_ERR_CANT_WRITE:
-				throw new Controller_ExtJS_Exception( 'Failed to write file to disk' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Failed to write file to disk' );
 			case UPLOAD_ERR_EXTENSION:
-				throw new Controller_ExtJS_Exception( 'File upload stopped by extension' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'File upload stopped by extension' );
 			default:
-				throw new Controller_ExtJS_Exception( 'Unknown upload error' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Unknown upload error' );
 		}
 
 		if( is_uploaded_file( $filename ) === false ) {
-			throw new Controller_ExtJS_Exception( 'File was not uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'File was not uploaded' );
 		}
 	}
 
@@ -95,16 +98,16 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Checks if the required parameter are available.
 	 *
-	 * @param stdClass $params Item object containing the parameter
+	 * @param \stdClass $params Item object containing the parameter
 	 * @param string[] $names List of names of the required parameter
-	 * @throws Controller_ExtJS_Exception if a required parameter is missing
+	 * @throws \Aimeos\Controller\ExtJS\Exception if a required parameter is missing
 	 */
-	protected function checkParams( stdClass $params, array $names )
+	protected function checkParams( \stdClass $params, array $names )
 	{
 		foreach( $names as $name )
 		{
 			if( !property_exists( $params, $name ) ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Missing parameter "%1$s"', $name ), -1 );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Missing parameter "%1$s"', $name ), -1 );
 			}
 		}
 	}
@@ -113,7 +116,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Returns the actual context item
 	 *
-	 * @return MShop_Context_Item_Iface
+	 * @return \Aimeos\MShop\Context\Item\Iface
 	 */
 	protected function getContext()
 	{
@@ -124,11 +127,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Associates the texts with the products.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object (attribute, product, etc.) for associating the list items
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function importReferences( MShop_Common_Manager_Iface $manager, array $itemTextMap, $domain )
+	protected function importReferences( \Aimeos\MShop\Common\Manager\Iface $manager, array $itemTextMap, $domain )
 	{
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
@@ -189,9 +192,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 			{
 				try
 				{
-					$iface = 'MShop_Common_Item_Type_Iface';
+					$iface = '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface';
 					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
-						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
+						throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
 					}
 
 					$item = $listManager->createItem();
@@ -202,8 +205,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 
 					$listManager->saveItem( $item );
 				}
-				catch( Exception $e ) {
-					$this->getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Base::ERR, 'import' );
+				catch( \Exception $e ) {
+					$this->getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), \Aimeos\MW\Logger\Base::ERR, 'import' );
 				}
 			}
 		}
@@ -213,11 +216,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Returns a list of list type items.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.)
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object (attribute, product, etc.)
 	 * @param string $domain Domain the list items must be associated to
-	 * @return array Associative list of list type codes and items implementing MShop_Common_Item_Type_Iface
+	 * @return array Associative list of list type codes and items implementing \Aimeos\MShop\Common\Item\Type\Iface
 	 */
-	protected function getTextListTypes( MShop_Common_Manager_Iface $manager, $domain )
+	protected function getTextListTypes( \Aimeos\MShop\Common\Manager\Iface $manager, $domain )
 	{
 		if( isset( $this->textListTypes[$domain] ) ) {
 			return $this->textListTypes[$domain];
@@ -255,7 +258,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	 * Returns a list of text type items.
 	 *
 	 * @param string $domain Domain the text items must be associated to
-	 * @return array List of text type items implementing MShop_Common_Item_Type_Iface
+	 * @return array List of text type items implementing \Aimeos\MShop\Common\Item\Type\Iface
 	 */
 	protected function getTextTypes( $domain )
 	{
@@ -265,7 +268,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 
 		$this->textTypes[$domain] = array();
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->getContext() );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->getContext() );
 		$manager = $textManager->getSubManager( 'type' );
 
 		$search = $manager->createSearch();
@@ -301,7 +304,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 		$locale = $context->getLocale();
 
 		$siteItem = null;
-		$siteManager = MShop_Locale_Manager_Factory::createManager( $context )->getSubManager( 'site' );
+		$siteManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $context )->getSubManager( 'site' );
 
 		if( $site != '' )
 		{
@@ -310,11 +313,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 			$sites = $siteManager->searchItems( $search );
 
 			if( ( $siteItem = reset( $sites ) ) === false ) {
-				throw new Controller_ExtJS_Exception( 'Site item not found.' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Site item not found.' );
 			}
 		}
 
-		$localeItem = new MShop_Locale_Item_Standard( array(), $siteItem );
+		$localeItem = new \Aimeos\MShop\Locale\Item\Standard( array(), $siteItem );
 		$localeItem->setLanguageId( $locale->getLanguageId() );
 		$localeItem->setCurrencyId( $locale->getCurrencyId() );
 
@@ -329,18 +332,18 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Imports the text content using the given text types.
 	 *
-	 * @param MW_Container_Content_Iface $contentItem Content item containing texts and associated data
+	 * @param \Aimeos\MW\Container\Content\Iface $contentItem Content item containing texts and associated data
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return void
 	 */
-	protected function importTextsFromContent( MW_Container_Content_Iface $contentItem, array $textTypeMap, $domain )
+	protected function importTextsFromContent( \Aimeos\MW\Container\Content\Iface $contentItem, array $textTypeMap, $domain )
 	{
 		$count = 0;
 		$codeIdMap = array();
 		$context = $this->getContext();
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
-		$manager = MShop_Factory::createManager( $context, $domain );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
 		$contentItem->next(); // skip description row
 
@@ -367,20 +370,20 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Inserts a single text item from the given import row.
 	 *
-	 * @param MShop_Common_Manager_Iface $textManager Text manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $textManager Text manager object
 	 * @param array $row Row from import file
 	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 * @throws Controller_ExtJS_Exception If text type is invalid
+	 * @throws \Aimeos\Controller\ExtJS\Exception If text type is invalid
 	 */
-	private function importTextRow( MShop_Common_Manager_Iface $textManager, array $row, array $textTypeMap,
+	private function importTextRow( \Aimeos\MShop\Common\Manager\Iface $textManager, array $row, array $textTypeMap,
 		array $codeIdMap, $domain )
 	{
 		if( count( $row ) !== 7 )
 		{
 			$msg = sprintf( 'Invalid row from %1$s text import: %2$s', $domain, print_r( $row, true ) );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN, 'import' );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'import' );
 		}
 
 		try
@@ -388,15 +391,15 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 			$textType = isset( $row[4] ) ? $row[4] : null;
 
 			if( !isset( $textTypeMap[$textType] ) ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 			}
 
 			$codeIdMap = $this->saveTextItem( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::ERR, 'import' );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::ERR, 'import' );
 		}
 
 		return $codeIdMap;
@@ -406,14 +409,14 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	/**
 	 * Saves a text item from the given data.
 	 *
-	 * @param MShop_Common_Manager_Iface $textManager Text manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $textManager Text manager object
 	 * @param array $row Row from import file
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return array Updated two dimensional associated list of codes and text IDs as key
 	 */
-	private function saveTextItem( MShop_Common_Manager_Iface $textManager, array $row,
+	private function saveTextItem( \Aimeos\MShop\Common\Manager\Iface $textManager, array $row,
 		array $textTypeMap, array $codeIdMap, $domain )
 	{
 		$value = isset( $row[6] ) ? $row[6] : '';
@@ -448,7 +451,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 	 *
 	 * @param string $resource Path to the file
 	 * @param string $key Configuration key prefix for the container type/format/options keys
-	 * @return MW_Container_Iface Container item
+	 * @return \Aimeos\MW\Container\Iface Container item
 	 */
 	protected function createContainer( $resource, $key )
 	{
@@ -458,6 +461,6 @@ abstract class Controller_ExtJS_Common_Load_Text_Base
 		$format = $config->get( $key . '/format', 'CSV' );
 		$options = $config->get( $key . '/options', array() );
 
-		return MW_Container_Factory::getContainer( $resource, $type, $format, $options );
+		return \Aimeos\MW\Container\Factory::getContainer( $resource, $type, $format, $options );
 	}
 }

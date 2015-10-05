@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Common;
+
+
 /**
  * Frontend controller interface.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Common_Iface
-	extends Controller_Frontend_Iface
+interface Iface
+	extends \Aimeos\Controller\Frontend\Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 
 }

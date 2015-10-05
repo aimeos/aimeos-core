@@ -1,12 +1,14 @@
 <?php
 
+namespace Aimeos\Client\Html\Email\Delivery\Text\Summary\Coupon;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Email_Delivery_Text_Summary_Coupon_StandardTest
-extends PHPUnit_Framework_TestCase
+class StandardTest
+extends \PHPUnit_Framework_TestCase
 {
 	private static $orderItem;
 	private static $orderBaseItem;
@@ -17,7 +19,7 @@ extends PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderManager->createSearch();
@@ -25,7 +27,7 @@ extends PHPUnit_Framework_TestCase
 		$result = $orderManager->searchItems( $search );
 
 		if( ( self::$orderItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
 		self::$orderBaseItem = $orderBaseManager->load( self::$orderItem->getBaseId() );
@@ -40,16 +42,16 @@ extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = \TestHelper::getContext();
+		$this->emailMock = $this->getMock( '\\Aimeos\\MW\\Mail\\Message\\None' );
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Email_Delivery_Text_Summary_Coupon_Standard( $this->context, $paths );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Email\Delivery\Text\Summary\Coupon\Standard( $this->context, $paths );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->extOrderItem = self::$orderItem;
 		$view->extOrderBaseItem = self::$orderBaseItem;
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Standard( $view, $this->emailMock ) );
+		$view->addHelper( 'mail', new \Aimeos\MW\View\Helper\Mail\Standard( $view, $this->emailMock ) );
 
 		$this->object->setView( $view );
 	}
@@ -84,14 +86,14 @@ extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 

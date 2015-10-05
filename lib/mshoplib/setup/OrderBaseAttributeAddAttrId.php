@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds attrid column to mshop_order_base_*_attr tables.
  */
-class MW_Setup_Task_OrderBaseAttributeAddAttrId extends MW_Setup_Task_Base
+class OrderBaseAttributeAddAttrId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_product_attr' => 'ALTER TABLE "mshop_order_base_product_attr" ADD "attrid" VARCHAR(32) NOT NULL COLLATE utf8_bin AFTER "siteid"',

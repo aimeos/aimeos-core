@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes product tag langid column to allow NULL values.
  */
-class MW_Setup_Task_ProductTagLangidNull extends MW_Setup_Task_Base
+class ProductTagLangidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_product_tag" CHANGE "langid" "langid" CHAR( 2 ) NULL',

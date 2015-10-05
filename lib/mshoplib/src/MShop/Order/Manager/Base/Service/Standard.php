@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Service;
+
+
 /**
  * Default Manager Order service
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Service_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Service_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Base\Service\Iface
 {
 	private $searchConfig = array(
 		'order.base.service.id' => array(
@@ -25,7 +28,7 @@ class MShop_Order_Manager_Base_Service_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service" AS mordbase ON ( mordba."id" = mordbase."baseid" )' ),
 			'label' => 'Order base service ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.siteid' => array(
@@ -33,7 +36,7 @@ class MShop_Order_Manager_Base_Service_Standard
 			'internalcode' => 'mordbase."siteid"',
 			'label' => 'Order base service site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.baseid' => array(
@@ -41,7 +44,7 @@ class MShop_Order_Manager_Base_Service_Standard
 			'internalcode' => 'mordbase."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.serviceid' => array(
@@ -49,84 +52,84 @@ class MShop_Order_Manager_Base_Service_Standard
 			'internalcode' => 'mordbase."servid"',
 			'label' => 'Order base service original service ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.type' => array(
 			'code' => 'order.base.service.type',
 			'internalcode' => 'mordbase."type"',
 			'label' => 'Order base service type',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.code' => array(
 			'code' => 'order.base.service.code',
 			'internalcode' => 'mordbase."code"',
 			'label' => 'Order base service code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.name' => array(
 			'code' => 'order.base.service.name',
 			'internalcode' => 'mordbase."name"',
 			'label' => 'Order base service name',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.mediaurl' => array(
 			'code'=>'order.base.service.mediaurl',
 			'internalcode'=>'mordbase."mediaurl"',
 			'label'=>'Order base service media url',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
 			'internalcode' => 'mordbase."price"',
 			'label' => 'Order base service price',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.costs' => array(
 			'code' => 'order.base.service.costs',
 			'internalcode' => 'mordbase."costs"',
 			'label' => 'Order base service shipping',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.rebate' => array(
 			'code' => 'order.base.service.rebate',
 			'internalcode' => 'mordbase."rebate"',
 			'label' => 'Order base service rebate',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxrate' => array(
 			'code' => 'order.base.service.taxrate',
 			'internalcode' => 'mordbase."taxrate"',
 			'label' => 'Order base service taxrate',
 			'type' => 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.mtime' => array(
 			'code' => 'order.base.service.mtime',
 			'internalcode' => 'mordbase."mtime"',
 			'label' => 'Order base service modification time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.ctime'=> array(
 			'code'=>'order.base.service.ctime',
 			'internalcode'=>'mordbase."ctime"',
 			'label'=>'Order base service create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'order.base.service.editor'=> array(
 			'code'=>'order.base.service.editor',
 			'internalcode'=>'mordbase."editor"',
 			'label'=>'Order base service editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 	);
 
@@ -134,9 +137,9 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -146,11 +149,11 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/service/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -219,12 +222,12 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Creates new order service item object.
 	 *
-	 * @return MShop_Order_Item_Base_Service_Iface New object
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface New object
 	 */
 	public function createItem()
 	{
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $priceManager->createItem(), $values );
@@ -234,14 +237,14 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Adds or updates an order base service item to the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item Order base service object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Order base service object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Service_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -323,22 +326,22 @@ class MShop_Order_Manager_Base_Service_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 5, $item->getCode(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 6, $item->getName(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 7, $item->getMediaUrl(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 8, $price->getValue(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 9, $price->getCosts(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 10, $price->getRebate(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 11, $price->getTaxRate(), MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getServiceId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 4, $item->getType(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 5, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 6, $item->getName(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 7, $item->getMediaUrl(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 8, $price->getValue(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 9, $price->getCosts(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 10, $price->getRebate(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 11, $price->getTaxRate(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$stmt->bind( 12, $date); // mtime
 			$stmt->bind( 13, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 14, $date ); // ctime
@@ -384,7 +387,7 @@ class MShop_Order_Manager_Base_Service_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -433,8 +436,8 @@ class MShop_Order_Manager_Base_Service_Standard
 	 *
 	 * @param integer $id Order service ID
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Service_Iface Returns order base service item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Returns order base service item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -445,16 +448,16 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Searches for order service items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Base_Service_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -463,7 +466,7 @@ class MShop_Order_Manager_Base_Service_Standard
 		try
 		{
 			$required = array( 'order.base.service' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/service/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -580,7 +583,7 @@ class MShop_Order_Manager_Base_Service_Standard
 					$items[$row['id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -588,7 +591,7 @@ class MShop_Order_Manager_Base_Service_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -614,7 +617,7 @@ class MShop_Order_Manager_Base_Service_Standard
 	 * Returns the search attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -646,7 +649,7 @@ class MShop_Order_Manager_Base_Service_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation (from configuration or "Default" if null)
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g attribute
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g attribute
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -660,11 +663,11 @@ class MShop_Order_Manager_Base_Service_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Base_Service_Standard
+		 *  \Aimeos\MShop\Order\Manager\Base\Service\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Base_Service_Myservice
+		 *  \Aimeos\MShop\Order\Manager\Base\Service\Myservice
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -699,7 +702,7 @@ class MShop_Order_Manager_Base_Service_Standard
 		 *  mshop/order/manager/base/service/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order base service manager.
 		 *
 		 * @param array List of decorator names
@@ -719,12 +722,12 @@ class MShop_Order_Manager_Base_Service_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base service manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base service manager.
 		 *
 		 *  mshop/order/manager/base/service/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -743,12 +746,12 @@ class MShop_Order_Manager_Base_Service_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base service manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base service manager.
 		 *
 		 *  mshop/order/manager/base/service/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -766,15 +769,15 @@ class MShop_Order_Manager_Base_Service_Standard
 	/**
 	 * Creates a new order service item object initialized with given parameters.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price object
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
 	 * @param array $values Associative list of values from the database
 	 * @param array $attributes List of order service attribute items
-	 * @return MShop_Order_Item_Base_Service_Iface Order item service object
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order item service object
 	 */
-	protected function createItemBase( MShop_Price_Item_Iface $price,
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price,
 		array $values = array(), array $attributes = array() )
 	{
-		return new MShop_Order_Item_Base_Service_Standard( $price, $values, $attributes );
+		return new \Aimeos\MShop\Order\Item\Base\Service\Standard( $price, $values, $attributes );
 	}
 
 
@@ -782,7 +785,7 @@ class MShop_Order_Manager_Base_Service_Standard
 	 * Searches for attribute items connected with order service item.
 	 *
 	 * @param string[] $ids List of order service item IDs
-	 * @return array List of items implementing MShop_Order_Item_Base_Service_Attribute_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
 	protected function getAttributeItems( $ids )
 	{

@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Void caching implementation.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_None
-	extends MW_Cache_Base
-	implements MW_Cache_Iface
+class None
+	extends \Aimeos\MW\Cache\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	/**
 	 * Removes the cache entry identified by the given key.
@@ -62,7 +65,7 @@ class MW_Cache_None
 	 * before new entries are added to the cache and you don't know which
 	 * entries are still in the cache.
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush()
 	{

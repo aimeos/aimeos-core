@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Catalog;
+
+
 /**
  * Category cache for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Cache_Catalog_Standard
-	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Cache\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface
 {
 	private $categories = array();
 
@@ -24,13 +27,13 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
-		$manager = MShop_Factory::createManager( $context, 'catalog' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'catalog' );
 		$result = $manager->searchItems( $manager->createSearch() );
 
 		foreach( $result as $id => $item ) {
@@ -52,7 +55,7 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_Standard
 			return $this->categories[$code];
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'catalog' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', $code ) );
@@ -70,9 +73,9 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_Standard
 	/**
 	 * Adds the catalog item to the cache
 	 *
-	 * @param MShop_Common_Item_Iface $item Catalog object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Catalog object
 	 */
-	public function set( MShop_Common_Item_Iface $item )
+	public function set( \Aimeos\MShop\Common\Item\Iface $item )
 	{
 		$this->categories[ $item->getCode() ] = $item->getId();
 	}

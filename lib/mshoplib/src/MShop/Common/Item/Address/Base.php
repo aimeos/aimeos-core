@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Address;
+
+
 /**
  * Abstract class for address items.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Item_Address_Base extends MShop_Common_Item_Base
+abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
 	/**
 	 * Saluation is not known.
@@ -115,18 +118,18 @@ abstract class MShop_Common_Item_Address_Base extends MShop_Common_Item_Base
 	/**
 	 * Returns the salutation constant for the person described by the address.
 	 *
-	 * @return string Saluatation constant defined in MShop_Common_Item_Address_Base
+	 * @return string Saluatation constant defined in \Aimeos\MShop\Common\Item\Address\Base
 	 */
 	public function getSalutation()
 	{
-		return ( isset( $this->values['salutation'] ) ? (string) $this->values['salutation'] : MShop_Common_Item_Address_Base::SALUTATION_UNKNOWN );
+		return ( isset( $this->values['salutation'] ) ? (string) $this->values['salutation'] : \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN );
 	}
 
 
 	/**
 	 * Sets the new salutation for the person described by the address.
 	 *
-	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Base
+	 * @param string $salutation Salutation constant defined in \Aimeos\MShop\Common\Item\Address\Base
 	 */
 	public function setSalutation( $salutation )
 	{
@@ -460,7 +463,7 @@ abstract class MShop_Common_Item_Address_Base extends MShop_Common_Item_Base
 		if( $email == $this->getEmail() ) { return; }
 
 		if( $email !== '' && preg_match( '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
 		$this->values['email'] = (string) $email;
@@ -516,7 +519,7 @@ abstract class MShop_Common_Item_Address_Base extends MShop_Common_Item_Base
 		$pattern = '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#';
 
 		if( $website !== '' && preg_match( $pattern, $website ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
 		$this->values['website'] = (string) $website;
@@ -627,21 +630,21 @@ abstract class MShop_Common_Item_Address_Base extends MShop_Common_Item_Base
 	/**
 	 * Checks the given address salutation is valid
 	 *
-	 * @param integer $value Address salutation defined in MShop_Common_Item_Address_Base
-	 * @throws MShop_Common_Exception If salutation is invalid
+	 * @param integer $value Address salutation defined in \Aimeos\MShop\Common\Item\Address\Base
+	 * @throws \Aimeos\MShop\Common\Exception If salutation is invalid
 	 */
 	protected function checkSalutation( $value )
 	{
 		switch( $value )
 		{
-			case MShop_Common_Item_Address_Base::SALUTATION_UNKNOWN:
-			case MShop_Common_Item_Address_Base::SALUTATION_COMPANY:
-			case MShop_Common_Item_Address_Base::SALUTATION_MRS:
-			case MShop_Common_Item_Address_Base::SALUTATION_MISS:
-			case MShop_Common_Item_Address_Base::SALUTATION_MR:
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN:
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY:
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS:
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS:
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR:
 				return;
 			default:
-				throw new MShop_Common_Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
+				throw new \Aimeos\MShop\Common\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

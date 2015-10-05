@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Product;
+
+
 /**
  * Product processor for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Processor_Product_Standard
-	extends Controller_Common_Product_Import_Csv_Processor_Base
-	implements Controller_Common_Product_Import_Csv_Processor_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Processor\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface
 {
 	private $cache;
 	private $listTypes;
@@ -25,12 +28,12 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
-	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $object Decorated processor
+	 * @param \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object Decorated processor
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Iface $object = null )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $mapping,
+		\Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object = null )
 	{
 		parent::__construct( $context, $mapping, $object );
 
@@ -70,15 +73,15 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 	/**
 	 * Saves the product related data to the storage
 	 *
-	 * @param MShop_Product_Item_Iface $product Product item with associated items
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with associated items
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function process( MShop_Product_Item_Iface $product, array $data )
+	public function process( \Aimeos\MShop\Product\Item\Iface $product, array $data )
 	{
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'product' );
-		$listManager = MShop_Factory::createManager( $context, 'product/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
 		$this->cache->set( $product );
@@ -107,7 +110,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 					if( ( $prodid = $this->cache->get( $code ) ) === null )
 					{
 						$msg = 'No product for code "%1$s" available when importing product with code "%2$s"';
-						throw new Controller_Jobs_Exception( sprintf( $msg, $code, $product->getCode() ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $code, $product->getCode() ) );
 					}
 
 					if( ( $listItem = array_shift( $listItems ) ) === null ) {
@@ -128,7 +131,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 
 			$manager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$manager->rollback();
 			throw $e;
@@ -141,11 +144,11 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 	/**
 	 * Returns the pool of list items that can be reassigned
 	 *
-	 * @param MShop_Product_Item_Iface $product Product item object
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item object
 	 * @param array $map List of associative arrays containing the chunked properties
-	 * @return array List of list items implementing MShop_Common_Item_Lists_Iface
+	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	protected function getListItemPool( MShop_Product_Item_Iface $product, array $map )
+	protected function getListItemPool( \Aimeos\MShop\Product\Item\Iface $product, array $map )
 	{
 		$pos = 0;
 		$delete = array();
@@ -167,7 +170,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_Standard
 			$pos++;
 		}
 
-		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 		$listManager->deleteItems( $delete );
 
 		return $listItems;

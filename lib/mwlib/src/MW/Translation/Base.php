@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Translation;
+
+
 /**
  * Abstract class for the translation interface
  *
  * @package MW
  * @subpackage Translation
  */
-abstract class MW_Translation_Base
+abstract class Base
 {
 	private $locale;
 
@@ -27,7 +30,7 @@ abstract class MW_Translation_Base
 	public function __construct( $locale )
 	{
 		if( preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $locale ) !== 1 ) {
-			throw new MW_Translation_Exception( sprintf( 'Invalid locale "%1$s"', $locale ) );
+			throw new \Aimeos\MW\Translation\Exception( sprintf( 'Invalid locale "%1$s"', $locale ) );
 		}
 
 		$this->locale = (string) $locale;
@@ -53,7 +56,7 @@ abstract class MW_Translation_Base
 	 * @param array $paths Paths of the translation files.
 	 * @param string $locale Locale to be used
 	 * @return array List of locations to the translation files
-	 * @throws MW_Translation_Exception If translation file doesn't exist
+	 * @throws \Aimeos\MW\Translation\Exception If translation file doesn't exist
 	 */
 	protected function getTranslationFileLocations( array $paths, $locale )
 	{

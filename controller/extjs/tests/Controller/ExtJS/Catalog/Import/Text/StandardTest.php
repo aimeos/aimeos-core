@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog\Import\Text;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $testdir;
@@ -22,15 +23,15 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->testfile = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
+			throw new \Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
 		}
 
-		$this->object = new Controller_ExtJS_Catalog_Import_Text_Standard( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Import\Text\Standard( $this->context );
 	}
 
 
@@ -57,14 +58,14 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 
 	public function testImportFromCSVFile()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'root' ) );
 		$items = $catalogManager->searchItems( $search );
 
 		if( ( $root = reset( $items ) ) === false ) {
-			throw new Controller_ExtJS_Exception( 'No item found for catalog code "root"' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No item found for catalog code "root"' );
 		}
 		$id = $root->getId();
 
@@ -83,26 +84,26 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 		$filename = PATH_TESTS . $ds . 'tmp' . $ds . 'catalog-import.zip';
 
 		if( file_put_contents( PATH_TESTS . $ds . 'tmp' . $ds . $csv, implode( '', $data ) ) === false ) {
-			throw new Exception( sprintf( 'Unable to write test file "%1$s"', $csv ) );
+			throw new \Exception( sprintf( 'Unable to write test file "%1$s"', $csv ) );
 		}
 
-		$zip = new ZipArchive();
-		$zip->open( $filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE );
+		$zip = new \ZipArchive();
+		$zip->open( $filename, \ZipArchive::CREATE | \ZipArchive::OVERWRITE );
 		$zip->addFile( PATH_TESTS . $ds . 'tmp' . $ds . $csv, $csv );
 		$zip->close();
 
 		if( unlink( PATH_TESTS . $ds . 'tmp' . $ds . $csv ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->object->importFile( $params );
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -145,14 +146,14 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 		$this->assertEquals( 6, count( $listItems ) );
 
 		if( file_exists( $filename ) !== false ) {
-			throw new Exception( 'Import file was not removed' );
+			throw new \Exception( 'Import file was not removed' );
 		}
 	}
 
 
 	public function testUploadFile()
 	{
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context );
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
@@ -165,7 +166,7 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->items = $this->testfile;
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
@@ -195,13 +196,13 @@ class Controller_ExtJS_Catalog_Import_Text_StandardTest extends PHPUnit_Framewor
 
 	public function testUploadFileExeptionNoFiles()
 	{
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->items = 'test.txt';
 		$params->site = 'unittest';
 
 		$_FILES = array();
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->uploadFile( $params );
 	}
 }

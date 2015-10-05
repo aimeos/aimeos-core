@@ -8,25 +8,28 @@
  */
 
 
+namespace Aimeos\MAdmin\Common\Factory;
+
+
 /**
  * Common methods for all factories.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MAdmin_Common_Factory_Base
-	extends MShop_Common_Factory_Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Factory\Base
 {
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Iface $manager Manager object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addManagerDecorators( MShop_Context_Item_Iface $context,
-		MShop_Common_Manager_Iface $manager, $domain )
+	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Common\Manager\Iface $manager, $domain )
 	{
 		$config = $context->getConfig();
 
@@ -45,8 +48,8 @@ abstract class MAdmin_Common_Factory_Base
 		 *
 		 * This would wrap the decorators named "decorator1" and "decorator2" around
 		 * all controller instances in that order. The decorator classes would be
-		 * "MShop_Common_Manager_Decorator_Decorator1" and
-		 * "MShop_Common_Manager_Decorator_Decorator2".
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -62,14 +65,14 @@ abstract class MAdmin_Common_Factory_Base
 			}
 		}
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/global', array() );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Decorator\\';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/local', array() );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 

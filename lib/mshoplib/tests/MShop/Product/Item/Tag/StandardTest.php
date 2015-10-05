@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Tag;
+
+
 /**
- * Test class for MShop_Product_Item_Tag_Standard.
+ * Test class for \Aimeos\MShop\Product\Item\Tag\Standard.
  */
-class MShop_Product_Item_Tag_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -35,7 +38,7 @@ class MShop_Product_Item_Tag_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Product_Item_Tag_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Product\Item\Tag\Standard( $this->values );
 	}
 
 	/**
@@ -129,7 +132,7 @@ class MShop_Product_Item_Tag_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Product_Item_Tag_Standard();
+		$item = new \Aimeos\MShop\Product\Item\Tag\Standard();
 
 		$list = array(
 			'product.tag.id' => 1,

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
  * Base class for all translator decorators.
  *
  * @package MW
  * @subpackage Translation
  */
-abstract class MW_Translation_Decorator_Base
-	extends MW_Translation_Base
-	implements MW_Translation_Decorator_Iface
+abstract class Base
+	extends \Aimeos\MW\Translation\Base
+	implements \Aimeos\MW\Translation\Decorator\Iface
 {
 	private $object;
 
@@ -24,9 +27,9 @@ abstract class MW_Translation_Decorator_Base
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Iface $object Translation object or decorator
+	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
 	 */
-	public function __construct( MW_Translation_Iface $object )
+	public function __construct( \Aimeos\MW\Translation\Iface $object )
 	{
 		$this->object = $object;
 	}
@@ -88,7 +91,7 @@ abstract class MW_Translation_Decorator_Base
 	/**
 	 * Returns the wrapped translation object.
 	 *
-	 * @return MW_Translation_Iface Translation object
+	 * @return \Aimeos\MW\Translation\Iface Translation object
 	 */
 	protected function getObject()
 	{

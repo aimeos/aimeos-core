@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Order\Base\Service\Attribute;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Order_Base_Service_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Order_Base_Service_Attribute_StandardTest extends PHPUnit
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Order_Base_Service_Attribute_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Service\Attribute\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -60,14 +61,14 @@ class Controller_ExtJS_Order_Base_Service_Attribute_StandardTest extends PHPUnit
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$baseManager = $manager->getSubManager( 'base' );
 		$serviceManager = $baseManager->getSubManager( 'service' );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'OGONE' ) );
 		$results = $serviceManager->searchItems( $search );
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$saveParams = (object) array(

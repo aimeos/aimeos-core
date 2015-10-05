@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Type;
+
+
 /**
  * Interface for attribute type manager.
  *
  * @package MShop
  * @subpackage Attribute
  */
-interface MShop_Attribute_Manager_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

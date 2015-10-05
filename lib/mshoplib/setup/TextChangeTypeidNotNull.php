@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes type ID columns to NOT NULL for text table.
  */
-class MW_Setup_Task_TextChangeTypeidNotNull extends MW_Setup_Task_Base
+class TextChangeTypeidNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_text" SET "typeid" = ( SELECT type."id" FROM "mshop_text_type" type WHERE type."code" = \'default\' AND type."domain" = \'attribute\' ) WHERE "domain" = \'attribute\' AND "typeid" IS NULL',

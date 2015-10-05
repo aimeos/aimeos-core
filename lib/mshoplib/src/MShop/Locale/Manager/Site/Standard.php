@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager\Site;
+
+
 /**
  * Default implementation for managing sites.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Manager_Site_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Locale_Manager_Site_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Locale\Manager\Site\Iface
 {
 	private $cache = array();
 
@@ -27,7 +30,7 @@ class MShop_Locale_Manager_Site_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")' ),
 			'label' => 'Locale site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.siteid' => array(
@@ -35,7 +38,7 @@ class MShop_Locale_Manager_Site_Standard
 			'internalcode' => 'mlocsi."id"',
 			'label' => 'Locale site ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.code' => array(
@@ -43,56 +46,56 @@ class MShop_Locale_Manager_Site_Standard
 			'internalcode' => 'mlocsi."code"',
 			'label' => 'Locale site code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.label' => array(
 			'code' => 'locale.site.label',
 			'internalcode' => 'mlocsi."label"',
 			'label' => 'Locale site label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.config' => array(
 			'code' => 'locale.site.config',
 			'internalcode' => 'mlocsi."config"',
 			'label' => 'Locale site config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
 			'internalcode' => 'mlocsi."status"',
 			'label' => 'Locale site status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'locale.site.ctime'=> array(
 			'code'=>'locale.site.ctime',
 			'internalcode'=>'mlocsi."ctime"',
 			'label'=>'Locale site create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'locale.site.mtime'=> array(
 			'code'=>'locale.site.mtime',
 			'internalcode'=>'mlocsi."mtime"',
 			'label'=>'Locale site modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'locale.site.editor'=> array(
 			'code'=>'locale.site.editor',
 			'internalcode'=>'mlocsi."editor"',
 			'label'=>'Locale site editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'level' => array(
 			'code'=>'locale.site.level',
 			'internalcode'=>'mlocsi."level"',
 			'label'=>'Locale site tree level',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'left' => array(
@@ -100,7 +103,7 @@ class MShop_Locale_Manager_Site_Standard
 			'internalcode'=>'mlocsi."nleft"',
 			'label'=>'Locale site left value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'right' => array(
@@ -108,7 +111,7 @@ class MShop_Locale_Manager_Site_Standard
 			'internalcode'=>'mlocsi."nright"',
 			'label'=>'Locale site right value',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -117,9 +120,9 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
@@ -129,8 +132,8 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Creates a new site object.
 	 *
-	 * @return MShop_Locale_Item_Site_Iface
-	 * @throws MShop_Locale_Exception
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface
+	 * @throws \Aimeos\MShop\Locale\Exception
 	 */
 	public function createItem()
 	{
@@ -141,19 +144,19 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
-	 * @param MShop_Common_Item_Iface $item New site item for saving to the storage
+	 * @param \Aimeos\MShop\Common\Item\Iface $item New site item for saving to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @throws MShop_Locale_Exception
+	 * @throws \Aimeos\MShop\Locale\Exception
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Locale_Item_Site_Iface';
+		$iface = '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->getId() === null ) {
-			throw new MShop_Locale_Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -198,17 +201,17 @@ class MShop_Locale_Manager_Site_Standard
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $context->getEditor() );
 			$stmt->bind( 6, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -280,7 +283,7 @@ class MShop_Locale_Manager_Site_Standard
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			MShop_Factory::createManager( $context, $domain )->cleanup( $ids );
+			\Aimeos\MShop\Factory::createManager( $context, $domain )->cleanup( $ids );
 		}
 
 		/** mshop/locale/manager/site/cleanup/admin/domains
@@ -306,7 +309,7 @@ class MShop_Locale_Manager_Site_Standard
 		$default = array( 'job', 'log', 'cache' );
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			MAdmin_Factory::createManager( $context, $domain )->cleanup( $ids );
+			\Aimeos\MAdmin\Factory::createManager( $context, $domain )->cleanup( $ids );
 		}
 	}
 
@@ -316,8 +319,8 @@ class MShop_Locale_Manager_Site_Standard
 	 *
 	 * @param string $id Unique ID of the site data in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Site_Iface Returns the site item of the given id
-	 * @throws MShop_Exception If the item couldn't be found
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
+	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -329,7 +332,7 @@ class MShop_Locale_Manager_Site_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -361,7 +364,7 @@ class MShop_Locale_Manager_Site_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Locale_Manager_Iface manager
+	 * @return \Aimeos\MShop\Locale\Manager\Iface manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -375,11 +378,11 @@ class MShop_Locale_Manager_Site_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Locale_Manager_Site_Standard
+		 *  \Aimeos\MShop\Locale\Manager\Site\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Locale_Manager_Site_Mysite
+		 *  \Aimeos\MShop\Locale\Manager\Site\Mysite
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -414,7 +417,7 @@ class MShop_Locale_Manager_Site_Standard
 		 *  mshop/locale/manager/site/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the locale site manager.
 		 *
 		 * @param array List of decorator names
@@ -434,12 +437,12 @@ class MShop_Locale_Manager_Site_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the locale site manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale site manager.
 		 *
 		 *  mshop/locale/manager/site/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the locale controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the locale controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -458,12 +461,12 @@ class MShop_Locale_Manager_Site_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the locale site manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale site manager.
 		 *
 		 *  mshop/locale/manager/site/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the locale
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the locale
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -481,12 +484,12 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Searches for site items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of site items implementing MShop_Locale_Item_Site_Iface
+	 * @return array List of site items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -574,13 +577,13 @@ class MShop_Locale_Manager_Site_Standard
 					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
 					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -642,7 +645,7 @@ class MShop_Locale_Manager_Site_Standard
 				$results->finish();
 
 				if( $row === false ) {
-					throw new MShop_Locale_Exception( 'No total results value found' );
+					throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
 				}
 
 				$total = $row['count'];
@@ -650,7 +653,7 @@ class MShop_Locale_Manager_Site_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -664,7 +667,7 @@ class MShop_Locale_Manager_Site_Standard
 	 * Creates a search object and sets base criteria.
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -690,11 +693,11 @@ class MShop_Locale_Manager_Site_Standard
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Site_Iface[] Associative list of items implementing MShop_Locale_Item_Site_Iface with IDs as keys
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
-		$item = $this->getTree( $id, $ref, MW_Tree_Manager_Base::LEVEL_ONE );
+		$item = $this->getTree( $id, $ref, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 		return array( $item->getId() => $item );
 	}
 
@@ -704,10 +707,10 @@ class MShop_Locale_Manager_Site_Standard
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @return MShop_Locale_Item_Site_Iface Site item
+	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE )
 	{
 		if( $id !== null )
 		{
@@ -729,7 +732,7 @@ class MShop_Locale_Manager_Site_Standard
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 
 		$this->cache[$item->getId()] = $item;
@@ -741,11 +744,11 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
 	 */
-	public function insertItem( MShop_Locale_Item_Site_Iface $item, $parentId = null, $refId = null )
+	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null )
 	{
 		$context = $this->getContext();
 
@@ -789,8 +792,8 @@ class MShop_Locale_Manager_Site_Standard
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 5, 0, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, 0, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 6, $context->getEditor() );
 			$stmt->bind( 7, $date ); // mtime
 			$stmt->bind( 8, $date ); // ctime
@@ -832,7 +835,7 @@ class MShop_Locale_Manager_Site_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -850,21 +853,21 @@ class MShop_Locale_Manager_Site_Standard
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		throw new MShop_Locale_Exception( sprintf( 'Method "%1$s" for locale site manager not available', 'moveItem()' ) );
+		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Method "%1$s" for locale site manager not available', 'moveItem()' ) );
 	}
 
 
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param $sql SQL statement
-	 * @return MW_DB_Result_Iface Search result object
+	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, \Aimeos\MW\Logger\Base::DEBUG );
 
 		$results = $statement->execute();
 
@@ -875,11 +878,11 @@ class MShop_Locale_Manager_Site_Standard
 	/**
 	 * Create new item object initialized with given parameters.
 	 *
-	 * @return MShop_Locale_Item_Site_Iface
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
 	protected function createItemBase( array $data = array( ) )
 	{
-		return new MShop_Locale_Item_Site_Standard( $data );
+		return new \Aimeos\MShop\Locale\Item\Site\Standard( $data );
 	}
 
 

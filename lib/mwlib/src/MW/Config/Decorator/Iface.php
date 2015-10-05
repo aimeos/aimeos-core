@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
  * Decorator interface for configuration setting classes
  *
  * @package MW
  * @subpackage Config
  */
-interface MW_Config_Decorator_Iface extends MW_Config_Iface
+interface Iface extends \Aimeos\MW\Config\Iface
 {
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Iface $object Config object or decorator
+	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @return void
 	 */
-	public function __construct( MW_Config_Iface $object );
+	public function __construct( \Aimeos\MW\Config\Iface $object );
 }

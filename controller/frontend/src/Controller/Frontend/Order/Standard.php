@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Order;
+
+
 /**
  * Default implementation of the order frontend controller.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Order_Standard
-	extends Controller_Frontend_Base
-	implements Controller_Frontend_Order_Iface
+class Standard
+	extends \Aimeos\Controller\Frontend\Base
+	implements \Aimeos\Controller\Frontend\Order\Iface
 {
 	/**
 	 * Creates a new order from the given basket.
@@ -25,15 +28,15 @@ class Controller_Frontend_Order_Standard
 	 * products, services, etc. and creates/stores a new order item for that
 	 * order.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object to be stored
-	 * @return MShop_Order_Item_Iface Order item that belongs to the stored basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object to be stored
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item that belongs to the stored basket
 	 */
-	public function store( MShop_Order_Item_Base_Iface $basket )
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$context = $this->getContext();
 
-		$orderManager = MShop_Factory::createManager( $context, 'order' );
-		$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
+		$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 
 
 		$orderBaseManager->begin();
@@ -42,7 +45,7 @@ class Controller_Frontend_Order_Standard
 
 		$orderItem = $orderManager->createItem();
 		$orderItem->setBaseId( $basket->getId() );
-		$orderItem->setType( MShop_Order_Item_Base::TYPE_WEB );
+		$orderItem->setType( \Aimeos\MShop\Order\Item\Base::TYPE_WEB );
 		$orderManager->saveItem( $orderItem );
 
 
@@ -66,11 +69,11 @@ class Controller_Frontend_Order_Standard
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function block( MShop_Order_Item_Iface $orderItem )
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->getContext() )->block( $orderItem );
+		\Aimeos\Controller\Common\Order\Factory::createController( $this->getContext() )->block( $orderItem );
 	}
 
 
@@ -90,11 +93,11 @@ class Controller_Frontend_Order_Standard
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function unblock( MShop_Order_Item_Iface $orderItem )
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->getContext() )->unblock( $orderItem );
+		\Aimeos\Controller\Common\Order\Factory::createController( $this->getContext() )->unblock( $orderItem );
 	}
 
 
@@ -110,10 +113,10 @@ class Controller_Frontend_Order_Standard
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function update( MShop_Order_Item_Iface $orderItem )
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
-		Controller_Common_Order_Factory::createController( $this->getContext() )->update( $orderItem );
+		\Aimeos\Controller\Common\Order\Factory::createController( $this->getContext() )->update( $orderItem );
 	}
 }

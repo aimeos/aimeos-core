@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Container_Content_GzipTest extends PHPUnit_Framework_TestCase
+class GzipTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
@@ -19,7 +20,7 @@ class MW_Container_Content_GzipTest extends PHPUnit_Framework_TestCase
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
-		$file = new MW_Container_Content_Gzip( $filename, 'temp' );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp' );
 
 		$check = file_exists( $file->getResource() );
 		unlink( $file->getResource() );
@@ -32,7 +33,7 @@ class MW_Container_Content_GzipTest extends PHPUnit_Framework_TestCase
 	public function testExistingFile()
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfile';
-		$file = new MW_Container_Content_Gzip( $filename, 'test' );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'test' );
 
 		$this->assertEquals( true, file_exists( $file->getResource() ) );
 	}
@@ -45,7 +46,7 @@ class MW_Container_Content_GzipTest extends PHPUnit_Framework_TestCase
 		);
 
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
-		$file = new MW_Container_Content_Gzip( $filename, 'temp', $options );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', $options );
 		$file->add( 'test text' );
 		$file->close();
 
@@ -62,7 +63,7 @@ class MW_Container_Content_GzipTest extends PHPUnit_Framework_TestCase
 	public function testIterator()
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfile';
-		$file = new MW_Container_Content_Gzip( $filename, 'test' );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'test' );
 
 		$expected = array( "test data" );
 

@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Address;
+
+
 /**
  * Interface for order address items.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Address_Iface extends MShop_Common_Item_Address_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 {
 	/**
 	 * Returns the order base ID the address belongs to.
@@ -50,9 +53,9 @@ interface MShop_Order_Item_Base_Address_Iface extends MShop_Common_Item_Address_
 	/**
 	 * Copys all data from a given address.
 	 *
-	 * @param MShop_Common_Item_Address_Iface $address New address
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address New address
 	 * @return void
 	 */
-	public function copyFrom( MShop_Common_Item_Address_Iface $address );
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address );
 
 }

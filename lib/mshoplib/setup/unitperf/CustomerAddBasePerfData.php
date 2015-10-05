@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to customer table.
  */
-class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -42,7 +45,7 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$context = $this->getContext();
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context );
 
 		$customerItem = $customerManager->createItem();
 		$customerItem->setCode( 'demo-test' );

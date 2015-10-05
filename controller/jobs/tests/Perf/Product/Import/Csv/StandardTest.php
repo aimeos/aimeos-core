@@ -1,18 +1,20 @@
 <?php
 
+namespace Aimeos\Perf\Product\Import\Csv;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  */
-
-class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext('unitperf');
+		$this->context = \TestHelper::getContext('unitperf');
 
 		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/product-import.zip' );
@@ -20,7 +22,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/jobs/product/import/csv/container/content', 'CSV' );
 		$config->set( 'controller/jobs/product/import/csv/mapping', $this->getMapping() );
 
-		$container = MW_Container_Factory::getContainer( 'tmp/product-import.zip', 'Zip', 'CSV', array() );
+		$container = \Aimeos\MW\Container\Factory::getContainer( 'tmp/product-import.zip', 'Zip', 'CSV', array() );
 
 		$content = $container->create( 'product.csv' );
 
@@ -59,8 +61,8 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testImport()
 	{
-		$aimeos = TestHelper::getAimeos();
-		$cntl = Controller_Jobs_Product_Import_Csv_Factory::createController( $this->context, $aimeos, 'Standard' );
+		$aimeos = \TestHelper::getAimeos();
+		$cntl = \Aimeos\Controller\Jobs\Product\Import\Csv\Factory::createController( $this->context, $aimeos, 'Standard' );
 
 		$start = microtime( true );
 
@@ -147,7 +149,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function cleanupAttribute()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -174,7 +176,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function cleanupMedia()
 	{
-		$manager = MShop_Media_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -201,7 +203,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function cleanupPrice()
 	{
-		$manager = MShop_Price_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -228,7 +230,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function cleanupProduct()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'import-%' ) );
@@ -251,7 +253,7 @@ class Perf_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function cleanupText()
 	{
-		$manager = MShop_Text_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$expr = array(

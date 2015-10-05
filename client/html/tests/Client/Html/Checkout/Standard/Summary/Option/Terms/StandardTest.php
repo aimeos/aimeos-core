@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Summary\Option\Terms;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PH
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Summary_Option_Terms_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Summary\Option\Terms\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PH
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -56,14 +58,14 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PH
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -84,7 +86,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PH
 			'cs_option_terms_value' => '1',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -100,7 +102,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_StandardTest extends PH
 			'cs_option_terms' => '1',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();

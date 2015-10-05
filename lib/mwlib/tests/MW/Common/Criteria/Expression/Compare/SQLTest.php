@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Compare_SQL.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Compare\SQL.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $conn = null;
 
@@ -19,12 +22,12 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$this->conn = $dbm->acquire();
 	}
 
@@ -36,14 +39,14 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$dbm->release( $this->conn );
 	}
 
 
 	public function testCreateFunction()
 	{
-		$func = MW_Common_Criteria_Expression_Compare_Base::createFunction( 'test', array( true, 1, 0.1, 'string', array( 2, 3 ) ) );
+		$func = \Aimeos\MW\Common\Criteria\Expression\Compare\Base::createFunction( 'test', array( true, 1, 0.1, 'string', array( 2, 3 ) ) );
 		$this->assertEquals( 'test(1,1,0.1,"string",[2,3])', $func );
 	}
 
@@ -51,37 +54,37 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 	public function testGetOperators()
 	{
 		$expected = array( '==', '!=', '~=', '>=', '<=', '>', '<', '&', '|', '=~');
-		$actual = MW_Common_Criteria_Expression_Compare_SQL::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Compare\SQL::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( '==', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( 'name', $expr->getName() );
 	}
 
 	public function testGetValue()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
 
 	public function testToString()
 	{
 		$types = array(
-			'list' => MW_DB_Statement_Base::PARAM_STR,
-			'string' => MW_DB_Statement_Base::PARAM_STR,
-			'float' => MW_DB_Statement_Base::PARAM_FLOAT,
-			'int' => MW_DB_Statement_Base::PARAM_INT,
-			'undefined' => MW_DB_Statement_Base::PARAM_INT,
-			'bool' => MW_DB_Statement_Base::PARAM_BOOL,
+			'list' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'string' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'float' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'int' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'undefined' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'bool' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		);
 
 		$translations = array(
@@ -93,40 +96,40 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 			'bool' => 't.bool',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
 		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '~=', 'string', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'string', 'value' );
 		$this->assertEquals( "t.string LIKE '%value%'", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '<', 'float', 0.1 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '>', 'int', 10 );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '>', 'int', 10 );
 		$this->assertEquals( "t.int > 10", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '!=', 'undefined', null );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'undefined', null );
 		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'bool', true );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 1", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '&', 'int', 0x2 );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '&', 'int', 0x2 );
 		$this->assertEquals( "t.int & 2", $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '|', 'int', 0x4 );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '|', 'int', 0x4 );
 		$this->assertEquals( "t.int | 4", $expr->toString( $types, $translations ) );
 	}
 
 	public function testToStringFunction()
 	{
 		$types = array(
-			'pcounter()' => MW_DB_Statement_Base::PARAM_INT,
-			'strconcat()' => MW_DB_Statement_Base::PARAM_STR,
-			'lcounter()' => MW_DB_Statement_Base::PARAM_INT,
+			'pcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'strconcat()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'lcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		);
 
 		$translations = array(
@@ -135,16 +138,16 @@ class MW_Common_Criteria_Expression_Compare_SQLTest extends PHPUnit_Framework_Te
 			'lcounter()' => 'count(name IN ($1))',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'pcounter("name",10,0.1)', 3 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'pcounter("name",10,0.1)', 3 );
 		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
 		$this->assertEquals( "concat('hello','world') LIKE '%low%'", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
 		$this->assertEquals( "count(name IN ('a','b','c','''d')) = 4", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, '==', 'lcounter([])', 0 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter([])', 0 );
 		$this->assertEquals( "count(name IN ()) = 0", $expr->toString( $types, $translations ) );
 	}
 }

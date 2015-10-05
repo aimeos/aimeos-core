@@ -6,57 +6,60 @@
  */
 
 
+namespace Aimeos\MAdmin;
+
+
 /**
- * Test class for MAdmin_Factory.
+ * Test class for \Aimeos\MAdmin\Factory.
  */
-class MAdmin_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MAdmin_Factory::createManager( TestHelper::getContext(), 'job' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'job' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerEmpty()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), "\n" );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), 'job/unknown' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'job/unknown' );
 	}
 
 
 	public function testClear()
 	{
-		$cache = MAdmin_Factory::setCache( true );
+		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$controller1 = MAdmin_Factory::createManager( $context, 'log' );
-		MAdmin_Factory::clear();
-		$controller2 = MAdmin_Factory::createManager( $context, 'log' );
+		$controller1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
+		\Aimeos\MAdmin\Factory::clear();
+		$controller2 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 
-		MAdmin_Factory::setCache( $cache );
+		\Aimeos\MAdmin\Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -64,15 +67,15 @@ class MAdmin_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSite()
 	{
-		$cache = MAdmin_Factory::setCache( true );
+		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$managerA1 = MAdmin_Factory::createManager( $context, 'log' );
-		MAdmin_Factory::clear( (string) $context );
-		$managerA2 = MAdmin_Factory::createManager( $context, 'log' );
+		$managerA1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
+		\Aimeos\MAdmin\Factory::clear( (string) $context );
+		$managerA2 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 
-		MAdmin_Factory::setCache( $cache );
+		\Aimeos\MAdmin\Factory::setCache( $cache );
 
 		$this->assertNotSame( $managerA1, $managerA2 );
 	}
@@ -80,19 +83,19 @@ class MAdmin_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSpecific()
 	{
-		$cache = MAdmin_Factory::setCache( true );
+		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$managerA1 = MAdmin_Factory::createManager( $context, 'log' );
-		$managerB1 = MAdmin_Factory::createManager( $context, 'job' );
+		$managerA1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
+		$managerB1 = \Aimeos\MAdmin\Factory::createManager( $context, 'job' );
 
-		MAdmin_Factory::clear( (string) $context, 'log' );
+		\Aimeos\MAdmin\Factory::clear( (string) $context, 'log' );
 
-		$managerA2 = MAdmin_Factory::createManager( $context, 'log' );
-		$managerB2 = MAdmin_Factory::createManager( $context, 'job' );
+		$managerA2 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
+		$managerB2 = \Aimeos\MAdmin\Factory::createManager( $context, 'job' );
 
-		MAdmin_Factory::setCache( $cache );
+		\Aimeos\MAdmin\Factory::setCache( $cache );
 
 		$this->assertNotSame( $managerA1, $managerA2 );
 		$this->assertSame( $managerB1, $managerB2 );

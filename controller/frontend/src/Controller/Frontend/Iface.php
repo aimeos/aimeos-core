@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Frontend;
+
+
 /**
  * Decorator interface for controller.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Iface
+interface Iface
 {
 }

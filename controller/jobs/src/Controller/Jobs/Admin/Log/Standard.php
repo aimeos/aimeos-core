@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Admin\Log;
+
+
 /**
  * Admin log controller.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Admin_Log_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Admin_Log_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -176,10 +179,10 @@ class Controller_Jobs_Admin_Log_Standard
 			$options = $config->get( 'controller/jobs/admin/log/default/container/options', array() );
 
 			$path .= DIRECTORY_SEPARATOR . str_replace( ' ', '_', $limitDate );
-			$container = MW_Container_Factory::getContainer( $path, $type, $format, $options );
+			$container = \Aimeos\MW\Container\Factory::getContainer( $path, $type, $format, $options );
 		}
 
-		$manager = MAdmin_Factory::createManager( $context, 'log' );
+		$manager = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '<=', 'log.timestamp', $limitDate ) );

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Media;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $directory;
@@ -20,15 +21,15 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$this->object = new Controller_ExtJS_Media_Standard( $context );
+		$context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$tempdir = $context->getConfig()->get( 'controller/extjs/media/default/upload/directory', 'tmp/media' );
 		$this->directory = PATH_TESTS . DIRECTORY_SEPARATOR . $tempdir;
 		$testfiledir = dirname( __FILE__ ) . '/testfiles';
 
 		if( !is_dir( $this->directory ) && mkdir( $this->directory, 0755, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create directory "%1%s"', $this->directory ) );
+			throw new \Exception( sprintf( 'Unable to create directory "%1%s"', $this->directory ) );
 		}
 		exec( sprintf( 'cp -r -f %1$s %2$s', escapeshellarg( $testfiledir ), escapeshellarg( $this->directory ) ) );
 	}
@@ -69,14 +70,14 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Media_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$saveParams = (object) array(
@@ -174,14 +175,14 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 	public function testUploadItemException()
 	{
 		$_FILES = array();
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
 	public function testUploadItemExceptionWithEnableCheck()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/default/enablecheck', true );
 
 		$_FILES['unittest'] = array(
@@ -190,18 +191,18 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' ); // not a real file upload
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' ); // not a real file upload
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
 	public function testProtectedCreateImageExceptionByUploadItem()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/default/upload/directory', null );
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-jpeg.jpg',
@@ -209,17 +210,17 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' ); // no upload directory
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' ); // no upload directory
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
 	public function testProtectedGetMimeIconEmptyByUploadItem()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', null );
 
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
@@ -239,9 +240,9 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testProtectedGetAbsoluteDirectoryEmptyByUploadItem()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/default/basedir', null );
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
@@ -249,7 +250,7 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 	}
@@ -257,12 +258,12 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testProtectedGetAbsoluteDirectoryErrorByUploadItem()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/root/' );
 		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', '/2/' );
 
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
@@ -270,7 +271,7 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
@@ -294,10 +295,10 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testProtectedCopyFileExceptionByUploadBinary()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/default/upload/directory', null );
 
-		$object = new Controller_ExtJS_Media_Standard( $context );
+		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
 			'name' => 'testbin',
@@ -305,7 +306,7 @@ class Controller_ExtJS_Media_StandardTest extends PHPUnit_Framework_TestCase
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 

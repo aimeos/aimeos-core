@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Rebuilds the catalog index.
  */
-class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Base
+class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,15 +50,15 @@ class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 
 		$this->msg( 'Rebuilding catalog index for test data', 0 );
 
-		$catalogIndexManager = MShop_Catalog_Manager_Factory::createManager( $this->additional )->getSubManager( 'index' );
+		$catalogIndexManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->additional )->getSubManager( 'index' );
 
 		$catalogIndexManager->rebuildIndex();
 		$catalogIndexManager->optimize();

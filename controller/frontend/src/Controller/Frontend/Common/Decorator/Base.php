@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Common\Decorator;
+
+
 /**
  * Provides common methods for controller decorators.
  *
  * @package Controller
  * @subpackage Frontend
  */
-abstract class Controller_Frontend_Common_Decorator_Base
-	implements Controller_Frontend_Common_Decorator_Iface
+abstract class Base
+	implements \Aimeos\Controller\Frontend\Common\Decorator\Iface
 {
 	private $context = null;
 	private $controller = null;
@@ -24,10 +27,10 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Controller_Frontend_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Controller\Frontend\Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Controller_Frontend_Iface $controller )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Controller\Frontend\Iface $controller )
 	{
 		$this->context = $context;
 		$this->controller = $controller;
@@ -40,14 +43,14 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
 	 * @return mixed Returns the value of the called method
-	 * @throws Controller_Frontend_Exception If method call failed
+	 * @throws \Aimeos\Controller\Frontend\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
 		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false )
 		{
 			$cntl = get_class( $this->controller );
-			throw new Controller_Frontend_Exception( sprintf( 'Unable to call method "%1$s::%2$s"', $cntl, $name ) );
+			throw new \Aimeos\Controller\Frontend\Exception( sprintf( 'Unable to call method "%1$s::%2$s"', $cntl, $name ) );
 		}
 
 		return $result;
@@ -57,7 +60,7 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Returns the context item
 	 *
-	 * @return MShop_Context_Item_Iface Context item object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
 	protected function getContext()
 	{
@@ -68,7 +71,7 @@ abstract class Controller_Frontend_Common_Decorator_Base
 	/**
 	 * Returns the frontend controller
 	 *
-	 * @return Controller_Frontend_Common_Iface Frontend controller object
+	 * @return \Aimeos\Controller\Frontend\Common\Iface Frontend controller object
 	 */
 	protected function getController()
 	{

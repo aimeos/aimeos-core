@@ -8,34 +8,37 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache;
+
+
 /**
  * Common cache interface for CSV import caches
  *
  * @package Controller
  * @subpackage Common
  */
-interface Controller_Common_Product_Import_Csv_Cache_Iface
+interface Iface
 {
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 
 	/**
 	 * Returns the item or ID for the given code
 	 *
 	 * @param string $code Unique code of the item
 	 * @param string|null $type Item type if used and required
-	 * @return MShop_Common_Item_Iface|string|null Item object, unique ID or null if not found
+	 * @return \Aimeos\MShop\Common\Item\Iface|string|null Item object, unique ID or null if not found
 	 */
 	public function get( $code, $type = null );
 
 	/**
 	 * Adds the item or ID to the cache
 	 *
-	 * @param MShop_Common_Item_Iface $item Item object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
 	 */
-	public function set( MShop_Common_Item_Iface $item );
+	public function set( \Aimeos\MShop\Common\Item\Iface $item );
 }

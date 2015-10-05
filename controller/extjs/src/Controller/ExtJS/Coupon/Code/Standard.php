@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Coupon\Code;
+
+
 /**
  * ExtJs coupon code controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Coupon_Code_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Initializes the coupon controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Coupon_Code' );
 	}
@@ -36,15 +39,15 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Uploads a file with coupon codes and meta information.
 	 *
-	 * @param stdClass $params Object containing the properties
+	 * @param \stdClass $params Object containing the properties
 	 */
-	public function uploadFile( stdClass $params )
+	public function uploadFile( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'couponid' ) );
 		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
-			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 		}
 
 		$config = $this->getContext()->getConfig();
@@ -82,7 +85,7 @@ class Controller_ExtJS_Coupon_Code_Standard
 		if( rename( $fileinfo['tmp_name'], $dest ) !== true )
 		{
 			$msg = sprintf( 'Uploaded file could not be moved to upload directory "%1$s"', $dir );
-			throw new Controller_ExtJS_Exception( $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
 		/** controller/extjs/coupon/code/default/fileperms
@@ -112,7 +115,7 @@ class Controller_ExtJS_Coupon_Code_Standard
 		if( chmod( $dest, $perms ) !== true )
 		{
 			$msg = sprintf( 'Could not set permissions "%1$s" for file "%2$s"', $perms, $dest );
-			throw new Controller_ExtJS_Exception( $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
 		$result = (object) array(
@@ -131,7 +134,7 @@ class Controller_ExtJS_Coupon_Code_Standard
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->getContext() );
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->getContext() );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -144,9 +147,9 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Imports a file with coupon codes and optional meta information.
 	 *
-	 * @param stdClass $params Object containing the properties
+	 * @param \stdClass $params Object containing the properties
 	 */
-	public function importFile( stdClass $params )
+	public function importFile( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'couponid', 'items' ) );
 		$this->setLocale( $params->site );
@@ -225,7 +228,7 @@ class Controller_ExtJS_Coupon_Code_Standard
 
 		foreach( $items as $path )
 		{
-			$container = MW_Container_Factory::getContainer( $path, $type, $format, $options );
+			$container = \Aimeos\MW\Container\Factory::getContainer( $path, $type, $format, $options );
 
 			foreach( $container as $content ) {
 				$this->importContent( $content, $params->couponid );
@@ -274,11 +277,11 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Returns the item populated by the data from the row.
 	 *
-	 * @param MShop_Coupon_Item_Code_Iface $item Empty coupon item
+	 * @param \Aimeos\MShop\Coupon\Item\Code\Iface $item Empty coupon item
 	 * @param array $row List of coupon data (code, count, start and end)
-	 * @return MShop_Coupon_Item_Code_Iface Populated coupon item
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Populated coupon item
 	 */
-	protected function getItemBase( MShop_Coupon_Item_Code_Iface $item, array $row )
+	protected function getItemBase( \Aimeos\MShop\Coupon\Item\Code\Iface $item, array $row )
 	{
 		foreach( $row as $idx => $value ) {
 			$row[$idx] = trim( $value );
@@ -301,12 +304,12 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'coupon/code' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
 		}
 
 		return $this->manager;
@@ -327,14 +330,14 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Imports the coupon codes and meta data from the content object.
 	 *
-	 * @param MW_Container_Content_Iface $content Content object with coupon codes and optional meta data
+	 * @param \Aimeos\MW\Container\Content\Iface $content Content object with coupon codes and optional meta data
 	 * @param string $couponId Unique ID of the coupon configuration for which the codes should be imported
-	 * @throws Exception If a code or its meta data can't be imported
+	 * @throws \Exception If a code or its meta data can't be imported
 	 */
-	protected function importContent( MW_Container_Content_Iface $content, $couponId )
+	protected function importContent( \Aimeos\MW\Container\Content\Iface $content, $couponId )
 	{
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'coupon/code' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon/code' );
 
 		$item = $manager->createItem();
 		$item->setCouponId( $couponId );
@@ -355,7 +358,7 @@ class Controller_ExtJS_Coupon_Code_Standard
 
 			$manager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$manager->rollback();
 			throw $e;
@@ -366,10 +369,10 @@ class Controller_ExtJS_Coupon_Code_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'coupon.code.datestart'} ) ) {
 			$entry->{'coupon.code.datestart'} = str_replace( 'T', ' ', $entry->{'coupon.code.datestart'} );

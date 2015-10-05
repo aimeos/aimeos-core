@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item\Address;
+
+
 /**
  * Interface for provider common address DTO objects used by the shop.
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Item_Address_Standard
-	extends MShop_Common_Item_Address_Standard
-	implements MShop_Customer_Item_Address_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Address\Standard
+	implements \Aimeos\MShop\Customer\Item\Address\Iface
 {
 }

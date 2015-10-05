@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MW;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MW_DemoTest extends PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class MW_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new MW_View_Helper_Test_Standard();
+		// $this->object = new \Aimeos\MW\View\Helper\Test\Standard();
 	}
 
 

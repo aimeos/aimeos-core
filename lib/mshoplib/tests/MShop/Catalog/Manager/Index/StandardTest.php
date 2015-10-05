@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\Standard.
  */
-class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private static $products;
 	private $context;
@@ -19,10 +22,10 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 
 	public static function setUpBeforeClass()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$manager = new MShop_Catalog_Manager_Index_Standard( $context );
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$manager = new \Aimeos\MShop\Catalog\Manager\Index\Standard( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -33,7 +36,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new Exception( 'Products not available' );
+			throw new \Exception( 'Products not available' );
 		}
 
 		foreach( $result as $item )
@@ -52,9 +55,9 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$this->object = new MShop_Catalog_Manager_Index_Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\Standard( $this->context );
 	}
 
 	/**
@@ -71,19 +74,19 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
 	public function testAggregate()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -95,7 +98,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No attribute found' );
+			throw new \Exception( 'No attribute found' );
 		}
 
 
@@ -110,13 +113,13 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item = $this->object->getItem( $expected->getId() );
@@ -127,7 +130,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -180,14 +183,14 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	public function testSaveDeleteItemNoName()
 	{
 		$context = $this->context;
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$result = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'Product not available' );
+			throw new \Exception( 'Product not available' );
 		}
 
 
@@ -260,7 +263,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	{
 		$context = $this->context;
 
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'attribute.label', '29' ),
@@ -272,7 +275,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 		$expr = array(
@@ -285,7 +288,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrLenItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 
@@ -351,7 +354,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	{
 		$context = $this->context;
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$catSearch = $catalogManager->createSearch();
 		$conditions = array(
 			$catSearch->compare( '==', 'catalog.label', 'Kaffee' ),
@@ -361,7 +364,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 		$conditions = array(
@@ -372,7 +375,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 
@@ -451,7 +454,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 
 		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
-			throw new Exception( 'No price with type "default" available in product CNC' );
+			throw new \Exception( 'No price with type "default" available in product CNC' );
 		}
 
 		$conditions = array(
@@ -499,11 +502,11 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	{
 		$context = clone $this->context;
 		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'Standard' );
-		$object = new MShop_Catalog_Manager_Index_Standard( $context );
+		$object = new \Aimeos\MShop\Catalog\Manager\Index\Standard( $context );
 
 		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new Exception( 'No text with type "name" available in product CNC' );
+			throw new \Exception( 'No text with type "name" available in product CNC' );
 		}
 
 		$total = 0;
@@ -570,7 +573,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	public function testSearchTexts()
 	{
 		$context = $this->context;
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -581,7 +584,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 
@@ -619,7 +622,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	{
 		$config = $this->context->getConfig();
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch( true );
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -648,7 +651,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testRebuildIndexWithList()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -699,7 +702,7 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		$context = $this->context;
 		$config = $context->getConfig();
 
-		$manager = MShop_Product_Manager_Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		//delete whole catalog
 		$search = $manager->createSearch();
@@ -725,15 +728,15 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 	/**
 	 * Returns value of a catalog_index column.
 	 *
-	 * @param MW_DB_Manager_Iface $dbm Database Manager for connection
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database Manager for connection
 	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
 	 * @param integer $siteId Siteid of the db entry
 	 * @param integer $productId Product id
 	 * @return string $value Value returned for specified sql statement
-	 * @throws Exception If column not available or error during a connection to db
+	 * @throws \Exception If column not available or error during a connection to db
 	 */
-	protected function getValue( MW_DB_Manager_Iface $dbm, $sql, $column, $siteId, $productId )
+	protected function getValue( \Aimeos\MW\DB\Manager\Iface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$config = $this->context->getConfig();
 
@@ -748,23 +751,23 @@ class MShop_Catalog_Manager_Index_StandardTest extends PHPUnit_Framework_TestCas
 		try
 		{
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteId, MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $productId, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $siteId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $productId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
-				throw new Exception( 'No rows available' );
+				throw new \Exception( 'No rows available' );
 			}
 
 			if( !isset( $row[$column] ) ) {
-				throw new Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
+				throw new \Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
 			}
 
 			$value = $row[$column];
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;

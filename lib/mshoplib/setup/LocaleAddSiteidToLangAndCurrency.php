@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds siteid column to locale language and currency tables.
  */
-class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Base
+class LocaleAddSiteidToLangAndCurrency extends \Aimeos\MW\Setup\Task\Base
 {
 
 	private $mysql = array(

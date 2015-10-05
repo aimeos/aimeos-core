@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Tree\Node;
+
+
 /**
  * Nested set implementation of a tree node
  *
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Node_DBNestedSet extends MW_Tree_Node_Standard
+class DBNestedSet extends \Aimeos\MW\Tree\Node\Standard
 {
 	/**
 	 * Tests if a node has children.

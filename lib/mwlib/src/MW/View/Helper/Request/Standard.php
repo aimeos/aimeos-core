@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Request;
+
+
 /**
  * View helper class for accessing request data.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Request_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $body;
 	private $clientaddr;
@@ -25,7 +28,7 @@ class MW_View_Helper_Request_Standard
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
 	 */
@@ -41,7 +44,7 @@ class MW_View_Helper_Request_Standard
 	/**
 	 * Returns the request view helper.
 	 *
-	 * @return MW_View_Helper_Iface Request view helper
+	 * @return \Aimeos\MW\View\Helper\Iface Request view helper
 	 */
 	public function transform()
 	{

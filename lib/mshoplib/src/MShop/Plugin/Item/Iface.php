@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Item;
+
+
 /**
  * Generic interface for plugins created and saved by plugin managers.
  *
  * @package MShop
  * @subpackage Plugin
  */
-interface MShop_Plugin_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the type of the plugin.

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Admin\Job;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Admin_Job_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $jobItemStub;
@@ -21,17 +22,17 @@ class Controller_Jobs_Admin_Job_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->jobItemStub = $this->getMockBuilder( 'MAdmin_Job_Item_Standard' )->getMock();
+		$this->jobItemStub = $this->getMockBuilder( '\\Aimeos\\MAdmin\\Job\\Item\\Standard' )->getMock();
 
-		$this->jobManagerStub = $this->getMockBuilder( 'MAdmin_Job_Manager_Standard' )
+		$this->jobManagerStub = $this->getMockBuilder( '\\Aimeos\\MAdmin\\Job\\Manager\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$this->object = new Controller_Jobs_Admin_Job_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Admin\Job\Standard( $context, $aimeos );
 	}
 
 
@@ -62,21 +63,21 @@ class Controller_Jobs_Admin_Job_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testRun()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 		$context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
 
-		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->jobManagerStub );
+		\Aimeos\MAdmin\Job\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name, $this->jobManagerStub );
 
-		$adminJobCntlStub = $this->getMockBuilder( 'Controller_ExtJS_Admin_Job_Standard' )
+		$adminJobCntlStub = $this->getMockBuilder( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard' )
 			->setMethods( array( 'deleteItem' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_' . $name, $adminJobCntlStub );
+		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\' . $name, $adminJobCntlStub );
 
 
 		$adminJobCntlStub->expects( $this->once() )->method( 'deleteItem' )
@@ -97,7 +98,7 @@ class Controller_Jobs_Admin_Job_StandardTest extends PHPUnit_Framework_TestCase
 			->with( $this->equalTo( -1 ) );
 
 
-		$object = new Controller_Jobs_Admin_Job_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Admin\Job\Standard( $context, $aimeos );
 		$object->run();
 	}
 
@@ -107,14 +108,14 @@ class Controller_Jobs_Admin_Job_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testRunInvalidMethod( $method )
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 
-		$object = new Controller_Jobs_Admin_Job_Standard( $context, $aimeos );
-		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->jobManagerStub );
+		$object = new \Aimeos\Controller\Jobs\Admin\Job\Standard( $context, $aimeos );
+		\Aimeos\MAdmin\Job\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name, $this->jobManagerStub );
 
 
 		$this->jobManagerStub->expects( $this->atLeastOnce() )->method( 'searchItems' )

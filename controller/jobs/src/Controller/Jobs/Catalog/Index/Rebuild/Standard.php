@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Catalog\Index\Rebuild;
+
+
 /**
  * Rebuild catalog index job controller.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Catalog_Index_Rebuild_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -53,7 +56,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Standard
 		$context->getLocale()->setLanguageId( null );
 		$context->getLocale()->setCurrencyId( null );
 
-		$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context )->getSubManager( 'index' );
 
 		$manager->rebuildIndex();
 		$manager->cleanupIndex( $timestamp );

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Product;
+
+
 /**
- * Test class for MShop_Order_Manager_Base_Product_Standard.
+ * Test class for \Aimeos\MShop\Order\Manager\Base\Product\Standard.
  */
-class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -18,9 +21,9 @@ class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_Te
 
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Order_Manager_Base_Product_Standard( $this->context );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Order\Manager\Base\Product\Standard( $this->context );
 	}
 
 
@@ -57,20 +60,20 @@ class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_Te
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes( true ) as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch( true ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch( true ) );
 	}
 
 
@@ -150,7 +153,7 @@ class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_Te
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'empty result' );
+			throw new \Exception( 'empty result' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -168,7 +171,7 @@ class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_Te
 		$orderItems = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $orderItems ) ) ) {
-			throw new Exception( 'empty search result' );
+			throw new \Exception( 'empty search result' );
 		}
 
 		$item->setId( null );
@@ -230,38 +233,38 @@ class MShop_Order_Manager_Base_Product_StandardTest extends PHPUnit_Framework_Te
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'attribute' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'attribute', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'attribute' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'attribute', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'attribute', 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidTypeName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( '$$$' );
 	}
 
 
 	public function testGetSubManagerInvalidDefaultName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'attribute', '$$$' );
 	}
 }

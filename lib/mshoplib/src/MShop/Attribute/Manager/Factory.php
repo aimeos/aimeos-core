@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager;
+
+
 /**
  * Factory for the attribute managers.
  *
  * @package MShop
  * @subpackage Attribute
  */
-class MShop_Attribute_Manager_Factory
-	extends MShop_Common_Factory_Base
-	implements MShop_Common_Factory_Iface
+class Factory
+	extends \Aimeos\MShop\Common\Factory\Base
+	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
 	 * Creates a attribute manager DAO object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Iface Attribute manager implementing MShop_Common_Manager_Iface
-	 * @throws MShop_Attribute_Exception|MShop_Exception If requested manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Attribute manager implementing \Aimeos\MShop\Common\Manager\Iface
+	 * @throws \Aimeos\MShop\Attribute\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
+	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/attribute/manager/name
 		 * Class name of the used attribute manager implementation
@@ -39,11 +42,11 @@ class MShop_Attribute_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Attribute_Manager_Standard
+		 *  \Aimeos\MShop\Attribute\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Attribute_Manager_Mymanager
+		 *  \Aimeos\MShop\Attribute\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -68,12 +71,12 @@ class MShop_Attribute_Manager_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'MShop_Attribute_Manager_' . $name : '<not a string>';
-			throw new MShop_Attribute_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\MShop\\Attribute\\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Attribute_Manager_Iface';
-		$classname = 'MShop_Attribute_Manager_' . $name;
+		$iface = '\\Aimeos\\MShop\\Attribute\\Manager\\Iface';
+		$classname = '\\Aimeos\\MShop\\Attribute\\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
@@ -92,7 +95,7 @@ class MShop_Attribute_Manager_Factory
 		 *  mshop/attribute/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the attribute manager.
 		 *
 		 * @param array List of decorator names
@@ -112,12 +115,12 @@ class MShop_Attribute_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute manager.
 		 *
 		 *  mshop/attribute/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the attribute controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the attribute controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -136,12 +139,12 @@ class MShop_Attribute_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute manager.
 		 *
 		 *  mshop/attribute/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the attribute
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the attribute
 		 * controller.
 		 *
 		 * @param array List of decorator names

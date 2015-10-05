@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Address;
+
+
 /**
  * Abstract class with constants for all order address items.
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Item_Base_Address_Base extends MShop_Common_Item_Address_Base
+abstract class Base extends \Aimeos\MShop\Common\Item\Address\Base
 {
 	/**
 	 * Delivery address.
@@ -30,18 +33,18 @@ abstract class MShop_Order_Item_Base_Address_Base extends MShop_Common_Item_Addr
 	/**
 	 * Checks if the given address type is valid
 	 *
-	 * @param string $value Address type defined in MShop_Order_Item_Base_Address_Base
-	 * @throws MShop_Order_Exception If type is invalid
+	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
 	 */
 	protected function checkType( $value )
 	{
 		switch( $value )
 		{
-			case MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY:
-			case MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT:
+			case \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY:
+			case \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT:
 				return;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Address type "%1$s" not within allowed range', $value ) );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address type "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

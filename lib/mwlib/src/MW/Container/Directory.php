@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * Implementation of directory containers.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Directory
-	extends MW_Container_Base
-	implements MW_Container_Iface
+class Directory
+	extends \Aimeos\MW\Container\Base
+	implements \Aimeos\MW\Container\Iface
 {
 	private $content = array();
 	private $classname;
@@ -35,10 +38,10 @@ class MW_Container_Directory
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() )
 	{
-		$this->classname = 'MW_Container_Content_' . $format;
+		$this->classname = '\\Aimeos\\MW\\Container\\Content\\' . $format;
 
 		if( class_exists( $this->classname ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
 		parent::__construct( $resourcepath, $options );
@@ -46,10 +49,10 @@ class MW_Container_Directory
 		$perm = octdec( $this->getOption( 'dir-perm', '0755' ) );
 
 		if( !is_dir( realpath( $resourcepath ) ) && mkdir( $resourcepath, $perm, true ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to create directory "%1$s"', $resourcepath ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to create directory "%1$s"', $resourcepath ) );
 		}
 
-		$this->resource = new DirectoryIterator( $resourcepath );
+		$this->resource = new \DirectoryIterator( $resourcepath );
 	}
 
 
@@ -57,7 +60,7 @@ class MW_Container_Directory
 	 * Creates a new content object.
 	 *
 	 * @param string $name Name of the content
-	 * @return MW_Container_Content_Iface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
 	public function create( $name )
 	{
@@ -69,9 +72,9 @@ class MW_Container_Directory
 	/**
 	 * Adds a content object to the container.
 	 *
-	 * @param MW_Container_Content_Iface $content Content object
+	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 */
-	public function add( MW_Container_Content_Iface $content )
+	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$this->content[] = $content;
 	}
@@ -81,7 +84,7 @@ class MW_Container_Directory
 	 * Returns the element specified by its name.
 	 *
 	 * @param string $name Name of the content object that should be returned
-	 * @return MW_Container_Content_Iface Content object
+	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
 	function get( $name )
 	{
@@ -103,7 +106,7 @@ class MW_Container_Directory
 	/**
 	 * Returns the current element.
 	 *
-	 * @return MW_Container_Content_Iface Current content object
+	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
 	function current()
 	{

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Item;
+
+
 /**
  * MAdmin cache item Interface.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-interface MAdmin_Cache_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the value associated to the key.

@@ -8,24 +8,27 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Factory;
+
+
 /**
  * Factory interface for coupon provider.
  *
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Provider_Factory_Iface
-	extends MShop_Coupon_Provider_Iface
+interface Iface
+	extends \Aimeos\MShop\Coupon\Provider\Iface
 {
 	/**
 	 * Initializes the coupon model.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
-	 * @param MShop_Coupon_Item_Iface $item Coupon item to set
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Coupon_Item_Iface $item, $code );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code );
 
 
 	/**
@@ -58,8 +61,8 @@ interface MShop_Coupon_Provider_Factory_Iface
 	 * access to the outmost object (the decorator) it would only be able to
 	 * call isAvailable() if itself which would lead to a result of "true".
 	 *
-	 * @param MShop_Coupon_Provider_Iface $object Reference to the outside provider or decorator
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outside provider or decorator
 	 * @return void
 	 */
-	public function setObject( MShop_Coupon_Provider_Iface $object );
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object );
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Property;
+
+
 /**
  * Default property manager implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Property_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Product_Manager_Property_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Product\Manager\Property\Iface
 {
 	private $searchConfig = array(
 		'product.property.id'=> array(
@@ -24,14 +27,14 @@ class MShop_Product_Manager_Property_Standard
 			'internalcode'=>'mpropr."id"',
 			'label'=>'Product property ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.property.parentid'=> array(
 			'code'=>'product.property.parentid',
 			'internalcode'=>'mpropr."parentid"',
 			'label'=>'Product property parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.siteid'=> array(
@@ -39,7 +42,7 @@ class MShop_Product_Manager_Property_Standard
 			'internalcode'=>'mpropr."siteid"',
 			'label'=>'Product property site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.typeid' => array(
@@ -47,7 +50,7 @@ class MShop_Product_Manager_Property_Standard
 			'internalcode'=>'mpropr."typeid"',
 			'label'=>'Product property type id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.property.languageid' => array(
@@ -55,35 +58,35 @@ class MShop_Product_Manager_Property_Standard
 			'internalcode'=>'mpropr."langid"',
 			'label'=>'Product property language id',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.property.value' => array(
 			'code'=>'product.property.value',
 			'internalcode'=>'mpropr."value"',
 			'label'=>'Product property value',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.property.mtime'=> array(
 			'code'=>'product.property.mtime',
 			'internalcode'=>'mpropr."mtime"',
 			'label'=>'Product property modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.property.ctime'=> array(
 			'code'=>'product.property.ctime',
 			'internalcode'=>'mpropr."ctime"',
 			'label'=>'Product property creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.property.editor'=> array(
 			'code'=>'product.property.editor',
 			'internalcode'=>'mpropr."editor"',
 			'label'=>'Product property editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -91,9 +94,9 @@ class MShop_Product_Manager_Property_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -119,7 +122,7 @@ class MShop_Product_Manager_Property_Standard
 	/**
 	 * Creates new property item object.
 	 *
-	 * @return MShop_Product_Item_Property_Iface New property item object
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface New property item object
 	 */
 	public function createItem()
 	{
@@ -132,7 +135,7 @@ class MShop_Product_Manager_Property_Standard
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -158,14 +161,14 @@ class MShop_Product_Manager_Property_Standard
 	/**
 	 * Inserts the new property items for product item
 	 *
-	 * @param MShop_Product_Item_Property_Iface $item Property item which should be saved
+	 * @param \Aimeos\MShop\Product\Item\Property\Iface $item Property item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Property_Iface';
+		$iface = '\\Aimeos\\MShop\\Product\\Item\\Property\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -246,16 +249,16 @@ class MShop_Product_Manager_Property_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getParentId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLanguageId() );
 			$stmt->bind( 5, $item->getValue() );
 			$stmt->bind( 6, $date ); //mtime
 			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 8, $date ); //ctime
@@ -301,7 +304,7 @@ class MShop_Product_Manager_Property_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -350,8 +353,8 @@ class MShop_Product_Manager_Property_Standard
 	 *
 	 * @param integer $id Id of the product property item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Property_Iface Returns the product property item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Returns the product property item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -363,7 +366,7 @@ class MShop_Product_Manager_Property_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -393,14 +396,14 @@ class MShop_Product_Manager_Property_Standard
 	/**
 	 * Search for all property items based on the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array List of referenced items that should be fetched too
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of property items implementing MShop_Product_Item_Property_Iface
-	 * @throws MShop_Product_Exception if creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 * @return array List of property items implementing \Aimeos\MShop\Product\Item\Property\Iface
+	 * @throws \Aimeos\MShop\Product\Exception if creating items failed
+	 * @see \Aimeos\MW\Common\Criteria\SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 		$context = $this->getContext();
@@ -412,7 +415,7 @@ class MShop_Product_Manager_Property_Standard
 		try
 		{
 			$required = array( 'product.property' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/product/manager/property/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -523,7 +526,7 @@ class MShop_Product_Manager_Property_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -557,7 +560,7 @@ class MShop_Product_Manager_Property_Standard
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from
 	 * configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g property types, property lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g property types, property lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -571,11 +574,11 @@ class MShop_Product_Manager_Property_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Property_Standard
+		 *  \Aimeos\MShop\Product\Manager\Property\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Property_Myproperty
+		 *  \Aimeos\MShop\Product\Manager\Property\Myproperty
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -610,7 +613,7 @@ class MShop_Product_Manager_Property_Standard
 		 *  mshop/product/manager/property/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product property manager.
 		 *
 		 * @param array List of decorator names
@@ -630,12 +633,12 @@ class MShop_Product_Manager_Property_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product property manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product property manager.
 		 *
 		 *  mshop/product/manager/property/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.01
@@ -654,12 +657,12 @@ class MShop_Product_Manager_Property_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product property manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product property manager.
 		 *
 		 *  mshop/product/manager/property/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -677,12 +680,12 @@ class MShop_Product_Manager_Property_Standard
 	/**
 	 * Creates new property item object.
 	 *
-	 * @see MShop_Product_Item_Property_Standard Default property item
+	 * @see \Aimeos\MShop\Product\Item\Property\Standard Default property item
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, value
-	 * @return MShop_Product_Item_Property_Standard New property item object
+	 * @return \Aimeos\MShop\Product\Item\Property\Standard New property item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Product_Item_Property_Standard( $values );
+		return new \Aimeos\MShop\Product\Item\Property\Standard( $values );
 	}
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Manager;
+
+
 /**
  * Delivery and payment service manager.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Manager_Standard
-	extends MShop_Service_Manager_Base
-	implements MShop_Service_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Service\Manager\Base
+	implements \Aimeos\MShop\Service\Manager\Iface
 {
 	private $searchConfig = array(
 		'service.id' => array(
@@ -24,14 +27,14 @@ class MShop_Service_Manager_Standard
 			'internalcode' => 'mser."id"',
 			'label' => 'Service ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'service.siteid' => array(
 			'code' => 'service.siteid',
 			'internalcode' => 'mser."siteid"',
 			'label' => 'Service site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'service.typeid' => array(
@@ -39,7 +42,7 @@ class MShop_Service_Manager_Standard
 			'internalcode' => 'mser."typeid"',
 			'label' => 'Service type ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.code' => array(
@@ -47,63 +50,63 @@ class MShop_Service_Manager_Standard
 			'internalcode' => 'mser."code"',
 			'label' => 'Service code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.position' => array(
 			'code' => 'service.position',
 			'internalcode' => 'mser."pos"',
 			'label' => 'Service position',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.provider' => array(
 			'code' => 'service.provider',
 			'internalcode' => 'mser."provider"',
 			'label' => 'Service provider',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.config' => array(
 			'code' => 'service.config',
 			'internalcode' => 'mser."config"',
 			'label' => 'Service config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.status' => array(
 			'code' => 'service.status',
 			'internalcode' => 'mser."status"',
 			'label' => 'Service status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'service.label' => array(
 			'code' => 'service.label',
 			'internalcode' => 'mser."label"',
 			'label' => 'Service label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.ctime'=> array(
 			'code'=>'service.ctime',
 			'internalcode'=>'mser."ctime"',
 			'label'=>'Service create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.mtime'=> array(
 			'code'=>'service.mtime',
 			'internalcode'=>'mser."mtime"',
 			'label'=>'Service modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'service.editor'=> array(
 			'code'=>'service.editor',
 			'internalcode'=>'mser."editor"',
 			'label'=>'Service editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -111,9 +114,9 @@ class MShop_Service_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
@@ -140,7 +143,7 @@ class MShop_Service_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -170,7 +173,7 @@ class MShop_Service_Manager_Standard
 	/**
 	 * Instanciates a new service item depending on the kind of service manager.
 	 *
-	 * @return MShop_Service_Item_Iface Service item
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item
 	 */
 	public function createItem()
 	{
@@ -220,8 +223,8 @@ class MShop_Service_Manager_Standard
 	 *
 	 * @param int $id Unique ID of the service item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Service_Item_Iface Returns the service item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Service\Item\Iface Returns the service item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -232,14 +235,14 @@ class MShop_Service_Manager_Standard
 	/**
 	 * Adds a new or updates an existing service item in the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item New or existing service item that should be saved to the storage
+	 * @param \Aimeos\MShop\Common\Item\Iface $item New or existing service item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Service_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Service\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Service_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -320,19 +323,19 @@ class MShop_Service_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getTypeId() );
 			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getProvider() );
 			$stmt->bind( 7, json_encode( $item->getConfig() ) );
-			$stmt->bind( 8, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 8, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 9, $date ); // mtime
 			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 11, $date ); // ctime
@@ -378,7 +381,7 @@ class MShop_Service_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -389,16 +392,16 @@ class MShop_Service_Manager_Standard
 	/**
 	 * Searches for service items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of service items implementing MShop_Service_Item_Iface
+	 * @return array List of service items implementing \Aimeos\MShop\Service\Item\Iface
 	 *
-	 * @throws MShop_Service_Exception if creating items failed
-	 * @throws MW_Common_Exception If a failure in the search object occurred
-	 * @throws MW_DB_Exception If errors regarding database access occured
+	 * @throws \Aimeos\MShop\Service\Exception if creating items failed
+	 * @throws \Aimeos\MW\Common\Exception If a failure in the search object occurred
+	 * @throws \Aimeos\MW\DB\Exception If errors regarding database access occured
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -410,7 +413,7 @@ class MShop_Service_Manager_Standard
 		try
 		{
 			$required = array( 'service' );
-			$level = MShop_Locale_Manager_Base::SITE_PATH;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 			/** mshop/service/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -521,7 +524,7 @@ class MShop_Service_Manager_Standard
 				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$map[$row['id']] = $row;
@@ -530,7 +533,7 @@ class MShop_Service_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -559,32 +562,32 @@ class MShop_Service_Manager_Standard
 	/**
 	 * Returns the service provider which is responsible for the service item.
 	 *
-	 * @param MShop_Service_Item_Iface $item Delivery or payment service item object
-	 * @return MShop_Service_Provider_Iface Returns a service provider implementing MShop_Service_Provider_Iface
-	 * @throws MShop_Service_Exception If provider couldn't be found
+	 * @param \Aimeos\MShop\Service\Item\Iface $item Delivery or payment service item object
+	 * @return \Aimeos\MShop\Service\Provider\Iface Returns a service provider implementing \Aimeos\MShop\Service\Provider\Iface
+	 * @throws \Aimeos\MShop\Service\Exception If provider couldn't be found
 	 */
-	public function getProvider( MShop_Service_Item_Iface $item )
+	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item )
 	{
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
 
 		if( ctype_alnum( $type ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null ) {
-			throw new MShop_Service_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$interface = 'MShop_Service_Provider_Factory_Iface';
-		$classname = 'MShop_Service_Provider_' . $type . '_' . $provider;
+		$interface = '\\Aimeos\\MShop\\Service\\Provider\\Factory\\Iface';
+		$classname = '\\Aimeos\\MShop\\Service\\Provider\\' . $type . '\\' . $provider;
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->getContext();
@@ -594,7 +597,7 @@ class MShop_Service_Manager_Standard
 		if( ( $provider instanceof $interface ) === false )
 		{
 			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		/** mshop/service/provider/delivery/decorators
@@ -606,12 +609,12 @@ class MShop_Service_Manager_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap decorators
-		 * ("MShop_Service_Provider_Decorator_*") around the delivery provider.
+		 * ("\Aimeos\MShop\Service\Provider\Decorator\*") around the delivery provider.
 		 *
 		 *  mshop/service/provider/delivery/decorators = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Service_Provider_Decorator_Decorator1" to all delivery provider
+		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all delivery provider
 		 * objects.
 		 *
 		 * @param array List of decorator names
@@ -629,12 +632,12 @@ class MShop_Service_Manager_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap decorators
-		 * ("MShop_Service_Provider_Decorator_*") around the payment provider.
+		 * ("\Aimeos\MShop\Service\Provider\Decorator\*") around the payment provider.
 		 *
 		 *  mshop/service/provider/payment/decorators = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Service_Provider_Decorator_Decorator1" to all payment provider
+		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all payment provider
 		 * objects.
 		 *
 		 * @param array List of decorator names
@@ -654,7 +657,7 @@ class MShop_Service_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Lists_Iface List manager
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -666,7 +669,7 @@ class MShop_Service_Manager_Standard
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default Prepopulate object with default criterias
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -682,12 +685,12 @@ class MShop_Service_Manager_Standard
 	 * Creates a new service item initialized with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_Lists_Iface
-	 * @param array $textItems List of items implementing MShop_Text_Item_Iface
-	 * @return MShop_Service_Item_Iface New service item
+	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $textItems List of items implementing \Aimeos\MShop\Text\Item\Iface
+	 * @return \Aimeos\MShop\Service\Item\Iface New service item
 	 */
 	protected function createItemBase( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
 	{
-		return new MShop_Service_Item_Standard( $values, $listitems, $textItems );
+		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $textItems );
 	}
 }

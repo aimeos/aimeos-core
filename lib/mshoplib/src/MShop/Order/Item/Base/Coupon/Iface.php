@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Coupon;
+
+
 /**
  * Interface for coupon items.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Coupon_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the base ID of the order.

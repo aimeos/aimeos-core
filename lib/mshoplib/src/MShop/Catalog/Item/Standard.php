@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Item;
+
+
 /**
  * Generic interface for catalog items.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Catalog_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Catalog\Item\Iface
 {
 	private $node;
 	private $children;
@@ -25,17 +28,17 @@ class MShop_Catalog_Item_Standard
 	/**
 	 * Initializes the catalog item.
 	 *
-	 * @param MW_Tree_Node_Iface $node Tree node
-	 * @param MShop_Catalog_Item_Iface[] $children List of children of the item
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node
+	 * @param \Aimeos\MShop\Catalog\Item\Iface[] $children List of children of the item
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( MW_Tree_Node_Iface $node, array $children = array(),
+	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = array(),
 		array $listItems = array(), array $refItems = array() )
 	{
 		parent::__construct( '', array(), $listItems, $refItems );
 
-		MW_Common_Base::checkClassList( 'MShop_Catalog_Item_Iface', $children );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $children );
 
 		$this->children = $children;
 		$this->node = $node;
@@ -275,7 +278,7 @@ class MShop_Catalog_Item_Standard
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Catalog_Item_Iface Selected node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
 	 */
 	public function getChild( $index )
 	{
@@ -283,7 +286,7 @@ class MShop_Catalog_Item_Standard
 			return $this->children[$index];
 		}
 
-		throw new MShop_Catalog_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
 	/**
@@ -313,9 +316,9 @@ class MShop_Catalog_Item_Standard
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Catalog_Item_Iface $item Child node to add
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Child node to add
 	 */
-	public function addChild( MShop_Catalog_Item_Iface $item )
+	public function addChild( \Aimeos\MShop\Catalog\Item\Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;
@@ -325,7 +328,7 @@ class MShop_Catalog_Item_Standard
 	/**
 	 * Returns the internal node.
 	 *
-	 * @return MW_Tree_Node_Iface Internal node object
+	 * @return \Aimeos\MW\Tree\Node\Iface Internal node object
 	 */
 	public function getNode()
 	{

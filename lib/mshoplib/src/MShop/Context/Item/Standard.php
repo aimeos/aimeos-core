@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Context\Item;
+
+
 /**
  * Common objects which must to be available for all manager objects.
  *
  * @package MShop
  * @subpackage Context
  */
-class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
+class Standard implements \Aimeos\MShop\Context\Item\Iface
 {
 	private $cache;
 	private $config;
@@ -84,9 +87,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the cache object.
 	 *
-	 * @param MW_Cache_Iface $cache Cache object
+	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
 	 */
-	public function setCache( MW_Cache_Iface $cache )
+	public function setCache( \Aimeos\MW\Cache\Iface $cache )
 	{
 		$this->cache = $cache;
 	}
@@ -95,12 +98,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the cache object.
 	 *
-	 * @return MW_Cache_Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
 	public function getCache()
 	{
 		if( !isset( $this->cache ) ) {
-			throw new MShop_Exception( sprintf( 'Cache object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Cache object not available' ) );
 		}
 
 		return $this->cache;
@@ -110,9 +113,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the configuration object.
 	 *
-	 * @param MW_Config_Iface $config Configuration object
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 */
-	public function setConfig( MW_Config_Iface $config )
+	public function setConfig( \Aimeos\MW\Config\Iface $config )
 	{
 		$this->config = $config;
 	}
@@ -121,12 +124,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return MShop_Config_Iface Configuration object
+	 * @return \Aimeos\MShop\Config\Iface Configuration object
 	 */
 	public function getConfig()
 	{
 		if( !isset( $this->config ) ) {
-			throw new MShop_Exception( sprintf( 'Configuration object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Configuration object not available' ) );
 		}
 
 		return $this->config;
@@ -136,9 +139,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param MW_DB_Manager_Iface $manager Database manager object
+	 * @param \Aimeos\MW\DB\Manager\Iface $manager Database manager object
 	 */
-	public function setDatabaseManager( MW_DB_Manager_Iface $manager )
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager )
 	{
 		$this->dbm = $manager;
 	}
@@ -147,12 +150,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return MW_DB_Manager_Iface Database manager object
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
 	public function getDatabaseManager()
 	{
 		if( !isset( $this->dbm ) ) {
-			throw new MShop_Exception( sprintf( 'Database manager object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );
 		}
 
 		return $this->dbm;
@@ -163,7 +166,7 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
 	 * @param string $locale Two letter language ISO code for specific language instead of default one
-	 * @return MW_Translation_Iface Internationalization object
+	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
 	public function getI18n( $locale = null )
 	{
@@ -171,7 +174,7 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 
 		if( !isset( $this->i18n[$locale] ) ) {
 			/// Locale ID %1$s
-			throw new MShop_Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
 		}
 
 		return $this->i18n[$locale];
@@ -182,7 +185,7 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
-	 * 	MW_Translation_Iface with locale as key
+	 * 	\Aimeos\MW\Translation\Iface with locale as key
 	 */
 	public function setI18n( array $translations )
 	{
@@ -193,9 +196,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the localization object.
 	 *
-	 * @param MShop_Locale_Item_Iface $locale Localization object
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
 	 */
-	public function setLocale( MShop_Locale_Item_Iface $locale )
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
 	{
 		$this->locale = $locale;
 	}
@@ -204,12 +207,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the localization object.
 	 *
-	 * @return MShop_Locale_Item_Iface Localization object
+	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
 	 */
 	public function getLocale()
 	{
 		if( !isset( $this->locale ) ) {
-			throw new MShop_Exception( sprintf( 'Locale object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Locale object not available' ) );
 		}
 
 		return $this->locale;
@@ -219,9 +222,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the logger object.
 	 *
-	 * @param MW_Logger_Iface $logger Logger object
+	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
 	 */
-	public function setLogger( MW_Logger_Iface $logger )
+	public function setLogger( \Aimeos\MW\Logger\Iface $logger )
 	{
 		$this->logger = $logger;
 	}
@@ -230,12 +233,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the logger object.
 	 *
-	 * @return MW_Logger_Iface Logger object
+	 * @return \Aimeos\MW\Logger\Iface Logger object
 	 */
 	public function getLogger()
 	{
 		if( !isset( $this->logger ) ) {
-			throw new MShop_Exception( sprintf( 'Log manager object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Log manager object not available' ) );
 		}
 
 		return $this->logger;
@@ -245,9 +248,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the session object.
 	 *
-	 * @param MW_Session_Iface $session Session object
+	 * @param \Aimeos\MW\Session\Iface $session Session object
 	 */
-	public function setSession( MW_Session_Iface $session )
+	public function setSession( \Aimeos\MW\Session\Iface $session )
 	{
 		$this->session = $session;
 	}
@@ -256,12 +259,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the session object.
 	 *
-	 * @return MW_Session_Iface Session object
+	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
 	public function getSession()
 	{
 		if( !isset( $this->session ) ) {
-			throw new MShop_Exception( sprintf( 'Session object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
 		}
 
 		return $this->session;
@@ -271,9 +274,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the mail object.
 	 *
-	 * @param MW_Mail_Iface $mail Mail object
+	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
 	 */
-	public function setMail( MW_Mail_Iface $mail )
+	public function setMail( \Aimeos\MW\Mail\Iface $mail )
 	{
 		$this->mail = $mail;
 	}
@@ -282,12 +285,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the mail object.
 	 *
-	 * @return MW_Mail_Iface Mail object
+	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
 	public function getMail()
 	{
 		if( !isset( $this->mail ) ) {
-			throw new MShop_Exception( sprintf( 'Mail object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Mail object not available' ) );
 		}
 
 		return $this->mail;
@@ -297,9 +300,9 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Sets the view object.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 */
-	public function setView( MW_View_Iface $view )
+	public function setView( \Aimeos\MW\View\Iface $view )
 	{
 		$this->view = $view;
 	}
@@ -308,12 +311,12 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	/**
 	 * Returns the view object.
 	 *
-	 * @return MW_View_Iface View object
+	 * @return \Aimeos\MW\View\Iface View object
 	 */
 	public function getView()
 	{
 		if( !isset( $this->view ) ) {
-			throw new MShop_Exception( sprintf( 'View object not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'View object not available' ) );
 		}
 
 		return clone $this->view;
@@ -360,7 +363,7 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	 */
 	public function getUserId()
 	{
-		if( $this->user instanceof Closure )
+		if( $this->user instanceof \Closure )
 		{
 			$fcn = $this->user;
 			$this->user = $fcn();
@@ -388,7 +391,7 @@ class MShop_Context_Item_Standard implements MShop_Context_Item_Iface
 	 */
 	public function getGroupIds()
 	{
-		if( $this->groups instanceof Closure )
+		if( $this->groups instanceof \Closure )
 		{
 			$fcn = $this->groups;
 			$this->groups = $fcn();

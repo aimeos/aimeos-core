@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Text\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Text_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Text_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Text_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Text\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -59,7 +60,7 @@ class Controller_ExtJS_Text_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1 );
-		$textManager = new Controller_ExtJS_Text_Standard( TestHelper::getContext() );
+		$textManager = new \Aimeos\Controller\ExtJS\Text\Standard( \TestHelper::getContext() );
 		$result = $textManager->searchItems( $params );
 
 		$params = (object) array(
@@ -68,7 +69,7 @@ class Controller_ExtJS_Text_Lists_StandardTest extends PHPUnit_Framework_TestCas
 			'start' => 0,
 			'limit' => 1,
 		);
-		$textListTypeManager = Controller_ExtJS_Text_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$textListTypeManager = \Aimeos\Controller\ExtJS\Text\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $textListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

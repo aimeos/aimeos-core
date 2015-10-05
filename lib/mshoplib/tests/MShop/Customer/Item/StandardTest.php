@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item;
+
+
 /**
- * Test class for MShop_Customer_Item_Standard.
+ * Test class for \Aimeos\MShop\Customer\Item\Standard.
  */
-class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -29,7 +32,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'pos' => 1,
 		);
 
-		$this->address = new MShop_Common_Item_Address_Standard( 'common.address.', $addressValues );
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
 
 		$this->values = array(
 			'id' => 541,
@@ -42,7 +45,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'vdate' => null,
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'title' => 'Dr.',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -63,7 +66,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Customer_Item_Standard( $this->address, $this->values, array(), array(), 'mshop', null );
+		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, array(), array(), 'mshop', null );
 	}
 
 	/**
@@ -179,8 +182,8 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetGroups()
 	{
 		$listValues = array( 'domain' => 'customer/group', 'refid' => 123 );
-		$listItems = array( 'customer/group' => array( new MShop_Common_Item_Lists_Standard( '', $listValues ) ) );
-		$object = new MShop_Customer_Item_Standard( $this->address, array(), $listItems );
+		$listItems = array( 'customer/group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
+		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, array(), $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );
 	}
@@ -191,7 +194,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $address->getRefId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
-		$this->assertEquals( $address->getSalutation(), MShop_Common_Item_Address_Base::SALUTATION_MR );
+		$this->assertEquals( $address->getSalutation(), \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR );
 		$this->assertEquals( $address->getTitle(), 'Dr.' );
 		$this->assertEquals( $address->getFirstname(), 'firstunit' );
 		$this->assertEquals( $address->getLastname(), 'lastunit' );
@@ -219,8 +222,8 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$address = new MShop_Common_Item_Address_Standard( 'common.address.' );
-		$item = new MShop_Customer_Item_Standard( $address );
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
+		$item = new \Aimeos\MShop\Customer\Item\Standard( $address );
 
 		$list = array(
 			'customer.id' => 1,
@@ -232,7 +235,7 @@ class MShop_Customer_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
-			'customer.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'customer.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'customer.title' => 'Dr.',
 			'customer.firstname' => 'firstunit',
 			'customer.lastname' => 'lastunit',

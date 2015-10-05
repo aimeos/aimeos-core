@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MAdmin\Job\Item;
+
+
 /**
  * MAdmin job item Interface.
  *
  * @package MAdmin
  * @subpackage Job
  */
-interface MAdmin_Job_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the status (enabled/disabled) of the attribute item.

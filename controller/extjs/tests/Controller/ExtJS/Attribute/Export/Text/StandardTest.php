@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Attribute\Export\Text;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Attribute_Export_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,8 +21,8 @@ class Controller_ExtJS_Attribute_Export_Text_StandardTest extends PHPUnit_Framew
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new Controller_ExtJS_Attribute_Export_Text_Standard( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\ExtJS\Attribute\Export\Text\Standard( $this->context );
 	}
 
 
@@ -39,14 +40,14 @@ class Controller_ExtJS_Attribute_Export_Text_StandardTest extends PHPUnit_Framew
 
 	public function testExportCSVFile()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$ids = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
 			$ids[] = $item->getId();
 		}
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->lang = array( 'de' );
 		$params->items = $ids;
 		$params->site = 'unittest';
@@ -59,19 +60,19 @@ class Controller_ExtJS_Attribute_Export_Text_StandardTest extends PHPUnit_Framew
 		$this->assertTrue( file_exists( $file ) );
 
 
-		$zip = new ZipArchive();
+		$zip = new \ZipArchive();
 		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
 		$zip->extractTo( $testdir );
 		$zip->close();
 
 		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
@@ -86,11 +87,11 @@ class Controller_ExtJS_Attribute_Export_Text_StandardTest extends PHPUnit_Framew
 
 		fclose( $fh );
 		if( unlink( $deCSV ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		if( rmdir( $testdir ) === false ) {
-			throw new Exception( 'Unable to remove test export directory' );
+			throw new \Exception( 'Unable to remove test export directory' );
 		}
 
 		$this->assertEquals( 'Language ID', $lines[0][0] );

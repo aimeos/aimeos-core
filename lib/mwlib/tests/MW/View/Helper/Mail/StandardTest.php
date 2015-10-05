@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Mail;
+
+
 /**
- * Test class for MW_View_Helper_Mail.
+ * Test class for \Aimeos\MW\View\Helper\Mail.
  */
-class MW_View_Helper_Mail_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $message;
@@ -23,12 +26,12 @@ class MW_View_Helper_Mail_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 
-		$mail = new MW_Mail_None();
+		$mail = new \Aimeos\MW\Mail\None();
 		$this->message = $mail->createMessage();
 
-		$this->object = new MW_View_Helper_Mail_Standard( $view, $this->message );
+		$this->object = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $this->message );
 	}
 
 

@@ -8,24 +8,27 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Delivery;
+
+
 /**
  * Manual delivery provider implementation.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Delivery_Manual
-	extends MShop_Service_Provider_Delivery_Base
-	implements MShop_Service_Provider_Delivery_Iface
+class Manual
+	extends \Aimeos\MShop\Service\Provider\Delivery\Base
+	implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
 	/**
 	 * Updates the delivery status.
 	 *
-	 * @param MShop_Order_Item_Iface $order Order instance
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
 	 */
-	public function process( MShop_Order_Item_Iface $order )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order )
 	{
-		$order->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
+		$order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Log\Item;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Log_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -32,7 +34,7 @@ class MAdmin_Log_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'editor foo'
 		);
 
-		$this->object = new MAdmin_Log_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MAdmin\Log\Item\Standard( $this->values );
 	}
 
 
@@ -65,14 +67,14 @@ class MAdmin_Log_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 'test' );
 	}
 
@@ -147,7 +149,7 @@ class MAdmin_Log_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MAdmin_Log_Item_Standard();
+		$item = new \Aimeos\MAdmin\Log\Item\Standard();
 
 		$list = array(
 			'log.id' => 1,

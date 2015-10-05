@@ -6,16 +6,19 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds records to tables.
  */
-class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
+class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 {
-	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		parent::__construct( $schema, $conn, $additional );
@@ -63,8 +66,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function addAttributes( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $attrManager->createItem();
@@ -127,8 +130,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function addMedia( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$mediaManager = MShop_Factory::createManager( $context, 'media' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -193,8 +196,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function addPrices( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$mediaManager = MShop_Factory::createManager( $context, 'price' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -261,8 +264,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function addTexts( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$textManager = MShop_Factory::createManager( $context, 'text' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
+		$textManager = \Aimeos\MShop\Factory::createManager( $context, 'text' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $textManager->createItem();
@@ -325,8 +328,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function addProducts( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/lists' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$listItem = $listManager->createItem();
@@ -352,7 +355,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 		foreach( $data as $entry )
 		{
 			if( !isset( $codes[$entry['code']] ) ) {
-				throw new Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
+				throw new \Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
 			}
 
 			$listItem->setId( null );
@@ -377,14 +380,14 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	 */
 	protected function addProductStock( $productid, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
 
 		$warehouses = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
 			$warehouses[$item->getCode()] = $id;
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$item = $manager->createItem();
 		$item->setProductId( $productid );
@@ -404,7 +407,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	/**
 	 * Returns the context.
 	 *
-	 * @return MShop_Context_Item_Iface Context item
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item
 	 */
 	protected function getContext()
 	{
@@ -422,7 +425,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 	protected function getTypeId( $name, $domain, $type )
 	{
 		$key = str_replace( '/', '.', $name );
-		$manager = MShop_Factory::createManager( $this->getContext(), $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $name );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -434,7 +437,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
+			throw new \Exception( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
 		}
 
 		return $item->getId();
@@ -454,8 +457,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
-		$manager = MShop_Factory::createManager( $context, $refdomain );
-		$listManager = MShop_Factory::createManager( $context, $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, $refdomain );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $name );
 
 
 		$search = $manager->createSearch();
@@ -495,8 +498,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Base
 		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
-		$manager = MShop_Factory::createManager( $context, $refdomain );
-		$listManager = MShop_Factory::createManager( $context, $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, $refdomain );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $name );
 
 
 		$search = $listManager->createSearch();

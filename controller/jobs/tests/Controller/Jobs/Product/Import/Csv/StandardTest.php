@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Product\Import\Csv;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,16 +22,16 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->aimeos = TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
+		$this->aimeos = \TestHelper::getAimeos();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 1 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/valid' );
 
-		$this->object = new Controller_Jobs_Product_Import_Csv_Standard( $this->context, $this->aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Product\Import\Csv\Standard( $this->context, $this->aimeos );
 	}
 
 
@@ -42,8 +43,8 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->object = null;
 
@@ -155,7 +156,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 
 		$this->context->getConfig()->set( 'controller/jobs/product/import/csv/mapping', $mapping );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->run();
 	}
 
@@ -201,9 +202,9 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 0 );
 		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/invalid' );
 
-		$this->object = new Controller_Jobs_Product_Import_Csv_Standard( $this->context, $this->aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Product\Import\Csv\Standard( $this->context, $this->aimeos );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->run();
 	}
 
@@ -216,7 +217,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/test-%Y-%m-%d.zip' );
 
 		if( copy( __DIR__ . '/_testfiles/import.zip', 'tmp/import.zip' ) === false ) {
-			throw new Exception( 'Unable to copy test file' );
+			throw new \Exception( 'Unable to copy test file' );
 		}
 
 		$this->object->run();
@@ -236,25 +237,25 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 		$config->set( 'controller/jobs/product/import/csv/backup', 'tmp/notexist/import.zip' );
 
 		if( copy( __DIR__ . '/_testfiles/import.zip', 'tmp/import.zip' ) === false ) {
-			throw new Exception( 'Unable to copy test file' );
+			throw new \Exception( 'Unable to copy test file' );
 		}
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->run();
 	}
 
 
 	protected function delete( array $prodcodes, array $delete, array $nondelete )
 	{
-		$catListManager = MShop_Catalog_Manager_Factory::createManager( $this->context )->getSubmanager( 'lists' );
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$catListManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context )->getSubmanager( 'lists' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$listManager = $productManager->getSubManager( 'lists' );
 
 		foreach( $this->get( $prodcodes, $delete + $nondelete ) as $id => $product )
 		{
 			foreach( $delete as $domain )
 			{
-				$manager = MShop_Factory::createManager( $this->context, $domain );
+				$manager = \Aimeos\MShop\Factory::createManager( $this->context, $domain );
 
 				foreach( $product->getListItems( $domain ) as $listItem )
 				{
@@ -279,7 +280,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 		}
 
 
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'import-test' ) );
@@ -292,7 +293,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 
 	protected function get( array $prodcodes, array $domains )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $prodcodes ) );
@@ -303,7 +304,7 @@ class Controller_Jobs_Product_Import_Csv_StandardTest extends PHPUnit_Framework_
 
 	protected function getProperties( array $prodids )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context )->getSubManager( 'property' );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context )->getSubManager( 'property' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodids ) );

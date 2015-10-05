@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Typeid;
+
+
 /**
  * Common interface for items having types.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Typeid_Iface
+interface Iface
 {
 	/**
 	 * Returns the type of the item.

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Manager\Address;
+
+
 /**
  * Interface for supplier address managers.
  *
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Manager_Address_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Address;
+
+
 /**
  * Common abstract address manager implementation.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Manager_Address_Base
-	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Address_Iface
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Address\Iface
 {
 	private $context;
 	private $searchConfig;
@@ -26,11 +29,11 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Initializes a new common address manager object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 *
-	 * @throws MShop_Exception if no configuration is available
+	 * @throws \Aimeos\MShop\Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -38,15 +41,15 @@ abstract class MShop_Common_Manager_Address_Base
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 	}
 
@@ -54,7 +57,7 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Instantiates a new common address item object.
 	 *
-	 * @return MShop_Common_Item_Address_Iface
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface
 	 */
 	public function createItem()
 	{
@@ -80,13 +83,13 @@ abstract class MShop_Common_Manager_Address_Base
 	 *
 	 * @param integer $id Unique common address ID referencing an existing address
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Address_Iface Returns the address item of the given id
-	 * @throws MShop_Exception If address search configuration isn't available
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id
+	 * @throws \Aimeos\MShop\Exception If address search configuration isn't available
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Address search configuration not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Address search configuration not available' ) );
 		}
 
 		return $this->getItemBase( $conf['code'], $id, $ref );
@@ -96,14 +99,14 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Saves a common address item object.
 	 *
-	 * @param MShop_Common_Item_Address_Iface $item common address item object
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item common address item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_Address_Iface';
+		$iface = '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		$dbm = $this->context->getDatabaseManager();
@@ -126,7 +129,7 @@ abstract class MShop_Common_Manager_Address_Base
 			$sql = $this->context->getConfig()->get( $path, $path );
 			$stmt = $this->getCachedStatement( $conn, $this->prefix . $type, $sql );
 
-			$stmt->bind( 1, $this->context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $this->context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getRefId() );
 			$stmt->bind( 3, $item->getCompany() );
 			$stmt->bind( 4, $item->getVatId() );
@@ -146,13 +149,13 @@ abstract class MShop_Common_Manager_Address_Base
 			$stmt->bind( 18, $item->getEmail() );
 			$stmt->bind( 19, $item->getTelefax() );
 			$stmt->bind( 20, $item->getWebsite() );
-			$stmt->bind( 21, $item->getFlag(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 22, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 21, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 23, $date ); //mtime
 			$stmt->bind( 24, $this->context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 25, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 25, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 25, $date ); // ctime
@@ -168,7 +171,7 @@ abstract class MShop_Common_Manager_Address_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -179,12 +182,12 @@ abstract class MShop_Common_Manager_Address_Base
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Address_Iface
-	 * @throws MShop_Common_Exception If creating items failed
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Address\Iface
+	 * @throws \Aimeos\MShop\Common\Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -196,11 +199,11 @@ abstract class MShop_Common_Manager_Address_Base
 			$domain = explode( '.', $this->prefix );
 
 			if( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( 'No configuration available.' );
+				throw new \Aimeos\MShop\Exception( 'No configuration available.' );
 			}
 
 			$required = array( trim( $this->prefix, '.' ) );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = $this->getConfigPath() . '/search';
 			$cfgPathCount = $this->getConfigPath() . '/count';
 
@@ -212,7 +215,7 @@ abstract class MShop_Common_Manager_Address_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -227,7 +230,7 @@ abstract class MShop_Common_Manager_Address_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -266,10 +269,10 @@ abstract class MShop_Common_Manager_Address_Base
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
-	 * @return MShop_Common_Item_Address_Iface New address item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{
-		return new MShop_Common_Item_Address_Standard( $this->prefix, $values );
+		return new \Aimeos\MShop\Common\Item\Address\Standard( $this->prefix, $values );
 	}
 }

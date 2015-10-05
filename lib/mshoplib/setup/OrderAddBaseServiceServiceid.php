@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds order ID column to order base service tables.
  */
-class MW_Setup_Task_OrderAddBaseServiceServiceid extends MW_Setup_Task_Base
+class OrderAddBaseServiceServiceid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_order_base_service" ADD "servid" VARCHAR(32) NOT NULL COLLATE utf8_bin AFTER "siteid"',

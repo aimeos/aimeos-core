@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in madmin_log.
  */
-class MW_Setup_Task_LogModifyIndexes extends MW_Setup_Task_Base
+class LogModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'delete' => array(

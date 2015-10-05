@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Log\Manager;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Log_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class MAdmin_Log_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MAdmin_Log_Manager_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -42,21 +44,21 @@ class MAdmin_Log_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Log_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Log\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attr );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -94,7 +96,7 @@ class MAdmin_Log_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $criteria );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -133,7 +135,7 @@ class MAdmin_Log_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getRequest(), $itemUpd->getRequest() );
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
 
-		$this->setExpectedException( 'MAdmin_Log_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 }

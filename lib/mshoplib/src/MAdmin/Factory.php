@@ -7,12 +7,15 @@
  */
 
 
+namespace Aimeos\MAdmin;
+
+
 /**
  * Factory which can create all MAdmin managers.
  *
  * @package MAdmin
  */
-class MAdmin_Factory
+class Factory
 {
 	static private $cache = true;
 	static private $managers = array();
@@ -23,7 +26,7 @@ class MAdmin_Factory
 	 *
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Iface)
+	 * @param integer $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
 	 * @param string $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
 	static public function clear( $id = null, $path = null )
@@ -47,21 +50,21 @@ class MAdmin_Factory
 	 * Creates the required manager specified by the given path of manager names.
 	 *
 	 * Domain managers are created by providing only the domain name, e.g.
-	 * "product" for the MAdmin_Log_Manager_Standard or a path of names to
+	 * "product" for the \Aimeos\MAdmin\Log\Manager\Standard or a path of names to
 	 * retrieve a specific sub-manager.
 	 * Please note, that only the default managers can be created. If you need
 	 * a specific implementation, you need to use the factory class of the
 	 * domain or the getSubManager() method to hand over specifc implementation
 	 * names.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object required by managers
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "log"
-	 * @throws MAdmin_Exception If the given path is invalid or the manager wasn't found
+	 * @throws \Aimeos\MAdmin\Exception If the given path is invalid or the manager wasn't found
 	 */
-	static public function createManager( MShop_Context_Item_Iface $context, $path )
+	static public function createManager( \Aimeos\MShop\Context\Item\Iface $context, $path )
 	{
 		if( empty( $path ) ) {
-			throw new MAdmin_Exception( sprintf( 'Manager path is empty' ) );
+			throw new \Aimeos\MAdmin\Exception( sprintf( 'Manager path is empty' ) );
 		}
 
 		$id = (string) $context;
@@ -73,27 +76,27 @@ class MAdmin_Factory
 			foreach( $parts as $part )
 			{
 				if( ctype_alnum( $part ) === false ) {
-					throw new MAdmin_Exception( sprintf( 'Invalid characters in manager name "%1$s" in "%2$s"', $part, $path ) );
+					throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid characters in manager name "%1$s" in "%2$s"', $part, $path ) );
 				}
 			}
 
 			if( ( $name = array_shift( $parts ) ) === null ) {
-				throw new MAdmin_Exception( sprintf( 'Manager path "%1$s" is invalid', $path ) );
+				throw new \Aimeos\MAdmin\Exception( sprintf( 'Manager path "%1$s" is invalid', $path ) );
 			}
 
 
 			if( !isset( self::$managers[$id][$name] ) )
 			{
-				$factory = 'MAdmin_' . ucwords( $name ) . '_Manager_Factory';
+				$factory = '\\Aimeos\\MAdmin\\' . ucwords( $name ) . '\\Manager\\Factory';
 
 				if( class_exists( $factory ) === false ) {
-					throw new MAdmin_Exception( sprintf( 'Class "%1$s" not available', $factory ) );
+					throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 				}
 
 				$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
 
 				if( $manager === false ) {
-					throw new MAdmin_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
+					throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
 				self::$managers[$id][$name] = $manager;

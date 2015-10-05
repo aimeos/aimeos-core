@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Filter\Tree;
+
+
 /**
  * Default implementation of catalog tree filter section in HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Filter_Tree_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/catalog/filter/tree/default/subparts
 	 * List of HTML sub-clients rendered within the catalog filter tree section
@@ -154,7 +157,7 @@ class Client_Html_Catalog_Filter_Tree_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -173,7 +176,7 @@ class Client_Html_Catalog_Filter_Tree_Standard
 		 *  client/html/catalog/filter/tree/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -193,12 +196,12 @@ class Client_Html_Catalog_Filter_Tree_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/filter/tree/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -217,12 +220,12 @@ class Client_Html_Catalog_Filter_Tree_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/filter/tree/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -250,16 +253,16 @@ class Client_Html_Catalog_Filter_Tree_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
-	 * @return MW_View_Iface Modified view object
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
 			$catItems = array();
 			$context = $this->getContext();
-			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+			$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
 			$currentid = (string) $view->param( 'f_catid', '' );
 			$currentid = ( $currentid != '' ? $currentid : null );
@@ -325,7 +328,7 @@ class Client_Html_Catalog_Filter_Tree_Standard
 
 			if( ( $node = reset( $catItems ) ) === false )
 			{
-				$node = $controller->getCatalogTree( $startid, array(), MW_Tree_Manager_Base::LEVEL_ONE );
+				$node = $controller->getCatalogTree( $startid, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 				$catItems = array( $node->getId() => $node );
 			}
 
@@ -389,7 +392,7 @@ class Client_Html_Catalog_Filter_Tree_Standard
 
 			$search->setConditions( $expr );
 
-			$level = MW_Tree_Manager_Base::LEVEL_TREE;
+			$level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE;
 
 			$view->treeCatalogPath = $catItems;
 			$view->treeCatalogTree = $controller->getCatalogTree( $startid, $ref, $level, $search );
@@ -413,13 +416,13 @@ class Client_Html_Catalog_Filter_Tree_Standard
 	 *
 	 * Only the IDs of the children of the current category are returned.
 	 *
-	 * @param MShop_Catalog_Item_Iface $tree Catalog node as entry point of the tree
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $tree Catalog node as entry point of the tree
 	 * @param array $path Associative list of category IDs as keys and the catalog
 	 * 	nodes from the currently selected category up to the root node
 	 * @param string $currentId Currently selected category
 	 * @return array List of category IDs
 	 */
-	protected function getCatalogIds( MShop_Catalog_Item_Iface $tree, array $path, $currentId )
+	protected function getCatalogIds( \Aimeos\MShop\Catalog\Item\Iface $tree, array $path, $currentId )
 	{
 		if( $tree->getId() == $currentId )
 		{
@@ -445,11 +448,11 @@ class Client_Html_Catalog_Filter_Tree_Standard
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given catalog tree.
 	 *
-	 * @param MShop_Catalog_Item_Iface $tree Tree node, maybe with sub-nodes
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $tree Tree node, maybe with sub-nodes
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function addMetaItemCatalog( MShop_Catalog_Item_Iface $tree, &$expire, array &$tags = array() )
+	protected function addMetaItemCatalog( \Aimeos\MShop\Catalog\Item\Iface $tree, &$expire, array &$tags = array() )
 	{
 		$this->addMetaItem( $tree, 'catalog', $expire, $tags );
 

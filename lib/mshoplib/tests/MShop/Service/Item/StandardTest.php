@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Service\Item;
+
+
 /**
- * Test class for MShop_Service_Item_Standard.
+ * Test class for \Aimeos\MShop\Service\Item\Standard.
  */
-class MShop_Service_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values = array();
@@ -38,7 +41,7 @@ class MShop_Service_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Service_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Service\Item\Standard( $this->values );
 	}
 
 	/**
@@ -193,7 +196,7 @@ class MShop_Service_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Service_Item_Standard();
+		$item = new \Aimeos\MShop\Service\Item\Standard();
 
 		$list = array(
 			'service.id' => 1,

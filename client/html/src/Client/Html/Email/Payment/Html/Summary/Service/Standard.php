@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Client\Html\Email\Payment\Html\Summary\Service;
+
+
 /**
  * Default implementation of order summary service HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Email_Payment_Html_Summary_Service_Standard
-	extends Client_Html_Common_Summary_Service_Standard
+class Standard
+	extends \Aimeos\Client\Html\Common\Summary\Service\Standard
 {
 	/**
 	 * Returns the sub-client given by its name.
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -41,7 +44,7 @@ class Client_Html_Email_Payment_Html_Summary_Service_Standard
 		 *  client/html/email/payment/html/summary/service/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -61,12 +64,12 @@ class Client_Html_Email_Payment_Html_Summary_Service_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/payment/html/summary/service/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -85,12 +88,12 @@ class Client_Html_Email_Payment_Html_Summary_Service_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/payment/html/summary/service/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08

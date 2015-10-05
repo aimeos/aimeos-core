@@ -6,57 +6,60 @@
  */
 
 
+namespace Aimeos\Controller\Frontend;
+
+
 /**
- * Test class for Controller_Frontend_Factory.
+ * Test class for \Aimeos\Controller\Frontend\Factory.
  */
-class Controller_Frontend_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$controller = Controller_Frontend_Factory::createController( TestHelper::getContext(), 'basket' );
-		$this->assertInstanceOf( 'Controller_Frontend_Common_Iface', $controller );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'basket' );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\Frontend\\Common\\Iface', $controller );
 	}
 
 
 	public function testCreateControllerEmpty()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Factory::createController( TestHelper::getContext(), "\t\n" );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Factory::createController( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Factory::createController( TestHelper::getContext(), 'notexist' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'notexist' );
 	}
 
 
 	public function testCreateSubControllerNotExisting()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Exception' );
-		Controller_Frontend_Factory::createController( TestHelper::getContext(), 'basket/notexist' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'basket/notexist' );
 	}
 
 
 	public function testClear()
 	{
-		$cache = Controller_Frontend_Factory::setCache( true );
+		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$controller1 = Controller_Frontend_Factory::createController( $context, 'basket' );
-		Controller_Frontend_Factory::clear();
-		$controller2 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		$controller1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+		\Aimeos\Controller\Frontend\Factory::clear();
+		$controller2 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 
-		Controller_Frontend_Factory::setCache( $cache );
+		\Aimeos\Controller\Frontend\Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -64,18 +67,18 @@ class Controller_Frontend_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSite()
 	{
-		$cache = Controller_Frontend_Factory::setCache( true );
+		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
-		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
-		Controller_Frontend_Factory::clear( (string) $context );
+		$basket1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+		$catalog1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
+		\Aimeos\Controller\Frontend\Factory::clear( (string) $context );
 
-		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
-		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		$basket2 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+		$catalog2 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
-		Controller_Frontend_Factory::setCache( $cache );
+		\Aimeos\Controller\Frontend\Factory::setCache( $cache );
 
 		$this->assertNotSame( $basket1, $basket2 );
 		$this->assertNotSame( $catalog1, $catalog2 );
@@ -84,18 +87,18 @@ class Controller_Frontend_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSpecific()
 	{
-		$cache = Controller_Frontend_Factory::setCache( true );
+		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
-		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
-		Controller_Frontend_Factory::clear( (string) $context, 'basket' );
+		$basket1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+		$catalog1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
+		\Aimeos\Controller\Frontend\Factory::clear( (string) $context, 'basket' );
 
-		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
-		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		$basket2 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+		$catalog2 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
-		Controller_Frontend_Factory::setCache( $cache );
+		\Aimeos\Controller\Frontend\Factory::setCache( $cache );
 
 		$this->assertNotSame( $basket1, $basket2 );
 		$this->assertSame( $catalog1, $catalog2 );

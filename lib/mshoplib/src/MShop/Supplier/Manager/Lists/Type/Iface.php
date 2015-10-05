@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Manager\Lists\Type;
+
+
 /**
  * Interface for supplier type manager.
  *
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Manager_Lists_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

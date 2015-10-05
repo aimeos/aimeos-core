@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Currency;
+
+
 /**
  * Default implementation of a currency item.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Item_Currency_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Currency_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Locale\Item\Currency\Iface
 {
 	private $modified = false;
 	private $values;
@@ -91,7 +94,7 @@ class MShop_Locale_Item_Currency_Standard
 		if( $key == $this->getCode() ) { return; }
 
 		if( strlen( $key ) != 3 || ctype_alpha( $key ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
 		$this->values['code'] = strtoupper( $key );

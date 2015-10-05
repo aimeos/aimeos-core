@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Product\Export\Sitemap;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Jobs_Product_Export_Sitemap_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,12 +22,12 @@ class Controller_Jobs_Product_Export_Sitemap_StandardTest extends PHPUnit_Framew
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->aimeos = TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
+		$this->aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Product_Export_Sitemap_Standard( $this->context, $this->aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Product\Export\Sitemap\Standard( $this->context, $this->aimeos );
 	}
 
 
@@ -38,8 +39,8 @@ class Controller_Jobs_Product_Export_Sitemap_StandardTest extends PHPUnit_Framew
 	 */
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->object = null;
 	}

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item;
+
+
 /**
  * Generic interface for all items.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Iface
+interface Iface
 {
 	/**
 	 * Returns the unique ID of the item.

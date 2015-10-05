@@ -8,29 +8,32 @@
  */
 
 
+namespace Aimeos\MW\Observer\Listener;
+
+
 /**
  * Common interface for objects listening to notifications.
  *
  * @package MW
  * @subpackage Observer
  */
-interface MW_Observer_Listener_Iface
+interface Iface
 {
 	/**
 	 * Subscribes itself to a publisher.
 	 *
-	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return void
 	 */
-	public function register( MW_Observer_Publisher_Iface $p );
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p );
 
 	/**
 	 * Receives a notification from a publisher object.
 	 *
-	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @return boolean Status of the operation (true=OK, false=not OK)
 	 */
-	public function update( MW_Observer_Publisher_Iface $p, $action, $value = null );
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, $action, $value = null );
 }

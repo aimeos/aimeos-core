@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds media test data.
  */
-class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
+class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding media-list test data', 0 );
@@ -59,7 +62,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'media-list.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for media list domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for media list domain', $path ) );
 		}
 
 		$refKeys = array();
@@ -81,11 +84,11 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 * Gets required attribute item ids.
 	 *
 	 * @param array $keys List of keys for search
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function getAttributeData( array $keys )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = $domains = array();
@@ -94,7 +97,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 			$exp = explode( '/', $dataset );
 
 			if( count( $exp ) != 4 ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref attribute are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref attribute are set wrong "%1$s"', $dataset ) );
 			}
 
 			$domains[] = $exp[1];
@@ -136,17 +139,17 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 * Gets required text item ids.
 	 *
 	 * @param array $keys List of keys for search
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
 			$labels[] = $str;
@@ -169,11 +172,11 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addMediaListData( array $testdata, array $refIds )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$mediaListManager = $mediaManager->getSubmanager( 'lists', 'Standard' );
 		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Standard' );
 
@@ -181,7 +184,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['media/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$urls[] = $str;
@@ -218,15 +221,15 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['media/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No media ID found for "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			if( !isset( $medListTypes[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No media list type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$medList->setId( null );

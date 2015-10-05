@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the catalog tables.
  */
-class MW_Setup_Task_CatalogModifyIndexes extends MW_Setup_Task_Base
+class CatalogModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

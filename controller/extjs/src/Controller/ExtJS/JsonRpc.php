@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
  * JSON RPC frontend controller for ExtJS.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_JsonRpc
+class JsonRpc
 {
-	private $classprefix = 'Controller_ExtJS';
+	private $classprefix = '\\Aimeos\\Controller\\ExtJS';
 	private $controllers = array();
 	private $cntlPaths;
 	private $context;
@@ -26,9 +29,9 @@ class Controller_ExtJS_JsonRpc
 	 * Initializes the ExtJS frontend controller.
 	 * Should not be instantiated directly. Use getInstance() instead.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $cntlPaths )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $cntlPaths )
 	{
 		$this->cntlPaths = $cntlPaths;
 		$this->context = $context;
@@ -49,7 +52,7 @@ class Controller_ExtJS_JsonRpc
 		}
 
 		if( ( $json = json_encode( $list ) ) === null ) {
-			throw new Exception( 'Unable to encode schemas to JSON' );
+			throw new \Exception( 'Unable to encode schemas to JSON' );
 		}
 
 		return $json;
@@ -70,7 +73,7 @@ class Controller_ExtJS_JsonRpc
 		}
 
 		if( ( $json = json_encode( $list ) ) === null ) {
-			throw new Exception( 'Unable to encode schemas to JSON' );
+			throw new \Exception( 'Unable to encode schemas to JSON' );
 		}
 
 		return $json;
@@ -105,7 +108,7 @@ class Controller_ExtJS_JsonRpc
 		);
 
 		if( ( $json = json_encode( $smd ) ) === null ) {
-			throw new Exception( 'Unable to encode service mapping description to JSON' );
+			throw new \Exception( 'Unable to encode service mapping description to JSON' );
 		}
 
 		return $json;
@@ -140,14 +143,14 @@ class Controller_ExtJS_JsonRpc
 		try
 		{
 			if( !isset( $reqparams['params'] ) || ( $params = json_decode( $reqparams['params'] ) ) === null ) {
-				throw new Controller_ExtJS_Exception( 'Required parameters are missing or not JSON encoded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Required parameters are missing or not JSON encoded' );
 			}
 
 			if( ( $result = $this->callMethod( $reqparams['method'], $params ) ) !== null ) {
 				return json_encode( $result );
 			}
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$response = array(
 				'error' => array(
@@ -177,11 +180,11 @@ class Controller_ExtJS_JsonRpc
 		try
 		{
 			if( ( $raw = file_get_contents( $inputstream ) ) === false ) {
-				throw new Controller_ExtJS_Exception( 'Unable to read JSON encoded request', -32700 );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Unable to read JSON encoded request', -32700 );
 			}
 
 			if( ( $request = json_decode( $raw ) ) === null ) {
-				throw new Controller_ExtJS_Exception( 'Invalid JSON encoded request', -32700 );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Invalid JSON encoded request', -32700 );
 			}
 
 			if( is_array( $request ) )
@@ -201,10 +204,10 @@ class Controller_ExtJS_JsonRpc
 			}
 			else
 			{
-				throw new Controller_ExtJS_Exception( 'Invalid JSON RPC request', -32600 );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Invalid JSON RPC request', -32600 );
 			}
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$response = array(
 				'error' => array(
@@ -226,10 +229,10 @@ class Controller_ExtJS_JsonRpc
 	/**
 	 * Processes a single JSON RPC request.
 	 *
-	 * @param stdClass $request Object with attributes of JSON RPC request
+	 * @param \stdClass $request Object with attributes of JSON RPC request
 	 * @return Associative array with JSON RPC response or NULL in case of JSON RPC notifications
 	 */
-	protected function processJson( stdClass $request )
+	protected function processJson( \stdClass $request )
 	{
 		$response = array(
 			'jsonrpc' => '2.0',
@@ -240,16 +243,16 @@ class Controller_ExtJS_JsonRpc
 			if( !isset( $request->method ) )
 			{
 				$msg = sprintf( 'Required attribute "%1$s" missing in request', 'method' );
-				throw new Controller_ExtJS_Exception( $msg, -32600 );
+				throw new \Aimeos\Controller\ExtJS\Exception( $msg, -32600 );
 			}
 
 			if( !isset( $request->params ) ) {
-				throw new Controller_ExtJS_Exception( 'Required parameters are missing in request', -32600 );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Required parameters are missing in request', -32600 );
 			}
 
 			$response['result'] = $this->callMethod( $request->method, $request->params );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$response['error'] = array(
 				'code' => ( $e->getCode() != 0 ? $e->getCode() : -1 ),
@@ -270,37 +273,37 @@ class Controller_ExtJS_JsonRpc
 	 * Calls the givven method of the specified controller.
 	 *
 	 * @param string $classmethod Controller/method as "controller.method"
-	 * @param stdClass $params Associative array of parameters
+	 * @param \stdClass $params Associative array of parameters
 	 * @return array Array of results generated by the controller method
-	 * @throws Exception If controller or method couldn't be found or an error occured
+	 * @throws \Exception If controller or method couldn't be found or an error occured
 	 */
-	protected function callMethod( $classmethod, stdClass $params )
+	protected function callMethod( $classmethod, \stdClass $params )
 	{
 		$parts = explode( '.', $classmethod );
 
 		if( count( $parts ) !== 2 ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid method "%1$s" in request', $classmethod ), -32602 );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid method "%1$s" in request', $classmethod ), -32602 );
 		}
 
-		$class = $parts[0];
 		$method = $parts[1];
+		$class = str_replace( '_', '\\', $parts[0] );
 
-		$name = $this->getClassPrefix() . '_' . $class . '_Factory';
+		$name = $this->getClassPrefix() . '\\' . $class . '\\Factory';
 
-		if( preg_match( '/^[a-zA-Z0-9\_]+$/', $name ) !== 1 ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ), -32602 );
+		if( preg_match( '/^[\\a-zA-Z0-9]+$/', $name ) !== 1 ) {
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ), -32602 );
 		}
 
 		if( class_exists( $name ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $name ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" not found', $name ) );
 		}
 
 		if( ( $controller = call_user_func_array( $name . '::createController', array( $this->context ) ) ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Factory "%1$s" not found', $name ), -32602 );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Factory "%1$s" not found', $name ), -32602 );
 		}
 
 		if( method_exists( $controller, $method ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Method "%1$s" not found', $classmethod ), -32602 );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Method "%1$s" not found', $classmethod ), -32602 );
 		}
 
 		return $controller->$method( $params );
@@ -310,7 +313,7 @@ class Controller_ExtJS_JsonRpc
 	/**
 	 * Returns the used prefix for all classes.
 	 *
-	 * @return string Class prefix (default: "Controller_ExtJS")
+	 * @return string Class prefix (default: "\Aimeos\Controller\ExtJS")
 	 */
 	protected function getClassPrefix()
 	{
@@ -321,14 +324,18 @@ class Controller_ExtJS_JsonRpc
 	/**
 	 * Returns all available controller instances.
 	 *
-	 * @return array Associative list of base controller name (Controller_ExtJS_Admin_Log_Standard becomes Admin_Log)
+	 * @return array Associative list of base controller name (\Aimeos\Controller\ExtJS\Admin\Log\Standard becomes Admin_Log)
 	 * 	as key and the class instance as value
 	 */
 	protected function getControllers()
 	{
 		if( $this->controllers === array() )
 		{
-			$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, $this->getClassPrefix() );
+			$subFolder = trim( str_replace( '\\', DIRECTORY_SEPARATOR, $this->getClassPrefix() ), '/' );
+
+			if( strncmp( $subFolder, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) === 0 ) {
+				$subFolder = substr( $subFolder, 7 );
+			}
 
 			foreach( $this->cntlPaths as $path => $list )
 			{
@@ -337,7 +344,7 @@ class Controller_ExtJS_JsonRpc
 					$path .= DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $subFolder;
 
 					if( is_dir( $path ) ) {
-						$this->addControllers( new DirectoryIterator( $path ) );
+						$this->addControllers( new \DirectoryIterator( $path ) );
 					}
 				}
 			}
@@ -350,11 +357,11 @@ class Controller_ExtJS_JsonRpc
 	/**
 	 * Instantiates all found factories and stores the controller instances in the class variable.
 	 *
-	 * @param DirectoryIterator $dir Iterator over the (sub-)directory which might contain a factory
-	 * @param string $prefix Part of the class name between "Controller_ExtJS" and "Factory"
-	 * @throws Controller_ExtJS_Exception If factory name is invalid or if the controller couldn't be instantiated
+	 * @param \DirectoryIterator $dir Iterator over the (sub-)directory which might contain a factory
+	 * @param string $prefix Part of the class name between "\Aimeos\Controller\ExtJS" and "Factory"
+	 * @throws \Aimeos\Controller\ExtJS\Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
-	protected function addControllers( DirectoryIterator $dir, $prefix = '' )
+	protected function addControllers( \DirectoryIterator $dir, $prefix = '' )
 	{
 		$classprefix = $this->getClassPrefix();
 
@@ -362,26 +369,26 @@ class Controller_ExtJS_JsonRpc
 		{
 			if( $entry->getType() === 'dir' && $entry->isDot() === false )
 			{
-				$subdir = new DirectoryIterator( $entry->getPathName() );
+				$subdir = new \DirectoryIterator( $entry->getPathName() );
 				$this->addControllers( $subdir, ( $prefix !== '' ? $prefix . '_' : '' ) . $entry->getBaseName() );
 			}
 			else if( $prefix !== '' && $entry->getType() === 'file'
 				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
-				$name = $classprefix . '_' . $prefix . '_Factory';
+				$name = $classprefix . '\\' . str_replace( '_', '\\', $prefix ) . '\\Factory';
 
-				if( preg_match( '/^[a-zA-Z0-9\_]+$/', $name ) !== 1 ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ) );
+				if( preg_match( '/^[\\a-zA-Z0-9]+$/', $name ) !== 1 ) {
+					throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ) );
 				}
 
 				if( class_exists( $name ) === false ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $name ) );
+					throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" not found', $name ) );
 				}
 
 				$controller = call_user_func_array( array( $name, 'createController' ), array( $this->context ) );
 
 				if( $controller === false ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Invalid factory "%1$s"', $name ) );
+					throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid factory "%1$s"', $name ) );
 				}
 
 				$this->controllers[$prefix] = $controller;

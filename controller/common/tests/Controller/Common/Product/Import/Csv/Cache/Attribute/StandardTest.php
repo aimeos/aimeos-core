@@ -1,29 +1,30 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Attribute;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Cache_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
-		$this->object = new Controller_Common_Product_Import_Csv_Cache_Attribute_Standard( $context );
+		$context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\Common\Product\Import\Csv\Cache\Attribute\Standard( $context );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -31,7 +32,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_StandardTest extends 
 	{
 		$item = $this->object->get( 'black', 'color' );
 
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Attribute\\Item\\Iface', $item );
 		$this->assertEquals( 'black', $item->getCode() );
 		$this->assertEquals( 'color', $item->getType() );
 	}
@@ -51,7 +52,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_StandardTest extends 
 		$this->object->set( $item );
 		$item = $this->object->get( 'cache-test', 'color' );
 
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Attribute\\Item\\Iface', $item );
 		$this->assertEquals( 'cache-test', $item->getCode() );
 		$this->assertEquals( 'color', $item->getType() );
 	}

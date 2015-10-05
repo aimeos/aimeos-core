@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Lists;
+
+
 /**
  * Interface for attribute list manager.
  *
  * @package MShop
  * @subpackage Attribute
  */
-interface MShop_Attribute_Manager_Lists_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

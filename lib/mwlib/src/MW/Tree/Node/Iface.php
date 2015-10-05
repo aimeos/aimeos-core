@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\MW\Tree\Node;
+
+
 /**
  * Generic interface for all basic tree node implementations
  *
  * @package MW
  * @subpackage Tree
  */
-interface MW_Tree_Node_Iface
+interface Iface
 {
 	/**
 	 * Returns the value associated with the given name.
 	 *
 	 * @param string $name Name of member variable tried to access
 	 * @return mixed Value associated to the given name
-	 * @throws MW_Tree_Exception If no value is available for the given name
+	 * @throws \Aimeos\MW\Tree\Exception If no value is available for the given name
 	 */
 	public function __get( $name );
 
@@ -115,7 +118,7 @@ interface MW_Tree_Node_Iface
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MW_Tree_Node_Iface Selected node
+	 * @return \Aimeos\MW\Tree\Node\Iface Selected node
 	 */
 	public function getChild( $index );
 
@@ -136,10 +139,10 @@ interface MW_Tree_Node_Iface
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MW_Tree_Node_Iface $node Child node to add
+	 * @param \Aimeos\MW\Tree\Node\Iface $node Child node to add
 	 * @return void
 	 */
-	public function addChild( MW_Tree_Node_Iface $node );
+	public function addChild( \Aimeos\MW\Tree\Node\Iface $node );
 
 	/**
 	 * Returns the public values of the node as array.

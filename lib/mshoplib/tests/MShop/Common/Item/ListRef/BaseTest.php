@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Common\Item\ListRef;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Base
+class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 {
 	function getLabel()
 	{
@@ -15,10 +16,13 @@ class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Base
 }
 
 
+namespace Aimeos\MShop\Common\Item\ListRef;
+
+
 /**
- * Test class for MShop_Common_Item_ListRef_Base
+ * Test class for \Aimeos\MShop\Common\Item\ListRef\Base
  */
-class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $textItem1;
@@ -32,20 +36,20 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->textItem1 = new MShop_Text_Item_Standard( array( 'type' => 'name' ) );
+		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'type' => 'name' ) );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new MShop_Text_Item_Standard( array( 'type' => 'name' ) );
+		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'type' => 'name' ) );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new MShop_Common_Item_Lists_Standard( 'test', array( 'type' => 'test' ) );
+		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'test', array( 'type' => 'test' ) );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setId( 11 );
 
-		$this->listItem2 = new MShop_Common_Item_Lists_Standard( 'test', array( 'type' => 'default' ) );
+		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'test', array( 'type' => 'default' ) );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setId( 10 );
@@ -60,7 +64,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 			$this->textItem2->getId() => $this->textItem2,
 		) );
 
-		$this->object = new MShop_Common_Item_ListRef_Test( '', array(), $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( '', array(), $listItems, $refItems );
 	}
 
 
@@ -75,7 +79,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testGetName()
 	{
-		$object = new MShop_Common_Item_ListRef_Test( '' );
+		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( '' );
 
 		$this->assertEquals( $object->getName(), 'test label' );
 		$this->assertEquals( $this->object->getName(), 'default name' );
@@ -93,7 +97,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_Lists_Iface', $listItem );
+			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 		}
 	}
 
@@ -109,7 +113,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( 'MShop_Common_Item_Lists_Iface', $listItem );
+			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 		}
 
 		$this->assertEquals( array(), $this->object->getListItems( 'undefined' ) );
@@ -144,7 +148,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 
 		foreach( $result as $listItem )
 		{
-			$this->assertInstanceof( 'MShop_Text_Item_Iface', $listItem->getRefItem() );
+			$this->assertInstanceof( '\\Aimeos\\MShop\\Text\\Item\\Iface', $listItem->getRefItem() );
 			$this->assertSame( $expected[$listItem->getRefId()], $listItem->getRefItem() );
 		}
 	}
@@ -161,7 +165,7 @@ class MShop_Common_Item_ListRef_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $item ) {
-			$this->assertInstanceof( 'MShop_Common_Item_Iface', $item );
+			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $item );
 		}
 
 		$this->assertEquals( array(), $this->object->getRefItems( 'undefined' ) );

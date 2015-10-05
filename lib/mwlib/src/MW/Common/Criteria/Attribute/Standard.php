@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Attribute;
+
+
 /**
  * Default search attribute class.
  *
@@ -18,7 +21,7 @@
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Attribute_Standard implements MW_Common_Criteria_Attribute_Iface
+class Standard implements \Aimeos\MW\Common\Criteria\Attribute\Iface
 {
 	/**
 	 * @var string Public data type used in the frontend
@@ -87,7 +90,7 @@ class MW_Common_Criteria_Attribute_Standard implements MW_Common_Criteria_Attrib
 		foreach( $required as $entry )
 		{
 			if ( !isset($params[$entry]) ) {
-				throw new MW_Common_Exception( sprintf('Required parameter "%1$s" is missing', $entry) );
+				throw new \Aimeos\MW\Common\Exception( sprintf('Required parameter "%1$s" is missing', $entry) );
 			}
 		}
 

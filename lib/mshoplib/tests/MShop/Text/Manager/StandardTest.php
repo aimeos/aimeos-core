@@ -5,13 +5,16 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Text\Manager;
+
+
 /**
- * Test class for MShop_Text_Manager_Standard.
+ * Test class for \Aimeos\MShop\Text\Manager\Standard.
  */
-class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var MShop_Text_Manager_Standard
+	 * @var \Aimeos\MShop\Text\Manager\Standard
 	 */
 	private $object;
 
@@ -27,8 +30,8 @@ class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = new MShop_Text_Manager_Standard( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Text\Manager\Standard( \TestHelper::getContext() );
 	}
 
 	/**
@@ -50,14 +53,14 @@ class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$textItem = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Text_Item_Iface', $textItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Text\\Item\\Iface', $textItem );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -155,7 +158,7 @@ class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No text item including "%1$s" found', '%Monetary%' ) );
+			throw new \Exception( sprintf( 'No text item including "%1$s" found', '%Monetary%' ) );
 		}
 
 
@@ -177,7 +180,7 @@ class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$a = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $a ) ) === false ) {
-			throw new Exception( 'Text item not found.' );
+			throw new \Exception( 'Text item not found.' );
 		}
 
 		$item->setId( null );
@@ -222,27 +225,27 @@ class MShop_Text_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 }

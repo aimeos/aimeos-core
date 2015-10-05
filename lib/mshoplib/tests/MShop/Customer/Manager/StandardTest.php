@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
- * Test class for MShop_Customer_Manager_Standard
+ * Test class for \Aimeos\MShop\Customer\Manager\Standard
  */
-class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $fixture;
@@ -21,15 +24,15 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = new MShop_Customer_Manager_Standard( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::getContext() );
 
 		$this->fixture = array(
 			'label' => 'unitTest',
 			'status' => 2,
 		);
 
-		$this->address = new MShop_Common_Item_Address_Standard( 'common.address.' );
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
 	}
 
 
@@ -52,7 +55,7 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -60,7 +63,7 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Customer_Item_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
 	}
 
 
@@ -75,7 +78,7 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new Exception( 'No customer item with code "UTC003" found' );
+			throw new \Exception( 'No customer item with code "UTC003" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
@@ -133,14 +136,14 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -239,17 +242,17 @@ class MShop_Customer_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

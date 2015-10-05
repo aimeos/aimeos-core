@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Admin\Log;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,10 +21,10 @@ class Controller_Jobs_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Admin_Log_Standard( $this->context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Admin\Log\Standard( $this->context, $aimeos );
 	}
 
 
@@ -36,7 +37,7 @@ class Controller_Jobs_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		$this->object = null;
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -57,7 +58,7 @@ class Controller_Jobs_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$config = $this->context->getConfig();
 
-		$mock = $this->getMockBuilder( 'MAdmin_Log_Manager_Standard' )
+		$mock = $this->getMockBuilder( '\\Aimeos\\MAdmin\\Log\\Manager\\Standard' )
 			->setMethods( array( 'deleteItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -70,19 +71,19 @@ class Controller_Jobs_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 		$config->set( 'controller/jobs/admin/log/default/limit-days', 0 );
 		$config->set( 'controller/jobs/admin/log/default/path', $tmppath );
 
-		MAdmin_Log_Manager_Factory::injectManager( 'MAdmin_Log_Manager_' . $name, $mock );
+		\Aimeos\MAdmin\Log\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Log\\Manager\\' . $name, $mock );
 
 		if( !is_dir( $tmppath ) && mkdir( $tmppath ) === false ) {
-			throw new Exception( sprintf( 'Unable to create temporary path "%1$s"', $tmppath ) );
+			throw new \Exception( sprintf( 'Unable to create temporary path "%1$s"', $tmppath ) );
 		}
 
 		$this->object->run();
 
-		foreach( new DirectoryIterator( $tmppath ) as $file )
+		foreach( new \DirectoryIterator( $tmppath ) as $file )
 		{
 			if( $file->isFile() && $file->getExtension() === 'zip' )
 			{
-				$container = MW_Container_Factory::getContainer( $file->getPathName(), 'Zip', 'CSV', array() );
+				$container = \Aimeos\MW\Container\Factory::getContainer( $file->getPathName(), 'Zip', 'CSV', array() );
 				$container->get( 'unittest facility.csv' );
 				unlink( $file->getPathName() );
 				return;

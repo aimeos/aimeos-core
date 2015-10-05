@@ -6,11 +6,14 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes typeid columns in list tables to allow no NULL values any more.
  */
-class MW_Setup_Task_ListsChangeTypeidNotNull
-	extends MW_Setup_Task_Base
+class ListsChangeTypeidNotNull
+	extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute_list' => array(

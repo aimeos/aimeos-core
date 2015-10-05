@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Content;
+
+
 /**
  * View helper class for generating media HTML tags.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Content_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $baseurl;
 	private $enc;
@@ -25,10 +28,10 @@ class MW_View_Helper_Content_Standard
 	/**
 	 * Initializes the content view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $baseurl Base URL for the content
 	 */
-	public function __construct( MW_View_Iface $view, $baseurl = null )
+	public function __construct( \Aimeos\MW\View\Iface $view, $baseurl = null )
 	{
 		parent::__construct( $view );
 

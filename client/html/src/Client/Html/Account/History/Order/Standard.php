@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Account\History\Order;
+
+
 /**
  * Default implementation of acount history order HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Account_History_Order_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/account/history/order/default/subparts
 	 * List of HTML sub-clients rendered within the account history order section
@@ -56,7 +59,7 @@ class Client_Html_Account_History_Order_Standard
 	/** client/html/account/history/order/address/name
 	 * Name of the address part used by the account history order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Address_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Order\Address\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Account_History_Order_Standard
 	/** client/html/account/history/order/service/name
 	 * Name of the service part used by the account history order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Service_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Order\Service\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Account_History_Order_Standard
 	/** client/html/account/history/order/coupon/name
 	 * Name of the coupon part used by the account history order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Coupon_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Order\Coupon\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Account_History_Order_Standard
 	/** client/html/account/history/order/detail/name
 	 * Name of the detail part used by the account history order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Detail_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Order\Detail\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -209,7 +212,7 @@ class Client_Html_Account_History_Order_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -228,7 +231,7 @@ class Client_Html_Account_History_Order_Standard
 		 *  client/html/account/history/order/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -248,12 +251,12 @@ class Client_Html_Account_History_Order_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/account/history/order/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -272,12 +275,12 @@ class Client_Html_Account_History_Order_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Account_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Account\Decorator\*") around the html client.
 		 *
 		 *  client/html/account/history/order/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Account_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Account\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -305,17 +308,17 @@ class Client_Html_Account_History_Order_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
 			$context = $this->getContext();
-			$manager = MShop_Factory::createManager( $context, 'order' );
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 
 			$orderId = $view->param( 'his_id', null );
 
@@ -334,10 +337,10 @@ class Client_Html_Account_History_Order_Standard
 				if( ( $orderItem = reset( $orderItems ) ) === false )
 				{
 					$msg = $view->translate( 'client/html', 'Order with ID "%1$s" not found' );
-					throw new Client_Html_Exception( sprintf( $msg, $orderId ) );
+					throw new \Aimeos\Client\Html\Exception( sprintf( $msg, $orderId ) );
 				}
 
-				$baseManager = MShop_Factory::createManager( $context, 'order/base' );
+				$baseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 				$view->summaryBasket = $baseManager->load( $orderItem->getBaseId() );
 			}
 

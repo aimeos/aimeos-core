@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Type;
+
+
 /**
  * Generic interface for all type items.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Type_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the code of the common list type item

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Text;
+
+
 /**
  * Text processor for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Processor_Text_Standard
-	extends Controller_Common_Product_Import_Csv_Processor_Base
-	implements Controller_Common_Product_Import_Csv_Processor_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Processor\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface
 {
 	private $listTypes;
 
@@ -24,12 +27,12 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
-	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $object Decorated processor
+	 * @param \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object Decorated processor
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $mapping,
-			Controller_Common_Product_Import_Csv_Processor_Iface $object = null )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $mapping,
+			\Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object = null )
 	{
 		parent::__construct( $context, $mapping, $object );
 
@@ -59,14 +62,14 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 	/**
 	 * Saves the product related data to the storage
 	 *
-	 * @param MShop_Product_Item_Iface $product Product item with associated items
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with associated items
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function process( MShop_Product_Item_Iface $product, array $data )
+	public function process( \Aimeos\MShop\Product\Item\Iface $product, array $data )
 	{
-		$listManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
-		$manager = MShop_Factory::createManager( $this->getContext(), 'text' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'text' );
 		$manager->begin();
 
 		try
@@ -116,7 +119,7 @@ class Controller_Common_Product_Import_Csv_Processor_Text_Standard
 
 			$manager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$manager->rollback();
 			throw $e;

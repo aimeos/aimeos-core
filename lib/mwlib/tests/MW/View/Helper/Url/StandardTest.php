@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
- * Test class for MW_View_Helper_Url.
+ * Test class for \Aimeos\MW\View\Helper\Url.
  */
-class MW_View_Helper_Url_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,8 +25,8 @@ class MW_View_Helper_Url_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
-		$this->object = new MW_View_Helper_Url_Standard( $view, '/baseurl/' );
+		$view = new \Aimeos\MW\View\Standard();
+		$this->object = new \Aimeos\MW\View\Helper\Url\Standard( $view, '/baseurl/' );
 	}
 
 

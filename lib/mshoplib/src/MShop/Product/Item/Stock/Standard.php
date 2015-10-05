@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Stock;
+
+
 /**
  * Default product stock item implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Item_Stock_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Product_Item_Stock_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Product\Item\Stock\Iface
 {
 	private $values;
 

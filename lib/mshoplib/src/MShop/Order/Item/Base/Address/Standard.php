@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Address;
+
+
 /**
  * Default order address container object
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Base_Address_Standard
-	extends MShop_Order_Item_Base_Address_Base
-	implements MShop_Order_Item_Base_Address_Iface
+class Standard
+	extends \Aimeos\MShop\Order\Item\Base\Address\Base
+	implements \Aimeos\MShop\Order\Item\Base\Address\Iface
 {
 	private $values;
 
@@ -90,7 +93,7 @@ class MShop_Order_Item_Base_Address_Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 	}
 
 
@@ -113,9 +116,9 @@ class MShop_Order_Item_Base_Address_Standard
 	/**
 	 * Copys all data from a given address.
 	 *
-	 * @param MShop_Common_Item_Address_Iface $address New address
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address New address
 	 */
-	public function copyFrom( MShop_Common_Item_Address_Iface $address )
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address )
 	{
 		$this->setAddressId( $address->getId() );
 		$this->setCompany( $address->getCompany() );

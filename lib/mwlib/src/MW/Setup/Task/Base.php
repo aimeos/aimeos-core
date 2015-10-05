@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates the required table.
  *
  * @package MW
  * @subpackage Setup
  */
-abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
+abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 {
 	private $connections = array();
 	private $schemas = array();
@@ -30,11 +33,11 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 	/**
 	 * Initializes the task object.
 	 *
-	 * @param MW_Setup_DBSchema_Iface $schema Database schema object
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Database schema object
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
 	 */
-	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
 		$this->schema = $schema;
 		$this->conn = $conn;
@@ -53,7 +56,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 		{
 			case 'mysql': $this->mysql(); break;
 			default:
-				throw new MW_Setup_Exception( sprintf( 'Unknown database type "%1$s"', $dbtype ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown database type "%1$s"', $dbtype ) );
 		}
 	}
 
@@ -126,11 +129,11 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 		$result = $this->getConnection( $name )->create( $sql )->execute();
 
 		if( ( $row = $result->fetch() ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'No rows found: %1$s', $sql ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
 		}
 
 		if( array_key_exists( $column, $row ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
 		}
 
 		$result->finish();
@@ -143,7 +146,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 	 * Returns the connection specified by the given resource name.
 	 *
 	 * @param string $name Name from resource configuration
-	 * @return MW_DB_Connection_Iface
+	 * @return \Aimeos\MW\DB\Connection\Iface
 	 */
 	protected function getConnection( $name )
 	{
@@ -159,7 +162,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 	 * Returns the schemas specified by the given resource name.
 	 *
 	 * @param string $name Name from resource configuration
-	 * @return MW_Setup_DBSchema_Iface
+	 * @return \Aimeos\MW\Setup\DBSchema\Iface
 	 */
 	protected function getSchema( $name )
 	{
@@ -210,7 +213,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 
 		$regex = '/CREATE TABLE \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new MW_Setup_Exception('Unable to get table definitions');
+			throw new \Aimeos\MW\Setup\Exception('Unable to get table definitions');
 		}
 
 		foreach ( $matches as $match ) {
@@ -233,7 +236,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 		$matches = array( );
 
 		if ( preg_match_all('/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+(\n\n|$)/sU', $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new MW_Setup_Exception('Unable to get index definitions');
+			throw new \Aimeos\MW\Setup\Exception('Unable to get index definitions');
 		}
 
 		foreach ( $matches as $match ) {
@@ -258,7 +261,7 @@ abstract class MW_Setup_Task_Base implements MW_Setup_Task_Iface
 
 		$regex = '/CREATE TRIGGER \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new MW_Setup_Exception('Unable to get trigger definitions');
+			throw new \Aimeos\MW\Setup\Exception('Unable to get trigger definitions');
 		}
 
 		foreach ( $matches as $match ) {

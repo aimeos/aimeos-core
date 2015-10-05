@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Property\Type;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2014
  */
-
-
-class Controller_ExtJS_Product_Property_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Property_Type_StandardTest extends PHPUnit_Framew
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Property_Type_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Property\Type\Standard( \TestHelper::getContext() );
 	}
 
 

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Detail\Basket\Selection;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Detail_Basket_Selection_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,9 +20,9 @@ class Client_Html_Catalog_Detail_Basket_Selection_StandardTest extends PHPUnit_F
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Detail_Basket_Selection_Standard( TestHelper::getContext(), $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Basket\Selection\Standard( \TestHelper::getContext(), $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -82,7 +84,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_StandardTest extends PHPUnit_F
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
@@ -92,13 +94,13 @@ class Client_Html_Catalog_Detail_Basket_Selection_StandardTest extends PHPUnit_F
 	 */
 	protected function getProductItem( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search, array( 'attribute', 'price', 'product' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

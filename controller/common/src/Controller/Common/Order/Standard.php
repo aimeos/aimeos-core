@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Common\Order;
+
+
 /**
  * Common order controller methods.
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Order_Standard
-	implements Controller_Common_Order_Iface
+class Standard
+	implements \Aimeos\Controller\Common\Order\Iface
 {
 	private $context;
 
@@ -23,9 +26,9 @@ class Controller_Common_Order_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context
+	 * @param \Aimeos\MShop\Context\Item\Iface $context
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -47,12 +50,12 @@ class Controller_Common_Order_Standard
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function block( MShop_Order_Item_Iface $orderItem )
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 1, -1 );
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, -1 );
 	}
 
 
@@ -72,12 +75,12 @@ class Controller_Common_Order_Standard
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function unblock( MShop_Order_Item_Iface $orderItem )
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::STOCK_UPDATE, 0, +1 );
-		$this->updateStatus( $orderItem, MShop_Order_Item_Status_Base::COUPON_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 0, +1 );
 	}
 
 
@@ -93,22 +96,22 @@ class Controller_Common_Order_Standard
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 */
-	public function update( MShop_Order_Item_Iface $orderItem )
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
 		switch( $orderItem->getPaymentStatus() )
 		{
-			case MShop_Order_Item_Base::PAY_DELETED:
-			case MShop_Order_Item_Base::PAY_CANCELED:
-			case MShop_Order_Item_Base::PAY_REFUSED:
-			case MShop_Order_Item_Base::PAY_REFUND:
+			case \Aimeos\MShop\Order\Item\Base::PAY_DELETED:
+			case \Aimeos\MShop\Order\Item\Base::PAY_CANCELED:
+			case \Aimeos\MShop\Order\Item\Base::PAY_REFUSED:
+			case \Aimeos\MShop\Order\Item\Base::PAY_REFUND:
 				$this->unblock( $orderItem );
 				break;
 
-			case MShop_Order_Item_Base::PAY_PENDING:
-			case MShop_Order_Item_Base::PAY_AUTHORIZED:
-			case MShop_Order_Item_Base::PAY_RECEIVED:
+			case \Aimeos\MShop\Order\Item\Base::PAY_PENDING:
+			case \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED:
+			case \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED:
 				$this->block( $orderItem );
 				break;
 		}
@@ -124,7 +127,7 @@ class Controller_Common_Order_Standard
 	 */
 	protected function addStatusItem( $parentid, $type, $value )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/status' );
 
 		$item = $manager->createItem();
 		$item->setParentId( $parentid );
@@ -138,7 +141,7 @@ class Controller_Common_Order_Standard
 	/**
 	 * Returns the context item object.
 	 *
-	 * @return MShop_Context_Item_Iface Context item object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
 	protected function getContext()
 	{
@@ -150,11 +153,11 @@ class Controller_Common_Order_Standard
 	 * Returns the last status item for the given order ID.
 	 *
 	 * @param string $parentid Order ID
-	 * @return MShop_Order_Item_Status_Iface|false Order status item or false if no item is available
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface|false Order status item or false if no item is available
 	 */
 	protected function getLastStatusItem( $parentid, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/status' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -175,14 +178,14 @@ class Controller_Common_Order_Standard
 	/**
 	 * Increases or decreses the coupon code counts referenced in the order by the given value.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the coupon count
 	 */
-	protected function updateCoupons( MShop_Order_Item_Iface $orderItem, $how = +1 )
+	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, $how = +1 )
 	{
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'order/base/coupon' );
-		$couponCodeManager = MShop_Factory::createManager( $context, 'coupon/code' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/coupon' );
+		$couponCodeManager = \Aimeos\MShop\Factory::createManager( $context, 'coupon/code' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.baseid', $orderItem->getBaseId() ) );
@@ -209,7 +212,7 @@ class Controller_Common_Order_Standard
 
 			$couponCodeManager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$couponCodeManager->rollback();
 			throw $e;
@@ -220,12 +223,12 @@ class Controller_Common_Order_Standard
 	/**
 	 * Increases or decreases the stock level or the coupon code count for referenced items of the given order.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
-	 * @param string $type Constant from MShop_Order_Item_Status_Base, e.g. STOCK_UPDATE or COUPON_UPDATE
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
+	 * @param string $type Constant from \Aimeos\MShop\Order\Item\Status\Base, e.g. STOCK_UPDATE or COUPON_UPDATE
 	 * @param string $status New status value stored along with the order item
 	 * @param integer $value Number to increse or decrease the stock level or coupon code count
 	 */
-	protected function updateStatus( MShop_Order_Item_Iface $orderItem, $type, $status, $value )
+	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, $type, $status, $value )
 	{
 		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type );
 
@@ -233,9 +236,9 @@ class Controller_Common_Order_Standard
 			return;
 		}
 
-		if( $type == MShop_Order_Item_Status_Base::STOCK_UPDATE ) {
+		if( $type == \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE ) {
 			$this->updateStock( $orderItem, $value );
-		} elseif( $type == MShop_Order_Item_Status_Base::COUPON_UPDATE ) {
+		} elseif( $type == \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE ) {
 			$this->updateCoupons( $orderItem, $value );
 		}
 
@@ -246,15 +249,15 @@ class Controller_Common_Order_Standard
 	/**
 	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
 	 */
-	protected function updateStock( MShop_Order_Item_Iface $orderItem, $how = +1 )
+	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, $how = +1 )
 	{
 		$context = $this->getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
-		$manager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$stockManager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.baseid', $orderItem->getBaseId() ) );
@@ -297,7 +300,7 @@ class Controller_Common_Order_Standard
 
 			$stockManager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$stockManager->rollback();
 			throw $e;
@@ -308,13 +311,13 @@ class Controller_Common_Order_Standard
 	/**
 	 * Updates the stock levels of bundles for a specific warehouse
 	 *
-	 * @param array $bundleItems List of items implementing MShop_Product_Item_Iface
+	 * @param array $bundleItems List of items implementing \Aimeos\MShop\Product\Item\Iface
 	 * @param string $whcode Unique warehouse code
 	 */
 	protected function updateStockBundle( array $bundleItems, $whcode )
 	{
 		$bundleMap = $prodIds = $stock = array();
-		$stockManager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
 
 		foreach( $bundleItems as $bundleId => $bundleItem )

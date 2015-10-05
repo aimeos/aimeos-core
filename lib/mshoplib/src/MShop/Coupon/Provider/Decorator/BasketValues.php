@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Decorator;
+
+
 /**
  * BasketValues decorator for coupon provider.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Decorator_BasketValues
-	extends MShop_Coupon_Provider_Decorator_Base
-	implements MShop_Coupon_Provider_Decorator_Iface
+class BasketValues
+	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
+	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
 	/**
 	 * Checks for the min/max order value.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return boolean True if the basket matches the constraints, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$price = $base->getPrice();
 		$currency = $price->getCurrencyId();

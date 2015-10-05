@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Email\Delivery\Text\Intro;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private static $orderItem;
 	private static $orderBaseItem;
@@ -16,7 +18,7 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 
 	public static function setUpBeforeClass()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderManager->createSearch();
@@ -24,7 +26,7 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 		$result = $orderManager->searchItems( $search );
 
 		if( ( self::$orderItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
 		self::$orderBaseItem = $orderBaseManager->load( self::$orderItem->getBaseId() );
@@ -39,16 +41,16 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = \TestHelper::getContext();
+		$this->emailMock = $this->getMock( '\\Aimeos\\MW\\Mail\\Message\\None' );
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Email_Delivery_Text_Intro_Standard( $this->context, $paths );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Email\Delivery\Text\Intro\Standard( $this->context, $paths );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->extOrderItem = self::$orderItem;
 		$view->extOrderBaseItem = self::$orderBaseItem;
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Standard( $view, $this->emailMock ) );
+		$view->addHelper( 'mail', new \Aimeos\MW\View\Helper\Mail\Standard( $view, $this->emailMock ) );
 
 		$this->object->setView( $view );
 	}
@@ -86,7 +88,7 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_DISPATCHED );
+		$orderItem->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_DISPATCHED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -100,7 +102,7 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_REFUSED );
+		$orderItem->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_REFUSED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -114,7 +116,7 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 		$orderItem = clone self::$orderItem;
 		$view = $this->object->getView();
 
-		$orderItem->setDeliveryStatus( MShop_Order_Item_Base::STAT_RETURNED );
+		$orderItem->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_RETURNED );
 		$view->extOrderItem = $orderItem;
 
 		$output = $this->object->getBody();
@@ -125,14 +127,14 @@ class Client_Html_Email_Delivery_Text_Intro_StandardTest extends PHPUnit_Framewo
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 

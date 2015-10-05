@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Manager;
+
+
 /**
  * Default coupon manager interface for creating and handling coupons.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Manager_Standard
-	extends MShop_Coupon_Manager_Base
-	implements MShop_Coupon_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Coupon\Manager\Base
+	implements \Aimeos\MShop\Coupon\Manager\Iface
 {
 	private $searchConfig = array(
 		'coupon.id'=> array(
@@ -24,14 +27,14 @@ class MShop_Coupon_Manager_Standard
 			'internalcode'=>'mcou."id"',
 			'label'=>'Coupon ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'coupon.siteid'=> array(
 			'code'=>'coupon.siteid',
 			'internalcode'=>'mcou."siteid"',
 			'label'=>'Coupon site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.label'=> array(
@@ -39,63 +42,63 @@ class MShop_Coupon_Manager_Standard
 			'internalcode'=>'mcou."label"',
 			'label'=>'Coupon label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.provider'=> array(
 			'code'=>'coupon.provider',
 			'internalcode'=>'mcou."provider"',
 			'label'=>'Coupon method',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.config'=> array(
 			'code'=>'coupon.config',
 			'internalcode'=>'mcou."config"',
 			'label'=>'Coupon config',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.datestart'=> array(
 			'code'=>'coupon.datestart',
 			'internalcode'=>'mcou."start"',
 			'label'=>'Coupon start date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.dateend'=> array(
 			'code'=>'coupon.dateend',
 			'internalcode'=>'mcou."end"',
 			'label'=>'Coupon end date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.status'=> array(
 			'code'=>'coupon.status',
 			'internalcode'=>'mcou."status"',
 			'label'=>'Coupon status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'coupon.ctime'=> array(
 			'code'=>'coupon.ctime',
 			'internalcode'=>'mcou."ctime"',
 			'label'=>'Coupon create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.mtime'=> array(
 			'code'=>'coupon.mtime',
 			'internalcode'=>'mcou."mtime"',
 			'label'=>'Coupon modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.editor'=> array(
 			'code'=>'coupon.editor',
 			'internalcode'=>'mcou."editor"',
 			'label'=>'Coupon editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -103,9 +106,9 @@ class MShop_Coupon_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-coupon' );
@@ -132,7 +135,7 @@ class MShop_Coupon_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -162,7 +165,7 @@ class MShop_Coupon_Manager_Standard
 	/**
 	 * Creates a new empty coupon item instance
 	 *
-	 * @return MShop_Coupon_Item_Iface Creates a blank coupon item
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Creates a blank coupon item
 	 */
 	public function createItem()
 	{
@@ -176,8 +179,8 @@ class MShop_Coupon_Manager_Standard
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Coupon_Item_Iface Returns the coupon item of the given ID
-	 * @throws MShop_Exception If coupon couldn't be found
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
+	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -188,15 +191,15 @@ class MShop_Coupon_Manager_Standard
 	/**
 	 * Saves a coupon item to the storage.
 	 *
-	 * @param MShop_Coupon_Item_Iface $item Coupon implementing the coupon interface
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon implementing the coupon interface
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @throws MShop_Coupon_Exception If coupon couldn't be saved
+	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be saved
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Coupon_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Coupon\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -284,12 +287,12 @@ class MShop_Coupon_Manager_Standard
 			$stmt->bind( 4, json_encode( $item->getConfig() ) );
 			$stmt->bind( 5, $item->getDateStart() );
 			$stmt->bind( 6, $item->getDateEnd() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -335,7 +338,7 @@ class MShop_Coupon_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -382,16 +385,16 @@ class MShop_Coupon_Manager_Standard
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array Returns a list of coupon items implementing MShop_Coupon_Item_Iface
+	 * @return array Returns a list of coupon items implementing \Aimeos\MShop\Coupon\Item\Iface
 	 *
-	 * @throws MW_DB_Exception On failures with the db object
-	 * @throws MShop_Common_Exception On failures with the MW_Common_Criteria_ object
-	 * @throws MShop_Coupon_Exception On failures with the coupon items
+	 * @throws \Aimeos\MW\DB\Exception On failures with the db object
+	 * @throws \Aimeos\MShop\Common\Exception On failures with the \Aimeos\MW\Common\Criteria\ object
+	 * @throws \Aimeos\MShop\Coupon\Exception On failures with the coupon items
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -401,7 +404,7 @@ class MShop_Coupon_Manager_Standard
 		try
 		{
 			$required = array( 'coupon' );
-			$level = MShop_Locale_Manager_Base::SITE_PATH;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 			/** mshop/coupon/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -514,13 +517,13 @@ class MShop_Coupon_Manager_Standard
 					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
 					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -528,7 +531,7 @@ class MShop_Coupon_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -543,7 +546,7 @@ class MShop_Coupon_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Lists_Iface List manager
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -554,27 +557,27 @@ class MShop_Coupon_Manager_Standard
 	/**
 	 * Returns the coupon model which belongs to the given code.
 	 *
-	 * @param MShop_Coupon_Item_Iface $item Coupon item interface
-	 * @return MShop_Coupon_Provider_Iface Returns a coupon provider instance
-	 * @throws MShop_Coupon_Exception If coupon couldn't be found
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item interface
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Returns a coupon provider instance
+	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
 	 */
-	public function getProvider( MShop_Coupon_Item_Iface $item, $code )
+	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, $code )
 	{
 		$names = explode( ',', $item->getProvider() );
 
 		if( ( $providername = array_shift( $names ) ) === null ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $providername ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
 		}
 
-		$interface = 'MShop_Coupon_Provider_Factory_Iface';
-		$classname = 'MShop_Coupon_Provider_' . $providername;
+		$interface = '\\Aimeos\\MShop\\Coupon\\Provider\\Factory\\Iface';
+		$classname = '\\Aimeos\\MShop\\Coupon\\Provider\\' . $providername;
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->getContext();
@@ -583,7 +586,7 @@ class MShop_Coupon_Manager_Standard
 		if( ( $provider instanceof $interface ) === false )
 		{
 			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new MShop_Coupon_Exception( $msg );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
 		/** mshop/coupon/provider/decorators
@@ -595,12 +598,12 @@ class MShop_Coupon_Manager_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap decorators
-		 * ("MShop_Coupon_Provider_Decorator_*") around the coupon provider.
+		 * ("\Aimeos\MShop\Coupon\Provider\Decorator\*") around the coupon provider.
 		 *
 		 *  mshop/coupon/provider/decorators = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Coupon_Provider_Decorator_Decorator1" to all coupon provider
+		 * "\Aimeos\MShop\Coupon\Provider\Decorator\Decorator1" to all coupon provider
 		 * objects.
 		 *
 		 * @param array List of decorator names
@@ -624,7 +627,7 @@ class MShop_Coupon_Manager_Standard
 	 * Creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -659,10 +662,10 @@ class MShop_Coupon_Manager_Standard
 	 * Creates a new coupon item instance
 	 *
 	 * @param array $values Values of the coupon item from the storage
-	 * @return MShop_Coupon_Item_Standard Returns a new created coupon item instance
+	 * @return \Aimeos\MShop\Coupon\Item\Standard Returns a new created coupon item instance
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Coupon_Item_Standard( $values );
+		return new \Aimeos\MShop\Coupon\Item\Standard( $values );
 	}
 }

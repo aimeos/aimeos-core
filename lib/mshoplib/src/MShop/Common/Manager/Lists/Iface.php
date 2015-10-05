@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Lists;
+
+
 /**
  * Default list manager implementation
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Lists_Iface
-	extends MShop_Common_Manager_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Counts the number items that are available for the values of the given key.
@@ -112,12 +115,12 @@ interface MShop_Common_Manager_Lists_Iface
 	 * array( 'text' => 1 ) // second result set with refid 12 counted
 	 * </code>
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
-	 * @see MW_Common_Criteria_Iface
+	 * @see \Aimeos\MW\Common\Criteria\Iface
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key );
 
 
 	/**
@@ -198,12 +201,12 @@ interface MShop_Common_Manager_Lists_Iface
 	 * list items in one slice point to the same referenced item. In this case
 	 * the referenced item is only returned once in that slice.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
-	 *	of IDs and items implementing MShop_Common_Item_Iface
-	 * @see MW_Common_Criteria_Iface
+	 *	of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @see \Aimeos\MW\Common\Criteria\Iface
 	 */
-	public function searchRefItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null );
+	public function searchRefItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null );
 }

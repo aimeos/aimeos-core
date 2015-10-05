@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists;
+
+
 /**
- * Test class for MShop_Customer_Manager_Lists_Standard.
+ * Test class for \Aimeos\MShop\Customer\Manager\Lists\Standard.
  */
-class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -69,7 +72,7 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $item );
 	}
 
 
@@ -80,7 +83,7 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -94,7 +97,7 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -144,7 +147,7 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -155,11 +158,11 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -180,15 +183,15 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second customer list item' );
+			throw new \Exception( 'No second customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -209,15 +212,15 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second customer list item' );
+			throw new \Exception( 'No second customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -292,17 +295,17 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	protected function getListItems()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );
@@ -311,7 +314,7 @@ class MShop_Customer_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCa
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No customer item found' );
+			throw new \Exception( 'No customer item found' );
 		}
 
 		$search = $this->object->createSearch();

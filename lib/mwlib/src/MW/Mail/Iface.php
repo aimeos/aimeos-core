@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MW\Mail;
+
+
 /**
  * Common interface for creating and sending e-mails.
  *
  * @package MW
  * @subpackage Mail
  */
-interface MW_Mail_Iface
+interface Iface
 {
 	/**
 	 * Creates a new e-mail message object.
 	 *
 	 * @param string $charset Default charset of the message
-	 * @return MW_Mail_Message_Iface E-mail message object
+	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
 	public function createMessage( $charset = 'UTF-8' );
 
@@ -28,8 +31,8 @@ interface MW_Mail_Iface
 	/**
 	 * Sends the e-mail message to the mail server.
 	 *
-	 * @param MW_Mail_Message_Iface $message E-mail message object
+	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 * @return void
 	 */
-	public function send( MW_Mail_Message_Iface $message );
+	public function send( \Aimeos\MW\Mail\Message\Iface $message );
 }

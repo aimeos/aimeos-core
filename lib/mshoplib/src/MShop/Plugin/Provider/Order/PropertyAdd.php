@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Adds attributes to a product in an order
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_PropertyAdd
-	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Iface
+class PropertyAdd
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $orderAttrManager;
 	private $type;
@@ -25,14 +28,14 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Initializes the plugin instance
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item )
 	{
 		parent::__construct( $context, $item );
 
-		$this->orderAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
+		$this->orderAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
 		$this->type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
@@ -40,9 +43,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.before' );
 	}
@@ -51,25 +54,25 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Exception in case of faulty configuration or parameters
+	 * @throws \Aimeos\MShop\Plugin\Exception in case of faulty configuration or parameters
 	 * @return bool true if attributes have been added successfully
 	 */
-	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Iface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$class = 'MShop_Order_Item_Base_Product_Iface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface';
 		if( !( $value instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$config = $this->getItemBase()->getConfig();
 
@@ -78,7 +81,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 			$keyElements = explode( '.', $key );
 
 			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Configuration invalid' ) );
+				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Configuration invalid' ) );
 			}
 
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );
@@ -107,12 +110,12 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	/**
 	 * Adds attribute items to an array.
 	 *
-	 * @param MShop_Common_Item_Iface $item Item containing the properties to be added as attributes
-	 * @param MShop_Order_Item_Base_Product_Iface $product Product containing attributes
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item containing the properties to be added as attributes
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Product containing attributes
 	 * @param Array $properties List of item properties to be converted
 	 * @return Array List of attributes
 	 */
-	protected function addAttributes( MShop_Common_Item_Iface $item, MShop_Order_Item_Base_Product_Iface $product, array $properties )
+	protected function addAttributes( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();
 		$itemProperties = $item->toArray();

@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
- * Test class for MW_Translation_Decorator_Memory.
+ * Test class for \Aimeos\MW\Translation\Decorator\Memory.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Translation_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
+class MemoryTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -27,8 +30,8 @@ class MW_Translation_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 			)
 		) );
 
-		$conf = new MW_Translation_None( 'cs' );
-		$this->object = new MW_Translation_Decorator_Memory( $conf, $strings );
+		$conf = new \Aimeos\MW\Translation\None( 'cs' );
+		$this->object = new \Aimeos\MW\Translation\Decorator\Memory( $conf, $strings );
 	}
 
 	/**

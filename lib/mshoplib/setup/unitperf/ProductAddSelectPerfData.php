@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds selection performance records to product table.
  */
-class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	private $count = 1000;
 
@@ -67,14 +70,14 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$listTypeItem = $this->getTypeItem( 'product/lists/type', 'product', 'default' );
 
 
-		$productListManager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'product' );
 
 
-		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
@@ -156,7 +159,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	}
 
 
-	protected function getLowestPrice( MShop_Price_Item_Iface $price = null, array $prices = array() )
+	protected function getLowestPrice( \Aimeos\MShop\Price\Item\Iface $price = null, array $prices = array() )
 	{
 		foreach( $prices as $item )
 		{
@@ -181,7 +184,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$context = $this->getContext();
 
 
-		$textTypeManager = MShop_Factory::createManager( $context, 'text/type' );
+		$textTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'text/type' );
 
 		$search = $textTypeManager->createSearch();
 		$expr = array(
@@ -198,18 +201,18 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		}
 
 		if( count( $textTypeItems ) !== 2 ) {
-			throw new Exception( 'Text type items not found' );
+			throw new \Exception( 'Text type items not found' );
 		}
 
 
-		$textManager = MShop_Factory::createManager( $context, 'text' );
+		$textManager = \Aimeos\MShop\Factory::createManager( $context, 'text' );
 
 		$textItem = $textManager->createItem();
 		$textItem->setDomain( 'product' );
 		$textItem->setStatus( 1 );
 
 
-		$productListTypeManager = MShop_Factory::createManager( $context, 'product/lists/type' );
+		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
@@ -219,11 +222,11 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 
-		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 		$productListItem = $productListManager->createItem();
 		$productListItem->setTypeId( $productListTypeItem->getId() );
@@ -231,7 +234,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$productListItem->setStatus( 1 );
 
 
-		$productTypeManager = MShop_Factory::createManager( $context, 'product/type' );
+		$productTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/type' );
 
 		$expr = array();
 		$search = $productTypeManager->createSearch();
@@ -241,11 +244,11 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$types = $productTypeManager->searchItems( $search );
 
 		if( ( $productTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product type item not found' );
+			throw new \Exception( 'Product type item not found' );
 		}
 
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$productItem = $productManager->createItem();
 		$productItem->setTypeId( $productTypeItem->getId() );

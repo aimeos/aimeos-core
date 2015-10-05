@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required tables.
  */
-class MW_Setup_Task_DiscountAddForeignKey extends MW_Setup_Task_Base
+class DiscountAddForeignKey extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_discount' => array(

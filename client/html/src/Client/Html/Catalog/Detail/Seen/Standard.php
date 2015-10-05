@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Detail\Seen;
+
+
 /**
  * Default implementation for last seen products.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Detail_Seen_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/catalog/detail/seen/default/subparts
 	 * List of HTML sub-clients rendered within the catalog detail seen section
@@ -88,7 +91,7 @@ class Client_Html_Catalog_Detail_Seen_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -107,7 +110,7 @@ class Client_Html_Catalog_Detail_Seen_Standard
 		 *  client/html/catalog/detail/seen/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -127,12 +130,12 @@ class Client_Html_Catalog_Detail_Seen_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/seen/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -151,12 +154,12 @@ class Client_Html_Catalog_Detail_Seen_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/seen/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -273,7 +276,7 @@ class Client_Html_Catalog_Detail_Seen_Standard
 			 */
 			$domains = $config->get( 'client/html/catalog/detail/seen/domains', $domains );
 
-			$view->seenProductItem = MShop_Factory::createManager( $context, 'product' )->getItem( $id, $domains );
+			$view->seenProductItem = \Aimeos\MShop\Factory::createManager( $context, 'product' )->getItem( $id, $domains );
 
 			$this->addMetaItem( $view->seenProductItem, 'product', $expire, $tags );
 			$this->addMetaList( $view->seenProductItem->getId(), 'product', $expire );

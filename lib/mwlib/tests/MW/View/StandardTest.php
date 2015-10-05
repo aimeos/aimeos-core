@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View;
+
+
 /**
- * Test class for MW_View_Standard.
+ * Test class for \Aimeos\MW\View\Standard.
  */
-class MW_View_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $translate;
@@ -23,8 +26,8 @@ class MW_View_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_View_Standard();
-		$this->translate = new MW_View_Helper_Translate_Standard( $this->object, new MW_Translation_None( 'en_GB' ) );
+		$this->object = new \Aimeos\MW\View\Standard();
+		$this->translate = new \Aimeos\MW\View\Helper\Translate\Standard( $this->object, new \Aimeos\MW\Translation\None( 'en_GB' ) );
 	}
 
 
@@ -51,7 +54,7 @@ class MW_View_StandardTest extends PHPUnit_Framework_TestCase
 		unset( $this->object->test );
 		$this->assertEquals( false, isset( $this->object->test ) );
 
-		$this->setExpectedException( 'MW_View_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->test;
 	}
 
@@ -69,20 +72,20 @@ class MW_View_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCallCreateHelper()
 	{
 		$enc = $this->object->encoder();
-		$this->assertInstanceOf( 'MW_View_Helper_Iface', $enc );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Helper\\Iface', $enc );
 	}
 
 
 	public function testCallInvalidName()
 	{
-		$this->setExpectedException( 'MW_View_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->invalid();
 	}
 
 
 	public function testCallUnknown()
 	{
-		$this->setExpectedException( 'MW_View_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->unknown();
 	}
 

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Cleanup\Unfinished;
+
+
 /**
  * Order cleanup job controller for removing unfinished orders.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Cleanup_Unfinished_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,14 +46,14 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
 		$context = $this->getContext();
-		$controller = Controller_Common_Order_Factory::createController( $context );
-		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
-		$manager = MShop_Factory::createManager( $context, 'order' );
+		$controller = \Aimeos\Controller\Common\Order\Factory::createController( $context );
+		$baseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 
 		/** controller/jobs/order/cleanup/unfinished/keep-hours
 		 * Release the ordered products after the configured time if no payment was confirmed
@@ -76,7 +79,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Standard
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '<', 'order.mtime', $limit ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_UNFINISHED ),
+			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

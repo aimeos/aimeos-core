@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Locale;
+
+
 /**
- * MShop_Locale_Exception.
+ * \Aimeos\MShop\Locale\Exception.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

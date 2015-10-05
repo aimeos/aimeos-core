@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MAdmin\Log;
+
+
 /**
- * Exception thrown by log classes.
+ * \Exception thrown by log classes.
  *
  * @package MAdmin
  * @subpackage Log
  */
-class MAdmin_Log_Exception extends MAdmin_Exception
+class Exception extends \Aimeos\MAdmin\Exception
 {
 }

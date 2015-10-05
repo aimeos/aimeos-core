@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
  * Default implementation of the password helper item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Password_Standard implements MShop_Common_Item_Helper_Password_Iface
+class Standard implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $options = array();
 	

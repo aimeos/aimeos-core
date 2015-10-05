@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Decorator;
+
+
 /**
  * Provides common methods for controller decorators.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Common_Decorator_Example
-	extends Controller_ExtJS_Common_Decorator_Base
-	implements Controller_ExtJS_Common_Decorator_Iface
+class Example
+	extends \Aimeos\Controller\ExtJS\Common\Decorator\Base
+	implements \Aimeos\Controller\ExtJS\Common\Decorator\Iface
 {
 	public function additionalMethod()
 	{

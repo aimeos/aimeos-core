@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Stock\Warehouse;
+
+
 /**
  * Default product stock warehouse item interface.
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Item_Stock_Warehouse_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the code of the warehouse item.

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames price column to value in price table.
  */
-class MW_Setup_Task_PriceRenameColumnPriceToValue extends MW_Setup_Task_Base
+class PriceRenameColumnPriceToValue extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_price' => 'ALTER TABLE "mshop_price" CHANGE "price" "value" DECIMAL(12,2) NOT NULL',

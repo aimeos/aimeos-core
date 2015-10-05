@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Item;
+
+
 /**
  * Interface for supplier DTO objects used by the shop.
  *
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Item_Iface
-	extends MShop_Common_Item_ListRef_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface
 {
 	/**
 	 * Returns the label of the supplier item.

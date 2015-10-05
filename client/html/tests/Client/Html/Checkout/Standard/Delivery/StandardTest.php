@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Delivery;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Delivery_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Delivery\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -49,7 +51,7 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 
 	public function testGetBody()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$this->object->setView( $view );
 		$view->standardStepActive = 'delivery';
 		$view->standardSteps = array( 'before', 'delivery', 'after' );
@@ -64,7 +66,7 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 
 	public function testGetBodyOtherStep()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -74,14 +76,14 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -94,59 +96,59 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 
 	public function testProcessExistingId()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
 		$result = $serviceManager->searchItems( $search );
 
 		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception( 'Service item not found' );
+			throw new \Exception( 'Service item not found' );
 		}
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'c_deliveryoption' => $service->getId(),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
 		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 'unitcode', $basket->getService( 'delivery' )->getCode() );
 	}
 
 
 	public function testProcessInvalidId()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'c_deliveryoption' => -1 );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Service\\Exception' );
 		$this->object->process();
 	}
 
 
 	public function testProcessNotExistingAttributes()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
 		$result = $serviceManager->searchItems( $search );
 
 		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception( 'Service item not found' );
+			throw new \Exception( 'Service item not found' );
 		}
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'c_deliveryoption' => $service->getId(),
@@ -156,12 +158,12 @@ class Client_Html_Checkout_Standard_Delivery_StandardTest extends PHPUnit_Framew
 				),
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->process();
 	}
 }

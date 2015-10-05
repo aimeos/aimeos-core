@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Plugin\Decorator;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,9 +20,9 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$controller = Controller_ExtJS_Plugin_Factory::createController( $context );
-		$this->object = new Controller_ExtJS_Plugin_Decorator_Example( $context, $controller );
+		$context = \TestHelper::getContext();
+		$controller = \Aimeos\Controller\ExtJS\Plugin\Factory::createController( $context );
+		$this->object = new \Aimeos\Controller\ExtJS\Plugin\Decorator\Example( $context, $controller );
 	}
 
 
@@ -51,7 +52,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 		$result = $this->object->searchItems( $params );
 
 		if( ( $plugin = reset( $result ) ) === false ) {
-			throw new Exception( 'No plugin found' );
+			throw new \Exception( 'No plugin found' );
 		}
 
 		$this->assertEquals( 1, count( $plugin ) );
@@ -61,7 +62,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
@@ -69,7 +70,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 		$result = $typeManager->searchItems( $search );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No plugin type found' );
+			throw new \Exception( 'No plugin type found' );
 		}
 
 		$saveParams = (object) array(

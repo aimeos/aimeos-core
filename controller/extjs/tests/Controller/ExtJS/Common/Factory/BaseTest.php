@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Factory;
+
+
 /**
- * Test class for Controller_ExtJS_Common_Factory_BaseTest.
+ * Test class for \Aimeos\Controller\ExtJS\Common\Factory\BaseTest.
  */
-class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 
@@ -22,7 +25,7 @@ class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/extjs/common/decorators/default', array() );
@@ -34,10 +37,10 @@ class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCas
 
 	public function testInjectController()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', $controller );
+		$controller = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context, 'Standard' );
+		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard', $controller );
 
-		$injectedController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
+		$injectedController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context, 'Standard' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +48,11 @@ class Controller_ExtJS_Common_Factory_BaseTest extends PHPUnit_Framework_TestCas
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', $controller );
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Standard', null );
+		$controller = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context, 'Standard' );
+		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard', $controller );
+		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard', null );
 
-		$new = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Standard' );
+		$new = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context, 'Standard' );
 
 		$this->assertNotSame( $controller, $new );
 	}

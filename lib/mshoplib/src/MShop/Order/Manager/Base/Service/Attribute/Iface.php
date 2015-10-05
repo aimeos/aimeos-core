@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Service\Attribute;
+
+
 /**
  * Interface for order base attribute manager.
  * 
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Manager_Base_Service_Attribute_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

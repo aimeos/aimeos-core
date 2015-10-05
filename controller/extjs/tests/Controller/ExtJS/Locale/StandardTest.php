@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Locale;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Locale_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Locale\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -38,7 +39,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->init( new stdClass() );
+		$actual = $this->object->init( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -46,7 +47,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->finish( new stdClass() );
+		$actual = $this->object->finish( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -57,7 +58,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 			'site' => 'unittest',
 			'condition' => (object) array(
 				'&&' => array(
-					(object) array( '==' => (object) array( 'locale.siteid' => TestHelper::getContext()->getLocale()->getSiteId() ) ),
+					(object) array( '==' => (object) array( 'locale.siteid' => \TestHelper::getContext()->getLocale()->getSiteId() ) ),
 					(object) array( '==' => (object) array( 'locale.currencyid' => 'EUR' ) ),
 				),
 			),
@@ -81,7 +82,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 		$saveParam = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'locale.siteid' => TestHelper::getContext()->getLocale()->getSiteId(),
+				'locale.siteid' => \TestHelper::getContext()->getLocale()->getSiteId(),
 				'locale.currencyid' => 'CHF',
 				'locale.languageid' => 'de',
 				'locale.status' => 0,
@@ -113,7 +114,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 	public function testSaveCheckParamsAbstractException()
 	{
 		$saveParam = (object) array();
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->saveItems( $saveParam );
 	}
 
@@ -124,7 +125,7 @@ class Controller_ExtJS_Locale_StandardTest extends PHPUnit_Framework_TestCase
 			'site' => 'badSite',
 			'items' => (object) array(),
 		);
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->saveItems( $saveParam );
 	}
 

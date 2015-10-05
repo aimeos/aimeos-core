@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Property;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2014
  */
-
-
-class Controller_ExtJS_Product_Property_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Property_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Property_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Property\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -61,7 +62,7 @@ class Controller_ExtJS_Product_Property_StandardTest extends PHPUnit_Framework_T
 				'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.code' => 'CNC' ) ) ) )
 		);
 		
-		$prodCtrl = new Controller_ExtJS_Product_Standard( TestHelper::getContext() );
+		$prodCtrl = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelper::getContext() );
 		$products = $prodCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $products['items'] ) );
 		
@@ -70,7 +71,7 @@ class Controller_ExtJS_Product_Property_StandardTest extends PHPUnit_Framework_T
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.property.type.code' => 'package-weight' ) ) ) )
 		);
 
-		$typeCtrl = new Controller_ExtJS_Product_Property_Type_Standard( TestHelper::getContext() );
+		$typeCtrl = new \Aimeos\Controller\ExtJS\Product\Property\Type\Standard( \TestHelper::getContext() );
 		$types = $typeCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $types['items'] ) );
 

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Convert;
+
+
 /**
  * Interface for data converting objects.
  *
  * @package MW
  * @subpackage Convert
  */
-interface MW_Convert_Iface
+interface Iface
 {
 	/**
 	 * Translates a value to another one.

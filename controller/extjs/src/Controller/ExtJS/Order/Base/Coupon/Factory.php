@@ -8,17 +8,20 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Order\Base\Coupon;
+
+
 /**
  * ExtJS Order base coupon controller factory.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Order_Base_Coupon_Factory
-	extends Controller_ExtJS_Common_Factory_Base
-	implements Controller_ExtJS_Common_Factory_Iface
+class Factory
+	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
+	implements \Aimeos\Controller\ExtJS\Common\Factory\Iface
 {
-	public static function createController( MShop_Context_Item_Iface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/order/base/coupon/name
 		 * Class name of the used ExtJS order base coupon controller implementation
@@ -30,11 +33,11 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Order_Base_Coupon_Standard
+		 *  \Aimeos\Controller\ExtJS\Order\Base\Coupon\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_ExtJS_Order_Base_Coupon_Mycoupon
+		 *  \Aimeos\Controller\ExtJS\Order\Base\Coupon\Mycoupon
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -57,8 +60,8 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 			$name = $context->getConfig()->get( 'classes/controller/extjs/order/base/coupon/name', 'Standard' );
 		}
 
-		$interface = 'Controller_ExtJS_Iface';
-		$classname = 'Controller_ExtJS_Order_Base_Coupon_' . $name;
+		$interface = '\\Aimeos\\Controller\\ExtJS\\Iface';
+		$classname = '\\Aimeos\\Controller\\ExtJS\\Order\\Base\\Coupon\\' . $name;
 
 		$controller = self::createControllerBase( $context, $classname, $interface );
 
@@ -77,7 +80,7 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		 *  controller/extjs/order/base/coupon/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Controller\ExtJS\Common\Decorator\*") added via
 		 * "controller/extjs/common/decorators/default" for the admin ExtJS controller.
 		 *
 		 * @param array List of decorator names
@@ -97,12 +100,12 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Common\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/order/base/coupon/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 * "\Aimeos\Controller\ExtJS\Common\Decorator\Decorator1" only to the ExtJS controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
@@ -121,12 +124,12 @@ class Controller_ExtJS_Order_Base_Coupon_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_ExtJS_Order_Base_Coupon_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Order\Base\Coupon\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/order/base/coupon/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_ExtJS_Order_Base_Coupon_Decorator_Decorator2" only to the ExtJS
+		 * "\Aimeos\Controller\ExtJS\Order\Base\Coupon\Decorator\Decorator2" only to the ExtJS
 		 * controller.
 		 *
 		 * @param array List of decorator names

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Text\Manager;
+
+
 /**
  * Default text manager implementation
  *
  * @package MShop
  * @subpackage Text
  */
-class MShop_Text_Manager_Standard
-	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Text_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	implements \Aimeos\MShop\Text\Manager\Iface
 {
 	private $searchConfig = array(
 		'text.id'=> array(
@@ -24,14 +27,14 @@ class MShop_Text_Manager_Standard
 			'internalcode'=>'mtex."id"',
 			'label'=>'Text ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'text.siteid'=> array(
 			'code'=>'text.siteid',
 			'internalcode'=>'mtex."siteid"',
 			'label'=>'Text site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.languageid' => array(
@@ -39,14 +42,14 @@ class MShop_Text_Manager_Standard
 			'internalcode'=>'mtex."langid"',
 			'label'=>'Text language code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.typeid' => array(
 			'code'=>'text.typeid',
 			'internalcode'=>'mtex."typeid"',
 			'label'=>'Text type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'text.label' => array(
@@ -54,49 +57,49 @@ class MShop_Text_Manager_Standard
 			'internalcode'=>'mtex."label"',
 			'label'=>'Text label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.domain' => array(
 			'code'=>'text.domain',
 			'internalcode'=>'mtex."domain"',
 			'label'=>'Text domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.content' => array(
 			'code'=>'text.content',
 			'internalcode'=>'mtex."content"',
 			'label'=>'Text content',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.status' => array(
 			'code'=>'text.status',
 			'internalcode'=>'mtex."status"',
 			'label'=>'Text status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'text.ctime'=> array(
 			'code'=>'text.ctime',
 			'internalcode'=>'mtex."ctime"',
 			'label'=>'Text create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.mtime'=> array(
 			'code'=>'text.mtime',
 			'internalcode'=>'mtex."mtime"',
 			'label'=>'Text modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.editor'=> array(
 			'code'=>'text.editor',
 			'internalcode'=>'mtex."editor"',
 			'label'=>'Text editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -104,9 +107,9 @@ class MShop_Text_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-text' );
@@ -132,7 +135,7 @@ class MShop_Text_Manager_Standard
 	/**
 	 * Creates new text item object.
 	 *
-	 * @return MShop_Text_Item_Iface New text item object
+	 * @return \Aimeos\MShop\Text\Item\Iface New text item object
 	 */
 	public function createItem()
 	{
@@ -145,14 +148,14 @@ class MShop_Text_Manager_Standard
 	 * Updates or adds a text item object.
 	 * This method doesn't update the type string that belongs to the type ID
 	 *
-	 * @param MShop_Text_Item_Iface $item Text item which should be saved
+	 * @param \Aimeos\MShop\Text\Item\Iface $item Text item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Text_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Text\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Text_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Text\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -233,18 +236,18 @@ class MShop_Text_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getDomain() );
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getContent() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -290,7 +293,7 @@ class MShop_Text_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -339,8 +342,8 @@ class MShop_Text_Manager_Standard
 	 *
 	 * @param integer $id Id of the text item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Text_Item_Iface Returns the text item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Text\Item\Iface Returns the text item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -352,7 +355,7 @@ class MShop_Text_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -382,12 +385,12 @@ class MShop_Text_Manager_Standard
 	/**
 	 * Searches for all text items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of text items implementing MShop_Text_Item_Iface
+	 * @return array List of text items implementing \Aimeos\MShop\Text\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -399,7 +402,7 @@ class MShop_Text_Manager_Standard
 		try
 		{
 			$required = array( 'text' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/text/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -511,7 +514,7 @@ class MShop_Text_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -542,7 +545,7 @@ class MShop_Text_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -554,7 +557,7 @@ class MShop_Text_Manager_Standard
 	 * Creates a search object.
 	 *
 	 * @param boolean $default If base criteria should be added
-	 * @return MW_Common_Criteria_Iface Search criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -589,12 +592,12 @@ class MShop_Text_Manager_Standard
 	 * Creates a new text item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
-	 * @param array $refItems List of items implementing MShop_Text_Item_Iface
-	 * @return MShop_Text_Item_Iface New product item
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $refItems List of items implementing \Aimeos\MShop\Text\Item\Iface
+	 * @return \Aimeos\MShop\Text\Item\Iface New product item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		return new MShop_Text_Item_Standard( $values, $listItems, $refItems );
+		return new \Aimeos\MShop\Text\Item\Standard( $values, $listItems, $refItems );
 	}
 }

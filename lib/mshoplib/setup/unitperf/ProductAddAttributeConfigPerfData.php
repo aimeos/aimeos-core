@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds media performance records.
  */
-class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -59,7 +62,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 		$context = $this->getContext();
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
@@ -71,7 +74,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 
@@ -122,8 +125,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 	{
 		$context = $this->getContext();
 
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
-		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'price/type' );
 
 		$search = $priceTypeManager->createSearch();
 		$expr = array(
@@ -134,7 +137,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$result = $priceTypeManager->searchItems( $search );
 
 		if( ( $priceTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No price type "default" found' );
+			throw new \Exception( 'No price type "default" found' );
 		}
 
 		$priceItem = $priceManager->createItem();
@@ -144,8 +147,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$priceItem->setStatus( 1 );
 
 
-		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$attrTypeManager = MShop_Factory::createManager( $context, 'attribute/type' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$attrTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/type' );
 
 		$search = $attrTypeManager->createSearch();
 		$expr = array(
@@ -156,7 +159,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$result = $attrTypeManager->searchItems( $search );
 
 		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "option" found' );
+			throw new \Exception( 'No attribute type "option" found' );
 		}
 
 		$attrItem = $attrManager->createItem();
@@ -165,8 +168,8 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$attrItem->setStatus( 1 );
 
 
-		$listManager = MShop_Factory::createManager( $context, 'attribute/lists' );
-		$listTypeManager = MShop_Factory::createManager( $context, 'attribute/lists/type' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists' );
+		$listTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
 
 		$search = $listTypeManager->createSearch();
 		$expr = array(
@@ -177,7 +180,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$result = $listTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No price list type "default" found' );
+			throw new \Exception( 'No price list type "default" found' );
 		}
 
 		$listItem = $listManager->createItem();

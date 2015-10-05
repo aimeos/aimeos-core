@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Filter;
+
+
 /**
  * Default implementation of catalog filter section HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Filter_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	private static $headerSingleton;
 
@@ -58,7 +61,7 @@ class Client_Html_Catalog_Filter_Standard
 	/** client/html/catalog/filter/search/name
 	 * Name of the search part used by the catalog filter client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Filter_Search_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Filter\Search\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -69,7 +72,7 @@ class Client_Html_Catalog_Filter_Standard
 	/** client/html/catalog/filter/tree/name
 	 * Name of the tree part used by the catalog filter client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Filter_Tree_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Filter\Tree\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -80,7 +83,7 @@ class Client_Html_Catalog_Filter_Standard
 	/** client/html/catalog/filter/attribute/name
 	 * Name of the attribute part used by the catalog filter client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Filter_Attribute_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Filter\Attribute\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -130,22 +133,22 @@ class Client_Html_Catalog_Filter_Standard
 				}
 				$view->filterBody = $html;
 			}
-			catch( Client_Html_Exception $e )
+			catch( \Aimeos\Client\Html\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 			}
-			catch( Controller_Frontend_Exception $e )
+			catch( \Aimeos\Controller\Frontend\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 			}
-			catch( MShop_Exception $e )
+			catch( \Aimeos\MShop\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -250,7 +253,7 @@ class Client_Html_Catalog_Filter_Standard
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
@@ -269,7 +272,7 @@ class Client_Html_Catalog_Filter_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -288,7 +291,7 @@ class Client_Html_Catalog_Filter_Standard
 		 *  client/html/catalog/filter/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -308,12 +311,12 @@ class Client_Html_Catalog_Filter_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/filter/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -332,12 +335,12 @@ class Client_Html_Catalog_Filter_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/filter/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -365,22 +368,22 @@ class Client_Html_Catalog_Filter_Standard
 		{
 			parent::process();
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -399,12 +402,12 @@ class Client_Html_Catalog_Filter_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{

@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Decorator;
+
+
 /**
  * Factory interface for managers.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Decorator_Iface
-	extends MShop_Common_Manager_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Initializes a new manager decorator object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Common_Manager_Iface $manager Manager object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Common_Manager_Iface $manager );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Common\Manager\Iface $manager );
 }

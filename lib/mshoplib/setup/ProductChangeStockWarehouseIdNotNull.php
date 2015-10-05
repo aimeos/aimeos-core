@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes warehouse ID to NOT NULL in stock table.
  */
-class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_Base
+class ProductChangeStockWarehouseIdNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product_stock" st

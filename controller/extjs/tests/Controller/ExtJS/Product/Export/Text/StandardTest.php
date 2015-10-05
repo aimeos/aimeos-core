@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Export\Text;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,8 +21,8 @@ class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new Controller_ExtJS_Product_Export_Text_Standard( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Export\Text\Standard( $this->context );
 	}
 
 
@@ -39,7 +40,7 @@ class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framewor
 
 	public function testExportCSVFile()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$criteria = $productManager->createSearch();
 
 		$expr = array();
@@ -49,10 +50,10 @@ class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framewor
 		$searchResult = $productManager->searchItems( $criteria );
 
 		if( ( $productItem = reset( $searchResult ) ) === false ) {
-			throw new Exception( 'No item with product code CNE found' );
+			throw new \Exception( 'No item with product code CNE found' );
 		}
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
 		$params->lang = 'de';
@@ -62,19 +63,19 @@ class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framewor
 
 		$this->assertTrue( file_exists( $file ) );
 
-		$zip = new ZipArchive();
+		$zip = new \ZipArchive();
 		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
 		$zip->extractTo( $testdir );
 		$zip->close();
 
 		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
@@ -90,11 +91,11 @@ class Controller_ExtJS_Product_Export_Text_StandardTest extends PHPUnit_Framewor
 		fclose( $fh );
 
 		if( unlink( $deCSV ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		if( rmdir( $testdir ) === false ) {
-			throw new Exception( 'Unable to remove test export directory' );
+			throw new \Exception( 'Unable to remove test export directory' );
 		}
 
 		$this->assertEquals( $lines[0][0], 'Language ID' );

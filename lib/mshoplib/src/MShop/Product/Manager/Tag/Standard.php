@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Tag;
+
+
 /**
  * Default tag manager implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Tag_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Product_Manager_Tag_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Product\Manager\Tag\Iface
 {
 	private $searchConfig = array(
 		'product.tag.id'=> array(
@@ -24,14 +27,14 @@ class MShop_Product_Manager_Tag_Standard
 			'internalcode'=>'mprota."id"',
 			'label'=>'Product tag ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.tag.siteid'=> array(
 			'code'=>'product.tag.siteid',
 			'internalcode'=>'mprota."siteid"',
 			'label'=>'Product tag site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.typeid' => array(
@@ -39,7 +42,7 @@ class MShop_Product_Manager_Tag_Standard
 			'internalcode'=>'mprota."typeid"',
 			'label'=>'Product tag type id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.languageid' => array(
@@ -47,35 +50,35 @@ class MShop_Product_Manager_Tag_Standard
 			'internalcode'=>'mprota."langid"',
 			'label'=>'Product tag language id',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.label' => array(
 			'code'=>'product.tag.label',
 			'internalcode'=>'mprota."label"',
 			'label'=>'Product tag label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.mtime'=> array(
 			'code'=>'product.tag.mtime',
 			'internalcode'=>'mprota."mtime"',
 			'label'=>'Product tag modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.ctime'=> array(
 			'code'=>'product.tag.ctime',
 			'internalcode'=>'mprota."ctime"',
 			'label'=>'Product tag creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.editor'=> array(
 			'code'=>'product.tag.editor',
 			'internalcode'=>'mprota."editor"',
 			'label'=>'Product tag editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -83,9 +86,9 @@ class MShop_Product_Manager_Tag_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -111,7 +114,7 @@ class MShop_Product_Manager_Tag_Standard
 	/**
 	 * Creates new tag item object.
 	 *
-	 * @return MShop_Product_Item_Tag_Iface New tag item object
+	 * @return \Aimeos\MShop\Product\Item\Tag\Iface New tag item object
 	 */
 	public function createItem()
 	{
@@ -123,14 +126,14 @@ class MShop_Product_Manager_Tag_Standard
 	/**
 	 * Inserts the new tag items for product item
 	 *
-	 * @param MShop_Product_Item_Tag_Iface $item Tag item which should be saved
+	 * @param \Aimeos\MShop\Product\Item\Tag\Iface $item Tag item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Tag_Iface';
+		$iface = '\\Aimeos\\MShop\\Product\\Item\\Tag\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -211,15 +214,15 @@ class MShop_Product_Manager_Tag_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $date ); //mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 7, $date ); //ctime
@@ -265,7 +268,7 @@ class MShop_Product_Manager_Tag_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -314,8 +317,8 @@ class MShop_Product_Manager_Tag_Standard
 	 *
 	 * @param integer $id Id of the product tag item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Tag_Iface Returns the product tag item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Product\Item\Tag\Iface Returns the product tag item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -327,7 +330,7 @@ class MShop_Product_Manager_Tag_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -357,14 +360,14 @@ class MShop_Product_Manager_Tag_Standard
 	/**
 	 * Search for all tag items based on the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * 		[product.tag.prodid], [product.tag.domain], [product.tag.label]
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of tag items implementing MShop_Product_Item_Tag_Iface
-	 * @throws MShop_Product_Exception if creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 * @return array List of tag items implementing \Aimeos\MShop\Product\Item\Tag\Iface
+	 * @throws \Aimeos\MShop\Product\Exception if creating items failed
+	 * @see \Aimeos\MW\Common\Criteria\SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 		$context = $this->getContext();
@@ -376,7 +379,7 @@ class MShop_Product_Manager_Tag_Standard
 		try
 		{
 			$required = array( 'product.tag' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/product/manager/tag/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -487,7 +490,7 @@ class MShop_Product_Manager_Tag_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -521,7 +524,7 @@ class MShop_Product_Manager_Tag_Standard
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from
 	 * configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g tag types, tag lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g tag types, tag lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -535,11 +538,11 @@ class MShop_Product_Manager_Tag_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Tag_Standard
+		 *  \Aimeos\MShop\Product\Manager\Tag\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Tag_Mytag
+		 *  \Aimeos\MShop\Product\Manager\Tag\Mytag
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -574,7 +577,7 @@ class MShop_Product_Manager_Tag_Standard
 		 *  mshop/product/manager/tag/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product tag manager.
 		 *
 		 * @param array List of decorator names
@@ -594,12 +597,12 @@ class MShop_Product_Manager_Tag_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product tag manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product tag manager.
 		 *
 		 *  mshop/product/manager/tag/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -618,12 +621,12 @@ class MShop_Product_Manager_Tag_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product tag manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product tag manager.
 		 *
 		 *  mshop/product/manager/tag/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -641,12 +644,12 @@ class MShop_Product_Manager_Tag_Standard
 	/**
 	 * Creates new tag item object.
 	 *
-	 * @see MShop_Product_Item_Tag_Standard Default tag item
+	 * @see \Aimeos\MShop\Product\Item\Tag\Standard Default tag item
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, label
-	 * @return MShop_Product_Item_Tag_Standard New tag item object
+	 * @return \Aimeos\MShop\Product\Item\Tag\Standard New tag item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Product_Item_Tag_Standard( $values );
+		return new \Aimeos\MShop\Product\Item\Tag\Standard( $values );
 	}
 }

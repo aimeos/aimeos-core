@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order\Account;
+
+
 /**
  * Default implementation of checkout order account HTML client
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Order_Account_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/order/account/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard order account section
@@ -151,7 +154,7 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -170,7 +173,7 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 		 *  client/html/checkout/standard/order/account/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -190,12 +193,12 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/account/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
@@ -214,12 +217,12 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/account/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
@@ -250,10 +253,10 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 
 			try
 			{
-				$addr = $basket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+				$addr = $basket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 				$email = $addr->getEmail();
 
-				$manager = MShop_Factory::createManager( $context, 'customer' );
+				$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 				$search = $manager->createSearch();
 				$search->setConditions( $search->compare( '==', 'customer.code', $email ) );
 				$search->setSlice( 0, 1 );
@@ -261,7 +264,7 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 
 				if( empty( $result ) )
 				{
-					$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
+					$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 
 					$password = substr( md5( microtime( true ) . /*getpid() .*/ rand() ), -8 );
 					$item = $this->addCustomerData( $manager->createItem(), $addr, $addr->getEmail(), $password );
@@ -275,10 +278,10 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 					$this->sendEmail( $addr, $addr->getEmail(), $password );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$msg = sprintf( 'Unable to create an account for "%1$s": %2$s', $email, $e->getMessage() );
-				$context->getLogger()->log( $msg, MW_Logger_Base::INFO );
+				$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::INFO );
 			}
 		}
 
@@ -300,12 +303,12 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 	/**
 	 * Adds the customer and address data to the given customer item
 	 *
-	 * @param MShop_Customer_Item_Iface $customer Customer object
-	 * @param MShop_Common_Item_Address_Iface $address Billing address object
-	 * @return MShop_Customer_Item_Iface Customer object filled with data
+	 * @param \Aimeos\MShop\Customer\Item\Iface $customer Customer object
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address object
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer object filled with data
 	 */
-	protected function addCustomerData( MShop_Customer_Item_Iface $customer,
-		MShop_Common_Item_Address_Iface $address, $code, $password )
+	protected function addCustomerData( \Aimeos\MShop\Customer\Item\Iface $customer,
+		\Aimeos\MShop\Common\Item\Address\Iface $address, $code, $password )
 	{
 		$label = $address->getLastname();
 
@@ -330,14 +333,14 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 	/**
 	 * Sends the account creation e-mail to the e-mail address of the customer
 	 *
-	 * @param MShop_Common_Item_Address_Iface $address Payment address item of the customer
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item of the customer
 	 * @param string $code Customer login name
 	 * @param string $password Customer clear text password
 	 */
-	protected function sendEmail( MShop_Common_Item_Address_Iface $address, $code, $password )
+	protected function sendEmail( \Aimeos\MShop\Common\Item\Address\Iface $address, $code, $password )
 	{
 		$context = $this->getContext();
-		$client = Client_Html_Email_Account_Factory::createClient( $context, $this->getTemplatePaths() );
+		$client = \Aimeos\Client\Html\Email\Account\Factory::createClient( $context, $this->getTemplatePaths() );
 
 		$view = $context->getView();
 		$view->extAccountCode = $code;
@@ -346,7 +349,7 @@ class Client_Html_Checkout_Standard_Order_Account_Standard
 
 		$mailer = $context->getMail();
 		$message = $mailer->createMessage();
-		$helper = new MW_View_Helper_Mail_Standard( $view, $message );
+		$helper = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $message );
 		$view->addHelper( 'mail', $helper );
 
 		$client->setView( $view );

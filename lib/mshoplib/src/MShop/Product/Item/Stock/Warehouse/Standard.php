@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Stock\Warehouse;
+
+
 /**
  * Default product stock warehouse item implementation.
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Item_Stock_Warehouse_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Product_Item_Stock_Warehouse_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface
 {
 	private $values;
 

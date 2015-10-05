@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Config;
+
+
 /**
  * Generic minimal interface for configuration setting classes
  *
  * @package MW
  * @subpackage Config
  */
-interface MW_Config_Iface
+interface Iface
 {
 	/**
 	 * Returns the value of the requested config key.

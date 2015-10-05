@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Admin\Cache;
+
+
 /**
  * Jobs admin job controller for admin interfaces.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Admin_Cache_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,10 +46,10 @@ class Controller_Jobs_Admin_Cache_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
-		MAdmin_Cache_Manager_Factory::createManager( $this->getContext() )->getCache()->cleanup();
+		\Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->getContext() )->getCache()->cleanup();
 	}
 }

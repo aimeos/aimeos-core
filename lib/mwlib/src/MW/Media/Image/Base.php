@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MW\Media\Image;
+
+
 /**
  * Common methods for image classes.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Image_Base
-	extends MW_Media_Base
+class Base
+	extends \Aimeos\MW\Media\Base
 {
 	/**
 	 * Returns the fitted width and height.

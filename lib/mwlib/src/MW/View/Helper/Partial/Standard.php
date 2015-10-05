@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Partial;
+
+
 /**
  * View helper class for rendering partials.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Partial_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $config;
 	private $paths;
@@ -25,11 +28,11 @@ class MW_View_Helper_Partial_Standard
 	/**
 	 * Initializes the parital view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
-	 * @param MW_Config_Iface $config Configuration object
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 * @param array $paths Associative list of base path / relative paths combinations
 	 */
-	public function __construct( MW_View_Iface $view, MW_Config_Iface $config, array $paths )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Config\Iface $config, array $paths )
 	{
 		parent::__construct( $view );
 
@@ -69,6 +72,6 @@ class MW_View_Helper_Partial_Standard
 			}
 		}
 
-		throw new MW_Exception( sprintf( 'Partial "%1$s" not available', $file ) );
+		throw new \Aimeos\MW\Exception( sprintf( 'Partial "%1$s" not available', $file ) );
 	}
 }

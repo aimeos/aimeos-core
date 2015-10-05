@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Locale\Item\Site;
+
+
 /**
- * Test class for MShop_Locale_Item_Site_Standard.
+ * Test class for \Aimeos\MShop\Locale\Item\Site\Standard.
  */
-class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -28,8 +31,8 @@ class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$children = array( new MShop_Locale_Item_Site_Standard() );
-		$this->object = new MShop_Locale_Item_Site_Standard( $this->values, $children );
+		$children = array( new \Aimeos\MShop\Locale\Item\Site\Standard() );
+		$this->object = new \Aimeos\MShop\Locale\Item\Site\Standard( $this->values, $children );
 	}
 
 
@@ -65,7 +68,7 @@ class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->setId( 12 );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 99 );
 	}
 
@@ -145,7 +148,7 @@ class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Locale_Item_Site_Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Site\Standard();
 
 		$list = array(
 			'locale.site.id' => 2,
@@ -193,9 +196,9 @@ class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->getChild( 0 ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->getChild( 1 );
 	}
 
@@ -206,7 +209,7 @@ class MShop_Locale_Item_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
-			$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $child );
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $child );
 		}
 	}
 

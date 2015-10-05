@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Stock\Warehouse;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_Stock_Warehouse_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Stock_Warehouse_StandardTest extends PHPUnit_Fram
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Stock_Warehouse_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Stock\Warehouse\Standard( \TestHelper::getContext() );
 	}
 
 

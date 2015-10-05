@@ -3,10 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage Customer
  */
+
+
+namespace Aimeos\Controller\Jobs\Customer\Email\Watch;
 
 
 /**
@@ -15,9 +18,9 @@
  * @package Controller
  * @subpackage Customer
  */
-class Controller_Jobs_Customer_Email_Watch_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	private $client;
 	private $warehouses;
@@ -48,7 +51,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -56,8 +59,8 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 		$context = $this->getContext();
 		$typeId = $this->getListTypeItem( 'watch' )->getId();
 
-		$localeManager = MShop_Factory::createManager( $context, 'locale' );
-		$custManager = MShop_Factory::createManager( $context, 'customer' );
+		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
+		$custManager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 
 		$localeItems = $localeManager->searchItems( $localeManager->createSearch() );
 
@@ -103,15 +106,15 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Sends product notifications for the given customers in their language
 	 *
-	 * @param MShop_Context_Item_Iface $context Context item object
-	 * @param array $customers List of customer items implementing MShop_Customer_Item_Iface
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
+	 * @param array $customers List of customer items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @param string $listTypeId Customer list type ID
 	 */
-	protected function execute( MShop_Context_Item_Iface $context, array $customers, $listTypeId )
+	protected function execute( \Aimeos\MShop\Context\Item\Iface $context, array $customers, $listTypeId )
 	{
 		$prodIds = $custIds = array();
 		$whItem = $this->getWarehouseItem( 'default' );
-		$listManager = MShop_Factory::createManager( $context, 'customer/lists' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'customer/lists' );
 		$listItems = $this->getListItems( $context, array_keys( $customers ), $listTypeId );
 
 		foreach( $listItems as $id => $listItem )
@@ -149,7 +152,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 					$listIds += array_keys( $custProducts );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$str = 'Error while trying to send product notification e-mail for customer ID "%1$s": %2$s';
 				$msg = sprintf( $str, $custId, $e->getMessage() );
@@ -164,15 +167,15 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Returns the product notification e-mail client
 	 *
-	 * @param MShop_Context_Item_Iface $context Context item object
-	 * @return Client_Html_Iface Product notification e-mail client
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
+	 * @return \Aimeos\Client\Html\Iface Product notification e-mail client
 	 */
-	protected function getClient( MShop_Context_Item_Iface $context )
+	protected function getClient( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		if( !isset( $this->client ) )
 		{
 			$templatePaths = $this->getAimeos()->getCustomPaths( 'client/html' );
-			$this->client = Client_Html_Email_Watch_Factory::createClient( $context, $templatePaths );
+			$this->client = \Aimeos\Client\Html\Email\Watch\Factory::createClient( $context, $templatePaths );
 		}
 
 		return $this->client;
@@ -182,14 +185,14 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Returns the list items for the given customer IDs and list type ID
 	 *
-	 * @param MShop_Context_Item_Iface $context Context item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
 	 * @param array $custIds List of customer IDs
 	 * @param string $listTypeId Customer list type ID
-	 * @return array List of customer list items implementing MShop_Common_Item_Lists_Iface
+	 * @return array List of customer list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	protected function getListItems( MShop_Context_Item_Iface $context, array $custIds, $listTypeId )
+	protected function getListItems( \Aimeos\MShop\Context\Item\Iface $context, array $custIds, $listTypeId )
 	{
-		$listManager = MShop_Factory::createManager( $context, 'customer/lists' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'customer/lists' );
 
 		$search = $listManager->createSearch();
 		$expr = array(
@@ -207,14 +210,14 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Returns a filtered list of products for which a notification should be sent
 	 *
-	 * @param array $listItems List of customer list items implementing MShop_Common_Item_Lists_Iface
-	 * @param array $products List of product items implementing MShop_Product_Item_Iface
+	 * @param array $listItems List of customer list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $products List of product items implementing \Aimeos\MShop\Product\Item\Iface
 	 * @return array Multi-dimensional associative list of list IDs as key and product / price item maps as values
 	 */
 	protected function getListProducts( array $listItems, array $products )
 	{
 		$result = array();
-		$priceManager = MShop_Factory::createManager( $this->getContext(), 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
 
 		foreach( $listItems as $id => $listItem )
 		{
@@ -239,7 +242,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 					}
 				}
 			}
-			catch( Exception $e ) { ; } // no price available
+			catch( \Exception $e ) { ; } // no price available
 		}
 
 		return $result;
@@ -249,13 +252,13 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Returns the products for the given IDs which are in stock in the warehouse
 	 *
-	 * @param MShop_Context_Item_Iface $context Context item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
 	 * @param array $prodIds List of product IDs
 	 * @param string $whId Unique warehouse ID
 	 */
-	protected function getProducts( MShop_Context_Item_Iface $context, array $prodIds, $whId )
+	protected function getProducts( \Aimeos\MShop\Context\Item\Iface $context, array $prodIds, $whId )
 	{
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch( true );
 		$domains = array( 'text', 'price', 'media' );
 
@@ -281,19 +284,19 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	 * Returns the customer list type item for the given type code.
 	 *
 	 * @param string $code Unique code of the list type item
-	 * @return MShop_Common_Item_Type_Iface List type item
-	 * @throws Controller_Jobs_Exception If the list type item wasn't found
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface List type item
+	 * @throws \Aimeos\Controller\Jobs\Exception If the list type item wasn't found
 	 */
 	protected function getListTypeItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/lists/type' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
 
 		$search = $manager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'customer.lists.type.code', $code ) );
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'List type for domain "%1$s" and code "%2$s" not found', 'customer', $code ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'List type for domain "%1$s" and code "%2$s" not found', 'customer', $code ) );
 		}
 
 		return $item;
@@ -304,14 +307,14 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	 * Returns the warehouse item for the given code.
 	 *
 	 * @param string $code Unique code of the warehouse item
-	 * @return MShop_Product_Item_Stock_Warehouse_Iface Warehouse item
-	 * @throws Controller_Jobs_Exception If the warehouse item wasn't found
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Warehouse item
+	 * @throws \Aimeos\Controller\Jobs\Exception If the warehouse item wasn't found
 	 */
 	protected function getWarehouseItem( $code )
 	{
 		if( !isset( $this->warehouses ) )
 		{
-			$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
 			$search = $manager->createSearch( true );
 
 			$this->warehouses = array();
@@ -321,7 +324,7 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 		}
 
 		if( !isset( $this->warehouses[$code] ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'No warehouse "%1$s" found', $code ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'No warehouse "%1$s" found', $code ) );
 		}
 
 		return $this->warehouses[$code];
@@ -331,24 +334,24 @@ class Controller_Jobs_Customer_Email_Watch_Standard
 	/**
 	 * Sends the notification e-mail for the given customer address and products
 	 *
-	 * @param MShop_Context_Item_Iface $context Context item object
-	 * @param MShop_Common_Item_Address_Iface $address Payment address of the customer
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address of the customer
 	 * @param array $products List of products a notification should be sent for
 	 */
-	protected function sendMail( MShop_Context_Item_Iface $context,
-		MShop_Common_Item_Address_Iface $address, array $products )
+	protected function sendMail( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Common\Item\Address\Iface $address, array $products )
 	{
 		$view = $context->getView();
 		$view->extProducts = $products;
 		$view->extAddressItem = $address;
 
-		$helper = new MW_View_Helper_Translate_Standard( $view, $context->getI18n( $address->getLanguageId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $context->getI18n( $address->getLanguageId() ) );
 		$view->addHelper( 'translate', $helper );
 
 		$mailer = $context->getMail();
 		$message = $mailer->createMessage();
 
-		$helper = new MW_View_Helper_Mail_Standard( $view, $message );
+		$helper = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $message );
 		$view->addHelper( 'mail', $helper );
 
 		$client = $this->getClient( $context );

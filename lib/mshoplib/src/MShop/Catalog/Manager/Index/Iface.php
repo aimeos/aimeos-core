@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
  * Catalog index interface for classes managing product indices.
  *
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Manager_Index_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key );
 
 
 	/**

@@ -9,22 +9,25 @@
 
 
 
+namespace Aimeos\Controller\ExtJS\Catalog\Export\Text;
+
+
 /**
  * ExtJS catalog text export controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Catalog_Export_Text_Standard
-	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Common\Load\Text\Base
+	implements \Aimeos\Controller\ExtJS\Common\Load\Text\Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Catalog_Export_Text' );
 	}
@@ -33,9 +36,9 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	/**
 	 * Creates a new job to export a file.
 	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
+	 * @param \stdClass $params Object containing the properties, e.g. the list of catalog IDs
 	 */
-	public function createJob( stdClass $params )
+	public function createJob( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -63,7 +66,7 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $context );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -76,9 +79,9 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	/**
 	 * Exports content files in container.
 	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
+	 * @param \stdClass $params Object containing the properties, e.g. the list of catalog IDs
 	 */
-	public function exportFile( stdClass $params )
+	public function exportFile( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -174,10 +177,10 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		$context->getLogger()->log( sprintf( 'Create export directory for catalog IDs: %1$s', implode( ',', $items ) ), MW_Logger_Base::DEBUG );
+		$context->getLogger()->log( sprintf( 'Create export directory for catalog IDs: %1$s', implode( ',', $items ) ), \Aimeos\MW\Logger\Base::DEBUG );
 
 		$filename = $this->exportData( $items, $lang, $tmpfolder );
 		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
@@ -220,7 +223,7 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	protected function exportData( array $ids, array $lang, $filename )
 	{
 		$context = $this->getContext();
-		$manager = MShop_Locale_Manager_Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $context );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
 
 		$search = $globalLanguageManager->createSearch();
@@ -327,11 +330,11 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	 *
 	 * @param string $langid Language id
 	 * @param array $ids List of of item ids whose texts should be added
-	 * @param MW_Container_Content_Iface $contentItem Content item
+	 * @param \Aimeos\MW\Container\Content\Iface $contentItem Content item
 	 */
-	protected function addLanguage( MW_Container_Content_Iface $contentItem, $langid, array $ids )
+	protected function addLanguage( \Aimeos\MW\Container\Content\Iface $contentItem, $langid, array $ids )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() );
 
 		foreach( $ids as $id )
 		{
@@ -345,11 +348,11 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	/**
 	 * Adds all texts belonging to an catalog item.
 	 *
-	 * @param MW_Container_Content_Iface $contentItem Content item
-	 * @param MShop_Catalog_Item_Iface $item product item object
+	 * @param \Aimeos\MW\Container\Content\Iface $contentItem Content item
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item product item object
 	 * @param string $langid Language id
 	 */
-	protected function addItem( MW_Container_Content_Iface $contentItem, MShop_Catalog_Item_Iface $item, $langid )
+	protected function addItem( \Aimeos\MW\Container\Content\Iface $contentItem, \Aimeos\MShop\Catalog\Item\Iface $item, $langid )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
@@ -391,10 +394,10 @@ class Controller_ExtJS_Catalog_Export_Text_Standard
 	/**
 	 * Get all child nodes.
 	 *
-	 * @param MShop_Catalog_Item_Iface $node
-	 * @return MShop_Catalog_Item_Iface[] $nodes List of nodes
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] $nodes List of nodes
 	 */
-	protected function getNodeList( MShop_Catalog_Item_Iface $node )
+	protected function getNodeList( \Aimeos\MShop\Catalog\Item\Iface $node )
 	{
 		$nodes = array( $node );
 

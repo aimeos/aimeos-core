@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Filter\Attribute;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,9 +20,9 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Filter_Attribute_Standard( TestHelper::getContext(), $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Filter\Attribute\Standard( \TestHelper::getContext(), $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -66,9 +68,9 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 	{
 		$view = $this->object->getView();
 
-		$conf = new MW_Config_PHPArray();
+		$conf = new \Aimeos\MW\Config\PHPArray();
 		$conf->set( 'client/html/catalog/filter/attribute/types', array( 'color', 'width', 'length' ) );
-		$helper = new MW_View_Helper_Config_Standard( $view, $conf );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
 		$output = $this->object->getBody();
@@ -82,7 +84,7 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 	public function testGetBodyCategory()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'f_catid' => -1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -93,7 +95,7 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 	public function testGetBodySearchText()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'f_search' => 'test' ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_search' => 'test' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -104,7 +106,7 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 	public function testGetBodySearchAttribute()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'f_attrid' => array( -1, -2 ) ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_attrid' => array( -1, -2 ) ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -114,7 +116,7 @@ class Client_Html_Catalog_Filter_Attribute_StandardTest extends PHPUnit_Framewor
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 

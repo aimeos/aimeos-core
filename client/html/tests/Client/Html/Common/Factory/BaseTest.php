@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Factory;
+
+
 /**
- * Test class for Client_Html_Common_Factory_BaseTest.
+ * Test class for \Aimeos\Client\Html\Common\Factory\BaseTest.
  */
-class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 
@@ -22,7 +25,7 @@ class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'client/html/common/decorators/default', array() );
@@ -33,10 +36,10 @@ class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClient()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', $client );
+		$client = \Aimeos\Client\Html\Catalog\Filter\Factory::createClient( $this->context, array(), 'Standard' );
+		\Aimeos\Client\Html\Catalog\Filter\Factory::injectClient( '\\Aimeos\\Client\\Html\\Catalog\\Filter\\Standard', $client );
 
-		$injectedClient = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
+		$injectedClient = \Aimeos\Client\Html\Catalog\Filter\Factory::createClient( $this->context, array(), 'Standard' );
 
 		$this->assertSame( $client, $injectedClient );
 	}
@@ -44,11 +47,11 @@ class Client_Html_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectClientReset()
 	{
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', $client );
-		Client_Html_Catalog_Filter_Factory::injectClient( 'Client_Html_Catalog_Filter_Standard', null );
+		$client = \Aimeos\Client\Html\Catalog\Filter\Factory::createClient( $this->context, array(), 'Standard' );
+		\Aimeos\Client\Html\Catalog\Filter\Factory::injectClient( '\\Aimeos\\Client\\Html\\Catalog\\Filter\\Standard', $client );
+		\Aimeos\Client\Html\Catalog\Filter\Factory::injectClient( '\\Aimeos\\Client\\Html\\Catalog\\Filter\\Standard', null );
 
-		$new = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array(), 'Standard' );
+		$new = \Aimeos\Client\Html\Catalog\Filter\Factory::createClient( $this->context, array(), 'Standard' );
 
 		$this->assertNotSame( $client, $new );
 	}

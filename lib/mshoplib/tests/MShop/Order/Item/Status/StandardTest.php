@@ -4,11 +4,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
- * Test class for MShop_Order_Item_Status_Standard.
- */
+namespace Aimeos\MShop\Order\Item\Status;
 
-class MShop_Order_Item_Status_StandardTest extends PHPUnit_Framework_TestCase
+
+/**
+ * Test class for \Aimeos\MShop\Order\Item\Status\Standard.
+ */
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -33,7 +35,7 @@ class MShop_Order_Item_Status_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Order_Item_Status_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Status\Standard( $this->values );
 
 	}
 
@@ -64,7 +66,7 @@ class MShop_Order_Item_Status_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
@@ -127,12 +129,12 @@ class MShop_Order_Item_Status_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Status_Standard();
+		$item = new \Aimeos\MShop\Order\Item\Status\Standard();
 
 		$list = array(
 			'order.status.id' => 1,
 			'order.status.parentid' => 2,
-			'order.status.type' => MShop_Order_Item_Status_Base::STATUS_PAYMENT,
+			'order.status.type' => \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT,
 			'order.status.value' => 'value',
 		);
 

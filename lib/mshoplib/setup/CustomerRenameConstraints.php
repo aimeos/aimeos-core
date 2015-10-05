@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames the foreign key constraints for customer tables to match style guidlines.
  */
-class MW_Setup_Task_CustomerRenameConstraints extends MW_Setup_Task_Base
+class CustomerRenameConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_customer' => array(

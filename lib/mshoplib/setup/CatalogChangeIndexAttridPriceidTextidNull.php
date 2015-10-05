@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes the attrid/priceid/textid column to allow NULL in catalog index attr/price/text table.
  */
-class MW_Setup_Task_CatalogChangeIndexAttridPriceidTextidNull extends MW_Setup_Task_Base
+class CatalogChangeIndexAttridPriceidTextidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog_index_attribute' => array(

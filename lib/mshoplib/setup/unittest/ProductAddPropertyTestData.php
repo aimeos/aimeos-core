@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product property test data.
  */
-class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
+class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 {
 
 	/**
@@ -48,9 +51,9 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding product property test data', 0 );
@@ -60,7 +63,7 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'productproperty.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
 		$this->addProductPropertyData( $testdata );
@@ -72,11 +75,11 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 	 * Adds the product property test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function addProductPropertyData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$productPropertyManager = $productManager->getSubManager( 'property', 'Standard' );
 		$productPropertyTypeManager = $productPropertyManager->getSubManager( 'type', 'Standard' );
 
@@ -102,7 +105,7 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 		foreach( $testdata['product/property'] as $key => $dataset )
 		{
 			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No product property type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product property type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$prodProperty->setId( null );
@@ -121,10 +124,10 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Base
 	/**
 	 * Retrieves the product IDs for the used codes
 	 * 
-	 * @param MShop_Common_Manager_Iface $productManager Product manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $productManager Product manager object
 	 * @return array Associative list of product codes as key (e.g. product/CNC) and IDs as value
 	 */
-	protected function getProductIds( MShop_Common_Manager_Iface $productManager )
+	protected function getProductIds( \Aimeos\MShop\Common\Manager\Iface $productManager )
 	{
 		$entry = array();
 		$search = $productManager->createSearch();

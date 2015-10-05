@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\DB;
+
+
 /**
- * Test class for MW_DB_Manager_PDO.
+ * Test class for \Aimeos\MW\DB\Manager\PDO.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
+class PDOTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $config;
@@ -20,14 +23,14 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->config = TestHelper::getConfig();
+		$this->config = \TestHelper::getConfig();
 
 		if( ( $adapter = $this->config->get( 'resource/db/adapter', false ) ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->object = new MW_DB_Manager_PDO( $this->config );
+		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
 
 		if( $adapter == 'mysql' ) {
 			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL ) ENGINE=InnoDB';
@@ -48,7 +51,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->object = new MW_DB_Manager_PDO( $this->config );
+		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
 		$sql = 'DROP TABLE "mw_unit_test"';
 
 		$conn = $this->object->acquire();
@@ -254,8 +257,8 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL);
-		$stmt2->bind( 2, 0.12, MW_DB_Statement_Base::PARAM_FLOAT);
+		$stmt2->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_NULL);
+		$stmt2->bind( 2, 0.12, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT);
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
@@ -270,7 +273,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert3 );
-		$stmt2->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL);
+		$stmt2->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_NULL);
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
@@ -285,7 +288,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, 0, MW_DB_Statement_Base::PARAM_NULL);
+		$stmt2->bind( 1, 0, \Aimeos\MW\DB\Statement\Base::PARAM_NULL);
 		$stmt2->bind( 2, 0.15, 123);
 		$result = $stmt2->execute();
 		$rows = $result->affectedRows();
@@ -304,7 +307,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		try {
 			$stmt = $conn->create( $sqlinsert );
 			$stmt->execute();
-		} catch ( MW_DB_Exception $de ) {
+		} catch ( \Aimeos\MW\DB\Exception $de ) {
 			$this->object->release( $conn );
 			return;
 		}
@@ -319,7 +322,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 		$stmt->bind( 1, 'test' );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
@@ -336,7 +339,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert2, MW_DB_Connection_Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert2, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 		$stmt->bind( 1, null );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
@@ -354,7 +357,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
@@ -376,17 +379,17 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, null, MW_DB_Statement_Base::PARAM_NULL );
-		$stmt->bind( 2, 1, MW_DB_Statement_Base::PARAM_BOOL );
+		$stmt->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_NULL );
+		$stmt->bind( 2, 1, \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, 123, MW_DB_Statement_Base::PARAM_LOB );
-		$stmt->bind( 2, 0.1, MW_DB_Statement_Base::PARAM_FLOAT );
+		$stmt->bind( 1, 123, \Aimeos\MW\DB\Statement\Base::PARAM_LOB );
+		$stmt->bind( 2, 0.1, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 		$stmt->execute()->finish();
 
 
@@ -417,18 +420,18 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 	public function testWrongFieldType()
 	{
-		$this->setExpectedException('MW_DB_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$conn = $this->object->acquire();
 
 		try
 		{
-			$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Base::TYPE_PREP );
+			$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 			$stmt->bind( 1, 1 );
 			$stmt->bind( 2, 'test', 123 );
 		}
-		catch ( MW_DB_Exception $e )
+		catch ( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -441,13 +444,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('MW_DB_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
 			$conn->create( $sql )->execute()->finish();
 		}
-		catch ( MW_DB_Exception $e )
+		catch ( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -458,13 +461,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('MW_DB_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
 			$conn->create( 'SELECT *' )->execute()->finish();
 		}
-		catch ( MW_DB_Exception $e )
+		catch ( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -477,13 +480,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('MW_DB_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
 			$conn->create( $sql, 123 );
 		}
-		catch (MW_DB_Exception $e)
+		catch (\Aimeos\MW\DB\Exception $e)
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -492,28 +495,28 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 	public function testPDOException()
 	{
-		$this->setExpectedException('MW_DB_Exception');
-		$conn = new MW_DB_Connection_TestForPDOException();
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$conn = new TestForPDOException();
 		$this->object->release($conn);
 	}
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf('MW_DB_Manager_Iface', $this->object);
+		$this->assertInstanceOf('\\Aimeos\\MW\\DB\\Manager\\Iface', $this->object);
 	}
 
 	public function testFactoryFail()
 	{
-		$this->setExpectedException('MW_DB_Exception');
-		MW_DB_Factory::createManager( TestHelper::getConfig(), 'notDefined' );
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		\Aimeos\MW\DB\Factory::createManager( \TestHelper::getConfig(), 'notDefined' );
 	}
 }
 
 
 
-class MW_DB_Connection_TestForPDOException implements MW_DB_Connection_Iface
+class TestForPDOException implements \Aimeos\MW\DB\Connection\Iface
 {
-	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)
+	public function create($sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE)
 	{
 	}
 

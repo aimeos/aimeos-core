@@ -7,15 +7,18 @@
 	 */
 
 
+namespace Aimeos\MShop\Order\Item\Status;
+
+
 /**
  * Default implementation of the order status object.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Status_Standard
-	extends MShop_Order_Item_Status_Base
-	implements MShop_Order_Item_Status_Iface
+class Standard
+	extends \Aimeos\MShop\Order\Item\Status\Base
+	implements \Aimeos\MShop\Order\Item\Status\Iface
 {
 	private $values;
 

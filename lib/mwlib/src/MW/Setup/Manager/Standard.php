@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\Manager;
+
+
 /**
  * Manager for setup and upgrade processes.
  *
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Manager_Standard extends MW_Setup_Manager_Base
+class Standard extends \Aimeos\MW\Setup\Manager\Base
 {
 	private $conn;
 	private $schema;
@@ -27,17 +30,17 @@ class MW_Setup_Manager_Standard extends MW_Setup_Manager_Base
 	/**
 	 * Initializes the setup manager.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param array $dbconfig Associative list with "adapter", "host", "database", "username" and "password" keys
 	 * @param array|string $taskpath Filesystem paths to the directory which contains the task classes
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
 	 */
-	public function __construct( MW_DB_Connection_Iface $conn, array $dbconfig, $taskpath, $additional = null )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, array $dbconfig, $taskpath, $additional = null )
 	{
 		foreach( array( 'adapter', 'database' )  as $key )
 		{
 			if( !isset( $dbconfig[$key] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'Configuration parameter "%1$s" missing', $key ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Configuration parameter "%1$s" missing', $key ) );
 			}
 		}
 
@@ -78,7 +81,7 @@ class MW_Setup_Manager_Standard extends MW_Setup_Manager_Base
 
 			if( in_array( $taskname, $stack ) ) {
 				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
-				throw new MW_Setup_Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
 			}
 
 			$stack[] = $taskname;

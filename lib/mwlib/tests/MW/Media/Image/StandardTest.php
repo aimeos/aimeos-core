@@ -1,19 +1,22 @@
 <?php
 
+namespace Aimeos\MW\Media\Image;
+
+
 /**
- * Test class for MW_Media_Image_Standard.
+ * Test class for \Aimeos\MW\Media\Image\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testConstructGif()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.gif';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/gif', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/gif', array() );
 
 		$this->assertEquals( 'image/gif', $media->getMimetype() );
 	}
@@ -24,7 +27,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.jpg';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/jpeg', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/jpeg', array() );
 
 		$this->assertEquals( 'image/jpeg', $media->getMimetype() );
 	}
@@ -35,7 +38,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 
 		$this->assertEquals( 'image/png', $media->getMimetype() );
 	}
@@ -43,8 +46,8 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testConstructFileException()
 	{
-		$this->setExpectedException( 'MW_Media_Exception' );
-		new MW_Media_Image_Standard( 'notexisting', '', array() );
+		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		new \Aimeos\MW\Media\Image\Standard( 'notexisting', '', array() );
 	}
 
 
@@ -53,8 +56,8 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'application.txt';
 
-		$this->setExpectedException( 'MW_Media_Exception' );
-		new MW_Media_Image_Standard( $filename, 'text/plain', array() );
+		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		new \Aimeos\MW\Media\Image\Standard( $filename, 'text/plain', array() );
 	}
 
 
@@ -63,7 +66,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 
 		unset( $media );
 	}
@@ -75,7 +78,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.gif';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 		$media->save( $dest, 'image/gif' );
 
 		$this->assertEquals( true, file_exists( $dest ) );
@@ -89,9 +92,9 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = __DIR__ . $ds . 'notexisting' . $ds . 'media.gif';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 
-		$this->setExpectedException( 'MW_Media_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
 		$media->save( $dest, 'image/gif' );
 	}
 
@@ -102,7 +105,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.jpg';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/gif', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/gif', array() );
 		$media->save( $dest, 'image/jpeg' );
 
 		$this->assertEquals( true, file_exists( $dest ) );
@@ -116,9 +119,9 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = __DIR__ . $ds . 'notexisting' . $ds . 'media.jpg';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 
-		$this->setExpectedException( 'MW_Media_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
 		$media->save( $dest, 'image/jpeg' );
 	}
 
@@ -129,7 +132,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.gif';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/gif', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/gif', array() );
 		$media->save( $dest, 'image/png' );
 
 		$this->assertEquals( true, file_exists( $dest ) );
@@ -143,9 +146,9 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.gif';
 		$dest = __DIR__ . $ds . 'notexisting' . $ds . 'media.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/gif', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/gif', array() );
 
-		$this->setExpectedException( 'MW_Media_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
 		$media->save( $dest, 'image/png' );
 	}
 
@@ -156,7 +159,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 		$media->scale( 100, 100, false );
 		$media->save( $dest, 'image/png' );
 
@@ -174,7 +177,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 		$media->scale( 5, 100 );
 		$media->save( $dest, 'image/png' );
 
@@ -192,7 +195,7 @@ class MW_Media_Image_StandardTest extends PHPUnit_Framework_TestCase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png';
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.png';
 
-		$media = new MW_Media_Image_Standard( $filename, 'image/png', array() );
+		$media = new \Aimeos\MW\Media\Image\Standard( $filename, 'image/png', array() );
 		$media->scale( 100, 100 );
 		$media->save( $dest, 'image/png' );
 

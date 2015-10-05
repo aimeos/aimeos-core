@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames shipping column to costs the order tables.
  */
-class MW_Setup_Task_OrderRenameShippingToCosts extends MW_Setup_Task_Base
+class OrderRenameShippingToCosts extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base' => array(

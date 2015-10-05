@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MW\DB\Connection;
+
+
 /**
  * Required functions for database connection objects.
  *
  * @package MW
  * @subpackage DB
  */
-interface MW_DB_Connection_Iface
+interface Iface
 {
 	/**
 	 * Creates a database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
 	 * @param integer $type Simple or prepared statement type
-	 * @return MW_DB_Statement_Iface
+	 * @return \Aimeos\MW\DB\Statement\Iface
 	 */
-	public function create( $sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE );
+	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 
 
 	/**

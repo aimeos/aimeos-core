@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Jobs;
+
+
 /**
  * Common methods for Jobs controller classes.
  *
  * @package Controller
  * @subpackage Jobs
  */
-abstract class Controller_Jobs_Base
+abstract class Base
 {
 	private $aimeos;
 	private $context;
@@ -23,10 +26,10 @@ abstract class Controller_Jobs_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
-	 * @param Aimeos $aimeos Aimeos main object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos main object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Aimeos $aimeos )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos )
 	{
 		$this->context = $context;
 		$this->aimeos = $aimeos;
@@ -36,7 +39,7 @@ abstract class Controller_Jobs_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -45,9 +48,9 @@ abstract class Controller_Jobs_Base
 
 
 	/**
-	 * Returns the Aimeos object.
+	 * Returns the \Aimeos\Aimeos object.
 	 *
-	 * @return Aimeos Aimeos object
+	 * @return \Aimeos\Aimeos \Aimeos\Aimeos object
 	 */
 	protected function getAimeos()
 	{
@@ -62,17 +65,17 @@ abstract class Controller_Jobs_Base
 	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
 	 * @param string $confpath Configuration key of the path to the template file
 	 * @return string path the to the template file
-	 * @throws Controller_Jobs_Exception If no template file was found
+	 * @throws \Aimeos\Controller\Jobs\Exception If no template file was found
 	 */
 	protected function getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/layouts' );
-	
+
 		foreach( (array) $default as $fname )
 		{
 			$file = $this->context->getConfig()->get( $confpath, $fname );
-	
+
 			foreach( array_reverse( $templatePaths ) as $path => $relPaths )
 			{
 				foreach( $relPaths as $relPath )
@@ -81,17 +84,17 @@ abstract class Controller_Jobs_Base
 					if( $ds !== '/' ) {
 						$absPath = str_replace( '/', $ds, $absPath );
 					}
-	
+
 					if( is_file( $absPath ) ) {
 						return $absPath;
 					}
 				}
 			}
 		}
-	
-		throw new Controller_Jobs_Exception( sprintf( 'Template "%1$s" not available', $file ) );
+
+		throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
-	
+
 
 	/**
 	 * Returns the attribute type item specified by the code.
@@ -99,12 +102,12 @@ abstract class Controller_Jobs_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Iface Type item
-	 * @throws Controller_Jobs_Exception If no item is found
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item
+	 * @throws \Aimeos\Controller\Jobs\Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();
@@ -118,7 +121,7 @@ abstract class Controller_Jobs_Base
 		if( ( $item = reset( $result ) ) === false )
 		{
 			$msg = sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix );
-			throw new Controller_Jobs_Exception( $msg );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 
 		return $item;

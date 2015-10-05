@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Count\Attribute;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Count_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,9 +20,9 @@ class Client_Html_Catalog_Count_Attribute_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Count_Attribute_Standard( TestHelper::getContext(), $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Count\Attribute\Standard( \TestHelper::getContext(), $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -53,7 +55,7 @@ class Client_Html_Catalog_Count_Attribute_StandardTest extends PHPUnit_Framework
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 

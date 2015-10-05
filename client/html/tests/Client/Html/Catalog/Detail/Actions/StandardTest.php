@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Detail\Actions;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Detail_Actions_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,9 +20,9 @@ class Client_Html_Catalog_Detail_Actions_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Detail_Actions_Standard( TestHelper::getContext(), $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Actions\Standard( \TestHelper::getContext(), $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -61,20 +63,20 @@ class Client_Html_Catalog_Detail_Actions_StandardTest extends PHPUnit_Framework_
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
+			throw new \Exception( 'No product item with code "CNC" found' );
 		}
 
 		return $item;

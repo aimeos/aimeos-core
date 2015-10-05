@@ -9,12 +9,15 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Address;
+
+
 /**
  * Interface for provider common address DTO objects used by the shop.
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Address_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the company name.
@@ -53,7 +56,7 @@ interface MShop_Common_Item_Address_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the salutation constant for the person described by the address.
 	 *
-	 * @return string Saluatation constant defined in MShop_Common_Item_Address_Base
+	 * @return string Saluatation constant defined in \Aimeos\MShop\Common\Item\Address\Base
 	 */
 	public function getSalutation();
 
@@ -61,7 +64,7 @@ interface MShop_Common_Item_Address_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Sets the new salutation for the person described by the address.
 	 *
-	 * @param string $salutation Salutation constant defined in MShop_Common_Item_Address_Base
+	 * @param string $salutation Salutation constant defined in \Aimeos\MShop\Common\Item\Address\Base
 	 * @return void
 	 */
 	public function setSalutation( $salutation );

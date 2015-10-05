@@ -8,32 +8,35 @@
  */
 
 
+namespace Aimeos\MW\Tree\Manager;
+
+
 /**
  * Generic interface for all tree manager implementations.
  *
  * @package MW
  * @subpackage Tree
  */
-interface MW_Tree_Manager_Iface
+interface Iface
 {
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return array List of search attribute objects implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of search attribute objects implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes();
 
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return MW_Common_Criteria_Iface Search object instance
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search object instance
 	 */
 	public function createSearch();
 
 	/**
 	 * Creates a new node object.
 	 *
-	 * @return MW_Tree_Node_Iface Empty node object
+	 * @return \Aimeos\MW\Tree\Node\Iface Empty node object
 	 */
 	public function createNode();
 
@@ -48,20 +51,20 @@ interface MW_Tree_Manager_Iface
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param int $level One of the level constants from MW_Tree_Manager_Base
-	 * @param MW_Common_Criteria_Iface|null $criteria Optional criteria object with conditions
-	 * @return MW_Tree_Node_Iface Node, maybe with subnodes
+	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param \Aimeos\MW\Common\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $criteria = null );
+	public function getNode( $id = null, $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Common\Criteria\Iface $criteria = null );
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
-	 * @param MW_Tree_Node_Iface $node New node that should be inserted
+	 * @param \Aimeos\MW\Tree\Node\Iface $node New node that should be inserted
 	 * @param integer|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
 	 * @param integer|null $refId ID of the node where the node node should be inserted before (null to append)
 	 */
-	public function insertNode( MW_Tree_Node_Iface $node, $parentId = null, $refId = null );
+	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, $parentId = null, $refId = null );
 
 	/**
 	 * Moves an existing node to the new parent in the storage.
@@ -79,17 +82,17 @@ interface MW_Tree_Manager_Iface
 	 * This method does only store values like the node label but doesn't change
 	 * the tree layout by adding, moving or deleting nodes.
 	 *
-	 * @param MW_Tree_Node_Iface $node Node, maybe with subnodes
+	 * @param \Aimeos\MW\Tree\Node\Iface $node Node, maybe with subnodes
 	 */
-	public function saveNode( MW_Tree_Node_Iface $node );
+	public function saveNode( \Aimeos\MW\Tree\Node\Iface $node );
 
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
-	 * @return array List of nodes implementing MW_Tree_Node_Iface
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
+	 * @return array List of nodes implementing \Aimeos\MW\Tree\Node\Iface
 	 */
-	public function searchNodes( MW_Common_Criteria_Iface $search );
+	public function searchNodes( \Aimeos\MW\Common\Criteria\Iface $search );
 
 	/**
 	 * Checks, whether a tree is read only.
@@ -102,7 +105,7 @@ interface MW_Tree_Manager_Iface
 	 * Returns a list if node ids, that are in the path of given node id
 	 *
 	 * @param integer $id Id of node to get path
-	 * @return array List of MW_Tree_Node_Iface in Path with node id as key
+	 * @return array List of \Aimeos\MW\Tree\Node\Iface in Path with node id as key
 	 */
 	public function getPath( $id );
 }

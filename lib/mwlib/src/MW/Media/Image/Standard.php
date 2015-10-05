@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Media\Image;
+
+
 /**
  * Default image class using GDLib.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Image_Standard
-	extends MW_Media_Image_Base
-	implements MW_Media_Image_Iface
+class Standard
+	extends \Aimeos\MW\Media\Image\Base
+	implements \Aimeos\MW\Media\Image\Iface
 {
 	private $image;
 	private $options;
@@ -29,18 +32,18 @@ class MW_Media_Image_Standard
 	 * @param string $filename Name of the media file
 	 * @param string $mimetype Mime type of the media data
 	 * @param array $options Associative list of configuration options
-	 * @throws MW_Media_Exception If image couldn't be retrieved from the given file name
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
 	public function __construct( $filename, $mimetype, array $options )
 	{
 		parent::__construct( $mimetype );
 
 		if( ( $content = @file_get_contents( $filename ) ) === false ) {
-			throw new MW_Media_Exception( sprintf( 'Unable to read from file "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $filename ) );
 		}
 
 		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
-			throw new MW_Media_Exception( sprintf( 'Unknown image type in "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unknown image type in "%1$s"', $filename ) );
 		}
 
 		$this->filename = $filename;
@@ -64,7 +67,7 @@ class MW_Media_Image_Standard
 	 *
 	 * @param string $filename Name of the file to save the media data into
 	 * @param string $mimetype Mime type to save the image as
-	 * @throws MW_Media_Exception If image couldn't be saved to the given file name
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
 	public function save( $filename, $mimetype )
 	{
@@ -73,7 +76,7 @@ class MW_Media_Image_Standard
 			case 'image/gif':
 
 				if( @imagegif( $this->image, $filename ) === false ) {
-					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
 				break;
@@ -86,7 +89,7 @@ class MW_Media_Image_Standard
 				}
 
 				if( @imagejpeg( $this->image, $filename, $quality ) === false ) {
-					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
 				break;
@@ -99,13 +102,13 @@ class MW_Media_Image_Standard
 				}
 
 				if( @imagepng( $this->image, $filename, $quality ) === false ) {
-					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
 				break;
 
 			default:
-				throw new MW_Media_Exception( sprintf( 'File format "%1$s" is not supported', $this->getMimeType() ) );
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'File format "%1$s" is not supported', $this->getMimeType() ) );
 		}
 	}
 
@@ -120,7 +123,7 @@ class MW_Media_Image_Standard
 	public function scale( $width, $height, $fit = true )
 	{
 		if( ( $info = getimagesize( $this->filename ) ) === false ) {
-			throw new MW_Media_Exception( 'Unable to retrive image size' );
+			throw new \Aimeos\MW\Media\Exception( 'Unable to retrive image size' );
 		}
 
 		if( $fit === true )
@@ -133,11 +136,11 @@ class MW_Media_Image_Standard
 		}
 
 		if( ( $image = imagecreatetruecolor( $width, $height ) ) === false ) {
-			throw new MW_Media_Exception( 'Unable to create new image' );
+			throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 		}
 
 		if( imagecopyresampled( $image, $this->image, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
-			throw new MW_Media_Exception( 'Unable to resize image' );
+			throw new \Aimeos\MW\Media\Exception( 'Unable to resize image' );
 		}
 
 		imagedestroy( $this->image );

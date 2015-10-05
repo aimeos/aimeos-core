@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Site;
+
+
 /**
  * Default implementation of a Site item.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Item_Site_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Site_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Locale\Item\Site\Iface
 {
 	private $children;
 	private $values;
@@ -28,7 +31,7 @@ class MShop_Locale_Item_Site_Standard
 	 */
 	public function __construct( array $values = array( ), array $children = array() )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Locale_Item_Site_Iface', $children );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $children );
 		parent::__construct( 'locale.site.', $values );
 
 		$this->values = $values;
@@ -197,7 +200,7 @@ class MShop_Locale_Item_Site_Standard
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Locale_Item_Site_Iface Selected node
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Selected node
 	 */
 	public function getChild( $index )
 	{
@@ -205,7 +208,7 @@ class MShop_Locale_Item_Site_Standard
 			return $this->children[$index];
 		}
 
-		throw new MShop_Locale_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
+		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
 
@@ -234,9 +237,9 @@ class MShop_Locale_Item_Site_Standard
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Child node to add
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Child node to add
 	 */
-	public function addChild( MShop_Locale_Item_Site_Iface $item )
+	public function addChild( \Aimeos\MShop\Locale\Item\Site\Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Translate;
+
+
 /**
- * Test class for MW_View_Helper_Translate.
+ * Test class for \Aimeos\MW\View\Helper\Translate.
  */
-class MW_View_Helper_Translate_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,9 +25,9 @@ class MW_View_Helper_Translate_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
-		$translate = new MW_Translation_None( 'en_GB' );
-		$this->object = new MW_View_Helper_Translate_Standard( $view, $translate );
+		$view = new \Aimeos\MW\View\Standard();
+		$translate = new \Aimeos\MW\Translation\None( 'en_GB' );
+		$this->object = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $translate );
 	}
 
 

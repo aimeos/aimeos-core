@@ -9,14 +9,17 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Item;
+
+
 /**
  * Generic interface for catalog items.
  *
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Item_Iface
-	extends MShop_Common_Item_Config_Iface, MShop_Common_Item_ListRef_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Config\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface
 {
 	/**
 	 * Returns the name of the item.
@@ -67,7 +70,7 @@ interface MShop_Catalog_Item_Iface
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Catalog_Item_Iface Selected node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
 	 */
 	public function getChild( $index );
 
@@ -88,8 +91,8 @@ interface MShop_Catalog_Item_Iface
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Catalog_Item_Iface $item Child node to add
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Child node to add
 	 * @return void
 	 */
-	public function addChild( MShop_Catalog_Item_Iface $item );
+	public function addChild( \Aimeos\MShop\Catalog\Item\Iface $item );
 }

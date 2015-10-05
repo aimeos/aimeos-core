@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Setup\DBSchema\Column;
+
+
 /**
- * Test class for MW_Tree_Node_Standard.
+ * Test class for \Aimeos\MW\Tree\Node\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
+class ItemTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +22,7 @@ class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Setup_DBSchema_Column_Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8_bin' );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Column\Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8_bin' );
 	}
 
 	/**
@@ -67,10 +70,10 @@ class MW_Setup_DBSchema_Column_ItemTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertTrue( $this->object->isNullable() );
 
-		$item = new MW_Setup_DBSchema_Column_Item( '', '', '', 0, '', 'NO', '' );
+		$item = new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', 'NO', '' );
 		$this->assertFalse( $item->isNullable() );
 
-		$this->setExpectedException('MW_Setup_Exception');
-		new MW_Setup_DBSchema_Column_Item( '', '', '', 0, '', '', '' );
+		$this->setExpectedException('\\Aimeos\\MW\\Setup\\Exception');
+		new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', '', '' );
 	}
 }

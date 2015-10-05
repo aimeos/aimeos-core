@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Address;
+
+
 /**
  * Interface for common address DAOs used by the shop.
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Address_Iface
-	extends MShop_Common_Manager_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

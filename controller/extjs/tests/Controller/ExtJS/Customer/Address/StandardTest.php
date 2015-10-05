@@ -1,19 +1,20 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Customer\Address;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Customer_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Customer_Address_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Customer\Address\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -44,7 +45,7 @@ class Controller_ExtJS_Customer_Address_StandardTest extends PHPUnit_Framework_T
 			'start' => 0,
 			'limit' => 1,
 		);
-		$manager = Controller_ExtJS_Customer_Factory::createController( TestHelper::getContext() );
+		$manager = \Aimeos\Controller\ExtJS\Customer\Factory::createController( \TestHelper::getContext() );
 		$resultType = $manager->searchItems( $params );
 
 		$saveParam = (object) array(

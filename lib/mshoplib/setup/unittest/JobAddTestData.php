@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds admin job test data.
  */
-class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Base
+class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 
 	/**
@@ -48,9 +51,9 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding admin test data', 0 );
@@ -65,17 +68,17 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the job test data.
 	 *
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addJobTestData()
 	{
-		$adminJobManager = MAdmin_Job_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$adminJobManager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'job.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for job domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for job domain', $path ) );
 		}
 
 		$job = $adminJobManager->createItem();

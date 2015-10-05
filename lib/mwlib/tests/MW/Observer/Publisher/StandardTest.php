@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Observer\Publisher;
+
+
 /**
- * Test class for MW_Session_CMSLite.
+ * Test class for \Aimeos\MW\Session\CMSLite.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Observer_Publisher_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +22,7 @@ class MW_Observer_Publisher_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Observer_Publisher_Test();
+		$this->object = new TestPublisher();
 	}
 
 	/**
@@ -35,14 +38,14 @@ class MW_Observer_Publisher_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testaddListener()
 	{
-		$l = new MW_Observer_Listener_Test();
+		$l = new TestListener();
 
 		$this->object->addListener($l, 'test');
 	}
 
 	public function testRemoveListener()
 	{
-		$l = new MW_Observer_Listener_Test();
+		$l = new TestListener();
 
 		$this->object->addListener($l, 'test');
 		$this->object->removeListener($l, 'test');
@@ -55,7 +58,7 @@ class MW_Observer_Publisher_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testnotifyListeners()
 	{
-		$l = new MW_Observer_Listener_Test();
+		$l = new TestListener();
 		$this->object->addListener($l, 'test');
 		$this->object->addListener($l, 'testagain');
 
@@ -65,7 +68,7 @@ class MW_Observer_Publisher_StandardTest extends PHPUnit_Framework_TestCase
 }
 
 
-class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Base
+class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
 {
 	/**
 	 * @param string $action
@@ -79,5 +82,20 @@ class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Base
 	public function clearListenersPublic()
 	{
 		$this->clearListeners();
+	}
+}
+
+
+class TestListener implements \Aimeos\MW\Observer\Listener\Iface
+{
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	{
+	}
+
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, $action, $value = null )
+	{
+		if ($action == 'test') {
+			return false;
+		}
 	}
 }

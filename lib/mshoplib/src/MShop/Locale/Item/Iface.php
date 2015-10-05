@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item;
+
+
 /**
  * Interface of transfer objects for request specific parameters.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the site item object.
 	 *
-	 * @return MShop_Locale_Item_Site_Iface Site item object
-	 * @throws MShop_Locale_Exception if site object isn't available
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
+	 * @throws \Aimeos\MShop\Locale\Exception if site object isn't available
 	 */
 	public function getSite();
 
@@ -79,7 +82,7 @@ interface MShop_Locale_Item_Iface extends MShop_Common_Item_Iface
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @throws MShop_Exception If the currency ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );

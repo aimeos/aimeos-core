@@ -7,10 +7,13 @@
 */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes product_tag.typeid to not null.
  */
-class MW_Setup_Task_ProductTagChangeTypeidNotNull extends MW_Setup_Task_Base
+class ProductTagChangeTypeidNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product_tag"

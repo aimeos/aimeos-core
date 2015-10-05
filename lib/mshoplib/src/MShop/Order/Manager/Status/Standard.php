@@ -6,15 +6,18 @@
  * @subpackage Order
  */
 
+namespace Aimeos\MShop\Order\Manager\Status;
+
+
 /**
  * Default implementation for order status manager.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Status_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Status_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Status\Iface
 {
 	private $searchConfig = array(
 		'order.status.id'=> array(
@@ -23,7 +26,7 @@ class MShop_Order_Manager_Status_Standard
 			'internaldeps'=> array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
 			'label'=>'Order status ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.siteid'=> array(
@@ -31,7 +34,7 @@ class MShop_Order_Manager_Status_Standard
 			'internalcode'=>'mordst."siteid"',
 			'label'=>'Order status site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.parentid'=> array(
@@ -39,7 +42,7 @@ class MShop_Order_Manager_Status_Standard
 			'internalcode'=>'mordst."parentid"',
 			'label'=>'Order status parent id',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.type'=> array(
@@ -47,35 +50,35 @@ class MShop_Order_Manager_Status_Standard
 			'internalcode'=>'mordst."type"',
 			'label'=>'Order status type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.value'=> array(
 			'code'=>'order.status.value',
 			'internalcode'=>'mordst."value"',
 			'label'=>'Order status value',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.mtime'=> array(
 			'code'=>'order.status.mtime',
 			'internalcode'=>'mordst."mtime"',
 			'label'=>'Order status modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.ctime'=> array(
 			'code'=>'order.status.ctime',
 			'internalcode'=>'mordst."ctime"',
 			'label'=>'Order status create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.editor'=> array(
 			'code'=>'order.status.editor',
 			'internalcode'=>'mordst."editor"',
 			'label'=>'Order status editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -83,9 +86,9 @@ class MShop_Order_Manager_Status_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -95,11 +98,11 @@ class MShop_Order_Manager_Status_Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/status/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -168,7 +171,7 @@ class MShop_Order_Manager_Status_Standard
 	/**
 	 * Creates a new order status object.
 	 *
-	 * @return MShop_Order_Item_Status_Iface New item object
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface New item object
 	 */
 	public function createItem()
 	{
@@ -180,14 +183,14 @@ class MShop_Order_Manager_Status_Standard
 	/**
 	 * Adds or updates an order status object.
 	 *
-	 * @param MShop_Order_Item_Status_Iface $item Order status object whose data should be saved
+	 * @param \Aimeos\MShop\Order\Item\Status\Iface $item Order status object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Status_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Status\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -269,15 +272,15 @@ class MShop_Order_Manager_Status_Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $item->getParentID(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getParentID(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getType() );
 			$stmt->bind( 4, $item->getValue() );
 			$stmt->bind( 5, $date ); //mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 7, $date ); //ctime
@@ -323,7 +326,7 @@ class MShop_Order_Manager_Status_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -337,8 +340,8 @@ class MShop_Order_Manager_Status_Standard
 	 *
 	 * @param integer $id Unique ID of the order status item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Status_Iface Returns order status item of the given id
-	 * @throws MShop_Order_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface Returns order status item of the given id
+	 * @throws \Aimeos\MShop\Order\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -386,7 +389,7 @@ class MShop_Order_Manager_Status_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -418,7 +421,7 @@ class MShop_Order_Manager_Status_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager extending the domain functionality
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -432,11 +435,11 @@ class MShop_Order_Manager_Status_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Status_Standard
+		 *  \Aimeos\MShop\Order\Manager\Status\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Status_Mystatus
+		 *  \Aimeos\MShop\Order\Manager\Status\Mystatus
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -471,7 +474,7 @@ class MShop_Order_Manager_Status_Standard
 		 *  mshop/order/manager/status/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order status manager.
 		 *
 		 * @param array List of decorator names
@@ -491,12 +494,12 @@ class MShop_Order_Manager_Status_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order status manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order status manager.
 		 *
 		 *  mshop/order/manager/status/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -515,12 +518,12 @@ class MShop_Order_Manager_Status_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order status manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order status manager.
 		 *
 		 *  mshop/order/manager/status/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -538,12 +541,12 @@ class MShop_Order_Manager_Status_Standard
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Status_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Status\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -555,7 +558,7 @@ class MShop_Order_Manager_Status_Standard
 		try
 		{
 			$required = array( 'order.status' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/status/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -667,7 +670,7 @@ class MShop_Order_Manager_Status_Standard
 			$dbm->release( $conn, $dbname );
 
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -681,10 +684,10 @@ class MShop_Order_Manager_Status_Standard
 	 * Creates a new order status object.
 	 *
 	 * @param array $values List of attributes for the order status object
-	 * @return MShop_Order_Item_Status_Iface New order status object
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface New order status object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Order_Item_Status_Standard( $values );
+		return new \Aimeos\MShop\Order\Item\Status\Standard( $values );
 	}
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Manager\Code;
+
+
 /**
- * Test class for MShop_Coupon_Manager_Standard.
+ * Test class for \Aimeos\MShop\Coupon\Manager\Standard.
  */
-class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $code;
@@ -23,14 +26,14 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '~=', 'coupon.code.code', 'OPQR' ) );
 		$results = $couponManager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'Code item not found' );
+			throw new \Exception( 'Code item not found' );
 		};
 
 		$this->object = $couponManager->getSubManager( 'code' );
@@ -57,14 +60,14 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $obj );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Coupon_Item_Code_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Coupon\\Item\\Code\\Iface', $this->object->createItem() );
 	}
 
 
@@ -75,7 +78,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'no item found exception' );
+			throw new \Exception( 'no item found exception' );
 		}
 
 		$item = $this->object->getItem( $codeItem->getId() );
@@ -90,7 +93,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No coupon code item found' );
+			throw new \Exception( 'No coupon code item found' );
 		}
 
 		$item->setId( null );
@@ -107,7 +110,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -134,14 +137,14 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\SQL', $this->object->createSearch() );
 	}
 
 
@@ -186,7 +189,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon code item found.' );
+			throw new \Exception( 'No coupon code item found.' );
 		}
 
 		$this->object->decrease( $codeItem->getCode(), 1 );
@@ -204,7 +207,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon code item found.' );
+			throw new \Exception( 'No coupon code item found.' );
 		}
 
 		$this->object->increase( $codeItem->getCode(), 1 );
@@ -217,7 +220,7 @@ class MShop_Coupon_Manager_Code_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Load\Text;
+
+
 /**
  * ExtJS controller interface.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-interface Controller_ExtJS_Common_Load_Text_Iface
+interface Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 
 	/**
 	 * Returns the service description of the class.

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\FormParam;
+
+
 /**
  * View helper class for generating form parameter names.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_FormParam_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $names;
 
@@ -24,7 +27,7 @@ class MW_View_Helper_FormParam_Standard
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string[] $names Prefix names when generating form parameters (will be "name1[name2][name3]..." )
 	 */
 	public function __construct( $view, array $names = array() )

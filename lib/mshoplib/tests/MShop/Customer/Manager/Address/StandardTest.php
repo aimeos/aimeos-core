@@ -6,11 +6,14 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Address;
+
+
 /**
- * Test class for MShop_Customer_Manager_Address_Standard
+ * Test class for \Aimeos\MShop\Customer\Manager\Address\Standard
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $fixture = null;
 	private $object = null;
@@ -22,8 +25,8 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$customer = new MShop_Customer_Manager_Standard( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$customer = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::getContext() );
 		$search = $customer->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'customer.label', 'unitCustomer001' ),
@@ -33,15 +36,15 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
+			throw new \Exception( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
 		}
 
 		$this->fixture = array(
 			'refid' => $customerItem->getId(),
 			'company' => 'Example company',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
-			'titlekey' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'titlekey' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -58,7 +61,7 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 			'telefax' => '05554433222',
 			'website' => 'www.example.com',
 			'position' => 1,
-			'siteid' => TestHelper::getContext()->getLocale()->getSiteId(),
+			'siteid' => \TestHelper::getContext()->getLocale()->getSiteId(),
 		);
 
 		$this->object = $customer->getSubManager( 'address', 'Standard' );
@@ -83,14 +86,14 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $item );
 	}
 
 	public function testGetItem()
@@ -101,7 +104,7 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No address item with company "Metaways" found' );
+			throw new \Exception( 'No address item with company "Metaways" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -109,7 +112,7 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = new MShop_Common_Item_Address_Standard( 'customer.address.', $this->fixture );
+		$item = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.', $this->fixture );
 		$item->setId( null );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -181,13 +184,13 @@ class MShop_Common_Manager_Address_BaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 

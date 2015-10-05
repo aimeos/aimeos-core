@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Job\Manager;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MAdmin_Job_Manager_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MAdmin\Job\Manager\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -42,21 +44,21 @@ class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Job_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Job\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attr );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -97,7 +99,7 @@ class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $criteria );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -120,7 +122,7 @@ class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -145,7 +147,7 @@ class MAdmin_Job_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MAdmin_Job_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Job\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 }

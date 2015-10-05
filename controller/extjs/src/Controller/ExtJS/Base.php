@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
  * Common methods for ExtJS controller classes.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-abstract class Controller_ExtJS_Base
+abstract class Base
 {
 	private $name = '';
 	private $sort = null;
@@ -24,11 +27,11 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @param string $name Name of the manager/item the controller is responsible for
 	 * @param string|null $sort Attribute code used for default sortation
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, $name, $sort = null )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, $name, $sort = null )
 	{
 		$this->context = $context;
 		$this->name = $name;
@@ -39,10 +42,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Executes tasks before processing the items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function init( stdClass $params )
+	public function init( \stdClass $params )
 	{
 		return array(
 			'success' => true,
@@ -53,10 +56,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Executes tasks after processing the items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function finish( stdClass $params )
+	public function finish( \stdClass $params )
 	{
 		return array(
 			'success' => true,
@@ -67,10 +70,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Deletes an item or a list of items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function deleteItems( stdClass $params )
+	public function deleteItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -88,10 +91,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
-	 * @param stdClass $params Associative array containing the parameters
+	 * @param \stdClass $params Associative array containing the parameters
 	 * @return array List of associative arrays with item properties, total number of items and success property
 	 */
-	public function searchItems( stdClass $params )
+	public function searchItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site' ) );
 		$this->setLocale( $params->site );
@@ -195,10 +198,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Creates a new item or updates an existing one or a list thereof
 	 *
-	 * @param stdClass $params Associative array containing the item properties
+	 * @param \stdClass $params Associative array containing the item properties
 	 * @return array Associative array including items and status for ExtJS
 	 */
-	public function saveItems( stdClass $params )
+	public function saveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -233,7 +236,7 @@ abstract class Controller_ExtJS_Base
 	 * Template method for returning the search key prefix of the used manager
 	 * This method has to be implemented in the derived classes
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	abstract protected function getPrefix();
 
@@ -243,7 +246,7 @@ abstract class Controller_ExtJS_Base
 	 *
 	 * @param string $filename Name of the uploaded file in the file system of the server
 	 * @param integer $errcode Status code of the uploaded file
-	 * @throws Controller_ExtJS_Exception If file upload is invalid
+	 * @throws \Aimeos\Controller\ExtJS\Exception If file upload is invalid
 	 */
 	protected function checkFileUpload( $filename, $errcode )
 	{
@@ -253,23 +256,23 @@ abstract class Controller_ExtJS_Base
 				break;
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
-				throw new Controller_ExtJS_Exception( 'The uploaded file exceeds the max. allowed filesize' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file exceeds the max. allowed filesize' );
 			case UPLOAD_ERR_PARTIAL:
-				throw new Controller_ExtJS_Exception( 'The uploaded file was only partially uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file was only partially uploaded' );
 			case UPLOAD_ERR_NO_FILE:
-				throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 			case UPLOAD_ERR_NO_TMP_DIR:
-				throw new Controller_ExtJS_Exception( 'Temporary folder is missing' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Temporary folder is missing' );
 			case UPLOAD_ERR_CANT_WRITE:
-				throw new Controller_ExtJS_Exception( 'Failed to write file to disk' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Failed to write file to disk' );
 			case UPLOAD_ERR_EXTENSION:
-				throw new Controller_ExtJS_Exception( 'File upload stopped by extension' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'File upload stopped by extension' );
 			default:
-				throw new Controller_ExtJS_Exception( 'Unknown upload error' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Unknown upload error' );
 		}
 
 		if( is_uploaded_file( $filename ) === false ) {
-			throw new Controller_ExtJS_Exception( 'File was not uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'File was not uploaded' );
 		}
 	}
 
@@ -277,16 +280,16 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Checks if the required parameter are available.
 	 *
-	 * @param stdClass $params Item object containing the parameter
+	 * @param \stdClass $params Item object containing the parameter
 	 * @param string[] $names List of names of the required parameter
-	 * @throws Controller_ExtJS_Exception if a required parameter is missing
+	 * @throws \Aimeos\Controller\ExtJS\Exception if a required parameter is missing
 	 */
-	protected function checkParams( stdClass $params, array $names )
+	protected function checkParams( \stdClass $params, array $names )
 	{
 		foreach( $names as $name )
 		{
 			if( !property_exists( $params, $name ) ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Missing parameter "%1$s"', $name ), -1 );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Missing parameter "%1$s"', $name ), -1 );
 			}
 		}
 	}
@@ -314,19 +317,19 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the item properties suitable for creating a JSON schema.
 	 *
-	 * @param array $attributes List of attribute object implementing MW_Common_Criteria_Attribute_Iface
+	 * @param array $attributes List of attribute object implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 * @param boolean $all True if all search attributes should be returned or false for only public ones
-	 * @throws Controller_ExtJS_Exception if list item doesn't implement MW_Common_Criteria_Attribute_Iface
+	 * @throws \Aimeos\Controller\ExtJS\Exception if list item doesn't implement \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	protected function getAttributeSchema( array $attributes, $all = true )
 	{
 		$properties = array();
-		$iface = 'MW_Common_Criteria_Attribute_Iface';
+		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $attribute )
 		{
 			if( !( $attribute instanceof $iface ) ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'List item doesn\'t implement "%1$s"', $iface ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'List item doesn\'t implement "%1$s"', $iface ) );
 			}
 
 			if( $attribute->isPublic() || (bool) $all )
@@ -366,11 +369,11 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Iface $criteria Criteria object
-	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
-	 * @return MW_Common_Criteria_Iface Initialized criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 * @return \Aimeos\MW\Common\Criteria\Iface Initialized criteria object
 	 */
-	protected function initCriteria( MW_Common_Criteria_Iface $criteria, stdClass $params )
+	protected function initCriteria( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
 	{
 		$this->initCriteriaConditions( $criteria, $params );
 		$this->initCriteriaSortations( $criteria, $params );
@@ -383,10 +386,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with conditions based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Iface $criteria Criteria object
-	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaConditions( MW_Common_Criteria_Iface $criteria, stdClass $params )
+	private function initCriteriaConditions( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->condition ) && is_object( $params->condition ) )
 		{
@@ -405,10 +408,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with the slice based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Iface $criteria Criteria object
-	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSlice( MW_Common_Criteria_Iface $criteria, stdClass $params )
+	private function initCriteriaSlice( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->start ) && isset( $params->limit ) )
 		{
@@ -423,10 +426,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Initializes the criteria object with sortations based on the given parameter.
 	 *
-	 * @param MW_Common_Criteria_Iface $criteria Criteria object
-	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSortations( MW_Common_Criteria_Iface $criteria, stdClass $params )
+	private function initCriteriaSortations( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->sort ) && isset( $params->dir ) )
 		{
@@ -439,7 +442,7 @@ abstract class Controller_ExtJS_Base
 				case 'DESC':
 					$sortation[] = $criteria->sort( '-', $params->sort ); break;
 				default:
-					throw new Controller_ExtJS_Exception( sprintf( 'Invalid sort direction "%1$s"', $params->sort ) );
+					throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid sort direction "%1$s"', $params->sort ) );
 			}
 
 			$criteria->setSortations( $sortation );
@@ -464,21 +467,21 @@ abstract class Controller_ExtJS_Base
 	 */
 	protected function setLocale( $site, $langid = null, $currencyid = null )
 	{
-		$siteManager = MShop_Locale_Manager_Factory::createManager( $this->context )->getSubManager( 'site' );
+		$siteManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->context )->getSubManager( 'site' );
 
 		$search = $siteManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', $site ) );
 		$sites = $siteManager->searchItems( $search );
 
 		if( ( $siteItem = reset( $sites ) ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
 		}
 
 		$values = array( 'siteid' => $siteItem->getId() );
 		$sitepath = array_keys( $siteManager->getPath( $siteItem->getId() ) );
 		$sitetree = $this->getSiteIdsFromTree( $siteManager->getTree( $siteItem->getId() ) );
 
-		$localeItem = new MShop_Locale_Item_Standard( $values, $siteItem, $sitepath, $sitetree );
+		$localeItem = new \Aimeos\MShop\Locale\Item\Standard( $values, $siteItem, $sitepath, $sitetree );
 		$localeItem->setLanguageId( $langid );
 		$localeItem->setCurrencyId( $currencyid );
 
@@ -487,10 +490,10 @@ abstract class Controller_ExtJS_Base
 
 
 	/**
-	 * Converts the given list of objects to a list of stdClass objects
+	 * Converts the given list of objects to a list of \stdClass objects
 	 *
 	 * @param array $list List of item objects
-	 * @return array List of stdClass objects containing the properties of the item objects
+	 * @return array List of \stdClass objects containing the properties of the item objects
 	 */
 	protected function toArray( array $list )
 	{
@@ -507,10 +510,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		return $entry;
 	}
@@ -532,7 +535,7 @@ abstract class Controller_ExtJS_Base
 
 		foreach( $lists as $domain => $ids )
 		{
-			$manager = MShop_Factory::createManager( $this->context, $domain );
+			$manager = \Aimeos\MShop\Factory::createManager( $this->context, $domain );
 
 			$total = 0;
 			$criteria = $manager->createSearch();
@@ -558,7 +561,7 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -569,10 +572,10 @@ abstract class Controller_ExtJS_Base
 	/**
 	 * Returns the list of site IDs of the whole tree.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Locale item, maybe with children
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Locale item, maybe with children
 	 * @return array List of site IDs
 	 */
-	private function getSiteIdsFromTree( MShop_Locale_Item_Site_Iface $item )
+	private function getSiteIdsFromTree( \Aimeos\MShop\Locale\Item\Site\Iface $item )
 	{
 		$list = array( $item->getId() );
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves service text references to service list.
  */
-class MW_Setup_Task_ServiceTextToList extends MW_Setup_Task_Base
+class ServiceTextToList extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_service_text' => array(

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Mail;
+
+
 /**
  * View helper class for creating e-mails.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Mail_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $message;
 
@@ -24,10 +27,10 @@ class MW_View_Helper_Mail_Standard
 	/**
 	 * Initializes the Mail view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
-	 * @param MW_Mail_Message_Iface $message E-mail message object
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 */
-	public function __construct( $view, MW_Mail_Message_Iface $message )
+	public function __construct( $view, \Aimeos\MW\Mail\Message\Iface $message )
 	{
 		parent::__construct( $view );
 
@@ -38,7 +41,7 @@ class MW_View_Helper_Mail_Standard
 	/**
 	 * Returns the e-mail message object.
 	 *
-	 * @return MW_Mail_Message_Iface E-mail message object
+	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
 	public function transform()
 	{

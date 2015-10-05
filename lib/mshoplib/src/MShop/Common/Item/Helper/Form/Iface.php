@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Form;
+
+
 /**
  * Generic interface for the helper form item.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Helper_Form_Iface
+interface Iface
 {
 	/**
 	 * Returns the url.
@@ -54,7 +57,7 @@ interface MShop_Common_Item_Helper_Form_Iface
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return MW_Common_Criteria_Attribute_Iface Attribute item for the given key
+	 * @return \Aimeos\MW\Common\Criteria\Attribute\Iface Attribute item for the given key
 	 */
 	public function getValue( $key );
 
@@ -63,16 +66,16 @@ interface MShop_Common_Item_Helper_Form_Iface
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param MW_Common_Criteria_Attribute_Iface $value Attribute item for the given key
+	 * @param \Aimeos\MW\Common\Criteria\Attribute\Iface $value Attribute item for the given key
 	 * @return void
 	 */
-	public function setValue( $key, MW_Common_Criteria_Attribute_Iface $value );
+	public function setValue( $key, \Aimeos\MW\Common\Criteria\Attribute\Iface $value );
 
 
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getValues();
 }

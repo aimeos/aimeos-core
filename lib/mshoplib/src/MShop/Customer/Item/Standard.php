@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item;
+
+
 /**
  * Interface for customer DTO objects used by the shop.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Customer_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Customer\Item\Iface
 {
 	private $billingaddress;
 	private $values;
@@ -28,15 +31,15 @@ class MShop_Customer_Item_Standard
 	 * Initializes the customer item object
 	 *
 	 * @param array $values List of attributes that belong to the customer item
-	 * @param MShop_Common_Item_Address_Iface $address Payment address item object
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item object
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param string $salt Password salt (optional)
-	 * @param MShop_Common_Item_Helper_Password_Iface $helper Password encryption helper object
+	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper Password encryption helper object
 	 */
-	public function __construct( MShop_Common_Item_Address_Iface $address, array $values = array(),
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
 		array $listItems = array(), array $refItems = array(), $salt = '',
-		MShop_Common_Item_Helper_Password_Iface $helper = null )
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
 	{
 		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
@@ -170,7 +173,7 @@ class MShop_Customer_Item_Standard
 	/**
 	 * Returns the billingaddress of the customer item.
 	 *
-	 * @return MShop_Common_Item_Address_Iface
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface
 	 */
 	public function getPaymentAddress()
 	{
@@ -181,9 +184,9 @@ class MShop_Customer_Item_Standard
 	/**
 	 * Sets the billingaddress of the customer item.
 	 *
-	 * @param MShop_Common_Item_Address_Iface $address Billingaddress of the customer item
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
 	 */
-	public function setPaymentAddress( MShop_Common_Item_Address_Iface $address )
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address )
 	{
 		if( $address === $this->billingaddress && $address->isModified() === false ) { return; }
 
@@ -401,7 +404,7 @@ class MShop_Customer_Item_Standard
 	protected function checkDateOnlyFormat( $date )
 	{
 		if( $date !== null && preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
 		}
 	}
 }

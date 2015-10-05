@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression;
+
+
 /**
  * Interface for expression objects (compare and combine).
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Expression_Iface
+interface Iface
 {
 	/**
 	 * Generates a string from the expression objects.
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() );

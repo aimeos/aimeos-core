@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Decorator;
+
+
 /**
  * Provides common methods for controller decorators.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-abstract class Controller_ExtJS_Common_Decorator_Base
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Decorator_Iface
+abstract class Base
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Decorator\Iface
 {
 	private $context = null;
 	private $controller = null;
@@ -25,10 +28,10 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Controller_ExtJS_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Controller\ExtJS\Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Controller_ExtJS_Iface $controller )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Controller\ExtJS\Iface $controller )
 	{
 		$this->context = $context;
 		$this->controller = $controller;
@@ -41,12 +44,12 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
 	 * @return mixed Returns the value of the called method
-	 * @throws Controller_ExtJS_Exception If method call failed
+	 * @throws \Aimeos\Controller\ExtJS\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
 		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
 		return $result;
@@ -56,9 +59,9 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	/**
 	 * Deletes a list of an items.
 	 *
-	 * @param stdClass $params Associative array containing the required values
+	 * @param \stdClass $params Associative array containing the required values
 	 */
-	public function deleteItems( stdClass $params )
+	public function deleteItems( \stdClass $params )
 	{
 		$this->controller->deleteItems( $params );
 	}
@@ -67,9 +70,9 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	/**
 	 * Creates a new item or updates an existing one or a list thereof.
 	 *
-	 * @param stdClass $params Associative array containing the required values
+	 * @param \stdClass $params Associative array containing the required values
 	 */
-	public function saveItems( stdClass $params )
+	public function saveItems( \stdClass $params )
 	{
 		return $this->controller->saveItems( $params );
 	}
@@ -78,10 +81,10 @@ abstract class Controller_ExtJS_Common_Decorator_Base
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
-	 * @param stdClass $params Associative array containing the parameters
+	 * @param \stdClass $params Associative array containing the parameters
 	 * @return array List of associative arrays with item properties and total number of items
 	 */
-	public function searchItems( stdClass $params )
+	public function searchItems( \stdClass $params )
 	{
 		return $this->controller->searchItems( $params );
 	}

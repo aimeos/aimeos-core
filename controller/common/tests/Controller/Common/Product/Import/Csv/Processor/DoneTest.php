@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Framework_TestCase
+class DoneTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,10 +21,10 @@ class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Fr
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->object = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $this->context, array() );
 	}
 
 
@@ -35,8 +36,8 @@ class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Fr
 	 */
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->object = null;
 	}
@@ -44,7 +45,7 @@ class Controller_Common_Product_Import_Csv_Processor_DoneTest extends PHPUnit_Fr
 
 	public function testProcess()
 	{
-		$product = MShop_Factory::createManager( $this->context, 'product' )->createItem();
+		$product = \Aimeos\MShop\Factory::createManager( $this->context, 'product' )->createItem();
 
 		$result = $this->object->process( $product, array( 'test' ) );
 

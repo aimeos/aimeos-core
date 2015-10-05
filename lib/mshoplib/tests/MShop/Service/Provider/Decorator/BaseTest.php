@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $mock;
 	private $object;
@@ -15,25 +16,25 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$servManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$search = $servManager->createSearch();
 		$search->setConditions($search->compare('==', 'service.provider', 'Standard'));
 		$result = $servManager->searchItems($search, array('price'));
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
-		$this->mock = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+		$this->mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )
 			->setConstructorArgs( array( $this->context, $item ) )
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
 				'setCommunication', 'setConfigFE', 'updateAsync', 'updateSync' ) )
 			->getMock();
 
-		$this->object = new MShop_Service_Provider_Decorator_Test( $this->context, $item, $this->mock );
+		$this->object = new TestBase( $this->context, $item, $this->mock );
 	}
 
 
@@ -51,11 +52,11 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testCalcPrice()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
 
 		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
 
-		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $this->object->calcPrice( $item ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $this->object->calcPrice( $item ) );
 	}
 
 
@@ -85,7 +86,7 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testGetConfigFE()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
 
 		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( array() ) );
 
@@ -103,7 +104,7 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testIsAvailable()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
 
 		$this->mock->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -115,13 +116,13 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 	{
 		$this->mock->expects( $this->once() )->method( 'isImplemented' )->will( $this->returnValue( true ) );
 
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
 	}
 
 
 	public function testQuery()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
 		$this->mock->expects( $this->once() )->method( 'query' );
 
@@ -133,13 +134,13 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 	{
 		$this->mock->expects( $this->once() )->method( 'setCommunication' );
 
-		$this->object->setCommunication( new MW_Communication_Curl() );
+		$this->object->setCommunication( new \Aimeos\MW\Communication\Curl() );
 	}
 
 
 	public function testSetConfigFE()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
 		$this->mock->expects( $this->once() )->method( 'setConfigFE' );
@@ -167,13 +168,13 @@ class MShop_Service_Provider_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testCallInvalid()
 	{
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->invalid();
 	}
 }
 
 
-class MShop_Service_Provider_Decorator_Test extends MShop_Service_Provider_Decorator_Base
+class TestBase extends \Aimeos\MShop\Service\Provider\Decorator\Base
 {
 
 }

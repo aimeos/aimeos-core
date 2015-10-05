@@ -7,11 +7,14 @@
  */
 
 
+namespace Aimeos\MAdmin;
+
+
 /**
- * Exception thrown by MAdmin classes.
+ * \Exception thrown by MAdmin classes.
  *
  * @package MAdmin
  */
-class MAdmin_Exception extends Exception
+class Exception extends \Exception
 {
 }

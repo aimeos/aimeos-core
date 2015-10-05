@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager;
+
+
 /**
  * Generic interface for all manager.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Iface
+interface Iface
 {
 	/**
 	 * Removes old entries from the storage
@@ -26,7 +29,7 @@ interface MShop_Common_Manager_Iface
 	/**
 	 * Creates new item object.
 	 *
-	 * @return MShop_Common_Item_Iface New item object
+	 * @return \Aimeos\MShop\Common\Item\Iface New item object
 	 */
 	public function createItem();
 
@@ -34,7 +37,7 @@ interface MShop_Common_Manager_Iface
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Returns the Search object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Returns the Search object
 	 */
 	public function createSearch( $default = false );
 
@@ -57,7 +60,7 @@ interface MShop_Common_Manager_Iface
 	 * Returns the item specified by its ID
 	 *
 	 * @param integer $id Id of item
-	 * @return MShop_Common_Item_Iface Item object
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function getItem( $id, array $ref = array() );
 
@@ -65,32 +68,32 @@ interface MShop_Common_Manager_Iface
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true );
 
 	/**
 	 * Creates a new extension manager in the domain.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager extending the domain functionality
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $domain, $name = null );
 
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Iface $item Item object whose data should be saved
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true );
 
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Common_Item_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null );
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null );
 }

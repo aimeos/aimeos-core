@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Item;
+
+
 /**
  * Generic interface for all attribute items.
  *
  * @package MShop
  * @subpackage Attribute
  */
-interface MShop_Attribute_Item_Iface
-	extends MShop_Common_Item_ListRef_Iface, MShop_Common_Item_Position_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the domain of the attribute item.

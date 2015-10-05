@@ -8,32 +8,35 @@
  */
 
 
+namespace Aimeos\MW\Observer\Publisher;
+
+
 /**
  * Common interface for objects sending notifications.
  *
  * @package MW
  * @subpackage Observer
  */
-interface MW_Observer_Publisher_Iface
+interface Iface
 {
 	/**
 	 * Adds a listener to a publisher object.
 	 *
-	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
+	 * @param \Aimeos\MW\Observer\Listener\Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to listen for
 	 * @return void
 	 */
 
-	public function addListener( MW_Observer_Listener_Iface $l, $action );
+	public function addListener( \Aimeos\MW\Observer\Listener\Iface $l, $action );
 
 
 	/**
 	 * Removes a listener from a publisher object.
 	 *
-	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
+	 * @param \Aimeos\MW\Observer\Listener\Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to remove listener from
 	 * @return void
 	 */
 
-	public function removeListener( MW_Observer_Listener_Iface $l, $action );
+	public function removeListener( \Aimeos\MW\Observer\Listener\Iface $l, $action );
 }

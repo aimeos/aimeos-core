@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Result;
+
+
 /**
  * Base class with required constants for result objects
  *
  * @package MW
  * @subpackage DB
  */
-abstract class MW_DB_Result_Base
+abstract class Base
 {
 	/**
 	 * Fetch mode returning numerically indexed record arrays

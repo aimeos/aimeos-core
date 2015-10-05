@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item\Group;
+
+
 /**
  * Default customer group object
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Item_Group_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Customer_Item_Group_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Customer\Item\Group\Iface
 {
 	private $values;
 

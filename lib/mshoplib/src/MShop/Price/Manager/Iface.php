@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\MShop\Price\Manager;
+
+
 /**
  * Generic price manager interface for creating and handling prices.
  * @package MShop
  * @subpackage Price
  */
-interface MShop_Price_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param array $priceItems List of price items implementing MShop_Price_Item_Iface
+	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param integer $quantity Number of products
-	 * @throws MShop_Price_Exception if no price item is available
+	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
 	public function getLowestPrice( array $priceItems, $quantity );
 }

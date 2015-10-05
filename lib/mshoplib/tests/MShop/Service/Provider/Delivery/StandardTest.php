@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Delivery;
+
+
 /**
- * Test class for MShop_Service_Provider_Delivery_Standard.
+ * Test class for \Aimeos\MShop\Service\Provider\Delivery\Standard.
  */
-class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,19 +25,19 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $serviceManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 		$item->setCode( 'test' );
 
-		$this->object = new MShop_Service_Provider_Delivery_Standard( TestHelper::getContext(), $item );
+		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( \TestHelper::getContext(), $item );
 	}
 
 
@@ -58,7 +61,7 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testGetConfigFE()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
@@ -111,32 +114,32 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
 		$price = $this->object->calcPrice( $item );
 
-		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $price );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
 
 	}
 
 	public function testIsAvaible()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
 
 		$this->assertTrue( $this->object->isAvailable( $orderBaseManager->createItem() ) );
 	}
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Delivery_Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Delivery\Base::FEAT_QUERY ) );
 	}
 
 	public function testProcess()
@@ -145,14 +148,14 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testBuildXML()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 		$criteria->setSlice( 0, 1 );
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $order = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', MShop_Order_Item_Base::STAT_REFUSED, MShop_Order_Item_Base::TYPE_WEB ) );
+			throw new \Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', \Aimeos\MShop\Order\Item\Base::STAT_REFUSED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -327,11 +330,11 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 				</orderitem>
 			</orderlist>';
 
-		$dom = new DOMDocument( '1.0', 'UTF-8' );
+		$dom = new \DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
 		if( $dom->loadXML( $expected ) !== true ) {
-			throw new Exception( 'Loading XML failed' );
+			throw new \Exception( 'Loading XML failed' );
 		}
 
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
@@ -339,14 +342,14 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testBuildXMLWithBundle()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2009-03-18 16:14:32' ) );
 		$criteria->setSlice( 0, 1 );
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $order = reset( $items ) ) === false ) {
-			throw new Exception( 'No order item available' );
+			throw new \Exception( 'No order item available' );
 		}
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -482,11 +485,11 @@ class MShop_Service_Provider_Delivery_StandardTest extends PHPUnit_Framework_Tes
 	</orderitem>
 </orderlist>';
 
-		$dom = new DOMDocument( '1.0', 'UTF-8' );
+		$dom = new \DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
 		if( $dom->loadXML( $expected ) !== true ) {
-			throw new Exception( 'Loading XML failed' );
+			throw new \Exception( 'Loading XML failed' );
 		}
 
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Confirm;
+
+
 /**
  * Default implementation of confirm checkout HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Confirm_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/confirm/default/subparts
 	 * List of HTML sub-clients rendered within the checkout confirm section
@@ -56,7 +59,7 @@ class Client_Html_Checkout_Confirm_Standard
 	/** client/html/checkout/confirm/intro/name
 	 * Name of the intro part used by the checkout confirm client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Intro_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Confirm\Intro\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Checkout_Confirm_Standard
 	/** client/html/checkout/confirm/basic/name
 	 * Name of the basic part used by the checkout confirm client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Basic_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Confirm\Basic\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Checkout_Confirm_Standard
 	/** client/html/checkout/confirm/retry/name
 	 * Name of the retry part used by the checkout confirm client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Retry_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Confirm\Retry\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Checkout_Confirm_Standard
 	/** client/html/checkout/confirm/order/name
 	 * Name of the order part used by the checkout confirm client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Order_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Confirm\Order\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -123,22 +126,22 @@ class Client_Html_Checkout_Confirm_Standard
 			}
 			$view->confirmBody = $html;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -219,7 +222,7 @@ class Client_Html_Checkout_Confirm_Standard
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
@@ -231,7 +234,7 @@ class Client_Html_Checkout_Confirm_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -250,7 +253,7 @@ class Client_Html_Checkout_Confirm_Standard
 		 *  client/html/checkout/confirm/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -270,12 +273,12 @@ class Client_Html_Checkout_Confirm_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/confirm/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -294,12 +297,12 @@ class Client_Html_Checkout_Confirm_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/confirm/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -329,7 +332,7 @@ class Client_Html_Checkout_Confirm_Standard
 		{
 			if( ( $orderItem = $this->updatePayment( $view, $orderid ) ) === null )
 			{
-				$orderManager = MShop_Factory::createManager( $context, 'order' );
+				$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 				$orderItem = $orderManager->getItem( $orderid );
 			}
 
@@ -339,34 +342,34 @@ class Client_Html_Checkout_Confirm_Standard
 			parent::process();
 
 
-			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Base::PAY_REFUSED )
+			if( $orderItem->getPaymentStatus() > \Aimeos\MShop\Order\Item\Base::PAY_REFUSED )
 			{
 				foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
 
-				Controller_Frontend_Factory::createController( $context, 'basket' )->clear();
+				\Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' )->clear();
 			}
 
 			// Update stock, coupons, etc.
-			Controller_Frontend_Factory::createController( $context, 'order' )->update( $orderItem );
+			\Aimeos\Controller\Frontend\Factory::createController( $context, 'order' )->update( $orderItem );
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -380,12 +383,12 @@ class Client_Html_Checkout_Confirm_Standard
 	 * Returns the payment service providere for the given code
 	 *
 	 * @param string $code Unique service code
-	 * @throws Client_Html_Exception If no payment service item could be found
-	 * @return MShop_Service_Provider_Iface Service provider object
+	 * @throws \Aimeos\Client\Html\Exception If no payment service item could be found
+	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
 	 */
 	protected function getServiceProvider( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
@@ -399,7 +402,7 @@ class Client_Html_Checkout_Confirm_Standard
 		if( ( $serviceItem = reset( $result ) ) === false )
 		{
 			$msg = sprintf( 'No service for code "%1$s" found', $code );
-			throw new Client_Html_Exception( $msg );
+			throw new \Aimeos\Client\Html\Exception( $msg );
 		}
 
 		return $serviceManager->getProvider( $serviceItem );
@@ -420,12 +423,12 @@ class Client_Html_Checkout_Confirm_Standard
 	/**
 	 * Returns the URL to the confirm page.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlConfirm( MW_View_Iface $view, array $params, array $config )
+	protected function getUrlConfirm( \Aimeos\MW\View\Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
@@ -439,12 +442,12 @@ class Client_Html_Checkout_Confirm_Standard
 	/**
 	 * Returns the URL to the update page.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlUpdate( MW_View_Iface $view, array $params, array $config )
+	protected function getUrlUpdate( \Aimeos\MW\View\Iface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
@@ -458,12 +461,12 @@ class Client_Html_Checkout_Confirm_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -471,7 +474,7 @@ class Client_Html_Checkout_Confirm_Standard
 			{
 				$context = $this->getContext();
 				$orderid = $context->getSession()->get( 'aimeos/orderid' );
-				$orderManager = MShop_Factory::createManager( $context, 'order' );
+				$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 
 				$view->confirmOrderItem = $orderManager->getItem( $orderid );
 			}
@@ -486,11 +489,11 @@ class Client_Html_Checkout_Confirm_Standard
 	/**
 	 * Updates the payment status for the given order ID and returns the order item
 	 *
-	 * @param MW_View_Iface $view View object of the HTML client
+	 * @param \Aimeos\MW\View\Iface $view View object of the HTML client
 	 * @param string $orderid ID of the order whose payment status should be updated
-	 * @return void|MShop_Order_Item_Iface Order item that has been updated
+	 * @return void|\Aimeos\MShop\Order\Item\Iface Order item that has been updated
 	 */
-	protected function updatePayment( MW_View_Iface $view, $orderid )
+	protected function updatePayment( \Aimeos\MW\View\Iface $view, $orderid )
 	{
 		if( ( $code = $view->param( 'code' ) ) === null ) {
 			return;
@@ -512,8 +515,8 @@ class Client_Html_Checkout_Confirm_Standard
 		$reqParams['orderid'] = $orderid;
 
 		if( ( $orderItem = $provider->updateSync( $reqParams, $view->request()->getBody() ) ) !== null
-			&& $orderItem->getPaymentStatus() === MShop_Order_Item_Base::PAY_UNFINISHED
-			&& $provider->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY )
+			&& $orderItem->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED
+			&& $provider->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY )
 		) {
 			$provider->query( $orderItem );
 		}

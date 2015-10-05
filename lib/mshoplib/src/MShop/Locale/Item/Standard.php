@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item;
+
+
 /**
  * Common locale class containing the site, language and currency information.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Item_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Locale\Item\Iface
 {
 	private $site;
 	private $sitePath;
@@ -28,11 +31,11 @@ class MShop_Locale_Item_Standard
 	 * Initializes the object with the locale values.
 	 *
 	 * @param array $values Values to be set on initialisation
-	 * @param MShop_Locale_Item_Site_Iface|null $site Site object
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site object
 	 * @param array $sitePath List of site IDs up to the root site item
 	 * @param array $siteSubTree List of site IDs from all sites below the current site
 	 */
-	public function __construct( array $values = array( ), MShop_Locale_Item_Site_Iface $site = null,
+	public function __construct( array $values = array( ), \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
 		array $sitePath = array(), array $siteSubTree = array() )
 	{
 		parent::__construct( 'locale.', $values );
@@ -56,13 +59,13 @@ class MShop_Locale_Item_Standard
 	/**
 	 * Returns the site item object.
 	 *
-	 * @return MShop_Locale_Item_Site_Iface Site item object
-	 * @throws MShop_Locale_Exception if site object isn't available
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
+	 * @throws \Aimeos\MShop\Locale\Exception if site object isn't available
 	 */
 	public function getSite()
 	{
 		if( $this->site === null ) {
-			throw new MShop_Locale_Exception( 'No site item available' );
+			throw new \Aimeos\MShop\Locale\Exception( 'No site item available' );
 		}
 
 		return $this->site;
@@ -136,7 +139,7 @@ class MShop_Locale_Item_Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid )
 	{
@@ -163,7 +166,7 @@ class MShop_Locale_Item_Standard
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @throws MShop_Exception If the currency ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{

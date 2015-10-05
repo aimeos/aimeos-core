@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes constraints from catalog index tables.
  */
-class MW_Setup_Task_CatalogDropIndexLocaleConstraints extends MW_Setup_Task_Base
+class CatalogDropIndexLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog_index_attribute' => array(

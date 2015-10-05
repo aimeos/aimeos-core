@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Item;
+
+
 /**
  * Default attribute item implementation.
  *
  * @package MShop
  * @subpackage Attribute
  */
-class MShop_Attribute_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Attribute_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Attribute\Item\Iface
 {
 	private $values;
 
@@ -25,8 +28,8 @@ class MShop_Attribute_Item_Standard
 	 * Initializes the attribute item.
 	 *
 	 * @param array $values Associative array with id, domain, code, and status to initialize the item properties; Optional
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

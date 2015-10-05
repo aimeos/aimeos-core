@@ -8,51 +8,54 @@
  */
 
 
+namespace Aimeos\MW\DB\Connection;
+
+
 /**
- * Database connection class for PDO connections.
+ * Database connection class for \PDO connections.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connection_Iface
+class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
 {
 	private $connection = null;
 	private $txnumber = 0;
 
 
 	/**
-	 * Initializes the PDO connection object.
+	 * Initializes the \PDO connection object.
 	 *
-	 * @param PDO $connection PDO connection object
+	 * @param \PDO $connection \PDO connection object
 	 */
-	public function __construct( PDO $connection )
+	public function __construct( \PDO $connection )
 	{
 		$this->connection = $connection;
 	}
 
 
 	/**
-	 * Creates a PDO database statement.
+	 * Creates a \PDO database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
 	 * @param integer $type Simple or prepared statement type constant from abstract class
-	 * @return MW_DB_Statement_Iface PDO statement object
-	 * @throws MW_DB_Exception if type is invalid or the PDO object throws an exception
+	 * @return \Aimeos\MW\DB\Statement\Iface \PDO statement object
+	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the \PDO object throws an exception
 	 */
-	public function create($sql, $type = MW_DB_Connection_Base::TYPE_SIMPLE)
+	public function create($sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE)
 	{
 		try {
 			switch ($type)
 			{
-				case MW_DB_Connection_Base::TYPE_SIMPLE:
-					return new MW_DB_Statement_PDO_Simple($this->connection, $sql);
-				case MW_DB_Connection_Base::TYPE_PREP:
-					return new MW_DB_Statement_PDO_Prepared($this->connection->prepare($sql));
+				case \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE:
+					return new \Aimeos\MW\DB\Statement\PDO\Simple($this->connection, $sql);
+				case \Aimeos\MW\DB\Connection\Base::TYPE_PREP:
+					return new \Aimeos\MW\DB\Statement\PDO\Prepared($this->connection->prepare($sql));
 				default:
-					throw new MW_DB_Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
+					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
 		} catch (PDOException $e) {
-			throw new MW_DB_Exception($e->getMessage(), $e->getCode(), $e->errorInfo);
+			throw new \Aimeos\MW\DB\Exception($e->getMessage(), $e->getCode(), $e->errorInfo);
 		}
 	}
 
@@ -67,7 +70,7 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connec
 		if( $this->txnumber++ === 0 )
 		{
 			if( $this->connection->beginTransaction() === false ) {
-				throw new MW_DB_Exception( 'Unable to start new transaction' );
+				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
 			}
 		}
 	}
@@ -81,7 +84,7 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connec
 		if( --$this->txnumber === 0 )
 		{
 			if( $this->connection->commit() === false ) {
-				throw new MW_DB_Exception( 'Failed to commit transaction' );
+				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
 			}
 		}
 	}
@@ -97,13 +100,13 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Base implements MW_DB_Connec
 			if( --$this->txnumber === 0 )
 			{
 				if( $this->connection->rollBack() === false ) {
-					throw new MW_DB_Exception( 'Failed to roll back transaction' );
+					throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
 				}
 			}
 		}
-		catch( PDOException $e )
+		catch( \PDOException $e )
 		{
-			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
 }

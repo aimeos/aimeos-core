@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Admin\Log;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Admin_Log_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Admin\Log\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -54,15 +55,15 @@ class Controller_ExtJS_Admin_Log_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testDeleteItems()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->object->deleteItems( new stdClass() );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->object->deleteItems( new \stdClass() );
 	}
 
 
 	public function testSaveItems()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->object->saveItems( new stdClass() );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->object->saveItems( new \stdClass() );
 	}
 
 }

@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Order\Base;
+
+
 /**
  * ExtJS order base controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Order_Base_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Order_Base_Standard
 	/**
 	 * Initializes the order base controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Order_Base' );
 	}
@@ -36,9 +39,9 @@ class Controller_ExtJS_Order_Base_Standard
 	/**
 	 * Creates a new order base item or updates an existing one or a list thereof.
 	 *
-	 * @param stdClass $params Associative array containing the order base properties
+	 * @param \stdClass $params Associative array containing the order base properties
 	 */
-	public function saveItems( stdClass $params )
+	public function saveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 
@@ -66,12 +69,12 @@ class Controller_ExtJS_Order_Base_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'order/base' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base' );
 		}
 
 		return $this->manager;

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
  * Interface for customer DAOs used by the shop.
  *
  * @package MShop
  * @subpackage Customer
  */
-interface MShop_Customer_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

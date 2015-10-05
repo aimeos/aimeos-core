@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Service\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Service_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Service\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,13 +57,13 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 
 	public function testSaveDeleteItem()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.label', 'unitlabel' ) );
 		$resultService = $serviceManager->searchItems( $search );
 
 		if( ( $item = reset( $resultService ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$params = (object) array(
@@ -71,7 +72,7 @@ class Controller_ExtJS_Service_Lists_StandardTest extends PHPUnit_Framework_Test
 			'start' => 0,
 			'limit' => 1,
 		);
-		$serviceListTypeManager = Controller_ExtJS_Service_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$serviceListTypeManager = \Aimeos\Controller\ExtJS\Service\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $serviceListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

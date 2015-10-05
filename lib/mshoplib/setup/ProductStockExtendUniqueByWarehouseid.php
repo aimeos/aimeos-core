@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes the unique constraint for table mshop_product_stock.
  */
-class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_Base
+class ProductStockExtendUniqueByWarehouseid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_product_stock"

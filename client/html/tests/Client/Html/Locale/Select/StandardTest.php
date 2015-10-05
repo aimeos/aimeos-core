@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Locale\Select;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Locale_Select_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,9 +20,9 @@ class Client_Html_Locale_Select_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Locale_Select_Standard( TestHelper::getContext(), $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Locale\Select\Standard( \TestHelper::getContext(), $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -63,20 +65,20 @@ class Client_Html_Locale_Select_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'language', 'Standard' );
-		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\HTML\\Iface', $client );
 	}
 
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Config;
+
+
 /**
  * Common methods for all configuration classes
  *
  * @package MW
  * @subpackage Config
  */
-abstract class MW_Config_Base implements MW_Config_Iface
+abstract class Base implements \Aimeos\MW\Config\Iface
 {
 	private $includeCache = array();
 

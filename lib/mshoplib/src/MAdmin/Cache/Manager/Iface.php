@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 /**
  * Interface for cache manager implementations.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-interface MAdmin_Cache_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Returns the cache object
 	 *
-	 * @return MW_Cache_Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
 	public function getCache();
 }

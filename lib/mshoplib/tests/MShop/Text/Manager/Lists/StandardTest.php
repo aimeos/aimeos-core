@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Text\Manager\Lists;
+
+
 /**
- * Test class for MShop_Text_Manager_Lists_Standard.
+ * Test class for \Aimeos\MShop\Text\Manager\Lists\Standard.
  */
-class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = MShop_Text_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -69,7 +72,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $item );
 	}
 
 
@@ -80,7 +83,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -94,7 +97,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -141,7 +144,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -152,11 +155,11 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first text list item' );
+			throw new \Exception( 'No first text list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last text list item' );
+			throw new \Exception( 'No last text list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -177,15 +180,15 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first text list item' );
+			throw new \Exception( 'No first text list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second text list item' );
+			throw new \Exception( 'No second text list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last text list item' );
+			throw new \Exception( 'No last text list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -206,15 +209,15 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first text list item' );
+			throw new \Exception( 'No first text list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second text list item' );
+			throw new \Exception( 'No second text list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last text list item' );
+			throw new \Exception( 'No last text list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -286,17 +289,17 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	protected function getListItems()
 	{
-		$manager = MShop_Text_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -310,7 +313,7 @@ class MShop_Text_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No text item found' );
+			throw new \Exception( 'No text item found' );
 		}
 
 		$search = $this->object->createSearch();

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Decorator;
+
+
 /**
- * Test class for Client_Html_Common_Decorator_Example.
+ * Test class for \Aimeos\Client\Html\Common\Decorator\Example.
  */
-class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $client;
 	private $object;
@@ -23,12 +26,12 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$methods = array( 'getHeader', 'getBody' );
 
-		$this->client = $this->getMock( 'Client_Html_Catalog_Filter_Standard', $methods, array( $context, array() ) );
-		$this->object = new Client_Html_Common_Decorator_Example( $context, array(), $this->client );
-		$this->object->setView( TestHelper::getView());
+		$this->client = $this->getMock( '\\Aimeos\\Client\\Html\\Catalog\\Filter\\Standard', $methods, array( $context, array() ) );
+		$this->object = new \Aimeos\Client\Html\Common\Decorator\Example( $context, array(), $this->client );
+		$this->object->setView( \TestHelper::getView());
 	}
 
 
@@ -40,7 +43,7 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubClient()
 	{
-		$this->assertInstanceOf( 'Client_Html_Iface', $this->object->getSubClient( 'tree' ) );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\Html\\Iface', $this->object->getSubClient( 'tree' ) );
 	}
 
 
@@ -60,13 +63,13 @@ class Client_Html_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCas
 
 	public function testGetView()
 	{
-		$this->assertInstanceOf( 'MW_View_Iface', $this->object->getView() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Iface', $this->object->getView() );
 	}
 
 
 	public function testSetView()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 		$this->object->setView( $view );
 
 		$this->assertSame( $view, $this->object->getView() );

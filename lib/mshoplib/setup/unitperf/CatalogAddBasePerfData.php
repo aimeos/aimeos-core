@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to catalog table.
  */
-class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -42,7 +45,7 @@ class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBaseP
 
 
 		$context = $this->getContext();
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 
 		$catalogRootItem = $catalogManager->createItem();
 		$catalogRootItem->setCode( 'home' );

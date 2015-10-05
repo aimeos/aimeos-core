@@ -1,29 +1,30 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Catalog;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Cache_Catalog_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
-		$this->object = new Controller_Common_Product_Import_Csv_Cache_Catalog_Standard( $context );
+		$context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\Common\Product\Import\Csv\Cache\Catalog\Standard( $context );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -44,7 +45,7 @@ class Controller_Common_Product_Import_Csv_Cache_Catalog_StandardTest extends PH
 
 	public function testSet()
 	{
-		$item = MShop_Factory::createManager( TestHelper::getContext(), 'catalog' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'catalog' )->createItem();
 		$item->setCode( 'cache-test' );
 		$item->setId( 1 );
 

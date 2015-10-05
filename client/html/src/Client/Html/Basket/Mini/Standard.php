@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Basket\Mini;
+
+
 /**
  * Default implementation of mini basket HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Basket_Mini_Standard
-	extends Client_Html_Basket_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Basket\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/basket/mini/default/subparts
 	 * List of HTML sub-clients rendered within the basket mini section
@@ -56,7 +59,7 @@ class Client_Html_Basket_Mini_Standard
 	/** client/html/basket/mini/main/name
 	 * Name of the main part used by the basket mini client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Basket_Mini_Main_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Basket\Mini\Main\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Basket_Mini_Standard
 	/** client/html/basket/mini/product/name
 	 * Name of the product part used by the basket mini client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Basket_Mini_Product_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Basket\Mini\Product\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -118,22 +121,22 @@ class Client_Html_Basket_Mini_Standard
 				}
 				$view->miniBody = $output;
 			}
-			catch( Client_Html_Exception $e )
+			catch( \Aimeos\Client\Html\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
-			catch( Controller_Frontend_Exception $e )
+			catch( \Aimeos\Controller\Frontend\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
-			catch( MShop_Exception $e )
+			catch( \Aimeos\MShop\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -232,7 +235,7 @@ class Client_Html_Basket_Mini_Standard
 				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 				$this->setBasketCached( $key, $html );
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
@@ -251,7 +254,7 @@ class Client_Html_Basket_Mini_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -270,7 +273,7 @@ class Client_Html_Basket_Mini_Standard
 		 *  client/html/basket/mini/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -290,12 +293,12 @@ class Client_Html_Basket_Mini_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/basket/mini/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -314,12 +317,12 @@ class Client_Html_Basket_Mini_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Basket_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Basket\Decorator\*") around the html client.
 		 *
 		 *  client/html/basket/mini/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Basket_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Basket\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -347,16 +350,16 @@ class Client_Html_Basket_Mini_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
-			$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
+			$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'basket' );
 			$view->miniBasket = $controller->get();
 
 			$this->cache = $view;

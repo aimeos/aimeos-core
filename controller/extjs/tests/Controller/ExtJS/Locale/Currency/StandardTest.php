@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Locale\Currency;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Locale_Currency_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Locale_Currency_StandardTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Locale_Currency_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Locale\Currency\Standard( \TestHelper::getContext() );
 	}
 
 

@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_PropertyAdd.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd.
  */
-class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_TestCase
+class PropertyAddTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $plugin;
@@ -24,7 +27,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'PropertyAdd' );
 		$this->plugin->setStatus( '1' );
@@ -36,18 +39,18 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 			'product.stock.dateback'
 		) ) );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		$products = $manager->searchItems( $search );
 
 		if( count( $products ) !== 2 ) {
-			throw new Exception( 'Wrong number of products' );
+			throw new \Exception( 'Wrong number of products' );
 		}
 
 		$this->products = array();
@@ -62,7 +65,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 
 		$this->order = $orderBaseManager->createItem();
 
-		$this->object = new MShop_Plugin_Provider_Order_PropertyAdd( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( \TestHelper::getContext(), $this->plugin );
 	}
 
 
@@ -107,7 +110,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 
 	public function testUpdateAttributeExists()
 	{
-		$attributeManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
+		$attributeManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
 
 		$attribute = $attributeManager->createItem();
 
@@ -145,7 +148,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 			'stock.warehouseid',
 		) ) );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

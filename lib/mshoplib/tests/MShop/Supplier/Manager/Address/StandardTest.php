@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Supplier\Manager\Address;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object = null;
 	private $editor = '';
@@ -17,8 +18,8 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$supplierManager = MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->object = $supplierManager->getSubManager( 'address' );
 	}
 
@@ -42,7 +43,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -50,7 +51,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $item );
 	}
 
 
@@ -66,7 +67,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No address item with company "Metaways" found' );
+			throw new \Exception( 'No address item with company "Metaways" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -80,7 +81,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No address item found' );
+			throw new \Exception( 'No address item found' );
 		}
 
 		$item->setId( null );
@@ -155,14 +156,14 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -177,7 +178,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 		$conditions[] = $search->compare( '!=', 'supplier.address.refid', null );
 		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
-		$conditions[] = $search->compare( '==', 'supplier.address.salutation', MShop_Common_Item_Address_Base::SALUTATION_MRS );
+		$conditions[] = $search->compare( '==', 'supplier.address.salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS );
 		$conditions[] = $search->compare( '==', 'supplier.address.title', '' );
 		$conditions[] = $search->compare( '==', 'supplier.address.firstname', 'Good' );
 		$conditions[] = $search->compare( '==', 'supplier.address.lastname', 'Unittest' );
@@ -210,7 +211,7 @@ class MShop_Supplier_Manager_Address_StandardTest extends PHPUnit_Framework_Test
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

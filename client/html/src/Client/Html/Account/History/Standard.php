@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Account\History;
+
+
 /**
  * Default implementation of account history HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Account_History_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Iface
 {
 	/** client/html/account/history/default/subparts
 	 * List of HTML sub-clients rendered within the account history section
@@ -56,7 +59,7 @@ class Client_Html_Account_History_Standard
 	/** client/html/account/history/lists/name
 	 * Name of the list part used by the account history client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Lists_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Lists\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Account_History_Standard
 	/** client/html/account/history/order/name
 	 * Name of the order part used by the account history client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Account_History_Order_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Account\History\Order\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -100,22 +103,22 @@ class Client_Html_Account_History_Standard
 			}
 			$view->historyBody = $html;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->historyErrorList = $view->get( 'historyErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->historyErrorList = $view->get( 'historyErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->historyErrorList = $view->get( 'historyErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -196,7 +199,7 @@ class Client_Html_Account_History_Standard
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
@@ -208,7 +211,7 @@ class Client_Html_Account_History_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -227,7 +230,7 @@ class Client_Html_Account_History_Standard
 		 *  client/html/account/history/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -247,12 +250,12 @@ class Client_Html_Account_History_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/account/history/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -271,12 +274,12 @@ class Client_Html_Account_History_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Account_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Account\Decorator\*") around the html client.
 		 *
 		 *  client/html/account/history/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Account_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Account\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Lists\Type;
+
+
 /**
- * Test class for MShop_Attribute_Manager_Lists_Type_Standard.
+ * Test class for \Aimeos\MShop\Attribute\Manager\Lists\Type\Standard.
  */
-class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$attributeListManager = $attributeManager->getSubManager( 'lists' );
 		$this->object = $attributeListManager->getSubManager( 'type' );
@@ -52,7 +55,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
 	}
 
 
@@ -62,7 +65,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No attribute list type item found' );
+			throw new \Exception( 'No attribute list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -74,7 +77,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$item->setId( null );
@@ -89,7 +92,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 
 		$this->object->deleteItem( $itemSaved->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -115,7 +118,7 @@ class MShop_Attribute_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 

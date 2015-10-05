@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MAdmin\Log\Item;
+
+
 /**
  * MAdmin log item Interface.
  *
  * @package MAdmin
  * @subpackage Log
  */
-interface MAdmin_Log_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the facility of the item.

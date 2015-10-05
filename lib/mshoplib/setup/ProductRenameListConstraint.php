@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames the mshop_service_list.parentid constraint.
  */
-class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Base
+class ProductRenameListConstraint extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fk_msproli_parentid' => '

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item;
+
+
 /**
  * Base order item class with common constants and methods.
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Item_Base extends MShop_Common_Item_Base
+abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
 	/**
 	 * Repeated order.
@@ -153,12 +156,12 @@ abstract class MShop_Order_Item_Base extends MShop_Common_Item_Base
 	 * Tests if the date parameter represents an ISO date format.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @throws MShop_Order_Exception If validating the date string failed
+	 * @throws \Aimeos\MShop\Order\Exception If validating the date string failed
 	 */
 	protected function checkDateFormat( $date )
 	{
 		if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
 		}
 	}
 
@@ -166,15 +169,15 @@ abstract class MShop_Order_Item_Base extends MShop_Common_Item_Base
 	/**
 	 * Checks if the given delivery status is a valid constant.
 	 *
-	 * @param integer $value Delivery status constant defined in MShop_Order_Item_Base
-	 * @throws MShop_Order_Exception If delivery status is invalid
+	 * @param integer $value Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @throws \Aimeos\MShop\Order\Exception If delivery status is invalid
 	 */
 	protected function checkDeliveryStatus( $value )
 	{
 		$temp = (int) $value;
 
-		if( $temp < MShop_Order_Item_Base::STAT_UNFINISHED || $temp > MShop_Order_Item_Base::STAT_RETURNED ) {
-			throw new MShop_Order_Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
+		if( $temp < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -182,15 +185,15 @@ abstract class MShop_Order_Item_Base extends MShop_Common_Item_Base
 	/**
 	 * Checks the given payment status is a valid constant.
 	 *
-	 * @param integer $value Payment status constant defined in MShop_Order_Item_Base
-	 * @throws MShop_Order_Exception If payment status is invalid
+	 * @param integer $value Payment status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @throws \Aimeos\MShop\Order\Exception If payment status is invalid
 	 */
 	protected function checkPaymentStatus( $value )
 	{
 		$temp = (int) $value;
 
-		if( $temp < MShop_Order_Item_Base::PAY_UNFINISHED || $temp > MShop_Order_Item_Base::PAY_RECEIVED ) {
-			throw new MShop_Order_Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
+		if( $temp < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -198,19 +201,19 @@ abstract class MShop_Order_Item_Base extends MShop_Common_Item_Base
 	/**
 	 * Checks the given order type is a valid constant.
 	 *
-	 * @param integer $value Type constant defined in MShop_Order_Item_Base
-	 * @throws MShop_Order_Exception If order type is invalid
+	 * @param integer $value Type constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @throws \Aimeos\MShop\Order\Exception If order type is invalid
 	 */
 	protected function checkType( $value )
 	{
 		switch( $value )
 		{
-			case MShop_Order_Item_Base::TYPE_REPEAT:
-			case MShop_Order_Item_Base::TYPE_WEB:
-			case MShop_Order_Item_Base::TYPE_PHONE:
+			case \Aimeos\MShop\Order\Item\Base::TYPE_REPEAT:
+			case \Aimeos\MShop\Order\Item\Base::TYPE_WEB:
+			case \Aimeos\MShop\Order\Item\Base::TYPE_PHONE:
 				break;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

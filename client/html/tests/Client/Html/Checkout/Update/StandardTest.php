@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Update;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->context = TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
 
-		$this->object = new Client_Html_Checkout_Update_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$this->object = new \Aimeos\Client\Html\Checkout\Update\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -54,14 +56,14 @@ class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -74,7 +76,7 @@ class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCas
 		);
 
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -92,7 +94,7 @@ class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function getOrder( $date )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );
@@ -100,7 +102,7 @@ class Client_Html_Checkout_Update_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $orderManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
 		return $item;

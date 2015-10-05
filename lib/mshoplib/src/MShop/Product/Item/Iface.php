@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item;
+
+
 /**
  * Generic interface for product items created and saved by product managers.
  *
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Item_Iface
-	extends MShop_Common_Item_Config_Iface, MShop_Common_Item_ListRef_Iface,
-		MShop_Common_Item_Time_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Config\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
+		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the status of the product item.

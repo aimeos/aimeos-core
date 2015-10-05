@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Address;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Address_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -49,7 +51,7 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 
 	public function testGetHeaderOtherStep()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->standardStepActive = 'xyz';
 		$this->object->setView( $view );
 
@@ -63,7 +65,7 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 		$item = $this->getCustomerItem();
 		$this->context->setUserId( $item->getId() );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->standardStepActive = 'address';
 		$view->standardSteps = array( 'address', 'after' );
 		$this->object->setView( $view );
@@ -78,7 +80,7 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 
 	public function testGetBodyOtherStep()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->standardStepActive = 'xyz';
 		$this->object->setView( $view );
 
@@ -89,14 +91,14 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -111,18 +113,18 @@ class Client_Html_Checkout_Standard_Address_StandardTest extends PHPUnit_Framewo
 	 * Returns the customer item for the given code
 	 *
 	 * @param string $code Unique customer code
-	 * @throws Exception If no customer item is found
-	 * @return MShop_Customer_Item_Iface Customer item object
+	 * @throws \Exception If no customer item is found
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item object
 	 */
 	protected function getCustomerItem( $code = 'UTC001' )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
 		$result = $customerManager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer item not found' );
+			throw new \Exception( 'Customer item not found' );
 		}
 
 		return $customer;

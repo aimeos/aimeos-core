@@ -6,15 +6,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\FormParam;
+
+
 /**
- * Test class for MW_View_Helper_FormParam_Standard.
+ * Test class for \Aimeos\MW\View\Helper\FormParam\Standard.
  */
-class MW_View_Helper_FormParam_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testTransform()
 	{
-		$view = new MW_View_Standard();
-		$object = new MW_View_Helper_FormParam_Standard( $view );
+		$view = new \Aimeos\MW\View\Standard();
+		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
 
 		$this->assertEquals( 'test', $object->transform( 'test' ) );
 		$this->assertEquals( 'test', $object->transform( array( 'test' ) ) );
@@ -23,8 +26,8 @@ class MW_View_Helper_FormParam_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformMultiNames()
 	{
-		$view = new MW_View_Standard();
-		$object = new MW_View_Helper_FormParam_Standard( $view );
+		$view = new \Aimeos\MW\View\Standard();
+		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
 
 		$this->assertEquals( 'test[test2]', $object->transform( array( 'test', 'test2' ) ) );
 	}
@@ -32,8 +35,8 @@ class MW_View_Helper_FormParam_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformWithPrefix()
 	{
-		$view = new MW_View_Standard();
-		$object = new MW_View_Helper_FormParam_Standard( $view, array( 'prefix' ) );
+		$view = new \Aimeos\MW\View\Standard();
+		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view, array( 'prefix' ) );
 
 		$this->assertEquals( 'prefix[test]', $object->transform( 'test' ) );
 		$this->assertEquals( 'prefix[test]', $object->transform( array( 'test' ) ) );
@@ -42,8 +45,8 @@ class MW_View_Helper_FormParam_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformWithMultiPrefix()
 	{
-		$view = new MW_View_Standard();
-		$object = new MW_View_Helper_FormParam_Standard( $view, array( 'pre', 'fix' ) );
+		$view = new \Aimeos\MW\View\Standard();
+		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view, array( 'pre', 'fix' ) );
 
 		$this->assertEquals( 'pre[fix][test]', $object->transform( 'test' ) );
 		$this->assertEquals( 'pre[fix][test]', $object->transform( array( 'test' ) ) );

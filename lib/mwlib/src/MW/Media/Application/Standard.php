@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Media\Application;
+
+
 /**
  * Default application media class.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Application_Standard
-	extends MW_Media_Base
-	implements MW_Media_Application_Iface
+class Standard
+	extends \Aimeos\MW\Media\Base
+	implements \Aimeos\MW\Media\Application\Iface
 {
 	private $options;
 	private $filename;
@@ -28,7 +31,7 @@ class MW_Media_Application_Standard
 	 * @param string $filename Name of the media file
 	 * @param string $mimetype Mime type of the media data
 	 * @param array $options Associative list of configuration options
-	 * @throws MW_Media_Exception If image couldn't be retrieved from the given file name
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
 	public function __construct( $filename, $mimetype, array $options )
 	{
@@ -44,12 +47,12 @@ class MW_Media_Application_Standard
 	 *
 	 * @param string $filename Name of the file to save the media data into
 	 * @param string $mimetype Mime type to save the image as
-	 * @throws MW_Media_Exception If image couldn't be saved to the given file name
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
 	public function save( $filename, $mimetype )
 	{
 		if( $this->filename != $filename && copy( $this->filename, $filename ) !== true ) {
-			throw new MW_Media_Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $this->filename, $filename ) );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $this->filename, $filename ) );
 		}
 	}
 }

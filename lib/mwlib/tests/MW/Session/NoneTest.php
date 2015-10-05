@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Session;
+
+
 /**
- * Test class for MW_Session_None.
+ * Test class for \Aimeos\MW\Session\None.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Session_NoneTest extends PHPUnit_Framework_TestCase
+class NoneTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +22,7 @@ class MW_Session_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Session_None();
+		$this->object = new \Aimeos\MW\Session\None();
 	}
 
 

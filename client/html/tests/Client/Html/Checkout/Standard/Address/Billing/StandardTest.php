@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Address\Billing;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Address_Billing_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Billing\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -52,7 +54,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		$customer = $this->getCustomerItem();
 		$this->context->setUserId( $customer->getId() );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -69,7 +71,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.html' );
 
-		$view = TestHelper::getView( 'unittest', $config );
+		$view = \TestHelper::getView( 'unittest', $config );
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -79,14 +81,14 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -99,7 +101,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 
 	public function testProcessNewAddress()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -114,21 +116,21 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 				'order.base.address.languageid' => 'en',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
 		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 'hamburg', $basket->getAddress( 'payment' )->getCity() );
 	}
 
 
 	public function testProcessNewAddressMissing()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -140,7 +142,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 				'order.base.address.city' => 'hamburg',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -149,7 +151,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		{
 			$this->object->process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$this->assertEquals( 3, count( $view->billingError ) );
 			$this->assertArrayHasKey( 'order.base.address.salutation', $view->billingError );
@@ -164,7 +166,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 
 	public function testProcessNewAddressUnknown()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -180,24 +182,24 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 				'order.base.address.flag' => '1',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 0, $basket->getAddress( 'payment' )->getFlag() );
 	}
 
 
 	public function testProcessNewAddressInvalid()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
-		$helper = new MW_View_Helper_Config_Standard( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
 		$param = array(
@@ -213,7 +215,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 				'order.base.address.languageid' => 'en',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -222,7 +224,7 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		{
 			$this->object->process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$this->assertEquals( 1, count( $view->billingError ) );
 			$this->assertArrayHasKey( 'order.base.address.postal', $view->billingError );
@@ -238,10 +240,10 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		$customer = $this->getCustomerItem();
 		$this->context->setUserId( $customer->getId() );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_billingoption' => $customer->getId() );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -249,22 +251,22 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 		$this->object->process();
 
 		$this->context->setEditor( null );
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 'Example company', $basket->getAddress( 'payment' )->getCompany() );
 	}
 
 
 	public function testProcessInvalidId()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_billingoption' => -1 );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->process();
 	}
 
@@ -273,18 +275,18 @@ class Client_Html_Checkout_Standard_Address_Billing_StandardTest extends PHPUnit
 	 * Returns the customer item for the given code
 	 *
 	 * @param string $code Unique customer code
-	 * @throws Exception If no customer item is found
-	 * @return MShop_Customer_Item_Iface Customer item object
+	 * @throws \Exception If no customer item is found
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item object
 	 */
 	protected function getCustomerItem( $code = 'UTC001' )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
 		$result = $customerManager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer item not found' );
+			throw new \Exception( 'Customer item not found' );
 		}
 
 		return $customer;

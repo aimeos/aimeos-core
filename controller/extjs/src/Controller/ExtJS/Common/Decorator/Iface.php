@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Decorator;
+
+
 /**
  * Decorator interface for controller.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-interface Controller_ExtJS_Common_Decorator_Iface
-	extends Controller_ExtJS_Iface
+interface Iface
+	extends \Aimeos\Controller\ExtJS\Iface
 {
 	/**
 	 * Initializes a new controller decorator object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Controller_ExtJS_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Controller\ExtJS\Iface $controller Controller object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Controller_ExtJS_Iface $controller );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Controller\ExtJS\Iface $controller );
 }

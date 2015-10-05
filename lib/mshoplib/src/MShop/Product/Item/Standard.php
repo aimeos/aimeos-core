@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item;
+
+
 /**
  * Default impelementation of a product item.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Product_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Product\Item\Iface
 {
 	private $values;
 
@@ -26,8 +29,8 @@ class MShop_Product_Item_Standard
 	 * Initializes the item object.
 	 *
 	 * @param array $values Parameter for initializing the basic properties
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

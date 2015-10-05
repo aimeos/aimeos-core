@@ -1,10 +1,12 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Session\Pinned;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -18,11 +20,11 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
 
-		$this->object = new Client_Html_Catalog_Session_Pinned_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$this->object = new \Aimeos\Client\Html\Catalog\Session\Pinned\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -60,7 +62,7 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
@@ -75,7 +77,7 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 			'pin_id' => $prodId,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -96,7 +98,7 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 			'pin_id' => $prodId,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -110,12 +112,12 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 	 * Returns the product for the given code.
 	 *
 	 * @param string $code Unique product code
-	 * @throws Exception If no product is found
-	 * @return MShop_Product_Item_Iface
+	 * @throws \Exception If no product is found
+	 * @return \Aimeos\MShop\Product\Item\Iface
 	 */
 	protected function getProductItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -123,7 +125,7 @@ class Client_Html_Catalog_Session_Pinned_StandardTest extends PHPUnit_Framework_
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

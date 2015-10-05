@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds typeid column to product table.
  */
-class MW_Setup_Task_ProductAddTypeid extends MW_Setup_Task_Base
+class ProductAddTypeid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_product" ADD "typeid" INTEGER NULL AFTER "id"',

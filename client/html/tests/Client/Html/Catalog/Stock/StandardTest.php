@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Stock;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Client_Html_Catalog_Stock_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,11 +21,11 @@ class Client_Html_Catalog_Stock_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Stock_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Stock\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -52,7 +53,7 @@ class Client_Html_Catalog_Stock_StandardTest extends PHPUnit_Framework_TestCase
 		$productId = $this->getProductItem()->getId();
 
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 's_prodid' => $productId ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 's_prodid' => $productId ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -63,7 +64,7 @@ class Client_Html_Catalog_Stock_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetBodyStockUnlimited()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 's_prodid' => -1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 's_prodid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -73,27 +74,27 @@ class Client_Html_Catalog_Stock_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
+			throw new \Exception( 'No product item with code "CNC" found' );
 		}
 
 		return $item;

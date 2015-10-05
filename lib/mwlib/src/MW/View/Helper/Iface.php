@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\View\Helper;
+
+
 /**
  * Common interface for all view helper classes.
  *
  * @package MW
  * @subpackage View
  */
-interface MW_View_Helper_Iface
+interface Iface
 {
 }

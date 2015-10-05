@@ -5,37 +5,40 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 /**
- * Test class for MAdmin_Cache_Manager_Factory.
+ * Test class for \Aimeos\MAdmin\Cache\Manager\Factory.
  */
-class MAdmin_Cache_Manager_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext(), 'Standard' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MAdmin_Cache_Exception' );
-		MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
+		\Aimeos\MAdmin\Cache\Manager\Factory::createManager( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MAdmin_Cache_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MAdmin\Cache\Manager\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Decorator;
+
+
 /**
  * Provides common methods for html client decorators.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Common_Decorator_Base
-	extends Client_Html_Base
-	implements Client_Html_Common_Decorator_Iface
+abstract class Base
+	extends \Aimeos\Client\Html\Base
+	implements \Aimeos\Client\Html\Common\Decorator\Iface
 {
 	private $client;
 
@@ -24,12 +27,12 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Initializes the client decorator.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
-	 * @param Client_Html_Iface $client Client object
+	 * @param \Aimeos\Client\Html\Iface $client Client object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $templatePaths, Client_Html_Iface $client )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, \Aimeos\Client\Html\Iface $client )
 	{
 		parent::__construct( $context, $templatePaths );
 
@@ -43,12 +46,12 @@ abstract class Client_Html_Common_Decorator_Base
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
 	 * @return mixed Returns the value of the called method
-	 * @throws Client_Html_Exception If method call failed
+	 * @throws \Aimeos\Client\Html\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
 		if( ( $result = call_user_func_array( array( $this->client, $name ), $param ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
 		return $result;
@@ -60,7 +63,7 @@ abstract class Client_Html_Common_Decorator_Base
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -99,7 +102,7 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
-	 * @return MW_View_Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 */
 	public function getView()
 	{
@@ -110,10 +113,10 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
-	 * @return Client_Html_Iface Reference to this object for fluent calls
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\Client\Html\Iface Reference to this object for fluent calls
 	 */
-	public function setView( MW_View_Iface $view )
+	public function setView( \Aimeos\MW\View\Iface $view )
 	{
 		$this->client->setView( $view );
 		return $this;
@@ -160,7 +163,7 @@ abstract class Client_Html_Common_Decorator_Base
 	/**
 	 * Returns the inner client object
 	 *
-	 * @return Client_Html_Iface HTML client
+	 * @return \Aimeos\Client\Html\Iface HTML client
 	 */
 	protected function getClient()
 	{

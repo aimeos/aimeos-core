@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Controller\Common\Order;
+
+
 /**
  * Common order controller methods.
  *
  * @package Controller
  * @subpackage Common
  */
-interface Controller_Common_Order_Iface
+interface Iface
 {
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context
+	 * @param \Aimeos\MShop\Context\Item\Iface $context
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 
 
 	/**
@@ -41,10 +44,10 @@ interface Controller_Common_Order_Iface
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function block( MShop_Order_Item_Iface $orderItem );
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
 
 	/**
@@ -63,10 +66,10 @@ interface Controller_Common_Order_Iface
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function unblock( MShop_Order_Item_Iface $orderItem );
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
 
 	/**
@@ -81,8 +84,8 @@ interface Controller_Common_Order_Iface
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function update( MShop_Order_Item_Iface $orderItem );
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem );
 }

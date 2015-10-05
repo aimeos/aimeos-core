@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_Complete.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\Complete.
  */
-class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
+class CouponTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
 	private $plugin;
@@ -23,15 +26,15 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'Coupon' );
 		$this->plugin->setStatus( 1 );
 
-		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$this->order = new MShop_Order_Item_Base_Standard( $priceItem, $context->getLocale() );
+		$priceItem = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
+		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
 	}
 
 
@@ -50,7 +53,7 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
@@ -58,7 +61,7 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 	public function testUpdate()
 	{
 		$this->order->addCoupon( 'OPQR', array() );
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}
@@ -66,14 +69,14 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 
 	public function testUpdateInvalidObject()
 	{
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$object->update( new MShop_Publisher_Test(), 'test' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$object->update( new TestPublisher(), 'test' );
 	}
 }
 
 
-class MShop_Publisher_Test extends MW_Observer_Publisher_Base
+class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
 {
 }

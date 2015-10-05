@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Config;
+
+
 /**
  * View helper class for retrieving configuration values.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Config_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $config;
 
@@ -24,10 +27,10 @@ class MW_View_Helper_Config_Standard
 	/**
 	 * Initializes the config view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
-	 * @param MW_Config_Iface $config Configuration object
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 */
-	public function __construct( $view, MW_Config_Iface $config )
+	public function __construct( $view, \Aimeos\MW\Config\Iface $config )
 	{
 		parent::__construct( $view );
 

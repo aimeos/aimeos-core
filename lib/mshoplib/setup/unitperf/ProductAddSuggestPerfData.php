@@ -6,16 +6,19 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds suggestion performance records to products.
  */
-class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Base
+class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 {
-	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		parent::__construct( $schema, $conn, $additional );
@@ -61,7 +64,7 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Base
 		$this->msg( 'Adding product suggestion performance data', 0 );
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->getContext() );
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
@@ -73,7 +76,7 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Base
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 		$search = $productManager->createSearch();

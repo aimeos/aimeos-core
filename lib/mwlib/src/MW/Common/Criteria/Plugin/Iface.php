@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Plugin;
+
+
 /**
  * Interface for criteria plugin objects.
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Plugin_Iface
-	extends MW_Convert_Iface
+interface Iface
+	extends \Aimeos\MW\Convert\Iface
 {
 }

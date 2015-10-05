@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Stock\Warehouse;
+
+
 /**
- * Test class for MShop_Product_Item_Stock_Warehouse_Standard.
+ * Test class for \Aimeos\MShop\Product\Item\Stock\Warehouse\Standard.
  */
-class MShop_Product_Item_Stock_Warehouse_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -34,7 +37,7 @@ class MShop_Product_Item_Stock_Warehouse_StandardTest extends PHPUnit_Framework_
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Product_Item_Stock_Warehouse_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Product\Item\Stock\Warehouse\Standard( $this->values );
 	}
 
 	/**
@@ -123,7 +126,7 @@ class MShop_Product_Item_Stock_Warehouse_StandardTest extends PHPUnit_Framework_
 
 	public function testFromArray()
 	{
-		$item = new MShop_Product_Item_Stock_Warehouse_Standard();
+		$item = new \Aimeos\MShop\Product\Item\Stock\Warehouse\Standard();
 
 		$list = array(
 			'product.stock.warehouse.id' => 1,

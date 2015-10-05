@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MAdmin\Log\Manager;
+
+
 /**
  * Interface for log manager implementations.
  *
  * @package MAdmin
  * @subpackage Log
  */
-interface MAdmin_Log_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

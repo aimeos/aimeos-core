@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\MW\Common\Manager;
+
+
 /**
  * Common methods for all manager objects.
  *
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Manager_Base
+abstract class Base
 {
 	/**
 	 * Returns the attribute types for searching defined by the manager.
 	 *
 	 * @param array $attributes List of search attribute objects implementing
-	 * 	MW_Common_Criteria_Attribute_Iface or associative arrays with 'code'
+	 * 	\Aimeos\MW\Common\Criteria\Attribute\Iface or associative arrays with 'code'
 	 * 	and 'internaltype' keys
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
 	protected function getSearchTypes( array $attributes )
 	{
 		$types = array();
-		$iface = 'MW_Common_Criteria_Attribute_Iface';
+		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
 		{
@@ -36,7 +39,7 @@ abstract class MW_Common_Manager_Base
 			} else if( isset( $item['code'] ) ) {
 				$types[ $item['code'] ] = $item['internaltype'];
 			} else {
-				throw new MW_Common_Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
 		}
 
@@ -48,14 +51,14 @@ abstract class MW_Common_Manager_Base
 	 * Returns the attribute translations for searching defined by the manager.
 	 *
 	 * @param array $attributes List of search attribute objects implementing
-	 * 	MW_Common_Criteria_Attribute_Iface or associative arrays with 'code'
+	 * 	\Aimeos\MW\Common\Criteria\Attribute\Iface or associative arrays with 'code'
 	 * 	and 'internalcode' keys
 	 * @return array Associative array of attribute code and internal attribute code
 	 */
 	protected function getSearchTranslations( array $attributes )
 	{
 		$translations = array();
-		$iface = 'MW_Common_Criteria_Attribute_Iface';
+		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
 		{
@@ -64,7 +67,7 @@ abstract class MW_Common_Manager_Base
 			} else if( isset( $item['code'] ) ) {
 				$translations[ $item['code'] ] = $item['internalcode'];
 			} else {
-				throw new MW_Common_Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
 		}
 

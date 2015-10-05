@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
  * Decorator for reduction of service providers prices.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Decorator_Reduction
-extends MShop_Service_Provider_Decorator_Base
+class Reduction
+extends \Aimeos\MShop\Service\Provider\Decorator\Base
 {
 	private $beConfig = array(
 		'reduction.percent' => array(
@@ -68,14 +71,14 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
 		$list = $this->getProvider()->getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $config );
+			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -87,10 +90,10 @@ extends MShop_Service_Provider_Decorator_Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$config = $this->getServiceItem()->getConfig();
 

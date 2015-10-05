@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager\Site;
+
+
 /**
- * Test class for MShop_Locale_Manager_Site_Standard.
+ * Test class for \Aimeos\MShop\Locale\Manager\Site\Standard.
  */
-class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -17,8 +20,8 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Locale_Manager_Site_Standard( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Locale\Manager\Site\Standard( $this->context );
 	}
 
 
@@ -30,7 +33,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->createItem() );
 	}
 
 
@@ -50,7 +53,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -77,7 +80,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -89,12 +92,12 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 		$a = $this->object->searchItems( $search );
 		if( ( $expected = reset( $a ) ) === false ) {
-			throw new Exception( 'Site item not found' );
+			throw new \Exception( 'Site item not found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
 
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $actual );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -141,14 +144,14 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -161,7 +164,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$list = $this->object->getPath( $expected->getId() );
@@ -178,7 +181,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item = $this->object->getTree( $expected->getId() );
@@ -194,7 +197,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item = $this->object->getTree( $expected->getId() );
@@ -221,7 +224,7 @@ class MShop_Locale_Manager_Site_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testMoveItem()
 	{
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->moveItem( null, null, null );
 	}
 }

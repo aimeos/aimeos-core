@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product color attribute performance records.
  */
-class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -77,8 +80,8 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$context = $this->getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$productListManager = MShop_Factory::createManager( $context, 'product/lists' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.type.code', 'default' ) );
@@ -124,7 +127,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	 * Creates and returns the attribute IDs for the given attribute codes.
 	 *
 	 * @param array $colors List of attribute codes
-	 * @throws Exception If a type isn't found
+	 * @throws \Exception If a type isn't found
 	 */
 	protected function getAttributeIds( array $colors )
 	{
@@ -136,7 +139,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$attrListTypeItem = $this->getTypeItem( 'attribute/lists/type', 'media', 'icon' );
 
 
-		$mediaManager = MShop_Factory::createManager( $context, 'media' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
 
 		$mediaItem = $mediaManager->createItem();
 		$mediaItem->setTypeId( $mediaTypeItem->getId() );
@@ -145,7 +148,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$mediaItem->setUrl( '' );
 
 
-		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -153,7 +156,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$attrItem->setStatus( 1 );
 
 
-		$attrListManager = MShop_Factory::createManager( $context, 'attribute/lists' );
+		$attrListManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists' );
 
 		$attrListItem = $attrListManager->createItem();
 		$attrListItem->setTypeId( $attrListTypeItem->getId() );
@@ -198,22 +201,22 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	 *
 	 * @param string $code Color code in hex notation, e.g. "#000000"
 	 * @param string &$mime Contains the mime type of the created image as result
-	 * @throws Exception If the image couldn't be created
+	 * @throws \Exception If the image couldn't be created
 	 */
 	protected function getImageData( $code, &$mime )
 	{
 		$list = str_split( ltrim( $code, '#' ), 2 );
 
 		if( count( $list ) !== 3 ) {
-			throw new Exception( sprintf( 'Invalid color code "%1$s"', $code ) );
+			throw new \Exception( sprintf( 'Invalid color code "%1$s"', $code ) );
 		}
 
 		if( ( $img = imagecreate( 1, 1 ) ) === false ) {
-			throw new Exception( 'Unable to create image' );
+			throw new \Exception( 'Unable to create image' );
 		}
 
 		if( imagecolorallocate( $img, hexdec( $list[0] ), hexdec( $list[1] ), hexdec( $list[2] ) ) === false ) {
-			throw new Exception( 'Unable to allocate color' );
+			throw new \Exception( 'Unable to allocate color' );
 		}
 
 		try
@@ -225,20 +228,20 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 			} else if( function_exists( 'imagepng' ) === true && imagepng( $img ) === true ) {
 				$mime = 'image/png';
 			} else {
-				throw new Exception( 'Unable to create image. php-gd not installed?' );
+				throw new \Exception( 'Unable to create image. php-gd not installed?' );
 			}
 
 			$image = ob_get_contents();
 			ob_end_clean();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			ob_end_clean();
 			throw $e;
 		}
 
 		if( imagedestroy( $img ) === false ) {
-			throw new Exception( 'Unable to destroy image' );
+			throw new \Exception( 'Unable to destroy image' );
 		}
 
 		return 'data:' . $mime . ';base64,' . base64_encode( $image );

@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Free shipping implementation if ordered product sum is above a certain value.
  *
@@ -15,16 +18,16 @@
  * @subpackage Plugin
  * @deprecated Use Reduction service decorator for each delivery option instead
  */
-class MShop_Plugin_Provider_Order_Shipping
-	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Iface
+class Shipping
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.after' );
 		$p->addListener( $this, 'deleteProduct.after' );
@@ -37,15 +40,15 @@ class MShop_Plugin_Provider_Order_Shipping
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 */
-	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Iface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->getItemBase()->getConfig();
@@ -53,7 +56,7 @@ class MShop_Plugin_Provider_Order_Shipping
 
 		try {
 			$delivery = $order->getService( 'delivery' );
-		} catch( MShop_Order_Exception $oe ) {
+		} catch( \Aimeos\MShop\Order\Exception $oe ) {
 			// no delivery item available yet
 			return true;
 		}
@@ -65,7 +68,7 @@ class MShop_Plugin_Provider_Order_Shipping
 			return true;
 		}
 
-		$sum = MShop_Factory::createManager( $this->getContext(), 'price' )->createItem();
+		$sum = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product ) {
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );

@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item;
+
+
 /**
  * Default implementation of an order invoice item.
  *
@@ -17,13 +20,13 @@
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Standard
-	extends MShop_Order_Item_Base
-	implements MShop_Order_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Order\Item\Base
+	implements \Aimeos\MShop\Order\Item\Iface
 {
 	private $values;
-	private $oldPaymentStatus = MShop_Order_Item_Base::PAY_UNFINISHED;
-	private $oldDeliveryStatus = MShop_Order_Item_Base::STAT_UNFINISHED;
+	private $oldPaymentStatus = \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED;
+	private $oldDeliveryStatus = \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
 
 
 	/**
@@ -160,7 +163,7 @@ class MShop_Order_Item_Standard
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from MShop_Order_Item_Base
+	 * @return integer Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function getDeliveryStatus()
 	{
@@ -168,14 +171,14 @@ class MShop_Order_Item_Standard
 			return (int) $this->values['statusdelivery'];
 		}
 
-		return MShop_Order_Item_Base::STAT_UNFINISHED;
+		return \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
 	}
 
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from MShop_Order_Item_Base
+	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function setDeliveryStatus( $status )
 	{
@@ -187,7 +190,7 @@ class MShop_Order_Item_Standard
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from MShop_Order_Item_Base
+	 * @return integer Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function getPaymentStatus()
 	{
@@ -195,14 +198,14 @@ class MShop_Order_Item_Standard
 			return (int) $this->values['statuspayment'];
 		}
 
-		return MShop_Order_Item_Base::PAY_UNFINISHED;
+		return \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED;
 	}
 
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from MShop_Order_Item_Base
+	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function setPaymentStatus( $status )
 	{
@@ -226,7 +229,7 @@ class MShop_Order_Item_Standard
 	 * Sets the related invoice ID.
 	 *
 	 * @param integer|null $id Related invoice ID
-	 * @throws MShop_Order_Exception If ID is invalid
+	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 */
 	public function setRelatedId( $id )
 	{
@@ -297,7 +300,7 @@ class MShop_Order_Item_Standard
 			case 'oldDeliveryStatus':
 				return $this->oldDeliveryStatus;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
 		}
 	}
 }

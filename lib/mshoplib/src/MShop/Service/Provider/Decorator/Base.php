@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
  * Base decorator methods for service provider.
  *
  * @package MShop
  * @subpackage Service
  */
-abstract class MShop_Service_Provider_Decorator_Base
-	extends MShop_Service_Provider_Base
-	implements MShop_Service_Provider_Decorator_Iface
+abstract class Base
+	extends \Aimeos\MShop\Service\Provider\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $object;
 
@@ -24,12 +27,12 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Initializes a new service provider object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration for the provider
-	 * @param MShop_Service_Provider_Iface $provider Service provider or decorator
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration for the provider
+	 * @param \Aimeos\MShop\Service\Provider\Iface $provider Service provider or decorator
 	 */
-	public function __construct( MShop_Context_Item_Iface $context,
-		MShop_Service_Item_Iface $serviceItem, MShop_Service_Provider_Iface $provider )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Service\Item\Iface $serviceItem, \Aimeos\MShop\Service\Provider\Iface $provider )
 	{
 		parent::__construct( $context, $serviceItem );
 
@@ -42,10 +45,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		return $this->object->calcPrice( $basket );
 	}
@@ -81,7 +84,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
@@ -93,10 +96,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( MShop_Order_Item_Base_Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		return $this->object->getConfigFE( $basket );
 	}
@@ -128,10 +131,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		return $this->object->isAvailable( $basket );
 	}
@@ -152,9 +155,9 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Iface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Iface $order )
+	public function query( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		$this->object->query( $order );
 	}
@@ -163,9 +166,9 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Sets the communication object for a service provider.
 	 *
-	 * @param MW_Communication_Iface $communication Object of communication
+	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
 	 */
-	public function setCommunication( MW_Communication_Iface $communication )
+	public function setCommunication( \Aimeos\MW\Communication\Iface $communication )
 	{
 		parent::setCommunication( $communication );
 
@@ -176,10 +179,10 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 */
-	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
 		$this->object->setConfigFE( $orderServiceItem, $attributes );
 	}
@@ -190,7 +193,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
 	 * @return boolean True if the update was successful, false if async updates are not supported
-	 * @throws MShop_Service_Exception If updating one of the orders failed
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
 	public function updateAsync()
 	{
@@ -205,8 +208,8 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 * @throws MShop_Service_Exception If updating one of the orders failed
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
@@ -217,7 +220,7 @@ abstract class MShop_Service_Provider_Decorator_Base
 	/**
 	 * Returns the provider object.
 	 *
-	 * @return MShop_Service_Provider_Iface Service provider object
+	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
 	 */
 	protected function getProvider()
 	{
@@ -231,12 +234,12 @@ abstract class MShop_Service_Provider_Decorator_Base
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
 	 * @return mixed Returns the value of the called method
-	 * @throws MShop_Service_Exception If method call failed
+	 * @throws \Aimeos\MShop\Service\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
 		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === null ) {
-			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 
 		return $result;

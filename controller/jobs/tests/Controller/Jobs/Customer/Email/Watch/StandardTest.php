@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Customer\Email\Watch;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,10 +22,10 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->aimeos = TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
+		$this->aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Customer_Email_Watch_Standard( $this->context, $this->aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Customer\Email\Watch\Standard( $this->context, $this->aimeos );
 	}
 
 
@@ -55,11 +56,11 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 
 	public function testRun()
 	{
-		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_None' )
+		$mailMsgStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\Message\\None' )
 			->disableOriginalConstructor()
 			->disableOriginalClone()
 			->getMock();
@@ -76,7 +77,7 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 		$product = $this->getProductItem();
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Standard' )
+		$object = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Customer\\Email\\Watch\\Standard' )
 			->setConstructorArgs( array( $this->context, $this->aimeos ) )
 			->setMethods( array( 'getListProducts' ) )
 			->getMock();
@@ -91,13 +92,13 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 
 	public function testRunException()
 	{
-		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$mailStub->expects( $this->once() )
 			->method( 'createMessage' )
-			->will( $this->throwException( new Exception() ) );
+			->will( $this->throwException( new \Exception() ) );
 
 		$this->context->setMail( $mailStub );
 
@@ -105,7 +106,7 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 		$product = $this->getProductItem();
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-		$object = $this->getMockBuilder( 'Controller_Jobs_Customer_Email_Watch_Standard' )
+		$object = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Customer\\Email\\Watch\\Standard' )
 			->setConstructorArgs( array( $this->context, $this->aimeos ) )
 			->setMethods( array( 'getListProducts' ) )
 			->getMock();
@@ -120,13 +121,13 @@ class Controller_Jobs_Customer_Email_Watch_StandardTest extends PHPUnit_Framewor
 
 	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search, array( 'media', 'price', 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
+			throw new \Exception( 'No product item with code "CNC" found' );
 		}
 
 		return $item;

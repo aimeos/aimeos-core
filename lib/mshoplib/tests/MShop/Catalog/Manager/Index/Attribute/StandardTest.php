@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Attribute;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_Attribute_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\Attribute\Standard.
  */
-class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,7 +25,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->object = new MShop_Catalog_Manager_Index_Attribute_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\Attribute\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -46,7 +49,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 
 	public function testAggregate()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -58,7 +61,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 
@@ -74,26 +77,26 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
 		$result = $productManager->searchItems( $search, array( 'attribute' ) );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product item with code CNE found!' );
+			throw new \Exception( 'No product item with code CNE found!' );
 		}
 
 		$attributes = $product->getRefItems( 'attribute' );
 		if( ( $attrItem = reset( $attributes ) ) === false ) {
-			throw new Exception( 'Product doesnt have any attribute item' );
+			throw new \Exception( 'Product doesnt have any attribute item' );
 		}
 
 		$product->setId( null );
@@ -123,15 +126,15 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$context = TestHelper::getContext();
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
+		$context = \TestHelper::getContext();
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
 
 		$expr = array(
@@ -144,7 +147,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrLengthItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 		$expr = array(
@@ -157,7 +160,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 
@@ -186,7 +189,7 @@ class MShop_Catalog_Manager_Index_Attribute_StandardTest extends PHPUnit_Framewo
 		$result = $this->object->searchItems( $search, array() );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 		$this->assertEquals( 2, count( $result ) );

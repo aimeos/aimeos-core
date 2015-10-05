@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Attribute;
+
+
 /**
  * Interface for search attribute classes.
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Attribute_Iface
+interface Iface
 {
 	/**
 	 * Returns the type of the attribute.

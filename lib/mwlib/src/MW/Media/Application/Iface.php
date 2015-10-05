@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Media\Application;
+
+
 /**
  * Common interface for all application media objects.
  *
  * @package MW
  * @subpackage Media
  */
-interface MW_Media_Application_Iface
-	extends MW_Media_Iface
+interface Iface
+	extends \Aimeos\MW\Media\Iface
 {
 }

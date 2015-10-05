@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Setup\Manager;
+
+
 /**
- * Test class for MW_Setup_Manager_Multiple.
+ * Test class for \Aimeos\MW\Setup\Manager\Multiple.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Manager_MultipleTest extends PHPUnit_Framework_TestCase
+class MultipleTest extends \PHPUnit_Framework_TestCase
 {
 	private $config;
 	private $dbm;
@@ -20,13 +23,13 @@ class MW_Setup_Manager_MultipleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->config = TestHelper::getConfig();
+		$this->config = \TestHelper::getConfig();
 
 		if( $this->config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 	}
 
 	/**
@@ -49,7 +52,7 @@ Executing TwoTask                                                     OK
 		$conn = $this->dbm->acquire();
 
 		$taskPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks';
-		$object = new MW_Setup_Manager_Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
+		$object = new \Aimeos\MW\Setup\Manager\Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
 		$this->dbm->release( $conn );
 
@@ -78,7 +81,7 @@ Executing ThreeTask                                                   OK
 			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks2',
 		);
 
-		$object = new MW_Setup_Manager_Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
+		$object = new \Aimeos\MW\Setup\Manager\Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
 		$this->dbm->release( $conn );
 

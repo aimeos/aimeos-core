@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Time;
+
+
 /**
  * Common interface for items having types.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Time_Iface
+interface Iface
 {
 	/**
 	 * Returns the date/time, the availability of the item will start

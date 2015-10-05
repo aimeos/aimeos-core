@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds foreign key for langid column to text table.
  */
-class MW_Setup_Task_TextAddForeignKey extends MW_Setup_Task_Base
+class TextAddForeignKey extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

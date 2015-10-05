@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Locale\Site;
+
+
 /**
  * ExtJS site controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Locale_Site_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Initializes the site controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Locale_Site' );
 	}
@@ -36,9 +39,9 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Deletes an item or a list of items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 */
-	public function deleteItems( stdClass $params )
+	public function deleteItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'items' ) );
 
@@ -55,9 +58,9 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Creates a new site item or updates an existing one or a list thereof.
 	 *
-	 * @param stdClass $params Associative array containing the product properties
+	 * @param \stdClass $params Associative array containing the product properties
 	 */
-	public function saveItems( stdClass $params )
+	public function saveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'items' ) );
 
@@ -80,10 +83,10 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
-	 * @param stdClass $params Associative array containing the parameters
+	 * @param \stdClass $params Associative array containing the parameters
 	 * @return array List of associative arrays with item properties, total number of items and success property
 	 */
-	public function searchItems( stdClass $params )
+	public function searchItems( \stdClass $params )
 	{
 		$total = 0;
 		$search = $this->initCriteria( $this->getManager()->createSearch(), $params );
@@ -105,10 +108,10 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Inserts a new item or a list of new items depending on the parent and the referenced item ID.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with nodes and success value
 	 */
-	public function insertItems( stdClass $params )
+	public function insertItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'items' ) );
 
@@ -137,10 +140,10 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Moves an item or a list of items depending on the old parent, the new parent and the referenced item ID.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function moveItems( stdClass $params )
+	public function moveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'items', 'oldparentid', 'newparentid', 'refid' ) );
 
@@ -169,10 +172,10 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Returns an item or a list of items including their children for the given IDs.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with nodes and success value
 	 */
-	public function getTree( stdClass $params )
+	public function getTree( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'items' ) );
 
@@ -197,7 +200,7 @@ class Controller_ExtJS_Locale_Site_Standard
 			}
 			else
 			{
-				$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Base::LEVEL_LIST );
+				$item = $manager->getTree( $entry, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
 			}
 
 			$result[] = $this->createNodeArray( $item );
@@ -272,9 +275,9 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Creates a list of items with children.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Locale site item
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Locale site item
 	 */
-	protected function createNodeArray( MShop_Locale_Item_Site_Iface $item )
+	protected function createNodeArray( \Aimeos\MShop\Locale\Item\Site\Iface $item )
 	{
 		$result = $item->toArray();
 
@@ -292,12 +295,12 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'locale/site' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'locale/site' );
 		}
 
 		return $this->manager;
@@ -318,10 +321,10 @@ class Controller_ExtJS_Locale_Site_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'locale.site.config'} ) ) {
 			$entry->{'locale.site.config'} = (array) $entry->{'locale.site.config'};

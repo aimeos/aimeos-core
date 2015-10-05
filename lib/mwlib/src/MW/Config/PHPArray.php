@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Config;
+
+
 /**
  * Configuration setting class using arrays
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_PHPArray
-	extends MW_Config_Base
-	implements MW_Config_Iface
+class PHPArray
+	extends \Aimeos\MW\Config\Base
+	implements \Aimeos\MW\Config\Iface
 {
 	private $config;
 	private $paths;

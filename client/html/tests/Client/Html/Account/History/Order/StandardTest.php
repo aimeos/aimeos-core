@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Account\History\Order;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->context = clone TestHelper::getContext();
+		$this->context = clone \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Account_History_Order_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Account\History\Order\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -60,7 +62,7 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 			'his_id' => $this->getOrderItem( $customer->getId() )->getId()
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -71,14 +73,14 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -88,13 +90,13 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function getCustomerItem( $code )
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $code ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No customer item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No customer item with code "%1$s" found', $code ) );
 		}
 
 		return $item;
@@ -103,7 +105,7 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 
 	protected function getOrderItem( $customerid )
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
@@ -114,7 +116,7 @@ class Client_Html_Account_History_Order_StandardTest extends PHPUnit_Framework_T
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order item for customer with ID "%1$s" found', $customerid ) );
+			throw new \Exception( sprintf( 'No order item for customer with ID "%1$s" found', $customerid ) );
 		}
 
 		return $item;

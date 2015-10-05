@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Currency;
+
+
 /**
  * Common interface for all currency items.
  * 
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Item_Currency_Iface
-	extends MShop_Common_Item_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the code of the currency.

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Media\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Media_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Media_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Media_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Media\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -59,7 +60,7 @@ class Controller_ExtJS_Media_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'media.lists.type.domain' => 'text' );
-		$mediaManager = new Controller_ExtJS_Media_Standard( TestHelper::getContext() );
+		$mediaManager = new \Aimeos\Controller\ExtJS\Media\Standard( \TestHelper::getContext() );
 		$result = $mediaManager->searchItems( $params );
 
 		$params = (object) array(
@@ -68,7 +69,7 @@ class Controller_ExtJS_Media_Lists_StandardTest extends PHPUnit_Framework_TestCa
 			'start' => 0,
 			'limit' => 1,
 		);
-		$mediaListTypeManager = Controller_ExtJS_Media_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$mediaListTypeManager = \Aimeos\Controller\ExtJS\Media\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $mediaListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

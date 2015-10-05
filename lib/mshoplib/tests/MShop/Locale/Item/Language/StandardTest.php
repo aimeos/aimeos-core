@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Locale\Item\Language;
+
+
 /**
- * Test class for MShop_Locale_Item_Language_Standard.
+ * Test class for \Aimeos\MShop\Locale\Item\Language\Standard.
  */
-class MShop_Locale_Item_Language_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -25,7 +28,7 @@ class MShop_Locale_Item_Language_StandardTest extends PHPUnit_Framework_TestCase
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser'
 		);
-		$this->object = new MShop_Locale_Item_Language_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Locale\Item\Language\Standard( $this->values );
 	}
 
 
@@ -62,14 +65,14 @@ class MShop_Locale_Item_Language_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetIdLength()
 	{
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setId( 'espania' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setId( 123 );
 	}
 
@@ -82,7 +85,7 @@ class MShop_Locale_Item_Language_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetCodeInvalid()
 	{
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setCode( 'XXX' );
 	}
 
@@ -143,7 +146,7 @@ class MShop_Locale_Item_Language_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Locale_Item_Language_Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Language\Standard();
 
 		$list = array(
 				'locale.language.id' => 'de',

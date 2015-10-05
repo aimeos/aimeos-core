@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Basket;
+
+
 /**
  * Interface for basket frontend controllers.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_Iface
+interface Iface extends \Aimeos\Controller\Frontend\Common\Iface
 {
 	/**
 	 * Empties the basket and removing all products, addresses, services, etc.
@@ -26,7 +29,7 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	/**
 	 * Returns the basket object.
 	 *
-	 * @return MShop_Order_Item_Base_Iface Basket holding products, addresses and delivery/payment options
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket holding products, addresses and delivery/payment options
 	 */
 	public function get();
 
@@ -49,7 +52,7 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	 * @param array $customAttributeValues Associative list of attribute IDs and arbitrary values that should be stored
 	 * 	along with the product in the order
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
-	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
+	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If the product isn't available
 	 * @return void
 	 */
 	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
@@ -81,7 +84,7 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	 * Adds the given coupon code and updates the basket.
 	 *
 	 * @param string $code Coupon code entered by the user
-	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid or not allowed
+	 * @throws \Aimeos\Controller\Frontend\Basket\Exception if the coupon code is invalid or not allowed
 	 * @return void
 	 */
 	public function addCoupon( $code );
@@ -91,7 +94,7 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	 * Removes the given coupon code and its effects from the basket.
 	 *
 	 * @param string $code Coupon code entered by the user
-	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid
+	 * @throws \Aimeos\Controller\Frontend\Basket\Exception if the coupon code is invalid
 	 * @return void
 	 */
 	public function deleteCoupon( $code );
@@ -100,9 +103,9 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	/**
 	 * Sets the address of the customer in the basket.
 	 *
-	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Base
-	 * @param MShop_Common_Item_Address_Iface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
-	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
+	 * @param string $type Address type constant from \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
+	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 * @return void
 	 */
@@ -116,7 +119,7 @@ interface Controller_Frontend_Basket_Iface extends Controller_Frontend_Common_If
 	 * @param string $id Unique ID of the service item
 	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
 	 * 	entered by the customer when choosing one of the delivery or payment options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
+	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If there is no price to the service item attached
 	 * @return void
 	 */
 	public function setService( $type, $id, array $attributes = array() );

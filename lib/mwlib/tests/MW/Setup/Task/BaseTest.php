@@ -1,39 +1,15 @@
 <?php
 
-
-class MW_Setup_Task_BaseImpl extends MW_Setup_Task_Base
-{
-	public function getPreDependencies()
-	{
-		return array( 'TestTask' );
-	}
-
-	public function getPostDependencies()
-	{
-		return array();
-	}
-
-	protected function mysql()
-	{
-		$this->execute( 'SELECT 1+1' );
-
-		$list = array(
-			'SELECT 1+2',
-			'SELECT 1+3',
-		);
-
-		$this->executeList( $list );
-	}
-}
+namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Test class for MW_Setup_Task_Base.
+ * Test class for \Aimeos\MW\Setup\Task\Base.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Task_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -46,18 +22,18 @@ class MW_Setup_Task_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$config = TestHelper::getConfig();
+		$config = \TestHelper::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$conn = $dbm->acquire();
 
-		$schema = new MW_Setup_DBSchema_Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
-		$this->object = new MW_Setup_Task_BaseImpl( $schema, $conn );
+		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
+		$this->object = new BaseImpl( $schema, $conn );
 
 		$dbm->release( $conn );
 	}
@@ -86,7 +62,33 @@ class MW_Setup_Task_BaseTest extends PHPUnit_Framework_TestCase
 	{
 		$this->object->run( 'mysql' );
 
-		$this->setExpectedException( 'MW_Setup_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Setup\\Exception' );
 		$this->object->run( 'notexisting' );
+	}
+}
+
+
+class BaseImpl extends \Aimeos\MW\Setup\Task\Base
+{
+	public function getPreDependencies()
+	{
+		return array( 'TestTask' );
+	}
+
+	public function getPostDependencies()
+	{
+		return array();
+	}
+
+	protected function mysql()
+	{
+		$this->execute( 'SELECT 1+1' );
+
+		$list = array(
+				'SELECT 1+2',
+				'SELECT 1+3',
+		);
+
+		$this->executeList( $list );
 	}
 }

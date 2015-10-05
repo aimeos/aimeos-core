@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from product tables.
  */
-class MW_Setup_Task_ProductDropLocaleConstraints extends MW_Setup_Task_Base
+class ProductDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_product_list_type' => array(

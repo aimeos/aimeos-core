@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Catalog;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_Catalog_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\Catalog\Standard.
  */
-class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,7 +25,7 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->object = new MShop_Catalog_Manager_Index_Catalog_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\Catalog\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -46,7 +49,7 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 
 	public function testAggregate()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'catalog' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'catalog' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
@@ -54,7 +57,7 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 
@@ -70,31 +73,31 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product item with code CNE found!' );
+			throw new \Exception( 'No product item with code CNE found!' );
 		}
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
 		$catListItems = $listManager->searchItems( $search );
 
 		if( ( $catListItem = reset( $catListItems ) ) === false ) {
-			throw new Exception( 'No catalog list item found!' );
+			throw new \Exception( 'No catalog list item found!' );
 		}
 
 
@@ -133,29 +136,29 @@ class MShop_Catalog_Manager_Index_Catalog_StandardTest extends PHPUnit_Framework
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$catSearch = $catalogManager->createSearch();
 		$catSearch->setConditions( $catSearch->compare( '==', 'catalog.label', 'Kaffee' ) );
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 		$catSearch->setConditions( $catSearch->compare( '==', 'catalog.label', 'Neu' ) );
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 

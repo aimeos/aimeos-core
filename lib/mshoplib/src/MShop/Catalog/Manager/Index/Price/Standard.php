@@ -7,15 +7,18 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Price;
+
+
 /**
  * Submanager for product prices.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Manager_Index_Price_Standard
-	extends MShop_Catalog_Manager_Index_DBBase
-	implements MShop_Catalog_Manager_Index_Price_Iface
+class Standard
+	extends \Aimeos\MShop\Catalog\Manager\Index\DBBase
+	implements \Aimeos\MShop\Catalog\Manager\Index\Price\Iface
 {
 	private $searchConfig = array(
 		'catalog.index.price.id' => array(
@@ -24,7 +27,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_price" AS mcatinpr ON mcatinpr."prodid" = mpro."id"' ),
 			'label'=>'Product index price ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.price.quantity' => array(
@@ -32,7 +35,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>'mcatinpr."quantity"',
 			'label'=>'Product price quantity',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.index.price.value' => array(
@@ -40,7 +43,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."value"',
 			'label'=>'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.value' => array(
@@ -48,7 +51,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>'mcatinpr."value"',
 			'label'=>'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.costs' => array(
@@ -56,7 +59,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."costs"',
 			'label'=>'Product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.costs' => array(
@@ -64,7 +67,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>'mcatinpr."costs"',
 			'label'=>'Sort product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.rebate' => array(
@@ -72,7 +75,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."rebate"',
 			'label'=>'Product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.rebate' => array(
@@ -80,7 +83,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>'mcatinpr."rebate"',
 			'label'=>'Sort product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.index.price.taxrate' => array(
@@ -88,7 +91,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."taxrate"',
 			'label'=>'Product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:catalog.index.price.taxrate' => array(
@@ -96,7 +99,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 			'internalcode'=>'mcatinpr."taxrate"',
 			'label'=>'Sort product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -107,9 +110,9 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	/**
 	 * Initializes the manager instance.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -126,11 +129,11 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/standard/aggregate' );
 	}
@@ -223,7 +226,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -259,7 +262,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -273,11 +276,11 @@ class MShop_Catalog_Manager_Index_Price_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Catalog_Manager_Index_Price_Standard
+		 *  \Aimeos\MShop\Catalog\Manager\Index\Price\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Catalog_Manager_Index_Price_Myprice
+		 *  \Aimeos\MShop\Catalog\Manager\Index\Price\Myprice
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -312,7 +315,7 @@ class MShop_Catalog_Manager_Index_Price_Standard
 		 *  mshop/catalog/manager/index/price/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the catalog index price manager.
 		 *
 		 * @param array List of decorator names
@@ -332,12 +335,12 @@ class MShop_Catalog_Manager_Index_Price_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the catalog index price manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog index price manager.
 		 *
 		 *  mshop/catalog/manager/index/price/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the catalog controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -356,12 +359,12 @@ class MShop_Catalog_Manager_Index_Price_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the catalog index price manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog index price manager.
 		 *
 		 *  mshop/catalog/manager/index/price/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the catalog
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the catalog
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -410,13 +413,13 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	 * Rebuilds the catalog index price for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param MShop_Common_Item_Iface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
 		if( empty( $items ) ) { return; }
 
-		MW_Common_Base::checkClassList( 'MShop_Product_Item_Iface', $items );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
 
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
@@ -472,14 +475,14 @@ class MShop_Catalog_Manager_Index_Price_Standard
 					if( !isset( $listTypes[$refId] ) )
 					{
 						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
-						throw new MShop_Catalog_Exception( $msg );
+						throw new \Aimeos\MShop\Catalog\Exception( $msg );
 					}
 
 					foreach( $listTypes[$refId] as $listType )
 					{
-						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Base::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Base::PARAM_INT );
-						$stmt->bind( 3, $refId, MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 3, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 4, $refItem->getCurrencyId() );
 						$stmt->bind( 5, $listType );
 						$stmt->bind( 6, $refItem->getType() );
@@ -487,21 +490,21 @@ class MShop_Catalog_Manager_Index_Price_Standard
 						$stmt->bind( 8, $refItem->getCosts() );
 						$stmt->bind( 9, $refItem->getRebate() );
 						$stmt->bind( 10, $refItem->getTaxRate() );
-						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Base::PARAM_INT );
+						$stmt->bind( 11, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 12, $date ); //mtime
 						$stmt->bind( 13, $editor );
 						$stmt->bind( 14, $date ); //ctime
 
 						try {
 							$stmt->execute()->finish();
-						} catch( MW_DB_Exception $e ) {; } // Ignore duplicates
+						} catch( \Aimeos\MW\DB\Exception $e ) {; } // Ignore duplicates
 					}
 				}
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -517,12 +520,12 @@ class MShop_Catalog_Manager_Index_Price_Standard
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Iface with ids as keys
+	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		/** mshop/catalog/manager/index/price/standard/item/search
 		 * Retrieves the records matched by the given criteria in the database

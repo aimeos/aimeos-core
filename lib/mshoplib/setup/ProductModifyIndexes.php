@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the product tables.
  */
-class MW_Setup_Task_ProductModifyIndexes extends MW_Setup_Task_Base
+class ProductModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

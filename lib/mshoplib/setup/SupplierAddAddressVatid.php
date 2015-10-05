@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds vatid column to address tables.
  */
-class MW_Setup_Task_SupplierAddAddressVatid extends MW_Setup_Task_Base
+class SupplierAddAddressVatid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_supplier_address' => 'ALTER TABLE "mshop_supplier_address" ADD "vatid" VARCHAR(32) AFTER "company"',

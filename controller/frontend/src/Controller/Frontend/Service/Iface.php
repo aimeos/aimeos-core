@@ -8,24 +8,27 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
  * Interface for service frontend controllers.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Service_Iface
-	extends Controller_Frontend_Common_Iface
+interface Iface
+	extends \Aimeos\Controller\Frontend\Common\Iface
 {
 	/**
 	 * Returns the service items that are available for the service type and the content of the basket.
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
-	 * @param MShop_Order_Item_Base_Iface $basket Basket of the user
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket of the user
 	 * @param array $ref List of domains for which the items referenced by the services should be fetched too
-	 * @return array List of service items implementing MShop_Service_Item_Iface with referenced items
+	 * @return array List of service items implementing \Aimeos\MShop\Service\Item\Iface with referenced items
 	 */
-	public function getServices( $type, MShop_Order_Item_Base_Iface $basket,
+	public function getServices( $type, \Aimeos\MShop\Order\Item\Base\Iface $basket,
 		$ref = array( 'media', 'price', 'text' ) );
 
 	/**
@@ -34,23 +37,23 @@ interface Controller_Frontend_Service_Iface
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
-	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Iface $basket );
+	public function getServiceAttributes( $type, $serviceId, \Aimeos\MShop\Order\Item\Base\Iface $basket );
 
 	/**
 	 * Returns the price of the service.
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Iface $basket Basket with products
-	 * @return MShop_Price_Item_Iface Price item
-	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
-	 * @throws MShop_Exception If service provider isn't available
-	 * @throws Exception If an error occurs
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket with products
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item
+	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
+	 * @throws \Aimeos\MShop\Exception If service provider isn't available
+	 * @throws \Exception If an error occurs
 	 */
-	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Iface $basket );
+	public function getServicePrice( $type, $serviceId, \Aimeos\MShop\Order\Item\Base\Iface $basket );
 
 	/**
 	 * Returns a list of attributes that are invalid.

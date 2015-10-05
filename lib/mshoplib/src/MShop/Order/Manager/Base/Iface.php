@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base;
+
+
 /**
  * Interface for all order base manager implementations.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Manager_Base_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Returns the current basket of the customer.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return MShop_Order_Item_Base_Iface Shopping basket
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Shopping basket
 	 */
 	public function getSession( $type = '' );
 
@@ -29,25 +32,25 @@ interface MShop_Order_Manager_Base_Iface
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see MShop_Order_Manager_Base_Base)
+	 * @return integer Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 */
 	public function getSessionLock( $type = '' );
 
 	/**
 	 * Saves the current shopping basket of the customer.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $order Shopping basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
 	 */
-	public function setSession( MShop_Order_Item_Base_Iface $order, $type = '' );
+	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = '' );
 
 	/**
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Base)
+	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @throws MShop_Order_Exception if the lock value is invalid
+	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
 	 */
 	public function setSessionLock( $lock, $type = '' );
 
@@ -59,15 +62,15 @@ interface MShop_Order_Manager_Base_Iface
 	 * @param integer $baseId Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
-	 * @return MShop_Order_Item_Base_Iface Basket including all items
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $baseId, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL, $fresh = false );
+	public function load( $baseId, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false );
 
 	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object containing all information
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Iface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL );
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item\Address;
+
+
 /**
- * Test class for MShop_Customer_Item_Address_Standard.
+ * Test class for \Aimeos\MShop\Customer\Item\Address\Standard.
  */
-class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -29,7 +32,7 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 			'refid' => 'referenceid',
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
-			'salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
 			'lastname' => 'lastunit',
@@ -52,7 +55,7 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 			'editor' => 'unitTestUser',
 		);
 
-		$this->object = new MShop_Common_Item_Address_Standard( 'customer.address.', $this->values );
+		$this->object = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.', $this->values );
 	}
 
 	/**
@@ -116,14 +119,14 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Base::SALUTATION_MR, $this->object->getSalutation() );
+		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
 
 	public function testSetSalutation()
 	{
-		$this->object->setSalutation( MShop_Common_Item_Address_Base::SALUTATION_COMPANY );
+		$this->object->setSalutation( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY );
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( MShop_Common_Item_Address_Base::SALUTATION_COMPANY, $this->object->getSalutation() );
+		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY, $this->object->getSalutation() );
 	}
 
 	public function testGetTitle()
@@ -281,7 +284,7 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setEmail( 'unittest.de' );
 	}
 
@@ -312,13 +315,13 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 		$this->object->setWebsite( 'http://www.test.de:443' );
 		$this->object->setWebsite( 'https://www.test.de:8080/abc?123' );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( '_test:de' );
 	}
 
 	public function testSetWebsiteHostException()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( 'localhost' );
 	}
 
@@ -361,8 +364,8 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testCopyFrom()
 	{
-		$object = new MShop_Common_Item_Address_Standard( 'customer.address.' );
-		$address = new MShop_Order_Item_Base_Address_Standard( $this->values );
+		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' );
+		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard( $this->values );
 		$object->copyFrom( $address );
 
 		$this->assertNull( $object->getId() );
@@ -414,7 +417,7 @@ class MShop_Customer_Item_Address_StandardTest extends PHPUnit_Framework_TestCas
 			'customer.address.position' => 4,
 		);
 
-		$object = new MShop_Common_Item_Address_Standard( 'customer.address.' );
+		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' );
 		$unknown = $object->fromArray( $list );
 
 		$this->assertEquals( array(), $unknown );

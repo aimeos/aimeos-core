@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Email\Delivery;
+
+
 /**
  * Order delivery e-mail job controller.
  *
  * @package Controller
  * @subpackage Order
  */
-class Controller_Jobs_Order_Email_Delivery_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -55,12 +58,12 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 
 		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
 
-		$helper = new MW_View_Helper_Config_Standard( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$client = Client_Html_Email_Delivery_Factory::createClient( $context, $templatePaths );
+		$client = \Aimeos\Client\Html\Email\Delivery\Factory::createClient( $context, $templatePaths );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
 		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
@@ -84,10 +87,10 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
 		$default = array(
-			MShop_Order_Item_Base::STAT_PROGRESS,
-			MShop_Order_Item_Base::STAT_DISPATCHED,
-			MShop_Order_Item_Base::STAT_REFUSED,
-			MShop_Order_Item_Base::STAT_RETURNED,
+			\Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
+			\Aimeos\MShop\Order\Item\Base::STAT_DISPATCHED,
+			\Aimeos\MShop\Order\Item\Base::STAT_REFUSED,
+			\Aimeos\MShop\Order\Item\Base::STAT_RETURNED,
 		);
 
 		/** controller/jobs/order/email/delivery/default/status
@@ -118,7 +121,7 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 		{
 			$orderSearch = $orderManager->createSearch();
 
-			$param = array( MShop_Order_Item_Status_Base::EMAIL_DELIVERY, $status );
+			$param = array( \Aimeos\MShop\Order\Item\Status\Base::EMAIL_DELIVERY, $status );
 			$orderFunc = $orderSearch->createFunction( 'order.containsStatus', $param );
 
 			$expr = array(
@@ -141,20 +144,20 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
 
 						try {
-							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
-						} catch( Exception $e ) {
-							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+							$addr = $orderBaseItem->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+						} catch( \Exception $e ) {
+							$addr = $orderBaseItem->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 						}
 
 						$view->extAddressItem = $addr;
 						$view->extOrderBaseItem = $orderBaseItem;
 						$view->extOrderItem = $item;
 
-						$helper = new MW_View_Helper_Translate_Standard( $view, $context->getI18n( $addr->getLanguageId() ) );
+						$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $context->getI18n( $addr->getLanguageId() ) );
 						$view->addHelper( 'translate', $helper );
 
 						$message = $mailer->createMessage();
-						$helper = new MW_View_Helper_Mail_Standard( $view, $message );
+						$helper = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $message );
 						$view->addHelper( 'mail', $helper );
 
 						$client->setView( $view );
@@ -165,12 +168,12 @@ class Controller_Jobs_Order_Email_Delivery_Standard
 
 						$statusItem = $orderStatusManager->createItem();
 						$statusItem->setParentId( $id );
-						$statusItem->setType( MShop_Order_Item_Status_Base::EMAIL_DELIVERY );
+						$statusItem->setType( \Aimeos\MShop\Order\Item\Status\Base::EMAIL_DELIVERY );
 						$statusItem->setValue( $status );
 
 						$orderStatusManager->saveItem( $statusItem );
 					}
-					catch( Exception $e )
+					catch( \Exception $e )
 					{
 						$str = 'Error while trying to send delivery e-mail for order ID "%1$s" and status "%2$s": %3$s';
 						$msg = sprintf( $str, $item->getId(), $item->getDeliveryStatus(), $e->getMessage() );

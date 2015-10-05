@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Delivery;
+
+
 /**
  * Abstract class for all delivery provider implementations.
  *
  * @package MShop
  * @subpackage Service
  */
-abstract class MShop_Service_Provider_Delivery_Base
-extends MShop_Service_Provider_Base
-implements MShop_Service_Provider_Delivery_Iface
+abstract class Base
+extends \Aimeos\MShop\Service\Provider\Base
+implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
 	/**
 	 * Feature constant if querying for status updates for an order is supported.
@@ -33,10 +36,10 @@ implements MShop_Service_Provider_Delivery_Iface
 	/**
 	 * Sets the delivery attributes in the given service.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 */
-	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
 		$this->setAttributes( $orderServiceItem, $attributes, 'delivery' );
 	}

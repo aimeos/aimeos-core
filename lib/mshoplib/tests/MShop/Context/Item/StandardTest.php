@@ -1,87 +1,89 @@
 <?php
 
+namespace Aimeos\MShop\Context\Item;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_Context_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new MShop_Context_Item_Standard();
+		$this->object = new \Aimeos\MShop\Context\Item\Standard();
 	}
 
 	public function testGetConfig()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getConfig();
 	}
 
 	public function testGetDatabaseManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getDatabaseManager();
 	}
 
 	public function testGetLocale()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getLocale();
 	}
 
 	public function testGetI18n()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getI18n();
 	}
 
 	public function testGetLogger()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getLogger();
 	}
 
 	public function testGetSession()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSession();
 	}
 
 	public function testGetMail()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getMail();
 	}
 
 	public function testGetView()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getView();
 	}
 
 	public function testSetConfig()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->object->setConfig( $context->getConfig() );
 		$this->assertSame( $context->getConfig(), $this->object->getConfig() );
 	}
 
 	public function testSetDatabaseManager()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->object->setDatabaseManager( $context->getDatabaseManager() );
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
 	}
 
 	public function testSetI18n()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 		$locale->setLanguageId( 'en' );
 		$this->object->setLocale( $locale );
 
@@ -91,37 +93,37 @@ class MShop_Context_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLocale()
 	{
-		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 		$this->object->setLocale( $locale );
 		$this->assertSame( $locale, $this->object->getLocale() );
 	}
 
 	public function testSetLogger()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->object->setLogger( $context->getLogger() );
 		$this->assertSame( $context->getLogger(), $this->object->getLogger() );
 	}
 
 	public function testSetSession()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->object->setSession( $context->getSession() );
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
 	}
 
 	public function testSetMail()
 	{
-		$mail = new MW_Mail_None();
+		$mail = new \Aimeos\MW\Mail\None();
 		$this->object->setMail( $mail );
-		$this->assertInstanceOf( 'MW_Mail_Iface', $this->object->getMail() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Iface', $this->object->getMail() );
 	}
 
 	public function testSetView()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 		$this->object->setView( $view );
-		$this->assertInstanceOf( 'MW_View_Iface', $this->object->getView() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Iface', $this->object->getView() );
 	}
 
 	public function testGetSetEditor()

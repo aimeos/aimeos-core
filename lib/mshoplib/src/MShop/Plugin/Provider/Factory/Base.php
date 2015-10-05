@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Factory;
+
+
 /**
  * Base class for plugin provider implementations
  *
  * @package MShop
  * @subpackage Plugin
  */
-abstract class MShop_Plugin_Provider_Factory_Base
-	extends MShop_Plugin_Provider_Base
+abstract class Base
+	extends \Aimeos\MShop\Plugin\Provider\Base
 {
 	/**
 	 * Initializes the object instance
@@ -24,10 +27,10 @@ abstract class MShop_Plugin_Provider_Factory_Base
 	 * compatible with the constructor of the factory interface if this
 	 * intermediate constructor isn't implemented!
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item )
 	{
 		parent::__construct( $context, $item );
 	}

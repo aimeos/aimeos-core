@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Communication;
+
+
 /**
  * Class for communication with delivery and payment providers of PayPalExpress.
  *
  * @package MW
  * @subpackage Communication
  */
-class MW_Communication_TestPayPalExpress implements MW_Communication_Iface
+class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 {
 	private $rules = array();
 
@@ -56,15 +59,15 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Iface
 	public function transmit( $target, $method, $payload )
 	{
 		if( !isset( $this->rules['set'] ) ) {
-			throw new MW_Communication_Exception( sprintf( 'No rules for unit tests was set' ) );
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No rules for unit tests was set' ) );
 		}
 
 		if( !isset( $this->rules['error'] ) ) {
-			throw new MW_Communication_Exception( sprintf( 'No error message for unit tests was set' ) );
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No error message for unit tests was set' ) );
 		}
 
 		if( !isset( $this->rules['success'] ) ) {
-			throw new MW_Communication_Exception( sprintf( 'No success message for unit tests was set' ) );
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
 
 		$params = array();

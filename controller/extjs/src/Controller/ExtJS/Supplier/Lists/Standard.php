@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Supplier\Lists;
+
+
 /**
  * ExtJS supplier list controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Supplier_Lists_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -24,9 +27,9 @@ class Controller_ExtJS_Supplier_Lists_Standard
 	/**
 	 * Initializes the supplier list controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Supplier_Lists' );
 	}
@@ -35,10 +38,10 @@ class Controller_ExtJS_Supplier_Lists_Standard
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
-	 * @param stdClass $params Associative array containing the parameters
+	 * @param \stdClass $params Associative array containing the parameters
 	 * @return array List of associative arrays with item properties, total number of items and success property
 	 */
-	public function searchItems( stdClass $params )
+	public function searchItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site' ) );
 		$this->setLocale( $params->site );
@@ -70,12 +73,12 @@ class Controller_ExtJS_Supplier_Lists_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'supplier/lists' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'supplier/lists' );
 		}
 
 		return $this->manager;
@@ -96,10 +99,10 @@ class Controller_ExtJS_Supplier_Lists_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'supplier.lists.datestart'} ) && $entry->{'supplier.lists.datestart'} != '' ) {
 			$entry->{'supplier.lists.datestart'} = str_replace( 'T', ' ', $entry->{'supplier.lists.datestart'} );

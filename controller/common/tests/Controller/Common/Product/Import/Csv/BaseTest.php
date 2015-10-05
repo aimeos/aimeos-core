@@ -1,31 +1,32 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Common_Product_Import_Csv_TestAbstract( $context, $aimeos );
+		$this->object = new TestAbstract( $context, $aimeos );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -33,27 +34,27 @@ class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_Te
 	{
 		$cache = $this->object->getCachePublic( 'attribute' );
 
-		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Cache_Iface', $cache );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\Iface', $cache );
 	}
 
 
 	public function testGetCacheInvalidType()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getCachePublic( '$' );
 	}
 
 
 	public function testGetCacheInvalidClass()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getCachePublic( 'test' );
 	}
 
 
 	public function testGetCacheInvalidInterface()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getCachePublic( 'attribute', 'Invalid' );
 	}
 
@@ -62,28 +63,28 @@ class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_Te
 	{
 		$processor = $this->object->getProcessorsPublic( array( 'attribute' => array() ) );
 
-		$this->assertInstanceOf( 'Controller_Common_Product_Import_Csv_Processor_Iface', $processor );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\Iface', $processor );
 	}
 
 
 	public function testGetProcessorsInvalidType()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getProcessorsPublic( array( '$' => array() ) );
 	}
 
 
 	public function testGetProcessorsInvalidClass()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getProcessorsPublic( array( 'test' => array() ) );
 	}
 
 
 	public function testGetProcessorsInvalidInterface()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->object->getProcessorsPublic( array( 'invalid' => array() ) );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->object->getProcessorsPublic( array( 'TestInvalid' => array() ) );
 	}
 
 
@@ -97,14 +98,14 @@ class Controller_Common_Product_Import_Csv_BaseTest extends PHPUnit_Framework_Te
 
 	public function testGetTypeIdUnknown()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getTypeIdPublic( 'attribute/type', 'product', 'unknown' );
 	}
 }
 
 
-class Controller_Common_Product_Import_Csv_TestAbstract
-	extends Controller_Common_Product_Import_Csv_Base
+class TestAbstract
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Base
 {
 	public function getCachePublic( $type, $name = null )
 	{
@@ -125,11 +126,6 @@ class Controller_Common_Product_Import_Csv_TestAbstract
 }
 
 
-class Controller_Common_Product_Import_Csv_Cache_Attribute_Invalid
-{
-}
-
-
-class Controller_Common_Product_Import_Csv_Processor_Invalid_Standard
+class TestInvalid
 {
 }

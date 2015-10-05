@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Basket\Standard\Coupon;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Basket_Standard_Coupon_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Basket\Standard\Coupon\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -41,7 +43,7 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testGetHeader()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$view = $this->object->getView();
 		$view->standardBasket = $controller->get();
@@ -53,7 +55,7 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testGetBody()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$view = $this->object->getView();
 		$view->standardBasket = $controller->get();
@@ -65,18 +67,18 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testGetBodyAddCoupon()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$controller->addProduct( $this->getProductItem( 'CNC' )->getId(), 1, array(), array(), array(), array(), array(), 'default' );
 
 		$view = $this->object->getView();
 
 		$param = array( 'b_coupon' => '90AB' );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
 
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$view->standardBasket = $controller->get();
 		$output = $this->object->getBody();
 
@@ -86,13 +88,13 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testGetBodyDeleteCoupon()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$controller->addProduct( $this->getProductItem( 'CNC' )->getId(), 1, array(), array(), array(), array(), array(), 'default' );
 
 		$view = $this->object->getView();
 
 		$param = array( 'b_coupon' => '90AB' );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -100,12 +102,12 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 		$param = array( 'b_action' => 'coupon-delete', 'b_coupon' => '90AB' );
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
 
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$view->standardBasket = $controller->get();
 		$output = $this->object->getBody();
 
@@ -115,14 +117,14 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -132,13 +134,13 @@ class Client_Html_Basket_Standard_Coupon_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function getProductItem( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

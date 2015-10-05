@@ -5,36 +5,39 @@
  */
 
 
+namespace Aimeos\MAdmin\Log\Manager;
+
+
 /**
- * Test class for MAdmin_Log_Manager_Factory.
+ * Test class for \Aimeos\MAdmin\Log\Manager\Factory.
  */
-class MAdmin_Log_Manager_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MAdmin\Log\Manager\Factory::createManager( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext(), 'Standard' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MAdmin\Log\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MAdmin_Log_Exception' );
-		MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
+		\Aimeos\MAdmin\Log\Manager\Factory::createManager( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MAdmin_Log_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MAdmin\Log\Manager\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 }

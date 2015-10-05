@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MW\Setup\DBSchema;
+
+
 /**
  * Common interface for all classes implementing access to the database schema.
  *
  * @package MW
  * @subpackage Setup
  */
-interface MW_Setup_DBSchema_Iface
+interface Iface
 {
 	/**
 	 * Initializes the database schema object.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $dbname Database name
 	 * @return void
 	 */
-	public function __construct( MW_DB_Connection_Iface $conn, $dbname );
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname );
 
 	/**
 	 * Checks if the given table exists for the specified table in the database.
@@ -65,7 +68,7 @@ interface MW_Setup_DBSchema_Iface
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return MW_Setup_DBSchema_Column_Iface Object which contains the details
+	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
 	public function getColumnDetails( $tablename, $columnname );
 	

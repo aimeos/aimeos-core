@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds service list test data.
  */
-class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
+class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding service-list test data', 0 );
@@ -59,7 +62,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'service-list.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 		}
 
 		$refKeys = array();
@@ -82,11 +85,11 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 *
 	 * @param array $keys List of keys for search
 	 * @return array $refIds List with referenced Ids
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
@@ -95,7 +98,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 			$exp = explode( '/', $dataset );
 
 			if( count( $exp ) != 5 ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref price are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref price are set wrong "%1$s"', $dataset ) );
 			}
 
 			$domain[] = $exp[1];
@@ -142,17 +145,17 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 *
 	 * @param array $keys List of keys for search
 	 * @return array $refIds List with referenced Ids
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
 			$labels[] = $str;
@@ -175,17 +178,17 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 *
 	 * @param array $keys List of keys for search
 	 * @return array $refIds List with referenced Ids
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
 			}
 
 			$labels[] = $str;
@@ -208,11 +211,11 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function addServiceListData( array $testdata, array $refIds )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 		$serviceListManager = $serviceManager->getSubManager( 'lists', 'Standard' );
 		$serviceListTypeManager = $serviceListManager->getSubmanager( 'type', 'Standard' );
@@ -223,7 +226,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 			$exp = explode( '/', $dataset['parentid'] );
 
 			if( count( $exp ) != 3 ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$typeDomain[] = $exp[0];
@@ -276,15 +279,15 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['service/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No service ID found for "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No service ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No service list type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No service list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$listItem->setId( null );

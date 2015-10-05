@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Account\Watch;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Account_Watch_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Account\Watch\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -55,14 +57,14 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -83,17 +85,17 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 			'wat_id' => 321,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
+		$listManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Lists\\Standard' )
 			->setMethods( array( 'saveItem', 'moveItem' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
-		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Standard' )
+		$managerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -101,7 +103,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
 		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
-		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
+		\Aimeos\MShop\Customer\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Customer\\Manager\\' . $name, $managerStub );
 
 
 		$managerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
@@ -125,16 +127,16 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 			'wat_id' => 321,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
+		$listManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Lists\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
-		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Standard' )
+		$managerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -142,7 +144,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
 		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
-		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
+		\Aimeos\MShop\Customer\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Customer\\Manager\\' . $name, $managerStub );
 
 
 		$item = $listManagerStub->createItem();
@@ -171,17 +173,17 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 			'wat_id' => 321,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 
 
-		$listManagerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Lists_Standard' )
+		$listManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Lists\\Standard' )
 			->setMethods( array( 'deleteItems' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
-		$managerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Standard' )
+		$managerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -189,7 +191,7 @@ class Client_Html_Account_Watch_StandardTest extends PHPUnit_Framework_TestCase
 		$name = 'ClientHtmlAccountWatchDefaultProcess';
 		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
 
-		MShop_Customer_Manager_Factory::injectManager( 'MShop_Customer_Manager_' . $name, $managerStub );
+		\Aimeos\MShop\Customer\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Customer\\Manager\\' . $name, $managerStub );
 
 
 		$managerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Statement\PDO;
+
+
 /**
- * Database statement class for simple PDO statements.
+ * Database statement class for simple \PDO statements.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_Statement_Iface
+class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
 	private $conn = null;
 	private $binds = array();
@@ -26,10 +29,10 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_S
 	/**
 	 * Initializes the statement object.
 	 *
-	 * @param PDO $conn PDO database connection object
+	 * @param \PDO $conn \PDO database connection object
 	 * @param string $sql SQL statement string
 	 */
-	public function __construct( PDO $conn, $sql )
+	public function __construct( \PDO $conn, $sql )
 	{
 		$this->conn = $conn;
 		$this->sql = $sql;
@@ -44,7 +47,7 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_S
 				while( ( $count += substr_count( $part, '\'' ) ) % 2 !== 0 )
 				{
 					if( ( $part = next( $parts ) ) === false ) {
-						throw new MW_DB_Exception( 'Number of apostrophes don\'t match' );
+						throw new \Aimeos\MW\DB\Exception( 'Number of apostrophes don\'t match' );
 					}
 					$temp .= '?' . $part;
 				}
@@ -60,9 +63,9 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_S
 	 *
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in MW_DB_Statement_Base as constant
+	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
 	 */
-	public function bind( $position, $value, $type = MW_DB_Statement_Base::PARAM_STR )
+	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
 	{
 		if( is_null( $value ) ) {
 			$this->binds[$position] = 'NULL'; return;
@@ -70,16 +73,16 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_S
 
 		switch( $type )
 		{
-			case MW_DB_Statement_Base::PARAM_NULL:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
 				$this->binds[$position] = 'NULL'; break;
-			case MW_DB_Statement_Base::PARAM_BOOL:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$this->binds[$position] = (int) (bool) $value; break;
-			case MW_DB_Statement_Base::PARAM_INT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
 				$this->binds[$position] = (int) $value; break;
-			case MW_DB_Statement_Base::PARAM_FLOAT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
-			case MW_DB_Statement_Base::PARAM_STR:
-				// PDO quote isn't available for ODBC driver
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+				// \PDO quote isn't available for ODBC driver
 				$value = str_replace( '\'', '\'\'', str_replace( '\\', '\\\\', $value ) );
 				$this->binds[$position] = '\'' . $value . '\''; break;
 			default:
@@ -93,21 +96,21 @@ class MW_DB_Statement_PDO_Simple extends MW_DB_Statement_Base implements MW_DB_S
 	/**
 	 * Executes the statement.
 	 *
-	 * @return MW_DB_Result_Iface Result object
-	 * @throws MW_DB_Exception If an error occured in the unterlying driver or if the number of binds doesn't match
+	 * @return \Aimeos\MW\DB\Result\Iface Result object
+	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver or if the number of binds doesn't match
 	 */
 	public function execute()
 	{
 		if( count( $this->binds ) !== count( $this->parts ) - 1 ) {
-			throw new MW_DB_Exception( sprintf( 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"', count( $this->binds ), $this->sql ) );
+			throw new \Aimeos\MW\DB\Exception( sprintf( 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"', count( $this->binds ), $this->sql ) );
 		}
 
 		$sql = $this->buildSQL();
 
 		try {
-			return new MW_DB_Result_PDO( $this->conn->query( $sql ) );
-		} catch ( PDOException $pe ) {
-			throw new MW_DB_Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
+			return new \Aimeos\MW\DB\Result\PDO( $this->conn->query( $sql ) );
+		} catch ( \PDOException $pe ) {
+			throw new \Aimeos\MW\DB\Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
 	}
 

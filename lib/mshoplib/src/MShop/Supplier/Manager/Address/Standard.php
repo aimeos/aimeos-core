@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Manager\Address;
+
+
 /**
  * Implementation for supplier address manager.
  *
  * @package MShop
  * @subpackage Supplier
  */
-class MShop_Supplier_Manager_Address_Standard
-	extends MShop_Common_Manager_Address_Base
-	implements MShop_Supplier_Manager_Address_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Address\Base
+	implements \Aimeos\MShop\Supplier\Manager\Address\Iface
 {
 	private $searchConfig = array(
 		'supplier.address.id' => array(
@@ -25,7 +28,7 @@ class MShop_Supplier_Manager_Address_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_supplier_address" AS msupad ON msupad."refid" = msup."id"' ),
 			'label' => 'Supplier address ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.address.siteid' => array(
@@ -33,7 +36,7 @@ class MShop_Supplier_Manager_Address_Standard
 			'internalcode' => 'msupad."siteid"',
 			'label' => 'Supplier address site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.address.refid' => array(
@@ -41,7 +44,7 @@ class MShop_Supplier_Manager_Address_Standard
 			'internalcode' => 'msupad."refid"',
 			'label' => 'Supplier address reference ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.address.company'=> array(
@@ -49,161 +52,161 @@ class MShop_Supplier_Manager_Address_Standard
 			'internalcode' => 'msupad."company"',
 			'label' => 'Supplier address company',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.vatid'=> array(
 			'code' => 'supplier.address.vatid',
 			'internalcode' => 'msupad."vatid"',
 			'label' => 'Supplier address Vat ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.salutation' => array(
 			'code' => 'supplier.address.salutation',
 			'internalcode' => 'msupad."salutation"',
 			'label' => 'Supplier address salutation',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.title' => array(
 			'code' => 'supplier.address.title',
 			'internalcode' => 'msupad."title"',
 			'label' => 'Supplier address title',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.firstname' => array(
 			'code' => 'supplier.address.firstname',
 			'internalcode' => 'msupad."firstname"',
 			'label' => 'Supplier address firstname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.lastname' => array(
 			'code' => 'supplier.address.lastname',
 			'internalcode' => 'msupad."lastname"',
 			'label' => 'Supplier address lastname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.address1' => array(
 			'code' => 'supplier.address.address1',
 			'internalcode' => 'msupad."address1"',
 			'label' => 'Supplier address part one',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.address2' => array(
 			'code' => 'supplier.address.address2',
 			'internalcode' => 'msupad."address2"',
 			'label' => 'Supplier address part two',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.address3' => array(
 			'code' => 'supplier.address.address3',
 			'internalcode' => 'msupad."address3"',
 			'label' => 'Supplier address part three',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.postal' => array(
 			'code' => 'supplier.address.postal',
 			'internalcode' => 'msupad."postal"',
 			'label' => 'Supplier address postal',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.city' => array(
 			'code' => 'supplier.address.city',
 			'internalcode' => 'msupad."city"',
 			'label' => 'Supplier address city',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.state' => array(
 			'code' => 'supplier.address.state',
 			'internalcode' => 'msupad."state"',
 			'label' => 'Supplier address state',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.countryid' => array(
 			'code' => 'supplier.address.countryid',
 			'internalcode' => 'msupad."countryid"',
 			'label' => 'Supplier address country ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.languageid' => array(
 			'code' => 'supplier.address.languageid',
 			'internalcode' => 'msupad."langid"',
 			'label' => 'Supplier address language ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.telephone' => array(
 			'code' => 'supplier.address.telephone',
 			'internalcode' => 'msupad."telephone"',
 			'label' => 'Supplier address telephone',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.email' => array(
 			'code' => 'supplier.address.email',
 			'internalcode' => 'msupad."email"',
 			'label' => 'Supplier address email',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.telefax' => array(
 			'code' => 'supplier.address.telefax',
 			'internalcode' => 'msupad."telefax"',
 			'label' => 'Supplier address telefax',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.website' => array(
 			'code' => 'supplier.address.website',
 			'internalcode' => 'msupad."website"',
 			'label' => 'Supplier address website',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.flag' => array(
 			'code' => 'supplier.address.flag',
 			'internalcode' => 'msupad."flag"',
 			'label' => 'Supplier address flag',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.address.position' => array(
 			'code' => 'supplier.address.position',
 			'internalcode' => 'msupad."pos"',
 			'label' => 'Supplier address position',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.address.ctime'=> array(
 			'code'=>'supplier.address.ctime',
 			'internalcode'=>'msupad."ctime"',
 			'label'=>'Supplier address create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.mtime'=> array(
 			'code'=>'supplier.address.mtime',
 			'internalcode'=>'msupad."mtime"',
 			'label'=>'Supplier address modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.address.editor'=> array(
 			'code'=>'supplier.address.editor',
 			'internalcode'=>'msupad."editor"',
 			'label'=>'Supplier address editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -211,9 +214,9 @@ class MShop_Supplier_Manager_Address_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
@@ -240,7 +243,7 @@ class MShop_Supplier_Manager_Address_Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -272,7 +275,7 @@ class MShop_Supplier_Manager_Address_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -286,11 +289,11 @@ class MShop_Supplier_Manager_Address_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Supplier_Manager_Address_Standard
+		 *  \Aimeos\MShop\Supplier\Manager\Address\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Supplier_Manager_Address_Myaddress
+		 *  \Aimeos\MShop\Supplier\Manager\Address\Myaddress
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -325,7 +328,7 @@ class MShop_Supplier_Manager_Address_Standard
 		 *  mshop/supplier/manager/address/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the address of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the supplier address manager.
 		 *
 		 * @param array Address of decorator names
@@ -345,12 +348,12 @@ class MShop_Supplier_Manager_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the supplier address manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the supplier address manager.
 		 *
 		 *  mshop/supplier/manager/address/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the supplier controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the supplier controller.
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
@@ -369,12 +372,12 @@ class MShop_Supplier_Manager_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the supplier address manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the supplier address manager.
 		 *
 		 *  mshop/supplier/manager/address/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the supplier
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the supplier
 		 * controller.
 		 *
 		 * @param array Address of decorator names
@@ -393,11 +396,11 @@ class MShop_Supplier_Manager_Address_Standard
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
-	 * @return MShop_Supplier_Item_Address_Iface New address item
+	 * @return \Aimeos\MShop\Supplier\Item\Address\Iface New address item
 	 */
 	protected function createItemBase( array $values = array( ) )
 	{
-		return new MShop_Supplier_Item_Address_Standard( $this->getPrefix(), $values );
+		return new \Aimeos\MShop\Supplier\Item\Address\Standard( $this->getPrefix(), $values );
 	}
 
 

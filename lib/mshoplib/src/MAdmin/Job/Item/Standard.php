@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Job\Item;
+
+
 /**
  * Default job item implementation.
  *
  * @package MAdmin
  * @subpackage Job
  */
-class MAdmin_Job_Item_Standard
-	extends MShop_Common_Item_Base
-	implements MAdmin_Job_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MAdmin\Job\Item\Iface
 {
 	private $values;
 

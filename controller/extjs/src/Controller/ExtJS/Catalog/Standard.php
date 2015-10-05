@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Catalog;
+
+
 /**
  * ExtJS catalog controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Catalog_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Initializes the RPC catalog controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Catalog' );
 	}
@@ -36,10 +39,10 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Returns a node or a list of nodes including their children for the given IDs.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with nodes and success value
 	 */
-	public function getTree( stdClass $params )
+	public function getTree( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -52,7 +55,7 @@ class Controller_ExtJS_Catalog_Standard
 		foreach( $items as $entry )
 		{
 			$entry = ( $entry != 'root' ? $entry : null );
-			$item = $manager->getTree( $entry, array(), MW_Tree_Manager_Base::LEVEL_LIST );
+			$item = $manager->getTree( $entry, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
 			$result[] = $this->createNodeArray( $item );
 		}
 
@@ -66,10 +69,10 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Inserts a new node or a list of new nodes depending on the parent and the referenced node ID.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with nodes and success value
 	 */
-	public function insertItems( stdClass $params )
+	public function insertItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -107,10 +110,10 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Moves a node or a list of nodes depending on the old parent, the new parent and the referenced node ID.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function moveItems( stdClass $params )
+	public function moveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items', 'oldparentid', 'newparentid' ) );
 		$this->setLocale( $params->site );
@@ -181,9 +184,9 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Creates a list of nodes with children.
 	 *
-	 * @param MShop_Catalog_Item_Iface $node Catalog node
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $node Catalog node
 	 */
-	protected function createNodeArray( MShop_Catalog_Item_Iface $node )
+	protected function createNodeArray( \Aimeos\MShop\Catalog\Item\Iface $node )
 	{
 		$result = $node->toArray();
 
@@ -198,12 +201,12 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
 		}
 
 		return $this->manager;
@@ -224,10 +227,10 @@ class Controller_ExtJS_Catalog_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'catalog.config'} ) ) {
 			$entry->{'catalog.config'} = (array) $entry->{'catalog.config'};

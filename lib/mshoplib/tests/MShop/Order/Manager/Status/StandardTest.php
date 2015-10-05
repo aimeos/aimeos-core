@@ -5,11 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
- * Test class for MShop_Order_Manager_Status_Standard.
- */
+namespace Aimeos\MShop\Order\Manager\Status;
 
-class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
+
+/**
+ * Test class for \Aimeos\MShop\Order\Manager\Status\Standard.
+ */
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -24,9 +26,9 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Order_Manager_Status_Standard( $this->context );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Order\Manager\Status\Standard( $this->context );
 	}
 
 	
@@ -62,7 +64,7 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 	
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Status_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Status\\Iface', $this->object->createItem() );
 	}
 
 	
@@ -73,7 +75,7 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new MShop_Order_Exception( 'No order status item found' );
+			throw new \Aimeos\MShop\Order\Exception( 'No order status item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -91,7 +93,7 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order base item found.' );
+			throw new \Exception( 'No order base item found.' );
 		}
 
 		$item->setId( null );
@@ -127,13 +129,13 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 	public function testSearchItems()
@@ -182,7 +184,7 @@ class MShop_Order_Manager_Status_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 

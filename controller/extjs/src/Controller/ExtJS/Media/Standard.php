@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Media;
+
+
 /**
  * ExtJs media controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Media_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Initializes the media controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Media' );
 	}
@@ -36,10 +39,10 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Deletes an item or a list of items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function deleteItems( stdClass $params )
+	public function deleteItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -114,13 +117,13 @@ class Controller_ExtJS_Media_Standard
 				&& unlink( $basedir . $item->getPreview() ) === false
 			) {
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getPreview() );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+				$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 			}
 
 			if( is_file( $basedir . $item->getUrl() ) && unlink( $basedir . $item->getUrl() ) === false )
 			{
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getUrl() );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+				$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 			}
 		}
 
@@ -129,7 +132,7 @@ class Controller_ExtJS_Media_Standard
 
 		foreach( $idList as $domain => $domainIds )
 		{
-			$manager = MShop_Factory::createManager( $context, $domain . '/lists' );
+			$manager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 			$search = $manager->createSearch();
 			$expr = array(
@@ -162,14 +165,14 @@ class Controller_ExtJS_Media_Standard
 	}
 
 
-	public function uploadItem( stdClass $params )
+	public function uploadItem( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'domain' ) );
 		$this->setLocale( $params->site );
 
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
-			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 		}
 
 		$config = $this->getContext()->getConfig();
@@ -216,7 +219,7 @@ class Controller_ExtJS_Media_Standard
 
 
 		$filename = md5( $fileinfo['name'] . microtime( true ) );
-		$mediaFile = MW_Media_Factory::get( $fileinfo['tmp_name'], $options );
+		$mediaFile = \Aimeos\MW\Media\Factory::get( $fileinfo['tmp_name'], $options );
 
 		$item = $this->getManager()->createItem();
 		$item->setDomain( $params->domain );
@@ -224,7 +227,7 @@ class Controller_ExtJS_Media_Standard
 		$item->setMimeType( $mediaFile->getMimetype() );
 
 
-		if( $mediaFile instanceof MW_Media_Image_Iface )
+		if( $mediaFile instanceof \Aimeos\MW\Media\Image\Iface )
 		{
 			$item->setPreview( $this->createImage( $mediaFile, 'preview', $params->domain, $fileinfo['tmp_name'], $filename ) );
 			$item->setUrl( $this->createImage( $mediaFile, 'files', $params->domain, $fileinfo['tmp_name'], $filename ) );
@@ -238,7 +241,7 @@ class Controller_ExtJS_Media_Standard
 		if( unlink( $fileinfo['tmp_name'] ) === false )
 		{
 			$msg = sprintf( 'Deleting file "%1$s" failed', $fileinfo['tmp_name'] );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 		}
 
 
@@ -271,12 +274,12 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'media' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'media' );
 		}
 
 		return $this->manager;
@@ -297,10 +300,10 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'media.languageid'} ) && $entry->{'media.languageid'} === '' ) {
 			$entry->{'media.languageid'} = null;
@@ -315,12 +318,12 @@ class Controller_ExtJS_Media_Standard
 	 *
 	 * @param string $filename Path to the file that should be checked
 	 * @param integer $errcode Error code from file upload
-	 * @throws Controller_ExtJS_Exception If file upload isn't valid or the error code represents an error state
+	 * @throws \Aimeos\Controller\ExtJS\Exception If file upload isn't valid or the error code represents an error state
 	 */
 	protected function checkFileUpload( $filename, $errcode )
 	{
 		if( is_uploaded_file( $filename ) === false ) {
-			throw new Controller_ExtJS_Exception( 'File was not uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'File was not uploaded' );
 		}
 
 		switch( $errcode )
@@ -329,19 +332,19 @@ class Controller_ExtJS_Media_Standard
 				break;
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
-				throw new Controller_ExtJS_Exception( 'The uploaded file exceeds the max. allowed filesize' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file exceeds the max. allowed filesize' );
 			case UPLOAD_ERR_PARTIAL:
-				throw new Controller_ExtJS_Exception( 'The uploaded file was only partially uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file was only partially uploaded' );
 			case UPLOAD_ERR_NO_FILE:
-				throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 			case UPLOAD_ERR_NO_TMP_DIR:
-				throw new Controller_ExtJS_Exception( 'Temporary folder is missing' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Temporary folder is missing' );
 			case UPLOAD_ERR_CANT_WRITE:
-				throw new Controller_ExtJS_Exception( 'Failed to write file to disk' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Failed to write file to disk' );
 			case UPLOAD_ERR_EXTENSION:
-				throw new Controller_ExtJS_Exception( 'File upload stopped by extension' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'File upload stopped by extension' );
 			default:
-				throw new Controller_ExtJS_Exception( 'Unknown upload error' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'Unknown upload error' );
 		}
 	}
 
@@ -350,14 +353,14 @@ class Controller_ExtJS_Media_Standard
 	 * Returns the absolute directory for a given relative one.
 	 *
 	 * @param string $relativeDir Relative directory name
-	 * @throws Controller_ExtJS_Exception If base directory is not available or the full directory couldn't be created
+	 * @throws \Aimeos\Controller\ExtJS\Exception If base directory is not available or the full directory couldn't be created
 	 */
 	protected function getAbsoluteDirectory( $relativeDir )
 	{
 		$config = $this->getContext()->getConfig();
 
 		if( ( $dir = $config->get( 'controller/extjs/media/default/basedir', null ) ) === null ) {
-			throw new Controller_ExtJS_Exception( 'No base directory configured' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No base directory configured' );
 		}
 
 		/** controller/extjs/media/default/upload/dirperms
@@ -397,7 +400,7 @@ class Controller_ExtJS_Media_Standard
 		if( is_dir( $dir ) === false && @mkdir( $dir, $perms, true ) === false )
 		{
 			$msg = sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms );
-			throw new Controller_ExtJS_Exception( $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
 		return $dir;
@@ -500,15 +503,15 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Creates a scaled image and returns it's new file name.
 	 *
-	 * @param MW_Media_Image_Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @param string $domain Domain the image belongs to, e.g. "product", "attribute", etc.
 	 * @param string $src Path to original file
 	 * @param string $filename Name of the new file without file extension
 	 * @return string Relative path to the new file
-	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
+	 * @throws \Aimeos\Controller\ExtJS\Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function createImage( MW_Media_Image_Iface $mediaFile, $type, $domain, $src, $filename )
+	protected function createImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $domain, $src, $filename )
 	{
 		$mimetype = $mediaFile->getMimetype();
 		$config = $this->getContext()->getConfig();
@@ -547,13 +550,13 @@ class Controller_ExtJS_Media_Standard
 			if( ( $defaulttype = reset( $allowed ) ) !== false ) {
 				$mimetype = $defaulttype;
 			} else {
-				throw new Controller_ExtJS_Exception( sprintf( 'No allowed image types configured for "%1$s"', $type ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'No allowed image types configured for "%1$s"', $type ) );
 			}
 		}
 
 
 		if( ( $mediadir = $config->get( 'controller/extjs/media/default/upload/directory', null ) ) === null ) {
-			throw new Controller_ExtJS_Exception( 'No media directory configured' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -671,7 +674,7 @@ class Controller_ExtJS_Media_Standard
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 		}
 
 		return "${mediadir}/${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
@@ -681,17 +684,17 @@ class Controller_ExtJS_Media_Standard
 	/**
 	 * Copies the given file to a new location.
 	 *
-	 * @param MW_Media_Image_Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
 	 * @param unknown_type $domain Domain the image belongs to, e.g. "product", "attribute", etc.
 	 * @param string $filename Name of the new file without file extension
-	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
+	 * @throws \Aimeos\Controller\ExtJS\Exception If the configuration is invalid or due to insufficient permissions
 	 */
-	protected function copyFile( MW_Media_Iface $mediaFile, $domain, $filename )
+	protected function copyFile( \Aimeos\MW\Media\Iface $mediaFile, $domain, $filename )
 	{
 		$config = $this->getContext()->getConfig();
 
 		if( ( $mediadir = $config->get( 'controller/extjs/media/default/upload/directory', null ) ) === null ) {
-				throw new Controller_ExtJS_Exception( 'No media directory configured' );
+				throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -706,7 +709,7 @@ class Controller_ExtJS_Media_Standard
 		if( chmod( $dest, $perms ) === false )
 		{
 			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 		}
 
 		return "${mediadir}/files/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
  * Memory caching decorator for config classes.
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_Memory
-	extends MW_Config_Decorator_Base
-	implements MW_Config_Decorator_Iface
+class Memory
+	extends \Aimeos\MW\Config\Decorator\Base
+	implements \Aimeos\MW\Config\Decorator\Iface
 {
 	private $negCache = array();
 	private $cache = array();
@@ -26,10 +29,10 @@ class MW_Config_Decorator_Memory
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Iface $object Config object or decorator
+	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param array $config Pre-cached non-shared configuration
 	 */
-	public function __construct( MW_Config_Iface $object, $config = array() )
+	public function __construct( \Aimeos\MW\Config\Iface $object, $config = array() )
 	{
 		parent::__construct( $object );
 

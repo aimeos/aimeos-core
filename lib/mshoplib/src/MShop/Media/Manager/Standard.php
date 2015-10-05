@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Media\Manager;
+
+
 /**
  * Default media manager implementation.
  *
  * @package MShop
  * @subpackage Media
  */
-class MShop_Media_Manager_Standard
-	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Media_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	implements \Aimeos\MShop\Media\Manager\Iface
 {
 	private $searchConfig = array(
 		'media.id' => array(
@@ -24,14 +27,14 @@ class MShop_Media_Manager_Standard
 			'code' => 'media.id',
 			'internalcode' => 'mmed."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'media.siteid' => array(
 			'label' => 'Media site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.typeid' => array(
@@ -39,7 +42,7 @@ class MShop_Media_Manager_Standard
 			'code' => 'media.typeid',
 			'internalcode' => 'mmed."typeid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.languageid' => array(
@@ -47,70 +50,70 @@ class MShop_Media_Manager_Standard
 			'code' => 'media.languageid',
 			'internalcode' => 'mmed."langid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.domain' => array(
 			'label' => 'Media domain',
 			'code' => 'media.domain',
 			'internalcode' => 'mmed."domain"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.label' => array(
 			'label' => 'Media label',
 			'code' => 'media.label',
 			'internalcode' => 'mmed."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.mimetype' => array(
 			'label' => 'Media mimetype',
 			'code' => 'media.mimetype',
 			'internalcode' => 'mmed."mimetype"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.url' => array(
 			'label' => 'Media URL',
 			'code' => 'media.url',
 			'internalcode' => 'mmed."link"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.preview' => array(
 			'label' => 'Media preview URL',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.status' => array(
 			'label' => 'Media status',
 			'code' => 'media.status',
 			'internalcode' => 'mmed."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'media.ctime'=> array(
 			'code'=>'media.ctime',
 			'internalcode'=>'mmed."ctime"',
 			'label'=>'Media create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.mtime'=> array(
 			'code'=>'media.mtime',
 			'internalcode'=>'mmed."mtime"',
 			'label'=>'Media modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.editor'=> array(
 			'code'=>'media.editor',
 			'internalcode'=>'mmed."editor"',
 			'label'=>'Media editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -118,9 +121,9 @@ class MShop_Media_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-media' );
@@ -147,7 +150,7 @@ class MShop_Media_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -177,7 +180,7 @@ class MShop_Media_Manager_Standard
 	/**
 	 * Creates a new media object.
 	 *
-	 * @return MShop_Media_Item_Iface New media object
+	 * @return \Aimeos\MShop\Media\Item\Iface New media object
 	 */
 	public function createItem()
 	{
@@ -227,8 +230,8 @@ class MShop_Media_Manager_Standard
 	 *
 	 * @param integer $id ID of the item that should be retrieved
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Media_Item_Iface Returns the media item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -239,14 +242,14 @@ class MShop_Media_Manager_Standard
 	/**
 	 * Adds a new item to the storage or updates an existing one.
 	 *
-	 * @param MShop_Media_Item_Iface $item New item that should be saved to the storage
+	 * @param \Aimeos\MShop\Media\Item\Iface $item New item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Media_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Media\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Media_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -328,20 +331,20 @@ class MShop_Media_Manager_Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
-			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $item->getMimeType() );
 			$stmt->bind( 6, $item->getUrl() );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $item->getDomain() );
 			$stmt->bind( 9, $item->getPreview() );
 			$stmt->bind( 10, $date ); // mtime
 			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 12, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 12, $date ); // ctime
@@ -387,7 +390,7 @@ class MShop_Media_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -398,13 +401,13 @@ class MShop_Media_Manager_Standard
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Media_Item_Iface
-	 * @throws MShop_Media_Exception If creating items failed
+	 * @return array List of items implementing \Aimeos\MShop\Media\Item\Iface
+	 * @throws \Aimeos\MShop\Media\Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -416,7 +419,7 @@ class MShop_Media_Manager_Standard
 		try
 		{
 			$required = array( 'media' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/media/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -528,7 +531,7 @@ class MShop_Media_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -558,7 +561,7 @@ class MShop_Media_Manager_Standard
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -594,7 +597,7 @@ class MShop_Media_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -606,12 +609,12 @@ class MShop_Media_Manager_Standard
 	 * Creates a new media item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items reference to this item
-	 * @return MShop_Media_Item_Iface New product item
+	 * @return \Aimeos\MShop\Media\Item\Iface New product item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		return new MShop_Media_Item_Standard( $values, $listItems, $refItems );
+		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems );
 	}
 }

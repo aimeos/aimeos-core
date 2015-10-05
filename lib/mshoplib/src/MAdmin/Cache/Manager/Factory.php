@@ -8,24 +8,27 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 /**
  * Admin cache factory.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Manager_Factory
-	extends MAdmin_Common_Factory_Base
-	implements MShop_Common_Factory_Iface
+class Factory
+	extends \Aimeos\MAdmin\Common\Factory\Base
+	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
 	 * Creates an admin cache manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
+	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/cache/manager/name
 		 * Class name of the used cache manager implementation
@@ -37,11 +40,11 @@ class MAdmin_Cache_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Cache_Manager_Standard
+		 *  \Aimeos\MShop\Cache\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Cache_Manager_Mymanager
+		 *  \Aimeos\MShop\Cache\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -66,12 +69,12 @@ class MAdmin_Cache_Manager_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'MAdmin_Cache_Manager_' . $name : '<not a string>';
-			throw new MAdmin_Cache_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\MAdmin\\Cache\\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MAdmin_Cache_Manager_Iface';
-		$classname = 'MAdmin_Cache_Manager_' . $name;
+		$iface = '\\Aimeos\\MAdmin\\Cache\\Manager\\Iface';
+		$classname = '\\Aimeos\\MAdmin\\Cache\\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
@@ -90,7 +93,7 @@ class MAdmin_Cache_Manager_Factory
 		 *  madmin/cache/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "madmin/common/manager/decorators/default" for the cache manager.
 		 *
 		 * @param array List of decorator names
@@ -110,12 +113,12 @@ class MAdmin_Cache_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the cache manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the cache manager.
 		 *
 		 *  madmin/cache/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the cache controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the cache controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -134,12 +137,12 @@ class MAdmin_Cache_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the cache manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the cache manager.
 		 *
 		 *  madmin/cache/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the cache
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the cache
 		 * controller.
 		 *
 		 * @param array List of decorator names

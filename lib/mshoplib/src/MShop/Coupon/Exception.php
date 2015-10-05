@@ -7,12 +7,15 @@
  */
 
 
+namespace Aimeos\MShop\Coupon;
+
+
 /**
- * MShop_Coupon_Exception.
+ * \Aimeos\MShop\Coupon\Exception.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base;
+
+
 /**
- * Test class for MShop_Order_Item_Base_Standard.
+ * Test class for \Aimeos\MShop\Order\Item\Base\Standard.
  */
-class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -28,8 +31,8 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
@@ -48,9 +51,9 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 
-		$this->object = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $this->locale, $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->locale, $this->values );
 
 
 		$price = $priceManager->createItem();
@@ -81,8 +84,8 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$this->coupons = array( 'OPQR' => array( $prod1 ) );
 
 		$this->addresses = array(
-			MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT => $orderAddressManager->createItem(),
-			MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY => $orderAddressManager->createItem(),
+			\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => $orderAddressManager->createItem(),
+			\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => $orderAddressManager->createItem(),
 		);
 
 		$this->services = array(
@@ -92,7 +95,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 
 		//registering order object for plugin use
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$pluginManager->register( $this->object, 'order' );
 	}
 
@@ -125,14 +128,14 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 'test' );
 	}
 
@@ -165,7 +168,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLocale()
 	{
-		$locale = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 		$this->object->setLocale( $locale );
 
 		$this->assertEquals( $locale, $this->object->getLocale() );
@@ -234,7 +237,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Standard( new MShop_Price_Item_Standard(), new MShop_Locale_Item_Standard() );
+		$item = new \Aimeos\MShop\Order\Item\Base\Standard( new \Aimeos\MShop\Price\Item\Standard(), new \Aimeos\MShop\Locale\Item\Standard() );
 
 		$list = array(
 			'order.base.id' => 1,
@@ -403,7 +406,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$product->setQuantity( 11 );
 
 		// Exceed limit for single product
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->addProduct( $product );
 	}
 
@@ -430,8 +433,8 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->addresses, $this->object->getAddresses() );
 
-		$address = $this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
-		$this->assertEquals( $this->addresses[MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT], $address );
+		$address = $this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->assertEquals( $this->addresses[\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT], $address );
 	}
 
 
@@ -441,16 +444,16 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$result = $this->object->setAddress( $address, MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
-		$item = $this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$result = $this->object->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$item = $this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Iface', $result );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface', $result );
 		$this->assertEquals( $result, $item );
-		$this->assertEquals( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $item->getType() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $item->getType() );
 		$this->assertTrue( $item->isModified() );
 		$this->assertNull( $item->getId() );
 	}
@@ -462,12 +465,12 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
-		$this->object->deleteAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->object->deleteAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 	}
 
 
@@ -492,14 +495,14 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 		}
 
 		$type = 'delivery';
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$service = $orderServiceManager->createItem();
 
 		$result = $this->object->setService( $service, $type );
 		$item = $this->object->getService( $type );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Iface', $result );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $result );
 		$this->assertEquals( $result, $item );
 		$this->assertEquals( $type, $item->getType() );
 		$this->assertTrue( $item->isModified() );
@@ -513,12 +516,12 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setService( $service, $type );
 		}
 
-		$this->object->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
-		$this->object->deleteService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
+		$this->object->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+		$this->object->deleteService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->getService( MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->object->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 	}
 
 
@@ -555,22 +558,22 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCheckInvalid()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->check( -1 );
 	}
 
 
 	public function testCheckAllFailure()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ALL );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 	}
 
 
 	public function testCheckProductsFailure()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
 
@@ -584,7 +587,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ADDRESS );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 
 
@@ -594,8 +597,8 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->addProduct( $product );
 		}
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_ADDRESS );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 
 
@@ -613,7 +616,7 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setService( $service, $type );
 		}
 
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_SERVICE );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 
 
@@ -628,8 +631,8 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->check( MShop_Order_Item_Base_Base::PARTS_SERVICE );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 
 
@@ -638,11 +641,11 @@ class MShop_Order_Item_Base_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function createProduct( $code )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->createItem();
 
-		$price = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

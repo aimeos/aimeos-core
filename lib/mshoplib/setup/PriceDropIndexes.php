@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes unused indexes in price table.
  */
-class MW_Setup_Task_PriceDropIndexes extends MW_Setup_Task_Base
+class PriceDropIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'idx_mspri_sid_currid' => 'ALTER TABLE "mshop_price" DROP INDEX "idx_mspri_sid_currid"',

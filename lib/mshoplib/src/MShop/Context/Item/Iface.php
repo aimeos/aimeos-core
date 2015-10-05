@@ -8,56 +8,59 @@
  */
 
 
+namespace Aimeos\MShop\Context\Item;
+
+
 /**
  * Common objects which have to be available for all manager objects.
  *
  * @package MShop
  * @subpackage Context
  */
-interface MShop_Context_Item_Iface
+interface Iface
 {
 	/**
 	 * Sets the cache object.
 	 *
-	 * @param MW_Cache_Iface $cache Cahce object
+	 * @param \Aimeos\MW\Cache\Iface $cache Cahce object
 	 * @return void
 	 */
-	public function setCache( MW_Cache_Iface $cache );
+	public function setCache( \Aimeos\MW\Cache\Iface $cache );
 
 	/**
 	 * Returns the cache object.
 	 *
-	 * @return MW_Cache_Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
 	public function getCache();
 
 	/**
 	 * Sets the configuration object.
 	 *
-	 * @param MW_Config_Iface $config Configuration object
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 * @return void
 	 */
-	public function setConfig( MW_Config_Iface $config );
+	public function setConfig( \Aimeos\MW\Config\Iface $config );
 
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return MShop_Config_Iface Configuration object
+	 * @return \Aimeos\MShop\Config\Iface Configuration object
 	 */
 	public function getConfig();
 
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param MW_DB_Manager_Iface $databaseManager Database manager object
+	 * @param \Aimeos\MW\DB\Manager\Iface $databaseManager Database manager object
 	 * @return void
 	 */
-	public function setDatabaseManager( MW_DB_Manager_Iface $databaseManager );
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $databaseManager );
 
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return MW_DB_Manager_Iface Database manager object
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
 	public function getDatabaseManager();
 
@@ -65,7 +68,7 @@ interface MShop_Context_Item_Iface
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
-	 * 	MW_Translation_Iface with locale as key
+	 * 	\Aimeos\MW\Translation\Iface with locale as key
 	 * @return void
 	 */
 	public function setI18n( array $translations );
@@ -74,82 +77,82 @@ interface MShop_Context_Item_Iface
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
 	 * @param string $locale Two letter language ISO code for specific language instead of default one
-	 * @return MW_Translation_Iface Internationalization object
+	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
 	public function getI18n( $locale = null );
 
 	/**
 	 * Sets the localization object.
 	 *
-	 * @param MShop_Locale_Item_Iface $locale Localization object
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
 	 * @return void
 	 */
-	public function setLocale( MShop_Locale_Item_Iface $locale );
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale );
 
 	/**
 	 * Returns the localization object.
 	 *
-	 * @return MShop_Locale_Item_Iface Localization object
+	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
 	 */
 	public function getLocale();
 
 	/**
 	 * Sets the logger object.
 	 *
-	 * @param MW_Logger_Iface $logger Logger object
+	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
 	 * @return void
 	 */
-	public function setLogger( MW_Logger_Iface $logger );
+	public function setLogger( \Aimeos\MW\Logger\Iface $logger );
 
 	/**
 	 * Returns the logger object.
 	 *
-	 * @return MW_Logger_Iface Logger object
+	 * @return \Aimeos\MW\Logger\Iface Logger object
 	 */
 	public function getLogger();
 
 	/**
 	 * Sets the session object.
 	 *
-	 * @param MW_Session_Iface $session Session object
+	 * @param \Aimeos\MW\Session\Iface $session Session object
 	 * @return void
 	 */
-	public function setSession( MW_Session_Iface $session );
+	public function setSession( \Aimeos\MW\Session\Iface $session );
 
 	/**
 	 * Returns the session object.
 	 *
-	 * @return MW_Session_Iface Session object
+	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
 	public function getSession();
 
 	/**
 	 * Sets the mail object.
 	 *
-	 * @param MW_Mail_Iface $mail Mail object
+	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
 	 * @return void
 	 */
-	public function setMail( MW_Mail_Iface $mail );
+	public function setMail( \Aimeos\MW\Mail\Iface $mail );
 
 	/**
 	 * Returns the mail object.
 	 *
-	 * @return MW_Mail_Iface Mail object
+	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
 	public function getMail();
 
 	/**
 	 * Sets the view object.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @return void
 	 */
-	public function setView( MW_View_Iface $view );
+	public function setView( \Aimeos\MW\View\Iface $view );
 
 	/**
 	 * Returns the view object.
 	 *
-	 * @return MW_View_Iface View object
+	 * @return \Aimeos\MW\View\Iface View object
 	 */
 	public function getView();
 

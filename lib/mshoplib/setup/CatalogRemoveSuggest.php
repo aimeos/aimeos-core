@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes catalog suggest tables.
  */
-class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Base
+class CatalogRemoveSuggest extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'gettypeid' => 'SELECT "id" FROM "mshop_product_list_type" WHERE "code" = \'suggestion\'',
@@ -71,8 +74,8 @@ class MW_Setup_Task_CatalogRemoveSuggest extends MW_Setup_Task_Base
 		{
 			$result = $this->conn->create( $stmts['gettypeid'] )->execute();
 
-			if( ( $row = $result->fetch( MW_DB_Result_Base::FETCH_NUM ) ) === false ) {
-				throw new MW_Setup_Exception( 'Product list type "suggestion" is missing' );
+			if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Product list type "suggestion" is missing' );
 			}
 
 			$result->finish();

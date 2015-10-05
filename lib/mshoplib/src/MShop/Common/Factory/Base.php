@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Factory;
+
+
 /**
  * Common methods for all factories.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Factory_Base
+abstract class Base
 {
 	private static $objects = array();
 
@@ -25,9 +28,9 @@ abstract class MShop_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param MShop_Common_Manager_Iface|null $manager Manager object or null for removing the manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface|null $manager Manager object or null for removing the manager object
 	 */
-	public static function injectManager( $classname, MShop_Common_Manager_Iface $manager = null )
+	public static function injectManager( $classname, \Aimeos\MShop\Common\Manager\Iface $manager = null )
 	{
 		self::$objects[$classname] = $manager;
 	}
@@ -36,32 +39,32 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Iface $manager Manager object
-	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
+	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Iface $context,
-		MShop_Common_Manager_Iface $manager, array $decorators, $classprefix )
+	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, $classprefix )
 	{
-		$iface = 'MShop_Common_Manager_Decorator_Iface';
+		$iface = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface';
 
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$manager = new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -72,13 +75,13 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Iface $manager Manager object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addManagerDecorators( MShop_Context_Item_Iface $context,
-		MShop_Common_Manager_Iface $manager, $domain )
+	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Common\Manager\Iface $manager, $domain )
 	{
 		$config = $context->getConfig();
 
@@ -97,8 +100,8 @@ abstract class MShop_Common_Factory_Base
 		 *
 		 * This would wrap the decorators named "decorator1" and "decorator2" around
 		 * all controller instances in that order. The decorator classes would be
-		 * "MShop_Common_Manager_Decorator_Decorator1" and
-		 * "MShop_Common_Manager_Decorator_Decorator2".
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -114,14 +117,14 @@ abstract class MShop_Common_Factory_Base
 			}
 		}
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', array() );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', array() );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
@@ -132,25 +135,25 @@ abstract class MShop_Common_Factory_Base
 	/**
 	 * Creates a manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string $classname Name of the manager class
 	 * @param string $interface Name of the manager interface
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function createManagerBase( MShop_Context_Item_Iface $context, $classname, $interface )
+	protected static function createManagerBase( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$manager = new $classname( $context );
 
 		if( !( $manager instanceof $interface ) ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $manager;

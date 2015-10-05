@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product;
+
+
 /**
  * Basket item abstract class defining available flags.
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Item_Base_Product_Base extends MShop_Order_Item_Base
+abstract class Base extends \Aimeos\MShop\Order\Item\Base
 {
 	/**
 	 * No flag used.
@@ -39,9 +42,9 @@ abstract class MShop_Order_Item_Base_Product_Base extends MShop_Order_Item_Base
 	{
 		$value = (int) $value;
 
-		if( $value < MShop_Order_Item_Base_Product_Base::FLAG_NONE ||
-			$value > MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE ) {
-				throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
+		if( $value < \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE ||
+			$value > \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

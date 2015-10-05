@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * MySQL database cache class.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_Mysql
-	extends MW_Cache_DB
-	implements MW_Cache_Iface
+class Mysql
+	extends \Aimeos\MW\Cache\DB
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $sql;
 	private $dbm;
@@ -27,7 +30,7 @@ class MW_Cache_Mysql
 	/**
 	 * Initializes the object instance.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Standard:
+	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Common\Criteria\Attribute\Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
 	 *	[cache.siteid] => Array containing the codes/types/labels for the site ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value
@@ -62,9 +65,9 @@ class MW_Cache_Mysql
 	 *  config['siteid'] = 123
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
-	 * @param MW_DB_Manager_Iface $dbm Database manager
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
 	 */
-	public function __construct( array $config, MW_DB_Manager_Iface $dbm )
+	public function __construct( array $config, \Aimeos\MW\DB\Manager\Iface $dbm )
 	{
 		parent::__construct( $config, $dbm );
 
@@ -87,11 +90,11 @@ class MW_Cache_Mysql
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
-		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Base::TYPE_PREP : MW_DB_Connection_Base::TYPE_SIMPLE );
+		$type = ( count( $pairs ) > 1 ? \Aimeos\MW\DB\Connection\Base::TYPE_PREP : \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
@@ -104,7 +107,7 @@ class MW_Cache_Mysql
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -117,7 +120,7 @@ class MW_Cache_Mysql
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTagPart->bind( 1, $key );
-						$stmtTagPart->bind( 2, $this->siteid, MW_DB_Statement_Base::PARAM_INT );
+						$stmtTagPart->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmtTagPart->bind( 3, $name );
 
 						$parts[] = (string) $stmtTagPart;
@@ -134,7 +137,7 @@ class MW_Cache_Mysql
 			$conn->commit();
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$conn->rollback();
 			$this->dbm->release( $conn, $this->dbname );

@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Jsb2\Standard;
+
+
 /**
- * Test class for MW_Jsb2_Standard.
+ * Test class for \Aimeos\MW\Jsb2\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Jsb2_Standard_Test extends PHPUnit_Framework_TestCase
+class Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $manifestPath;
@@ -24,7 +27,7 @@ class MW_Jsb2_Standard_Test extends PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$this->manifestPath = dirname( __FILE__ ) . $ds . 'manifests' . $ds;
 		$this->deployPath = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest.jsb2' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest.jsb2' );
 	}
 
 
@@ -44,36 +47,36 @@ class MW_Jsb2_Standard_Test extends PHPUnit_Framework_TestCase
 
 	public function testConstructNoIncludeFilesExceptions()
 	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_invalid_fileinclude.jsb2' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_fileinclude.jsb2' );
 	}
 
 
 	public function testConstructNoPackageExceptions()
 	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_invalid_package.jsb2' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_package.jsb2' );
 	}
 
 
 	public function testConstructInvalidPackageContentExceptions()
 	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_invalid_package_content.jsb2' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_package_content.jsb2' );
 	}
 
 
 	public function testConstructNotJSONExceptions()
 	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_no_json.jsb2' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_no_json.jsb2' );
 	}
 
 
 	public function testConstructFileNotExistingExceptions()
 	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_not_existing.jsb2' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_not_existing.jsb2' );
 	}
 
 
@@ -163,10 +166,10 @@ class MW_Jsb2_Standard_Test extends PHPUnit_Framework_TestCase
 		$alteredFilename = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . 'test.js';
 
 		copy( $filename, $alteredFilename );
-		$this->object = new MW_Jsb2_Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
+		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
 		unlink( $alteredFilename );
 
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object->getHTML( 'js' );
 	}
 
@@ -180,7 +183,7 @@ class MW_Jsb2_Standard_Test extends PHPUnit_Framework_TestCase
 			return;
 		}
 
-		$dirIterator = new DirectoryIterator( $dir );
+		$dirIterator = new \DirectoryIterator( $dir );
 
 		foreach( $dirIterator as $iterator )
 		{

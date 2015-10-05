@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
  * Catalog index manager for searching in product tables.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Manager_Index_Standard
-	extends MShop_Catalog_Manager_Index_DBBase
-	implements MShop_Catalog_Manager_Index_Iface
+class Standard
+	extends \Aimeos\MShop\Catalog\Manager\Index\DBBase
+	implements \Aimeos\MShop\Catalog\Manager\Index\Iface
 {
 	private $subManagers;
 
@@ -24,11 +27,11 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/catalog/manager/index/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -93,7 +96,7 @@ class MShop_Catalog_Manager_Index_Standard
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -130,7 +133,7 @@ class MShop_Catalog_Manager_Index_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -144,11 +147,11 @@ class MShop_Catalog_Manager_Index_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Catalog_Manager_Index_Standard
+		 *  \Aimeos\MShop\Catalog\Manager\Index\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Catalog_Manager_Index_Myindex
+		 *  \Aimeos\MShop\Catalog\Manager\Index\Myindex
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -183,7 +186,7 @@ class MShop_Catalog_Manager_Index_Standard
 		 *  mshop/catalog/manager/index/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the catalog index manager.
 		 *
 		 * @param array List of decorator names
@@ -203,12 +206,12 @@ class MShop_Catalog_Manager_Index_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the catalog index manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog index manager.
 		 *
 		 *  mshop/catalog/manager/index/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the catalog controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -227,12 +230,12 @@ class MShop_Catalog_Manager_Index_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the catalog index manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog index manager.
 		 *
 		 *  mshop/catalog/manager/index/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the catalog
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the catalog
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -386,7 +389,7 @@ class MShop_Catalog_Manager_Index_Standard
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $config->get( 'mshop/catalog/manager/index/standard/domains', $default );
 
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
@@ -421,7 +424,7 @@ class MShop_Catalog_Manager_Index_Standard
 
 
 		// index categorized product items only
-		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/lists' );
+		$catalogListManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
 		$expr = array(
@@ -456,18 +459,18 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Stores a new item in the index.
 	 *
-	 * @param MShop_Common_Item_Iface $item Product item
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Product\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->getId() === null ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
+			throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
 		}
 
 		$this->rebuildIndex( array( $item->getId() => $item ) );
@@ -477,12 +480,12 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		/** mshop/catalog/manager/index/standard/item/search
 		 * Retrieves the records matched by the given criteria in the database
@@ -604,13 +607,13 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param array $domains List of domains to be
 	 * @param integer $size Size of a chunk of products to handle at a time
 	 */
-	protected function writeIndex( MW_Common_Criteria_Iface $search, array $domains, $size )
+	protected function writeIndex( \Aimeos\MW\Common\Criteria\Iface $search, array $domains, $size )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = $this->getSubManagers();
 		$start = 0;
 
@@ -634,7 +637,7 @@ class MShop_Catalog_Manager_Index_Standard
 
 				$this->commit();
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$this->rollback();
 				throw $e;
@@ -652,7 +655,7 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
-	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Iface
+	 * @param array $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
 	protected function saveSubProducts( array $items )
 	{
@@ -683,7 +686,7 @@ class MShop_Catalog_Manager_Index_Standard
 		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/standard/subdomains', $default );
 		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/standard/chunksize', 1000 );
 
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$search->setSlice( 0, $size );
@@ -731,14 +734,14 @@ class MShop_Catalog_Manager_Index_Standard
 	/**
 	 * Saves one chunk of the sub products.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criterias for retrieving the sub-products
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criterias for retrieving the sub-products
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
 	 * @param integer $size Number of products per chunk
 	 */
-	protected function saveSubProductsChunk( MW_Common_Criteria_Iface $search, array $domains, array $list, $size )
+	protected function saveSubProductsChunk( \Aimeos\MW\Common\Criteria\Iface $search, array $domains, array $list, $size )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = array();
 		$start = 0;
 

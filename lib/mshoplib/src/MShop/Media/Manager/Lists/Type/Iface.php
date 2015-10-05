@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Media\Manager\Lists\Type;
+
+
 /**
  * Interface for media type manager.
  *
  * @package MShop
  * @subpackage Media
  */
-interface MShop_Media_Manager_Lists_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

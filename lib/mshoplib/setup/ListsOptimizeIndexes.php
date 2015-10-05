@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Optimizes the list unique constraints and indexes.
  */
-class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Base
+class ListsOptimizeIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

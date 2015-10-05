@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product stock test data.
  */
-class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
+class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 {
 
 	/**
@@ -48,9 +51,9 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding product stock test data', 0 );
@@ -60,7 +63,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'productstock.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
 		}
 
 		$this->addProductStockData( $testdata );
@@ -73,11 +76,11 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 	 * Adds the product stock test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function addProductStockData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$productStockManager = $productManager->getSubManager( 'stock', 'Standard' );
 		$productStockWarehouse = $productStockManager->getSubManager( 'warehouse', 'Standard' );
 
@@ -85,7 +88,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 		foreach( $testdata['product/stock'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for prodid are set wrong "%1$s"', $dataset['prodid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for prodid are set wrong "%1$s"', $dataset['prodid'] ) );
 			}
 
 			$prodcode[] = $str;
@@ -120,11 +123,11 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Base
 		foreach( $testdata['product/stock'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['prodid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No product ID found for "%1$s"', $dataset['prodid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product ID found for "%1$s"', $dataset['prodid'] ) );
 			}
 
 			if( !isset( $wareIds[$dataset['warehouseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No warehouse ID found for "%1$s"', $dataset['warehouseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No warehouse ID found for "%1$s"', $dataset['warehouseid'] ) );
 			}
 
 			$stock->setId( null );

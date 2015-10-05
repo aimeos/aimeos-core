@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Admin\Cache;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Admin_Cache_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,10 +20,10 @@ class Controller_Jobs_Admin_Cache_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Admin_Cache_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Admin\Cache\Standard( $context, $aimeos );
 	}
 
 

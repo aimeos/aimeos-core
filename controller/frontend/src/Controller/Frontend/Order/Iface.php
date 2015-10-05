@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Order;
+
+
 /**
  * Interface for order frontend controllers.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Order_Iface
-	extends Controller_Frontend_Common_Iface
+interface Iface
+	extends \Aimeos\Controller\Frontend\Common\Iface
 {
 	/**
 	 * Creates a new order from the given basket.
@@ -24,10 +27,10 @@ interface Controller_Frontend_Order_Iface
 	 * products, services, etc. and creates/stores a new order item for that
 	 * order.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object to be stored
-	 * @return MShop_Order_Item_Iface Order item that belongs to the stored basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object to be stored
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item that belongs to the stored basket
 	 */
-	public function store( MShop_Order_Item_Base_Iface $basket );
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket );
 
 
 	/**
@@ -46,10 +49,10 @@ interface Controller_Frontend_Order_Iface
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function block( MShop_Order_Item_Iface $orderItem );
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
 
 	/**
@@ -68,10 +71,10 @@ interface Controller_Frontend_Order_Iface
 	 * mind that unblocked resources may be reused by other orders in the
 	 * meantime. This can lead to an oversell of products!
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function unblock( MShop_Order_Item_Iface $orderItem );
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
 
 	/**
@@ -86,8 +89,8 @@ interface Controller_Frontend_Order_Iface
 	 * the actions will be executed only once. All subsequent calls will do
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
-	 * @param MShop_Order_Item_Iface $orderItem Order item object
+	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return void
 	 */
-	public function update( MShop_Order_Item_Iface $orderItem );
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem );
 }

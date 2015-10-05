@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Item;
+
+
 /**
  * Interface for supplier DTO objects used by the shop.
  *
  * @package MShop
  * @subpackage Supplier
  */
-class MShop_Supplier_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Supplier_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Supplier\Item\Iface
 {
 	private $values;
 
@@ -24,8 +27,8 @@ class MShop_Supplier_Item_Standard
 	 * Initializes the supplier item object
 	 *
 	 * @param array $values List of attributes that belong to the supplier item
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{

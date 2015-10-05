@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Coupon;
+
+
 /**
  * Default implementation for order item base coupon.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Base_Coupon_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Order_Item_Base_Coupon_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 {
 	private $values;
 

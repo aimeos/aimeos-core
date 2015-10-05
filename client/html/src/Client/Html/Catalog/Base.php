@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog;
+
+
 /**
  * Common methods for the catalog HTML client classes.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Catalog_Base
-	extends Client_Html_Common_Client_Factory_Base
+abstract class Base
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
 {
 	private $productList;
 	private $productTotal = 0;
@@ -25,9 +28,9 @@ abstract class Client_Html_Catalog_Base
 	 * Adds the conditions for the selected attributes to the given search filter.
 	 *
 	 * @param array $params Associative list of parameters that should be used for filtering
-	 * @param MW_Common_Criteria_Iface $filter Criteria object for searching
+	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Criteria object for searching
 	 */
-	protected function addAttributeFilterByParam( array $params, MW_Common_Criteria_Iface $filter )
+	protected function addAttributeFilterByParam( array $params, \Aimeos\MW\Common\Criteria\Iface $filter )
 	{
 		$attrids = ( isset( $params['f_attrid'] ) ? (array) $params['f_attrid'] : array() );
 
@@ -46,10 +49,10 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Adds the conditions for the selected attributes to the given search filter.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
-	 * @param MW_Common_Criteria_Iface $filter Criteria object for searching
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Criteria object for searching
 	 */
-	protected function addAttributeFilter( MW_View_Iface $view, MW_Common_Criteria_Iface $filter )
+	protected function addAttributeFilter( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Common\Criteria\Iface $filter )
 	{
 		$this->addAttributeFilterByParam( $view->param(), $filter );
 	}
@@ -58,10 +61,10 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the products found for the current parameters.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
-	 * @return array List of products implementing MShop_Product_Item_Iface
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
+	 * @return array List of products implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	protected function getProductList( MW_View_Iface $view )
+	protected function getProductList( \Aimeos\MW\View\Iface $view )
 	{
 		if( $this->productList === null ) {
 			$this->searchProducts( $view );
@@ -78,7 +81,7 @@ abstract class Client_Html_Catalog_Base
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return MW_Common_Criteria_Iface Search criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
 	 */
 	protected function getProductListFilterByParam( array $params, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
@@ -137,11 +140,11 @@ abstract class Client_Html_Catalog_Base
 	 * @param integer $size Page size
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
-	 * @return MW_Common_Criteria_Iface Search criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
 	 */
 	private function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
 	{
-		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'catalog' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'catalog' );
 
 		if( $text !== '' && $textfilter === true )
 		{
@@ -167,13 +170,13 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the filter created from the view parameters for the product list.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return MW_Common_Criteria_Iface Search criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
 	 */
-	protected function getProductListFilter( MW_View_Iface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
+	protected function getProductListFilter( \Aimeos\MW\View\Iface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
 		return $this->getProductListFilterByParam( $view->param(), $catfilter, $textfilter, $attrfilter );
 	}
@@ -182,10 +185,10 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the total number of products available for the current parameters.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 * @return integer Total number of products
 	 */
-	protected function getProductListTotal( MW_View_Iface $view )
+	protected function getProductListTotal( \Aimeos\MW\View\Iface $view )
 	{
 		if( $this->productList === null ) {
 			$this->searchProducts( $view );
@@ -210,10 +213,10 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the sanitized page from the parameters for the product list.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page number starting from 1
 	 */
-	protected function getProductListPage( MW_View_Iface $view )
+	protected function getProductListPage( \Aimeos\MW\View\Iface $view )
 	{
 		return $this->getProductListPageByParam( $view->param() );
 	}
@@ -257,10 +260,10 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the sanitized page size from the parameters for the product list.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page size
 	 */
-	protected function getProductListSize( MW_View_Iface $view )
+	protected function getProductListSize( \Aimeos\MW\View\Iface $view )
 	{
 		return $this->getProductListSizeByParam( $view->param() );
 	}
@@ -287,11 +290,11 @@ abstract class Client_Html_Catalog_Base
 	/**
 	 * Returns the sanitized sortation from the parameters for the product list.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 * @param string &$sortdir Value-result parameter where the sort direction will be stored
 	 * @return string Sortation string (relevance, name, price)
 	 */
-	protected function getProductListSort( MW_View_Iface $view, &$sortdir )
+	protected function getProductListSort( \Aimeos\MW\View\Iface $view, &$sortdir )
 	{
 		return $this->getProductListSortByParam( $view->param(), $sortdir );
 	}
@@ -303,9 +306,9 @@ abstract class Client_Html_Catalog_Base
 	 * The found products and the total number of available products can be
 	 * retrieved using the getProductList() and getProductTotal() methods.
 	 *
-	 * @param MW_View_Iface $view View instance with helper for retrieving the required parameters
+	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
 	 */
-	protected function searchProducts( MW_View_Iface $view )
+	protected function searchProducts( \Aimeos\MW\View\Iface $view )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -361,7 +364,7 @@ abstract class Client_Html_Catalog_Base
 		$domains = $config->get( 'client/html/catalog/lists/domains', $domains );
 
 		$productFilter = $this->getProductListFilter( $view );
-		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
 		$this->productList = $controller->getIndexItems( $productFilter, $domains, $this->productTotal );
 	}

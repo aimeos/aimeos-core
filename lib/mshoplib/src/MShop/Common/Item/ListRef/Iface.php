@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\ListRef;
+
+
 /**
  * Common interface for items containing referenced list items.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_ListRef_Iface
-	extends MShop_Common_Item_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
@@ -25,7 +28,7 @@ interface MShop_Common_Item_ListRef_Iface
 	 *
 	 * @param string $domain|null Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_Lists_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
 	public function getListItems( $domain = null, $type = null );
 
@@ -38,7 +41,7 @@ interface MShop_Common_Item_ListRef_Iface
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
-	 * @return array List of items implementing MShop_Common_Item_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
 	public function getRefItems( $domain, $type = null, $listtype = null );
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
- * Test class for MShop_Common_Item_Helper_Password_Standard
+ * Test class for \Aimeos\MShop\Common\Item\Helper\Password\Standard
  */
-class MShop_Common_Item_Helper_Password_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +22,7 @@ class MShop_Common_Item_Helper_Password_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->object = new MShop_Common_Item_Helper_Password_Standard( array( 'format' => '{%2$s}%1$s' ) );
+		$this->object = new \Aimeos\MShop\Common\Item\Helper\Password\Standard( array( 'format' => '{%2$s}%1$s' ) );
 	}
 
 

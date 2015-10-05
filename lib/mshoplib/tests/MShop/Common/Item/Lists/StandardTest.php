@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Lists;
+
+
 /**
- * Test class for MShop_Common_Item_Lists_Standard
+ * Test class for \Aimeos\MShop\Common\Item\Lists\Standard
  */
-class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -37,7 +40,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Common_Item_Lists_Standard( 'common.lists.', $values );
+		$this->object = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', $values );
 	}
 
 
@@ -109,7 +112,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( '2002-01-01 00:00:00', $this->object->getDateStart() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateStart( '2008-34-12' );
 	}
 
@@ -124,7 +127,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( '4400-12-31 00:00:00', $this->object->getDateEnd() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 
@@ -209,7 +212,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetRefItem()
 	{
-		$obj = new MShop_Common_Item_Lists_Standard( 'reftest', array() );
+		$obj = new \Aimeos\MShop\Common\Item\Lists\Standard( 'reftest', array() );
 
 		$this->object->setRefItem( $obj );
 		$this->assertFalse( $this->object->isModified() );
@@ -219,7 +222,7 @@ class MShop_Common_Item_Lists_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Common_Item_Lists_Standard( 'common.lists.' );
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.' );
 
 		$list = array(
 			'common.lists.id' => 8,

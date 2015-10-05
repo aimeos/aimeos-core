@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item;
+
+
 /**
  * Interface for all order item implementations.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the basic order ID.
@@ -79,14 +82,14 @@ interface MShop_Order_Item_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from MShop_Order_Item_Base
+	 * @return integer Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function getDeliveryStatus();
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from MShop_Order_Item_Base
+	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return void
 	 */
 	public function setDeliveryStatus( $status );
@@ -94,14 +97,14 @@ interface MShop_Order_Item_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from MShop_Order_Item_Base
+	 * @return integer Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
 	public function getPaymentStatus();
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from MShop_Order_Item_Base
+	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return void
 	 */
 	public function setPaymentStatus( $status );
@@ -117,7 +120,7 @@ interface MShop_Order_Item_Iface extends MShop_Common_Item_Iface
 	 * Sets the related invoice ID.
 	 *
 	 * @param integer|null Related invoice ID
-	 * @throws MShop_Order_Exception If ID is invalid
+	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 * @return void
 	 */
 	public function setRelatedId( $id );

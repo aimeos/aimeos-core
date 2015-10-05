@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from text tables.
  */
-class MW_Setup_Task_TextDropLocaleConstraints extends MW_Setup_Task_Base
+class TextDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_text_list_type' => array(

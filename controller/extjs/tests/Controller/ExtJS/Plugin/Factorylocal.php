@@ -8,30 +8,33 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Plugin;
+
+
 /**
  * ExtJS plugin test factory.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Plugin_Factorylocal
-	extends Controller_ExtJS_Common_Factory_Base
+class Factorylocal
+	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
 {
 	/**
 	 * @param string $name
 	 */
-	public static function createController( MShop_Context_Item_Iface $context, $name = null, $domainToTest = 'plugin' )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null, $domainToTest = 'plugin' )
 	{
 		if( $name === null ) {
 			$name = $context->getConfig()->get( 'classes/controller/extjs/plugin/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
 		}
 
-		$iface = 'Controller_ExtJS_Common_Iface';
-		$classname = 'Controller_ExtJS_Plugin_' . $name;
+		$iface = '\\Aimeos\\Controller\\ExtJS\\Common\\Iface';
+		$classname = '\\Aimeos\\Controller\\ExtJS\\Plugin\\' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );
 		return self::addControllerDecorators( $context, $manager, $domainToTest );

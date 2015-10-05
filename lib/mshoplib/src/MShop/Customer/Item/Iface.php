@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Item;
+
+
 /**
  * Interface for customer DTO objects used by the shop.
  *
  * @package MShop
  * @subpackage Customer
  */
-interface MShop_Customer_Item_Iface
-	extends MShop_Common_Item_ListRef_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface
 {
 	/**
 	 * Returns the label of the customer item.
@@ -81,17 +84,17 @@ interface MShop_Customer_Item_Iface
 	/**
 	 * Returns the billing address of the customer item.
 	 *
-	 * @return MShop_Common_Item_Address_Iface Address object
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address object
 	 */
 	public function getPaymentAddress();
 
 	/**
 	 * Sets the billing address of the customer item.
 	 *
-	 * @param MShop_Common_Item_Address_Iface $address Billing address of the customer item
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address of the customer item
 	 * @return void
 	 */
-	public function setPaymentAddress( MShop_Common_Item_Address_Iface $address );
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address );
 
 	/**
 	 * Returns the password of the customer item.

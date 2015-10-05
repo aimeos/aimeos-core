@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds locale test data.
  */
-class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
+class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding test data for MShop locale domain', 0 );
@@ -66,10 +69,10 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
 
 			if( ( $testdata = include( $filename ) ) == false ) {
-				throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional );
+			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional );
 
 			$this->cleanupSites( $localeManager );
 
@@ -96,10 +99,10 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	/**
 	 * Gets recursive all sub-sites of a site sorted on their level.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $site Site which can contain sub-sites
-	 * @return MShop_Locale_Item_Site_Iface[] $sites List with sites
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $site Site which can contain sub-sites
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] $sites List with sites
 	 */
-	private function getSites( MShop_Locale_Item_Site_Iface $site )
+	private function getSites( \Aimeos\MShop\Locale\Item\Site\Iface $site )
 	{
 		$sites = array( $site );
 
@@ -115,7 +118,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 *
 	 * Deletes old sites and their subsites.
 	 *
-	 * @param MShop_Locale_Manager_Iface $localeManager
+	 * @param \Aimeos\MShop\Locale\Manager\Iface $localeManager
 	 */
 	private function cleanupSites( $localeManager )
 	{

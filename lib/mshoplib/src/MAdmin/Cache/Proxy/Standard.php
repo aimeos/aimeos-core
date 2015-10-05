@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Proxy;
+
+
 /**
  * Cache proxy for creating cache object on demand.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Proxy_Standard
-	implements MW_Cache_Iface
+class Standard
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MAdmin_Cache_Proxy_Standard
 	/**
 	 * Initializes the cache controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -37,7 +40,7 @@ class MAdmin_Cache_Proxy_Standard
 	 *
 	 * @inheritDoc
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function cleanup()
 	{
@@ -51,7 +54,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * @inheritDoc
 	 *
 	 * @param string $key Key string that identifies the single cache entry
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function delete( $key )
 	{
@@ -66,7 +69,7 @@ class MAdmin_Cache_Proxy_Standard
 	 *
 	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteList( array $keys )
 	{
@@ -81,7 +84,7 @@ class MAdmin_Cache_Proxy_Standard
 	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteByTags( array $tags )
 	{
@@ -94,7 +97,7 @@ class MAdmin_Cache_Proxy_Standard
 	 *
 	 * @inheritDoc
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush()
 	{
@@ -111,7 +114,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key. If no value for the
 	 * key is found in the cache, the given default value is returned
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function get( $key, $default = null )
 	{
@@ -128,7 +131,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getList( array $keys )
 	{
@@ -145,7 +148,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getListByTags( array $tags )
 	{
@@ -164,7 +167,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * 	given value in the cache
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null )
 	{
@@ -184,7 +187,7 @@ class MAdmin_Cache_Proxy_Standard
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
@@ -195,12 +198,12 @@ class MAdmin_Cache_Proxy_Standard
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return MW_Cache_Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
 	protected function getObject()
 	{
 		if( !isset( $this->object ) ) {
-			$this->object = MAdmin_Cache_Manager_Factory::createManager( $this->context )->getCache();
+			$this->object = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->context )->getCache();
 		}
 
 		return $this->object;

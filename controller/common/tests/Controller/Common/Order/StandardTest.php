@@ -1,30 +1,32 @@
 <?php
 
+namespace Aimeos\Controller\Common\Order;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testBlock()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$name = 'ControllerCommonOrderBlock';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderStatusManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Status_Standard' )
+		$orderStatusManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Status\\Standard' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$orderItem = $orderManagerStub->createItem();
@@ -39,29 +41,29 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 			->will( $this->returnValue( array( $orderStatusItem ) ) );
 
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$object->block( $orderItem );
 	}
 
 
 	public function testUnblock()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$name = 'ControllerCommonOrderUnblock';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderStatusManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Status_Standard' )
+		$orderStatusManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Status\\Standard' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$orderItem = $orderManagerStub->createItem();
@@ -76,14 +78,14 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 			->will( $this->returnValue( array( $orderStatusItem ) ) );
 
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$object->unblock( $orderItem );
 	}
 
 
 	public function testUpdate()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$config = $context->getConfig();
 
 		$name = 'ControllerCommonOrderBlock';
@@ -92,54 +94,54 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 		$config->set( 'classes/coupon/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderBaseManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Standard' )
+		$orderBaseManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Base\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderStatusManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Status_Standard' )
+		$orderStatusManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Status\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderProductManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Product_Standard' )
+		$orderProductManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Base\\Product\\Standard' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderCouponManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Coupon_Standard' )
+		$orderCouponManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Base\\Coupon\\Standard' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$productManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Standard' )
+		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$productStockManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Stock_Standard' )
+		$productStockManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Stock\\Standard' )
 			->setMethods( array( 'increase' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$couponManagerStub = $this->getMockBuilder( 'MShop_Coupon_Manager_Standard' )
+		$couponManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Coupon\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$couponCodeManagerStub = $this->getMockBuilder( 'MShop_Coupon_Manager_Code_Standard' )
+		$couponCodeManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Coupon\\Manager\\Code\\Standard' )
 			->setMethods( array( 'increase' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
-		MShop_Product_Manager_Factory::injectManager( 'MShop_Product_Manager_' . $name, $productManagerStub );
-		MShop_Coupon_Manager_Factory::injectManager( 'MShop_Coupon_Manager_' . $name, $couponManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
+		\Aimeos\MShop\Product\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Product\\Manager\\' . $name, $productManagerStub );
+		\Aimeos\MShop\Coupon\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Coupon\\Manager\\' . $name, $couponManagerStub );
 
 
 		$orderStatusItemBlocked = $orderStatusManagerStub->createItem();
@@ -194,23 +196,23 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_UNFINISHED );
+		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$object->update( $orderItem );
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_PENDING );
+		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$object->update( $orderItem );
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setPaymentStatus( MShop_Order_Item_Base::PAY_DELETED );
+		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$object->update( $orderItem );
 	}
 
@@ -218,8 +220,8 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 	public function testUpdateStockBundle()
 	{
 		$stockItems = array();
-		$context = TestHelper::getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$context = \TestHelper::getContext();
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:BUNDLE' ) );
@@ -229,12 +231,12 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 		$name = 'ControllerCommonOrderUpdate';
 		$context->getConfig()->set( 'classes/product/manager/name', $name );
 
-		$stockManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Stock_Standard' )
+		$stockManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Stock\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$productManagerStub = $this->getMockBuilder( 'MShop_Product_Manager_Standard' )
+		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
@@ -242,7 +244,7 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 		$productManagerStub->expects( $this->once() )->method( 'getSubManager' )
 			->will( $this->returnValue( $stockManagerStub ) );
 
-		MShop_Product_Manager_Factory::injectManager( 'MShop_Product_Manager_' . $name, $productManagerStub );
+		\Aimeos\MShop\Product\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Product\\Manager\\' . $name, $productManagerStub );
 
 
 		$stock = 10;
@@ -275,11 +277,11 @@ class Controller_Common_Order_StandardTest extends PHPUnit_Framework_TestCase
 			->with( $this->callback( $fcn ) );
 
 
-		$class = new ReflectionClass( 'Controller_Common_Order_Standard' );
+		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
 		$method = $class->getMethod( 'updateStockBundle' );
 		$method->setAccessible( true );
 
-		$object = new Controller_Common_Order_Standard( $context );
+		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$method->invokeArgs( $object, array( $bundleItems, 'default' ) );
 	}
 }

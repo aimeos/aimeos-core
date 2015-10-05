@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Convert\Number;
+
+
 /**
  * Converts numbers with comma to point as decimal separator
  *
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Number_DecimalComma implements MW_Convert_Iface
+class DecimalComma implements \Aimeos\MW\Convert\Iface
 {
 	/**
 	 * Translates a value to another one.

@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Checks addresses are available in a basket as configured.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_AddressesAvailable
-	extends MShop_Plugin_Provider_Factory_Base
-	implements MShop_Plugin_Provider_Factory_Iface
+class AddressesAvailable
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'check.after' );
 	}
@@ -32,20 +35,20 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Iface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Provider_Exception if checks fail
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 * @return bool true if checks succeed
 	 */
-	public function update( MW_Observer_Publisher_Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Iface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		if( $value & MShop_Order_Item_Base_Base::PARTS_ADDRESS )
+		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS )
 		{
 			$problems = array();
 			$availableAddresses = $order->getAddresses();
@@ -64,7 +67,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 			if( count( $problems ) > 0 )
 			{
 				$code = array( 'address' => $problems );
-				throw new MShop_Plugin_Provider_Exception( sprintf( 'Checks for available addresses in basket failed' ), -1, null, $code );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( 'Checks for available addresses in basket failed' ), -1, null, $code );
 			}
 		}
 

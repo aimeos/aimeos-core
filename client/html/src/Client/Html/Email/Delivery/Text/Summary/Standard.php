@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Email\Delivery\Text\Summary;
+
+
 /**
  * Default implementation of email text address HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Email_Delivery_Text_Summary_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/email/delivery/text/summary/default/subparts
 	 * List of HTML sub-clients rendered within the email delivery text summary section
@@ -56,7 +59,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	/** client/html/email/delivery/text/summary/address/name
 	 * Name of the address part used by the email delivery text client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Summary_Address_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Text\Summary\Address\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	/** client/html/email/delivery/text/summary/service/name
 	 * Name of the service part used by the email delivery text client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Summary_Service_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Text\Summary\Service\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	/** client/html/email/delivery/text/summary/coupon/name
 	 * Name of the coupon part used by the email delivery text client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Summary_Coupon_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Text\Summary\Coupon\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	/** client/html/email/delivery/text/summary/detail/name
 	 * Name of the detail part used by the email delivery text client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Detail_Address_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Text\Detail\Address\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -195,7 +198,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -214,7 +217,7 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 		 *  client/html/email/delivery/text/summary/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -234,12 +237,12 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/delivery/text/summary/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -258,12 +261,12 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/delivery/text/summary/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -291,12 +294,12 @@ class Client_Html_Email_Delivery_Text_Summary_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		$view->summaryBasket = $view->extOrderBaseItem;
 

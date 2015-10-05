@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Admin\Cache;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Admin_Cache_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Admin_Cache_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Admin_Cache_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Admin\Cache\Standard( \TestHelper::getContext() );
 	}
 
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Common\Factory;
+
+
 /**
- * Test class for Controller_Frontend_Common_Factory_BaseTest.
+ * Test class for \Aimeos\Controller\Frontend\Common\Factory\BaseTest.
  */
-class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 
@@ -22,7 +25,7 @@ class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/frontend/common/decorators/default', array() );
@@ -34,10 +37,10 @@ class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_Test
 
 	public function testInjectController()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', $controller );
+		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( $this->context, 'Standard' );
+		\Aimeos\Controller\Frontend\Catalog\Factory::injectController( '\\Aimeos\\Controller\\Frontend\\Catalog\\Standard', $controller );
 
-		$injectedController = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
+		$injectedController = \Aimeos\Controller\Frontend\Catalog\Factory::createController( $this->context, 'Standard' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +48,11 @@ class Controller_Frontend_Common_Factory_BaseTest extends PHPUnit_Framework_Test
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', $controller );
-		Controller_Frontend_Catalog_Factory::injectController( 'Controller_Frontend_Catalog_Standard', null );
+		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( $this->context, 'Standard' );
+		\Aimeos\Controller\Frontend\Catalog\Factory::injectController( '\\Aimeos\\Controller\\Frontend\\Catalog\\Standard', $controller );
+		\Aimeos\Controller\Frontend\Catalog\Factory::injectController( '\\Aimeos\\Controller\\Frontend\\Catalog\\Standard', null );
 
-		$new = Controller_Frontend_Catalog_Factory::createController( $this->context, 'Standard' );
+		$new = \Aimeos\Controller\Frontend\Catalog\Factory::createController( $this->context, 'Standard' );
 
 		$this->assertNotSame( $controller, $new );
 	}

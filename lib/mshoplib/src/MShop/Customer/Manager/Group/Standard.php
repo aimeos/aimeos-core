@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Group;
+
+
 /**
  * Default implementation of the customer group manager
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Group_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Customer_Manager_Group_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Customer\Manager\Group\Iface
 {
 	private $searchConfig = array(
 		'customer.group.id' => array(
@@ -24,14 +27,14 @@ class MShop_Customer_Manager_Group_Standard
 			'internalcode' => 'mcusgr."id"',
 			'label' => 'Customer group ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.group.siteid' => array(
 			'code' => 'customer.group.siteid',
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Customer group site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.group.code' => array(
@@ -39,35 +42,35 @@ class MShop_Customer_Manager_Group_Standard
 			'internalcode' => 'mcusgr."code"',
 			'label' => 'Customer group code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."label"',
 			'label' => 'Customer group label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.ctime'=> array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."ctime"',
 			'label' => 'Customer group creation time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.mtime'=> array(
 			'code' => 'customer.group.mtime',
 			'internalcode' => 'mcusgr."mtime"',
 			'label' => 'Customer group modification time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.editor'=> array(
 			'code' => 'customer.group.editor',
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Customer group editor',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -75,9 +78,9 @@ class MShop_Customer_Manager_Group_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-customer' );
@@ -103,7 +106,7 @@ class MShop_Customer_Manager_Group_Standard
 	/**
 	 * Instantiates a new customer group item object
 	 *
-	 * @return MShop_Customer_Item_Group_Iface
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface
 	 */
 	public function createItem()
 	{
@@ -117,7 +120,7 @@ class MShop_Customer_Manager_Group_Standard
 	 * Returns the attributes that can be used for searching
 	 *
 	 * @param boolean $withsub Return attributes of sub-managers too if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -185,8 +188,8 @@ class MShop_Customer_Manager_Group_Standard
 	 *
 	 * @param integer $id Unique customer ID referencing an existing customer group
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Customer_Item_Group_Iface Returns the customer group item for the given ID
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Returns the customer group item for the given ID
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -197,14 +200,14 @@ class MShop_Customer_Manager_Group_Standard
 	/**
 	 * Inserts a new or updates an existing customer group item
 	 *
-	 * @param MShop_Customer_Item_Group_Iface $item Customer group item
+	 * @param \Aimeos\MShop\Customer\Item\Group\Iface $item Customer group item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Customer_Item_Group_Iface';
+		$iface = '\\Aimeos\\MShop\\Customer\\Item\\Group\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -286,14 +289,14 @@ class MShop_Customer_Manager_Group_Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
 			$stmt->bind( 3, $item->getLabel() );
 			$stmt->bind( 4, $date ); // mtime
 			$stmt->bind( 5, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 6, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 6, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 6, $date ); // ctime
@@ -339,7 +342,7 @@ class MShop_Customer_Manager_Group_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -350,13 +353,13 @@ class MShop_Customer_Manager_Group_Standard
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Customer_Item_Group_Iface
-	 * @throws MShop_Exception If retrieving items failed
+	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
+	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
 		$context = $this->getContext();
@@ -368,7 +371,7 @@ class MShop_Customer_Manager_Group_Standard
 		try
 		{
 			$required = array( 'customer.group' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/customer/manager/group/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -478,7 +481,7 @@ class MShop_Customer_Manager_Group_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -493,7 +496,7 @@ class MShop_Customer_Manager_Group_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -507,11 +510,11 @@ class MShop_Customer_Manager_Group_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Customer_Manager_Group_Standard
+		 *  \Aimeos\MShop\Customer\Manager\Group\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Customer_Manager_Group_Mygroup
+		 *  \Aimeos\MShop\Customer\Manager\Group\Mygroup
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -546,7 +549,7 @@ class MShop_Customer_Manager_Group_Standard
 		 *  mshop/customer/manager/group/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the customer group manager.
 		 *
 		 * @param array List of decorator names
@@ -566,12 +569,12 @@ class MShop_Customer_Manager_Group_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the customer manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer manager.
 		 *
 		 *  mshop/customer/manager/group/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the customer
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer
 		 * group manager.
 		 *
 		 * @param array List of decorator names
@@ -591,12 +594,12 @@ class MShop_Customer_Manager_Group_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the customer group manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer group manager.
 		 *
 		 *  mshop/customer/manager/group/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the customer
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the customer
 		 * group manager.
 		 *
 		 * @param array List of decorator names
@@ -615,10 +618,10 @@ class MShop_Customer_Manager_Group_Standard
 	 * Creates a new customer group item
 	 *
 	 * @param array $values List of attributes for customer group item
-	 * @return MShop_Customer_Item_Group_Iface New customer group item
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface New customer group item
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Customer_Item_Group_Standard( $values );
+		return new \Aimeos\MShop\Customer\Item\Group\Standard( $values );
 	}
 }

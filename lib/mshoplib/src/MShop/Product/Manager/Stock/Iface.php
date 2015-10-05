@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Stock;
+
+
 /**
  * Generic interface for product stock objects.
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Manager_Stock_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Decreases the stock level of the product for the warehouse.

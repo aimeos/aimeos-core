@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
  * Abstract class with common methods for comparing objects.
  *
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Criteria_Expression_Compare_Base
-	extends MW_Common_Criteria_Expression_Base
-	implements MW_Common_Criteria_Expression_Compare_Iface
+abstract class Base
+	extends \Aimeos\MW\Common\Criteria\Expression\Base
+	implements \Aimeos\MW\Common\Criteria\Expression\Compare\Iface
 {
 	private $operator;
 	private $name;
@@ -76,7 +79,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Base
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
@@ -90,7 +93,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Base
 		}
 
 		if( !isset( $types[$name] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
 		if( $this->value === null ) {

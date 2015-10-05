@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes foreign key constraints to locale tables from order tables.
  */
-class MW_Setup_Task_OrderDropForeignKeyOfLocaleCoupon extends MW_Setup_Task_Base
+class OrderDropForeignKeyOfLocaleCoupon extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_coupon' => array(

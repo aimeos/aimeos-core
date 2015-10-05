@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves service price references to list table.
  */
-class MW_Setup_Task_ServicePriceToList extends MW_Setup_Task_Base
+class ServicePriceToList extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_service_price' => array(

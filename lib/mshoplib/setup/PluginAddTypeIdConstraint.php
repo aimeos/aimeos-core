@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds constraint for typeid in plugin tag table.
  */
-class MW_Setup_Task_PluginAddTypeIdConstraint extends MW_Setup_Task_Base
+class PluginAddTypeIdConstraint extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fk_msplu_typeid' => 'ALTER TABLE "mshop_plugin" ADD CONSTRAINT "fk_msplu_typeid" FOREIGN KEY ("typeid") REFERENCES "mshop_plugin_type" ("id") ON DELETE CASCADE ON UPDATE CASCADE',

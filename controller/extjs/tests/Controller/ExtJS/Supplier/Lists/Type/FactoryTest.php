@@ -1,38 +1,39 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Supplier\Lists\Type;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Supplier_Lists_Type_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$obj = Controller_ExtJS_Supplier_Lists_Type_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Iface', $obj );
+		$obj = \Aimeos\Controller\ExtJS\Supplier\Lists\Type\Factory::createController( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Iface', $obj );
 	}
 
 
 	public function testFactoryExceptionWrongName()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Supplier_Lists_Type_Factory::createController( TestHelper::getContext(), 'Wrong$$$Name' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Supplier\Lists\Type\Factory::createController( \TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Supplier_Lists_Type_Factory::createController( TestHelper::getContext(), 'WrongClass' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Supplier\Lists\Type\Factory::createController( \TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Supplier_Lists_Type_Factory::createController( TestHelper::getContext(), 'Factory' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Supplier\Lists\Type\Factory::createController( \TestHelper::getContext(), 'Factory' );
 	}
 
 }

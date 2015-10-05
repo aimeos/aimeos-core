@@ -6,6 +6,9 @@
  */
 
 
+namespace Aimeos;
+
+
 /**
  * Global starting point for applicatons.
  */
@@ -47,11 +50,11 @@ class Aimeos
 			{
 				$location2 = $this->extensions[$manifest['name']]['location'];
 				$msg = 'Extension "%1$s" exists twice in "%2$s" and in "%3$s"';
-				throw new Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
+				throw new \Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
 			}
 
 			if( !isset( $manifest['depends'] ) || !is_array( $manifest['depends'] ) ) {
-				throw new Exception( sprintf( 'Incorrect dependency configuration in manifest "%1$s"', $location ) );
+				throw new \Exception( sprintf( 'Incorrect dependency configuration in manifest "%1$s"', $location ) );
 			}
 
 			$manifest['location'] = $location;
@@ -76,6 +79,10 @@ class Aimeos
 	public static function autoload( $className )
 	{
 		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
+
+		if( strncmp( $fileName, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) === 0 ) {
+			$fileName = substr( $fileName, 7 );
+		}
 
 		foreach( self::$includePaths as $path )
 		{
@@ -245,7 +252,7 @@ class Aimeos
 				continue;
 			}
 
-			$dir = new DirectoryIterator( $directory );
+			$dir = new \DirectoryIterator( $directory );
 
 			foreach( $dir as $dirinfo )
 			{
@@ -314,7 +321,7 @@ class Aimeos
 
 			if( in_array( $extName, $stack ) ) {
 				$msg = sprintf( 'Circular dependency for "%1$s" detected', $extName );
-				throw new Exception( $msg );
+				throw new \Exception( $msg );
 			}
 
 			$stack[] = $extName;

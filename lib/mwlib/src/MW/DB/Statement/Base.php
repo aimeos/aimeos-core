@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Statement;
+
+
 /**
  * Base class for all statement implementations providing the parameter constants
  *
  * @package MW
  * @subpackage DB
  */
-abstract class MW_DB_Statement_Base
+abstract class Base
 {
 	/**
 	 * NULL values

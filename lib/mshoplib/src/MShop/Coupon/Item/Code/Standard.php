@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Item\Code;
+
+
 /**
  * Default coupon code implementation.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Item_Code_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Coupon_Item_Code_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Coupon\Item\Code\Iface
 {
 	private $values;
 

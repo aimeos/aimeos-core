@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes countryid column in customer table.
  */
-class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Base
+class CustomerChangeCountryidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "mshop_customer" MODIFY "countryid" CHAR(2) NULL';
 

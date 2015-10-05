@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Plugin\Provider;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
+class ExceptionTest extends \PHPUnit_Framework_TestCase
 {
 	private $codes;
 
@@ -25,9 +27,9 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 	public function test()
 	{
 		try {
-			throw new MShop_Plugin_Provider_Exception( 'msg', 13, null, $this->codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( 'msg', 13, null, $this->codes );
 		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
 			$this->assertEquals( 13, $mppe->getCode() );
 			$this->assertEquals( 'msg', $mppe->getMessage() );
@@ -36,9 +38,9 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 		}
 
 		try {
-			throw new MShop_Plugin_Provider_Exception( 'msg2', 11 );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( 'msg2', 11 );
 		}
-		catch( MShop_Plugin_Provider_Exception $e )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$this->assertEquals( array(), $e->getErrorCodes() );
 		}

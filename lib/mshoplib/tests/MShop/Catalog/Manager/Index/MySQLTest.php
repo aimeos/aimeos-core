@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_MySQL.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\MySQL.
  */
-class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
+class MySQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor;
@@ -17,11 +20,11 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$context = clone TestHelper::getContext();
+		$context = clone \TestHelper::getContext();
 		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
 
-		$manager = new MShop_Catalog_Manager_Index_MySQL( $context );
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$manager = new \Aimeos\MShop\Catalog\Manager\Index\MySQL( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -47,7 +50,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = clone TestHelper::getContext();
+		$context = clone \TestHelper::getContext();
 		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
 
 		$this->editor = $context->getEditor();
@@ -59,7 +62,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'MySQL specific test' );
 		}
 
-		$this->object = new MShop_Catalog_Manager_Index_MySQL( $context );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\MySQL( $context );
 	}
 
 
@@ -81,7 +84,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 		foreach( $list as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 
 			switch( $attribute->getCode() )
 			{
@@ -134,8 +137,8 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchTexts()
 	{
-		$context = TestHelper::getContext();
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$context = \TestHelper::getContext();
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -146,7 +149,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Item;
+
+
 /**
- * Test class for MShop_Plugin_Item_Standard
+ * Test class for \Aimeos\MShop\Plugin\Item\Standard
  */
-class MShop_Plugin_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -35,7 +38,7 @@ class MShop_Plugin_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Plugin_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Plugin\Item\Standard( $this->values );
 	}
 
 
@@ -172,7 +175,7 @@ class MShop_Plugin_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Plugin_Item_Standard();
+		$item = new \Aimeos\MShop\Plugin\Item\Standard();
 
 		$list = array(
 			'plugin.id' => 1,

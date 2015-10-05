@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product\Attribute;
+
+
 /**
  * Interface for objects storing the selected product attributes.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Product_Attribute_Iface
-	extends MShop_Common_Item_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the original attribute ID of the ordered product attribute.
@@ -110,8 +113,8 @@ interface MShop_Order_Item_Base_Product_Attribute_Iface
 	/**
 	 * Copys all data from a given attribute item.
 	 *
-	 * @param MShop_Attribute_Item_Iface $item Attribute item to copy from
+	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
 	 * @return void
 	 */
-	public function copyFrom( MShop_Attribute_Item_Iface $item );
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item );
 }

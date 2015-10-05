@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Type;
+
+
 /**
  * Interface for all type manager implementations.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Type_Iface
-	extends MShop_Common_Manager_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

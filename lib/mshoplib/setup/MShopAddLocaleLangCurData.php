@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds locale language and currency records to tables.
  */
-class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLocaleData
+class MShopAddLocaleLangCurData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Add locale data for languages and currencies', 0 );
@@ -57,13 +60,13 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 
 		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'language.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 		}
 
 		if( isset( $data['locale/language'] ) ) {
@@ -74,7 +77,7 @@ class MW_Setup_Task_MShopAddLocaleLangCurData extends MW_Setup_Task_MShopAddLoca
 		$filename = dirname( __FILE__ ) . $ds . 'default'.  $ds . 'data'. $ds . 'currency.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
-			throw new MW_Setup_Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 		}
 
 		if( isset( $data['locale/currency'] ) ) {

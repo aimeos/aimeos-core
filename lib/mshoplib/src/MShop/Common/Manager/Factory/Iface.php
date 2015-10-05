@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Factory;
+
+
 /**
  * Generic interface for all manager created by factories.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_Factory_Iface extends MShop_Common_Manager_Iface
+interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Initializes the manager by using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 }

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria;
+
+
 /**
  * Interface for search classes
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Iface
+interface Iface
 {
 	/**
 	 * Creates a new combine expression.
@@ -26,7 +29,7 @@ interface MW_Common_Criteria_Iface
 	 *
 	 * @param string $operator One of the known operators
 	 * @param array $list List of expression objects that should be combined
-	 * @return MW_Common_Criteria_Expression_Combine_Iface Combine expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Combine\Iface Combine expression object
 	 */
 	public function combine( $operator, array $list );
 
@@ -46,7 +49,7 @@ interface MW_Common_Criteria_Iface
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for comparison
 	 * @param mixed $value Value the variable or column should be compared to
-	 * @return MW_Common_Criteria_Expression_Compare_Iface Compare expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Compare\Iface Compare expression object
 	 */
 	public function compare( $operator, $name, $value );
 
@@ -60,7 +63,7 @@ interface MW_Common_Criteria_Iface
 	 *
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for sorting
-	 * @return MW_Common_Criteria_Expression_Sort_Iface Sort expression object
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Sort\Iface Sort expression object
 	 */
 	public function sort( $operator, $name );
 
@@ -78,7 +81,7 @@ interface MW_Common_Criteria_Iface
 	 *
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression string for searching
 	 */
 	public function getConditionString( array $types, array $translations = array(), array $plugins = array() );
@@ -87,7 +90,7 @@ interface MW_Common_Criteria_Iface
 	/**
 	 * Returns the original condition expression objects.
 	 *
-	 * @return MW_Common_Criteria_Expression_Iface Original expression objects
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Iface Original expression objects
 	 */
 	public function getConditions();
 
@@ -95,10 +98,10 @@ interface MW_Common_Criteria_Iface
 	/**
 	 * Sets the expression objects.
 	 *
-	 * @param MW_Common_Criteria_Expression_Iface $conditions Expression object
-	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface $conditions Expression object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setConditions( MW_Common_Criteria_Expression_Iface $conditions );
+	public function setConditions( \Aimeos\MW\Common\Criteria\Expression\Iface $conditions );
 
 
 	/**
@@ -122,8 +125,8 @@ interface MW_Common_Criteria_Iface
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param MW_Common_Criteria_Expression_Sort_Iface[] $sortation List of objects implementing MW_Common_Criteria_Expression_Sort_Iface
-	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Sort\Iface[] $sortation List of objects implementing \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortation );
 
@@ -149,7 +152,7 @@ interface MW_Common_Criteria_Iface
 	 *
 	 * @param integer $start Start number of the items
 	 * @param integer $size Number of items
-	 * @return MW_Common_Criteria_Iface Object instance for fluent interface
+	 * @return \Aimeos\MW\Common\Criteria\Iface Object instance for fluent interface
 	 */
 	public function setSlice( $start, $size = 100 );
 
@@ -176,8 +179,8 @@ interface MW_Common_Criteria_Iface
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return MW_Common_Criteria_Expression_Iface Condition expressions (maybe nested)
-	 * @throws MW_Common_Exception If given array is invalid
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Iface Condition expressions (maybe nested)
+	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
 	public function toConditions( array $array );
 
@@ -192,7 +195,7 @@ interface MW_Common_Criteria_Iface
 	 * 	);
 	 *
 	 * @param array $array Single-dimensional array of name and operator pairs
-	 * @return array List of sort expressions implementing MW_Common_Criteria_Expression_Sort_Iface
+	 * @return array List of sort expressions implementing \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
 	 */
 	public function toSortations( array $array );
 }

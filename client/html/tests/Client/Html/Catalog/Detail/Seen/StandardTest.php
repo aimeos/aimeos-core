@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Detail\Seen;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Detail_Seen_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Catalog_Detail_Seen_StandardTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
 
-		$this->object = new Client_Html_Catalog_Detail_Seen_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Seen\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -54,7 +56,7 @@ class Client_Html_Catalog_Detail_Seen_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
@@ -64,7 +66,7 @@ class Client_Html_Catalog_Detail_Seen_StandardTest extends PHPUnit_Framework_Tes
 		$view = $this->object->getView();
 		$param = array( 'd_prodid' => $this->getProductItem()->getId() );
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -76,13 +78,13 @@ class Client_Html_Catalog_Detail_Seen_StandardTest extends PHPUnit_Framework_Tes
 
 	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNE" found' );
+			throw new \Exception( 'No product item with code "CNE" found' );
 		}
 
 		return $item;

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Locale\Site;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Locale_Site_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Locale_Site_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Locale_Site_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Locale\Site\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -91,9 +92,9 @@ class Controller_ExtJS_Locale_Site_StandardTest extends PHPUnit_Framework_TestCa
 
 		try {
 			$this->object->getTree( $params );
-		} catch( MShop_Exception $me ) {
+		} catch( \Aimeos\MShop\Exception $me ) {
 			return;
-		} catch( MW_Tree_Exception $mte ) {
+		} catch( \Aimeos\MW\Tree\Exception $mte ) {
 			return;
 		}
 
@@ -166,7 +167,7 @@ class Controller_ExtJS_Locale_Site_StandardTest extends PHPUnit_Framework_TestCa
 			'refid' => null
 		);
 
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->moveItems( $moveParams );
 	}
 

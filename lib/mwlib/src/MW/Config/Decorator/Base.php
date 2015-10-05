@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
  * Base class for all config decorators.
  *
  * @package MW
  * @subpackage Config
  */
-abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Iface
+abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 {
 	private $object;
 
@@ -22,9 +25,9 @@ abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Iface
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Iface $object Config object or decorator
+	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 */
-	public function __construct( MW_Config_Iface $object )
+	public function __construct( \Aimeos\MW\Config\Iface $object )
 	{
 		$this->object = $object;
 	}
@@ -67,7 +70,7 @@ abstract class MW_Config_Decorator_Base implements MW_Config_Decorator_Iface
 	/**
 	 * Returns the wrapped config object.
 	 *
-	 * @return MW_Config_Iface Config object
+	 * @return \Aimeos\MW\Config\Iface Config object
 	 */
 	protected function getObject()
 	{

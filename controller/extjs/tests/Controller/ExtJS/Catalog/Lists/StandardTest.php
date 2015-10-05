@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Catalog_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Catalog_Lists_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Catalog_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,8 +57,8 @@ class Controller_ExtJS_Catalog_Lists_StandardTest extends PHPUnit_Framework_Test
 
 	public function testSaveDeleteItem()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$params = (object) array(
 			'site' => 'unittest',
@@ -65,7 +66,7 @@ class Controller_ExtJS_Catalog_Lists_StandardTest extends PHPUnit_Framework_Test
 			'start' => 0,
 			'limit' => 1,
 		);
-		$catalogListTypeManager = Controller_ExtJS_Catalog_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$catalogListTypeManager = \Aimeos\Controller\ExtJS\Catalog\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $catalogListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

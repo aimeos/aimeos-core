@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required columns
  */
-class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Base
+class CouponMigrateConfigKeys extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_coupon" SET "provider" = CONCAT("provider", \',Required\')

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Delivery;
+
+
 /**
  * Default delivery provider implementation.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Delivery_Standard
-	extends MShop_Service_Provider_Delivery_Base
-	implements MShop_Service_Provider_Delivery_Iface
+class Standard
+	extends \Aimeos\MShop\Service\Provider\Delivery\Base
+	implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
 
 	private $beConfig = array(
@@ -71,22 +74,22 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Sends the order details to the ERP system for further processing.
 	 *
-	 * @param MShop_Order_Item_Iface $order Order invoice object to process
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
 	 */
-	public function process( MShop_Order_Item_Iface $order )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		$logger = $this->getContext()->getLogger();
 		$xml = $this->buildXML( $order );
 
-		$logger->log( __METHOD__ . ": XML request =\n" . $xml, MW_Logger_Base::INFO );
+		$logger->log( __METHOD__ . ": XML request =\n" . $xml, \Aimeos\MW\Logger\Base::INFO );
 
 		$response = $this->sendRequest( $xml );
 
-		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), MW_Logger_Base::INFO );
+		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), \Aimeos\MW\Logger\Base::INFO );
 
 		$this->checkResponse( $response, $order->getId() );
 
-		$order->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
+		$order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
 
@@ -94,14 +97,14 @@ class MShop_Service_Provider_Delivery_Standard
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
 		$list = array();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Standard( $config );
+			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -126,7 +129,7 @@ class MShop_Service_Provider_Delivery_Standard
 	 *
 	 * @param string $xml Complete order data as valid XML string
 	 * @return string response body of a http request
-	 * @throws MShop_Service_Exception If the request couldn't be sent
+	 * @throws \Aimeos\MShop\Service\Exception If the request couldn't be sent
 	 */
 	protected function sendRequest( $xml )
 	{
@@ -135,12 +138,12 @@ class MShop_Service_Provider_Delivery_Standard
 		$config = $this->getServiceItem()->getConfig();
 
 		if( !isset( $config['default.url'] ) ) {
-			throw new MShop_Service_Exception(
+			throw new \Aimeos\MShop\Service\Exception(
 				sprintf( 'Parameter "%1$s" for configuration not available', "url" ), parent::ERR_TEMP );
 		}
 
 		if( ( $curl = curl_init() ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Curl could not be initialized' ), parent::ERR_TEMP );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Curl could not be initialized' ), parent::ERR_TEMP );
 		}
 
 		try
@@ -158,7 +161,7 @@ class MShop_Service_Provider_Delivery_Standard
 
 			if( isset( $config['default.username'] ) && isset( $config['default.password'] ) )
 			{
-				$context->getLogger()->log( 'Using user name and password for authentication', MW_Logger_Base::NOTICE );
+				$context->getLogger()->log( 'Using user name and password for authentication', \Aimeos\MW\Logger\Base::NOTICE );
 				curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 				curl_setopt( $curl, CURLOPT_USERPWD, $config['default.username'] . ':' . $config['default.password'] );
 			}
@@ -168,36 +171,36 @@ class MShop_Service_Provider_Delivery_Standard
 			{
 				if( isset( $config['default.ssl'] ) && $config['default.ssl'] == 'weak' )
 				{
-					$context->getLogger()->log( 'Using weak SSL options', MW_Logger_Base::NOTICE );
+					$context->getLogger()->log( 'Using weak SSL options', \Aimeos\MW\Logger\Base::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, true );
 				}
 				else
 				{
-					$context->getLogger()->log( 'Using strict SSL options', MW_Logger_Base::NOTICE );
+					$context->getLogger()->log( 'Using strict SSL options', \Aimeos\MW\Logger\Base::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 ); // check CN and match host name
 				}
 			}
 			else
 			{
-				$context->getLogger()->log( 'Using no SSL encryption', MW_Logger_Base::NOTICE );
+				$context->getLogger()->log( 'Using no SSL encryption', \Aimeos\MW\Logger\Base::NOTICE );
 			}
 
 			if( ( $response = curl_exec( $curl ) ) === false ) {
-				throw new MShop_Service_Exception(
+				throw new \Aimeos\MShop\Service\Exception(
 					sprintf( 'Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
 			}
 
 			$curlinfo = curl_getinfo( $curl );
 			if( $curlinfo['http_code'] != '200' ) {
-				throw new MShop_Service_Exception(
+				throw new \Aimeos\MShop\Service\Exception(
 					sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
 			}
 
 			curl_close( $curl );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			curl_close( $curl );
 			throw $e;
@@ -212,30 +215,30 @@ class MShop_Service_Provider_Delivery_Standard
 	 *
 	 * @param string $response XML sent back by the server
 	 * @param integer $invoiceid Number of the order invoice sent to the fulfillment partner
-	 * @throws MShop_Service_Exception If the response is invalid
+	 * @throws \Aimeos\MShop\Service\Exception If the response is invalid
 	 */
 	protected function checkResponse( $response, $invoiceid )
 	{
 		$responseXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-response_v1.xsd';
 
-		$dom = new DOMDocument( '1.0', 'UTF-8' );
+		$dom = new \DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
 		if( $dom->loadXML( $response ) !== true ) {
-			throw new MShop_Service_Exception(
+			throw new \Aimeos\MShop\Service\Exception(
 				sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response ), parent::ERR_XML );
 		}
 
 		if( $dom->schemaValidate( $responseXSD ) !== true ) {
-			throw new MShop_Service_Exception(
+			throw new \Aimeos\MShop\Service\Exception(
 				sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
 		}
 
-		$xpath = new DOMXPath( $dom );
+		$xpath = new \DOMXPath( $dom );
 
 		$globalStatus = $xpath->query( '/response/error' )->item( 0 )->nodeValue;
 		if( $globalStatus != 0 ) {
-			throw new MShop_Service_Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
 		}
 
 		$orderitemlist = $xpath->query( '/response/orderlist/orderitem' );
@@ -246,14 +249,14 @@ class MShop_Service_Provider_Delivery_Standard
 			$status = $xpath->query( 'status', $orderitem )->item( 0 )->nodeValue;
 
 			if( $id != $invoiceid ) {
-				throw new MShop_Service_Exception(
+				throw new \Aimeos\MShop\Service\Exception(
 					sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order', $id, $invoiceid ) );
 			}
 
 			if( $status != 0 )
 			{
 				$msg = $xpath->query( 'message', $orderitem )->item( 0 )->nodeValue;
-				throw new MShop_Service_Exception(
+				throw new \Aimeos\MShop\Service\Exception(
 					sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
 			}
 		}
@@ -263,17 +266,17 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Builds a complete XML string including the order data
 	 *
-	 * @param MShop_Order_Item_Iface $invoice Order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $invoice Order of the customer
 	 * @return string Validated XML string with order data
-	 * @throws MShop_Service_Exception If an error occurs
+	 * @throws \Aimeos\MShop\Service\Exception If an error occurs
 	 */
-	public function buildXML( MShop_Order_Item_Iface $invoice )
+	public function buildXML( \Aimeos\MShop\Order\Item\Iface $invoice )
 	{
-		$base = $this->getOrderBase( $invoice->getBaseId(), MShop_Order_Manager_Base_Base::PARTS_ALL );
+		$base = $this->getOrderBase( $invoice->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 
 		try
 		{
-			$dom = new DOMDocument( '1.0', 'UTF-8' );
+			$dom = new \DOMDocument( '1.0', 'UTF-8' );
 
 			$orderlist = $dom->createElement( 'orderlist' );
 			$orderitem = $dom->createElement( 'orderitem' );
@@ -291,7 +294,7 @@ class MShop_Service_Provider_Delivery_Standard
 		catch( DOMException $e )
 		{
 			$msg = 'Creating XML file with order data for delivery provider failed: %1$s';
-			throw new MShop_Service_Exception( sprintf( $msg, $e->getMessage() ), 0, $e );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $e->getMessage() ), 0, $e );
 		}
 
 		$requestXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
@@ -299,13 +302,13 @@ class MShop_Service_Provider_Delivery_Standard
 		if( $dom->schemaValidate( $requestXSD ) !== true )
 		{
 			$msg = 'Validation of XML response from delivery provider against schema "%1$s" failed: %2$s';
-			throw new MShop_Service_Exception( sprintf( $msg, $requestXSD, $dom->saveXML() ), parent::ERR_SCHEMA );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $requestXSD, $dom->saveXML() ), parent::ERR_SCHEMA );
 		}
 
 		if( ( $xml = $dom->saveXML() ) === false )
 		{
 			$msg = 'DOM tree of XML response from delivery provider could not be converted to XML string';
-			throw new MShop_Service_Exception( sprintf( $msg ), parent::ERR_XML );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg ), parent::ERR_XML );
 		}
 
 		return $xml;
@@ -315,20 +318,20 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the header elements to the XML object
 	 *
-	 * @param MShop_Order_Item_Iface $invoice Order of the customer
-	 * @param MShop_Order_Item_Base_Iface $base Order base item of the customer
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Iface $invoice Order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base item of the customer
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLHeader( MShop_Order_Item_Iface $invoice, MShop_Order_Item_Base_Iface $base,
-		DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLHeader( \Aimeos\MShop\Order\Item\Iface $invoice, \Aimeos\MShop\Order\Item\Base\Iface $base,
+		\DOMDocument $dom, \DOMElement $orderitem )
 	{
 		$regex = '/^(\d+)\-(\d+)\-(\d+) (\d+)\:(\d+)\:(\d+)$/i';
 		$date = $invoice->getDatePayment();
 
 		if( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
-				throw new MShop_Service_Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
 		}
 
 		$config = $this->getServiceItem()->getConfig();
@@ -336,7 +339,7 @@ class MShop_Service_Provider_Delivery_Standard
 		if( !isset( $config['default.project'] ) )
 		{
 			$msg = 'Parameter "%1$s" for configuration not available';
-			throw new MShop_Service_Exception( sprintf( $msg, "project" ), parent::ERR_TEMP );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, "project" ), parent::ERR_TEMP );
 		}
 
 		$this->appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );
@@ -357,12 +360,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the delivery/payment item to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLService( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLService( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
 		foreach( $base->getServices() as $service )
 		{
@@ -404,12 +407,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the price item to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLPrice( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLPrice( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
 		$price = $base->getPrice();
 		$total = $price->getValue() + $price->getCosts();
@@ -427,12 +430,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the product list to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLProducts( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLProducts( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
 		$productlist = $dom->createElement( 'productlist' );
 
@@ -469,12 +472,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the list of child products to the bundle products in the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Product_Iface $parent The bundle product
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $parent The bundle product
 	 * @param array $products List of child products attached to $parent
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $productelement DOM element to which the child products are added
 	 */
-	protected function buildXMLChildList( MShop_Order_Item_Base_Product_Iface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
+	protected function buildXMLChildList( \Aimeos\MShop\Order\Item\Base\Product\Iface $parent, array $products, \DOMDocument $dom, \DOMElement $productelement )
 	{
 		$childlist = $dom->createElement( 'childlist' );
 
@@ -507,12 +510,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the address list to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAddresses( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAddresses( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
 		$addresslist = $dom->createElement( 'addresslist' );
 
@@ -527,13 +530,13 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds a single address item to the address list of the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Address_Iface $address Address object with personal information
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Address object with personal information
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $addresslist DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAddress( MShop_Order_Item_Base_Address_Iface $address,
-		DOMDocument $dom, DOMElement $addresslist )
+	protected function buildXMLAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address,
+		\DOMDocument $dom, \DOMElement $addresslist )
 	{
 		$addressitem = $dom->createElement( 'addressitem' );
 
@@ -561,12 +564,12 @@ class MShop_Service_Provider_Delivery_Standard
 	/**
 	 * Adds the "additional" section to the XML object
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function buildXMLAdditional( MShop_Order_Item_Base_Iface $base, DOMDocument $dom, DOMElement $orderitem )
+	protected function buildXMLAdditional( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
 		$additional = $dom->createElement( 'additional' );
 		$this->appendChildCDATA( 'comment', '', $dom, $additional );
@@ -587,11 +590,11 @@ class MShop_Service_Provider_Delivery_Standard
 	 *
 	 * @param string $name Name of the new XML element
 	 * @param string|integer $value Value of the new XML element
-	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param \DOMDocument $dom DOM document object with contains the XML structure
 	 * @param DOMElement $parent DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
-	protected function appendChildCDATA( $name, $value, DOMDocument $dom, DOMElement $parent )
+	protected function appendChildCDATA( $name, $value, \DOMDocument $dom, \DOMElement $parent )
 	{
 		$child = $dom->createElement( $name );
 		$child->appendChild( $dom->createCDATASection( $value ) );

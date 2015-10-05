@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,7 +57,7 @@ class Controller_ExtJS_Product_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $productManager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
@@ -64,7 +65,7 @@ class Controller_ExtJS_Product_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $typeManager->searchItems( $search );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No product type found' );
+			throw new \Exception( 'No product type found' );
 		}
 
 		$saveParams = (object) array(
@@ -113,7 +114,7 @@ class Controller_ExtJS_Product_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );

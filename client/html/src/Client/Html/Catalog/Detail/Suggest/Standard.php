@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Detail\Suggest;
+
+
 /**
  * Default implementation of catalog detail suggestion section for HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Detail_Suggest_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/catalog/detail/suggest/default/subparts
 	 * List of HTML sub-clients rendered within the catalog detail suggest section
@@ -154,7 +157,7 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -173,7 +176,7 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 		 *  client/html/catalog/detail/suggest/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -193,12 +196,12 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/suggest/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -217,12 +220,12 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/suggest/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -250,12 +253,12 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -266,7 +269,7 @@ class Client_Html_Catalog_Detail_Suggest_Standard
 				$domains = array( 'text', 'price', 'media' );
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'suggestion' );
 
-				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
 				/** client/html/catalog/detail/domains
 				 * A list of domain names whose items should be available in the catalog view templates

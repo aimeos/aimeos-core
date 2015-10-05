@@ -6,15 +6,18 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds foreign key constraints for langid and curid columns in order base table.
  *
  * 2012-08-08
  * At this time the constrains are not needed anymore because of future dependency.
- * see: MW_Setup_Task_OrderDropForeignKeyOfLocale
+ * see: \Aimeos\MW\Setup\Task\OrderDropForeignKeyOfLocale
  * -> Order domain table can be used on a differend database/ server
  */
-class MW_Setup_Task_OrderAddForeignKey extends MW_Setup_Task_Base
+class OrderAddForeignKey extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,6 +46,6 @@ class MW_Setup_Task_OrderAddForeignKey extends MW_Setup_Task_Base
 	 */
 	protected function mysql()
 	{
-		// see: MW_Setup_Task_OrderDropForeignKeyOfLocale
+		// see: \Aimeos\MW\Setup\Task\OrderDropForeignKeyOfLocale
 	}
 }

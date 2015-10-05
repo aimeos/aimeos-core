@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -59,7 +60,7 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1 );
-		$productManager = new Controller_ExtJS_Product_Standard( TestHelper::getContext() );
+		$productManager = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelper::getContext() );
 		$result = $productManager->searchItems( $params );
 
 		$params = (object) array(
@@ -68,7 +69,7 @@ class Controller_ExtJS_Product_Lists_StandardTest extends PHPUnit_Framework_Test
 			'start' => 0,
 			'limit' => 1,
 		);
-		$productListTypeManager = Controller_ExtJS_Product_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$productListTypeManager = \Aimeos\Controller\ExtJS\Product\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $productListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

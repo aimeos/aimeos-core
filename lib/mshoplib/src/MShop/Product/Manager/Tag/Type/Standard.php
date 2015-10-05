@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Tag\Type;
+
+
 /**
  * Default product tag type manager for creating and handling product tag type items.
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Tag_Type_Standard
-	extends MShop_Common_Manager_Type_Base
-	implements MShop_Product_Manager_Tag_Type_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Type\Base
+	implements \Aimeos\MShop\Product\Manager\Tag\Type\Iface
 {
 	private $searchConfig = array(
 		'product.tag.type.id' => array(
@@ -24,7 +27,7 @@ class MShop_Product_Manager_Tag_Type_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_product_tag_type" AS mprotaty ON ( mprota."typeid" = mprotaty."id" )' ),
 			'label' => 'Product tag type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.type.siteid' => array(
@@ -32,7 +35,7 @@ class MShop_Product_Manager_Tag_Type_Standard
 			'internalcode' => 'mprotaty."siteid"',
 			'label' => 'Product tag type site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.tag.type.code' => array(
@@ -40,49 +43,49 @@ class MShop_Product_Manager_Tag_Type_Standard
 			'internalcode' => 'mprotaty."code"',
 			'label' => 'Product tag type code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.type.domain' => array(
 			'code' => 'product.tag.type.domain',
 			'internalcode' => 'mprotaty."domain"',
 			'label' => 'Product tag type domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.type.label' => array(
 			'code' => 'product.tag.type.label',
 			'internalcode' => 'mprotaty."label"',
 			'label' => 'Product tag type label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.type.status' => array(
 			'code' => 'product.tag.type.status',
 			'internalcode' => 'mprotaty."status"',
 			'label' => 'Product tag type status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.tag.type.mtime'=> array(
 			'code'=>'product.tag.type.mtime',
 			'internalcode'=>'mprotaty."mtime"',
 			'label'=>'Product tag type modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.type.ctime'=> array(
 			'code'=>'product.tag.type.ctime',
 			'internalcode'=>'mprotaty."ctime"',
 			'label'=>'Product tag type creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.tag.type.editor'=> array(
 			'code'=>'product.tag.type.editor',
 			'internalcode'=>'mprotaty."editor"',
 			'label'=>'Product tag type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -90,9 +93,9 @@ class MShop_Product_Manager_Tag_Type_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -119,7 +122,7 @@ class MShop_Product_Manager_Tag_Type_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -151,7 +154,7 @@ class MShop_Product_Manager_Tag_Type_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -165,11 +168,11 @@ class MShop_Product_Manager_Tag_Type_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Lists_Type_Standard
+		 *  \Aimeos\MShop\Product\Manager\Lists\Type\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Lists_Type_Mytype
+		 *  \Aimeos\MShop\Product\Manager\Lists\Type\Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -204,7 +207,7 @@ class MShop_Product_Manager_Tag_Type_Standard
 		 *  mshop/product/manager/tag/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product tag type manager.
 		 *
 		 * @param array List of decorator names
@@ -224,12 +227,12 @@ class MShop_Product_Manager_Tag_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product tag type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product tag type manager.
 		 *
 		 *  mshop/product/manager/tag/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -248,12 +251,12 @@ class MShop_Product_Manager_Tag_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product tag type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product tag type manager.
 		 *
 		 *  mshop/product/manager/tag/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names

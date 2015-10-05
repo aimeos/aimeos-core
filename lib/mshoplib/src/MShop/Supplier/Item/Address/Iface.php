@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Item\Address;
+
+
 /**
  * Interface for provider supplier address DTO objects used by the shop.
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Item_Address_Iface extends MShop_Common_Item_Address_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 {
 	/**
 	 * Returns the reference id regarding to the product suppliercode of the address.
@@ -52,9 +55,9 @@ interface MShop_Supplier_Item_Address_Iface extends MShop_Common_Item_Address_If
 	/**
 	 * Copies the values of the order address item into the address item.
 	 *
-	 * @param MShop_Order_Item_Base_Address_Iface $item Order address item
-	 * @return MShop_Common_Item_Address_Iface The address item for method chaining
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item Order address item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface The address item for method chaining
 	 */
-	public function copyFrom( MShop_Order_Item_Base_Address_Iface $item );
+	public function copyFrom( \Aimeos\MShop\Order\Item\Base\Address\Iface $item );
 
 }

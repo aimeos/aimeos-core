@@ -8,28 +8,31 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
  * MySQL based catalog index for searching in product tables.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Manager_Index_MySQL
-	extends MShop_Catalog_Manager_Index_Standard
-	implements MShop_Catalog_Manager_Index_Iface
+class MySQL
+	extends \Aimeos\MShop\Catalog\Manager\Index\Standard
+	implements \Aimeos\MShop\Catalog\Manager\Index\Iface
 {
 	/**
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$conn = $dbm->acquire();
 
-		$object = new MW_Common_Criteria_MySQL( $conn );
+		$object = new \Aimeos\MW\Common\Criteria\MySQL( $conn );
 
 		$dbm->release( $conn );
 

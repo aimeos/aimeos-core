@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Media;
+
+
 /**
  * Common interface for all media objects.
  *
  * @package MW
  * @subpackage Media
  */
-interface MW_Media_Iface
+interface Iface
 {
 	/**
 	 * Returns the mime type of a media object.

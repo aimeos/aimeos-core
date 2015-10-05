@@ -6,64 +6,67 @@
  */
 
 
+namespace Aimeos\MShop;
+
+
 /**
- * Test class for MShop_Factory.
+ * Test class for \Aimeos\MShop\Factory.
  */
-class MShop_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateSubManager()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'attribute/lists/type' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $manager );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute/lists/type' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerEmpty()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), "\n" );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Factory::createManager( TestHelper::getContext(), 'attribute/unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute/unknown' );
 	}
 
 
 	public function testClear()
 	{
-		$cache = MShop_Factory::setCache( true );
+		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$controller1 = MShop_Factory::createManager( $context, 'attribute' );
-		MShop_Factory::clear();
-		$controller2 = MShop_Factory::createManager( $context, 'attribute' );
+		$controller1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		\Aimeos\MShop\Factory::clear();
+		$controller2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 
-		MShop_Factory::setCache( $cache );
+		\Aimeos\MShop\Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -71,18 +74,18 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSite()
 	{
-		$cache = MShop_Factory::setCache( true );
+		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB1 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
-		MShop_Factory::clear( (string) $context );
+		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
+		\Aimeos\MShop\Factory::clear( (string) $context );
 
-		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB2 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
+		$managerA2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$managerB2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
 
-		MShop_Factory::setCache( $cache );
+		\Aimeos\MShop\Factory::setCache( $cache );
 
 		$this->assertNotSame( $managerA1, $managerA2 );
 		$this->assertNotSame( $managerB1, $managerB2 );
@@ -91,18 +94,18 @@ class MShop_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSpecific()
 	{
-		$cache = MShop_Factory::setCache( true );
+		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB1 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
-		MShop_Factory::clear( (string) $context, 'attribute' );
+		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
+		\Aimeos\MShop\Factory::clear( (string) $context, 'attribute' );
 
-		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
-		$managerB2 = MShop_Factory::createManager( $context, 'attribute/lists/type' );
+		$managerA2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$managerB2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
 
-		MShop_Factory::setCache( $cache );
+		\Aimeos\MShop\Factory::setCache( $cache );
 
 		$this->assertNotSame( $managerA1, $managerA2 );
 		$this->assertSame( $managerB1, $managerB2 );

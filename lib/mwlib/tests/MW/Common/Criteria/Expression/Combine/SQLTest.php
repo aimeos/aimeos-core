@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Combine;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Combine_SQL.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Combine\SQL.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Combine_SQLTest extends PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -16,7 +19,7 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 	}
@@ -34,60 +37,60 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends PHPUnit_Framework_Te
 	public function testGetOperators()
 	{
 		$expected = array( '&&', '||', '!' );
-		$actual = MW_Common_Criteria_Expression_Combine_SQL::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Combine\SQL::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Combine_SQL( '||', array() );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '||', array() );
 		$this->assertEquals( '||', $expr->getOperator() );
 	}
 
 	public function testGetExpressions()
 	{
-		$expr = new MW_Common_Criteria_Expression_Combine_SQL( '||', array() );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '||', array() );
 		$this->assertEquals( array(), $expr->getExpressions() );
 	}
 
 	public function testToString()
 	{
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$conn = $dbm->acquire();
 		$dbm->release( $conn );
 
 		$types = array(
-			'list' => MW_DB_Statement_Base::PARAM_STR,
-			'string' => MW_DB_Statement_Base::PARAM_STR,
-			'float' => MW_DB_Statement_Base::PARAM_FLOAT,
-			'int' => MW_DB_Statement_Base::PARAM_INT,
-			'undefined' => MW_DB_Statement_Base::PARAM_INT,
-			'bool' => MW_DB_Statement_Base::PARAM_BOOL,
+			'list' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'string' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'float' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'int' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'undefined' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'bool' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		);
 
 		$expr1 = array();
-		$expr1[] = new MW_Common_Criteria_Expression_Compare_SQL( $conn, '==', 'list', array('a', 'b', 'c') );
-		$expr1[] = new MW_Common_Criteria_Expression_Compare_SQL( $conn, '~=', 'string', 'value' );
+		$expr1[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $conn, '==', 'list', array('a', 'b', 'c') );
+		$expr1[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $conn, '~=', 'string', 'value' );
 
 		$expr2 = array();
-		$expr2[] = new MW_Common_Criteria_Expression_Compare_SQL( $conn, '<', 'float', 0.1 );
-		$expr2[] = new MW_Common_Criteria_Expression_Compare_SQL( $conn, '>', 'int', 10 );
+		$expr2[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $conn, '<', 'float', 0.1 );
+		$expr2[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\SQL( $conn, '>', 'int', 10 );
 
 		$objects = array();
-		$objects[] = new MW_Common_Criteria_Expression_Combine_SQL( '&&', $expr1 );
-		$objects[] = new MW_Common_Criteria_Expression_Combine_SQL( '&&', $expr2 );
+		$objects[] = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '&&', $expr1 );
+		$objects[] = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '&&', $expr2 );
 
-		$object = new MW_Common_Criteria_Expression_Combine_SQL( '||', $objects );
-		$test = new MW_Common_Criteria_Expression_Combine_SQL( '!', array( $object ) );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '||', $objects );
+		$test = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL( '!', array( $object ) );
 
 		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ) OR ( float < 0.1 AND int > 10 ) )";
 		$this->assertEquals( $expected, $test->toString( $types ) );
 
-		$obj = new MW_Common_Criteria_Expression_Combine_SQL('&&', array());
+		$obj = new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL('&&', array());
 		$this->assertEquals('', $obj->toString($types));
 
-		$this->setExpectedException('MW_Common_Exception');
-		new MW_Common_Criteria_Expression_Combine_SQL('', array());
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		new \Aimeos\MW\Common\Criteria\Expression\Combine\SQL('', array());
 
 	}
 }

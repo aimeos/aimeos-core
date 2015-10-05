@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider;
+
+
 /**
- * Test class for MShop_Service_Provider_Base.
+ * Test class for \Aimeos\MShop\Service\Provider\Base.
  */
-class MShop_Service_Provider_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -23,10 +26,10 @@ class MShop_Service_Provider_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$serviceItem = MShop_Service_Manager_Factory::createManager( $this->context )->createItem();
+		$this->context = \TestHelper::getContext();
+		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->object = new Test_MShop_Service_Provider_Base( $this->context, $serviceItem );
+		$this->object = new TestBase( $this->context, $serviceItem );
 	}
 
 	/**
@@ -75,9 +78,9 @@ class MShop_Service_Provider_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testQuery()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->query( $item );
 	}
 
@@ -98,7 +101,7 @@ class MShop_Service_Provider_BaseTest extends PHPUnit_Framework_TestCase
 }
 
 
-class Test_MShop_Service_Provider_Base extends MShop_Service_Provider_Base
+class TestBase extends \Aimeos\MShop\Service\Provider\Base
 {
 	/**
 	 * @param integer $ts
@@ -113,7 +116,7 @@ class Test_MShop_Service_Provider_Base extends MShop_Service_Provider_Base
 		return $this->getConfigValue( $keys );
 	}
 
-	public function setConfigFE( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
 	}
 }

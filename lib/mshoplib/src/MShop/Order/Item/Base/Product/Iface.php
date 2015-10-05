@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product;
+
+
 /**
  * Basket item interface storing the product and the selected attributes and the computed price.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the base ID.
@@ -171,22 +174,22 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the stored price item for the selected product and package.
 	 *
-	 * @return MShop_Price_Item_Iface Price item with price, additional costs and rebate
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
 	 */
 	public function getPrice();
 
 	/**
 	 * Sets the new price item for the selected product and package.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item containing price and additional costs
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
 	 * @return void
 	 */
-	public function setPrice( MShop_Price_Item_Iface $price );
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
-	 * @return MShop_Price_Item_Iface Price item with price, additional costs and rebate
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
 	 */
 	public function getSumPrice();
 
@@ -216,7 +219,7 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	 * Sets the position of the product within the list of ordered products.
 	 *
 	 * @param integer Product position in the order from 1-n
-	 * @throws MShop_Order_Exception If there's already a position set
+	 * @throws \Aimeos\MShop\Order\Exception If there's already a position set
 	 * @return void
 	 */
 	public function setPosition( $value );
@@ -224,7 +227,7 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the current delivery status of the order product item.
 	 * The returned status values are the STAT_* constants from the
-	 * MShop_Order_Item_Base class
+	 * \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @return integer Delivery status of the product
 	 */
@@ -233,7 +236,7 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Sets the new delivery status of the order product item.
 	 * Possible status values are the STAT_* constants from the
-	 * MShop_Order_Item_Base class
+	 * \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @param integer $value New delivery status of the product
 	 * @return void
@@ -254,30 +257,30 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	 *
 	 * @param string $code code of the product attribute item
 	 * @param string $type Type of the product attribute item
-	 * @return MShop_Order_Item_Base_Product_Attribute_Iface|null Attribute item for the ordered product and the given code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' );
 
 	/**
 	 * Adds or replaces the attribute item in the list of product attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Attribute_Iface $item Product attribute item
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Product attribute item
 	 * @return void
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Iface $item );
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item );
 
 	/**
 	 * Returns the list of attribute items for the ordered product.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
 	public function getAttributes( $type = null );
 
 	/**
 	 * Sets the new list of attribute items for the product.
 	 *
-	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 * @return void
 	 */
 	public function setAttributes( array $attributes );
@@ -285,17 +288,17 @@ interface MShop_Order_Item_Base_Product_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Copys all data from a given product.
 	 *
-	 * @param MShop_Product_Item_Iface $product New product
+	 * @param \Aimeos\MShop\Product\Item\Iface $product New product
 	 * @return void
 	 */
-	public function copyFrom( MShop_Product_Item_Iface $product );
+	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product );
 
 	/**
 	 * Compares the properties of the given order product item with its own ones.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
 	 * @return boolean True if the item properties are equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Order_Item_Base_Product_Iface $item );
+	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item );
 }

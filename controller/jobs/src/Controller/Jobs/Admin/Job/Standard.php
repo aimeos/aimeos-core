@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Admin\Job;
+
+
 /**
  * Jobs admin job controller for admin interfaces.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Admin_Job_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,13 +46,13 @@ class Controller_Jobs_Admin_Job_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
 		$context = $this->getContext();
 
-		$jobManager = MAdmin_Job_Manager_Factory::createManager( $context );
+		$jobManager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( $context );
 		$criteria = $jobManager->createSearch( true );
 
 		$start = 0;
@@ -65,30 +68,31 @@ class Controller_Jobs_Admin_Job_Standard
 					$job = $item->getMethod();
 
 					if( preg_match( '/^[a-zA-Z0-9\_]+\.[a-zA-Z0-9\_]+$/', $job ) !== 1 ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in job name "%1$s"', $job ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in job name "%1$s"', $job ) );
 					}
 
 					$parts = explode( '.', $job );
 
 					if( count( $parts ) !== 2 ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Invalid job method "%1$s"', $job ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid job method "%1$s"', $job ) );
 					}
 
-					$name = "Controller_ExtJS_{$parts[0]}_Factory";
 					$method = $parts[1];
+					$class = str_replace( '_', '\\', $parts[0] );
+					$name = '\\Aimeos\\Controller\\ExtJS\\' . $class . '\\Factory';
 
 					if( class_exists( $name ) === false ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $name ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not available', $name ) );
 					}
 
 					$name .= '::createController';
 
 					if( ( $controller = call_user_func_array( $name, array( $context ) ) ) === false ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Unable to call factory method "%1$s"', $name ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to call factory method "%1$s"', $name ) );
 					}
 
 					if( method_exists( $controller, $method ) === false ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Method "%1$s" not available', $method ) );
+						throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Method "%1$s" not available', $method ) );
 					}
 
 					$result = $controller->$method( (object) $item->getParameter() );
@@ -96,7 +100,7 @@ class Controller_Jobs_Admin_Job_Standard
 					$item->setResult( $result );
 					$item->setStatus( -1 );
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
 					$str = 'Error while processing job "%1$s": %2$s';
 					$context->getLogger()->log( sprintf( $str, $item->getMethod(), $e->getMessage() ) );

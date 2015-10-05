@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Price;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_Price_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\Price\Standard.
  */
-class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	protected static $products;
@@ -17,14 +20,14 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 
 	public static function setUpBeforeClass()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new Exception( 'Products not available' );
+			throw new \Exception( 'Products not available' );
 		}
 
 		foreach( $result as $item ) {
@@ -41,7 +44,7 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->object = new MShop_Catalog_Manager_Index_Price_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\Price\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -65,7 +68,7 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 
 	public function testAggregate()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'price' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'price' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -78,7 +81,7 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No price item found' );
+			throw new \Exception( 'No price item found' );
 		}
 
 
@@ -94,19 +97,19 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$product = clone self::$products['CNC'];
 
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
-			throw new Exception( 'Product doesnt have any price item' );
+			throw new \Exception( 'Product doesnt have any price item' );
 		}
 
 
@@ -137,7 +140,7 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -148,7 +151,7 @@ class MShop_Catalog_Manager_Index_Price_StandardTest extends PHPUnit_Framework_T
 
 		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
-			throw new Exception( 'No price with type "default" available in product CNC' );
+			throw new \Exception( 'No price with type "default" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );

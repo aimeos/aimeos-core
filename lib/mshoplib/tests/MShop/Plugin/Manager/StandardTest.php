@@ -1,20 +1,24 @@
 <?php
 
+namespace Aimeos\MShop\Plugin\Manager\StandardTest;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class MShop_Plugin_Manager_StandardTest_Publisher extends MW_Observer_Publisher_Base
+class Publisher extends \Aimeos\MW\Observer\Publisher\Base
 {
 }
 
 
+namespace Aimeos\MShop\Plugin\Manager;
+
+
 /**
- * Test class for MShop_Plugin_Manager_Standard.
+ * Test class for \Aimeos\MShop\Plugin\Manager\Standard.
  */
-class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $examplePlugin;
@@ -30,8 +34,8 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$type = $this->object->getSubManager( 'type' );
 		$search = $type->createSearch();
@@ -42,7 +46,7 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $type->searchItems( $search );
 		if( ( $typeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->examplePlugin = $this->object->createItem();
@@ -76,13 +80,13 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Plugin_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Plugin\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testRegister()
 	{
-		$publisher = new MShop_Plugin_Manager_StandardTest_Publisher();
+		$publisher = new \Aimeos\MShop\Plugin\Manager\StandardTest\Publisher();
 		$this->object->register( $publisher, 'order' );
 	}
 
@@ -97,7 +101,7 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->object->searchItems( $search );
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
+			throw new \Exception( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -117,7 +121,7 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$a = $this->object->searchItems( $search );
 		if( ( $item = reset( $a ) ) === false ) {
-			throw new Exception( 'Search provider in test failt' );
+			throw new \Exception( 'Search provider in test failt' );
 		}
 
 		$item->setId( null );
@@ -164,7 +168,7 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -239,17 +243,17 @@ class MShop_Plugin_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'type', 'unknown' );
 	}
 }

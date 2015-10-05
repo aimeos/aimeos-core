@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
  * Default implementation of the service frontend controller.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Service_Standard
-	extends Controller_Frontend_Base
-	implements Controller_Frontend_Service_Iface
+class Standard
+	extends \Aimeos\Controller\Frontend\Base
+	implements \Aimeos\Controller\Frontend\Service\Iface
 {
 	private $items = array();
 	private $providers = array();
@@ -26,19 +29,19 @@ class Controller_Frontend_Service_Standard
 	 * Returns the service items that are available for the service type and the content of the basket.
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
-	 * @param MShop_Order_Item_Base_Iface $basket Basket of the user
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket of the user
 	 * @param array $ref List of domains for which the items referenced by the services should be fetched too
-	 * @return array List of service items implementing MShop_Service_Item_Iface with referenced items
-	 * @throws Exception If an error occurs
+	 * @return array List of service items implementing \Aimeos\MShop\Service\Item\Iface with referenced items
+	 * @throws \Exception If an error occurs
 	 */
-	public function getServices( $type, MShop_Order_Item_Base_Iface $basket,
+	public function getServices( $type, \Aimeos\MShop\Order\Item\Base\Iface $basket,
 		$ref = array( 'media', 'price', 'text' ) )
 	{
 		if( isset( $this->items[$type] ) ) {
 			return $this->items[$type];
 		}
 
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(
@@ -64,10 +67,10 @@ class Controller_Frontend_Service_Standard
 					unset( $this->items[$type][$id] );
 				}
 			}
-			catch( MShop_Service_Exception $e )
+			catch( \Aimeos\MShop\Service\Exception $e )
 			{
 				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
-				$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+				$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 			}
 		}
 
@@ -81,20 +84,20 @@ class Controller_Frontend_Service_Standard
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Iface
-	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
-	 * @throws MShop_Exception If service provider isn't available
-	 * @throws Exception If an error occurs
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
+	 * @throws \Aimeos\MShop\Exception If service provider isn't available
+	 * @throws \Exception If an error occurs
 	 */
-	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Iface $basket )
+	public function getServiceAttributes( $type, $serviceId, \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		if( isset( $this->providers[$type][$serviceId] ) ) {
 			return $this->providers[$type][$serviceId]->getConfigFE( $basket );
 		}
 
 		$item = $this->getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->getConfigFE( $basket );
 	}
@@ -105,20 +108,20 @@ class Controller_Frontend_Service_Standard
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
-	 * @param MShop_Order_Item_Base_Iface $basket Basket with products
-	 * @return MShop_Price_Item_Iface Price item
-	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
-	 * @throws MShop_Exception If service provider isn't available
-	 * @throws Exception If an error occurs
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket with products
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item
+	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
+	 * @throws \Aimeos\MShop\Exception If service provider isn't available
+	 * @throws \Exception If an error occurs
 	 */
-	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Iface $basket )
+	public function getServicePrice( $type, $serviceId, \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		if( isset( $this->providers[$type][$serviceId] ) ) {
 			return $this->providers[$type][$serviceId]->calcPrice( $basket );
 		}
 
 		$item = $this->getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->calcPrice( $basket );
 	}
@@ -133,7 +136,7 @@ class Controller_Frontend_Service_Standard
 	 * 	key and the string entered by the customer as value
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
-	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
+	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
 	 */
 	public function checkServiceAttributes( $type, $serviceId, array $attributes )
 	{
@@ -142,7 +145,7 @@ class Controller_Frontend_Service_Standard
 		}
 
 		$item = $this->getServiceItem( $type, $serviceId );
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		return $serviceManager->getProvider( $item )->checkConfigFE( $attributes );
 	}
@@ -153,11 +156,11 @@ class Controller_Frontend_Service_Standard
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of the service option chosen by the customer
-	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
+	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
 	 */
 	protected function getServiceItem( $type, $serviceId )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(
@@ -173,7 +176,7 @@ class Controller_Frontend_Service_Standard
 		if( ( $item = reset( $items ) ) === false )
 		{
 			$msg = sprintf( 'Service item for type "%1$s" and ID "%2$s" not found', $type, $serviceId );
-			throw new Controller_Frontend_Service_Exception( $msg );
+			throw new \Aimeos\Controller\Frontend\Service\Exception( $msg );
 		}
 
 		return $item;

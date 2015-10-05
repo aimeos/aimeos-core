@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager;
+
+
 /**
- * Test class for MShop_Attribute_Manager_Standard.
+ * Test class for \Aimeos\MShop\Attribute\Manager\Standard.
  */
-class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 	}
 
 
@@ -49,33 +52,33 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $obj );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Attribute_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Attribute\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 
@@ -91,7 +94,7 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$results = $this->object->searchItems( $search, array( 'text' ) );
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new Exception( 'No search results available in testGetItem()' );
+			throw new \Exception( 'No search results available in testGetItem()' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId(), array( 'text' ) );
@@ -115,7 +118,7 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$typeItems = $typeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $typeItems ) ) === false ) {
-			throw new Exception( 'No attribute type item available in setUp()' );
+			throw new \Exception( 'No attribute type item available in setUp()' );
 		}
 
 		$item = $this->object->createItem();
@@ -138,7 +141,7 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $itemSaved->getType() !== null );
@@ -169,7 +172,7 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -177,7 +180,7 @@ class MShop_Attribute_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->createSearch();
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $search );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $search );
 	}
 
 

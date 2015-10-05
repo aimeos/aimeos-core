@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Type;
+
+
 /**
  * Abstract type manager implementation.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Manager_Type_Base
-	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Type_Iface
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Type\Iface
 {
 	private $prefix;
 	private $context;
@@ -27,11 +30,11 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Creates the type manager using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 *
-	 * @throws MShop_Exception if no configuration is available
+	 * @throws \Aimeos\MShop\Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$conf = $context->getConfig();
 		$confpath = $this->getConfigPath();
@@ -52,7 +55,7 @@ abstract class MShop_Common_Manager_Type_Base
 		foreach( $required as $key )
 		{
 			if( !in_array( $key, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $key ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $key ) );
 			}
 		}
 
@@ -61,15 +64,15 @@ abstract class MShop_Common_Manager_Type_Base
 		$this->context = $context;
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 	}
 
@@ -77,7 +80,7 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Creates new type item object.
 	 *
-	 * @return MShop_Common_Item_Type_Iface New type item object
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface New type item object
 	 */
 	public function createItem()
 	{
@@ -90,7 +93,7 @@ abstract class MShop_Common_Manager_Type_Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -105,14 +108,14 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Adds or updates a type item object.
 	 *
-	 * @param MShop_Common_Item_Type_Iface $item Type item object which should be saved
+	 * @param \Aimeos\MShop\Common\Item\Type\Iface $item Type item object which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_Type_Iface';
+		$iface = '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->isModified() === false ) { return; }
@@ -133,16 +136,16 @@ abstract class MShop_Common_Manager_Type_Base
 
 			$statement = $conn->create( $sql );
 
-			$statement->bind( 1, $this->context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$statement->bind( 2, $item->getCode(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 3, $item->getDomain(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 4, $item->getLabel(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 5, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$statement->bind( 1, $this->context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 2, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 3, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 4, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$statement->bind( 6, date( 'Y-m-d H:i:s', time() ) ); //mtime
 			$statement->bind( 7, $this->context->getEditor() );
 
 			if( $id !== null ) {
-				$statement->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
+				$statement->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
 				$statement->bind( 8, date( 'Y-m-d H:i:s', time() ) ); //ctime
 			}
@@ -160,7 +163,7 @@ abstract class MShop_Common_Manager_Type_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -184,8 +187,8 @@ abstract class MShop_Common_Manager_Type_Base
 	 *
 	 * @param integer $id Id of type item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Type_Iface Returns the type item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -196,7 +199,7 @@ abstract class MShop_Common_Manager_Type_Base
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Type item with ID "%1$s" in "%2$s" not found', $id, $conf['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Type item with ID "%1$s" in "%2$s" not found', $id, $conf['code'] ) );
 		}
 
 		return $item;
@@ -206,12 +209,12 @@ abstract class MShop_Common_Manager_Type_Base
 	/**
 	 * Searches for all type items matching the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of type items implementing MShop_Common_Item_Type_Iface
-	 * @throws MShop_Common_Exception if creating items failed
+	 * @return array List of type items implementing \Aimeos\MShop\Common\Item\Type\Iface
+	 * @throws \Aimeos\MShop\Common\Exception if creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 
@@ -224,10 +227,10 @@ abstract class MShop_Common_Manager_Type_Base
 			$domain = explode( '.', $this->prefix );
 
 			if( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( 'No configuration available.' );
+				throw new \Aimeos\MShop\Exception( 'No configuration available.' );
 			}
 
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = $this->config['search'];
 			$cfgPathCount = $this->config['count'];
 			$required = array( trim( $this->prefix, '.' ) );
@@ -239,7 +242,7 @@ abstract class MShop_Common_Manager_Type_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -254,7 +257,7 @@ abstract class MShop_Common_Manager_Type_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -282,11 +285,11 @@ abstract class MShop_Common_Manager_Type_Base
 	 * Creates new type item object.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @return MShop_Common_Item_Type_Standard New type item object
+	 * @return \Aimeos\MShop\Common\Item\Type\Standard New type item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Common_Item_Type_Standard( $this->prefix, $values );
+		return new \Aimeos\MShop\Common\Item\Type\Standard( $this->prefix, $values );
 	}
 
 

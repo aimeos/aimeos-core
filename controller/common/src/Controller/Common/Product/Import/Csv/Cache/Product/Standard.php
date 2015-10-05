@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Product;
+
+
 /**
  * Product cache for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Cache_Product_Standard
-	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Cache\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface
 {
 	private $prodmap = array();
 
@@ -34,7 +37,7 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Standard
 			return $this->prodmap[$code];
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -52,9 +55,9 @@ class Controller_Common_Product_Import_Csv_Cache_Product_Standard
 	/**
 	 * Adds the product ID to the cache
 	 *
-	 * @param MShop_Common_Item_Iface $item Product object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Product object
 	 */
-	public function set( MShop_Common_Item_Iface $item )
+	public function set( \Aimeos\MShop\Common\Item\Iface $item )
 	{
 		$this->prodmap[ $item->getCode() ] = $item->getId();
 	}

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Log\Manager;
+
+
 /**
  * Default log manager implementation.
  *
  * @package MAdmin
  * @subpackage Log
  */
-class MAdmin_Log_Manager_Standard
-	extends MAdmin_Common_Manager_Base
-	implements MAdmin_Log_Manager_Iface, MW_Logger_Iface
+class Standard
+	extends \Aimeos\MAdmin\Common\Manager\Base
+	implements \Aimeos\MAdmin\Log\Manager\Iface, \Aimeos\MW\Logger\Iface
 {
 	private $loglevel;
 	private $requestid;
@@ -27,49 +30,49 @@ class MAdmin_Log_Manager_Standard
 			'internalcode' => 'malog."id"',
 			'label' => 'Log ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
 			'internalcode' => 'malog."siteid"',
 			'label' => 'Log site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.timestamp' => array(
 			'code' => 'log.timestamp',
 			'internalcode' => 'malog."timestamp"',
 			'label' => 'Log create date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.priority' => array(
 			'code' => 'log.priority',
 			'internalcode' => 'malog."priority"',
 			'label' => 'Log priority',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'log.message' => array(
 			'code' => 'log.message',
 			'internalcode' => 'malog."message"',
 			'label' => 'Log message',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.request' => array(
 			'code' => 'log.request',
 			'internalcode' => 'malog."request"',
 			'label' => 'Log request',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		)
 	);
 
@@ -77,9 +80,9 @@ class MAdmin_Log_Manager_Standard
 	/**
 	 * Creates the log manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-log' );
@@ -120,7 +123,7 @@ class MAdmin_Log_Manager_Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$this->loglevel = $config->get( 'madmin/log/manager/standard/loglevel', MW_Logger_Base::WARN );
+		$this->loglevel = $config->get( 'madmin/log/manager/standard/loglevel', \Aimeos\MW\Logger\Base::WARN );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 
@@ -144,13 +147,13 @@ class MAdmin_Log_Manager_Standard
 	/**
 	 * Create new log item object.
 	 *
-	 * @return MAdmin_Log_Item_Iface
+	 * @return \Aimeos\MAdmin\Log\Item\Iface
 	 */
 	public function createItem()
 	{
 		try {
 			$siteid = $this->getContext()->getLocale()->getSiteId();
-		} catch( Exception $e ) {
+		} catch( \Exception $e ) {
 			$siteid = null;
 		}
 
@@ -162,14 +165,14 @@ class MAdmin_Log_Manager_Standard
 	/**
 	 * Adds a new log to the storage.
 	 *
-	 * @param MAdmin_Log_Item_Iface $item Log item that should be saved to the storage
+	 * @param \Aimeos\MAdmin\Log\Item\Iface $item Log item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MAdmin_Log_Item_Iface';
+		$iface = '\\Aimeos\\MAdmin\\Log\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Log_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -180,7 +183,7 @@ class MAdmin_Log_Manager_Standard
 
 		try {
 			$siteid = $context->getLocale()->getSiteId();
-		} catch( Exception $e ) {
+		} catch( \Exception $e ) {
 			$siteid = null;
 		}
 
@@ -257,15 +260,15 @@ class MAdmin_Log_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $siteid, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getFacility() );
 			$stmt->bind( 3, date( 'Y-m-d H:i:s' ) );
-			$stmt->bind( 4, $item->getPriority(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $item->getMessage() );
 			$stmt->bind( 6, $item->getRequest() );
 
 			if( $item->getId() !== null ) {
-				$stmt->bind( 7, $item->getId(), MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 7, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			}
 
@@ -309,7 +312,7 @@ class MAdmin_Log_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -358,8 +361,8 @@ class MAdmin_Log_Manager_Standard
 	 *
 	 * @param integer $id Log ID to fetch log object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MAdmin_Log_Item_Iface Returns the log item of the given id
-	 * @throws MAdmin_Log_Exception If item couldn't be found
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
+	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -368,7 +371,7 @@ class MAdmin_Log_Manager_Standard
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Log_Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
+			throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;
@@ -378,12 +381,12 @@ class MAdmin_Log_Manager_Standard
 	/**
 	 * Search for log entries based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of jobs implementing MAdmin_Job_Item_Iface
+	 * @return array List of jobs implementing \Aimeos\MAdmin\Job\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -395,7 +398,7 @@ class MAdmin_Log_Manager_Standard
 		try
 		{
 			$required = array( 'log' );
-			$level = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** madmin/log/manager/standard/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -505,7 +508,7 @@ class MAdmin_Log_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -519,7 +522,7 @@ class MAdmin_Log_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -551,7 +554,7 @@ class MAdmin_Log_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -563,30 +566,30 @@ class MAdmin_Log_Manager_Standard
 	 * Create new admin log item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return MAdmin_Log_Item_Iface
+	 * @return \Aimeos\MAdmin\Log\Item\Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MAdmin_Log_Item_Standard( $values );
+		return new \Aimeos\MAdmin\Log\Item\Standard( $values );
 	}
 
 
 	/**
 	 * Returns the search result object for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL-statement to execute
-	 * @return MW_DB_Result_Iface Returns db result set from given sql statment
+	 * @return \Aimeos\MW\DB\Result\Iface Returns db result set from given sql statment
 	 */
-	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
 		$context = $this->getContext();
 		$statement = $conn->create( $sql );
 
 		try {
-			$statement->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-		} catch( Exception $e ) {
-			$statement->bind( 1, null, MW_DB_Statement_Base::PARAM_INT );
+			$statement->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		} catch( \Exception $e ) {
+			$statement->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		}
 
 		return $statement->execute();
@@ -600,7 +603,7 @@ class MAdmin_Log_Manager_Standard
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 */
-	public function log( $message, $priority = MW_Logger_Base::ERR, $facility = 'message' )
+	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
 		if( $priority <= $this->loglevel )
 		{

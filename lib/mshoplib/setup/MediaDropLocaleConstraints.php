@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from media tables.
  */
-class MW_Setup_Task_MediaDropLocaleConstraints extends MW_Setup_Task_Base
+class MediaDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_media_list_type' => array(

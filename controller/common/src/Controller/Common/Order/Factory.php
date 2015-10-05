@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Common\Order;
+
+
 /**
  * Common order controller factory.
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Order_Factory
+class Factory
 {
 	private static $objects = array();
 
@@ -26,9 +29,9 @@ class Controller_Common_Order_Factory
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param null|Controller_Common_Order_Iface $controller Frontend controller object
+	 * @param null|\Aimeos\Controller\Common\Order\Iface $controller Frontend controller object
 	 */
-	public static function injectController( $classname, Controller_Common_Order_Iface $controller = null )
+	public static function injectController( $classname, \Aimeos\Controller\Common\Order\Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -37,12 +40,12 @@ class Controller_Common_Order_Factory
 	/**
 	 * Creates a new controller specified by the given name.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object required by controllers
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
 	 * @param string|null $name Name of the controller or "Default" if null
-	 * @return Controller_Common_Order_Iface New order controller object
-	 * @throws Controller_Common_Exception
+	 * @return \Aimeos\Controller\Common\Order\Iface New order controller object
+	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function createController( MShop_Context_Item_Iface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/common/order/name
 		 * Class name of the used order common controller implementation
@@ -54,11 +57,11 @@ class Controller_Common_Order_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Common_Order_Standard
+		 *  \Aimeos\Controller\Common\Order\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_Common_Order_Myorder
+		 *  \Aimeos\Controller\Common\Order\Myorder
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -82,25 +85,25 @@ class Controller_Common_Order_Factory
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			$classname = is_string( $name ) ? 'Controller_Common_Order_' . $name : '<not a string>';
-			throw new Controller_Common_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Common\\Order\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Common_Order_Iface';
-		$classname = 'Controller_Common_Order_' . $name;
+		$iface = '\\Aimeos\\Controller\\Common\\Order\\Iface';
+		$classname = '\\Aimeos\\Controller\\Common\\Order\\' . $name;
 
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {
-			throw new Controller_Common_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$controller = new $classname( $context );
 
 		if( !( $controller instanceof $iface ) ) {
-			throw new Controller_Common_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $controller;

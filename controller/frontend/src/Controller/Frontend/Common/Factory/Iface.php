@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Common\Factory;
+
+
 /**
  * Controller factory interface.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Common_Factory_Iface
+interface Iface
 {
 	/**
 	 * Creates a new controller based on the name.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @param string|null $name Name of the controller implementation (Default if null)
-	 * @return Controller_Frontend_Common_Iface Controller object
+	 * @return \Aimeos\Controller\Frontend\Common\Iface Controller object
 	 */
-	public static function createController( MShop_Context_Item_Iface $context, $name = null );
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null );
 }

@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Language;
+
+
 /**
  * Common interface for all language items.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Item_Language_Iface
-	extends MShop_Common_Item_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the two letter ISO language code.

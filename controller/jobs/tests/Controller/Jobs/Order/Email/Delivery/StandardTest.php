@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Order\Email\Delivery;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,10 +20,10 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Order_Email_Delivery_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Order\Email\Delivery\Standard( $context, $aimeos );
 	}
 
 
@@ -53,15 +54,15 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 
 	public function testRun()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
-		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_None' )
+		$mailMsgStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\Message\\None' )
 			->disableOriginalConstructor()
 			->disableOriginalClone()
 			->getMock();
@@ -75,32 +76,32 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 		$context->setMail( $mailStub );
 
 
-		$orderAddressItem = MShop_Order_Manager_Factory::createManager( $context )
+		$orderAddressItem = \Aimeos\MShop\Order\Manager\Factory::createManager( $context )
 			->getSubManager( 'base' )->getSubManager( 'address' )->createItem();
 
 
 		$name = 'ControllerJobsEmailDeliveryDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderStatusManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Status_Standard' )
+		$orderStatusManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Status\\Standard' )
 			->setMethods( array( 'saveItem' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderBaseManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Standard' )
+		$orderBaseManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Base\\Standard' )
 			->setMethods( array( 'load' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
-		$orderItem = new MShop_Order_Item_Standard( array( 'ctime' => '2000-01-01 00:00:00' ) );
+		$orderItem = new \Aimeos\MShop\Order\Item\Standard( array( 'ctime' => '2000-01-01 00:00:00' ) );
 		$orderBaseItem = $orderBaseManagerStub->createItem();
 		$orderBaseItem->setAddress( $orderAddressItem );
 
@@ -117,18 +118,18 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 		$orderStatusManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Email_Delivery_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Email\Delivery\Standard( $context, $aimeos );
 		$object->run();
 	}
 
 
 	public function testRunException()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
-		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -139,12 +140,12 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$orderItem = $orderManagerStub->createItem();
@@ -154,7 +155,7 @@ class Controller_Jobs_Order_Email_Delivery_StandardTest extends PHPUnit_Framewor
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array(), array(), array() ) );
 
 
-		$object = new Controller_Jobs_Order_Email_Delivery_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Email\Delivery\Standard( $context, $aimeos );
 		$object->run();
 	}
 

@@ -8,28 +8,31 @@
  */
 
 
+namespace Aimeos\MW\DB\Statement;
+
+
 /**
  * Required methods for all database statement objects.
  *
  * @package MW
  * @subpackage DB
  */
-interface MW_DB_Statement_Iface
+interface Iface
 {
 	/**
 	 * Binds a value to a parameter in the statement.
 	 *
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in MW_DB_Stmt_Base as constant
+	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Stmt\Base as constant
 	 * @return void
 	 */
-	public function bind( $position, $value, $type = MW_DB_Statement_Base::PARAM_STR);
+	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR);
 
 	/**
 	 * Executes the statement.
 	 *
-	 * @return MW_DB_Result_Iface Result object
+	 * @return \Aimeos\MW\DB\Result\Iface Result object
 	 */
 	public function execute();
 }

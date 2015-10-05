@@ -6,13 +6,16 @@
  * @subpackage Order
  */
 
+namespace Aimeos\MShop\Order\Item\Status;
+
+
 /**
  * Generic interface for order status.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Status_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the parentid of the order status.

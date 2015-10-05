@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Service;
+
+
 /**
  * Interface for order item base service.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Service_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the order base ID of the order service if available.
@@ -89,16 +92,16 @@ interface MShop_Order_Item_Base_Service_Iface extends MShop_Common_Item_Iface
 	/**
 	 * Returns the price object which belongs to the service item.
 	 *
-	 * @return MShop_Price_Item_Iface Price item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item
 	 */
 	public function getPrice();
 
 	/**
 	 * Sets a new price object for the service item.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 */
-	public function setPrice( MShop_Price_Item_Iface $price );
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
 	 * Returns the value of the attribute item for the service with the given code.
@@ -114,38 +117,38 @@ interface MShop_Order_Item_Base_Service_Iface extends MShop_Common_Item_Iface
 	 *
 	 * @param string $code Code of the service attribute item
 	 * @param string $type Type of the service attribute item
-	 * @return MShop_Order_Item_Base_Service_Attribute_Iface|null Attribute item for the service and the given code
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface|null Attribute item for the service and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' );
 
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Attribute_Iface $item Service attribute item
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Service attribute item
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Service_Attribute_Iface $item );
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item );
 
 	/**
 	 * Returns the list of attribute items for the service.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
 	public function getAttributes( $type = null );
 
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Iface
+	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
 	public function setAttributes( array $attributes );
 
 	/**
 	 * Copys all data from a given service item.
 	 *
-	 * @param MShop_Service_Item_Iface $service New service item
+	 * @param \Aimeos\MShop\Service\Item\Iface $service New service item
 	 */
-	public function copyFrom( MShop_Service_Item_Iface $service );
+	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service );
 
 	/**
 	 * Sets the media url of the service item.

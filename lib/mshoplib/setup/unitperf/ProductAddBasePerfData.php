@@ -6,19 +6,22 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to product table.
  */
-class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
+class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 {
 	private $count = 9000;
 
 
-	public function __construct( MW_Setup_DBSchema_Iface $schema, MW_DB_Connection_Iface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		parent::__construct( $schema, $conn, $additional );
@@ -63,7 +66,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	{
 		$this->msg( 'Adding product base performance data', 0 );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->getContext() );
 		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
 
 		$this->txBegin();
@@ -102,7 +105,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	 */
 	protected function getProductListItem( $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists/type' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists/type' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -114,11 +117,11 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 		$types = $manager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$listItem = $manager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
@@ -134,12 +137,12 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Iface Type item
-	 * @throws Exception If no item is found
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item
+	 * @throws \Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();
@@ -151,7 +154,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Base
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix ) );
+			throw new \Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix ) );
 		}
 
 		return $item;

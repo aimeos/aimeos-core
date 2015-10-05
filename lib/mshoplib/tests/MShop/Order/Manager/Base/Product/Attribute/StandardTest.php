@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Product\Attribute;
+
+
 /**
- * Test class for MShop_Order_Manager_Base_Product_Attribute_Standard.
+ * Test class for \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Standard.
  */
-class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -18,9 +21,9 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Order_Manager_Base_Product_Attribute_Standard( $this->context );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Standard( $this->context );
 	}
 
 
@@ -51,7 +54,7 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -59,14 +62,14 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 	public function testCreateItem()
 	{
 		$actual = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Attribute_Iface', $actual );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface', $actual );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch( true ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch( true ) );
 	}
 
 
@@ -124,7 +127,7 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 		$results = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $results ) ) ) {
-			throw new Exception( 'empty results' );
+			throw new \Exception( 'empty results' );
 		}
 
 		$actual = $this->object->getItem( $item->getId() );
@@ -143,7 +146,7 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 		$orderItems = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $orderItems ) ) ) {
-			throw new Exception( 'empty search result' );
+			throw new \Exception( 'empty search result' );
 		}
 
 		$item->setId( null );
@@ -187,14 +190,14 @@ class MShop_Order_Manager_Base_Product_Attribute_StandardTest extends PHPUnit_Fr
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

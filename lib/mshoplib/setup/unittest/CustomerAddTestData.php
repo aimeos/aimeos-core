@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds customer test data.
  */
-class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
+class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding customer test data', 0 );
@@ -59,10 +62,10 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Standard' );
 		$customerGroupManager = $customerManager->getSubManager( 'group', 'Standard' );
 
@@ -83,12 +86,12 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Iface $customerManager Customer manager
-	 * @param MShop_Common_Item_Address_Iface $address Customer address item
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @param \Aimeos\MShop\Common\Manager\Iface $customerManager Customer manager
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Customer address item
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
-	protected function addCustomerData( array $testdata, MShop_Common_Manager_Iface $customerManager,
-		MShop_Common_Item_Address_Iface $address )
+	protected function addCustomerData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerManager,
+		\Aimeos\MShop\Common\Item\Address\Iface $address )
 	{
 		$parentIds = array();
 		$customer = $customerManager->createItem();
@@ -134,11 +137,11 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer address test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Iface $customerAddressManager Customer address manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $customerAddressManager Customer address manager
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
-	protected function addCustomerAddressData( array $testdata, MShop_Common_Manager_Iface $customerAddressManager,
+	protected function addCustomerAddressData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerAddressManager,
 		array $parentIds )
 	{
 		$address = $customerAddressManager->createItem();
@@ -146,7 +149,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['customer/address'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['refid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['refid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
 			$address->setId( null );
@@ -181,11 +184,11 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Base
 	 * Adds the customer group test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Common_Manager_Iface $customerGroupManager Customer group manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $customerGroupManager Customer group manager
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
-	protected function addCustomerGroupData( array $testdata, MShop_Common_Manager_Iface $customerGroupManager,
+	protected function addCustomerGroupData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerGroupManager,
 		array $parentIds )
 	{
 		$group = $customerGroupManager->createItem();

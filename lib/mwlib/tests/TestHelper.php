@@ -1,26 +1,29 @@
 <?php
 
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-
-
 class TestHelper
 {
 	private static $config;
 	private static $dbm;
 
 
-	public static function autoload( $classname )
+	public static function autoload( $className )
 	{
-		$filename = str_replace( '_', '/', $classname ) . '.php';
-		$paths = explode( PATH_SEPARATOR, get_include_path() );
+		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
-		foreach( $paths as $path )
+		if( strncmp( $fileName, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) === 0 ) {
+			$fileName = substr( $fileName, 7 );
+		}
+
+		foreach( explode( PATH_SEPARATOR, get_include_path() ) as $path )
 		{
-			$file = $path . DIRECTORY_SEPARATOR . $filename;
-			if( file_exists( $file ) === true  && ( include_once $file ) !== false ) {
+			$file = $path . DIRECTORY_SEPARATOR . $fileName;
+
+			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
 				return true;
 			}
 		}
@@ -54,8 +57,8 @@ class TestHelper
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$object = new MW_Config_PHPArray( array(), $path );
-		$object = new MW_Config_Decorator_Documentor( $object, $file );
+		$object = new \Aimeos\MW\Config\PHPArray( array(), $path );
+		$object = new \Aimeos\MW\Config\Decorator\Documentor( $object, $file );
 
 		return $object;
 	}
@@ -63,6 +66,6 @@ class TestHelper
 
 	private static function createDBManager()
 	{
-		return MW_DB_Factory::createManager( self::getConfig(), 'PDO' );
+		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'PDO' );
 	}
 }

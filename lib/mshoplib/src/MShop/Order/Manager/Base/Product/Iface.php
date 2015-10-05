@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Product;
+
+
 /**
  * Generic interface for order base product managers.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Manager_Base_Product_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

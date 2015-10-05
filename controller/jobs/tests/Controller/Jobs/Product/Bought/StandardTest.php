@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Product\Bought;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Product_Bought_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,12 +22,12 @@ class Controller_Jobs_Product_Bought_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->aimeos = TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
+		$this->aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Product_Bought_Standard( $this->context, $this->aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Product\Bought\Standard( $this->context, $this->aimeos );
 	}
 
 
@@ -38,8 +39,8 @@ class Controller_Jobs_Product_Bought_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->object = null;
 	}
@@ -60,12 +61,12 @@ class Controller_Jobs_Product_Bought_StandardTest extends PHPUnit_Framework_Test
 
 	public function testRun()
 	{
-		$stub = $this->getMockBuilder( 'MShop_Product_Manager_Lists_Standard' )
+		$stub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Lists\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'deleteItems', 'saveItem' ) )
 			->getMock();
 
-		MShop_Factory::injectManager( $this->context, 'product/lists', $stub );
+		\Aimeos\MShop\Factory::injectManager( $this->context, 'product/lists', $stub );
 
 		$stub->expects( $this->atLeastOnce() )->method( 'deleteItems' );
 		$stub->expects( $this->atLeastOnce() )->method( 'saveItem' );

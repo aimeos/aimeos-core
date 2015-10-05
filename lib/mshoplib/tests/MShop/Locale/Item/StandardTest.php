@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item;
+
+
 /**
- * Test class for MShop_Locale_Item_Standard.
+ * Test class for \Aimeos\MShop\Locale\Item\Standard.
  */
-class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $siteItem;
@@ -18,7 +21,7 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->siteItem = $manager->getSubManager( 'site' )->createItem();
 
 		$this->values = array(
@@ -33,7 +36,7 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Locale_Item_Standard(
+		$this->object = new \Aimeos\MShop\Locale\Item\Standard(
 			$this->values,
 			$this->siteItem,
 			array( 1, 2 ),
@@ -50,10 +53,10 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSite()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Site_Iface', $this->object->getSite() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getSite() );
 
-		$wrongobject = new MShop_Locale_Item_Standard();
-		$this->setExpectedException( 'MShop_Locale_Exception' );
+		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$wrongobject->getSite();
 	}
 
@@ -117,21 +120,21 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'en-GB' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalidLowerCase()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'en_gb' );
 	}
 
@@ -160,7 +163,7 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setCurrencyId( 'TEST' );
 	}
 
@@ -199,7 +202,7 @@ class MShop_Locale_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Locale_Item_Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Standard();
 
 		$list = array(
 			'locale.id' => 1,

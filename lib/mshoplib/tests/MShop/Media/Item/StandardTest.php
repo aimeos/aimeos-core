@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Media\Item;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_Media_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -33,7 +35,7 @@ class MShop_Media_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Media_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
 	}
 
 
@@ -124,7 +126,7 @@ class MShop_Media_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'EN' );
 	}
 
@@ -145,14 +147,14 @@ class MShop_Media_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetMimeTypeNoSlash()
 	{
-		$this->setExpectedException( 'MShop_Media_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
 		$this->object->setMimeType( 'image' );
 	}
 
 
 	public function testSetMimeTypeInvalidCategory()
 	{
-		$this->setExpectedException( 'MShop_Media_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
 		$this->object->setMimeType( 'image+audio/test' );
 	}
 
@@ -219,7 +221,7 @@ class MShop_Media_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Media_Item_Standard();
+		$item = new \Aimeos\MShop\Media\Item\Standard();
 
 		$list = array(
 			'media.id' => 1,

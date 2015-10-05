@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Manager\Code;
+
+
 /**
  * Generic coupon manager interface for creating and handling coupons.
  *
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Manager_Code_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Decreases the counter of the coupon code.

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Media;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $endpoint;
@@ -20,10 +21,10 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
+		$this->context = \TestHelper::getContext();
+		$this->endpoint = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $this->context, array() );
 	}
 
 
@@ -35,8 +36,8 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 	 */
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -62,7 +63,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -72,7 +73,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItems = $product->getListItems();
 		$listItem = reset( $listItems );
 
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 		$this->assertEquals( 1, count( $listItems ) );
 
 		$this->assertEquals( 1, $listItem->getStatus() );
@@ -105,7 +106,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -144,7 +145,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -180,7 +181,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -195,7 +196,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
 	}
@@ -213,12 +214,12 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, array(), $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, array(), $this->endpoint );
 		$result = $object->process( $product, array() );
 
 		$product = $this->get( 'job_csv_test' );
@@ -245,7 +246,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -278,7 +279,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Media_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -289,7 +290,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'path/to/file2', $listItem->getRefItem()->getUrl() );
@@ -298,7 +299,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 	protected function create( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$typeSearch = $typeManager->createSearch();
@@ -306,7 +307,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$typeResult = $typeManager->searchItems( $typeSearch );
 
 		if( ( $typeItem = reset( $typeResult ) ) === false ) {
-			throw new Exception( 'No product type "default" found' );
+			throw new \Exception( 'No product type "default" found' );
 		}
 
 		$item = $manager->createItem();
@@ -319,10 +320,10 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 	}
 
 
-	protected function delete( MShop_Product_Item_Iface $product )
+	protected function delete( \Aimeos\MShop\Product\Item\Iface $product )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->context );
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('media') as $listItem )
@@ -337,7 +338,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 
 	protected function get( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -345,7 +346,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_StandardTest extends 
 		$result = $manager->searchItems( $search, array('media') );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No product item for code "%1$s"', $code ) );
+			throw new \Exception( sprintf( 'No product item for code "%1$s"', $code ) );
 		}
 
 		return $item;

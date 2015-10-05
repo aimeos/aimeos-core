@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Interface to manage content like CSV or Excel.
  *
  * @package MW
  * @subpackage Container
  */
-interface MW_Container_Content_Iface extends Iterator
+interface Iface extends \Iterator
 {
 	/**
 	 * Adds data to the content object.

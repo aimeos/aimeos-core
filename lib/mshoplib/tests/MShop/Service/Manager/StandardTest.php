@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Manager;
+
+
 /**
- * Test class for MShop_Service_Manager_Standard.
+ * Test class for \Aimeos\MShop\Service\Manager\Standard.
  */
-class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = new MShop_Service_Manager_Standard( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Service\Manager\Standard( \TestHelper::getContext() );
 	}
 
 	/**
@@ -46,7 +49,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Service_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Item\\Iface', $this->object->createItem() );
 	}
 
 	public function testSaveUpdateDeleteItem()
@@ -61,7 +64,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No service provider item found.' );
+			throw new \Exception( 'No service provider item found.' );
 		}
 
 		$item->setId( null );
@@ -112,7 +115,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -128,7 +131,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId(), array( 'text' ) ) );
@@ -223,37 +226,37 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$item->setProvider( 'Standard,Example' );
 		$provider = $this->object->getProvider( $item );
 
-		$this->assertInstanceOf( 'MShop_Service_Provider_Iface', $provider );
-		$this->assertInstanceOf( 'MShop_Service_Provider_Decorator_Example', $provider );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Provider\\Iface', $provider );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Example', $provider );
 
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getProvider( $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 
@@ -262,7 +265,7 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$attribs = $this->object->getSearchAttributes();
 		foreach( $attribs as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $obj );
 		}
 
 	}
@@ -271,6 +274,6 @@ class MShop_Service_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->createSearch();
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $search );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $search );
 	}
 }

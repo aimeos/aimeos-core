@@ -6,31 +6,34 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
- * Test class for MShop_Service_Provider_Decorator_Example.
+ * Test class for \Aimeos\MShop\Service\Provider\Decorator\Example.
  */
-class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$servManager = MShop_Service_Manager_Factory::createManager( $context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 		$search = $servManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $servManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
 		$serviceProvider = $servManager->getProvider( $item );
-		$this->object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider );
+		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Example( $context, $item, $serviceProvider );
 	}
 
 
@@ -82,18 +85,18 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
 		$price = $this->object->calcPrice( $item );
 
-		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $price );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
 
 	}
@@ -101,8 +104,8 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 	public function testIsAvailable()
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() )->getSubManager( 'base' );
-		$localeManager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$localeItem = $localeManager->createItem();
 
@@ -120,16 +123,16 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
 	}
 
 
 	public function testCall()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
 		$expr = array(
-			$criteria->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_WEB ),
+			$criteria->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
 			$criteria->compare( '==', 'order.statuspayment', '6' )
 		);
 
@@ -138,7 +141,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends PHPUnit_Framework_Tes
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $order = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
+			throw new \Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
 		}
 
 		$this->object->buildXML( $order );

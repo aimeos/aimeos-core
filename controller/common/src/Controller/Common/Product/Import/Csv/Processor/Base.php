@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor;
+
+
 /**
  * Abstract class with common methods for all CSV import processors
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Processor_Base
-	extends Controller_Common_Product_Import_Csv_Base
+class Base
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Base
 {
 	private static $types = array();
 	private $context;
@@ -26,12 +29,12 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
-	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $object Decorated processor
+	 * @param \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object Decorated processor
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Iface $object = null )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $mapping,
+		\Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $object = null )
 	{
 		$this->context = $context;
 		$this->mapping = $mapping;
@@ -63,7 +66,7 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Returns the context item
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -85,13 +88,13 @@ class Controller_Common_Product_Import_Csv_Processor_Base
 	/**
 	 * Returns the decorated processor object
 	 *
-	 * @return Controller_Common_Product_Import_Csv_Processor_Iface Processor object
-	 * @throws Controller_Jobs_Exception If no processor object is available
+	 * @return \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface Processor object
+	 * @throws \Aimeos\Controller\Jobs\Exception If no processor object is available
 	 */
 	protected function getObject()
 	{
 		if( $this->object === null ) {
-			throw new Controller_Jobs_Exception( 'No processor object available' );
+			throw new \Aimeos\Controller\Jobs\Exception( 'No processor object available' );
 		}
 
 		return $this->object;

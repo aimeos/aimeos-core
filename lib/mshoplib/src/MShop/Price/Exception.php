@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Price;
+
+
 /**
- * Exception thrown by all price classes.
+ * \Exception thrown by all price classes.
  *
  * @package MShop
  * @subpackage Price
  */
-class MShop_Price_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

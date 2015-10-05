@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_PropertyMatch.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch.
  */
-class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_TestCase
+class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $plugin;
@@ -24,7 +27,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'PropertyMatch' );
@@ -32,18 +35,18 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 		$this->plugin->setStatus( '1' );
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		$products = $manager->searchItems( $search );
 
 		if( count( $products ) !== 2 ) {
-			throw new Exception( 'Wrong number of products' );
+			throw new \Exception( 'Wrong number of products' );
 		}
 
 		$this->products = array();
@@ -58,7 +61,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 
 		$this->order = $orderBaseManager->createItem();
 
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
 	}
 
@@ -87,7 +90,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 		$this->plugin->setConfig( array( 'product.stock.warehouse.code' => 'default' ) );
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
@@ -97,7 +100,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 			'product.stock.warehouse.code' => 'default',
 			'product.suppliercode' => 'unitSupplier',
 		) );
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 	}
@@ -106,9 +109,9 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 	public function testUpdateFail()
 	{
 		$this->plugin->setConfig( array( 'product.suppliercode' => 'wrongSupplier' ) );
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
@@ -119,18 +122,18 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 			'product.stock.warehouse.code' => 'unit_warehouse2',
 			'product.suppliercode' => 'wrongSupplier',
 		) );
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
 	public function testUpdateFailList()
 	{
 		$this->plugin->setConfig( array( 'product.lists.domain' => 'foobar' ) );
-		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Detail;
+
+
 /**
  * Default implementation of catalog detail section HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Detail_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/catalog/detail/default/subparts
 	 * List of HTML sub-clients rendered within the catalog detail section
@@ -56,7 +59,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/social/name
 	 * Name of the social part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Social_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Social\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/image/name
 	 * Name of the image part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Image_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Image\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/basic/name
 	 * Name of the basic part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Basic_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Basic\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/actions/name
 	 * Name of the actions part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Actions_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Actions\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -100,7 +103,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/basket/name
 	 * Name of the basket part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Basket_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Basket\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -111,7 +114,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/bundle/name
 	 * Name of the bundle part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Bundle_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Bundle\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -122,7 +125,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/additional/name
 	 * Name of the additional part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Additional_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Additional\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -133,7 +136,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/suggest/name
 	 * Name of the suggest part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Suggest_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Suggest\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -144,7 +147,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/bought/name
 	 * Name of the bought together part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Bought_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Bought\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -155,7 +158,7 @@ class Client_Html_Catalog_Detail_Standard
 	/** client/html/catalog/detail/seen/name
 	 * Name of the seen part used by the catalog detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Seen_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Detail\Seen\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -208,22 +211,22 @@ class Client_Html_Catalog_Detail_Standard
 				}
 				$view->detailBody = $output;
 			}
-			catch( Client_Html_Exception $e )
+			catch( \Aimeos\Client\Html\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
-			catch( Controller_Frontend_Exception $e )
+			catch( \Aimeos\Controller\Frontend\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
-			catch( MShop_Exception $e )
+			catch( \Aimeos\MShop\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -322,7 +325,7 @@ class Client_Html_Catalog_Detail_Standard
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
@@ -341,7 +344,7 @@ class Client_Html_Catalog_Detail_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -360,7 +363,7 @@ class Client_Html_Catalog_Detail_Standard
 		 *  client/html/catalog/detail/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -380,12 +383,12 @@ class Client_Html_Catalog_Detail_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -404,12 +407,12 @@ class Client_Html_Catalog_Detail_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/detail/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -440,22 +443,22 @@ class Client_Html_Catalog_Detail_Standard
 
 			parent::process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -479,19 +482,19 @@ class Client_Html_Catalog_Detail_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
 			$context = $this->getContext();
 			$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
 			$productItem = $this->getProductItem( $view->param( 'd_prodid' ), $domains );
-			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+			$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
 
 			$attrManager = $controller->createManager( 'attribute' );
@@ -540,8 +543,8 @@ class Client_Html_Catalog_Detail_Standard
 	 *
 	 * @param string $prodid Unique product ID
 	 * @param array List of domain items that should be fetched too
-	 * @throws Client_Html_Exception If no product item was found
-	 * @return MShop_Product_Item_Iface Product item object
+	 * @throws \Aimeos\Client\Html\Exception If no product item was found
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
 	protected function getProductItem( $prodid, array $domains )
 	{
@@ -578,11 +581,11 @@ class Client_Html_Catalog_Detail_Standard
 		 */
 		$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
 
-		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 		$items = $controller->getProductItems( array( $prodid ), $domains );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'No product with ID "%1$s" found', $prodid ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'No product with ID "%1$s" found', $prodid ) );
 		}
 
 		$this->addMetaItem( $item, 'product', $this->expire, $this->tags );

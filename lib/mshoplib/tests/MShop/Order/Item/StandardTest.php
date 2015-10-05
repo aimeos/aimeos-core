@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item;
+
+
 /**
- * Test class for MShop_Order_Item_Standard.
+ * Test class for \Aimeos\MShop\Order\Item\Standard.
  */
-class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -26,9 +29,9 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->values = array(
 			'id' => 15,
 			'siteid'=>99,
-			'type' => MShop_Order_Item_Base::TYPE_WEB,
-			'statusdelivery' => MShop_Order_Item_Base::STAT_PENDING,
-			'statuspayment' => MShop_Order_Item_Base::PAY_RECEIVED,
+			'type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PENDING,
+			'statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 			'datepayment' => '2004-12-01 12:34:56',
 			'datedelivery' => '2004-01-03 12:34:56',
 			'relatedid' => 1,
@@ -38,7 +41,7 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Order_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values );
 	}
 
 	/**
@@ -67,13 +70,13 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 'test' );
 	}
 
@@ -101,11 +104,11 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( MShop_Order_Item_Base::TYPE_PHONE );
-		$this->assertEquals( MShop_Order_Item_Base::TYPE_PHONE, $this->object->getType() );
+		$this->object->setType( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE, $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setType( 500 );
 	}
 
@@ -120,7 +123,7 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDateDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setDateDelivery( '2008-34-12' );
 	}
 
@@ -135,7 +138,7 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDatePayment() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setDatePayment( '2008-34-12' );
 	}
 
@@ -146,8 +149,8 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetDeliveryStatus()
 	{
-		$this->object->setDeliveryStatus( MShop_Order_Item_Base::STAT_PROGRESS );
-		$this->assertEquals( MShop_Order_Item_Base::STAT_PROGRESS, $this->object->getDeliveryStatus() );
+		$this->object->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getDeliveryStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -158,8 +161,8 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetPaymentStatus()
 	{
-		$this->object->setPaymentStatus( MShop_Order_Item_Base::PAY_DELETED );
-		$this->assertEquals( MShop_Order_Item_Base::PAY_DELETED, $this->object->getPaymentStatus() );
+		$this->object->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getPaymentStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -193,11 +196,11 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Standard();
+		$item = new \Aimeos\MShop\Order\Item\Standard();
 
 		$list = array(
 			'order.id' => 1,
-			'order.type' => MShop_Order_Item_Base::TYPE_WEB,
+			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
 			'order.baseid' => 2,
 			'order.relatedid' => 3,
 			'order.statusdelivery' => 4,
@@ -247,17 +250,17 @@ class MShop_Order_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testMagicGetOldPaymentStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Base::PAY_RECEIVED, $this->object->oldPaymentStatus );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->object->oldPaymentStatus );
 	}
 
 	public function testMagicGetOldDeliveryStatus()
 	{
-		$this->assertEquals( MShop_Order_Item_Base::STAT_PENDING, $this->object->oldDeliveryStatus );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, $this->object->oldDeliveryStatus );
 	}
 
 	public function testMagicGetException()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->notExisting;
 	}
 }

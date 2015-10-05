@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Catalog;
+
+
 /**
  * Catalog index interface for classes managing product indices.
  *
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Manager_Index_Catalog_Iface extends MShop_Catalog_Manager_Index_Iface
+interface Iface extends \Aimeos\MShop\Catalog\Manager\Index\Iface
 {
 }

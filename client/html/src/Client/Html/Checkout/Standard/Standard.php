@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard;
+
+
 /**
  * Default implementation of standard checkout HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard section
@@ -56,7 +59,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/address/name
 	 * Name of the address part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Address_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Address\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/delivery/name
 	 * Name of the delivery part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Delivery_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Delivery\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/payment/name
 	 * Name of the payment part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Payment_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Payment\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/summary/name
 	 * Name of the summary part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Summary_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Summary\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -100,7 +103,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/order/name
 	 * Name of the order part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Order_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Order\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -111,7 +114,7 @@ class Client_Html_Checkout_Standard_Standard
 	/** client/html/checkout/standard/process/name
 	 * Name of the process part used by the checkout standard client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Checkout_Standard_Process_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Checkout\Standard\Process\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -145,22 +148,22 @@ class Client_Html_Checkout_Standard_Standard
 			}
 			$view->standardBody = $html;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -241,7 +244,7 @@ class Client_Html_Checkout_Standard_Standard
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
@@ -253,7 +256,7 @@ class Client_Html_Checkout_Standard_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -272,7 +275,7 @@ class Client_Html_Checkout_Standard_Standard
 		 *  client/html/checkout/standard/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -292,12 +295,12 @@ class Client_Html_Checkout_Standard_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -316,12 +319,12 @@ class Client_Html_Checkout_Standard_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -349,17 +352,17 @@ class Client_Html_Checkout_Standard_Standard
 		{
 			parent::process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( MShop_Plugin_Provider_Exception $e )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$errors = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$errors = array_merge( $errors, $this->translatePluginErrorCodes( $e->getErrorCodes() ) );
@@ -367,12 +370,12 @@ class Client_Html_Checkout_Standard_Standard
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -396,18 +399,18 @@ class Client_Html_Checkout_Standard_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
 			$context = $this->getContext();
 
-			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
+			$basketCntl = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 			$view->standardBasket = $basketCntl->get();
 
 			$bTarget = $view->config( 'client/html/basket/standard/url/target' );

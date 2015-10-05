@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * Implementation of Zip containers.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Zip
-	extends MW_Container_Base
-	implements MW_Container_Iface
+class Zip
+	extends \Aimeos\MW\Container\Base
+	implements \Aimeos\MW\Container\Iface
 {
 	private $container;
 	private $classname;
@@ -37,10 +40,10 @@ class MW_Container_Zip
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() )
 	{
-		$this->classname = 'MW_Container_Content_' . $format;
+		$this->classname = '\\Aimeos\\MW\\Container\\Content\\' . $format;
 
 		if( class_exists( $this->classname ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
 		if( is_file( $resourcepath ) === false && substr( $resourcepath, -4 ) !== '.zip' ) {
@@ -51,8 +54,8 @@ class MW_Container_Zip
 
 		$this->resourcepath = $resourcepath;
 
-		$this->container = new ZipArchive();
-		$this->container->open( $resourcepath, ZipArchive::CREATE );
+		$this->container = new \ZipArchive();
+		$this->container->open( $resourcepath, \ZipArchive::CREATE );
 	}
 
 
@@ -65,7 +68,7 @@ class MW_Container_Zip
 	 * the cron jobs.
 	 *
 	 * @param string $name Name of the content
-	 * @return MW_Container_Content_Iface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
 	public function create( $name )
 	{
@@ -78,9 +81,9 @@ class MW_Container_Zip
 	/**
 	 * Adds content data to the container.
 	 *
-	 * @param MW_Container_Content_Iface $content Content object
+	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 */
-	public function add( MW_Container_Content_Iface $content )
+	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$this->content[] = $content;
 	}
@@ -90,14 +93,14 @@ class MW_Container_Zip
 	 * Returns the element specified by its name.
 	 *
 	 * @param string $name Name of the content object that should be returned
-	 * @return MW_Container_Content_Iface Content object
+	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
 	public function get( $name )
 	{
 		if( $this->container->locateName( $name ) === false )
 		{
 			$msg = 'No content object "%1$s" available in "%2$s"';
-			throw new MW_Container_Exception( sprintf( $msg, $name, $this->container->filename ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( $msg, $name, $this->container->filename ) );
 		}
 
 		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
@@ -117,12 +120,12 @@ class MW_Container_Zip
 			if( $this->container->addFile( $content->getResource(), $content->getName() ) === false )
 			{
 				$msg = 'Unable to add content in "%1$s" to file "%2$s"';
-				throw new MW_Content_Exception( sprinf( $msg, $content->getResource(), $this->container->filename ) );
+				throw new \Aimeos\MW\Content\Exception( sprinf( $msg, $content->getResource(), $this->container->filename ) );
 			}
 		}
 
 		if( $this->container->close() === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close zip file "%1$s"', $this->container->filename ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close zip file "%1$s"', $this->container->filename ) );
 		}
 
 		foreach( $this->content as $content ) {
@@ -134,14 +137,14 @@ class MW_Container_Zip
 	/**
 	 * Returns the current element.
 	 *
-	 * @return MW_Container_Content_Iface Current content object
+	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
 	function current()
 	{
 		if( ( $name = $this->container->getNameIndex( $this->position ) ) === false )
 		{
 			$msg = 'Unable to get name of file at index "%1$s" in "%2$s"';
-			throw new MW_Container_Exception( sprintf( $msg, $this->position, $this->container->filename ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( $msg, $this->position, $this->container->filename ) );
 		}
 
 		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded

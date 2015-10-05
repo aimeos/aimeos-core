@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Frontend;
+
+
 /**
  * Common methods for frontend controller classes.
  *
  * @package Controller
  * @subpackage Frontend
  */
-abstract class Controller_Frontend_Base
+abstract class Base
 {
 	private $context = null;
 
@@ -22,9 +25,9 @@ abstract class Controller_Frontend_Base
 	/**
 	 * Common initialization for controller classes.
 	 *
-	 * @param MShop_Context_Item_Iface $context Common MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Common MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -33,7 +36,7 @@ abstract class Controller_Frontend_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface context object implementing MShop_Context_Item_Iface
+	 * @return \Aimeos\MShop\Context\Item\Iface context object implementing \Aimeos\MShop\Context\Item\Iface
 	 */
 	protected function getContext()
 	{

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Common\Factory;
+
+
 /**
  * Common methods for all factories.
  *
  * @package Controller
  * @subpackage Jobs
  */
-abstract class Controller_Jobs_Common_Factory_Base
+abstract class Base
 {
 	private static $objects = array();
 
@@ -25,9 +28,9 @@ abstract class Controller_Jobs_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param Controller_Jobs_Iface|null $controller Frontend controller object
+	 * @param \Aimeos\Controller\Jobs\Iface|null $controller Frontend controller object
 	 */
-	public static function injectController( $classname, Controller_Jobs_Iface $controller = null )
+	public static function injectController( $classname, \Aimeos\Controller\Jobs\Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -36,35 +39,35 @@ abstract class Controller_Jobs_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param Aimeos $aimeos Aimeos object
-	 * @param Controller_Jobs_Iface $controller Controller object
-	 * @param string $classprefix Decorator class prefix, e.g. "Controller_Jobs_Attribute_Decorator_"
-	 * @return Controller_Jobs_Common_Iface Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
+	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\Jobs\Attribute\Decorator\"
+	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller, array $decorators, $classprefix )
+	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
 	{
-		$iface = 'Controller_Jobs_Common_Decorator_Iface';
+		$iface = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\Iface';
 
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
 				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
-				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$controller = new $classname( $context, $aimeos, $controller );
 
 			if( !( $controller instanceof $iface ) ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -75,17 +78,17 @@ abstract class Controller_Jobs_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param Aimeos $aimeos Aimeos object
-	 * @param Controller_Jobs_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return Controller_Jobs_Common_Iface Controller object
+	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function addControllerDecorators( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller, $domain )
+	protected static function addControllerDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller, $domain )
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
 		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
@@ -106,8 +109,8 @@ abstract class Controller_Jobs_Common_Factory_Base
 		 *
 		 * This would wrap the decorators named "decorator1" and "decorator2" around
 		 * all controller instances in that order. The decorator classes would be
-		 * "Controller_Jobs_Common_Decorator_Decorator1" and
-		 * "Controller_Jobs_Common_Decorator_Decorator2".
+		 * "\Aimeos\Controller\Jobs\Common\Decorator\Decorator1" and
+		 * "\Aimeos\Controller\Jobs\Common\Decorator\Decorator2".
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -123,14 +126,14 @@ abstract class Controller_Jobs_Common_Factory_Base
 			}
 		}
 
-		$classprefix = 'Controller_Jobs_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_Jobs_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_Jobs_' . ucfirst( $localClass ) . '_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
@@ -141,13 +144,13 @@ abstract class Controller_Jobs_Common_Factory_Base
 	/**
 	 * Creates a controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param Aimeos $aimeos Aimeos object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
-	 * @return Controller_Jobs_Common_Iface Controller object
+	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function createControllerBase( MShop_Context_Item_Iface $context, Aimeos $aimeos,
+	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
 		$classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
@@ -155,13 +158,13 @@ abstract class Controller_Jobs_Common_Factory_Base
 		}
 
 		if( class_exists( $classname ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$controller = new $classname( $context, $aimeos );
 
 		if( !( $controller instanceof $interface ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $controller;

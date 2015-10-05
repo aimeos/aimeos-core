@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Common;
+
+
 /**
- * Exception thrown by common classes
+ * \Exception thrown by common classes
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

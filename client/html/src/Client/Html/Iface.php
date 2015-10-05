@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\Client\Html;
+
+
 /**
  * Common interface for all HTML client classes.
  *
  * @package Client
  * @subpackage Html
  */
-interface Client_Html_Iface
+interface Iface
 {
 	/**
 	 * Returns the sub-client given by its name.
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null );
 
@@ -48,17 +51,17 @@ interface Client_Html_Iface
 	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
-	 * @return MW_View_Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 */
 	public function getView();
 
 	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
-	 * @return Client_Html_Iface Reference to this object for fluent calls
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\Client\Html\Iface Reference to this object for fluent calls
 	 */
-	public function setView( MW_View_Iface $view );
+	public function setView( \Aimeos\MW\View\Iface $view );
 
 	/**
 	 * Modifies the cached body content to replace content based on sessions or cookies.

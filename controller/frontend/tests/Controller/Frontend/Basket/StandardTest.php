@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Frontend\Basket;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -14,10 +16,10 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new Controller_Frontend_Basket_Standard( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\Frontend\Basket\Standard( $this->context );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
@@ -25,7 +27,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
 		if( ( $this->testItem = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 	}
 
@@ -51,7 +53,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 'U:TESTPSUB01', $basket->getProduct( 0 )->getProductCode() );
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
@@ -59,7 +61,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'default' );
@@ -74,7 +76,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductBundle()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:BUNDLE' ) );
@@ -82,7 +84,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 
@@ -96,7 +98,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductVariant()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
@@ -104,10 +106,10 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', array( 'xs', 'white' ) ) );
@@ -115,7 +117,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( count( $attributes ) === 0 ) {
-			throw new Exception( 'Attributes not found' );
+			throw new \Exception( 'Attributes not found' );
 		}
 
 
@@ -128,7 +130,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductVariantIncomplete()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
@@ -136,10 +138,10 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search, array() );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -152,7 +154,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( count( $attributes ) === 0 ) {
-			throw new Exception( 'Attributes not found' );
+			throw new \Exception( 'Attributes not found' );
 		}
 
 
@@ -166,7 +168,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductVariantNonUnique()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
@@ -174,10 +176,10 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search, array() );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -190,18 +192,18 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( count( $attributes ) === 0 ) {
-			throw new Exception( 'Attributes not found' );
+			throw new \Exception( 'Attributes not found' );
 		}
 
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 	}
 
 
 	public function testAddProductVariantNotRequired()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'xs' ) );
@@ -209,7 +211,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( count( $attributes ) === 0 ) {
-			throw new Exception( 'Attribute not found' );
+			throw new \Exception( 'Attribute not found' );
 		}
 
 		$options = array( 'variant' => false );
@@ -223,7 +225,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductConfigAttribute()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'xs' ) );
@@ -231,7 +233,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( empty( $attributes ) ) {
-			throw new Exception( 'Attribute not found' );
+			throw new \Exception( 'Attribute not found' );
 		}
 
 		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array_keys( $attributes ) );
@@ -245,7 +247,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductHiddenAttribute()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -257,7 +259,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( empty( $attributes ) ) {
-			throw new Exception( 'Attribute not found' );
+			throw new \Exception( 'Attribute not found' );
 		}
 
 		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array(), array_keys( $attributes ) );
@@ -272,7 +274,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $attributes ) );
 
 		if( ( $attribute = reset( $attributes ) ) === false ) {
-			throw new Exception( 'No attribute' );
+			throw new \Exception( 'No attribute' );
 		}
 
 		$this->assertEquals( 'hidden', $attribute->getType() );
@@ -282,7 +284,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductCustomAttribute()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -294,7 +296,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( ( $attrItem = reset( $attributes ) ) === false ) {
-			throw new Exception( 'Attribute not found' );
+			throw new \Exception( 'Attribute not found' );
 		}
 
 		$attrValues = array( $attrItem->getId() => '2000-01-01' );
@@ -309,7 +311,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductAttributeNotAssigned()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -321,27 +323,27 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attribute = $attributeManager->searchItems( $search );
 
 		if( empty( $attribute ) ) {
-			throw new Exception( 'Attribute not found' );
+			throw new \Exception( 'Attribute not found' );
 		}
 
 		$hiddenAttrIds = array_keys( $attribute );
 		$configAttrIds = array_keys( $attribute );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), $configAttrIds, $hiddenAttrIds );
 	}
 
 
 	public function testAddProductNegativeQuantityException()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->addProduct( $this->testItem->getId(), -1 );
 	}
 
 
 	public function testAddProductNotEnoughStockException()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
@@ -349,15 +351,15 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		try
 		{
 			$this->object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse3' );
-			throw new Exception( 'Expected exception not thrown' );
+			throw new \Exception( 'Expected exception not thrown' );
 		}
-		catch( Controller_Frontend_Basket_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Basket\Exception $e )
 		{
 			$item = $this->object->get()->getProduct( 0 );
 			$this->assertEquals( 3, $item->getQuantity() );
@@ -367,7 +369,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockException()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'EFGH' ) );
@@ -375,15 +377,15 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		try
 		{
 			$this->object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse2' );
-			throw new Exception( 'Expected exception not thrown' );
+			throw new \Exception( 'Expected exception not thrown' );
 		}
-		catch( Controller_Frontend_Basket_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Basket\Exception $e )
 		{
 			$this->assertEquals( array(), $this->object->get()->getProducts() );
 		}
@@ -392,7 +394,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockRequired()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
@@ -400,7 +402,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->object->addProduct( $item->getId(), 5, array( 'stock' => false ) );
@@ -409,7 +411,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'QRST' ) );
@@ -417,17 +419,17 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
 	public function testAddProductNoPriceException()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'MNOP' ) );
@@ -435,33 +437,33 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
 	public function testAddProductConfigAttributeException()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array( -1 ) );
 	}
 
 
 	public function testAddProductEmptySelectionException()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:noSel' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addProduct( $item->getId(), 1 );
 	}
 
@@ -470,14 +472,14 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$this->object->addProduct( $this->testItem->getId(), 1 );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTPSUB01' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->assertEquals( 'U:TESTPSUB01', $this->object->get()->getProduct( 0 )->getProductCode() );
@@ -486,29 +488,29 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddProductLowQuantityPriceException()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
 	public function testAddProductHigherQuantities()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
@@ -523,9 +525,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->addProduct( $this->testItem->getId(), 2 );
 
 		$item = $this->object->get()->getProduct( 0 );
-		$item->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
+		$item->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->deleteProduct( 0 );
 	}
 
@@ -547,16 +549,16 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testEditProductAttributes()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'attribute.domain', 'product' ),
@@ -575,7 +577,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$attributes = $attributeManager->searchItems( $search );
 
 		if( ( $attribute = reset( $attributes ) ) === false ) {
-			throw new Exception( 'No attributes available' );
+			throw new \Exception( 'No attributes available' );
 		}
 
 
@@ -598,13 +600,13 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testEditProductNotEnoughStock()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
@@ -615,9 +617,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		try
 		{
 			$this->object->editProduct( 0, 5 );
-			throw new Exception( 'Expected exception not thrown' );
+			throw new \Exception( 'Expected exception not thrown' );
 		}
-		catch( Controller_Frontend_Basket_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Basket\Exception $e )
 		{
 			$item = $this->object->get()->getProduct( 0 );
 			$this->assertEquals( 3, $item->getQuantity() );
@@ -628,18 +630,18 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testEditProductNoStock()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
-		$orderProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 		$orderProductItem = $orderProductManager->createItem();
 		$orderProductItem->copyFrom( $item );
 		$orderProductItem->setQuantity( 2 );
@@ -653,9 +655,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		try
 		{
 			$this->object->editProduct( $pos, 5 );
-			throw new Exception( 'Expected exception not thrown' );
+			throw new \Exception( 'Expected exception not thrown' );
 		}
-		catch( Controller_Frontend_Basket_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Basket\Exception $e )
 		{
 			$this->assertEquals( 3, $this->object->get()->getProduct( $pos )->getQuantity() );
 		}
@@ -664,13 +666,13 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testEditProductStockNotChecked()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
+			throw new \Exception( 'Product not found' );
 		}
 
 		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
@@ -691,9 +693,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->addProduct( $this->testItem->getId(), 2 );
 
 		$item = $this->object->get()->getProduct( 0 );
-		$item->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
+		$item->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->editProduct( 0, 4 );
 	}
 
@@ -711,14 +713,14 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddCouponInvalidCode()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addCoupon( 'invalid' );
 	}
 
 
 	public function testAddCouponMissingRequirements()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->addCoupon( 'OPQR' );
 	}
 
@@ -748,9 +750,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getAddress( 'Example company' );
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $item );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $item );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$address = $this->object->get()->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
@@ -761,7 +763,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
-			'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'order.base.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',
 			'order.base.address.lastname' => 'lastunit',
 			'order.base.address.address1' => 'unit str.',
@@ -779,9 +781,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 			'order.base.address.flag' => 0,
 		);
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $fixture );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $fixture );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$address = $this->object->get()->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
@@ -790,15 +792,15 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetBillingAddressByArrayError()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, array( 'error' => false ) );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, array( 'error' => false ) );
 	}
 
 
 	public function testSetBillingAddressParameterError()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, 'error' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, 'error' );
 	}
 
 
@@ -806,9 +808,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getAddress( 'Example company' );
 
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $item );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, $item );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+		$address = $this->object->get()->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
@@ -819,7 +821,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
-			'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+			'order.base.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',
 			'order.base.address.lastname' => 'lastunit',
 			'order.base.address.address1' => 'unit str.',
@@ -836,9 +838,9 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, $fixture );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, $fixture );
 
-		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+		$address = $this->object->get()->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
@@ -847,15 +849,15 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetDeliveryAddressByArrayError()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, array( 'error' => false ) );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, array( 'error' => false ) );
 	}
 
 
 	public function testSetDeliveryAddressTypeError()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY, 'error' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, 'error' );
 	}
 
 
@@ -866,7 +868,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->setService( 'payment', $service->getId(), array() );
 		$this->assertEquals( 'unitpaymentcode', $this->object->get()->getService( 'payment' )->getCode() );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->setService( 'payment', $service->getId(), array( 'prepay' => true ) );
 	}
 
@@ -878,7 +880,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->setService( 'delivery', $service->getId(), array() );
 		$this->assertEquals( 'unitcode', $this->object->get()->getService( 'delivery' )->getCode() );
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Basket\\Exception' );
 		$this->object->setService( 'delivery', $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
 	}
 
@@ -906,14 +908,14 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$price->setCurrencyId( 'CHF' );
 
 		$this->context->getLocale()->setCurrencyId( 'CHF' );
-		$this->object->setAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT, $this->getAddress( 'Example company' ) );
+		$this->object->setAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $this->getAddress( 'Example company' ) );
 
 		$this->context->getSession()->set( 'aimeos/basket/currency', 'CHF' );
 		$this->context->getLocale()->setCurrencyId( 'EUR' );
 
 		$this->context->getSession()->set( 'aimeos/basket/content-unittest-en-EUR-', null );
 
-		$object = new Controller_Frontend_Basket_Standard( $this->context );
+		$object = new \Aimeos\Controller\Frontend\Basket\Standard( $this->context );
 		$basket = $object->get();
 
 		foreach( $basket->getProducts() as $product )
@@ -934,7 +936,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function getAddress( $company )
 	{
-		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Standard' );
+		$customer = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
 		$addressManager = $customer->getSubManager( 'address', 'Standard' );
 
 		$search = $addressManager->createSearch();
@@ -942,7 +944,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $addressManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No address item with company "%1$s" found', $company ) );
+			throw new \Exception( sprintf( 'No address item with company "%1$s" found', $company ) );
 		}
 
 		return $item;
@@ -954,7 +956,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function getService( $code )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', $code ) );
@@ -962,7 +964,7 @@ class Controller_Frontend_Basket_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $serviceManager->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No service item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No service item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

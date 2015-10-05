@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Manager;
+
+
 /**
  * Interface for supplier DAOs used by the shop.
  * @package MShop
  * @subpackage Supplier
  */
-interface MShop_Supplier_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

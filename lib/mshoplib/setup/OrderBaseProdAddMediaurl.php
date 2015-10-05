@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds mediaurl column to table mshop_order_base_product.
  */
-class MW_Setup_Task_OrderBaseProdAddMediaurl extends MW_Setup_Task_Base
+class OrderBaseProdAddMediaurl extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mediaurl' => 'ALTER TABLE "mshop_order_base_product" ADD "mediaurl" VARCHAR(255) NOT NULL AFTER "name"',

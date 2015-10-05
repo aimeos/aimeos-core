@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
  * PHP implementation for comparing objects.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expression_Compare_Base
+class PHP extends \Aimeos\MW\Common\Criteria\Expression\Compare\Base
 {
 	private static $operators = array( '==' => '==', '!=' => '!=', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<' );
 
@@ -29,7 +32,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 	public function __construct( $operator, $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		parent::__construct( $operator, $name, $value );
@@ -77,7 +80,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 			case '!=':
 				return $name . ' !== null';
 			default:
-				throw new MW_Common_Exception( sprintf( 'null value not allowed for operator "%1$s"', $this->getOperator() ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'null value not allowed for operator "%1$s"', $this->getOperator() ) );
 		}
 	}
 
@@ -110,7 +113,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 				return '( ' . implode( ' && ', $list ) . ' )';
 
 			default:
-				throw new MW_Common_Exception( sprintf( 'List Term not allowed for operator "%1$s"', $this->getOperator() ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'List Term not allowed for operator "%1$s"', $this->getOperator() ) );
 		}
 	}
 
@@ -177,7 +180,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 		if( $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new MW_Common_Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
 			}
 
 			return 'string';

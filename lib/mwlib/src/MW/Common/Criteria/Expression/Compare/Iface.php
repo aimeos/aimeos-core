@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
  * Interface for comparing objects.
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Expression_Compare_Iface extends MW_Common_Criteria_Expression_Iface
+interface Iface extends \Aimeos\MW\Common\Criteria\Expression\Iface
 {
 	/**
 	 * Returns the left side of the compare expression.

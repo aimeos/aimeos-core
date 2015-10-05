@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
- * Test class for MShop_Service_Provider_Payment_DirectDebit.
+ * Test class for \Aimeos\MShop\Service\Provider\Payment\DirectDebit.
  */
-class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_TestCase
+class DirectDebitTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $ordServItem;
@@ -23,13 +26,13 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$this->ordServItem = MShop_Factory::createManager( $context, 'order/base/service' )->createItem();
-		$serviceItem = MShop_Factory::createManager( $context, 'service' )->createItem();
+		$this->ordServItem = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' )->createItem();
+		$serviceItem = \Aimeos\MShop\Factory::createManager( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_DirectDebit' )
+		$this->object = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\DirectDebit' )
 			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -69,18 +72,18 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 
 	public function testGetConfigFE()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED )
+			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
+			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Base::PAY_AUTHORIZED, MShop_Order_Item_Base::TYPE_WEB ) );
+			throw new \Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
 		$basket = $orderBaseManager->load( $order->getBaseId() );
@@ -143,30 +146,30 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attrItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Iface', $attrItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
 
 
 	public function testProcess()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$order = $manager->createItem();
 
 		$this->object->process( $order );
 
-		$this->assertEquals( MShop_Order_Item_Base::PAY_AUTHORIZED, $order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $order->getPaymentStatus() );
 	}
 
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_QUERY ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
 	}
 }

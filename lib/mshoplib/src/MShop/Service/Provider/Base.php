@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider;
+
+
 /**
  * Abstract class for all service provider implementations with some default methods.
  *
  * @package MShop
  * @subpackage Service
  */
-abstract class MShop_Service_Provider_Base
-implements MShop_Service_Provider_Iface
+abstract class Base
+implements \Aimeos\MShop\Service\Provider\Iface
 {
 	private $context;
 	private $serviceItem;
@@ -26,10 +29,10 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Initializes the service provider object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration for the provider
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration for the provider
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Service_Item_Iface $serviceItem )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
 	{
 		$this->context = $context;
 		$this->serviceItem = $serviceItem;
@@ -41,12 +44,12 @@ implements MShop_Service_Provider_Iface
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return MShop_Price_Item_Iface Price item containing the price, shipping, rebate
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( MShop_Order_Item_Base_Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
 		if( count( $prices ) > 0 ) {
@@ -87,7 +90,7 @@ implements MShop_Service_Provider_Iface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
@@ -99,10 +102,10 @@ implements MShop_Service_Provider_Iface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( MShop_Order_Item_Base_Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		return array();
 	}
@@ -111,7 +114,7 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Returns the service item which also includes the configuration for the service provider.
 	 *
-	 * @return MShop_Service_Item_Iface Service item
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item
 	 */
 	public function getServiceItem()
 	{
@@ -143,10 +146,10 @@ implements MShop_Service_Provider_Iface
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, RMS, etc. -> in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		return true;
 	}
@@ -167,11 +170,11 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Iface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Iface $order )
+	public function query( \Aimeos\MShop\Order\Item\Iface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
 	}
 
 
@@ -180,7 +183,7 @@ implements MShop_Service_Provider_Iface
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
 	 * @return boolean True if the update was successful, false if async updates are not supported
-	 * @throws MShop_Service_Exception If updating one of the orders failed
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
 	public function updateAsync()
 	{
@@ -195,8 +198,8 @@ implements MShop_Service_Provider_Iface
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 * @throws MShop_Service_Exception If updating one of the orders failed
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
@@ -211,9 +214,9 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Sets the communication object for a service provider.
 	 *
-	 * @param MW_Communication_Iface $communication Object of communication
+	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
 	 */
-	public function setCommunication( MW_Communication_Iface $communication )
+	public function setCommunication( \Aimeos\MW\Communication\Iface $communication )
 	{
 		$this->communication = $communication;
 	}
@@ -222,12 +225,12 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Returns the communication object for the service provider.
 	 *
-	 * @return MW_Communication_Iface Object for communication
+	 * @return \Aimeos\MW\Communication\Iface Object for communication
 	 */
 	protected function getCommunication()
 	{
 		if( !isset( $this->communication ) ) {
-			$this->communication = new MW_Communication_Curl();
+			$this->communication = new \Aimeos\MW\Communication\Curl();
 		}
 
 		return $this->communication;
@@ -248,7 +251,7 @@ implements MShop_Service_Provider_Iface
 	 * @param boolean $businessOnly True if only business days should be used for calculation, false if not
 	 * @param string $publicHolidays Comma separated list of public holidays in YYYY-MM-DD format
 	 * @return string Date in YYY-MM-DD format to be compared to the order date
-	 * @throws MShop_Service_Exception If the given holiday string is in the wrong format and can't be processed
+	 * @throws \Aimeos\MShop\Service\Exception If the given holiday string is in the wrong format and can't be processed
 	 */
 	protected function calcDateLimit( $timestamp, $skipdays = 0, $businessOnly = false, $publicHolidays = '' )
 	{
@@ -259,7 +262,7 @@ implements MShop_Service_Provider_Iface
 			$holidays = explode( ',', str_replace( ' ', '', $publicHolidays ) );
 
 			if( sort( $holidays ) === false ) {
-				throw new MShop_Service_Exception( sprintf( 'Unable to sort public holidays: "%1$s"', $publicHolidays ) );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Unable to sort public holidays: "%1$s"', $publicHolidays ) );
 			}
 
 			$holidays = array_flip( $holidays );
@@ -366,7 +369,7 @@ implements MShop_Service_Provider_Iface
 						}
 						break;
 					default:
-						throw new MShop_Service_Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
+						throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
 				}
 			}
 
@@ -410,7 +413,7 @@ implements MShop_Service_Provider_Iface
 	/**
 	 * Returns the context item.
 	 *
-	 * @return MShop_Context_Item_Iface Context item
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item
 	 */
 	protected function getContext()
 	{
@@ -422,11 +425,11 @@ implements MShop_Service_Provider_Iface
 	 * Returns the order item for the given ID.
 	 *
 	 * @param string $id Unique order ID
-	 * @return MShop_Order_Item_Iface $item Order object
+	 * @return \Aimeos\MShop\Order\Item\Iface $item Order object
 	 */
 	protected function getOrder( $id )
 	{
-		return MShop_Factory::createManager( $this->context, 'order' )->getItem( $id );
+		return \Aimeos\MShop\Factory::createManager( $this->context, 'order' )->getItem( $id );
 	}
 
 
@@ -435,47 +438,47 @@ implements MShop_Service_Provider_Iface
 	 *
 	 * @param string $baseId Order base ID stored in the order item
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @return MShop_Order_Item_Base_Iface Basket, optional with addresses, products, services and coupons
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
 	 */
-	protected function getOrderBase( $baseId, $parts = MShop_Order_Manager_Base_Base::PARTS_SERVICE )
+	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE )
 	{
-		return MShop_Factory::createManager( $this->context, 'order/base' )->load( $baseId, $parts );
+		return \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->load( $baseId, $parts );
 	}
 
 
 	/**
 	 * Saves the order item.
 	 *
-	 * @param MShop_Order_Item_Iface $item Order object
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
 	 */
-	protected function saveOrder( MShop_Order_Item_Iface $item )
+	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		MShop_Factory::createManager( $this->context, 'order' )->saveItem( $item );
+		\Aimeos\MShop\Factory::createManager( $this->context, 'order' )->saveItem( $item );
 	}
 
 
 	/**
 	 * Saves the base order which is equivalent to the basket and its dependent objects.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Order base object with associated items
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	protected function saveOrderBase( MShop_Order_Item_Base_Iface $base, $parts = MShop_Order_Manager_Base_Base::PARTS_SERVICE )
+	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE )
 	{
-		MShop_Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
+		\Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
 	}
 
 
 	/**
 	 * Sets the attributes in the given service item.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 */
-	protected function setAttributes( MShop_Order_Item_Base_Service_Iface $orderServiceItem, array $attributes, $type )
+	protected function setAttributes( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->context, 'order/base/service/attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service/attribute' );
 
 		foreach( $attributes as $key => $value )
 		{

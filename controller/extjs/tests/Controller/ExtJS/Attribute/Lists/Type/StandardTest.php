@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Attribute\Lists\Type;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Attribute_Lists_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Attribute_Lists_Type_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Attribute_Lists_Type_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Attribute\Lists\Type\Standard( \TestHelper::getContext() );
 	}
 
 

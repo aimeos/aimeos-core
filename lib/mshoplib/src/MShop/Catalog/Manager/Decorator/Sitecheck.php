@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Decorator;
+
+
 /**
  * Provides a site check decorator for tree managers.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Manager_Decorator_Sitecheck
-	extends MShop_Catalog_Manager_Decorator_Base
+class Sitecheck
+	extends \Aimeos\MShop\Catalog\Manager\Decorator\Base
 {
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Common_Item_Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item which should be inserted
 	 */
-	public function insertItem( MShop_Catalog_Item_Iface $item, $parentId = null, $refId = null )
+	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
 		if( $parentId !== null ) {
 
@@ -30,7 +33,7 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 			$siteId = $this->getContext()->getLocale()->getSiteId();
 
 			if( $parent->getSiteId() != $siteId ) {
-				throw new MShop_Exception( sprintf( 'Site can not be inserted. Site ID of site differs from site ID of parent site.' ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Site can not be inserted. Site ID of site differs from site ID of parent site.' ) );
 			}
 		}
 
@@ -58,7 +61,7 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 		foreach( $manager->searchItems( $search ) as $item )
 		{
 			if( $item->getSiteId() != $siteId ) {
-				throw new MShop_Exception( sprintf( 'Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site.' ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site.' ) );
 			}
 		}
 

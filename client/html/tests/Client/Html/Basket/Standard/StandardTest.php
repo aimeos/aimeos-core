@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Basket\Standard;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Basket_Standard_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Basket\Standard\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -64,7 +66,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -97,7 +99,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			),
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -113,7 +115,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBodyAddVariantAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -140,7 +142,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_attrvarid' => array_keys( $attributes ),
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -152,7 +154,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBodyAddConfigAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -164,7 +166,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $attrManager->searchItems( $search, array() );
 
 		if( ( $attribute = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute' );
+			throw new \Exception( 'No attribute' );
 		}
 
 		$view = $this->object->getView();
@@ -176,7 +178,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -188,7 +190,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBodyAddHiddenAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -200,7 +202,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $attrManager->searchItems( $search, array() );
 
 		if( ( $attribute = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute' );
+			throw new \Exception( 'No attribute' );
 		}
 
 		$view = $this->object->getView();
@@ -212,7 +214,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -224,7 +226,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetBodyAddCustomAttribute()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -236,7 +238,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $attrManager->searchItems( $search, array() );
 
 		if( ( $attribute = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute' );
+			throw new \Exception( 'No attribute' );
 		}
 
 		$view = $this->object->getView();
@@ -248,7 +250,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 				'b_warehouse' => 'default',
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -269,7 +271,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_quantity' => 1,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -302,7 +304,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			),
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -327,7 +329,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_position' => 1,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -351,7 +353,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_position' => array( 0, 1 ),
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -371,7 +373,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_position' => -1,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -383,20 +385,20 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'detail', 'Standard' );
-		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\HTML\\Iface', $client );
 	}
 
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -408,13 +410,13 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function addProduct( $code, $quantity, $warehouse )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		$view = $this->object->getView();
@@ -425,7 +427,7 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 			'b_warehouse' => $warehouse,
 		);
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -437,13 +439,13 @@ class Client_Html_Basket_Standard_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function getProductItem( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

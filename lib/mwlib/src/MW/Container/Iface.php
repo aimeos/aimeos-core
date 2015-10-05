@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * Interface to manage containers like Zip or Excel.
  *
  * @package MW
  * @subpackage Container
  */
-interface MW_Container_Iface extends Iterator
+interface Iface extends \Iterator
 {
 	/**
 	 * Opens an existing container or creates a new one.
@@ -29,10 +32,10 @@ interface MW_Container_Iface extends Iterator
 	/**
 	 * Adds content data to the container.
 	 *
-	 * @param MW_Container_Content_Iface $content Content object
+	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 * @return void
 	 */
-	public function add( MW_Container_Content_Iface $content );
+	public function add( \Aimeos\MW\Container\Content\Iface $content );
 
 	/**
 	 * Cleans up and saves the container.
@@ -44,7 +47,7 @@ interface MW_Container_Iface extends Iterator
 	 * Creates a new content object.
 	 *
 	 * @param string $name Name of the content
-	 * @return MW_Container_Content_Iface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
 	public function create( $name );
 
@@ -52,7 +55,7 @@ interface MW_Container_Iface extends Iterator
 	 * Returns the element specified by its name.
 	 *
 	 * @param string $name Name of the content object that should be returned
-	 * @return MW_Container_Content_Iface Content object
+	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
 	public function get( $name );
 }

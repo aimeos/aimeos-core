@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Email\Payment;
+
+
 /**
  * Order payment e-mail job controller.
  *
  * @package Controller
  * @subpackage Order
  */
-class Controller_Jobs_Order_Email_Payment_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Order_Email_Payment_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -55,12 +58,12 @@ class Controller_Jobs_Order_Email_Payment_Standard
 
 		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
 
-		$helper = new MW_View_Helper_Config_Standard( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$client = Client_Html_Email_Payment_Factory::createClient( $context, $templatePaths );
+		$client = \Aimeos\Client\Html\Email\Payment\Factory::createClient( $context, $templatePaths );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
 		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
@@ -83,10 +86,10 @@ class Controller_Jobs_Order_Email_Payment_Standard
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
 		$default = array(
-			MShop_Order_Item_Base::PAY_REFUND,
-			MShop_Order_Item_Base::PAY_PENDING,
-			MShop_Order_Item_Base::PAY_AUTHORIZED,
-			MShop_Order_Item_Base::PAY_RECEIVED,
+			\Aimeos\MShop\Order\Item\Base::PAY_REFUND,
+			\Aimeos\MShop\Order\Item\Base::PAY_PENDING,
+			\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
+			\Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 		);
 
 		/** controller/jobs/order/email/payment/default/status
@@ -116,7 +119,7 @@ class Controller_Jobs_Order_Email_Payment_Standard
 		{
 			$orderSearch = $orderManager->createSearch();
 
-			$param = array( MShop_Order_Item_Status_Base::EMAIL_PAYMENT, $status );
+			$param = array( \Aimeos\MShop\Order\Item\Status\Base::EMAIL_PAYMENT, $status );
 			$orderFunc = $orderSearch->createFunction( 'order.containsStatus', $param );
 
 			$expr = array(
@@ -138,17 +141,17 @@ class Controller_Jobs_Order_Email_Payment_Standard
 					{
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
 
-						$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+						$addr = $orderBaseItem->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 						$view->extAddressItem = $addr;
 						$view->extOrderBaseItem = $orderBaseItem;
 						$view->extOrderItem = $item;
 
-						$helper = new MW_View_Helper_Translate_Standard( $view, $context->getI18n( $addr->getLanguageId() ) );
+						$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $context->getI18n( $addr->getLanguageId() ) );
 						$view->addHelper( 'translate', $helper );
 
 						$message = $mailer->createMessage();
-						$helper = new MW_View_Helper_Mail_Standard( $view, $message );
+						$helper = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $message );
 						$view->addHelper( 'mail', $helper );
 
 						$client->setView( $view );
@@ -159,12 +162,12 @@ class Controller_Jobs_Order_Email_Payment_Standard
 
 						$statusItem = $orderStatusManager->createItem();
 						$statusItem->setParentId( $id );
-						$statusItem->setType( MShop_Order_Item_Status_Base::EMAIL_PAYMENT );
+						$statusItem->setType( \Aimeos\MShop\Order\Item\Status\Base::EMAIL_PAYMENT );
 						$statusItem->setValue( $status );
 
 						$orderStatusManager->saveItem( $statusItem );
 					}
-					catch( Exception $e )
+					catch( \Exception $e )
 					{
 						$str = 'Error while trying to send payment e-mail for order ID "%1$s" and status "%2$s": %3$s';
 						$msg = sprintf( $str, $item->getId(), $item->getPaymentStatus(), $e->getMessage() );

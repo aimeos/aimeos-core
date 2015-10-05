@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
  * Generic interface for the passwort helper item.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Helper_Password_Iface
+interface Iface
 {
 	/**
 	 * Initializes the password helper.

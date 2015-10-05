@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Implementation of the gzip content object.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Content_Gzip
-	extends MW_Container_Content_Base
-	implements MW_Container_Content_Iface
+class Gzip
+	extends \Aimeos\MW\Container\Content\Base
+	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $fh;
 	private $data;
@@ -48,7 +51,7 @@ class MW_Container_Content_Gzip
 		if( ( $this->fh = @gzopen( $resource, 'rb' . $level ) ) === false
 			&& ( $this->fh = gzopen( $resource, 'wb' ) ) === false
 		) {
-			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
@@ -60,12 +63,12 @@ class MW_Container_Content_Gzip
 	/**
 	 * Closes the gzip file so it's written to disk.
 	 *
-	 * @throws MW_Container_Exception If the file handle couldn't be flushed or closed
+	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
 	public function close()
 	{
 		if( gzclose( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
 
@@ -78,7 +81,7 @@ class MW_Container_Content_Gzip
 	public function add( $data )
 	{
 		if( gzwrite( $this->fh, $data ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
 
@@ -125,7 +128,7 @@ class MW_Container_Content_Gzip
 	function rewind()
 	{
 		if( gzrewind( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to rewind file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to rewind file "%1$s"', $this->getResource() ) );
 		}
 
 		$this->position = 0;

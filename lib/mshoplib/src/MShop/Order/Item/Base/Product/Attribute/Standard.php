@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product\Attribute;
+
+
 /**
  * Default product attribute item implementation.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Base_Product_Attribute_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Order_Item_Base_Product_Attribute_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 {
 	private $values;
 
@@ -189,9 +192,9 @@ class MShop_Order_Item_Base_Product_Attribute_Standard
 	/**
 	 * Copys all data from a given attribute item.
 	 *
-	 * @param MShop_Attribute_Item_Iface $item Attribute item to copy from
+	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
 	 */
-	public function copyFrom( MShop_Attribute_Item_Iface $item )
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
 	{
 		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );

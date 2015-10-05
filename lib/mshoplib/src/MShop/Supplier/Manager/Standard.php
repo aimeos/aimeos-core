@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Manager;
+
+
 /**
- * Class MShop_Supplier_Manager_Standard.
+ * Class \Aimeos\MShop\Supplier\Manager\Standard.
  *
  * @package MShop
  * @subpackage Supplier
  */
-class MShop_Supplier_Manager_Standard
-	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Supplier_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	implements \Aimeos\MShop\Supplier\Manager\Iface
 {
 	private $searchConfig = array(
 		'supplier.id' => array(
@@ -24,14 +27,14 @@ class MShop_Supplier_Manager_Standard
 			'internalcode' => 'msup."id"',
 			'label' => 'Supplier ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.siteid' => array(
 			'code' => 'supplier.siteid',
 			'internalcode' => 'msup."siteid"',
 			'label' => 'Supplier site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.code' => array(
@@ -39,42 +42,42 @@ class MShop_Supplier_Manager_Standard
 			'internalcode' => 'msup."code"',
 			'label' => 'Supplier code',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.label' => array(
 			'code' => 'supplier.label',
 			'internalcode' => 'msup."label"',
 			'label' => 'Supplier label',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.status'=> array(
 			'code' => 'supplier.status',
 			'internalcode' => 'msup."status"',
 			'label' => 'Supplier status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.ctime'=> array(
 			'code'=>'supplier.ctime',
 			'internalcode'=>'msup."ctime"',
 			'label'=>'Supplier create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.mtime'=> array(
 			'code'=>'supplier.mtime',
 			'internalcode'=>'msup."mtime"',
 			'label'=>'Supplier modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.editor'=> array(
 			'code'=>'supplier.editor',
 			'internalcode'=>'msup."editor"',
 			'label'=>'Supplier editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -82,9 +85,9 @@ class MShop_Supplier_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
@@ -111,7 +114,7 @@ class MShop_Supplier_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -141,7 +144,7 @@ class MShop_Supplier_Manager_Standard
 	/**
 	 * Instantiates a new supplier item object.
 	 *
-	 * @return MShop_Supplier_Item_Iface
+	 * @return \Aimeos\MShop\Supplier\Item\Iface
 	 */
 	public function createItem()
 	{
@@ -191,8 +194,8 @@ class MShop_Supplier_Manager_Standard
 	 *
 	 * @param integer $id Unique supplier ID referencing an existing supplier
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Supplier_Item_Iface Returns the supplier item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Supplier\Item\Iface Returns the supplier item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -203,14 +206,14 @@ class MShop_Supplier_Manager_Standard
 	/**
 	 * Saves a supplier item object.
 	 *
-	 * @param MShop_Supplier_Item_Iface $item Supplier item object
+	 * @param \Aimeos\MShop\Supplier\Item\Iface $item Supplier item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Supplier_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Supplier\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Supplier_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Supplier\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -291,15 +294,15 @@ class MShop_Supplier_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
 			$stmt->bind( 3, $item->getLabel() );
-			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $date ); // mtime
 			$stmt->bind( 6, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 7, $date ); // ctime
@@ -345,7 +348,7 @@ class MShop_Supplier_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -356,12 +359,12 @@ class MShop_Supplier_Manager_Standard
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Supplier_Item_Iface
-	 * @throws MShop_Supplier_Exception If creating items failed
+	 * @return array List of items implementing \Aimeos\MShop\Supplier\Item\Iface
+	 * @throws \Aimeos\MShop\Supplier\Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
 		$context = $this->getContext();
@@ -373,7 +376,7 @@ class MShop_Supplier_Manager_Standard
 		try
 		{
 			$required = array( 'supplier' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/supplier/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -482,7 +485,7 @@ class MShop_Supplier_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -497,8 +500,8 @@ class MShop_Supplier_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Address_Iface Returns a address manager
-	 * @throws MShop_Supplier_Exception If creating manager failed
+	 * @return \Aimeos\MShop\Common\Manager\Address\Iface Returns a address manager
+	 * @throws \Aimeos\MShop\Supplier\Exception If creating manager failed
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -510,7 +513,7 @@ class MShop_Supplier_Manager_Standard
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch($default = false)
 	{
@@ -526,10 +529,10 @@ class MShop_Supplier_Manager_Standard
 	 * Creates a new supplier item.
 	 *
 	 * @param array $values List of attributes for supplier item
-	 * @return MShop_Supplier_Item_Iface New supplier item
+	 * @return \Aimeos\MShop\Supplier\Item\Iface New supplier item
 	 */
 	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
-		return new MShop_Supplier_Item_Standard( $values, $listitems, $refItems );
+		return new \Aimeos\MShop\Supplier\Item\Standard( $values, $listitems, $refItems );
 	}
 }

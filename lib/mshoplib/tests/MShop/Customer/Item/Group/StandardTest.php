@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Customer\Item\Group;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Customer_Item_Group_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -24,7 +25,7 @@ class MShop_Customer_Item_Group_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unittest',
 		);
 
-		$this->object = new MShop_Customer_Item_Group_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Customer\Item\Group\Standard( $this->values );
 	}
 
 
@@ -90,7 +91,7 @@ class MShop_Customer_Item_Group_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Customer_Item_Group_Standard();
+		$item = new \Aimeos\MShop\Customer\Item\Group\Standard();
 
 		$list = array(
 			'customer.group.id' => 12,

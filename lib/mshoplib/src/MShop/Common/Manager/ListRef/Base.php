@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\ListRef;
+
+
 /**
  * Abstract class for managers working with referenced list items.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Manager_ListRef_Base
-	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_ListRef_Iface
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\ListRef\Iface
 {
 	/**
 	 * Creates a new item for the specific manager.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing MShop_Common_Item_Lists_Iface
-	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
-	 * @return MShop_Common_Item_Iface New item
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\MShop\Common\Item\Iface New item
 	 */
 	abstract protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() );
 
@@ -35,7 +38,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * @param array $map Associative list of IDs as keys and the associative array of values
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_Item_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
 	protected function buildItems( array $map, array $domains, $prefix )
 	{
@@ -82,7 +85,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 	 * @param array $ids List of IDs
 	 * @param array $domains List of domain names whose referenced items should be attached
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_Lists_Item_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Lists\Item\Iface
 	 */
 	protected function getListItems( array $ids, array $domains, $prefix )
 	{
@@ -118,7 +121,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 		{
 			try
 			{
-				$manager = MShop_Factory::createManager( $context, $domain );
+				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
 				$search = $manager->createSearch( true );
 				$expr = array(
@@ -135,7 +138,7 @@ abstract class MShop_Common_Manager_ListRef_Base
 					}
 				}
 			}
-			catch( MShop_Exception $e )
+			catch( \Aimeos\MShop\Exception $e )
 			{
 				$logger = $context->getLogger();
 				$logger->log( sprintf( 'Item referenced in domain "%1$s" not found: %2$s', $domain, $e->getMessage() ) );

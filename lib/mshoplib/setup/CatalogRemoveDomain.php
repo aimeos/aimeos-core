@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes domain column from catalog table.
  */
-class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Base
+class CatalogRemoveDomain extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_catalog" DROP "domain"',

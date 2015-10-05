@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Product;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $endpoint;
@@ -14,17 +15,17 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
+		$this->context = \TestHelper::getContext();
+		$this->endpoint = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $this->context, array() );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -50,7 +51,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -96,7 +97,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -140,7 +141,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -155,7 +156,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'CNE', $listItem->getRefItem()->getCode() );
 	}
@@ -175,12 +176,12 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, array(), $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, array(), $this->endpoint );
 		$result = $object->process( $product, array() );
 
 		$product = $this->get( 'job_csv_test' );
@@ -211,7 +212,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -244,7 +245,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 		$product = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Product_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Product\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( $product, $data );
 
 		$product = $this->get( 'job_csv_test' );
@@ -255,7 +256,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'CNE', $listItem->getRefItem()->getCode() );
@@ -264,7 +265,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 	protected function create( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$typeSearch = $typeManager->createSearch();
@@ -272,7 +273,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 		$typeResult = $typeManager->searchItems( $typeSearch );
 
 		if( ( $typeItem = reset( $typeResult ) ) === false ) {
-			throw new Exception( 'No product type "default" found' );
+			throw new \Exception( 'No product type "default" found' );
 		}
 
 		$item = $manager->createItem();
@@ -285,9 +286,9 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 	}
 
 
-	protected function delete( MShop_Product_Item_Iface $product )
+	protected function delete( \Aimeos\MShop\Product\Item\Iface $product )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $product->getListItems('product') as $listItem ) {
@@ -300,7 +301,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 
 	protected function get( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -308,7 +309,7 @@ class Controller_Common_Product_Import_Csv_Processor_Product_StandardTest extend
 		$result = $manager->searchItems( $search, array('product') );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No product item for code "%1$s"', $code ) );
+			throw new \Exception( sprintf( 'No product item for code "%1$s"', $code ) );
 		}
 
 		return $item;

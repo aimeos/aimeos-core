@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item;
+
+
 /**
  * Common methods for all item objects.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
+abstract class Base extends \Aimeos\MW\Common\Item\Base
 {
 	private $prefix;
 	private $values;
@@ -51,7 +54,7 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->values['id'] = MShop_Common_Item_Base::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->values['id'] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
@@ -169,12 +172,12 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 * @param string $old Current ID of the item
 	 * @param string $new New ID which should be set in the item
 	 * @return string Value of the new ID
-	 * @throws MShop_Common_Exception if the ID is not null or not the same as the old one
+	 * @throws \Aimeos\MShop\Common\Exception if the ID is not null or not the same as the old one
 	 */
 	public static function checkId( $old, $new )
 	{
 		if( $new != null && $old != null && $old != $new ) {
-			throw new MShop_Exception( sprintf( 'New ID "%1$s" for item differs from old ID "%2$s"', $new, $old ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'New ID "%1$s" for item differs from old ID "%2$s"', $new, $old ) );
 		}
 
 		return $new;
@@ -185,14 +188,14 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 * Tests if the date parameter represents an ISO format.
 	 *
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
-	 * @throws MShop_Exception If the date is invalid
+	 * @throws \Aimeos\MShop\Exception If the date is invalid
 	 */
 	protected function checkDateFormat( $date )
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
 		if( $date !== null && preg_match( $regex, $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
 		}
 	}
 
@@ -201,12 +204,12 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 * Tests if the code is valid.
 	 *
 	 * @param string $code New code for an item
-	 * @throws MShop_Exception If the code is invalid
+	 * @throws \Aimeos\MShop\Exception If the code is invalid
 	 */
 	protected function checkCode( $code )
 	{
 		if( strlen( $code ) > 32 ) {
-			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Code must not be longer than 32 characters' ) );
 		}
 	}
 
@@ -216,16 +219,16 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 *
 	 * @param string|null $currencyid Three letter ISO currency format, e.g. EUR
 	 * @param boolean $null True if null is allowed, false if not
-	 * @throws MShop_Exception If the currency ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
 	protected function checkCurrencyId( $currencyid, $null = true )
 	{
 		if( $null === false && $currencyid === null ) {
-			throw new MShop_Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
 		}
 
 		if( $currencyid !== null && preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
 		}
 	}
 
@@ -234,12 +237,12 @@ abstract class MShop_Common_Item_Base extends MW_Common_Item_Base
 	 * Tests if the language ID parameter represents an ISO language format.
 	 *
 	 * @param string|null $langid ISO language format, e.g. de or de_DE
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	protected function checkLanguageId( $langid )
 	{
 		if( $langid !== null && preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
 		}
 	}
 

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
+class JsonRpcTest extends \PHPUnit_Framework_TestCase
 {
 	private static $object;
 	private $testdir;
@@ -14,8 +15,8 @@ class Controller_ExtJS_JsonRpcTest extends PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$cntlPaths = TestHelper::getControllerPaths();
-		self::$object = new Controller_ExtJS_JsonRpc( TestHelper::getContext(), $cntlPaths );
+		$cntlPaths = \TestHelper::getControllerPaths();
+		self::$object = new \Aimeos\Controller\ExtJS\JsonRpc( \TestHelper::getContext(), $cntlPaths );
 	}
 
 

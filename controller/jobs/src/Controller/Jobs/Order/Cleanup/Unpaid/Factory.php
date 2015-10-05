@@ -8,25 +8,28 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Cleanup\Unpaid;
+
+
 /**
  * Order cleanup unpaid controller factory.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Cleanup_Unpaid_Factory
-	extends Controller_Jobs_Common_Factory_Base
-	implements Controller_Jobs_Common_Factory_Iface
+class Factory
+	extends \Aimeos\Controller\Jobs\Common\Factory\Base
+	implements \Aimeos\Controller\Jobs\Common\Factory\Iface
 {
 	/**
 	 * Creates a new controller specified by the given name.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object required by controllers
-	 * @param Aimeos $aimeos Aimeos object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
-	 * @return Controller_Jobs_Iface New controller object
+	 * @return \Aimeos\Controller\Jobs\Iface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Iface $context, Aimeos $aimeos, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/order/cleanup/unpaid/name
 		 * Class name of the used order cleanup unpaid scheduler controller implementation
@@ -38,11 +41,11 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Order_Cleanup_Unpaid_Standard
+		 *  \Aimeos\Controller\Jobs\Order\Cleanup\Unpaid\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_Jobs_Order_Cleanup_Unpaid_Myunpaid
+		 *  \Aimeos\Controller\Jobs\Order\Cleanup\Unpaid\Myunpaid
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -67,12 +70,12 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'Controller_Jobs_Order_Cleanup_Unpaid_' . $name : '<not a string>';
-			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Jobs\\Order\\Cleanup\\Unpaid\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Jobs_Iface';
-		$classname = 'Controller_Jobs_Order_Cleanup_Unpaid_' . $name;
+		$iface = '\\Aimeos\\Controller\\Jobs\\Iface';
+		$classname = '\\Aimeos\\Controller\\Jobs\\Order\\Cleanup\\Unpaid\\' . $name;
 
 		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
@@ -91,7 +94,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 		 *  controller/jobs/order/cleanup/unpaid/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Controller_Jobs_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Controller\Jobs\Common\Decorator\*") added via
 		 * "controller/jobs/common/decorators/default" to this job controller.
 		 *
 		 * @param array List of decorator names
@@ -111,12 +114,12 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_Jobs_Common_Decorator_*") around the job controller.
+		 * ("\Aimeos\Controller\Jobs\Common\Decorator\*") around the job controller.
 		 *
 		 *  controller/jobs/order/cleanup/unpaid/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Jobs_Common_Decorator_Decorator1" only to this job controller.
+		 * "\Aimeos\Controller\Jobs\Common\Decorator\Decorator1" only to this job controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
@@ -135,12 +138,12 @@ class Controller_Jobs_Order_Cleanup_Unpaid_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_Jobs_Order_Cleanup_Unpaid_Decorator_*") around this job controller.
+		 * ("\Aimeos\Controller\Jobs\Order\Cleanup\Unpaid\Decorator\*") around this job controller.
 		 *
 		 *  controller/jobs/order/cleanup/unpaid/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Jobs_Order_Cleanup_Unpaid_Decorator_Decorator2" only to this job
+		 * "\Aimeos\Controller\Jobs\Order\Cleanup\Unpaid\Decorator\Decorator2" only to this job
 		 * controller.
 		 *
 		 * @param array List of decorator names

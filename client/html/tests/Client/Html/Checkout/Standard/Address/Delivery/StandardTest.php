@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Address\Delivery;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Address_Delivery_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Delivery\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,7 +37,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -61,14 +63,14 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -81,7 +83,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 
 	public function testProcessNewAddress()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -95,21 +97,21 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 				'order.base.address.languageid' => 'en',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
 		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 'hamburg', $basket->getAddress( 'delivery' )->getCity() );
 	}
 
 
 	public function testProcessNewAddressMissing()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -121,7 +123,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 				'order.base.address.city' => 'hamburg',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -130,7 +132,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 		{
 			$this->object->process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$this->assertEquals( 2, count( $view->deliveryError ) );
 			$this->assertArrayHasKey( 'order.base.address.salutation', $view->deliveryError );
@@ -144,7 +146,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 
 	public function testProcessNewAddressUnknown()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -159,24 +161,24 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 				'order.base.address.flag' => '1',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 		$this->object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 0, $basket->getAddress( 'delivery' )->getFlag() );
 	}
 
 
 	public function testProcessNewAddressInvalid()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
-		$helper = new MW_View_Helper_Config_Standard( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
 		$param = array(
@@ -192,7 +194,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 				'order.base.address.languageid' => 'en',
 			),
 		);
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -201,7 +203,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 		{
 			$this->object->process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$this->assertEquals( 1, count( $view->deliveryError ) );
 			$this->assertArrayHasKey( 'order.base.address.postal', $view->deliveryError );
@@ -214,81 +216,81 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 
 	public function testProcessAddressDelete()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context )->getSubManager( 'address' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context )->getSubManager( 'address' );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer address found' );
+			throw new \Exception( 'No customer address found' );
 		}
 
 		$item->setId( null );
 		$manager->saveItem( $item );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$this->context->setUserId( $item->getRefId() );
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 		$this->object->process();
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$manager->getItem( $item->getId() );
 	}
 
 
 	public function testProcessAddressDeleteUnknown()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_delivery_delete' => '-1' );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->process();
 	}
 
 
 	public function testProcessAddressDeleteNoLogin()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context )->getSubManager( 'address' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context )->getSubManager( 'address' );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer address found' );
+			throw new \Exception( 'No customer address found' );
 		}
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->process();
 	}
 
 
 	public function testProcessExistingAddress()
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $customerManager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer item not found' );
+			throw new \Exception( 'Customer item not found' );
 		}
 
 		$customerAddressManager = $customerManager->getSubManager( 'address' );
@@ -297,15 +299,15 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 		$result = $customerAddressManager->searchItems( $search );
 
 		if( ( $address = reset( $result ) ) === false ) {
-			throw new Exception( 'Customer address item not found' );
+			throw new \Exception( 'Customer address item not found' );
 		}
 
 		$this->context->setUserId( $customer->getId() );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_deliveryoption' => $address->getId() );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -313,22 +315,22 @@ class Client_Html_Checkout_Standard_Address_Delivery_StandardTest extends PHPUni
 		$this->object->process();
 
 		$this->context->setEditor( null );
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->context )->get();
+		$basket = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->get();
 		$this->assertEquals( 'Example company', $basket->getAddress( 'delivery' )->getCompany() );
 	}
 
 
 	public function testProcessInvalidId()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'ca_deliveryoption' => -1 );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->process();
 	}
 }

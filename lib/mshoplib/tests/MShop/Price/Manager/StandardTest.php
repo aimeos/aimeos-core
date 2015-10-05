@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Price\Manager;
+
+
 /**
- * Test class for MShop_Price_Manager_Standard.
+ * Test class for \Aimeos\MShop\Price\Manager\Standard.
  */
-class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
 	}
 
 	/**
@@ -47,13 +50,13 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $object ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $object );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $object );
 		}
 	}
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Price_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $this->object->createItem() );
 	}
 
 	public function testGetItem()
@@ -67,7 +70,7 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No results available' );
+			throw new \Exception( 'No results available' );
 		}
 
 		$itemB = $this->object->getItem( $item->getId() );
@@ -83,7 +86,7 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -136,14 +139,14 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\SQL', $this->object->createSearch() );
 	}
 
 
@@ -211,8 +214,8 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 	}
 
 
@@ -247,14 +250,14 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array( $item ), 1, 'USD' );
 	}
 
 
 	public function testGetLowestPriceNoPrice()
 	{
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array(), 1 );
 	}
 
@@ -265,14 +268,14 @@ class MShop_Price_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$item->setValue( '1.00' );
 		$item->setQuantity( 5 );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array( $item ), 1 );
 	}
 
 
 	public function testGetLowestPriceWrongItem()
 	{
-		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->object->getLowestPrice( array( new stdClass() ), 1 );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->object->getLowestPrice( array( new \stdClass() ), 1 );
 	}
 }

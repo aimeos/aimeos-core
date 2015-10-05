@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Form;
+
+
 /**
- * Test class for MShop_Common_Item_Helper_Form_Standard
+ * Test class for \Aimeos\MShop\Common\Item\Helper\Form\Standard
  */
-class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -21,7 +24,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 	protected function setUp()
 	{
 		$this->values = array(
-			'name' => new MW_Common_Criteria_Attribute_Standard( array(
+			'name' => new \Aimeos\MW\Common\Criteria\Attribute\Standard( array(
 				'code' => 'name',
 				'internalcode' => 'name',
 				'type' => 'string',
@@ -29,7 +32,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 				'label' => 'Name',
 				'default' => 'unittest',
 			) ),
-			'site' => new MW_Common_Criteria_Attribute_Standard( array(
+			'site' => new \Aimeos\MW\Common\Criteria\Attribute\Standard( array(
 				'code' => 'site',
 				'internalcode' => 'site',
 				'type' => 'string',
@@ -37,7 +40,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 				'label' => 'Site',
 				'default' => 'de',
 			) ),
-			'language' => new MW_Common_Criteria_Attribute_Standard( array(
+			'language' => new \Aimeos\MW\Common\Criteria\Attribute\Standard( array(
 				'code' => 'language',
 				'internalcode' => 'language',
 				'type' => 'string',
@@ -45,7 +48,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 				'label' => 'Language',
 				'default' => 'de',
 			) ),
-			'language' => new MW_Common_Criteria_Attribute_Standard( array(
+			'language' => new \Aimeos\MW\Common\Criteria\Attribute\Standard( array(
 				'code' => 'domain',
 				'internalcode' => 'domain',
 				'type' => 'string',
@@ -55,7 +58,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 			) ),
 		);
 
-		$this->object = new MShop_Common_Item_Helper_Form_Standard( 'http://www.example.com', 'post', $this->values );
+		$this->object = new \Aimeos\MShop\Common\Item\Helper\Form\Standard( 'http://www.example.com', 'post', $this->values );
 	}
 
 
@@ -112,7 +115,7 @@ class MShop_Common_Item_Helper_Form_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetValue()
 	{
-		$item = new MW_Common_Criteria_Attribute_Standard( array(
+		$item = new \Aimeos\MW\Common\Criteria\Attribute\Standard( array(
 			'code' => 'name',
 			'internalcode' => 'name',
 			'type' => 'string',

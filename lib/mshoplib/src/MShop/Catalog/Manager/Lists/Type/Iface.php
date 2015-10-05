@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Lists\Type;
+
+
 /**
  * Interface for catalog list type manager.
  *
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Manager_Lists_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

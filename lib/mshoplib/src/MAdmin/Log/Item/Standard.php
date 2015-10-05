@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Log\Item;
+
+
 /**
  * Default log item implementation.
  *
  * @package MAdmin
  * @subpackage Log
  */
-class MAdmin_Log_Item_Standard
-	extends MShop_Common_Item_Base
-	implements MAdmin_Log_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MAdmin\Log\Item\Iface
 {
 	private $values;
 

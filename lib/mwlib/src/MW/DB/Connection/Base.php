@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Connection;
+
+
 /**
  * Common class for all database connection implementations.
  *
  * @package MW
  * @subpackage DB
  */
-abstract class MW_DB_Connection_Base
+abstract class Base
 {
 	/**
 	 * Simple (direct) SQL queries

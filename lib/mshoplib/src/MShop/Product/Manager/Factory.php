@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager;
+
+
 /**
  * Product factory.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Factory
-	extends MShop_Common_Factory_Base
-	implements MShop_Common_Factory_Iface
+class Factory
+	extends \Aimeos\MShop\Common\Factory\Base
+	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
 	 * Creates a product manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Iface Manager object
-	 * @throws MShop_Product_Exception|MShop_Exception If requested manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 * @throws \Aimeos\MShop\Product\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Iface $context, $name = null )
+	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/product/manager/name
 		 * Class name of the used product manager implementation
@@ -39,11 +42,11 @@ class MShop_Product_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Standard
+		 *  \Aimeos\MShop\Product\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Mymanager
+		 *  \Aimeos\MShop\Product\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -68,12 +71,12 @@ class MShop_Product_Manager_Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'MShop_Product_Manager_' . $name : '<not a string>';
-			throw new MShop_Product_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\MShop\\Product\\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Product_Manager_Iface';
-		$classname = 'MShop_Product_Manager_' . $name;
+		$iface = '\\Aimeos\\MShop\\Product\\Manager\\Iface';
+		$classname = '\\Aimeos\\MShop\\Product\\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
@@ -92,7 +95,7 @@ class MShop_Product_Manager_Factory
 		 *  mshop/product/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product manager.
 		 *
 		 * @param array List of decorator names
@@ -112,12 +115,12 @@ class MShop_Product_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product manager.
 		 *
 		 *  mshop/product/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -136,12 +139,12 @@ class MShop_Product_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product manager.
 		 *
 		 *  mshop/product/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names

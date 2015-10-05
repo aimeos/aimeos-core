@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames global tables to locale.
  */
-class MW_Setup_Task_GlobalMoveTablesToLocale extends MW_Setup_Task_Base
+class GlobalMoveTablesToLocale extends \Aimeos\MW\Setup\Task\Base
 {
 
 	private $mysql = array(

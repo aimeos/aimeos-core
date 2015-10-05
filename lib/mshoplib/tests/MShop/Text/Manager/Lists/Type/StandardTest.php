@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Text\Manager\Lists\Type;
+
+
 /**
- * Test class for MShop_Text_Manager_Lists_Type_Standard.
+ * Test class for \Aimeos\MShop\Text\Manager\Lists\Type\Standard.
  */
-class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Text_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$manager = \Aimeos\MShop\Text\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$listManager = $manager->getSubManager( 'lists' );
 		$this->object = $listManager->getSubManager( 'type' );
@@ -52,7 +55,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
 	}
 
 
@@ -63,7 +66,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No text list type item found' );
+			throw new \Exception( 'No text list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -77,7 +80,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$item->setId( null );
@@ -116,7 +119,7 @@ class MShop_Text_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 

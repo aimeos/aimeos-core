@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Type;
+
+
 /**
  * Default implementation of the list item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Type_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Common_Item_Type_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Common\Item\Type\Iface
 {
 	private $prefix;
 	private $values;

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Text\Item;
+
+
 /**
  * Default text manager implementation.
  *
  * @package MShop
  * @subpackage Text
  */
-class MShop_Text_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Text_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Text\Item\Iface
 {
 	private $values;
 
@@ -25,8 +28,8 @@ class MShop_Text_Item_Standard
 	 * Initializes the text item object with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -51,7 +54,7 @@ class MShop_Text_Item_Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid )
 	{

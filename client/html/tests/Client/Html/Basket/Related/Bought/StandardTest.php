@@ -1,10 +1,12 @@
 <?php
 
+namespace Aimeos\Client\Html\Basket\Related\Bought;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Basket_Related_Bought_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -18,11 +20,11 @@ class Client_Html_Basket_Related_Bought_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Basket_Related_Bought_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Basket\Related\Bought\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -40,7 +42,7 @@ class Client_Html_Basket_Related_Bought_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetHeader()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$view = $this->object->getView();
 		$view->relatedBasket = $controller->get();
@@ -52,7 +54,7 @@ class Client_Html_Basket_Related_Bought_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetBody()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$basket = $controller->get();
 		$basket->addProduct( $this->getOrderProductItem( 'CNC' ) );
@@ -69,34 +71,34 @@ class Client_Html_Basket_Related_Bought_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	/**
 	 * @param string $code
-	 * @return MShop_Order_Item_Base_Product_Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	protected function getOrderProductItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
-		$manager = MShop_Factory::createManager( $this->context, 'order/base/product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
 		$orderItem = $manager->createItem();
 		$orderItem->copyFrom( $item );
 

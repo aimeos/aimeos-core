@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Date;
+
+
 /**
  * View helper class for formatting dates.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Date_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $format;
 
@@ -24,7 +27,7 @@ class MW_View_Helper_Date_Standard
 	/**
 	 * Initializes the Date view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $format New date format
 	 * @see http://php.net/manual/en/datetime.createfromformat.php
 	 */
@@ -44,6 +47,6 @@ class MW_View_Helper_Date_Standard
 	 */
 	public function transform( $date )
 	{
-		return DateTime::createFromFormat( 'Y-m-d H:i:s', $date )->format( $this->format );
+		return \DateTime::createFromFormat( 'Y-m-d H:i:s', $date )->format( $this->format );
 	}
 }

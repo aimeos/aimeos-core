@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds demo records to service tables.
  */
-class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstract
+class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -50,7 +53,7 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 		$this->msg( 'Processing service demo data', 0 );
 
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'service' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'service.code', 'demo-' ) );
@@ -73,7 +76,7 @@ class MW_Setup_Task_DemoAddServiceData extends MW_Setup_Task_MShopAddDataAbstrac
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-service.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new MShop_Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 			}
 
 

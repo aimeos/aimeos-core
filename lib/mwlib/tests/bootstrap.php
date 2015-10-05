@@ -39,5 +39,5 @@ set_include_path( implode( PATH_SEPARATOR, $path ) );
  */
 require_once 'TestHelper.php';
 if( spl_autoload_register( 'TestHelper::autoload' ) === false ) {
-	throw new Exception( 'Unable to register autoloader' );
+	throw new \Exception( 'Unable to register autoloader' );
 }

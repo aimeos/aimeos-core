@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Price\Manager\Lists\Type;
+
+
 /**
  * Interface for price type manager.
  *
  * @package MShop
  * @subpackage Price
  */
-interface MShop_Price_Manager_Lists_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

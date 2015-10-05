@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Common\Factory;
+
+
 /**
- * Test class for MShop_Common_Factory_Base.
+ * Test class for \Aimeos\MShop\Common\Factory\Base.
  */
-class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 
@@ -22,7 +25,7 @@ class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'mshop/common/manager/decorators/default', array() );
@@ -33,16 +36,16 @@ class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', null );
+		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', null );
 	}
 
 
 	public function testInjectManager()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', $manager );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
+		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', $manager );
 
-		$injectedManager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'StandardMock' );
+		$injectedManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'StandardMock' );
 
 		$this->assertSame( $manager, $injectedManager );
 	}
@@ -50,12 +53,12 @@ class MShop_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectManagerReset()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', $manager );
-		MShop_Attribute_Manager_Factory::injectManager( 'MShop_Attribute_Manager_StandardMock', null );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
+		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', $manager );
+		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', null );
 
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Attribute_Manager_Factory::createManager( $this->context, 'StandardMock' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'StandardMock' );
 	}
 
 }

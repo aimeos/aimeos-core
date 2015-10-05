@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Remove column listflag from product table.
  */
-class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Base
+class ProductRemoveListFlag extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'column' => array(

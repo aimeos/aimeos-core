@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_TestCase
+class ProductPriceTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
 	private $price;
@@ -20,22 +22,22 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductPrice' );
 		$this->plugin->setStatus( 1 );
 
-		$this->order = MShop_Factory::createManager( $context, 'order/base' )->createItem();
+		$this->order = \Aimeos\MShop\Factory::createManager( $context, 'order/base' )->createItem();
 
-		$orderBaseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 		$search = $orderBaseProductManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNC' ) );
 		$productItems = $orderBaseProductManager->searchItems( $search );
 
 		if( ( $productItem = reset( $productItems ) ) === false ) {
-			throw new Exception( 'No order base product item found.' );
+			throw new \Exception( 'No order base product item found.' );
 		}
 
 		$productItem->getPrice()->setValue( 600.00 );
@@ -66,7 +68,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
@@ -75,27 +77,27 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	{
 		$this->plugin->setConfig( array( 'update' => true ) );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 	}
 
 
 	public function testUpdateSelectionPriceCorrect()
 	{
-		$productManager = MShop_Factory::createManager( TestHelper::getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $productItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( ( $productPrice = reset( $refPrices ) ) === false ) {
-			throw new Exception( 'No product price available' );
+			throw new \Exception( 'No product price available' );
 		}
 
 
@@ -106,9 +108,9 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 		$this->plugin->setConfig( array( 'update' => true ) );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 	}
 
 
@@ -117,15 +119,15 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$this->order->getProduct( 0 )->setPrice( $this->price );
 
 		$this->plugin->setConfig( array( 'update' => true ) );
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
 			$this->assertEquals( '600.00', $this->order->getProduct( 0 )->getPrice()->getValue() );
 			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
@@ -135,19 +137,19 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateSelectionPriceUpdated()
 	{
-		$productManager = MShop_Factory::createManager( TestHelper::getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $productItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( ( $productPrice = reset( $refPrices ) ) === false ) {
-			throw new Exception( 'No product price available' );
+			throw new \Exception( 'No product price available' );
 		}
 
 
@@ -156,15 +158,15 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$orderProduct->setProductCode( 'U:TESTSUB02' );
 		$orderProduct->setPrice( $this->price );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
 			$this->assertEquals( '18.00', $this->order->getProduct( 0 )->getPrice()->getValue() );
 			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
@@ -174,9 +176,9 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateAttributePriceUpdated()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(
@@ -188,10 +190,10 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$attributes = $attrManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $attribute = reset( $attributes ) ) === false ) {
-			throw new Exception( 'No attribute found' );
+			throw new \Exception( 'No attribute found' );
 		}
 
-		$orderProdAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
+		$orderProdAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
 		$ordAttr = $orderProdAttrManager->createItem();
 		$ordAttr->copyFrom( $attribute );
 
@@ -199,15 +201,15 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$orderProduct->setAttributes( array( $ordAttr ) );
 		$orderProduct->setPrice( $this->price );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( $context, $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( $context, $this->plugin );
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
 			$this->assertEquals( '612.95', $this->order->getProduct( 0 )->getPrice()->getValue() );
 			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
@@ -219,26 +221,26 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 	{
 		$products = $this->order->getProducts();
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new Exception( 'There is a product missing from your test data.' );
+			throw new \Exception( 'There is a product missing from your test data.' );
 		}
 
 		$refPrice = $product->getPrice()->getValue();
 		$product->setPrice( $this->price );
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 			$this->fail( 'Price changes not recognized' );
 		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
 			$products = $this->order->getProducts();
 
 			if( ( $product = reset( $products ) ) === false ) {
-				throw new Exception( 'No product availalbe' );
+				throw new \Exception( 'No product availalbe' );
 			};
 
 			$this->assertEquals( $refPrice, $product->getPrice()->getValue() );
@@ -252,17 +254,17 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		$products = $this->order->getProducts();
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new Exception( 'Product missing from your test data.' );
+			throw new \Exception( 'Product missing from your test data.' );
 		}
 
 		$product->setPrice( $this->price );
-		$product->setFlags( Mshop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
+		$product->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
 		$oldPrice = clone $product->getPrice();
 
-		$object = new MShop_Plugin_Provider_Order_ProductPrice( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Base::PARTS_PRODUCT ) );
+		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 		$this->assertEquals( $oldPrice, $product->getPrice() );
 	}
 }

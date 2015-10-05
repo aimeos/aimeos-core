@@ -8,43 +8,46 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider;
+
+
 /**
  * Generic interface for coupons models implementing the coupons.
  *
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Provider_Iface
+interface Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return void
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Iface $base );
+	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
 
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return void
 	 */
-	public function updateCoupon( MShop_Order_Item_Base_Iface $base );
+	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
 
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return void
 	 */
-	public function deleteCoupon( MShop_Order_Item_Base_Iface $base );
+	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
 
 	/**
 	 * Tests if a coupon should be granted.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return boolean True of coupon can be granted, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Iface $base );
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base );
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Stage\Navigator;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,10 +20,10 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Stage_Navigator_Standard( $context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Stage\Navigator\Standard( $context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -40,7 +42,7 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 	public function testGetHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -56,7 +58,7 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -73,7 +75,7 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 	public function testModifyHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
@@ -86,7 +88,7 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 	public function testModifyBody()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
@@ -98,7 +100,7 @@ class Client_Html_Catalog_Stage_Navigator_StandardTest extends PHPUnit_Framework
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 

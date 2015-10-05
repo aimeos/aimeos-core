@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds foreign key constraint for langid to media table.
  */
-class MW_Setup_Task_MediaAddForeignKey extends MW_Setup_Task_Base
+class MediaAddForeignKey extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

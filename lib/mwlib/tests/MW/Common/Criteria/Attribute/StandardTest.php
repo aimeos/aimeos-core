@@ -1,15 +1,18 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Attribute;
+
+
 /**
- * Test class for MW_Common_Criteria_Attribute_Standard.
+ * Test class for \Aimeos\MW\Common\Criteria\Attribute\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    MW_Common_Criteria_Attribute_Standard
+	 * @var    \Aimeos\MW\Common\Criteria\Attribute\Standard
 	 * @access protected
 	 */
 	private $object;
@@ -34,7 +37,7 @@ class MW_Common_Criteria_Attribute_StandardTest extends PHPUnit_Framework_TestCa
 			'required' => false,
 		);
 
-		$this->object = new MW_Common_Criteria_Attribute_Standard($values);
+		$this->object = new \Aimeos\MW\Common\Criteria\Attribute\Standard($values);
 	}
 
 	/**

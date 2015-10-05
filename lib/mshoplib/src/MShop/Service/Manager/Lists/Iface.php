@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Service\Manager\Lists;
+
+
 /**
  * Interface for service type manager.
  *
  * @package MShop
  * @subpackage Service
  */
-interface MShop_Service_Manager_Lists_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

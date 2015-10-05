@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Item;
+
+
 /**
  * Generic interface for coupons created and saved by the coupon managers.
  *
  * @package MShop
  * @subpackage Coupon
  */
-interface MShop_Coupon_Item_Iface extends MShop_Common_Item_Iface, MShop_Common_Item_Time_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface
 {
 	/**
 	 * Returns the label of the coupon if available.

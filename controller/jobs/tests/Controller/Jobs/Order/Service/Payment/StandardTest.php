@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Order\Service\Payment;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,10 +20,10 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Order_Service_Payment_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Order\Service\Payment\Standard( $context, $aimeos );
 	}
 
 
@@ -53,8 +54,8 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 
 	public function testRun()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -62,24 +63,24 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
+		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\' . $name, $serviceManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
 		$orderItem = $orderManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+		$serviceProviderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )
 			->setMethods( array( 'isImplemented', 'capture' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -100,15 +101,15 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 		$serviceProviderStub->expects( $this->once() )->method( 'capture' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Service\Payment\Standard( $context, $aimeos );
 		$object->run();
 	}
 
 
 	public function testRunExceptionProcess()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -116,24 +117,24 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
+		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\' . $name, $serviceManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
 		$orderItem = $orderManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+		$serviceProviderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )
 			->setMethods( array( 'isImplemented', 'capture' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -152,20 +153,20 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 			->will( $this->returnValue( true ) );
 
 		$serviceProviderStub->expects( $this->once() )->method( 'capture' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test oder service payment: capture' ) ) );
+			->will( $this->throwException( new \Aimeos\MShop\Service\Exception( 'test oder service payment: capture' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Service\Payment\Standard( $context, $aimeos );
 		$object->run();
 	}
 
 
 	public function testRunExceptionProvider()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -173,18 +174,18 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
+		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\' . $name, $serviceManagerStub );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
@@ -193,12 +194,12 @@ class Controller_Jobs_Order_Service_Payment_StandardTest extends PHPUnit_Framewo
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 
 		$serviceManagerStub->expects( $this->once() )->method( 'getProvider' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test service delivery process: getProvider' ) ) );
+			->will( $this->throwException( new \Aimeos\MShop\Service\Exception( 'test service delivery process: getProvider' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Service\Payment\Standard( $context, $aimeos );
 		$object->run();
 	}
 }

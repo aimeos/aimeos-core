@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\MW\Jsb2;
+
+
 /**
  *
  * Generates compressed JS files read from a .jsb2 package.
@@ -15,7 +18,7 @@
  * @package MW
  * @subpackage Jsb2
  */
-class MW_Jsb2_Standard
+class Standard
 {
 	private $registeredPackages = array();
 	private $baseURL = '';
@@ -141,7 +144,7 @@ class MW_Jsb2_Standard
 				if( !is_dir( $packageDir ) )
 				{
 					if( mkdir( $packageDir, $dirpermission, true ) === false ) {
-						throw new MW_Jsb2_Exception( sprintf( 'Unable to create path for package file "%1$s"', $packageDir ) );
+						throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to create path for package file "%1$s"', $packageDir ) );
 					}
 				}
 
@@ -156,12 +159,12 @@ class MW_Jsb2_Standard
 	 *
 	 * @param string $baseUrl URL the file location is relative to
 	 * @param string $basePath Absolute path to the base directory of the files
-	 * @param stdClass $package Object with "fileIncludes" property containing a
+	 * @param \stdClass $package Object with "fileIncludes" property containing a
 	 * 	list of file objects with "path" and "text" properties
 	 * @param integer &$timestamp Value/result parameter that will contain the latest file modification timestamp
-	 * @throws MW_Jsb2_Exception If the file modification timestamp couldn't be determined
+	 * @throws \Aimeos\MW\Jsb2\Exception If the file modification timestamp couldn't be determined
 	 */
-	protected function getFileUrls( $baseUrl, $basePath, stdClass $package, &$timestamp, $version = '?v=%s' )
+	protected function getFileUrls( $baseUrl, $basePath, \stdClass $package, &$timestamp, $version = '?v=%s' )
 	{
 		$timestamp = (int) $timestamp;
 		$filesToDisplay = array();
@@ -171,7 +174,7 @@ class MW_Jsb2_Standard
 			$filename = $basePath . $singleFile->path . $singleFile->text;
 
 			if( !is_file( $filename ) || ( $fileTime = filemtime( $filename ) ) === false ) {
-				throw new MW_Jsb2_Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
+				throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
 			}
 
 			$timestamp = max( $timestamp, $fileTime );
@@ -196,22 +199,22 @@ class MW_Jsb2_Standard
 		foreach( $this->getFilenames( $package, $this->basePath ) as $filename )
 		{
 			if( ( $content .= file_get_contents( $filename ) ) === false ) {
-				throw new MW_Jsb2_Exception( sprintf( 'Unable to get content of file "%1$s"', $filename ) );
+				throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to get content of file "%1$s"', $filename ) );
 			}
 		}
 
 		if( $debug !== true ) {
-			$content = JSMin::minify( $content );
+			$content = \JSMin::minify( $content );
 		}
 
 		$pkgFileName = $this->basePath . $this->deployDir . $package->file;
 
 		if( file_put_contents( $pkgFileName, $content ) === false ) {
-			throw new MW_Jsb2_Exception( sprintf( 'Unable to create package file "%1$s"', $pkgFileName ) );
+			throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to create package file "%1$s"', $pkgFileName ) );
 		}
 
 		if( chmod( $pkgFileName, $permissions ) === false ) {
-			throw new MW_Jsb2_Exception( sprintf( 'Unable to change permissions of file "%1$s"', $pkgFileName ) );
+			throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to change permissions of file "%1$s"', $pkgFileName ) );
 		}
 	}
 
@@ -227,17 +230,17 @@ class MW_Jsb2_Standard
 		$packageContainer = array();
 
 		if( !isset( $manifest->pkgs ) || !is_array( $manifest->pkgs ) ) {
-			throw new MW_Jsb2_Exception( 'No packages found' );
+			throw new \Aimeos\MW\Jsb2\Exception( 'No packages found' );
 		}
 
 		foreach( $manifest->pkgs as $package )
 		{
 			if( !isset( $package->name ) || !isset( $package->file ) || !is_object( $package ) ) {
-				throw new MW_Jsb2_Exception( 'Invalid package content' );
+				throw new \Aimeos\MW\Jsb2\Exception( 'Invalid package content' );
 			}
 
 			if( !isset( $package->fileIncludes ) || !is_array( $package->fileIncludes ) ) {
-				throw new MW_Jsb2_Exception( 'No files in package found' );
+				throw new \Aimeos\MW\Jsb2\Exception( 'No files in package found' );
 			}
 
 			if( !in_array( $package->name, $filter ) ) {
@@ -262,14 +265,14 @@ class MW_Jsb2_Standard
 		foreach( $package->fileIncludes as $include )
 		{
 			if( !is_object( $include ) ) {
-				throw new MW_Jsb2_Exception( 'Invalid file inlcude' );
+				throw new \Aimeos\MW\Jsb2\Exception( 'Invalid file inlcude' );
 			}
 
 			$filename = $include->path . $include->text;
 			$absfilename = $this->basePath . $filename;
 
 			if( !file_exists( $absfilename ) ) {
-				throw new MW_Jsb2_Exception( sprintf( 'File does not exists: "%1$s"', $absfilename ) );
+				throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'File does not exists: "%1$s"', $absfilename ) );
 			}
 
 			$filenames[] = $prePath . $filename;
@@ -283,20 +286,20 @@ class MW_Jsb2_Standard
 	 * Returns the content of a manifest file.
 	 *
 	 * @param string $filepath Path to manifest
-	 * @throws MW_Jsb2_Exception
+	 * @throws \Aimeos\MW\Jsb2\Exception
 	 */
 	protected function getManifest( $filepath )
 	{
 		if( !file_exists( $filepath ) ) {
-			throw new MW_Jsb2_Exception( sprintf( 'File does not exists: "%1$s"', $filepath ) );
+			throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'File does not exists: "%1$s"', $filepath ) );
 		}
 
 		if( ( $content = file_get_contents( $filepath ) ) === false ) {
-			throw new MW_Jsb2_Exception( sprintf( 'Unable to read content from "%1$s"', $filepath ) );
+			throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to read content from "%1$s"', $filepath ) );
 		}
 
 		if( ( $content = json_decode( $content ) ) === null ) {
-			throw new MW_Jsb2_Exception( 'File content is not JSON encoded' );
+			throw new \Aimeos\MW\Jsb2\Exception( 'File content is not JSON encoded' );
 		}
 
 		return $content;

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog\Export\Text;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,8 +21,8 @@ class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framewor
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new Controller_ExtJS_Catalog_Export_Text_Standard( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Export\Text\Standard( $this->context );
 	}
 
 
@@ -39,8 +40,8 @@ class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framewor
 
 	public function testExportCSVFile()
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$node = $manager->getTree( null, array(), MW_Tree_Manager_Base::LEVEL_ONE );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$node = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );
@@ -50,7 +51,7 @@ class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framewor
 			$ids[$item->getLabel()] = $item->getId();
 		}
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
 		$params->site = $this->context->getLocale()->getSite()->getCode();
@@ -62,19 +63,19 @@ class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framewor
 		$file = substr( $result['file'], 9, -14 );
 		$this->assertTrue( file_exists( $file ) );
 
-		$zip = new ZipArchive();
+		$zip = new \ZipArchive();
 		$zip->open( $file );
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
 		$zip->extractTo( $testdir );
 		$zip->close();
 
 		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		$lines = $langs = array();
@@ -91,12 +92,12 @@ class Controller_ExtJS_Catalog_Export_Text_StandardTest extends PHPUnit_Framewor
 
 			fclose( $fh );
 			if( unlink( $path ) === false ) {
-				throw new Exception( 'Unable to remove export file' );
+				throw new \Exception( 'Unable to remove export file' );
 			}
 		}
 
 		if( rmdir( $testdir ) === false ) {
-			throw new Exception( 'Unable to remove test export directory' );
+			throw new \Exception( 'Unable to remove test export directory' );
 		}
 
 		$this->assertEquals( 'Language ID', $lines['de'][0][0] );

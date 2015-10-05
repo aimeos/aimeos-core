@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Service\Async;
+
+
 /**
  * Updates the payment or delivery status for services with asynchronous methods.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Service_Async_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,12 +46,12 @@ class Controller_Jobs_Order_Service_Async_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
 		$context = $this->getContext();
-		$serviceManager = MShop_Factory::createManager( $context, 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 
 		$search = $serviceManager->createSearch();
 		$start = 0;
@@ -63,7 +66,7 @@ class Controller_Jobs_Order_Service_Async_Standard
 				{
 					$serviceManager->getProvider( $serviceItem )->updateAsync();
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
 					$msg = 'Executing updateAsyc() of "%1$s" failed: %2$s';
 					$context->getLogger()->log( sprintf( $msg, $serviceItem->getProvider(), $e->getMessage() ) );

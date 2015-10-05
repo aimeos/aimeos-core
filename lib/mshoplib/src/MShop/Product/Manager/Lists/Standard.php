@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Lists;
+
+
 /**
  * Default product list manager for creating and handling product list items.
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Lists_Standard
-	extends MShop_Common_Manager_Lists_Base
-	implements MShop_Product_Manager_Lists_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Lists\Base
+	implements \Aimeos\MShop\Product\Manager\Lists\Iface
 {
 	private $searchConfig = array(
 		'product.lists.id'=> array(
@@ -24,7 +27,7 @@ class MShop_Product_Manager_Lists_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_product_list" AS mproli ON ( mpro."id" = mproli."parentid" )' ),
 			'label'=>'Product list ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.lists.siteid'=> array(
@@ -32,7 +35,7 @@ class MShop_Product_Manager_Lists_Standard
 			'internalcode'=>'mproli."siteid"',
 			'label'=>'Product list site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.lists.parentid'=> array(
@@ -40,7 +43,7 @@ class MShop_Product_Manager_Lists_Standard
 			'internalcode'=>'mproli."parentid"',
 			'label'=>'Product list parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.lists.domain'=> array(
@@ -48,14 +51,14 @@ class MShop_Product_Manager_Lists_Standard
 			'internalcode'=>'mproli."domain"',
 			'label'=>'Product list domain',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.typeid' => array(
 			'code'=>'product.lists.typeid',
 			'internalcode'=>'mproli."typeid"',
 			'label'=>'Product list type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.lists.refid'=> array(
@@ -63,63 +66,63 @@ class MShop_Product_Manager_Lists_Standard
 			'internalcode'=>'mproli."refid"',
 			'label'=>'Product list reference ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.datestart' => array(
 			'code'=>'product.lists.datestart',
 			'internalcode'=>'mproli."start"',
 			'label'=>'Product list start date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.dateend' => array(
 			'code'=>'product.lists.dateend',
 			'internalcode'=>'mproli."end"',
 			'label'=>'Product list end date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.config' => array(
 			'code'=>'product.lists.config',
 			'internalcode'=>'mproli."config"',
 			'label'=>'Product list config',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.position' => array(
 			'code'=>'product.lists.position',
 			'internalcode'=>'mproli."pos"',
 			'label'=>'Product list position',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.lists.status' => array(
 			'code'=>'product.lists.status',
 			'internalcode'=>'mproli."status"',
 			'label'=>'Product list status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.lists.ctime'=> array(
 			'code'=>'product.lists.ctime',
 			'internalcode'=>'mproli."ctime"',
 			'label'=>'Product list create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.mtime'=> array(
 			'code'=>'product.lists.mtime',
 			'internalcode'=>'mproli."mtime"',
 			'label'=>'Product list modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.editor'=> array(
 			'code'=>'product.lists.editor',
 			'internalcode'=>'mproli."editor"',
 			'label'=>'Product list editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -127,9 +130,9 @@ class MShop_Product_Manager_Lists_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -156,7 +159,7 @@ class MShop_Product_Manager_Lists_Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -188,7 +191,7 @@ class MShop_Product_Manager_Lists_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -202,11 +205,11 @@ class MShop_Product_Manager_Lists_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Lists_Standard
+		 *  \Aimeos\MShop\Product\Manager\Lists\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Lists_Mylist
+		 *  \Aimeos\MShop\Product\Manager\Lists\Mylist
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -241,7 +244,7 @@ class MShop_Product_Manager_Lists_Standard
 		 *  mshop/product/manager/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product list manager.
 		 *
 		 * @param array List of decorator names
@@ -261,12 +264,12 @@ class MShop_Product_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product list manager.
 		 *
 		 *  mshop/product/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -285,12 +288,12 @@ class MShop_Product_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product list manager.
 		 *
 		 *  mshop/product/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names

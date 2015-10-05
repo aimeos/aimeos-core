@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Item;
+
+
 /**
  * Default implementation of plugin items.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Item_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Plugin_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Plugin\Item\Iface
 {
 	private $values;
 

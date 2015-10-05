@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager;
+
+
 /**
- * Test class for MShop_Order_Manager_Standard.
+ * Test class for \Aimeos\MShop\Order\Manager\Standard.
  */
-class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -24,9 +27,9 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Order_Manager_Standard( $this->context );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Order\Manager\Standard( $this->context );
 	}
 
 
@@ -62,13 +65,13 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetItem()
 	{
-		$status = MShop_Order_Item_Base::PAY_RECEIVED;
+		$status = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -79,7 +82,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
+			throw new \Exception( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -91,14 +94,14 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order item found.' );
+			throw new \Exception( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -106,7 +109,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setType( MShop_Order_Item_Base::TYPE_WEB );
+		$itemExp->setType( \Aimeos\MShop\Order\Item\Base::TYPE_WEB );
 		$this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
@@ -142,25 +145,25 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testSaveStatusUpdatePayment()
 	{
-		$statusManager = MShop_Factory::createManager( $this->context, 'order/status' );
+		$statusManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/status' );
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order item found.' );
+			throw new \Exception( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -177,7 +180,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 
 		$item->setId( null );
-		$item->setPaymentStatus( MShop_Order_Item_Base::PAY_CANCELED );
+		$item->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		$this->object->saveItem( $item );
 
 		$search = $statusManager->createSearch();
@@ -187,29 +190,29 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No status item found' );
+			throw new \Exception( 'No status item found' );
 		}
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( MShop_Order_Item_Status_Base::STATUS_PAYMENT, $statusItem->getType() );
-		$this->assertEquals( MShop_Order_Item_Base::PAY_CANCELED, $statusItem->getValue() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, $statusItem->getType() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $statusItem->getValue() );
 	}
 
 
 	public function testSaveStatusUpdateDelivery()
 	{
-		$statusManager = MShop_Factory::createManager( $this->context, 'order/status' );
+		$statusManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/status' );
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order item found.' );
+			throw new \Exception( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -226,7 +229,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 
 		$item->setId( null );
-		$item->setDeliveryStatus( MShop_Order_Item_Base::STAT_LOST );
+		$item->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
 		$this->object->saveItem( $item );
 
 		$search = $statusManager->createSearch();
@@ -236,18 +239,18 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No status item found' );
+			throw new \Exception( 'No status item found' );
 		}
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( MShop_Order_Item_Status_Base::STATUS_DELIVERY, $statusItem->getType() );
-		$this->assertEquals( MShop_Order_Item_Base::STAT_LOST, $statusItem->getValue() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Status\Base::STATUS_DELIVERY, $statusItem->getType() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_LOST, $statusItem->getValue() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -258,7 +261,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$param = array( MShop_Order_Item_Status_Base::STATUS_PAYMENT, MShop_Order_Item_Base::PAY_RECEIVED );
+		$param = array( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
 
 		$expr = array();
@@ -268,7 +271,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.type', 'web' );
 		$expr[] = $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' );
 		$expr[] = $search->compare( '==', 'order.datedelivery', null );
-		$expr[] = $search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_RECEIVED );
+		$expr[] = $search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$expr[] = $search->compare( '==', 'order.statusdelivery', 4 );
 		$expr[] = $search->compare( '==', 'order.relatedid', null );
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
@@ -398,7 +401,7 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_RECEIVED ),
+			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -417,20 +420,20 @@ class MShop_Order_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'base' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'base', 'Standard' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'status' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'status', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'base' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'base', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'status' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'status', 'Standard' ) );
 
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'base', 'unknown' );
 	}
 

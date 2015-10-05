@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Order\Service\Async;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Order_Service_Async_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,10 +20,10 @@ class Controller_Jobs_Order_Service_Async_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Order_Service_Async_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Order\Service\Async\Standard( $context, $aimeos );
 	}
 
 
@@ -53,25 +54,25 @@ class Controller_Jobs_Order_Service_Async_StandardTest extends PHPUnit_Framework
 
 	public function testRun()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
 
 
-		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
+		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\' . $name, $serviceManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
+		$serviceProviderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Manual' )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 
@@ -85,27 +86,27 @@ class Controller_Jobs_Order_Service_Async_StandardTest extends PHPUnit_Framework
 		$serviceProviderStub->expects( $this->once() )->method( 'updateAsync' );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Service\Async\Standard( $context, $aimeos );
 		$object->run();
 	}
 
 
 	public function testRunExceptionProcess()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
 
 
-		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Standard' )
+		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\' . $name, $serviceManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
@@ -114,10 +115,10 @@ class Controller_Jobs_Order_Service_Async_StandardTest extends PHPUnit_Framework
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 
 		$serviceManagerStub->expects( $this->once() )->method( 'getProvider' )
-			->will( $this->throwException( new MShop_Service_Exception() ) );
+			->will( $this->throwException( new \Aimeos\MShop\Service\Exception() ) );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Order\Service\Async\Standard( $context, $aimeos );
 		$object->run();
 	}
 }

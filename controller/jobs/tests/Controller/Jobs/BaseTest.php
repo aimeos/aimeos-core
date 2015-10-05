@@ -1,42 +1,43 @@
 <?php
 
+namespace Aimeos\Controller\Jobs;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Jobs_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	public function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_TestAbstract( $context, $aimeos );
+		$this->object = new TestAbstract( $context, $aimeos );
 	}
 
 
 	public function testGetTypeItemNotFound()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getTypeItemPublic( 'product/type', 'product', 'test' );
 	}
 
 
 	public function testGetTemplateNotFound()
 	{
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$this->object->getTemplatePublic( 'test', 'test' );
 	}
 }
 
 
 
-class Controller_Jobs_TestAbstract extends Controller_Jobs_Base
+class TestAbstract extends \Aimeos\Controller\Jobs\Base
 {
 	public function getTemplatePublic( $confpath, $default )
 	{

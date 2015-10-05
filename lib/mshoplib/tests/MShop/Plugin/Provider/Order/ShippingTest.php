@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_Shipping.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\Shipping.
  */
-class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCase
+class ShippingTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
 	private $object;
@@ -25,20 +28,20 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'Shipping' );
 		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
 		$this->plugin->setStatus( '1' );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = MShop_Product_Manager_Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $manager->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
@@ -46,7 +49,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$pResults = $manager->searchItems( $search, array( 'price' ) );
 
 		if( count( $pResults ) !== 3 ) {
-			throw new Exception( 'Wrong number of products' );
+			throw new \Exception( 'Wrong number of products' );
 		}
 
 		$products = array();
@@ -55,7 +58,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		}
 
 		if( ( $price = current( $products['IJKL']->getRefItems( 'price' ) ) ) === false ) {
-			throw new Exception( 'No price item found' );
+			throw new \Exception( 'No price item found' );
 		}
 		$price->setValue( 10.00 );
 
@@ -82,7 +85,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
 
 		if( ( $delivery = reset( $results ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
 		$this->order = $orderBaseManager->createItem();
@@ -92,7 +95,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$this->order->addProduct( $product2 );
 		$this->order->addProduct( $product3 );
 
-		$this->object = new MShop_Plugin_Provider_Order_Shipping( $context, $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $context, $this->plugin );
 	}
 
 
@@ -110,7 +113,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_Shipping( TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( \TestHelper::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 

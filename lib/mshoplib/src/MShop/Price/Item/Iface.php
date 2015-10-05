@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\MShop\Price\Item;
+
+
 /**
  * Generic interface for price DTO objects.
  *
  * @package MShop
  * @subpackage Price
  */
-interface MShop_Price_Item_Iface
-	extends MShop_Common_Item_ListRef_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Add the given price to the current one.
 	 *
-	 * @param MShop_Price_Item_Iface $item Price item which should be added
+	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
 	 * @return void
 	 */
-	public function addItem( MShop_Price_Item_Iface $item, $quantity = 1 );
+	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 );
 
 	/**
 	 * Compares the properties of the given price item with its own one.
@@ -39,11 +42,11 @@ interface MShop_Price_Item_Iface
 	 *
 	 * All other item properties are not compared.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item to compare with
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item to compare with
 	 * @return boolean True if equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Price_Item_Iface $price );
+	public function compare( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
 	 * Returns the domain the price is valid for.
@@ -146,7 +149,7 @@ interface MShop_Price_Item_Iface
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @throws MShop_Exception If the currency ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );

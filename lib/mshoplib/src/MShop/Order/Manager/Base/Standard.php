@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base;
+
+
 /**
  * Default implementation for order base manager.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
+class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 {
 	private $searchConfig = array(
 		'order.base.id'=> array(
@@ -23,7 +26,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base" AS mordba ON ( mord."baseid" = mordba."id" )' ),
 			'label'=>'Order base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.siteid'=> array(
@@ -31,7 +34,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			'internalcode'=>'mordba."siteid"',
 			'label'=>'Order base site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.sitecode'=> array(
@@ -39,84 +42,84 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			'internalcode'=>'mordba."sitecode"',
 			'label'=>'Order base site code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.customerid'=> array(
 			'code'=>'order.base.customerid',
 			'internalcode'=>'mordba."customerid"',
 			'label'=>'Order base customer ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.languageid'=> array(
 			'code'=>'order.base.languageid',
 			'internalcode'=>'mordba."langid"',
 			'label'=>'Order base language code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.currencyid'=> array(
 			'code'=>'order.base.currencyid',
 			'internalcode'=>'mordba."currencyid"',
 			'label'=>'Order base currencyid code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.price'=> array(
 			'code'=>'order.base.price',
 			'internalcode'=>'mordba."price"',
 			'label'=>'Order base price amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.costs'=> array(
 			'code'=>'order.base.costs',
 			'internalcode'=>'mordba."costs"',
 			'label'=>'Order base shipping amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.rebate'=> array(
 			'code'=>'order.base.rebate',
 			'internalcode'=>'mordba."rebate"',
 			'label'=>'Order base rebate amount',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.comment'=> array(
 			'code'=>'order.base.comment',
 			'internalcode'=>'mordba."comment"',
 			'label'=>'Order base comment',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.status'=> array(
 			'code'=>'order.base.status',
 			'internalcode'=>'mordba."status"',
 			'label'=>'Order base status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.mtime'=> array(
 			'code'=>'order.base.mtime',
 			'internalcode'=>'mordba."mtime"',
 			'label'=>'Order base modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.ctime'=> array(
 			'code'=>'order.base.ctime',
 			'internalcode'=>'mordba."ctime"',
 			'label'=>'Order base create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.editor'=> array(
 			'code'=>'order.base.editor',
 			'internalcode'=>'mordba."editor"',
 			'label'=>'Order base editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -124,9 +127,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -136,11 +139,11 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -211,17 +214,17 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
-	 * @return MShop_Order_Item_Base_Iface Order base object
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	public function createItem()
 	{
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
 		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
 
-		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
+		$pluginManager = \Aimeos\MShop\Factory::createManager( $context, 'plugin' );
 		$pluginManager->register( $base, 'order' );
 
 		return $base;
@@ -269,8 +272,8 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Unique id of the order base
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Iface Returns Order base item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Returns Order base item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -282,7 +285,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -315,7 +318,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g address, coupon, product, service, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g address, coupon, product, service, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -329,11 +332,11 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Base_Standard
+		 *  \Aimeos\MShop\Order\Manager\Base\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Base_Mybase
+		 *  \Aimeos\MShop\Order\Manager\Base\Mybase
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -368,7 +371,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 *  mshop/order/manager/base/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order base manager.
 		 *
 		 * @param array List of decorator names
@@ -388,12 +391,12 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base manager.
 		 *
 		 *  mshop/order/manager/base/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -412,12 +415,12 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base manager.
 		 *
 		 *  mshop/order/manager/base/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -435,14 +438,14 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Adds or updates an order base item in the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item Order base object (sub-items are not saved)
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Order base object (sub-items are not saved)
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -527,7 +530,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $localeItem->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCustomerId() );
 			$stmt->bind( 3, $localeItem->getSite()->getCode() );
 			$stmt->bind( 4, $item->getLocale()->getLanguageId() );
@@ -541,7 +544,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			$stmt->bind( 12, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 13, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 13, $date ); // ctime
@@ -587,7 +590,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -598,20 +601,20 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Search for orders based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Order_Item_Base_Iface
-	 * @throws MShop_Order_Exception If creating items fails
-	 * @throws MW_DB_Exception If a database operation fails
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface
+	 * @throws \Aimeos\MShop\Order\Exception If creating items fails
+	 * @throws \Aimeos\MW\DB\Exception If a database operation fails
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
-		$localeManager = MShop_Factory::createManager( $context, 'locale' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -620,7 +623,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		try
 		{
 			$required = array( 'order.base' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -744,7 +747,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -758,7 +761,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Returns the current basket of the customer.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return MShop_Order_Item_Base_Iface Shopping basket
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Shopping basket
 	 */
 	public function getSession( $type = '' )
 	{
@@ -774,17 +777,17 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			return $this->createItem();
 		}
 
-		$iface = 'MShop_Order_Item_Base_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{
 			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
-			$context->getLogger()->log( $msg, MW_Logger_Base::WARN );
+			$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 
 			return $this->createItem();
 		}
 
-		MShop_Factory::createManager( $context, 'plugin' )->register( $order, 'order' );
+		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $order, 'order' );
 
 		return $order;
 	}
@@ -794,7 +797,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see MShop_Order_Manager_Base_Base)
+	 * @return integer Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 */
 	public function getSessionLock( $type = '' )
 	{
@@ -810,17 +813,17 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			return (int) $value;
 		}
 
-		return MShop_Order_Manager_Base_Base::LOCK_DISABLE;
+		return \Aimeos\MShop\Order\Manager\Base\Base::LOCK_DISABLE;
 	}
 
 
 	/**
 	 * Saves the current shopping basket of the customer.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $order Shopping basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
 	 */
-	public function setSession( MShop_Order_Item_Base_Iface $order, $type = '' )
+	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = '' )
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -838,9 +841,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see MShop_Order_Manager_Base_Base)
+	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @throws MShop_Order_Exception if the lock value is invalid
+	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
 	 */
 	public function setSessionLock( $lock, $type = '' )
 	{
@@ -866,9 +869,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * @param integer $id Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
-	 * @return MShop_Order_Item_Base_Iface Basket including all items
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $id, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL, $fresh = false )
+	public function load( $id, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false )
 	{
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.id', $id ) );
@@ -880,7 +883,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 
 		try
 		{
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/standard/item/search';
 			$cfgPathCount = 'mshop/order/manager/base/standard/item/count';
 			$required = array( 'order.base' );
@@ -889,20 +892,20 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
 
 			if( ( $row = $results->fetch() ) === false ) {
-				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
 			}
 			$results->finish();
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
-		$localeManager = MShop_Factory::createManager( $context, 'locale' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
 
 		$price = $priceManager->createItem();
 		$price->setCurrencyId( $row['currencyid'] );
@@ -929,28 +932,28 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket object containing all information
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( MShop_Order_Item_Base_Iface $basket, $parts = MShop_Order_Manager_Base_Base::PARTS_ALL )
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL )
 	{
 		$this->saveItem( $basket );
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT
-			|| $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
+			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
 		) {
 			$this->storeProducts( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON ) {
 			$this->storeCoupons( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
 			$this->storeAddresses( $basket );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
 			$this->storeServices( $basket );
 		}
 	}
@@ -959,13 +962,13 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
-	 * @return MShop_Order_Item_Base_Iface Order base object
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
-	protected function createItemBase( MShop_Price_Item_Iface $price, MShop_Locale_Item_Iface $locale,
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
-		return new MShop_Order_Item_Base_Standard( $price, $locale,
+		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
 			$values, $products, $addresses, $services, $coupons );
 	}
 
@@ -975,7 +978,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Product_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Product\Iface
 	 */
 	protected function loadProducts( $id, $fresh )
 	{
@@ -1042,7 +1045,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Address_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Address\Iface
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
@@ -1074,7 +1077,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array List of order products from the basket
-	 * @return array Associative list of coupon codes as keys and items implementing MShop_Order_Item_Product_Iface
+	 * @return array Associative list of coupon codes as keys and items implementing \Aimeos\MShop\Order\Item\Product\Iface
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
@@ -1111,7 +1114,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing MShop_Order_Item_Service_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Service\Iface
 	 */
 	protected function loadServices( $id, $fresh )
 	{
@@ -1146,9 +1149,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the ordered products to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket containing ordered products or bundles
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing ordered products or bundles
 	 */
-	protected function storeProducts( MShop_Order_Item_Base_Iface $basket )
+	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$position = 1;
 		$manager = $this->getSubManager( 'product' );
@@ -1202,9 +1205,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the addresses of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket containing address items
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing address items
 	 */
-	protected function storeAddresses( MShop_Order_Item_Base_Iface $basket )
+	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$manager = $this->getSubManager( 'address' );
 
@@ -1220,9 +1223,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the coupons of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket containing coupon items
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing coupon items
 	 */
-	protected function storeCoupons( MShop_Order_Item_Base_Iface $basket )
+	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$manager = $this->getSubManager( 'coupon' );
 
@@ -1253,9 +1256,9 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	/**
 	 * Saves the services of the order to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket containing service items
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing service items
 	 */
-	protected function storeServices( MShop_Order_Item_Base_Iface $basket )
+	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$manager = $this->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );
@@ -1279,31 +1282,31 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Load the basket item for the given ID.
 	 *
 	 * @param integer $id Unique order base ID
-	 * @param MShop_Price_Item $price Price object with total order value
-	 * @param MShop_Locale_Item $localeItem Locale object of the order
+	 * @param \Aimeos\MShop\Price\Item $price Price object with total order value
+	 * @param \Aimeos\MShop\Locale\Item $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @return MShop_Order_Item_Base_Standard The loaded order item for the given ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
 	protected function loadItems( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $coupons = $addresses = $services = array();
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT
-			|| $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
+			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
 		) {
 			$products = $this->loadProducts( $id, false );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_COUPON ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON ) {
 			$coupons = $this->loadCoupons( $id, false, $products );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, false );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, false );
 		}
 
@@ -1317,25 +1320,25 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 	 * Create a new basket item as a clone from an existing order ID.
 	 *
 	 * @param integer $id Unique order base ID
-	 * @param MShop_Price_Item $price Price object with total order value
-	 * @param MShop_Locale_Item $localeItem Locale object of the order
+	 * @param \Aimeos\MShop\Price\Item $price Price object with total order value
+	 * @param \Aimeos\MShop\Locale\Item $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @return MShop_Order_Item_Base_Standard The loaded order item for the given ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
 	protected function loadFresh( $id, $price, $localeItem, $row, $parts )
 	{
 		$products = $addresses = $services = array();
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_PRODUCT ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT ) {
 			$products = $this->loadProducts( $id, true );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, true );
 		}
 
-		if( $parts & MShop_Order_Manager_Base_Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, true );
 		}
 
@@ -1343,7 +1346,7 @@ class MShop_Order_Manager_Base_Standard extends MShop_Order_Manager_Base_Base
 		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
-		$pluginManager = MShop_Factory::createManager( $this->getContext(), 'plugin' );
+		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'plugin' );
 		$pluginManager->register( $basket, 'order' );
 
 		foreach( $products as $item ) {

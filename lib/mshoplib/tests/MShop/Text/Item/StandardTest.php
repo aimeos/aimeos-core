@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Text\Item;
+
+
 /**
- * Test class for MShop_Test_Item_Standard.
+ * Test class for \Aimeos\MShop\Test\Item\Standard.
  */
-class MShop_Text_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -37,7 +40,7 @@ class MShop_Text_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Text_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Text\Item\Standard( $this->values );
 	}
 
 
@@ -191,7 +194,7 @@ class MShop_Text_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Text_Item_Standard();
+		$item = new \Aimeos\MShop\Text\Item\Standard();
 
 		$list = array(
 			'text.id' => 1,
@@ -246,14 +249,14 @@ class MShop_Text_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->setLanguageId( 'en' );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 0 );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 0 );
 	}
 }

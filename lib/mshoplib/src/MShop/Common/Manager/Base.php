@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager;
+
+
 /**
  * Provides common methods required by most of the manager classes.
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Manager_Base
-	extends MW_Common_Manager_Base
-	implements MShop_Common_Manager_Iface
+abstract class Base
+	extends \Aimeos\MW\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Iface
 {
 	private $context;
 	private $resourceName;
@@ -29,9 +32,9 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Initialization of class.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -51,11 +54,11 @@ abstract class MShop_Common_Manager_Base
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
-		return new MW_Common_Criteria_SQL( new MW_DB_Connection_None() );
+		return new \Aimeos\MW\Common\Criteria\SQL( new \Aimeos\MW\DB\Connection\None() );
 	}
 
 
@@ -100,13 +103,13 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function aggregateBase( MW_Common_Criteria_Iface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( \Aimeos\MW\Common\Criteria\Iface $search, $key, $cfgPath, $required = array() )
 	{
 		$list = array();
 		$context = $this->getContext();
@@ -121,14 +124,14 @@ abstract class MShop_Common_Manager_Base
 			$attrList = $this->getSearchAttributes();
 
 			if( !isset( $attrList[$key] ) ) {
-				throw new MShop_Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
 			}
 
 			/** @todo Required to get the joins for the catalog index managers, but there should be a better way */
 			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$total = null;
 
 			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
@@ -140,7 +143,7 @@ abstract class MShop_Common_Manager_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -153,17 +156,17 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection used to insert the new record
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection used to insert the new record
 	 * @param string $sql SQL statement for retrieving the new ID of the last record which was inserted
 	 * @return string ID of the last record that was inserted by using the given connection
-	 * @throws MShop_Common_Exception if there's no ID of the last record available
+	 * @throws \Aimeos\MShop\Common\Exception if there's no ID of the last record available
 	 */
-	protected function newId( MW_DB_Connection_Iface $conn, $sql )
+	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
 		$result = $conn->create( $sql )->execute();
 
-		if( ( $row = $result->fetch( MW_DB_Result_Base::FETCH_NUM ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'ID of last inserted database record not available' ) );
+		if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'ID of last inserted database record not available' ) );
 		}
 		$result->finish();
 
@@ -192,13 +195,13 @@ abstract class MShop_Common_Manager_Base
 
 			foreach( $siteids as $siteid )
 			{
-				$stmt->bind( 1, $siteid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->execute()->finish();
 			}
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -211,7 +214,7 @@ abstract class MShop_Common_Manager_Base
 	 * (setConditions overwrites the base criteria)
 	 *
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
-	 * @return MW_Common_Criteria_Iface Search critery object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Search critery object
 	 */
 	protected function createSearchBase( $domain )
 	{
@@ -219,7 +222,7 @@ abstract class MShop_Common_Manager_Base
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$object = new MW_Common_Criteria_SQL( $conn );
+		$object = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
 
 		$dbm->release( $conn, $dbname );
@@ -232,11 +235,11 @@ abstract class MShop_Common_Manager_Base
 	 * Returns the cached statement for the given key or creates a new prepared statement.
 	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $key Unique key for the SQL
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
 	 */
-	protected function getCachedStatement( MW_DB_Connection_Iface $conn, $key, $sql = null )
+	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $key, $sql = null )
 	{
 		if( !isset( $this->stmts['stmt'][$key] ) || !isset( $this->stmts['conn'][$key] ) || $conn !== $this->stmts['conn'][$key] )
 		{
@@ -255,7 +258,7 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -270,7 +273,7 @@ abstract class MShop_Common_Manager_Base
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
 	 * @param array $default List of sub-domains if no others are configured
 	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
-	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Iface
+	 * @return array Associative list of search keys and objects implementing the \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 * @since 2014.09
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
@@ -280,7 +283,7 @@ abstract class MShop_Common_Manager_Base
 			$attr = array();
 
 			foreach( $list as $key => $fields ) {
-				$attr[$key] = new MW_Common_Criteria_Attribute_Standard( $fields );
+				$attr[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $fields );
 			}
 
 			$this->searchAttributes[0] = $attr;
@@ -310,7 +313,7 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the site IDs for the given site level constant.
 	 *
-	 * @param integer $sitelevel Site level constant from MShop_Locale_Manager_Base
+	 * @param integer $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
 	 * @return string[] List of site IDs
 	 */
 	private function getSiteIds( $sitelevel )
@@ -318,11 +321,11 @@ abstract class MShop_Common_Manager_Base
 		$locale = $this->context->getLocale();
 		$siteIds = array( $locale->getSiteId() );
 
-		if( $sitelevel & MShop_Locale_Manager_Base::SITE_PATH ) {
+		if( $sitelevel & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
 			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
 		}
 
-		if( $sitelevel & MShop_Locale_Manager_Base::SITE_SUBTREE ) {
+		if( $sitelevel & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
@@ -338,7 +341,7 @@ abstract class MShop_Common_Manager_Base
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
 	protected function getSubManagerBase( $domain, $manager, $name )
 	{
@@ -349,11 +352,11 @@ abstract class MShop_Common_Manager_Base
 		if( !isset( $this->subManagers[$key] ) )
 		{
 			if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 			}
 
 			if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
 			}
 
 			if( $name === null ) {
@@ -362,23 +365,23 @@ abstract class MShop_Common_Manager_Base
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 			}
 
 			$domainname = ucfirst( $domain );
 			$subnames = $this->createSubNames( $manager );
 
-			$classname = 'MShop_' . $domainname . '_Manager_' . $subnames . '_' . $name;
-			$interface = 'MShop_' . $domainname . '_Manager_' . $subnames . '_Iface';
+			$classname = '\\Aimeos\\MShop\\' . $domainname . '\\Manager\\' . $subnames . '\\' . $name;
+			$interface = '\\Aimeos\\MShop\\' . $domainname . '\\Manager\\' . $subnames . '\\Iface';
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$subManager = new $classname( $this->context );
 
 			if( ( $subManager instanceof $interface ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 			}
 
 			$this->subManagers[$key] = $this->addManagerDecorators( $subManager, $manager, $domain );
@@ -392,10 +395,10 @@ abstract class MShop_Common_Manager_Base
 	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param string[] $prefix Required base prefixes of the search keys
-	 * @param MW_Common_Criteria_Expression_Iface|null Criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Iface $expr = null )
+	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Common\Criteria\Expression\Iface $expr = null )
 	{
 		if( $expr === null ) { return array(); }
 
@@ -421,11 +424,11 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns a sorted list of required criteria keys.
 	 *
-	 * @param MW_Common_Criteria_Iface $criteria Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Search criteria object
 	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
-	private function getCriteriaKeyList( MW_Common_Criteria_Iface $criteria, array $required )
+	private function getCriteriaKeyList( \Aimeos\MW\Common\Criteria\Iface $criteria, array $required )
 	{
 		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
@@ -487,32 +490,32 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param MShop_Common_Manager_Iface $manager Manager object
-	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
+	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function addDecorators( MShop_Context_Item_Iface $context,
-		MShop_Common_Manager_Iface $manager, array $decorators, $classprefix )
+	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, $classprefix )
 	{
-		$iface = 'MShop_Common_Manager_Decorator_Iface';
+		$iface = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface';
 
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$manager = new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -523,11 +526,11 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Adds the configured decorators to the given manager object.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager Manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 */
-	protected function addManagerDecorators( MShop_Common_Manager_Iface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, $managerpath, $domain )
 	{
 		$config = $this->context->getConfig();
 
@@ -541,10 +544,10 @@ abstract class MShop_Common_Manager_Base
 			}
 		}
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
-		$classprefix = 'MShop_Common_Manager_Decorator_';
+		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
 		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
@@ -569,29 +572,29 @@ abstract class MShop_Common_Manager_Base
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
 		}
 
-		return implode( '_', $names );
+		return implode( '\\', $names );
 	}
 
 
 	/**
 	 * Returns a list of criteria names from a expression and its sub-expressions.
 	 *
-	 * @param MW_Common_Criteria_Expression_Iface Criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface Criteria object
 	 * @return array List of criteria names
 	 */
-	private function getCriteriaNames( MW_Common_Criteria_Expression_Iface $expr )
+	private function getCriteriaNames( \Aimeos\MW\Common\Criteria\Expression\Iface $expr )
 	{
-		if( $expr instanceof MW_Common_Criteria_Expression_Compare_Iface ) {
+		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) {
 			return array( $expr->getName() );
 		}
 
-		if( $expr instanceof MW_Common_Criteria_Expression_Combine_Iface )
+		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Combine\Iface )
 		{
 			$list = array();
 			foreach( $expr->getExpressions() as $item ) {
@@ -600,7 +603,7 @@ abstract class MShop_Common_Manager_Base
 			return $list;
 		}
 
-		if( $expr instanceof MW_Common_Criteria_Expression_Sort_Iface ) {
+		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Sort\Iface ) {
 			return array( $expr->getName() );
 		}
 
@@ -613,8 +616,8 @@ abstract class MShop_Common_Manager_Base
 	 *
 	 * @param string $key Search key for the requested ID
 	 * @param integer $id Unique ID to search for
-	 * @return MShop_Common_Item_Iface Requested item
-	 * @throws MShop_Exception if no item with the given ID found
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
 	protected function getItemBase( $key, $id, array $ref = array() )
 	{
@@ -623,7 +626,7 @@ abstract class MShop_Common_Manager_Base
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
 		}
 
 		return $item;
@@ -639,7 +642,7 @@ abstract class MShop_Common_Manager_Base
 	 */
 	private function getJoins( array $attributes, $prefix )
 	{
-		$iface = 'MW_Common_Criteria_Attribute_Iface';
+		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
@@ -707,11 +710,11 @@ abstract class MShop_Common_Manager_Base
 	 */
 	protected function replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
 	{
-		$types = array( 'siteid' => MW_DB_Statement_Base::PARAM_INT );
+		$types = array( 'siteid' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$translations = array( 'siteid' => $column );
-		$conn = new MW_DB_Connection_None();
+		$conn = new \Aimeos\MW\DB\Connection\None();
 
-		$search = new MW_Common_Criteria_SQL( $conn );
+		$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 
 		$expr = $search->compare( '==', 'siteid', $value );
 		$string = $expr->toString( $types, $translations );
@@ -723,14 +726,14 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the site coditions for the search request
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string[] Sorted list of criteria keys
-	 * @param array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Iface
+	 * @param array Associative list of search keys and objects implementing the \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 * @param string[] $siteIds List of site IDs that should be used for searching
-	 * @return array List of search conditions implementing MW_Common_Criteria_Expression_Iface
+	 * @return array List of search conditions implementing \Aimeos\MW\Common\Criteria\Expression\Iface
 	 * @since 2015.01
 	 */
-	protected function getSearchSiteConditions( MW_Common_Criteria_Iface $search, array $keys, array $attributes, array $siteIds )
+	protected function getSearchSiteConditions( \Aimeos\MW\Common\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
 	{
 		$cond = array();
 		$sep = $this->getKeySeparator();
@@ -751,19 +754,19 @@ abstract class MShop_Common_Manager_Base
 	/**
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
-	 * @param integer $sitelevel Constant from MShop_Locale_Manager_Base for defining which site IDs should be used for searching
-	 * @return MW_DB_Result_Iface SQL result object for accessing the found records
-	 * @throws MShop_Exception if no number of all matching records is available
+	 * @param integer $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
+	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
+	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
-	protected function searchItemsBase( MW_DB_Connection_Iface $conn, MW_Common_Criteria_Iface $search,
+	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Common\Criteria\Iface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
-		$sitelevel = MShop_Locale_Manager_Base::SITE_ALL, array $plugins = array() )
+		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = array() )
 	{
 		$joins = array();
 		$conditions = $search->getConditions();
@@ -811,7 +814,7 @@ abstract class MShop_Common_Manager_Base
 
 		if( $total !== null )
 		{
-			$sql = new MW_Template_SQL( $this->context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
+			$sql = new \Aimeos\MW\Template\SQL( $this->context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
 			$sql->replace( $find, $replace )->enable( $keys );
 
 			$time = microtime( true );
@@ -819,23 +822,23 @@ abstract class MShop_Common_Manager_Base
 			$results = $stmt->execute();
 			$row = $results->fetch();
 			$results->finish();
-			$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Base::DEBUG );
+			$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, \Aimeos\MW\Logger\Base::DEBUG );
 
 			if( $row === false ) {
-				throw new MShop_Exception( sprintf( 'Total results value not found' ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Total results value not found' ) );
 			}
 
 			$total = (int) $row['count'];
 		}
 
 
-		$sql = new MW_Template_SQL( $this->context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
+		$sql = new \Aimeos\MW\Template\SQL( $this->context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
 		$sql->replace( $find, $replace )->enable( $keys );
 
 		$time = microtime( true );
 		$stmt = $conn->create( $sql->str() );
 		$results = $stmt->execute();
-		$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Base::DEBUG );
+		$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, \Aimeos\MW\Logger\Base::DEBUG );
 
 		return $results;
 	}
@@ -859,7 +862,7 @@ abstract class MShop_Common_Manager_Base
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', $name, $ids ) );
 
-		$types = array( $name => MW_DB_Statement_Base::PARAM_STR );
+		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionString( $types, $translations );
@@ -873,14 +876,14 @@ abstract class MShop_Common_Manager_Base
 			$stmt = $conn->create( $sql );
 
 			if( $siteidcheck ) {
-				$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;

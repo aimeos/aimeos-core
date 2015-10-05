@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds media performance records.
  */
-class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -45,7 +48,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$prefix = 'http://demo.aimeos.org/media/';
 
 
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $context );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $context );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type' );
 
 		$expr = array();
@@ -56,11 +59,11 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$types = $mediaTypeManager->searchItems( $search );
 
 		if( ( $mediaTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Media type item not found' );
+			throw new \Exception( 'Media type item not found' );
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
@@ -72,7 +75,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 		$expr = array();
@@ -83,7 +86,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $downloadListTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 

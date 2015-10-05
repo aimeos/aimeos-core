@@ -6,64 +6,67 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
- * Test class for Controller_ExtJS_Factory.
+ * Test class for \Aimeos\Controller\ExtJS\Factory.
  */
-class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
+		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute' );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Common\\Iface', $controller );
 	}
 
 
 	public function testCreateSubController()
 	{
-		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/lists/type' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Iface', $controller );
+		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute/lists/type' );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Common\\Iface', $controller );
 	}
 
 
 	public function testCreateControllerEmpty()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Factory::createController( TestHelper::getContext(), "\t\n" );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Factory::createController( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'notexist' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'notexist' );
 	}
 
 
 	public function testCreateSubControllerNotExisting()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/notexist' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute/notexist' );
 	}
 
 
 	public function testClear()
 	{
-		$cache = Controller_ExtJS_Factory::setCache( true );
+		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$controller1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		Controller_ExtJS_Factory::clear();
-		$controller2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		$controller1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		$controller2 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
 
-		Controller_ExtJS_Factory::setCache( $cache );
+		\Aimeos\Controller\ExtJS\Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -71,18 +74,18 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSite()
 	{
-		$cache = Controller_ExtJS_Factory::setCache( true );
+		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
-		Controller_ExtJS_Factory::clear( (string) $context );
+		$cntlA1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
+		$cntlB1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );
+		\Aimeos\Controller\ExtJS\Factory::clear( (string) $context );
 
-		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
+		$cntlA2 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
+		$cntlB2 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );
 
-		Controller_ExtJS_Factory::setCache( $cache );
+		\Aimeos\Controller\ExtJS\Factory::setCache( $cache );
 
 		$this->assertNotSame( $cntlA1, $cntlA2 );
 		$this->assertNotSame( $cntlB1, $cntlB2 );
@@ -91,18 +94,18 @@ class Controller_ExtJS_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testClearSpecific()
 	{
-		$cache = Controller_ExtJS_Factory::setCache( true );
+		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
-		Controller_ExtJS_Factory::clear( (string) $context, 'attribute' );
+		$cntlA1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
+		$cntlB1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );
+		\Aimeos\Controller\ExtJS\Factory::clear( (string) $context, 'attribute' );
 
-		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
-		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/lists/type' );
+		$cntlA2 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
+		$cntlB2 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );
 
-		Controller_ExtJS_Factory::setCache( $cache );
+		\Aimeos\Controller\ExtJS\Factory::setCache( $cache );
 
 		$this->assertNotSame( $cntlA1, $cntlA2 );
 		$this->assertSame( $cntlB1, $cntlB2 );

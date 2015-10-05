@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Catalog_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $rootnode;
@@ -20,7 +21,7 @@ class Controller_ExtJS_Catalog_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Catalog_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Standard( \TestHelper::getContext() );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => 'root' );
 

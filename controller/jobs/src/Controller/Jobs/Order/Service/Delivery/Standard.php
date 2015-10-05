@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Service\Delivery;
+
+
 /**
  * Sends paid orders to the ERP system or logistic partner.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Service_Delivery_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Order_Service_Delivery_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -67,11 +70,11 @@ class Controller_Jobs_Order_Service_Delivery_Standard
 		$days = $context->getConfig()->get( 'controller/jobs/order/service/delivery/limit-days', 90 );
 		$date = date( 'Y-m-d 00:00:00', time() - 86400 * $days );
 
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 		$serviceSearch = $serviceManager->createSearch();
 		$serviceSearch->setConditions( $serviceSearch->compare( '==', 'service.type.code', 'delivery' ) );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
 		$orderSearch = $orderManager->createSearch();
 
 		$start = 0;
@@ -89,8 +92,8 @@ class Controller_Jobs_Order_Service_Delivery_Standard
 					$expr = array(
 						$orderSearch->compare( '==', 'order.siteid', $serviceItem->getSiteId() ),
 						$orderSearch->compare( '>', 'order.datepayment', $date ),
-						$orderSearch->compare( '>', 'order.statuspayment', MShop_Order_Item_Base::PAY_PENDING ),
-						$orderSearch->compare( '==', 'order.statusdelivery', MShop_Order_Item_Base::STAT_UNFINISHED ),
+						$orderSearch->compare( '>', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+						$orderSearch->compare( '==', 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED ),
 						$orderSearch->compare( '==', 'order.base.service.code', $serviceItem->getCode() ),
 						$orderSearch->compare( '==', 'order.base.service.type', 'delivery' ),
 					);
@@ -109,7 +112,7 @@ class Controller_Jobs_Order_Service_Delivery_Standard
 								$serviceProvider->process( $orderItem );
 								$orderManager->saveItem( $orderItem );
 							}
-							catch( Exception $e )
+							catch( \Exception $e )
 							{
 								$str = 'Error while processing order with ID "%1$s": %2$s';
 								$context->getLogger()->log( sprintf( $str, $orderItem->getId(), $e->getMessage() ) );
@@ -122,7 +125,7 @@ class Controller_Jobs_Order_Service_Delivery_Standard
 					}
 					while( $orderCount >= $orderSearch->getSliceSize() );
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
 					$str = 'Error while processing service with ID "%1$s": %2$s';
 					$context->getLogger()->log( sprintf( $str, $serviceItem->getId(), $e->getMessage() ) );

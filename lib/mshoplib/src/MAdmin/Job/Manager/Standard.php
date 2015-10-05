@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Job\Manager;
+
+
 /**
  * Default job manager implementation.
  *
  * @package MAdmin
  * @subpackage Job
  */
-class MAdmin_Job_Manager_Standard
-	extends MAdmin_Common_Manager_Base
-	implements MAdmin_Job_Manager_Iface
+class Standard
+	extends \Aimeos\MAdmin\Common\Manager\Base
+	implements \Aimeos\MAdmin\Job\Manager\Iface
 {
 	private $searchConfig = array(
 		'job.id'=> array(
@@ -24,70 +27,70 @@ class MAdmin_Job_Manager_Standard
 			'internalcode'=>'majob."id"',
 			'label'=>'Job ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'job.siteid'=> array(
 			'code'=>'job.siteid',
 			'internalcode'=>'majob."siteid"',
 			'label'=>'Job site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'job.label'=> array(
 			'code'=>'job.label',
 			'internalcode'=>'majob."label"',
 			'label'=>'Job label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.method'=> array(
 			'code'=>'job.method',
 			'internalcode'=>'majob."method"',
 			'label'=>'Job method',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.parameter'=> array(
 			'code'=>'job.parameter',
 			'internalcode'=>'majob."parameter"',
 			'label'=>'Job parameter',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.result'=> array(
 			'code'=>'job.result',
 			'internalcode'=>'majob."result"',
 			'label'=>'Job result',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.status'=> array(
 			'code'=>'job.status',
 			'internalcode'=>'majob."status"',
 			'label'=>'Job status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'job.ctime'=> array(
 			'code'=>'job.ctime',
 			'internalcode'=>'majob."ctime"',
 			'label'=>'Job create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.mtime'=> array(
 			'code'=>'job.mtime',
 			'internalcode'=>'majob."mtime"',
 			'label'=>'Job modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'job.editor'=> array(
 			'code'=>'job.editor',
 			'internalcode'=>'majob."editor"',
 			'label'=>'Job editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -95,9 +98,9 @@ class MAdmin_Job_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-job' );
@@ -123,7 +126,7 @@ class MAdmin_Job_Manager_Standard
 	/**
 	 * Create new job item object.
 	 *
-	 * @return MAdmin_Job_Item_Iface
+	 * @return \Aimeos\MAdmin\Job\Item\Iface
 	 */
 	public function createItem()
 	{
@@ -136,7 +139,7 @@ class MAdmin_Job_Manager_Standard
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -151,14 +154,14 @@ class MAdmin_Job_Manager_Standard
 	/**
 	 * Adds a new job to the storage.
 	 *
-	 * @param MAdmin_Job_Item_Iface $item Job item that should be saved to the storage
+	 * @param \Aimeos\MAdmin\Job\Item\Iface $item Job item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MAdmin_Job_Item_Iface';
+		$iface = '\\Aimeos\\MAdmin\\Job\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -241,17 +244,17 @@ class MAdmin_Job_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getMethod() );
 			$stmt->bind( 4, json_encode( $item->getParameter() ) );
 			$stmt->bind( 5, json_encode( $item->getResult() ) );
-			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 7, $context->getEditor() );
 			$stmt->bind( 8, $date );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // so item is no longer modified
 			} else {
 				$stmt->bind( 9, $date );
@@ -297,7 +300,7 @@ class MAdmin_Job_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -346,8 +349,8 @@ class MAdmin_Job_Manager_Standard
 	 *
 	 * @param integer $id Job ID to fetch job object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MAdmin_Job_Item_Iface Returns the job item of the given id
-	 * @throws MAdmin_Job_Exception If item couldn't be found
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Returns the job item of the given id
+	 * @throws \Aimeos\MAdmin\Job\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -356,7 +359,7 @@ class MAdmin_Job_Manager_Standard
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );
+			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;
@@ -366,12 +369,12 @@ class MAdmin_Job_Manager_Standard
 	/**
 	 * Search for jobs based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of jobs implementing MAdmin_Job_Item_Iface
+	 * @return array List of jobs implementing \Aimeos\MAdmin\Job\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -384,7 +387,7 @@ class MAdmin_Job_Manager_Standard
 		try
 		{
 			$required = array( 'job' );
-			$level = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** madmin/job/manager/standard/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -494,14 +497,14 @@ class MAdmin_Job_Manager_Standard
 				if( ( $row['parameter'] = json_decode( $row['parameter'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
-					$logger->log( $msg, MW_Logger_Base::WARN );
+					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$config = $row['result'];
 				if( ( $row['result'] = json_decode( $row['result'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
-					$logger->log( $msg, MW_Logger_Base::WARN );
+					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$items[$row['id']] = $this->createItemBase( $row );
@@ -509,7 +512,7 @@ class MAdmin_Job_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -523,7 +526,7 @@ class MAdmin_Job_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attributes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -555,7 +558,7 @@ class MAdmin_Job_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -567,30 +570,30 @@ class MAdmin_Job_Manager_Standard
 	 * Create new admin job item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return MAdmin_Job_Item_Iface
+	 * @return \Aimeos\MAdmin\Job\Item\Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MAdmin_Job_Item_Standard( $values );
+		return new \Aimeos\MAdmin\Job\Item\Standard( $values );
 	}
 
 
 	/**
 	 * Returns the search result object for the given SQL statement.
 	 *
-	 * @param MW_DB_Connection_Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL-statement to execute
-	 * @return MW_DB_Result_Iface Returns db result set from given sql statment
+	 * @return \Aimeos\MW\DB\Result\Iface Returns db result set from given sql statment
 	 */
-	protected function getSearchResults( MW_DB_Connection_Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
 		$context = $this->getContext();
 		$siteId = $context->getLocale()->getSiteId();
 
 		$statement = $conn->create( $sql );
-		$statement->bind( 1, $siteId, MW_DB_Statement_Base::PARAM_INT );
+		$statement->bind( 1, $siteId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Base::DEBUG );
+		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, \Aimeos\MW\Logger\Base::DEBUG );
 
 		return $statement->execute();
 	}

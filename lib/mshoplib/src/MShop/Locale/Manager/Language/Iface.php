@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager\Language;
+
+
 /**
  * Interface for locale language manager.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Manager_Language_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Translate;
+
+
 /**
  * View helper class for translating strings.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Translate_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $translator;
 
@@ -24,10 +27,10 @@ class MW_View_Helper_Translate_Standard
 	/**
 	 * Initializes the translator view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
-	 * @param MW_Translation_Iface $translator Translation object
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\Translation\Iface $translator Translation object
 	 */
-	public function __construct( MW_View_Iface $view, MW_Translation_Iface $translator )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Translation\Iface $translator )
 	{
 		parent::__construct( $view );
 

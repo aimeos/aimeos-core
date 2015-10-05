@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Move order_* tables to order_base_*.
  */
-class MW_Setup_Task_OrderRenameTables extends MW_Setup_Task_Base
+class OrderRenameTables extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_address' => array(

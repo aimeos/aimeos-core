@@ -7,11 +7,14 @@
  */
 
 
+namespace Aimeos\MShop;
+
+
 /**
  * Generic exception thrown by Aimeos objects if no specialized exception is available.
  *
  * @package MShop
  */
-class MShop_Exception extends Exception
+class Exception extends \Exception
 {
 }

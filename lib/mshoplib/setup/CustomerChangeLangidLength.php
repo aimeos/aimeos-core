@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes langid column in customer table.
  */
-class MW_Setup_Task_CustomerChangeLangidLength extends MW_Setup_Task_Base
+class CustomerChangeLangidLength extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "mshop_customer" MODIFY "langid" VARCHAR(5) NULL';
 

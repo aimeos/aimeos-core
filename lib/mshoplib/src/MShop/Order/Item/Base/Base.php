@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base;
+
+
 /**
  * Abstract order base class with necessary constants and basic methods.
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Item_Base_Base
-	extends MW_Observer_Publisher_Base
-	implements MShop_Order_Item_Base_Iface
+abstract class Base
+	extends \Aimeos\MW\Observer\Publisher\Base
+	implements \Aimeos\MShop\Order\Item\Base\Iface
 {
 	/**
 	 * Check no basket content.
@@ -54,14 +57,14 @@ abstract class MShop_Order_Item_Base_Base
 	 * Checks the constants for the different parts of the basket.
 	 *
 	 * @param integer $value Part constant
-	 * @throws MShop_Order_Exception If parts constant is invalid
+	 * @throws \Aimeos\MShop\Order\Exception If parts constant is invalid
 	 */
 	protected function checkParts( $value )
 	{
 		$value = (int) $value;
 
-		if( $value < MShop_Order_Item_Base_Base::PARTS_NONE || $value > MShop_Order_Item_Base_Base::PARTS_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
+		if( $value < \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE || $value > \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -69,13 +72,13 @@ abstract class MShop_Order_Item_Base_Base
 	/**
 	 * Checks if a order product contains all required values.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
-	 * @throws MShop_Exception if the price item or product code is missing
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
+	 * @throws \Aimeos\MShop\Exception if the price item or product code is missing
 	 */
-	protected function checkProduct( MShop_Order_Item_Base_Product_Iface $item )
+	protected function checkProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item )
 	{
 		if( $item->getProductCode() === '' ) {
-			throw new MShop_Order_Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );
 		}
 	}
 }

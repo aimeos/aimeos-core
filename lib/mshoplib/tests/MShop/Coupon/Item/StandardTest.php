@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Item;
+
+
 /**
- * Test class for MShop_Coupon_Item_Example.
+ * Test class for \Aimeos\MShop\Coupon\Item\Example.
  */
-class MShop_Coupon_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -36,7 +39,7 @@ class MShop_Coupon_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Coupon_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Coupon\Item\Standard( $this->values );
 	}
 
 	/**
@@ -161,7 +164,7 @@ class MShop_Coupon_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Coupon_Item_Standard();
+		$item = new \Aimeos\MShop\Coupon\Item\Standard();
 
 		$list = array(
 			'coupon.id' => 1,

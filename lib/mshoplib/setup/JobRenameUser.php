@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames "user" column to "editor" in job table.
  */
-class MW_Setup_Task_JobRenameUser extends MW_Setup_Task_Base
+class JobRenameUser extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'user' => 'ALTER TABLE "madmin_job" CHANGE "user" "editor" VARCHAR(255) NOT NULL',

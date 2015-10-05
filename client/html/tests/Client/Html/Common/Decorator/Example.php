@@ -6,12 +6,15 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Decorator;
+
+
 /**
  * Provides example decorator for html clients.
  */
-class Client_Html_Common_Decorator_Example
-	extends Client_Html_Common_Decorator_Base
-	implements Client_Html_Common_Decorator_Iface
+class Example
+	extends \Aimeos\Client\Html\Common\Decorator\Base
+	implements \Aimeos\Client\Html\Common\Decorator\Iface
 {
 	public function additionalMethod()
 	{

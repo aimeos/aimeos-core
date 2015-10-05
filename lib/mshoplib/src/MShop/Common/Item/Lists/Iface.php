@@ -9,16 +9,19 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Lists;
+
+
 /**
  * Generic interface for all list items.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Lists_Iface
-	extends MShop_Common_Item_Iface, MShop_Common_Item_Config_Iface,
-		MShop_Common_Item_Position_Iface, MShop_Common_Item_Time_Iface,
-		MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
+		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
+		\Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the parent Id (DB-field parentid) of the common list item, like the unique Id of a product or a tree node.
@@ -83,15 +86,15 @@ interface MShop_Common_Item_Lists_Iface
 	/**
 	 * Returns the referenced item if it's available.
 	 *
-	 * @return MShop_Common_Item_Iface|null Referenced list item
+	 * @return \Aimeos\MShop\Common\Item\Iface|null Referenced list item
 	 */
 	public function getRefItem();
 
 	/**
 	 * Stores the item referenced by the list item.
 	 *
-	 * @param MShop_Common_Item_Iface $refItem Item referenced by the list item
+	 * @param \Aimeos\MShop\Common\Item\Iface $refItem Item referenced by the list item
 	 * @return void
 	 */
-	public function setRefItem( MShop_Common_Item_Iface $refItem );
+	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem );
 }

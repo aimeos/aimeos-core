@@ -5,15 +5,18 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds a foreign key constraint on mshop_locale_site to mshop_order_base_coupon.
  *
  * 2012-08-08
  * At this time "columne", "drop", "adding" the constrain... adding is removed
- * because of future dependency. see: MW_Setup_Task_OrderDropForeignKeyOfLocale
+ * because of future dependency. see: \Aimeos\MW\Setup\Task\OrderDropForeignKeyOfLocale
  * -> Order domain table can be used on a differend database/ server
  */
-class MW_Setup_Task_OrderBaseCouponAddSiteidConstraint extends MW_Setup_Task_Base
+class OrderBaseCouponAddSiteidConstraint extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_coupon' => array(

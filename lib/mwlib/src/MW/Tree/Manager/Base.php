@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Tree\Manager;
+
+
 /**
  * Abstract tree manager class with basic methods.
  *
  * @package MW
  * @subpackage Tree
  */
-abstract class MW_Tree_Manager_Base extends MW_Common_Manager_Base implements MW_Tree_Manager_Iface
+abstract class Base extends \Aimeos\MW\Common\Manager\Base implements \Aimeos\MW\Tree\Manager\Iface
 {
 	/**
 	 * Returns only the requested node

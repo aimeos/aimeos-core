@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Locale\Select;
+
+
 /**
  * Default implementation of locale select HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Locale_Select_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/locale/select/default/subparts
 	 * List of HTML sub-clients rendered within the locale select section
@@ -56,7 +59,7 @@ class Client_Html_Locale_Select_Standard
 	/** client/html/locale/select/language/name
 	 * Name of the language part used by the locale selector client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Locale_Select_Language_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Locale\Select\Language\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Locale_Select_Standard
 	/** client/html/locale/select/currency/name
 	 * Name of the currency part used by the locale selector client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Locale_Select_Currency_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Locale\Select\Currency\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -101,22 +104,22 @@ class Client_Html_Locale_Select_Standard
 			}
 			$view->selectBody = $html;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->selectErrorList = $view->get( 'selectErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -197,7 +200,7 @@ class Client_Html_Locale_Select_Standard
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
@@ -209,7 +212,7 @@ class Client_Html_Locale_Select_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -228,7 +231,7 @@ class Client_Html_Locale_Select_Standard
 		 *  client/html/locale/select/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -248,12 +251,12 @@ class Client_Html_Locale_Select_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/locale/select/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -272,12 +275,12 @@ class Client_Html_Locale_Select_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Locale_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Locale\Decorator\*") around the html client.
 		 *
 		 *  client/html/locale/select/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Locale_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Locale\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -304,12 +307,12 @@ class Client_Html_Locale_Select_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -347,7 +350,7 @@ class Client_Html_Locale_Select_Standard
 			$curname = $config->get( 'client/html/locale/select/currency/param-name', 'loc_currencyid' );
 
 
-			$manager = MShop_Factory::createManager( $context, 'locale' );
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
 
 			$search = $manager->createSearch( true );
 			$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );

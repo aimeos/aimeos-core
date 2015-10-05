@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Manager;
+
+
 /**
  * Default plugin manager implementation.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Manager_Standard
-	extends MShop_Plugin_Manager_Base
-	implements MShop_Plugin_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Plugin\Manager\Base
+	implements \Aimeos\MShop\Plugin\Manager\Iface
 {
 	private $plugins = array();
 
@@ -26,14 +29,14 @@ class MShop_Plugin_Manager_Standard
 			'code' => 'plugin.id',
 			'internalcode' => 'mplu."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'plugin.siteid' => array(
 			'label' => 'Plugin site ID',
 			'code' => 'plugin.siteid',
 			'internalcode' => 'mplu."siteid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'plugin.typeid' => array(
@@ -41,7 +44,7 @@ class MShop_Plugin_Manager_Standard
 			'code' => 'plugin.typeid',
 			'internalcode' => 'mplu."typeid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.label' => array(
@@ -49,56 +52,56 @@ class MShop_Plugin_Manager_Standard
 			'code' => 'plugin.label',
 			'internalcode' => 'mplu."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.provider' => array(
 			'label' => 'Plugin provider',
 			'code' => 'plugin.provider',
 			'internalcode' => 'mplu."provider"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.config' => array(
 			'label' => 'Plugin config',
 			'code' => 'plugin.config',
 			'internalcode' => 'mplu."config"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.position' => array(
 			'label' => 'Plugin position',
 			'code' => 'plugin.position',
 			'internalcode' => 'mplu."pos"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'plugin.status' => array(
 			'label' => 'Plugin status',
 			'code' => 'plugin.status',
 			'internalcode' => 'mplu."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'plugin.mtime'=> array(
 			'code'=>'plugin.mtime',
 			'internalcode'=>'mplu."mtime"',
 			'label'=>'Plugin modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.ctime'=> array(
 			'code'=>'plugin.ctime',
 			'internalcode'=>'mplu."ctime"',
 			'label'=>'Plugin creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.editor'=> array(
 			'code'=>'plugin.editor',
 			'internalcode'=>'mplu."editor"',
 			'label'=>'Plugin editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -106,9 +109,9 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-plugin' );
@@ -134,7 +137,7 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Creates a new plugin object.
 	 *
-	 * @return MShop_Plugin_Item_Iface New plugin object
+	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
 	 */
 	public function createItem()
 	{
@@ -147,7 +150,7 @@ class MShop_Plugin_Manager_Standard
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Prepopulate object with default criterias
-	 * @return MW_Common_Criteria_Iface
+	 * @return \Aimeos\MW\Common\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -199,7 +202,7 @@ class MShop_Plugin_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -231,7 +234,7 @@ class MShop_Plugin_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -244,8 +247,8 @@ class MShop_Plugin_Manager_Standard
 	 *
 	 * @param integer $id Unique ID of the plugin item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Plugin_Item_Iface Returns the plugin item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Returns the plugin item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -256,32 +259,32 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Returns the plugin provider which is responsible for the plugin item.
 	 *
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
-	 * @return MShop_Plugin_Provider_Iface Returns the decoratad plugin provider object
-	 * @throws MShop_Plugin_Exception If provider couldn't be found
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
+	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
 	 */
-	public function getProvider( MShop_Plugin_Item_Iface $item )
+	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item )
 	{
 		$type = ucwords( $item->getType() );
 		$names = explode( ',', $item->getProvider() );
 
 		if( ctype_alnum( $type ) === false ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$interface = 'MShop_Plugin_Provider_Factory_Iface';
-		$classname = 'MShop_Plugin_Provider_' . $type . '_' . $provider;
+		$interface = '\\Aimeos\\MShop\\Plugin\\Provider\\Factory\\Iface';
+		$classname = '\\Aimeos\\MShop\\Plugin\\Provider\\' . $type . '\\' . $provider;
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->getContext();
@@ -291,7 +294,7 @@ class MShop_Plugin_Manager_Standard
 		if( ( $provider instanceof $interface ) === false )
 		{
 			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new MShop_Plugin_Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Exception( $msg );
 		}
 
 		/** mshop/plugin/provider/order/decorators
@@ -303,12 +306,12 @@ class MShop_Plugin_Manager_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap decorators
-		 * ("MShop_Plugin_Provider_Decorator_*") around the order provider.
+		 * ("\Aimeos\MShop\Plugin\Provider\Decorator\*") around the order provider.
 		 *
 		 *  mshop/plugin/provider/order/decorators = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Plugin_Provider_Decorator_Decorator1" to all order provider
+		 * "\Aimeos\MShop\Plugin\Provider\Decorator\Decorator1" to all order provider
 		 * objects.
 		 *
 		 * @param array List of decorator names
@@ -326,10 +329,10 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Registers plugins to the given publisher.
 	 *
-	 * @param MW_Observer_Publisher_Iface $publisher Publisher object
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
 	 * @param string $type Unique plugin type code
 	 */
-	public function register( MW_Observer_Publisher_Iface $publisher, $type )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type )
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
@@ -359,14 +362,14 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Saves a new or modified plugin to the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item Plugin item
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Plugin item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Plugin_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Plugin\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -447,18 +450,18 @@ class MShop_Plugin_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getLabel() );
 			$stmt->bind( 4, $item->getProvider() );
 			$stmt->bind( 5, json_encode( $item->getConfig() ) );
-			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $date ); //mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); //ctime
@@ -506,7 +509,7 @@ class MShop_Plugin_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -517,12 +520,12 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Searches for plugin items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
 	 *
-	 * @return array List of plugin items implementing MShop_Plugin_Item_Iface
+	 * @return array List of plugin items implementing \Aimeos\MShop\Plugin\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 		$context = $this->getContext();
@@ -534,7 +537,7 @@ class MShop_Plugin_Manager_Standard
 		try
 		{
 			$required = array( 'plugin' );
-			$level = MShop_Locale_Manager_Base::SITE_PATH;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 			/** mshop/plugin/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -644,7 +647,7 @@ class MShop_Plugin_Manager_Standard
 				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$map[$row['id']] = $row;
@@ -653,7 +656,7 @@ class MShop_Plugin_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -684,10 +687,10 @@ class MShop_Plugin_Manager_Standard
 	/**
 	 * Creates a new plugin object.
 	 *
-	 * @return MShop_Plugin_Item_Iface New plugin object
+	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Plugin_Item_Standard( $values );
+		return new \Aimeos\MShop\Plugin\Item\Standard( $values );
 	}
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private static $basket;
@@ -13,13 +15,13 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	protected function setUp()
 	{
-		$this->object = new Controller_Frontend_Service_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\Frontend\Service\Standard( \TestHelper::getContext() );
 	}
 
 
 	public static function setUpBeforeClass()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseMgr = $orderManager->getSubManager( 'base' );
 		self::$basket = $orderBaseMgr->createItem();
 	}
@@ -33,21 +35,21 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServices()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
 		$this->assertGreaterThan( 0, count( $services ) );
 
 		foreach( $services as $service ) {
-			$this->assertInstanceOf( 'MShop_Service_Item_Iface', $service );
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Item\\Iface', $service );
 		}
 	}
 
 
 	public function testGetServicesCache()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->object->getServices( 'delivery', $basket );
@@ -68,13 +70,13 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServiceAttributesCache()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
 
 		if( ( $service = reset( $services ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$attributes = $this->object->getServiceAttributes( 'delivery', $service->getId(), self::$basket );
@@ -85,14 +87,14 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServiceAttributesNoItems()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Service\\Exception' );
 		$this->object->getServiceAttributes( 'invalid', -1, self::$basket );
 	}
 
 
 	public function testGetServicePrice()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$service = $this->getServiceItem();
@@ -105,13 +107,13 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServicePriceCache()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
 
 		if( ( $service = reset( $services ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$price = $this->object->getServicePrice( 'delivery', $service->getId(), $basket );
@@ -123,10 +125,10 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetServicePriceNoItems()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Service\\Exception' );
 		$this->object->getServicePrice( 'invalid', -1, $basket );
 	}
 
@@ -141,11 +143,11 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 
 
 	/**
-	 * @return MShop_Order_Item_Base_Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	protected function getServiceItem()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(
@@ -159,7 +161,7 @@ class Controller_Frontend_Service_StandardTest extends PHPUnit_Framework_TestCas
 		$services = $serviceManager->searchItems( $search );
 
 		if( ( $service = reset( $services ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		return $service;

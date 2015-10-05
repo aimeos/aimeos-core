@@ -8,20 +8,23 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Factory;
+
+
 /**
  * Order plugin interface for dealing with run-time loadable extenstions.
  *
  * @package MShop
  * @subpackage Plugin
  */
-interface MShop_Plugin_Provider_Factory_Iface extends MShop_Plugin_Provider_Iface
+interface Iface extends \Aimeos\MShop\Plugin\Provider\Iface
 {
 	/**
 	 * Initializes the plugin object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item );
 }

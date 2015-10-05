@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Detail;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
 
-		$this->object = new Client_Html_Catalog_Detail_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -42,7 +44,7 @@ class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -58,7 +60,7 @@ class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -74,20 +76,20 @@ class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClient()
 	{
 		$client = $this->object->getSubClient( 'basic', 'Standard' );
-		$this->assertInstanceOf( 'Client_HTML_Iface', $client );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\HTML\\Iface', $client );
 	}
 
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -100,13 +102,13 @@ class Client_Html_Catalog_Detail_StandardTest extends PHPUnit_Framework_TestCase
 
 	protected function getProductItem()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
+			throw new \Exception( 'No product item with code "CNC" found' );
 		}
 
 		return $item;

@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Admin\Cache;
+
+
 /**
  * ExtJS cache controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Admin_Cache_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Admin_Cache_Standard
 	/**
 	 * Initializes the cache controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Admin_Cache' );
 	}
@@ -57,10 +60,10 @@ class Controller_ExtJS_Admin_Cache_Standard
 	/**
 	 * Executes tasks after processing the items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function flush( stdClass $params )
+	public function flush( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site' ) );
 		$this->setLocale( $params->site );
@@ -76,12 +79,12 @@ class Controller_ExtJS_Admin_Cache_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MAdmin_Cache_Manager_Factory::createManager( $this->getContext() );
+			$this->manager = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->getContext() );
 		}
 
 		return $this->manager;
@@ -102,10 +105,10 @@ class Controller_ExtJS_Admin_Cache_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'cache.expire'} ) ) {
 			$entry->{'cache.expire'} = str_replace( 'T', ' ', $entry->{'cache.expire'} );

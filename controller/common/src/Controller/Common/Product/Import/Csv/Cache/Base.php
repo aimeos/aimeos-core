@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache;
+
+
 /**
  * Attribute cache for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Cache_Base
+class Base
 {
 	private $context;
 
@@ -22,9 +25,9 @@ class Controller_Common_Product_Import_Csv_Cache_Base
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 	}
@@ -33,7 +36,7 @@ class Controller_Common_Product_Import_Csv_Cache_Base
 	/**
 	 * Returns the context object
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{

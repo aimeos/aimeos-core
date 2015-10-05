@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Form;
+
+
 /**
  * Default implementation of the helper form item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Form_Standard implements MShop_Common_Item_Helper_Form_Iface
+class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 {
 	private $url;
 	private $method;
@@ -27,12 +30,12 @@ class MShop_Common_Item_Helper_Form_Standard implements MShop_Common_Item_Helper
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param array $values Form parameters implementing MW_Common_Criteria_Attribute_Iface
+	 * @param array $values Form parameters implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 */
 	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
 	{
-		MW_Common_Base::checkClassList( 'MW_Common_Criteria_Attribute_Iface', $values );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $values );
 
 		$this->url = (string) $url;
 		$this->external = (bool) $external;
@@ -111,7 +114,7 @@ class MShop_Common_Item_Helper_Form_Standard implements MShop_Common_Item_Helper
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return MW_Common_Criteria_Attribute_Iface Attribute item for the given key
+	 * @return \Aimeos\MW\Common\Criteria\Attribute\Iface Attribute item for the given key
 	 */
 	public function getValue( $key )
 	{
@@ -127,9 +130,9 @@ class MShop_Common_Item_Helper_Form_Standard implements MShop_Common_Item_Helper
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param MW_Common_Criteria_Attribute_Iface $value Attribute item for the given key
+	 * @param \Aimeos\MW\Common\Criteria\Attribute\Iface $value Attribute item for the given key
 	 */
-	public function setValue( $key, MW_Common_Criteria_Attribute_Iface $value )
+	public function setValue( $key, \Aimeos\MW\Common\Criteria\Attribute\Iface $value )
 	{
 		$this->values[$key] = $value;
 	}
@@ -138,7 +141,7 @@ class MShop_Common_Item_Helper_Form_Standard implements MShop_Common_Item_Helper
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getValues()
 	{

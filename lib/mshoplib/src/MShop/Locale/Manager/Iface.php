@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager;
+
+
 /**
  * Shop interface with methods for setting locale.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Returns the locale item for the given site code, language code and currency code.
@@ -26,8 +29,8 @@ interface MShop_Locale_Manager_Iface
 	 * @param boolean $active Flag to get only active items (optional)
 	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
 	 * 	based on config or value for SITE_PATH if null
-	 * @return MShop_Locale_Item_Iface Locale item for the given parameters
-	 * @throws MShop_Locale_Exception If no locale item is found
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
+	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null );
 }

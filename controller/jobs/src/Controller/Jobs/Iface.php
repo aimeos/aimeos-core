@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\Jobs;
+
+
 /**
  * ExtJS controller interface.
  *
  * @package Controller
  * @subpackage Jobs
  */
-interface Controller_Jobs_Iface
+interface Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -34,7 +37,7 @@ interface Controller_Jobs_Iface
 	 * Executes the job.
 	 *
 	 * @return void
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run();
 }

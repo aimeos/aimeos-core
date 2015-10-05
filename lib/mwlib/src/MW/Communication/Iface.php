@@ -7,13 +7,16 @@
  * @subpackage Communication
  */
 
+namespace Aimeos\MW\Communication;
+
+
 /**
  * Common interface for communication with delivery and payment providers.
  *
  * @package MW
  * @subpackage Communication
  */
-interface MW_Communication_Iface
+interface Iface
 {
 	/**
 	 * Sends request parameters to the providers interface.

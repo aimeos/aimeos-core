@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Manager\Type;
+
+
 /**
  * Interface for plugin type manager.
  *
  * @package MShop
  * @subpackage Plugin
  */
-interface MShop_Plugin_Manager_Type_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

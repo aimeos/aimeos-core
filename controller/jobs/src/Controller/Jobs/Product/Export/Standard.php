@@ -2,10 +2,13 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage Jobs
  */
+
+
+namespace Aimeos\Controller\Jobs\Product\Export;
 
 
 /**
@@ -14,9 +17,9 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Export_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Product_Export_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -56,10 +59,10 @@ class Controller_Jobs_Product_Export_Standard
 	/**
 	 * Adds the given products to the content object for the site map file
 	 *
-	 * @param MW_Container_Content_Iface $content File content object
-	 * @param MShop_Product_Item_Iface[] $items List of product items
+	 * @param \Aimeos\MW\Container\Content\Iface $content File content object
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
 	 */
-	protected function addItems( MW_Container_Content_Iface $content, array $items )
+	protected function addItems( \Aimeos\MW\Container\Content\Iface $content, array $items )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -99,7 +102,7 @@ class Controller_Jobs_Product_Export_Standard
 	/**
 	 * Creates a new container for the site map file
 	 *
-	 * @return MW_Container_Iface Container object
+	 * @return \Aimeos\MW\Container\Iface Container object
 	 */
 	protected function createContainer()
 	{
@@ -174,18 +177,18 @@ class Controller_Jobs_Product_Export_Standard
 		 */
 		$options = $config->get( 'controller/jobs/product/export/default/container/options', array() );
 
-		return MW_Container_Factory::getContainer( $location, $container, $content, $options );
+		return \Aimeos\MW\Container\Factory::getContainer( $location, $container, $content, $options );
 	}
 
 
 	/**
 	 * Creates a new site map content object
 	 *
-	 * @param MW_Container_Iface $container Container object
+	 * @param \Aimeos\MW\Container\Iface $container Container object
 	 * @param integer $filenum New file number
-	 * @return MW_Container_Content_Iface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
-	protected function createContent( MW_Container_Iface $container, $filenum )
+	protected function createContent( \Aimeos\MW\Container\Iface $container, $filenum )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -227,9 +230,9 @@ class Controller_Jobs_Product_Export_Standard
 	/**
 	 * Closes the site map content object
 	 *
-	 * @param MW_Container_Content_Iface $content
+	 * @param \Aimeos\MW\Container\Content\Iface $content
 	 */
-	protected function closeContent( MW_Container_Content_Iface $content )
+	protected function closeContent( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -267,10 +270,10 @@ class Controller_Jobs_Product_Export_Standard
 	/**
 	 * Exports the products into the given container
 	 *
-	 * @param MW_Container_Iface $container Container object
+	 * @param \Aimeos\MW\Container\Iface $container Container object
 	 * @return array List of content (file) names
 	 */
-	protected function export( MW_Container_Iface $container )
+	protected function export( \Aimeos\MW\Container\Iface $container )
 	{
 		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
 
@@ -281,7 +284,7 @@ class Controller_Jobs_Product_Export_Standard
 		$start = 0; $filenum = 1;
 		$names = array();
 
-		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );

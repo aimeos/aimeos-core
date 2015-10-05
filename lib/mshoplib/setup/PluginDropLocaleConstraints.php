@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from plugin tables.
  */
-class MW_Setup_Task_PluginDropLocaleConstraints extends MW_Setup_Task_Base
+class PluginDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_plugin_type' => array(

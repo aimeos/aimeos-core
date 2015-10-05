@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Lists;
+
+
 /**
- * Test class for MShop_Attribute_Manager_Lists_Standard.
+ * Test class for \Aimeos\MShop\Attribute\Manager\Lists\Standard.
  */
-class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -69,7 +72,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $item );
 	}
 
 
@@ -79,7 +82,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -92,7 +95,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -107,7 +110,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 
 		$this->object->deleteItem( $itemSaved->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $itemSaved->getType() !== null );
@@ -140,7 +143,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -151,11 +154,11 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first attribute list item' );
+			throw new \Exception( 'No first attribute list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last attribute list item' );
+			throw new \Exception( 'No last attribute list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -176,15 +179,15 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first attribute list item' );
+			throw new \Exception( 'No first attribute list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second attribute list item' );
+			throw new \Exception( 'No second attribute list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last attribute list item' );
+			throw new \Exception( 'No last attribute list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -205,15 +208,15 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first attribute list item' );
+			throw new \Exception( 'No first attribute list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second attribute list item' );
+			throw new \Exception( 'No second attribute list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last attribute list item' );
+			throw new \Exception( 'No last attribute list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -295,17 +298,17 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	protected function getListItems()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -320,7 +323,7 @@ class MShop_Attribute_Manager_Lists_StandardTest extends PHPUnit_Framework_TestC
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 		$search = $this->object->createSearch();

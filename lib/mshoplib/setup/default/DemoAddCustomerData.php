@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds demo records to customer tables.
  */
-class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstract
+class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -50,7 +53,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 		$this->msg( 'Processing customer demo data', 0 );
 
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'customer' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'customer.code', 'demo-' ) );
@@ -65,7 +68,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-customer.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 			}
 
 			$this->saveCustomerItems( $data );
@@ -86,7 +89,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	 */
 	protected function saveCustomerItems( array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'customer' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
 
 		foreach( $data as $entry )
 		{
@@ -135,7 +138,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 	 */
 	protected function saveAddressItems( array $data, $id )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/address' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/address' );
 
 		foreach( $data as $entry )
 		{

@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager;
+
+
 /**
  * Shop catalog interface with methods for managing categories, groups and products.
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Manager_Iface
+interface Iface
 {
 	/**
 	 * Returns a list of item IDs, that are in the path of given item ID.
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return array Associative list of items implementing MShop_Catalog_Item_Iface with IDs as keys
+	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() );
 
@@ -30,22 +33,22 @@ interface MShop_Catalog_Manager_Iface
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @param MW_Common_Criteria_Iface|null $criteria Optional criteria object with conditions
-	 * @return MShop_Catalog_Item_Iface Catalog item, maybe with subnodes
+	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param \Aimeos\MW\Common\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE, MW_Common_Criteria_Iface $criteria = null );
+	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Common\Criteria\Iface $criteria = null );
 
 
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Catalog_Item_Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
 	 * @return void
 	 */
-	public function insertItem( MShop_Catalog_Item_Iface $item, $parentId = null, $refId = null );
+	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null );
 
 
 	/**

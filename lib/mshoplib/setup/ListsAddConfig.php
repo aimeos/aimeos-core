@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds config column to list tables.
  */
-class MW_Setup_Task_ListsAddConfig extends MW_Setup_Task_Base
+class ListsAddConfig extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute_list' => 'ALTER TABLE "mshop_attribute_list" ADD "config" TEXT NOT NULL AFTER "end"',

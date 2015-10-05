@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Config;
+
+
 /**
  * Common interface for items containing configuration
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Item_Config_Iface
+interface Iface
 {
 	/**
 	 * Returns the configuration values of the item

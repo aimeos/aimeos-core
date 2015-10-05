@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 /**
  * Implementation without using permanent session.
  *
  * @package MW
  * @subpackage Session
  */
-class MW_Session_None implements MW_Session_Iface
+class None implements \Aimeos\MW\Session\Iface
 {
 	private $data = array();
 

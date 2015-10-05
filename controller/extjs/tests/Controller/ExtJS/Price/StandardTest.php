@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Price;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Price_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,7 +57,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchItemsWithReference()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$params = (object) array(
 			'site' => 'unittest',
@@ -70,7 +71,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 		$price = $this->object->searchItems( $params );
 
 		// find refs
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$productsList = $productManager->getSubManager( 'lists' );
 
 		$search = $productsList->createSearch();
@@ -88,7 +89,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 		$items = $productsList->searchItems( $search );
 
 		if( ( $productItem = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$parentid = $productItem->getParentId();
@@ -116,7 +117,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$controller = Controller_ExtJS_Price_Type_Factory::createController( TestHelper::getContext() );
+		$controller = \Aimeos\Controller\ExtJS\Price\Type\Factory::createController( \TestHelper::getContext() );
 
 		$params = (object) array(
 			'site' => 'unittest',
@@ -131,7 +132,7 @@ class Controller_ExtJS_Price_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $controller->searchItems( $params );
 
 		if( ( $priceItem = reset( $result['items'] ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$saveParams = (object) array(

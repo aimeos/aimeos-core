@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Observer\Listener;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-
-
-class MW_Observer_Listener_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class MW_Observer_Listener_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Observer_Listener_Test;
+		$this->object = new TestListener;
 	}
 
 	/**
@@ -34,31 +35,35 @@ class MW_Observer_Listener_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$p = new MW_Observer_Publisher_Test();
+		$p = new TestPublisher();
 
 		$this->object->register($p);
 	}
 
 	public function testUpdate()
 	{
-		$p = new MW_Observer_Publisher_Test();
+		$p = new TestPublisher();
 
 		$this->object->update($p, 'test');
 	}
 }
 
 
-
-class MW_Observer_Listener_Test implements MW_Observer_Listener_Iface
+class TestListener implements \Aimeos\MW\Observer\Listener\Iface
 {
-	public function register( MW_Observer_Publisher_Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 	}
 
-	public function update( MW_Observer_Publisher_Iface $p, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, $action, $value = null )
 	{
 		if ($action == 'test') {
 			return false;
 		}
 	}
+}
+
+
+class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
+{
 }

@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Setup\DBSchema;
+
+
 /**
- * Test class for MW_Setup_DBSchema_Mysql.
+ * Test class for \Aimeos\MW\Setup\DBSchema\Mysql.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_DBSchema_MysqlTest extends PHPUnit_Framework_TestCase
+class MysqlTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $dbm;
@@ -20,14 +23,14 @@ class MW_Setup_DBSchema_MysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$config = TestHelper::getConfig();
+		$config = \TestHelper::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$sql = '
@@ -42,7 +45,7 @@ class MW_Setup_DBSchema_MysqlTest extends PHPUnit_Framework_TestCase
 		$conn->create( $sql )->execute()->finish();
 		$conn->create( 'CREATE INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test" ("smallint")' )->execute()->finish();
 
-		$this->object = new MW_Setup_DBSchema_Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
 
 		$this->dbm->release( $conn );
 	}
@@ -55,7 +58,7 @@ class MW_Setup_DBSchema_MysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 
 		$conn = $this->dbm->acquire();
 		$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();
@@ -99,7 +102,7 @@ class MW_Setup_DBSchema_MysqlTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( null, $columnItem->getDefaultValue() );
 		$this->assertTrue( $columnItem->isNullable() );
 
-		$this->setExpectedException('MW_Setup_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Setup\\Exception');
 		$this->object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
 	}
 

@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager;
+
+
 /**
  * Default product manager.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Standard
-	extends MShop_Common_Manager_ListRef_Base
-	implements MShop_Product_Manager_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	implements \Aimeos\MShop\Product\Manager\Iface
 {
 	private $searchConfig = array(
 		'product.id'=> array(
@@ -25,14 +28,14 @@ class MShop_Product_Manager_Standard
 			'internalcode'=>'mpro."id"',
 			'label'=>'Product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.siteid'=> array(
 			'code'=>'product.siteid',
 			'internalcode'=>'mpro."siteid"',
 			'label'=>'Product site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.typeid'=> array(
@@ -40,7 +43,7 @@ class MShop_Product_Manager_Standard
 			'internalcode'=>'mpro."typeid"',
 			'label'=>'Product type ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.code'=> array(
@@ -48,77 +51,77 @@ class MShop_Product_Manager_Standard
 			'internalcode'=>'mpro."code"',
 			'label'=>'Product code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.label'=> array(
 			'code'=>'product.label',
 			'internalcode'=>'mpro."label"',
 			'label'=>'Product label',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
 			'label' => 'Product config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.suppliercode'=> array(
 			'code'=>'product.suppliercode',
 			'internalcode'=>'mpro."suppliercode"',
 			'label'=>'Product supplier code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.datestart'=> array(
 			'code'=>'product.datestart',
 			'internalcode'=>'mpro."start"',
 			'label'=>'Product start date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.dateend'=> array(
 			'code'=>'product.dateend',
 			'internalcode'=>'mpro."end"',
 			'label'=>'Product end date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.ctime'=> array(
 			'code'=>'product.ctime',
 			'internalcode'=>'mpro."ctime"',
 			'label'=>'Product create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.mtime'=> array(
 			'code'=>'product.mtime',
 			'internalcode'=>'mpro."mtime"',
 			'label'=>'Product modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.editor'=> array(
 			'code'=>'product.editor',
 			'internalcode'=>'mpro."editor"',
 			'label'=>'Product editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.status'=> array(
 			'code'=>'product.status',
 			'internalcode'=>'mpro."status"',
 			'label'=>'Product status',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.contains' => array(
 			'code'=>'product.contains()',
 			'internalcode'=>'',
 			'label'=>'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -127,9 +130,9 @@ class MShop_Product_Manager_Standard
 	/**
 	 * Creates the product manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -169,7 +172,7 @@ class MShop_Product_Manager_Standard
 	/**
 	 * Create new product item object.
 	 *
-	 * @return MShop_Product_Item_Iface
+	 * @return \Aimeos\MShop\Product\Item\Iface
 	 */
 	public function createItem()
 	{
@@ -181,14 +184,14 @@ class MShop_Product_Manager_Standard
 	/**
 	 * Adds a new product to the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item Product item that should be saved to the storage
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Product\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -269,12 +272,12 @@ class MShop_Product_Manager_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getSupplierCode() );
 			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 7, $item->getDateStart() );
 			$stmt->bind( 8, $item->getDateEnd() );
 			$stmt->bind( 9, json_encode( $item->getConfig() ) );
@@ -282,7 +285,7 @@ class MShop_Product_Manager_Standard
 			$stmt->bind( 11, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 12, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
 				$stmt->bind( 12, $date ); // ctime
@@ -328,7 +331,7 @@ class MShop_Product_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -377,8 +380,8 @@ class MShop_Product_Manager_Standard
 	 *
 	 * @param integer $id Unique ID of the product item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Iface Returns the product item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -389,13 +392,13 @@ class MShop_Product_Manager_Standard
 	/**
 	 * Search for products based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 *
-	 * @return array List of products implementing MShop_Product_Item_Iface
+	 * @return array List of products implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -407,7 +410,7 @@ class MShop_Product_Manager_Standard
 		try
 		{
 			$required = array( 'product' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/product/manager/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -518,7 +521,7 @@ class MShop_Product_Manager_Standard
 				if( $config && ( $row['config'] = json_decode( $config, true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['id'], $config );
-					$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$map[$row['id']] = $row;
@@ -527,7 +530,7 @@ class MShop_Product_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -557,7 +560,7 @@ class MShop_Product_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -590,7 +593,7 @@ class MShop_Product_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -602,7 +605,7 @@ class MShop_Product_Manager_Standard
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Iface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -637,10 +640,10 @@ class MShop_Product_Manager_Standard
 	/**
 	 * Create new product item object initialized with given parameters.
 	 *
-	 * @param MShop_Product_Item_Iface $item Product item object
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item object
 	 * @return array Associative list of key/value pairs suitable for product item constructor
 	 */
-	protected function createArray( MShop_Product_Item_Iface $item )
+	protected function createArray( \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		return array(
 			'id' => $item->getId(),
@@ -663,12 +666,12 @@ class MShop_Product_Manager_Standard
 	 * Create new product item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_Lists_Iface
-	 * @param array $refItems List of items implementing MShop_Common_Item_Iface
-	 * @return MShop_Product_Item_Iface New product item
+	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\MShop\Product\Item\Iface New product item
 	 */
 	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
-		return new MShop_Product_Item_Standard( $values, $listitems, $refItems );
+		return new \Aimeos\MShop\Product\Item\Standard( $values, $listitems, $refItems );
 	}
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Encoder;
+
+
 /**
- * Test class for MW_View_Helper_Encoder_Standard.
+ * Test class for \Aimeos\MW\View\Helper\Encoder\Standard.
  */
-class MW_View_Helper_Encoder_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,8 +25,8 @@ class MW_View_Helper_Encoder_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
-		$this->object = new MW_View_Helper_Encoder_Standard( $view );
+		$view = new \Aimeos\MW\View\Standard();
+		$this->object = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 	}
 
 
@@ -41,7 +44,7 @@ class MW_View_Helper_Encoder_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Iface', $this->object->transform() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Helper\\Iface', $this->object->transform() );
 	}
 
 

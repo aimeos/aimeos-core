@@ -1,5 +1,8 @@
 <?php
 
-class Controller_Frontend_Service_Invalid
+namespace Aimeos\Controller\Frontend\Service;
+
+
+class Invalid
 {
 }

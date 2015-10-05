@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Text\Manager\Lists;
+
+
 /**
  * Interface for text type manager.
  *
  * @package MShop
  * @subpackage Text
  */
-interface MShop_Text_Manager_Lists_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

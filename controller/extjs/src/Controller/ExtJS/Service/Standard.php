@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Service;
+
+
 /**
  * ExtJS product controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Service_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Service_Standard
 	/**
 	 * Initializes the service controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Service' );
 	}
@@ -36,10 +39,10 @@ class Controller_ExtJS_Service_Standard
 	/**
 	 * Creates a new service item or updates an existing one or a list thereof.
 	 *
-	 * @param stdClass $params Associative array containing the service properties
+	 * @param \stdClass $params Associative array containing the service properties
 	 * @return array Associative list with nodes and success value
 	 */
-	public function saveItems( stdClass $params )
+	public function saveItems( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -79,10 +82,10 @@ class Controller_ExtJS_Service_Standard
 	/**
 	 * Tests the configuration and throws an exception if it's invalid
 	 *
-	 * @param MShop_Service_Item_Iface $item Service item object
-	 * @throws Controller_ExtJS_Exception If configuration is invalid
+	 * @param \Aimeos\MShop\Service\Item\Iface $item Service item object
+	 * @throws \Aimeos\Controller\ExtJS\Exception If configuration is invalid
 	 */
-	protected function checkConfig( MShop_Service_Item_Iface $item )
+	protected function checkConfig( \Aimeos\MShop\Service\Item\Iface $item )
 	{
 		$msg = '';
 		$provider = $this->manager->getProvider( $item );
@@ -96,7 +99,7 @@ class Controller_ExtJS_Service_Standard
 		}
 
 		if( $msg !== '' ) {
-			throw new Controller_ExtJS_Exception( "Invalid configuration:\n" . $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( "Invalid configuration:\n" . $msg );
 		}
 	}
 
@@ -104,12 +107,12 @@ class Controller_ExtJS_Service_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'service' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 		}
 
 		return $this->manager;
@@ -130,10 +133,10 @@ class Controller_ExtJS_Service_Standard
 	/**
 	 * Transforms ExtJS values to be suitable for storing them
 	 *
-	 * @param stdClass $entry Entry object from ExtJS
-	 * @return stdClass Modified object
+	 * @param \stdClass $entry Entry object from ExtJS
+	 * @return \stdClass Modified object
 	 */
-	protected function transformValues( stdClass $entry )
+	protected function transformValues( \stdClass $entry )
 	{
 		if( isset( $entry->{'service.config'} ) ) {
 			$entry->{'service.config'} = (array) $entry->{'service.config'};

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Price\Item;
+
+
 /**
  * Default implementation of a price object.
  *
  * @package MShop
  * @subpackage Price
  */
-class MShop_Price_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Price_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Price\Item\Iface
 {
 	private $values;
 
@@ -25,8 +28,8 @@ class MShop_Price_Item_Standard
 	 * Initalizes the object with the given values
 	 *
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -87,7 +90,7 @@ class MShop_Price_Item_Standard
 	 * Sets the used currency ID.
 	 *
 	 * @param string $currencyid Three letter currency code
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{
@@ -310,14 +313,14 @@ class MShop_Price_Item_Standard
 	/**
 	 * Add the given price to the current one.
 	 *
-	 * @param MShop_Price_Item_Iface $item Price item which should be added
+	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
 	 */
-	public function addItem( MShop_Price_Item_Iface $item, $quantity = 1 )
+	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 )
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
-			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
+			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
 		$this->values['value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
@@ -339,11 +342,11 @@ class MShop_Price_Item_Standard
 	 *
 	 * All other item properties are not compared.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item to compare with
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item to compare with
 	 * @return boolean True if equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Price_Item_Iface $price )
+	public function compare( \Aimeos\MShop\Price\Item\Iface $price )
 	{
 		if( $this->getValue() === $price->getValue()
 			&& $this->getCosts() === $price->getCosts()
@@ -425,7 +428,7 @@ class MShop_Price_Item_Standard
 	protected function checkPrice( $value )
 	{
 		if( !is_numeric( $value ) ) {
-			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
+			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 	}
 

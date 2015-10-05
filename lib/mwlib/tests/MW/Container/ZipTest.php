@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Container;
+
+
 /**
- * Test class for MW_Container_Zip.
+ * Test class for \Aimeos\MW\Container\Zip.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
+class ZipTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
@@ -20,7 +23,7 @@ class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$zip = new MW_Container_Zip( $filename, 'CSV' );
+		$zip = new \Aimeos\MW\Container\Zip( $filename, 'CSV' );
 		$zip->add( $zip->create( 'test' ) );
 		$zip->close();
 
@@ -37,7 +40,7 @@ class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$zip = new MW_Container_Zip( $filename, 'CSV' );
+		$zip = new \Aimeos\MW\Container\Zip( $filename, 'CSV' );
 
 		$content = $zip->create( 'test' );
 		$content->add( array( 'test', 'file', 'data' ) );
@@ -45,7 +48,7 @@ class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
 		$zip->add( $content );
 		$zip->close();
 
-		$za = new ZipArchive();
+		$za = new \ZipArchive();
 		$za->open( $zip->getName() );
 		$actual = $za->getFromName( $content->getName() );
 		$za->close();
@@ -60,15 +63,15 @@ class MW_Container_ZipTest extends PHPUnit_Framework_TestCase
 
 	public function testGet()
 	{
-		$zip = new MW_Container_Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
+		$zip = new \Aimeos\MW\Container\Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
-		$this->assertInstanceOf( 'MW_Container_Content_Iface', $zip->get( 'tempfile.csv' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $zip->get( 'tempfile.csv' ) );
 	}
 
 
 	public function testIterator()
 	{
-		$zip = new MW_Container_Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
+		$zip = new \Aimeos\MW\Container\Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
 		$expected = array(
 			'tempfile.csv' => 2,

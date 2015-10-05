@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds plugin test data and all items from other domains.
  */
-class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Base
+class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding plugin test data', 0 );
@@ -64,18 +67,18 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the plugin test data.
 	 *
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function addPluginData()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'plugin.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
 		$plugTypeIds = array();
@@ -99,7 +102,7 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['plugin'] as $dataset )
 		{
 			if( !isset( $plugTypeIds[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No plugin type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No plugin type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$plugin->setId( null );

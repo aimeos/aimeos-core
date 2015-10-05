@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds site ID columns to order tables.
  */
-class MW_Setup_Task_OrderAddSiteId extends MW_Setup_Task_Base
+class OrderAddSiteId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base' => array(

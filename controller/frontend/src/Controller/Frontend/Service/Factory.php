@@ -8,17 +8,20 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
  * Service frontend controller factory.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Service_Factory
-	extends Controller_Frontend_Common_Factory_Base
-	implements Controller_Frontend_Common_Factory_Iface
+class Factory
+	extends \Aimeos\Controller\Frontend\Common\Factory\Base
+	implements \Aimeos\Controller\Frontend\Common\Factory\Iface
 {
-	public static function createController( MShop_Context_Item_Iface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/frontend/service/name
 		 * Class name of the used service frontend controller implementation
@@ -30,11 +33,11 @@ class Controller_Frontend_Service_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Frontend_Service_Standard
+		 *  \Aimeos\Controller\Frontend\Service\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_Frontend_Service_Myservice
+		 *  \Aimeos\Controller\Frontend\Service\Myservice
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -58,12 +61,12 @@ class Controller_Frontend_Service_Factory
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			$classname = is_string( $name ) ? 'Controller_Frontend_Service_' . $name : '<not a string>';
-			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Frontend\\Service\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\Frontend\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_Frontend_Service_Iface';
-		$classname = 'Controller_Frontend_Service_' . $name;
+		$iface = '\\Aimeos\\Controller\\Frontend\\Service\\Iface';
+		$classname = '\\Aimeos\\Controller\\Frontend\\Service\\' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );
 
@@ -82,7 +85,7 @@ class Controller_Frontend_Service_Factory
 		 *  controller/frontend/service/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Controller_Frontend_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Controller\Frontend\Common\Decorator\*") added via
 		 * "controller/frontend/common/decorators/default" for the service frontend controller.
 		 *
 		 * @param array List of decorator names
@@ -102,12 +105,12 @@ class Controller_Frontend_Service_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_Frontend_Common_Decorator_*") around the frontend controller.
+		 * ("\Aimeos\Controller\Frontend\Common\Decorator\*") around the frontend controller.
 		 *
 		 *  controller/frontend/service/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Frontend_Common_Decorator_Decorator1" only to the frontend controller.
+		 * "\Aimeos\Controller\Frontend\Common\Decorator\Decorator1" only to the frontend controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -126,12 +129,12 @@ class Controller_Frontend_Service_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_Frontend_Service_Decorator_*") around the frontend controller.
+		 * ("\Aimeos\Controller\Frontend\Service\Decorator\*") around the frontend controller.
 		 *
 		 *  controller/frontend/service/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Frontend_Catalog_Decorator_Decorator2" only to the frontend
+		 * "\Aimeos\Controller\Frontend\Catalog\Decorator\Decorator2" only to the frontend
 		 * controller.
 		 *
 		 * @param array List of decorator names

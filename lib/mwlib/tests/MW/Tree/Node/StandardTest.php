@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Tree\Node;
+
+
 /**
- * Test class for MW_Tree_Node_Standard.
+ * Test class for \Aimeos\MW\Tree\Node\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Tree_Node_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,10 +21,10 @@ class MW_Tree_Node_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$child1 = new MW_Tree_Node_Standard( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
-		$child2 = new MW_Tree_Node_Standard( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
+		$child1 = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
+		$child2 = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
 
-		$this->object = new MW_Tree_Node_Standard( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
+		$this->object = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
 	}
 
 	/**
@@ -88,7 +91,7 @@ class MW_Tree_Node_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddChild()
 	{
-		$this->object->addChild( new MW_Tree_Node_Standard( array( 'id' => null, 'label' => 'child3' ) ) );
+		$this->object->addChild( new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child3' ) ) );
 		$this->assertEquals( 'child1', $this->object->getChild( 0 )->getLabel() );
 		$this->assertEquals( 'child2', $this->object->getChild( 1 )->getLabel() );
 		$this->assertEquals( 'child3', $this->object->getChild( 2 )->getLabel() );
@@ -111,7 +114,7 @@ class MW_Tree_Node_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals( 2, count( $this->object ) );
 
-		$this->object->addChild( new MW_Tree_Node_Standard( array( 'id' => null, 'label' => 'child3' ) ) );
+		$this->object->addChild( new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child3' ) ) );
 		$this->assertEquals( 3, count( $this->object ) );
 	}
 }

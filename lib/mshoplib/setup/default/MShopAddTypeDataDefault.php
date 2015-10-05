@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds default records to tables.
  */
-class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeData
+class MShopAddTypeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 {
 	/**
 	 * Returns the list of task names which this task depends on.

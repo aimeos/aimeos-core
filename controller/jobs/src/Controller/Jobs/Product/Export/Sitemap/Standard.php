@@ -2,10 +2,13 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage Jobs
  */
+
+
+namespace Aimeos\Controller\Jobs\Product\Export\Sitemap;
 
 
 /**
@@ -14,9 +17,9 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Export_Sitemap_Standard
-	extends Controller_Jobs_Product_Export_Standard
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Product\Export\Standard
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -59,10 +62,10 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 	/**
 	 * Adds the given products to the content object for the site map file
 	 *
-	 * @param MW_Container_Content_Iface $content File content object
-	 * @param MShop_Product_Item_Iface[] $items List of product items
+	 * @param \Aimeos\MW\Container\Content\Iface $content File content object
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
 	 */
-	protected function addItems( MW_Container_Content_Iface $content, array $items )
+	protected function addItems( \Aimeos\MW\Container\Content\Iface $content, array $items )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -132,7 +135,7 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 	/**
 	 * Creates a new container for the site map file
 	 *
-	 * @return MW_Container_Iface Container object
+	 * @return \Aimeos\MW\Container\Iface Container object
 	 */
 	protected function createContainer()
 	{
@@ -193,18 +196,18 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 		*/
 		$options = $config->get( 'controller/jobs/product/export/sitemap/container/options', array() );
 
-		return MW_Container_Factory::getContainer( $location, 'Directory', 'Gzip', $options );
+		return \Aimeos\MW\Container\Factory::getContainer( $location, 'Directory', 'Gzip', $options );
 	}
 
 
 	/**
 	 * Creates a new site map content object
 	 *
-	 * @param MW_Container_Iface $container Container object
+	 * @param \Aimeos\MW\Container\Iface $container Container object
 	 * @param integer $filenum New file number
-	 * @return MW_Container_Content_Iface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
-	protected function createContent( MW_Container_Iface $container, $filenum )
+	protected function createContent( \Aimeos\MW\Container\Iface $container, $filenum )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -246,9 +249,9 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 	/**
 	 * Closes the site map content object
 	 *
-	 * @param MW_Container_Content_Iface $content
+	 * @param \Aimeos\MW\Container\Content\Iface $content
 	 */
-	protected function closeContent( MW_Container_Content_Iface $content )
+	protected function closeContent( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -286,10 +289,10 @@ class Controller_Jobs_Product_Export_Sitemap_Standard
 	/**
 	 * Adds the content for the site map index file
 	 *
-	 * @param MW_Container_Iface $container File container object
+	 * @param \Aimeos\MW\Container\Iface $container File container object
 	 * @param array $files List of generated site map file names
 	 */
-	protected function createSitemapIndex( MW_Container_Iface $container, array $files )
+	protected function createSitemapIndex( \Aimeos\MW\Container\Iface $container, array $files )
 	{
 		$config = $this->getContext()->getConfig();
 

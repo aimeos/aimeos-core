@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Supplier\Manager\Lists\Type;
+
+
 /**
- * Test class for MShop_Supplier_Manager_Lists_Type_Standard.
+ * Test class for \Aimeos\MShop\Supplier\Manager\Lists\Type\Standard.
  */
-class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -22,8 +25,8 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$manager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$listManager = $manager->getSubManager( 'lists' );
 		$this->object = $listManager->getSubManager( 'type' );
@@ -49,7 +52,7 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
 	}
 
 	public function testGetItem()
@@ -59,7 +62,7 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 		$results = $this->object->searchItems($search);
 
 		if( ( $expected = reset($results) ) === false ) {
-			throw new Exception( 'No attribute list type item found' );
+			throw new \Exception( 'No attribute list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -72,7 +75,7 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 		$results = $this->object->searchItems($search);
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$item->setId(null);
@@ -111,7 +114,7 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -145,7 +148,7 @@ class MShop_Supplier_Manager_Lists_Type_StandardTest extends PHPUnit_Framework_T
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
 		$this->object->getSubManager('unknown');
 	}
 }

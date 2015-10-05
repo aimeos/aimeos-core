@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Customer\Lists\Type;
+
+
 /**
  * ExtJS customer list type controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Customer_Lists_Type_Standard
-	extends Controller_ExtJS_Base
-	implements Controller_ExtJS_Common_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Base
+	implements \Aimeos\Controller\ExtJS\Common\Iface
 {
 	private $manager = null;
 
@@ -24,9 +27,9 @@ class Controller_ExtJS_Customer_Lists_Type_Standard
 	/**
 	 * Initializes the customer list type controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Customer_Lists_Type' );
 	}
@@ -35,12 +38,12 @@ class Controller_ExtJS_Customer_Lists_Type_Standard
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function getManager()
 	{
 		if( $this->manager === null ) {
-			$this->manager = MShop_Factory::createManager( $this->getContext(), 'customer/lists/type' );
+			$this->manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
 		}
 
 		return $this->manager;

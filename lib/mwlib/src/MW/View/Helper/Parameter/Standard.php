@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Parameter;
+
+
 /**
  * View helper class for retrieving parameter values.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Parameter_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $params;
 
@@ -24,7 +27,7 @@ class MW_View_Helper_Parameter_Standard
 	/**
 	 * Initializes the parameter view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param array $params Associative list of key/value pairs
 	 */
 	public function __construct( $view, array $params )

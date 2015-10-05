@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order\Address;
+
+
 /**
  * Default implementation of checkout address order HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Order_Address_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/order/address/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard order address section
@@ -151,7 +154,7 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -170,7 +173,7 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 		 *  client/html/checkout/standard/order/address/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -190,12 +193,12 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/address/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -214,12 +217,12 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/address/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -246,12 +249,12 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 
 		try
 		{
-			$addr = $basket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+			$addr = $basket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
 			if( $customerId != '' && $addr->getAddressId() == '' )
 			{
-				$addrManager = MShop_Factory::createManager( $this->getContext(), 'customer/address' );
-				$orderAddrManager = MShop_Factory::createManager( $this->getContext(), 'order/base/address' );
+				$addrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/address' );
+				$orderAddrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/address' );
 
 				$item = $addrManager->createItem();
 				$item->setRefId( $customerId );
@@ -263,10 +266,10 @@ class Client_Html_Checkout_Standard_Order_Address_Standard
 				$orderAddrManager->saveItem( $addr, false );
 			}
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$msg = sprintf( 'Unable to save address for customer "%1$s": %2$s', $customerId, $e->getMessage() );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Base::INFO );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::INFO );
 		}
 
 		parent::process();

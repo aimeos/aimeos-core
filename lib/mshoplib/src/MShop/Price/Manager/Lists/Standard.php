@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Price\Manager\Lists;
+
+
 /**
  * Default price list manager for creating and handling price list items.
  * @package MShop
  * @subpackage Price
  */
-class MShop_Price_Manager_Lists_Standard
-	extends MShop_Common_Manager_Lists_Base
-	implements MShop_Price_Manager_Lists_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Lists\Base
+	implements \Aimeos\MShop\Price\Manager\Lists\Iface
 {
 	private $searchConfig = array(
 		'price.lists.id' => array(
@@ -24,7 +27,7 @@ class MShop_Price_Manager_Lists_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_price_list" AS mprili ON ( mpri."id" = mprili."parentid" )' ),
 			'label' => 'Price list ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.lists.siteid' => array(
@@ -32,7 +35,7 @@ class MShop_Price_Manager_Lists_Standard
 			'internalcode' => 'mprili."siteid"',
 			'label' => 'Price list site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.lists.parentid' => array(
@@ -40,7 +43,7 @@ class MShop_Price_Manager_Lists_Standard
 			'internalcode' => 'mprili."parentid"',
 			'label' => 'Price list price ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.lists.domain' => array(
@@ -48,14 +51,14 @@ class MShop_Price_Manager_Lists_Standard
 			'internalcode' => 'mprili."domain"',
 			'label' => 'Price list domain',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.typeid' => array(
 			'code' => 'price.lists.typeid',
 			'internalcode' => 'mprili."typeid"',
 			'label' => 'Price list type ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'price.lists.refid' => array(
@@ -63,63 +66,63 @@ class MShop_Price_Manager_Lists_Standard
 			'internalcode' => 'mprili."refid"',
 			'label' => 'Price list reference ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.datestart' => array(
 			'code' => 'price.lists.datestart',
 			'internalcode' => 'mprili."start"',
 			'label' => 'Price list start date',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.dateend' => array(
 			'code' => 'price.lists.dateend',
 			'internalcode' => 'mprili."end"',
 			'label' => 'Price list end date',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.config' => array(
 			'code' => 'price.lists.config',
 			'internalcode' => 'mprili."config"',
 			'label' => 'Price list config',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.position' => array(
 			'code' => 'price.lists.position',
 			'internalcode' => 'mprili."pos"',
 			'label' => 'Price list position',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'price.lists.status' => array(
 			'code' => 'price.lists.status',
 			'internalcode' => 'mprili."status"',
 			'label' => 'Price list status',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'price.lists.ctime' => array(
 			'code' => 'price.lists.ctime',
 			'internalcode' => 'mprili."ctime"',
 			'label' => 'Price list create date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.mtime' => array(
 			'code' => 'price.lists.mtime',
 			'internalcode' => 'mprili."mtime"',
 			'label' => 'Price list modification date/time',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.lists.editor' => array(
 			'code' => 'price.lists.editor',
 			'internalcode' => 'mprili."editor"',
 			'label' => 'Price list editor',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -127,9 +130,9 @@ class MShop_Price_Manager_Lists_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-price' );
@@ -156,7 +159,7 @@ class MShop_Price_Manager_Lists_Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -188,7 +191,7 @@ class MShop_Price_Manager_Lists_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -202,11 +205,11 @@ class MShop_Price_Manager_Lists_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Price_Manager_Lists_Standard
+		 *  \Aimeos\MShop\Price\Manager\Lists\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Price_Manager_Lists_Mylist
+		 *  \Aimeos\MShop\Price\Manager\Lists\Mylist
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -241,7 +244,7 @@ class MShop_Price_Manager_Lists_Standard
 		 *  mshop/price/manager/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the price list manager.
 		 *
 		 * @param array List of decorator names
@@ -261,12 +264,12 @@ class MShop_Price_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the price list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the price list manager.
 		 *
 		 *  mshop/price/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the price controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the price controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -285,12 +288,12 @@ class MShop_Price_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the price list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the price list manager.
 		 *
 		 *  mshop/price/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the price
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the price
 		 * controller.
 		 *
 		 * @param array List of decorator names

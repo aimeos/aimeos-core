@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
- * Exception thrown by the service frontend controller classes.
+ * \Exception thrown by the service frontend controller classes.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Service_Exception extends Controller_Frontend_Exception
+class Exception extends \Aimeos\Controller\Frontend\Exception
 {
 }

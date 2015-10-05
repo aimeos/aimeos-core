@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider;
+
+
 /**
  * Abstract class for plugin provider and decorator implementations
  *
  * @package MShop
  * @subpackage Plugin
  */
-abstract class MShop_Plugin_Provider_Base
+abstract class Base
 {
 	private $item;
 	private $context;
@@ -23,10 +26,10 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Initializes the plugin instance.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item )
 	{
 		$this->item = $item;
 		$this->context = $context;
@@ -36,7 +39,7 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Returns the plugin item the provider is configured with.
 	 *
-	 * @return MShop_Plugin_Item_Iface Plugin item object
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item object
 	 */
 	protected function getItemBase()
 	{
@@ -66,7 +69,7 @@ abstract class MShop_Plugin_Provider_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface Context item object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
 	protected function getContext()
 	{

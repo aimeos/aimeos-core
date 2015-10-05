@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Config;
+
+
 /**
- * Test class for MW_Config_PHPArray.
+ * Test class for \Aimeos\MW\Config\PHPArray.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Config_PHPArrayTest extends PHPUnit_Framework_TestCase
+class PHPArrayTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -23,7 +26,7 @@ class MW_Config_PHPArrayTest extends PHPUnit_Framework_TestCase
 		$dir2 = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testowrite';
 
 		$conf = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
-		$this->object = new MW_Config_PHPArray( $conf, array( $dir, $dir2 ) );
+		$this->object = new \Aimeos\MW\Config\PHPArray( $conf, array( $dir, $dir2 ) );
 	}
 
 	/**

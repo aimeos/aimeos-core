@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Order\Service\Payment;
+
+
 /**
  * Sends paid orders to the ERP system or logistic partner.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Service_Payment_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Order_Service_Payment_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -83,14 +86,14 @@ class Controller_Jobs_Order_Service_Payment_Standard
 		$capDays = $config->get( 'controller/jobs/order/service/payment/capture-days', null );
 
 
-		$serviceManager = MShop_Factory::createManager( $context, 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 		$serviceSearch = $serviceManager->createSearch();
 		$serviceSearch->setConditions( $serviceSearch->compare( '==', 'service.type.code', 'payment' ) );
 
-		$orderManager = MShop_Factory::createManager( $context, 'order' );
+		$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 		$orderSearch = $orderManager->createSearch();
 
-		$status = array( MShop_Order_Item_Base::STAT_DISPATCHED, MShop_Order_Item_Base::STAT_DELIVERED );
+		$status = array( \Aimeos\MShop\Order\Item\Base::STAT_DISPATCHED, \Aimeos\MShop\Order\Item\Base::STAT_DELIVERED );
 		$start = 0;
 
 		do
@@ -103,7 +106,7 @@ class Controller_Jobs_Order_Service_Payment_Standard
 				{
 					$serviceProvider = $serviceManager->getProvider( $serviceItem );
 
-					if( !$serviceProvider->isImplemented( MShop_Service_Provider_Payment_Base::FEAT_CAPTURE ) ) {
+					if( !$serviceProvider->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) ) {
 						continue;
 					}
 
@@ -122,7 +125,7 @@ class Controller_Jobs_Order_Service_Payment_Standard
 						$expr[] = $orderSearch->compare( '==', 'order.statusdelivery', $status );
 					}
 
-					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', MShop_Order_Item_Base::PAY_AUTHORIZED );
+					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.code', $serviceItem->getCode() );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.type', 'payment' );
 
@@ -141,7 +144,7 @@ class Controller_Jobs_Order_Service_Payment_Standard
 							{
 								$serviceProvider->capture( $orderItem );
 							}
-							catch( Exception $e )
+							catch( \Exception $e )
 							{
 								$str = 'Error while capturing payment for order with ID "%1$s": %2$s';
 								$context->getLogger()->log( sprintf( $str, $orderItem->getId(), $e->getMessage() ) );
@@ -154,7 +157,7 @@ class Controller_Jobs_Order_Service_Payment_Standard
 					}
 					while( $orderCount >= $orderSearch->getSliceSize() );
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
 					$str = 'Error while capturing payments for service with ID "%1$s": %2$s';
 					$context->getLogger()->log( sprintf( $str, $serviceItem->getId(), $e->getMessage() ) );

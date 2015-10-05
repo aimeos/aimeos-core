@@ -9,9 +9,9 @@ $enc = $this->encoder();
 $errors = $this->get( 'summaryErrorCodes', array() );
 
 $salutations = array(
-	MShop_Common_Item_Address_Base::SALUTATION_MR,
-	MShop_Common_Item_Address_Base::SALUTATION_MRS,
-	MShop_Common_Item_Address_Base::SALUTATION_MISS,
+	\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+	\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS,
+	\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS,
 );
 
 ?>
@@ -28,7 +28,7 @@ $salutations = array(
 <?php
 	try
 	{
-		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$addr = $this->summaryBasket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
@@ -84,7 +84,7 @@ $salutations = array(
 <?php
 	try
 	{
-		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY );
+		$addr = $this->summaryBasket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

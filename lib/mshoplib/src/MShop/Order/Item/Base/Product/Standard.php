@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product;
+
+
 /**
  * Product item of order base
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Item_Base_Product_Standard
-	extends MShop_Order_Item_Base_Product_Base
-	implements MShop_Order_Item_Base_Product_Iface
+class Standard
+	extends \Aimeos\MShop\Order\Item\Base\Product\Base
+	implements \Aimeos\MShop\Order\Item\Base\Product\Iface
 {
 	private $price;
 	private $attributes;
@@ -26,22 +29,22 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Initializes the order product instance.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 * @param array $values Associative list of order product values
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
 
-	public function __construct( MShop_Price_Item_Iface $price, array $values = array(), array $attributes = array(), array $products = array() )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array(), array $products = array() )
 	{
 		parent::__construct( 'order.base.product.', $values );
 
 		$this->price = $price;
 		$this->values = $values;
 
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface', $attributes );
 		$this->attributes = $attributes;
 
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $products );
 		$this->products = $products;
 	}
 
@@ -131,7 +134,7 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Returns a array of order base product items
 	 *
-	 * @return array Associative list of product items that implements MShop_Order_Item_Base_Product_Iface
+	 * @return array Associative list of product items that implements \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	public function getProducts()
 	{
@@ -141,11 +144,11 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Sets a array of order base product items
 	 *
-	 * @param array Associative list of product items which must implement the MShop_Order_Item_Base_Product_Iface
+	 * @param array Associative list of product items which must implement the \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	public function setProducts( array $products )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $products );
 		$this->products = $products;
 		$this->setModified();
 	}
@@ -326,7 +329,7 @@ class MShop_Order_Item_Base_Product_Standard
 	public function setQuantity( $quantity )
 	{
 		if( !is_numeric( $quantity ) ) {
-			throw new MShop_Order_Exception( 'Quantity is invalid. Please enter a positive integer' );
+			throw new \Aimeos\MShop\Order\Exception( 'Quantity is invalid. Please enter a positive integer' );
 		}
 
 		$quantity = (int) $quantity;
@@ -334,7 +337,7 @@ class MShop_Order_Item_Base_Product_Standard
 		if( $quantity == $this->getQuantity() ) { return; }
 
 		if( $quantity < 1 || $quantity > 2147483647 ) {
-			throw new MShop_Order_Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
 		$this->values['quantity'] = $quantity;
@@ -345,7 +348,7 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Returns the price item for the product.
 	 *
-	 * @return MShop_Price_Item_Iface Price item with price, costs and rebate
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
 	 */
 	public function getPrice()
 	{
@@ -356,9 +359,9 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Sets the price item for the product.
 	 *
-	 * @param MShop_Price_Item_Iface $price Price item containing price and additional costs
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
 	 */
-	public function setPrice( MShop_Price_Item_Iface $price )
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
 	{
 		if( $price === $this->price ) { return; }
 
@@ -370,7 +373,7 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
-	 * @return MShop_Price_Item_Iface Price item with price, additional costs and rebate
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
 	 */
 	public function getSumPrice()
 	{
@@ -391,7 +394,7 @@ class MShop_Order_Item_Base_Product_Standard
 	 */
 	public function getFlags()
 	{
-		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : MShop_Order_Item_Base_Product_Base::FLAG_NONE );
+		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE );
 	}
 
 
@@ -425,14 +428,14 @@ class MShop_Order_Item_Base_Product_Standard
 	 * Sets the position of the product within the list of ordered products.
 	 *
 	 * @param integer|null $value Product position in the order from 1-n or null for resetting the position
-	 * @throws MShop_Order_Exception If there's already a position set
+	 * @throws \Aimeos\MShop\Order\Exception If there's already a position set
 	 */
 	public function setPosition( $value )
 	{
 		if( $value == $this->getPosition() ) { return; }
 
 		if( $value !== null && $value < 1 ) {
-			throw new MShop_Order_Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
 		$this->values['pos'] = ( $value !== null ? (int) $value : null );
@@ -443,20 +446,20 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Returns the current delivery status of the order product item.
 	 * The returned status values are the STAT_* constants from the
-	 * MShop_Order_Item_Base class
+	 * \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @return integer Delivery status of the product
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : MShop_Order_Item_Base::STAT_UNFINISHED );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
 	/**
 	 * Sets the new delivery status of the order product item.
 	 * Possible status values are the STAT_* constants from the
-	 * MShop_Order_Item_Base class
+	 * \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @param integer $value New delivery status of the product
 	 */
@@ -491,7 +494,7 @@ class MShop_Order_Item_Base_Product_Standard
 	 *
 	 * @param string $code code of the product attribute item
 	 * @param string $type Type of the product attribute item
-	 * @return MShop_Order_Item_Base_Product_Attribute_Iface|null Attribute item for the ordered product and the given code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
@@ -509,7 +512,7 @@ class MShop_Order_Item_Base_Product_Standard
 	 * Returns the list of attribute items for the ordered product.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
 	public function getAttributes( $type = null )
 	{
@@ -533,9 +536,9 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Attribute_Iface $item Service attribute item
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Service attribute item
 	 */
-	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Iface $item )
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item )
 	{
 		$this->getAttributeMap();
 
@@ -556,11 +559,11 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Sets the new list of attribute items for the product.
 	 *
-	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
 	public function setAttributes( array $attributes )
 	{
-		MW_Common_Base::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;
@@ -639,11 +642,11 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Compares the properties of the given order product item with its own ones.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Iface $item Order product item
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
 	 * @return boolean True if the item properties are equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( MShop_Order_Item_Base_Product_Iface $item )
+	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item )
 	{
 		if( $this->getFlags() === $item->getFlags()
 			&& $this->getName() === $item->getName()
@@ -661,9 +664,9 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Copys all data from a given product item.
 	 *
-	 * @param MShop_Product_Item_Iface $product Product item to copy from
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item to copy from
 	 */
-	public function copyFrom( MShop_Product_Item_Iface $product )
+	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product )
 	{
 		$this->setName( $product->getName() );
 		$this->setType( $product->getType() );
@@ -683,7 +686,7 @@ class MShop_Order_Item_Base_Product_Standard
 	/**
 	 * Returns the attribute map for the ordered products.
 	 *
-	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Product_Attribute_Iface as value
+	 * @return array Associative list of type and code as key and an \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface as value
 	 */
 	protected function getAttributeMap()
 	{

@@ -1,12 +1,14 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Process;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -20,13 +22,13 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Process_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Process\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -38,8 +40,8 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
-		MShop_Factory::setCache( false );
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
+		\Aimeos\MShop\Factory::setCache( false );
 		unset( $this->object );
 	}
 
@@ -62,14 +64,14 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -78,14 +80,14 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 	{
 		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->getOrder( '2008-02-15 12:34:56' )->getId();
 		$this->context->getSession()->set( 'aimeos/orderid', $orderid );
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$mock = $this->getMockBuilder( 'Client_Html_Checkout_Standard_Process_Standard' )
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$mock = $this->getMockBuilder( '\\Aimeos\\Client\\Html\\Checkout\\Standard\\Process\\Standard' )
 			->setConstructorArgs( array( $this->context, $paths ) )
 			->setMethods( array( 'getOrderServiceCode' ) )
 			->getMock();
@@ -105,16 +107,16 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 
 	public function testProcessDirectDebit()
 	{
-		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Standard' )
+		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem', ) )
 			->getMock();
 
-		MShop_Factory::injectManager( $this->context, 'order', $mock );
+		\Aimeos\MShop\Factory::injectManager( $this->context, 'order', $mock );
 
 		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->getOrder( '2009-03-18 16:14:32' )->getId();
@@ -141,7 +143,7 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function getOrder( $date )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );
@@ -149,7 +151,7 @@ class Client_Html_Checkout_Standard_Process_StandardTest extends PHPUnit_Framewo
 		$result = $orderManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
 		return $item;

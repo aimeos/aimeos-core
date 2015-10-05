@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Item;
+
+
 /**
  * Default cache item implementation.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Item_Standard
-	extends MShop_Common_Item_Base
-	implements MAdmin_Cache_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MAdmin\Cache\Item\Iface
 {
 	private $values;
 

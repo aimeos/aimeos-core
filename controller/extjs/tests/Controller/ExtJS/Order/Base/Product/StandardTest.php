@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Order\Base\Product;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Order_Base_Product_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Order_Base_Product_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Order_Base_Product_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Product\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -61,13 +62,13 @@ class Controller_ExtJS_Order_Base_Product_StandardTest extends PHPUnit_Framework
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$baseManager = $manager->getSubManager( 'base' );
 		$search = $baseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
 		$results = $baseManager->searchItems( $search );
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No base item found' );
+			throw new \Exception( 'No base item found' );
 		}
 
 		$saveParams = (object) array(

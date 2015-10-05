@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Service\Attribute;
+
+
 /**
- * Test class for MShop_Order_Item_Base_Service_Attribute_Standard.
+ * Test class for \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard.
  */
-class MShop_Order_Item_Base_Service_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -38,7 +41,7 @@ class MShop_Order_Item_Base_Service_Attribute_StandardTest extends PHPUnit_Frame
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Order_Item_Base_Service_Attribute_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard( $this->values );
 	}
 
 
@@ -69,7 +72,7 @@ class MShop_Order_Item_Base_Service_Attribute_StandardTest extends PHPUnit_Frame
 		$this->object->setId( 99 );
 		$this->assertEquals( 99, $this->object->getId() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 3 );
 	}
 
@@ -182,11 +185,11 @@ class MShop_Order_Item_Base_Service_Attribute_StandardTest extends PHPUnit_Frame
 
 	public function testCopyFrom()
 	{
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$items = $attrManager->searchItems( $attrManager->createSearch() );
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
+			throw new \Exception( 'No attribute item found' );
 		}
 
 		$this->object->copyFrom( $item );
@@ -200,7 +203,7 @@ class MShop_Order_Item_Base_Service_Attribute_StandardTest extends PHPUnit_Frame
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Service_Attribute_Standard();
+		$item = new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard();
 
 		$list = array(
 			'order.base.service.attribute.id' => 1,

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Template;
+
+
 /**
  * Text template processing interface
  *
  * @package MW
  * @subpackage Template
  */
-interface MW_Template_Iface
+interface Iface
 {
 	/**
 	 * Builds the template object with string and markers.
@@ -22,7 +25,7 @@ interface MW_Template_Iface
 	 * @param string $text Template as text
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return MW_Template_Iface
+	 * @return \Aimeos\MW\Template\Iface
 	 */
 	public function __construct( $text, $begin = '', $end = '' );
 
@@ -31,7 +34,7 @@ interface MW_Template_Iface
 	 * Removes the content between the marker.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Iface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function disable( $name );
 
@@ -40,7 +43,7 @@ interface MW_Template_Iface
 	 * Removes the maker and enables content in template.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Iface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function enable( $name );
 
@@ -59,7 +62,7 @@ interface MW_Template_Iface
 	 *
 	 * @param string|array $old String or list of strings to remove
 	 * @param string|array $new String or list of strings to insert instead
-	 * @return MW_Template_Iface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function replace( $old, $new );
 
@@ -68,7 +71,7 @@ interface MW_Template_Iface
 	 * Substitutes the marker by given text.
 	 *
 	 * @param array $substitute Array of marker names (keys) and text to substitute (values)
-	 * @return MW_Template_Iface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function substitute( array $substitute );
 

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Address;
+
+
 /**
  * Default order address manager implementation.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Address_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Address_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Base\Address\Iface
 {
 	private $searchConfig = array(
 		'order.base.address.id' => array(
@@ -25,7 +28,7 @@ class MShop_Order_Manager_Base_Address_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_address" AS mordbaad ON ( mordba."id" = mordbaad."baseid" )' ),
 			'label' => 'Order base address ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.baseid' => array(
@@ -33,7 +36,7 @@ class MShop_Order_Manager_Base_Address_Standard
 			'internalcode' => 'mordbaad."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.siteid' => array(
@@ -41,7 +44,7 @@ class MShop_Order_Manager_Base_Address_Standard
 			'internalcode' => 'mordbaad."siteid"',
 			'label' => 'Order base address site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.address.addressid' => array(
@@ -49,168 +52,168 @@ class MShop_Order_Manager_Base_Address_Standard
 			'internalcode' => 'mordbaad."addrid"',
 			'label' => 'Order base customer address ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.type' => array(
 			'code' => 'order.base.address.type',
 			'internalcode' => 'mordbaad."type"',
 			'label' => 'Order base address type',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.company' => array(
 			'code' => 'order.base.address.company',
 			'internalcode' => 'mordbaad."company"',
 			'label' => 'Order base address company',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.vatid' => array(
 			'code' => 'order.base.address.vatid',
 			'internalcode' => 'mordbaad."vatid"',
 			'label' => 'Order base address Vat ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.salutation' => array(
 			'label' => 'Order address salutation',
 			'code' => 'order.base.address.salutation',
 			'internalcode' => 'mordbaad."salutation"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.title' => array(
 			'code' => 'order.base.address.title',
 			'internalcode' => 'mordbaad."title"',
 			'label' => 'Order base address title',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.firstname' => array(
 			'code' => 'order.base.address.firstname',
 			'internalcode' => 'mordbaad."firstname"',
 			'label' => 'Order base address firstname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.lastname' => array(
 			'code' => 'order.base.address.lastname',
 			'internalcode' => 'mordbaad."lastname"',
 			'label' => 'Order base address lastname',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.address1' => array(
 			'code' => 'order.base.address.address1',
 			'internalcode' => 'mordbaad."address1"',
 			'label' => 'Order base address part one',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.address2' => array(
 			'code' => 'order.base.address.address2',
 			'internalcode' => 'mordbaad."address2"',
 			'label' => 'Order base address part two',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.address3' => array(
 			'code' => 'order.base.address.address3',
 			'internalcode' => 'mordbaad."address3"',
 			'label' => 'Order base address part three',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.postal' => array(
 			'code' => 'order.base.address.postal',
 			'internalcode' => 'mordbaad."postal"',
 			'label' => 'Order base address postal',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.city' => array(
 			'code' => 'order.base.address.city',
 			'internalcode' => 'mordbaad."city"',
 			'label' => 'Order base address city',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.state' => array(
 			'code' => 'order.base.address.state',
 			'internalcode' => 'mordbaad."state"',
 			'label' => 'Order base address state',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.countryid' => array(
 			'code' => 'order.base.address.countryid',
 			'internalcode' => 'mordbaad."countryid"',
 			'label' => 'Order base address country ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.languageid' => array(
 			'code' => 'order.base.address.languageid',
 			'internalcode' => 'mordbaad."langid"',
 			'label' => 'Order base address language ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.telephone' => array(
 			'code' => 'order.base.address.telephone',
 			'internalcode' => 'mordbaad."telephone"',
 			'label' => 'Order base address telephone',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.email' => array(
 			'code' => 'order.base.address.email',
 			'internalcode' => 'mordbaad."email"',
 			'label' => 'Order base address email',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.telefax' => array(
 			'code' => 'order.base.address.telefax',
 			'internalcode' => 'mordbaad."telefax"',
 			'label' => 'Order base address telefax',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.website' => array(
 			'code' => 'order.base.address.website',
 			'internalcode' => 'mordbaad."website"',
 			'label' => 'Order base address website',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.flag' => array(
 			'code' => 'order.base.address.flag',
 			'internalcode' => 'mordbaad."flag"',
 			'label' => 'Order base address flag',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.address.mtime' => array(
 			'code' => 'order.base.address.mtime',
 			'internalcode' => 'mordbaad."mtime"',
 			'label' => 'Order base address modification date/time',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.ctime'=> array(
 			'code'=>'order.base.address.ctime',
 			'internalcode'=>'mordbaad."ctime"',
 			'label'=>'Order base address create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.address.editor'=> array(
 			'code'=>'order.base.address.editor',
 			'internalcode'=>'mordbaad."editor"',
 			'label'=>'Order base address editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -218,9 +221,9 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -230,11 +233,11 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/address/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -303,7 +306,7 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Creates new order base address item object.
 	 *
-	 * @return MShop_Order_Item_Base_Address_Iface New order address item object
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface New order address item object
 	 */
 	public function createItem()
 	{
@@ -315,14 +318,14 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Inserts the new order base address items
 	 *
-	 * @param MShop_Order_Item_Base_Address_Iface $item order address item which should be saved
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item order address item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Address_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -403,34 +406,34 @@ class MShop_Order_Manager_Base_Address_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 5, $item->getCompany(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 6, $item->getVatID(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 7, $item->getSalutation(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 8, $item->getTitle(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 9, $item->getFirstname(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 10, $item->getLastname(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 11, $item->getAddress1(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 12, $item->getAddress2(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 13, $item->getAddress3(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 14, $item->getPostal(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 15, $item->getCity(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 16, $item->getState(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 17, $item->getCountryId(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 18, $item->getLanguageId(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 19, $item->getTelephone(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 20, $item->getEmail(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 21, $item->getTelefax(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 22, $item->getWebsite(), MW_DB_Statement_Base::PARAM_STR );
-			$stmt->bind( 23, $item->getFlag(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 24, $date, MW_DB_Statement_Base::PARAM_STR );
+			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 4, $item->getType(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 5, $item->getCompany(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 6, $item->getVatID(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 7, $item->getSalutation(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 8, $item->getTitle(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 9, $item->getFirstname(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 10, $item->getLastname(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 11, $item->getAddress1(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 12, $item->getAddress2(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 13, $item->getAddress3(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 14, $item->getPostal(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 15, $item->getCity(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 16, $item->getState(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 17, $item->getCountryId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 18, $item->getLanguageId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 19, $item->getTelephone(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 20, $item->getEmail(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 21, $item->getTelefax(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 22, $item->getWebsite(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 23, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 24, $date, \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$stmt->bind( 25, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 26, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 26, $date ); // ctime
@@ -476,7 +479,7 @@ class MShop_Order_Manager_Base_Address_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -525,8 +528,8 @@ class MShop_Order_Manager_Base_Address_Standard
 	 *
 	 * @param integer $id Id of the order base address item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Address_Iface Returns order base address item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Returns order base address item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -538,7 +541,7 @@ class MShop_Order_Manager_Base_Address_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -568,12 +571,12 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Search for order base address items based on the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of order base address items implementing MShop_Order_Item_Base_Address_Iface
-	 * @throws MShop_Order_Exception if creating items failed
+	 * @return array List of order base address items implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
+	 * @throws \Aimeos\MShop\Order\Exception if creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -586,7 +589,7 @@ class MShop_Order_Manager_Base_Address_Standard
 		try
 		{
 			$required = array( 'order.base.address' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/address/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -697,7 +700,7 @@ class MShop_Order_Manager_Base_Address_Standard
 					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -705,7 +708,7 @@ class MShop_Order_Manager_Base_Address_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -720,8 +723,8 @@ class MShop_Order_Manager_Base_Address_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions
-	 * @throws MShop_Order_Exception If creating manager failed
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
+	 * @throws \Aimeos\MShop\Order\Exception If creating manager failed
 	 */
 
 	public function getSubManager( $manager, $name = null )
@@ -736,11 +739,11 @@ class MShop_Order_Manager_Base_Address_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Base_Address_Standard
+		 *  \Aimeos\MShop\Order\Manager\Base\Address\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Base_Address_Myaddress
+		 *  \Aimeos\MShop\Order\Manager\Base\Address\Myaddress
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -775,7 +778,7 @@ class MShop_Order_Manager_Base_Address_Standard
 		 *  mshop/order/manager/base/address/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order base address manager.
 		 *
 		 * @param array List of decorator names
@@ -795,12 +798,12 @@ class MShop_Order_Manager_Base_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base address manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base address manager.
 		 *
 		 *  mshop/order/manager/base/address/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -819,12 +822,12 @@ class MShop_Order_Manager_Base_Address_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base address manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base address manager.
 		 *
 		 *  mshop/order/manager/base/address/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -842,12 +845,12 @@ class MShop_Order_Manager_Base_Address_Standard
 	/**
 	 * Creates new order base address item object.
 	 *
-	 * @see MShop_Order_Item_Base_Address_Standard Default order base address item
+	 * @see \Aimeos\MShop\Order\Item\Base\Address\Standard Default order base address item
 	 * @param array $values Possible optional array keys can be given: id, type, firstname, lastname
-	 * @return MShop_Order_Item_Base_Address_Standard New order base address item object
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Standard New order base address item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Order_Item_Base_Address_Standard( $values );
+		return new \Aimeos\MShop\Order\Item\Base\Address\Standard( $values );
 	}
 }

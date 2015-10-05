@@ -2,10 +2,13 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Aimeos (aimeos.org), 2015
  * @package Controller
  * @subpackage Jobs
  */
+
+
+namespace Aimeos\Controller\Jobs\Product\Import\Csv;
 
 
 /**
@@ -14,9 +17,9 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Import_Csv_Standard
-	extends Controller_Common_Product_Import_Csv_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -164,7 +167,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 		 * It would convert the data of the second CSV field first to UTF-8 and
 		 * afterwards try to translate it to an ISO date format.
 		 *
-		 * The available converter objects are named "MW_Convert_<type>_<conversion>"
+		 * The available converter objects are named "\Aimeos\MW\Convert\<type>_<conversion>"
 		 * where <type> is the data type and <conversion> the way of the conversion.
 		 * In the configuration, the type and conversion must be separated by a
 		 * slash (<type>/<conversion>).
@@ -306,7 +309,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 		if( !isset( $mappings['item'] ) || !is_array( $mappings['item'] ) )
 		{
 			$msg = sprintf( 'Required mapping key "%1$s" is missing or contains no array', 'item' );
-			throw new Controller_Jobs_Exception( $msg );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 
 		try
@@ -320,7 +323,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 			$path = $container->getName();
 
 			$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
-			$logger->log( $msg, MW_Logger_Base::NOTICE );
+			$logger->log( $msg, \Aimeos\MW\Logger\Base::NOTICE );
 
 			foreach( $container as $content )
 			{
@@ -338,7 +341,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 					$chunkcnt = count( $data );
 
 					$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
-					$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), MW_Logger_Base::NOTICE );
+					$logger->log( sprintf( $msg, $name, $chunkcnt - $errcnt, $chunkcnt, __CLASS__ ), \Aimeos\MW\Logger\Base::NOTICE );
 
 					$errors += $errcnt;
 					$total += $chunkcnt;
@@ -348,25 +351,25 @@ class Controller_Jobs_Product_Import_Csv_Standard
 
 			$container->close();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$logger->log( 'Product import error: ' . $e->getMessage() );
 			$logger->log( $e->getTraceAsString() );
 
-			throw new Controller_Jobs_Exception( $e->getMessage() );
+			throw new \Aimeos\Controller\Jobs\Exception( $e->getMessage() );
 		}
 
 		$msg = 'Finished product import from "%1$s": %2$d successful, %3$s errors, %4$s total (%5$s)';
-		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), MW_Logger_Base::NOTICE );
+		$logger->log( sprintf( $msg, $path, $total - $errors, $errors, $total, __CLASS__ ), \Aimeos\MW\Logger\Base::NOTICE );
 
 		if( $errors > 0 )
 		{
 			$msg = sprintf( 'Invalid product lines in "%1$s": %2$d/%3$d', $path, $errors, $total );
-			throw new Controller_Jobs_Exception( $msg );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 
 		if( !empty( $backup ) && @rename( $path, strftime( $backup ) ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Unable to move imported file' ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to move imported file' ) );
 		}
 	}
 
@@ -374,7 +377,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 	/**
 	 * Opens and returns the container which includes the product data
 	 *
-	 * @return MW_Container_Iface Container object
+	 * @return \Aimeos\MW\Container\Iface Container object
 	 */
 	protected function getContainer()
 	{
@@ -466,27 +469,27 @@ class Controller_Jobs_Product_Import_Csv_Standard
 		*/
 		$options = $config->get( 'controller/jobs/product/import/csv/container/options', array() );
 
-		return MW_Container_Factory::getContainer( $location, $container, $content, $options );
+		return \Aimeos\MW\Container\Factory::getContainer( $location, $container, $content, $options );
 	}
 
 
 	/**
 	 * Imports the CSV data and creates new products or updates existing ones
 	 *
-	 * @param array $products List of products items implementing MShop_Product_Item_Iface
+	 * @param array $products List of products items implementing \Aimeos\MShop\Product\Item\Iface
 	 * @param array $data Associative list of import data as index/value pairs
 	 * @param array $mappings Associative list of positions and domain item keys
-	 * @param Controller_Common_Product_Import_Csv_Processor_Iface $processor Processor object
+	 * @param \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $processor Processor object
 	 * @param boolean $strict Log columns not mapped or silently ignore them
 	 * @return integer Number of products that couldn't be imported
-	 * @throws Controller_Jobs_Exception
+	 * @throws \Aimeos\Controller\Jobs\Exception
 	 */
 	protected function import( array $products, array $data, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Iface $processor, $strict )
+		\Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $processor, $strict )
 	{
 		$errors = 0;
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		foreach( $data as $code => $list )
 		{
@@ -514,7 +517,7 @@ class Controller_Jobs_Product_Import_Csv_Standard
 
 				$manager->commit();
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$manager->rollback();
 

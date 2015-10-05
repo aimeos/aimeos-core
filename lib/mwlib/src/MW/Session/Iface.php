@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 /**
  * Generic minimal interface for managing session data.
  *
  * @package MW
  * @subpackage Session
  */
-interface MW_Session_Iface
+interface Iface
 {
 	/**
 	 * Returns the value of the requested session key.

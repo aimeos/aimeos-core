@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Email\Delivery;
+
+
 /**
  * Default implementation of delivery emails.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Email_Delivery_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/email/delivery/default/subparts
 	 * List of HTML sub-clients rendered within the email delivery section
@@ -56,7 +59,7 @@ class Client_Html_Email_Delivery_Standard
 	/** client/html/email/delivery/text/name
 	 * Name of the text part used by the email delivery client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Text\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Email_Delivery_Standard
 	/** client/html/email/delivery/html/name
 	 * Name of the html part used by the email delivery client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Html_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Email\Delivery\Html\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -151,7 +154,7 @@ class Client_Html_Email_Delivery_Standard
 
 
 		$addr = $view->extAddressItem;
-		$billAddr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT );
+		$billAddr = $view->extOrderBaseItem->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 		$msg = $view->mail();
 		$msg->addHeader( 'X-MailGenerator', 'Aimeos' );
@@ -393,7 +396,7 @@ class Client_Html_Email_Delivery_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -412,7 +415,7 @@ class Client_Html_Email_Delivery_Standard
 		 *  client/html/email/delivery/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -432,12 +435,12 @@ class Client_Html_Email_Delivery_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/delivery/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -456,12 +459,12 @@ class Client_Html_Email_Delivery_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Email_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Email\Decorator\*") around the html client.
 		 *
 		 *  client/html/email/delivery/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Email_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Email\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05

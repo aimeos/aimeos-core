@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Coupon;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Coupon_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Coupon_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Coupon_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Coupon\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -98,7 +99,7 @@ class Controller_ExtJS_Coupon_StandardTest extends PHPUnit_Framework_TestCase
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->init( new stdClass() );
+		$actual = $this->object->init( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -106,7 +107,7 @@ class Controller_ExtJS_Coupon_StandardTest extends PHPUnit_Framework_TestCase
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->finish( new stdClass() );
+		$actual = $this->object->finish( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -287,7 +288,7 @@ class Controller_ExtJS_Coupon_StandardTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->searchItems( $params );
 	}
 }

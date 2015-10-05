@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Stock;
+
+
 /**
  * Default product stock manager implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Stock_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Product_Manager_Stock_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Product\Manager\Stock\Iface
 {
 	private $searchConfig = array(
 		'product.stock.id'=> array(
@@ -25,7 +28,7 @@ class MShop_Product_Manager_Stock_Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock" AS mprost ON ( mprost."prodid" = mpro."id" )' ),
 			'label'=>'Product stock ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.siteid'=> array(
@@ -33,7 +36,7 @@ class MShop_Product_Manager_Stock_Standard
 			'internalcode'=>'mprost."siteid"',
 			'label'=>'Product stock site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.productid'=> array(
@@ -41,7 +44,7 @@ class MShop_Product_Manager_Stock_Standard
 			'internalcode'=>'mprost."prodid"',
 			'label'=>'Product stock product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.warehouseid' => array(
@@ -49,7 +52,7 @@ class MShop_Product_Manager_Stock_Standard
 			'internalcode'=>'mprost."warehouseid"',
 			'label'=>'Product stock warehouse ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product.stock.stocklevel' => array(
@@ -57,35 +60,35 @@ class MShop_Product_Manager_Stock_Standard
 			'internalcode'=>'mprost."stocklevel"',
 			'label'=>'Product stock level',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.stock.dateback' => array(
 			'code'=>'product.stock.dateback',
 			'internalcode'=>'mprost."backdate"',
 			'label'=>'Product stock back in stock date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.stock.mtime'=> array(
 			'code'=>'product.stock.mtime',
 			'internalcode'=>'mprost."mtime"',
 			'label'=>'Product stock modification date',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.stock.ctime'=> array(
 			'code'=>'product.stock.ctime',
 			'internalcode'=>'mprost."ctime"',
 			'label'=>'Product stock creation date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.stock.editor'=> array(
 			'code'=>'product.stock.editor',
 			'internalcode'=>'mprost."editor"',
 			'label'=>'Product stock editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -93,9 +96,9 @@ class MShop_Product_Manager_Stock_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
@@ -121,7 +124,7 @@ class MShop_Product_Manager_Stock_Standard
 	/**
 	 * Creates new stock item object.
 	 *
-	 * @return MShop_Product_Item_Stock_Iface New product stock item object
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface New product stock item object
 	 */
 	public function createItem()
 	{
@@ -133,14 +136,14 @@ class MShop_Product_Manager_Stock_Standard
 	/**
 	 * Inserts the new stock item
 	 *
-	 * @param MShop_Product_Item_Stock_Iface $item Stock item which should be saved
+	 * @param \Aimeos\MShop\Product\Item\Stock\Iface $item Stock item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Stock_Iface';
+		$iface = '\\Aimeos\\MShop\\Product\\Item\\Stock\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -223,16 +226,16 @@ class MShop_Product_Manager_Stock_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getProductId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 3, $item->getWarehouseId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 4, $item->getStocklevel(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getWarehouseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $item->getDateBack() );
 			$stmt->bind( 6, $date ); //mtime
 			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // modified false
 			} else {
 				$stmt->bind( 8, $date ); //ctime
@@ -279,7 +282,7 @@ class MShop_Product_Manager_Stock_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -329,8 +332,8 @@ class MShop_Product_Manager_Stock_Standard
 	 *
 	 * @param integer $id Id of the stock item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Stock_Iface Returns the product stock item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Returns the product stock item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -342,7 +345,7 @@ class MShop_Product_Manager_Stock_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -375,14 +378,14 @@ class MShop_Product_Manager_Stock_Standard
 	 * Possible search keys: 'product.stock.id', 'product.stock.prodid', 'product.stock.siteid',
 	 * 'product.stock.warehouseid', 'product.stock.stocklevel', 'product.stock.backdate'
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of stock items implementing MShop_Product_Item_Stock_Iface
-	 * @throws MShop_Product_Exception if creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 * @return array List of stock items implementing \Aimeos\MShop\Product\Item\Stock\Iface
+	 * @throws \Aimeos\MShop\Product\Exception if creating items failed
+	 * @see \Aimeos\MW\Common\Criteria\SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -394,7 +397,7 @@ class MShop_Product_Manager_Stock_Standard
 		try
 		{
 			$required = array( 'product.stock' );
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/product/manager/stock/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -506,7 +509,7 @@ class MShop_Product_Manager_Stock_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -521,7 +524,7 @@ class MShop_Product_Manager_Stock_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g base, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g base, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -535,11 +538,11 @@ class MShop_Product_Manager_Stock_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Stock_Standard
+		 *  \Aimeos\MShop\Product\Manager\Stock\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Stock_Mystock
+		 *  \Aimeos\MShop\Product\Manager\Stock\Mystock
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -574,7 +577,7 @@ class MShop_Product_Manager_Stock_Standard
 		 *  mshop/product/manager/stock/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the product stock manager.
 		 *
 		 * @param array List of decorator names
@@ -594,12 +597,12 @@ class MShop_Product_Manager_Stock_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product stock manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product stock manager.
 		 *
 		 *  mshop/product/manager/stock/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -618,12 +621,12 @@ class MShop_Product_Manager_Stock_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product stock manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product stock manager.
 		 *
 		 *  mshop/product/manager/stock/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -662,7 +665,7 @@ class MShop_Product_Manager_Stock_Standard
 	{
 		$context = $this->getContext();
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$productIds = array_keys( $productManager->searchItems( $search ) );
@@ -673,7 +676,7 @@ class MShop_Product_Manager_Stock_Standard
 		$warehouseIds = array_keys( $warehouseManager->searchItems( $search ) );
 
 		if( empty( $warehouseIds ) ) {
-			throw new MShop_Product_Exception( sprintf( 'No warehouse for code "%1$s" found', $warehouseCode ) );
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'No warehouse for code "%1$s" found', $warehouseCode ) );
 		}
 
 		$search = $this->createSearch();
@@ -734,7 +737,7 @@ class MShop_Product_Manager_Stock_Standard
 			$path = 'mshop/product/manager/stock/standard/item/stocklevel';
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $context->getConfig()->get( $path, $path ) ) );
 
-			$stmt->bind( 1, $amount, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $amount, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 			$stmt->bind( 3, $context->getEditor() );
 
@@ -742,7 +745,7 @@ class MShop_Product_Manager_Stock_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -755,10 +758,10 @@ class MShop_Product_Manager_Stock_Standard
 	 *
 	 * @param array $values Possible optional array keys can be given:
 	 * id, prodid, siteid, warehouseid, stocklevel, backdate
-	 * @return MShop_Product_Item_Stock_Standard New stock item object
+	 * @return \Aimeos\MShop\Product\Item\Stock\Standard New stock item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Product_Item_Stock_Standard( $values );
+		return new \Aimeos\MShop\Product\Item\Stock\Standard( $values );
 	}
 }

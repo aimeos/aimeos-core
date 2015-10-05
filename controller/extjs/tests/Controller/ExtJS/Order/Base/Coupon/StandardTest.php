@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Order\Base\Coupon;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Order_Base_Coupon_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Order_Base_Coupon_StandardTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Order_Base_Coupon_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Coupon\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,7 +57,7 @@ class Controller_ExtJS_Order_Base_Coupon_StandardTest extends PHPUnit_Framework_
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$baseManager = $manager->getSubManager( 'base' );
 		$productManager = $baseManager->getSubManager( 'product' );
 		$search = $productManager->createSearch();
@@ -65,7 +66,7 @@ class Controller_ExtJS_Order_Base_Coupon_StandardTest extends PHPUnit_Framework_
 		$results = $productManager->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new Exception( 'No product item found' );
+			throw new \Exception( 'No product item found' );
 		}
 
 		$saveParams = (object) array(

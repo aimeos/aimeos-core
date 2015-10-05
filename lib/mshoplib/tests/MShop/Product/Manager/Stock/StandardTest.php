@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Stock;
+
+
 /**
- * Test class for MShop_Product_Stock_Standard.
+ * Test class for \Aimeos\MShop\Product\Stock\Standard.
  */
-class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -21,8 +24,8 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->object = new MShop_Product_Manager_Stock_Standard( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -44,13 +47,13 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Product_Item_Stock_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Stock\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $productManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'product.code', 'U:WH' ),
@@ -60,7 +63,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$items = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item found' );
+			throw new \Exception( 'No product item found' );
 		}
 
 		$search = $this->object->createSearch();
@@ -69,7 +72,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -108,7 +111,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -124,7 +127,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
+			throw new \Exception( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -135,7 +138,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -177,10 +180,10 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$results = $this->object->searchItems( $search );
 
 		if( ( $stockItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No stock item found.' );
+			throw new \Exception( 'No stock item found.' );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$productCode = $productManager->getItem( $stockItem->getProductId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
@@ -203,10 +206,10 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 		$results = $this->object->searchItems( $search );
 
 		if( ( $stockItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No stock item found.' );
+			throw new \Exception( 'No stock item found.' );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$productCode = $productManager->getItem( $stockItem->getProductId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
@@ -223,7 +226,7 @@ class MShop_Product_Manager_Stock_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

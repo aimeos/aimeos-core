@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Lists\Items;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Catalog_Lists_Items_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,25 +20,25 @@ class Client_Html_Catalog_Lists_Items_StandardTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Catalog_Lists_Items_Standard( $context, $paths );
+		$context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Items\Standard( $context, $paths );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
 		$catItems = $catalogManager->searchItems( $search );
 
 		if( ( $catItem = reset( $catItems ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
 		$total = 0;
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$view->listProductItems = $productManager->searchItems( $search, array( 'media', 'price', 'text' ), $total );
 		$view->listProductTotal = $total;
@@ -82,7 +84,7 @@ class Client_Html_Catalog_Lists_Items_StandardTest extends PHPUnit_Framework_Tes
 
 	public function testGetSubClient()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 }

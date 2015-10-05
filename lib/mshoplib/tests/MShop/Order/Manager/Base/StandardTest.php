@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base;
+
+
 /**
- * Test class for MShop_Order_Manager_Standard.
+ * Test class for \Aimeos\MShop\Order\Manager\Standard.
  */
-class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
-		$this->object = new MShop_Order_Manager_Base_Standard( $this->context );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MShop\Order\Manager\Base\Standard( $this->context );
 	}
 
 
@@ -62,7 +65,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $this->object->createItem() );
 	}
 
 
@@ -73,7 +76,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new MShop_Order_Exception( 'No order base item found' );
+			throw new \Aimeos\MShop\Order\Exception( 'No order base item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -91,7 +94,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order base item found.' );
+			throw new \Exception( 'No order base item found.' );
 		}
 
 		$item->setId( null );
@@ -156,14 +159,14 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -307,26 +310,26 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'address', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'coupon' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'coupon', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'coupon' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'coupon', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'product' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'product', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'product' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'product', 'Standard' ) );
 
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'service' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'service', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'service' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'service', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 
@@ -351,7 +354,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$this->assertNotEquals( '', $code );
 
 			foreach( $products as $product ) {
-				$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Iface', $product );
+				$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $product );
 			}
 		}
 
@@ -375,7 +378,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_NONE );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_NONE );
 
 		$this->assertEquals( array(), $order->getProducts() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -387,7 +390,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ADDRESS );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -399,7 +402,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_PRODUCT );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -411,7 +414,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_COUPON );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
@@ -423,7 +426,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -435,7 +438,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFresh()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 
 
 		$this->assertEquals( 0, count( $order->getCoupons() ) );
@@ -464,7 +467,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_NONE, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_NONE, true );
 
 		$this->assertEquals( array(), $order->getAddresses() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -476,7 +479,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ADDRESS, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS, true );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -488,7 +491,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_PRODUCT, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT, true );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -500,7 +503,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_COUPON, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON, true );
 
 		$this->assertEquals( array(), $order->getAddresses() );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -512,7 +515,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testLoadFreshService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_SERVICE, true );
+		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE, true );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( array(), $order->getCoupons() );
@@ -525,7 +528,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -563,7 +566,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 9, count( $attributes['OGONE'] ) );
 		$this->assertEquals( 0, count( $attributes['73'] ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $newBasketId );
 	}
 
@@ -572,7 +575,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 		$newBasketId = $basket->getId();
 		$this->object->store( $basket );
@@ -591,9 +594,9 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 
 		foreach( $basket->getProducts() as $key => $product )
 		{
-			// key+1 is because of the array_splice() in MShop_Order_Item_Base_Standard::addProduct()
+			// key+1 is because of the array_splice() in \Aimeos\MShop\Order\Item\Base\Standard::addProduct()
 			// so it doesn't make sense to hand over the key as second parameter to addProduct() in
-			// MShop_Order_Manager_Base_Standard::loadFresh() to try to enforce a 1-based numbering
+			// \Aimeos\MShop\Order\Manager\Base\Standard::loadFresh() to try to enforce a 1-based numbering
 			$this->assertEquals( $product->getId(), $newProducts[$key + 1]->getId() );
 			$this->assertEquals( $product->getPosition(), $newProducts[$key + 1]->getPosition() );
 		}
@@ -617,10 +620,10 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) == false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -642,7 +645,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 			$pos += 3; // two sub-products in between
 		}
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $newBasketId );
 	}
 
@@ -651,12 +654,12 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_NONE );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
+		$this->object->store( $basket, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_NONE );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertEquals( array(), $basket->getCoupons() );
@@ -670,12 +673,12 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_ADDRESS );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
+		$this->object->store( $basket, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
@@ -689,12 +692,12 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_PRODUCT );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
+		$this->object->store( $basket, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
@@ -708,12 +711,12 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
-		$this->object->store( $basket, MShop_Order_Manager_Base_Base::PARTS_SERVICE );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
+		$this->object->store( $basket, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, MShop_Order_Manager_Base_Base::PARTS_ALL );
+		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
@@ -730,10 +733,10 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), MShop_Order_Manager_Base_Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 
 		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
 		$this->assertEquals( '32.00', $basket->getPrice()->getCosts() );
@@ -762,7 +765,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$this->object->setSession( $order, 'test' );
 		$session = $this->object->getSession( 'test' );
 
-		$this->assertInstanceof( 'MShop_Order_Item_Base_Iface', $session );
+		$this->assertInstanceof( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $session );
 		$this->assertEquals( 'test comment', $order->getComment() );
 		$this->assertEquals( $order, $session );
 	}
@@ -771,12 +774,12 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 	public function testGetSetSessionLock()
 	{
 		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( MShop_Order_Manager_Base_Base::LOCK_DISABLE, $lock );
+		$this->assertEquals( \Aimeos\MShop\Order\Manager\Base\Base::LOCK_DISABLE, $lock );
 
-		$this->object->setSessionLock( MShop_Order_Manager_Base_Base::LOCK_ENABLE, 'test' );
+		$this->object->setSessionLock( \Aimeos\MShop\Order\Manager\Base\Base::LOCK_ENABLE, 'test' );
 
 		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( MShop_Order_Manager_Base_Base::LOCK_ENABLE, $lock );
+		$this->assertEquals( \Aimeos\MShop\Order\Manager\Base\Base::LOCK_ENABLE, $lock );
 	}
 
 
@@ -793,7 +796,7 @@ class MShop_Order_Manager_Base_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No order found' );
+			throw new \Exception( 'No order found' );
 		}
 
 		return $item;

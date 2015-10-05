@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Client\Html;
+
+
 /**
  * Common abstract class for all HTML client classes.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Base
-	implements Client_Html_Iface
+abstract class Base
+	implements \Aimeos\Client\Html\Iface
 {
 	private $view;
 	private $cache;
@@ -27,11 +30,11 @@ abstract class Client_Html_Base
 	/**
 	 * Initializes the class instance.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, array $templatePaths )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths )
 	{
 		$this->context = $context;
 		$this->templatePaths = $templatePaths;
@@ -41,12 +44,12 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
-	 * @return MW_View_Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 */
 	public function getView()
 	{
 		if( !isset( $this->view ) ) {
-			throw new Client_Html_Exception( sprintf( 'No view available' ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'No view available' ) );
 		}
 
 		return $this->view;
@@ -122,10 +125,10 @@ abstract class Client_Html_Base
 	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
-	 * @return Client_Html_Iface Reference to this object for fluent calls
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @return \Aimeos\Client\Html\Iface Reference to this object for fluent calls
 	 */
-	public function setView( MW_View_Iface $view )
+	public function setView( \Aimeos\MW\View\Iface $view )
 	{
 		$this->view = $view;
 		return $this;
@@ -135,35 +138,35 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param Client_Html_Iface $client Client object
+	 * @param \Aimeos\Client\Html\Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param array $decorators List of decorator name that should be wrapped around the client
-	 * @param string $classprefix Decorator class prefix, e.g. "Client_Html_Catalog_Decorator_"
-	 * @return Client_Html_Iface Client object
+	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Client\Html\Catalog\Decorator\"
+	 * @return \Aimeos\Client\Html\Iface Client object
 	 */
-	protected function addDecorators( Client_Html_Iface $client, array $templatePaths,
+	protected function addDecorators( \Aimeos\Client\Html\Iface $client, array $templatePaths,
 		array $decorators, $classprefix )
 	{
-		$iface = 'Client_Html_Common_Decorator_Iface';
+		$iface = '\\Aimeos\\Client\\Html\\Common\\Decorator\\Iface';
 
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
 				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
-				throw new Client_Html_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+				throw new \Aimeos\Client\Html\Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new \Aimeos\Client\Html\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
 			$client = new $classname( $this->context, $this->templatePaths, $client );
 
 			if( !( $client instanceof $iface ) ) {
-				throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\Client\Html\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -174,18 +177,18 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param Client_Html_Iface $client Client object
+	 * @param \Aimeos\Client\Html\Iface $client Client object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
-	 * @return Client_Html_Iface Client object
+	 * @return \Aimeos\Client\Html\Iface Client object
 	 */
-	protected function addClientDecorators( Client_Html_Iface $client, array $templatePaths, $path )
+	protected function addClientDecorators( \Aimeos\Client\Html\Iface $client, array $templatePaths, $path )
 	{
 		if( !is_string( $path ) || $path === '' ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
 		}
 
-		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
+		$localClass = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $path ) ) );
 		$config = $this->context->getConfig();
 
 		$decorators = $config->get( 'client/html/common/decorators/default', array() );
@@ -198,14 +201,14 @@ abstract class Client_Html_Base
 			}
 		}
 
-		$classprefix = 'Client_Html_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Client\\Html\\Common\\Decorator\\';
 		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
-		$classprefix = 'Client_Html_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Client\\Html\\Common\\Decorator\\';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
 		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
-		$classprefix = 'Client_Html_' . $localClass . '_Decorator_';
+		$classprefix = '\\Aimeos\\Client\\Html\\' . $localClass . '\\Decorator\\';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
 		$client = $this->addDecorators( $client, $templatePaths, $decorators, $classprefix );
 
@@ -216,7 +219,7 @@ abstract class Client_Html_Base
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
-	 * @param array|MShop_Common_Item_Iface $items Item or list of items, maybe with associated list items
+	 * @param array|\Aimeos\MShop\Common\Item\Iface $items Item or list of items, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
@@ -274,13 +277,13 @@ abstract class Client_Html_Base
 	/**
 	 * Adds expire date and tags for a single item.
 	 *
-	 * @param MShop_Common_Item_Iface $item Item, maybe with associated list items
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 * @param boolean $tagAll True of tags for all items should be added, false if only for the main item
 	 */
-	private function addMetaItemSingle( MShop_Common_Item_Iface $item, $domain, &$expire, array &$tags, $tagAll )
+	private function addMetaItemSingle( \Aimeos\MShop\Common\Item\Iface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
 		$expires = array();
 		$domain = str_replace( '/', '_', $domain ); // maximum compatiblity
@@ -289,11 +292,11 @@ abstract class Client_Html_Base
 			$tags[] = $domain . '-' . $item->getId();
 		}
 
-		if( $item instanceof MShop_Common_Item_Time_Iface && ( $date = $item->getDateEnd() ) !== null ) {
+		if( $item instanceof \Aimeos\MShop\Common\Item\Time\Iface && ( $date = $item->getDateEnd() ) !== null ) {
 			$expires[] = $date;
 		}
 
-		if( $item instanceof MShop_Common_Item_ListRef_Iface )
+		if( $item instanceof \Aimeos\MShop\Common\Item\ListRef\Iface )
 		{
 			foreach( $item->getListItems() as $listitem )
 			{
@@ -322,7 +325,7 @@ abstract class Client_Html_Base
 	 */
 	protected function addMetaList( $ids, $domain, &$expire )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), $domain . '/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain . '/lists' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -344,7 +347,7 @@ abstract class Client_Html_Base
 	 *
 	 * @param string $path Name of the sub-part in lower case (can contain a path like catalog/filter/tree)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return Client_Html_Iface Sub-part object
+	 * @return \Aimeos\Client\Html\Iface Sub-part object
 	 */
 	protected function createSubClient( $path, $name )
 	{
@@ -355,22 +358,22 @@ abstract class Client_Html_Base
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $name ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Invalid characters in client name "%1$s"', $name ) );
 		}
 
-		$subnames = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
+		$subnames = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $path ) ) );
 
-		$classname = 'Client_Html_' . $subnames . '_' . $name;
-		$interface = 'Client_Html_Iface';
+		$classname = '\\Aimeos\\Client\\Html\\' . $subnames . '\\' . $name;
+		$interface = '\\Aimeos\\Client\\Html\\Iface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$object = new $classname( $this->context, $this->templatePaths );
 
 		if( ( $object instanceof $interface ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $this->addClientDecorators( $object, $this->templatePaths, $path );
@@ -415,7 +418,7 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface Context object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	protected function getContext()
 	{
@@ -438,7 +441,7 @@ abstract class Client_Html_Base
 		ksort( $params );
 
 		if( ( $pstr = json_encode( $params ) ) === false || ( $cstr = json_encode( $config ) ) === false ) {
-			throw new Client_Html_Exception( 'Unable to encode parameters or configuration options' );
+			throw new \Aimeos\Client\Html\Exception( 'Unable to encode parameters or configuration options' );
 		}
 
 		return md5( $key . $pstr . $cstr . $locale->getLanguageId() . $locale->getCurrencyId() );
@@ -456,7 +459,7 @@ abstract class Client_Html_Base
 	/**
 	 * Returns the configured sub-clients or the ones named in the default parameter if none are configured.
 	 *
-	 * @return array List of sub-clients implementing Client_Html_Iface	ordered in the same way as the names
+	 * @return array List of sub-clients implementing \Aimeos\Client\Html\Iface	ordered in the same way as the names
 	 */
 	protected function getSubClients()
 	{
@@ -480,7 +483,7 @@ abstract class Client_Html_Base
 	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
 	 * @param string $confpath Configuration key of the path to the template file
 	 * @return string path the to the template file
-	 * @throws Client_Html_Exception If no template file was found
+	 * @throws \Aimeos\Client\Html\Exception If no template file was found
 	 */
 	protected function getTemplate( $confpath, $default )
 	{
@@ -506,7 +509,7 @@ abstract class Client_Html_Base
 			}
 		}
 
-		throw new Client_Html_Exception( sprintf( 'Template "%1$s" not available', $file ) );
+		throw new \Aimeos\Client\Html\Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
 
 
@@ -528,12 +531,12 @@ abstract class Client_Html_Base
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
-	 * @return MShop_Common_Item_Type_Iface Type item
-	 * @throws Controller_Jobs_Exception If no item is found
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item
+	 * @throws \Aimeos\Controller\Jobs\Exception If no item is found
 	 */
 	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();
@@ -547,7 +550,7 @@ abstract class Client_Html_Base
 		if( ( $item = reset( $result ) ) === false )
 		{
 			$msg = sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix );
-			throw new Controller_Jobs_Exception( $msg );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 
 		return $item;
@@ -644,10 +647,10 @@ abstract class Client_Html_Base
 
 			$context->getCache()->set( $key, $value, array_unique( $tags ), $expire );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$msg = sprintf( 'Unable to set cache entry: %1$s', $e->getMessage() );
-			$context->getLogger()->log( $msg, MW_Logger_Base::NOTICE );
+			$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::NOTICE );
 		}
 	}
 
@@ -675,12 +678,12 @@ abstract class Client_Html_Base
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		return $view;
 	}

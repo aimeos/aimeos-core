@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from customer tables.
  */
-class MW_Setup_Task_CustomerDropLocaleConstraints extends MW_Setup_Task_Base
+class CustomerDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_customer_list_type' => array(

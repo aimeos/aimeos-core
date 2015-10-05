@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds default records to plugin table.
  */
-class MW_Setup_Task_MShopAddWarehouseDataDefault extends MW_Setup_Task_MShopAddWarehouseData
+class MShopAddWarehouseDataDefault extends \Aimeos\MW\Setup\Task\MShopAddWarehouseData
 {
 	/**
 	 * Returns the list of task names which this task depends on.

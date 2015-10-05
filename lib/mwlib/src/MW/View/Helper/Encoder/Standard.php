@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Encoder;
+
+
 /**
  * View helper class for encoding data into the output.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Encoder_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	const TAINT = 0;
 	const TRUST = 1;
@@ -25,7 +28,7 @@ class MW_View_Helper_Encoder_Standard
 	/**
 	 * Returns the encoder.
 	 *
-	 * @return MW_View_Helper_Iface Encoder object
+	 * @return \Aimeos\MW\View\Helper\Iface Encoder object
 	 */
 	public function transform()
 	{

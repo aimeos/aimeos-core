@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists;
+
+
 /**
  * Default customer list manager for creating and handling customer list items.
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Lists_Standard
-	extends MShop_Common_Manager_Lists_Base
-	implements MShop_Customer_Manager_Lists_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Lists\Base
+	implements \Aimeos\MShop\Customer\Manager\Lists\Iface
 {
 	private $searchConfig = array(
 		'customer.lists.id'=> array(
@@ -24,7 +27,7 @@ class MShop_Customer_Manager_Lists_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_customer_list" AS mcusli ON ( mcus."id" = mcusli."parentid" )' ),
 			'label'=>'Customer list ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.lists.siteid'=> array(
@@ -32,7 +35,7 @@ class MShop_Customer_Manager_Lists_Standard
 			'internalcode'=>'mcusli."siteid"',
 			'label'=>'Customer list site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.lists.parentid'=> array(
@@ -40,7 +43,7 @@ class MShop_Customer_Manager_Lists_Standard
 			'internalcode'=>'mcusli."parentid"',
 			'label'=>'Customer list parent Id',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.lists.domain'=> array(
@@ -48,14 +51,14 @@ class MShop_Customer_Manager_Lists_Standard
 			'internalcode'=>'mcusli."domain"',
 			'label'=>'Customer list domain',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.typeid'=> array(
 			'code'=>'customer.lists.typeid',
 			'internalcode'=>'mcusli."typeid"',
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.lists.refid'=> array(
@@ -63,63 +66,63 @@ class MShop_Customer_Manager_Lists_Standard
 			'internalcode'=>'mcusli."refid"',
 			'label'=>'Customer list reference ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.datestart' => array(
 			'code'=>'customer.lists.datestart',
 			'internalcode'=>'mcusli."start"',
 			'label'=>'Customer list start date',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.dateend' => array(
 			'code'=>'customer.lists.dateend',
 			'internalcode'=>'mcusli."end"',
 			'label'=>'Customer list end date',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.config' => array(
 			'code'=>'customer.lists.config',
 			'internalcode'=>'mcusli."config"',
 			'label'=>'Customer list config',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.position' => array(
 			'code'=>'customer.lists.position',
 			'internalcode'=>'mcusli."pos"',
 			'label'=>'Customer list position',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.lists.status' => array(
 			'code'=>'customer.lists.status',
 			'internalcode'=>'mcusli."status"',
 			'label'=>'Customer list status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.lists.ctime'=> array(
 			'code'=>'customer.lists.ctime',
 			'internalcode'=>'mcusli."ctime"',
 			'label'=>'Customer list create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.lists.mtime'=> array(
 			'code'=>'customer.lists.mtime',
 			'internalcode'=>'mcusli."mtime"',
 			'label'=>'Customer list modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.lists.editor'=> array(
 			'code'=>'customer.lists.editor',
 			'internalcode'=>'mcusli."editor"',
 			'label'=>'Customer list editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 	);
 
@@ -127,9 +130,9 @@ class MShop_Customer_Manager_Lists_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-customer' );
@@ -156,7 +159,7 @@ class MShop_Customer_Manager_Lists_Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -188,7 +191,7 @@ class MShop_Customer_Manager_Lists_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -202,11 +205,11 @@ class MShop_Customer_Manager_Lists_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Customer_Manager_Lists_Standard
+		 *  \Aimeos\MShop\Customer\Manager\Lists\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Customer_Manager_Lists_Mylist
+		 *  \Aimeos\MShop\Customer\Manager\Lists\Mylist
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -241,7 +244,7 @@ class MShop_Customer_Manager_Lists_Standard
 		 *  mshop/customer/manager/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the customer list manager.
 		 *
 		 * @param array List of decorator names
@@ -261,12 +264,12 @@ class MShop_Customer_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the customer list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer list manager.
 		 *
 		 *  mshop/customer/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the customer controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -285,12 +288,12 @@ class MShop_Customer_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the customer list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer list manager.
 		 *
 		 *  mshop/customer/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the customer
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the customer
 		 * controller.
 		 *
 		 * @param array List of decorator names

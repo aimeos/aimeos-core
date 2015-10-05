@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider;
+
+
 /**
  * Order plugin interface for dealing with run-time loadable extenstions.
  *
  * @package MShop
  * @subpackage Plugin
  */
-interface MShop_Plugin_Provider_Iface extends MW_Observer_Listener_Iface
+interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 {
 }

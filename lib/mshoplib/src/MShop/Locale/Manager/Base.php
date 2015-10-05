@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager;
+
+
 /**
  * Abstract class for all locale manager implementations.
  *
  * @package MShop
  * @subpackage Locale
  */
-abstract class MShop_Locale_Manager_Base
-	extends MShop_Common_Manager_Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
 {
 	/**
 	 * Only current site.

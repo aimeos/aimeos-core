@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MAdmin\Job\Manager;
+
+
 /**
  * Interface for job manager implementations.
  *
  * @package MAdmin
  * @subpackage Job
  */
-interface MAdmin_Job_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

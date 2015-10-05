@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Factory;
+
+
 /**
  * Base class for coupon provider
  *
  * @package MShop
  * @subpackage Coupon
  */
-abstract class MShop_Coupon_Provider_Factory_Base
-	extends MShop_Coupon_Provider_Base
+abstract class Base
+	extends \Aimeos\MShop\Coupon\Provider\Base
 {
 	/**
 	 * Initializes the object instance
@@ -24,11 +27,11 @@ abstract class MShop_Coupon_Provider_Factory_Base
 	 * compatible with the constructor of the factory interface if this
 	 * intermediate constructor isn't implemented!
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
-	 * @param MShop_Coupon_Item_Iface $item Coupon item
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Coupon_Item_Iface $item, $code )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code )
 	{
 		parent::__construct( $context, $item, $code );
 	}

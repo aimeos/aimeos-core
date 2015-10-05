@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MW\View\Helper\Content;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MW_View_Helper_Content_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,12 +20,12 @@ class MW_View_Helper_Content_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 
-		$helper = new MW_View_Helper_Encoder_Standard( $view );
+		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$this->object = new MW_View_Helper_Content_Standard( $view, 'base/url' );
+		$this->object = new \Aimeos\MW\View\Helper\Content\Standard( $view, 'base/url' );
 	}
 
 
@@ -41,15 +43,15 @@ class MW_View_Helper_Content_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransformRelativeUrlFromConfig()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 
-		$helper = new MW_View_Helper_Encoder_Standard( $view );
+		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new MW_View_Helper_Config_Standard( $view, TestHelper::getContext()->getConfig() );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, \TestHelper::getContext()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
-		$this->object = new MW_View_Helper_Content_Standard( $view );
+		$this->object = new \Aimeos\MW\View\Helper\Content\Standard( $view );
 
 
 		$output = $this->object->transform( 'path/to/resource' );

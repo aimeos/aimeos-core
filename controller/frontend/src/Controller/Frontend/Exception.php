@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Frontend;
+
+
 /**
  * Common exception for frontend controller classes.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Exception
-	extends Exception
+class Exception
+	extends \Exception
 {
 	private $list;
 
@@ -25,10 +28,10 @@ class Controller_Frontend_Exception
 	 *
 	 * @param string $msg The exception message
 	 * @param integer $code The exception code
-	 * @param Exception $previous The previous exception used for the exception chaining.
+	 * @param \Exception $previous The previous exception used for the exception chaining.
 	 * @param array $list The associative list of errors and their messages when several errors occured
 	 */
-	public function __construct( $msg = '', $code = 0, Exception $previous = null, array $list = array() )
+	public function __construct( $msg = '', $code = 0, \Exception $previous = null, array $list = array() )
 	{
 		parent::__construct( $msg, $code, $previous );
 

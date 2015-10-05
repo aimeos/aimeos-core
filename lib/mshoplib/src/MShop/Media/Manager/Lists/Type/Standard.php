@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Media\Manager\Lists\Type;
+
+
 /**
  * Default media list type manager for creating and handling media list type items.
  * @package MShop
  * @subpackage Media
  */
-class MShop_Media_Manager_Lists_Type_Standard
-	extends MShop_Common_Manager_Type_Base
-	implements MShop_Media_Manager_Lists_Type_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Type\Base
+	implements \Aimeos\MShop\Media\Manager\Lists\Type\Iface
 {
 	private $searchConfig = array(
 		'media.lists.type.id' => array(
@@ -24,7 +27,7 @@ class MShop_Media_Manager_Lists_Type_Standard
 			'internaldeps'=> array( 'LEFT JOIN "mshop_media_list_type" AS mmedlity ON ( mmedli."typeid" = mmedlity."id" )' ),
 			'label'=>'Media list type Id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.lists.type.siteid' => array(
@@ -32,7 +35,7 @@ class MShop_Media_Manager_Lists_Type_Standard
 			'internalcode'=>'mmedlity."siteid"',
 			'label'=>'Media list type site Id',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'media.lists.type.code' => array(
@@ -40,49 +43,49 @@ class MShop_Media_Manager_Lists_Type_Standard
 			'internalcode'=>'mmedlity."code"',
 			'label'=>'Media list type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.domain' => array(
 			'code'=>'media.lists.type.domain',
 			'internalcode'=>'mmedlity."domain"',
 			'label'=>'Media list type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.label' => array(
 			'label' => 'Media list type label',
 			'code' => 'media.lists.type.label',
 			'internalcode' => 'mmedlity."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.status' => array(
 			'label' => 'Media list type status',
 			'code' => 'media.lists.type.status',
 			'internalcode' => 'mmedlity."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'media.lists.type.ctime'=> array(
 			'code'=>'media.lists.type.ctime',
 			'internalcode'=>'mmedlity."ctime"',
 			'label'=>'Media list type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.mtime'=> array(
 			'code'=>'media.lists.type.mtime',
 			'internalcode'=>'mmedlity."mtime"',
 			'label'=>'Media list type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.editor'=> array(
 			'code'=>'media.lists.type.editor',
 			'internalcode'=>'mmedlity."editor"',
 			'label'=>'Media list type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -90,9 +93,9 @@ class MShop_Media_Manager_Lists_Type_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-media' );
@@ -119,7 +122,7 @@ class MShop_Media_Manager_Lists_Type_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -151,7 +154,7 @@ class MShop_Media_Manager_Lists_Type_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -165,11 +168,11 @@ class MShop_Media_Manager_Lists_Type_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Media_Manager_Lists_Type_Standard
+		 *  \Aimeos\MShop\Media\Manager\Lists\Type\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Media_Manager_Lists_Type_Mytype
+		 *  \Aimeos\MShop\Media\Manager\Lists\Type\Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -204,7 +207,7 @@ class MShop_Media_Manager_Lists_Type_Standard
 		 *  mshop/media/manager/lists/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the media list type manager.
 		 *
 		 * @param array List of decorator names
@@ -224,12 +227,12 @@ class MShop_Media_Manager_Lists_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the media list type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the media list type manager.
 		 *
 		 *  mshop/media/manager/lists/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the media controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the media controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -248,12 +251,12 @@ class MShop_Media_Manager_Lists_Type_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the media list type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the media list type manager.
 		 *
 		 *  mshop/media/manager/lists/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the media
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the media
 		 * controller.
 		 *
 		 * @param array List of decorator names

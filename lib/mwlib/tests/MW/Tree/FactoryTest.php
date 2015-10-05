@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Tree;
+
+
 /**
- * Test class for MW_Tree_Factory.
+ * Test class for \Aimeos\MW\Tree\Factory.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $dbm;
@@ -20,7 +23,7 @@ class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = MW_Tree_Factory::createManager('LDAP', array(), null );
+		$this->object = \Aimeos\MW\Tree\Factory::createManager('LDAP', array(), null );
 	}
 
 	/**
@@ -36,12 +39,12 @@ class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testFactory()
 	{
-		$this->assertInstanceOf('MW_Tree_Manager_Iface', $this->object);
+		$this->assertInstanceOf('\\Aimeos\\MW\\Tree\\Manager\\Iface', $this->object);
 	}
 
 	public function testFactoryFail()
 	{
-		$this->setExpectedException('MW_Tree_Exception');
-		$this->object = MW_Tree_Factory::createManager('notDefined', array(), null );
+		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
+		$this->object = \Aimeos\MW\Tree\Factory::createManager('notDefined', array(), null );
 	}
 }

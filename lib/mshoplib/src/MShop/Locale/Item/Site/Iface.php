@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Site;
+
+
 /**
  * Common interface for all Site items.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Item_Site_Iface
-	extends MShop_Common_Item_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the code of the Site.
@@ -88,7 +91,7 @@ interface MShop_Locale_Item_Site_Iface
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node
-	 * @return MShop_Locale_Item_Site_Iface Selected node
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Selected node
 	 */
 	public function getChild( $index );
 
@@ -109,8 +112,8 @@ interface MShop_Locale_Item_Site_Iface
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Child node to add
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Child node to add
 	 * @return void
 	 */
-	public function addChild( MShop_Locale_Item_Site_Iface $item );
+	public function addChild( \Aimeos\MShop\Locale\Item\Site\Iface $item );
 }

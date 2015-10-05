@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\View\Helper\Partial;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_View_Helper_Partial_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,11 +20,11 @@ class MW_View_Helper_Partial_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
-		$conf = new MW_Config_PHPArray();
+		$view = new \Aimeos\MW\View\Standard();
+		$conf = new \Aimeos\MW\Config\PHPArray();
 		$paths = array( __DIR__ => array( 'testfiles' ) );
 
-		$this->object = new MW_View_Helper_Partial_Standard( $view, $conf, $paths );
+		$this->object = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $conf, $paths );
 	}
 
 

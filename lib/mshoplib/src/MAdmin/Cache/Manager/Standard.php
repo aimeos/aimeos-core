@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 /**
  * Default cache manager implementation.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Manager_Standard
-	extends MAdmin_Common_Manager_Base
-	implements MAdmin_Cache_Manager_Iface
+class Standard
+	extends \Aimeos\MAdmin\Common\Manager\Base
+	implements \Aimeos\MAdmin\Cache\Manager\Iface
 {
 	private $object;
 
@@ -26,7 +29,7 @@ class MAdmin_Cache_Manager_Standard
 			'internalcode' => '"id"',
 			'label' => 'Cache ID',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.siteid' => array(
 			'code' => 'cache.siteid',
@@ -34,7 +37,7 @@ class MAdmin_Cache_Manager_Standard
 			'label' => 'Cache site ID',
 			'type' => 'integer',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'cache.value' => array(
 			'code' => 'cache.value',
@@ -42,7 +45,7 @@ class MAdmin_Cache_Manager_Standard
 			'label' => 'Cached value',
 			'type' => 'string',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.expire' => array(
 			'code' => 'cache.expire',
@@ -50,7 +53,7 @@ class MAdmin_Cache_Manager_Standard
 			'label' => 'Cache expiration date/time',
 			'type' => 'datetime',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.tag.name' => array(
 			'code' => 'cache.tag.name',
@@ -58,7 +61,7 @@ class MAdmin_Cache_Manager_Standard
 			'label' => 'Cache tag name',
 			'type' => 'string',
 			'public' => false,
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -66,9 +69,9 @@ class MAdmin_Cache_Manager_Standard
 	/**
 	 * Creates the cache manager that will use the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-cache' );
@@ -78,7 +81,7 @@ class MAdmin_Cache_Manager_Standard
 	/**
 	 * Returns the cache object
 	 *
-	 * @return MW_Cache_Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
 	public function getCache()
 	{
@@ -175,7 +178,7 @@ class MAdmin_Cache_Manager_Standard
 			 * There are several implementations available for integrating caches
 			 * or providing optimized implementations for certain environments.
 			 * This configuration option allows to change the cache implementation
-			 * by setting the name of the MW_Cache_* class.
+			 * by setting the name of the \Aimeos\MW\Cache\* class.
 			 *
 			 * @param string Name of the cache class
 			 * @since 2014.09
@@ -198,9 +201,9 @@ class MAdmin_Cache_Manager_Standard
 			$dbm = $context->getDatabaseManager();
 
 			try {
-				$this->object = MW_Cache_Factory::createManager( $name, $config, $dbm );
-			} catch( Exception $e ) {
-				$this->object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
+				$this->object = \Aimeos\MW\Cache\Factory::createManager( $name, $config, $dbm );
+			} catch( \Exception $e ) {
+				$this->object = \Aimeos\MW\Cache\Factory::createManager( 'DB', $config, $dbm );
 			}
 		}
 
@@ -257,13 +260,13 @@ class MAdmin_Cache_Manager_Standard
 	/**
 	 * Create new cache item object.
 	 *
-	 * @return MAdmin_Cache_Item_Iface
+	 * @return \Aimeos\MAdmin\Cache\Item\Iface
 	 */
 	public function createItem()
 	{
 		try {
 			$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
-		} catch( Exception $e ) {
+		} catch( \Exception $e ) {
 			$values = array( 'siteid' => null );
 		}
 
@@ -274,14 +277,14 @@ class MAdmin_Cache_Manager_Standard
 	/**
 	 * Adds a new cache to the storage.
 	 *
-	 * @param MAdmin_Cache_Item_Iface $item Cache item that should be saved to the storage
+	 * @param \Aimeos\MAdmin\Cache\Item\Iface $item Cache item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MAdmin_Cache_Item_Iface';
+		$iface = '\\Aimeos\\MAdmin\\Cache\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Cache_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -376,13 +379,13 @@ class MAdmin_Cache_Manager_Standard
 	 *
 	 * @param integer $id Cache ID to fetch cache object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MAdmin_Cache_Item_Iface Returns the cache item of the given id
-	 * @throws MAdmin_Cache_Exception If item couldn't be found
+	 * @return \Aimeos\MAdmin\Cache\Item\Iface Returns the cache item of the given id
+	 * @throws \Aimeos\MAdmin\Cache\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $value = $this->getCache()->get( $id ) ) === null ) {
-			throw new MAdmin_Cache_Exception( sprintf( 'Item with ID "%1$s" not found', $id ) );
+			throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Item with ID "%1$s" not found', $id ) );
 		}
 
 		return $this->createItemBase( array( 'id' => $id, 'value' => $value ) );
@@ -392,12 +395,12 @@ class MAdmin_Cache_Manager_Standard
 	/**
 	 * Search for cache entries based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of cache items implementing MAdmin_Cache_Item_Iface
+	 * @return array List of cache items implementing \Aimeos\MAdmin\Cache\Item\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -409,7 +412,7 @@ class MAdmin_Cache_Manager_Standard
 		try
 		{
 			$required = array( 'cache' );
-			$level = MShop_Locale_Manager_Base::SITE_ONE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
 			/** madmin/cache/manager/standard/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -492,7 +495,7 @@ class MAdmin_Cache_Manager_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -506,7 +509,7 @@ class MAdmin_Cache_Manager_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -538,7 +541,7 @@ class MAdmin_Cache_Manager_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -550,12 +553,12 @@ class MAdmin_Cache_Manager_Standard
 	 * Create new admin cache item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return MAdmin_Cache_Item_Iface
+	 * @return \Aimeos\MAdmin\Cache\Item\Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
 		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		return new MAdmin_Cache_Item_Standard( $values );
+		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
 	}
 }

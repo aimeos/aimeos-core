@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds the coupon test data.
  */
-class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
+class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -53,7 +56,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'coupon.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for coupon test data', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon test data', $path ) );
 		}
 
 		$this->addCouponData( $testdata );
@@ -67,11 +70,11 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 	 * Adds the coupon test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addCouponData( array $testdata )
 	{
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
 		$couponIds = array();
@@ -95,7 +98,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['coupon/code'] as $key => $dataset )
 		{
 			if( !isset( $couponIds[$dataset['couponid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No coupon ID found for "%1$s"', $dataset['couponid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No coupon ID found for "%1$s"', $dataset['couponid'] ) );
 			}
 
 			$ccode->setId( null );
@@ -114,11 +117,11 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 	 * Adds the order coupon test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addOrderCouponTestData( array $testdata )
 	{
-		$order = MShop_Order_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$order = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$orderBase = $order->getSubManager( 'base', 'Standard' );
 		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
 		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
@@ -131,7 +134,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 			$exp = explode( '/', $dataset['ordprodid'] );
 
 			if( count( $exp ) != 3 ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
 			}
 
 			$prodcode[$exp[0]] = $exp[0];
@@ -165,11 +168,11 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/base/coupon'] as $key => $dataset )
 		{
 			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $ordProdIds[$dataset['ordprodid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
 			$orderCoupon->setId( null );

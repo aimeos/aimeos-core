@@ -1,8 +1,9 @@
 <?php
 
+namespace Aimeos\MW\Setup\Task;
 
 
-class MW_Setup_Task_OneTask extends MW_Setup_Task_Base
+class OneTask extends Base
 {
 	public function getPreDependencies()
 	{

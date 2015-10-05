@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Basket\Standard;
+
+
 /**
  * Default implementation of standard basket HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Basket_Standard_Standard
-	extends Client_Html_Basket_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Basket\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/basket/standard/default/subparts
 	 * List of HTML sub-clients rendered within the basket standard section
@@ -56,7 +59,7 @@ class Client_Html_Basket_Standard_Standard
 	/** client/html/basket/standard/detail/name
 	 * Name of the detail part used by the basket standard detail client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Basket_Standard_Detail_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Basket\Standard\Detail\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Basket_Standard_Standard
 	/** client/html/basket/standard/coupon/name
 	 * Name of the detail part used by the basket standard coupon client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Basket_Standard_Detail_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Basket\Standard\Detail\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -101,22 +104,22 @@ class Client_Html_Basket_Standard_Standard
 			}
 			$view->standardBody = $html;
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -171,7 +174,7 @@ class Client_Html_Basket_Standard_Standard
 			}
 			$view->standardHeader = $html;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return '';
@@ -210,7 +213,7 @@ class Client_Html_Basket_Standard_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -229,7 +232,7 @@ class Client_Html_Basket_Standard_Standard
 		 *  client/html/basket/standard/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -249,12 +252,12 @@ class Client_Html_Basket_Standard_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/basket/standard/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -273,12 +276,12 @@ class Client_Html_Basket_Standard_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Basket_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Basket\Decorator\*") around the html client.
 		 *
 		 *  client/html/basket/standard/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Basket_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Basket\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -351,20 +354,20 @@ class Client_Html_Basket_Standard_Standard
 
 			parent::process();
 
-			$controller = Controller_Frontend_Factory::createController( $context, 'basket' );
-			$controller->get()->check( MShop_Order_Item_Base_Base::PARTS_PRODUCT );
+			$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
+			$controller->get()->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( MShop_Plugin_Provider_Exception $e )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$errors = array_merge( $errors, $this->translatePluginErrorCodes( $e->getErrorCodes() ) );
@@ -372,12 +375,12 @@ class Client_Html_Basket_Standard_Standard
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -401,12 +404,12 @@ class Client_Html_Basket_Standard_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -420,7 +423,7 @@ class Client_Html_Basket_Standard_Standard
 
 			$view->standardParams = $this->getClientParams( $view->param() );
 			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
-			$view->standardBasket = Controller_Frontend_Factory::createController( $context, 'basket' )->get();
+			$view->standardBasket = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' )->get();
 
 			$this->cache = $view;
 		}
@@ -432,14 +435,14 @@ class Client_Html_Basket_Standard_Standard
 	/**
 	 * Adds the products specified by the view parameters to the basket.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $options List of options for addProducts() in basket controller
 	 */
-	protected function addProducts( MW_View_Iface $view, array $options )
+	protected function addProducts( \Aimeos\MW\View\Iface $view, array $options )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'basket' );
 
 		if( ( $prodid = $view->param( 'b_prodid', '' ) ) !== '' )
 		{
@@ -463,11 +466,11 @@ class Client_Html_Basket_Standard_Standard
 	/**
 	 * Adds a single product specified by its values to the basket.
 	 *
-	 * @param Controller_Frontend_Iface $controller Basket frontend controller
+	 * @param \Aimeos\Controller\Frontend\Iface $controller Basket frontend controller
 	 * @param array $values Associative list of key/value pairs from the view specifying the product
 	 * @param array $options List of options for addProducts() in basket frontend controller
 	 */
-	protected function addProduct( Controller_Frontend_Iface $controller, array $values, array $options )
+	protected function addProduct( \Aimeos\Controller\Frontend\Iface $controller, array $values, array $options )
 	{
 		$controller->addProduct(
 			( isset( $values['prodid'] ) ? (string) $values['prodid'] : '' ),
@@ -485,13 +488,13 @@ class Client_Html_Basket_Standard_Standard
 	/**
 	 * Removes the products specified by the view parameters from the basket.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 */
-	protected function deleteProducts( MW_View_Iface $view )
+	protected function deleteProducts( \Aimeos\MW\View\Iface $view )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_position', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'basket' );
 
 		foreach( $products as $position ) {
 			$controller->deleteProduct( $position );
@@ -502,14 +505,14 @@ class Client_Html_Basket_Standard_Standard
 	/**
 	 * Edits the products specified by the view parameters to the basket.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $options List of options for editProducts() in basket controller
 	 */
-	protected function editProducts( MW_View_Iface $view, array $options )
+	protected function editProducts( \Aimeos\MW\View\Iface $view, array $options )
 	{
 		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'basket' );
 
 		if( ( $position = $view->param( 'b_position', '' ) ) !== '' )
 		{

@@ -6,17 +6,20 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager\Language;
+
+
 /**
- * Test class for MShop_Locale_Manager_Language_Standard.
+ * Test class for \Aimeos\MShop\Locale\Manager\Language\Standard.
  */
-class MShop_Locale_Manager_Language_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new MShop_Locale_Manager_Language_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Locale\Manager\Language\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -28,7 +31,7 @@ class MShop_Locale_Manager_Language_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Language_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Language\\Iface', $this->object->createItem() );
 	}
 
 
@@ -50,7 +53,7 @@ class MShop_Locale_Manager_Language_StandardTest extends PHPUnit_Framework_TestC
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -71,7 +74,7 @@ class MShop_Locale_Manager_Language_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -125,14 +128,14 @@ class MShop_Locale_Manager_Language_StandardTest extends PHPUnit_Framework_TestC
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

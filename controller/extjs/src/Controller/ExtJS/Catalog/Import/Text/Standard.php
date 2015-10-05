@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Catalog\Import\Text;
+
+
 /**
  * ExtJS catalog text import controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Catalog_Import_Text_Standard
-	extends Controller_ExtJS_Common_Load_Text_Base
-	implements Controller_ExtJS_Common_Load_Text_Iface
+class Standard
+	extends \Aimeos\Controller\ExtJS\Common\Load\Text\Base
+	implements \Aimeos\Controller\ExtJS\Common\Load\Text\Iface
 {
 	/**
 	 * Initializes the controller.
 	 *
-	 * @param MShop_Context_Item_Iface $context MShop context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context, 'Catalog_Import_Text' );
 	}
@@ -32,15 +35,15 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 	/**
 	 * Uploads a CSV file with all catalog texts.
 	 *
-	 * @param stdClass $params Object containing the properties
+	 * @param \stdClass $params Object containing the properties
 	 */
-	public function uploadFile( stdClass $params )
+	public function uploadFile( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site' ) );
 		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
-			throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 		}
 
 		$config = $this->getContext()->getConfig();
@@ -78,7 +81,7 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 		if( rename( $fileinfo['tmp_name'], $dest ) !== true )
 		{
 			$msg = sprintf( 'Uploaded file could not be moved to upload directory "%1$s"', $dir );
-			throw new Controller_ExtJS_Exception( $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
 		/** controller/extjs/catalog/import/text/default/fileperms
@@ -108,7 +111,7 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 		if( chmod( $dest, $perms ) !== true )
 		{
 			$msg = sprintf( 'Could not set permissions "%1$s" for file "%2$s"', $perms, $dest );
-			throw new Controller_ExtJS_Exception( $msg );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
 		$result = (object) array(
@@ -126,7 +129,7 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->getContext() );
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->getContext() );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -139,9 +142,9 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 	/**
 	 * Imports a CSV file with all catalog texts.
 	 *
-	 * @param stdClass $params Object containing the properties
+	 * @param \stdClass $params Object containing the properties
 	 */
-	public function importFile( stdClass $params )
+	public function importFile( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
@@ -262,11 +265,11 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 	/**
 	 * Associates the texts with the products.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object (attribute, product, etc.) for associating the list items
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function importReferences( MShop_Common_Manager_Iface $manager, array $itemTextMap, $domain )
+	protected function importReferences( \Aimeos\MShop\Common\Manager\Iface $manager, array $itemTextMap, $domain )
 	{
 		$catalogStart = $catalogTotal = 0;
 		$listManager = $manager->getSubManager( 'lists' );
@@ -315,9 +318,9 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 			{
 				try
 				{
-					$iface = 'MShop_Common_Item_Type_Iface';
+					$iface = '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface';
 					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
-						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
+						throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
 					}
 
 					$item = $listManager->createItem();
@@ -328,9 +331,9 @@ class Controller_ExtJS_Catalog_Import_Text_Standard
 
 					$listManager->saveItem( $item );
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
-					$this->getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Base::ERR, 'import' );
+					$this->getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), \Aimeos\MW\Logger\Base::ERR, 'import' );
 				}
 			}
 		}

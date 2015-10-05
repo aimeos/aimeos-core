@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Tag;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_Tag_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Tag_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Tag_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Tag\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -61,7 +62,7 @@ class Controller_ExtJS_Product_Tag_StandardTest extends PHPUnit_Framework_TestCa
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.tag.type.code' => 'taste' ) ) ) )
 		);
 
-		$typeCtrl = new Controller_ExtJS_Product_Tag_Type_Standard( TestHelper::getContext() );
+		$typeCtrl = new \Aimeos\Controller\ExtJS\Product\Tag\Type\Standard( \TestHelper::getContext() );
 		$types = $typeCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $types['items'] ) );
 

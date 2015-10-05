@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Catalog\Item;
+
+
 /**
- * Test class for MShop_Catalog_Item_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Item\Standard.
  */
-class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $node;
 	private $object;
@@ -25,7 +28,7 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
-		$this->listItems = array( 1 => new MShop_Common_Item_Lists_Standard( 'catalog.lists.', $listValues ) );
+		$this->listItems = array( 1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues ) );
 
 		$this->values = array(
 			'id' => 2,
@@ -40,10 +43,10 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'hasChildren' => true
 		);
 
-		$this->node = new MW_Tree_Node_Standard( $this->values );
-		$child = new MShop_Catalog_Item_Standard( $this->node );
+		$this->node = new \Aimeos\MW\Tree\Node\Standard( $this->values );
+		$child = new \Aimeos\MShop\Catalog\Item\Standard( $this->node );
 
-		$this->object = new MShop_Catalog_Item_Standard( $this->node, array( $child ), $this->listItems );
+		$this->object = new \Aimeos\MShop\Catalog\Item\Standard( $this->node, array( $child ), $this->listItems );
 	}
 
 
@@ -165,7 +168,7 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Catalog_Item_Standard( new MW_Tree_Node_Standard() );
+		$item = new \Aimeos\MShop\Catalog\Item\Standard( new \Aimeos\MW\Tree\Node\Standard() );
 
 		$list = array(
 			'catalog.id' => 1,
@@ -218,7 +221,7 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
-			$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $child );
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $child );
 		}
 	}
 
@@ -232,15 +235,15 @@ class MShop_Catalog_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( 'MShop_Catalog_Item_Iface', $this->object->getChild( 0 ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( 'MShop_Catalog_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Catalog\\Exception' );
 		$this->object->getChild( 1 );
 	}
 
 
 	public function testGetNode()
 	{
-		$this->assertInstanceOf( 'MW_Tree_Node_Iface', $this->object->getNode() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Tree\\Node\\Iface', $this->object->getNode() );
 	}
 }

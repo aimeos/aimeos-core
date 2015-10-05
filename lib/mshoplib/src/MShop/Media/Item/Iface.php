@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Media\Item;
+
+
 /**
  * Generic interface for all media item.
  *
  * @package MShop
  * @subpackage Media
  */
-interface MShop_Media_Item_Iface
-	extends MShop_Common_Item_ListRef_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the ISO language code.
@@ -28,7 +31,7 @@ interface MShop_Media_Item_Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 * @return void
 	 */
 	public function setLanguageId( $langid );

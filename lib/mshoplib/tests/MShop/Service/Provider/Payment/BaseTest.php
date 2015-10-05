@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -14,18 +15,18 @@ class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$servManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$search = $servManager->createSearch();
 		$search->setConditions($search->compare('==', 'service.provider', 'Standard'));
 		$result = $servManager->searchItems($search, array('price'));
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order base item found' );
+			throw new \Exception( 'No order base item found' );
 		}
 
-		$this->object = new MShop_Service_Provider_Payment_Test( $this->context, $item );
+		$this->object = new TestBase( $this->context, $item );
 	}
 
 
@@ -64,42 +65,42 @@ class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testCancel()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->cancel( $item );
 	}
 
 
 	public function testCapture()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->capture( $item );
 	}
 
 	public function testProcess()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
 		$result = $this->object->process( $item, array() );
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Iface', $result );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Form\\Iface', $result );
 	}
 
 
 	public function testRefund()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->refund( $item );
 	}
 
 
 	public function testSetConfigFE()
 	{
-		$item = MShop_Order_Manager_Factory::createManager( $this->context )
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
 		$this->object->setConfigFE( $item, array() );
@@ -107,7 +108,7 @@ class MShop_Service_Provider_Payment_BaseTest extends PHPUnit_Framework_TestCase
 }
 
 
-class MShop_Service_Provider_Payment_Test extends MShop_Service_Provider_Payment_Base
+class TestBase extends \Aimeos\MShop\Service\Provider\Payment\Base
 {
 
 }

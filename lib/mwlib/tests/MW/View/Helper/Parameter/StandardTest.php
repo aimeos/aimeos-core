@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Parameter;
+
+
 /**
- * Test class for MW_View_Helper_Parameter.
+ * Test class for \Aimeos\MW\View\Helper\Parameter.
  */
-class MW_View_Helper_Parameter_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,9 +25,9 @@ class MW_View_Helper_Parameter_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 		$param = array( 'page' => 'test' );
-		$this->object = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$this->object = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 	}
 
 

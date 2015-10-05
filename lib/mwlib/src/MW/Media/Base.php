@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Media;
+
+
 /**
  * Common methods for media classes.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Base
+class Base
 {
 	private $mimetype;
 

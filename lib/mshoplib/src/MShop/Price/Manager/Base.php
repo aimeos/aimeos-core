@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Price\Manager;
+
+
 /**
  * Abstract class for all price managers with basic methods.
  *
  * @package MShop
  * @subpackage Price
  */
-abstract class MShop_Price_Manager_Base
-	extends MShop_Common_Manager_ListRef_Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 {
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param array $priceItems List of price items implementing MShop_Price_Item_Iface
+	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param integer $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
-	 * @throws MShop_Price_Exception if no price item is available
+	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
 	public function getLowestPrice( array $priceItems, $quantity, $currencyId = null )
 	{
@@ -31,9 +34,9 @@ abstract class MShop_Price_Manager_Base
 
 		foreach( $priceItems as $priceItem )
 		{
-			$iface = 'MShop_Price_Item_Iface';
+			$iface = '\\Aimeos\\MShop\\Price\\Item\\Iface';
 			if( ( $priceItem instanceof $iface ) === false ) {
-				throw new MShop_Price_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+				throw new \Aimeos\MShop\Price\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 			}
 
 			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
@@ -46,13 +49,13 @@ abstract class MShop_Price_Manager_Base
 		ksort( $priceList );
 
 		if( ( $price = reset( $priceList ) ) === false ) {
-			throw new MShop_Price_Exception( sprintf( 'Price item not available' ) );
+			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price item not available' ) );
 		}
 
 		if( $price->getQuantity() > $quantity )
 		{
 			$msg = sprintf( 'Price for the given quantity "%1$d" not available', $quantity );
-			throw new MShop_Price_Exception( $msg );
+			throw new \Aimeos\MShop\Price\Exception( $msg );
 		}
 
 		foreach( $priceList as $qty => $priceItem )

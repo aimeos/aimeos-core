@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Common abstract class for content objects.
  *
  * @package MW
  * @subpackage Container
  */
-abstract class MW_Container_Content_Base
+abstract class Base
 {
 	private $resource;
 	private $options;

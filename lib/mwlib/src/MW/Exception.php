@@ -7,11 +7,14 @@
  */
 
 
+namespace Aimeos\MW;
+
+
 /**
  * Generic exception thrown by MW objects if no specialized exception is available
  *
  * @package MW
  */
-class MW_Exception extends Exception
+class Exception extends \Exception
 {
 }

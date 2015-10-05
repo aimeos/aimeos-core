@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Plugin\Type;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Plugin_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Plugin_Type_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Plugin_Type_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Plugin\Type\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -46,7 +47,7 @@ class Controller_ExtJS_Plugin_Type_StandardTest extends PHPUnit_Framework_TestCa
 		$result = $this->object->searchItems( $params );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No plugin type found' );
+			throw new \Exception( 'No plugin type found' );
 		}
 
 		$this->assertEquals( 1, count( $type ) );

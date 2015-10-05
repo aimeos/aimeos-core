@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes action on delete on mshop_locale_site FOREIGN KEY CONSTRAINTS for mshop_locale tables.
  */
-class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Base
+class LocaleAlterForeignKeyContraintsOnDelete extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_locale_currency' => array(

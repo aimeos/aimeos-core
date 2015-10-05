@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Summary\Address;
+
+
 /**
  * Default implementation of checkout address summary HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Common_Summary_Address_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+abstract class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/common/summary/address/default/subparts
 	 * List of HTML sub-clients rendered within the common summary address section

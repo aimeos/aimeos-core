@@ -7,14 +7,17 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Status;
+
+
 /**
  * Abstract class for all order status objects.
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Item_Status_Base
-	extends MShop_Common_Item_Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Item\Base
 {
 	/**
 	 * Payment status.

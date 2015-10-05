@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Common\Decorator;
+
+
 /**
  * Provides common methods for controller decorators.
  *
  * @package Controller
  * @subpackage Jobs
  */
-abstract class Controller_Jobs_Common_Decorator_Base
-	implements Controller_Jobs_Common_Decorator_Iface
+abstract class Base
+	implements \Aimeos\Controller\Jobs\Common\Decorator\Iface
 {
 	private $context;
 	private $aimeos;
@@ -25,11 +28,11 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Controller_Jobs_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller )
 	{
 		$this->context = $context;
 		$this->aimeos = $aimeos;
@@ -43,12 +46,12 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
 	 * @return mixed Returns the value of the called method
-	 * @throws Controller_Jobs_Exception If method call failed
+	 * @throws \Aimeos\Controller\Jobs\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
 		if( ( $result = call_user_func_array( array( $this->controller, $name ), $param ) ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
 		return $result;
@@ -80,7 +83,7 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -91,7 +94,7 @@ abstract class Controller_Jobs_Common_Decorator_Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop_Context_Item_Iface context object implementing MShop_Context_Item_Iface
+	 * @return \Aimeos\MShop\Context\Item\Iface context object implementing \Aimeos\MShop\Context\Item\Iface
 	 */
 	protected function getContext()
 	{
@@ -100,9 +103,9 @@ abstract class Controller_Jobs_Common_Decorator_Base
 
 
 	/**
-	 * Returns the Aimeos object.
+	 * Returns the \Aimeos\Aimeos object.
 	 *
-	 * @return Aimeos Aimeos object
+	 * @return \Aimeos\Aimeos \Aimeos\Aimeos object
 	 */
 	protected function getAimeos()
 	{

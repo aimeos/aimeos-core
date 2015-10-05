@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Product\Bought;
+
+
 /**
  * Job controller for bought together products.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Bought_Standard
-	extends Controller_Jobs_Base
-	implements Controller_Jobs_Iface
+class Standard
+	extends \Aimeos\Controller\Jobs\Base
+	implements \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Returns the localized name of the job.
@@ -43,7 +46,7 @@ class Controller_Jobs_Product_Bought_Standard
 	/**
 	 * Executes the job.
 	 *
-	 * @throws Controller_Jobs_Exception If an error occurs
+	 * @throws \Aimeos\Controller\Jobs\Exception If an error occurs
 	 */
 	public function run()
 	{
@@ -152,14 +155,14 @@ class Controller_Jobs_Product_Bought_Standard
 
 		$typeItem = $this->getTypeItem( 'product/lists/type', 'product', 'bought-together' );
 
-		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
+		$baseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 		$search = $baseManager->createSearch();
 		$search->setConditions( $search->compare( '>', 'order.base.ctime', $date ) );
 		$search->setSlice( 0, 0 );
 		$totalOrders = 0;
 		$baseManager->searchItems( $search, array(), $totalOrders );
 
-		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$baseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 		$search = $baseProductManager->createSearch();
 		$search->setConditions( $search->compare( '>', 'order.base.product.ctime', $date ) );
 		$start = 0;
@@ -206,8 +209,8 @@ class Controller_Jobs_Product_Bought_Standard
 		$refIds = array();
 		$context = $this->getContext();
 
-		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/lists' );
-		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$catalogListManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
+		$baseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 
 
 		$search = $baseProductManager->createSearch();
@@ -270,7 +273,7 @@ class Controller_Jobs_Product_Bought_Standard
 			return;
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 		$item = $manager->createItem();
 
 		foreach( $productIds as $pos => $refid )
@@ -296,7 +299,7 @@ class Controller_Jobs_Product_Bought_Standard
 	 */
 	protected function removeListItems( $productId, $typeId )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$search = $manager->createSearch();
 		$expr = array(

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Convert;
+
+
 /**
  * Combines several objects into a converter chain
  *
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Compose implements MW_Convert_Iface
+class Compose implements \Aimeos\MW\Convert\Iface
 {
 	private $converter;
 

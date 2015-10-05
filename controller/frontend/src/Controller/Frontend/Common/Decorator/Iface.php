@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Common\Decorator;
+
+
 /**
  * Decorator interface for controller.
  *
  * @package Controller
  * @subpackage Frontend
  */
-interface Controller_Frontend_Common_Decorator_Iface
-	extends Controller_Frontend_Iface
+interface Iface
+	extends \Aimeos\Controller\Frontend\Iface
 {
 	/**
 	 * Initializes a new controller decorator object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Controller_Frontend_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Controller\Frontend\Iface $controller Controller object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Controller_Frontend_Iface $controller );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Controller\Frontend\Iface $controller );
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds order test data.
  */
-class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
+class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,16 +50,16 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Iface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding order test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Standard' );
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->createSearch();
@@ -71,7 +74,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'order.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
 		$bases = $this->addOrderBaseData( $localeManager, $orderBaseManager, $testdata );
@@ -92,13 +95,13 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base data.
 	 *
-	 * @param MShop_Locale_Manager_Iface $localeManager Locale Manager
-	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Locale\Manager\Iface $localeManager Locale Manager
+	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addOrderBaseData( MShop_Common_Manager_Iface $localeManager,
-		MShop_Common_Manager_Iface $orderBaseManager, array $testdata )
+	protected function addOrderBaseData( \Aimeos\MShop\Common\Manager\Iface $localeManager,
+		\Aimeos\MShop\Common\Manager\Iface $orderBaseManager, array $testdata )
 	{
 		$bases = array();
 		$locale = $localeManager->createItem();
@@ -135,10 +138,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order address data.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
 	 * @param array $testdata
 	 */
-	protected function addOrderBaseAddressData( MShop_Common_Manager_Iface $manager,
+	protected function addOrderBaseAddressData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $bases, array $testdata )
 	{
 		$orderAddr = $manager->createItem();
@@ -146,7 +149,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/base/address'] as $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$orderAddr->setId( null );
@@ -181,19 +184,19 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base service data.
 	 *
-	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addOrderBaseServiceData( MShop_Common_Manager_Iface $orderBaseManager,
+	protected function addOrderBaseServiceData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
 	{
 		$ordServices = array();
 		$servIds = $this->getServiceIds( $testdata );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$ordServ = $orderBaseServiceManager->createItem();
 
 		$this->conn->begin();
@@ -201,11 +204,11 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
 			}
 
 			$priceItem = $priceManager->createItem();
@@ -244,30 +247,30 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the required order base product data.
 	 *
-	 * @param MShop_Order_Manager_Base_Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addOrderBaseProductData( MShop_Common_Manager_Iface$orderBaseManager,
+	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface$orderBaseManager,
 		array $bases, array $testdata )
 	{
 		$ordProds = array();
 		$products = $this->getProductItems( $testdata );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$this->conn->begin();
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
 			$ordProdItem = $orderBaseProductManager->createItem();
@@ -321,17 +324,17 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order product attribute test data.
 	 *
-	 * @param MShop_Common_Manager_Iface $manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
 	 * @param array $testdata
 	 * @param array $ordProds
-	 * @param MShop_Product_Item_Iface[] $products
-	 * @throws MW_Setup_Exception
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $products
+	 * @throws \Aimeos\MW\Setup\Exception
 	 */
-	protected function addOrderBaseProductAttributeData( MShop_Common_Manager_Iface $manager,
+	protected function addOrderBaseProductAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordProds, array $products )
 	{
 		$attrCodes = array();
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
 
 		foreach( $attributes as $attrItem ) {
@@ -343,7 +346,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/base/product/attr'] as $dataset )
 		{
 			if( !isset( $ordProds[$dataset['ordprodid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
 			$ordProdAttr->setId( null );
@@ -374,12 +377,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order service attributes.
 	 *
-	 * @param MShop_Order_Manager_Base_Service_Attribute_Iface $manager
+	 * @param \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface $manager
 	 * @param array $testdata
 	 * @param array $ordServices
-	 * @throws MW_Setup_Exception
+	 * @throws \Aimeos\MW\Setup\Exception
 	 */
-	protected function addOrderBaseServiceAttributeData( MShop_Common_Manager_Iface $manager,
+	protected function addOrderBaseServiceAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordServices )
 	{
 		$ordServAttr = $manager->createItem();
@@ -387,7 +390,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/base/service/attr'] as $dataset )
 		{
 			if( !isset( $ordServices[$dataset['ordservid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
 			}
 
 			$ordServAttr->setId( null );
@@ -409,12 +412,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	/**
 	 * Adds the order test data.
 	 *
-	 * @param MShop_Order_Manager_Iface $orderManager Order Manager
+	 * @param \Aimeos\MShop\Order\Manager\Iface $orderManager Order Manager
 	 * @param array $baseIds List of ids
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addOrderData( MShop_Common_Manager_Iface $orderManager, array $baseIds, array $testdata )
+	protected function addOrderData( \Aimeos\MShop\Common\Manager\Iface $orderManager, array $baseIds, array $testdata )
 	{
 		$orderStatusManager = $orderManager->getSubManager( 'status', 'Standard' );
 
@@ -426,7 +429,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order'] as $key => $dataset )
 		{
 			if( !isset( $baseIds[$dataset['baseid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$ordItem->setId( null );
@@ -446,7 +449,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 		foreach( $testdata['order/status'] as $dataset )
 		{
 			if( !isset( $ords[$dataset['parentid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$ordStat->setId( null );
@@ -475,7 +478,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 			$customercodes[] = $dataset['customerid'];
 		}
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
@@ -491,12 +494,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	 * Returns the product items for the given test data.
 	 *
 	 * @param array $testdata Test data
-	 * @return MShop_Product_Item_Iface[] Product Items
+	 * @return \Aimeos\MShop\Product\Item\Iface[] Product Items
 	 */
 	protected function getProductItems( array $testdata )
 	{
 		$codes = $items = array();
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
@@ -526,7 +529,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Base
 	protected function getServiceIds( array $testdata )
 	{
 		$services = $servIds = array();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{

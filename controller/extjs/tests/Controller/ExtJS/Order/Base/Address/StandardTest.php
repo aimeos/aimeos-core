@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Order\Base\Address;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Order_Base_Address_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Address\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -61,9 +62,9 @@ class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework
 
 	public function testSaveDeleteItem()
 	{
-		$ctx = TestHelper::getContext();
+		$ctx = \TestHelper::getContext();
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
 
@@ -72,7 +73,7 @@ class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework
 		$sites = $siteManager->searchItems( $search );
 
 		if( ( $siteItem = reset( $sites ) ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
 		}
 
 		$localeItem = $localeManager->createItem();
@@ -81,7 +82,7 @@ class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework
 		$localeItem->setSiteId( $siteItem->getId() );
 
 
-		$manager = MShop_Order_Manager_Factory::createManager( $ctx );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $ctx );
 		$baseManager = $manager->getSubManager( 'base' );
 
 		$baseItem = $baseManager->createItem();
@@ -101,7 +102,7 @@ class Controller_ExtJS_Order_Base_Address_StandardTest extends PHPUnit_Framework
 				'order.base.address.type' => 'payment',
 				'order.base.address.company' => 'MusterMax',
 				'order.base.address.vatid' => 'DE999999999',
-				'order.base.address.salutation' => MShop_Common_Item_Address_Base::SALUTATION_MR,
+				'order.base.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
 				'order.base.address.title' => 'Herr',
 				'order.base.address.firstname' => 'Max',
 				'order.base.address.lastname' => 'Mustermann',

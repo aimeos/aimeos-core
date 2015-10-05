@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Stock;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Product_Stock_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Product_Stock_StandardTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Product_Stock_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Stock\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -56,9 +57,9 @@ class Controller_ExtJS_Product_Stock_StandardTest extends PHPUnit_Framework_Test
 
 	public function testSaveDeleteItem()
 	{
-		$ctx = TestHelper::getContext();
+		$ctx = \TestHelper::getContext();
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $ctx );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $ctx );
 		$warehouseManager = $productManager->getSubManager( 'stock' )->getSubManager( 'warehouse' );
 
 		$search = $warehouseManager->createSearch();
@@ -67,7 +68,7 @@ class Controller_ExtJS_Product_Stock_StandardTest extends PHPUnit_Framework_Test
 		$items = $warehouseManager->searchItems( $search );
 
 		if( ( $warehouseItem = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$search = $productManager->createSearch();
@@ -75,7 +76,7 @@ class Controller_ExtJS_Product_Stock_StandardTest extends PHPUnit_Framework_Test
 		$items = $productManager->searchItems( $search );
 
 		if( ( $productItem = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$saveParams = (object) array(

@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Combine;
+
+
 /**
  * Interface for combining objects.
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Expression_Combine_Iface extends MW_Common_Criteria_Expression_Iface
+interface Iface extends \Aimeos\MW\Common\Criteria\Expression\Iface
 {
 	/**
 	 * Returns the list of expressions that should be combined.

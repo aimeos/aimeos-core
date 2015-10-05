@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Order_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Order\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -35,14 +37,14 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->standardStepActive = 'order';
 		$this->object->setView( $view );
 
@@ -60,9 +62,9 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 
 	public function testGetBody()
 	{
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->standardStepActive = 'order';
-		$view->paymentForm = new MShop_Common_Item_Helper_Form_Standard( '', 'POST', array() );
+		$view->paymentForm = new \Aimeos\MShop\Common\Item\Helper\Form\Standard( '', 'POST', array() );
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -79,14 +81,14 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -99,9 +101,9 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 
 	public function testProcessOK()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
-		$baseManager = MShop_Order_Manager_Factory::createManager( $this->context )->getSubManager( 'base' );
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
+		$baseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->getSubManager( 'base' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 
 
 		$search = $serviceManager->createSearch();
@@ -109,7 +111,7 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 		$result = $serviceManager->searchItems( $search );
 
 		if( ( $serviceItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$controller->setService( 'payment', $serviceItem->getId() );
@@ -117,10 +119,10 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 		$this->context->setUserId( '-1' );
 
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 
 		$param = array( 'cs_order' => 1 );
-		$helper = new MW_View_Helper_Parameter_Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -132,12 +134,12 @@ class Client_Html_Checkout_Standard_Order_StandardTest extends PHPUnit_Framework
 		$result = $baseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order placed' );
+			throw new \Exception( 'No order placed' );
 		}
 
 		$baseManager->deleteItem( $item->getId() );
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Iface', $view->orderItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $view->orderItem );
 		$this->assertEquals( $item->getId(), $view->orderItem->getBaseId() );
 	}
 }

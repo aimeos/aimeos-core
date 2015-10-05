@@ -8,6 +8,9 @@
 
 require_once 'phing/Task.php';
 
+namespace Aimeos;
+
+
 /**
  * Generating jsb2 package files for core and extensions.
  */
@@ -27,7 +30,7 @@ class MShopJsbPackageTask extends Task
 		require_once $this->projectPath . $ds . 'Aimeos.php';
 		spl_autoload_register( 'Aimeos::autoload' );
 
-		$this->aimeos = new Aimeos();
+		$this->aimeos = new \Aimeos\Aimeos();
 
 		$incPath = $this->aimeos->getIncludePaths();
 		$incPath[] = get_include_path();
@@ -59,10 +62,10 @@ class MShopJsbPackageTask extends Task
 
 				try
 				{
-					$jsbParser = new MW_Jsb2_Standard( $jsbPath );
+					$jsbParser = new \Aimeos\MW\Jsb2\Standard( $jsbPath );
 					$jsbParser->deploy( 'js' );
 				}
-				catch( Exception $e )
+				catch( \Exception $e )
 				{
 					$this->log( sprintf( 'Error: %1$s', $e->getMessage() ) );
 				}

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from service tables.
  */
-class MW_Setup_Task_ServiceDropLocaleConstraints extends MW_Setup_Task_Base
+class ServiceDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_service_list_type' => array(

@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard\Process;
+
+
 // Strings for translation
 sprintf( 'process' );
 
@@ -18,9 +21,9 @@ sprintf( 'process' );
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Process_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/process/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard process section
@@ -167,7 +170,7 @@ class Client_Html_Checkout_Standard_Process_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -186,7 +189,7 @@ class Client_Html_Checkout_Standard_Process_Standard
 		 *  client/html/checkout/standard/process/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -206,12 +209,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/process/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -230,12 +233,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/process/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -269,13 +272,13 @@ class Client_Html_Checkout_Standard_Process_Standard
 
 		try
 		{
-			$orderItem = MShop_Factory::createManager( $context, 'order' )->getItem( $orderid );
+			$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->getItem( $orderid );
 
 			if( ( $code = $this->getOrderServiceCode( $orderItem->getBaseId() ) ) !== null )
 			{
 				$serviceItem = $this->getServiceItem( $code );
 
-				$serviceManager = MShop_Factory::createManager( $context, 'service' );
+				$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 				$provider = $serviceManager->getProvider( $serviceItem );
 
 				$params = array( 'code' => $serviceItem->getCode(), 'orderid' => $orderid );
@@ -290,7 +293,7 @@ class Client_Html_Checkout_Standard_Process_Standard
 				if( ( $form = $provider->process( $orderItem, $view->param() ) ) === null )
 				{
 					$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $serviceItem->getCode() );
-					throw new Client_Html_Exception( $msg );
+					throw new \Aimeos\Client\Html\Exception( $msg );
 				}
 
 				$view->standardUrlNext = $form->getUrl();
@@ -307,22 +310,22 @@ class Client_Html_Checkout_Standard_Process_Standard
 
 			parent::process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -342,12 +345,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 	 */
 	protected function getOrderServiceCode( $baseid )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'order/base/service' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/service' );
 
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'order.base.service.baseid', $baseid ),
-			$search->compare( '==', 'order.base.service.type', MShop_Order_Item_Base_Service_Base::TYPE_PAYMENT ),
+			$search->compare( '==', 'order.base.service.type', \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -363,12 +366,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 	 * Returns the payment service item for the given code.
 	 *
 	 * @param string $code Unique service code
-	 * @throws Client_Html_Exception If no service item for this code is found
-	 * @return MShop_Service_Item_Iface Service item object
+	 * @throws \Aimeos\Client\Html\Exception If no service item for this code is found
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item object
 	 */
 	protected function getServiceItem( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
@@ -382,7 +385,7 @@ class Client_Html_Checkout_Standard_Process_Standard
 		if( ( $serviceItem = reset( $result ) ) === false )
 		{
 			$msg = sprintf( 'No service for code "%1$s" found', $code );
-			throw new Client_Html_Exception( $msg );
+			throw new \Aimeos\Client\Html\Exception( $msg );
 		}
 
 		return $serviceItem;
@@ -403,12 +406,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 	/**
 	 * Returns the URL to the confirm page.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlConfirm( MW_View_Iface $view, array $params, array $config )
+	protected function getUrlConfirm( \Aimeos\MW\View\Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/confirm/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -488,12 +491,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 	/**
 	 * Returns the URL to the current page.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlSelf( MW_View_Iface $view, array $params, array $config )
+	protected function getUrlSelf( \Aimeos\MW\View\Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/standard/url/target
 		 * Destination of the URL where the controller specified in the URL is known
@@ -573,12 +576,12 @@ class Client_Html_Checkout_Standard_Process_Standard
 	/**
 	 * Returns the URL to the update page.
 	 *
-	 * @param MW_View_Iface $view View object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $params Parameters that should be part of the URL
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function getUrlUpdate( MW_View_Iface $view, array $params, array $config )
+	protected function getUrlUpdate( \Aimeos\MW\View\Iface $view, array $params, array $config )
 	{
 		/** client/html/checkout/update/url/target
 		 * Destination of the URL where the controller specified in the URL is known

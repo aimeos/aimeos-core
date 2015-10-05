@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from coupon tables.
  */
-class MW_Setup_Task_CouponDropLocaleConstraints extends MW_Setup_Task_Base
+class CouponDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_coupon_code' => array(

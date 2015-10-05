@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider;
+
+
 /**
- * Test class for MShop_Coupon_Provider_PercentRebate.
+ * Test class for \Aimeos\MShop\Coupon\Provider\PercentRebate.
  */
-class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
+class PercentRebateTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $orderBase;
@@ -23,15 +26,15 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 		$couponItem->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Standard( $priceManager->createItem(), $context->getLocale() );
-		$this->object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, 'zyxw' );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, 'zyxw' );
 	}
 
 
@@ -61,7 +64,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 		$products = $this->orderBase->getProducts();
 
 		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
-			throw new Exception( 'No coupon available' );
+			throw new \Exception( 'No coupon available' );
 		}
 
 		$this->assertEquals( 3, count( $products ) );
@@ -95,11 +98,11 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 		$products = $this->orderBase->getProducts();
 
 		if( ( $couponProduct20 = reset( $coupons['zyxw'] ) ) === false ) {
-			throw new Exception( 'No coupon available' );
+			throw new \Exception( 'No coupon available' );
 		}
 
 		if( ( $couponProduct10 = end( $coupons['zyxw'] ) ) === false ) {
-			throw new Exception( 'No coupon available' );
+			throw new \Exception( 'No coupon available' );
 		}
 
 		$this->assertEquals( 4, count( $products ) );
@@ -128,12 +131,12 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 
 	public function testAddCouponInvalidConfig()
 	{
-		$context = TestHelper::getContext();
-		$couponItem = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$context = \TestHelper::getContext();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 
-		$object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, 'zyxw' );
+		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, 'zyxw' );
 
-		$this->setExpectedException( 'MShop_Coupon_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
 		$object->addCoupon( $this->orderBase );
 	}
 
@@ -147,13 +150,13 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Return the order products.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Iface[]
-	 * @throws Exception
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[]
+	 * @throws \Exception
 	 */
 	protected function getOrderProducts()
 	{
 		$products = array();
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(
@@ -163,7 +166,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( count( $items ) < 2 ) {
-			throw new Exception( 'Please fix the test data in your database.' );
+			throw new \Exception( 'Please fix the test data in your database.' );
 		}
 
 		foreach( $items as $item ) {

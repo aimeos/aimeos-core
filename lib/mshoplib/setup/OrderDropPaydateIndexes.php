@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Drops the old *_pdate_* indexes in the order tables.
  */
-class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Base
+class OrderDropPaydateIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'idx_msord_sid_pdate_pstat_dstat' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_sid_pdate_pstat_dstat"',

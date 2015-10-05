@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Common\Item;
+
+
 /**
  * Common methods for all item objects.
  *
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Item_Base
+abstract class Base
 {
 }

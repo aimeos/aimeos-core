@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Service;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Service_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Service_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Service_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Service\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -49,7 +50,7 @@ class Controller_ExtJS_Service_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $params );
 
 		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception( 'No service found' );
+			throw new \Exception( 'No service found' );
 		}
 
 		$this->assertEquals( 1, count( $service ) );
@@ -59,7 +60,7 @@ class Controller_ExtJS_Service_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
@@ -67,7 +68,7 @@ class Controller_ExtJS_Service_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $typeManager->searchItems( $search );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No service type found' );
+			throw new \Exception( 'No service type found' );
 		}
 
 		$saveParams = (object) array(

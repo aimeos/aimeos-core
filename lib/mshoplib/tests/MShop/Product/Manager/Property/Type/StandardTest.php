@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Property\Type;
+
+
 /**
- * Test class for MShop_Product_Manager_Property_Type_Standard.
+ * Test class for \Aimeos\MShop\Product\Manager\Property\Type\Standard.
  */
-class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -23,8 +26,8 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->object = $manager->getSubManager( 'property' )->getSubManager('type');
 	}
 
@@ -49,14 +52,14 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -74,7 +77,7 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 
 		if( ($expected = reset($results) ) === false )
 		{
-			throw new Exception( 'No property type item found.' );
+			throw new \Exception( 'No property type item found.' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -90,7 +93,7 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 		$results = $this->object->searchItems($search);
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$item->setId(null);
@@ -129,7 +132,7 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -175,7 +178,7 @@ class MShop_Product_Manager_Property_Type_StandardTest extends PHPUnit_Framework
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
 		$this->object->getSubManager('unknown');
 	}
 }

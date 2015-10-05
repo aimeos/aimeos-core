@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private static $product;
 	private $context;
@@ -15,7 +16,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 	public static function setUpBeforeClass()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $manager->getSubmanager( 'type' );
 
 		$typeSearch = $typeManager->createSearch();
@@ -23,7 +24,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 		$result = $typeManager->searchItems( $typeSearch );
 
 		if( ( $typeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'Product type "default" not found' );
+			throw new \Exception( 'Product type "default" not found' );
 		}
 
 		$item = $manager->createItem();
@@ -39,24 +40,24 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 	public static function tearDownAfterClass()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$manager->deleteItem( self::$product->getId() );
 	}
 
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
+		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = TestHelper::getContext();
-		$this->endpoint = new Controller_Common_Product_Import_Csv_Processor_Done( $this->context, array() );
+		$this->context = \TestHelper::getContext();
+		$this->endpoint = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $this->context, array() );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::setCache( false );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -78,7 +79,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 
 		$category = $this->get( 'job_csv_test' );
@@ -124,7 +125,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 		$category = $this->create( 'job_csv_test' );
 		$category2 = $this->create( 'job_csv_test2' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 
 		$category = $this->get( 'job_csv_test' );
@@ -172,7 +173,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 		$result = $object->process( self::$product, $dataUpdate );
 
@@ -184,7 +185,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'job_csv_prod', $listItem->getRefItem()->getCode() );
 	}
@@ -204,10 +205,10 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, array(), $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, array(), $this->endpoint );
 		$result = $object->process( self::$product, array() );
 
 		$category = $this->get( 'job_csv_test' );
@@ -238,7 +239,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 
 		$category = $this->get( 'job_csv_test' );
@@ -271,7 +272,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 		$category = $this->create( 'job_csv_test' );
 
-		$object = new Controller_Common_Product_Import_Csv_Processor_Catalog_Standard( $this->context, $mapping, $this->endpoint );
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Catalog\Standard( $this->context, $mapping, $this->endpoint );
 		$result = $object->process( self::$product, $data );
 
 		$category = $this->get( 'job_csv_test' );
@@ -282,7 +283,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 		$listItem = reset( $listItems );
 
 		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $listItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'default', $listItem->getType() );
 		$this->assertEquals( 'job_csv_prod', $listItem->getRefItem()->getCode() );
@@ -291,7 +292,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 	protected function create( $code )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$item = $manager->createItem();
 		$item->setCode( $code );
@@ -302,9 +303,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 	}
 
 
-	protected function delete( MShop_Catalog_Item_Iface $catItem )
+	protected function delete( \Aimeos\MShop\Catalog\Item\Iface $catItem )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$listManager = $manager->getSubManager( 'lists' );
 
 		foreach( $catItem->getListItems('product') as $listItem ) {
@@ -317,7 +318,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 
 	protected function get( $code )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', $code ) );
@@ -325,7 +326,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_StandardTest extend
 		$result = $manager->searchItems( $search, array('product') );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No catalog item for code "%1$s"', $code ) );
+			throw new \Exception( sprintf( 'No catalog item for code "%1$s"', $code ) );
 		}
 
 		return $item;

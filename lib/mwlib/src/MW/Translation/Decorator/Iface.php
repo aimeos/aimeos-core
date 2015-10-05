@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
  * Decorator interface for translation classes
  *
  * @package MW
  * @subpackage Translation
  */
-interface MW_Translation_Decorator_Iface extends MW_Translation_Iface
+interface Iface extends \Aimeos\MW\Translation\Iface
 {
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Iface $object Translation object or decorator
+	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
 	 * @return void
 	 */
-	public function __construct( MW_Translation_Iface $object );
+	public function __construct( \Aimeos\MW\Translation\Iface $object );
 }

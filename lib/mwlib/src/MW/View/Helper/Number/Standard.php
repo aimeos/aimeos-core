@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Number;
+
+
 /**
  * View helper class for formatting numbers.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Number_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $dsep;
 	private $tsep;
@@ -25,7 +28,7 @@ class MW_View_Helper_Number_Standard
 	/**
 	 * Initializes the Number view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $decimalSeparator Character for the decimal point
 	 * @param string $thousandsSeperator Character separating groups of thousands
 	 */

@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Decorator;
+
+
 /**
  * Plugin decorator interface for dealing with run-time loadable extenstions.
  *
  * @package MShop
  * @subpackage Plugin
  */
-interface MShop_Plugin_Provider_Decorator_Iface extends MShop_Plugin_Provider_Iface
+interface Iface extends \Aimeos\MShop\Plugin\Provider\Iface
 {
 	/**
 	 * Initializes the plugin decorator object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Iface $item Plugin item object
-	 * @param MShop_Plugin_Provider_Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $item Plugin item object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Plugin_Item_Iface $item,
-		MShop_Plugin_Provider_Iface $provider );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item,
+		\Aimeos\MShop\Plugin\Provider\Iface $provider );
 }

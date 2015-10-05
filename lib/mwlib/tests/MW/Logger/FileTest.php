@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $filename;
@@ -22,7 +23,7 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->filename = 'loggertest.log';
-		$this->object = new MW_Logger_File( $this->filename );
+		$this->object = new \Aimeos\MW\Logger\File( $this->filename );
 	}
 
 	/**
@@ -41,23 +42,23 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 		$this->object->log( 'error' );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new Exception( 'No test file found' );
+			throw new \Exception( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( MW_Logger_Base::ERR, $msg[3] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $msg[3] );
 		$this->assertEquals( 'error', $msg[4] );
 
 
-		$this->setExpectedException('MW_Logger_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Logger\\Exception');
 		$this->object->log( 'wrong log level', -1);
 	}
 
@@ -66,70 +67,70 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 		$this->object->log( array ( 'scalar', 'errortest' ) );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new Exception( 'No test file found' );
+			throw new \Exception( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( MW_Logger_Base::ERR, $msg[3] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $msg[3] );
 		$this->assertEquals( '["scalar","errortest"]', $msg[4] );
 	}
 
 	public function testLogCrit()
 	{
-		$this->object->log( 'critical', MW_Logger_Base::CRIT );
+		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new Exception( 'No test file found' );
+			throw new \Exception( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( MW_Logger_Base::CRIT, $msg[3] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::CRIT, $msg[3] );
 		$this->assertEquals( 'critical', $msg[4] );
 	}
 
 	public function testLogWarn()
 	{
-		$this->object->log( 'debug', MW_Logger_Base::WARN );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::WARN );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new Exception( 'No test file found' );
+			throw new \Exception( 'No test file found' );
 		}
 
 		$msg = file_get_contents( $this->filename );
 
 		if( $msg !== '' ) {
-			throw new Exception( 'Log record found but none expected' );
+			throw new \Exception( 'Log record found but none expected' );
 		}
 	}
 
 	public function testFacility()
 	{
-		$this->object->log( 'user auth', MW_Logger_Base::ERR, 'auth' );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new Exception( 'No test file found' );
+			throw new \Exception( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( '<auth>', $msg[0] );
@@ -137,8 +138,8 @@ class MW_Logger_FileTest extends PHPUnit_Framework_TestCase
 
 	public function testFacilityLimited()
 	{
-		$this->object = new MW_Logger_File( $this->filename, MW_Logger_Base::ERR, array( 'test' ) );
-		$this->object->log( 'user auth', MW_Logger_Base::ERR, 'auth' );
+		$this->object = new \Aimeos\MW\Logger\File( $this->filename, \Aimeos\MW\Logger\Base::ERR, array( 'test' ) );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
 
 		$this->assertEquals( '', file_get_contents( $this->filename ) );
 	}

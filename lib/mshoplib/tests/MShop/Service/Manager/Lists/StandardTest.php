@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Manager\Lists;
+
+
 /**
- * Test class for MShop_Service_Manager_Lists_Standard.
+ * Test class for \Aimeos\MShop\Service\Manager\Lists\Standard.
  */
-class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -24,9 +27,9 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $serviceManager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -69,7 +72,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Lists_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $item );
 	}
 
 
@@ -80,7 +83,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -89,10 +92,10 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'type', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -104,7 +107,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -151,7 +154,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -162,11 +165,11 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first service list item' );
+			throw new \Exception( 'No first service list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last service list item' );
+			throw new \Exception( 'No last service list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -187,15 +190,15 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first service list item' );
+			throw new \Exception( 'No first service list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second service list item' );
+			throw new \Exception( 'No second service list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last service list item' );
+			throw new \Exception( 'No last service list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -216,15 +219,15 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first service list item' );
+			throw new \Exception( 'No first service list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second service list item' );
+			throw new \Exception( 'No second service list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last service list item' );
+			throw new \Exception( 'No last service list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -295,7 +298,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 
 	protected function getListItems()
 	{
-		$manager = MShop_Service_Manager_Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -308,7 +311,7 @@ class MShop_Service_Manager_Lists_StandardTest extends PHPUnit_Framework_TestCas
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No service item found' );
+			throw new \Exception( 'No service item found' );
 		}
 
 		$search = $this->object->createSearch();

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Job\Item;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Job_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -32,7 +34,7 @@ class MAdmin_Job_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'ctime' => '2000-01-01 00:00:00',
 		);
 
-		$this->object = new MAdmin_Job_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MAdmin\Job\Item\Standard( $this->values );
 	}
 
 
@@ -159,7 +161,7 @@ class MAdmin_Job_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MAdmin_Job_Item_Standard();
+		$item = new \Aimeos\MAdmin\Job\Item\Standard();
 
 		$list = array(
 			'job.id' => 1,

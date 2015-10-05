@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Manager;
+
+
 /**
- * Manager for database connections using the PDO library.
+ * Manager for database connections using the \PDO library.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
+class PDO implements \Aimeos\MW\DB\Manager\Iface
 {
 	private $config = null;
 	private $connections = array();
@@ -24,9 +27,9 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 	/**
 	 * Initializes the database manager object
 	 *
-	 * @param MW_Config_Iface $config Object holding the configuration data
+	 * @param \Aimeos\MW\Config\Iface $config Object holding the configuration data
 	 */
-	public function __construct( MW_Config_Iface $config )
+	public function __construct( \Aimeos\MW\Config\Iface $config )
 	{
 		$this->config = $config;
 	}
@@ -45,7 +48,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 	 * Returns a database connection.
 	 *
 	 * @param string $name Name of the resource in configuration
-	 * @return MW_DB_Connection_Iface
+	 * @return \Aimeos\MW\DB\Connection\Iface
 	 */
 	public function acquire( $name = 'db' )
 	{
@@ -62,7 +65,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 				$limit = $this->config->get( 'resource/' . $name . '/limit', -1 );
 
 				if( $limit >= 0 && $this->count[$name] >= $limit ) {
-					throw new MW_DB_Exception( sprintf( 'Maximum number of connections (%1$d) exceeded', $limit ) );
+					throw new \Aimeos\MW\DB\Exception( sprintf( 'Maximum number of connections (%1$d) exceeded', $limit ) );
 				}
 
 				$this->connections[$name] = array( $this->createConnection( $name, $adapter ) );
@@ -82,8 +85,8 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 			return array_pop( $this->connections[$name] );
 
 		}
-		catch( PDOException $e ) {
-			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+		catch( \PDOException $e ) {
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
 
@@ -91,13 +94,13 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 	/**
 	 * Releases the connection for reuse
 	 *
-	 * @param MW_DB_Connection_Iface $connection Connection object
+	 * @param \Aimeos\MW\DB\Connection\Iface $connection Connection object
 	 * @param string $name Name of resource
 	 */
-	public function release( MW_DB_Connection_Iface $connection, $name = 'db' )
+	public function release( \Aimeos\MW\DB\Connection\Iface $connection, $name = 'db' )
 	{
-		if( ( $connection instanceof MW_DB_Connection_PDO ) === false ) {
-			throw new MW_DB_Exception( 'Connection object isn\'t of type PDO' );
+		if( ( $connection instanceof \Aimeos\MW\DB\Connection\PDO ) === false ) {
+			throw new \Aimeos\MW\DB\Exception( 'Connection object isn\'t of type \PDO' );
 		}
 
 		$this->connections[$name][] = $connection;
@@ -109,7 +112,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 	 *
 	 * @param string $name Name to the database configuration in the resource file
 	 * @param string $adapter Name of the database adapter, e.g. "mysql"
-	 * @return MW_DB_Connection_Iface Database connection
+	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
 	protected function createConnection( $name, $adapter )
 	{
@@ -132,12 +135,12 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Iface
 		}
 
 		$attr = array(
-			PDO::ATTR_PERSISTENT => $this->config->get( 'resource/' . $name . '/opt-persistent', false ),
+			\PDO::ATTR_PERSISTENT => $this->config->get( 'resource/' . $name . '/opt-persistent', false ),
 		);
 
-		$pdo = new PDO( $dsn, $user, $pass, $attr );
-		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$dbc = new MW_DB_Connection_PDO( $pdo );
+		$pdo = new \PDO( $dsn, $user, $pass, $attr );
+		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
+		$dbc = new \Aimeos\MW\DB\Connection\PDO( $pdo );
 
 		foreach( $this->config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
 			$dbc->create( $stmt )->execute()->finish();

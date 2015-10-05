@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv;
+
+
 /**
  * Common class for CSV product import job controllers and processors.
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Base
-	extends Controller_Jobs_Base
+class Base
+	extends \Aimeos\Controller\Jobs\Base
 {
 	private static $types = array();
 
@@ -48,13 +51,13 @@ class Controller_Common_Product_Import_Csv_Base
 	 *
 	 * @param string $type Type of the cached data
 	 * @param string|null Name of the cache implementation
-	 * @return Controller_Common_Product_Import_Csv_Cache_Iface Cache object
+	 * @return \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface Cache object
 	 */
 	protected function getCache( $type, $name = null )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$iface = 'Controller_Common_Product_Import_Csv_Cache_Iface';
+		$iface = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\Iface';
 
 		if( $name === null ) {
 			$name = $config->get( 'classes/controller/common/product/import/csv/cache/' . $type . '/name', 'Standard' );
@@ -62,20 +65,20 @@ class Controller_Common_Product_Import_Csv_Base
 
 		if( ctype_alnum( $type ) === false || ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Common_Product_Import_Csv_Cache_' . $type . '_' . $name : '<not a string>';
-			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string($name) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\' . $type . '\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$classname = 'Controller_Common_Product_Import_Csv_Cache_' . ucfirst( $type ) . '_' . $name;
+		$classname = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\' . ucfirst( $type ) . '\\' . $name;
 
 		if( class_exists( $classname ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
 
 		$object = new $classname( $context );
 
 		if( !( $object instanceof $iface ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
 		return $object;
@@ -93,7 +96,7 @@ class Controller_Common_Product_Import_Csv_Base
 		$convlist = array();
 
 		foreach( $convmap as $idx => $name ) {
-			$convlist[$idx] = MW_Convert_Factory::createConverter( $name );
+			$convlist[$idx] = \Aimeos\MW\Convert\Factory::createConverter( $name );
 		}
 
 		return $convlist;
@@ -103,11 +106,11 @@ class Controller_Common_Product_Import_Csv_Base
 	/**
 	 * Returns the rows from the CSV file up to the maximum count
 	 *
-	 * @param MW_Container_Content_Iface $content CSV content object
+	 * @param \Aimeos\MW\Container\Content\Iface $content CSV content object
 	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
 	 * @return array List of arrays with product codes as keys and list of values from the CSV file
 	 */
-	protected function getData( MW_Container_Content_Iface $content, $maxcnt )
+	protected function getData( \Aimeos\MW\Container\Content\Iface $content, $maxcnt )
 	{
 		$count = 0;
 		$data = array();
@@ -233,14 +236,14 @@ class Controller_Common_Product_Import_Csv_Base
 	 * Returns the processor object for saving the product related information
 	 *
 	 * @param array $mapping Associative list of processor types as keys and index/data mappings as values
-	 * @return Controller_Common_Product_Import_Csv_Processor_Iface Processor object
+	 * @return \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface Processor object
 	 */
 	protected function getProcessors( array $mappings )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$iface = 'Controller_Common_Product_Import_Csv_Processor_Iface';
-		$object = new Controller_Common_Product_Import_Csv_Processor_Done( $context, array() );
+		$iface = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\Iface';
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $context, array() );
 
 		foreach( $mappings as $type => $mapping )
 		{
@@ -248,20 +251,20 @@ class Controller_Common_Product_Import_Csv_Base
 
 			if( ctype_alnum( $type ) === false )
 			{
-				$classname = is_string($name) ? 'Controller_Common_Product_Import_Csv_Processor_' . $type . '_' . $name : '<not a string>';
-				throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+				$classname = is_string($name) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\' . $type . '\\' . $name : '<not a string>';
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$classname = 'Controller_Common_Product_Import_Csv_Processor_' . ucfirst( $type ) . '_' . $name;
+			$classname = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\' . ucfirst( $type ) . '\\' . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
 			$object = new $classname( $context, $mapping, $object );
 
 			if( !( $object instanceof $iface ) ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -279,7 +282,7 @@ class Controller_Common_Product_Import_Csv_Base
 	protected function getProducts( array $codes, array $domains )
 	{
 		$result = array();
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
@@ -305,7 +308,7 @@ class Controller_Common_Product_Import_Csv_Base
 	{
 		if( !isset( self::$types[$path][$domain] ) )
 		{
-			$manager = MShop_Factory::createManager( $this->getContext(), $path );
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $path );
 			$key = str_replace( '/', '.', $path );
 
 			$search = $manager->createSearch();
@@ -317,7 +320,7 @@ class Controller_Common_Product_Import_Csv_Base
 		}
 
 		if( !isset( self::$types[$path][$domain][$code] ) ) {
-			throw new Controller_Jobs_Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $path ) );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $path ) );
 		}
 
 		return self::$types[$path][$domain][$code];

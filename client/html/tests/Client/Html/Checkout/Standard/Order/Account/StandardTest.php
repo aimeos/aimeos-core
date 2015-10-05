@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order\Account;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-class Client_Html_Checkout_Standard_Order_Account_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -13,21 +15,21 @@ class Client_Html_Checkout_Standard_Order_Account_StandardTest extends PHPUnit_F
 
 	protected function setUp()
 	{
-		MShop_Factory::setCache( true );
-		$this->context = TestHelper::getContext();
+		\Aimeos\MShop\Factory::setCache( true );
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Checkout_Standard_Order_Account_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Order\Account\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
 	protected function tearDown()
 	{
-		MShop_Factory::clear();
-		MShop_Factory::setCache( false );
+		\Aimeos\MShop\Factory::clear();
+		\Aimeos\MShop\Factory::setCache( false );
 
-		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		\Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context )->clear();
 		unset( $this->object );
 	}
 
@@ -48,40 +50,40 @@ class Client_Html_Checkout_Standard_Order_Account_StandardTest extends PHPUnit_F
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$type = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT;
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context );
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context );
 
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $manager->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer item found' );
+			throw new \Exception( 'No customer item found' );
 		}
 
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setEmail( 'unittest@aimeos.org' );
 
 
-		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
+		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_None' )
+		$mailMsgStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\Message\\None' )
 			->disableOriginalConstructor()
 			->disableOriginalClone()
 			->getMock();
@@ -95,20 +97,20 @@ class Client_Html_Checkout_Standard_Order_Account_StandardTest extends PHPUnit_F
 		$this->context->setMail( $mailStub );
 
 
-		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$basketCntl = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 
-		$view = TestHelper::getView();
+		$view = \TestHelper::getView();
 		$view->orderBasket = $basketCntl->get();
 		$this->context->setView( $view );
 		$this->object->setView( $view );
 
-		$orderBaseStub = $this->getMockBuilder( 'MShop_Order_Manager_Base_Standard' )
+		$orderBaseStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Base\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
-		$customerStub = $this->getMockBuilder( 'MShop_Customer_Manager_Standard' )
+		$customerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Customer\\Manager\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -116,8 +118,8 @@ class Client_Html_Checkout_Standard_Order_Account_StandardTest extends PHPUnit_F
 		$orderBaseStub->expects( $this->once() )->method( 'saveItem' );
 		$customerStub->expects( $this->once() )->method( 'saveItem' );
 
-		MShop_Factory::injectManager( $this->context, 'customer', $customerStub );
-		MShop_Factory::injectManager( $this->context, 'order/base', $orderBaseStub );
+		\Aimeos\MShop\Factory::injectManager( $this->context, 'customer', $customerStub );
+		\Aimeos\MShop\Factory::injectManager( $this->context, 'order/base', $orderBaseStub );
 
 		$this->object->process();
 	}

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds typeid column to attribute table.
  */
-class MW_Setup_Task_AttributeAddType extends MW_Setup_Task_Base
+class AttributeAddType extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute' => array(

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Csrf;
+
+
 /**
  * View helper class for retrieving CSRF tokens.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Csrf_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $name;
 	private $value;
@@ -26,7 +29,7 @@ class MW_View_Helper_Csrf_Standard
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $name CSRF token name
 	 * @param string $value CSRF token value
 	 */
@@ -46,7 +49,7 @@ class MW_View_Helper_Csrf_Standard
 	/**
 	 * Returns the CSRF partial object.
 	 *
-	 * @return MW_View_Helper_Iface CSRF partial object
+	 * @return \Aimeos\MW\View\Helper\Iface CSRF partial object
 	 */
 	public function transform()
 	{

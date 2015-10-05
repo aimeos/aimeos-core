@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager\Site;
+
+
 /**
  * Interface for Locale site manager.
  *
  * @package MShop
  * @subpackage Locale
  */
-interface MShop_Locale_Manager_Site_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Returns a list of item IDs, that are in the path of given item ID.
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Locale_Item_Site_Iface[] Associative list of items implementing MShop_Locale_Item_Site_Iface with IDs as keys
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() );
 
@@ -32,21 +35,21 @@ interface MShop_Locale_Manager_Site_Iface
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from MW_Tree_Manager_Base
-	 * @return MW_Tree_Node_Iface Node, maybe with subnodes
+	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Base::LEVEL_TREE );
+	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
 
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param MShop_Locale_Item_Site_Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
 	 * @return void
 	 */
-	public function insertItem( MShop_Locale_Item_Site_Iface $item, $parentId = null, $refId = null );
+	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null );
 
 
 	/**

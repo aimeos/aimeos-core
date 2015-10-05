@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Tag;
+
+
 /**
  * Default tag item implementation
  *
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Item_Tag_Iface
-	extends MShop_Common_Item_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the language id of the tag item

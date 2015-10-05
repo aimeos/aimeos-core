@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames constraints for price tables.
  */
-class MW_Setup_Task_PriceRenameConstraints extends MW_Setup_Task_Base
+class PriceRenameConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_price' => array(

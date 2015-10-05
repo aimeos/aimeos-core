@@ -6,7 +6,7 @@
  */
 
 $enc = $this->encoder();
-$iface = 'MShop_Price_Item_Iface';
+$iface = '\Aimeos\MShop\Price\Item\Iface';
 $prices = $this->get( 'prices', array() );
 
 if( !is_array( $prices ) ) {
@@ -32,7 +32,7 @@ $format = array(
 <?php foreach( $prices as $priceItem ) : ?>
 <?php
 	if( !( $priceItem instanceof $iface ) ) {
-		throw new MW_View_Exception( sprintf( 'Object doesn\'t implement "%1$s"', $iface ) );
+		throw new \Aimeos\MW\View\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $iface ) );
 	}
 
 	$costs = $priceItem->getCosts();

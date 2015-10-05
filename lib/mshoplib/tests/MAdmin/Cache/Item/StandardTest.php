@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Cache\Item;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Cache_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -27,7 +29,7 @@ class MAdmin_Cache_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'tags' => array( 'tag:1', 'tag:2' ),
 		);
 
-		$this->object = new MAdmin_Cache_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MAdmin\Cache\Item\Standard( $this->values );
 	}
 
 
@@ -108,7 +110,7 @@ class MAdmin_Cache_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MAdmin_Cache_Item_Standard();
+		$item = new \Aimeos\MAdmin\Cache\Item\Standard();
 
 		$list = array(
 			'cache.id' => 'product/id/1:detail-body',

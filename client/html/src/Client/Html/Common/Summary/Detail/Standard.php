@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Common\Summary\Detail;
+
+
 /**
  * Default implementation of checkout detail summary HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Common_Summary_Detail_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+abstract class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/common/summary/detail/default/subparts
 	 * List of HTML sub-clients rendered within the common summary detail section
@@ -160,10 +163,10 @@ abstract class Client_Html_Common_Summary_Detail_Standard
 	/**
 	 * Returns a list of tax rates and values for the given basket.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $basket Basket containing the products, services, etc.
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing the products, services, etc.
 	 * @return array Associative list of tax rates as key and corresponding amounts as value
 	 */
-	protected function getTaxRates( MShop_Order_Item_Base_Iface $basket )
+	protected function getTaxRates( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$taxrates = array();
 
@@ -190,7 +193,7 @@ abstract class Client_Html_Common_Summary_Detail_Standard
 				$taxrates[$taxrate] = $price->getValue() + $price->getCosts();
 			}
 		}
-		catch( Exception $e ) { ; } // if delivery service isn't available
+		catch( \Exception $e ) { ; } // if delivery service isn't available
 
 		try
 		{
@@ -203,7 +206,7 @@ abstract class Client_Html_Common_Summary_Detail_Standard
 				$taxrates[$taxrate] = $price->getValue() + $price->getCosts();
 			}
 		}
-		catch( Exception $e ) { ; } // if payment service isn't available
+		catch( \Exception $e ) { ; } // if payment service isn't available
 
 		return $taxrates;
 	}

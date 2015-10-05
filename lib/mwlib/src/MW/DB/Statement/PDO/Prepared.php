@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB\Statement\PDO;
+
+
 /**
- * Database statement class for prepared PDO statements.
+ * Database statement class for prepared \PDO statements.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB_Statement_Iface
+class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
 	private $stmt = null;
 
@@ -22,9 +25,9 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB
 	/**
 	 * Initializes the statement object.
 	 *
-	 * @param PDOStatement $stmt PDO database statement object
+	 * @param \PDOStatement $stmt \PDO database statement object
 	 */
-	public function __construct( PDOStatement $stmt )
+	public function __construct( \PDOStatement $stmt )
 	{
 		$this->stmt = $stmt;
 	}
@@ -35,37 +38,37 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB
 	 *
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in MW_DB_Statement_Base as constant
-	 * @throws MW_DB_Exception If an error occured in the unterlying driver
+	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
 	 */
-	public function bind( $position, $value, $type = MW_DB_Statement_Base::PARAM_STR )
+	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
 	{
 		switch( $type )
 		{
-			case MW_DB_Statement_Base::PARAM_NULL:
-				$pdotype = PDO::PARAM_NULL; break;
-			case MW_DB_Statement_Base::PARAM_BOOL:
-				$pdotype = PDO::PARAM_BOOL; break;
-			case MW_DB_Statement_Base::PARAM_INT:
-				$pdotype = PDO::PARAM_INT; break;
-			case MW_DB_Statement_Base::PARAM_FLOAT:
-				$pdotype = PDO::PARAM_STR; break;
-			case MW_DB_Statement_Base::PARAM_STR:
-				$pdotype = PDO::PARAM_STR; break;
-			case MW_DB_Statement_Base::PARAM_LOB:
-				$pdotype = PDO::PARAM_LOB; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+				$pdotype = \PDO::PARAM_NULL; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+				$pdotype = \PDO::PARAM_BOOL; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+				$pdotype = \PDO::PARAM_INT; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+				$pdotype = \PDO::PARAM_STR; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+				$pdotype = \PDO::PARAM_STR; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_LOB:
+				$pdotype = \PDO::PARAM_LOB; break;
 			default:
-				throw new MW_DB_Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
+				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
 		}
 
 		if( is_null( $value ) ) {
-			$pdotype = PDO::PARAM_NULL;
+			$pdotype = \PDO::PARAM_NULL;
 		}
 
 		try {
 			$this->stmt->bindValue( $position, $value, $pdotype );
-		} catch ( PDOException $pe ) {
-			throw new MW_DB_Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
+		} catch ( \PDOException $pe ) {
+			throw new \Aimeos\MW\DB\Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
 	}
 
@@ -73,17 +76,17 @@ class MW_DB_Statement_PDO_Prepared extends MW_DB_Statement_Base implements MW_DB
 	/**
 	 * Executes the statement.
 	 *
-	 * @return MW_DB_Result_Iface Result object
-	 * @throws MW_DB_Exception If an error occured in the unterlying driver
+	 * @return \Aimeos\MW\DB\Result\Iface Result object
+	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
 	 */
 	public function execute()
 	{
 		try {
 			$this->stmt->execute();
-		} catch ( PDOException $pe ) {
-			throw new MW_DB_Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
+		} catch ( \PDOException $pe ) {
+			throw new \Aimeos\MW\DB\Exception( $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
 		}
 
-		return new MW_DB_Result_PDO( $this->stmt );
+		return new \Aimeos\MW\DB\Result\PDO( $this->stmt );
 	}
 }

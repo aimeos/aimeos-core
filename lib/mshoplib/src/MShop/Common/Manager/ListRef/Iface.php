@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\ListRef;
+
+
 /**
  * Common interface for managers working with referenced list items.
  *
  * @package MShop
  * @subpackage Common
  */
-interface MShop_Common_Manager_ListRef_Iface
-	extends MShop_Common_Manager_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

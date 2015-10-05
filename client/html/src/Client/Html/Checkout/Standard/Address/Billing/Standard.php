@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard\Address\Billing;
+
+
 /**
  * Default implementation of checkout billing address HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Address_Billing_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/address/billing/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard address billing section
@@ -171,7 +174,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -190,7 +193,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 		 *  client/html/checkout/standard/address/billing/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -210,12 +213,12 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/address/billing/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -234,12 +237,12 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/address/billing/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -268,7 +271,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 			}
 
 			$context = $this->getContext();
-			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
+			$basketCtrl = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 
 
 			/** client/html/checkout/standard/address/billing/disable-new
@@ -291,7 +294,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 			 * @see client/html/checkout/standard/address/billing/hidden
 			 */
 			$disable = $view->config( 'client/html/checkout/standard/address/billing/disable-new', false );
-			$type = MShop_Order_Item_Base_Address_Base::TYPE_PAYMENT;
+			$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 
 			if( ( $option = $view->param( 'ca_billingoption', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
@@ -301,14 +304,14 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 				if( count( $invalid ) > 0 )
 				{
 					$view->billingError = $invalid;
-					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
+					throw new \Aimeos\Client\Html\Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $params );
 			}
 			else // existing address
 			{
-				$customerManager = MShop_Factory::createManager( $context, 'customer' );
+				$customerManager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 
 				$search = $customerManager->createSearch( true );
 				$expr = array(
@@ -320,7 +323,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 				$items = $customerManager->searchItems( $search );
 
 				if( ( $item = reset( $items ) ) === false || $option != $context->getUserId() ) {
-					throw new Client_Html_Exception( sprintf( 'Customer with ID "%1$s" not found', $option ) );
+					throw new \Aimeos\Client\Html\Exception( sprintf( 'Customer with ID "%1$s" not found', $option ) );
 				}
 
 				$invalid = array();
@@ -345,7 +348,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 				if( count( $invalid ) > 0 )
 				{
 					$view->billingError = $invalid;
-					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
+					throw new \Aimeos\Client\Html\Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $addr );
@@ -353,7 +356,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 
 			parent::process();
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$view->billingError = $e->getErrorList();
 			throw $e;
@@ -635,7 +638,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 
 
 		if( isset( $params['order.base.address.salutation'] )
-			&& $params['order.base.address.salutation'] === MShop_Common_Item_Address_Base::SALUTATION_COMPANY
+			&& $params['order.base.address.salutation'] === \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY
 			&& in_array( 'order.base.address.company', $mandatory ) === false
 		) {
 			$mandatory[] = 'order.base.address.company';
@@ -671,21 +674,21 @@ class Client_Html_Checkout_Standard_Address_Billing_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
 			$context = $this->getContext();
-			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
+			$basketCntl = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 
 			try {
 				$langid = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
-			} catch( Exception $e ) {
+			} catch( \Exception $e ) {
 				$langid = $view->param( 'ca_billing/order.base.address.languageid', $context->getLocale()->getLanguageId() );
 			}
 			$view->billingLanguage = $langid;

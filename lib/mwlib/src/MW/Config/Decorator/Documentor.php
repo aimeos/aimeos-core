@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
  * Documentor decorator for config classes.
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_Documentor
-	extends MW_Config_Decorator_Base
-	implements MW_Config_Decorator_Iface
+class Documentor
+	extends \Aimeos\MW\Config\Decorator\Base
+	implements \Aimeos\MW\Config\Decorator\Iface
 {
 	private $file;
 
@@ -24,15 +27,15 @@ class MW_Config_Decorator_Documentor
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Iface $object Config object or decorator
+	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param string $filename File name the collected configuration is written to
 	 */
-	public function __construct( MW_Config_Iface $object, $filename = 'confdoc.ser' )
+	public function __construct( \Aimeos\MW\Config\Iface $object, $filename = 'confdoc.ser' )
 	{
 		parent::__construct( $object );
 
 		// this object is not cloned!
-		$this->file = new My_Config_File( $filename );
+		$this->file = new ConfigFile( $filename );
 	}
 
 
@@ -60,7 +63,7 @@ class MW_Config_Decorator_Documentor
  * @package MW
  * @subpackage Config
  */
-class My_Config_File
+class ConfigFile
 {
 	private $config = array();
 	private $file;
@@ -70,12 +73,12 @@ class My_Config_File
 	 * Initializes the instance.
 	 *
 	 * @param string $filename
-	 * @throws MW_Config_Exception If file could not be opened or created
+	 * @throws \Aimeos\MW\Config\Exception If file could not be opened or created
 	 */
 	public function __construct( $filename )
 	{
 		if( ( $this->file = fopen( $filename, 'w' ) ) === false ) {
-			throw new MW_Config_Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Config\Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
 		}
 	}
 

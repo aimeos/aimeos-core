@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Sort;
+
+
 /**
  * PHP implementation for sorting objects.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Sort_PHP
-	extends MW_Common_Criteria_Expression_Base
-	implements MW_Common_Criteria_Expression_Sort_Iface
+class PHP
+	extends \Aimeos\MW\Common\Criteria\Expression\Base
+	implements \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
 {
 	private static $operators = array( '+' => 'asort', '-' => 'arsort' );
 	private $operator;
@@ -32,7 +35,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	public function __construct( $operator, $name )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		$this->operator = $operator;
@@ -78,7 +81,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
@@ -92,7 +95,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 		}
 
 		if( !isset( $types[$name] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
 		return self::$operators[$this->operator] . '(' . $transname . ');';
@@ -128,14 +131,14 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	 *
 	 * @param string &$item Parameter value
 	 * @return string Internal parameter type
-	 * @throws MW_Common_Exception If an error occurs
+	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
 	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new MW_Common_Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
 			}
 
 			return '(string)';

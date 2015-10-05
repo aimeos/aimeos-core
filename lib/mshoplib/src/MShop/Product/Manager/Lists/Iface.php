@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Product\Manager\Lists;
+
+
 /**
  * Interface for product type manager.
  *
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Manager_Lists_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Decorator;
+
+
 /**
  * Base decorator methods for coupon provider.
  *
  * @package MShop
  * @subpackage Coupon
  */
-abstract class MShop_Coupon_Provider_Decorator_Base
-	extends MShop_Coupon_Provider_Base
+abstract class Base
+	extends \Aimeos\MShop\Coupon\Provider\Base
 {
 	private $provider;
 	private $object;
@@ -24,13 +27,13 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Initializes a new coupon provider object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Coupon_Item_Iface $couponItem Coupon item with configuration for the provider
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $couponItem Coupon item with configuration for the provider
 	 * @param string $code Coupon code entered by the customer
-	 * @param MShop_Coupon_Provider_Iface $provider Coupon provider interface
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider interface
 	 */
-	public function __construct( MShop_Context_Item_Iface $context,
-		MShop_Coupon_Item_Iface $couponItem, $code, MShop_Coupon_Provider_Iface $provider )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MShop\Coupon\Item\Iface $couponItem, $code, \Aimeos\MShop\Coupon\Provider\Iface $provider )
 	{
 		$this->provider = $provider;
 
@@ -41,9 +44,9 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Iface $base )
+	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$this->provider->addCoupon( $base );
 	}
@@ -52,9 +55,9 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function updateCoupon( MShop_Order_Item_Base_Iface $base )
+	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$this->provider->updateCoupon( $base );
 	}
@@ -63,9 +66,9 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function deleteCoupon( MShop_Order_Item_Base_Iface $base )
+	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$this->provider->deleteCoupon( $base );
 	}
@@ -74,10 +77,10 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Tests if a coupon should be granted.
 	 *
-	 * @param MShop_Order_Item_Base_Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return boolean True of coupon can be granted, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		return $this->provider->isAvailable( $base );
 	}
@@ -86,9 +89,9 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Sets the reference of the outside object.
 	 *
-	 * @param MShop_Coupon_Provider_Iface $object Reference to the outside provider or decorator
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outside provider or decorator
 	 */
-	public function setObject( MShop_Coupon_Provider_Iface $object )
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object )
 	{
 		$this->provider->setObject( $object );
 		$this->object = $object;
@@ -98,7 +101,7 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Returns the outmost decorator or a reference to the provider itself.
 	 *
-	 * @return MShop_Coupon_Provider_Iface Outmost object
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost object
 	 */
 	protected function getObject()
 	{
@@ -113,7 +116,7 @@ abstract class MShop_Coupon_Provider_Decorator_Base
 	/**
 	 * Returns the stored provider object.
 	 *
-	 * @return MShop_Coupon_Provider_Iface Coupon provider
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider
 	 */
 	protected function getProvider()
 	{

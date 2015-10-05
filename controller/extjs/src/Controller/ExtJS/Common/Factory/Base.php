@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Factory;
+
+
 /**
  * Common methods for all factories.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Common_Factory_Base
+class Base
 {
 	private static $objects = array();
 
@@ -25,9 +28,9 @@ class Controller_ExtJS_Common_Factory_Base
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param Controller_ExtJS_Iface|null $controller ExtJS controller object
+	 * @param \Aimeos\Controller\ExtJS\Iface|null $controller ExtJS controller object
 	 */
-	public static function injectController( $classname, Controller_ExtJS_Iface $controller = null )
+	public static function injectController( $classname, \Aimeos\Controller\ExtJS\Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -36,34 +39,34 @@ class Controller_ExtJS_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param Controller_ExtJS_Common_Iface $controller Controller object
-	 * @param string $classprefix Decorator class prefix, e.g. "Controller_ExtJS_Attribute_Decorator_"
-	 * @return Controller_ExtJS_Common_Iface Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\Controller\ExtJS\Common\Iface $controller Controller object
+	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\ExtJS\Attribute\Decorator\"
+	 * @return \Aimeos\Controller\ExtJS\Common\Iface Controller object
 	 */
-	protected static function addDecorators( MShop_Context_Item_Iface $context,
-		Controller_ExtJS_Iface $controller, array $decorators, $classprefix )
+	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\Controller\ExtJS\Iface $controller, array $decorators, $classprefix )
 	{
-		$iface = 'Controller_ExtJS_Common_Decorator_Iface';
+		$iface = '\\Aimeos\\Controller\\ExtJS\\Common\\Decorator\\Iface';
 
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
 				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
-				throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
 			$controller = new $classname( $context, $controller );
 
 			if( !( $controller instanceof $iface ) ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -74,16 +77,16 @@ class Controller_ExtJS_Common_Factory_Base
 	/**
 	 * Adds the decorators to the controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
-	 * @param Controller_ExtJS_Common_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\Controller\ExtJS\Common\Iface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
-	 * @return Controller_ExtJS_Common_Iface Controller object
+	 * @return \Aimeos\Controller\ExtJS\Common\Iface Controller object
 	 */
-	protected static function addControllerDecorators( MShop_Context_Item_Iface $context,
-		Controller_ExtJS_Iface $controller, $domain )
+	protected static function addControllerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\Controller\ExtJS\Iface $controller, $domain )
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
 		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
@@ -104,8 +107,8 @@ class Controller_ExtJS_Common_Factory_Base
 		 *
 		 * This would wrap the decorators named "decorator1" and "decorator2" around
 		 * all client instances in that order. The decorator classes would be
-		 * "Controller_ExtJS_Common_Decorator_Decorator1" and
-		 * "Controller_ExtJS_Common_Decorator_Decorator2".
+		 * "\Aimeos\Controller\ExtJS\Common\Decorator\Decorator1" and
+		 * "\Aimeos\Controller\ExtJS\Common\Decorator\Decorator2".
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -121,14 +124,14 @@ class Controller_ExtJS_Common_Factory_Base
 			}
 		}
 
-		$classprefix = 'Controller_ExtJS_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\ExtJS\\Common\\Decorator\\';
 		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_ExtJS_Common_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\ExtJS\\Common\\Decorator\\';
 		$decorators = $config->get( 'controller/extjs/' . $domain . '/decorators/global', array() );
 		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = 'Controller_ExtJS_' . ucfirst( $localClass ) . '_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\ExtJS\\' . ucfirst( $localClass ) . '_Decorator_';
 		$decorators = $config->get( 'controller/extjs/' . $domain . '/decorators/local', array() );
 		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
@@ -139,25 +142,25 @@ class Controller_ExtJS_Common_Factory_Base
 	/**
 	 * Creates a controller object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
-	 * @return Controller_ExtJS_Common_Iface Controller object
+	 * @return \Aimeos\Controller\ExtJS\Common\Iface Controller object
 	 */
-	protected static function createControllerBase( MShop_Context_Item_Iface $context, $classname, $interface )
+	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
 
 		$controller = new $classname( $context );
 
 		if( !( $controller instanceof $interface ) ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
 		}
 
 		return $controller;

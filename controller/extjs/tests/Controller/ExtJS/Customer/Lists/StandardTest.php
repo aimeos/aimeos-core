@@ -1,19 +1,20 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Customer\Lists;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Customer_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Customer\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -47,7 +48,7 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1 );
-		$textManager = new Controller_ExtJS_Customer_Standard( TestHelper::getContext() );
+		$textManager = new \Aimeos\Controller\ExtJS\Customer\Standard( \TestHelper::getContext() );
 		$result = $textManager->searchItems( $params );
 
 		$params = (object) array(
@@ -56,7 +57,7 @@ class Controller_ExtJS_Customer_Lists_StandardTest extends PHPUnit_Framework_Tes
 			'start' => 0,
 			'limit' => 1,
 		);
-		$listTypeManager = Controller_ExtJS_Customer_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$listTypeManager = \Aimeos\Controller\ExtJS\Customer\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $listTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

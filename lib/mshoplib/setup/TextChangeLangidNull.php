@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes langid column to allow NULL values.
  */
-class MW_Setup_Task_TextChangeLangidNull extends MW_Setup_Task_Base
+class TextChangeLangidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_text" CHANGE "langid" "langid" CHAR(2) DEFAULT NULL',

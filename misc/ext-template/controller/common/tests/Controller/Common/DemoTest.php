@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Common;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Controller_Common_DemoTest extends PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class Controller_Common_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new Controller_Common_Demo_Standard( TestHelper::getContext() );
+		// $this->object = new \Aimeos\Controller\Common\Demo\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -32,7 +34,7 @@ class Controller_Common_DemoTest extends PHPUnit_Framework_TestCase
 	{
 		unset( $this->object );
 
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 

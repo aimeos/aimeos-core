@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Manager;
+
+
 /**
- * Test class for MShop_Coupon_Manager_Standard.
+ * Test class for \Aimeos\MShop\Coupon\Manager\Standard.
  */
-class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $item;
@@ -23,7 +26,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->object = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$this->item = $this->object->createItem();
 		$this->item->setProvider( 'Example' );
@@ -54,37 +57,37 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	{
 		$attribs = $this->object->getSearchAttributes();
 		foreach( $attribs as $obj ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $obj );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $obj );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Coupon_Item_Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Coupon\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'code' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Iface', $this->object->getSubManager( 'code', 'Standard' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'code' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'code', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( '$%^' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'Code', 'unknown' );
 	}
 
@@ -96,7 +99,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new Exception( 'No results available' );
+			throw new \Exception( 'No results available' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId() );
@@ -109,7 +112,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No coupon item found' );
+			throw new \Exception( 'No coupon item found' );
 		}
 
 		$item->setId( null );
@@ -128,7 +131,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -157,7 +160,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -168,11 +171,11 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 		$item->setProvider( 'Present,Example' );
 		$provider = $this->object->getProvider( $item, 'abcd' );
 
-		$this->assertInstanceOf( 'MShop_Coupon_Provider_Iface', $provider );
-		$this->assertInstanceOf( 'MShop_Coupon_Provider_Decorator_Example', $provider );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Coupon\\Provider\\Iface', $provider );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Coupon\\Provider\\Decorator\\Example', $provider );
 
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getProvider( $this->object->createItem(), '' );
 	}
 
@@ -180,7 +183,7 @@ class MShop_Coupon_Manager_StandardTest extends PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->createSearch();
-		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $search );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\SQL', $search );
 	}
 
 

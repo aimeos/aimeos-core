@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Warehouse;
+
+
 /**
  * Warehouse cache for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Cache_Warehouse_Standard
-	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Cache\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface
 {
 	private $warehouses = array();
 
@@ -24,13 +27,13 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
-		$manager = MShop_Factory::createManager( $context, 'product/stock/warehouse' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock/warehouse' );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 1000 );
 
@@ -58,9 +61,9 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Standard
 	/**
 	 * Adds the warehouse ID to the cache
 	 *
-	 * @param MShop_Common_Item_Iface $item Warehouse object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Warehouse object
 	 */
-	public function set( MShop_Common_Item_Iface $item )
+	public function set( \Aimeos\MShop\Common\Item\Iface $item )
 	{
 		$this->warehouses[ $item->getCode() ] = $item->getId();
 	}

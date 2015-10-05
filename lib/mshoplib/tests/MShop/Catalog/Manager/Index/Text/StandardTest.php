@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index\Text;
+
+
 /**
- * Test class for MShop_Catalog_Manager_Index_Text_Standard.
+ * Test class for \Aimeos\MShop\Catalog\Manager\Index\Text\Standard.
  */
-class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	protected static $products;
@@ -18,14 +21,14 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 
 	public static function setUpBeforeClass()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new Exception( 'Products not available' );
+			throw new \Exception( 'Products not available' );
 		}
 
 		foreach( $result as $item ) {
@@ -41,9 +44,9 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
+		$this->editor = \TestHelper::getContext()->getEditor();
 
-		$this->object = new MShop_Catalog_Manager_Index_Text_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Index\Text\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -67,7 +70,7 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 
 	public function testAggregate()
 	{
-		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'text' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -80,7 +83,7 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No text item found' );
+			throw new \Exception( 'No text item found' );
 		}
 
 
@@ -96,19 +99,19 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$product = self::$products['CNC'];
 
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
-			throw new Exception( 'Product doesnt have any price item' );
+			throw new \Exception( 'Product doesnt have any price item' );
 		}
 
 
@@ -139,7 +142,7 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -150,7 +153,7 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 
 		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new Exception( 'No text with type "name" available in product CNC' );
+			throw new \Exception( 'No text with type "name" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
@@ -189,8 +192,8 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 
 	public function testSearchTexts()
 	{
-		$context = TestHelper::getContext();
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$context = \TestHelper::getContext();
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -201,7 +204,7 @@ class MShop_Catalog_Manager_Index_Text_StandardTest extends PHPUnit_Framework_Te
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
+			throw new \Exception( 'No product found' );
 		}
 
 

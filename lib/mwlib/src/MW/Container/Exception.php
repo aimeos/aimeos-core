@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
- * Exception thrown by container and content classes.
+ * \Exception thrown by container and content classes.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Product\Attribute;
+
+
 /**
  * Default order manager base product attribute.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Product_Attribute_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Product_Attribute_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Iface
 {
 	private $searchConfig = array(
 		'order.base.product.attribute.id' => array(
@@ -25,7 +28,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."ordprodid" )' ),
 			'label'=>'Order base product attribute ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.siteid' => array(
@@ -33,7 +36,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			'internalcode'=>'mordbaprat."siteid"',
 			'label'=>'Order base product attribute site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.attributeid' => array(
@@ -41,7 +44,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			'internalcode'=>'mordbaprat."attrid"',
 			'label'=>'Order base product attribute original ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.productid' => array(
@@ -49,7 +52,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			'internalcode'=>'mordbaprat."ordprodid"',
 			'label'=>'Order base product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.type' => array(
@@ -57,49 +60,49 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			'internalcode'=>'mordbaprat."type"',
 			'label'=>'Order base product attribute type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.code' => array(
 			'code'=>'order.base.product.attribute.code',
 			'internalcode'=>'mordbaprat."code"',
 			'label'=>'Order base product attribute code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.value' => array(
 			'code'=>'order.base.product.attribute.value',
 			'internalcode'=>'mordbaprat."value"',
 			'label'=>'Order base product attribute value',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.name' => array(
 			'code'=>'order.base.product.attribute.name',
 			'internalcode'=>'mordbaprat."name"',
 			'label'=>'Order base product attribute name',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.mtime' => array(
 			'code'=>'order.base.product.attribute.mtime',
 			'internalcode'=>'mordbaprat."mtime"',
 			'label'=>'Order base product attribute modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.ctime'=> array(
 			'code'=>'order.base.product.attribute.ctime',
 			'internalcode'=>'mordbaprat."ctime"',
 			'label'=>'Order base product attribute create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'order.base.product.attribute.editor'=> array(
 			'code'=>'order.base.product.attribute.editor',
 			'internalcode'=>'mordbaprat."editor"',
 			'label'=>'Order base product attribute editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 	);
 
@@ -107,9 +110,9 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -119,11 +122,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/product/attribute/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -192,7 +195,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	/**
 	 * Creates a new order base product attribute object.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Attribute_Iface New media object
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface New media object
 	 */
 	public function createItem()
 	{
@@ -206,8 +209,8 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	 *
 	 * @param integer $id ID of the item that should be retrieved
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Product_Attribute_Iface Returns order base product attribute item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Returns order base product attribute item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -218,15 +221,15 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	/**
 	 * Adds a new item to the storage or updates an existing one.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Attribute_Iface $item New item that should
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item New item that should
 	 * be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Product_Attribute_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -307,9 +310,9 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
-			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 3, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
 			$stmt->bind( 6, $item->getValue() );
@@ -318,7 +321,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
@@ -364,7 +367,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -412,7 +415,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -444,7 +447,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Lists_Iface List manager
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface List manager
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -458,11 +461,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Base_Product_Attribute_Standard
+		 *  \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Base_Product_Attribute_Myattribute
+		 *  \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Myattribute
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -497,7 +500,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 		 *  mshop/order/manager/base/product/attribute/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order base product attribute manager.
 		 *
 		 * @param array List of decorator names
@@ -517,12 +520,12 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base product attribute manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base product attribute manager.
 		 *
 		 *  mshop/order/manager/base/product/attribute/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -541,12 +544,12 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base product attribute manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base product attribute manager.
 		 *
 		 *  mshop/order/manager/base/product/attribute/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -564,11 +567,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	/**
 	 * Searches for order product attributes based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of products implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @return array List of products implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -581,7 +584,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 		try
 		{
 			$required = array( 'order.base.product.attribute' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/product/attribute/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -696,7 +699,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -704,7 +707,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -718,10 +721,10 @@ class MShop_Order_Manager_Base_Product_Attribute_Standard
 	 * Creates new order base product attribute item object initialized with given parameters.
 	 *
 	 * @param array $values Associative array of order product attribute values
-	 * @return MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Order_Item_Base_Product_Attribute_Standard( $values );
+		return new \Aimeos\MShop\Order\Item\Base\Product\Attribute\Standard( $values );
 	}
 }

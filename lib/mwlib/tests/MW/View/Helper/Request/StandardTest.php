@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\View\Helper\Request;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_View_Helper_Request_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,8 +20,8 @@ class MW_View_Helper_Request_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
-		$this->object = new MW_View_Helper_Request_Standard( $view, 'body', '127.0.0.1' );
+		$view = new \Aimeos\MW\View\Standard();
+		$this->object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1' );
 	}
 
 
@@ -38,7 +39,7 @@ class MW_View_Helper_Request_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( 'MW_View_Helper_Iface', $this->object->transform() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Helper\\Iface', $this->object->transform() );
 	}
 
 

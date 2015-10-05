@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor\Property;
+
+
 /**
  * Product property processor for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Processor_Property_Standard
-	extends Controller_Common_Product_Import_Csv_Processor_Base
-	implements Controller_Common_Product_Import_Csv_Processor_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Processor\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface
 {
 	/**
 	 * Saves the product property related data to the storage
 	 *
-	 * @param MShop_Product_Item_Iface $product Product item with associated items
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with associated items
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function process( MShop_Product_Item_Iface $product, array $data )
+	public function process( \Aimeos\MShop\Product\Item\Iface $product, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/property' );
 		$manager->begin();
 
 		try
@@ -88,7 +91,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Standard
 
 			$manager->commit();
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$manager->rollback();
 			throw $e;
@@ -106,7 +109,7 @@ class Controller_Common_Product_Import_Csv_Processor_Property_Standard
 	 */
 	protected function getPropertyItems( $prodid )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/property' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/property' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodid ) );

@@ -8,21 +8,24 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Factory;
+
+
 /**
  * Factory interface for service provider.
  *
  * @package MShop
  * @subpackage Service
  */
-interface MShop_Service_Provider_Factory_Iface
-	extends MShop_Service_Provider_Iface
+interface Iface
+	extends \Aimeos\MShop\Service\Provider\Iface
 {
 	/**
 	 * Initializes a new service provider object using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param MShop_Service_Item_Iface $serviceItem Service item with configuration for the provider
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration for the provider
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, MShop_Service_Item_Iface $serviceItem );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem );
 }

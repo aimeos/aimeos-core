@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Convert;
+
+
 /**
- * Exception thrown by convert classes.
+ * \Exception thrown by convert classes.
  *
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

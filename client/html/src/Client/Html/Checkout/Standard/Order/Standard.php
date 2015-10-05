@@ -8,6 +8,9 @@
  */
 
 
+namespace Aimeos\Client\Html\Checkout\Standard\Order;
+
+
 // Strings for translation
 sprintf( 'order' );
 
@@ -18,9 +21,9 @@ sprintf( 'order' );
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Order_Standard
-	extends Client_Html_Common_Client_Factory_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/checkout/standard/order/default/subparts
 	 * List of HTML sub-clients rendered within the checkout standard order section
@@ -60,7 +63,7 @@ class Client_Html_Checkout_Standard_Order_Standard
 	/** client/html/checkout/standard/order/account/name
 	 * Name of the account part used by the checkout standard order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Checkout_Standard_Order_Account_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Checkout\Standard\Order\Account\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -71,7 +74,7 @@ class Client_Html_Checkout_Standard_Order_Standard
 	/** client/html/checkout/standard/order/address/name
 	 * Name of the address part used by the checkout standard order client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Checkout_Standard_Order_Address_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Checkout\Standard\Order\Address\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -189,7 +192,7 @@ class Client_Html_Checkout_Standard_Order_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -208,7 +211,7 @@ class Client_Html_Checkout_Standard_Order_Standard
 		 *  client/html/checkout/standard/order/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -228,12 +231,12 @@ class Client_Html_Checkout_Standard_Order_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -252,12 +255,12 @@ class Client_Html_Checkout_Standard_Order_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Checkout_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Checkout\Decorator\*") around the html client.
 		 *
 		 *  client/html/checkout/standard/order/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Checkout_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Checkout\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08
@@ -290,13 +293,13 @@ class Client_Html_Checkout_Standard_Order_Standard
 			}
 
 			$context = $this->getContext();
-			$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
+			$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 
 			$basket = $orderBaseManager->getSession();
 			$basket->setCustomerId( $context->getUserId() );
 			$basket->finish();
 
-			$cntl = Controller_Frontend_Factory::createController( $context, 'order' );
+			$cntl = \Aimeos\Controller\Frontend\Factory::createController( $context, 'order' );
 			$orderItem = $cntl->store( $basket );
 			$cntl->block( $orderItem );
 
@@ -308,9 +311,9 @@ class Client_Html_Checkout_Standard_Order_Standard
 			parent::process();
 
 			// save again after sub-clients modified it's state
-			MShop_Factory::createManager( $context, 'order' )->saveItem( $orderItem );
+			\Aimeos\MShop\Factory::createManager( $context, 'order' )->saveItem( $orderItem );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$view->standardStepActive = 'order';
 			throw $e;

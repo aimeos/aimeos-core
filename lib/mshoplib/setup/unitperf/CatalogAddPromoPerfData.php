@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product promotion performance records to catalog list table.
  */
-class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogAddPromoPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,7 +46,7 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 		$context = $this->getContext();
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'lists' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type' );
 
@@ -57,7 +60,7 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Catalog list type item not found' );
+			throw new \Exception( 'Catalog list type item not found' );
 		}
 
 

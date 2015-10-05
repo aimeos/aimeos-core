@@ -9,14 +9,17 @@
  */
 
 
+namespace Aimeos\MShop\Service\Item;
+
+
 /**
  * Generic interface for delivery and payment item DTOs.
  * @package MShop
  * @subpackage Service
  */
-interface MShop_Service_Item_Iface
-	extends MShop_Common_Item_Config_Iface, MShop_Common_Item_ListRef_Iface,
-		MShop_Common_Item_Position_Iface, MShop_Common_Item_Typeid_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Config\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
+		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the code of the service item.

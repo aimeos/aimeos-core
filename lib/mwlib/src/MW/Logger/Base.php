@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * Base logger class defining required error level constants
  *
  * @package MW
  * @subpackage Logger
  */
-abstract class MW_Logger_Base
+abstract class Base
 {
 	/**
 	 * Emergency (0): system is unusable
@@ -61,23 +64,23 @@ abstract class MW_Logger_Base
 	 * Checks if the given log constant is valid
 	 *
 	 * @param integer $level Log constant
-	 * @throws MW_Logger_Exception If log constant is unknown
+	 * @throws \Aimeos\MW\Logger\Exception If log constant is unknown
 	 */
 	protected function checkLogLevel( $level )
 	{
 		switch( $level )
 		{
-			case MW_Logger_Base::EMERG:
-			case MW_Logger_Base::ALERT:
-			case MW_Logger_Base::CRIT:
-			case MW_Logger_Base::ERR:
-			case MW_Logger_Base::WARN:
-			case MW_Logger_Base::NOTICE:
-			case MW_Logger_Base::INFO:
-			case MW_Logger_Base::DEBUG:
+			case \Aimeos\MW\Logger\Base::EMERG:
+			case \Aimeos\MW\Logger\Base::ALERT:
+			case \Aimeos\MW\Logger\Base::CRIT:
+			case \Aimeos\MW\Logger\Base::ERR:
+			case \Aimeos\MW\Logger\Base::WARN:
+			case \Aimeos\MW\Logger\Base::NOTICE:
+			case \Aimeos\MW\Logger\Base::INFO:
+			case \Aimeos\MW\Logger\Base::DEBUG:
 				break;
 			default:
-				throw new MW_Logger_Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
+				throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
 		}
 	}
 }

@@ -8,51 +8,54 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
  * ExtJS controller interface.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-interface Controller_ExtJS_Iface
+interface Iface
 {
 	/**
 	 * Executes tasks before processing the items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function init( stdClass $params );
+	public function init( \stdClass $params );
 
 	/**
 	 * Executes tasks after processing the items.
 	 *
-	 * @param stdClass $params Associative list of parameters
+	 * @param \stdClass $params Associative list of parameters
 	 * @return array Associative list with success value
 	 */
-	public function finish( stdClass $params );
+	public function finish( \stdClass $params );
 
 	/**
 	 * Deletes a list of an items.
 	 *
-	 * @param stdClass $params Associative array containing the required values
+	 * @param \stdClass $params Associative array containing the required values
 	 */
-	public function deleteItems( stdClass $params );
+	public function deleteItems( \stdClass $params );
 
 	/**
 	 * Creates a new item or updates an existing one or a list thereof.
 	 *
-	 * @param stdClass $params Associative array containing the required values
+	 * @param \stdClass $params Associative array containing the required values
 	 */
-	public function saveItems( stdClass $params );
+	public function saveItems( \stdClass $params );
 
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
-	 * @param stdClass $params Associative array containing the parameters
+	 * @param \stdClass $params Associative array containing the parameters
 	 * @return array List of associative arrays with item properties and total number of items
 	 */
-	public function searchItems( stdClass $params );
+	public function searchItems( \stdClass $params );
 
 	/**
 	 * Returns the service description of the class.

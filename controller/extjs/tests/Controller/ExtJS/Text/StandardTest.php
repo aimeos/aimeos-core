@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Text;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Text_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Text_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = Controller_ExtJS_Text_Factory::createController( TestHelper::getContext() );
+		$this->object = \Aimeos\Controller\ExtJS\Text\Factory::createController( \TestHelper::getContext() );
 	}
 
 
@@ -60,13 +61,13 @@ class Controller_ExtJS_Text_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$typeManager = MShop_Factory::createManager( TestHelper::getContext(), 'text/type' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text/type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$saveParams = (object) array(
@@ -110,13 +111,13 @@ class Controller_ExtJS_Text_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveItemLabelContent()
 	{
-		$typeManager = MShop_Factory::createManager( TestHelper::getContext(), 'text/type' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text/type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$saveParams = (object) array(

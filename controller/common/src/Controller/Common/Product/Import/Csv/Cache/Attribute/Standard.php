@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Cache\Attribute;
+
+
 /**
  * Attribute cache for CSV imports
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Cache_Attribute_Standard
-	extends Controller_Common_Product_Import_Csv_Cache_Base
-	implements Controller_Common_Product_Import_Csv_Cache_Iface
+class Standard
+	extends \Aimeos\Controller\Common\Product\Import\Csv\Cache\Base
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface
 {
 	private $attributes = array();
 
@@ -24,13 +27,13 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
-		$manager = MShop_Factory::createManager( $context, 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$result = $manager->searchItems( $manager->createSearch() );
 
 		foreach( $result as $id => $item ) {
@@ -44,7 +47,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Standard
 	 *
 	 * @param string $code Attribute code
 	 * @param string|null $type Attribute type
-	 * @return MShop_Attribute_Item_Iface|null Attribute object or null if not found
+	 * @return \Aimeos\MShop\Attribute\Item\Iface|null Attribute object or null if not found
 	 */
 	public function get( $code, $type = null )
 	{
@@ -52,7 +55,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Standard
 			return $this->attributes[$code][$type];
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -74,9 +77,9 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Standard
 	/**
 	 * Adds the attribute item to the cache
 	 *
-	 * @param MShop_Common_Item_Iface $item Attribute object
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Attribute object
 	 */
-	public function set( MShop_Common_Item_Iface $item )
+	public function set( \Aimeos\MShop\Common\Item\Iface $item )
 	{
 		$code = $item->getCode();
 

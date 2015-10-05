@@ -1,19 +1,20 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Supplier\Address;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Supplier_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Supplier_Address_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Supplier\Address\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -44,7 +45,7 @@ class Controller_ExtJS_Supplier_Address_StandardTest extends PHPUnit_Framework_T
 			'start' => 0,
 			'limit' => 1,
 		);
-		$manager = Controller_ExtJS_Supplier_Factory::createController( TestHelper::getContext() );
+		$manager = \Aimeos\Controller\ExtJS\Supplier\Factory::createController( \TestHelper::getContext() );
 		$resultType = $manager->searchItems( $params );
 
 		$saveParam = (object) array(

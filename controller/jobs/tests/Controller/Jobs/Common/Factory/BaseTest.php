@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Common\Factory;
+
+
 /**
- * Test class for Controller_Jobs_Common_Factory_BaseTest.
+ * Test class for \Aimeos\Controller\Jobs\Common\Factory\BaseTest.
  */
-class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $aimeos;
@@ -23,8 +26,8 @@ class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->aimeos = TestHelper::getAimeos();
-		$this->context = TestHelper::getContext();
+		$this->aimeos = \TestHelper::getAimeos();
+		$this->context = \TestHelper::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/jobs/common/decorators/default', array() );
@@ -36,10 +39,10 @@ class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectController()
 	{
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
-		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Standard', $cntl );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', $cntl );
 
-		$iCntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$iCntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->assertSame( $cntl, $iCntl );
 	}
@@ -47,11 +50,11 @@ class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 
 	public function testInjectControllerReset()
 	{
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
-		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Standard', $cntl );
-		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Standard', null );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', $cntl );
+		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', null );
 
-		$new = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$new = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->assertNotSame( $cntl, $new );
 	}
@@ -60,71 +63,71 @@ class Controller_Jobs_Common_Factory_BaseTest extends PHPUnit_Framework_TestCase
 	public function testAddDecoratorsInvalidName()
 	{
 		$decorators = array( '$' );
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
 	}
 
 
 	public function testAddDecoratorsInvalidClass()
 	{
 		$decorators = array( 'Test' );
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'TestDecorator' );
 	}
 
 
 	public function testAddDecoratorsInvalidInterface()
 	{
 		$decorators = array( 'Test' );
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Common_Factory_TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
-			$decorators, 'Controller_Jobs_Common_Decorator_' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
+			$decorators, '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\' );
 	}
 
 
 	public function testAddControllerDecoratorsInvalidDomain()
 	{
-		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Common_Factory_TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
 	}
 
 
 	public function testAddControllerDecoratorsExcludes()
 	{
-		$this->context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array( 'test' ) );
-		$this->context->getConfig()->set( 'controller/jobs/common/decorators/default', array( 'test' ) );
+		$this->context->getConfig()->set( 'controller/jobs/test/decorators/excludes', array( 'TestDecorator' ) );
+		$this->context->getConfig()->set( 'controller/jobs/common/decorators/default', array( 'TestDecorator' ) );
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Admin_Job_Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 	}
 }
 
 
-class Controller_Jobs_Common_Factory_TestAbstract
-	extends Controller_Jobs_Common_Factory_Base
+class TestAbstract
+	extends \Aimeos\Controller\Jobs\Common\Factory\Base
 {
-	public static function addDecoratorsPublic( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller, array $decorators, $classprefix )
+	public static function addDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
 	{
 		self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 	}
 
-	public static function addControllerDecoratorsPublic( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller, $domain )
+	public static function addControllerDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller, $domain )
 	{
 		self::addControllerDecorators( $context, $aimeos, $controller, $domain );
 	}
 }
 
 
-class Controller_Jobs_Common_Decorator_Test
+class TestDecorator
 {
 }

@@ -8,14 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Observer\Publisher;
+
+
 /**
  * Default implementation of a publisher in the observer pattern
  *
  * @package MW
  * @subpackage Observer
  */
-
-abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Iface
+abstract class Base implements \Aimeos\MW\Observer\Publisher\Iface
 {
 	private $listeners = array();
 
@@ -23,10 +25,10 @@ abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Iface
 	/**
 	 * Adds a listener object to the publisher.
 	 *
-	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
+	 * @param \Aimeos\MW\Observer\Listener\Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to listen for
 	 */
-	public function addListener( MW_Observer_Listener_Iface $l, $action )
+	public function addListener( \Aimeos\MW\Observer\Listener\Iface $l, $action )
 	{
 		$this->listeners[$action][] = $l;
 	}
@@ -35,10 +37,10 @@ abstract class MW_Observer_Publisher_Base implements MW_Observer_Publisher_Iface
 	/**
 	 * Removes a listener from the publisher object.
 	 *
-	 * @param MW_Observer_Listener_Iface $l Object implementing listener interface
+	 * @param \Aimeos\MW\Observer\Listener\Iface $l Object implementing listener interface
 	 * @param string $action Name of the action to remove the listener from
 	 */
-	public function removeListener( MW_Observer_Listener_Iface $l, $action )
+	public function removeListener( \Aimeos\MW\Observer\Listener\Iface $l, $action )
 	{
 		if( isset( $this->listeners[$action] ) )
 		{

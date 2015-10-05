@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\Manager;
+
+
 /**
  * Interface for all setup manager classes
  *
  * @package MW
  * @subpackage Setup
  */
-interface MW_Setup_Manager_Iface
+interface Iface
 {
 	/**
 	 * Executes all tasks for the given database type.

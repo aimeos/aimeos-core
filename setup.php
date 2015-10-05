@@ -16,7 +16,7 @@ date_default_timezone_set( 'UTC' );
 
 function setup_autoload( $classname )
 {
-	if( strncmp( $classname, 'MW_Setup_Task_', 14 ) === 0 )
+	if( strncmp( $classname, '\\Aimeos\\MW\\Setup\\Task\\', 14 ) === 0 )
 	{
 		$fileName = substr( $classname, 14 ) . '.php';
 		$paths = explode( PATH_SEPARATOR, get_include_path() );
@@ -94,7 +94,7 @@ try
 
 	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-	$aimeos = new Aimeos( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+	$aimeos = new \Aimeos\Aimeos( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
 	$taskPaths = $aimeos->getSetupPaths( $parent );
@@ -103,18 +103,18 @@ try
 	$includePaths[] = get_include_path();
 
 	if( set_include_path( implode( PATH_SEPARATOR, $includePaths ) ) === false ) {
-		throw new Exception( 'Unable to extend include path' );
+		throw new \Exception( 'Unable to extend include path' );
 	}
 
-	$ctx = new MShop_Context_Item_Standard();
+	$ctx = new \Aimeos\MShop\Context\Item\Standard();
 
 	$confPaths = $aimeos->getConfigPaths( 'mysql' );
 	if( isset( $options['config'] ) ) {
 		$confPaths = array_merge( $confPaths, (array) $options['config'] );
 	}
 
-	$conf = new MW_Config_PHPArray( array(), $confPaths );
-	$conf = new MW_Config_Decorator_Memory( $conf );
+	$conf = new \Aimeos\MW\Config\PHPArray( array(), $confPaths );
+	$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 	$ctx->setConfig( $conf );
 
 	$conf->set( 'setup/site', $site );
@@ -146,19 +146,19 @@ try
 		}
 	}
 
-	$dbm = new MW_DB_Manager_PDO( $conf );
+	$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
 
-	$logger = new MW_Logger_Errorlog( MW_Logger_Base::INFO );
+	$logger = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::INFO );
 	$ctx->setLogger( $logger );
 
-	$session = new MW_Session_None();
+	$session = new \Aimeos\MW\Session\None();
 	$ctx->setSession( $session );
 
-	$cache = new MW_Cache_None();
+	$cache = new \Aimeos\MW\Cache\None();
 	$ctx->setCache( $cache );
 
-	$manager = new MW_Setup_Manager_Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
+	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 	$manager->run( 'mysql' );
 }
 catch( Throwable $t )
@@ -171,7 +171,7 @@ catch( Throwable $t )
 	echo "\n\n";
 	exit( 1 );
 }
-catch( Exception $e )
+catch( \Exception $e )
 {
 	echo "\n\nCaught exception while processing setup";
 	echo "\n\nMessage:\n";

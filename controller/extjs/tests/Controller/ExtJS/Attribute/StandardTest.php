@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Attribute;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Attribute_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Attribute_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Attribute_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Attribute\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -61,14 +62,14 @@ class Controller_ExtJS_Attribute_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$saveParams = (object) array(
@@ -365,7 +366,7 @@ class Controller_ExtJS_Attribute_StandardTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->searchItems( $params );
 	}
 

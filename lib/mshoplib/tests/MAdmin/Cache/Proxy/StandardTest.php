@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MAdmin\Cache\Proxy;
+
+
 /**
- * Test class for MAdmin_Cache_Proxy_Standard.
+ * Test class for \Aimeos\MAdmin\Cache\Proxy\Standard.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MAdmin_Cache_Proxy_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $mock;
 	private $object;
@@ -21,12 +24,12 @@ class MAdmin_Cache_Proxy_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$this->mock = $this->getMockBuilder( 'MW_Cache_DB' )
+		$this->mock = $this->getMockBuilder( '\\Aimeos\\MW\\Cache\\DB' )
 			->disableOriginalConstructor()->getMock();
 
-		$manager = $this->getMockBuilder( 'MAdmin_Cache_Manager_Standard' )
+		$manager = $this->getMockBuilder( '\\Aimeos\\MAdmin\\Cache\\Manager\\Standard' )
 			->setConstructorArgs( array( $this->context ) )->getMock();
 
 		$manager->expects( $this->once() )->method( 'getCache' )
@@ -35,9 +38,9 @@ class MAdmin_Cache_Proxy_StandardTest extends PHPUnit_Framework_TestCase
 		$name = 'MAdminCacheProxyDefaultTest';
 		$this->context->getConfig()->set( 'classes/cache/manager/name', $name );
 
-		MAdmin_Cache_Manager_Factory::injectManager( 'MAdmin_Cache_Manager_' . $name, $manager );
+		\Aimeos\MAdmin\Cache\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Cache\\Manager\\' . $name, $manager );
 
-		$this->object = new MAdmin_Cache_Proxy_Standard( $this->context );
+		$this->object = new \Aimeos\MAdmin\Cache\Proxy\Standard( $this->context );
 	}
 
 

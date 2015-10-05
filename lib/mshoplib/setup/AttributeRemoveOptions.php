@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes attribute option tables.
  */
-class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Base
+class AttributeRemoveOptions extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'column' => array(

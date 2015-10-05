@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Config;
+
+
 /**
- * Test class for MW_View_Helper_Config.
+ * Test class for \Aimeos\MW\View\Helper\Config.
  */
-class MW_View_Helper_Config_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,7 +25,7 @@ class MW_View_Helper_Config_StandardTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 
 		$config = array(
 			'page' => 'test',
@@ -31,8 +34,8 @@ class MW_View_Helper_Config_StandardTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$conf = new MW_Config_PHPArray( $config );
-		$this->object = new MW_View_Helper_Config_Standard( $view, $conf );
+		$conf = new \Aimeos\MW\Config\PHPArray( $config );
+		$this->object = new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf );
 	}
 
 

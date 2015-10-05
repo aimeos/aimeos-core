@@ -6,13 +6,16 @@
  * @subpackage Order
  */
 
+namespace Aimeos\MShop\Order\Manager\Status;
+
+
 /**
  * Interface for all order status manager implementations.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Manager_Status_Iface
-extends MShop_Common_Manager_Factory_Iface
+interface Iface
+extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

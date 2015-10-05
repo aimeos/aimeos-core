@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager;
+
+
 /**
  * Generic interface for order manager implementations.
  *
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Manager_Iface
-	extends MShop_Common_Manager_Factory_Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 }

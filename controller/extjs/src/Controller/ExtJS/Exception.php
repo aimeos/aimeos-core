@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
- * Exception for ExtJS controller classes.
+ * \Exception for ExtJS controller classes.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Exception extends Exception
+class Exception extends \Exception
 {
 }

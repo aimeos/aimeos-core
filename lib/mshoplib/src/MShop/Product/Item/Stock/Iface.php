@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Stock;
+
+
 /**
  * Default product stock item interface.
  *
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Item_Stock_Iface extends MShop_Common_Item_Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the product Id.

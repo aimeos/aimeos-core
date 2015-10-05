@@ -5,11 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Migrates "Complete" plugin to "BasketLimits".
  */
-
-class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Base
+class PluginMigrateCompleteToBasketLimits extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'minorder' => array(

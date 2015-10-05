@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\DBSchema;
+
+
 /**
  * Implements querying the MySQL database.
  *
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_DBSchema_Mysql extends MW_Setup_DBSchema_InformationSchema
+class Mysql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 {
 	/**
 	 * Checks if the given index (not foreign keys, primary or unique constraints) exists in the database.

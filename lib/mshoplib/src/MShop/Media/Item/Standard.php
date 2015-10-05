@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Media\Item;
+
+
 /**
  * Default implementation of the media item.
  *
  * @package MShop
  * @subpackage Media
  */
-class MShop_Media_Item_Standard
-	extends MShop_Common_Item_ListRef_Base
-	implements MShop_Media_Item_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	implements \Aimeos\MShop\Media\Item\Iface
 {
 	private $values;
 
@@ -25,8 +28,8 @@ class MShop_Media_Item_Standard
 	 * Initializes the media item object.
 	 *
 	 * @param array $values Initial values of the media item
-	 * @param MShop_Common_Lists_Item_Iface[] $listItems List of list items
-	 * @param MShop_Common_Item_Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -51,7 +54,7 @@ class MShop_Media_Item_Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws MShop_Exception If the language ID is invalid
+	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid )
 	{
@@ -195,7 +198,7 @@ class MShop_Media_Item_Standard
 		if( $mimetype == $this->getMimeType() ) { return; }
 
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
-			throw new MShop_Media_Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
+			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
 		}
 
 		$this->values['mimetype'] = (string) $mimetype;

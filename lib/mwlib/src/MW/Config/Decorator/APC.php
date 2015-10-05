@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
  * APC caching decorator for config classes.
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_APC
-	extends MW_Config_Decorator_Base
-	implements MW_Config_Decorator_Iface
+class APC
+	extends \Aimeos\MW\Config\Decorator\Base
+	implements \Aimeos\MW\Config\Decorator\Iface
 {
 	private $prefix;
 
@@ -24,13 +27,13 @@ class MW_Config_Decorator_APC
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Config_Iface $object Config object or decorator
+	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Config_Iface $object, $prefix = '' )
+	public function __construct( \Aimeos\MW\Config\Iface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
-			throw new MW_Config_Exception( 'APC not available' );
+			throw new \Aimeos\MW\Config\Exception( 'APC not available' );
 		}
 
 		parent::__construct( $object );

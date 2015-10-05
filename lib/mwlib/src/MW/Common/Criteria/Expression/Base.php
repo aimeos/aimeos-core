@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression;
+
+
 /**
  * Abstract expression class with basic methods
  *
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Criteria_Expression_Base
+abstract class Base
 {
 	private $plugins = array();
 
@@ -76,22 +79,22 @@ abstract class MW_Common_Criteria_Expression_Base
 		if( $len === 0 || $name[$len-1] !== ')' ) { return false; }
 
 		if( ( $pos = strpos( $name, '(' ) ) === false ) {
-			throw new MW_Common_Exception( 'Missing opening bracket for function syntax' );
+			throw new \Aimeos\MW\Common\Exception( 'Missing opening bracket for function syntax' );
 		}
 
 		if( ( $paramstr = substr( $name, $pos, $len - $pos ) ) === false ) {
-			throw new MW_Common_Exception( 'Unable to extract function parameter' );
+			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameter' );
 		}
 
 		if( ( $namestr = substr( $name, 0, $pos ) ) === false ) {
-			throw new MW_Common_Exception( 'Unable to extract function name' );
+			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function name' );
 		}
 
 		$matches = array();
 		$pattern = '/(\[[^\]]*\]|"[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
 
 		if( preg_match_all( $pattern, $paramstr, $matches ) === false ) {
-			throw new MW_Common_Exception( 'Unable to extract function parameters' );
+			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );
 		}
 
 		if( isset( $matches[1] ) ) {
@@ -160,11 +163,11 @@ abstract class MW_Common_Criteria_Expression_Base
 	/**
 	 * Sets the new plugins for translating values.
 	 *
-	 * @param array $plugins Associative list of names and the plugin implementing MW_Common_Criteria_Plugin_Iface
+	 * @param array $plugins Associative list of names and the plugin implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 */
 	protected function setPlugins( array $plugins )
 	{
-		MW_Common_Base::checkClassList('MW_Common_Criteria_Plugin_Iface', $plugins);
+		\Aimeos\MW\Common\Base::checkClassList('\\Aimeos\\MW\\Common\\Criteria\\Plugin\\Iface', $plugins);
 
 		$this->plugins = $plugins;
 	}
@@ -186,7 +189,7 @@ abstract class MW_Common_Criteria_Expression_Base
 	 *
 	 * @param string $item Parameter value
 	 * @return integer Internal parameter type
-	 * @throws MW_Common_Exception If an error occurs
+	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
 	abstract protected function getParamType( &$item );
 
@@ -209,7 +212,7 @@ abstract class MW_Common_Criteria_Expression_Base
 				$pattern = '/("[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
 
 				if( preg_match_all( $pattern, $string, $items ) === false ) {
-					throw new MW_Common_Exception( 'Unable to extract function parameters' );
+					throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );
 				}
 
 				if( isset( $items[1] ) )

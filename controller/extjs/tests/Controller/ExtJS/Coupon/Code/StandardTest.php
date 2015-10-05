@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Coupon\Code;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,15 +22,15 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
 		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
 
 		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
-			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
+			throw new \Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
 		}
 
-		$this->object = new Controller_ExtJS_Coupon_Code_Standard( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Coupon\Code\Standard( $this->context );
 	}
 
 
@@ -71,13 +72,13 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testSaveDeleteItem()
 	{
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.label', 'Unit test example' ) );
 		$result = $couponManager->searchItems( $search );
 
 		if( ( $couponItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No coupon item found' );
+			throw new \Exception( 'No coupon item found' );
 		}
 
 		$saveParams = (object) array(
@@ -116,7 +117,7 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 	public function testAbstractInit()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->init( new stdClass() );
+		$actual = $this->object->init( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -124,7 +125,7 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 	public function testAbstractFinish()
 	{
 		$expected = array( 'success' => true );
-		$actual = $this->object->finish( new stdClass() );
+		$actual = $this->object->finish( new \stdClass() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -254,7 +255,7 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 		$config->set( 'controller/extjs/coupon/code/default/uploaddir', './tmp' );
 		$config->set( 'controller/extjs/coupon/code/default/enablecheck', false );
 
-		$cntlMock = $this->getMockBuilder( 'Controller_ExtJS_Admin_Job_Standard' )
+		$cntlMock = $this->getMockBuilder( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard' )
 			->setMethods( array( 'saveItems' ) )->setConstructorArgs( array( $this->context ) )->getMock();
 
 		$cntlMock->expects( $this->once() )->method( 'saveItems' );
@@ -263,7 +264,7 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
 		$this->context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
 
-		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_' . $name, $cntlMock );
+		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\' . $name, $cntlMock );
 
 
 		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
@@ -275,7 +276,7 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 			'error' => UPLOAD_ERR_OK,
 		);
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->couponid = '-1';
@@ -290,27 +291,27 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testUploadFileExeptionNoFiles()
 	{
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->items = basename( $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip' );
 		$params->site = 'unittest';
 
 		$_FILES = array();
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->uploadFile( $params );
 	}
 
 
 	public function testImportFile()
 	{
-		$codeMock = $this->getMockBuilder( 'MShop_Coupon_Manager_Code_Standard' )
+		$codeMock = $this->getMockBuilder( '\\Aimeos\\MShop\\Coupon\\Manager\\Code\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$codeMock->expects( $this->exactly( 3 ) )->method( 'saveItem' );
 
-		$mock = $this->getMockBuilder( 'MShop_Coupon_Manager_Standard' )
+		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Coupon\\Manager\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'getSubManager' ) )
 			->getMock();
@@ -321,14 +322,14 @@ class Controller_ExtJS_Coupon_Code_StandardTest extends PHPUnit_Framework_TestCa
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
 		$this->context->getConfig()->set( 'classes/coupon/manager/name', $name );
 
-		MShop_Coupon_Manager_Factory::injectManager( 'MShop_Coupon_Manager_' . $name, $mock );
+		\Aimeos\MShop\Coupon\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Coupon\\Manager\\' . $name, $mock );
 
 
 		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
 		$params->couponid = '-1';

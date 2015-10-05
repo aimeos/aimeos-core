@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes list ids to NOT NULL.
  */
-class MW_Setup_Task_ListsChangeIdNotNull extends MW_Setup_Task_Base
+class ListsChangeIdNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_text_list_type' => 'ALTER TABLE "mshop_text_list_type" CHANGE "typeid" "typeid" INTEGER NOT NULL',

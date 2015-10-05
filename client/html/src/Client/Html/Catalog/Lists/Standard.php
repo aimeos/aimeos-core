@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Lists;
+
+
 /**
  * Default implementation of catalog list section HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Lists_Standard
-	extends Client_Html_Catalog_Base
-	implements Client_Html_Common_Client_Factory_Iface
+class Standard
+	extends \Aimeos\Client\Html\Catalog\Base
+	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/catalog/lists/default/subparts
 	 * List of HTML sub-clients rendered within the catalog list section
@@ -56,7 +59,7 @@ class Client_Html_Catalog_Lists_Standard
 	/** client/html/catalog/lists/head/name
 	 * Name of the head part used by the catalog list client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Lists_Head_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Lists\Head\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -67,7 +70,7 @@ class Client_Html_Catalog_Lists_Standard
 	/** client/html/catalog/lists/promo/name
 	 * Name of the promotion part used by the catalog list client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Lists_Promo_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Lists\Promo\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -78,7 +81,7 @@ class Client_Html_Catalog_Lists_Standard
 	/** client/html/catalog/lists/quote/name
 	 * Name of the quote part used by the catalog list client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Lists_Quote_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Lists\Quote\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -89,7 +92,7 @@ class Client_Html_Catalog_Lists_Standard
 	/** client/html/catalog/lists/pagination/name
 	 * Name of the pagination part used by the catalog list client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Lists_Pagination_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Lists\Pagination\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -100,7 +103,7 @@ class Client_Html_Catalog_Lists_Standard
 	/** client/html/catalog/lists/items/name
 	 * Name of the items part used by the catalog list client implementation
 	 *
-	 * Use "Myname" if your class is named "Client_Html_Catalog_Lists_Items_Myname".
+	 * Use "Myname" if your class is named "\Aimeos\Client\Html\Catalog\Lists\Items\Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
@@ -153,22 +156,22 @@ class Client_Html_Catalog_Lists_Standard
 				}
 				$view->listBody = $html;
 			}
-			catch( Client_Html_Exception $e )
+			catch( \Aimeos\Client\Html\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 			}
-			catch( Controller_Frontend_Exception $e )
+			catch( \Aimeos\Controller\Frontend\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 			}
-			catch( MShop_Exception $e )
+			catch( \Aimeos\MShop\Exception $e )
 			{
 				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -267,7 +270,7 @@ class Client_Html_Catalog_Lists_Standard
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
@@ -286,7 +289,7 @@ class Client_Html_Catalog_Lists_Standard
 	 *
 	 * @param string $type Name of the client type
 	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Iface Sub-client object
+	 * @return \Aimeos\Client\Html\Iface Sub-client object
 	 */
 	public function getSubClient( $type, $name = null )
 	{
@@ -305,7 +308,7 @@ class Client_Html_Catalog_Lists_Standard
 		 *  client/html/catalog/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Client_Html_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Client\Html\Common\Decorator\*") added via
 		 * "client/html/common/decorators/default" to the html client.
 		 *
 		 * @param array List of decorator names
@@ -325,12 +328,12 @@ class Client_Html_Catalog_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Client_Html_Common_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Common\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Client_Html_Common_Decorator_Decorator1" only to the html client.
+		 * "\Aimeos\Client\Html\Common\Decorator\Decorator1" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -349,12 +352,12 @@ class Client_Html_Catalog_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Client_Html_Catalog_Decorator_*") around the html client.
+		 * ("\Aimeos\Client\Html\Catalog\Decorator\*") around the html client.
 		 *
 		 *  client/html/catalog/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Client_Html_Catalog_Decorator_Decorator2" only to the html client.
+		 * "\Aimeos\Client\Html\Catalog\Decorator\Decorator2" only to the html client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
@@ -386,22 +389,22 @@ class Client_Html_Catalog_Lists_Standard
 
 			parent::process();
 		}
-		catch( Client_Html_Exception $e )
+		catch( \Aimeos\Client\Html\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
-		catch( Controller_Frontend_Exception $e )
+		catch( \Aimeos\Controller\Frontend\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
-		catch( MShop_Exception $e )
+		catch( \Aimeos\MShop\Exception $e )
 		{
 			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
@@ -425,12 +428,12 @@ class Client_Html_Catalog_Lists_Standard
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
-	 * @param MW_View_Iface $view The view object which generates the HTML output
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
 	 * @param array &$tags Result array for the list of tags that are associated to the output
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Iface Modified view object
+	 * @return \Aimeos\MW\View\Iface Modified view object
 	 */
-	protected function setViewParams( MW_View_Iface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->cache ) )
 		{
@@ -450,7 +453,7 @@ class Client_Html_Catalog_Lists_Standard
 			{
 				$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'text' ) );
 
-				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 				$view->listCatPath = $controller->getCatalogPath( $catid, $domains );
 
 				$listCatPath = $view->get( 'listCatPath', array() );

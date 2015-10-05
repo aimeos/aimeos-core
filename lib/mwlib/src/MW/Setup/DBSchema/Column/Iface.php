@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\DBSchema\Column;
+
+
 /**
  * Interface for classes representing table columns and their details.
  *
  * @package MW
  * @subpackage Setup
  */
-interface MW_Setup_DBSchema_Column_Iface
+interface Iface
 {
 	/**
 	 * Initializes the column object.

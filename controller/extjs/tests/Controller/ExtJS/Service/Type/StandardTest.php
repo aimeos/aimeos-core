@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Service\Type;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Service_Type_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Service_Type_StandardTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Service_Type_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Service\Type\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -46,7 +47,7 @@ class Controller_ExtJS_Service_Type_StandardTest extends PHPUnit_Framework_TestC
 		$result = $this->object->searchItems( $params );
 
 		if( ( $type = reset( $result ) ) === false ) {
-			throw new Exception( 'No service type found' );
+			throw new \Exception( 'No service type found' );
 		}
 
 		$this->assertEquals( 1, count( $type ) );

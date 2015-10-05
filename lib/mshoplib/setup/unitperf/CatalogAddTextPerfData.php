@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds text performance records to catalog list table.
  */
-class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,7 +46,7 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$context = $this->getContext();
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'lists' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type' );
 
@@ -57,11 +60,11 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Catalog list type item not found' );
+			throw new \Exception( 'Catalog list type item not found' );
 		}
 
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $context );
 		$textTypeManager = $textManager->getSubManager( 'type' );
 
 		$search = $textTypeManager->createSearch();
@@ -73,7 +76,7 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$types = $textTypeManager->searchItems( $search );
 
 		if( ( $textTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Text type item not found' );
+			throw new \Exception( 'Text type item not found' );
 		}
 
 

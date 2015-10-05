@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Attribute\Manager\Lists;
+
+
 /**
  * Default attribute list manager for creating and handling attribute list items.
  * @package MShop
  * @subpackage Attribute
  */
-class MShop_Attribute_Manager_Lists_Standard
-	extends MShop_Common_Manager_Lists_Base
-	implements MShop_Attribute_Manager_Lists_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Lists\Base
+	implements \Aimeos\MShop\Attribute\Manager\Lists\Iface
 {
 	private $searchConfig = array(
 		'attribute.lists.id'=> array(
@@ -24,7 +27,7 @@ class MShop_Attribute_Manager_Lists_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_list" AS mattli ON ( matt."id" = mattli."parentid" )' ),
 			'label'=>'List ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.lists.parentid'=> array(
@@ -32,7 +35,7 @@ class MShop_Attribute_Manager_Lists_Standard
 			'internalcode'=>'mattli."parentid"',
 			'label'=>'Attribute ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.lists.siteid' => array(
@@ -40,7 +43,7 @@ class MShop_Attribute_Manager_Lists_Standard
 			'internalcode' => 'mattli."siteid"',
 			'label' => 'Attribute list site ID',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.lists.domain'=> array(
@@ -48,14 +51,14 @@ class MShop_Attribute_Manager_Lists_Standard
 			'internalcode'=>'mattli."domain"',
 			'label'=>'Attribute list domain',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.typeid'=> array(
 			'code'=>'attribute.lists.typeid',
 			'internalcode'=>'mattli."typeid"',
 			'label'=>'Attribute list typeID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.lists.refid'=> array(
@@ -63,63 +66,63 @@ class MShop_Attribute_Manager_Lists_Standard
 			'internalcode'=>'mattli."refid"',
 			'label'=>'Attribute list reference ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.datestart' => array(
 			'code'=>'attribute.lists.datestart',
 			'internalcode'=>'mattli."start"',
 			'label'=>'Attribute list start date',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.dateend' => array(
 			'code'=>'attribute.lists.dateend',
 			'internalcode'=>'mattli."end"',
 			'label'=>'Attribute list end date',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.config' => array(
 			'code'=>'attribute.lists.config',
 			'internalcode'=>'mattli."config"',
 			'label'=>'Attribute list config',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Base::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.position' => array(
 			'code'=>'attribute.lists.position',
 			'internalcode'=>'mattli."pos"',
 			'label'=>'Attribute list position',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'attribute.lists.status' => array(
 			'code'=>'attribute.lists.status',
 			'internalcode'=>'mattli."status"',
 			'label'=>'Attribute list status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'attribute.lists.ctime'=> array(
 			'code'=>'attribute.lists.ctime',
 			'internalcode'=>'mattli."ctime"',
 			'label'=>'Attribute list create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.mtime'=> array(
 			'code'=>'attribute.lists.mtime',
 			'internalcode'=>'mattli."mtime"',
 			'label'=>'Attribute list modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.editor'=> array(
 			'code'=>'attribute.lists.editor',
 			'internalcode'=>'mattli."editor"',
 			'label'=>'Attribute list editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -127,9 +130,9 @@ class MShop_Attribute_Manager_Lists_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
@@ -156,7 +159,7 @@ class MShop_Attribute_Manager_Lists_Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -188,7 +191,7 @@ class MShop_Attribute_Manager_Lists_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g types, lists etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -202,11 +205,11 @@ class MShop_Attribute_Manager_Lists_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Attribute_Manager_Lists_Standard
+		 *  \Aimeos\MShop\Attribute\Manager\Lists\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Attribute_Manager_Lists_Mylist
+		 *  \Aimeos\MShop\Attribute\Manager\Lists\Mylist
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -241,7 +244,7 @@ class MShop_Attribute_Manager_Lists_Standard
 		 *  mshop/attribute/manager/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the attribute list manager.
 		 *
 		 * @param array List of decorator names
@@ -261,12 +264,12 @@ class MShop_Attribute_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute list manager.
 		 *
 		 *  mshop/attribute/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the attribute controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the attribute controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -285,12 +288,12 @@ class MShop_Attribute_Manager_Lists_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the attribute list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute list manager.
 		 *
 		 *  mshop/attribute/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the attribute
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the attribute
 		 * controller.
 		 *
 		 * @param array List of decorator names

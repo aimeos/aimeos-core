@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
  * View helper class for building URLs.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Url_Standard
-	extends MW_View_Helper_Base
-	implements MW_View_Helper_Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $baseUrl;
 
@@ -24,7 +27,7 @@ class MW_View_Helper_Url_Standard
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Iface $view View instance with registered view helpers
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $baseUrl URL which acts as base for all constructed URLs
 	 */
 	public function __construct( $view, $baseUrl )

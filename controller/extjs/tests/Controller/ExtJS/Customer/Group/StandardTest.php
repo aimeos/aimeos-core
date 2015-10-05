@@ -1,19 +1,20 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Customer\Group;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Customer_Group_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Customer_Group_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Customer\Group\Standard( \TestHelper::getContext() );
 	}
 
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves product packages to sub-products.
  */
-class MW_Setup_Task_ProductPackagesToProducts extends MW_Setup_Task_Base
+class ProductPackagesToProducts extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_product_package' => array(

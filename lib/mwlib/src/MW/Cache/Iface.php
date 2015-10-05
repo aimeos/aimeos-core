@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Generic interface for cacheing classes.
  *
  * @package MW
  * @subpackage Cache
  */
-interface MW_Cache_Iface
+interface Iface
 {
 	/**
 	 * Removes all expired cache entries.
@@ -37,7 +40,7 @@ interface MW_Cache_Iface
 	 * Implementations for cache servers that care about expiration themselves
 	 * simply do nothing and return immediately.
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return void
 	 */
 	public function cleanup();
@@ -59,7 +62,7 @@ interface MW_Cache_Iface
 	 * delete the keys much faster by combining them into one request.
 	 *
 	 * @param string $key Key string that identifies the single cache entry
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return void
 	 */
 	public function delete( $key );
@@ -86,7 +89,7 @@ interface MW_Cache_Iface
 	 *
 	 * @param array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteList( array $keys );
 
@@ -115,7 +118,7 @@ interface MW_Cache_Iface
 	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteByTags( array $tags );
 
@@ -128,7 +131,7 @@ interface MW_Cache_Iface
 	 * clean start before new entries are added to the cache and you don't know
 	 * which entries are still in the cache.
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush();
 
@@ -176,7 +179,7 @@ interface MW_Cache_Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key. If no value for the
 	 * key is found in the cache, the given default value is returned
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function get( $key, $default = null );
 
@@ -211,7 +214,7 @@ interface MW_Cache_Iface
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getList( array $keys );
 
@@ -251,7 +254,7 @@ interface MW_Cache_Iface
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getListByTags( array $tags );
 
@@ -324,7 +327,7 @@ interface MW_Cache_Iface
 	 * 	given value in the cache
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return void
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null );
@@ -416,7 +419,7 @@ interface MW_Cache_Iface
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() );
 }

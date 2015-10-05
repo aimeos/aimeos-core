@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Basket\Mini\Main;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,11 +21,11 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->object = new Client_Html_Basket_Mini_Main_Standard( $this->context, $paths );
-		$this->object->setView( TestHelper::getView() );
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Basket\Mini\Main\Standard( $this->context, $paths );
+		$this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -36,14 +38,14 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 	protected function tearDown()
 	{
 		unset( $this->object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\Frontend\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testGetHeader()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$view = $this->object->getView();
 		$view->miniBasket = $controller->get();
@@ -55,7 +57,7 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testGetBody()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$view = $this->object->getView();
 		$view->miniBasket = $controller->get();
@@ -67,7 +69,7 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testGetBodyAddedOneProduct()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 
 		$productItem = $this->getProductItem( 'CNE' );
 
@@ -88,14 +90,14 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSubClientInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
 		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
@@ -105,13 +107,13 @@ class Client_Html_Basket_Mini_Main_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function getProductItem( $code )
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$items = $manager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+			throw new \Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Price\Lists;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +20,7 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Price_Lists_Standard( TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Price\Lists\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -58,7 +59,7 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'price.lists.type.domain' => 'customer' );
-		$priceManager = new Controller_ExtJS_Price_Standard( TestHelper::getContext() );
+		$priceManager = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelper::getContext() );
 		$result = $priceManager->searchItems( $params );
 
 		$params = (object) array(
@@ -67,7 +68,7 @@ class Controller_ExtJS_Price_Lists_StandardTest extends PHPUnit_Framework_TestCa
 			'start' => 0,
 			'limit' => 1,
 		);
-		$priceListTypeManager = Controller_ExtJS_Price_Lists_Type_Factory::createController( TestHelper::getContext() );
+		$priceListTypeManager = \Aimeos\Controller\ExtJS\Price\Lists\Type\Factory::createController( \TestHelper::getContext() );
 		$resultType = $priceListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

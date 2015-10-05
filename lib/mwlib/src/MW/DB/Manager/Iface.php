@@ -8,19 +8,22 @@
  */
 
 
+namespace Aimeos\MW\DB\Manager;
+
+
 /**
  * Required methods for database manager objects.
  *
  * @package MW
  * @subpackage DB
  */
-interface MW_DB_Manager_Iface
+interface Iface
 {
 	/**
 	 * Returns a database connection.
 	 *
 	 * @param string $name Name of the resource in configuration
-	 * @return MW_DB_Connection_Iface
+	 * @return \Aimeos\MW\DB\Connection\Iface
 	 */
 	public function acquire( $name = 'db' );
 
@@ -28,9 +31,9 @@ interface MW_DB_Manager_Iface
 	/**
 	 * Releases the connection for reuse
 	 *
-	 * @param MW_DB_Connection_Iface $connection Connection object
+	 * @param \Aimeos\MW\DB\Connection\Iface $connection Connection object
 	 * @param string $name Name of resource
 	 * @return void
 	 */
-	public function release( MW_DB_Connection_Iface $connection, $name = 'db' );
+	public function release( \Aimeos\MW\DB\Connection\Iface $connection, $name = 'db' );
 }

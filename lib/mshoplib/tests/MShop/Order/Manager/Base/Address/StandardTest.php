@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Address;
+
+
 /**
- * Test class for MShop_Order_Manager_Base_Address_Standard
+ * Test class for \Aimeos\MShop\Order\Manager\Base\Address\Standard
  */
-class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object = null;
@@ -21,10 +24,10 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$this->context = TestHelper::getContext();
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->context = \TestHelper::getContext();
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$this->object = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 	}
 
@@ -45,8 +48,8 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 		$result = $this->object->aggregate( $search, 'order.base.address.salutation' );
 	
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( MShop_Common_Item_Address_Base::SALUTATION_MRS, $result );
-		$this->assertEquals( 4, $result[MShop_Common_Item_Address_Base::SALUTATION_MRS] );
+		$this->assertArrayHasKey( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS, $result );
+		$this->assertEquals( 4, $result[\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS] );
 	}
 	
 
@@ -59,27 +62,27 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface', $item );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testGetItem()
 	{
-		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -90,7 +93,7 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
+			throw new \Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -99,7 +102,7 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$type = MShop_Order_Item_Base_Address_Base::TYPE_DELIVERY;
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -110,7 +113,7 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
+			throw new \Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
 		$this->object->deleteItem( $item->getId() );
@@ -187,7 +190,7 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $oldId );
 	}
 
@@ -252,7 +255,7 @@ class MShop_Order_Manager_Base_Address_StandardTest extends PHPUnit_Framework_Te
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

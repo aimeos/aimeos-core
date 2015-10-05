@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Jobs\Catalog\Index\Rebuild;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Jobs_Catalog_Index_Rebuild_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,10 +20,10 @@ class Controller_Jobs_Catalog_Index_Rebuild_StandardTest extends PHPUnit_Framewo
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new Controller_Jobs_Catalog_Index_Rebuild_Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Standard( $context, $aimeos );
 	}
 
 
@@ -53,25 +54,25 @@ class Controller_Jobs_Catalog_Index_Rebuild_StandardTest extends PHPUnit_Framewo
 
 	public function testRun()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
 		$context->getConfig()->set( 'classes/catalog/manager/name', $name );
 
 
-		$catalogManagerStub = $this->getMockBuilder( 'MShop_Catalog_Manager_Standard' )
+		$catalogManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Standard' )
 			->setMethods( array( 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$catalogIndexManagerStub = $this->getMockBuilder( 'MShop_Catalog_Manager_Index_Standard' )
+		$catalogIndexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Index\\Standard' )
 			->setMethods( array( 'rebuildIndex', 'cleanupIndex' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Catalog_Manager_Factory::injectManager( 'MShop_Catalog_Manager_' . $name, $catalogManagerStub );
+		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Catalog\\Manager\\' . $name, $catalogManagerStub );
 
 
 		$catalogManagerStub->expects( $this->once() )->method( 'getSubManager' )
@@ -81,7 +82,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_StandardTest extends PHPUnit_Framewo
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Rebuild_Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Standard( $context, $aimeos );
 		$object->run();
 	}
 }

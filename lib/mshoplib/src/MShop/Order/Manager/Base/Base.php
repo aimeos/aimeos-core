@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base;
+
+
 /**
  * Basic methods and constants for order base items (shopping basket).
  *
  * @package MShop
  * @subpackage Order
  */
-abstract class MShop_Order_Manager_Base_Base
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Iface
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Base\Iface
 {
 	/**
 	 * Unlock basket.
@@ -83,17 +86,17 @@ abstract class MShop_Order_Manager_Base_Base
 	 * Checks if the lock value is a valid constant.
 	 *
 	 * @param integer $value Lock constant
-	 * @throws MShop_Order_Exception If given value is invalid
+	 * @throws \Aimeos\MShop\Order\Exception If given value is invalid
 	 */
 	protected function checkLock( $value )
 	{
 		switch( $value )
 		{
-			case MShop_Order_Manager_Base_Base::LOCK_DISABLE:
-			case MShop_Order_Manager_Base_Base::LOCK_ENABLE:
+			case \Aimeos\MShop\Order\Manager\Base\Base::LOCK_DISABLE:
+			case \Aimeos\MShop\Order\Manager\Base\Base::LOCK_ENABLE:
 				break;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
 		}
 	}
 }

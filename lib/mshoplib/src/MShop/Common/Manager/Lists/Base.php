@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Lists;
+
+
 /**
  * Abstract list manager implementation
  *
  * @package MShop
  * @subpackage Common
  */
-abstract class MShop_Common_Manager_Lists_Base
-	extends MShop_Common_Manager_Base
-	implements MShop_Common_Manager_Lists_Iface
+abstract class Base
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Lists\Iface
 {
 	private $prefix;
 	private $configPath;
@@ -26,25 +29,25 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Creates the common list manager using the given context object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 *
-	 * @throws MShop_Exception if no configuration is available
+	 * @throws \Aimeos\MShop\Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->configPath = $this->getConfigPath();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		parent::__construct( $context );
@@ -54,11 +57,11 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		$required = array( trim( $this->prefix, '.' ) );
 		return $this->aggregateBase( $search, $key, $this->configPath . 'aggregate', $required );
@@ -68,7 +71,7 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Creates new common list item object.
 	 *
-	 * @return MShop_Common_Item_Lists_Iface New list item object
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list item object
 	 */
 	public function createItem()
 	{
@@ -81,14 +84,14 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Updates or adds a common list item object.
 	 *
-	 * @param MShop_Common_Item_Lists_Iface $item List item object which should be saved
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Common_Item_Lists_Iface';
+		$iface = '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		$context = $this->getContext();
@@ -110,23 +113,23 @@ abstract class MShop_Common_Manager_Lists_Base
 			$time = date( 'Y-m-d H:i:s' );
 			$statement = $this->getCachedStatement( $conn, $path );
 
-			$statement->bind( 1, $item->getParentId(), MW_DB_Statement_Base::PARAM_INT );
-			$statement->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$statement->bind( 3, $item->getTypeId(), MW_DB_Statement_Base::PARAM_INT );
-			$statement->bind( 4, $item->getDomain(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 5, $item->getRefId(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 6, $item->getDateStart(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 7, $item->getDateEnd(), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 8, json_encode( $item->getConfig() ), MW_DB_Statement_Base::PARAM_STR );
-			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
-			$statement->bind( 10, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
+			$statement->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 4, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 5, $item->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 6, $item->getDateStart(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 7, $item->getDateEnd(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 8, json_encode( $item->getConfig() ), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$statement->bind( 9, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$statement->bind( 11, $time ); //mtime
 			$statement->bind( 12, $this->getContext()->getEditor() );
 
 
 			if( $id !== null ) {
-				$statement->bind( 13, $id, MW_DB_Statement_Base::PARAM_INT );
+				$statement->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
 				$statement->bind( 13, $time ); //ctime
 			}
@@ -145,7 +148,7 @@ abstract class MShop_Common_Manager_Lists_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -170,13 +173,13 @@ abstract class MShop_Common_Manager_Lists_Base
 	 *
 	 * @param integer $id Id of common list item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Common_Item_Lists_Iface Returns common list item object of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
-			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		$criteria = $this->createSearch();
@@ -186,7 +189,7 @@ abstract class MShop_Common_Manager_Lists_Base
 		if( ( $item = reset( $items ) ) === false )
 		{
 			$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $conf['code'], $id );
-			throw new MShop_Exception( $msg );
+			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		return $item;
@@ -231,14 +234,14 @@ abstract class MShop_Common_Manager_Lists_Base
 				$sql = $config->get( $this->configPath . 'move' );
 
 				$stmt = $conn->create( $sql );
-				$stmt->bind( 1, +1, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 1, +1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 				$stmt->bind( 3, $this->getContext()->getEditor() );
-				$stmt->bind( 4, $siteid, MW_DB_Statement_Base::PARAM_INT );
-				$stmt->bind( 5, $parentid, MW_DB_Statement_Base::PARAM_INT );
-				$stmt->bind( 6, $typeid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 7, $domain );
-				$stmt->bind( 8, $pos, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 8, $pos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 				$stmt->execute()->finish();
 			}
@@ -248,9 +251,9 @@ abstract class MShop_Common_Manager_Lists_Base
 
 				$stmt = $conn->create( $sql );
 
-				$stmt->bind( 1, $siteid, MW_DB_Statement_Base::PARAM_INT );
-				$stmt->bind( 2, $parentid, MW_DB_Statement_Base::PARAM_INT );
-				$stmt->bind( 3, $typeid, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 4, $domain );
 
 				$result = $stmt->execute();
@@ -265,10 +268,10 @@ abstract class MShop_Common_Manager_Lists_Base
 			$sql = $config->get( $this->configPath . 'updatepos' );
 
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $newpos, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $newpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( 3, $this->getContext()->getEditor() );
-			$stmt->bind( 4, $id, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
@@ -279,20 +282,20 @@ abstract class MShop_Common_Manager_Lists_Base
 			$sql = $config->get( $this->configPath . 'move' );
 
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, -1, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, -1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( 3, $this->getContext()->getEditor() );
-			$stmt->bind( 4, $siteid, MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 5, $parentid, MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 6, $typeid, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 7, $domain );
-			$stmt->bind( 8, $oldpos, MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 8, $oldpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -303,14 +306,14 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Search for all list items based on the given critera.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing MShop_Common_Item_Lists_Iface
-	 * @throws MShop_Exception if creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @throws \Aimeos\MShop\Exception if creating items failed
+	 * @see \Aimeos\MW\Common\Criteria\SQL
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 
@@ -323,10 +326,10 @@ abstract class MShop_Common_Manager_Lists_Base
 			$domain = explode( '.', $this->prefix );
 
 			if( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Configuration not available' ) );
 			}
 
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = $this->configPath . 'search';
 			$cfgPathCount = $this->configPath . 'count';
 
@@ -347,7 +350,7 @@ abstract class MShop_Common_Manager_Lists_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -380,15 +383,15 @@ abstract class MShop_Common_Manager_Lists_Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
-	 *	of IDs and items implementing MShop_Common_Item_Iface
-	 * @throws MShop_Exception If creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 *	of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @throws \Aimeos\MShop\Exception If creating items failed
+	 * @see \Aimeos\MW\Common\Criteria\SQL
 	 */
-	public function searchRefItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = array();
 		$context = $this->getContext();
@@ -402,10 +405,10 @@ abstract class MShop_Common_Manager_Lists_Base
 			$domain = explode( '.', $this->prefix );
 
 			if( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Configuration not available' ) );
 			}
 
-			$level = MShop_Locale_Manager_Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = $this->configPath . 'search';
 			$cfgPathCount = $this->configPath . 'count';
 
@@ -420,7 +423,7 @@ abstract class MShop_Common_Manager_Lists_Base
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -429,7 +432,7 @@ abstract class MShop_Common_Manager_Lists_Base
 
 		foreach( $map as $domain => $list )
 		{
-			$manager = MShop_Factory::createManager( $context, $domain );
+			$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
 			$search = $manager->createSearch( true );
 			$expr = array(
@@ -450,7 +453,7 @@ abstract class MShop_Common_Manager_Lists_Base
 	 * Creates a search object including the base criteria (optionally).
 	 *
 	 * @param boolean $default Include default criteria
-	 * @return MW_Common_Criteria_Iface Critera object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Critera object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -488,7 +491,7 @@ abstract class MShop_Common_Manager_Lists_Base
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager for different extensions, e.g type, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -515,13 +518,13 @@ abstract class MShop_Common_Manager_Lists_Base
 	/**
 	 * Creates new common list item object.
 	 *
-	 * @see MShop_Common_Item_Lists_Standard Default list item
+	 * @see \Aimeos\MShop\Common\Item\Lists\Standard Default list item
 	 * @param array $values Possible optional array keys can be given: id, parentid, refid, domain, pos, start, end
-	 * @return MShop_Common_Item_Lists_Standard New common list item object
+	 * @return \Aimeos\MShop\Common\Item\Lists\Standard New common list item object
 	 */
 	protected function createItemBase( array $values = array() )
 	{
-		return new MShop_Common_Item_Lists_Standard( $this->prefix, $values );
+		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix, $values );
 	}
 
 

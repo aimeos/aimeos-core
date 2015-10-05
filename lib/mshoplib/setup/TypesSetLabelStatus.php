@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds label and status values if not set.
  */
-class MW_Setup_Task_TypesSetLabelStatus extends MW_Setup_Task_Base
+class TypesSetLabelStatus extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute_type' => array(

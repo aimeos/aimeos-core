@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\Client\Html\Basket;
+
+
 /**
  * Abstract class for all basket HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-abstract class Client_Html_Basket_Base
-	extends Client_Html_Common_Client_Factory_Base
+abstract class Base
+	extends \Aimeos\Client\Html\Common\Client\Factory\Base
 {
 	/**
 	 * Removes all cached basket parts from the cache.

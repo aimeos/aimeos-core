@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
- * Test class for MShop_Service_Provider_Decorator_Reduction.
+ * Test class for \Aimeos\MShop\Service\Provider\Decorator\Reduction.
  */
-class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_TestCase
+class ReductionTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $basket;
@@ -20,18 +23,18 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$servManager = MShop_Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
-		$this->mockProvider = $this->getMockBuilder( 'MShop_Service_Provider_Decorator_Reduction' )
+		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Reduction' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = MShop_Order_Manager_Factory::createManager( $this->context )
+		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
 			->getSubManager( 'base' )->createItem();
 
-		$this->object = new MShop_Service_Provider_Decorator_Reduction( $this->context, $this->servItem, $this->mockProvider );
+		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Reduction( $this->context, $this->servItem, $this->mockProvider );
 	}
 
 
@@ -116,7 +119,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 	public function testCalcPrice()
 	{
 		$this->servItem->setConfig( array( 'reduction.percent' => 50 ) );
-		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -134,7 +137,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.00' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -152,7 +155,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.01' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -170,7 +173,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '20.00' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -188,7 +191,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '19.99' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = MShop_Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -203,9 +206,9 @@ class MShop_Service_Provider_Decorator_ReductionTest extends PHPUnit_Framework_T
 
 	protected function getOrderProduct()
 	{
-		$priceManager = MShop_Factory::createManager( $this->context, 'price' );
-		$productManager = MShop_Factory::createManager( $this->context, 'product' );
-		$orderProductManager = MShop_Factory::createManager( $this->context, 'order/base/product' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );

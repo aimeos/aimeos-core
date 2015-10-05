@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Item\Language;
+
+
 /**
  * Default implementation of a Language item.
  *
  * @package MShop
  * @subpackage Locale
  */
-class MShop_Locale_Item_Language_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Locale_Item_Language_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Locale\Item\Language\Iface
 {
 
 	private $modified = false;
@@ -94,7 +97,7 @@ class MShop_Locale_Item_Language_Standard
 
 		$len = strlen( $key );
 		if( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
 		$this->values['code'] = (string) $key;

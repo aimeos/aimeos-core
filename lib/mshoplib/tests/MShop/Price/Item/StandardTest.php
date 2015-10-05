@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Price\Item;
+
+
 /**
- * Test class for MShop_Price_Item_Standard.
+ * Test class for \Aimeos\MShop\Price\Item\Standard.
  */
-class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -41,7 +44,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Price_Item_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 	}
 
 	/**
@@ -57,7 +60,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testAddItem()
 	{
-		$price = new MShop_Price_Item_Standard( $this->values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 		$this->object->addItem( $price );
 
 		$this->assertEquals( '391.00', $this->object->getValue() );
@@ -70,15 +73,15 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$values = $this->values;
 		$values['currencyid'] = 'USD';
 
-		$price = new MShop_Price_Item_Standard( $values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->addItem( $price );
 	}
 
 	public function testCompare()
 	{
-		$price = new MShop_Price_Item_Standard( $this->values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 		$this->assertTrue( $this->object->compare( $price ) );
 	}
 
@@ -87,7 +90,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$values = $this->values;
 		$values['value'] = '200.00';
 
-		$price = new MShop_Price_Item_Standard( $values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 		$this->assertFalse( $this->object->compare( $price ) );
 	}
 
@@ -140,13 +143,13 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testSetCurrencyIdNull()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setCurrencyId( null );
 	}
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setCurrencyId( 'usd' );
 	}
 
@@ -197,7 +200,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 199.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->setValue( '190,90' );
 	}
 
@@ -212,7 +215,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 20.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -227,7 +230,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 20.00, $this->object->getRebate() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -275,7 +278,7 @@ class MShop_Price_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Price_Item_Standard();
+		$item = new \Aimeos\MShop\Price\Item\Standard();
 
 		$list = array(
 			'price.id' => 1,

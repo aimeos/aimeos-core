@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * Generic minimal interface for logging messages
  *
  * @package MW
  * @subpackage Logger
  */
-interface MW_Logger_Iface
+interface Iface
 {
 	/**
 	 * Writes a message to the configured log facility.
@@ -24,5 +27,5 @@ interface MW_Logger_Iface
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return void
 	 */
-	public function log( $message, $priority = MW_Logger_Base::ERR, $facility = 'message' );
+	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' );
 }

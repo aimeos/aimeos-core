@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Lists;
+
+
 /**
  * Default implementation of the list item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Lists_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Common_Item_Lists_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Common\Item\Lists\Iface
 {
 	private $prefix;
 	private $values;
@@ -287,7 +290,7 @@ class MShop_Common_Item_Lists_Standard
 	/**
 	 * Returns the referenced item if it's available.
 	 *
-	 * @return MShop_Common_Item_Iface Referenced list item
+	 * @return \Aimeos\MShop\Common\Item\Iface Referenced list item
 	 */
 	public function getRefItem()
 	{
@@ -298,9 +301,9 @@ class MShop_Common_Item_Lists_Standard
 	/**
 	 * Stores the item referenced by the list item.
 	 *
-	 * @param MShop_Common_Item_Iface $refItem Item referenced by the list item
+	 * @param \Aimeos\MShop\Common\Item\Iface $refItem Item referenced by the list item
 	 */
-	public function setRefItem( MShop_Common_Item_Iface $refItem )
+	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem )
 	{
 		$this->refItem = $refItem;
 	}

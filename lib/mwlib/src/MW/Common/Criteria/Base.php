@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria;
+
+
 /**
  * Abstract search class
  *
  * @package MW
  * @subpackage Common
  */
-abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
+abstract class Base implements \Aimeos\MW\Common\Criteria\Iface
 {
 	/**
 	 * Creates a function signature for expressions.
@@ -24,7 +27,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 	 */
 	public function createFunction( $name, array $params )
 	{
-		return MW_Common_Criteria_Expression_Base::createFunction( $name, $params );
+		return \Aimeos\MW\Common\Criteria\Expression\Base::createFunction( $name, $params );
 	}
 
 
@@ -50,8 +53,8 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return MW_Common_Criteria_Expression_Iface Condition expressions (maybe nested)
-	 * @throws MW_Common_Exception If given array is invalid
+	 * @return \Aimeos\MW\Common\Criteria\Expression\Iface Condition expressions (maybe nested)
+	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
 	public function toConditions( array $array )
 	{
@@ -60,7 +63,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 		}
 
 		if( ( list( $op, $value ) = each( $array ) ) === false ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid condition array "%1$s"', json_encode( $array ) ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid condition array "%1$s"', json_encode( $array ) ) );
 		}
 
 		$operators = $this->getOperators();
@@ -72,7 +75,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 			return $this->createCompareExpression( $op, (array) $value );
 		}
 
-		throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
+		throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
 	}
 
 
@@ -86,7 +89,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 	 * 	);
 	 *
 	 * @param array $array Single-dimensional array of name and operator pairs
-	 * @return array List of sort expressions implementing MW_Common_Criteria_Expression_Sort_Iface
+	 * @return array List of sort expressions implementing \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
 	 */
 	public function toSortations( array $array )
 	{
@@ -105,7 +108,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 	 *
 	 * @param string $operator One of the "combine" operators
 	 * @param array $list List of arrays with "combine" or "compare" representations
-	 * @throws MW_Common_Exception If operator is invalid
+	 * @throws \Aimeos\MW\Common\Exception If operator is invalid
 	 */
 	protected function createCombineExpression( $operator, array $list )
 	{
@@ -117,7 +120,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 			$entry = (array) $entry;
 
 			if( ( list( $op, $value ) = each( $entry ) ) === false ) {
-				throw new MW_Common_Exception( sprintf( 'Invalid combine condition array "%1$s"', json_encode( $entry ) ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid combine condition array "%1$s"', json_encode( $entry ) ) );
 			}
 
 			if( in_array( $op, $operators['combine'] ) ) {
@@ -127,7 +130,7 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 				$results[] = $this->createCompareExpression( $op, (array) $entry[$op] );
 			}
 			else {
-				throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
 			}
 		}
 
@@ -140,12 +143,12 @@ abstract class MW_Common_Criteria_Base implements MW_Common_Criteria_Iface
 	 *
 	 * @param string $op One of the "compare" operators
 	 * @param array $pair Associative list containing one name/value pair
-	 * @throws MW_Common_Exception If no name/value pair is available
+	 * @throws \Aimeos\MW\Common\Exception If no name/value pair is available
 	 */
 	protected function createCompareExpression( $op, array $pair )
 	{
 		if( ( list( $name, $value ) = each( $pair ) ) === false ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid compare condition array "%1$s"', json_encode( $pair ) ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid compare condition array "%1$s"', json_encode( $pair ) ) );
 		}
 
 		return $this->compare( $op, $name, $value );

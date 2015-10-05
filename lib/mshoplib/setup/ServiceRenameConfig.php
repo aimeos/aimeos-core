@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames configuration values for service providers.
  */
-class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Base
+class ServiceRenameConfig extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype

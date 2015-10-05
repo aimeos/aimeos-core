@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Sort;
+
+
 /**
  * Interface for sorting objects.
  *
  * @package MW
  * @subpackage Common
  */
-interface MW_Common_Criteria_Expression_Sort_Iface extends MW_Common_Criteria_Expression_Iface
+interface Iface extends \Aimeos\MW\Common\Criteria\Expression\Iface
 {
 	/**
 	 * Returns the name of the variable or column to sort.

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Order\Manager\Base\Product;
+
+
 /**
  * Default order manager base product.
  *
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Manager_Base_Product_Standard
-	extends MShop_Common_Manager_Base
-	implements MShop_Order_Manager_Base_Product_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Order\Manager\Base\Product\Iface
 {
 	private $searchConfig = array(
 		'order.base.product.id' => array(
@@ -25,7 +28,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product" AS mordbapr ON ( mordba."id" = mordbapr."baseid" )' ),
 			'label'=>'Order base product ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.baseid' => array(
@@ -33,7 +36,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."baseid"',
 			'label'=>'Order base product base ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.siteid' => array(
@@ -41,7 +44,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."siteid"',
 			'label'=>'Order base product site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.orderproductid' => array(
@@ -49,7 +52,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."ordprodid"',
 			'label'=>'Order base product parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.type' => array(
@@ -57,7 +60,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."type"',
 			'label'=>'Order base product type',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => true,
 		),
 		'order.base.product.productid' => array(
@@ -65,7 +68,7 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."prodid"',
 			'label'=>'Order base product original ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.prodcode' => array(
@@ -73,119 +76,119 @@ class MShop_Order_Manager_Base_Product_Standard
 			'internalcode'=>'mordbapr."prodcode"',
 			'label'=>'Order base product code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.suppliercode' => array(
 			'code'=>'order.base.product.suppliercode',
 			'internalcode'=>'mordbapr."suppliercode"',
 			'label'=>'Order base product supplier code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.warehousecode' => array(
 			'code'=>'order.base.product.warehousecode',
 			'internalcode'=>'mordbapr."warehousecode"',
 			'label'=>'Order base product warehouse code',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.name' => array(
 			'code'=>'order.base.product.name',
 			'internalcode'=>'mordbapr."name"',
 			'label'=>'Order base product name',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.mediaurl' => array(
 			'code'=>'order.base.product.mediaurl',
 			'internalcode'=>'mordbapr."mediaurl"',
 			'label'=>'Order base product media url',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.quantity' => array(
 			'code'=>'order.base.product.quantity',
 			'internalcode'=>'mordbapr."amount"',
 			'label'=>'Order base product quantity',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.price' => array(
 			'code'=>'order.base.product.price',
 			'internalcode'=>'mordbapr."price"',
 			'label'=>'Order base product price',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.costs' => array(
 			'code'=>'order.base.product.costs',
 			'internalcode'=>'mordbapr."costs"',
 			'label'=>'Order base product shipping',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.rebate' => array(
 			'code'=>'order.base.product.rebate',
 			'internalcode'=>'mordbapr."rebate"',
 			'label'=>'Order base product rebate',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.taxrate' => array(
 			'code'=>'order.base.product.taxrate',
 			'internalcode'=>'mordbapr."taxrate"',
 			'label'=>'Order base product taxrate',
 			'type'=> 'decimal',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.quantity' => array(
 			'code'=>'order.base.product.quantity',
 			'internalcode'=>'mordbapr."quantity"',
 			'label'=>'Order base product quantity',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.flags' => array(
 			'code'=>'order.base.product.flags',
 			'internalcode'=>'mordbapr."flags"',
 			'label'=>'Order base product flags',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.position' => array(
 			'code'=>'order.base.product.position',
 			'internalcode'=>'mordbapr."pos"',
 			'label'=>'Order base product position',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.status' => array(
 			'code'=>'order.base.product.status',
 			'internalcode'=>'mordbapr."status"',
 			'label'=>'Order base product status',
 			'type'=> 'boolean',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_BOOL,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		),
 		'order.base.product.mtime' => array(
 			'code'=>'order.base.product.mtime',
 			'internalcode'=>'mordbapr."mtime"',
 			'label'=>'Order base product modification time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.ctime'=> array(
 			'code'=>'order.base.product.ctime',
 			'internalcode'=>'mordbapr."ctime"',
 			'label'=>'Order base product create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'order.base.product.editor'=> array(
 			'code'=>'order.base.product.editor',
 			'internalcode'=>'mordbapr."editor"',
 			'label'=>'Order base product editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_STR
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'order.base.product.count()' => array(
 			'code'=>'order.base.product.count()',
@@ -193,7 +196,7 @@ class MShop_Order_Manager_Base_Product_Standard
 				WHERE mordbapr."baseid" = mordbapr_count."baseid" AND mordbapr_count."prodid" = $1 )',
 			'label'=>'Order base product count, parameter(<product IDs>)',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Base::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -202,9 +205,9 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Iface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
@@ -214,11 +217,11 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( MW_Common_Criteria_Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/product/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -287,12 +290,12 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Create new order base product item object.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	public function createItem()
 	{
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 		$values = array( 'siteid' => $context->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $priceManager->createItem(), $values );
@@ -304,8 +307,8 @@ class MShop_Order_Manager_Base_Product_Standard
 	 *
 	 * @param integer $id Product ids to create product object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Order_Item_Base_Product_Iface Returns order base product item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Returns order base product item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -316,14 +319,14 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Adds or updates a order base product item to the storage.
 	 *
-	 * @param MShop_Common_Item_Iface $item New or existing product item that should be saved to the storage
+	 * @param \Aimeos\MShop\Common\Item\Iface $item New or existing product item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Order_Item_Base_Product_Iface';
+		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -405,9 +408,9 @@ class MShop_Order_Manager_Base_Product_Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 3, $item->getOrderProductId(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getProductId() );
 			$stmt->bind( 6, $item->getProductCode() );
@@ -420,14 +423,14 @@ class MShop_Order_Manager_Base_Product_Standard
 			$stmt->bind( 13, $price->getCosts() );
 			$stmt->bind( 14, $price->getRebate() );
 			$stmt->bind( 15, $price->getTaxRate() );
-			$stmt->bind( 16, $item->getFlags(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 17, $item->getStatus(), MW_DB_Statement_Base::PARAM_INT );
-			$stmt->bind( 18, $item->getPosition(), MW_DB_Statement_Base::PARAM_INT );
+			$stmt->bind( 16, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 17, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 18, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 19, $date ); // mtime
 			$stmt->bind( 20, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 21, $id, MW_DB_Statement_Base::PARAM_INT );
+				$stmt->bind( 21, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 21, $date ); // ctime
@@ -473,7 +476,7 @@ class MShop_Order_Manager_Base_Product_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -521,7 +524,7 @@ class MShop_Order_Manager_Base_Product_Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attributes implementing MW_Common_Criteria_Attribute_Iface
+	 * @return array Returns a list of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -553,7 +556,7 @@ class MShop_Order_Manager_Base_Product_Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Iface Manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
@@ -567,11 +570,11 @@ class MShop_Order_Manager_Base_Product_Standard
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Order_Manager_Base_Product_Standard
+		 *  \Aimeos\MShop\Order\Manager\Base\Product\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Order_Manager_Base_Product_Myproduct
+		 *  \Aimeos\MShop\Order\Manager\Base\Product\Myproduct
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -606,7 +609,7 @@ class MShop_Order_Manager_Base_Product_Standard
 		 *  mshop/order/manager/base/product/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the order base product manager.
 		 *
 		 * @param array List of decorator names
@@ -626,12 +629,12 @@ class MShop_Order_Manager_Base_Product_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base product manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base product manager.
 		 *
 		 *  mshop/order/manager/base/product/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -650,12 +653,12 @@ class MShop_Order_Manager_Base_Product_Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the order base product manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base product manager.
 		 *
 		 *  mshop/order/manager/base/product/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
 		 * controller.
 		 *
 		 * @param array List of decorator names
@@ -673,15 +676,15 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Searches for order base products item based on the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of products implementing MShop_Order_Item_Base_Product_Iface's
+	 * @return array List of products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface's
 	 */
-	public function searchItems( MW_Common_Criteria_Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -690,7 +693,7 @@ class MShop_Order_Manager_Base_Product_Standard
 		try
 		{
 			$required = array( 'order.base.product' );
-			$sitelevel = MShop_Locale_Manager_Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
 			/** mshop/order/manager/base/product/standard/item/search
 			 * Retrieves the records matched by the given criteria in the database
@@ -807,7 +810,7 @@ class MShop_Order_Manager_Base_Product_Standard
 					$items[$row['id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
 				$results->finish();
 				throw $e;
@@ -815,7 +818,7 @@ class MShop_Order_Manager_Base_Product_Standard
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -837,18 +840,18 @@ class MShop_Order_Manager_Base_Product_Standard
 	/**
 	 * Creates new order base product item object initialized with given parameters.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	protected function createItemBase( MShop_Price_Item_Iface $price, array $values = array(), array $attributes = array() )
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )
 	{
-		return new MShop_Order_Item_Base_Product_Standard( $price, $values, $attributes );
+		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes );
 	}
 
 	/**
 	 * Searches for attribute items connected with order product item.
 	 *
 	 * @param string[] $ids List of order product item IDs
-	 * @return array List of items implementing MShop_Order_Item_Base_Product_Attribute_Iface
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
 	protected function getAttributeItems( $ids )
 	{

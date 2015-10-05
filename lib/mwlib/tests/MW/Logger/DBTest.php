@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Logger;
+
+
 /**
- * Test class for MW_Logger_DB.
+ * Test class for \Aimeos\MW\Logger\DB.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
+class DBTest extends \PHPUnit_Framework_TestCase
 {
 	private $dbm;
 	private $object;
@@ -20,12 +23,12 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 
 		$conn = $this->dbm->acquire();
 
@@ -39,7 +42,7 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 			);' )->execute()->finish();
 
 		$sql = 'INSERT INTO "mw_log_test" ( "facility", "tstamp", "priority", "message", "request" ) VALUES ( ?, ?, ?, ?, ? )';
-		$this->object = new MW_Logger_DB( $conn->create( $sql ) );
+		$this->object = new \Aimeos\MW\Logger\DB( $conn->create( $sql ) );
 
 		$this->dbm->release( $conn );
 	}
@@ -52,11 +55,11 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			return;
 		}
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 
 		$conn = $this->dbm->acquire();
 		$conn->create( 'DROP TABLE "mw_log_test"' )->execute()->finish();
@@ -75,17 +78,17 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Base::ERR, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $row['priority'] );
 		$this->assertEquals( 'error', $row['message'] );
 
 
-		$this->setExpectedException('MW_Logger_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Logger\\Exception');
 		$this->object->log( 'wrong log level', -1);
 	}
 
@@ -103,19 +106,19 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Base::ERR, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $row['priority'] );
 		$this->assertEquals( '["scalar","errortest"]', $row['message'] );
 	}
 
 	public function testLogCrit()
 	{
-		$this->object->log( 'critical', MW_Logger_Base::CRIT );
+		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
 
 		$conn = $this->dbm->acquire();
 
@@ -125,18 +128,18 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( MW_Logger_Base::CRIT, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Base::CRIT, $row['priority'] );
 		$this->assertEquals( 'critical', $row['message'] );
 	}
 
 	public function testLogWarn()
 	{
-		$this->object->log( 'debug', MW_Logger_Base::WARN );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::WARN );
 
 		$conn = $this->dbm->acquire();
 
@@ -146,13 +149,13 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 		if( $row !== false ) {
-			throw new Exception( 'Log record found but none expected' );
+			throw new \Exception( 'Log record found but none expected' );
 		}
 	}
 
 	public function testFacility()
 	{
-		$this->object->log( 'user auth', MW_Logger_Base::ERR, 'auth' );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
 
 		$conn = $this->dbm->acquire();
 
@@ -162,7 +165,7 @@ class MW_Logger_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new Exception( 'No log record found' );
+			throw new \Exception( 'No log record found' );
 		}
 
 		$this->assertEquals( 'auth', $row['facility'] );

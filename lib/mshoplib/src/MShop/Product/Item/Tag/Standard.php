@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Product\Item\Tag;
+
+
 /**
  * Default tag item implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Item_Tag_Standard
-	extends MShop_Common_Item_Base
-	implements MShop_Product_Item_Tag_Iface
+class Standard
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Product\Item\Tag\Iface
 {
 	private $values;
 

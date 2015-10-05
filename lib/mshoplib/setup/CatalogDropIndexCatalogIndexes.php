@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Drops the old indexes in the catalog tables.
  */
-class MW_Setup_Task_CatalogDropIndexCatalogIndexes extends MW_Setup_Task_Base
+class CatalogDropIndexCatalogIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'idx_mscatinca_s_lt_ca_po' => 'ALTER TABLE "mshop_catalog_index_catalog" DROP INDEX "idx_mscatinca_s_lt_ca_po"',

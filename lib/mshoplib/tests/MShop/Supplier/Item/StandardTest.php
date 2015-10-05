@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Supplier\Item;
+
+
 /**
- * Test class for MShop_Supplier_Item_Standard.
+ * Test class for \Aimeos\MShop\Supplier\Item\Standard.
  */
-class MShop_Supplier_Item_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -33,7 +36,7 @@ class MShop_Supplier_Item_StandardTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Supplier_Item_Standard( $values );
+		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $values );
 	}
 
 	/**
@@ -125,7 +128,7 @@ class MShop_Supplier_Item_StandardTest extends PHPUnit_Framework_TestCase
 
 	public function testFromArray()
 	{
-		$item = new MShop_Supplier_Item_Standard();
+		$item = new \Aimeos\MShop\Supplier\Item\Standard();
 
 		$list = array(
 			'supplier.id' => 1,

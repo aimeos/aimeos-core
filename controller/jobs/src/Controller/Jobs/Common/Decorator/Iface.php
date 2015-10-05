@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Common\Decorator;
+
+
 /**
  * Decorator interface for controller.
  *
  * @package Controller
  * @subpackage Jobs
  */
-interface Controller_Jobs_Common_Decorator_Iface
-	extends Controller_Jobs_Iface
+interface Iface
+	extends \Aimeos\Controller\Jobs\Iface
 {
 	/**
 	 * Initializes a new controller decorator object.
 	 *
-	 * @param MShop_Context_Item_Iface $context Context object with required objects
-	 * @param Aimeos $aimeos Aimeos object
-	 * @param Controller_Jobs_Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @return void
 	 */
-	public function __construct( MShop_Context_Item_Iface $context, Aimeos $aimeos,
-		Controller_Jobs_Iface $controller );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+		\Aimeos\Controller\Jobs\Iface $controller );
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\Controller\Jobs\Common\Decorator;
+
+
 /**
- * Test class for Controller_Jobs_Common_Decorator_BaseTest.
+ * Test class for \Aimeos\Controller\Jobs\Common\Decorator\BaseTest.
  */
-class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $stub;
 	private $object;
@@ -23,14 +26,14 @@ class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Standard' )
+		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard' )
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
-		$this->object = new Controller_Jobs_Common_Decorator_BaseImpl( $context, $aimeos, $this->stub );
+		$this->object = new TestBase( $context, $aimeos, $this->stub );
 	}
 
 
@@ -68,13 +71,13 @@ class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 
 	public function testGetContext()
 	{
-		$this->assertInstanceOf( 'MShop_Context_Item_Iface', $this->object->getContextPublic() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->object->getContextPublic() );
 	}
 
 
 	public function testGetAimeos()
 	{
-		$this->assertInstanceOf( 'Aimeos', $this->object->getAimeosPublic() );
+		$this->assertInstanceOf( '\Aimeos\Aimeos', $this->object->getAimeosPublic() );
 	}
 
 
@@ -86,8 +89,8 @@ class Controller_Jobs_Common_Decorator_BaseTest extends PHPUnit_Framework_TestCa
 }
 
 
-class Controller_Jobs_Common_Decorator_BaseImpl
-	extends Controller_Jobs_Common_Decorator_Base
+class TestBase
+	extends \Aimeos\Controller\Jobs\Common\Decorator\Base
 {
 	public function getContextPublic()
 	{

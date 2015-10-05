@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Coupon;
+
+
 /**
- * Test class for MShop_Order_Item_Base_Coupon_Standard.
+ * Test class for \Aimeos\MShop\Order\Item\Base\Coupon\Standard.
  */
-class MShop_Order_Item_Base_Coupon_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -34,7 +37,7 @@ class MShop_Order_Item_Base_Coupon_StandardTest extends PHPUnit_Framework_TestCa
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new MShop_Order_Item_Base_Coupon_Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Coupon\Standard( $this->values );
 	}
 
 	/**
@@ -61,13 +64,13 @@ class MShop_Order_Item_Base_Coupon_StandardTest extends PHPUnit_Framework_TestCa
 		$this->object->setId( 5 );
 		$this->assertEquals( 5, $this->object->getId() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 'test' );
 	}
 
@@ -130,7 +133,7 @@ class MShop_Order_Item_Base_Coupon_StandardTest extends PHPUnit_Framework_TestCa
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Coupon_Standard();
+		$item = new \Aimeos\MShop\Order\Item\Base\Coupon\Standard();
 
 		$list = array(
 			'order.base.coupon.id' => 1,

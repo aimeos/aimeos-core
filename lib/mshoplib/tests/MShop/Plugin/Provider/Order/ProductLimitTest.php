@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_ProductLimit.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\ProductLimit.
  */
-class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_TestCase
+class ProductLimitTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $plugin;
@@ -24,7 +27,7 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'ProductLimit' );
@@ -32,18 +35,18 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 		$this->plugin->setStatus( '1' );
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		$products = $manager->searchItems( $search );
 
 		if( count( $products ) !== 2 ) {
-			throw new Exception( 'Wrong number of products' );
+			throw new \Exception( 'Wrong number of products' );
 		}
 
 		$this->products = array();
@@ -58,7 +61,7 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 
 		$this->order = $orderBaseManager->createItem();
 
-		$this->object = new MShop_Plugin_Provider_Order_ProductLimit( TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( \TestHelper::getContext(), $this->plugin );
 
 	}
 
@@ -93,14 +96,14 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 
 		$this->products['CNE']->setQuantity( 11 );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
 
 	public function testUpdateSingleValueMax()
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$this->plugin->setConfig( array( 'single-value-max' => array( 'EUR' => '10.00' ) ) );
 
@@ -120,7 +123,7 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 		$this->products['CNE']->setPrice( $price );
 		$this->products['CNE']->setQuantity( 3 );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
@@ -138,14 +141,14 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 		$this->order->addProduct( $this->products['CNC'] );
 		$this->products['CNE']->setQuantity( 1 );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
 
 	public function testUpdateTotalValueMax()
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$this->plugin->setConfig( array( 'total-value-max' => array( 'EUR' => '110.00' ) ) );
 
@@ -167,7 +170,7 @@ class MShop_Plugin_Provider_Order_ProductLimitTest extends PHPUnit_Framework_Tes
 		$this->products['CNE']->setPrice( $price );
 		$this->products['CNE']->setQuantity( 2 );
 
-		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 }

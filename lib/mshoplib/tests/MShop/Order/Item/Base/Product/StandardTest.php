@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Order\Item\Base\Product;
+
+
 /**
- * Test class for MShop_Order_Item_Base_Product_Standard.
+ * Test class for \Aimeos\MShop\Order\Item\Base\Product\Standard.
  */
-class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
@@ -26,7 +29,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->price = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$this->price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 
 		$attrValues = array(
 			'id' => 4,
@@ -40,7 +43,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser'
 		);
-		$this->attribute = array( new MShop_Order_Item_Base_Product_Attribute_Standard( $attrValues ) );
+		$this->attribute = array( new \Aimeos\MShop\Order\Item\Base\Product\Attribute\Standard( $attrValues ) );
 
 		$this->values = array(
 			'id' => 1,
@@ -56,8 +59,8 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 			'name' => 'UnitProduct',
 			'mediaurl' => 'testurl',
 			'quantity' => 11,
-			'flags' => MShop_Order_Item_Base_Product_Base::FLAG_NONE,
-			'status' => MShop_Order_Item_Base::STAT_PROGRESS,
+			'flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
+			'status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
 			'pos' => 1,
 			'mtime' => '2000-12-31 23:59:59',
 			'ctime' => '2011-01-01 00:00:01',
@@ -65,10 +68,10 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 		);
 
 		$this->subProducts = array(
-			new MShop_Order_Item_Base_Product_Standard( clone $this->price ),
-			new MShop_Order_Item_Base_Product_Standard( clone $this->price )
+			new \Aimeos\MShop\Order\Item\Base\Product\Standard( clone $this->price ),
+			new \Aimeos\MShop\Order\Item\Base\Product\Standard( clone $this->price )
 		);
-		$this->object = new MShop_Order_Item_Base_Product_Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
 	}
 
 	/**
@@ -84,7 +87,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testCompare()
 	{
-		$product = new MShop_Order_Item_Base_Product_Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
+		$product = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
 		$this->assertTrue( $this->object->compare( $product ) );
 	}
 
@@ -93,7 +96,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 		$price = clone $this->price;
 		$price->setValue( '1.00' );
 
-		$product = new MShop_Order_Item_Base_Product_Standard( $price, $this->values, $this->attribute, $this->subProducts );
+		$product = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $this->values, $this->attribute, $this->subProducts );
 		$this->assertFalse( $this->object->compare( $product ) );
 	}
 
@@ -112,7 +115,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
@@ -246,25 +249,25 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetQuantityNoNumber()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setQuantity( 'a' );
 	}
 
 	public function testSetQuantityNegative()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setQuantity( -5 );
 	}
 
 	public function testSetQuantityZero()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setQuantity( 0 );
 	}
 
 	public function testSetQuantityOverflow()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setQuantity( 2147483648 );
 	}
 
@@ -297,8 +300,8 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetFlags()
 	{
-		$this->object->setFlags( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE );
-		$this->assertEquals( MShop_Order_Item_Base_Product_Base::FLAG_IMMUTABLE, $this->object->getFlags() );
+		$this->object->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE, $this->object->getFlags() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -323,7 +326,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetPositionInvalid()
 	{
-		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->setPosition( 0 );
 	}
 
@@ -334,8 +337,8 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( MShop_Order_Item_Base::STAT_LOST );
-		$this->assertEquals( MShop_Order_Item_Base::STAT_LOST, $this->object->getStatus() );
+		$this->object->setStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_LOST, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -377,7 +380,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testGetAttribute()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
@@ -411,7 +414,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testGetAttributeItem()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
@@ -460,7 +463,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetAttributeItem()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$item = $attManager->createItem();
@@ -485,7 +488,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testSetAttributes()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$list = array(
@@ -517,7 +520,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testFromArray()
 	{
-		$item = new MShop_Order_Item_Base_Product_Standard( new MShop_Price_Item_Standard() );
+		$item = new \Aimeos\MShop\Order\Item\Base\Product\Standard( new \Aimeos\MShop\Price\Item\Standard() );
 
 		$list = array(
 			'order.base.product.id' => 1,
@@ -594,9 +597,9 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 
 	public function testCopyFrom()
 	{
-		$productCopy = new MShop_Order_Item_Base_Product_Standard( $this->price );
+		$productCopy = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price );
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$products = $manager->searchItems( $search );
@@ -610,7 +613,7 @@ class MShop_Order_Item_Base_Product_StandardTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
-		$this->assertEquals( MShop_Order_Item_Base::STAT_UNFINISHED, $productCopy->getStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 
 		$this->assertTrue( $productCopy->isModified() );

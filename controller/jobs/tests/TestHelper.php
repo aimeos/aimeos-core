@@ -1,11 +1,10 @@
 <?php
 
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
 class TestHelper
 {
 	private static $aimeos;
@@ -15,7 +14,7 @@ class TestHelper
 	public static function bootstrap()
 	{
 		self::getAimeos();
-		MShop_Factory::setCache( false );
+		\Aimeos\MShop\Factory::setCache( false );
 	}
 
 
@@ -35,7 +34,7 @@ class TestHelper
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$aimeos = new Aimeos( array(), false );
+			self::$aimeos = new \Aimeos\Aimeos( array(), false );
 		}
 
 		return self::$aimeos;
@@ -53,7 +52,7 @@ class TestHelper
 	 */
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Standard();
+		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 		$aimeos = self::getAimeos();
 
 
@@ -61,29 +60,29 @@ class TestHelper
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$conf = new MW_Config_PHPArray( array(), $paths );
-		$conf = new MW_Config_Decorator_Memory( $conf );
-		$conf = new MW_Config_Decorator_Documentor( $conf, $file );
+		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
+		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new MW_DB_Manager_PDO( $conf );
+		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Base::DEBUG );
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
 
-		$session = new MW_Session_None();
+		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
 
-		$i18n = new MW_Translation_None( 'de' );
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 
@@ -98,39 +97,39 @@ class TestHelper
 	}
 
 
-	protected static function createView( MW_Config_Iface $config )
+	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
 		$tmplpaths = self::getAimeos()->getCustomPaths( 'client/html' );
 		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );
 
-		$view = new MW_View_Standard();
+		$view = new \Aimeos\MW\View\Standard();
 
-		$trans = new MW_Translation_None( 'de_DE' );
-		$helper = new MW_View_Helper_Translate_Standard( $view, $trans );
+		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
+		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new MW_View_Helper_Url_Standard( $view, 'http://baseurl' );
+		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'http://baseurl' );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Number_Standard( $view, '.', '' );
+		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Date_Standard( $view, 'Y-m-d' );
+		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Standard( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Parameter_Standard( $view, array() );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_FormParam_Standard( $view );
+		$helper = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
 		$view->addHelper( 'formparam', $helper );
 
-		$helper = new MW_View_Helper_Encoder_Standard( $view );
+		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new MW_View_Helper_Partial_Standard( $view, $config, $tmplpaths );
+		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $config, $tmplpaths );
 		$view->addHelper( 'partial', $helper );
 
 		return $view;
