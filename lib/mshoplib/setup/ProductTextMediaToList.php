@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_product_text' => array(
 			'INSERT INTO "mshop_product_list"("parentid", "siteid", "domain", "refid", "pos") SELECT "prodid", "siteid", \'text\', "textid", "pos" FROM "mshop_product_text"',
 			'DROP TABLE "mshop_product_text"',
@@ -48,9 +48,9 @@ class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -59,22 +59,22 @@ class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating product text and media tables to list', 0 ); $this->_status( '' );
+		$this->msg( 'Migrating product text and media tables to list', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true )
+			if( $this->schema->tableExists( $table ) === true )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'migrated' );
+				$this->executeList( $stmtList );
+				$this->status( 'migrated' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

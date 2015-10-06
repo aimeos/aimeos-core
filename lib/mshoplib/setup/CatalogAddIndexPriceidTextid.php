@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogAddIndexPriceidTextid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_catalog_index_price.priceid' => array(
 			'TRUNCATE TABLE "mshop_catalog_index_price"',
 			'ALTER TABLE "mshop_catalog_index_price" ADD "priceid" INTEGER NULL AFTER "siteid"',
@@ -49,9 +49,9 @@ class MW_Setup_Task_CatalogAddIndexPriceidTextid extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -59,25 +59,25 @@ class MW_Setup_Task_CatalogAddIndexPriceidTextid extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding reference ID columns to catalog index tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding reference ID columns to catalog index tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $id => $sql )
 		{
 			$parts = explode( '.', $id );
-			$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $parts[0], $parts[1] ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $parts[0], $parts[1] ), 1 );
 
-			if( $this->_schema->tableExists( $parts[0] ) === true
-				&& $this->_schema->columnExists( $parts[0], $parts[1] ) === false )
+			if( $this->schema->tableExists( $parts[0] ) === true
+				&& $this->schema->columnExists( $parts[0], $parts[1] ) === false )
 			{
-				$this->_executeList( $sql );
-				$this->_status( 'added' );
+				$this->executeList( $sql );
+				$this->status( 'added' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

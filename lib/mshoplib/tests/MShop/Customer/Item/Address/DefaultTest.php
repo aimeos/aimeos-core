@@ -11,8 +11,8 @@
  */
 class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 23,
 			'siteid' => 12,
 			'refid' => 'referenceid',
@@ -42,9 +42,9 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 			'countryid' => 'DE',
 			'langid' => 'de',
 			'telephone' => '05554433221',
-			'email' => 'unit.test@metaways.de',
+			'email' => 'test@example.com',
 			'telefax' => '05554433222',
-			'website' => 'www.metaways.de',
+			'website' => 'www.example.com',
 			'pos' => 1,
 			'flag' => 2,
 			'mtime' => '2011-01-01 00:00:02',
@@ -52,7 +52,7 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser',
 		);
 
-		$this->_object = new MShop_Common_Item_Address_Default( 'customer.address.', $this->_values );
+		$this->object = new MShop_Common_Item_Address_Default( 'customer.address.', $this->values );
 	}
 
 	/**
@@ -63,328 +63,328 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 23, $this->_object->getId() );
+		$this->assertEquals( 23, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertNull( $this->_object->getId() );
+		$this->object->setId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetRefId()
 	{
-		$this->assertEquals( 'referenceid', $this->_object->getRefId() );
+		$this->assertEquals( 'referenceid', $this->object->getRefId() );
 	}
 
 	public function testSetRefId()
 	{
-		$this->_object->setRefId( 'unitreference' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unitreference', $this->_object->getRefId() );
+		$this->object->setRefId( 'unitreference' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unitreference', $this->object->getRefId() );
 	}
 
 	public function testGetCompany()
 	{
-		$this->assertEquals( 'unitCompany', $this->_object->getCompany() );
+		$this->assertEquals( 'unitCompany', $this->object->getCompany() );
 	}
 
 	public function testSetCompany()
 	{
-		$this->_object->setCompany( 'company' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'company', $this->_object->getCompany() );
+		$this->object->setCompany( 'company' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'company', $this->object->getCompany() );
 	}
 
 	public function testGetVatID()
 	{
-		$this->assertEquals( 'DE999999999', $this->_object->getVatID() );
+		$this->assertEquals( 'DE999999999', $this->object->getVatID() );
 	}
 
 	public function testSetVatID()
 	{
-		$this->_object->setVatID( 'vatid' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'vatid', $this->_object->getVatID() );
+		$this->object->setVatID( 'vatid' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'vatid', $this->object->getVatID() );
 	}
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MR, $this->_object->getSalutation() );
+		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MR, $this->object->getSalutation() );
 	}
 
 	public function testSetSalutation()
 	{
-		$this->_object->setSalutation( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY, $this->_object->getSalutation() );
+		$this->object->setSalutation( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY, $this->object->getSalutation() );
 	}
 
 	public function testGetTitle()
 	{
-		$this->assertEquals( 'Herr', $this->_object->getTitle() );
+		$this->assertEquals( 'Herr', $this->object->getTitle() );
 	}
 
 	public function testSetTitle()
 	{
-		$this->_object->setTitle( 'Dr.' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'Dr.', $this->_object->getTitle() );
+		$this->object->setTitle( 'Dr.' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'Dr.', $this->object->getTitle() );
 	}
 
 	public function testGetFirstname()
 	{
-		$this->assertEquals( 'firstunit', $this->_object->getFirstname() );
+		$this->assertEquals( 'firstunit', $this->object->getFirstname() );
 	}
 
 	public function testSetFirstname()
 	{
-		$this->_object->setFirstname( 'hans' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'hans', $this->_object->getFirstname() );
+		$this->object->setFirstname( 'hans' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'hans', $this->object->getFirstname() );
 	}
 
 	public function testGetLastname()
 	{
-		$this->assertEquals( 'lastunit', $this->_object->getLastname() );
+		$this->assertEquals( 'lastunit', $this->object->getLastname() );
 	}
 
 	public function testSetLastname()
 	{
-		$this->_object->setLastname( 'im Glueck' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'im Glueck', $this->_object->getLastname() );
+		$this->object->setLastname( 'im Glueck' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'im Glueck', $this->object->getLastname() );
 	}
 
 	public function testGetAddress1()
 	{
-		$this->assertEquals( 'unit str.', $this->_object->getAddress1() );
+		$this->assertEquals( 'unit str.', $this->object->getAddress1() );
 	}
 
 	public function testSetAddress1()
 	{
-		$this->_object->setAddress1( 'unitallee' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unitallee', $this->_object->getAddress1() );
+		$this->object->setAddress1( 'unitallee' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unitallee', $this->object->getAddress1() );
 	}
 
 	public function testGetAddress2()
 	{
-		$this->assertEquals( '166', $this->_object->getAddress2() );
+		$this->assertEquals( '166', $this->object->getAddress2() );
 	}
 
 	public function testSetAddress2()
 	{
-		$this->_object->setAddress2( '12' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '12', $this->_object->getAddress2() );
+		$this->object->setAddress2( '12' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '12', $this->object->getAddress2() );
 	}
 
 	public function testGetAddress3()
 	{
-		$this->assertEquals( '4.OG', $this->_object->getAddress3() );
+		$this->assertEquals( '4.OG', $this->object->getAddress3() );
 	}
 
 	public function testSetAddress3()
 	{
-		$this->_object->setAddress3( 'EG' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'EG', $this->_object->getAddress3() );
+		$this->object->setAddress3( 'EG' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'EG', $this->object->getAddress3() );
 	}
 
 	public function testGetPostal()
 	{
-		$this->assertEquals( '22769', $this->_object->getPostal() );
+		$this->assertEquals( '22769', $this->object->getPostal() );
 	}
 
 	public function testSetPostal()
 	{
-		$this->_object->setPostal( '11111' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '11111', $this->_object->getPostal() );
+		$this->object->setPostal( '11111' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '11111', $this->object->getPostal() );
 	}
 
 	public function testGetCity()
 	{
-		$this->assertEquals( 'Hamburg', $this->_object->getCity() );
+		$this->assertEquals( 'Hamburg', $this->object->getCity() );
 	}
 
 	public function testSetCity()
 	{
-		$this->_object->setCity( 'unitCity' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unitCity', $this->_object->getCity() );
+		$this->object->setCity( 'unitCity' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unitCity', $this->object->getCity() );
 	}
 
 	public function testGetState()
 	{
-		$this->assertEquals( 'Hamburg', $this->_object->getState() );
+		$this->assertEquals( 'Hamburg', $this->object->getState() );
 	}
 
 	public function testSetState()
 	{
-		$this->_object->setState( 'unitState' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unitState', $this->_object->getState() );
+		$this->object->setState( 'unitState' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unitState', $this->object->getState() );
 	}
 
 	public function testGetCountryId()
 	{
-		$this->assertEquals( 'DE', $this->_object->getCountryId() );
+		$this->assertEquals( 'DE', $this->object->getCountryId() );
 	}
 
 	public function testSetCountryId()
 	{
-		$this->_object->setCountryId( 'uk' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'UK', $this->_object->getCountryId() );
+		$this->object->setCountryId( 'uk' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'UK', $this->object->getCountryId() );
 	}
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'de', $this->_object->getLanguageId() );
+		$this->assertEquals( 'de', $this->object->getLanguageId() );
 	}
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId( 'en' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'en', $this->_object->getLanguageId() );
+		$this->object->setLanguageId( 'en' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'en', $this->object->getLanguageId() );
 	}
 
 	public function testGetTelephone()
 	{
-		$this->assertEquals( '05554433221', $this->_object->getTelephone() );
+		$this->assertEquals( '05554433221', $this->object->getTelephone() );
 	}
 
 	public function testSetTelephone()
 	{
-		$this->_object->setTelephone( '55512345' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '55512345', $this->_object->getTelephone() );
+		$this->object->setTelephone( '55512345' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '55512345', $this->object->getTelephone() );
 	}
 
 	public function testGetEmail()
 	{
-		$this->assertEquals( 'unit.test@metaways.de', $this->_object->getEmail() );
+		$this->assertEquals( 'test@example.com', $this->object->getEmail() );
 	}
 
 	public function testSetEmail()
 	{
-		$this->_object->setEmail( 'unit@test.de' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unit@test.de', $this->_object->getEmail() );
+		$this->object->setEmail( 'unit@test.de' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setEmail( 'unittest.de' );
+		$this->object->setEmail( 'unittest.de' );
 	}
 
 	public function testGetTelefax()
 	{
-		$this->assertEquals( '05554433222', $this->_object->getTelefax() );
+		$this->assertEquals( '05554433222', $this->object->getTelefax() );
 	}
 
 	public function testSetTelefax()
 	{
-		$this->_object->setTelefax( '55512345' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '55512345', $this->_object->getTelefax() );
+		$this->object->setTelefax( '55512345' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '55512345', $this->object->getTelefax() );
 	}
 
 	public function testGetWebsite()
 	{
-		$this->assertEquals( 'www.metaways.de', $this->_object->getWebsite() );
+		$this->assertEquals( 'www.example.com', $this->object->getWebsite() );
 	}
 
 	public function testSetWebsite()
 	{
-		$this->_object->setWebsite( 'www.test.de' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'www.test.de', $this->_object->getWebsite() );
+		$this->object->setWebsite( 'www.test.de' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'www.test.de', $this->object->getWebsite() );
 
-		$this->_object->setWebsite( 'http://xn--ses-5ka8l.de' );
-		$this->_object->setWebsite( 'http://www.test.de:443' );
-		$this->_object->setWebsite( 'https://www.test.de:8080/abc?123' );
+		$this->object->setWebsite( 'http://xn--ses-5ka8l.de' );
+		$this->object->setWebsite( 'http://www.test.de:443' );
+		$this->object->setWebsite( 'https://www.test.de:8080/abc?123' );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setWebsite( '_test:de' );
+		$this->object->setWebsite( '_test:de' );
 	}
 
 	public function testSetWebsiteHostException()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setWebsite( 'localhost' );
+		$this->object->setWebsite( 'localhost' );
 	}
 
 	public function testGetPosition()
 	{
-		$this->assertEquals( 1, $this->_object->getPosition() );
+		$this->assertEquals( 1, $this->object->getPosition() );
 	}
 
 	public function testSetPosition()
 	{
-		$this->_object->setPosition( 555 );
-		$this->assertEquals( 555, $this->_object->getPosition() );
+		$this->object->setPosition( 555 );
+		$this->assertEquals( 555, $this->object->getPosition() );
 	}
 
 	public function testGetFlag()
 	{
-		$this->assertEquals( 2, $this->_object->getFlag() );
+		$this->assertEquals( 2, $this->object->getFlag() );
 	}
 
 	public function testSetFlag()
 	{
-		$this->_object->setFlag( 5 );
-		$this->assertEquals( 5, $this->_object->getFlag() );
+		$this->object->setFlag( 5 );
+		$this->assertEquals( 5, $this->object->getFlag() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 	public function testCopyFrom()
 	{
 		$object = new MShop_Common_Item_Address_Default( 'customer.address.' );
-		$address = new MShop_Order_Item_Base_Address_Default( $this->_values );
+		$address = new MShop_Order_Item_Base_Address_Default( $this->values );
 		$object->copyFrom( $address );
 
 		$this->assertNull( $object->getId() );
-		$this->assertEquals( $this->_values['salutation'], $object->getSalutation() );
-		$this->assertEquals( $this->_values['company'], $object->getCompany() );
-		$this->assertEquals( $this->_values['vatid'], $object->getVatID() );
-		$this->assertEquals( $this->_values['title'], $object->getTitle() );
-		$this->assertEquals( $this->_values['firstname'], $object->getFirstname() );
-		$this->assertEquals( $this->_values['lastname'], $object->getLastname() );
-		$this->assertEquals( $this->_values['address1'], $object->getAddress1() );
-		$this->assertEquals( $this->_values['address2'], $object->getAddress2() );
-		$this->assertEquals( $this->_values['address3'], $object->getAddress3() );
-		$this->assertEquals( $this->_values['postal'], $object->getPostal() );
-		$this->assertEquals( $this->_values['city'], $object->getCity() );
-		$this->assertEquals( $this->_values['state'], $object->getState() );
-		$this->assertEquals( $this->_values['countryid'], $object->getCountryId() );
-		$this->assertEquals( $this->_values['langid'], $object->getLanguageId() );
-		$this->assertEquals( $this->_values['telephone'], $object->getTelephone() );
-		$this->assertEquals( $this->_values['telefax'], $object->getTelefax() );
-		$this->assertEquals( $this->_values['email'], $object->getEmail() );
-		$this->assertEquals( $this->_values['website'], $object->getWebsite() );
-		$this->assertEquals( $this->_values['flag'], $object->getFlag() );
+		$this->assertEquals( $this->values['salutation'], $object->getSalutation() );
+		$this->assertEquals( $this->values['company'], $object->getCompany() );
+		$this->assertEquals( $this->values['vatid'], $object->getVatID() );
+		$this->assertEquals( $this->values['title'], $object->getTitle() );
+		$this->assertEquals( $this->values['firstname'], $object->getFirstname() );
+		$this->assertEquals( $this->values['lastname'], $object->getLastname() );
+		$this->assertEquals( $this->values['address1'], $object->getAddress1() );
+		$this->assertEquals( $this->values['address2'], $object->getAddress2() );
+		$this->assertEquals( $this->values['address3'], $object->getAddress3() );
+		$this->assertEquals( $this->values['postal'], $object->getPostal() );
+		$this->assertEquals( $this->values['city'], $object->getCity() );
+		$this->assertEquals( $this->values['state'], $object->getState() );
+		$this->assertEquals( $this->values['countryid'], $object->getCountryId() );
+		$this->assertEquals( $this->values['langid'], $object->getLanguageId() );
+		$this->assertEquals( $this->values['telephone'], $object->getTelephone() );
+		$this->assertEquals( $this->values['telefax'], $object->getTelefax() );
+		$this->assertEquals( $this->values['email'], $object->getEmail() );
+		$this->assertEquals( $this->values['website'], $object->getWebsite() );
+		$this->assertEquals( $this->values['flag'], $object->getFlag() );
 	}
 
 	public function testFromArray()
@@ -445,39 +445,39 @@ class MShop_Customer_Item_Address_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['customer.address.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['customer.address.siteid'] );
-		$this->assertEquals( $this->_object->getRefID(), $arrayObject['customer.address.refid'] );
-		$this->assertEquals( $this->_object->getPosition(), $arrayObject['customer.address.position'] );
-		$this->assertEquals( $this->_object->getCompany(), $arrayObject['customer.address.company'] );
-		$this->assertEquals( $this->_object->getVatID(), $arrayObject['customer.address.vatid'] );
-		$this->assertEquals( $this->_object->getSalutation(), $arrayObject['customer.address.salutation'] );
-		$this->assertEquals( $this->_object->getTitle(), $arrayObject['customer.address.title'] );
-		$this->assertEquals( $this->_object->getFirstname(), $arrayObject['customer.address.firstname'] );
-		$this->assertEquals( $this->_object->getLastname(), $arrayObject['customer.address.lastname'] );
-		$this->assertEquals( $this->_object->getAddress1(), $arrayObject['customer.address.address1'] );
-		$this->assertEquals( $this->_object->getAddress2(), $arrayObject['customer.address.address2'] );
-		$this->assertEquals( $this->_object->getAddress3(), $arrayObject['customer.address.address3'] );
-		$this->assertEquals( $this->_object->getPostal(), $arrayObject['customer.address.postal'] );
-		$this->assertEquals( $this->_object->getCity(), $arrayObject['customer.address.city'] );
-		$this->assertEquals( $this->_object->getState(), $arrayObject['customer.address.state'] );
-		$this->assertEquals( $this->_object->getCountryId(), $arrayObject['customer.address.countryid'] );
-		$this->assertEquals( $this->_object->getTelephone(), $arrayObject['customer.address.telephone'] );
-		$this->assertEquals( $this->_object->getEmail(), $arrayObject['customer.address.email'] );
-		$this->assertEquals( $this->_object->getTelefax(), $arrayObject['customer.address.telefax'] );
-		$this->assertEquals( $this->_object->getWebsite(), $arrayObject['customer.address.website'] );
-		$this->assertEquals( $this->_object->getLanguageId(), $arrayObject['customer.address.languageid'] );
-		$this->assertEquals( $this->_object->getFlag(), $arrayObject['customer.address.flag'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['customer.address.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['customer.address.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['customer.address.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['customer.address.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['customer.address.siteid'] );
+		$this->assertEquals( $this->object->getRefID(), $arrayObject['customer.address.refid'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['customer.address.position'] );
+		$this->assertEquals( $this->object->getCompany(), $arrayObject['customer.address.company'] );
+		$this->assertEquals( $this->object->getVatID(), $arrayObject['customer.address.vatid'] );
+		$this->assertEquals( $this->object->getSalutation(), $arrayObject['customer.address.salutation'] );
+		$this->assertEquals( $this->object->getTitle(), $arrayObject['customer.address.title'] );
+		$this->assertEquals( $this->object->getFirstname(), $arrayObject['customer.address.firstname'] );
+		$this->assertEquals( $this->object->getLastname(), $arrayObject['customer.address.lastname'] );
+		$this->assertEquals( $this->object->getAddress1(), $arrayObject['customer.address.address1'] );
+		$this->assertEquals( $this->object->getAddress2(), $arrayObject['customer.address.address2'] );
+		$this->assertEquals( $this->object->getAddress3(), $arrayObject['customer.address.address3'] );
+		$this->assertEquals( $this->object->getPostal(), $arrayObject['customer.address.postal'] );
+		$this->assertEquals( $this->object->getCity(), $arrayObject['customer.address.city'] );
+		$this->assertEquals( $this->object->getState(), $arrayObject['customer.address.state'] );
+		$this->assertEquals( $this->object->getCountryId(), $arrayObject['customer.address.countryid'] );
+		$this->assertEquals( $this->object->getTelephone(), $arrayObject['customer.address.telephone'] );
+		$this->assertEquals( $this->object->getEmail(), $arrayObject['customer.address.email'] );
+		$this->assertEquals( $this->object->getTelefax(), $arrayObject['customer.address.telefax'] );
+		$this->assertEquals( $this->object->getWebsite(), $arrayObject['customer.address.website'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['customer.address.languageid'] );
+		$this->assertEquals( $this->object->getFlag(), $arrayObject['customer.address.flag'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.address.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.address.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['customer.address.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

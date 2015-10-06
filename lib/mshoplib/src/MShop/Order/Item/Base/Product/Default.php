@@ -17,11 +17,11 @@ class MShop_Order_Item_Base_Product_Default
 	extends MShop_Order_Item_Base_Product_Abstract
 	implements MShop_Order_Item_Base_Product_Interface
 {
-	private $_price;
-	private $_attributes;
-	private $_attributesMap;
-	private $_products;
-	private $_values;
+	private $price;
+	private $attributes;
+	private $attributesMap;
+	private $products;
+	private $values;
 
 	/**
 	 * Initializes the order product instance.
@@ -35,14 +35,14 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		parent::__construct( 'order.base.product.', $values );
 
-		$this->_price = $price;
-		$this->_values = $values;
+		$this->price = $price;
+		$this->values = $values;
 
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
-		$this->_attributes = $attributes;
+		$this->attributes = $attributes;
 
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
-		$this->_products = $products;
+		$this->products = $products;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function __clone()
 	{
-		$this->_price = clone $this->_price;
+		$this->price = clone $this->price;
 	}
 
 	/**
@@ -60,7 +60,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->_values['baseid'] ) ? (int) $this->_values['baseid'] : null );
+		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
 	}
 
 
@@ -73,7 +73,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -86,7 +86,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getOrderProductId()
 	{
-		return ( isset( $this->_values['ordprodid'] ) ? (int) $this->_values['ordprodid'] : null );
+		return ( isset( $this->values['ordprodid'] ) ? (int) $this->values['ordprodid'] : null );
 	}
 
 
@@ -100,7 +100,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $orderProductId === $this->getOrderProductId() ) { return; }
 
-		$this->_values['ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
+		$this->values['ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
 		$this->setModified();
 	}
 
@@ -112,7 +112,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -135,7 +135,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getProducts()
 	{
-		return $this->_products;
+		return $this->products;
 	}
 
 	/**
@@ -146,7 +146,7 @@ class MShop_Order_Item_Base_Product_Default
 	public function setProducts( array $products )
 	{
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $products );
-		$this->_products = $products;
+		$this->products = $products;
 		$this->setModified();
 	}
 
@@ -158,7 +158,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getSupplierCode()
 	{
-		return ( isset( $this->_values['suppliercode'] ) ? (string) $this->_values['suppliercode'] : '' );
+		return ( isset( $this->values['suppliercode'] ) ? (string) $this->values['suppliercode'] : '' );
 	}
 
 
@@ -169,11 +169,11 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
-		$this->_checkCode( $suppliercode );
+		$this->checkCode( $suppliercode );
 
 		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
-		$this->_values['suppliercode'] = (string) $suppliercode;
+		$this->values['suppliercode'] = (string) $suppliercode;
 		$this->setModified();
 	}
 
@@ -185,7 +185,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->_values['prodid'] ) ? (string) $this->_values['prodid'] : '' );
+		return ( isset( $this->values['prodid'] ) ? (string) $this->values['prodid'] : '' );
 	}
 
 
@@ -198,7 +198,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $id == $this->getProductId() ) { return; }
 
-		$this->_values['prodid'] = (string) $id;
+		$this->values['prodid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -210,7 +210,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getProductCode()
 	{
-		return ( isset( $this->_values['prodcode'] ) ? (string) $this->_values['prodcode'] : '' );
+		return ( isset( $this->values['prodcode'] ) ? (string) $this->values['prodcode'] : '' );
 	}
 
 
@@ -221,11 +221,11 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setProductCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getProductCode() ) { return; }
 
-		$this->_values['prodcode'] = (string) $code;
+		$this->values['prodcode'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -237,7 +237,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getWarehouseCode()
 	{
-		return ( isset( $this->_values['warehousecode'] ) ? (string) $this->_values['warehousecode'] : '' );
+		return ( isset( $this->values['warehousecode'] ) ? (string) $this->values['warehousecode'] : '' );
 	}
 
 
@@ -248,11 +248,11 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setWarehouseCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getWarehouseCode() ) { return; }
 
-		$this->_values['warehousecode'] = (string) $code;
+		$this->values['warehousecode'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -264,7 +264,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getName()
 	{
-		return ( isset( $this->_values['name'] ) ? (string) $this->_values['name'] : '' );
+		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
 	}
 
 
@@ -277,7 +277,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $value == $this->getName() ) { return; }
 
-		$this->_values['name'] = (string) $value;
+		$this->values['name'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -289,7 +289,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getMediaUrl()
 	{
-		return ( isset( $this->_values['mediaurl'] ) ? (string) $this->_values['mediaurl'] : '' );
+		return ( isset( $this->values['mediaurl'] ) ? (string) $this->values['mediaurl'] : '' );
 	}
 
 
@@ -302,7 +302,7 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $value == $this->getMediaUrl() ) { return; }
 
-		$this->_values['mediaurl'] = (string) $value;
+		$this->values['mediaurl'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -314,7 +314,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getQuantity()
 	{
-		return ( isset( $this->_values['quantity'] ) ? (int) $this->_values['quantity'] : 1 );
+		return ( isset( $this->values['quantity'] ) ? (int) $this->values['quantity'] : 1 );
 	}
 
 
@@ -337,7 +337,7 @@ class MShop_Order_Item_Base_Product_Default
 			throw new MShop_Order_Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		$this->_values['quantity'] = $quantity;
+		$this->values['quantity'] = $quantity;
 		$this->setModified();
 	}
 
@@ -349,7 +349,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getPrice()
 	{
-		return $this->_price;
+		return $this->price;
 	}
 
 
@@ -360,9 +360,9 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price )
 	{
-		if( $price === $this->_price ) { return; }
+		if( $price === $this->price ) { return; }
 
-		$this->_price = $price;
+		$this->price = $price;
 		$this->setModified();
 	}
 
@@ -374,11 +374,11 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getSumPrice()
 	{
-		$price = clone $this->_price;
+		$price = clone $this->price;
 
-		$price->setValue( $price->getValue() * $this->_values['quantity'] );
-		$price->setCosts( $price->getCosts() * $this->_values['quantity'] );
-		$price->setRebate( $price->getRebate() * $this->_values['quantity'] );
+		$price->setValue( $price->getValue() * $this->values['quantity'] );
+		$price->setCosts( $price->getCosts() * $this->values['quantity'] );
+		$price->setRebate( $price->getRebate() * $this->values['quantity'] );
 
 		return $price;
 	}
@@ -391,7 +391,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getFlags()
 	{
-		return ( isset( $this->_values['flags'] ) ? (int) $this->_values['flags'] : MShop_Order_Item_Base_Product_Abstract::FLAG_NONE );
+		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : MShop_Order_Item_Base_Product_Abstract::FLAG_NONE );
 	}
 
 
@@ -404,8 +404,8 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		if( $value == $this->getFlags() ) { return; }
 
-		$this->_checkFlags( $value );
-		$this->_values['flags'] = (int) $value;
+		$this->checkFlags( $value );
+		$this->values['flags'] = (int) $value;
 		$this->setModified();
 	}
 
@@ -417,7 +417,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : null );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : null );
 	}
 
 
@@ -435,7 +435,7 @@ class MShop_Order_Item_Base_Product_Default
 			throw new MShop_Order_Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		$this->_values['pos'] = ( $value !== null ? (int) $value : null );
+		$this->values['pos'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -449,7 +449,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : MShop_Order_Item_Abstract::STAT_UNFINISHED );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : MShop_Order_Item_Abstract::STAT_UNFINISHED );
 	}
 
 
@@ -462,7 +462,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setStatus( $value )
 	{
-		$this->_values['status'] = (int) $value;
+		$this->values['status'] = (int) $value;
 		$this->setModified();
 	}
 
@@ -476,7 +476,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getAttribute( $code, $type = '' )
 	{
-		$map = $this->_getAttributeMap();
+		$map = $this->getAttributeMap();
 
 		if( isset( $map[$type][$code] ) ) {
 			return $map[$type][$code]->getValue();
@@ -495,7 +495,7 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
-		$map = $this->_getAttributeMap();
+		$map = $this->getAttributeMap();
 
 		if( isset( $map[$type][$code] ) ) {
 			return $map[$type][$code];
@@ -514,12 +514,12 @@ class MShop_Order_Item_Base_Product_Default
 	public function getAttributes( $type = null )
 	{
 		if( $type === null ) {
-			return $this->_attributes;
+			return $this->attributes;
 		}
 
 		$list = array();
 
-		foreach( $this->_attributes as $attrItem )
+		foreach( $this->attributes as $attrItem )
 		{
 			if( $attrItem->getType() === $type ) {
 				$list[] = $attrItem;
@@ -537,18 +537,18 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setAttributeItem( MShop_Order_Item_Base_Product_Attribute_Interface $item )
 	{
-		$this->_getAttributeMap();
+		$this->getAttributeMap();
 
 		$type = $item->getType();
 		$code = $item->getCode();
 
-		if( !isset( $this->_attributesMap[$type][$code] ) )
+		if( !isset( $this->attributesMap[$type][$code] ) )
 		{
-			$this->_attributesMap[$type][$code] = $item;
-			$this->_attributes[] = $item;
+			$this->attributesMap[$type][$code] = $item;
+			$this->attributes[] = $item;
 		}
 
-		$this->_attributesMap[$type][$code]->setValue( $item->getValue() );
+		$this->attributesMap[$type][$code]->setValue( $item->getValue() );
 		$this->setModified();
 	}
 
@@ -562,8 +562,8 @@ class MShop_Order_Item_Base_Product_Default
 	{
 		MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Attribute_Interface', $attributes );
 
-		$this->_attributes = $attributes;
-		$this->_attributesMap = null;
+		$this->attributes = $attributes;
+		$this->attributesMap = null;
 		$this->setModified();
 	}
 
@@ -595,10 +595,10 @@ class MShop_Order_Item_Base_Product_Default
 				case 'order.base.product.quantity': $this->setQuantity( $value ); break;
 				case 'order.base.product.status': $this->setStatus( $value ); break;
 				case 'order.base.product.flags': $this->setFlags( $value ); break;
-				case 'order.base.product.price': $this->_price->setValue( $value ); break;
-				case 'order.base.product.costs': $this->_price->setCosts( $value ); break;
-				case 'order.base.product.rebate': $this->_price->setRebate( $value ); break;
-				case 'order.base.product.taxrate': $this->_price->setTaxRate( $value ); break;
+				case 'order.base.product.price': $this->price->setValue( $value ); break;
+				case 'order.base.product.costs': $this->price->setCosts( $value ); break;
+				case 'order.base.product.rebate': $this->price->setRebate( $value ); break;
+				case 'order.base.product.taxrate': $this->price->setTaxRate( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -625,10 +625,10 @@ class MShop_Order_Item_Base_Product_Default
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.position'] = $this->getPosition();
-		$list['order.base.product.price'] = $this->_price->getValue();
-		$list['order.base.product.costs'] = $this->_price->getCosts();
-		$list['order.base.product.rebate'] = $this->_price->getRebate();
-		$list['order.base.product.taxrate'] = $this->_price->getTaxRate();
+		$list['order.base.product.price'] = $this->price->getValue();
+		$list['order.base.product.costs'] = $this->price->getCosts();
+		$list['order.base.product.rebate'] = $this->price->getRebate();
+		$list['order.base.product.taxrate'] = $this->price->getTaxRate();
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.flags'] = $this->getFlags();
@@ -685,17 +685,17 @@ class MShop_Order_Item_Base_Product_Default
 	 *
 	 * @return array Associative list of type and code as key and an MShop_Order_Item_Base_Product_Attribute_Interface as value
 	 */
-	protected function _getAttributeMap()
+	protected function getAttributeMap()
 	{
-		if( !isset( $this->_attributesMap ) )
+		if( !isset( $this->attributesMap ) )
 		{
-			$this->_attributesMap = array();
+			$this->attributesMap = array();
 
-			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
+			foreach( $this->attributes as $attribute ) {
+				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
 			}
 		}
 
-		return $this->_attributesMap;
+		return $this->attributesMap;
 	}
 }

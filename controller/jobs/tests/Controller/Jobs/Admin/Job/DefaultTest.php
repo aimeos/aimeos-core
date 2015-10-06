@@ -8,9 +8,9 @@
 
 class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_jobItemStub;
-	private $_jobManagerStub;
+	private $object;
+	private $jobItemStub;
+	private $jobManagerStub;
 
 
 	/**
@@ -22,16 +22,16 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_jobItemStub = $this->getMockBuilder( 'MAdmin_Job_Item_Default' )->getMock();
+		$this->jobItemStub = $this->getMockBuilder( 'MAdmin_Job_Item_Default' )->getMock();
 
-		$this->_jobManagerStub = $this->getMockBuilder( 'MAdmin_Job_Manager_Default' )
+		$this->jobManagerStub = $this->getMockBuilder( 'MAdmin_Job_Manager_Default' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$this->_object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
+		$this->object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
 	}
 
 
@@ -43,33 +43,33 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Admin interface jobs', $this->_object->getName() );
+		$this->assertEquals( 'Admin interface jobs', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Executes the jobs created by the admin interface, e.g. the text exports';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 		$context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
 
-		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->_jobManagerStub );
+		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->jobManagerStub );
 
 		$adminJobCntlStub = $this->getMockBuilder( 'Controller_ExtJS_Admin_Job_Default' )
 			->setMethods( array( 'deleteItem' ) )
@@ -82,22 +82,22 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 		$adminJobCntlStub->expects( $this->once() )->method( 'deleteItem' )
 			->will( $this->returnValue( array( 'number' => 42 ) ) );
 
-		$this->_jobManagerStub->expects( $this->atLeastOnce() )->method( 'searchItems' )
-			->will( $this->onConsecutiveCalls( array( $this->_jobItemStub ), array() ) );
+		$this->jobManagerStub->expects( $this->atLeastOnce() )->method( 'searchItems' )
+			->will( $this->onConsecutiveCalls( array( $this->jobItemStub ), array() ) );
 
-		$this->_jobManagerStub->expects( $this->once() )->method( 'saveItem' );
+		$this->jobManagerStub->expects( $this->once() )->method( 'saveItem' );
 
-		$this->_jobItemStub->expects( $this->atLeastOnce() )->method( 'getMethod' )
+		$this->jobItemStub->expects( $this->atLeastOnce() )->method( 'getMethod' )
 			->will( $this->returnValue( 'Admin_Job.deleteItem' ) );
 
-		$this->_jobItemStub->expects( $this->once() )->method( 'setResult' )
+		$this->jobItemStub->expects( $this->once() )->method( 'setResult' )
 			->with( $this->equalTo( array( 'number' => 42 ) ) );
 
-		$this->_jobItemStub->expects( $this->once() )->method( 'setStatus' )
+		$this->jobItemStub->expects( $this->once() )->method( 'setStatus' )
 			->with( $this->equalTo( -1 ) );
 
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -108,24 +108,24 @@ class Controller_Jobs_Admin_Job_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testRunInvalidMethod( $method )
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
-		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->_jobManagerStub );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $aimeos );
+		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->jobManagerStub );
 
 
-		$this->_jobManagerStub->expects( $this->atLeastOnce() )->method( 'searchItems' )
-			->will( $this->onConsecutiveCalls( array( $this->_jobItemStub ), array() ) );
+		$this->jobManagerStub->expects( $this->atLeastOnce() )->method( 'searchItems' )
+			->will( $this->onConsecutiveCalls( array( $this->jobItemStub ), array() ) );
 
-		$this->_jobManagerStub->expects( $this->once() )->method( 'saveItem' );
+		$this->jobManagerStub->expects( $this->once() )->method( 'saveItem' );
 
-		$this->_jobItemStub->expects( $this->atLeastOnce() )->method( 'getMethod' )
+		$this->jobItemStub->expects( $this->atLeastOnce() )->method( 'getMethod' )
 			->will( $this->returnValue( $method ) );
 
-		$this->_jobItemStub->expects( $this->once() )->method( 'setStatus' )
+		$this->jobItemStub->expects( $this->once() )->method( 'setStatus' )
 			->with( $this->equalTo( 0 ) );
 
 

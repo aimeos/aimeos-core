@@ -16,7 +16,7 @@
  */
 abstract class MW_Translation_Abstract
 {
-	private $_locale;
+	private $locale;
 
 
 	/**
@@ -30,7 +30,7 @@ abstract class MW_Translation_Abstract
 			throw new MW_Translation_Exception( sprintf( 'Invalid locale "%1$s"', $locale ) );
 		}
 
-		$this->_locale = (string) $locale;
+		$this->locale = (string) $locale;
 	}
 
 
@@ -41,7 +41,7 @@ abstract class MW_Translation_Abstract
 	 */
 	public function getLocale()
 	{
-		return $this->_locale;
+		return $this->locale;
 	}
 
 
@@ -55,7 +55,7 @@ abstract class MW_Translation_Abstract
 	 * @return array List of locations to the translation files
 	 * @throws MW_Translation_Exception If translation file doesn't exist
 	 */
-	protected function _getTranslationFileLocations( array $paths, $locale )
+	protected function getTranslationFileLocations( array $paths, $locale )
 	{
 		$locations = array();
 
@@ -93,7 +93,7 @@ abstract class MW_Translation_Abstract
 	 * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 	 * @license    http://framework.zend.com/license/new-bsd     New BSD License
 	 */
-	protected function _getPluralIndex( $number, $locale )
+	protected function getPluralIndex( $number, $locale )
 	{
 		$number = abs( (int) $number );
 

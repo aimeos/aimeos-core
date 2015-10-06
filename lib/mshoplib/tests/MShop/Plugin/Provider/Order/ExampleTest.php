@@ -11,7 +11,8 @@
  */
 class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $order;
+	private $plugin;
 
 
 	/**
@@ -22,15 +23,19 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
-		$plugin = $pluginManager->createItem();
-		$plugin->setTypeId( 2 );
-		$plugin->setProvider( 'Example' );
-		$plugin->setConfig( array( 'key'=>1 ) );
-		$plugin->setStatus( '1' );
+		$context = TestHelper::getContext();
 
-		$this->_object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $plugin );
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setTypeId( 2 );
+		$this->plugin->setProvider( 'Example' );
+		$this->plugin->setConfig( array( 'key'=>1 ) );
+		$this->plugin->setStatus( '1' );
+
+		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
+		$this->order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -40,28 +45,21 @@ class MShop_Plugin_Provider_Order_ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->order, $this->plugin );
 	}
 
-	/**
-	 * @todo Implement testRegister().
-	 */
+
 	public function testRegister()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $this->plugin );
+		$object->register( $this->order );
 	}
 
-	/**
-	 * @todo Implement testU().
-	 */
+
 	public function testUpdate()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$object = new MShop_Plugin_Provider_Order_Example( TestHelper::getContext(), $this->plugin );
+
+		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}
 }

@@ -25,7 +25,7 @@ class Controller_Jobs_Catalog_Index_Optimize_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index optimization' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index optimization' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Catalog_Index_Optimize_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Optimizes the catalog index for searching products' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Optimizes the catalog index for searching products' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Catalog_Index_Optimize_Default
 	 */
 	public function run()
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->getContext() );
 		$manager->getSubManager( 'index' )->optimize();
 	}
 }

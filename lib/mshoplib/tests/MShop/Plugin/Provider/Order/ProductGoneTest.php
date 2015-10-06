@@ -7,10 +7,10 @@
 
 class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_TestCase
 {
-	private $_order;
-	private $_plugin;
-	private $_product;
-	private $_orderManager;
+	private $order;
+	private $plugin;
+	private $product;
+	private $orderManager;
 
 
 	/**
@@ -24,12 +24,12 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$context = TestHelper::getContext();
 
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setProvider( 'ProductGone' );
-		$this->_plugin->setStatus( 1 );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setProvider( 'ProductGone' );
+		$this->plugin->setStatus( 1 );
 
-		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
+		$this->orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', 672.00 ) );
@@ -39,7 +39,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 			throw new Exception( 'No order base item found.' );
 		}
 
-		$this->_order = $baseItem;
+		$this->order = $baseItem;
 
 		// create a product to mess with in the tests
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
@@ -56,7 +56,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$newProduct->setCode( 'WTF' );
 		$productManager->saveItem( $newProduct );
 
-		$this->_product = $newProduct;
+		$this->product = $newProduct;
 	}
 
 
@@ -77,30 +77,30 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 			$productManager->deleteItem( $badItem->getId() );
 		}
 
-		unset( $this->_orderManager );
-		unset( $this->_plugin );
+		unset( $this->orderManager );
+		unset( $this->plugin );
 	}
 
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
-		$object->register( $this->_order );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
+		$object->register( $this->order );
 	}
 
 
 	public function testUpdateNone()
 	{
 		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so check shall not be executed
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
-		$this->AssertTrue( $object->update( $this->_order, 'check.after' ) );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
+		$this->AssertTrue( $object->update( $this->order, 'check.after' ) );
 	}
 
 
 	public function testUpdateOk()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
-		$result = $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
+		$result = $object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 
 		$this->assertTrue( $result );
 	}
@@ -108,19 +108,19 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 	public function testUpdateProductDeleted()
 	{
-		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
+		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
 		$badItem = $orderBaseProductManager->createItem();
 		$badItem->setProductId( -13 );
 		$badItem->setProductCode( 'NONE' );
 
-		$this->_order->addProduct( $badItem );
+		$this->order->addProduct( $badItem );
 
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -128,20 +128,20 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
+		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$badItem = $orderBaseProductManager->createItem();
-		$badItem->copyFrom( $this->_product );
+		$badItem->copyFrom( $this->product );
 
-		$this->_product->setDateEnd( '1999-12-31 23:59:59' );
+		$this->product->setDateEnd( '1999-12-31 23:59:59' );
 
-		$productManager->saveItem( $this->_product );
+		$productManager->saveItem( $this->product );
 
-		$this->_order->addProduct( $badItem );
+		$this->order->addProduct( $badItem );
 
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -149,20 +149,20 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
+		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$badItem = $orderBaseProductManager->createItem();
-		$badItem->copyFrom( $this->_product );
+		$badItem->copyFrom( $this->product );
 
-		$this->_product->setDateStart( '2022-12-31 23:59:59' );
+		$this->product->setDateStart( '2022-12-31 23:59:59' );
 
-		$productManager->saveItem( $this->_product );
+		$productManager->saveItem( $this->product );
 
-		$this->_order->addProduct( $badItem );
+		$this->order->addProduct( $badItem );
 
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
 
@@ -170,16 +170,16 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$orderBaseManager = $this->_orderManager->getSubManager( 'base' );
+		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$badItem = $orderBaseProductManager->createItem();
-		$badItem->copyFrom( $this->_product );
+		$badItem->copyFrom( $this->product );
 
-		$this->_product->setStatus( 0 );
-		$productManager->saveItem( $this->_product );
+		$this->product->setStatus( 0 );
+		$productManager->saveItem( $this->product );
 
-		$this->_order->addProduct( $badItem );
-		$products = $this->_order->getProducts();
+		$this->order->addProduct( $badItem );
+		$products = $this->order->getProducts();
 
 		if( count( $products ) < 1 ) {
 			throw new Exception( 'Product for testing not in basket.' );
@@ -187,11 +187,11 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		$badItemPosition = key( $products );
 
-		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_ProductGone( TestHelper::getContext(), $this->plugin );
 
 		try
 		{
-			$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 			$this->fail( 'MShop_Plugin_Provider_Exception not thrown.' );
 		}
 		catch( MShop_Plugin_Provider_Exception $e )

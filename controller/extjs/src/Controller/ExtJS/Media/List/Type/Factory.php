@@ -66,7 +66,7 @@ class Controller_ExtJS_Media_List_Type_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Media_List_Type_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/media/list/type/decorators/excludes
 		 * Excludes decorators added by the "common" option from the media list type ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Media_List_Type_Factory
 		 * @see controller/extjs/media/list/type/decorators/excludes
 		 * @see controller/extjs/media/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'media/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'media/list/type' );
 	}
 }

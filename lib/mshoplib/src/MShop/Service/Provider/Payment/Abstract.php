@@ -39,7 +39,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	const FEAT_REFUND = 4;
 
 
-	private $_beConfig = array(
+	private $beConfig = array(
 		'payment.url-success' => array(
 			'code' => 'payment.url-success',
 			'internalcode'=> 'payment.url-success',
@@ -88,9 +88,9 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->_checkConfig( $this->_beConfig, $attributes );
+		$error = $this->checkConfig( $this->beConfig, $attributes );
 
-		foreach( $this->_beConfig as $key => $value )
+		foreach( $this->beConfig as $key => $value )
 		{
 			if( isset( $attributes[$key] ) && $value['type'] != gettype( $attributes[$key] ) ) {
 				$error[$key] = sprintf( 'The type of the configuration option with key "%1$s" must be "%2$s"', $key, $value['type'] );
@@ -111,7 +111,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	{
 		$list = array();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -152,7 +152,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	 */
 	public function process( MShop_Order_Item_Interface $order, array $params = array() )
 	{
-		$url = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$url = $this->getConfigValue( array( 'payment.url-success' ) );
 
 		return new MShop_Common_Item_Helper_Form_Default( $url, 'POST', array() );
 	}
@@ -177,6 +177,6 @@ abstract class MShop_Service_Provider_Payment_Abstract
 	 */
 	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
 	{
-		$this->_setAttributes( $orderServiceItem, $attributes, 'payment' );
+		$this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}
 }

@@ -51,7 +51,7 @@ class Client_Html_Catalog_Detail_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/detail/default/subparts';
+	private $subPartPath = 'client/html/catalog/detail/default/subparts';
 
 	/** client/html/catalog/detail/social/name
 	 * Name of the social part used by the catalog detail client implementation
@@ -162,11 +162,11 @@ class Client_Html_Catalog_Detail_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'social', 'image', 'basic', 'actions', 'basket', 'bundle', 'additional', 'suggest', 'bought', 'seen' );
+	private $subPartNames = array( 'social', 'image', 'basic', 'actions', 'basket', 'bundle', 'additional', 'suggest', 'bought', 'seen' );
 
-	private $_tags = array();
-	private $_expire;
-	private $_cache;
+	private $tags = array();
+	private $expire;
+	private $cache;
 
 
 	/**
@@ -193,17 +193,17 @@ class Client_Html_Catalog_Detail_Default
 		 */
 		$confkey = 'client/html/catalog/detail';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->detailBody = $output;
@@ -254,9 +254,9 @@ class Client_Html_Catalog_Detail_Default
 			$tplconf = 'client/html/catalog/detail/default/template-body';
 			$default = 'catalog/detail/body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$this->_setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
+			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
@@ -280,16 +280,16 @@ class Client_Html_Catalog_Detail_Default
 		$prefixes = array( 'd' );
 		$confkey = 'client/html/catalog/detail';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->detailHeader = $output;
@@ -318,13 +318,13 @@ class Client_Html_Catalog_Detail_Default
 				$tplconf = 'client/html/catalog/detail/default/template-header';
 				$default = 'catalog/detail/header-default.html';
 
-				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-				$this->_setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
+				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -419,7 +419,7 @@ class Client_Html_Catalog_Detail_Default
 		 * @see client/html/catalog/detail/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/detail/' . $type, $name );
+		return $this->createSubClient( 'catalog/detail/' . $type, $name );
 	}
 
 
@@ -430,13 +430,13 @@ class Client_Html_Catalog_Detail_Default
 	 */
 	public function process()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$params = $this->_getClientParams( $view->param() );
-			$context->getSession()->set( 'arcavias/catalog/detail/params/last', $params );
+			$params = $this->getClientParams( $view->param() );
+			$context->getSession()->set( 'aimeos/catalog/detail/params/last', $params );
 
 			parent::process();
 		}
@@ -470,9 +470,9 @@ class Client_Html_Catalog_Detail_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -484,13 +484,13 @@ class Client_Html_Catalog_Detail_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
-			$productItem = $this->_getProductItem( $view->param( 'd_prodid' ), $domains );
+			$productItem = $this->getProductItem( $view->param( 'd_prodid' ), $domains );
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 
@@ -503,8 +503,8 @@ class Client_Html_Catalog_Detail_Default
 			$attrSearch->setConditions( $attrSearch->combine( '&&', $expr ) );
 			$attributes = $attrManager->searchItems( $attrSearch, $domains );
 
-			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
-			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
+			$this->addMetaItem( $attributes, 'attribute', $this->expire, $this->tags );
+			$this->addMetaList( array_keys( $attributes ), 'attribute', $this->expire );
 
 
 			$mediaManager = $controller->createManager( 'media' );
@@ -516,22 +516,22 @@ class Client_Html_Catalog_Detail_Default
 			$mediaSearch->setConditions( $mediaSearch->combine( '&&', $expr ) );
 			$media = $mediaManager->searchItems( $mediaSearch, $domains );
 
-			$this->_addMetaItem( $media, 'media', $this->_expire, $this->_tags );
-			$this->_addMetaList( array_keys( $media ), 'media', $this->_expire );
+			$this->addMetaItem( $media, 'media', $this->expire, $this->tags );
+			$this->addMetaList( array_keys( $media ), 'media', $this->expire );
 
 
 			$view->detailProductItem = $productItem;
 			$view->detailProductAttributeItems = $attributes;
 			$view->detailProductMediaItems = $media;
-			$view->detailParams = $this->_getClientParams( $view->param() );
+			$view->detailParams = $this->getClientParams( $view->param() );
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 
 
@@ -543,9 +543,9 @@ class Client_Html_Catalog_Detail_Default
 	 * @throws Client_Html_Exception If no product item was found
 	 * @return MShop_Product_Item_Interface Product item object
 	 */
-	protected function _getProductItem( $prodid, array $domains )
+	protected function getProductItem( $prodid, array $domains )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		/** client/html/catalog/domains
@@ -585,8 +585,8 @@ class Client_Html_Catalog_Detail_Default
 			throw new Client_Html_Exception( sprintf( 'No product with ID "%1$s" found', $prodid ) );
 		}
 
-		$this->_addMetaItem( $item, 'product', $this->_expire, $this->_tags );
-		$this->_addMetaList( $prodid, 'product', $this->_expire );
+		$this->addMetaItem( $item, 'product', $this->expire, $this->tags );
+		$this->addMetaList( $prodid, 'product', $this->expire );
 
 		return $item;
 	}

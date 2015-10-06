@@ -18,7 +18,7 @@ class MShop_Order_Manager_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.id'=> array(
 			'code'=>'order.id',
 			'internalcode'=>'mord."id"',
@@ -127,11 +127,11 @@ class MShop_Order_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 
 
 		$sites = $context->getLocale()->getSiteSubTree();
-		$this->_replaceSiteMarker( $this->_searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
 	}
 
 
@@ -188,7 +188,7 @@ class MShop_Order_Manager_Default
 		 * @see mshop/order/manager/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order' ) );
 	}
 
 
@@ -200,11 +200,11 @@ class MShop_Order_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/default/item/delete' );
 	}
 
 
@@ -215,8 +215,8 @@ class MShop_Order_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -263,10 +263,10 @@ class MShop_Order_Manager_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -338,7 +338,7 @@ class MShop_Order_Manager_Default
 				$path = 'mshop/order/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -393,7 +393,7 @@ class MShop_Order_Manager_Default
 				 * @see mshop/order/manager/default/item/count
 				 */
 				$path = 'mshop/order/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -405,7 +405,7 @@ class MShop_Order_Manager_Default
 		}
 
 
-		$this->_addStatus( $item );
+		$this->addStatus( $item );
 	}
 
 
@@ -419,7 +419,7 @@ class MShop_Order_Manager_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.id', $id, $ref );
+		return $this->getItemBase( 'order.id', $id, $ref );
 	}
 
 
@@ -455,7 +455,7 @@ class MShop_Order_Manager_Default
 		 * @see mshop/order/manager/default/item/count
 		 */
 		$path = 'mshop/order/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -487,7 +487,7 @@ class MShop_Order_Manager_Default
 		$path = 'classes/order/manager/submanagers';
 		$default = array( 'base', 'status' );
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
@@ -503,10 +503,10 @@ class MShop_Order_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -616,13 +616,13 @@ class MShop_Order_Manager_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -652,7 +652,7 @@ class MShop_Order_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'order', $manager, $name );
+		return $this->getSubManagerBase( 'order', $manager, $name );
 	}
 
 
@@ -661,9 +661,9 @@ class MShop_Order_Manager_Default
 	 *
 	 * @param MShop_Order_Item_Interface $item Order item object
 	 */
-	protected function _addStatus( MShop_Order_Item_Interface $item )
+	protected function addStatus( MShop_Order_Item_Interface $item )
 	{
-		$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+		$statusManager = MShop_Factory::createManager( $this->getContext(), 'order/status' );
 
 		$statusItem = $statusManager->createItem();
 		$statusItem->setParentId( $item->getId() );
@@ -694,7 +694,7 @@ class MShop_Order_Manager_Default
 	 * @param array $values List of attributes for order item
 	 * @return MShop_Order_Item_Interface New order item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Default( $values );
 	}

@@ -7,8 +7,8 @@
 
 class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_object;
+	private $context;
+	private $object;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
 
-		// $this->_object = new Client_Html_..._Default( $this->_context, $paths );
-		// $this->_object->setView( TestHelper::getView() );
+		// $this->object = new Client_Html_..._Default( $this->context, $paths );
+		// $this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,7 +35,7 @@ class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 
 		Controller_Frontend_Factory::clear();
 		MShop_Factory::clear();

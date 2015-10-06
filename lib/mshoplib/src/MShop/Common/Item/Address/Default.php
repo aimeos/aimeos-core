@@ -17,8 +17,8 @@ class MShop_Common_Item_Address_Default
 	extends MShop_Common_Item_Address_Abstract
 	implements MShop_Common_Item_Address_Interface
 {
-	private $_prefix;
-	private $_values;
+	private $prefix;
+	private $values;
 
 	/**
 	 * Initializes the provider common address item object
@@ -30,8 +30,8 @@ class MShop_Common_Item_Address_Default
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->_values = $values;
-		$this->_prefix = $prefix;
+		$this->values = $values;
+		$this->prefix = $prefix;
 	}
 
 
@@ -42,7 +42,7 @@ class MShop_Common_Item_Address_Default
 	 */
 	public function getRefId()
 	{
-		return ( isset( $this->_values['refid'] ) ? (string) $this->_values['refid'] : '' );
+		return ( isset( $this->values['refid'] ) ? (string) $this->values['refid'] : '' );
 	}
 
 
@@ -55,7 +55,7 @@ class MShop_Common_Item_Address_Default
 	{
 		if( $refid == $this->getRefId() ) { return; }
 
-		$this->_values['refid'] = (string) $refid;
+		$this->values['refid'] = (string) $refid;
 		$this->setModified();
 	}
 
@@ -69,7 +69,7 @@ class MShop_Common_Item_Address_Default
 	{
 		if( $position == $this->getPosition() ) { return; }
 
-		$this->_values['pos'] = (int) $position;
+		$this->values['pos'] = (int) $position;
 		$this->setModified();
 	}
 
@@ -81,7 +81,7 @@ class MShop_Common_Item_Address_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 
@@ -129,8 +129,8 @@ class MShop_Common_Item_Address_Default
 		{
 			switch( $key )
 			{
-				case $this->_prefix . 'refid': $this->setRefId( $value ); break;
-				case $this->_prefix . 'position': $this->setPosition( $value ); break;
+				case $this->prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->prefix . 'position': $this->setPosition( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -148,8 +148,8 @@ class MShop_Common_Item_Address_Default
 	{
 		$properties = parent::toArray();
 
-		$properties[$this->_prefix . 'refid'] = $this->getRefId();
-		$properties[$this->_prefix . 'position'] = $this->getPosition();
+		$properties[$this->prefix . 'refid'] = $this->getRefId();
+		$properties[$this->prefix . 'position'] = $this->getPosition();
 
 		return $properties;
 	}

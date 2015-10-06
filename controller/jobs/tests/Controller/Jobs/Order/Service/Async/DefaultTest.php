@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,9 +20,9 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$this->object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 	}
 
 
@@ -34,27 +34,27 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Batch update of payment/delivery status', $this->_object->getName() );
+		$this->assertEquals( 'Batch update of payment/delivery status', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Executes payment or delivery service providers that uses batch updates';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
@@ -85,7 +85,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 		$serviceProviderStub->expects( $this->once() )->method( 'updateAsync' );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -93,7 +93,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 	public function testRunExceptionProcess()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
@@ -117,7 +117,7 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends PHPUnit_Framework_
 			->will( $this->throwException( new MShop_Service_Exception() ) );
 
 
-		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Async_Default( $context, $aimeos );
 		$object->run();
 	}
 }

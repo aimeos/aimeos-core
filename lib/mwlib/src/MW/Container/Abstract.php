@@ -16,8 +16,8 @@
  */
 abstract class MW_Container_Abstract
 {
-	private $_options;
-	private $_name;
+	private $options;
+	private $name;
 
 
 	/**
@@ -28,8 +28,8 @@ abstract class MW_Container_Abstract
 	 */
 	public function __construct( $name, array $options )
 	{
-		$this->_options = $options;
-		$this->_name = $name;
+		$this->options = $options;
+		$this->name = $name;
 	}
 
 
@@ -40,7 +40,7 @@ abstract class MW_Container_Abstract
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -49,9 +49,9 @@ abstract class MW_Container_Abstract
 	 *
 	 * @return array Associative list of option keys and values
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
-		return $this->_options;
+		return $this->options;
 	}
 
 
@@ -62,8 +62,8 @@ abstract class MW_Container_Abstract
 	 * @param string $default Default value if option is not configured
 	 * @return string Option value
 	 */
-	protected function _getOption( $name, $default = null )
+	protected function getOption( $name, $default = null )
 	{
-		return ( isset( $this->_options[$name] ) ? $this->_options[$name] : $default );
+		return ( isset( $this->options[$name] ) ? $this->options[$name] : $default );
 	}
 }

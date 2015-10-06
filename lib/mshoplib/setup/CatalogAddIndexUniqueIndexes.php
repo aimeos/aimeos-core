@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogAddIndexUniqueIndexes extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_catalog_index_attribute' => array(
 			'unq_mscatinat_p_s_aid_lt' => array(
 				'CREATE TEMPORARY TABLE "tmp_mshop_catalog_index_attribute"
@@ -120,9 +120,9 @@ class MW_Setup_Task_CatalogAddIndexUniqueIndexes extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -130,26 +130,26 @@ class MW_Setup_Task_CatalogAddIndexUniqueIndexes extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative list of table name / constraint name / SQL statement to execute
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding unique constraints to catalog index tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding unique constraints to catalog index tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $list )
 		{
 			foreach( $list as $index => $sqls )
 			{
-				$this->_msg( sprintf( 'Checking index "%1$s"', $index ), 1 );
+				$this->msg( sprintf( 'Checking index "%1$s"', $index ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->constraintExists( $table, $index ) === false )
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->constraintExists( $table, $index ) === false )
 				{
-					$this->_executeList( $sqls );
-					$this->_status( 'added' );
+					$this->executeList( $sqls );
+					$this->status( 'added' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

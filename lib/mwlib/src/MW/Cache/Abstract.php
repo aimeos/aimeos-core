@@ -89,18 +89,4 @@ abstract class MW_Cache_Abstract
 		$expireList = ( $expires !== null ? array( $key => $expires ) : array() );
 		$this->setList( array( $key => $value ), array( $key => $tags ), $expireList );
 	}
-
-
-	/**
-	 * Tests if caching is available.
-	 *
-	 * @inheritDoc
-	 *
-	 * @return boolean True if available, false if not
-	 * @deprecated
-	 */
-	public function isAvailable()
-	{
-		return true;
-	}
 }

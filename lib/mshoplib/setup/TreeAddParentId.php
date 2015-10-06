@@ -9,7 +9,7 @@
  */
 class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_catalog' => array(
 			'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"',
 			'UPDATE mshop_catalog mc1 SET parentid = (
@@ -66,9 +66,9 @@ class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -77,23 +77,23 @@ class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding parentid column to catalog and locale_site', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding parentid column to catalog and locale_site', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking parentid column in "%1$s"', $table ), 1 );
+			$this->msg( sprintf( 'Checking parentid column in "%1$s"', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true && $this->_schema->columnExists( $table, 'parentid' ) === false )
+			if( $this->schema->tableExists( $table ) === true && $this->schema->columnExists( $table, 'parentid' ) === false )
 			{
-				$this->_executeList( $stmt );
-				$this->_status( 'added' );
+				$this->executeList( $stmt );
+				$this->status( 'added' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

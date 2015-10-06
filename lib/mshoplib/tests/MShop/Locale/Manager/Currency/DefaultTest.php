@@ -11,45 +11,45 @@
  */
 class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	protected function setUp()
 	{
-		$this->_object = new MShop_Locale_Manager_Currency_Default( TestHelper::getContext() );
+		$this->object = new MShop_Locale_Manager_Currency_Default( TestHelper::getContext() );
 	}
 
 
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Locale_Item_Currency_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Locale_Item_Currency_Interface', $this->object->createItem() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
 		// insert case
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setLabel( 'new name' );
 		$item->setStatus( 1 );
 		$item->setCode( 'XXX' );
 
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		// update case
 		$itemExp = clone $itemSaved;
 		$itemExp->setLabel( 'new new name' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$context = TestHelper::getContext();
 
@@ -74,13 +74,13 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testGetItem()
 	{
-		$actual = $this->_object->getItem( 'EUR' );
+		$actual = $this->object->getItem( 'EUR' );
 
 		$this->assertEquals( 'EUR', $actual->getId() );
 		$this->assertEquals( 'Euro', $actual->getLabel() );
@@ -91,7 +91,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '==', 'locale.currency.id', 'EUR' );
@@ -104,16 +104,16 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 		// search without base criteria, slice & total
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '~=', 'locale.currency.label', 'CFA' ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 
@@ -125,7 +125,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -134,6 +134,6 @@ class MShop_Locale_Manager_Currency_DefaultTest extends PHPUnit_Framework_TestCa
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

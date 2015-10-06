@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_product_stock" st
 			SET "warehouseid" = ( SELECT "id" FROM "mshop_product_stock_warehouse" wh WHERE wh."siteid" = st."siteid" AND wh."code" = \'default\' )
 			WHERE "warehouseid" IS NULL',
@@ -52,21 +52,21 @@ class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_A
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		$table = 'mshop_product_stock';
-		$this->_msg( sprintf( 'Changing warehouseid column in %1$s', $table ), 0 );
+		$this->msg( sprintf( 'Changing warehouseid column in %1$s', $table ), 0 );
 
-		$schema = $this->_getSchema( 'db-product' );
+		$schema = $this->getSchema( 'db-product' );
 
 		if( $schema->tableExists( $table ) === true
 			&& $schema->columnExists( $table, 'warehouseid' )
 			&& $schema->getColumnDetails( $table, 'warehouseid' )->isNullable() === true
 		) {
-			$this->_executeList( $this->_mysql, 'db-product' );
-			$this->_status( 'done' );
+			$this->executeList( $this->mysql, 'db-product' );
+			$this->status( 'done' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

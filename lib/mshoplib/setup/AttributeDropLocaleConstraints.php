@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_list_type' => array(
 			'fk_msattlity_siteid' => 'ALTER TABLE "mshop_attribute_list_type" DROP FOREIGN KEY "fk_msattlity_siteid"',
 		),
@@ -54,9 +54,9 @@ class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Abstrac
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -65,12 +65,12 @@ class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Abstrac
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Removing locale constraints from attribute tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Removing locale constraints from attribute tables', 0 );
+		$this->status( '' );
 
-		$schema = $this->_getSchema( 'db-attribute' );
+		$schema = $this->getSchema( 'db-attribute' );
 
 		foreach( $stmts as $table => $list )
 		{
@@ -78,14 +78,14 @@ class MW_Setup_Task_AttributeDropLocaleConstraints extends MW_Setup_Task_Abstrac
 			{
 				foreach( $list as $constraint => $stmt )
 				{
-					$this->_msg( sprintf( 'Removing "%1$s" from "%2$s"', $constraint, $table ), 1 );
+					$this->msg( sprintf( 'Removing "%1$s" from "%2$s"', $constraint, $table ), 1 );
 
 					if( $schema->constraintExists( $table, $constraint ) !== false )
 					{
-						$this->_execute( $stmt, 'db-attribute' );
-						$this->_status( 'done' );
+						$this->execute( $stmt, 'db-attribute' );
+						$this->status( 'done' );
 					} else {
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 			}

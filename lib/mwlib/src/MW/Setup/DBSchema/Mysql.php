@@ -33,7 +33,7 @@ class MW_Setup_DBSchema_Mysql extends MW_Setup_DBSchema_InformationSchema
 				AND INDEX_NAME = ?
 		";
 
-		$stmt = $this->_getConnection()->create( $sql );
+		$stmt = $this->getConnection()->create( $sql );
 		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $indexname );

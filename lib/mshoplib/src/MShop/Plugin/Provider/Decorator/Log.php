@@ -25,9 +25,9 @@ class MShop_Plugin_Provider_Decorator_Log
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$this->_getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, MW_Logger_Abstract::DEBUG );
 
-		$this->_getProvider()->register( $p );
+		$this->getProvider()->register( $p );
 	}
 
 
@@ -41,8 +41,8 @@ class MShop_Plugin_Provider_Decorator_Log
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
 		$msg = 'Plugin: ' . __METHOD__ . ', action: ' . $action . ( is_scalar( $value ) ? ', value: ' . $value : '' );
-		$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::DEBUG );
 
-		return $this->_getProvider()->update( $order, $action, $value );
+		return $this->getProvider()->update( $order, $action, $value );
 	}
 }

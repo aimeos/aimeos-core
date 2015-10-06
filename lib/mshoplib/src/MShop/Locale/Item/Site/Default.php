@@ -18,8 +18,8 @@ class MShop_Locale_Item_Site_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Locale_Item_Site_Interface
 {
-	private $_children;
-	private $_values;
+	private $children;
+	private $values;
 
 	/**
 	 * Initializes the site object.
@@ -31,8 +31,8 @@ class MShop_Locale_Item_Site_Default
 		MW_Common_Abstract::checkClassList( 'MShop_Locale_Item_Site_Interface', $children );
 		parent::__construct( 'locale.site.', $values );
 
-		$this->_values = $values;
-		$this->_children = $children;
+		$this->values = $values;
+		$this->children = $children;
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -65,11 +65,11 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -81,7 +81,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -94,7 +94,7 @@ class MShop_Locale_Item_Site_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -106,7 +106,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
 	}
 
 
@@ -117,7 +117,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function setConfig( array $options )
 	{
-		$this->_values['config'] = $options;
+		$this->values['config'] = $options;
 		$this->setModified();
 	}
 
@@ -129,7 +129,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -142,7 +142,7 @@ class MShop_Locale_Item_Site_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -201,8 +201,8 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getChild( $index )
 	{
-		if( isset( $this->_children[$index] ) ) {
-			return $this->_children[$index];
+		if( isset( $this->children[$index] ) ) {
+			return $this->children[$index];
 		}
 
 		throw new MShop_Locale_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
@@ -216,7 +216,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function getChildren()
 	{
-		return $this->_children;
+		return $this->children;
 	}
 
 
@@ -227,7 +227,7 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function hasChildren()
 	{
-		return ( count( $this->_children ) > 0 ? true : false );
+		return ( count( $this->children ) > 0 ? true : false );
 	}
 
 
@@ -239,6 +239,6 @@ class MShop_Locale_Item_Site_Default
 	public function addChild( MShop_Locale_Item_Site_Interface $item )
 	{
 		// don't set the modified flag as it's only for the values
-		$this->_children[] = $item;
+		$this->children[] = $item;
 	}
 }

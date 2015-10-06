@@ -66,7 +66,7 @@ class Controller_ExtJS_Supplier_List_Type_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Supplier_List_Type_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/supplier/list/type/decorators/excludes
 		 * Excludes decorators added by the "common" option from the supplier list type ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Supplier_List_Type_Factory
 		 * @see controller/extjs/supplier/list/type/decorators/excludes
 		 * @see controller/extjs/supplier/list/type/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'supplier/list/type' );
+		return self::addControllerDecorators( $context, $controller, 'supplier/list/type' );
 	}
 }

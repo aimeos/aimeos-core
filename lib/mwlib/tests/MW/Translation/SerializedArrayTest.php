@@ -8,7 +8,7 @@
  */
 class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 			'thirdtestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
-		$this->_object = new MW_Translation_SerializedArray( $translationSources, 'ru_XX' );
+		$this->object = new MW_Translation_SerializedArray( $translationSources, 'ru_XX' );
 	}
 
 
@@ -39,16 +39,16 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testDt()
 	{
-		$this->assertEquals( 'singular translation', $this->_object->dt( 'testDomain', 'File' ) );
-		$this->assertEquals( 'singular translation file', $this->_object->dt( 'thirdtestDomain', 'File' ) );
-		$this->assertEquals( 'Car', $this->_object->dt( 'thirdtestDomain', 'Car' ) );
-		$this->assertEquals( 'test', $this->_object->dt( 'invalidTestDomain', 'test' ) );
+		$this->assertEquals( 'singular translation', $this->object->dt( 'testDomain', 'File' ) );
+		$this->assertEquals( 'singular translation file', $this->object->dt( 'thirdtestDomain', 'File' ) );
+		$this->assertEquals( 'Car', $this->object->dt( 'thirdtestDomain', 'Car' ) );
+		$this->assertEquals( 'test', $this->object->dt( 'invalidTestDomain', 'test' ) );
 	}
 
 
@@ -60,23 +60,23 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 		 * 1, if $n == 2..4, 22..24, 32..34, ...
 		 * 2, if $n == 5..20, 25..30, 35..40, .
 		 */
-		$this->assertEquals( 'plural 2 translation', $this->_object->dn( 'testDomain', 'File', 'Files', 0 ) );
-		$this->assertEquals( 'singular translation', $this->_object->dn( 'testDomain', 'File', 'Files', 1 ) );
-		$this->assertEquals( 'plural 1 translation', $this->_object->dn( 'testDomain', 'File', 'Files', 2 ) );
-		$this->assertEquals( 'plural 2 translation', $this->_object->dn( 'testDomain', 'File', 'Files', 5 ) );
+		$this->assertEquals( 'plural 2 translation', $this->object->dn( 'testDomain', 'File', 'Files', 0 ) );
+		$this->assertEquals( 'singular translation', $this->object->dn( 'testDomain', 'File', 'Files', 1 ) );
+		$this->assertEquals( 'plural 1 translation', $this->object->dn( 'testDomain', 'File', 'Files', 2 ) );
+		$this->assertEquals( 'plural 2 translation', $this->object->dn( 'testDomain', 'File', 'Files', 5 ) );
 
-		$this->assertEquals( 'plural 1 translation', $this->_object->dn( 'testDomain', 'File', 'Files', 22 ) );
-		$this->assertEquals( 'plural 2 translation', $this->_object->dn( 'testDomain', 'File', 'Files', 25 ) );
-		$this->assertEquals( 'singular translation', $this->_object->dn( 'testDomain', 'File', 'Files', 31 ) );
+		$this->assertEquals( 'plural 1 translation', $this->object->dn( 'testDomain', 'File', 'Files', 22 ) );
+		$this->assertEquals( 'plural 2 translation', $this->object->dn( 'testDomain', 'File', 'Files', 25 ) );
+		$this->assertEquals( 'singular translation', $this->object->dn( 'testDomain', 'File', 'Files', 31 ) );
 
-		$this->assertEquals( 'singular translation', $this->_object->dn( 'testDomain', 'File', 'Files', -1 ) );
-		$this->assertEquals( 'plural 1 translation', $this->_object->dn( 'testDomain', 'File', 'Files', -22 ) );
+		$this->assertEquals( 'singular translation', $this->object->dn( 'testDomain', 'File', 'Files', -1 ) );
+		$this->assertEquals( 'plural 1 translation', $this->object->dn( 'testDomain', 'File', 'Files', -22 ) );
 
-		$this->assertEquals( 'Files', $this->_object->dn( 'thirdtestDomain', 'File', 'Files', 0 ) );
-		$this->assertEquals( 'singular translation file', $this->_object->dn( 'thirdtestDomain', 'File', 'Files', 1 ) );
-		$this->assertEquals( 'Cars', $this->_object->dn( 'thirdtestDomain', 'Car', 'Cars', 0 ) );
-		$this->assertEquals( 'Car', $this->_object->dn( 'thirdtestDomain', 'Car', 'Cars', 1 ) );
-		$this->assertEquals( 'tests', $this->_object->dn( 'invalidTestDomain', 'test', 'tests', 2 ) );
+		$this->assertEquals( 'Files', $this->object->dn( 'thirdtestDomain', 'File', 'Files', 0 ) );
+		$this->assertEquals( 'singular translation file', $this->object->dn( 'thirdtestDomain', 'File', 'Files', 1 ) );
+		$this->assertEquals( 'Cars', $this->object->dn( 'thirdtestDomain', 'Car', 'Cars', 0 ) );
+		$this->assertEquals( 'Car', $this->object->dn( 'thirdtestDomain', 'Car', 'Cars', 1 ) );
+		$this->assertEquals( 'tests', $this->object->dn( 'invalidTestDomain', 'test', 'tests', 2 ) );
 	}
 
 
@@ -150,7 +150,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetAll()
 	{
-		$result = $this->_object->getAll( 'testDomain' );
+		$result = $this->object->getAll( 'testDomain' );
 
 		$this->assertArrayHasKey( 'File', $result );
 		$this->assertEquals( 'singular translation', $result['File'][0] );

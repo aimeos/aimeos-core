@@ -66,7 +66,7 @@ class Controller_ExtJS_Admin_Cache_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Admin_Cache_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/admin/cache/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin cache ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Admin_Cache_Factory
 		 * @see controller/extjs/admin/cache/decorators/excludes
 		 * @see controller/extjs/admin/cache/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'admin/cache' );
+		return self::addControllerDecorators( $context, $controller, 'admin/cache' );
 	}
 }

@@ -8,7 +8,7 @@
 
 class MW_Observer_Listener_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Observer_Listener_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Observer_Listener_Test;
+		$this->object = new MW_Observer_Listener_Test;
 	}
 
 	/**
@@ -36,14 +36,14 @@ class MW_Observer_Listener_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$p = new MW_Observer_Publisher_Test();
 
-		$this->_object->register($p);
+		$this->object->register($p);
 	}
 
 	public function testUpdate()
 	{
 		$p = new MW_Observer_Publisher_Test();
 
-		$this->_object->update($p, 'test');
+		$this->object->update($p, 'test');
 	}
 }
 

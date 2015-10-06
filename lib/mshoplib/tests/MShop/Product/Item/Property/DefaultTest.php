@@ -11,8 +11,8 @@
  */
 class MShop_Product_Item_Property_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Product_Item_Property_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 987,
 			'parentid' => 11,
 			'siteid' => 99,
@@ -36,7 +36,7 @@ class MShop_Product_Item_Property_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Product_Item_Property_Default( $this->_values );
+		$this->object = new MShop_Product_Item_Property_Default( $this->values );
 	}
 
 	/**
@@ -47,97 +47,97 @@ class MShop_Product_Item_Property_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 987, $this->_object->getId() );
+		$this->assertEquals( 987, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId(null);
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setId(null);
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertNull( $this->_object->getId() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'en', $this->_object->getLanguageId() );
+		$this->assertEquals( 'en', $this->object->getLanguageId() );
 	}
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId('fr');
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLanguageId('fr');
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 'fr', $this->_object->getLanguageId() );
+		$this->assertEquals( 'fr', $this->object->getLanguageId() );
 	}
 
 	public function testGetParentId()
 	{
-		$this->assertEquals( 11, $this->_object->getParentId() );
+		$this->assertEquals( 11, $this->object->getParentId() );
 	}
 
 	public function testSetParentId()
 	{
-		$this->_object->setParentId( 22 );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setParentId( 22 );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 22, $this->_object->getParentId() );
+		$this->assertEquals( 22, $this->object->getParentId() );
 	}
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 44, $this->_object->getTypeId() );
+		$this->assertEquals( 44, $this->object->getTypeId() );
 	}
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId(33);
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setTypeId(33);
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 33, $this->_object->getTypeId() );
+		$this->assertEquals( 33, $this->object->getTypeId() );
 	}
 
 	public function testGetType()
 	{
-		$this->assertEquals( 'width', $this->_object->getType() );
+		$this->assertEquals( 'width', $this->object->getType() );
 	}
 
 	public function testGetValue()
 	{
-		$this->assertEquals( '30.0', $this->_object->getValue() );
+		$this->assertEquals( '30.0', $this->object->getValue() );
 	}
 
 	public function testSetValue()
 	{
-		$this->_object->setValue( '15.00' );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setValue( '15.00' );
+		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( '15.00', $this->_object->getValue() );
+		$this->assertEquals( '15.00', $this->object->getValue() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -165,22 +165,22 @@ class MShop_Product_Item_Property_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['product.property.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['product.property.siteid'] );
-		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['product.property.typeid'] );
-		$this->assertEquals( $this->_object->getLanguageId(), $arrayObject['product.property.languageid'] );
-		$this->assertEquals( $this->_object->getType(), $arrayObject['product.property.type'] );
-		$this->assertEquals( $this->_object->getValue(), $arrayObject['product.property.value'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['product.property.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['product.property.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['product.property.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['product.property.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.property.siteid'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.property.typeid'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['product.property.languageid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['product.property.type'] );
+		$this->assertEquals( $this->object->getValue(), $arrayObject['product.property.value'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.property.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.property.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.property.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

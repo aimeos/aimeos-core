@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Email_Delivery_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Order delivery related e-mails' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Order delivery related e-mails' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Email_Delivery_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Sends order delivery status update e-mails' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Sends order delivery status update e-mails' );
 	}
 
 
@@ -47,13 +47,13 @@ class Controller_Jobs_Order_Email_Delivery_Default
 	 */
 	public function run()
 	{
-		$arcavias = $this->_getArcavias();
-		$context = $this->_getContext();
+		$aimeos = $this->getAimeos();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$mailer = $context->getMail();
 		$view = $context->getView();
 
-		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
+		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
 
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );

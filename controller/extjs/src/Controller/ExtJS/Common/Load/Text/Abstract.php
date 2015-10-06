@@ -17,10 +17,10 @@
  */
 abstract class Controller_ExtJS_Common_Load_Text_Abstract
 {
-	private $_context;
-	private $_textListTypes = array();
-	private $_textTypes = array();
-	private $_name;
+	private $context;
+	private $textListTypes = array();
+	private $textTypes = array();
+	private $name;
 
 
 	/**
@@ -31,8 +31,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, $name )
 	{
-		$this->_context = $context;
-		$this->_name = $name;
+		$this->context = $context;
+		$this->name = $name;
 	}
 
 
@@ -44,7 +44,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	public function getItemSchema()
 	{
 		return array(
-			'name' => $this->_name,
+			'name' => $this->name,
 			'properties' => array(),
 		);
 	}
@@ -63,7 +63,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	}
 
 
-	protected function _checkFileUpload( $filename, $errcode )
+	protected function checkFileUpload( $filename, $errcode )
 	{
 		switch( $errcode )
 		{
@@ -99,7 +99,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string[] $names List of names of the required parameter
 	 * @throws Controller_ExtJS_Exception if a required parameter is missing
 	 */
-	protected function _checkParams( stdClass $params, array $names )
+	protected function checkParams( stdClass $params, array $names )
 	{
 		foreach( $names as $name )
 		{
@@ -115,9 +115,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -128,7 +128,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
+	protected function importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
 	{
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
@@ -181,7 +181,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		while( $count > 0 );
 
 
-		$listTypes = $this->_getTextListTypes( $manager, $domain );
+		$listTypes = $this->getTextListTypes( $manager, $domain );
 
 		foreach( $itemTextMap as $itemCode => $textIds )
 		{
@@ -203,7 +203,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					$listManager->saveItem( $item );
 				}
 				catch( Exception $e ) {
-					$this->_getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
+					$this->getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
 				}
 			}
 		}
@@ -217,13 +217,13 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Domain the list items must be associated to
 	 * @return array Associative list of list type codes and items implementing MShop_Common_Item_Type_Interface
 	 */
-	protected function _getTextListTypes( MShop_Common_Manager_Interface $manager, $domain )
+	protected function getTextListTypes( MShop_Common_Manager_Interface $manager, $domain )
 	{
-		if( isset( $this->_textListTypes[$domain] ) ) {
-			return $this->_textListTypes[$domain];
+		if( isset( $this->textListTypes[$domain] ) ) {
+			return $this->textListTypes[$domain];
 		}
 
-		$this->_textListTypes[$domain] = array();
+		$this->textListTypes[$domain] = array();
 
 		$typeManager = $manager->getSubManager( 'list' )->getSubManager( 'type' );
 
@@ -238,7 +238,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			$result = $typeManager->searchItems( $search );
 
 			foreach( $result as $typeItem ) {
-				$this->_textListTypes[$domain][$typeItem->getCode()] = $typeItem;
+				$this->textListTypes[$domain][$typeItem->getCode()] = $typeItem;
 			}
 
 			$count = count( $result );
@@ -247,7 +247,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		}
 		while( $count > 0 );
 
-		return $this->_textListTypes[$domain];
+		return $this->textListTypes[$domain];
 	}
 
 
@@ -257,15 +257,15 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Domain the text items must be associated to
 	 * @return array List of text type items implementing MShop_Common_Item_Type_Interface
 	 */
-	protected function _getTextTypes( $domain )
+	protected function getTextTypes( $domain )
 	{
-		if( isset( $this->_textTypes[$domain] ) ) {
-			return $this->_textTypes[$domain];
+		if( isset( $this->textTypes[$domain] ) ) {
+			return $this->textTypes[$domain];
 		}
 
-		$this->_textTypes[$domain] = array();
+		$this->textTypes[$domain] = array();
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->getContext() );
 		$manager = $textManager->getSubManager( 'type' );
 
 		$search = $manager->createSearch();
@@ -278,7 +278,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		{
 			$result = $manager->searchItems( $search );
 
-			$this->_textTypes[$domain] = array_merge( $this->_textTypes[$domain], $result );
+			$this->textTypes[$domain] = array_merge( $this->textTypes[$domain], $result );
 
 			$count = count( $result );
 			$start += $count;
@@ -286,7 +286,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		}
 		while( $count > 0 );
 
-		return $this->_textTypes[$domain];
+		return $this->textTypes[$domain];
 	}
 
 
@@ -295,9 +295,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 *
 	 * @param string $site Site code
 	 */
-	protected function _setLocale( $site )
+	protected function setLocale( $site )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$locale = $context->getLocale();
 
 		$siteItem = null;
@@ -334,11 +334,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return void
 	 */
-	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
+	protected function importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
 	{
 		$count = 0;
 		$codeIdMap = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$manager = MShop_Factory::createManager( $context, $domain );
 
@@ -346,11 +346,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		while( ( $row = $contentItem->current() ) !== null )
 		{
-			$codeIdMap = $this->_importTextRow( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
+			$codeIdMap = $this->importTextRow( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
 
 			if( ++$count == 1000 )
 			{
-				$this->_importReferences( $manager, $codeIdMap, $domain );
+				$this->importReferences( $manager, $codeIdMap, $domain );
 				$codeIdMap = array();
 				$count = 0;
 			}
@@ -359,7 +359,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		}
 
 		if( !empty( $codeIdMap ) ) {
-			$this->_importReferences( $manager, $codeIdMap, $domain );
+			$this->importReferences( $manager, $codeIdMap, $domain );
 		}
 	}
 
@@ -374,13 +374,13 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @throws Controller_ExtJS_Exception If text type is invalid
 	 */
-	private function _importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
+	private function importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
 		array $codeIdMap, $domain )
 	{
 		if( count( $row ) !== 7 )
 		{
 			$msg = sprintf( 'Invalid row from %1$s text import: %2$s', $domain, print_r( $row, true ) );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN, 'import' );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN, 'import' );
 		}
 
 		try
@@ -391,12 +391,12 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 			}
 
-			$codeIdMap = $this->_saveTextItem( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
+			$codeIdMap = $this->saveTextItem( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
 		}
 		catch( Exception $e )
 		{
 			$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
+			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
 		}
 
 		return $codeIdMap;
@@ -413,7 +413,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return array Updated two dimensional associated list of codes and text IDs as key
 	 */
-	private function _saveTextItem( MShop_Common_Manager_Interface $textManager, array $row,
+	private function saveTextItem( MShop_Common_Manager_Interface $textManager, array $row,
 		array $textTypeMap, array $codeIdMap, $domain )
 	{
 		$value = isset( $row[6] ) ? $row[6] : '';
@@ -450,9 +450,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $key Configuration key prefix for the container type/format/options keys
 	 * @return MW_Container_Interface Container item
 	 */
-	protected function _createContainer( $resource, $key )
+	protected function createContainer( $resource, $key )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		$type = $config->get( $key . '/type', 'Zip' );
 		$format = $config->get( $key . '/format', 'CSV' );

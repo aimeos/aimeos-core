@@ -16,7 +16,7 @@
  */
 class Controller_Common_Product_Import_Csv_Cache_Abstract
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -26,7 +26,7 @@ class Controller_Common_Product_Import_Csv_Cache_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_context = $context;
+		$this->context = $context;
 	}
 
 
@@ -35,8 +35,8 @@ class Controller_Common_Product_Import_Csv_Cache_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 }

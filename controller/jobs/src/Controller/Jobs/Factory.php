@@ -16,7 +16,7 @@
  */
 class Controller_Jobs_Factory
 {
-	static private $_prefix = 'Controller_Jobs';
+	static private $prefix = 'Controller_Jobs';
 
 
 	/**
@@ -29,11 +29,11 @@ class Controller_Jobs_Factory
 	 * controller to hand over specifc implementation names.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string $path Name of the domain
 	 * @throws Controller_Jobs_Exception If the given path is invalid or the controllers wasn't found
 	 */
-	static public function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $path )
+	static public function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $path )
 	{
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
@@ -58,7 +58,7 @@ class Controller_Jobs_Factory
 			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $factory ) );
 		}
 
-		$controller = call_user_func_array( array( $factory, 'createController' ), array( $context, $arcavias ) );
+		$controller = call_user_func_array( array( $factory, 'createController' ), array( $context, $aimeos ) );
 
 		if( $controller === false ) {
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
@@ -72,15 +72,15 @@ class Controller_Jobs_Factory
 	 * Returns all available controller instances.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param array $cntlPaths Associative list of the base path as key and all
 	 * 	relative job controller paths (core and extensions)
 	 * @return array Associative list of controller names as key and the class instance as value
 	 */
-	static public function getControllers( MShop_Context_Item_Interface $context, Arcavias $arcavias, array $cntlPaths )
+	static public function getControllers( MShop_Context_Item_Interface $context, Aimeos $aimeos, array $cntlPaths )
 	{
 		$cntlList = array();
-		$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, self::$_prefix );
+		$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, self::$prefix );
 
 		foreach( $cntlPaths as $path => $list )
 		{
@@ -91,7 +91,7 @@ class Controller_Jobs_Factory
 				if( is_dir( $path ) )
 				{
 					$it = new DirectoryIterator( $path );
-					$list = self::_createControllers( $it, $context, $arcavias );
+					$list = self::createControllers( $it, $context, $aimeos );
 
 					$cntlList = array_merge( $cntlList, $list );
 				}
@@ -109,12 +109,12 @@ class Controller_Jobs_Factory
 	 *
 	 * @param DirectoryIterator $dir Iterator over the (sub-)directory which might contain a factory
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string $prefix Part of the class name between "Controller_Jobs" and "Factory"
 	 * @throws Controller_Jobs_Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
-	static protected function _createControllers( DirectoryIterator $dir, MShop_Context_Item_Interface $context,
-		Arcavias $arcavias, $prefix = '' )
+	static protected function createControllers( DirectoryIterator $dir, MShop_Context_Item_Interface $context,
+		Aimeos $aimeos, $prefix = '' )
 	{
 		$list = array();
 
@@ -125,14 +125,14 @@ class Controller_Jobs_Factory
 				$name = strtolower( $entry->getBaseName() );
 				$it = new DirectoryIterator( $entry->getPathName() );
 				$pref = ( $prefix !== '' ? $prefix . '/' : '' ) . $name;
-				$subList = self::_createControllers( $it, $context, $arcavias, $pref );
+				$subList = self::createControllers( $it, $context, $aimeos, $pref );
 
 				$list = array_merge( $list, $subList );
 			}
 			else if( $prefix !== '' && $entry->getType() === 'file'
 				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
-				$list[$prefix] = self::createController( $context, $arcavias, $prefix );
+				$list[$prefix] = self::createController( $context, $aimeos, $prefix );
 			}
 		}
 

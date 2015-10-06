@@ -51,7 +51,7 @@ class Client_Html_Email_Account_Html_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/account/html/default/subparts';
+	private $subPartPath = 'client/html/email/account/html/default/subparts';
 
 	/** client/html/email/account/html/salutation/name
 	 * Name of the salutation part used by the account creation e-mail html client implementation
@@ -107,7 +107,7 @@ class Client_Html_Email_Account_Html_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'salutation', 'intro', 'detail', 'outro' );
+	private $subPartNames = array( 'salutation', 'intro', 'detail', 'outro' );
 
 
 	/**
@@ -120,10 +120,10 @@ class Client_Html_Email_Account_Html_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->htmlBody = $content;
@@ -157,7 +157,7 @@ class Client_Html_Email_Account_Html_Default
 		 */
 		$tplconf = 'client/html/email/account/html/default/template-body';
 
-		$html = $view->render( $this->_getTemplate( $tplconf, 'email/common/html-body-default.html' ) );
+		$html = $view->render( $this->getTemplate( $tplconf, 'email/common/html-body-default.html' ) );
 		$view->mail()->setBodyHtml( $html );
 		return $html;
 	}
@@ -173,10 +173,10 @@ class Client_Html_Email_Account_Html_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->htmlHeader = $content;
@@ -211,7 +211,7 @@ class Client_Html_Email_Account_Html_Default
 		 */
 		$tplconf = 'client/html/email/account/html/default/template-header';
 
-		return $view->render( $this->_getTemplate( $tplconf, 'email/common/html-header-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-header-default.html' ) );
 	}
 
 
@@ -298,7 +298,7 @@ class Client_Html_Email_Account_Html_Default
 		 * @see client/html/email/account/html/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/account/html/' . $type, $name );
+		return $this->createSubClient( 'email/account/html/' . $type, $name );
 	}
 
 
@@ -307,8 +307,8 @@ class Client_Html_Email_Account_Html_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

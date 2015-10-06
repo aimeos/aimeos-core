@@ -7,8 +7,8 @@
 
 class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -16,7 +16,7 @@ class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => 1,
 			'siteid' => 123,
 			'typeid' => 2,
@@ -33,7 +33,7 @@ class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Media_Item_Default( $this->_values );
+		$this->object = new MShop_Media_Item_Default( $this->values );
 	}
 
 
@@ -42,178 +42,178 @@ class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'test_dom', $this->_object->getDomain() );
+		$this->assertEquals( 'test_dom', $this->object->getDomain() );
 	}
 
 
 	public function testSetDomain()
 	{
-		$this->_object->setDomain( null );
-		$this->assertEquals( null, $this->_object->getDomain() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setDomain( null );
+		$this->assertEquals( null, $this->object->getDomain() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetType()
 	{
-		$this->assertEquals( 'category', $this->_object->getType() );
+		$this->assertEquals( 'category', $this->object->getType() );
 	}
 
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 2, $this->_object->getTypeId() );
+		$this->assertEquals( 2, $this->object->getTypeId() );
 	}
 
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId( 3 );
-		$this->assertEquals( 3, $this->_object->getTypeId() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setTypeId( 3 );
+		$this->assertEquals( 3, $this->object->getTypeId() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( 'testPicture', $this->_object->getLabel() );
+		$this->assertEquals( 'testPicture', $this->object->getLabel() );
 	}
 
 
 	public function testSetLabel()
 	{
-		$this->_object->setLabel( 'newPicture' );
-		$this->assertEquals( 'newPicture', $this->_object->getLabel() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setLabel( 'newPicture' );
+		$this->assertEquals( 'newPicture', $this->object->getLabel() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetLanguageId()
 	{
-		$this->assertEquals( 'de', $this->_object->getLanguageId() );
+		$this->assertEquals( 'de', $this->object->getLanguageId() );
 	}
 
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId( 'en' );
-		$this->assertEquals( 'en', $this->_object->getLanguageId() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setLanguageId( 'en' );
+		$this->assertEquals( 'en', $this->object->getLanguageId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setLanguageId( 'EN' );
+		$this->object->setLanguageId( 'EN' );
 	}
 
 
 	public function testGetMimeType()
 	{
-		$this->assertEquals( 'image/jpeg', $this->_object->getMimeType() );
+		$this->assertEquals( 'image/jpeg', $this->object->getMimeType() );
 	}
 
 
 	public function testSetMimeType()
 	{
-		$this->_object->setMimeType( 'image/png' );
-		$this->assertEquals( 'image/png', $this->_object->getMimeType() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setMimeType( 'image/png' );
+		$this->assertEquals( 'image/png', $this->object->getMimeType() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testSetMimeTypeNoSlash()
 	{
 		$this->setExpectedException( 'MShop_Media_Exception' );
-		$this->_object->setMimeType( 'image' );
+		$this->object->setMimeType( 'image' );
 	}
 
 
 	public function testSetMimeTypeInvalidCategory()
 	{
 		$this->setExpectedException( 'MShop_Media_Exception' );
-		$this->_object->setMimeType( 'image+audio/test' );
+		$this->object->setMimeType( 'image+audio/test' );
 	}
 
 
 	public function testGetUrl()
 	{
-		$this->assertEquals( 'http://www.url.com/test.jpg', $this->_object->getUrl() );
+		$this->assertEquals( 'http://www.url.com/test.jpg', $this->object->getUrl() );
 	}
 
 
 	public function testSetUrl()
 	{
-		$this->_object->setUrl( '/pictures/category.jpg' );
-		$this->assertEquals( '/pictures/category.jpg', $this->_object->getUrl() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setUrl( '/pictures/category.jpg' );
+		$this->assertEquals( '/pictures/category.jpg', $this->object->getUrl() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetPreview()
 	{
-		$this->assertEquals( '/directory/test.jpg', $this->_object->getPreview() );
+		$this->assertEquals( '/directory/test.jpg', $this->object->getPreview() );
 	}
 
 
 	public function testSetPreview()
 	{
-		$this->_object->setPreview( '/pictures/category.jpg' );
-		$this->assertEquals( '/pictures/category.jpg', $this->_object->getPreview() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setPreview( '/pictures/category.jpg' );
+		$this->assertEquals( '/pictures/category.jpg', $this->object->getPreview() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 6, $this->_object->getStatus() );
+		$this->assertEquals( 6, $this->object->getStatus() );
 	}
 
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertEquals( 0, $this->_object->getStatus() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setStatus( 0 );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -251,24 +251,24 @@ class MShop_Media_Item_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
+		$arrayObject = $this->object->toArray();
 
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['media.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['media.siteid'] );
-		$this->assertEquals( $this->_object->getDomain(), $arrayObject['media.domain'] );
-		$this->assertEquals( $this->_object->getLabel(), $arrayObject['media.label'] );
-		$this->assertEquals( $this->_object->getLanguageId(), $arrayObject['media.languageid'] );
-		$this->assertEquals( $this->_object->getMimeType(), $arrayObject['media.mimetype'] );
-		$this->assertEquals( $this->_object->getTypeId(), $arrayObject['media.typeid'] );
-		$this->assertEquals( $this->_object->getType(), $arrayObject['media.type'] );
-		$this->assertEquals( $this->_object->getUrl(), $arrayObject['media.url'] );
-		$this->assertEquals( $this->_object->getPreview(), $arrayObject['media.preview'] );
-		$this->assertEquals( $this->_object->getStatus(), $arrayObject['media.status'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['media.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['media.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['media.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['media.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['media.siteid'] );
+		$this->assertEquals( $this->object->getDomain(), $arrayObject['media.domain'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['media.label'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['media.languageid'] );
+		$this->assertEquals( $this->object->getMimeType(), $arrayObject['media.mimetype'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['media.typeid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['media.type'] );
+		$this->assertEquals( $this->object->getUrl(), $arrayObject['media.url'] );
+		$this->assertEquals( $this->object->getPreview(), $arrayObject['media.preview'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['media.status'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['media.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['media.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['media.editor'] );
 	}
 
 }

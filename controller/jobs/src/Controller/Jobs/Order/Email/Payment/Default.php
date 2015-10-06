@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Email_Payment_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Order payment related e-mails' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Order payment related e-mails' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Email_Payment_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Sends order confirmation or payment status update e-mails' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Sends order confirmation or payment status update e-mails' );
 	}
 
 
@@ -47,13 +47,13 @@ class Controller_Jobs_Order_Email_Payment_Default
 	 */
 	public function run()
 	{
-		$arcavias = $this->_getArcavias();
-		$context = $this->_getContext();
+		$aimeos = $this->getAimeos();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$mailer = $context->getMail();
 		$view = $context->getView();
 
-		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
+		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
 
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
@@ -137,10 +137,12 @@ class Controller_Jobs_Order_Email_Payment_Default
 					try
 					{
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
-						$view->extOrderBaseItem = $orderBaseItem;
-						$view->extOrderItem = $item;
 
 						$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+
+						$view->extAddressItem = $addr;
+						$view->extOrderBaseItem = $orderBaseItem;
+						$view->extOrderItem = $item;
 
 						$helper = new MW_View_Helper_Translate_Default( $view, $context->getI18n( $addr->getLanguageId() ) );
 						$view->addHelper( 'translate', $helper );

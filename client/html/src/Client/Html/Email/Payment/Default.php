@@ -51,7 +51,7 @@ class Client_Html_Email_Payment_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/payment/default/subparts';
+	private $subPartPath = 'client/html/email/payment/default/subparts';
 
 	/** client/html/email/payment/text/name
 	 * Name of the text part used by the email payment client implementation
@@ -74,7 +74,7 @@ class Client_Html_Email_Payment_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'text', 'html' );
+	private $subPartNames = array( 'text', 'html' );
 
 
 	/**
@@ -87,10 +87,10 @@ class Client_Html_Email_Payment_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->paymentBody = $content;
@@ -127,7 +127,7 @@ class Client_Html_Email_Payment_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/body-default.html', 'email/payment/body-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -141,10 +141,10 @@ class Client_Html_Email_Payment_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->paymentHeader = $content;
@@ -153,7 +153,7 @@ class Client_Html_Email_Payment_Default
 		$addr = $view->extAddressItem;
 
 		$msg = $view->mail();
-		$msg->addHeader( 'X-MailGenerator', 'Arcavias' );
+		$msg->addHeader( 'X-MailGenerator', 'Aimeos' );
 		$msg->addTo( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
 
 
@@ -319,7 +319,7 @@ class Client_Html_Email_Payment_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/header-default.html', 'email/payment/header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) ); ;
+		return $view->render( $this->getTemplate( $tplconf, $default ) ); ;
 	}
 
 
@@ -406,7 +406,7 @@ class Client_Html_Email_Payment_Default
 		 * @see client/html/email/payment/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/payment/' . $type, $name );
+		return $this->createSubClient( 'email/payment/' . $type, $name );
 	}
 
 
@@ -415,27 +415,8 @@ class Client_Html_Email_Payment_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @param array &$tags Result array for the list of tags that are associated to the output
-	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
-	{
-		/** @todo 2016.03 Remove as this needs to be set by the calling code */
-		if( !isset( $view->extAddressItem ) ) {
-			$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		}
-
-		return $view;
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

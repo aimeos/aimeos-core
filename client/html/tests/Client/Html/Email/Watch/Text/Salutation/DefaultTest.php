@@ -7,10 +7,10 @@
 
 class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private static $_customerItem;
-	private $_object;
-	private $_context;
-	private $_emailMock;
+	private static $customerItem;
+	private $object;
+	private $context;
+	private $emailMock;
 
 
 	public static function setUpBeforeClass()
@@ -21,7 +21,7 @@ class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framew
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $manager->searchItems( $search );
 
-		if( ( self::$_customerItem = reset( $result ) ) === false ) {
+		if( ( self::$customerItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No customer found' );
 		}
 	}
@@ -35,17 +35,17 @@ class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framew
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = TestHelper::getContext();
+		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Email_Watch_Text_Salutation_Default( $this->_context, $paths );
+		$this->object = new Client_Html_Email_Watch_Text_Salutation_Default( $this->context, $paths );
 
 		$view = TestHelper::getView();
-		$view->extAddressItem = self::$_customerItem->getPaymentAddress();
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
+		$view->extAddressItem = self::$customerItem->getPaymentAddress();
+		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->emailMock ) );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -57,20 +57,20 @@ class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framew
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertContains( 'Dear mr Our Unittest', $output );
 	}
@@ -79,19 +79,19 @@ class Client_Html_Email_Watch_Text_Salutation_DefaultTest extends PHPUnit_Framew
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

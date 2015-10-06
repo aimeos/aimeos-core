@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends PHPUni
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Detail_Additional_Attribute_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Detail_Additional_Attribute_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,18 +32,18 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends PHPUni
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( null, $expire );
@@ -53,12 +53,12 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends PHPUni
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view = $this->object->getView();
+		$view->detailProductItem = $this->getProductItem();
 
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( '<h2 class="header attributes">', $output );
 		$this->assertContains( '<td class="name">size</td>', $output );
@@ -72,11 +72,11 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends PHPUni
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
-	protected function _getProductItem()
+	protected function getProductItem()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();

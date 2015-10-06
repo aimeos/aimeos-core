@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Abstract implements Controller_ExtJS_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -36,13 +36,13 @@ class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Abstra
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/coupon' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'order/base/coupon' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Abstra
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'order.base.coupon';
 	}

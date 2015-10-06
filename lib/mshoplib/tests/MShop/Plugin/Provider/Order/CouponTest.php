@@ -11,8 +11,8 @@
  */
 class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 {
-	private $_order;
-	private $_plugin;
+	private $order;
+	private $plugin;
 
 
 	/**
@@ -26,12 +26,12 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 		$context = TestHelper::getContext();
 
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setProvider( 'Coupon' );
-		$this->_plugin->setStatus( 1 );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setProvider( 'Coupon' );
+		$this->plugin->setStatus( 1 );
 
 		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$this->_order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
+		$this->order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
 	}
 
 
@@ -43,30 +43,30 @@ class MShop_Plugin_Provider_Order_CouponTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_plugin );
-		unset( $this->_order );
+		unset( $this->plugin );
+		unset( $this->order );
 	}
 
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->_plugin );
-		$object->register( $this->_order );
+		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
+		$object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->_order->addCoupon( 'OPQR', array() );
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->_plugin );
+		$this->order->addCoupon( 'OPQR', array() );
+		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $object->update( $this->_order, 'test' ) );
+		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}
 
 
 	public function testUpdateInvalidObject()
 	{
-		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->_plugin );
+		$object = new MShop_Plugin_Provider_Order_Coupon( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
 		$object->update( new MShop_Publisher_Test(), 'test' );

@@ -36,12 +36,12 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 	/**
 	 * Insert catalog nodes and product/catalog relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product categories performance data', 0 );
+		$this->msg( 'Adding product categories performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catalogListManager = $catalogManager->getSubManager( 'list' );
@@ -73,7 +73,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 		$listItem->setDomain( 'product' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $productManager->createSearch();
@@ -114,9 +114,9 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

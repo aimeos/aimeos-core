@@ -18,7 +18,7 @@ class MShop_Product_Item_Property_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Product_Item_Property_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -28,7 +28,7 @@ class MShop_Product_Item_Property_Default
 	{
 		parent::__construct( 'product.property.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -39,7 +39,7 @@ class MShop_Product_Item_Property_Default
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : null );
+		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
 	}
 
 
@@ -52,8 +52,8 @@ class MShop_Product_Item_Property_Default
 	{
 		if ( $id === $this->getLanguageId() ) { return; }
 
-		$this->_checkLanguageId( $id );
-		$this->_values['langid'] = $id;
+		$this->checkLanguageId( $id );
+		$this->values['langid'] = $id;
 		$this->setModified();
 	}
 
@@ -65,7 +65,7 @@ class MShop_Product_Item_Property_Default
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->_values['parentid'] ) ? (int) $this->_values['parentid'] : null );
+		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
 	}
 
 
@@ -79,7 +79,7 @@ class MShop_Product_Item_Property_Default
 		$id = (int) $id;
 		if ( $id === $this->getParentId() ) { return; }
 
-		$this->_values['parentid'] = (int) $id;
+		$this->values['parentid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -91,7 +91,7 @@ class MShop_Product_Item_Property_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -105,7 +105,7 @@ class MShop_Product_Item_Property_Default
 		$id = (int) $id;
 		if ( $id === $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $id;
+		$this->values['typeid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -117,7 +117,7 @@ class MShop_Product_Item_Property_Default
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->_values['value'] ) ? (string) $this->_values['value'] : '' );
+		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
 	}
 
 
@@ -131,7 +131,7 @@ class MShop_Product_Item_Property_Default
 	{
 		if ( $value == $this->getValue() ) { return; }
 
-		$this->_values['value'] = (string) $value;
+		$this->values['value'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -143,7 +143,7 @@ class MShop_Product_Item_Property_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 

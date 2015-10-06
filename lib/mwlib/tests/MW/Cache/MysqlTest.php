@@ -8,9 +8,9 @@
  */
 class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 {
-	private $_dbm;
-	private $_config;
-	private $_object;
+	private $dbm;
+	private $config;
+	private $object;
 
 
 	/**
@@ -28,9 +28,9 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_config = array( 'siteid' => 1 );
+		$this->config = array( 'siteid' => 1 );
 
-		$this->_config['search'] = array(
+		$this->config['search'] = array(
 			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
 			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
 			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
@@ -38,7 +38,7 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
 		);
 
-		$this->_config['sql'] = array(
+		$this->config['sql'] = array(
 			'delete' => '
 				DELETE FROM "mw_cache_test" WHERE "siteid" = ? AND :cond
 			',
@@ -64,8 +64,8 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		);
 
 
-		$this->_dbm = TestHelper::getDBManager();
-		$conn = $this->_dbm->acquire();
+		$this->dbm = TestHelper::getDBManager();
+		$conn = $this->dbm->acquire();
 
 
 		$sql = 'DROP TABLE IF EXISTS "mw_cache_tag_test"';
@@ -105,10 +105,10 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		$conn->create( $sql )->execute()->finish();
 
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 
-		$this->_object = new MW_Cache_Mysql( $this->_config, $this->_dbm );
+		$this->object = new MW_Cache_Mysql( $this->config, $this->dbm );
 	}
 
 
@@ -120,13 +120,13 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_dbm = TestHelper::getDBManager();
-		$conn = $this->_dbm->acquire();
+		$this->dbm = TestHelper::getDBManager();
+		$conn = $this->dbm->acquire();
 
 		$conn->create( 'DROP TABLE "mw_cache_tag_test"' )->execute()->finish();
 		$conn->create( 'DROP TABLE "mw_cache_test"' )->execute()->finish();
 
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 	}
 
 
@@ -136,12 +136,12 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		$tags = array( 't:1' => array( 'tag:1', 'tag:2', 'tag:3' ) );
 		$expires = array( 't:1' => '2100-00-00 00:00:00' );
 
-		$this->_object->setList( $pairs, $tags, $expires );
+		$this->object->setList( $pairs, $tags, $expires );
 
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:1\' ORDER BY "tname"' )->execute();
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:1' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
@@ -149,9 +149,9 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse( $result->fetch() );
 
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->dbm->acquire();
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:1\'' )->execute();
-		$this->_dbm->release( $conn );
+		$this->dbm->release( $conn );
 
 		$expected = array(
 			'expire' => '2100-00-00 00:00:00',

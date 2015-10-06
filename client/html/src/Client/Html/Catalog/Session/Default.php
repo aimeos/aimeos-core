@@ -51,7 +51,7 @@ class Client_Html_Catalog_Session_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/session/default/subparts';
+	private $subPartPath = 'client/html/catalog/session/default/subparts';
 
 	/** client/html/catalog/session/pinned/name
 	 * Name of the pinned part used by the catalog session client implementation
@@ -74,7 +74,7 @@ class Client_Html_Catalog_Session_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'pinned', 'seen' );
+	private $subPartNames = array( 'pinned', 'seen' );
 
 
 	/**
@@ -87,32 +87,32 @@ class Client_Html_Catalog_Session_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->sessionBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -146,7 +146,7 @@ class Client_Html_Catalog_Session_Default
 		$tplconf = 'client/html/catalog/session/default/template-body';
 		$default = 'catalog/session/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -162,10 +162,10 @@ class Client_Html_Catalog_Session_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->sessionHeader = $html;
@@ -194,11 +194,11 @@ class Client_Html_Catalog_Session_Default
 			$tplconf = 'client/html/catalog/session/default/template-header';
 			$default = 'catalog/session/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -286,7 +286,7 @@ class Client_Html_Catalog_Session_Default
 		 * @see client/html/catalog/session/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/session/' . $type, $name );
+		return $this->createSubClient( 'catalog/session/' . $type, $name );
 	}
 
 
@@ -304,24 +304,24 @@ class Client_Html_Catalog_Session_Default
 		catch( Client_Html_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$view = $this->getView();
@@ -336,8 +336,8 @@ class Client_Html_Catalog_Session_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

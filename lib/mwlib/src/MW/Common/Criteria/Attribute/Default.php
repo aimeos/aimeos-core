@@ -23,47 +23,47 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	/**
 	 * @var string Public data type used in the frontend
 	 */
-	private $_type = 'string';
+	private $type = 'string';
 
 	/**
 	 * @var mixed Internal data type, depends on the manager
 	 */
-	private $_internalType = null;
+	private $internalType = null;
 
 	/**
 	 * @var string Public code which maps to the internal code
 	 */
-	private $_code = '';
+	private $code = '';
 
 	/**
 	 * @var string Name of the attribute in the storage system
 	 */
-	private $_internalCode = '';
+	private $internalCode = '';
 
 	/**
 	 * @var array List of internal dependencies
 	 */
-	private $_internalDeps = array();
+	private $internalDeps = array();
 
 	/**
 	 * @var string Human readable name of the attribute
 	 */
-	private $_label = '';
+	private $label = '';
 
 	/**
 	 * @var string Default value
 	 */
-	private $_default = null;
+	private $default = null;
 
 	/**
 	 * @var boolean Is required attribute
 	 */
-	private $_required = true;
+	private $required = true;
 
 	/**
 	 * @var boolean Is attribute publically available
 	 */
-	private $_public = true;
+	private $public = true;
 
 
 	/**
@@ -91,26 +91,26 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 			}
 		}
 
-		$this->_code = (string) $params['code'];
-		$this->_internalType = (string) $params['internaltype'];
-		$this->_internalCode = (string) $params['internalcode'];
-		$this->_label = (string) $params['label'];
-		$this->_type = (string) $params['type'];
+		$this->code = (string) $params['code'];
+		$this->internalType = (string) $params['internaltype'];
+		$this->internalCode = (string) $params['internalcode'];
+		$this->label = (string) $params['label'];
+		$this->type = (string) $params['type'];
 
 		if( isset( $params['default'] ) ) {
-			$this->_default = $params['default'];
+			$this->default = $params['default'];
 		}
 
 		if( isset( $params['internaldeps'] ) ) {
-			$this->_internalDeps = $params['internaldeps'];
+			$this->internalDeps = $params['internaldeps'];
 		}
 
 		if( isset( $params['public'] ) ) {
-			$this->_public = (bool) $params['public'];
+			$this->public = (bool) $params['public'];
 		}
 
 		if( isset( $params['required'] ) ) {
-			$this->_required = (bool) $params['required'];
+			$this->required = (bool) $params['required'];
 		}
 	}
 
@@ -124,7 +124,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getType()
 	{
-		return $this->_type;
+		return $this->type;
 	}
 
 
@@ -135,7 +135,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getInternalType()
 	{
-		return $this->_internalType;
+		return $this->internalType;
 	}
 
 
@@ -146,7 +146,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getCode()
 	{
-		return $this->_code;
+		return $this->code;
 	}
 
 
@@ -157,7 +157,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getInternalCode()
 	{
-		return $this->_internalCode;
+		return $this->internalCode;
 	}
 
 
@@ -168,7 +168,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getInternalDeps()
 	{
-		return $this->_internalDeps;
+		return $this->internalDeps;
 	}
 
 
@@ -179,7 +179,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getLabel()
 	{
-		return $this->_label;
+		return $this->label;
 	}
 
 
@@ -190,7 +190,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function getDefault()
 	{
-		return $this->_default;
+		return $this->default;
 	}
 
 
@@ -201,7 +201,7 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function isPublic()
 	{
-		return $this->_public;
+		return $this->public;
 	}
 
 
@@ -212,6 +212,6 @@ class MW_Common_Criteria_Attribute_Default implements MW_Common_Criteria_Attribu
 	 */
 	public function isRequired()
 	{
-		return $this->_required;
+		return $this->required;
 	}
 }

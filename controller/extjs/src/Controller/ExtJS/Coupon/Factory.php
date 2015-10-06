@@ -66,7 +66,7 @@ class Controller_ExtJS_Coupon_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Coupon_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/coupon/decorators/excludes
 		 * Excludes decorators added by the "common" option from the coupon ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Coupon_Factory
 		 * @see controller/extjs/coupon/decorators/excludes
 		 * @see controller/extjs/coupon/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'coupon' );
+		return self::addControllerDecorators( $context, $controller, 'coupon' );
 	}
 }

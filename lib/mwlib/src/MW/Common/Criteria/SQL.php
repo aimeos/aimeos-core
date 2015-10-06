@@ -16,11 +16,11 @@
  */
 class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 {
-	private $_conditions;
-	private $_sortations = array();
-	private $_sliceStart = 0;
-	private $_sliceSize = 100;
-	private $_conn = null;
+	private $conditions;
+	private $sortations = array();
+	private $sliceStart = 0;
+	private $sliceSize = 100;
+	private $conn = null;
 
 
 	/**
@@ -30,8 +30,8 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function __construct( MW_DB_Connection_Interface $conn )
 	{
-		$this->_conn = $conn;
-		$this->_conditions = $this->compare( '==', '1', '1' );
+		$this->conn = $conn;
+		$this->conditions = $this->compare( '==', '1', '1' );
 	}
 
 
@@ -73,7 +73,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function compare( $operator, $name, $value )
 	{
-		return new MW_Common_Criteria_Expression_Compare_SQL( $this->_conn, $operator, $name, $value );
+		return new MW_Common_Criteria_Expression_Compare_SQL( $this->conn, $operator, $name, $value );
 	}
 
 
@@ -90,7 +90,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function sort( $operator, $name )
 	{
-		return new MW_Common_Criteria_Expression_Sort_SQL( $this->_conn, $operator, $name );
+		return new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, $operator, $name );
 	}
 
 
@@ -121,7 +121,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	{
 		$types['1'] = MW_DB_Statement_Abstract::PARAM_INT;
 
-		if( ( $string = $this->_conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
+		if( ( $string = $this->conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
 			return $string;
 		}
 
@@ -136,7 +136,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getConditions()
 	{
-		return $this->_conditions;
+		return $this->conditions;
 	}
 
 
@@ -152,7 +152,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 			throw new MW_Common_Exception( 'Sortation objects are not allowed' );
 		}
 
-		$this->_conditions = $conditions;
+		$this->conditions = $conditions;
 		return $this;
 	}
 
@@ -166,7 +166,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getSortationString( array $types, array $translations = array() )
 	{
-		if( empty( $this->_sortations ) )
+		if( empty( $this->sortations ) )
 		{
 			reset( $types );
 
@@ -180,7 +180,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 
 		$sortation = array();
 
-		foreach( $this->_sortations as $sortitem )
+		foreach( $this->sortations as $sortitem )
 		{
 			if( ( $string = $sortitem->toString( $types, $translations ) ) !== '' ) {
 				$sortation[] = $string;
@@ -198,7 +198,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getSortations()
 	{
-		return $this->_sortations;
+		return $this->sortations;
 	}
 
 
@@ -212,7 +212,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	{
 		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Expression_Sort_Interface', $sortations );
 
-		$this->_sortations = $sortations;
+		$this->sortations = $sortations;
 		return $this;
 	}
 
@@ -224,7 +224,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getSliceSize()
 	{
-		return $this->_sliceSize;
+		return $this->sliceSize;
 	}
 
 
@@ -235,7 +235,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function getSliceStart()
 	{
-		return $this->_sliceStart;
+		return $this->sliceStart;
 	}
 
 
@@ -248,8 +248,8 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 */
 	public function setSlice( $start, $size = 100 )
 	{
-		$this->_sliceStart = (int) $start;
-		$this->_sliceSize = (int) $size;
+		$this->sliceStart = (int) $start;
+		$this->sliceSize = (int) $size;
 
 		return $this;
 	}
@@ -260,8 +260,8 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	 *
 	 * return MW_DB_Connection_Interface Connection object
 	 */
-	public function _getConnection()
+	public function getConnection()
 	{
-		return $this->_conn;
+		return $this->conn;
 	}
 }

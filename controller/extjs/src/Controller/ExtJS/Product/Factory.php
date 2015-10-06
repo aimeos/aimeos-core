@@ -66,7 +66,7 @@ class Controller_ExtJS_Product_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Product_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/product/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Product_Factory
 		 * @see controller/extjs/product/decorators/excludes
 		 * @see controller/extjs/product/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'product' );
+		return self::addControllerDecorators( $context, $controller, 'product' );
 	}
 }

@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = Controller_ExtJS_Text_Factory::createController( TestHelper::getContext() );
+		$this->object = Controller_ExtJS_Text_Factory::createController( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -50,7 +50,7 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 2, $result['total'] );
@@ -86,12 +86,12 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'text.content' => 'controller test text' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'text.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'text.id'} );
@@ -135,12 +135,12 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'text.content' => 'controller test text' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'text.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'text.id'} );
@@ -159,6 +159,6 @@ class Controller_ExtJS_Text_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+		$this->object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
 	}
 }

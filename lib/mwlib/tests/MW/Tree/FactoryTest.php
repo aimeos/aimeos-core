@@ -8,9 +8,9 @@
  */
 class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_dbm;
-	private $_config;
+	private $object;
+	private $dbm;
+	private $config;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -20,7 +20,7 @@ class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = MW_Tree_Factory::createManager('LDAP', array(), null );
+		$this->object = MW_Tree_Factory::createManager('LDAP', array(), null );
 	}
 
 	/**
@@ -31,17 +31,17 @@ class MW_Tree_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testFactory()
 	{
-		$this->assertInstanceOf('MW_Tree_Manager_Interface', $this->_object);
+		$this->assertInstanceOf('MW_Tree_Manager_Interface', $this->object);
 	}
 
 	public function testFactoryFail()
 	{
 		$this->setExpectedException('MW_Tree_Exception');
-		$this->_object = MW_Tree_Factory::createManager('notDefined', array(), null );
+		$this->object = MW_Tree_Factory::createManager('notDefined', array(), null );
 	}
 }

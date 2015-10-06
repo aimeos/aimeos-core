@@ -18,7 +18,7 @@ class MAdmin_Job_Item_Default
 	extends MShop_Common_Item_Abstract
 	implements MAdmin_Job_Item_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the job item.
@@ -29,7 +29,7 @@ class MAdmin_Job_Item_Default
 	{
 		parent::__construct( 'job.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -40,7 +40,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -51,7 +51,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -64,7 +64,7 @@ class MAdmin_Job_Item_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -76,7 +76,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function getMethod()
 	{
-		return ( isset( $this->_values['method'] ) ? (string) $this->_values['method'] : '' );
+		return ( isset( $this->values['method'] ) ? (string) $this->values['method'] : '' );
 	}
 
 
@@ -89,7 +89,7 @@ class MAdmin_Job_Item_Default
 	{
 		if( $method == $this->getMethod() ) { return; }
 
-		$this->_values['method'] = (string) $method;
+		$this->values['method'] = (string) $method;
 		$this->setModified();
 	}
 
@@ -101,7 +101,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function getParameter()
 	{
-		return ( isset( $this->_values['parameter'] ) ? $this->_values['parameter'] : array() );
+		return ( isset( $this->values['parameter'] ) ? $this->values['parameter'] : array() );
 	}
 
 
@@ -112,7 +112,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function setParameter( array $param )
 	{
-		$this->_values['parameter'] = $param;
+		$this->values['parameter'] = $param;
 		$this->setModified();
 	}
 
@@ -124,7 +124,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function getResult()
 	{
-		return ( isset( $this->_values['result'] ) ? $this->_values['result'] : array() );
+		return ( isset( $this->values['result'] ) ? $this->values['result'] : array() );
 	}
 
 
@@ -135,7 +135,7 @@ class MAdmin_Job_Item_Default
 	 */
 	public function setResult( array $result )
 	{
-		$this->_values['result'] = $result;
+		$this->values['result'] = $result;
 		$this->setModified();
 	}
 
@@ -149,7 +149,7 @@ class MAdmin_Job_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 

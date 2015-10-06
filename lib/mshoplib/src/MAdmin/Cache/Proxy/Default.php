@@ -17,8 +17,8 @@
 class MAdmin_Cache_Proxy_Default
 	implements MW_Cache_Interface
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -28,7 +28,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$this->_context = $context;
+		$this->context = $context;
 	}
 
 
@@ -41,7 +41,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function cleanup()
 	{
-		$this->_getObject()->cleanup();
+		$this->getObject()->cleanup();
 	}
 
 
@@ -55,7 +55,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function delete( $key )
 	{
-		$this->_getObject()->delete( $key );
+		$this->getObject()->delete( $key );
 	}
 
 
@@ -70,7 +70,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function deleteList( array $keys )
 	{
-		$this->_getObject()->deleteList( $keys );
+		$this->getObject()->deleteList( $keys );
 	}
 
 
@@ -85,7 +85,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function deleteByTags( array $tags )
 	{
-		$this->_getObject()->deleteByTags( $tags );
+		$this->getObject()->deleteByTags( $tags );
 	}
 
 
@@ -98,7 +98,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function flush()
 	{
-		$this->_getObject()->flush();
+		$this->getObject()->flush();
 	}
 
 
@@ -115,7 +115,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function get( $key, $default = null )
 	{
-		return $this->_getObject()->get( $key, $default );
+		return $this->getObject()->get( $key, $default );
 	}
 
 
@@ -132,7 +132,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function getList( array $keys )
 	{
-		return $this->_getObject()->getList( $keys );
+		return $this->getObject()->getList( $keys );
 	}
 
 
@@ -149,21 +149,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function getListByTags( array $tags )
 	{
-		return $this->_getObject()->getListByTags( $tags );
-	}
-
-
-	/**
-	 * Tests if caching is available.
-	 *
-	 * @inheritDoc
-	 *
-	 * @return boolean True if available, false if not
-	 * @deprecated
-	 */
-	public function isAvailable()
-	{
-		return $this->_getObject()->isAvailable();
+		return $this->getObject()->getListByTags( $tags );
 	}
 
 
@@ -182,7 +168,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null )
 	{
-		$this->_getObject()->set( $key, $value, $tags, $expires );
+		$this->getObject()->set( $key, $value, $tags, $expires );
 	}
 
 
@@ -202,7 +188,7 @@ class MAdmin_Cache_Proxy_Default
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
-		$this->_getObject()->setList( $pairs, $tags, $expires );
+		$this->getObject()->setList( $pairs, $tags, $expires );
 	}
 
 
@@ -211,12 +197,12 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @return MW_Cache_Interface Cache object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		if( !isset( $this->_object ) ) {
-			$this->_object = MAdmin_Cache_Manager_Factory::createManager( $this->_context )->getCache();
+		if( !isset( $this->object ) ) {
+			$this->object = MAdmin_Cache_Manager_Factory::createManager( $this->context )->getCache();
 		}
 
-		return $this->_object;
+		return $this->object;
 	}
 }

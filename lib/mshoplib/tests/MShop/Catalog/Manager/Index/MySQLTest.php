@@ -11,8 +11,8 @@
  */
 class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor;
+	private $object;
+	private $editor;
 
 
 	public static function setUpBeforeClass()
@@ -50,7 +50,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 		$context = clone TestHelper::getContext();
 		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
 
-		$this->_editor = $context->getEditor();
+		$this->editor = $context->getEditor();
 		$config = $context->getConfig();
 
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
@@ -59,7 +59,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'MySQL specific test' );
 		}
 
-		$this->_object = new MShop_Catalog_Manager_Index_MySQL( $context );
+		$this->object = new MShop_Catalog_Manager_Index_MySQL( $context );
 	}
 
 
@@ -77,7 +77,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSearchAttributes()
 	{
-		$list = $this->_object->getSearchAttributes();
+		$list = $this->object->getSearchAttributes();
 
 		foreach( $list as $attribute )
 		{
@@ -96,18 +96,18 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 	public function testSearchItemsText()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
-			$search->compare( '==', 'product.editor', $this->_editor )
+			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -116,12 +116,12 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Noir' ), // text value
-			$search->compare( '==', 'product.editor', $this->_editor )
+			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -140,7 +140,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 		$search = $productManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->_editor )
+			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $productManager->searchItems( $search );
@@ -152,7 +152,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 		$langid = $context->getLocale()->getLanguageId();
 
-		$textMgr = $this->_object->getSubManager( 'text', 'MySQL' );
+		$textMgr = $this->object->getSubManager( 'text', 'MySQL' );
 
 
 		$search = $textMgr->createSearch();
@@ -171,6 +171,6 @@ class MShop_Catalog_Manager_Index_MySQLTest extends PHPUnit_Framework_TestCase
 
 	public function testOptimize()
 	{
-		$this->_object->optimize();
+		$this->object->optimize();
 	}
 }

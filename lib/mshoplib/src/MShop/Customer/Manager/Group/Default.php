@@ -18,7 +18,7 @@ class MShop_Customer_Manager_Group_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Customer_Manager_Group_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.group.id' => array(
 			'code' => 'customer.group.id',
 			'internalcode' => 'mcusgr."id"',
@@ -80,7 +80,7 @@ class MShop_Customer_Manager_Group_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-customer' );
+		$this->setResourceName( 'db-customer' );
 	}
 
 
@@ -92,11 +92,11 @@ class MShop_Customer_Manager_Group_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/group/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/customer/manager/group/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/group/default/item/delete' );
 	}
 
 
@@ -107,9 +107,9 @@ class MShop_Customer_Manager_Group_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -140,7 +140,7 @@ class MShop_Customer_Manager_Group_Default
 		 */
 		$path = 'classes/customer/manager/group/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -176,7 +176,7 @@ class MShop_Customer_Manager_Group_Default
 		 * @see mshop/customer/manager/group/default/item/count
 		 */
 		$path = 'mshop/customer/manager/group/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -190,7 +190,7 @@ class MShop_Customer_Manager_Group_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'customer.group.id', $id, $ref );
+		return $this->getItemBase( 'customer.group.id', $id, $ref );
 	}
 
 
@@ -209,10 +209,10 @@ class MShop_Customer_Manager_Group_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -284,7 +284,7 @@ class MShop_Customer_Manager_Group_Default
 				$path = 'mshop/customer/manager/group/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
@@ -334,7 +334,7 @@ class MShop_Customer_Manager_Group_Default
 				 * @see mshop/customer/manager/group/default/item/count
 				 */
 				$path = 'mshop/customer/manager/group/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -359,10 +359,10 @@ class MShop_Customer_Manager_Group_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -470,10 +470,10 @@ class MShop_Customer_Manager_Group_Default
 			 */
 			$cfgPathCount = 'mshop/customer/manager/group/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $this->_createItem( $row );
+				$map[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -607,7 +607,7 @@ class MShop_Customer_Manager_Group_Default
 		 * @see mshop/customer/manager/group/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer/group', $manager, $name );
+		return $this->getSubManagerBase( 'customer/group', $manager, $name );
 	}
 
 
@@ -617,7 +617,7 @@ class MShop_Customer_Manager_Group_Default
 	 * @param array $values List of attributes for customer group item
 	 * @return MShop_Customer_Item_Group_Interface New customer group item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Customer_Item_Group_Default( $values );
 	}

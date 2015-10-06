@@ -22,11 +22,11 @@ class Controller_Jobs_Admin_Job_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/admin/job/name
 		 * Class name of the used admin jobs scheduler controller implementation
@@ -74,7 +74,7 @@ class Controller_Jobs_Admin_Job_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Admin_Job_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/admin/job/decorators/excludes
 		 * Excludes decorators added by the "common" option from the admin job controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Admin_Job_Factory
 		 * @see controller/jobs/admin/job/decorators/excludes
 		 * @see controller/jobs/admin/job/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'admin/job' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'admin/job' );
 	}
 }

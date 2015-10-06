@@ -25,7 +25,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product import CSV' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Product import CSV' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Imports new and updates existing products from CSV files' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Imports new and updates existing products from CSV files' );
 	}
 
 
@@ -48,11 +48,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 	public function run()
 	{
 		$total = $errors = 0;
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 		$logger = $context->getLogger();
 		$domains = array( 'attribute', 'media', 'price', 'product', 'text' );
-		$mappings = $this->_getDefaultMapping();
+		$mappings = $this->getDefaultMapping();
 
 
 		/** controller/common/product/import/csv/domains
@@ -314,9 +314,9 @@ class Controller_Jobs_Product_Import_Csv_Default
 			$procMappings = $mappings;
 			unset( $procMappings['item'] );
 
-			$convlist = $this->_getConverterList( $converters );
-			$processor = $this->_getProcessors( $procMappings );
-			$container = $this->_getContainer();
+			$convlist = $this->getConverterList( $converters );
+			$processor = $this->getProcessors( $procMappings );
+			$container = $this->getContainer();
 			$path = $container->getName();
 
 			$msg = sprintf( 'Started product import from "%1$s" (%2$s)', $path, __CLASS__ );
@@ -330,11 +330,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 					$content->next();
 				}
 
-				while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
+				while( ( $data = $this->getData( $content, $maxcnt ) ) !== array() )
 				{
-					$data = $this->_convertData( $convlist, $data );
-					$products = $this->_getProducts( array_keys( $data ), $domains );
-					$errcnt = $this->_import( $products, $data, $mappings['item'], $processor, $strict );
+					$data = $this->convertData( $convlist, $data );
+					$products = $this->getProducts( array_keys( $data ), $domains );
+					$errcnt = $this->import( $products, $data, $mappings['item'], $processor, $strict );
 					$chunkcnt = count( $data );
 
 					$msg = 'Imported product lines from "%1$s": %2$d/%3$d (%4$s)';
@@ -376,9 +376,9 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 *
 	 * @return MW_Container_Interface Container object
 	 */
-	protected function _getContainer()
+	protected function getContainer()
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/jobs/product/import/csv/location
 		 * File or directory where the content is stored which should be imported
@@ -481,11 +481,11 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 * @return integer Number of products that couldn't be imported
 	 * @throws Controller_Jobs_Exception
 	 */
-	protected function _import( array $products, array $data, array $mapping,
+	protected function import( array $products, array $data, array $mapping,
 		Controller_Common_Product_Import_Csv_Processor_Interface $processor, $strict )
 	{
 		$errors = 0;
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		foreach( $data as $code => $list )
@@ -502,12 +502,12 @@ class Controller_Jobs_Product_Import_Csv_Default
 					$product = $manager->createItem();
 				}
 
-				$map = $this->_getMappedData( $mapping, $list );
+				$map = $this->getMappedData( $mapping, $list );
 
 				$typecode = ( isset( $map['product.type'] ) ? $map['product.type'] : 'default' );
-				$map['product.typeid'] = $this->_getTypeId( 'product/type', 'product', $typecode );
+				$map['product.typeid'] = $this->getTypeId( 'product/type', 'product', $typecode );
 
-				$product->fromArray( $this->_addItemDefaults( $map ) );
+				$product->fromArray( $this->addItemDefaults( $map ) );
 				$manager->saveItem( $product );
 
 				$remaining = $processor->process( $product, $list );
@@ -539,7 +539,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 	 * @param array $list Associative list of domain item keys and their values, e.g. "product.status" => 1
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addItemDefaults( array $list )
+	protected function addItemDefaults( array $list )
 	{
 		if( !isset( $list['product.status'] ) ) {
 			$list['product.status'] = 1;

@@ -75,7 +75,7 @@ class MShop_Text_Manager_Factory
 		$iface = 'MShop_Text_Manager_Interface';
 		$classname = 'MShop_Text_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/text/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the text manager
@@ -151,6 +151,6 @@ class MShop_Text_Manager_Factory
 		 * @see mshop/text/manager/decorators/excludes
 		 * @see mshop/text/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'text' );
+		return self::addManagerDecorators( $context, $manager, 'text' );
 	}
 }

@@ -36,7 +36,7 @@ class MW_Setup_Task_ListsRenameConstraints extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'UPDATE "mshop_coupon" SET "provider" = CONCAT("provider", \',Required\')
 			WHERE "provider" NOT LIKE \'%,Required%\' AND "config" LIKE \'%reqproduct%\'',
 		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'reqproduct\', \'required.productcode\')
@@ -67,9 +67,9 @@ class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -78,18 +78,18 @@ class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for migrating the configuration
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating configuration keys in coupon tables', 0 );
+		$this->msg( 'Migrating configuration keys in coupon tables', 0 );
 
-		if( $this->_getSchema( 'db-coupon' )->tableExists( 'mshop_coupon' ) === true )
+		if( $this->getSchema( 'db-coupon' )->tableExists( 'mshop_coupon' ) === true )
 		{
-			$this->_executeList( $stmts, 'db-coupon' );
-			$this->_status( 'done' );
+			$this->executeList( $stmts, 'db-coupon' );
+			$this->status( 'done' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 
 	}

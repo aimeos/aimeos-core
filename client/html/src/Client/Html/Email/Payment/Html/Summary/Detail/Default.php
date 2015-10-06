@@ -100,7 +100,7 @@ class Client_Html_Email_Payment_Html_Summary_Detail_Default
 		 * @see client/html/email/payment/html/summary/detail/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/payment/html/summary/detail/' . $type, $name );
+		return $this->createSubClient( 'email/payment/html/summary/detail/' . $type, $name );
 	}
 
 
@@ -112,7 +112,7 @@ class Client_Html_Email_Payment_Html_Summary_Detail_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		// we can't cache the calculation because the same client object is used for all e-mails
 		$view->summaryTaxRates = $this->getTaxRates( $view->extOrderBaseItem );

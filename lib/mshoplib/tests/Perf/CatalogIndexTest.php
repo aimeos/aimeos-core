@@ -7,23 +7,23 @@
 
 class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_catItem;
-	private $_slizeSize = 100;
+	private $context;
+	private $catItem;
+	private $slizeSize = 100;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext( 'unitperf' );
+		$this->context = TestHelper::getContext( 'unitperf' );
 
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'home' ) );
 		$result = $catalogManager->searchItems( $search );
 
-		if( ( $this->_catItem = reset( $result ) ) === false ) {
+		if( ( $this->catItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No catalog item found' );
 		}
 
@@ -41,15 +41,15 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testListByPos()
 	{
-		$catId = (int) $this->_catItem->getId();
+		$catId = (int) $this->catItem->getId();
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -73,15 +73,15 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testListByName()
 	{
-		$catId = (int) $this->_catItem->getId();
+		$catId = (int) $this->catItem->getId();
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -105,15 +105,15 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testListByPrice()
 	{
-		$catId = (int) $this->_catItem->getId();
+		$catId = (int) $this->catItem->getId();
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -137,7 +137,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchByCategories()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
@@ -147,19 +147,19 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No catalog item found' );
 		}
 
-		$catIds = array( (int) $this->_catItem->getId(), (int) $catItem->getId() );
+		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->_catItem->getId() ),
+			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->catItem->getId() ),
 			$search->compare( '==', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -181,10 +181,10 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -210,10 +210,10 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -238,10 +238,10 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -264,15 +264,15 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchByCategoryPriceText()
 	{
-		$catId = (int) $this->_catItem->getId();
+		$catId = (int) $this->catItem->getId();
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -297,7 +297,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchByCategoriesPriceText()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
@@ -307,19 +307,19 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No catalog item found' );
 		}
 
-		$catIds = array( (int) $this->_catItem->getId(), (int) $catItem->getId() );
+		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
 
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
-		$search->setSlice( 0, $this->_slizeSize );
+		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->_catItem->getId() ),
+			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->catItem->getId() ),
 			$search->compare( '>=', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
 			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),

@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Removes unfinished orders' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Removes unfinished orders' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Deletes unfinished orders an makes their products and coupon codes available again' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Deletes unfinished orders an makes their products and coupon codes available again' );
 	}
 
 
@@ -47,7 +47,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Default
 	 */
 	public function run()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$controller = Controller_Common_Order_Factory::createController( $context );
 		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
 		$manager = MShop_Factory::createManager( $context, 'order' );

@@ -18,7 +18,7 @@ class MAdmin_Job_Manager_Default
 	extends MAdmin_Common_Manager_Abstract
 	implements MAdmin_Job_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'job.id'=> array(
 			'code'=>'job.id',
 			'internalcode'=>'majob."id"',
@@ -100,7 +100,7 @@ class MAdmin_Job_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-job' );
+		$this->setResourceName( 'db-job' );
 	}
 
 
@@ -112,11 +112,11 @@ class MAdmin_Job_Manager_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/job/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'madmin/job/manager/default/delete' );
+		$this->cleanupBase( $siteids, 'madmin/job/manager/default/delete' );
 	}
 
 
@@ -127,8 +127,8 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -141,7 +141,7 @@ class MAdmin_Job_Manager_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'job' );
+			return $this->createSearchBase( 'job' );
 		}
 
 		return parent::createSearch();
@@ -165,10 +165,10 @@ class MAdmin_Job_Manager_Default
 			return;
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -240,7 +240,7 @@ class MAdmin_Job_Manager_Default
 				$path = 'madmin/job/manager/default/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getMethod() );
@@ -292,7 +292,7 @@ class MAdmin_Job_Manager_Default
 				 * @see madmin/job/manager/default/count
 				 */
 				$path = 'madmin/job/manager/default/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -337,7 +337,7 @@ class MAdmin_Job_Manager_Default
 		 * @see madmin/job/manager/default/count
 		 */
 		$path = 'madmin/job/manager/default/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -374,11 +374,11 @@ class MAdmin_Job_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$logger = $context->getLogger();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -486,7 +486,7 @@ class MAdmin_Job_Manager_Default
 			 */
 			$cfgPathCount = 'madmin/job/manager/default/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
@@ -504,7 +504,7 @@ class MAdmin_Job_Manager_Default
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -546,7 +546,7 @@ class MAdmin_Job_Manager_Default
 		 */
 		$path = 'classes/job/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -559,7 +559,7 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'job', $manager, $name );
+		return $this->getSubManagerBase( 'job', $manager, $name );
 	}
 
 
@@ -569,7 +569,7 @@ class MAdmin_Job_Manager_Default
 	 * @param array $values Associative list of key/value pairs of a job
 	 * @return MAdmin_Job_Item_Interface
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MAdmin_Job_Item_Default( $values );
 	}
@@ -582,9 +582,9 @@ class MAdmin_Job_Manager_Default
 	 * @param string $sql SQL-statement to execute
 	 * @return MW_DB_Result_Interface Returns db result set from given sql statment
 	 */
-	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$siteId = $context->getLocale()->getSiteId();
 
 		$statement = $conn->create( $sql );

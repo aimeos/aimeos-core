@@ -25,8 +25,8 @@ class MW_Setup_Task_MShopAddPluginDataDefault extends MW_Setup_Task_MShopAddPlug
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 }

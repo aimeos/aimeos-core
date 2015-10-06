@@ -7,17 +7,17 @@
 
 class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 {
-	protected $_context;
-	protected $_paths;
-	protected $_view;
+	protected $context;
+	protected $paths;
+	protected $view;
 
 
 	protected function setUp()
 	{
-		$this->_paths = TestHelper::getHtmlTemplatePaths();
-		$this->_context = TestHelper::getContext( 'unitperf' );
+		$this->paths = TestHelper::getHtmlTemplatePaths();
+		$this->context = TestHelper::getContext( 'unitperf' );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'home' ) );
 		$items = $catalogManager->searchItems( $search );
@@ -26,7 +26,7 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No catalog item with code "home" found' );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'perf-00000' ) );
 		$items = $productManager->searchItems( $search );
@@ -35,30 +35,30 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'No product item with code "perf-00000" found' );
 		}
 
-		$this->_view = TestHelper::getView( 'unitperf' );
+		$this->view = TestHelper::getView( 'unitperf' );
 
 		$param = array(
 			'f_catid' => $catalogItem->getId(),
 			'd_prodid' => $productItem->getId()
 		);
-		$helper = new MW_View_Helper_Parameter_Default( $this->_view, $param );
-		$this->_view->addHelper( 'param', $helper );
+		$helper = new MW_View_Helper_Parameter_Default( $this->view, $param );
+		$this->view->addHelper( 'param', $helper );
 	}
 
 
 	public function testFilter()
 	{
 		// parser warm up so files are already parsed (same as APC is used)
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 		$client->getHeader();
 
 
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 		$client->getBody();
 
@@ -71,8 +71,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 
 		$stop = microtime( true );
@@ -84,8 +84,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 
 		$stop = microtime( true );
@@ -96,16 +96,16 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	public function testList()
 	{
 		// parser warm up so files are already parsed (same as APC is used)
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 		$client->getHeader();
 
 
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 		$client->getBody();
 
@@ -118,8 +118,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 
 		$stop = microtime( true );
@@ -131,8 +131,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_List_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 
 		$stop = microtime( true );
@@ -143,16 +143,16 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	public function testDetail()
 	{
 		// parser warm up so files are already parsed (same as APC is used)
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 		$client->getHeader();
 
 
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 		$client->getBody();
 
@@ -165,8 +165,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getHeader();
 
 		$stop = microtime( true );
@@ -178,8 +178,8 @@ class Perf_Client_Html_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
-		$client->setView( $this->_view );
+		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->context, $this->paths );
+		$client->setView( $this->view );
 		$client->getBody();
 
 		$stop = microtime( true );

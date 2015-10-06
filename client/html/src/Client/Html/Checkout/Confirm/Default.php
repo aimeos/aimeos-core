@@ -51,7 +51,7 @@ class Client_Html_Checkout_Confirm_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/confirm/default/subparts';
+	private $subPartPath = 'client/html/checkout/confirm/default/subparts';
 
 	/** client/html/checkout/confirm/intro/name
 	 * Name of the intro part used by the checkout confirm client implementation
@@ -96,8 +96,8 @@ class Client_Html_Checkout_Confirm_Default
 	 * @since 2015.02
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'intro', 'basic', 'retry', 'order' );
-	private $_cache;
+	private $subPartNames = array( 'intro', 'basic', 'retry', 'order' );
+	private $cache;
 
 
 	/**
@@ -110,32 +110,32 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->confirmBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -169,7 +169,7 @@ class Client_Html_Checkout_Confirm_Default
 		$tplconf = 'client/html/checkout/confirm/default/template-body';
 		$default = 'checkout/confirm/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -185,10 +185,10 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->confirmHeader = $html;
@@ -217,11 +217,11 @@ class Client_Html_Checkout_Confirm_Default
 			$tplconf = 'client/html/checkout/confirm/default/template-header';
 			$default = 'checkout/confirm/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -309,7 +309,7 @@ class Client_Html_Checkout_Confirm_Default
 		 * @see client/html/checkout/confirm/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/confirm/' . $type, $name );
+		return $this->createSubClient( 'checkout/confirm/' . $type, $name );
 	}
 
 
@@ -321,13 +321,13 @@ class Client_Html_Checkout_Confirm_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
-		$orderid = $session->get( 'arcavias/orderid' );
+		$orderid = $session->get( 'aimeos/orderid' );
 
 		try
 		{
-			if( ( $orderItem = $this->_updatePayment( $view, $orderid ) ) === null )
+			if( ( $orderItem = $this->updatePayment( $view, $orderid ) ) === null )
 			{
 				$orderManager = MShop_Factory::createManager( $context, 'order' );
 				$orderItem = $orderManager->getItem( $orderid );
@@ -341,7 +341,7 @@ class Client_Html_Checkout_Confirm_Default
 
 			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
-				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+				foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
 
@@ -383,9 +383,9 @@ class Client_Html_Checkout_Confirm_Default
 	 * @throws Client_Html_Exception If no payment service item could be found
 	 * @return MShop_Service_Provider_Interface Service provider object
 	 */
-	protected function _getServiceProvider( $code )
+	protected function getServiceProvider( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$expr = array(
@@ -411,9 +411,9 @@ class Client_Html_Checkout_Confirm_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -425,7 +425,7 @@ class Client_Html_Checkout_Confirm_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
@@ -444,7 +444,7 @@ class Client_Html_Checkout_Confirm_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
@@ -463,23 +463,23 @@ class Client_Html_Checkout_Confirm_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			if( !isset( $view->confirmOrderItem ) )
 			{
-				$context = $this->_getContext();
-				$orderid = $context->getSession()->get( 'arcavias/orderid' );
+				$context = $this->getContext();
+				$orderid = $context->getSession()->get( 'aimeos/orderid' );
 				$orderManager = MShop_Factory::createManager( $context, 'order' );
 
 				$view->confirmOrderItem = $orderManager->getItem( $orderid );
 			}
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 
 
@@ -490,19 +490,19 @@ class Client_Html_Checkout_Confirm_Default
 	 * @param string $orderid ID of the order whose payment status should be updated
 	 * @return void|MShop_Order_Item_Interface Order item that has been updated
 	 */
-	protected function _updatePayment( MW_View_Interface $view, $orderid )
+	protected function updatePayment( MW_View_Interface $view, $orderid )
 	{
 		if( ( $code = $view->param( 'code' ) ) === null ) {
 			return;
 		}
 
-		$provider = $this->_getServiceProvider( $code );
+		$provider = $this->getServiceProvider( $code );
 
 		$config = array( 'absoluteUri' => true, 'namespace' => false );
 		$params = array( 'code' => $code, 'orderid' => $orderid );
 		$urls = array(
-			'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
-			'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+			'payment.url-success' => $this->getUrlConfirm( $view, $params, $config ),
+			'payment.url-update' => $this->getUrlUpdate( $view, $params, $config ),
 			'client.ipaddress' => $view->request()->getClientAddress(),
 		);
 		$urls['payment.url-self'] = $urls['payment.url-success'];

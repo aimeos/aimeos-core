@@ -51,8 +51,8 @@ class Client_Html_Email_Payment_Html_Legal_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/payment/html/legal/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/email/payment/html/legal/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,10 +65,10 @@ class Client_Html_Email_Payment_Html_Legal_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->legalBody = $content;
@@ -105,7 +105,7 @@ class Client_Html_Email_Payment_Html_Legal_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/html-legal-body-default.html', 'email/common/html-legal-body-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -119,10 +119,10 @@ class Client_Html_Email_Payment_Html_Legal_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->legalHeader = $content;
@@ -160,7 +160,7 @@ class Client_Html_Email_Payment_Html_Legal_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/html-legal-header-default.html', 'email/common/html-legal-header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -247,7 +247,7 @@ class Client_Html_Email_Payment_Html_Legal_Default
 		 * @see client/html/email/payment/html/legal/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/payment/html/legal/' . $type, $name );
+		return $this->createSubClient( 'email/payment/html/legal/' . $type, $name );
 	}
 
 
@@ -256,8 +256,8 @@ class Client_Html_Email_Payment_Html_Legal_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

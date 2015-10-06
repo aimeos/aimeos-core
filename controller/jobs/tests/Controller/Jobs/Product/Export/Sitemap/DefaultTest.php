@@ -8,9 +8,9 @@
 
 class Controller_Jobs_Product_Export_Sitemap_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_arcavias;
+	private $object;
+	private $context;
+	private $aimeos;
 
 
 	/**
@@ -23,10 +23,10 @@ class Controller_Jobs_Product_Export_Sitemap_DefaultTest extends PHPUnit_Framewo
 	{
 		MShop_Factory::setCache( true );
 
-		$this->_context = TestHelper::getContext();
-		$this->_arcavias = TestHelper::getArcavias();
+		$this->context = TestHelper::getContext();
+		$this->aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Product_Export_Sitemap_Default( $this->_context, $this->_arcavias );
+		$this->object = new Controller_Jobs_Product_Export_Sitemap_Default( $this->context, $this->aimeos );
 	}
 
 
@@ -41,26 +41,26 @@ class Controller_Jobs_Product_Export_Sitemap_DefaultTest extends PHPUnit_Framewo
 		MShop_Factory::setCache( false );
 		MShop_Factory::clear();
 
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Product site map', $this->_object->getName() );
+		$this->assertEquals( 'Product site map', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Creates a product site map for search engines';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
-		$this->_object->run();
+		$this->object->run();
 		
 		$ds = DIRECTORY_SEPARATOR;
 		$this->assertFileExists( 'tmp' . $ds . 'aimeos-sitemap-1.xml.gz' );

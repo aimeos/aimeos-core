@@ -8,8 +8,8 @@
 
 class Controller_Jobs_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -20,10 +20,10 @@ class Controller_Jobs_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$this->context = TestHelper::getContext();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Admin_Log_Default( $this->_context, $arcavias );
+		$this->object = new Controller_Jobs_Admin_Log_Default( $this->context, $aimeos );
 	}
 
 
@@ -35,31 +35,31 @@ class Controller_Jobs_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 		MShop_Factory::clear();
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Log cleanup', $this->_object->getName() );
+		$this->assertEquals( 'Log cleanup', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Removes the old log entries from the database and archives them (optional)';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 
 		$mock = $this->getMockBuilder( 'MAdmin_Log_Manager_Default' )
 			->setMethods( array( 'deleteItems' ) )
-			->setConstructorArgs( array( $this->_context ) )
+			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$mock->expects( $this->atLeastOnce() )->method( 'deleteItems' );
@@ -76,7 +76,7 @@ class Controller_Jobs_Admin_Log_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( sprintf( 'Unable to create temporary path "%1$s"', $tmppath ) );
 		}
 
-		$this->_object->run();
+		$this->object->run();
 
 		foreach( new DirectoryIterator( $tmppath ) as $file )
 		{

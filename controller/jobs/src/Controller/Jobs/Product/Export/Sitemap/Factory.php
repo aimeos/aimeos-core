@@ -22,11 +22,11 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/product/export/sitemap/name
 		 * Class name of the used product suggestions scheduler controller implementation
@@ -74,7 +74,7 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Product_Export_Sitemap_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/product/export/sitemap/decorators/excludes
 		 * Excludes decorators added by the "common" option from the product export sitemap job controller
@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Export_Sitemap_Factory
 		 * @see controller/jobs/product/export/sitemap/export/sitemap/decorators/excludes
 		 * @see controller/jobs/product/export/sitemap/export/sitemap/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'product/export/sitemap' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'product/export/sitemap' );
 	}
 }

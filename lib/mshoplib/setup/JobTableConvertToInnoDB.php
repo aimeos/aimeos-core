@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'convert' => 'ALTER TABLE "madmin_job" ENGINE=InnoDB',
 		'check' => 'SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?'
 	);
@@ -39,9 +39,9 @@ class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -49,27 +49,27 @@ class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for changing table
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = "madmin_job";
-		$this->_msg( sprintf( 'Converting "%1$s" to InnoDB".', $table ), 0 );
+		$this->msg( sprintf( 'Converting "%1$s" to InnoDB".', $table ), 0 );
 
-		$stmt = $this->_conn->create( $stmts['check'] );
-		$stmt->bind( 1, $this->_schema->getDBName() );
+		$stmt = $this->conn->create( $stmts['check'] );
+		$stmt->bind( 1, $this->schema->getDBName() );
 		$stmt->bind( 2, $table );
 		$result = $stmt->execute();
 		$dbname = $result->fetch();
 		$result->finish();
 
-		if( $this->_schema->tableExists( $table ) === true
+		if( $this->schema->tableExists( $table ) === true
 			&& $dbname['ENGINE'] === 'MyISAM' )
 		{
-			$this->_execute( $stmts['convert'] );
-			$this->_status( 'converted' );
+			$this->execute( $stmts['convert'] );
+			$this->status( 'converted' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

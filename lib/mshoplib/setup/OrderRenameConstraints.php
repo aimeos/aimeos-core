@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderRenameConstraints extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base' => array(
 			'pk_ordba_id' => 'ALTER TABLE "mshop_order_base" DROP PRIMARY KEY, ADD CONSTRAINT "pk_ordba_id" PRIMARY KEY ("id")',
 		),
@@ -66,9 +66,9 @@ class MW_Setup_Task_OrderRenameConstraints extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -77,22 +77,22 @@ class MW_Setup_Task_OrderRenameConstraints extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming order constraints', 0 ); $this->_status( '' );
+		$this->msg( 'Renaming order constraints', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
 			foreach( $stmtList as $constraint=>$stmt )
 			{
-				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
+				$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
-				if( $this->_schema->constraintExists( $table, $constraint ) )
+				if( $this->schema->constraintExists( $table, $constraint ) )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'renamed' );
+					$this->execute( $stmt );
+					$this->status( 'renamed' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

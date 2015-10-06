@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Order_Base_Address_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Order_Base_Address_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 4, $result['total'] );
@@ -116,7 +116,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 				'order.base.address.telephone' => '0815-4711',
 				'order.base.address.email' => 'ich@du.de',
 				'order.base.address.telefax' => '0815-4712',
-				'order.base.address.website' => 'www.metaways.de'
+				'order.base.address.website' => 'www.example.com'
 			),
 		);
 
@@ -130,11 +130,11 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 			)
 		);
 
-		$savedAddress = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$savedAddress = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParamsAddr = (object) array( 'site' => 'unittest', 'items' => $savedAddress['items']->{'order.base.address.id'} );
-		$this->_object->deleteItems( $deleteParamsAddr );
+		$this->object->deleteItems( $deleteParamsAddr );
 
 		$baseManager->deleteItem( $baseItem->getId() );
 
@@ -165,7 +165,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends PHPUnit_Framework_
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.website'}, $searched['items'][0]->{'order.base.address.website'} );
 		$this->assertEquals( 1, count( $searched['items'] ) );
 
-		$searched = $this->_object->searchItems( $searchParams );
+		$searched = $this->object->searchItems( $searchParams );
 		$this->assertEquals( 0, $searched['total'] );
 		$this->assertTrue( $searched['success'] );
 	}

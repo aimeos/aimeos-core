@@ -65,7 +65,7 @@ class Controller_Frontend_Order_Factory
 		$iface = 'Controller_Frontend_Order_Interface';
 		$classname = 'Controller_Frontend_Order_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$manager = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/frontend/order/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order frontend controllers
@@ -141,6 +141,6 @@ class Controller_Frontend_Order_Factory
 		 * @see controller/frontend/order/decorators/excludes
 		 * @see controller/frontend/order/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'order' );
+		return self::addControllerDecorators( $context, $manager, 'order' );
 	}
 }

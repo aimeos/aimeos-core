@@ -36,8 +36,8 @@ class MW_Setup_Task_MShopAddWarehouseDataDefault extends MW_Setup_Task_MShopAddW
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 }

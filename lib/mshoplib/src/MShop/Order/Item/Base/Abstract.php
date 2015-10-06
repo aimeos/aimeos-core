@@ -56,7 +56,7 @@ abstract class MShop_Order_Item_Base_Abstract
 	 * @param integer $value Part constant
 	 * @throws MShop_Order_Exception If parts constant is invalid
 	 */
-	protected function _checkParts( $value )
+	protected function checkParts( $value )
 	{
 		$value = (int) $value;
 
@@ -72,7 +72,7 @@ abstract class MShop_Order_Item_Base_Abstract
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
 	 * @throws MShop_Exception if the price item or product code is missing
 	 */
-	protected function _checkProduct( MShop_Order_Item_Base_Product_Interface $item )
+	protected function checkProduct( MShop_Order_Item_Base_Product_Interface $item )
 	{
 		if( $item->getProductCode() === '' ) {
 			throw new MShop_Order_Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );

@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Order_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Order_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,8 +35,8 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
@@ -44,16 +44,16 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 	{
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'order';
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetHeaderOtherStep()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
@@ -63,16 +63,16 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'order';
 		$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( '', 'POST', array() );
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="checkout-standard-order">', $output );
 	}
 
 
 	public function testGetBodyOtherStep()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertEquals( '', $output );
 	}
 
@@ -80,28 +80,28 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessOK()
 	{
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$baseManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' );
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
+		$baseManager = MShop_Order_Manager_Factory::createManager( $this->context )->getSubManager( 'base' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
 
 
 		$search = $serviceManager->createSearch();
@@ -114,7 +114,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 
 		$controller->setService( 'payment', $serviceItem->getId() );
 		$controller->setAddress( 'payment', array( 'order.base.address.languageid' => 'en' ) );
-		$this->_context->setUserId( '-1' );
+		$this->context->setUserId( '-1' );
 
 
 		$view = TestHelper::getView();
@@ -123,8 +123,8 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends PHPUnit_Framework_
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->setView( $view );
-		$this->_object->process();
+		$this->object->setView( $view );
+		$this->object->process();
 
 
 		$search = $baseManager->createSearch();

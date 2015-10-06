@@ -12,8 +12,8 @@
  */
 class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_orderBase;
+	private $object;
+	private $orderBase;
 
 
 	/**
@@ -31,8 +31,8 @@ class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
-		$this->_object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
+		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
 	}
 
 
@@ -44,17 +44,17 @@ class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_orderBase );
+		unset( $this->object );
+		unset( $this->orderBase );
 	}
 
 
 	public function testAddCoupon()
 	{
-		$this->_object->addCoupon( $this->_orderBase );
+		$this->object->addCoupon( $this->orderBase );
 
-		$coupons = $this->_orderBase->getCoupons();
-		$products = $this->_orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
 
 		if( !isset( $coupons['zyxw'][0] ) ) {
 			throw new Exception( 'Missing coupon product' );
@@ -73,11 +73,11 @@ class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 
 	public function testDeleteCoupon()
 	{
-		$this->_object->addCoupon( $this->_orderBase );
-		$this->_object->deleteCoupon( $this->_orderBase );
+		$this->object->addCoupon( $this->orderBase );
+		$this->object->deleteCoupon( $this->orderBase );
 
-		$coupons = $this->_orderBase->getCoupons();
-		$products = $this->_orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
 
 		$this->assertEquals( 0, count( $products ) );
 		$this->assertArrayNotHasKey( 'zyxw', $coupons );
@@ -92,12 +92,12 @@ class MShop_Coupon_Provider_PresentTest extends PHPUnit_Framework_TestCase
 		$object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
 
 		$this->setExpectedException( 'MShop_Coupon_Exception' );
-		$object->addCoupon( $this->_orderBase );
+		$object->addCoupon( $this->orderBase );
 	}
 
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 }

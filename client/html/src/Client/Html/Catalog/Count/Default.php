@@ -51,7 +51,7 @@ class Client_Html_Catalog_Count_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/count/default/subparts';
+	private $subPartPath = 'client/html/catalog/count/default/subparts';
 
 	/** client/html/catalog/count/tree/name
 	 * Name of the tree part used by the catalog count client implementation
@@ -74,7 +74,7 @@ class Client_Html_Catalog_Count_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'tree', 'attribute' );
+	private $subPartNames = array( 'tree', 'attribute' );
 
 
 	/**
@@ -89,10 +89,10 @@ class Client_Html_Catalog_Count_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->countBody = $html;
@@ -120,11 +120,11 @@ class Client_Html_Catalog_Count_Default
 			$tplconf = 'client/html/catalog/count/default/template-body';
 			$default = 'catalog/count/body-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -141,10 +141,10 @@ class Client_Html_Catalog_Count_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->countHeader = $html;
@@ -173,11 +173,11 @@ class Client_Html_Catalog_Count_Default
 			$tplconf = 'client/html/catalog/count/default/template-header';
 			$default = 'catalog/count/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -265,7 +265,7 @@ class Client_Html_Catalog_Count_Default
 		 * @see client/html/catalog/count/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/count/' . $type, $name );
+		return $this->createSubClient( 'catalog/count/' . $type, $name );
 	}
 
 
@@ -282,7 +282,7 @@ class Client_Html_Catalog_Count_Default
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -292,8 +292,8 @@ class Client_Html_Catalog_Count_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

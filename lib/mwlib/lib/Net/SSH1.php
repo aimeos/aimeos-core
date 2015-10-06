@@ -210,7 +210,7 @@ define('NET_SSH1_TTY_OP_END',  0);
 /**
  * The Response Type
  *
- * @see Net_SSH1::_get_binary_packet()
+ * @see Net_SSH1::get_binary_packet()
  * @access private
  */
 define('NET_SSH1_RESPONSE_TYPE', 1);
@@ -218,7 +218,7 @@ define('NET_SSH1_RESPONSE_TYPE', 1);
 /**
  * The Response Data
  *
- * @see Net_SSH1::_get_binary_packet()
+ * @see Net_SSH1::get_binary_packet()
  * @access private
  */
 define('NET_SSH1_RESPONSE_DATA', 2);
@@ -463,7 +463,7 @@ class Net_SSH1 {
             33 => 'NET_SSH1_CMSG_EXIT_CONFIRMATION'
         );
 
-        $this->_define_array($this->protocol_flags);
+        $this->define_array($this->protocol_flags);
 
         $this->fsock = @fsockopen($host, $port, $errno, $errstr, $timeout);
         if (!$this->fsock) {
@@ -494,38 +494,38 @@ class Net_SSH1 {
 
         fputs($this->fsock, $this->identifier."\r\n");
 
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
         if ($response[NET_SSH1_RESPONSE_TYPE] != NET_SSH1_SMSG_PUBLIC_KEY) {
             user_error('Expected SSH_SMSG_PUBLIC_KEY', E_USER_NOTICE);
             return;
         }
 
-        $anti_spoofing_cookie = $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 8);
+        $anti_spoofing_cookie = $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 8);
 
-        $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
+        $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
 
-        $temp = unpack('nlen', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
-        $server_key_public_exponent = new Math_BigInteger($this->_string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
+        $temp = unpack('nlen', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
+        $server_key_public_exponent = new Math_BigInteger($this->string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
         $this->server_key_public_exponent = $server_key_public_exponent;
 
-        $temp = unpack('nlen', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
-        $server_key_public_modulus = new Math_BigInteger($this->_string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
+        $temp = unpack('nlen', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
+        $server_key_public_modulus = new Math_BigInteger($this->string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
         $this->server_key_public_modulus = $server_key_public_modulus;
 
-        $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
+        $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
 
-        $temp = unpack('nlen', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
-        $host_key_public_exponent = new Math_BigInteger($this->_string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
+        $temp = unpack('nlen', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
+        $host_key_public_exponent = new Math_BigInteger($this->string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
         $this->host_key_public_exponent = $host_key_public_exponent;
 
-        $temp = unpack('nlen', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
-        $host_key_public_modulus = new Math_BigInteger($this->_string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
+        $temp = unpack('nlen', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 2));
+        $host_key_public_modulus = new Math_BigInteger($this->string_shift($response[NET_SSH1_RESPONSE_DATA], ceil($temp['len'] / 8)), 256);
         $this->host_key_public_modulus = $host_key_public_modulus;
 
-        $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
+        $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 4);
 
         // get a list of the supported ciphers
-        extract(unpack('Nsupported_ciphers_mask', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 4)));
+        extract(unpack('Nsupported_ciphers_mask', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 4)));
         foreach ($this->supported_ciphers as $mask=>$name) {
             if (($supported_ciphers_mask & (1 << $mask)) == 0) {
                 unset($this->supported_ciphers[$mask]);
@@ -533,7 +533,7 @@ class Net_SSH1 {
         }
 
         // get a list of the supported authentications
-        extract(unpack('Nsupported_authentications_mask', $this->_string_shift($response[NET_SSH1_RESPONSE_DATA], 4)));
+        extract(unpack('Nsupported_authentications_mask', $this->string_shift($response[NET_SSH1_RESPONSE_DATA], 4)));
         foreach ($this->supported_authentications as $mask=>$name) {
             if (($supported_authentications_mask & (1 << $mask)) == 0) {
                 unset($this->supported_authentications[$mask]);
@@ -549,14 +549,14 @@ class Net_SSH1 {
         $double_encrypted_session_key = $session_key ^ str_pad($session_id, 32, chr(0));
 
         if ($server_key_public_modulus->compare($host_key_public_modulus) < 0) {
-            $double_encrypted_session_key = $this->_rsa_crypt(
+            $double_encrypted_session_key = $this->rsa_crypt(
                 $double_encrypted_session_key,
                 array(
                     $server_key_public_exponent,
                     $server_key_public_modulus
                 )
             );
-            $double_encrypted_session_key = $this->_rsa_crypt(
+            $double_encrypted_session_key = $this->rsa_crypt(
                 $double_encrypted_session_key,
                 array(
                     $host_key_public_exponent,
@@ -564,14 +564,14 @@ class Net_SSH1 {
                 )
             );
         } else {
-            $double_encrypted_session_key = $this->_rsa_crypt(
+            $double_encrypted_session_key = $this->rsa_crypt(
                 $double_encrypted_session_key,
                 array(
                     $host_key_public_exponent,
                     $host_key_public_modulus
                 )
             );
-            $double_encrypted_session_key = $this->_rsa_crypt(
+            $double_encrypted_session_key = $this->rsa_crypt(
                 $double_encrypted_session_key,
                 array(
                     $server_key_public_exponent,
@@ -583,7 +583,7 @@ class Net_SSH1 {
         $cipher = isset($this->supported_ciphers[$cipher]) ? $cipher : NET_SSH1_CIPHER_3DES;
         $data = pack('C2a*na*N', NET_SSH1_CMSG_SESSION_KEY, $cipher, $anti_spoofing_cookie, 8 * strlen($double_encrypted_session_key), $double_encrypted_session_key, 0);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_SESSION_KEY', E_USER_NOTICE);
             return;
         }
@@ -611,7 +611,7 @@ class Net_SSH1 {
             //    break;
         }
 
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
 
         if ($response[NET_SSH1_RESPONSE_TYPE] != NET_SSH1_SMSG_SUCCESS) {
             user_error('Expected SSH_SMSG_SUCCESS', E_USER_NOTICE);
@@ -637,12 +637,12 @@ class Net_SSH1 {
 
         $data = pack('CNa*', NET_SSH1_CMSG_USER, strlen($username), $username);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_USER', E_USER_NOTICE);
             return false;
         }
 
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
 
         if ($response[NET_SSH1_RESPONSE_TYPE] == NET_SSH1_SMSG_SUCCESS) {
             $this->bitmap |= NET_SSH1_MASK_LOGIN;
@@ -654,7 +654,7 @@ class Net_SSH1 {
 
         $data = pack('CNa*', NET_SSH1_CMSG_AUTH_PASSWORD, strlen($password), $password);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_AUTH_PASSWORD', E_USER_NOTICE);
             return false;
         }
@@ -665,7 +665,7 @@ class Net_SSH1 {
             $this->message_log[count($this->message_log) - 1] = $data; // zzzzz
         }
 
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
 
         if ($response[NET_SSH1_RESPONSE_TYPE] == NET_SSH1_SMSG_SUCCESS) {
             $this->bitmap |= NET_SSH1_MASK_LOGIN;
@@ -707,7 +707,7 @@ class Net_SSH1 {
 
         $data = pack('CNa*', NET_SSH1_CMSG_EXEC_CMD, strlen($cmd), $cmd);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_EXEC_CMD', E_USER_NOTICE);
             return false;
         }
@@ -717,17 +717,17 @@ class Net_SSH1 {
         }
 
         $output = '';
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
 
         do {
             $output.= substr($response[NET_SSH1_RESPONSE_DATA], 4);
-            $response = $this->_get_binary_packet();
+            $response = $this->get_binary_packet();
         } while ($response[NET_SSH1_RESPONSE_TYPE] != NET_SSH1_SMSG_EXITSTATUS);
 
         $data = pack('C', NET_SSH1_CMSG_EXIT_CONFIRMATION);
 
         // i don't think it's really all that important if this packet gets sent or not.
-        $this->_send_binary_packet($data);
+        $this->send_binary_packet($data);
 
         fclose($this->fsock);
 
@@ -745,19 +745,19 @@ class Net_SSH1 {
      * @return Boolean
      * @access private
      */
-    function _initShell()
+    function initShell()
     {
         // connect using the sample parameters in protocol-1.5.txt.
         // according to wikipedia.org's entry on text terminals, "the fundamental type of application running on a text
         // terminal is a command line interpreter or shell".  thus, opening a terminal session to run the shell.
         $data = pack('CNa*N4C', NET_SSH1_CMSG_REQUEST_PTY, strlen('vt100'), 'vt100', 24, 80, 0, 0, NET_SSH1_TTY_OP_END);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_REQUEST_PTY', E_USER_NOTICE);
             return false;
         }
 
-        $response = $this->_get_binary_packet();
+        $response = $this->get_binary_packet();
 
         if ($response[NET_SSH1_RESPONSE_TYPE] != NET_SSH1_SMSG_SUCCESS) {
             user_error('Expected SSH_SMSG_SUCCESS', E_USER_NOTICE);
@@ -766,7 +766,7 @@ class Net_SSH1 {
 
         $data = pack('C', NET_SSH1_CMSG_EXEC_SHELL);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_EXEC_SHELL', E_USER_NOTICE);
             return false;
         }
@@ -810,7 +810,7 @@ class Net_SSH1 {
             return false;
         }
 
-        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->_initShell()) {
+        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->initShell()) {
             user_error('Unable to initiate an interactive shell session', E_USER_NOTICE);
             return false;
         }
@@ -823,9 +823,9 @@ class Net_SSH1 {
             }
             $pos = strpos($this->interactiveBuffer, $match);
             if ($pos !== false) {
-                return $this->_string_shift($this->interactiveBuffer, $pos + strlen($match));
+                return $this->string_shift($this->interactiveBuffer, $pos + strlen($match));
             }
-            $response = $this->_get_binary_packet();
+            $response = $this->get_binary_packet();
             $this->interactiveBuffer.= substr($response[NET_SSH1_RESPONSE_DATA], 4);
         }
     }
@@ -845,14 +845,14 @@ class Net_SSH1 {
             return false;
         }
 
-        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->_initShell()) {
+        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->initShell()) {
             user_error('Unable to initiate an interactive shell session', E_USER_NOTICE);
             return false;
         }
 
         $data = pack('CNa*', NET_SSH1_CMSG_STDIN_DATA, strlen($cmd), $cmd);
 
-        if (!$this->_send_binary_packet($data)) {
+        if (!$this->send_binary_packet($data)) {
             user_error('Error sending SSH_CMSG_STDIN', E_USER_NOTICE);
             return false;
         }
@@ -880,7 +880,7 @@ class Net_SSH1 {
             return false;
         }
 
-        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->_initShell()) {
+        if (!($this->bitmap & NET_SSH1_MASK_SHELL) && !$this->initShell()) {
             user_error('Unable to initiate an interactive shell session', E_USER_NOTICE);
             return false;
         }
@@ -888,7 +888,7 @@ class Net_SSH1 {
         $read = array($this->fsock);
         $write = $except = null;
         if (stream_select($read, $write, $except, 0)) {
-            $response = $this->_get_binary_packet();
+            $response = $this->get_binary_packet();
             return substr($response[NET_SSH1_RESPONSE_DATA], 4);
         } else {
             return '';
@@ -902,7 +902,7 @@ class Net_SSH1 {
      */
     function disconnect()
     {
-        $this->_disconnect();
+        $this->disconnect();
     }
 
     /**
@@ -915,7 +915,7 @@ class Net_SSH1 {
      */
     function __destruct()
     {
-        $this->_disconnect();
+        $this->disconnect();
     }
 
     /**
@@ -924,13 +924,13 @@ class Net_SSH1 {
      * @param String $msg
      * @access private
      */
-    function _disconnect($msg = 'Client Quit')
+    function disconnect($msg = 'Client Quit')
     {
         if ($this->bitmap) {
             $data = pack('C', NET_SSH1_CMSG_EOF);
-            $this->_send_binary_packet($data);
+            $this->send_binary_packet($data);
 
-            $response = $this->_get_binary_packet();
+            $response = $this->get_binary_packet();
             switch ($response[NET_SSH1_RESPONSE_TYPE]) {
                 case NET_SSH1_SMSG_EXITSTATUS:
                     $data = pack('C', NET_SSH1_CMSG_EXIT_CONFIRMATION);
@@ -939,7 +939,7 @@ class Net_SSH1 {
                     $data = pack('CNa*', NET_SSH1_MSG_DISCONNECT, strlen($msg), $msg);
             }
 
-            $this->_send_binary_packet($data);
+            $this->send_binary_packet($data);
             fclose($this->fsock);
             $this->bitmap = 0;
         }
@@ -953,11 +953,11 @@ class Net_SSH1 {
      * Also, this function could be improved upon by adding detection for the following exploit:
      * http://www.securiteam.com/securitynews/5LP042K3FY.html
      *
-     * @see Net_SSH1::_send_binary_packet()
+     * @see Net_SSH1::send_binary_packet()
      * @return Array
      * @access private
      */
-    function _get_binary_packet()
+    function get_binary_packet()
     {
         if (feof($this->fsock)) {
             //user_error('connection closed prematurely', E_USER_NOTICE);
@@ -983,7 +983,7 @@ class Net_SSH1 {
 
         $temp = unpack('Ncrc', substr($raw, -4));
 
-        //if ( $temp['crc'] != $this->_crc($padding . $type . $data) ) {
+        //if ( $temp['crc'] != $this->crc($padding . $type . $data) ) {
         //    user_error('Bad CRC in packet from server', E_USER_NOTICE);
         //    return false;
         //}
@@ -1010,12 +1010,12 @@ class Net_SSH1 {
      *
      * Returns true on success, false on failure.
      *
-     * @see Net_SSH1::_get_binary_packet()
+     * @see Net_SSH1::get_binary_packet()
      * @param String $data
      * @return Boolean
      * @access private
      */
-    function _send_binary_packet($data) {
+    function send_binary_packet($data) {
         if (feof($this->fsock)) {
             //user_error('connection closed prematurely', E_USER_NOTICE);
             return false;
@@ -1039,7 +1039,7 @@ class Net_SSH1 {
         }
 
         $data = $padding . $data;
-        $data.= pack('N', $this->_crc($data));
+        $data.= pack('N', $this->crc($data));
 
         if ($this->crypto !== false) {
             $data = $this->crypto->encrypt($data);
@@ -1061,13 +1061,13 @@ class Net_SSH1 {
      * we've reimplemented it. A more detailed discussion of the differences can be found after
      * $crc_lookup_table's initialization.
      *
-     * @see Net_SSH1::_get_binary_packet()
-     * @see Net_SSH1::_send_binary_packet()
+     * @see Net_SSH1::get_binary_packet()
+     * @see Net_SSH1::send_binary_packet()
      * @param String $data
      * @return Integer
      * @access private
      */
-    function _crc($data)
+    function crc($data)
     {
         static $crc_lookup_table = array(
             0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA,
@@ -1164,7 +1164,7 @@ class Net_SSH1 {
      * @return String
      * @access private
      */
-    function _string_shift(&$string, $index = 1)
+    function string_shift(&$string, $index = 1)
     {
         $substr = substr($string, 0, $index);
         $string = substr($string, $index);
@@ -1184,7 +1184,7 @@ class Net_SSH1 {
      * @return Math_BigInteger
      * @access private
      */
-    function _rsa_crypt($m, $key)
+    function rsa_crypt($m, $key)
     {
         /*
         if (!class_exists('Crypt_RSA')) {
@@ -1234,7 +1234,7 @@ class Net_SSH1 {
      * @param Array $array
      * @access private
      */
-    function _define_array()
+    function define_array()
     {
         $args = func_get_args();
         foreach ($args as $arg) {
@@ -1267,7 +1267,7 @@ class Net_SSH1 {
                 return $this->message_number_log;
                 break;
             case NET_SSH1_LOG_COMPLEX:
-                return $this->_format_log($this->message_log, $this->protocol_flags_log);
+                return $this->format_log($this->message_log, $this->protocol_flags_log);
                 break;
             default:
                 return false;
@@ -1282,7 +1282,7 @@ class Net_SSH1 {
      * @access private
      * @return String
      */
-    function _format_log($message_log, $message_number_log)
+    function format_log($message_log, $message_number_log)
     {
         static $boundary = ':', $long_width = 65, $short_width = 16;
 
@@ -1295,7 +1295,7 @@ class Net_SSH1 {
                 if (!empty($current_log)) {
                     $output.= str_pad(dechex($j), 7, '0', STR_PAD_LEFT) . '0  ';
                 }
-                $fragment = $this->_string_shift($current_log, $short_width);
+                $fragment = $this->string_shift($current_log, $short_width);
                 $hex = substr(
                            preg_replace(
                                '#(.)#es',

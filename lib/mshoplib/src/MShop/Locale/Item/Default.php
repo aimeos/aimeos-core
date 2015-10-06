@@ -18,10 +18,10 @@ class MShop_Locale_Item_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Locale_Item_Interface
 {
-	private $_site;
-	private $_sitePath;
-	private $_siteSubTree;
-	private $_values;
+	private $site;
+	private $sitePath;
+	private $siteSubTree;
+	private $values;
 
 
 	/**
@@ -37,10 +37,10 @@ class MShop_Locale_Item_Default
 	{
 		parent::__construct( 'locale.', $values );
 
-		$this->_values = $values;
-		$this->_site = $site;
-		$this->_sitePath = $sitePath;
-		$this->_siteSubTree = $siteSubTree;
+		$this->values = $values;
+		$this->site = $site;
+		$this->sitePath = $sitePath;
+		$this->siteSubTree = $siteSubTree;
 	}
 
 
@@ -49,7 +49,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function __clone()
 	{
-		$this->_site = ( isset( $this->_site ) ? clone $this->_site : null );
+		$this->site = ( isset( $this->site ) ? clone $this->site : null );
 	}
 
 
@@ -61,11 +61,11 @@ class MShop_Locale_Item_Default
 	 */
 	public function getSite()
 	{
-		if( $this->_site === null ) {
+		if( $this->site === null ) {
 			throw new MShop_Locale_Exception( 'No site item available' );
 		}
 
-		return $this->_site;
+		return $this->site;
 	}
 
 
@@ -76,7 +76,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getSitePath()
 	{
-		return $this->_sitePath;
+		return $this->sitePath;
 	}
 
 
@@ -87,7 +87,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getSiteSubTree()
 	{
-		return $this->_siteSubTree;
+		return $this->siteSubTree;
 	}
 
 
@@ -98,7 +98,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->_values['siteid'] ) ? (int) $this->_values['siteid'] : null );
+		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
 	}
 
 
@@ -111,9 +111,9 @@ class MShop_Locale_Item_Default
 	{
 		if( $id === $this->getSiteId() ) { return; }
 
-		$this->_values['siteid'] = (int) $id;
-		$this->_sitePath = array( (int) $id );
-		$this->_siteSubTree = array( (int) $id );
+		$this->values['siteid'] = (int) $id;
+		$this->sitePath = array( (int) $id );
+		$this->siteSubTree = array( (int) $id );
 
 		/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
 
@@ -128,7 +128,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : null );
+		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
 	}
 
 
@@ -142,8 +142,8 @@ class MShop_Locale_Item_Default
 	{
 		if( $langid == $this->getLanguageId() ) { return; }
 
-		$this->_checkLanguageId( $langid );
-		$this->_values['langid'] = $langid;
+		$this->checkLanguageId( $langid );
+		$this->values['langid'] = $langid;
 		$this->setModified();
 	}
 
@@ -155,7 +155,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getCurrencyId()
 	{
-		return ( isset( $this->_values['currencyid'] ) ? (string) $this->_values['currencyid'] : null );
+		return ( isset( $this->values['currencyid'] ) ? (string) $this->values['currencyid'] : null );
 	}
 
 
@@ -169,8 +169,8 @@ class MShop_Locale_Item_Default
 	{
 		if( $currencyid == $this->getCurrencyId() ) { return; }
 
-		$this->_checkCurrencyId( $currencyid );
-		$this->_values['currencyid'] = $currencyid;
+		$this->checkCurrencyId( $currencyid );
+		$this->values['currencyid'] = $currencyid;
 		$this->setModified();
 	}
 
@@ -182,7 +182,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 
@@ -195,7 +195,7 @@ class MShop_Locale_Item_Default
 	{
 		if( $pos == $this->getPosition() ) { return; }
 
-		$this->_values['pos'] = (int) $pos;
+		$this->values['pos'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -207,7 +207,7 @@ class MShop_Locale_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -220,7 +220,7 @@ class MShop_Locale_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 

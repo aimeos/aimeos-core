@@ -10,10 +10,10 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_plugin;
-	private $_order;
-	private $_products;
+	private $object;
+	private $plugin;
+	private $order;
+	private $products;
 
 
 	/**
@@ -25,11 +25,11 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 	protected function setUp()
 	{
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setProvider( 'PropertyAdd' );
-		$this->_plugin->setStatus( '1' );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setProvider( 'PropertyAdd' );
+		$this->plugin->setStatus( '1' );
 
-		$this->_plugin->setConfig( array( 'product.stock.productid' => array(
+		$this->plugin->setConfig( array( 'product.stock.productid' => array(
 			'product.stock.warehouseid',
 			'product.stock.editor',
 			'product.stock.stocklevel',
@@ -50,19 +50,19 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 			throw new Exception( 'Wrong number of products' );
 		}
 
-		$this->_products = array();
+		$this->products = array();
 
 		foreach( $products as $product )
 		{
 			$item = $orderBaseProductManager->createItem();
 			$item->copyFrom( $product );
 
-			$this->_products[$product->getCode()] = $item;
+			$this->products[$product->getCode()] = $item;
 		}
 
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyAdd( TestHelper::getContext(), $this->_plugin );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyAdd( TestHelper::getContext(), $this->plugin );
 	}
 
 
@@ -74,23 +74,23 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_order, $this->_plugin, $this->_products );
+		unset( $this->object, $this->order, $this->plugin, $this->products );
 	}
 
 
 	public function testRegister()
 	{
-		$this->_object->register( $this->_order );
+		$this->object->register( $this->order );
 	}
 
 
 	public function testUpdateOk()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
-		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
+		$this->assertEquals( 4, count( $this->products['CNC']->getAttributes() ) );
 
-		$this->_products['CNE']->setAttributes( array() );
-		$this->_plugin->setConfig( array(
+		$this->products['CNE']->setAttributes( array() );
+		$this->plugin->setConfig( array(
 			'product.list.parentid' => array(
 				'product.list.domain',
 			),
@@ -99,9 +99,9 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 			)
 		) );
 
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 
-		$this->assertEquals( 2, count( $this->_products['CNE']->getAttributes() ) );
+		$this->assertEquals( 2, count( $this->products['CNE']->getAttributes() ) );
 	}
 
 
@@ -116,11 +116,11 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 		$attribute->setValue( '1200' );
 		$attribute->setType( 'property' );
 
-		$this->_products['CNC']->setAttributes( array( $attribute ) );
-		$this->assertEquals( 1, count( $this->_products['CNC']->getAttributes() ) );
+		$this->products['CNC']->setAttributes( array( $attribute ) );
+		$this->assertEquals( 1, count( $this->products['CNC']->getAttributes() ) );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
-		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
+		$this->assertEquals( 4, count( $this->products['CNC']->getAttributes() ) );
 	}
 
 
@@ -128,24 +128,24 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends PHPUnit_Framework_Test
 	{
 		// Non-existent property:
 
-		$this->_plugin->setConfig( array( 'product.stock.productid' => array(
+		$this->plugin->setConfig( array( 'product.stock.productid' => array(
 			'product.stock.quatsch',
 			'product.stock.editor',
 			'product.stock.stocklevel',
 			'product.stock.dateback'
 		) ) );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->_products['CNC']->getAttributes() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
+		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
 
 
 		// Incorrect key:
 
-		$this->_plugin->setConfig( array( 'stock.productid' => array(
+		$this->plugin->setConfig( array( 'stock.productid' => array(
 			'stock.warehouseid',
 		) ) );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

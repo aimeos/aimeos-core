@@ -18,8 +18,8 @@ class MW_View_Helper_Request_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_body;
-	private $_clientaddr;
+	private $body;
+	private $clientaddr;
 
 
 	/**
@@ -33,8 +33,8 @@ class MW_View_Helper_Request_Default
 	{
 		parent::__construct( $view );
 
-		$this->_body = $body;
-		$this->_clientaddr = $clientaddr;
+		$this->body = $body;
+		$this->clientaddr = $clientaddr;
 	}
 
 
@@ -56,7 +56,7 @@ class MW_View_Helper_Request_Default
 	 */
 	public function getBody()
 	{
-		return $this->_body;
+		return $this->body;
 	}
 
 
@@ -67,6 +67,6 @@ class MW_View_Helper_Request_Default
 	 */
 	public function getClientAddress()
 	{
-		return $this->_clientaddr;
+		return $this->clientaddr;
 	}
 }

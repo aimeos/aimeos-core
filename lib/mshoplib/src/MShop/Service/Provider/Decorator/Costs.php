@@ -17,7 +17,7 @@
 class MShop_Service_Provider_Decorator_Costs
 extends MShop_Service_Provider_Decorator_Abstract
 {
-	private $_beConfig = array(
+	private $beConfig = array(
 		'costs.percent' => array(
 			'code' => 'costs.percent',
 			'internalcode'=> 'costs.percent',
@@ -39,8 +39,8 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->_getProvider()->checkConfigBE( $attributes );
-		$error += $this->_checkConfig( $this->_beConfig, $attributes );
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
 
 		return $error;
 	}
@@ -54,9 +54,9 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 */
 	public function getConfigBE()
 	{
-		$list = $this->_getProvider()->getConfigBE();
+		$list = $this->getProvider()->getConfigBE();
 
-		foreach( $this->_beConfig as $key => $config ) {
+		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
@@ -81,7 +81,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 		}
 
 		$value = $basket->getPrice()->getValue() * $config['costs.percent'] / 100;
-		$price = $this->_getProvider()->calcPrice( $basket );
+		$price = $this->getProvider()->calcPrice( $basket );
 		$price->setCosts( $price->getCosts() + $value );
 
 		return $price;

@@ -11,8 +11,8 @@
  */
 class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -20,7 +20,7 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'name' => new MW_Common_Criteria_Attribute_Default( array(
 				'code' => 'name',
 				'internalcode' => 'name',
@@ -55,7 +55,7 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCa
 			) ),
 		);
 
-		$this->_object = new MShop_Common_Item_Helper_Form_Default( 'http://www.example.com', 'post', $this->_values );
+		$this->object = new MShop_Common_Item_Helper_Form_Default( 'http://www.example.com', 'post', $this->values );
 	}
 
 
@@ -64,50 +64,50 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_values );
+		unset( $this->object, $this->values );
 	}
 
 	public function testGetExternal()
 	{
-		$this->assertEquals( true, $this->_object->getExternal() );
+		$this->assertEquals( true, $this->object->getExternal() );
 	}
 
 	public function testSetExternal()
 	{
-		$this->_object->setExternal( false );
-		$this->assertEquals( false, $this->_object->getExternal() );
+		$this->object->setExternal( false );
+		$this->assertEquals( false, $this->object->getExternal() );
 	}
 
 	public function testGetUrl()
 	{
-		$this->assertEquals( 'http://www.example.com', $this->_object->getUrl() );
+		$this->assertEquals( 'http://www.example.com', $this->object->getUrl() );
 	}
 
 	public function testSetUrl()
 	{
-		$this->_object->setUrl( 'http://www.example.de' );
-		$this->assertEquals( 'http://www.example.de', $this->_object->getUrl() );
+		$this->object->setUrl( 'http://www.example.de' );
+		$this->assertEquals( 'http://www.example.de', $this->object->getUrl() );
 	}
 
 	public function testGetMethod()
 	{
-		$this->assertEquals( 'post', $this->_object->getMethod() );
+		$this->assertEquals( 'post', $this->object->getMethod() );
 	}
 
 	public function testSetMethod()
 	{
-		$this->_object->setMethod( 'get' );
-		$this->assertEquals( 'get', $this->_object->getMethod() );
+		$this->object->setMethod( 'get' );
+		$this->assertEquals( 'get', $this->object->getMethod() );
 	}
 
 	public function testGetValues()
 	{
-		$this->assertEquals( $this->_values, $this->_object->getValues() );
+		$this->assertEquals( $this->values, $this->object->getValues() );
 	}
 
 	public function testGetValue()
 	{
-		$this->assertEquals( 'unittest', $this->_object->getValue( 'name' )->getDefault() );
+		$this->assertEquals( 'unittest', $this->object->getValue( 'name' )->getDefault() );
 	}
 
 	public function testSetValue()
@@ -121,7 +121,7 @@ class MShop_Common_Item_Helper_Form_DefaultTest extends PHPUnit_Framework_TestCa
 			'default' => 'test',
 		) );
 
-		$this->_object->setValue( 'name', $item );
-		$this->assertEquals( 'test', $this->_object->getValue( 'name' )->getDefault() );
+		$this->object->setValue( 'name', $item );
+		$this->assertEquals( 'test', $this->object->getValue( 'name' )->getDefault() );
 	}
 }

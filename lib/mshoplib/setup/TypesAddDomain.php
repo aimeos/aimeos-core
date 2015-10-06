@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_TypesAddDomain extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute_list_type' => 'ALTER TABLE "mshop_attribute_list_type" ADD "domain" VARCHAR(8) NOT NULL AFTER "siteid"',
 		'mshop_attribute_option_list_type' => 'ALTER TABLE "mshop_attribute_option_list_type" ADD "domain" VARCHAR(8) NOT NULL AFTER "siteid"',
 		'mshop_catalog_list_type' => 'ALTER TABLE "mshop_catalog_list_type" ADD "domain" VARCHAR(8) NOT NULL AFTER "siteid"',
@@ -48,9 +48,9 @@ class MW_Setup_Task_TypesAddDomain extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -59,22 +59,22 @@ class MW_Setup_Task_TypesAddDomain extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Add column \'domain\' to mshop_*_type', 0 ); $this->_status( '' );
+		$this->msg( 'Add column \'domain\' to mshop_*_type', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) && $this->_schema->columnExists( $table, 'domain' ) === false )
+			if( $this->schema->tableExists( $table ) && $this->schema->columnExists( $table, 'domain' ) === false )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'added' );
+				$this->execute( $stmt );
+				$this->status( 'added' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

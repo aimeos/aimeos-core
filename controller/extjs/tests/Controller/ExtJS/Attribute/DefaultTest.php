@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Attribute_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Attribute_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 3, $result['total'] );
@@ -88,12 +88,12 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'attribute.code' => 'test' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => array( $saved['items']->{'attribute.id'}) );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'attribute.id'} );
@@ -111,7 +111,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAbstractGetItemSchema()
 	{
-		$actual = $this->_object->getItemSchema();
+		$actual = $this->object->getItemSchema();
 		$expected = array(
 			'name' => 'Attribute',
 			'properties' => array(
@@ -179,7 +179,7 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testAbstractGetSearchSchema()
 	{
-		$actual = $this->_object->getSearchSchema();
+		$actual = $this->object->getSearchSchema();
 		$expected = array(
 			'criteria' => array(
 				'attribute.id' => array(
@@ -366,13 +366,13 @@ class Controller_ExtJS_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->searchItems( $params );
+		$this->object->searchItems( $params );
 	}
 
 
 	public function testFinish()
 	{
-		$result = $this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+		$result = $this->object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
 
 		$this->assertEquals( array( 'success' => true ), $result );
 	}

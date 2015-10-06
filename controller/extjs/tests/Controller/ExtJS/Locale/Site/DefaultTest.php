@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Locale_Site_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Locale_Site_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -45,7 +45,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -56,7 +56,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testGetTree()
 	{
 		$params = (object) array( 'items' => 'root' );
-		$result = $this->_object->getTree( $params );
+		$result = $this->object->getTree( $params );
 
 		$this->assertEquals( 'Root', $result['items']->{'locale.site.label'} );
 		$this->assertGreaterThanOrEqual( 2, $result['items']->{'children'} );
@@ -68,7 +68,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 		}
 
 		$params = (object) array( 'items' => $ids );
-		$result = $this->_object->getTree( $params );
+		$result = $this->object->getTree( $params );
 
 		$this->assertGreaterThanOrEqual( 2, $result['items'] );
 	}
@@ -84,13 +84,13 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			),
 			'parentid' => null,
 		);
-		$saved = $this->_object->insertItems( $insertParams );
+		$saved = $this->object->insertItems( $insertParams );
 
 		$params = (object) array( 'items' => $saved['items']->{'locale.site.id'} );
-		$this->_object->deleteItems( $params );
+		$this->object->deleteItems( $params );
 
 		try {
-			$this->_object->getTree( $params );
+			$this->object->getTree( $params );
 		} catch( MShop_Exception $me ) {
 			return;
 		} catch( MW_Tree_Exception $mte ) {
@@ -111,7 +111,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			),
 			'parentid' => null,
 		);
-		$inserted = $this->_object->insertItems( $insertParams );
+		$inserted = $this->object->insertItems( $insertParams );
 
 		$saveParams = (object) array(
 			'items' => (object) array(
@@ -121,13 +121,13 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 				'locale.site.status' => 0,
 			),
 		);
-		$saved = $this->_object->saveItems( $saveParams );
+		$saved = $this->object->saveItems( $saveParams );
 
 		$params = (object) array( 'items' => $saved['items']->{'locale.site.id'} );
-		$newroot = $this->_object->getTree( $params );
+		$newroot = $this->object->getTree( $params );
 
 		$params = (object) array( 'items' => $inserted['items']->{'locale.site.id'} );
-		$this->_object->deleteItems( $params );
+		$this->object->deleteItems( $params );
 
 		$this->assertEquals( $inserted['items']->{'locale.site.id'}, $newroot['items']->{'locale.site.id'} );
 		$this->assertEquals( 'testnode2', $newroot['items']->{'locale.site.code'} );
@@ -151,7 +151,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			'refid' => null,
 		);
 
-		$result = $this->_object->moveItems( $moveParams );
+		$result = $this->object->moveItems( $moveParams );
 
 		$this->assertTrue( $result['success'] );
 	}
@@ -167,7 +167,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 		);
 
 		$this->setExpectedException( 'MShop_Locale_Exception' );
-		$this->_object->moveItems( $moveParams );
+		$this->object->moveItems( $moveParams );
 	}
 
 
@@ -222,7 +222,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends PHPUnit_Framework_TestCas
 			),
 		);
 
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertEquals( $expected, $actual );
 	}

@@ -19,8 +19,8 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	extends Controller_Jobs_Abstract
 	implements Controller_Jobs_Interface
 {
-	private $_client;
-	private $_warehouses;
+	private $client;
+	private $warehouses;
 
 
 	/**
@@ -30,7 +30,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product notification e-mails' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Product notification e-mails' );
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Sends e-mails for watched products' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Sends e-mails for watched products' );
 	}
 
 
@@ -53,8 +53,8 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	public function run()
 	{
 		$langIds = array();
-		$context = $this->_getContext();
-		$typeId = $this->_getListTypeItem( 'watch' )->getId();
+		$context = $this->getContext();
+		$typeId = $this->getListTypeItem( 'watch' )->getId();
 
 		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 		$custManager = MShop_Factory::createManager( $context, 'customer' );
@@ -89,7 +89,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 			{
 				$customers = $custManager->searchItems( $search );
 
-				$this->_execute( $context, $customers, $typeId );
+				$this->execute( $context, $customers, $typeId );
 
 				$count = count( $customers );
 				$start += $count;
@@ -107,12 +107,12 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param array $customers List of customer items implementing MShop_Customer_Item_Interface
 	 * @param string $listTypeId Customer list type ID
 	 */
-	protected function _execute( MShop_Context_Item_Interface $context, array $customers, $listTypeId )
+	protected function execute( MShop_Context_Item_Interface $context, array $customers, $listTypeId )
 	{
 		$prodIds = $custIds = array();
-		$whItem = $this->_getWarehouseItem( 'default' );
+		$whItem = $this->getWarehouseItem( 'default' );
 		$listManager = MShop_Factory::createManager( $context, 'customer/list' );
-		$listItems = $this->_getListItems( $context, array_keys( $customers ), $listTypeId );
+		$listItems = $this->getListItems( $context, array_keys( $customers ), $listTypeId );
 
 		foreach( $listItems as $id => $listItem )
 		{
@@ -122,7 +122,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 		}
 
 		$date = date( 'Y-m-d H:i:s' );
-		$products = $this->_getProducts( $context, $prodIds, $whItem->getId() );
+		$products = $this->getProducts( $context, $prodIds, $whItem->getId() );
 
 		foreach( $custIds as $custId => $list )
 		{
@@ -141,11 +141,11 @@ class Controller_Jobs_Customer_Email_Watch_Default
 
 			try
 			{
-				$custProducts = $this->_getListProducts( $custListItems, $products );
+				$custProducts = $this->getListProducts( $custListItems, $products );
 
 				if( !empty( $custProducts ) )
 				{
-					$this->_sendMail( $context, $customers[$custId]->getPaymentAddress(), $custProducts );
+					$this->sendMail( $context, $customers[$custId]->getPaymentAddress(), $custProducts );
 					$listIds += array_keys( $custProducts );
 				}
 			}
@@ -167,15 +167,15 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param MShop_Context_Item_Interface $context Context item object
 	 * @return Client_Html_Interface Product notification e-mail client
 	 */
-	protected function _getClient( MShop_Context_Item_Interface $context )
+	protected function getClient( MShop_Context_Item_Interface $context )
 	{
-		if( !isset( $this->_client ) )
+		if( !isset( $this->client ) )
 		{
-			$templatePaths = $this->_getArcavias()->getCustomPaths( 'client/html' );
-			$this->_client = Client_Html_Email_Watch_Factory::createClient( $context, $templatePaths );
+			$templatePaths = $this->getAimeos()->getCustomPaths( 'client/html' );
+			$this->client = Client_Html_Email_Watch_Factory::createClient( $context, $templatePaths );
 		}
 
-		return $this->_client;
+		return $this->client;
 	}
 
 
@@ -187,7 +187,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param string $listTypeId Customer list type ID
 	 * @return array List of customer list items implementing MShop_Common_Item_List_Interface
 	 */
-	protected function _getListItems( MShop_Context_Item_Interface $context, array $custIds, $listTypeId )
+	protected function getListItems( MShop_Context_Item_Interface $context, array $custIds, $listTypeId )
 	{
 		$listManager = MShop_Factory::createManager( $context, 'customer/list' );
 
@@ -211,10 +211,10 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param array $products List of product items implementing MShop_Product_Item_Interface
 	 * @return array Multi-dimensional associative list of list IDs as key and product / price item maps as values
 	 */
-	protected function _getListProducts( array $listItems, array $products )
+	protected function getListProducts( array $listItems, array $products )
 	{
 		$result = array();
-		$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		$priceManager = MShop_Factory::createManager( $this->getContext(), 'price' );
 
 		foreach( $listItems as $id => $listItem )
 		{
@@ -231,8 +231,8 @@ class Controller_Jobs_Customer_Email_Watch_Default
 					$price = $priceManager->getLowestPrice( $prices, 1, $currencyId );
 
 					if( isset( $config['stock'] ) && $config['stock'] == 1 ||
-							isset( $config['price'] ) && $config['price'] == 1 &&
-							isset( $config['pricevalue'] ) && $config['pricevalue'] > $price->getValue()
+						isset( $config['price'] ) && $config['price'] == 1 &&
+						isset( $config['pricevalue'] ) && $config['pricevalue'] > $price->getValue()
 					) {
 						$result[$id]['item'] = $products[$refId];
 						$result[$id]['price'] = $price;
@@ -253,7 +253,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param array $prodIds List of product IDs
 	 * @param string $whId Unique warehouse ID
 	 */
-	protected function _getProducts( MShop_Context_Item_Interface $context, array $prodIds, $whId )
+	protected function getProducts( MShop_Context_Item_Interface $context, array $prodIds, $whId )
 	{
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch( true );
@@ -284,9 +284,9 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @return MShop_Common_Item_Type_Interface List type item
 	 * @throws Controller_Jobs_Exception If the list type item wasn't found
 	 */
-	protected function _getListTypeItem( $code )
+	protected function getListTypeItem( $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'customer/list/type' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'customer/list/type' );
 
 		$search = $manager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'customer.list.type.code', $code ) );
@@ -307,24 +307,24 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @return MShop_Product_Item_Stock_Warehouse_Interface Warehouse item
 	 * @throws Controller_Jobs_Exception If the warehouse item wasn't found
 	 */
-	protected function _getWarehouseItem( $code )
+	protected function getWarehouseItem( $code )
 	{
-		if( !isset( $this->_warehouses ) )
+		if( !isset( $this->warehouses ) )
 		{
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock/warehouse' );
+			$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
 			$search = $manager->createSearch( true );
 
-			$this->_warehouses = array();
+			$this->warehouses = array();
 			foreach( $manager->searchItems( $search ) as $whItem ) {
-				$this->_warehouses[ $whItem->getCode() ] = $whItem;
+				$this->warehouses[ $whItem->getCode() ] = $whItem;
 			}
 		}
 
-		if( !isset( $this->_warehouses[$code] ) ) {
+		if( !isset( $this->warehouses[$code] ) ) {
 			throw new Controller_Jobs_Exception( sprintf( 'No warehouse "%1$s" found', $code ) );
 		}
 
-		return $this->_warehouses[$code];
+		return $this->warehouses[$code];
 	}
 
 
@@ -335,7 +335,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 	 * @param MShop_Common_Item_Address_Interface $address Payment address of the customer
 	 * @param array $products List of products a notification should be sent for
 	 */
-	protected function _sendMail( MShop_Context_Item_Interface $context,
+	protected function sendMail( MShop_Context_Item_Interface $context,
 		MShop_Common_Item_Address_Interface $address, array $products )
 	{
 		$view = $context->getView();
@@ -351,7 +351,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 		$helper = new MW_View_Helper_Mail_Default( $view, $message );
 		$view->addHelper( 'mail', $helper );
 
-		$client = $this->_getClient( $context );
+		$client = $this->getClient( $context );
 		$client->setView( $view );
 		$client->getHeader();
 		$client->getBody();

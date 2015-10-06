@@ -8,7 +8,7 @@
 
 class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -21,7 +21,7 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework
 	{
 		$context = TestHelper::getContext();
 		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
-		$this->_object = new Controller_Frontend_Service_Decorator_Example( $context, $controller );
+		$this->object = new Controller_Frontend_Service_Decorator_Example( $context, $controller );
 	}
 
 
@@ -33,14 +33,14 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testCall()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$this->_object->checkServiceAttributes( 'delivery', -1, array() );
+		$this->object->checkServiceAttributes( 'delivery', -1, array() );
 	}
 
 }

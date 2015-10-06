@@ -55,7 +55,7 @@ class Client_Html_Checkout_Standard_Order_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/order/default/subparts';
+	private $subPartPath = 'client/html/checkout/standard/order/default/subparts';
 
 	/** client/html/checkout/standard/order/account/name
 	 * Name of the account part used by the checkout standard order client implementation
@@ -78,7 +78,7 @@ class Client_Html_Checkout_Standard_Order_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'account', 'address' );
+	private $subPartNames = array( 'account', 'address' );
 
 
 	/**
@@ -97,10 +97,10 @@ class Client_Html_Checkout_Standard_Order_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->orderBody = $html;
@@ -128,7 +128,7 @@ class Client_Html_Checkout_Standard_Order_Default
 		$tplconf = 'client/html/checkout/standard/order/default/template-body';
 		$default = 'checkout/standard/order-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -148,10 +148,10 @@ class Client_Html_Checkout_Standard_Order_Default
 			return '';
 		}
 
-		$view = $this->_setViewParams( $view, $tags, $expire );
+		$view = $this->setViewParams( $view, $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->orderHeader = $html;
@@ -180,7 +180,7 @@ class Client_Html_Checkout_Standard_Order_Default
 		$tplconf = 'client/html/checkout/standard/order/default/template-header';
 		$default = 'checkout/standard/order-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -267,7 +267,7 @@ class Client_Html_Checkout_Standard_Order_Default
 		 * @see client/html/checkout/standard/order/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/order/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/order/' . $type, $name );
 	}
 
 
@@ -289,7 +289,7 @@ class Client_Html_Checkout_Standard_Order_Default
 				return;
 			}
 
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 
 			$basket = $orderBaseManager->getSession();
@@ -300,7 +300,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderItem = $cntl->store( $basket );
 			$cntl->block( $orderItem );
 
-			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
+			$context->getSession()->set( 'aimeos/orderid', $orderItem->getId() );
 
 			$view->orderItem = $orderItem;
 			$view->orderBasket = $basket;
@@ -323,8 +323,8 @@ class Client_Html_Checkout_Standard_Order_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

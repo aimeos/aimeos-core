@@ -51,9 +51,9 @@ class Client_Html_Catalog_Count_Tree_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/count/tree/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/count/tree/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
 
 	/**
@@ -66,10 +66,10 @@ class Client_Html_Catalog_Count_Tree_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->treeBody = $html;
@@ -97,7 +97,7 @@ class Client_Html_Catalog_Count_Tree_Default
 		$tplconf = 'client/html/catalog/count/tree/default/template-body';
 		$default = 'catalog/count/tree-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -111,10 +111,10 @@ class Client_Html_Catalog_Count_Tree_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->treeHeader = $html;
@@ -143,7 +143,7 @@ class Client_Html_Catalog_Count_Tree_Default
 		$tplconf = 'client/html/catalog/count/tree/default/template-header';
 		$default = 'catalog/count/tree-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -230,7 +230,7 @@ class Client_Html_Catalog_Count_Tree_Default
 		 * @see client/html/catalog/count/tree/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/count/tree/' . $type, $name );
+		return $this->createSubClient( 'catalog/count/tree/' . $type, $name );
 	}
 
 
@@ -239,9 +239,9 @@ class Client_Html_Catalog_Count_Tree_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -253,11 +253,11 @@ class Client_Html_Catalog_Count_Tree_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 
 			/** client/html/catalog/count/tree/aggregate
@@ -275,7 +275,7 @@ class Client_Html_Catalog_Count_Tree_Default
 				/** client/html/catalog/count/limit
 				 * @see client/html/catalog/count/tree/aggregate
 				 */
-				$filter = $this->_getProductListFilter( $view, false );
+				$filter = $this->getProductListFilter( $view, false );
 				$filter->setSlice( 0, $config->get( 'client/html/catalog/count/limit', 10000 ) );
 				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
@@ -283,9 +283,9 @@ class Client_Html_Catalog_Count_Tree_Default
 				$view->treeCountList = $controller->aggregateIndex( $filter, 'catalog.index.catalog.id' );
 			}
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

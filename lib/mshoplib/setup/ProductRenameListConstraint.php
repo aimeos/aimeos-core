@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'fk_msproli_parentid' => '
 			ALTER TABLE "mshop_product_list" DROP FOREIGN KEY "fk_msproli_parentid",
 			ADD CONSTRAINT "fk_msproli_pid" FOREIGN KEY ("parentid")
@@ -46,9 +46,9 @@ class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -57,26 +57,26 @@ class MW_Setup_Task_ProductRenameListConstraint extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( sprintf( 'Renameing product list constraint' ), 0 );
-		$this->_status( '' );
+		$this->msg( sprintf( 'Renameing product list constraint' ), 0 );
+		$this->status( '' );
 
 		$table = 'mshop_product_list';
 
 		foreach( $stmts as $name => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking constraint "%1$s": ', $name ), 1 );
+			$this->msg( sprintf( 'Checking constraint "%1$s": ', $name ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->constraintExists( $table, $name ) === true )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->constraintExists( $table, $name ) === true )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'renamed' );
+				$this->execute( $stmt );
+				$this->status( 'renamed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

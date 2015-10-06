@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHP
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Summary_Option_Terms_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Summary_Option_Terms_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,21 +35,21 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHP
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-summary-option-terms">', $output );
 	}
 
@@ -57,27 +57,27 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHP
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
-		$this->assertEquals( null, $this->_object->getView()->get( 'standardStepActive' ) );
+		$this->object->process();
+		$this->assertEquals( null, $this->object->getView()->get( 'standardStepActive' ) );
 	}
 
 
 	public function testProcessOK()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
 		$param = array(
 			'cs_option_terms' => '1',
@@ -87,14 +87,14 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHP
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 		$this->assertEquals( null, $view->get( 'standardStepActive' ) );
 	}
 
 
 	public function testProcessInvalid()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
 		$param = array(
 			'cs_option_terms' => '1',
@@ -103,7 +103,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends PHP
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 		$this->assertEquals( 'summary', $view->get( 'standardStepActive' ) );
 		$this->assertEquals( true, $view->get( 'termsError' ) );
 	}

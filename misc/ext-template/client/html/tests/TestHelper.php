@@ -8,15 +8,15 @@
 
 class TestHelper
 {
-	private static $_arcavias;
-	private static $_context = array();
+	private static $aimeos;
+	private static $context = array();
 
 
 	public static function bootstrap()
 	{
-		$arcavias = self::_getArcavias();
+		$aimeos = self::getAimeos();
 
-		$includepaths = $arcavias->getIncludePaths();
+		$includepaths = $aimeos->getIncludePaths();
 		$includepaths[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
 	}
@@ -24,11 +24,11 @@ class TestHelper
 
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$_context[$site] ) ) {
-			self::$_context[$site] = self::_createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone self::$_context[$site];
+		return clone self::$context[$site];
 	}
 
 
@@ -67,32 +67,32 @@ class TestHelper
 
 	public static function getHtmlTemplatePaths()
 	{
-		return self::_getArcavias()->getCustomPaths( 'client/html' );
+		return self::getAimeos()->getCustomPaths( 'client/html' );
 	}
 
 
-	private static function _getArcavias()
+	private static function getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$aimeos ) )
 		{
-			require_once 'Arcavias.php';
-			spl_autoload_register( 'Arcavias::autoload' );
+			require_once 'Aimeos.php';
+			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) );
-			self::$_arcavias = new Arcavias( array( $extdir ), false );
+			self::$aimeos = new Aimeos( array( $extdir ), false );
 		}
 
-		return self::$_arcavias;
+		return self::$aimeos;
 	}
 
 
-	private static function _createContext( $site )
+	private static function createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::_getArcavias();
+		$aimeos = self::getAimeos();
 
 
-		$paths = $arcavias->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );

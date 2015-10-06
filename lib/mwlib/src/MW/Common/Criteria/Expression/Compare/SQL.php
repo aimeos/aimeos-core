@@ -16,8 +16,8 @@
  */
 class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expression_Compare_Abstract
 {
-	private static $_operators = array( '==' => '=', '!=' => '<>', '~=' => 'LIKE', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<', '&' => '&', '|' => '|', '=~' => 'LIKE' );
-	private $_conn = null;
+	private static $operators = array( '==' => '=', '!=' => '<>', '~=' => 'LIKE', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<', '&' => '&', '|' => '|', '=~' => 'LIKE' );
+	private $conn = null;
 
 
 	/**
@@ -30,12 +30,12 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 */
 	public function __construct( MW_DB_Connection_Interface $conn, $operator, $name, $value )
 	{
-		if( !isset( self::$_operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		parent::__construct( $operator, $name, $value );
-		$this->_conn = $conn;
+		$this->conn = $conn;
 	}
 
 
@@ -46,7 +46,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$_operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -58,9 +58,9 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function _createTerm( $name, $type, $value )
+	protected function createTerm( $name, $type, $value )
 	{
-		return $name . ' ' . self::$_operators[$this->getOperator()] . ' ' . $this->_escape( $this->getOperator(), $type, $value );
+		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
 	}
 
 
@@ -70,7 +70,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @param string $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	protected function _createNullTerm( $name )
+	protected function createNullTerm( $name )
 	{
 		switch( $this->getOperator() )
 		{
@@ -91,19 +91,19 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @param integer $type Type constant
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	protected function _createListTerm( $name, $type )
+	protected function createListTerm( $name, $type )
 	{
 		switch( $this->getOperator() )
 		{
 			case '==':
-				return $name . ' IN ' . $this->_createValueList( $type, (array) $this->getValue() );
+				return $name . ' IN ' . $this->createValueList( $type, (array) $this->getValue() );
 			case '!=':
-				return $name . ' NOT IN ' . $this->_createValueList( $type, (array) $this->getValue() );
+				return $name . ' NOT IN ' . $this->createValueList( $type, (array) $this->getValue() );
 			default:
 				$terms = array();
 
 				foreach( (array) $this->getValue() as $val ) {
-					$terms[] = $this->_createTerm( $name, $type, $val );
+					$terms[] = $this->createTerm( $name, $type, $val );
 				}
 
 				return '(' . implode( ' OR ', $terms ) . ')';
@@ -118,7 +118,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @param string[] $values Value list for the variable or column name
 	 * @return string String of comma separated values in parenthesis
 	 */
-	protected function _createValueList( $type, array $values )
+	protected function createValueList( $type, array $values )
 	{
 		if( empty( $values ) ) {
 			return '(NULL)';
@@ -127,7 +127,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 		$operator = $this->getOperator();
 
 		foreach( $values as $key => $value ) {
-			$values[$key] = $this->_escape( $operator, $type, $value );
+			$values[$key] = $this->escape( $operator, $type, $value );
 		}
 
 		return '(' . implode(',', $values) . ')';
@@ -142,9 +142,9 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
-	protected function _escape( $operator, $type, $value )
+	protected function escape( $operator, $type, $value )
 	{
-		$value = $this->_translateValue( $this->getName(), $value );
+		$value = $this->translateValue( $this->getName(), $value );
 
 		switch( $type )
 		{
@@ -156,13 +156,13 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 				$value = (float) $value; break;
 			case MW_DB_Statement_Abstract::PARAM_STR:
 				if( $operator == '~=' ) {
-					$value = '\'%' . $this->_conn->escape( $value ) . '%\''; break;
+					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
 				if( $operator == '=~' ) {
-					$value = '\'' . $this->_conn->escape( $value ) . '%\''; break;
+					$value = '\'' . $this->conn->escape( $value ) . '%\''; break;
 				}
 			default:
-				$value = '\'' . $this->_conn->escape( $value ) . '\'';
+				$value = '\'' . $this->conn->escape( $value ) . '\'';
 		}
 
 		return $value;
@@ -176,7 +176,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * @return integer Internal parameter type
 	 * @throws MW_Common_Exception If an error occurs
 	 */
-	protected function _getParamType( &$item )
+	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{

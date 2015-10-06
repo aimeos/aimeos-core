@@ -18,7 +18,7 @@ class Controller_ExtJS_Admin_Log_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -30,7 +30,7 @@ class Controller_ExtJS_Admin_Log_Default
 	{
 		parent::__construct( $context, 'Admin_Log' );
 
-		$this->_manager = MAdmin_Log_Manager_Factory::createManager( $context );
+		$this->manager = MAdmin_Log_Manager_Factory::createManager( $context );
 	}
 
 
@@ -62,8 +62,19 @@ class Controller_ExtJS_Admin_Log_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		return $this->_manager;
+		return $this->manager;
+	}
+
+
+	/**
+	 * Returns the prefix for searching items
+	 *
+	 * @return string MShop search key prefix
+	 */
+	protected function getPrefix()
+	{
+		return 'log';
 	}
 }

@@ -36,20 +36,20 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert product data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Processing product demo data', 0 );
+		$this->msg( 'Processing product demo data', 0 );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
@@ -59,11 +59,11 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		foreach( $products as $item )
 		{
-			$this->_removeItems( $item->getId(), 'product/list', 'product', 'attribute' );
-			$this->_removeItems( $item->getId(), 'product/list', 'product', 'media' );
-			$this->_removeItems( $item->getId(), 'product/list', 'product', 'price' );
-			$this->_removeItems( $item->getId(), 'product/list', 'product', 'text' );
-			$this->_removeListItems( $item->getId(), 'product/list', 'product' );
+			$this->removeItems( $item->getId(), 'product/list', 'product', 'attribute' );
+			$this->removeItems( $item->getId(), 'product/list', 'product', 'media' );
+			$this->removeItems( $item->getId(), 'product/list', 'product', 'price' );
+			$this->removeItems( $item->getId(), 'product/list', 'product', 'text' );
+			$this->removeListItems( $item->getId(), 'product/list', 'product' );
 		}
 
 		$manager->deleteItems( array_keys( $products ) );
@@ -71,12 +71,12 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
 		{
-			$this->_addDemoData();
-			$this->_status( 'added' );
+			$this->addDemoData();
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'removed' );
+			$this->status( 'removed' );
 		}
 	}
 
@@ -86,7 +86,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	 *
 	 * @throws MShop_Exception If the file isn't found
 	 */
-	protected function _addDemoData()
+	protected function addDemoData()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'demo-product.php';
@@ -95,13 +95,13 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		foreach( $data as $entry )
 		{
 			$item = $manager->createItem();
-			$item->setTypeId( $this->_getTypeId( 'product/type', 'product', $entry['type'] ) );
+			$item->setTypeId( $this->getTypeId( 'product/type', 'product', $entry['type'] ) );
 			$item->setCode( $entry['code'] );
 			$item->setLabel( $entry['label'] );
 			$item->setSupplierCode( $entry['supplier'] );
@@ -111,8 +111,8 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 			$manager->saveItem( $item );
 
-			$this->_addPropertyItems( $entry, $item->getId() );
-			$this->_addRefItems( $entry, $item->getId() );
+			$this->addPropertyItems( $entry, $item->getId() );
+			$this->addRefItems( $entry, $item->getId() );
 		}
 	}
 
@@ -123,11 +123,11 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
 	 * @param string $id Parent ID for inserting the items
 	 */
-	protected function _addPropertyItems( array $entry, $id )
+	protected function addPropertyItems( array $entry, $id )
 	{
 		if( isset( $entry['property'] ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$manager = MShop_Factory::createManager( $context, 'product/property' );
 
 			foreach( (array) $entry['property'] as $values )
@@ -135,7 +135,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 				$item = $manager->createItem();
 				$item->setParentId( $id );
 				$item->setLanguageId( $values['languageid'] );
-				$item->setTypeId( $this->_getTypeId( 'product/property/type', 'product/property', $values['type'] ) );
+				$item->setTypeId( $this->getTypeId( 'product/property/type', 'product/property', $values['type'] ) );
 				$item->setLanguageId( $values['languageid'] );
 				$item->setValue( $values['value'] );
 
@@ -151,30 +151,30 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
 	 * @param string $id Parent ID for inserting the items
 	 */
-	protected function _addRefItems( array $entry, $id )
+	protected function addRefItems( array $entry, $id )
 	{
 		if( isset( $entry['stock'] ) ) {
-			$this->_addProductStock( $id, $entry['stock'] );
+			$this->addProductStock( $id, $entry['stock'] );
 		}
 
 		if( isset( $entry['attribute'] ) ) {
-			$this->_addAttributes( $id, $entry['attribute'], 'product' );
+			$this->addAttributes( $id, $entry['attribute'], 'product' );
 		}
 
 		if( isset( $entry['media'] ) ) {
-			$this->_addMedia( $id, $entry['media'], 'product' );
+			$this->addMedia( $id, $entry['media'], 'product' );
 		}
 
 		if( isset( $entry['price'] ) ) {
-			$this->_addPrices( $id, $entry['price'], 'product' );
+			$this->addPrices( $id, $entry['price'], 'product' );
 		}
 
 		if( isset( $entry['text'] ) ) {
-			$this->_addTexts( $id, $entry['text'], 'product' );
+			$this->addTexts( $id, $entry['text'], 'product' );
 		}
 
 		if( isset( $entry['product'] ) ) {
-			$this->_addProducts( $id, $entry['product'], 'product' );
+			$this->addProducts( $id, $entry['product'], 'product' );
 		}
 	}
 }

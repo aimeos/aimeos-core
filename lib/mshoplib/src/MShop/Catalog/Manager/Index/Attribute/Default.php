@@ -17,7 +17,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	extends MShop_Catalog_Manager_Index_DBBase
 	implements MShop_Catalog_Manager_Index_Attribute_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.index.attribute.id' => array(
 			'code'=>'catalog.index.attribute.id',
 			'internalcode'=>'mcatinat."attrid"',
@@ -59,7 +59,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		),
 	);
 
-	private $_subManagers;
+	private $subManagers;
 
 
 	/**
@@ -73,9 +73,9 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.attribute.code'], 'mcatinat."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.attributecount'], 'mcatinat_cnt."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.attributeaggregate'], 'mcatinat_agg."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attribute.code'], 'mcatinat."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributecount'], 'mcatinat_cnt."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributeaggregate'], 'mcatinat_agg."siteid"', $site );
 	}
 
 
@@ -88,7 +88,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
-		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
 
 
@@ -101,7 +101,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	{
 		parent::cleanup( $siteids );
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
 	}
 
 
@@ -137,7 +137,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 * @see mshop/catalog/manager/index/attribute/default/item/insert
 		 * @see mshop/catalog/manager/index/attribute/default/item/search
 		 */
-		$this->_doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/attribute/default/cleanup' );
+		$this->doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/attribute/default/cleanup' );
 	}
 
 
@@ -171,7 +171,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 * @see mshop/catalog/manager/index/attribute/default/item/insert
 		 * @see mshop/catalog/manager/index/attribute/default/item/search
 		 */
-		$this->_doDeleteItems( $ids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
+		$this->doDeleteItems( $ids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
 	}
 
 
@@ -204,7 +204,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 */
 		$path = 'classes/catalog/manager/index/attribute/submanagers';
 
-		$list += $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 
 		return $list;
 	}
@@ -328,7 +328,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 * @see mshop/catalog/manager/index/attribute/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/attribute/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/attribute/' . $manager, $name );
 	}
 
 
@@ -358,7 +358,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 * @see mshop/catalog/manager/index/attribute/default/item/search
 		 * @see mshop/catalog/manager/index/attribute/default/item/aggregate
 		 */
-		$this->_doOptimize( 'mshop/catalog/manager/index/attribute/default/optimize' );
+		$this->doOptimize( 'mshop/catalog/manager/index/attribute/default/optimize' );
 	}
 
 
@@ -374,14 +374,14 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -421,7 +421,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				 * @see mshop/catalog/manager/index/attribute/default/item/search
 				 * @see mshop/catalog/manager/index/attribute/default/item/count
 				 */
-				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/insert' );
+				$stmt = $this->getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/insert' );
 
 				foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
 				{
@@ -458,7 +458,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			throw $e;
 		}
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
 	}
@@ -570,7 +570,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		 */
 		$cfgPathCount = 'mshop/catalog/manager/index/attribute/default/item/count';
 
-		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 
@@ -579,11 +579,11 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 *
 	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
-	protected function _getSubManagers()
+	protected function getSubManagers()
 	{
-		if( $this->_subManagers === null )
+		if( $this->subManagers === null )
 		{
-			$this->_subManagers = array();
+			$this->subManagers = array();
 
 			/** mshop/catalog/manager/index/attribute/submanagers
 			 * A list of sub-manager names used for indexing associated items to attributes
@@ -605,13 +605,13 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			 */
 			$path = 'classes/catalog/manager/index/attribute/submanagers';
 
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$this->_subManagers[$domain] = $this->getSubManager( $domain );
+			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+				$this->subManagers[$domain] = $this->getSubManager( $domain );
 			}
 
-			return $this->_subManagers;
+			return $this->subManagers;
 		}
 
-		return $this->_subManagers;
+		return $this->subManagers;
 	}
 }

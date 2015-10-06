@@ -75,9 +75,9 @@ class Client_Html_Basket_Mini_Factory
 		$iface = 'Client_Html_Interface';
 		$classname = 'Client_Html_Basket_Mini_' . $name;
 
-		$client = self::_createClient( $context, $classname, $iface, $templatePaths );
+		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 
-		return self::_addClientDecorators( $context, $client, $templatePaths, 'basket/mini' );
+		return self::addClientDecorators( $context, $client, $templatePaths, 'basket/mini' );
 	}
 
 }

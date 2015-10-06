@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'ALTER TABLE "mshop_catalog" ADD "config" TEXT NOT NULL AFTER "label"';
+	private $mysql = 'ALTER TABLE "mshop_catalog" ADD "config" TEXT NOT NULL AFTER "label"';
 
 
 	/**
@@ -39,9 +39,9 @@ class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -49,19 +49,19 @@ class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 	 *
 	 * @param string $stmt SQL statement to execute for adding columns
 	 */
-	protected function _process( $stmt )
+	protected function process( $stmt )
 	{
-		$this->_msg( 'Adding config column to mshop_catalog', 0 );
+		$this->msg( 'Adding config column to mshop_catalog', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_catalog' ) === true
-			&& $this->_schema->columnExists( 'mshop_catalog', 'config' ) === false )
+		if( $this->schema->tableExists( 'mshop_catalog' ) === true
+			&& $this->schema->columnExists( 'mshop_catalog', 'config' ) === false )
 		{
-			$this->_execute( $stmt );
-			$this->_status( 'added' );
+			$this->execute( $stmt );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

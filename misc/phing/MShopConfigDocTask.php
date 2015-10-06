@@ -13,13 +13,13 @@ require_once 'phing/Task.php';
  */
 class MShopConfigDocTask extends Task
 {
-	private $_file;
-	private $_optfile;
-	private $_outfile;
-	private $_filesets = array();
-	private $_keyprefix = '';
-	private $_wikiprefix = '';
-	private $_keyparts = 1;
+	private $file;
+	private $optfile;
+	private $outfile;
+	private $filesets = array();
+	private $keyprefix = '';
+	private $wikiprefix = '';
+	private $keyparts = 1;
 
 
 	/**
@@ -29,9 +29,9 @@ class MShopConfigDocTask extends Task
 	 */
 	public function createFileSet()
 	{
-		$num = array_push( $this->_filesets, new FileSet() );
+		$num = array_push( $this->filesets, new FileSet() );
 
-		return $this->_filesets[$num - 1];
+		return $this->filesets[$num - 1];
 	}
 
 
@@ -50,39 +50,39 @@ class MShopConfigDocTask extends Task
 	{
 		$options = array();
 
-		if( !isset( $this->_file ) && count( $this->_filesets ) == 0 ) {
+		if( !isset( $this->file ) && count( $this->filesets ) == 0 ) {
 			throw new BuildException( "Missing either a nested fileset or attribute 'file' set" );
 		}
 
-		if( isset( $this->_optfile ) && ( $string = file_get_contents( $this->_optfile ) ) !== false
+		if( isset( $this->optfile ) && ( $string = file_get_contents( $this->optfile ) ) !== false
 			&& ( $options = unserialize( $string ) ) === false ) {
-			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $this->_optfile ) );
+			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $this->optfile ) );
 		}
 
-		if( $this->_file instanceof PhingFile )
+		if( $this->file instanceof PhingFile )
 		{
-			$this->_extract( $this->_file->getPath(), $options );
+			$this->extract( $this->file->getPath(), $options );
 		}
 		else // process filesets
 		{
 			$project = $this->getProject();
 
-			foreach( $this->_filesets as $fs )
+			foreach( $this->filesets as $fs )
 			{
 				$files = $fs->getDirectoryScanner( $project )->getIncludedFiles();
 				$dir = $fs->getDir( $this->project )->getPath();
 
 				foreach( $files as $file ) {
-					$this->_extract( $dir . DIRECTORY_SEPARATOR . $file, $options );
+					$this->extract( $dir . DIRECTORY_SEPARATOR . $file, $options );
 				}
 			}
 		}
 
-		$len = strlen( $this->_keyprefix );
+		$len = strlen( $this->keyprefix );
 
 		foreach( $options as $key => $values )
 		{
-			if( strncmp( $key, $this->_keyprefix, $len ) !== 0 ) {
+			if( strncmp( $key, $this->keyprefix, $len ) !== 0 ) {
 				unset( $options[$key] );
 			} else if( strpos( $key, 'unknown' ) !== false ) {
 				unset( $options[$key] );
@@ -92,9 +92,9 @@ class MShopConfigDocTask extends Task
 		}
 
 		ksort( $options );
-		$this->log( 'Number of config options for ' . $this->_keyprefix . ': ' . count( $options ) );
+		$this->log( 'Number of config options for ' . $this->keyprefix . ': ' . count( $options ) );
 
-		$this->_createWikiPages( $options );
+		$this->createWikiPages( $options );
 	}
 
 
@@ -105,7 +105,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setFile( PhingFile $file )
 	{
-		$this->_file = $file;
+		$this->file = $file;
 	}
 
 
@@ -116,7 +116,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setOptfile( $file )
 	{
-		$this->_optfile = $file;
+		$this->optfile = $file;
 	}
 
 
@@ -127,7 +127,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setOutfile( $file )
 	{
-		$this->_outfile = $file;
+		$this->outfile = $file;
 	}
 
 
@@ -140,7 +140,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setKeyPrefix( $prefix )
 	{
-		$this->_keyprefix = $prefix;
+		$this->keyprefix = $prefix;
 	}
 
 
@@ -151,7 +151,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setKeyParts( $keyparts )
 	{
-		$this->_keyparts = (int) $keyparts;
+		$this->keyparts = (int) $keyparts;
 	}
 
 
@@ -162,7 +162,7 @@ class MShopConfigDocTask extends Task
 	 */
 	public function setWikiPrefix( $prefix )
 	{
-		$this->_wikiprefix = $prefix;
+		$this->wikiprefix = $prefix;
 	}
 
 
@@ -172,18 +172,18 @@ class MShopConfigDocTask extends Task
 	 * @param array $options Associative list of the keys and an array of
 	 * 	"short", "desc", "param", "since" and "see" entries
 	 */
-	protected function _createWikiPages( array $options )
+	protected function createWikiPages( array $options )
 	{
-		if( ( $fh = fopen( $this->_outfile, 'w' ) ) === false ) {
-			throw new BuildException( sprintf( 'Unable to open file "%1$s"', $this->_outfile ) );
+		if( ( $fh = fopen( $this->outfile, 'w' ) ) === false ) {
+			throw new BuildException( sprintf( 'Unable to open file "%1$s"', $this->outfile ) );
 		}
 
 		$date = date( 'c' );
-		$wikiprefix = $this->_wikiprefix;
-		$prefixlen = strlen( $this->_keyprefix ) + 1;
+		$wikiprefix = $this->wikiprefix;
+		$prefixlen = strlen( $this->keyprefix ) + 1;
 		$matches = $sections = array();
 
-		$this->_writeFile( $fh, '<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"
+		$this->writeFile( $fh, '<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4"
  xml:lang="en"><siteinfo><namespaces><namespace key="0" case="first-letter" /></namespaces></siteinfo>' . "\n" );
@@ -192,12 +192,12 @@ class MShopConfigDocTask extends Task
 		{
 			$short = $type = $since = $deprecated = '';
 			$parts = explode( '/', substr( $key, $prefixlen ) );
-			$first = implode( '/', array_slice( $parts, 0, $this->_keyparts ) );
+			$first = implode( '/', array_slice( $parts, 0, $this->keyparts ) );
 
-			if( $this->_keyparts == 0 ) {
+			if( $this->keyparts == 0 ) {
 				$sections[$parts[0]][] = $key;
-			} else if( count( $parts ) > $this->_keyparts + 1 ) {
-				$sections[$first][$parts[$this->_keyparts]][] = $key;
+			} else if( count( $parts ) > $this->keyparts + 1 ) {
+				$sections[$first][$parts[$this->keyparts]][] = $key;
 			} else {
 				$sections[$first]['global'][] = $key;
 			}
@@ -272,11 +272,11 @@ class MShopConfigDocTask extends Task
 
 			$data .= "</text><model>wikitext</model><format>text/x-wiki</format></revision>\n</page>\n";
 
-			$this->_writeFile( $fh, $data );
+			$this->writeFile( $fh, $data );
 		}
 
-		$this->_writeFile( $fh, $this->_createWikiPagesList( $options, $sections ) );
-		$this->_writeFile( $fh, '</mediawiki>' );
+		$this->writeFile( $fh, $this->createWikiPagesList( $options, $sections ) );
+		$this->writeFile( $fh, '</mediawiki>' );
 	}
 
 
@@ -288,12 +288,12 @@ class MShopConfigDocTask extends Task
 	 * @param array $sections Two dimensional associative list of section names and sub-names
 	 * @return string Mediawiki page as XML for import
 	 */
-	protected function _createWikiPagesList( array $options, array $sections )
+	protected function createWikiPagesList( array $options, array $sections )
 	{
 		$data = '';
 		$date = date( 'c' );
-		$keyprefix = $this->_keyprefix;
-		$wikiprefix = $this->_wikiprefix;
+		$keyprefix = $this->keyprefix;
+		$wikiprefix = $this->wikiprefix;
 
 		foreach( $sections as $name => $list )
 		{
@@ -344,7 +344,7 @@ class MShopConfigDocTask extends Task
 	 * @param string $filename Absolute name of the file
 	 * @param array &$options Associative list of extracted configuration options
 	 */
-	protected function _extract( $filename, array &$options )
+	protected function extract( $filename, array &$options )
 	{
 		$matches = $result = array();
 
@@ -407,10 +407,10 @@ class MShopConfigDocTask extends Task
 	}
 
 
-	protected function _writeFile( $handle, $data )
+	protected function writeFile( $handle, $data )
 	{
 		if( fwrite( $handle, $data ) === false ) {
-			throw new BuildException( sprintf( 'Unable to write to file "%1$s"', $this->_outfile ) );
+			throw new BuildException( sprintf( 'Unable to write to file "%1$s"', $this->outfile ) );
 		}
 	}
 }

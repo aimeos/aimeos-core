@@ -63,7 +63,7 @@ abstract class MW_Logger_Abstract
 	 * @param integer $level Log constant
 	 * @throws MW_Logger_Exception If log constant is unknown
 	 */
-	protected function _checkLogLevel( $level )
+	protected function checkLogLevel( $level )
 	{
 		switch( $level )
 		{

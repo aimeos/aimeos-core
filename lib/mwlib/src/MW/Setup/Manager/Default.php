@@ -16,12 +16,12 @@
  */
 class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 {
-	private $_conn;
-	private $_schema;
-	private $_additional;
-	private $_tasks = array();
-	private $_tasksDone = array();
-	private $_dependencies = array();
+	private $conn;
+	private $schema;
+	private $additional;
+	private $tasks = array();
+	private $tasksDone = array();
+	private $dependencies = array();
 
 
 	/**
@@ -41,12 +41,12 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 			}
 		}
 
-		$this->_conn = $conn;
-		$this->_schema = $this->_createSchema( $conn, $dbconfig['adapter'], $dbconfig['database'] );
-		$this->_additional = $additional;
+		$this->conn = $conn;
+		$this->schema = $this->createSchema( $conn, $dbconfig['adapter'], $dbconfig['database'] );
+		$this->additional = $additional;
 
 		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
-		$this->_setupTasks( $taskpath );
+		$this->setupTasks( $taskpath );
 	}
 
 
@@ -57,8 +57,8 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 	 */
 	public function run( $dbtype )
 	{
-		foreach( $this->_tasks as $taskname => $task ) {
-			$this->_runTasks( $dbtype, array( $taskname ) );
+		foreach( $this->tasks as $taskname => $task ) {
+			$this->runTasks( $dbtype, array( $taskname ) );
 		}
 	}
 
@@ -70,11 +70,11 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
 	 */
-	protected function _runTasks( $dbtype, array $tasknames, array $stack = array() )
+	protected function runTasks( $dbtype, array $tasknames, array $stack = array() )
 	{
 		foreach( $tasknames as $taskname )
 		{
-			if( in_array( $taskname, $this->_tasksDone ) ) { continue; }
+			if( in_array( $taskname, $this->tasksDone ) ) { continue; }
 
 			if( in_array( $taskname, $stack ) ) {
 				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
@@ -83,15 +83,15 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 
 			$stack[] = $taskname;
 
-			if( isset( $this->_dependencies[$taskname] ) ) {
-				$this->_runTasks( $dbtype, (array) $this->_dependencies[$taskname], $stack );
+			if( isset( $this->dependencies[$taskname] ) ) {
+				$this->runTasks( $dbtype, (array) $this->dependencies[$taskname], $stack );
 			}
 
-			if( isset( $this->_tasks[$taskname] ) ) {
-				$this->_tasks[$taskname]->run( $dbtype );
+			if( isset( $this->tasks[$taskname] ) ) {
+				$this->tasks[$taskname]->run( $dbtype );
 			}
 
-			$this->_tasksDone[] = $taskname;
+			$this->tasksDone[] = $taskname;
 		}
 	}
 
@@ -101,18 +101,18 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 	 *
 	 * @param array $paths List of paths containing setup task classes
 	 */
-	protected function _setupTasks( array $paths )
+	protected function setupTasks( array $paths )
 	{
-		$this->_tasks = $this->_createTasks( $paths, $this->_schema, $this->_conn, $this->_additional );
+		$this->tasks = $this->createTasks( $paths, $this->schema, $this->conn, $this->additional );
 
-		foreach( $this->_tasks as $name => $task )
+		foreach( $this->tasks as $name => $task )
 		{
 			foreach( (array) $task->getPreDependencies() as $taskname ) {
-				$this->_dependencies[$name][] = $taskname;
+				$this->dependencies[$name][] = $taskname;
 			}
 
 			foreach( (array) $task->getPostDependencies() as $taskname ) {
-				$this->_dependencies[$taskname][] = $name;
+				$this->dependencies[$taskname][] = $name;
 			}
 		}
 	}

@@ -8,50 +8,50 @@
 
 class TestHelper
 {
-	private static $_arcavias;
-	private static $_context;
+	private static $aimeos;
+	private static $context;
 
 
 	public static function bootstrap()
 	{
-		self::getArcavias();
+		self::getAimeos();
 		MShop_Factory::setCache( false );
 	}
 
 
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$_context[$site] ) ) {
-			self::$_context[$site] = self::_createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone self::$_context[$site];
+		return clone self::$context[$site];
 	}
 
 
-	public static function getArcavias()
+	public static function getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
 
-			self::$_arcavias = new Arcavias( array(), false );
+			self::$aimeos = new Aimeos( array(), false );
 		}
 
-		return self::$_arcavias;
+		return self::$aimeos;
 	}
 
 
 	/**
 	 * @param string $site
 	 */
-	private static function _createContext( $site )
+	private static function createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::getArcavias();
+		$aimeos = self::getAimeos();
 
 
-		$paths = $arcavias->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 

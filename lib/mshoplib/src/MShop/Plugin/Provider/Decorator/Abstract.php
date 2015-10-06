@@ -17,7 +17,7 @@
 abstract class MShop_Plugin_Provider_Decorator_Abstract
 	extends MShop_Plugin_Provider_Abstract
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -32,7 +32,7 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	{
 		parent::__construct( $context, $item );
 
-		$this->_object = $provider;
+		$this->object = $provider;
 	}
 
 
@@ -43,7 +43,7 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$this->_object->register( $p );
+		$this->object->register( $p );
 	}
 
 
@@ -57,7 +57,7 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		return $this->_object->update( $order, $action, $value );
+		return $this->object->update( $order, $action, $value );
 	}
 
 
@@ -66,8 +66,8 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	 *
 	 * @return MShop_Plugin_Provider_Interface Provider or decorator object
 	 */
-	protected function _getProvider()
+	protected function getProvider()
 	{
-		return $this->_object;
+		return $this->object;
 	}
 }

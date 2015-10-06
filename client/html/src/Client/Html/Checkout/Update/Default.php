@@ -51,8 +51,8 @@ class Client_Html_Checkout_Update_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/update/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/checkout/update/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,32 +65,32 @@ class Client_Html_Checkout_Update_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->updateBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -124,7 +124,7 @@ class Client_Html_Checkout_Update_Default
 		$tplconf = 'client/html/checkout/update/default/template-body';
 		$default = 'checkout/update/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -140,10 +140,10 @@ class Client_Html_Checkout_Update_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->updateHeader = $html;
@@ -172,11 +172,11 @@ class Client_Html_Checkout_Update_Default
 			$tplconf = 'client/html/checkout/update/default/template-header';
 			$default = 'checkout/update/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -264,7 +264,7 @@ class Client_Html_Checkout_Update_Default
 		 * @see client/html/checkout/update/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/update/' . $type, $name );
+		return $this->createSubClient( 'checkout/update/' . $type, $name );
 	}
 
 
@@ -276,17 +276,17 @@ class Client_Html_Checkout_Update_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		try
 		{
-			$provider = $this->_getServiceProvider( $view->param( 'code' ) );
+			$provider = $this->getServiceProvider( $view->param( 'code' ) );
 
 			$config = array( 'absoluteUri' => true, 'namespace' => false );
 			$params = array( 'code' => $view->param( 'code' ), 'orderid' => $view->param( 'orderid' ) );
 			$urls = array(
-				'payment.url-success' => $this->_getUrlConfirm( $view, $params, $config ),
-				'payment.url-update' => $this->_getUrlUpdate( $view, $params, $config ),
+				'payment.url-success' => $this->getUrlConfirm( $view, $params, $config ),
+				'payment.url-update' => $this->getUrlUpdate( $view, $params, $config ),
 			);
 			$urls['payment.url-self'] = $urls['payment.url-update'];
 			$provider->injectGlobalConfigBE( $urls );
@@ -351,9 +351,9 @@ class Client_Html_Checkout_Update_Default
 	 * @throws Client_Html_Exception If no service item could be found
 	 * @return MShop_Service_Provider_Interface Service provider object
 	 */
-	protected function _getServiceProvider( $code )
+	protected function getServiceProvider( $code )
 	{
-		$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+		$serviceManager = MShop_Factory::createManager( $this->getContext(), 'service' );
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', $code ) );
@@ -375,9 +375,9 @@ class Client_Html_Checkout_Update_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -389,7 +389,7 @@ class Client_Html_Checkout_Update_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlConfirm( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlConfirm( MW_View_Interface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$cntl = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
@@ -408,7 +408,7 @@ class Client_Html_Checkout_Update_Default
 	 * @param array $config Default URL configuration
 	 * @return string URL string
 	 */
-	protected function _getUrlUpdate( MW_View_Interface $view, array $params, array $config )
+	protected function getUrlUpdate( MW_View_Interface $view, array $params, array $config )
 	{
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$cntl = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );

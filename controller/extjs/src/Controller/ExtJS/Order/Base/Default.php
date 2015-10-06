@@ -19,7 +19,7 @@ class Controller_ExtJS_Order_Base_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -40,10 +40,10 @@ class Controller_ExtJS_Order_Base_Default
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
+		$this->checkParams( $params, array( 'site', 'items' ) );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
@@ -51,15 +51,15 @@ class Controller_ExtJS_Order_Base_Default
 			$langid = ( isset( $entry->{'order.base.languageid'} ) ? $entry->{'order.base.languageid'} : null );
 			$currencyid = ( isset( $entry->{'order.base.currencyid'} ) ? $entry->{'order.base.currencyid'} : null );
 
-			$this->_setLocale( $params->site, $langid, $currencyid );
+			$this->setLocale( $params->site, $langid, $currencyid );
 
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -68,13 +68,13 @@ class Controller_ExtJS_Order_Base_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'order/base' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -83,7 +83,7 @@ class Controller_ExtJS_Order_Base_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'order.base';
 	}

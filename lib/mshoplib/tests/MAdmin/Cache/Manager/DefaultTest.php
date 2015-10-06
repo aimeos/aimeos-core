@@ -7,8 +7,8 @@
 
 class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,8 +19,8 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new MAdmin_Cache_Manager_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new MAdmin_Cache_Manager_Default( $this->context );
 	}
 
 
@@ -32,25 +32,25 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Cache_Item_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MAdmin_Cache_Item_Interface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attr ) {
+		foreach( $this->object->getSearchAttributes() as $attr ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
 		}
 	}
@@ -59,17 +59,17 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MAdmin_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
+		$siteid = $this->context->getLocale()->getSiteId();
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		$this->assertEquals( 1, count( $results ) );
 
@@ -85,8 +85,8 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
-		$item = $this->_object->getItem( 'unittest' );
+		$siteid = $this->context->getLocale()->getSiteId();
+		$item = $this->object->getItem( 'unittest' );
 
 		$this->assertEquals( 'unittest', $item->getId() );
 		$this->assertEquals( $siteid, $item->getSiteId() );
@@ -96,18 +96,18 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setId( 'unittest2' );
 		$item->setValue( 'test2' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setValue( 'test3' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $item->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$this->assertEquals( 'unittest2', $item->getId() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -123,6 +123,6 @@ class MAdmin_Cache_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTags(), $itemUpd->getTags() );
 
 		$this->setExpectedException( 'MAdmin_Cache_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 }

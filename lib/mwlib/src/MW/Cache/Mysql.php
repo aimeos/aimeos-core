@@ -18,10 +18,10 @@ class MW_Cache_Mysql
 	extends MW_Cache_DB
 	implements MW_Cache_Interface
 {
-	private $_sql;
-	private $_dbm;
-	private $_dbname;
-	private $_siteid;
+	private $sql;
+	private $dbm;
+	private $dbname;
+	private $siteid;
 
 
 	/**
@@ -68,10 +68,10 @@ class MW_Cache_Mysql
 	{
 		parent::__construct( $config, $dbm );
 
-		$this->_dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
-		$this->_siteid = ( isset( $config['siteid'] ) ? $config['siteid'] : null );
-		$this->_sql = $config['sql'];
-		$this->_dbm = $dbm;
+		$this->dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
+		$this->siteid = ( isset( $config['siteid'] ) ? $config['siteid'] : null );
+		$this->sql = $config['sql'];
+		$this->dbm = $dbm;
 	}
 
 
@@ -92,19 +92,19 @@ class MW_Cache_Mysql
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
 		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$conn->begin();
-			$stmt = $conn->create( $this->_sql['set'], $type );
+			$stmt = $conn->create( $this->sql['set'], $type );
 
 			foreach( $pairs as $key => $value )
 			{
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -117,7 +117,7 @@ class MW_Cache_Mysql
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTagPart->bind( 1, $key );
-						$stmtTagPart->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmtTagPart->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 						$stmtTagPart->bind( 3, $name );
 
 						$parts[] = (string) $stmtTagPart;
@@ -125,19 +125,19 @@ class MW_Cache_Mysql
 
 					if( !empty ( $parts ) )
 					{
-						$stmtTag = $conn->create( str_replace( ':tuples', join( ',', $parts ), $this->_sql['settag'] ) );
+						$stmtTag = $conn->create( str_replace( ':tuples', join( ',', $parts ), $this->sql['settag'] ) );
 						$stmtTag->execute()->finish();
 					}
 				}
 			}
 
 			$conn->commit();
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
 			$conn->rollback();
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}

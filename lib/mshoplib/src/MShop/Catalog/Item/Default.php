@@ -18,8 +18,8 @@ class MShop_Catalog_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Catalog_Item_Interface
 {
-	private $_node;
-	private $_children;
+	private $node;
+	private $children;
 
 
 	/**
@@ -37,8 +37,8 @@ class MShop_Catalog_Item_Default
 
 		MW_Common_Abstract::checkClassList( 'MShop_Catalog_Item_Interface', $children );
 
-		$this->_children = $children;
-		$this->_node = $node;
+		$this->children = $children;
+		$this->node = $node;
 	}
 
 
@@ -47,7 +47,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function __clone()
 	{
-		$this->_node = clone $this->_node;
+		$this->node = clone $this->node;
 	}
 
 
@@ -58,7 +58,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getId()
 	{
-		return $this->_node->getId();
+		return $this->node->getId();
 	}
 
 
@@ -71,7 +71,7 @@ class MShop_Catalog_Item_Default
 	{
 		if( $id === $this->getId() ) { return; }
 
-		$this->_node->setId( $id );
+		$this->node->setId( $id );
 	}
 
 
@@ -82,7 +82,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getSiteId()
 	{
-		return $this->_node->__get( 'siteid' );
+		return $this->node->__get( 'siteid' );
 	}
 
 
@@ -93,7 +93,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getLabel()
 	{
-		return $this->_node->getLabel();
+		return $this->node->getLabel();
 	}
 
 
@@ -106,7 +106,7 @@ class MShop_Catalog_Item_Default
 	{
 		if( $name == $this->getLabel() ) { return; }
 
-		$this->_node->setLabel( $name );
+		$this->node->setLabel( $name );
 	}
 
 
@@ -117,7 +117,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getConfig()
 	{
-		return $this->_node->__isset( 'config' ) && is_array( $this->_node->config ) ? $this->_node->__get( 'config' ) : array();
+		return $this->node->__isset( 'config' ) && is_array( $this->node->config ) ? $this->node->__get( 'config' ) : array();
 	}
 
 
@@ -128,7 +128,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setConfig( array $options )
 	{
-		$this->_node->__set( 'config', $options );
+		$this->node->__set( 'config', $options );
 	}
 
 
@@ -139,7 +139,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getCode()
 	{
-		return $this->_node->getCode();
+		return $this->node->getCode();
 	}
 
 
@@ -150,9 +150,9 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setCode( $name )
 	{
-		$this->_checkCode( $name );
+		$this->checkCode( $name );
 
-		$this->_node->setCode( $name );
+		$this->node->setCode( $name );
 	}
 
 
@@ -163,7 +163,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getStatus()
 	{
-		return $this->_node->getStatus();
+		return $this->node->getStatus();
 	}
 
 	/**
@@ -175,7 +175,7 @@ class MShop_Catalog_Item_Default
 	{
 		if( $status === $this->getStatus() ) { return; }
 
-		$this->_node->setStatus( $status );
+		$this->node->setStatus( $status );
 	}
 
 	/**
@@ -185,7 +185,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getTimeModified()
 	{
-		return $this->_node->__get( 'mtime' );
+		return $this->node->__get( 'mtime' );
 	}
 
 
@@ -196,7 +196,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getTimeCreated()
 	{
-		return $this->_node->__get( 'ctime' );
+		return $this->node->__get( 'ctime' );
 	}
 
 
@@ -207,7 +207,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getEditor()
 	{
-		return $this->_node->__get( 'editor' );
+		return $this->node->__get( 'editor' );
 	}
 
 
@@ -226,10 +226,10 @@ class MShop_Catalog_Item_Default
 		{
 			switch( $key )
 			{
-				case 'catalog.id': $this->_node->setId( $value ); break;
-				case 'catalog.code': $this->_node->setCode( $value ); break;
-				case 'catalog.label': $this->_node->setLabel( $value ); break;
-				case 'catalog.status': $this->_node->setStatus( $value ); break;
+				case 'catalog.id': $this->node->setId( $value ); break;
+				case 'catalog.code': $this->node->setCode( $value ); break;
+				case 'catalog.label': $this->node->setLabel( $value ); break;
+				case 'catalog.status': $this->node->setStatus( $value ); break;
 				case 'catalog.config': $this->setConfig( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -247,15 +247,15 @@ class MShop_Catalog_Item_Default
 	public function toArray()
 	{
 		return array(
-			'catalog.id' => $this->_node->getId(),
-			'catalog.code' => $this->_node->getCode(),
-			'catalog.label' => $this->_node->getLabel(),
-			'catalog.status' => $this->_node->getStatus(),
+			'catalog.id' => $this->node->getId(),
+			'catalog.code' => $this->node->getCode(),
+			'catalog.label' => $this->node->getLabel(),
+			'catalog.status' => $this->node->getStatus(),
 			'catalog.config' => $this->getConfig(),
-			'catalog.siteid' => $this->_node->__get( 'siteid' ),
-			'catalog.ctime' => $this->_node->__get( 'ctime' ),
-			'catalog.mtime' => $this->_node->__get( 'mtime' ),
-			'catalog.editor' => $this->_node->__get( 'editor' ),
+			'catalog.siteid' => $this->node->__get( 'siteid' ),
+			'catalog.ctime' => $this->node->__get( 'ctime' ),
+			'catalog.mtime' => $this->node->__get( 'mtime' ),
+			'catalog.editor' => $this->node->__get( 'editor' ),
 			'catalog.hasChildren' => $this->hasChildren()
 		);
 	}
@@ -268,7 +268,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function isModified()
 	{
-		return $this->_node->isModified();
+		return $this->node->isModified();
 	}
 
 	/**
@@ -279,8 +279,8 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getChild( $index )
 	{
-		if( isset( $this->_children[$index] ) ) {
-			return $this->_children[$index];
+		if( isset( $this->children[$index] ) ) {
+			return $this->children[$index];
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
@@ -293,7 +293,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getChildren()
 	{
-		return $this->_children;
+		return $this->children;
 	}
 
 	/**
@@ -303,11 +303,11 @@ class MShop_Catalog_Item_Default
 	 */
 	public function hasChildren()
 	{
-		if( count( $this->_children ) > 0 ) {
+		if( count( $this->children ) > 0 ) {
 			return true;
 		}
 
-		return $this->_node->hasChildren();
+		return $this->node->hasChildren();
 	}
 
 	/**
@@ -318,7 +318,7 @@ class MShop_Catalog_Item_Default
 	public function addChild( MShop_Catalog_Item_Interface $item )
 	{
 		// don't set the modified flag as it's only for the values
-		$this->_children[] = $item;
+		$this->children[] = $item;
 	}
 
 
@@ -329,6 +329,6 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getNode()
 	{
-		return $this->_node;
+		return $this->node;
 	}
 }

@@ -11,9 +11,10 @@
  */
 class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCase
 {
-	private $_order;
-	private $_object;
-	private $_product;
+	private $order;
+	private $object;
+	private $plugin;
+	private $product;
 
 
 	/**
@@ -27,11 +28,11 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		$context = TestHelper::getContext();
 
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
-		$plugin = $pluginManager->createItem();
-		$plugin->setTypeId( 2 );
-		$plugin->setProvider( 'Shipping' );
-		$plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
-		$plugin->setStatus( '1' );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setTypeId( 2 );
+		$this->plugin->setProvider( 'Shipping' );
+		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
+		$this->plugin->setStatus( '1' );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -58,9 +59,9 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 		}
 		$price->setValue( 10.00 );
 
-		$this->_product = $orderBaseProductManager->createItem();
-		$this->_product->copyFrom( $products['CNE'] );
-		$this->_product->setPrice( $price );
+		$this->product = $orderBaseProductManager->createItem();
+		$this->product->copyFrom( $products['CNE'] );
+		$this->product->setPrice( $price );
 
 		$product2 = $orderBaseProductManager->createItem();
 		$product2->copyFrom( $products['CNC'] );
@@ -84,15 +85,16 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 			throw new Exception( 'No order base item found' );
 		}
 
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 
-		$this->_order->setService( $delivery, 'delivery' );
-		$this->_order->addProduct( $this->_product );
-		$this->_order->addProduct( $product2 );
-		$this->_order->addProduct( $product3 );
+		$this->order->setService( $delivery, 'delivery' );
+		$this->order->addProduct( $this->product );
+		$this->order->addProduct( $product2 );
+		$this->order->addProduct( $product3 );
 
-		$this->_object = new MShop_Plugin_Provider_Order_Shipping( $context, $plugin );
+		$this->object = new MShop_Plugin_Provider_Order_Shipping( $context, $this->plugin );
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -102,31 +104,25 @@ class MShop_Plugin_Provider_Order_ShippingTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_product );
+		unset( $this->object, $this->order, $this->plugin, $this->product );
 	}
 
-	/**
-	 * @todo Implement testRegister().
-	 */
+
 	public function testRegister()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$object = new MShop_Plugin_Provider_Order_Shipping( TestHelper::getContext(), $this->plugin );
+		$object->register( $this->order );
 	}
 
-	/**
-	 * @todo Implement testUpdate().
-	 */
+
 	public function testUpdate()
 	{
-		$this->assertEquals( 5.00, $this->_order->getPrice()->getCosts() );
-		$this->_object->update( $this->_order, 'addProduct' );
+		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
+		$this->object->update( $this->order, 'addProduct' );
 
-		$this->_order->addProduct( $this->_product );
-		$this->_object->update( $this->_order, 'addProduct' );
+		$this->order->addProduct( $this->product );
+		$this->object->update( $this->order, 'addProduct' );
 
-		$this->assertEquals( 0.00, $this->_order->getPrice()->getCosts() );
+		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts() );
 	}
 }

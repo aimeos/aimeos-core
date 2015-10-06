@@ -11,8 +11,8 @@
  */
 class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_object;
+	private $context;
+	private $object;
 
 
 	/**
@@ -23,8 +23,8 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Base_Coupon_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new MShop_Order_Manager_Base_Coupon_Default( $this->context );
 	}
 
 
@@ -36,15 +36,15 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testAggregate()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core:unittest' ) );
-		$result = $this->_object->aggregate( $search, 'order.base.coupon.code' );
+		$result = $this->object->aggregate( $search, 'order.base.coupon.code' );
 	
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( '5678', $result );
@@ -54,13 +54,13 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -68,23 +68,23 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Coupon_Interface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
 	}
 
 
 	public function testSearchItem()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
+		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.coupon.id', null );
@@ -97,7 +97,7 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 		$expr[] = $search->compare( '>=', 'order.base.coupon.editor', '' );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -107,7 +107,7 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertGreaterThanOrEqual( 4, $total );
@@ -116,7 +116,7 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testGetItem()
 	{
-		$obj = $this->_object;
+		$obj = $this->object;
 		$search = $obj->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR' ) );
@@ -132,24 +132,24 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '>=', 'order.base.coupon.productid', '1' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $results ) ) ) {
 			throw new Exception( 'empty results' );
 		}
 
 		$item->setId( null );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitUpdCode' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $item->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$context = TestHelper::getContext();
 
@@ -175,13 +175,13 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends PHPUnit_Framework_Test
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

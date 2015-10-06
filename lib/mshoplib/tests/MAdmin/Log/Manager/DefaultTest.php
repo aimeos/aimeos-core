@@ -7,7 +7,7 @@
 
 class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -18,7 +18,7 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MAdmin_Log_Manager_Default( TestHelper::getContext() );
+		$this->object = new MAdmin_Log_Manager_Default( TestHelper::getContext() );
 	}
 
 
@@ -30,25 +30,25 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Log_Item_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MAdmin_Log_Item_Interface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attr ) {
+		foreach( $this->object->getSearchAttributes() as $attr ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
 		}
 	}
@@ -57,13 +57,13 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MAdmin_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'log.id', null );
@@ -76,7 +76,7 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -89,33 +89,33 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$criteria = $this->_object->createSearch();
+		$criteria = $this->object->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'log.priority', 1 ) );
-		$result = $this->_object->searchItems( $criteria );
+		$result = $this->object->searchItems( $criteria );
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setMessage( 'unit test message' );
 		$item->setRequest( 'unit test rqst' );
-		$this->_object->saveItem( $item );
+		$this->object->saveItem( $item );
 
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setRequest( 'unit test request' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $item->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $item->getTimestamp() === null );
@@ -134,6 +134,6 @@ class MAdmin_Log_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
 
 		$this->setExpectedException( 'MAdmin_Log_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 }

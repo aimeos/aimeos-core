@@ -37,24 +37,24 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds product test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding product property test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding product property test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'productproperty.php';
@@ -63,9 +63,9 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$this->_addProductPropertyData( $testdata );
+		$this->addProductPropertyData( $testdata );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 	/**
@@ -74,17 +74,17 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _addProductPropertyData( array $testdata )
+	private function addProductPropertyData( array $testdata )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
 		$productPropertyManager = $productManager->getSubManager( 'property', 'Default' );
 		$productPropertyTypeManager = $productPropertyManager->getSubManager( 'type', 'Default' );
 
 		$typeIds = array();
 		$type = $productPropertyTypeManager->createItem();
-		$prodIds = $this->_getProductIds( $productManager );
+		$prodIds = $this->getProductIds( $productManager );
 		
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['product/property/type'] as $key => $dataset )
 		{
@@ -114,7 +114,7 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
 			$productPropertyManager->saveItem( $prodProperty, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 	
 
@@ -124,7 +124,7 @@ class MW_Setup_Task_ProductAddPropertyTestData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Manager_Interface $productManager Product manager object
 	 * @return array Associative list of product codes as key (e.g. product/CNC) and IDs as value
 	 */
-	protected function _getProductIds( MShop_Common_Manager_Interface $productManager )
+	protected function getProductIds( MShop_Common_Manager_Interface $productManager )
 	{
 		$entry = array();
 		$search = $productManager->createSearch();

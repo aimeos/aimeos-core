@@ -18,11 +18,11 @@ class MW_Cache_DB
 	extends MW_Cache_Abstract
 	implements MW_Cache_Interface
 {
-	private $_sql;
-	private $_dbm;
-	private $_dbname;
-	private $_siteid;
-	private $_searchConfig;
+	private $sql;
+	private $dbm;
+	private $dbname;
+	private $siteid;
+	private $searchConfig;
 
 
 	/**
@@ -75,14 +75,14 @@ class MW_Cache_DB
 			throw new MW_Cache_Exception( 'SQL config is missing' );
 		}
 
-		$this->_checkSearchConfig( $config['search'] );
-		$this->_checkSqlConfig( $config['sql'] );
+		$this->checkSearchConfig( $config['search'] );
+		$this->checkSqlConfig( $config['sql'] );
 
-		$this->_dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
-		$this->_siteid = ( isset( $config['siteid'] ) ? $config['siteid'] : null );
-		$this->_searchConfig = $config['search'];
-		$this->_sql = $config['sql'];
-		$this->_dbm = $dbm;
+		$this->dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
+		$this->siteid = ( isset( $config['siteid'] ) ? $config['siteid'] : null );
+		$this->searchConfig = $config['search'];
+		$this->sql = $config['sql'];
+		$this->dbm = $dbm;
 	}
 
 
@@ -95,27 +95,27 @@ class MW_Cache_DB
 	 */
 	public function cleanup()
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$date = date( 'Y-m-d H:i:00' );
 			$search = new MW_Common_Criteria_SQL( $conn );
-			$search->setConditions( $search->compare( '<', $this->_searchConfig['cache.expire']['code'], $date ) );
+			$search->setConditions( $search->compare( '<', $this->searchConfig['cache.expire']['code'], $date ) );
 
-			$types = $this->_getSearchTypes( $this->_searchConfig );
-			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionString( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_sql['delete'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -132,26 +132,26 @@ class MW_Cache_DB
 	 */
 	public function deleteList( array $keys )
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$search = new MW_Common_Criteria_SQL( $conn );
-			$search->setConditions( $search->compare( '==', $this->_searchConfig['cache.id']['code'], $keys ) );
+			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.id']['code'], $keys ) );
 
-			$types = $this->_getSearchTypes( $this->_searchConfig );
-			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionString( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_sql['delete'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -168,27 +168,27 @@ class MW_Cache_DB
 	 */
 	public function deleteByTags( array $tags )
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$search = new MW_Common_Criteria_SQL( $conn );
-			$search->setConditions( $search->compare( '==', $this->_searchConfig['cache.tag.name']['code'], $tags ) );
+			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.tag.name']['code'], $tags ) );
 
-			$types = $this->_getSearchTypes( $this->_searchConfig );
-			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionString( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_sql['deletebytag'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -203,19 +203,19 @@ class MW_Cache_DB
 	 */
 	public function flush()
 	{
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', '1', $this->_sql['delete'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', '1', $this->sql['delete'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -235,7 +235,7 @@ class MW_Cache_DB
 	public function getList( array $keys )
 	{
 		$list = array();
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
@@ -250,23 +250,23 @@ class MW_Cache_DB
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$types = $this->_getSearchTypes( $this->_searchConfig );
-			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionString( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_sql['get'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
 				$list[ $row['id'] ] = $row['value'];
 			}
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 
@@ -288,7 +288,7 @@ class MW_Cache_DB
 	public function getListByTags( array $tags )
 	{
 		$list = array();
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
@@ -303,24 +303,24 @@ class MW_Cache_DB
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$types = $this->_getSearchTypes( $this->_searchConfig );
-			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionString( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->_sql['getbytag'] ) );
-			$stmt->bind( 1, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['getbytag'] ) );
+			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
 				$list[ $row['id'] ] = $row['value'];
 			}
 
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 
@@ -348,20 +348,20 @@ class MW_Cache_DB
 		$this->deleteList( array_keys( $pairs ) );
 
 		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
-		$conn = $this->_dbm->acquire( $this->_dbname );
+		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$conn->begin();
-			$stmt = $conn->create( $this->_sql['set'], $type );
-			$stmtTag = $conn->create( $this->_sql['settag'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmt = $conn->create( $this->sql['set'], $type );
+			$stmtTag = $conn->create( $this->sql['settag'], MW_DB_Connection_Abstract::TYPE_PREP );
 
 			foreach( $pairs as $key => $value )
 			{
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -371,7 +371,7 @@ class MW_Cache_DB
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTag->bind( 1, $key );
-						$stmtTag->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmtTag->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
 						$stmtTag->bind( 3, $name );
 						$stmtTag->execute()->finish();
 					}
@@ -379,12 +379,12 @@ class MW_Cache_DB
 			}
 
 			$conn->commit();
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( Exception $e )
 		{
 			$conn->rollback();
-			$this->_dbm->release( $conn, $this->_dbname );
+			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
 	}
@@ -396,7 +396,7 @@ class MW_Cache_DB
 	 * @param array $config Associative list of search configurations
 	 * @throws MW_Tree_Exception If one ore more search configurations are missing
 	 */
-	protected function _checkSearchConfig( array $config )
+	protected function checkSearchConfig( array $config )
 	{
 		$required = array( 'cache.id', 'cache.siteid', 'cache.value', 'cache.expire', 'cache.tag.name' );
 
@@ -421,7 +421,7 @@ class MW_Cache_DB
 	 * @param array $config Associative list of SQL statements
 	 * @throws MW_Tree_Exception If one ore more SQL statements are missing
 	 */
-	protected function _checkSqlConfig( array $config )
+	protected function checkSqlConfig( array $config )
 	{
 		$required = array( 'delete', 'deletebytag', 'get', 'getbytag', 'set', 'settag' );
 

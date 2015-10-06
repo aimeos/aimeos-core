@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'code' => 'ALTER TABLE "mshop_customer" ADD "code" VARCHAR(32) NOT NULL AFTER "label"',
 		'salutation' => 'ALTER TABLE "mshop_customer" ADD "salutation" varchar(8) NOT NULL AFTER "code"',
 		'company' => 'ALTER TABLE "mshop_customer" ADD "company" varchar(100) NOT NULL AFTER "salutation"',
@@ -62,9 +62,9 @@ class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -73,23 +73,23 @@ class MW_Setup_Task_CustomerAddColumns extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 
 		$table = 'mshop_customer';
-		$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
+		$this->msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->status( '' );
 
 		foreach( $stmts as $column=>$stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s": ', $table, $column ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s" for column "%2$s": ', $table, $column ), 1 );
 
-			if( $this->_schema->tableExists( $table )
-				&& $this->_schema->columnExists( $table, $column ) === false )
+			if( $this->schema->tableExists( $table )
+				&& $this->schema->columnExists( $table, $column ) === false )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'added' );
+				$this->execute( $stmt );
+				$this->status( 'added' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

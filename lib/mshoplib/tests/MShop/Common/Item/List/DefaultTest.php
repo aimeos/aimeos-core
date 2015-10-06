@@ -11,7 +11,7 @@
  */
 class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -37,7 +37,7 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Common_Item_List_Default( 'common.list.', $values );
+		$this->object = new MShop_Common_Item_List_Default( 'common.list.', $values );
 	}
 
 
@@ -46,174 +46,174 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetId()
 	{
-		$this->assertEquals( 8, $this->_object->getId() );
+		$this->assertEquals( 8, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( null );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertNull( $this->_object->getId() );
+		$this->object->setId( null );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertNull( $this->object->getId() );
 	}
 
 	public function testGetParentId()
 	{
-		$this->assertEquals( 2, $this->_object->getParentId() );
+		$this->assertEquals( 2, $this->object->getParentId() );
 	}
 
 	public function testSetParentId()
 	{
-		$this->_object->setParentId( 5 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 5, $this->_object->getParentId() );
+		$this->object->setParentId( 5 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 5, $this->object->getParentId() );
 	}
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'testDomain', $this->_object->getDomain() );
+		$this->assertEquals( 'testDomain', $this->object->getDomain() );
 	}
 
 	public function testSetDomain()
 	{
-		$this->_object->setDomain( 'newDom' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'newDom', $this->_object->getDomain() );
+		$this->object->setDomain( 'newDom' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'newDom', $this->object->getDomain() );
 	}
 
 	public function testGetRefId()
 	{
-		$this->assertEquals( 'unitId', $this->_object->getRefId() );
+		$this->assertEquals( 'unitId', $this->object->getRefId() );
 	}
 
 	public function testSetRefId()
 	{
-		$this->_object->setRefId( 'unitReference' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 'unitReference', $this->_object->getRefId() );
+		$this->object->setRefId( 'unitReference' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'unitReference', $this->object->getRefId() );
 	}
 
 	public function testGetDateStart()
 	{
-		$this->assertEquals( '2005-01-01 00:00:00', $this->_object->getDateStart() );
+		$this->assertEquals( '2005-01-01 00:00:00', $this->object->getDateStart() );
 	}
 
 	public function testSetDateStart()
 	{
-		$this->_object->setDateStart( '2002-01-01 00:00:00' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '2002-01-01 00:00:00', $this->_object->getDateStart() );
+		$this->object->setDateStart( '2002-01-01 00:00:00' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '2002-01-01 00:00:00', $this->object->getDateStart() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setDateStart( '2008-34-12' );
+		$this->object->setDateStart( '2008-34-12' );
 	}
 
 	public function testGetDateEnd()
 	{
-		$this->assertEquals( '2010-12-31 00:00:00', $this->_object->getDateEnd() );
+		$this->assertEquals( '2010-12-31 00:00:00', $this->object->getDateEnd() );
 	}
 
 	public function testSetDateEnd()
 	{
-		$this->_object->setDateEnd( '4400-12-31 00:00:00' );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( '4400-12-31 00:00:00', $this->_object->getDateEnd() );
+		$this->object->setDateEnd( '4400-12-31 00:00:00' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( '4400-12-31 00:00:00', $this->object->getDateEnd() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setDateEnd( '2008-34-12' );
+		$this->object->setDateEnd( '2008-34-12' );
 	}
 
 	public function testSetPosition()
 	{
-		$this->_object->setPosition( 1234 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 1234, $this->_object->getPosition() );
+		$this->object->setPosition( 1234 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 1234, $this->object->getPosition() );
 	}
 
 	public function testGetPosition()
 	{
-		$this->assertEquals( 7, $this->_object->getPosition() );
+		$this->assertEquals( 7, $this->object->getPosition() );
 	}
 
 	public function testSetStatus()
 	{
-		$this->_object->setStatus( 0 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 0, $this->_object->getStatus() );
+		$this->object->setStatus( 0 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 0, $this->object->getStatus() );
 	}
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 1, $this->_object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( 8, $this->_object->getTypeId() );
+		$this->assertEquals( 8, $this->object->getTypeId() );
 	}
 
 	public function testSetTypeId()
 	{
-		$this->_object->setTypeId( 18 );
-		$this->assertTrue( $this->_object->isModified() );
-		$this->assertEquals( 18, $this->_object->getTypeId() );
+		$this->object->setTypeId( 18 );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 18, $this->object->getTypeId() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->_object->getSiteId() );
+		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 	public function testGetConfig()
 	{
-		$this->assertEquals( array( 'cnt'=>'40' ), $this->_object->getConfig() );
+		$this->assertEquals( array( 'cnt'=>'40' ), $this->object->getConfig() );
 	}
 
 
 	public function testSetConfig()
 	{
-		$this->_object->setConfig( array( 'new value'=>'20.00' ) );
-		$this->assertEquals( array( 'new value'=>'20.00' ), $this->_object->getConfig() );
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->object->setConfig( array( 'new value'=>'20.00' ) );
+		$this->assertEquals( array( 'new value'=>'20.00' ), $this->object->getConfig() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 	public function testGetRefItem()
 	{
-		$this->assertEquals( null, $this->_object->getRefItem() );
+		$this->assertEquals( null, $this->object->getRefItem() );
 	}
 
 	public function testSetRefItem()
 	{
 		$obj = new MShop_Common_Item_List_Default( 'reftest', array() );
 
-		$this->_object->setRefItem( $obj );
-		$this->assertFalse( $this->_object->isModified() );
-		$this->assertSame( $obj, $this->_object->getRefItem() );
+		$this->object->setRefItem( $obj );
+		$this->assertFalse( $this->object->isModified() );
+		$this->assertSame( $obj, $this->object->getRefItem() );
 	}
 
 
@@ -267,6 +267,6 @@ class MShop_Common_Item_List_DefaultTest extends PHPUnit_Framework_TestCase
 			'common.list.editor' => 'unitTestUser',
 		);
 
-		$this->assertEquals( $expected, $this->_object->toArray() );
+		$this->assertEquals( $expected, $this->object->toArray() );
 	}
 }

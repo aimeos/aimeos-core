@@ -17,7 +17,7 @@
 abstract class MShop_Plugin_Manager_Abstract
 	extends MShop_Common_Manager_Abstract
 {
-	protected function _addPluginDecorators( MShop_Plugin_Item_Interface $serviceItem,
+	protected function addPluginDecorators( MShop_Plugin_Item_Interface $serviceItem,
 		MShop_Plugin_Provider_Interface $provider, $names )
 	{
 		$iface = 'MShop_Plugin_Provider_Decorator_Interface';
@@ -35,7 +35,7 @@ abstract class MShop_Plugin_Manager_Abstract
 				throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->_getContext(), $serviceItem, $provider );
+			$provider = new $classname( $this->getContext(), $serviceItem, $provider );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );

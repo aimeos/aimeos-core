@@ -11,7 +11,7 @@
  */
 class MW_View_Helper_Parameter_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -24,7 +24,7 @@ class MW_View_Helper_Parameter_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$view = new MW_View_Default();
 		$param = array( 'page' => 'test' );
-		$this->_object = new MW_View_Helper_Parameter_Default( $view, $param );
+		$this->object = new MW_View_Helper_Parameter_Default( $view, $param );
 	}
 
 
@@ -36,21 +36,21 @@ class MW_View_Helper_Parameter_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testTransform()
 	{
-		$this->assertEquals( 'test', $this->_object->transform( 'page', 'none' ) );
-		$this->assertEquals( 'none', $this->_object->transform( 'missing', 'none' ) );
+		$this->assertEquals( 'test', $this->object->transform( 'page', 'none' ) );
+		$this->assertEquals( 'none', $this->object->transform( 'missing', 'none' ) );
 	}
 
 
 	public function testTransformNoDefault()
 	{
-		$this->assertEquals( 'test', $this->_object->transform( 'page' ) );
-		$this->assertEquals( null, $this->_object->transform( 'missing' ) );
+		$this->assertEquals( 'test', $this->object->transform( 'page' ) );
+		$this->assertEquals( null, $this->object->transform( 'missing' ) );
 	}
 
 }

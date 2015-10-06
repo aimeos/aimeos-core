@@ -47,21 +47,21 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert product data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product suggestion performance data', 0 );
+		$this->msg( 'Adding product suggestion performance data', 0 );
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->getContext() );
 		$productListManager = $productManager->getSubManager( 'list' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
@@ -88,7 +88,7 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 		$listItem->setDomain( 'product' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = 0;
 
@@ -124,22 +124,22 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_additional;
+		return $this->additional;
 	}
 
 
-	protected function _txBegin()
+	protected function txBegin()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -147,9 +147,9 @@ class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _txCommit()
+	protected function txCommit()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$dbm = $this->additional->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

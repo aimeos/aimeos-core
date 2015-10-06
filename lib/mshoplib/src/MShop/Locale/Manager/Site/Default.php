@@ -18,9 +18,9 @@ class MShop_Locale_Manager_Site_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Locale_Manager_Site_Interface
 {
-	private $_cache = array();
+	private $cache = array();
 
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'locale.site.id' => array(
 			'code' => 'locale.site.id',
 			'internalcode' => 'mlocsi."id"',
@@ -122,7 +122,7 @@ class MShop_Locale_Manager_Site_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-locale' );
+		$this->setResourceName( 'db-locale' );
 	}
 
 
@@ -134,7 +134,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		return $this->createItemBase();
 	}
 
 
@@ -158,10 +158,10 @@ class MShop_Locale_Manager_Site_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -193,7 +193,7 @@ class MShop_Locale_Manager_Site_Default
 			 */
 			$path = 'mshop/locale/manager/site/default/item/update';
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
@@ -223,7 +223,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		/** mshop/locale/manager/site/default/item/delete
@@ -251,7 +251,7 @@ class MShop_Locale_Manager_Site_Default
 		 * @see mshop/locale/manager/site/default/item/newid
 		 */
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems( $ids, $config->get( $path, $path ), false );
+		$this->deleteItemsBase( $ids, $config->get( $path, $path ), false );
 
 		/** mshop/locale/manager/site/cleanup/shop/domains
 		 * List of madmin domains names whose items referring to the same site should be deleted as well
@@ -321,7 +321,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'locale.site.id', $id, $ref );
+		return $this->getItemBase( 'locale.site.id', $id, $ref );
 	}
 
 
@@ -352,7 +352,7 @@ class MShop_Locale_Manager_Site_Default
 		 */
 		$path = 'classes/locale/manager/site/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -474,7 +474,7 @@ class MShop_Locale_Manager_Site_Default
 		 * @see mshop/locale/manager/site/decorators/global
 		 */
 
-		return $this->_getSubManager( 'locale', 'site/' . $manager, $name );
+		return $this->getSubManagerBase( 'locale', 'site/' . $manager, $name );
 	}
 
 
@@ -489,17 +489,17 @@ class MShop_Locale_Manager_Site_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
 			$attributes = $this->getSearchAttributes();
-			$types = $this->_getSearchTypes( $attributes );
-			$translations = $this->_getSearchTranslations( $attributes );
+			$types = $this->getSearchTypes( $attributes );
+			$translations = $this->getSearchTranslations( $attributes );
 
 			$find = array( ':cond', ':order', ':start', ':size' );
 			$replace = array(
@@ -563,7 +563,7 @@ class MShop_Locale_Manager_Site_Default
 			$path = 'mshop/locale/manager/site/default/item/search';
 
 			$sql = $context->getConfig()->get( $path, $path );
-			$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 			try
 			{
@@ -574,10 +574,10 @@ class MShop_Locale_Manager_Site_Default
 					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+						$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -635,8 +635,8 @@ class MShop_Locale_Manager_Site_Default
 				 */
 				$path = 'mshop/locale/manager/site/default/item/count';
 
-				$sql = $this->_getContext()->getConfig()->get( $path, $path );
-				$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+				$sql = $this->getContext()->getConfig()->get( $path, $path );
+				$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 				$row = $results->fetch();
 				$results->finish();
@@ -669,7 +669,7 @@ class MShop_Locale_Manager_Site_Default
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			$search = $this->_createSearch( 'locale.site' );
+			$search = $this->createSearchBase( 'locale.site' );
 		} else {
 			$search = parent::createSearch();
 		}
@@ -715,11 +715,11 @@ class MShop_Locale_Manager_Site_Default
 				return $this->getItem( $id, $ref );
 			}
 
-			if( !isset( $this->_cache[$id] ) ) {
-				$this->_cache[$id] = $this->getItem( $id, $ref );
+			if( !isset( $this->cache[$id] ) ) {
+				$this->cache[$id] = $this->getItem( $id, $ref );
 			}
 
-			return $this->_cache[$id];
+			return $this->cache[$id];
 		}
 
 		$criteria = $this->createSearch();
@@ -732,7 +732,7 @@ class MShop_Locale_Manager_Site_Default
 			throw new MShop_Locale_Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 
-		$this->_cache[$item->getId()] = $item;
+		$this->cache[$item->getId()] = $item;
 
 		return $item;
 	}
@@ -747,10 +747,10 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function insertItem( MShop_Locale_Item_Site_Interface $item, $parentId = null, $refId = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -784,7 +784,7 @@ class MShop_Locale_Manager_Site_Default
 			 */
 			$path = 'mshop/locale/manager/site/default/item/insert';
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $item->getLabel() );
@@ -828,7 +828,7 @@ class MShop_Locale_Manager_Site_Default
 			 * @see mshop/locale/manager/site/default/item/count
 			 */
 			$path = 'mshop/locale/manager/default/item/newid';
-			$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+			$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 
 			$dbm->release( $conn, $dbname );
 		}
@@ -861,10 +861,10 @@ class MShop_Locale_Manager_Site_Default
 	 * @param $sql SQL statement
 	 * @return MW_DB_Result_Interface Search result object
 	 */
-	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
+	protected function getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create( $sql );
-		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		$results = $statement->execute();
 
@@ -877,7 +877,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @return MShop_Locale_Item_Site_Interface
 	 */
-	protected function _createItem( array $data = array( ) )
+	protected function createItemBase( array $data = array( ) )
 	{
 		return new MShop_Locale_Item_Site_Default( $data );
 	}
@@ -888,8 +888,8 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @return array List of search config arrays
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

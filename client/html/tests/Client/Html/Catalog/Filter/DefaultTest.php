@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Filter_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Filter_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,7 +32,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -40,7 +40,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -52,7 +52,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="aimeos catalog-filter">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -62,7 +62,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'tree', 'Default' );
+		$client = $this->object->getSubClient( 'tree', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
@@ -70,14 +70,14 @@ class Client_Html_Catalog_Filter_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 }

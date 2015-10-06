@@ -50,7 +50,7 @@ class Client_Html_Basket_Related_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/basket/related/default/subparts';
+	private $subPartPath = 'client/html/basket/related/default/subparts';
 
 	/** client/html/basket/related/bought/name
 	 * Name of the bought together part used by the basket related client implementation
@@ -62,8 +62,8 @@ class Client_Html_Basket_Related_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'bought' );
-	private $_cache;
+	private $subPartNames = array( 'bought' );
+	private $cache;
 
 
 	/**
@@ -76,32 +76,32 @@ class Client_Html_Basket_Related_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->relatedBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->relatedErrorList = $view->get( 'relatedErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->relatedErrorList = $view->get( 'relatedErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->relatedErrorList = $view->get( 'relatedErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -135,7 +135,7 @@ class Client_Html_Basket_Related_Default
 		$tplconf = 'client/html/basket/related/default/template-body';
 		$default = 'basket/related/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -151,17 +151,17 @@ class Client_Html_Basket_Related_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->relatedHeader = $html;
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return '';
 		}
 
@@ -189,7 +189,7 @@ class Client_Html_Basket_Related_Default
 		$tplconf = 'client/html/basket/related/default/template-header';
 		$default = 'basket/related/header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -276,7 +276,7 @@ class Client_Html_Basket_Related_Default
 		 * @see client/html/basket/related/decorators/global
 		 */
 
-		return $this->_createSubClient( 'basket/related/' . $type, $name );
+		return $this->createSubClient( 'basket/related/' . $type, $name );
 	}
 
 
@@ -285,9 +285,9 @@ class Client_Html_Basket_Related_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -299,17 +299,17 @@ class Client_Html_Basket_Related_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 
 			$view->relatedBasket = Controller_Frontend_Factory::createController( $context, 'basket' )->get();
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

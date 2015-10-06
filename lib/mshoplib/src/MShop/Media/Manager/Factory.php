@@ -75,7 +75,7 @@ class MShop_Media_Manager_Factory
 		$iface = 'MShop_Media_Manager_Interface';
 		$classname = 'MShop_Media_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/media/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the media manager
@@ -151,7 +151,7 @@ class MShop_Media_Manager_Factory
 		 * @see mshop/media/manager/decorators/excludes
 		 * @see mshop/media/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'media' );
+		return self::addManagerDecorators( $context, $manager, 'media' );
 	}
 
 }

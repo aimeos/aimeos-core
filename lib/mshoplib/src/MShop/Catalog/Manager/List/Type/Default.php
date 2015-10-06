@@ -17,7 +17,7 @@ class MShop_Catalog_Manager_List_Type_Default
 	extends MShop_Common_Manager_Type_Abstract
 	implements MShop_Catalog_Manager_List_Type_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.list.type.id' => array(
 			'code'=>'catalog.list.type.id',
 			'internalcode'=>'mcatlity."id"',
@@ -95,7 +95,7 @@ class MShop_Catalog_Manager_List_Type_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-catalog' );
+		$this->setResourceName( 'db-catalog' );
 	}
 
 
@@ -107,11 +107,11 @@ class MShop_Catalog_Manager_List_Type_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/catalog/manager/list/type/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/list/type/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/list/type/default/item/delete' );
 	}
 
 
@@ -142,7 +142,7 @@ class MShop_Catalog_Manager_List_Type_Default
 		 */
 		$path = 'classes/catalog/manager/list/type/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -264,7 +264,7 @@ class MShop_Catalog_Manager_List_Type_Default
 		 * @see mshop/catalog/manager/list/type/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'list/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'list/type/' . $manager, $name );
 	}
 
 
@@ -273,7 +273,7 @@ class MShop_Catalog_Manager_List_Type_Default
 	 *
 	 * @return string Configuration path
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		/** mshop/catalog/manager/list/type/default/item/insert
 		 * Inserts a new catalog list type record into the database table
@@ -495,8 +495,8 @@ class MShop_Catalog_Manager_List_Type_Default
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

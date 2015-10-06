@@ -7,11 +7,11 @@
 
 class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private static $_orderItem;
-	private static $_orderBaseItem;
-	private $_object;
-	private $_context;
-	private $_emailMock;
+	private static $orderItem;
+	private static $orderBaseItem;
+	private $object;
+	private $context;
+	private $emailMock;
 
 
 	public static function setUpBeforeClass()
@@ -23,11 +23,11 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Fra
 		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 		$result = $orderManager->searchItems( $search );
 
-		if( ( self::$_orderItem = reset( $result ) ) === false ) {
+		if( ( self::$orderItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No order found' );
 		}
 
-		self::$_orderBaseItem = $orderBaseManager->load( self::$_orderItem->getBaseId() );
+		self::$orderBaseItem = $orderBaseManager->load( self::$orderItem->getBaseId() );
 	}
 
 
@@ -39,19 +39,19 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Fra
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = TestHelper::getContext();
+		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Email_Delivery_Text_Salutation_Default( $this->_context, $paths );
+		$this->object = new Client_Html_Email_Delivery_Text_Salutation_Default( $this->context, $paths );
 
 		$view = TestHelper::getView();
-		$view->extOrderItem = self::$_orderItem;
-		$view->extOrderBaseItem = self::$_orderBaseItem;
-		$view->extAddressItem = self::$_orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
+		$view->extOrderItem = self::$orderItem;
+		$view->extOrderBaseItem = self::$orderBaseItem;
+		$view->extAddressItem = self::$orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->emailMock ) );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -63,20 +63,20 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Fra
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 
 		$this->assertContains( 'Dear mr Our Unittest', $output );
 	}
@@ -85,19 +85,19 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends PHPUnit_Fra
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

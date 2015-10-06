@@ -94,10 +94,10 @@ try
 
 	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-	$arcavias = new Arcavias( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+	$aimeos = new Aimeos( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
-	$taskPaths = $arcavias->getSetupPaths( $parent );
+	$taskPaths = $aimeos->getSetupPaths( $parent );
 
 	$includePaths = $taskPaths;
 	$includePaths[] = get_include_path();
@@ -108,7 +108,7 @@ try
 
 	$ctx = new MShop_Context_Item_Default();
 
-	$confPaths = $arcavias->getConfigPaths( 'mysql' );
+	$confPaths = $aimeos->getConfigPaths( 'mysql' );
 	if( isset( $options['config'] ) ) {
 		$confPaths = array_merge( $confPaths, (array) $options['config'] );
 	}

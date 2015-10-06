@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,8 +19,8 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Filter_Attribute_Default( TestHelper::getContext(), $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Catalog_Filter_Attribute_Default( TestHelper::getContext(), $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -32,7 +32,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -40,7 +40,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( 2, count( $tags ) );
@@ -52,7 +52,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$regex = '/<fieldset class="attr-color">.*<fieldset class="attr-length">.*<fieldset class="attr-size">.*<fieldset class="attr-width">/smu';
 		$this->assertRegexp( $regex, $output );
@@ -64,14 +64,14 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 
 	public function testGetBodyAttributeOrder()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 
 		$conf = new MW_Config_Array();
 		$conf->set( 'client/html/catalog/filter/attribute/types', array( 'color', 'width', 'length' ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$regex = '/<fieldset class="attr-color">.*<fieldset class="attr-width">.*<fieldset class="attr-length">/smu';
 
 		$this->assertNotContains( '<fieldset class="attr-size">', $output );
@@ -81,33 +81,33 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 
 	public function testGetBodyCategory()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="catalog-filter-attribute">', $output );
 	}
 
 
 	public function testGetBodySearchText()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => 'test' ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="catalog-filter-attribute">', $output );
 	}
 
 
 	public function testGetBodySearchAttribute()
 	{
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => array( -1, -2 ) ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="catalog-filter-attribute">', $output );
 	}
 
@@ -115,7 +115,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends PHPUnit_Framework
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 }

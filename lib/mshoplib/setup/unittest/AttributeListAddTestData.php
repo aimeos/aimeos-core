@@ -36,24 +36,24 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds attribute-list test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding attribute-list test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding attribute-list test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'attribute-list.php';
@@ -68,13 +68,13 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$refIds = array();
-		$refIds['media'] = $this->_getMediaData( $refKeys['media'] );
-		$refIds['price'] = $this->_getPriceData( $refKeys['price'] );
-		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
+		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
+		$refIds['price'] = $this->getPriceData( $refKeys['price'] );
+		$refIds['text'] = $this->getTextData( $refKeys['text'] );
 
-		$this->_addAttributeListData( $testdata, $refIds );
+		$this->addAttributeListData( $testdata, $refIds );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -84,9 +84,9 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getMediaData( array $keys )
+	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
@@ -116,9 +116,9 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getTextData( array $keys )
+	private function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
@@ -149,9 +149,9 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getPriceData( array $keys )
+	private function getPriceData( array $keys )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->additional, 'Default' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Default' );
 
 		$value = $ship = $domain = $code = array();
@@ -205,9 +205,9 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addAttributeListData( array $testdata, array $refIds )
+	private function addAttributeListData( array $testdata, array $refIds )
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->additional, 'Default' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Default' );
 		$attributeListManager = $attributeManager->getSubManager( 'list', 'Default' );
 		$attributeListTypeManager = $attributeListManager->getSubManager( 'type', 'Default' );
@@ -252,7 +252,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 		$listItemTypeIds = array();
 		$listItemType = $attributeListTypeManager->createItem();
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
 		foreach( $testdata['attribute/list/type'] as $key => $dataset )
 		{
@@ -295,6 +295,6 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 			$attributeListManager->saveItem( $listItem, false );
 		}
 
-		$this->_conn->commit();
+		$this->conn->commit();
 	}
 }

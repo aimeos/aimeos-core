@@ -17,13 +17,13 @@ class MShop_Order_Item_Status_Default
 	extends MShop_Order_Item_Status_Abstract
 	implements MShop_Order_Item_Status_Interface
 {
-	private $_values;
+	private $values;
 
 	public function __construct( array $values = array( ) )
 	{
 		parent::__construct( 'order.status.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -34,7 +34,7 @@ class MShop_Order_Item_Status_Default
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->_values['parentid'] ) ? (int) $this->_values['parentid'] : null );
+		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
 	}
 
 	/**
@@ -48,7 +48,7 @@ class MShop_Order_Item_Status_Default
 			return;
 		}
 
-		$this->_values['parentid'] = (int) $parentid;
+		$this->values['parentid'] = (int) $parentid;
 
 		$this->setModified();
 	}
@@ -61,7 +61,7 @@ class MShop_Order_Item_Status_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : '' );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class MShop_Order_Item_Status_Default
 			return;
 		}
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 
 		$this->setModified();
 	}
@@ -87,7 +87,7 @@ class MShop_Order_Item_Status_Default
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->_values['value'] ) ? (string) $this->_values['value'] : '' );
+		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class MShop_Order_Item_Status_Default
 			return;
 		}
 
-		$this->_values['value'] = (string) $value;
+		$this->values['value'] = (string) $value;
 
 		$this->setModified();
 	}

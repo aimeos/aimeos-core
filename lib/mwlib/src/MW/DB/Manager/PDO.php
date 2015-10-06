@@ -16,9 +16,9 @@
  */
 class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 {
-	private $_config = null;
-	private $_connections = array();
-	private $_count = array();
+	private $config = null;
+	private $connections = array();
+	private $count = array();
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	 */
 	public function __construct( MW_Config_Interface $config )
 	{
-		$this->_config = $config;
+		$this->config = $config;
 	}
 
 
@@ -37,7 +37,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	 */
 	public function __clone()
 	{
-		$this->_config = clone $this->_config;
+		$this->config = clone $this->config;
 	}
 
 
@@ -51,22 +51,22 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	{
 		try
 		{
-			$adapter = $this->_config->get( 'resource/' . $name . '/adapter', 'mysql' );
+			$adapter = $this->config->get( 'resource/' . $name . '/adapter', 'mysql' );
 
-			if( !isset( $this->_connections[$name] ) || empty( $this->_connections[$name] ) )
+			if( !isset( $this->connections[$name] ) || empty( $this->connections[$name] ) )
 			{
-				if( !isset( $this->_count[$name] ) ) {
-					$this->_count[$name] = 0;
+				if( !isset( $this->count[$name] ) ) {
+					$this->count[$name] = 0;
 				}
 
-				$limit = $this->_config->get( 'resource/' . $name . '/limit', -1 );
+				$limit = $this->config->get( 'resource/' . $name . '/limit', -1 );
 
-				if( $limit >= 0 && $this->_count[$name] >= $limit ) {
+				if( $limit >= 0 && $this->count[$name] >= $limit ) {
 					throw new MW_DB_Exception( sprintf( 'Maximum number of connections (%1$d) exceeded', $limit ) );
 				}
 
-				$this->_connections[$name] = array( $this->_createConnection( $name, $adapter ) );
-				$this->_count[$name]++;
+				$this->connections[$name] = array( $this->createConnection( $name, $adapter ) );
+				$this->count[$name]++;
 			}
 
 			switch( $adapter )
@@ -76,10 +76,10 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 					// SQLite uses page locking which prevents a second connection from
 					// reading from tables which are already in use. Fortunately, it is
 					// possible withing the same connection to do the update.
-					return $this->_connections[$name][0];
+					return $this->connections[$name][0];
 			}
 
-			return array_pop( $this->_connections[$name] );
+			return array_pop( $this->connections[$name] );
 
 		}
 		catch( PDOException $e ) {
@@ -100,7 +100,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 			throw new MW_DB_Exception( 'Connection object isn\'t of type PDO' );
 		}
 
-		$this->_connections[$name][] = $connection;
+		$this->connections[$name][] = $connection;
 	}
 
 
@@ -111,14 +111,14 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 	 * @param string $adapter Name of the database adapter, e.g. "mysql"
 	 * @return MW_DB_Connection_Interface Database connection
 	 */
-	protected function _createConnection( $name, $adapter )
+	protected function createConnection( $name, $adapter )
 	{
-		$host = $this->_config->get( 'resource/' . $name . '/host' );
-		$port = $this->_config->get( 'resource/' . $name . '/port' );
-		$user = $this->_config->get( 'resource/' . $name . '/username' );
-		$pass = $this->_config->get( 'resource/' . $name . '/password' );
-		$sock = $this->_config->get( 'resource/' . $name . '/socket' );
-		$dbase = $this->_config->get( 'resource/' . $name . '/database' );
+		$host = $this->config->get( 'resource/' . $name . '/host' );
+		$port = $this->config->get( 'resource/' . $name . '/port' );
+		$user = $this->config->get( 'resource/' . $name . '/username' );
+		$pass = $this->config->get( 'resource/' . $name . '/password' );
+		$sock = $this->config->get( 'resource/' . $name . '/socket' );
+		$dbase = $this->config->get( 'resource/' . $name . '/database' );
 
 		$dsn = $adapter . ':dbname=' . $dbase;
 		if( $sock == null )
@@ -132,14 +132,14 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 		}
 
 		$attr = array(
-			PDO::ATTR_PERSISTENT => $this->_config->get( 'resource/' . $name . '/opt-persistent', false ),
+			PDO::ATTR_PERSISTENT => $this->config->get( 'resource/' . $name . '/opt-persistent', false ),
 		);
 
 		$pdo = new PDO( $dsn, $user, $pass, $attr );
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$dbc = new MW_DB_Connection_PDO( $pdo );
 
-		foreach( $this->_config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
+		foreach( $this->config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
 			$dbc->create( $stmt )->execute()->finish();
 		}
 

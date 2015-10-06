@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'column' => array(
 			'label' => 'ALTER TABLE "mshop_attribute" ADD "label" VARCHAR(255) NOT NULL AFTER "code"',
 			'pos' => 'ALTER TABLE "mshop_attribute" ADD "pos" INT DEFAULT NULL AFTER "label"'
@@ -52,9 +52,9 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -63,40 +63,40 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$table = 'mshop_attribute';
 
-		if( $this->_schema->tableExists( $table ) === true )
+		if( $this->schema->tableExists( $table ) === true )
 		{
-			$this->_msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->_status( '' );
+			$this->msg( sprintf( 'Adding columns to table "%1$s"', $table ), 0 ); $this->status( '' );
 
 			foreach( $stmts['column'] as $column=>$stmt )
 			{
-				$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
+				$this->msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
-				if( $this->_schema->columnExists( $table, $column ) === false )
+				if( $this->schema->columnExists( $table, $column ) === false )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'added' );
+					$this->execute( $stmt );
+					$this->status( 'added' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 
 
-			$this->_msg( sprintf( 'Adding constraints to table "%1$s"', $table ), 0 ); $this->_status( '' );
+			$this->msg( sprintf( 'Adding constraints to table "%1$s"', $table ), 0 ); $this->status( '' );
 
 			foreach( $stmts['constraint'] as $constraint=>$stmt )
 			{
-				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
+				$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
 
-				if( $this->_schema->constraintExists( $table, $constraint ) === false )
+				if( $this->schema->constraintExists( $table, $constraint ) === false )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'added' );
+					$this->execute( $stmt );
+					$this->status( 'added' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}
@@ -105,18 +105,18 @@ class MW_Setup_Task_AttributeRemoveOptions extends MW_Setup_Task_Abstract
 
 
 		// drop no longer required tables
-		$this->_msg( 'Delete attribute options', 0 ); $this->_status( '' );
+		$this->msg( 'Delete attribute options', 0 ); $this->status( '' );
 
 		foreach( $stmts['droptables'] as $table=>$stmt )
 		{
-			$this->_msg( sprintf( 'Delete table "%1$s"', $table ), 1 );
+			$this->msg( sprintf( 'Delete table "%1$s"', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true )
+			if( $this->schema->tableExists( $table ) === true )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'deleted' );
+				$this->execute( $stmt );
+				$this->status( 'deleted' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 

@@ -60,7 +60,7 @@
 			"controller/frontend/src",
 			"controller/extjs/src",
 			"controller/jobs/src",
-			"Arcavias.php"
+			"Aimeos.php"
 		]
 	}
 }

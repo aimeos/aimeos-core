@@ -13,8 +13,8 @@ require_once 'phing/Task.php';
  */
 class MShopJsbPackageTask extends Task
 {
-	private $_arcavias;
-	private $_projectPath = '';
+	private $aimeos;
+	private $projectPath = '';
 
 	/**
 	 * Initializes the object.
@@ -22,14 +22,14 @@ class MShopJsbPackageTask extends Task
 	public function init()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->_projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
+		$this->projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
 
-		require_once $this->_projectPath . $ds . 'Arcavias.php';
-		spl_autoload_register( 'Arcavias::autoload' );
+		require_once $this->projectPath . $ds . 'Aimeos.php';
+		spl_autoload_register( 'Aimeos::autoload' );
 
-		$this->_arcavias = new Arcavias();
+		$this->aimeos = new Aimeos();
 
-		$incPath = $this->_arcavias->getIncludePaths();
+		$incPath = $this->aimeos->getIncludePaths();
 		$incPath[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $incPath ) );
 
@@ -43,7 +43,7 @@ class MShopJsbPackageTask extends Task
 	{
 		$this->log( 'Generating JSB2 packages' );
 
-		foreach( $this->_arcavias->getCustomPaths( 'client/extjs' ) as $base => $paths )
+		foreach( $this->aimeos->getCustomPaths( 'client/extjs' ) as $base => $paths )
 		{
 			foreach( $paths as $path )
 			{

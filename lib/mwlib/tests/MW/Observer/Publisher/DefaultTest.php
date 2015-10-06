@@ -8,7 +8,7 @@
  */
 class MW_Observer_Publisher_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Observer_Publisher_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Observer_Publisher_Test();
+		$this->object = new MW_Observer_Publisher_Test();
 	}
 
 	/**
@@ -37,30 +37,30 @@ class MW_Observer_Publisher_DefaultTest extends PHPUnit_Framework_TestCase
 	{
 		$l = new MW_Observer_Listener_Test();
 
-		$this->_object->addListener($l, 'test');
+		$this->object->addListener($l, 'test');
 	}
 
 	public function testRemoveListener()
 	{
 		$l = new MW_Observer_Listener_Test();
 
-		$this->_object->addListener($l, 'test');
-		$this->_object->removeListener($l, 'test');
+		$this->object->addListener($l, 'test');
+		$this->object->removeListener($l, 'test');
 	}
 
 	public function testclearListeners()
 	{
-		$this->_object->clearListeners();
+		$this->object->clearListenersPublic();
 	}
 
 	public function testnotifyListeners()
 	{
 		$l = new MW_Observer_Listener_Test();
-		$this->_object->addListener($l, 'test');
-		$this->_object->addListener($l, 'testagain');
+		$this->object->addListener($l, 'test');
+		$this->object->addListener($l, 'testagain');
 
-		$this->_object->notifyListeners('test', 'warn');
-		$this->_object->notifyListeners('testagain', 'warn');
+		$this->object->notifyListenersPublic('test', 'warn');
+		$this->object->notifyListenersPublic('testagain', 'warn');
 	}
 }
 
@@ -71,13 +71,13 @@ class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Abstract
 	 * @param string $action
 	 * @param string $value
 	 */
-	public function notifyListeners($action, $value = null)
+	public function notifyListenersPublic($action, $value = null)
 	{
-		$this->_notifyListeners($action, $value);
+		$this->notifyListeners($action, $value);
 	}
 
-	public function clearListeners()
+	public function clearListenersPublic()
 	{
-		$this->_clearListeners();
+		$this->clearListeners();
 	}
 }

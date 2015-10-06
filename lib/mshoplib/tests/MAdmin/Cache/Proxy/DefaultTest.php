@@ -8,9 +8,9 @@
  */
 class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_mock;
-	private $_object;
-	private $_context;
+	private $mock;
+	private $object;
+	private $context;
 
 
 	/**
@@ -21,23 +21,23 @@ class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
-		$this->_mock = $this->getMockBuilder( 'MW_Cache_DB' )
+		$this->mock = $this->getMockBuilder( 'MW_Cache_DB' )
 			->disableOriginalConstructor()->getMock();
 
 		$manager = $this->getMockBuilder( 'MAdmin_Cache_Manager_Default' )
-			->setConstructorArgs( array( $this->_context ) )->getMock();
+			->setConstructorArgs( array( $this->context ) )->getMock();
 
 		$manager->expects( $this->once() )->method( 'getCache' )
-			->will( $this->returnValue( $this->_mock ) );
+			->will( $this->returnValue( $this->mock ) );
 
 		$name = 'MAdminCacheProxyDefaultTest';
-		$this->_context->getConfig()->set( 'classes/cache/manager/name', $name );
+		$this->context->getConfig()->set( 'classes/cache/manager/name', $name );
 
 		MAdmin_Cache_Manager_Factory::injectManager( 'MAdmin_Cache_Manager_' . $name, $manager );
 
-		$this->_object = new MAdmin_Cache_Proxy_Default( $this->_context );
+		$this->object = new MAdmin_Cache_Proxy_Default( $this->context );
 	}
 
 
@@ -49,72 +49,72 @@ class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_mock, $this->_context );
+		unset( $this->object, $this->mock, $this->context );
 	}
 
 
 	public function testDelete()
 	{
-		$this->_mock->expects( $this->once() )->method( 'delete' )
+		$this->mock->expects( $this->once() )->method( 'delete' )
 			->with( $this->equalTo( 'test' ) );
 
-		$this->_object->delete( 'test' );
+		$this->object->delete( 'test' );
 	}
 
 
 	public function testDeleteList()
 	{
-		$this->_mock->expects( $this->once() )->method( 'deleteList' )
+		$this->mock->expects( $this->once() )->method( 'deleteList' )
 			->with( $this->equalTo( array( 'test' ) ) );
 
-		$this->_object->deleteList( array( 'test' ) );
+		$this->object->deleteList( array( 'test' ) );
 	}
 
 
 	public function testDeleteByTags()
 	{
-		$this->_mock->expects( $this->once() )->method( 'deleteByTags' )
+		$this->mock->expects( $this->once() )->method( 'deleteByTags' )
 			->with( $this->equalTo( array( 'tag1', 'tag2' ) ) );
 
-		$this->_object->deleteByTags( array( 'tag1', 'tag2' ) );
+		$this->object->deleteByTags( array( 'tag1', 'tag2' ) );
 	}
 
 
 	public function testFlush()
 	{
-		$this->_mock->expects( $this->once() )->method( 'flush' );
-		$this->_object->flush();
+		$this->mock->expects( $this->once() )->method( 'flush' );
+		$this->object->flush();
 	}
 
 
 	public function testGet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->once() )->method( 'get' )
 			->with( $this->equalTo( 't:1' ) )
 			->will( $this->returnValue( 'test' ) );
 
-		$this->assertEquals( 'test', $this->_object->get( 't:1' ) );
+		$this->assertEquals( 'test', $this->object->get( 't:1' ) );
 	}
 
 
 	public function testGetList()
 	{
-		$this->_mock->expects( $this->once() )->method( 'getList' )
+		$this->mock->expects( $this->once() )->method( 'getList' )
 			->with( $this->equalTo( array( 't:1' ) ) )
 			->will( $this->returnValue( array( 't:1' => 'test' ) ) );
 
-		$this->assertEquals( array( 't:1' => 'test' ), $this->_object->getList( array( 't:1' ) ) );
+		$this->assertEquals( array( 't:1' => 'test' ), $this->object->getList( array( 't:1' ) ) );
 	}
 
 
 	public function testGetListByTags()
 	{
-		$this->_mock->expects( $this->once() )->method( 'getListByTags' )
+		$this->mock->expects( $this->once() )->method( 'getListByTags' )
 			->with( $this->equalTo( array( 'tag1', 'tag2' ) ) )
 			->will( $this->returnValue( array( 't:1' => 'test1', 't:2' => 'test2' ) ) );
 
 		$expected = array( 't:1' => 'test1', 't:2' => 'test2' );
-		$result = $this->_object->getListByTags( array( 'tag1', 'tag2' ) );
+		$result = $this->object->getListByTags( array( 'tag1', 'tag2' ) );
 
 		$this->assertEquals( $expected, $result );
 	}
@@ -122,7 +122,7 @@ class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'set' )
+		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( 't:1' ),
 				$this->equalTo( 'test 1' ),
@@ -130,19 +130,19 @@ class MAdmin_Cache_Proxy_DefaultTest extends PHPUnit_Framework_TestCase
 				$this->equalTo( '2000-01-01 00:00:00' )
 			);
 
-		$this->_object->set( 't:1', 'test 1', array( 'tag1', 'tag2' ), '2000-01-01 00:00:00' );
+		$this->object->set( 't:1', 'test 1', array( 'tag1', 'tag2' ), '2000-01-01 00:00:00' );
 	}
 
 
 	public function testSetList()
 	{
-		$this->_mock->expects( $this->once() )->method( 'setList' )
+		$this->mock->expects( $this->once() )->method( 'setList' )
 			->with(
 				$this->equalTo( array( 't:1' => 'test 1' ) ),
 				$this->equalTo( array( 'tag1', 'tag2' ) ),
 				$this->equalTo( array( 't:1' => '2000-01-01 00:00:00' ) )
 			);
 
-		$this->_object->setList( array( 't:1' => 'test 1' ), array( 'tag1', 'tag2' ), array( 't:1' => '2000-01-01 00:00:00' ) );
+		$this->object->setList( array( 't:1' => 'test 1' ), array( 'tag1', 'tag2' ), array( 't:1' => '2000-01-01 00:00:00' ) );
 	}
 }

@@ -66,7 +66,7 @@ class Controller_Frontend_Basket_Factory
 		$iface = 'Controller_Frontend_Basket_Interface';
 		$classname = 'Controller_Frontend_Basket_' . $name;
 
-		$manager = self::_createController( $context, $classname, $iface );
+		$manager = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/frontend/basket/decorators/excludes
 		 * Excludes decorators added by the "common" option from the basket frontend controllers
@@ -142,7 +142,7 @@ class Controller_Frontend_Basket_Factory
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $manager, 'basket' );
+		return self::addControllerDecorators( $context, $manager, 'basket' );
 	}
 
 }

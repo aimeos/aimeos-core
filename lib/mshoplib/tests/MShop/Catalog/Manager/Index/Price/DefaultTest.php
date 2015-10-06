@@ -11,8 +11,8 @@
  */
 class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	protected static $_products;
+	private $object;
+	protected static $products;
 
 
 	public static function setUpBeforeClass()
@@ -28,7 +28,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		}
 
 		foreach( $result as $item ) {
-			self::$_products[$item->getCode()] = $item;
+			self::$products[$item->getCode()] = $item;
 		}
 	}
 
@@ -41,7 +41,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MShop_Catalog_Manager_Index_Price_Default( TestHelper::getContext() );
+		$this->object = new MShop_Catalog_Manager_Index_Price_Default( TestHelper::getContext() );
 	}
 
 
@@ -53,13 +53,13 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
@@ -82,8 +82,8 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		}
 
 
-		$search = $this->_object->createSearch( true );
-		$result = $this->_object->aggregate( $search, 'catalog.index.price.id' );
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'catalog.index.price.id' );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -93,7 +93,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -102,7 +102,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 	public function testSaveDeleteItem()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$product = clone self::$_products['CNC'];
+		$product = clone self::$products['CNC'];
 
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
@@ -113,21 +113,21 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$product->setId( null );
 		$product->setCode( 'ModifiedCNC' );
 		$productManager->saveItem( $product );
-		$this->_object->saveItem( $product );
+		$this->object->saveItem( $product );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result = $this->object->searchItems( $search );
 
 
-		$this->_object->deleteItem( $product->getId() );
+		$this->object->deleteItem( $product->getId() );
 		$productManager->deleteItem( $product->getId() );
 
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
-		$result2 = $this->_object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search );
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -138,21 +138,21 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
-		$priceItems = self::$_products['CNC']->getRefItems( 'price', 'default' );
+		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
 			throw new Exception( 'No price with type "default" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -160,10 +160,10 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsIdNull()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.price.id', null ) );
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -171,10 +171,10 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsQuantity()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.quantity', 1 ) );
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -182,7 +182,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsQuantityValue()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
@@ -194,7 +194,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -202,7 +202,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsValue()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
@@ -210,7 +210,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -218,7 +218,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsCosts()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '20.00' ) );
@@ -226,7 +226,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
@@ -234,7 +234,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsRebate()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '==', $func, '1.50' ) );
@@ -242,7 +242,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
@@ -250,7 +250,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testSearchItemsTaxrate()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '==', $func, '19.00' ) );
@@ -258,7 +258,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->_object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -266,7 +266,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends PHPUnit_Framework_Te
 
 	public function testCleanupIndex()
 	{
-		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
 	}
 
 }

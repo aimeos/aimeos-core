@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_product_stock"
 			DROP INDEX "unq_msprost_pid_sid",
 			ADD UNIQUE "unq_msprost_pid_sid_wid" ("prodid", "siteid", "warehouseid")'
@@ -43,9 +43,9 @@ class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -54,19 +54,19 @@ class MW_Setup_Task_ProductStockExtendUniqueByWarehouseid extends MW_Setup_Task_
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$constraint = 'unq_msprost_pid_sid';
 		$table = 'mshop_product_stock';
 		
-		$this->_msg( 'Changing product stock unique constraint', 0 );
+		$this->msg( 'Changing product stock unique constraint', 0 );
 
-		if( $this->_schema->tableExists( $table ) && $this->_schema->constraintExists( $table, $constraint ) )
+		if( $this->schema->tableExists( $table ) && $this->schema->constraintExists( $table, $constraint ) )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'changed' );
+			$this->executeList( $stmts );
+			$this->status( 'changed' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

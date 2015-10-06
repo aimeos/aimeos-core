@@ -18,7 +18,12 @@ class Controller_ExtJS_Plugin_Decorator_Example
 	extends Controller_ExtJS_Common_Decorator_Abstract
 	implements Controller_ExtJS_Common_Decorator_Interface
 {
-	protected function _getManager()
+	protected function getManager()
+	{
+	}
+
+
+	protected function getPrefix()
 	{
 	}
 }

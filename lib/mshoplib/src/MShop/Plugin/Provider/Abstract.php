@@ -16,8 +16,8 @@
  */
 abstract class MShop_Plugin_Provider_Abstract
 {
-	private $_item;
-	private $_context;
+	private $item;
+	private $context;
 
 
 	/**
@@ -28,8 +28,8 @@ abstract class MShop_Plugin_Provider_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
 	{
-		$this->_item = $item;
-		$this->_context = $context;
+		$this->item = $item;
+		$this->context = $context;
 	}
 
 
@@ -38,9 +38,9 @@ abstract class MShop_Plugin_Provider_Abstract
 	 *
 	 * @return MShop_Plugin_Item_Interface Plugin item object
 	 */
-	protected function _getItem()
+	protected function getItemBase()
 	{
-		return $this->_item;
+		return $this->item;
 	}
 
 
@@ -51,9 +51,9 @@ abstract class MShop_Plugin_Provider_Abstract
 	 * @param mixed $default Default value if configuration key isn't available
 	 * @return string|null Value from service item configuration
 	 */
-	protected function _getConfigValue( $key, $default = null )
+	protected function getConfigValue( $key, $default = null )
 	{
-		$config = $this->_item->getConfig();
+		$config = $this->item->getConfig();
 
 		if( isset( $config[$key] ) ) {
 			return $config[$key];
@@ -68,8 +68,8 @@ abstract class MShop_Plugin_Provider_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context item object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 }

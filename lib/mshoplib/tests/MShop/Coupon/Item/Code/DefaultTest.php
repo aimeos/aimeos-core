@@ -11,8 +11,8 @@
  */
 class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_values;
+	private $object;
+	private $values;
 
 
 	/**
@@ -23,7 +23,7 @@ class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_values = array(
+		$this->values = array(
 			'id' => '1',
 			'siteid' => 123,
 			'couponid' => '2',
@@ -36,7 +36,7 @@ class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Coupon_Item_Code_Default( $this->_values );
+		$this->object = new MShop_Coupon_Item_Code_Default( $this->values );
 	}
 
 	/**
@@ -47,104 +47,104 @@ class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 	public function testGetId()
 	{
-		$this->assertEquals( 1, $this->_object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()
 	{
-		$this->_object->setId( '1' );
-		$this->assertEquals( 1, $this->_object->getId() );
+		$this->object->setId( '1' );
+		$this->assertEquals( 1, $this->object->getId() );
 
-		$this->assertFalse( false, $this->_object->isModified() );
+		$this->assertFalse( false, $this->object->isModified() );
 
-		$this->_object->setId( null );
-		$this->assertEquals( null, $this->_object->getId() );
+		$this->object->setId( null );
+		$this->assertEquals( null, $this->object->getId() );
 
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 123, $this->_object->getSiteId() );
+		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
 	public function testGetCouponId()
 	{
-		$this->assertEquals( 2, $this->_object->getCouponId() );
+		$this->assertEquals( 2, $this->object->getCouponId() );
 	}
 
 	public function testSetCouponId()
 	{
-		$this->_object->setCouponId( '3' );
-		$this->assertEquals( 3, $this->_object->getCouponId() );
+		$this->object->setCouponId( '3' );
+		$this->assertEquals( 3, $this->object->getCouponId() );
 
-		$this->assertEquals( true, $this->_object->isModified() );
+		$this->assertEquals( true, $this->object->isModified() );
 	}
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'abcd', $this->_object->getCode() );
+		$this->assertEquals( 'abcd', $this->object->getCode() );
 	}
 
 	public function testSetCode()
 	{
-		$this->_object->setCode( 'dcba' );
-		$this->assertEquals( 'dcba', $this->_object->getCode() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setCode( 'dcba' );
+		$this->assertEquals( 'dcba', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCount()
 	{
-		$this->assertEquals( 100, $this->_object->getCount() );
+		$this->assertEquals( 100, $this->object->getCount() );
 	}
 
 	public function testSetCount()
 	{
-		$this->_object->setCount( 50 );
-		$this->assertEquals( 50, $this->_object->getCount() );
-		$this->assertTrue( $this->_object->isModified() );
+		$this->object->setCount( 50 );
+		$this->assertEquals( 50, $this->object->getCount() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDateStart()
 	{
-		$this->assertNull( $this->_object->getDateStart() );
+		$this->assertNull( $this->object->getDateStart() );
 	}
 
 	public function testSetDateStart()
 	{
-		$this->_object->setDateStart( '2010-04-22 06:22:22' );
-		$this->assertEquals( '2010-04-22 06:22:22', $this->_object->getDateStart() );
+		$this->object->setDateStart( '2010-04-22 06:22:22' );
+		$this->assertEquals( '2010-04-22 06:22:22', $this->object->getDateStart() );
 	}
 
 	public function testGetDateEnd()
 	{
-		$this->assertNull( $this->_object->getDateEnd() );
+		$this->assertNull( $this->object->getDateEnd() );
 	}
 
 	public function testSetDateEnd()
 	{
-		$this->_object->setDateEnd( '2010-05-22 06:22:22' );
-		$this->assertEquals( '2010-05-22 06:22:22', $this->_object->getDateEnd() );
+		$this->object->setDateEnd( '2010-05-22 06:22:22' );
+		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
 	}
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
+		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()
 	{
-		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
+		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
 
@@ -172,20 +172,20 @@ class MShop_Coupon_Item_Code_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$arrayObject = $this->object->toArray();
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['coupon.code.id'] );
-		$this->assertEquals( $this->_object->getCode(), $arrayObject['coupon.code.code'] );
-		$this->assertEquals( $this->_object->getCount(), $arrayObject['coupon.code.count'] );
-		$this->assertEquals( $this->_object->getCouponId(), $arrayObject['coupon.code.couponid'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['coupon.code.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['coupon.code.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['coupon.code.id'] );
+		$this->assertEquals( $this->object->getCode(), $arrayObject['coupon.code.code'] );
+		$this->assertEquals( $this->object->getCount(), $arrayObject['coupon.code.count'] );
+		$this->assertEquals( $this->object->getCouponId(), $arrayObject['coupon.code.couponid'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.code.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['coupon.code.editor'] );
 	}
 
 	public function testIsModified()
 	{
-		$this->assertFalse( $this->_object->isModified() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 }

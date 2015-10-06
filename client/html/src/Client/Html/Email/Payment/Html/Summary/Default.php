@@ -51,7 +51,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/payment/html/summary/default/subparts';
+	private $subPartPath = 'client/html/email/payment/html/summary/default/subparts';
 
 	/** client/html/email/payment/html/summary/address/name
 	 * Name of the address part used by the email payment html client implementation
@@ -96,7 +96,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'service', 'coupon', 'detail' );
+	private $subPartNames = array( 'address', 'service', 'coupon', 'detail' );
 
 
 	/**
@@ -109,10 +109,10 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->summaryBody = $content;
@@ -147,7 +147,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 		$tplconf = 'client/html/email/payment/html/summary/default/template-body';
 		$default = 'email/common/html-summary-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -161,10 +161,10 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->summaryHeader = $content;
@@ -193,7 +193,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 		$tplconf = 'client/html/email/payment/html/summary/default/template-header';
 		$default = 'email/common/html-summary-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -280,7 +280,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 		 * @see client/html/email/payment/html/summary/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/payment/html/summary/' . $type, $name );
+		return $this->createSubClient( 'email/payment/html/summary/' . $type, $name );
 	}
 
 
@@ -289,9 +289,9 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -303,7 +303,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		$view->summaryBasket = $view->extOrderBaseItem;
 

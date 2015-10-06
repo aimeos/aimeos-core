@@ -14,7 +14,7 @@
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Common_Summary_Address_Default
+abstract class Client_Html_Common_Summary_Address_Default
 	extends Client_Html_Common_Client_Factory_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
@@ -51,8 +51,8 @@ class Client_Html_Common_Summary_Address_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/common/summary/address/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/common/summary/address/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,10 +65,10 @@ class Client_Html_Common_Summary_Address_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->addressBody = $html;
@@ -96,7 +96,7 @@ class Client_Html_Common_Summary_Address_Default
 		$tplconf = 'client/html/common/summary/address/default/template-body';
 		$default = 'common/summary/address-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -110,10 +110,10 @@ class Client_Html_Common_Summary_Address_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->addressHeader = $html;
@@ -142,21 +142,7 @@ class Client_Html_Common_Summary_Address_Default
 		$tplconf = 'client/html/common/summary/address/default/template-header';
 		$default = 'common/summary/address-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
-	}
-
-
-	/**
-	 * Returns the sub-client given by its name.
-	 *
-	 * @param string $type Name of the client type
-	 * @param string|null $name Name of the sub-client (Default if null)
-	 * @return Client_Html_Interface Sub-client object
-	 * @deprecated 2015.10 Make class abstract and remove method
-	 */
-	public function getSubClient( $type, $name = null )
-	{
-		return $this->_createSubClient( 'common/summary/address/' . $type, $name );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -165,8 +151,8 @@ class Client_Html_Common_Summary_Address_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

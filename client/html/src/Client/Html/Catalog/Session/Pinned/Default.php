@@ -51,9 +51,9 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/session/pinned/default/subparts';
-	private $_subPartNames = array();
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/session/pinned/default/subparts';
+	private $subPartNames = array();
+	private $cache;
 
 
 	/**
@@ -66,7 +66,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 
 		/** client/html/catalog/session/pinned
@@ -80,14 +80,14 @@ class Client_Html_Catalog_Session_Pinned_Default
 		 * @see client/html/catalog/session#pinned
 		 */
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
-		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
+		$key = $this->getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$output = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->pinnedBody = $output;
@@ -115,10 +115,10 @@ class Client_Html_Catalog_Session_Pinned_Default
 			$tplconf = 'client/html/catalog/session/pinned/default/template-body';
 			$default = 'catalog/session/pinned-body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -136,18 +136,18 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
 
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
-		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-header', $config );
+		$key = $this->getParamHash( array(), $uid . ':catalog:session-pinned-header', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$output = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->pinnedHeader = $output;
@@ -176,10 +176,10 @@ class Client_Html_Catalog_Session_Pinned_Default
 			$tplconf = 'client/html/catalog/session/pinned/default/template-header';
 			$default = 'catalog/session/pinned-header-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
+			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -270,7 +270,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 		 * @see client/html/catalog/session/pinned/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/session/pinned/' . $type, $name );
+		return $this->createSubClient( 'catalog/session/pinned/' . $type, $name );
 	}
 
 
@@ -283,9 +283,9 @@ class Client_Html_Catalog_Session_Pinned_Default
 	{
 		$refresh = false;
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$session = $context->getSession();
-		$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
+		$pinned = $session->get( 'aimeos/catalog/session/pinned/list', array() );
 
 		switch( $view->param( 'pin_action' ) )
 		{
@@ -331,9 +331,9 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 		if( $refresh )
 		{
-			$session->set( 'arcavias/catalog/session/pinned/list', $pinned );
+			$session->set( 'aimeos/catalog/session/pinned/list', $pinned );
 
-			foreach( $session->get( 'arcavias/catalog/session/pinned/cache', array() ) as $key => $value ) {
+			foreach( $session->get( 'aimeos/catalog/session/pinned/cache', array() ) as $key => $value ) {
 				$session->set( $key, null );
 			}
 		}
@@ -347,9 +347,9 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -361,13 +361,13 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$expire = null;
 			$tags = $items = array();
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 			$session = $context->getSession();
 
@@ -397,7 +397,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 */
 			$domains = $config->get( 'client/html/catalog/session/pinned/domains', $domains );
 
-			$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
+			$pinned = $session->get( 'aimeos/catalog/session/pinned/list', array() );
 
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 			$result = $controller->getProductItems( $pinned, $domains );
@@ -410,11 +410,11 @@ class Client_Html_Catalog_Session_Pinned_Default
 			}
 
 			$view->pinnedProductItems = $items;
-			$view->pinnedParams = $this->_getClientParams( $view->param() );
+			$view->pinnedParams = $this->getClientParams( $view->param() );
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

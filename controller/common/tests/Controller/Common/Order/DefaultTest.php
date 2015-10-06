@@ -276,7 +276,7 @@ class Controller_Common_Order_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		$class = new ReflectionClass( 'Controller_Common_Order_Default' );
-		$method = $class->getMethod( '_updateStockBundle' );
+		$method = $class->getMethod( 'updateStockBundle' );
 		$method->setAccessible( true );
 
 		$object = new Controller_Common_Order_Default( $context );

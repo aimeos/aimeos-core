@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_customer_address' => array(
 			'langid' => array(
 				'ALTER TABLE "mshop_customer_address" CHANGE "langid" "langid" VARCHAR(5) NOT NULL',
@@ -85,9 +85,9 @@ class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -96,27 +96,27 @@ class MW_Setup_Task_ColumnLangidChangeLength extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing "langid" & "mshop_locale_language.id" columns', 0 ); $this->_status( '' );
+		$this->msg( 'Changing "langid" & "mshop_locale_language.id" columns', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table=>$columns )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
 			foreach( $columns as $column=>$stmtList )
 			{
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->columnExists( $table, $column ) === true
-					&& $this->_schema->getColumnDetails( $table, $column )->getDataType() == "char"
-					&& $this->_schema->getColumnDetails( $table, $column )->getMaxLength() != 5 )
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->columnExists( $table, $column ) === true
+					&& $this->schema->getColumnDetails( $table, $column )->getDataType() == "char"
+					&& $this->schema->getColumnDetails( $table, $column )->getMaxLength() != 5 )
 				{
-					$this->_executeList( $stmtList );
-					$this->_status( 'migrated' );
+					$this->executeList( $stmtList );
+					$this->status( 'migrated' );
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

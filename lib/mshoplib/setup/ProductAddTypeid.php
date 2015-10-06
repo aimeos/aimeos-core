@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductAddTypeid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_product" ADD "typeid" INTEGER NULL AFTER "id"',
 		'ALTER TABLE "mshop_product" ADD CONSTRAINT "fk_mspro_typeid" FOREIGN KEY ( "typeid" ) REFERENCES "mshop_product_type" ("id") ON DELETE CASCADE ON UPDATE CASCADE',
 	);
@@ -42,9 +42,9 @@ class MW_Setup_Task_ProductAddTypeid extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -52,21 +52,21 @@ class MW_Setup_Task_ProductAddTypeid extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function process( $stmts )
 	{
-		$this->_msg( 'Adding typeid column to product table', 0 ); $this->_status( '' );
+		$this->msg( 'Adding typeid column to product table', 0 ); $this->status( '' );
 
-		$this->_msg( sprintf( 'Checking table "%1$s": ', 'mshop_product' ), 1 );
+		$this->msg( sprintf( 'Checking table "%1$s": ', 'mshop_product' ), 1 );
 
-		if( $this->_schema->tableExists( 'mshop_product' ) === true
-			&& $this->_schema->columnExists( 'mshop_product', 'typeid' ) === false )
+		if( $this->schema->tableExists( 'mshop_product' ) === true
+			&& $this->schema->columnExists( 'mshop_product', 'typeid' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

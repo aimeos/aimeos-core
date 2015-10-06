@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Promo_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_List_Promo_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -34,7 +34,7 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 		$view = TestHelper::getView();
 		$view->listParams = array();
 		$view->listCurrentCatItem = $catItem;
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -46,7 +46,7 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
@@ -54,7 +54,7 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getHeader( 1, $tags, $expire );
+		$output = $this->object->getHeader( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
@@ -66,7 +66,7 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	{
 		$tags = array();
 		$expire = null;
-		$output = $this->_object->getBody( 1, $tags, $expire );
+		$output = $this->object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="catalog-list-promo">', $output );
 		$this->assertRegExp( '/.*Expresso.*Cappuccino.*/smu', $output );
@@ -77,12 +77,12 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

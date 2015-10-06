@@ -20,11 +20,11 @@ abstract class Client_Html_Basket_Abstract
 	/**
 	 * Removes all cached basket parts from the cache.
 	 */
-	protected function _clearCached()
+	protected function clearCached()
 	{
-		$session = $this->_getContext()->getSession();
+		$session = $this->getContext()->getSession();
 
-		foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+		foreach( $session->get( 'aimeos/basket/cache', array() ) as $key => $value ) {
 			$session->set( $key, null );
 		}
 	}
@@ -38,9 +38,9 @@ abstract class Client_Html_Basket_Abstract
 	 * @return mixed Value associated to the requested key. If no value for the
 	 *	key is found in the cache, the given default value is returned
 	 */
-	protected function _getBasketCached( $key, $default = null )
+	protected function getBasketCached( $key, $default = null )
 	{
-		return $this->_getContext()->getSession()->get( $key, $default );
+		return $this->getContext()->getSession()->get( $key, $default );
 	}
 
 
@@ -50,9 +50,9 @@ abstract class Client_Html_Basket_Abstract
 	 * @param string $key Path the cache entry should be stored in
 	 * @param mixed $value Value stored in the cache for the path
 	 */
-	protected function _setBasketCached( $key, $value )
+	protected function setBasketCached( $key, $value )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		/** client/html/basket/cache/enable
 		 * Enables or disables caching of the basket content
@@ -72,8 +72,8 @@ abstract class Client_Html_Basket_Abstract
 		{
 			$session = $context->getSession();
 
-			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/basket/cache', $cached );
+			$cached = $session->get( 'aimeos/basket/cache', array() ) + array( $key => true );
+			$session->set( 'aimeos/basket/cache', $cached );
 			$session->set( $key, $value );
 		}
 	}

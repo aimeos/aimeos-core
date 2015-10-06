@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Summary_Service_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Standard_Summary_Service_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,18 +35,18 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 	 */
 	protected function tearDown()
 	{
-		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
-		unset( $this->_object );
+		Controller_Frontend_Basket_Factory::createController( $this->context )->clear();
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
 		$view = TestHelper::getView();
-		$view->standardBasket = $this->_getBasket();
-		$this->_object->setView( $view );
+		$view->standardBasket = $this->getBasket();
+		$this->object->setView( $view );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
@@ -54,10 +54,10 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
-		$view->standardBasket = $this->_getBasket();
-		$this->_object->setView( $view );
+		$view->standardBasket = $this->getBasket();
+		$this->object->setView( $view );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="common-summary-service container">', $output );
 	}
 
@@ -65,20 +65,20 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
-	protected function _getBasket()
+	protected function getBasket()
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $customerManager->searchItems( $search );
@@ -87,7 +87,7 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends PHPUnit_
 			throw new Exception( 'Customer item not found' );
 		}
 
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->context );
 		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $customer->getPaymentAddress() );
 		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getPaymentAddress() );
 

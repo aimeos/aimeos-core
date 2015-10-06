@@ -36,12 +36,12 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Insert media items and product/media relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product media performance data', 0 );
+		$this->msg( 'Adding product media performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$prefix = 'http://demo.aimeos.org/media/';
 
 
@@ -122,7 +122,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = $pos = 0;
 
@@ -198,9 +198,9 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

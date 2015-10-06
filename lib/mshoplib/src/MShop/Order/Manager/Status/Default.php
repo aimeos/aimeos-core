@@ -16,7 +16,7 @@ class MShop_Order_Manager_Status_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Status_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.status.id'=> array(
 			'code'=>'order.status.id',
 			'internalcode'=>'mordst."id"',
@@ -88,7 +88,7 @@ class MShop_Order_Manager_Status_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -145,7 +145,7 @@ class MShop_Order_Manager_Status_Default
 		 * @see mshop/order/manager/status/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/status/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.status' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.status' ) );
 	}
 
 
@@ -157,11 +157,11 @@ class MShop_Order_Manager_Status_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/status/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/status/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/status/default/item/delete' );
 	}
 
 
@@ -172,8 +172,8 @@ class MShop_Order_Manager_Status_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -192,10 +192,10 @@ class MShop_Order_Manager_Status_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -267,7 +267,7 @@ class MShop_Order_Manager_Status_Default
 				$path = 'mshop/order/manager/status/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getParentID(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -318,7 +318,7 @@ class MShop_Order_Manager_Status_Default
 				 * @see mshop/order/manager/status/default/item/count
 				 */
 				$path = 'mshop/order/manager/status/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -342,7 +342,7 @@ class MShop_Order_Manager_Status_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.status.id', $id, $ref );
+		return $this->getItemBase( 'order.status.id', $id, $ref );
 	}
 
 
@@ -378,7 +378,7 @@ class MShop_Order_Manager_Status_Default
 		 * @see mshop/order/manager/status/default/item/count
 		 */
 		$path = 'mshop/order/manager/status/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -409,7 +409,7 @@ class MShop_Order_Manager_Status_Default
 		 */
 		$path = 'classes/order/manager/status/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -531,7 +531,7 @@ class MShop_Order_Manager_Status_Default
 		 * @see mshop/order/manager/status/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'status/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'status/' . $manager, $name );
 	}
 
 
@@ -546,10 +546,10 @@ class MShop_Order_Manager_Status_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -657,11 +657,11 @@ class MShop_Order_Manager_Status_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/status/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->_createItem( $row );
+				$items[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -683,7 +683,7 @@ class MShop_Order_Manager_Status_Default
 	 * @param array $values List of attributes for the order status object
 	 * @return MShop_Order_Item_Status_Interface New order status object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Status_Default( $values );
 	}

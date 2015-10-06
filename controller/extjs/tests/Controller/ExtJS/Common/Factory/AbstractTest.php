@@ -11,7 +11,7 @@
  */
 class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	/**
@@ -22,8 +22,8 @@ class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$config = $this->_context->getConfig();
+		$this->context = TestHelper::getContext();
+		$config = $this->context->getConfig();
 
 		$config->set( 'controller/extjs/common/decorators/default', array() );
 		$config->set( 'controller/extjs/admin/log/decorators/global', array() );
@@ -34,10 +34,10 @@ class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_Tes
 
 	public function testInjectController()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
 		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', $controller );
 
-		$injectedController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$injectedController = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
 
 		$this->assertSame( $controller, $injectedController );
 	}
@@ -45,11 +45,11 @@ class Controller_ExtJS_Common_Factory_AbstractTest extends PHPUnit_Framework_Tes
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
 		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', $controller );
 		Controller_ExtJS_Admin_Job_Factory::injectController( 'Controller_ExtJS_Admin_Job_Default', null );
 
-		$new = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$new = Controller_ExtJS_Admin_Job_Factory::createController( $this->context, 'Default' );
 
 		$this->assertNotSame( $controller, $new );
 	}

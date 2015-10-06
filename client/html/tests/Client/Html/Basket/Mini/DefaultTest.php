@@ -7,8 +7,8 @@
 
 class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,11 +19,11 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Basket_Mini_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Basket_Mini_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -35,21 +35,21 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
-		$miniBasket = $this->_object->getView()->miniBasket;
+		$output = $this->object->getBody();
+		$miniBasket = $this->object->getView()->miniBasket;
 		$this->assertTrue( $miniBasket instanceof MShop_Order_Item_Base_Interface );
 		$this->assertStringStartsWith( '<section class="aimeos basket-mini">', $output );
 	}
@@ -57,7 +57,7 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'main', 'Default' );
+		$client = $this->object->getSubClient( 'main', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 
@@ -65,19 +65,19 @@ class Client_Html_Basket_Mini_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

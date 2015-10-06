@@ -16,7 +16,7 @@
  */
 abstract class MShop_Common_Factory_Abstract
 {
-	private static $_objects = array();
+	private static $objects = array();
 
 
 	/**
@@ -29,7 +29,7 @@ abstract class MShop_Common_Factory_Abstract
 	 */
 	public static function injectManager( $classname, MShop_Common_Manager_Interface $manager = null )
 	{
-		self::$_objects[$classname] = $manager;
+		self::$objects[$classname] = $manager;
 	}
 
 
@@ -41,7 +41,7 @@ abstract class MShop_Common_Factory_Abstract
 	 * @param string $classprefix Decorator class prefix, e.g. "MShop_Product_Manager_Decorator_"
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected static function _addDecorators( MShop_Context_Item_Interface $context,
+	protected static function addDecorators( MShop_Context_Item_Interface $context,
 		MShop_Common_Manager_Interface $manager, array $decorators, $classprefix )
 	{
 		$iface = 'MShop_Common_Manager_Decorator_Interface';
@@ -77,7 +77,7 @@ abstract class MShop_Common_Factory_Abstract
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected static function _addManagerDecorators( MShop_Context_Item_Interface $context,
+	protected static function addManagerDecorators( MShop_Context_Item_Interface $context,
 		MShop_Common_Manager_Interface $manager, $domain )
 	{
 		$config = $context->getConfig();
@@ -115,15 +115,15 @@ abstract class MShop_Common_Factory_Abstract
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', array() );
-		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', array() );
-		$manager = self::_addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;
 	}
@@ -137,10 +137,10 @@ abstract class MShop_Common_Factory_Abstract
 	 * @param string $interface Name of the manager interface
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected static function _createManager( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function createManagerBase( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
-		if( isset( self::$_objects[$classname] ) ) {
-			return self::$_objects[$classname];
+		if( isset( self::$objects[$classname] ) ) {
+			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

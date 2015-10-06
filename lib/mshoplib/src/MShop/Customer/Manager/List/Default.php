@@ -17,7 +17,7 @@ class MShop_Customer_Manager_List_Default
 	extends MShop_Common_Manager_List_Abstract
 	implements MShop_Customer_Manager_List_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.list.id'=> array(
 			'code'=>'customer.list.id',
 			'internalcode'=>'mcusli."id"',
@@ -132,7 +132,7 @@ class MShop_Customer_Manager_List_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-customer' );
+		$this->setResourceName( 'db-customer' );
 	}
 
 
@@ -144,11 +144,11 @@ class MShop_Customer_Manager_List_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/list/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/customer/manager/list/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/list/default/item/delete' );
 	}
 
 
@@ -179,7 +179,7 @@ class MShop_Customer_Manager_List_Default
 		 */
 		$path = 'classes/customer/manager/list/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
@@ -301,7 +301,7 @@ class MShop_Customer_Manager_List_Default
 		 * @see mshop/customer/manager/list/decorators/global
 		 */
 
-		return $this->_getSubManager( 'customer', 'list/' . $manager, $name );
+		return $this->getSubManagerBase( 'customer', 'list/' . $manager, $name );
 	}
 
 
@@ -310,7 +310,7 @@ class MShop_Customer_Manager_List_Default
 	 *
 	 * @return string Configuration path
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		/** mshop/customer/manager/list/default/item/insert
 		 * Inserts a new customer list record into the database table
@@ -699,8 +699,8 @@ class MShop_Customer_Manager_List_Default
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

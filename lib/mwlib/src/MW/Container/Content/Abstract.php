@@ -16,9 +16,9 @@
  */
 abstract class MW_Container_Content_Abstract
 {
-	private $_resource;
-	private $_options;
-	private $_name;
+	private $resource;
+	private $options;
+	private $name;
 
 
 	/**
@@ -30,9 +30,9 @@ abstract class MW_Container_Content_Abstract
 	 */
 	public function __construct( $resource, $name, array $options )
 	{
-		$this->_resource = $resource;
-		$this->_options = $options;
-		$this->_name = $name;
+		$this->resource = $resource;
+		$this->options = $options;
+		$this->name = $name;
 	}
 
 
@@ -43,7 +43,7 @@ abstract class MW_Container_Content_Abstract
 	 */
 	public function getResource()
 	{
-		return $this->_resource;
+		return $this->resource;
 	}
 
 
@@ -54,7 +54,7 @@ abstract class MW_Container_Content_Abstract
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->name;
 	}
 
 
@@ -65,8 +65,8 @@ abstract class MW_Container_Content_Abstract
 	 * @param string $default Default value if option is not configured
 	 * @return mixed Option value
 	 */
-	protected function _getOption( $name, $default = null )
+	protected function getOption( $name, $default = null )
 	{
-		return ( isset( $this->_options[$name] ) ? $this->_options[$name] : $default );
+		return ( isset( $this->options[$name] ) ? $this->options[$name] : $default );
 	}
 }

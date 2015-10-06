@@ -11,8 +11,8 @@
  */
 class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -23,8 +23,8 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
+		$this->editor = TestHelper::getContext()->getEditor();
+		$this->object = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
 	}
 
 	/**
@@ -35,42 +35,42 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $object ) {
+		foreach( $this->object->getSearchAttributes() as $object ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $object );
 		}
 	}
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Price_Item_Interface', $this->object->createItem() );
 	}
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'price.value', 12.00 ),
-			$search->compare( '==', 'price.editor', $this->_editor )
+			$search->compare( '==', 'price.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No results available' );
 		}
 
-		$itemB = $this->_object->getItem( $item->getId() );
+		$itemB = $this->object->getItem( $item->getId() );
 
 		$this->assertEquals( 19.00, $itemB->getTaxRate() );
 	}
@@ -78,9 +78,9 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.editor', $this->_editor ) );
-		$items = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No item found' );
@@ -88,15 +88,15 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$item->setId( null );
 		$item->setLabel( 'price label' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setDomain( 'unittest' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -114,7 +114,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getTaxRate(), $itemSaved->getTaxRate() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -132,25 +132,25 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTaxRate(), $itemUpd->getTaxRate() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_SQL', $this->object->createSearch() );
 	}
 
 
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'price.id', null );
@@ -167,7 +167,7 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'price.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.type.siteid', null );
@@ -177,30 +177,30 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.type.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'price.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 
 
 		//search without base criteria
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'price.editor', $this->_editor ) );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 23, $total );
 
 		//search with base criteria
-		$search = $this->_object->createSearch( true );
+		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'price.editor', $this->_editor ),
+			$search->compare( '==', 'price.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 21, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
@@ -211,17 +211,17 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'type', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'type', 'Default' ) );
 	}
 
 
 	public function testGetLowestPrice()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
-		$lowest = $this->_object->getLowestPrice( array( $item ), 1 );
+		$lowest = $this->object->getLowestPrice( array( $item ), 1 );
 
 		$this->assertEquals( $item, $lowest );
 	}
@@ -229,14 +229,14 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetLowestPriceQuantity()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setValue( '10.00' );
 
-		$item2 = $this->_object->createItem();
+		$item2 = $this->object->createItem();
 		$item2->setValue( '5.00' );
 		$item2->setQuantity( 5 );
 
-		$lowest = $this->_object->getLowestPrice( array( $item, $item2 ), 10 );
+		$lowest = $this->object->getLowestPrice( array( $item, $item2 ), 10 );
 
 		$this->assertEquals( $item2, $lowest );
 	}
@@ -244,35 +244,35 @@ class MShop_Price_Manager_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetLowestPriceCurrency()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->getLowestPrice( array( $item ), 1, 'USD' );
+		$this->object->getLowestPrice( array( $item ), 1, 'USD' );
 	}
 
 
 	public function testGetLowestPriceNoPrice()
 	{
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->getLowestPrice( array(), 1 );
+		$this->object->getLowestPrice( array(), 1 );
 	}
 
 
 	public function testGetLowestPriceNoPriceForQuantity()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 		$item->setQuantity( 5 );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->getLowestPrice( array( $item ), 1 );
+		$this->object->getLowestPrice( array( $item ), 1 );
 	}
 
 
 	public function testGetLowestPriceWrongItem()
 	{
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->getLowestPrice( array( new stdClass() ), 1 );
+		$this->object->getLowestPrice( array( new stdClass() ), 1 );
 	}
 }

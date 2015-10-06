@@ -16,10 +16,10 @@
  */
 class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_Form_Interface
 {
-	private $_url;
-	private $_method;
-	private $_values;
-	private $_external;
+	private $url;
+	private $method;
+	private $values;
+	private $external;
 
 
 	/**
@@ -34,10 +34,10 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	{
 		MW_Common_Abstract::checkClassList( 'MW_Common_Criteria_Attribute_Interface', $values );
 
-		$this->_url = (string) $url;
-		$this->_external = (bool) $external;
-		$this->_method = (string) $method;
-		$this->_values = $values;
+		$this->url = (string) $url;
+		$this->external = (bool) $external;
+		$this->method = (string) $method;
+		$this->values = $values;
 	}
 
 
@@ -48,7 +48,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function getExternal()
 	{
-		return $this->_external;
+		return $this->external;
 	}
 
 
@@ -59,7 +59,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function setExternal( $value )
 	{
-		$this->_external = (bool) $value;
+		$this->external = (bool) $value;
 	}
 
 
@@ -70,7 +70,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function getUrl()
 	{
-		return $this->_url;
+		return $this->url;
 	}
 
 
@@ -81,7 +81,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function setUrl( $url )
 	{
-		$this->_url = (string) $url;
+		$this->url = (string) $url;
 	}
 
 
@@ -92,7 +92,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function getMethod()
 	{
-		return $this->_method;
+		return $this->method;
 	}
 
 
@@ -103,7 +103,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function setMethod( $method )
 	{
-		$this->_method = (string) $method;
+		$this->method = (string) $method;
 	}
 
 
@@ -115,11 +115,11 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function getValue( $key )
 	{
-		if( !isset( $this->_values[$key] ) ) {
+		if( !isset( $this->values[$key] ) ) {
 			return null;
 		}
 
-		return $this->_values[$key];
+		return $this->values[$key];
 	}
 
 
@@ -131,7 +131,7 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function setValue( $key, MW_Common_Criteria_Attribute_Interface $value )
 	{
-		$this->_values[$key] = $value;
+		$this->values[$key] = $value;
 	}
 
 
@@ -142,6 +142,6 @@ class MShop_Common_Item_Helper_Form_Default implements MShop_Common_Item_Helper_
 	 */
 	public function getValues()
 	{
-		return $this->_values;
+		return $this->values;
 	}
 }

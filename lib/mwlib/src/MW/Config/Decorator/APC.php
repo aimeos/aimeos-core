@@ -18,7 +18,7 @@ class MW_Config_Decorator_APC
 	extends MW_Config_Decorator_Abstract
 	implements MW_Config_Decorator_Interface
 {
-	private $_prefix;
+	private $prefix;
 
 
 	/**
@@ -34,7 +34,7 @@ class MW_Config_Decorator_APC
 		}
 
 		parent::__construct( $object );
-		$this->_prefix = $prefix;
+		$this->prefix = $prefix;
 	}
 
 
@@ -51,7 +51,7 @@ class MW_Config_Decorator_APC
 
 		// negative cache
 		$success = false;
-		apc_fetch( '-' . $this->_prefix . $path, $success );
+		apc_fetch( '-' . $this->prefix . $path, $success );
 
 		if( $success === true ) {
 			return $default;
@@ -59,20 +59,20 @@ class MW_Config_Decorator_APC
 
 		// regular cache
 		$success = false;
-		$value = apc_fetch( $this->_prefix . $path, $success );
+		$value = apc_fetch( $this->prefix . $path, $success );
 
 		if( $success === true ) {
 			return $value;
 		}
 
 		// not cached
-		if( ( $value = $this->_getObject()->get( $path, null ) ) === null )
+		if( ( $value = $this->getObject()->get( $path, null ) ) === null )
 		{
-			apc_store( '-' . $this->_prefix . $path, null );
+			apc_store( '-' . $this->prefix . $path, null );
 			return $default;
 		}
 
-		apc_store( $this->_prefix . $path, $value );
+		apc_store( $this->prefix . $path, $value );
 
 		return $value;
 	}
@@ -88,8 +88,8 @@ class MW_Config_Decorator_APC
 	{
 		$path = trim( $path, '/' );
 
-		$this->_getObject()->set( $path, $value );
+		$this->getObject()->set( $path, $value );
 
-		apc_store( $this->_prefix . $path, $value );
+		apc_store( $this->prefix . $path, $value );
 	}
 }

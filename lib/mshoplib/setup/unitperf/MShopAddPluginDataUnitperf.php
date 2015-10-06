@@ -25,8 +25,8 @@ class MW_Setup_Task_MShopAddPluginDataUnitperf extends MW_Setup_Task_MShopAddPlu
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 }

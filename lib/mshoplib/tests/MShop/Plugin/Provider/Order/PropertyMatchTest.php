@@ -10,10 +10,10 @@
  */
 class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_plugin;
-	private $_order;
-	private $_products;
+	private $object;
+	private $plugin;
+	private $order;
+	private $products;
 
 
 	/**
@@ -25,11 +25,11 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 	protected function setUp()
 	{
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setTypeId( 2 );
-		$this->_plugin->setProvider( 'PropertyMatch' );
-		$this->_plugin->setConfig( array( 'product.suppliercode' => 'unitSupplier' ) );
-		$this->_plugin->setStatus( '1' );
+		$this->plugin = $pluginManager->createItem();
+		$this->plugin->setTypeId( 2 );
+		$this->plugin->setProvider( 'PropertyMatch' );
+		$this->plugin->setConfig( array( 'product.suppliercode' => 'unitSupplier' ) );
+		$this->plugin->setStatus( '1' );
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
@@ -46,19 +46,19 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 			throw new Exception( 'Wrong number of products' );
 		}
 
-		$this->_products = array();
+		$this->products = array();
 
 		foreach( $products as $product )
 		{
 			$item = $orderBaseProductManager->createItem();
 			$item->copyFrom( $product );
 
-			$this->_products[$product->getCode()] = $item;
+			$this->products[$product->getCode()] = $item;
 		}
 
-		$this->_order = $orderBaseManager->createItem();
+		$this->order = $orderBaseManager->createItem();
 
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
 	}
 
@@ -71,66 +71,66 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_order, $this->_plugin, $this->_products );
+		unset( $this->object, $this->order, $this->plugin, $this->products );
 	}
 
 
 	public function testRegister()
 	{
-		$this->_object->register( $this->_order );
+		$this->object->register( $this->order );
 	}
 
 
 	public function testUpdateOk()
 	{
 		// single condition
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
-		$this->_plugin->setConfig( array( 'product.stock.warehouse.code' => 'default' ) );
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->plugin->setConfig( array( 'product.stock.warehouse.code' => 'default' ) );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
 
 		// two conditions
-		$this->_plugin->setConfig( array(
+		$this->plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'default',
 			'product.suppliercode' => 'unitSupplier',
 		) );
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 	}
 
 
 	public function testUpdateFail()
 	{
-		$this->_plugin->setConfig( array( 'product.suppliercode' => 'wrongSupplier' ) );
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->plugin->setConfig( array( 'product.suppliercode' => 'wrongSupplier' ) );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
 
 	public function testUpdateFailMultipleConditions()
 	{
-		$this->_plugin->setConfig( array(
+		$this->plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'unit_warehouse2',
 			'product.suppliercode' => 'wrongSupplier',
 		) );
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
 	public function testUpdateFailList()
 	{
-		$this->_plugin->setConfig( array( 'product.list.domain' => 'foobar' ) );
-		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
+		$this->plugin->setConfig( array( 'product.list.domain' => 'foobar' ) );
+		$this->object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] );
+		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

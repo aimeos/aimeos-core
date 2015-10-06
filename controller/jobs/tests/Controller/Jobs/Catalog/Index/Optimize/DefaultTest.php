@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,9 +20,9 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $arcavias );
+		$this->object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $aimeos );
 	}
 
 
@@ -34,27 +34,27 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Catalog index optimization', $this->_object->getName() );
+		$this->assertEquals( 'Catalog index optimization', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Optimizes the catalog index for searching products';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsCatalogIndexOptimizeDefaultRun';
@@ -80,7 +80,7 @@ class Controller_Jobs_Catalog_Index_Optimize_DefaultTest extends PHPUnit_Framewo
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'optimize' );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Catalog_Index_Optimize_Default( $context, $aimeos );
 		$object->run();
 	}
 }

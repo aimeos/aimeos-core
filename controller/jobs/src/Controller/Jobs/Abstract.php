@@ -16,20 +16,20 @@
  */
 abstract class Controller_Jobs_Abstract
 {
-	private $_arcavias;
-	private $_context;
+	private $aimeos;
+	private $context;
 
 
 	/**
 	 * Initializes the object.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
-	 * @param Arcavias $arcavias Arcavias main object
+	 * @param Aimeos $aimeos Aimeos main object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias )
+	public function __construct( MShop_Context_Item_Interface $context, Aimeos $aimeos )
 	{
-		$this->_context = $context;
-		$this->_arcavias = $arcavias;
+		$this->context = $context;
+		$this->aimeos = $aimeos;
 	}
 
 
@@ -38,20 +38,20 @@ abstract class Controller_Jobs_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
 	/**
-	 * Returns the Arcavias object.
+	 * Returns the Aimeos object.
 	 *
-	 * @return Arcavias Arcavias object
+	 * @return Aimeos Aimeos object
 	 */
-	protected function _getArcavias()
+	protected function getAimeos()
 	{
-		return $this->_arcavias;
+		return $this->aimeos;
 	}
 
 
@@ -64,14 +64,14 @@ abstract class Controller_Jobs_Abstract
 	 * @return string path the to the template file
 	 * @throws Controller_Jobs_Exception If no template file was found
 	 */
-	protected function _getTemplate( $confpath, $default )
+	protected function getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$templatePaths = $this->_arcavias->getCustomPaths( 'controller/jobs/layouts' );
+		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/layouts' );
 	
 		foreach( (array) $default as $fname )
 		{
-			$file = $this->_context->getConfig()->get( $confpath, $fname );
+			$file = $this->context->getConfig()->get( $confpath, $fname );
 	
 			foreach( array_reverse( $templatePaths ) as $path => $relPaths )
 			{
@@ -102,9 +102,9 @@ abstract class Controller_Jobs_Abstract
 	 * @return MShop_Common_Item_Type_Interface Type item
 	 * @throws Controller_Jobs_Exception If no item is found
 	 */
-	protected function _getTypeItem( $prefix, $domain, $code )
+	protected function getTypeItem( $prefix, $domain, $code )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), $prefix );
+		$manager = MShop_Factory::createManager( $this->getContext(), $prefix );
 		$prefix = str_replace( '/', '.', $prefix );
 
 		$search = $manager->createSearch();

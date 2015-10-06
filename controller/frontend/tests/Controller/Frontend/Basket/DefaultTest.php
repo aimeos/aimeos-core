@@ -7,15 +7,15 @@
 
 class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
-	private $_testItem;
+	private $object;
+	private $context;
+	private $testItem;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_object = new Controller_Frontend_Basket_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->object = new Controller_Frontend_Basket_Default( $this->context );
 
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
@@ -24,7 +24,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
-		if( ( $this->_testItem = reset( $items ) ) === false ) {
+		if( ( $this->testItem = reset( $items ) ) === false ) {
 			throw new Exception( 'Product not found' );
 		}
 	}
@@ -32,19 +32,19 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		$this->_object->clear();
-		$this->_context->getSession()->set( 'arcavias', array() );
+		$this->object->clear();
+		$this->context->getSession()->set( 'aimeos', array() );
 
-		unset( $this->_object, $this->_testItem );
+		unset( $this->object, $this->testItem );
 	}
 
 
 	public function testAddDeleteProduct()
 	{
-		$basket = $this->_object->get();
+		$basket = $this->object->get();
 
 
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 		$this->assertEquals( 2, $basket->getProduct( 0 )->getQuantity() );
@@ -62,9 +62,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'default' );
-		$item2 = $this->_object->get()->getProduct( 1 );
-		$this->_object->deleteProduct( 0 );
+		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'default' );
+		$item2 = $this->object->get()->getProduct( 1 );
+		$this->object->deleteProduct( 0 );
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 		$this->assertEquals( $item2, $basket->getProduct( 1 ) );
@@ -86,11 +86,11 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1 );
+		$this->object->addProduct( $item->getId(), 1 );
 
-		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
-		$this->assertEquals( 'U:BUNDLE', $this->_object->get()->getProduct( 0 )->getProductCode() );
-		$this->assertEquals( 2, count( $this->_object->get()->getProduct( 0 )->getProducts() ) );
+		$this->assertEquals( 1, count( $this->object->get()->getProducts() ) );
+		$this->assertEquals( 'U:BUNDLE', $this->object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 2, count( $this->object->get()->getProduct( 0 )->getProducts() ) );
 	}
 
 
@@ -119,10 +119,10 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), array(), 'default' );
+		$this->object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), array(), 'default' );
 
-		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
-		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 1, count( $this->object->get()->getProducts() ) );
+		$this->assertEquals( 'CNC', $this->object->get()->getProduct( 0 )->getProductCode() );
 	}
 
 
@@ -156,11 +156,11 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
+		$this->object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 
-		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
-		$this->assertEquals( 'U:TESTSUB02', $this->_object->get()->getProduct( 0 )->getProductCode() );
-		$this->assertEquals( 2, count( $this->_object->get()->getProduct( 0 )->getAttributes() ) );
+		$this->assertEquals( 1, count( $this->object->get()->getProducts() ) );
+		$this->assertEquals( 'U:TESTSUB02', $this->object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 2, count( $this->object->get()->getProduct( 0 )->getAttributes() ) );
 	}
 
 
@@ -195,7 +195,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
+		$this->object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 	}
 
 
@@ -214,10 +214,10 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$options = array( 'variant' => false );
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, $options, array_keys( $attributes ) );
+		$this->object->addProduct( $this->testItem->getId(), 1, $options, array_keys( $attributes ) );
 
-		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
-		$this->assertEquals( 'U:TESTP', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 1, count( $this->object->get()->getProducts() ) );
+		$this->assertEquals( 'U:TESTP', $this->object->get()->getProduct( 0 )->getProductCode() );
 	}
 
 
@@ -234,8 +234,8 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Attribute not found' );
 		}
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array_keys( $attributes ) );
-		$basket = $this->_object->get();
+		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array_keys( $attributes ) );
+		$basket = $this->object->get();
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 		$this->assertEquals( 'U:TESTPSUB01', $basket->getProduct( 0 )->getProductCode() );
@@ -260,9 +260,9 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Attribute not found' );
 		}
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array(), array_keys( $attributes ) );
+		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array(), array_keys( $attributes ) );
 
-		$basket = $this->_object->get();
+		$basket = $this->object->get();
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 
 		$product = $basket->getProduct( 0 );
@@ -299,8 +299,8 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$attrValues = array( $attrItem->getId() => '2000-01-01' );
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array(), array(), $attrValues );
-		$basket = $this->_object->get();
+		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array(), array(), $attrValues );
+		$basket = $this->object->get();
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
 		$this->assertEquals( '2000-01-01', $basket->getProduct( 0 )->getAttribute( 'date', 'custom' ) );
@@ -328,14 +328,14 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$configAttrIds = array_keys( $attribute );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), $configAttrIds, $hiddenAttrIds );
+		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), $configAttrIds, $hiddenAttrIds );
 	}
 
 
 	public function testAddProductNegativeQuantityException()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), -1 );
+		$this->object->addProduct( $this->testItem->getId(), -1 );
 	}
 
 
@@ -354,12 +354,12 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse3' );
+			$this->object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
 		{
-			$item = $this->_object->get()->getProduct( 0 );
+			$item = $this->object->get()->getProduct( 0 );
 			$this->assertEquals( 3, $item->getQuantity() );
 		}
 	}
@@ -380,12 +380,12 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse2' );
+			$this->object->addProduct( $item->getId(), 5, array(), array(), array(), array(), array(), 'unit_warehouse2' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
 		{
-			$this->assertEquals( array(), $this->_object->get()->getProducts() );
+			$this->assertEquals( array(), $this->object->get()->getProducts() );
 		}
 	}
 
@@ -403,7 +403,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 5, array( 'stock' => false ) );
+		$this->object->addProduct( $item->getId(), 5, array( 'stock' => false ) );
 	}
 
 
@@ -421,7 +421,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 1 );
+		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
@@ -439,14 +439,14 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->addProduct( $item->getId(), 1 );
+		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
 	public function testAddProductConfigAttributeException()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array( -1 ) );
+		$this->object->addProduct( $this->testItem->getId(), 1, array(), array(), array( -1 ) );
 	}
 
 
@@ -462,13 +462,13 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 1 );
+		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
 	public function testAddProductSelectionWithPricelessItem()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 1 );
+		$this->object->addProduct( $this->testItem->getId(), 1 );
 
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
@@ -480,7 +480,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->assertEquals( 'U:TESTPSUB01', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 'U:TESTPSUB01', $this->object->get()->getProduct( 0 )->getProductCode() );
 	}
 
 
@@ -496,7 +496,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->addProduct( $item->getId(), 1 );
+		$this->object->addProduct( $item->getId(), 1 );
 	}
 
 
@@ -511,35 +511,35 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
-		$this->assertEquals( 2, $this->_object->get()->getProduct( 0 )->getQuantity() );
-		$this->assertEquals( 'IJKL', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 2, $this->object->get()->getProduct( 0 )->getQuantity() );
+		$this->assertEquals( 'IJKL', $this->object->get()->getProduct( 0 )->getProductCode() );
 	}
 
 
 	public function testDeleteProductFlagError()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$item->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->deleteProduct( 0 );
+		$this->object->deleteProduct( 0 );
 	}
 
 
 	public function testEditProduct()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 1 );
+		$this->object->addProduct( $this->testItem->getId(), 1 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 1, $item->getQuantity() );
 
-		$this->_object->editProduct( 0, 4 );
+		$this->object->editProduct( 0, 4 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 4, $item->getQuantity() );
 		$this->assertEquals( 'U:TESTPSUB01', $item->getProductCode() );
 	}
@@ -579,17 +579,17 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array(), array_keys( $attributes ) );
-		$this->_object->editProduct( 0, 4 );
+		$this->object->addProduct( $item->getId(), 1, array(), array(), array_keys( $attributes ) );
+		$this->object->editProduct( 0, 4 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
 		$this->assertEquals( 4, $item->getQuantity() );
 
 
-		$this->_object->editProduct( 0, 3, array(), array( $attribute->getType() ) );
+		$this->object->editProduct( 0, 3, array(), array( $attribute->getType() ) );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 3, $item->getQuantity() );
 		$this->assertEquals( 1, count( $item->getAttributes() ) );
 		$this->assertEquals( 'U:TESTPSUB01', $item->getProductCode() );
@@ -607,19 +607,19 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );
 
 		try
 		{
-			$this->_object->editProduct( 0, 5 );
+			$this->object->editProduct( 0, 5 );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
 		{
-			$item = $this->_object->get()->getProduct( 0 );
+			$item = $this->object->get()->getProduct( 0 );
 			$this->assertEquals( 3, $item->getQuantity() );
 			$this->assertEquals( 'IJKL', $item->getProductCode() );
 		}
@@ -645,19 +645,19 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$orderProductItem->setQuantity( 2 );
 		$orderProductItem->setWarehouseCode( 'unit_warehouse3' );
 
-		$pos = $this->_object->get()->addProduct( $orderProductItem, 1 );
+		$pos = $this->object->get()->addProduct( $orderProductItem, 1 );
 
-		$item = $this->_object->get()->getProduct( $pos );
+		$item = $this->object->get()->getProduct( $pos );
 		$this->assertEquals( 2, $item->getQuantity() );
 
 		try
 		{
-			$this->_object->editProduct( $pos, 5 );
+			$this->object->editProduct( $pos, 5 );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
 		{
-			$this->assertEquals( 3, $this->_object->get()->getProduct( $pos )->getQuantity() );
+			$this->assertEquals( 3, $this->object->get()->getProduct( $pos )->getQuantity() );
 		}
 	}
 
@@ -673,14 +673,14 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
+		$this->object->addProduct( $item->getId(), 2, array(), array(), array(), array(), array(), 'unit_warehouse3' );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );
 
-		$this->_object->editProduct( 0, 5, array( 'stock' => false ) );
+		$this->object->editProduct( 0, 5, array( 'stock' => false ) );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$this->assertEquals( 5, $item->getQuantity() );
 		$this->assertEquals( 'IJKL', $item->getProductCode() );
 	}
@@ -688,22 +688,22 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testEditProductFlagError()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->object->get()->getProduct( 0 );
 		$item->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->editProduct( 0, 4 );
+		$this->object->editProduct( 0, 4 );
 	}
 
 
 	public function testAddCoupon()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
-		$this->_object->addCoupon( 'GHIJ' );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
+		$this->object->addCoupon( 'GHIJ' );
 
-		$basket = $this->_object->get();
+		$basket = $this->object->get();
 
 		$this->assertEquals( 1, count( $basket->getCoupons() ) );
 	}
@@ -712,24 +712,24 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testAddCouponInvalidCode()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addCoupon( 'invalid' );
+		$this->object->addCoupon( 'invalid' );
 	}
 
 
 	public function testAddCouponMissingRequirements()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addCoupon( 'OPQR' );
+		$this->object->addCoupon( 'OPQR' );
 	}
 
 
 	public function testDeleteCoupon()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
-		$this->_object->addCoupon( '90AB' );
-		$this->_object->deleteCoupon( '90AB' );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
+		$this->object->addCoupon( '90AB' );
+		$this->object->deleteCoupon( '90AB' );
 
-		$basket = $this->_object->get();
+		$basket = $this->object->get();
 
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 	}
@@ -737,28 +737,28 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 
 	public function testClear()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
-		$this->_object->clear();
+		$this->object->addProduct( $this->testItem->getId(), 2 );
+		$this->object->clear();
 
-		$this->assertEquals( 0, count( $this->_object->get()->getProducts() ) );
+		$this->assertEquals( 0, count( $this->object->get()->getProducts() ) );
 	}
 
 
 	public function testSetBillingAddressByItem()
 	{
-		$item = $this->_getAddress( 'Metaways' );
+		$item = $this->getAddress( 'Example company' );
 
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
 
 	public function testSetBillingAddressByArray()
 	{
 		$fixture = array(
-			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -773,16 +773,16 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.countryid' => 'de',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.telephone' => '05554433221',
-			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.email' => 'test@example.com',
 			'order.base.address.telefax' => '05554433222',
-			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
 
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $fixture );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $fixture );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
 	}
@@ -791,32 +791,32 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetBillingAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, array( 'error' => false ) );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, array( 'error' => false ) );
 	}
 
 
 	public function testSetBillingAddressParameterError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, 'error' );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, 'error' );
 	}
 
 
 	public function testSetDeliveryAddressByItem()
 	{
-		$item = $this->_getAddress( 'Metaways' );
+		$item = $this->getAddress( 'Example company' );
 
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 	}
 
 
 	public function testSetDeliveryAddressByArray()
 	{
 		$fixture = array(
-			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Example company</p>',
 			'order.base.address.vatid' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -831,15 +831,15 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 			'order.base.address.countryid' => 'de',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.telephone' => '05554433221',
-			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.email' => 'test@example.com',
 			'order.base.address.telefax' => '05554433222',
-			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.website' => 'www.example.com',
 			'order.base.address.flag' => 0,
 		);
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $fixture );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $fixture );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$address = $this->object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$this->assertEquals( 'Example company', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
 	}
@@ -848,50 +848,50 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testSetDeliveryAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, array( 'error' => false ) );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, array( 'error' => false ) );
 	}
 
 
 	public function testSetDeliveryAddressTypeError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, 'error' );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, 'error' );
 	}
 
 
 	public function testSetServicePayment()
 	{
-		$service = $this->_getService( 'unitpaymentcode' );
+		$service = $this->getService( 'unitpaymentcode' );
 
-		$this->_object->setService( 'payment', $service->getId(), array() );
-		$this->assertEquals( 'unitpaymentcode', $this->_object->get()->getService( 'payment' )->getCode() );
+		$this->object->setService( 'payment', $service->getId(), array() );
+		$this->assertEquals( 'unitpaymentcode', $this->object->get()->getService( 'payment' )->getCode() );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setService( 'payment', $service->getId(), array( 'prepay' => true ) );
+		$this->object->setService( 'payment', $service->getId(), array( 'prepay' => true ) );
 	}
 
 
 	public function testSetDeliveryOption()
 	{
-		$service = $this->_getService( 'unitcode' );
+		$service = $this->getService( 'unitcode' );
 
-		$this->_object->setService( 'delivery', $service->getId(), array() );
-		$this->assertEquals( 'unitcode', $this->_object->get()->getService( 'delivery' )->getCode() );
+		$this->object->setService( 'delivery', $service->getId(), array() );
+		$this->assertEquals( 'unitcode', $this->object->get()->getService( 'delivery' )->getCode() );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setService( 'delivery', $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
+		$this->object->setService( 'delivery', $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
 	}
 
 
 	public function testCheckLocale()
 	{
-		$this->_object->addProduct( $this->_testItem->getId(), 2 );
-		$this->_object->addCoupon( 'OPQR' );
+		$this->object->addProduct( $this->testItem->getId(), 2 );
+		$this->object->addCoupon( 'OPQR' );
 
-		$this->_object->setService( 'payment', $this->_getService( 'unitpaymentcode' )->getId() );
-		$this->_object->setService( 'delivery', $this->_getService( 'unitcode' )->getId() );
+		$this->object->setService( 'payment', $this->getService( 'unitpaymentcode' )->getId() );
+		$this->object->setService( 'delivery', $this->getService( 'unitcode' )->getId() );
 
-		$basket = $this->_object->get();
+		$basket = $this->object->get();
 		$price = $basket->getPrice();
 
 		foreach( $basket->getProducts() as $product )
@@ -905,15 +905,15 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 		$basket->getLocale()->setCurrencyId( 'CHF' );
 		$price->setCurrencyId( 'CHF' );
 
-		$this->_context->getLocale()->setCurrencyId( 'CHF' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_getAddress( 'Metaways' ) );
+		$this->context->getLocale()->setCurrencyId( 'CHF' );
+		$this->object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->getAddress( 'Example company' ) );
 
-		$this->_context->getSession()->set( 'arcavias/basket/currency', 'CHF' );
-		$this->_context->getLocale()->setCurrencyId( 'EUR' );
+		$this->context->getSession()->set( 'aimeos/basket/currency', 'CHF' );
+		$this->context->getLocale()->setCurrencyId( 'EUR' );
 
-		$this->_context->getSession()->set( 'arcavias/basket/content-unittest-en-EUR-', null );
+		$this->context->getSession()->set( 'aimeos/basket/content-unittest-en-EUR-', null );
 
-		$object = new Controller_Frontend_Basket_Default( $this->_context );
+		$object = new Controller_Frontend_Basket_Default( $this->context );
 		$basket = $object->get();
 
 		foreach( $basket->getProducts() as $product )
@@ -932,7 +932,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @param string $company
 	 */
-	protected function _getAddress( $company )
+	protected function getAddress( $company )
 	{
 		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
 		$addressManager = $customer->getSubManager( 'address', 'Default' );
@@ -952,7 +952,7 @@ class Controller_Frontend_Basket_DefaultTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @param string $code
 	 */
-	protected function _getService( $code )
+	protected function getService( $code )
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 

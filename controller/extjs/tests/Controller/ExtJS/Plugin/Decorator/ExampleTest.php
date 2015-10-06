@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -21,7 +21,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 	{
 		$context = TestHelper::getContext();
 		$controller = Controller_ExtJS_Plugin_Factory::createController( $context );
-		$this->_object = new Controller_ExtJS_Plugin_Decorator_Example( $context, $controller );
+		$this->object = new Controller_ExtJS_Plugin_Decorator_Example( $context, $controller );
 	}
 
 
@@ -33,7 +33,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -48,7 +48,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		if( ( $plugin = reset( $result ) ) === false ) {
 			throw new Exception( 'No plugin found' );
@@ -85,12 +85,12 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'plugin.provider' => 'test provider' ) ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'plugin.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 	}
@@ -98,7 +98,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testGetServiceDescription()
 	{
-		$actual = $this->_object->getServiceDescription();
+		$actual = $this->object->getServiceDescription();
 
 		$this->assertArrayHasKey( 'Plugin.init', $actual );
 	}
@@ -106,7 +106,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testGetSearchSchema()
 	{
-		$actual = $this->_object->getSearchSchema();
+		$actual = $this->object->getSearchSchema();
 
 		$this->assertArrayHasKey( 'criteria', $actual );
 	}
@@ -114,7 +114,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testGetItemSchema()
 	{
-		$actual = $this->_object->getItemSchema();
+		$actual = $this->object->getItemSchema();
 
 		$this->assertArrayHasKey( 'name', $actual );
 		$this->assertArrayHasKey( 'properties', $actual );
@@ -123,7 +123,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testCall()
 	{
-		$result = $this->_object->__call( 'getServiceDescription', array() );
+		$result = $this->object->__call( 'getServiceDescription', array() );
 		$this->assertInternalType( 'array', $result );
 	}
 

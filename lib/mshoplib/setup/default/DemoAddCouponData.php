@@ -36,20 +36,20 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert service data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Processing coupon demo data', 0 );
+		$this->msg( 'Processing coupon demo data', 0 );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'coupon' );
 
 		$search = $manager->createSearch();
@@ -81,14 +81,14 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 
 				$manager->saveItem( $item );
 
-				$this->_addCodes( $item->getId(), $entry['codes'] );
+				$this->addCodes( $item->getId(), $entry['codes'] );
 			}
 
-			$this->_status( 'added' );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'removed' );
+			$this->status( 'removed' );
 		}
 	}
 
@@ -99,9 +99,9 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 	 * @param string $couponId
 	 * @param array $data
 	 */
-	protected function _addCodes( $couponId, array $data )
+	protected function addCodes( $couponId, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'coupon/code' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'coupon/code' );
 
 		foreach( $data as $entry )
 		{

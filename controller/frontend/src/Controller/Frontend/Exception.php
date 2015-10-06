@@ -17,7 +17,7 @@
 class Controller_Frontend_Exception
 	extends Exception
 {
-	private $_list;
+	private $list;
 
 
 	/**
@@ -32,7 +32,7 @@ class Controller_Frontend_Exception
 	{
 		parent::__construct( $msg, $code, $previous );
 
-		$this->_list = $list;
+		$this->list = $list;
 	}
 
 
@@ -43,6 +43,6 @@ class Controller_Frontend_Exception
 	 */
 	public function getErrorList()
 	{
-		return $this->_list;
+		return $this->list;
 	}
 }

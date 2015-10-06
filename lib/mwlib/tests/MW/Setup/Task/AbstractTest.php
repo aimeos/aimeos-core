@@ -13,16 +13,16 @@ class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
 		return array();
 	}
 
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_execute( 'SELECT 1+1' );
+		$this->execute( 'SELECT 1+1' );
 
 		$list = array(
 			'SELECT 1+2',
 			'SELECT 1+3',
 		);
 
-		$this->_executeList( $list );
+		$this->executeList( $list );
 	}
 }
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
  */
 class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -57,7 +57,7 @@ class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
 		$conn = $dbm->acquire();
 
 		$schema = new MW_Setup_DBSchema_Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
-		$this->_object = new MW_Setup_Task_AbstractImpl( $schema, $conn );
+		$this->object = new MW_Setup_Task_AbstractImpl( $schema, $conn );
 
 		$dbm->release( $conn );
 	}
@@ -74,19 +74,19 @@ class MW_Setup_Task_AbstractTest extends PHPUnit_Framework_TestCase
 
 	public function testGetPreDependencies()
 	{
-		$this->assertEquals( array( 'TestTask' ), $this->_object->getPreDependencies() );
+		$this->assertEquals( array( 'TestTask' ), $this->object->getPreDependencies() );
 	}
 
 	public function testGetPostDependencies()
 	{
-		$this->assertEquals( array(), $this->_object->getPostDependencies() );
+		$this->assertEquals( array(), $this->object->getPostDependencies() );
 	}
 
 	public function testRun()
 	{
-		$this->_object->run( 'mysql' );
+		$this->object->run( 'mysql' );
 
 		$this->setExpectedException( 'MW_Setup_Exception' );
-		$this->_object->run( 'notexisting' );
+		$this->object->run( 'notexisting' );
 	}
 }

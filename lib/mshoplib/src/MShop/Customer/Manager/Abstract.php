@@ -18,9 +18,9 @@ abstract class MShop_Customer_Manager_Abstract
 	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Customer_Manager_Interface
 {
-	private $_salt;
-	private $_helper;
-	private $_addressManager;
+	private $salt;
+	private $helper;
+	private $addressManager;
 
 
 	/**
@@ -31,7 +31,7 @@ abstract class MShop_Customer_Manager_Abstract
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-customer' );
+		$this->setResourceName( 'db-customer' );
 
 		/** mshop/customer/manager/salt
 		 * Password salt for all customer passwords of the installation
@@ -48,7 +48,7 @@ abstract class MShop_Customer_Manager_Abstract
 		 * @see mshop/customer/manager/password/name
 		 * @sse mshop/customer/manager/password/options
 		 */
-		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/salt', 'mshop' );
+		$this->salt = $context->getConfig()->get( 'mshop/customer/manager/salt', 'mshop' );
 	}
 
 
@@ -59,9 +59,9 @@ abstract class MShop_Customer_Manager_Abstract
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
 
-		return $this->_createItem( $values );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -74,7 +74,7 @@ abstract class MShop_Customer_Manager_Abstract
 	public function createSearch( $default = false )
 	{
 		if( $default === true ) {
-			return $this->_createSearch( 'customer' );
+			return $this->createSearchBase( 'customer' );
 		}
 
 		return parent::createSearch();
@@ -91,7 +91,7 @@ abstract class MShop_Customer_Manager_Abstract
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'customer.id', $id, $ref );
+		return $this->getItemBase( 'customer.id', $id, $ref );
 	}
 
 
@@ -103,16 +103,16 @@ abstract class MShop_Customer_Manager_Abstract
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		if( !isset( $this->_addressManager ) ) {
-			$this->_addressManager = $this->getSubManager( 'address' );
+		if( !isset( $this->addressManager ) ) {
+			$this->addressManager = $this->getSubManager( 'address' );
 		}
 
-		$helper = $this->_getPasswordHelper();
-		$address = $this->_addressManager->createItem();
+		$helper = $this->getPasswordHelper();
+		$address = $this->addressManager->createItem();
 
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->_salt, $helper );
+		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->salt, $helper );
 	}
 
 
@@ -122,13 +122,13 @@ abstract class MShop_Customer_Manager_Abstract
 	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
 	 * @throws MShop_Exception If the name is invalid or the class isn't found
 	 */
-	protected function _getPasswordHelper()
+	protected function getPasswordHelper()
 	{
-		if( $this->_helper ) {
-			return $this->_helper;
+		if( $this->helper ) {
+			return $this->helper;
 		}
 
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** mshop/customer/manager/password/name
 		 * Last part of the name for building the password helper item
@@ -180,7 +180,7 @@ abstract class MShop_Customer_Manager_Abstract
 			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
-		$this->_helper = $helper;
+		$this->helper = $helper;
 
 		return $helper;
 	}

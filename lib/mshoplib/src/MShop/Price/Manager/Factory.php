@@ -75,7 +75,7 @@ class MShop_Price_Manager_Factory
 		$iface = 'MShop_Price_Manager_Interface';
 		$classname = 'MShop_Price_Manager_' . $name;
 
-		$manager = self::_createManager( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/price/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the price manager
@@ -151,7 +151,7 @@ class MShop_Price_Manager_Factory
 		 * @see mshop/price/manager/decorators/excludes
 		 * @see mshop/price/manager/decorators/global
 		 */
-		return self::_addManagerDecorators( $context, $manager, 'price' );
+		return self::addManagerDecorators( $context, $manager, 'price' );
 	}
 
 }

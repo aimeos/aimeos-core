@@ -51,11 +51,11 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/detail/additional/attribute/default/subparts';
-	private $_subPartNames = array();
-	private $_tags = array();
-	private $_expire;
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/detail/additional/attribute/default/subparts';
+	private $subPartNames = array();
+	private $tags = array();
+	private $expire;
+	private $cache;
 
 
 	/**
@@ -68,10 +68,10 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->attributeBody = $html;
@@ -99,7 +99,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 		$tplconf = 'client/html/catalog/detail/additional/attribute/default/template-body';
 		$default = 'catalog/detail/additional-attribute-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -113,10 +113,10 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->attributeHeader = $html;
@@ -145,7 +145,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 		$tplconf = 'client/html/catalog/detail/additional/attribute/default/template-header';
 		$default = 'catalog/detail/additional-attribute-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -232,7 +232,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 		 * @see client/html/catalog/detail/additional/attribute/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/detail/additional/attribute/' . $type, $name );
+		return $this->createSubClient( 'catalog/detail/additional/attribute/' . $type, $name );
 	}
 
 
@@ -241,9 +241,9 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -255,11 +255,11 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$config = $context->getConfig();
 			$attrIds = $attributeMap = $subAttrDeps = array();
 
@@ -306,8 +306,8 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				}
 			}
 
-			$this->_addMetaItem( $products, 'product', $this->_expire, $this->_tags );
-			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
+			$this->addMetaItem( $products, 'product', $this->expire, $this->tags );
+			$this->addMetaList( array_keys( $products ), 'product', $this->expire );
 
 
 			$attrManager = $controller->createManager( 'attribute' );
@@ -345,19 +345,19 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				$attributeMap[$item->getType()][$id] = $item;
 			}
 
-			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
-			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
+			$this->addMetaItem( $attributes, 'attribute', $this->expire, $this->tags );
+			$this->addMetaList( array_keys( $attributes ), 'attribute', $this->expire );
 
 
 			$view->attributeMap = $attributeMap;
 			$view->subAttributeDependencies = $subAttrDeps;
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

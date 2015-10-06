@@ -27,7 +27,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createManager( $name )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), $name );
+		return MShop_Factory::createManager( $this->getContext(), $name );
 	}
 
 
@@ -40,7 +40,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createCatalogFilter( $default = true )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->createSearch( $default );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog' )->createSearch( $default );
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function getCatalogPath( $id, array $domains = array( 'text', 'media' ) )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->getPath( $id, $domains );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog' )->getPath( $id, $domains );
 	}
 
 
@@ -72,7 +72,7 @@ class Controller_Frontend_Catalog_Default
 	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ),
 		$level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $search = null )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog' )->getTree( $id, $domains, $level, $search );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog' )->getTree( $id, $domains, $level, $search );
 	}
 
 
@@ -86,18 +86,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function aggregateIndex( MW_Common_Criteria_Interface $filter, $key )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog/index' )->aggregate( $filter, $key );
-	}
-
-
-	/**
-	 * @deprecated 2015.10 use aggregateIndex() instead
-	 * @param MW_Common_Criteria_Interface $filter
-	 * @param string $key
-	 */
-	public function aggregate( MW_Common_Criteria_Interface $filter, $key )
-	{
-		return $this->aggregateIndex( $filter, $key );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog/index' )->aggregate( $filter, $key );
 	}
 
 
@@ -115,7 +104,7 @@ class Controller_Frontend_Catalog_Default
 	public function createIndexFilter( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
 		$sortations = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$search = MShop_Factory::createManager( $context, 'catalog/index' )->createSearch( true );
 		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
@@ -158,20 +147,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use createIndexFilter() instead
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterDefault( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
-	}
-
-
-	/**
 	 * Returns the index filter for the given category ID.
 	 *
 	 * @param integer $catid ID of the category to get the product list from
@@ -205,21 +180,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use createIndexFilterCategory() instead
-	 * @param string $catid
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterByCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilterCategory( $catid, $sort, $direction, $start, $size, $listtype );
-	}
-
-
-	/**
 	 * Returns the index filter for the given search string.
 	 *
 	 * @param string $input Search string entered by the user
@@ -233,8 +193,8 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createIndexFilterText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
-		$langid = $this->_getContext()->getLocale()->getLanguageId();
-		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
+		$langid = $this->getContext()->getLocale()->getLanguageId();
+		$search = $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
 		// we don't need to sort by 'sort:catalog.index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
@@ -243,20 +203,6 @@ class Controller_Frontend_Catalog_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $search;
-	}
-
-	/**
-	 * @deprecated 2015.10 use createIndexFilterText() instead
-	 * @param string $input
-	 * @param string|null $sort
-	 * @param string $direction
-	 * @param integer $start
-	 * @param integer $size
-	 * @param string $listtype
-	 */
-	public function createProductFilterByText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
-	{
-		return $this->createIndexFilterText( $input, $sort, $direction, $start, $size, $listtype );
 	}
 
 
@@ -280,17 +226,6 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * @deprecated 2015.10 use addIndexFilterCategory() instead
-	 * @param MW_Common_Criteria_Interface $search
-	 * @param string $catid
-	 */
-	public function addProductFilterCategory( MW_Common_Criteria_Interface $search, $catid )
-	{
-		return $this->addIndexFilterCategory( $search, $catid );
-	}
-
-
-	/**
 	 * Returns the given search filter with the conditions attached for filtering by text.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Criteria object used for product search
@@ -301,25 +236,13 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function addIndexFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
 	{
-		$langid = $this->_getContext()->getLocale()->getLanguageId();
+		$langid = $this->getContext()->getLocale()->getLanguageId();
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
 		$expr[] = $search->getConditions();
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $search;
-	}
-
-
-	/**
-	 * @deprecated 2015.10 use addIndexFilterText() instead
-	 * @param MW_Common_Criteria_Interface $search
-	 * @param string $input
-	 * @param string $listtype
-	 */
-	public function addProductFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
-	{
-		return $this->addIndexFilterText( $search, $input, $listtype );
 	}
 
 
@@ -334,19 +257,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function getIndexItems( MW_Common_Criteria_Interface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog/index' )->searchItems( $filter, $domains, $total );
-	}
-
-
-	/**
-	 * @deprecated 2015.10 use getIndexItems() instead
-	 * @param MW_Common_Criteria_Interface $filter
-	 * @param integer|null $total
-	 * @param string[] $domains
-	 */
-	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text' ) )
-	{
-		return $this->getIndexItems( $filter, $domains, $total );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog/index' )->searchItems( $filter, $domains, $total );
 	}
 
 
@@ -361,7 +272,7 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function getProductItems( array $ids, array $domains = array( 'media', 'price', 'text' ) )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $manager->createSearch( true );
 		$expr = array(
@@ -389,10 +300,10 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createTextFilter( $input, $sort = null, $direction = '+', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
 	{
-		$locale = $this->_getContext()->getLocale();
+		$locale = $this->getContext()->getLocale();
 		$langid = $locale->getLanguageId();
 
-		$search = MShop_Factory::createManager( $this->_getContext(), 'catalog/index/text' )->createSearch( true );
+		$search = MShop_Factory::createManager( $this->getContext(), 'catalog/index/text' )->createSearch( true );
 
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
@@ -431,6 +342,6 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function getTextList( MW_Common_Criteria_Interface $filter )
 	{
-		return MShop_Factory::createManager( $this->_getContext(), 'catalog/index/text' )->searchTexts( $filter );
+		return MShop_Factory::createManager( $this->getContext(), 'catalog/index/text' )->searchTexts( $filter );
 	}
 }

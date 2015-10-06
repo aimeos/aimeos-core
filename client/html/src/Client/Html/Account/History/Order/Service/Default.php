@@ -99,6 +99,6 @@ class Client_Html_Account_History_Order_Service_Default
 		 * @see client/html/account/history/order/service/decorators/excludes
 		 * @see client/html/account/history/order/service/decorators/global
 		 */
-		return $this->_createSubClient( 'account/history/order/service/' . $type, $name );
+		return $this->createSubClient( 'account/history/order/service/' . $type, $name );
 	}
 }

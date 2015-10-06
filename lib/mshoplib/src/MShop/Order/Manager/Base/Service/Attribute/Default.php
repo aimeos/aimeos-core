@@ -18,7 +18,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Service_Attribute_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.base.service.attribute.id' => array(
 			'code' => 'order.base.service.attribute.id',
 			'internalcode' => 'mordbaseat."id"',
@@ -112,7 +112,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -169,7 +169,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 * @see mshop/order/manager/base/service/attribute/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/service/attribute/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.service.attribute' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.service.attribute' ) );
 	}
 
 
@@ -181,11 +181,11 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/base/service/attribute/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/service/attribute/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/service/attribute/default/item/delete' );
 	}
 
 
@@ -196,8 +196,8 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -211,7 +211,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.base.service.attribute.id', $id, $ref );
+		return $this->getItemBase( 'order.base.service.attribute.id', $id, $ref );
 	}
 
 
@@ -230,10 +230,10 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -305,7 +305,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 				$path = 'mshop/order/manager/base/service/attribute/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
 			$stmt->bind( 3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -358,7 +358,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 				 * @see mshop/order/manager/base/service/attribute/default/item/count
 				 */
 				$path = 'mshop/order/manager/base/service/attribute/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -403,7 +403,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 * @see mshop/order/manager/base/service/attribute/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/service/attribute/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -434,7 +434,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 */
 		$path = 'classes/order/manager/base/service/attribute/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -448,10 +448,10 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -561,7 +561,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/service/attribute/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			try
@@ -571,7 +571,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
 						$row['value'] = $value;
 					}
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -710,7 +710,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 		 * @see mshop/order/manager/base/service/attribute/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/service/attribute/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/service/attribute/' . $manager, $name );
 	}
 
 
@@ -719,7 +719,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	 *
 	 * @return MShop_Order_Item_Base_Service_Attribute_Default New item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Base_Service_Attribute_Default( $values );
 	}

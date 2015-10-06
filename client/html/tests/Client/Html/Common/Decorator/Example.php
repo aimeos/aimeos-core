@@ -17,4 +17,10 @@ class Client_Html_Common_Decorator_Example
 	{
 		return true;
 	}
+
+
+	protected function getSubClientNames()
+	{
+		return array();
+	}
 }

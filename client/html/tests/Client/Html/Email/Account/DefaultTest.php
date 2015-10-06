@@ -7,10 +7,10 @@
 
 class Client_Html_Email_Account_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private static $_customerItem;
-	private $_object;
-	private $_context;
-	private $_emailMock;
+	private static $customerItem;
+	private $object;
+	private $context;
+	private $emailMock;
 
 
 	public static function setUpBeforeClass()
@@ -23,7 +23,7 @@ class Client_Html_Email_Account_DefaultTest extends PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 		$result = $manager->searchItems( $search );
 
-		if( ( self::$_customerItem = reset( $result ) ) === false ) {
+		if( ( self::$customerItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No customer found' );
 		}
 	}
@@ -37,19 +37,19 @@ class Client_Html_Email_Account_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_emailMock = $this->getMock( 'MW_Mail_Message_None' );
+		$this->context = TestHelper::getContext();
+		$this->emailMock = $this->getMock( 'MW_Mail_Message_None' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Email_Account_Default( $this->_context, $paths );
+		$this->object = new Client_Html_Email_Account_Default( $this->context, $paths );
 
-		$view = TestHelper::getView( 'unittest', $this->_context->getConfig() );
-		$view->extAddressItem = self::$_customerItem->getPaymentAddress();
-		$view->extAccountCode = self::$_customerItem->getCode();
+		$view = TestHelper::getView( 'unittest', $this->context->getConfig() );
+		$view->extAddressItem = self::$customerItem->getPaymentAddress();
+		$view->extAccountCode = self::$customerItem->getCode();
 		$view->extAccountPassword = 'testpwd';
-		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
+		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->emailMock ) );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -61,39 +61,39 @@ class Client_Html_Email_Account_DefaultTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/email/from-email', 'me@localhost' );
 		$config->set( 'client/html/email/from-name', 'My company' );
 
-		$this->_emailMock->expects( $this->once() )->method( 'addHeader' )
+		$this->emailMock->expects( $this->once() )->method( 'addHeader' )
 			->with( $this->equalTo( 'X-MailGenerator' ), $this->equalTo( 'Aimeos' ) );
 
-		$this->_emailMock->expects( $this->once() )->method( 'addTo' )
-			->with( $this->equalTo( 'eshop@metaways.de' ), $this->equalTo( 'Our Unittest' ) );
+		$this->emailMock->expects( $this->once() )->method( 'addTo' )
+			->with( $this->equalTo( 'test@example.com' ), $this->equalTo( 'Our Unittest' ) );
 
-		$this->_emailMock->expects( $this->once() )->method( 'addFrom' )
+		$this->emailMock->expects( $this->once() )->method( 'addFrom' )
 			->with( $this->equalTo( 'me@localhost' ), $this->equalTo( 'My company' ) );
 
-		$this->_emailMock->expects( $this->once() )->method( 'addReplyTo' )
+		$this->emailMock->expects( $this->once() )->method( 'addReplyTo' )
 			->with( $this->equalTo( 'me@localhost' ), $this->equalTo( 'My company' ) );
 
-		$this->_emailMock->expects( $this->once() )->method( 'setSubject' )
+		$this->emailMock->expects( $this->once() )->method( 'setSubject' )
 			->with( $this->stringContains( 'Your new account' ) );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertNotNull( $output );
 	}
 
@@ -101,19 +101,19 @@ class Client_Html_Email_Account_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 }

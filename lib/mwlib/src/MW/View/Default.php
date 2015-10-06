@@ -26,8 +26,8 @@
  */
 class MW_View_Default implements MW_View_Interface
 {
-	private $_helper = array();
-	private $_values = array();
+	private $helper = array();
+	private $values = array();
 
 
 	/**
@@ -39,7 +39,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __call( $name, array $args )
 	{
-		if( !isset( $this->_helper[$name] ) )
+		if( !isset( $this->helper[$name] ) )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
@@ -60,10 +60,10 @@ class MW_View_Default implements MW_View_Interface
 				throw new MW_View_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 
-			$this->_helper[$name] = $helper;
+			$this->helper[$name] = $helper;
 		}
 
-		return call_user_func_array( array( $this->_helper[$name], 'transform' ), $args );
+		return call_user_func_array( array( $this->helper[$name], 'transform' ), $args );
 	}
 
 
@@ -72,14 +72,14 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __clone()
 	{
-		foreach( $this->_helper as $name => $helper )
+		foreach( $this->helper as $name => $helper )
 		{
 			$helper = clone $helper;
 
 			// reset view so view helpers will use the current one (for translation, etc.)
 			$helper->setView( $this );
 
-			$this->_helper[$name] = $helper;
+			$this->helper[$name] = $helper;
 		}
 	}
 
@@ -93,11 +93,11 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __get( $key )
 	{
-		if( !isset( $this->_values[$key] ) ) {
+		if( !isset( $this->values[$key] ) ) {
 			throw new MW_View_Exception( sprintf( 'No value for key "%1$s" found', $key ) );
 		}
 
-		return $this->_values[$key];
+		return $this->values[$key];
 	}
 
 
@@ -109,7 +109,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __isset( $key )
 	{
-		return isset( $this->_values[$key] );
+		return isset( $this->values[$key] );
 	}
 
 
@@ -120,7 +120,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __unset( $key )
 	{
-		unset( $this->_values[$key] );
+		unset( $this->values[$key] );
 	}
 
 
@@ -132,7 +132,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __set( $key, $value )
 	{
-		$this->_values[$key] = $value;
+		$this->values[$key] = $value;
 	}
 
 
@@ -144,7 +144,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function addHelper( $name, MW_View_Helper_Interface $helper )
 	{
-		$this->_helper[$name] = $helper;
+		$this->helper[$name] = $helper;
 	}
 
 
@@ -156,7 +156,7 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function assign( array $values )
 	{
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -169,8 +169,8 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function get( $key, $default = null )
 	{
-		if( isset( $this->_values[$key] ) ) {
-			return $this->_values[$key];
+		if( isset( $this->values[$key] ) ) {
+			return $this->values[$key];
 		}
 
 		return $default;
@@ -190,7 +190,7 @@ class MW_View_Default implements MW_View_Interface
 		{
 			ob_start();
 
-			$this->_include( $filename );
+			$this->includeFile( $filename );
 
 			return ob_get_clean();
 		}
@@ -206,7 +206,7 @@ class MW_View_Default implements MW_View_Interface
 	 * Includes the template file and processes the PHP instructions.
 	 * The filename is passed as first argument but without variable name to prevent messing the variable scope.
 	 */
-	protected function _include()
+	protected function includeFile()
 	{
 		include func_get_arg( 0 );
 	}

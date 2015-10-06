@@ -18,7 +18,7 @@ class MShop_Price_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Price_Item_Interface
 {
-	private $_values;
+	private $values;
 
 
 	/**
@@ -32,7 +32,7 @@ class MShop_Price_Item_Default
 	{
 		parent::__construct( 'price.', $values, $listItems, $refItems );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -43,7 +43,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -67,7 +67,7 @@ class MShop_Price_Item_Default
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $typeid;
+		$this->values['typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -79,7 +79,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getCurrencyId()
 	{
-		return ( isset( $this->_values['currencyid'] ) ? (string) $this->_values['currencyid'] : null );
+		return ( isset( $this->values['currencyid'] ) ? (string) $this->values['currencyid'] : null );
 	}
 
 
@@ -93,8 +93,8 @@ class MShop_Price_Item_Default
 	{
 		if( $currencyid == $this->getCurrencyId() ) { return; }
 
-		$this->_checkCurrencyId( $currencyid, false );
-		$this->_values['currencyid'] = $currencyid;
+		$this->checkCurrencyId( $currencyid, false );
+		$this->values['currencyid'] = $currencyid;
 		$this->setModified();
 	}
 
@@ -106,7 +106,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->_values['domain'] ) ? (string) $this->_values['domain'] : '' );
+		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
 	}
 
 
@@ -119,7 +119,7 @@ class MShop_Price_Item_Default
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->_values['domain'] = (string) $domain;
+		$this->values['domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -131,7 +131,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getQuantity()
 	{
-		return ( isset( $this->_values['quantity'] ) ? (int) $this->_values['quantity'] : 1 );
+		return ( isset( $this->values['quantity'] ) ? (int) $this->values['quantity'] : 1 );
 	}
 
 
@@ -144,7 +144,7 @@ class MShop_Price_Item_Default
 	{
 		if( $quantity == $this->getQuantity() ) { return; }
 
-		$this->_values['quantity'] = (int) $quantity;
+		$this->values['quantity'] = (int) $quantity;
 		$this->setModified();
 	}
 
@@ -156,7 +156,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->_values['value'] ) ? (string) $this->_values['value'] : '0.00' );
+		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '0.00' );
 	}
 
 
@@ -169,9 +169,9 @@ class MShop_Price_Item_Default
 	{
 		if( $price == $this->getValue() ) { return; }
 
-		$this->_checkPrice( $price );
+		$this->checkPrice( $price );
 
-		$this->_values['value'] = $this->_formatNumber( $price );
+		$this->values['value'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -183,7 +183,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getCosts()
 	{
-		return ( isset( $this->_values['costs'] ) ? (string) $this->_values['costs'] : '0.00' );
+		return ( isset( $this->values['costs'] ) ? (string) $this->values['costs'] : '0.00' );
 	}
 
 
@@ -196,9 +196,9 @@ class MShop_Price_Item_Default
 	{
 		if( $price == $this->getCosts() ) { return; }
 
-		$this->_checkPrice( $price );
+		$this->checkPrice( $price );
 
-		$this->_values['costs'] = $this->_formatNumber( $price );
+		$this->values['costs'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -210,7 +210,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getRebate()
 	{
-		return ( isset( $this->_values['rebate'] ) ? (string) $this->_values['rebate'] : '0.00' );
+		return ( isset( $this->values['rebate'] ) ? (string) $this->values['rebate'] : '0.00' );
 	}
 
 
@@ -223,9 +223,9 @@ class MShop_Price_Item_Default
 	{
 		if( $price == $this->getRebate() ) { return; }
 
-		$this->_checkPrice( $price );
+		$this->checkPrice( $price );
 
-		$this->_values['rebate'] = $this->_formatNumber( $price );
+		$this->values['rebate'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -237,7 +237,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getTaxRate()
 	{
-		return ( isset( $this->_values['taxrate'] ) ? (string) $this->_values['taxrate'] : '0.00' );
+		return ( isset( $this->values['taxrate'] ) ? (string) $this->values['taxrate'] : '0.00' );
 	}
 
 
@@ -250,9 +250,9 @@ class MShop_Price_Item_Default
 	{
 		if( $taxrate == $this->getTaxRate() ) { return; }
 
-		$this->_checkPrice( $taxrate );
+		$this->checkPrice( $taxrate );
 
-		$this->_values['taxrate'] = $this->_formatNumber( $taxrate );
+		$this->values['taxrate'] = $this->formatNumber( $taxrate );
 		$this->setModified();
 	}
 
@@ -264,7 +264,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -277,7 +277,7 @@ class MShop_Price_Item_Default
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -289,7 +289,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -302,7 +302,7 @@ class MShop_Price_Item_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -320,9 +320,9 @@ class MShop_Price_Item_Default
 			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
-		$this->_values['value'] = $this->_formatNumber( $this->getValue() + $item->getValue() * $quantity );
-		$this->_values['costs'] = $this->_formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
-		$this->_values['rebate'] = $this->_formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
+		$this->values['value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
+		$this->values['costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
+		$this->values['rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
 	}
 
 
@@ -422,7 +422,7 @@ class MShop_Price_Item_Default
 	 *
 	 * @param integer|double $value Monetary value
 	 */
-	protected function _checkPrice( $value )
+	protected function checkPrice( $value )
 	{
 		if( !is_numeric( $value ) ) {
 			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
@@ -435,7 +435,7 @@ class MShop_Price_Item_Default
 	 *
 	 * @param string formatted money value
 	 */
-	protected function _formatNumber( $number )
+	protected function formatNumber( $number )
 	{
 		return number_format( $number, 2, '.', '' );
 	}

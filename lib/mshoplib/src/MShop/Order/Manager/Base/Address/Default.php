@@ -18,7 +18,7 @@ class MShop_Order_Manager_Base_Address_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Address_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'order.base.address.id' => array(
 			'code' => 'order.base.address.id',
 			'internalcode' => 'mordbaad."id"',
@@ -223,7 +223,7 @@ class MShop_Order_Manager_Base_Address_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
-		$this->_setResourceName( 'db-order' );
+		$this->setResourceName( 'db-order' );
 	}
 
 
@@ -280,7 +280,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/default/item/count
 		 */
 		$cfgkey = 'mshop/order/manager/base/address/default/aggregate';
-		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.address' ) );
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.address' ) );
 	}
 
 
@@ -292,11 +292,11 @@ class MShop_Order_Manager_Base_Address_Default
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/order/manager/base/address/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/order/manager/base/address/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/order/manager/base/address/default/item/delete' );
 	}
 
 
@@ -307,8 +307,8 @@ class MShop_Order_Manager_Base_Address_Default
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-		return $this->_createItem( $values );
+		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		return $this->createItemBase( $values );
 	}
 
 
@@ -327,10 +327,10 @@ class MShop_Order_Manager_Base_Address_Default
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -402,7 +402,7 @@ class MShop_Order_Manager_Base_Address_Default
 				$path = 'mshop/order/manager/base/address/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Abstract::PARAM_STR );
@@ -471,7 +471,7 @@ class MShop_Order_Manager_Base_Address_Default
 				 * @see mshop/order/manager/base/address/default/item/count
 				 */
 				$path = 'mshop/order/manager/base/address/default/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -516,7 +516,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/default/item/count
 		 */
 		$path = 'mshop/order/manager/base/address/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -530,7 +530,7 @@ class MShop_Order_Manager_Base_Address_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'order.base.address.id', $id, $ref );
+		return $this->getItemBase( 'order.base.address.id', $id, $ref );
 	}
 
 
@@ -561,7 +561,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 */
 		$path = 'classes/order/manager/base/address/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -575,10 +575,10 @@ class MShop_Order_Manager_Base_Address_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -688,13 +688,13 @@ class MShop_Order_Manager_Base_Address_Default
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/address/default/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $sitelevel );
 
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->_createItem( $row );
+					$items[$row['id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( Exception $e )
@@ -835,7 +835,7 @@ class MShop_Order_Manager_Base_Address_Default
 		 * @see mshop/order/manager/base/address/decorators/global
 		 */
 
-		return $this->_getSubManager( 'order', 'base/address/' . $manager, $name );
+		return $this->getSubManagerBase( 'order', 'base/address/' . $manager, $name );
 	}
 
 
@@ -846,7 +846,7 @@ class MShop_Order_Manager_Base_Address_Default
 	 * @param array $values Possible optional array keys can be given: id, type, firstname, lastname
 	 * @return MShop_Order_Item_Base_Address_Default New order base address item object
 	 */
-	protected function _createItem( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new MShop_Order_Item_Base_Address_Default( $values );
 	}

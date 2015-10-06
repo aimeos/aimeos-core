@@ -12,8 +12,8 @@
  */
 class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_orderBase;
+	private $object;
+	private $orderBase;
 
 
 	/**
@@ -31,8 +31,8 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 		$couponItem->setConfig( array( 'fixedrebate.productcode' => 'U:MD', 'fixedrebate.rebate' => '2.50' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
-		$this->_object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
+		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
 	}
 
 
@@ -44,17 +44,17 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_orderBase );
+		unset( $this->object );
+		unset( $this->orderBase );
 	}
 
 
 	public function testAddCoupon()
 	{
-		$this->_object->addCoupon( $this->_orderBase );
+		$this->object->addCoupon( $this->orderBase );
 
-		$coupons = $this->_orderBase->getCoupons();
-		$products = $this->_orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
 
 		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
 			throw new Exception( 'No coupon available' );
@@ -87,10 +87,10 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 
 		$object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
 
-		$object->addCoupon( $this->_orderBase );
+		$object->addCoupon( $this->orderBase );
 
-		$coupons = $this->_orderBase->getCoupons();
-		$products = $this->_orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
 
 		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
 			throw new Exception( 'No coupon available' );
@@ -105,7 +105,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 
 	public function testAddCouponMultipleTaxRates()
 	{
-		$products = $this->_getOrderProducts();
+		$products = $this->getOrderProducts();
 
 		$products['CNC']->getPrice()->setTaxRate( '10.00' );
 		$products['CNE']->getPrice()->setTaxRate( '20.00' );
@@ -113,8 +113,8 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 		$products['CNC']->setQuantity( 1 );
 		$products['CNE']->setQuantity( 1 );
 
-		$this->_orderBase->addProduct( $products['CNE'] );
-		$this->_orderBase->addProduct( $products['CNC'] );
+		$this->orderBase->addProduct( $products['CNE'] );
+		$this->orderBase->addProduct( $products['CNC'] );
 
 		$context = TestHelper::getContext();
 		$config = array(
@@ -129,10 +129,10 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 
 		$object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
 
-		$object->addCoupon( $this->_orderBase );
+		$object->addCoupon( $this->orderBase );
 
-		$coupons = $this->_orderBase->getCoupons();
-		$products = $this->_orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
 
 		if( ( $couponProduct20 = reset( $coupons['zyxw'] ) ) === false ) {
 			throw new Exception( 'No coupon available' );
@@ -152,11 +152,11 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 
 	public function testDeleteCoupon()
 	{
-		$this->_object->addCoupon( $this->_orderBase );
-		$this->_object->deleteCoupon( $this->_orderBase );
+		$this->object->addCoupon( $this->orderBase );
+		$this->object->deleteCoupon( $this->orderBase );
 
-		$products = $this->_orderBase->getProducts();
-		$coupons = $this->_orderBase->getCoupons();
+		$products = $this->orderBase->getProducts();
+		$coupons = $this->orderBase->getCoupons();
 
 		$this->assertEquals( 0, count( $products ) );
 		$this->assertArrayNotHasKey( 'zyxw', $coupons );
@@ -172,17 +172,17 @@ class MShop_Coupon_Provider_FixedRebateTest extends PHPUnit_Framework_TestCase
 		$object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
 
 		$this->setExpectedException( 'MShop_Coupon_Exception' );
-		$object->addCoupon( $this->_orderBase );
+		$object->addCoupon( $this->orderBase );
 	}
 
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 
-	protected function _getOrderProducts()
+	protected function getOrderProducts()
 	{
 		$products = array();
 		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/product' );

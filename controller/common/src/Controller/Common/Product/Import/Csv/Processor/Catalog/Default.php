@@ -18,8 +18,8 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	extends Controller_Common_Product_Import_Csv_Processor_Abstract
 	implements Controller_Common_Product_Import_Csv_Processor_Interface
 {
-	private $_cache;
-	private $_listTypes;
+	private $cache;
+	private $listTypes;
 
 
 	/**
@@ -53,9 +53,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 		 * @see controller/common/product/import/csv/processor/product/listtypes
 		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/catalog/listtypes' );
+		$this->listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/catalog/listtypes' );
 
-		$this->_cache = $this->_getCache( 'catalog' );
+		$this->cache = $this->getCache( 'catalog' );
 	}
 
 
@@ -68,7 +68,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	 */
 	public function process( MShop_Product_Item_Interface $product, array $data )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$manager = MShop_Factory::createManager( $context, 'catalog' );
 		$listManager = MShop_Factory::createManager( $context, 'catalog/list' );
 
@@ -97,13 +97,13 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 		try
 		{
 			$prodid = $product->getId();
-			$map = $this->_getMappedChunk( $data );
-			$listItems = $this->_getListItemPool( $product, $map );
+			$map = $this->getMappedChunk( $data );
+			$listItems = $this->getListItemPool( $product, $map );
 
 			foreach( $map as $pos => $list )
 			{
 				if( !isset( $list['catalog.code'] ) || $list['catalog.code'] === '' || isset( $list['catalog.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['catalog.list.type'], (array) $this->_listTypes )
+					&& $this->listTypes !== null && !in_array( $list['catalog.list.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
@@ -113,7 +113,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 
 				foreach( $codes as $code )
 				{
-					if( ( $catid = $this->_cache->get( $code ) ) === null )
+					if( ( $catid = $this->cache->get( $code ) ) === null )
 					{
 						$msg = 'No category for code "%1$s" available when importing product with code "%2$s"';
 						throw new Controller_Jobs_Exception( sprintf( $msg, $code, $product->getCode() ) );
@@ -123,17 +123,17 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 						$listItem = $listManager->createItem();
 					}
 
-					$list['catalog.list.typeid'] = $this->_getTypeId( 'catalog/list/type', 'product', $type );
+					$list['catalog.list.typeid'] = $this->getTypeId( 'catalog/list/type', 'product', $type );
 					$list['catalog.list.parentid'] = $catid;
 					$list['catalog.list.refid'] = $prodid;
 					$list['catalog.list.domain'] = 'product';
 
-					$listItem->fromArray( $this->_addListItemDefaults( $list, $pos++ ) );
+					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
 					$listManager->saveItem( $listItem );
 				}
 			}
 
-			$remaining = $this->_getObject()->process( $product, $data );
+			$remaining = $this->getObject()->process( $product, $data );
 
 			$manager->commit();
 		}
@@ -154,7 +154,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	 * @param integer $pos Computed position of the list item in the associated list of items
 	 * @return array Given associative list enriched by default values if they were not already set
 	 */
-	protected function _addListItemDefaults( array $list, $pos )
+	protected function addListItemDefaults( array $list, $pos )
 	{
 		if( !isset( $list['catalog.list.position'] ) ) {
 			$list['catalog.list.position'] = $pos;
@@ -175,9 +175,9 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	 * @param array|null $types List of catalog list types
 	 * @return array List of catalog list items
 	 */
-	protected function _getListItems( $prodid, $types )
+	protected function getListItems( $prodid, $types )
 	{
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
 		$search = $manager->createSearch();
 
 		$expr = array(
@@ -204,16 +204,16 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 	 * @param array $map List of associative arrays containing the chunked properties
 	 * @return array List of list items implementing MShop_Common_Item_List_Interface
 	 */
-	protected function _getListItemPool( MShop_Product_Item_Interface $product, array $map )
+	protected function getListItemPool( MShop_Product_Item_Interface $product, array $map )
 	{
 		$pos = 0;
 		$delete = array();
-		$listItems = $this->_getListItems( $product->getId(), $this->_listTypes );
+		$listItems = $this->getListItems( $product->getId(), $this->listTypes );
 
 		foreach( $listItems as $listId => $listItem )
 		{
 			if( isset( $map[$pos] ) && ( !isset( $map[$pos]['catalog.code'] )
-				|| $this->_cache->get( $map[$pos]['catalog.code'] ) == $listItem->getParentId() )
+				|| $this->cache->get( $map[$pos]['catalog.code'] ) == $listItem->getParentId() )
 			) {
 				$pos++;
 				continue;
@@ -224,7 +224,7 @@ class Controller_Common_Product_Import_Csv_Processor_Catalog_Default
 			$pos++;
 		}
 
-		$listManager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list' );
+		$listManager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
 		$listManager->deleteItems( $delete );
 
 		return $listItems;

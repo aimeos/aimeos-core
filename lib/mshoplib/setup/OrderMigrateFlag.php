@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'migrate' => '
 			INSERT INTO "mshop_order_status" ("parentid", "type", "value")
 			SELECT "id", ?, 1 FROM "mshop_order" AS mord
@@ -50,9 +50,9 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -61,29 +61,29 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Migrating order flags to order status list', 0 ); $this->_status( '' );
+		$this->msg( 'Migrating order flags to order status list', 0 ); $this->status( '' );
 		$table = 'mshop_order';
 
-		if( $this->_schema->tableExists( $table ) === true )
+		if( $this->schema->tableExists( $table ) === true )
 		{
-			$this->_msg( 'Deleting order index with flag colum', 1 );
+			$this->msg( 'Deleting order index with flag colum', 1 );
 
-			if( $this->_schema->indexExists( $table, 'idx_msord_sid_pstat_dstat_flag' ) === true )
+			if( $this->schema->indexExists( $table, 'idx_msord_sid_pstat_dstat_flag' ) === true )
 			{
-				$this->_execute( $stmts['index'] );
-				$this->_status( 'dropped' );
+				$this->execute( $stmts['index'] );
+				$this->status( 'dropped' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 
 
-			$this->_msg( 'Migrating order flag colum', 1 );
+			$this->msg( 'Migrating order flag colum', 1 );
 
-			if( $this->_schema->columnExists( $table, 'flag' ) === true )
+			if( $this->schema->columnExists( $table, 'flag' ) === true )
 			{
 				$cntRows = 0;
 				$mapping = array();
@@ -96,7 +96,7 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 
 				foreach( $mapping as $key => $value )
 				{
-					$stmt = $this->_conn->create( $stmts['migrate'] );
+					$stmt = $this->conn->create( $stmts['migrate'] );
 					$stmt->bind( 1, $value );
 					$stmt->bind( 2, $key );
 					$stmt->bind( 3, $value );
@@ -106,22 +106,22 @@ class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
 					$result->finish();
 				}
 
-				$this->_execute( $stmts['column'] );
+				$this->execute( $stmts['column'] );
 
 				if( $cntRows > 0 ) {
-					$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
+					$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 
 	}

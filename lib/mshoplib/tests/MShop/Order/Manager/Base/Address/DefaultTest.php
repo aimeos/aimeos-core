@@ -11,9 +11,9 @@
  */
 class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_object = null;
-	private $_editor = '';
+	private $context;
+	private $object = null;
+	private $editor = '';
 
 
 	/**
@@ -21,11 +21,11 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_context = TestHelper::getContext();
+		$this->editor = TestHelper::getContext()->getEditor();
+		$this->context = TestHelper::getContext();
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
-		$this->_object = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$this->object = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 	}
 
 
@@ -34,15 +34,15 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testAggregate()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.address.editor', 'core:unittest' ) );
-		$result = $this->_object->aggregate( $search, 'order.base.address.salutation' );
+		$result = $this->object->aggregate( $search, 'order.base.address.salutation' );
 	
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( MShop_Common_Item_Address_Abstract::SALUTATION_MRS, $result );
@@ -52,26 +52,26 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $item );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -81,19 +81,19 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	{
 		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'order.base.address.type', $type ),
-			$search->compare( '==', 'order.base.address.editor', $this->_editor )
+			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
@@ -101,31 +101,31 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	{
 		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'order.base.address.type', $type ),
-			$search->compare( '==', 'order.base.address.editor', $this->_editor )
+			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 		$firstname = $item->getFirstname();
 		$oldId = $item->getId();
 
 		$item->setId( null );
 		$item->setFirstname( 'unittestdata' );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setFirstname( $firstname );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -154,7 +154,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -183,21 +183,21 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $oldId );
+		$this->object->getItem( $oldId );
 	}
 
 
 	public function testSearchItem()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
+		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.address.id', null );
@@ -220,26 +220,26 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'order.base.address.email', 'eshop@metaways.de' );
+		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'order.base.address.telefax', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.metaways.net' );
 		$expr[] = $search->compare( '>=', 'order.base.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 
 		$conditions = array(
 			$search->compare( '==', 'order.base.address.lastname', 'Unittest' ),
-			$search->compare( '==', 'order.base.address.editor', $this->_editor )
+			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$items = $this->_object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 4, $total );
@@ -253,6 +253,6 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends PHPUnit_Framework_Tes
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

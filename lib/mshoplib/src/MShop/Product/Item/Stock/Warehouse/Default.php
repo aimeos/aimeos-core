@@ -17,7 +17,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Product_Item_Stock_Warehouse_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the warehouse item object with the given values
@@ -26,7 +26,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	{
 		parent::__construct( 'product.stock.warehouse.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -37,7 +37,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -48,9 +48,9 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -62,7 +62,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -73,7 +73,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function setLabel( $label )
 	{
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -85,7 +85,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
 	}
 
 
@@ -96,7 +96,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function setStatus( $status )
 	{
-		$this->_values['status'] = (int) $status;
+		$this->values['status'] = (int) $status;
 		$this->setModified();
 	}
 

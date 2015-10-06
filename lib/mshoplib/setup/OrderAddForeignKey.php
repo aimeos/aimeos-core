@@ -41,7 +41,7 @@ class MW_Setup_Task_OrderAddForeignKey extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
 		// see: MW_Setup_Task_OrderDropForeignKeyOfLocale
 	}

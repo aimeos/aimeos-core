@@ -25,19 +25,19 @@ class MShop_Coupon_Provider_FixedRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
+		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
 		}
 
 		$rebate = '0.00';
 		$currency = $base->getPrice()->getCurrencyId();
-		$config = $this->_getItem()->getConfig();
+		$config = $this->getItemBase()->getConfig();
 
 		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate'
+				$this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate'
 			) );
 		}
 
@@ -53,8 +53,8 @@ class MShop_Coupon_Provider_FixedRebate
 		}
 
 
-		$orderProducts = $this->_createMonetaryRebateProducts( $base, $config['fixedrebate.productcode'], $rebate );
+		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['fixedrebate.productcode'], $rebate );
 
-		$base->addCoupon( $this->_getCode(), $orderProducts );
+		$base->addCoupon( $this->getCode(), $orderProducts );
 	}
 }

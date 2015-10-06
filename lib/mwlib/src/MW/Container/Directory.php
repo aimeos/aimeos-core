@@ -18,9 +18,9 @@ class MW_Container_Directory
 	extends MW_Container_Abstract
 	implements MW_Container_Interface
 {
-	private $_content = array();
-	private $_classname;
-	private $_resource;
+	private $content = array();
+	private $classname;
+	private $resource;
 
 
 	/**
@@ -35,21 +35,21 @@ class MW_Container_Directory
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() )
 	{
-		$this->_classname = 'MW_Container_Content_' . $format;
+		$this->classname = 'MW_Container_Content_' . $format;
 
-		if( class_exists( $this->_classname ) === false ) {
+		if( class_exists( $this->classname ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
 		parent::__construct( $resourcepath, $options );
 		
-		$perm = octdec( $this->_getOption( 'dir-perm', '0755' ) );
+		$perm = octdec( $this->getOption( 'dir-perm', '0755' ) );
 
 		if( !is_dir( realpath( $resourcepath ) ) && mkdir( $resourcepath, $perm, true ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to create directory "%1$s"', $resourcepath ) );
 		}
 
-		$this->_resource = new DirectoryIterator( $resourcepath );
+		$this->resource = new DirectoryIterator( $resourcepath );
 	}
 
 
@@ -61,8 +61,8 @@ class MW_Container_Directory
 	 */
 	public function create( $name )
 	{
-		$resource = $this->_resource->getPath() . DIRECTORY_SEPARATOR . $name;
-		return new $this->_classname( $resource, $name, $this->_getOptions() );
+		$resource = $this->resource->getPath() . DIRECTORY_SEPARATOR . $name;
+		return new $this->classname( $resource, $name, $this->getOptions() );
 	}
 
 
@@ -73,7 +73,7 @@ class MW_Container_Directory
 	 */
 	public function add( MW_Container_Content_Interface $content )
 	{
-		$this->_content[] = $content;
+		$this->content[] = $content;
 	}
 
 
@@ -85,7 +85,7 @@ class MW_Container_Directory
 	 */
 	function get( $name )
 	{
-		return new $this->_classname( $this->_resource->getPath() . DIRECTORY_SEPARATOR . $name, $name );
+		return new $this->classname( $this->resource->getPath() . DIRECTORY_SEPARATOR . $name, $name );
 	}
 
 
@@ -94,7 +94,7 @@ class MW_Container_Directory
 	 */
 	public function close()
 	{
-		foreach( $this->_content as $content ) {
+		foreach( $this->content as $content ) {
 			$content->close();
 		}
 	}
@@ -107,7 +107,7 @@ class MW_Container_Directory
 	 */
 	function current()
 	{
-		return new $this->_classname( $this->_resource->getPathname(), $this->_resource->getFilename() );
+		return new $this->classname( $this->resource->getPathname(), $this->resource->getFilename() );
 	}
 
 
@@ -118,7 +118,7 @@ class MW_Container_Directory
 	 */
 	function key()
 	{
-		return $this->_resource->key();
+		return $this->resource->key();
 	}
 
 
@@ -128,10 +128,10 @@ class MW_Container_Directory
 	function next()
 	{
 		do {
-			$this->_resource->next();
+			$this->resource->next();
 		}
-		while( $this->_resource->valid()
-			&& ( $this->_resource->isDot() || !is_file( realpath( $this->_resource->getPathname() ) ) )
+		while( $this->resource->valid()
+			&& ( $this->resource->isDot() || !is_file( realpath( $this->resource->getPathname() ) ) )
 		);
 	}
 
@@ -141,7 +141,7 @@ class MW_Container_Directory
 	 */
 	function rewind()
 	{
-		$this->_resource->rewind();
+		$this->resource->rewind();
 	}
 
 
@@ -152,10 +152,10 @@ class MW_Container_Directory
 	 */
 	function valid()
 	{
-		while( $this->_resource->isDot() ) {
+		while( $this->resource->isDot() ) {
 			$this->next();
 		}
 
-		return $this->_resource->valid();
+		return $this->resource->valid();
 	}
 }

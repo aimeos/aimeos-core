@@ -11,7 +11,7 @@
 
 class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_plugin" ADD "label" VARCHAR(255) NOT NULL AFTER "typeid"',
 		'UPDATE "mshop_plugin" SET "label" = "provider" WHERE "label" = \'\'',
 	);
@@ -41,9 +41,9 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,19 +52,19 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding label column to mshop_plugin table', 0 );
+		$this->msg( 'Adding label column to mshop_plugin table', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_plugin' ) === true
-			&& $this->_schema->columnExists( 'mshop_plugin', 'label' ) === false )
+		if( $this->schema->tableExists( 'mshop_plugin' ) === true
+			&& $this->schema->columnExists( 'mshop_plugin', 'label' ) === false )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
+			$this->executeList( $stmts );
+			$this->status( 'added' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

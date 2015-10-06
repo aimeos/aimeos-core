@@ -8,29 +8,29 @@
 
 class Controller_Jobs_AbstractTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	public function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_TestAbstract( $context, $arcavias );
+		$this->object = new Controller_Jobs_TestAbstract( $context, $aimeos );
 	}
 
 
 	public function testGetTypeItemNotFound()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getTypeItemPublic( 'product/type', 'product', 'test' );
+		$this->object->getTypeItemPublic( 'product/type', 'product', 'test' );
 	}
 
 
 	public function testGetTemplateNotFound()
 	{
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$this->_object->getTemplatePublic( 'test', 'test' );
+		$this->object->getTemplatePublic( 'test', 'test' );
 	}
 }
 
@@ -40,11 +40,11 @@ class Controller_Jobs_TestAbstract extends Controller_Jobs_Abstract
 {
 	public function getTemplatePublic( $confpath, $default )
 	{
-		$this->_getTemplate( $confpath, $default );
+		$this->getTemplate( $confpath, $default );
 	}
 
 	public function getTypeItemPublic( $prefix, $domain, $code )
 	{
-		$this->_getTypeItem( $prefix, $domain, $code );
+		$this->getTypeItem( $prefix, $domain, $code );
 	}
 }

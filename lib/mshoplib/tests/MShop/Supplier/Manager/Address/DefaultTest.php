@@ -8,8 +8,8 @@
 
 class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object = null;
-	private $_editor = '';
+	private $object = null;
+	private $editor = '';
 
 
 	/**
@@ -17,9 +17,9 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 		$supplierManager = MShop_Supplier_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $supplierManager->getSubManager( 'address' );
+		$this->object = $supplierManager->getSubManager( 'address' );
 	}
 
 
@@ -28,19 +28,19 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute )
+		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
@@ -49,53 +49,53 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $item );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'supplier.address.company', 'Metaways' ),
-			$search->compare( '==', 'supplier.address.editor', $this->_editor ),
+			$search->compare( '~=', 'supplier.address.company', 'Example company' ),
+			$search->compare( '==', 'supplier.address.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No address item with company "Metaways" found' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.address.editor', $this->_editor ) );
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'supplier.address.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No address item found' );
 		}
 
 		$item->setId( null );
-		$this->_object->saveItem( $item );
+		$this->object->saveItem( $item );
 
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$itemSaved = $this->object->getItem( $item->getId() );
 		$itemExp = clone $itemSaved;
 
 		$itemExp->setCity( 'Berlin' );
 		$itemExp->setState( 'Berlin' );
-		$this->_object->saveItem( $itemExp );
+		$this->object->saveItem( $itemExp );
 
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -123,7 +123,7 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -151,31 +151,31 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
 	}
 
 
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$conditions = array();
 		$conditions[] = $search->compare( '!=', 'supplier.address.id', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.refid', null );
-		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Metaways GmbH' );
+		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$conditions[] = $search->compare( '==', 'supplier.address.salutation', MShop_Common_Item_Address_Abstract::SALUTATION_MRS );
 		$conditions[] = $search->compare( '==', 'supplier.address.title', '' );
@@ -189,16 +189,16 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 		$conditions[] = $search->compare( '==', 'supplier.address.state', 'Hamburg' );
 		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'de' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
-		$conditions[] = $search->compare( '==', 'supplier.address.email', 'eshop@metaways.de' );
+		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
-		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.metaways.de' );
+		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
-		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->_editor );
+		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 
@@ -211,6 +211,6 @@ class MShop_Supplier_Manager_Address_DefaultTest extends PHPUnit_Framework_TestC
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

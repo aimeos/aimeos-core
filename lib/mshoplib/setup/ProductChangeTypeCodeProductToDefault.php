@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'UPDATE "mshop_product_type" SET "code" = \'default\', "label" = \'Article\' WHERE "code" = \'product\'';
+	private $mysql = 'UPDATE "mshop_product_type" SET "code" = \'default\', "label" = \'Article\' WHERE "code" = \'product\'';
 
 
 	/**
@@ -39,9 +39,9 @@ class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -50,26 +50,26 @@ class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_
 	 *
 	 * @param string $stmt SQL statement to execute
 	 */
-	protected function _process( $stmt )
+	protected function process( $stmt )
 	{
 		$msg = 'Changing code from "product" to "default" in "mshop_product_type"';
-		$this->_msg( $msg, 0 );
+		$this->msg( $msg, 0 );
 
-		if( $this->_schema->tableExists( 'mshop_product_type' ) )
+		if( $this->schema->tableExists( 'mshop_product_type' ) )
 		{
-			$result = $this->_conn->create( $stmt )->execute();
+			$result = $this->conn->create( $stmt )->execute();
 			$cntRows = $result->affectedRows();
 			$result->finish();
 
 			if( $cntRows ) {
-				$this->_status( sprintf( 'migrated (%1$d)', $cntRows ) );
+				$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 

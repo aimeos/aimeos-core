@@ -19,7 +19,7 @@ class Controller_ExtJS_Catalog_List_Default
 	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
-	private $_manager = null;
+	private $manager = null;
 
 
 	/**
@@ -41,15 +41,15 @@ class Controller_ExtJS_Catalog_List_Default
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$refIds = array();
 		$ids = (array) $params->items;
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', $this->_getPrefix() . '.id', $ids ) );
+		$search->setConditions( $search->compare( '==', $this->getPrefix() . '.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
 
 		foreach( $manager->searchItems( $search ) as $item ) {
@@ -60,8 +60,8 @@ class Controller_ExtJS_Catalog_List_Default
 
 		if( isset( $refIds['product'] ) )
 		{
-			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( (array) $refIds['product'], 'product' );
+			$this->rebuildIndex( (array) $refIds['product'] );
+			$this->clearCache( (array) $refIds['product'], 'product' );
 		}
 
 		return array(
@@ -78,17 +78,17 @@ class Controller_ExtJS_Catalog_List_Default
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$ids = $refIds = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 			$manager->saveItem( $item );
 
 			$refIds[$item->getDomain()][] = $item->getRefId();
@@ -97,11 +97,11 @@ class Controller_ExtJS_Catalog_List_Default
 
 		if( isset( $refIds['product'] ) )
 		{
-			$this->_rebuildIndex( (array) $refIds['product'] );
-			$this->_clearCache( (array) $refIds['product'], 'product' );
+			$this->rebuildIndex( (array) $refIds['product'] );
+			$this->clearCache( (array) $refIds['product'], 'product' );
 		}
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -113,12 +113,12 @@ class Controller_ExtJS_Catalog_List_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		$totalList = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
-		$result = $this->_getManager()->searchItems( $search, array(), $totalList );
+		$search = $this->initCriteria( $this->getManager()->createSearch(), $params );
+		$result = $this->getManager()->searchItems( $search, array(), $totalList );
 
 		$idLists = array();
 		$listItems = array();
@@ -134,7 +134,7 @@ class Controller_ExtJS_Catalog_List_Default
 		return array(
 			'items' => $listItems,
 			'total' => $totalList,
-			'graph' => $this->_getDomainItems( $idLists ),
+			'graph' => $this->getDomainItems( $idLists ),
 			'success' => true,
 		);
 	}
@@ -145,13 +145,13 @@ class Controller_ExtJS_Catalog_List_Default
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
 	 */
-	protected function _getManager()
+	protected function getManager()
 	{
-		if( $this->_manager === null ) {
-			$this->_manager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list' );
+		if( $this->manager === null ) {
+			$this->manager = MShop_Factory::createManager( $this->getContext(), 'catalog/list' );
 		}
 
-		return $this->_manager;
+		return $this->manager;
 	}
 
 
@@ -160,7 +160,7 @@ class Controller_ExtJS_Catalog_List_Default
 	 *
 	 * @return string MShop search key prefix
 	 */
-	protected function _getPrefix()
+	protected function getPrefix()
 	{
 		return 'catalog.list';
 	}
@@ -171,9 +171,9 @@ class Controller_ExtJS_Catalog_List_Default
 	 *
 	 * @param array $prodIds List of product IDs
 	 */
-	protected function _rebuildIndex( array $prodIds )
+	protected function rebuildIndex( array $prodIds )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $productManager->createSearch();
@@ -191,7 +191,7 @@ class Controller_ExtJS_Catalog_List_Default
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' ) {
 			$entry->{'catalog.list.datestart'} = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );

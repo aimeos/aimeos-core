@@ -11,16 +11,16 @@
  */
 class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
-	private $_object;
-	private $_editor = '';
+	private $context;
+	private $object;
+	private $editor = '';
 
 
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_context = TestHelper::getContext();
-		$this->_object = new MShop_Order_Manager_Base_Product_Default( $this->_context );
+		$this->editor = TestHelper::getContext()->getEditor();
+		$this->context = TestHelper::getContext();
+		$this->object = new MShop_Order_Manager_Base_Product_Default( $this->context );
 	}
 
 
@@ -32,15 +32,15 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testAggregate()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:unittest' ) );
-		$result = $this->_object->aggregate( $search, 'order.base.product.warehousecode' );
+		$result = $this->object->aggregate( $search, 'order.base.product.warehousecode' );
 	
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'unit_warehouse1', $result );
@@ -50,13 +50,13 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes( true ) as $attribute ) {
+		foreach( $this->object->getSearchAttributes( true ) as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
@@ -64,22 +64,22 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Interface', $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch( true ) );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch( true ) );
 	}
 
 
 	public function testSearchItem()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
+		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.product.id', null );
@@ -103,7 +103,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
 		$expr[] = $search->compare( '!=', 'order.base.product.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'order.base.product.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.product.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'order.base.product.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
@@ -113,22 +113,22 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' ),
-			$search->compare( '==', 'order.base.product.editor', $this->_editor )
+			$search->compare( '==', 'order.base.product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 14, $total );
@@ -141,31 +141,31 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.prodcode', 'CNE' ),
-			$search->compare( '==', 'order.base.product.editor', $this->_editor )
+			$search->compare( '==', 'order.base.product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'empty result' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.price', '0.00' ),
-			$search->compare( '==', 'order.base.product.editor', $this->_editor )
+			$search->compare( '==', 'order.base.product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$orderItems = $this->_object->searchItems( $search );
+		$orderItems = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $orderItems ) ) ) {
 			throw new Exception( 'empty search result' );
@@ -173,15 +173,15 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 
 		$item->setId( null );
 		$item->setPosition( $item->getPosition() + 1 );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setProductCode( 'unitUpdCode' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemUpd->getId() );
+		$this->object->deleteItem( $itemUpd->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -203,7 +203,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -226,42 +226,42 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends PHPUnit_Framework_Tes
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
 		$this->assertEquals( array( ), $itemUpd->getAttributes() );
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'attribute' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager( 'attribute', 'Default' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'attribute' ) );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'attribute', 'Default' ) );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'attribute', 'unknown' );
+		$this->object->getSubManager( 'attribute', 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidTypeName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( '$$$' );
+		$this->object->getSubManager( '$$$' );
 	}
 
 
 	public function testGetSubManagerInvalidDefaultName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'attribute', '$$$' );
+		$this->object->getSubManager( 'attribute', '$$$' );
 	}
 }

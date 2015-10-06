@@ -14,8 +14,8 @@
  */
 class MAdmin_Factory
 {
-	static private $_cache = true;
-	static private $_managers = array();
+	static private $cache = true;
+	static private $managers = array();
 
 
 	/**
@@ -31,15 +31,15 @@ class MAdmin_Factory
 		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_managers[$id][$path] = null;
+				self::$managers[$id][$path] = null;
 			} else {
-				self::$_managers[$id] = array();
+				self::$managers[$id] = array();
 			}
 
 			return;
 		}
 
-		self::$_managers = array();
+		self::$managers = array();
 	}
 
 
@@ -66,7 +66,7 @@ class MAdmin_Factory
 
 		$id = (string) $context;
 
-		if( !isset( self::$_managers[$id][$path] ) )
+		if( !isset( self::$managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -82,7 +82,7 @@ class MAdmin_Factory
 			}
 
 
-			if( !isset( self::$_managers[$id][$name] ) )
+			if( !isset( self::$managers[$id][$name] ) )
 			{
 				$factory = 'MAdmin_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -96,7 +96,7 @@ class MAdmin_Factory
 					throw new MAdmin_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$_managers[$id][$name] = $manager;
+				self::$managers[$id][$name] = $manager;
 			}
 
 
@@ -104,15 +104,15 @@ class MAdmin_Factory
 			{
 				$tmpname = $name . '/' . $part;
 
-				if( !isset( self::$_managers[$id][$tmpname] ) ) {
-					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );
+				if( !isset( self::$managers[$id][$tmpname] ) ) {
+					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$_managers[$id][$path];
+		return self::$managers[$id][$path];
 	}
 
 
@@ -124,8 +124,8 @@ class MAdmin_Factory
 	 */
 	static public function setCache( $value )
 	{
-		$old = self::$_cache;
-		self::$_cache = (boolean) $value;
+		$old = self::$cache;
+		self::$cache = (boolean) $value;
 
 		return $old;
 	}

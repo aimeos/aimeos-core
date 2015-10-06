@@ -21,9 +21,9 @@ class MShop_Order_Item_Default
 	extends MShop_Order_Item_Abstract
 	implements MShop_Order_Item_Interface
 {
-	private $_values;
-	private $_oldPaymentStatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
-	private $_oldDeliveryStatus = MShop_Order_Item_Abstract::STAT_UNFINISHED;
+	private $values;
+	private $oldPaymentStatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
+	private $oldDeliveryStatus = MShop_Order_Item_Abstract::STAT_UNFINISHED;
 
 
 	/**
@@ -35,18 +35,18 @@ class MShop_Order_Item_Default
 	{
 		parent::__construct( 'order.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 
 		if( !isset( $values['datepayment'] ) ) {
-			$this->_values['datepayment'] = date( 'Y-m-d H:i:s', time() );
+			$this->values['datepayment'] = date( 'Y-m-d H:i:s', time() );
 		}
 
 		if( isset( $values['statuspayment'] ) ) {
-			$this->_oldPaymentStatus = (int) $values['statuspayment'];
+			$this->oldPaymentStatus = (int) $values['statuspayment'];
 		}
 
 		if( isset( $values['statusdelivery'] ) ) {
-			$this->_oldDeliveryStatus = (int) $values['statusdelivery'];
+			$this->oldDeliveryStatus = (int) $values['statusdelivery'];
 		}
 	}
 
@@ -58,7 +58,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->_values['baseid'] ) ? (int) $this->_values['baseid'] : null );
+		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
 	}
 
 
@@ -71,7 +71,7 @@ class MShop_Order_Item_Default
 	{
 		if( $id == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = (int) $id;
+		$this->values['baseid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -83,7 +83,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : '' );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
 	}
 
 
@@ -96,9 +96,9 @@ class MShop_Order_Item_Default
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->_checkType( $type );
+		$this->checkType( $type );
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -110,7 +110,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getDateDelivery()
 	{
-		return ( isset( $this->_values['datedelivery'] ) ? (string) $this->_values['datedelivery'] : null );
+		return ( isset( $this->values['datedelivery'] ) ? (string) $this->values['datedelivery'] : null );
 	}
 
 
@@ -123,9 +123,9 @@ class MShop_Order_Item_Default
 	{
 		if( $date === $this->getDateDelivery() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['datedelivery'] = (string) $date;
+		$this->values['datedelivery'] = (string) $date;
 		$this->setModified();
 	}
 
@@ -137,7 +137,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getDatePayment()
 	{
-		return ( isset( $this->_values['datepayment'] ) ? (string) $this->_values['datepayment'] : null );
+		return ( isset( $this->values['datepayment'] ) ? (string) $this->values['datepayment'] : null );
 	}
 
 
@@ -150,9 +150,9 @@ class MShop_Order_Item_Default
 	{
 		if( $date === $this->getDatePayment() ) { return; }
 
-		$this->_checkDateFormat( $date );
+		$this->checkDateFormat( $date );
 
-		$this->_values['datepayment'] = (string) $date;
+		$this->values['datepayment'] = (string) $date;
 		$this->setModified();
 	}
 
@@ -164,8 +164,8 @@ class MShop_Order_Item_Default
 	 */
 	public function getDeliveryStatus()
 	{
-		if( isset( $this->_values['statusdelivery'] ) ) {
-			return (int) $this->_values['statusdelivery'];
+		if( isset( $this->values['statusdelivery'] ) ) {
+			return (int) $this->values['statusdelivery'];
 		}
 
 		return MShop_Order_Item_Abstract::STAT_UNFINISHED;
@@ -179,7 +179,7 @@ class MShop_Order_Item_Default
 	 */
 	public function setDeliveryStatus( $status )
 	{
-		$this->_values['statusdelivery'] = (int) $status;
+		$this->values['statusdelivery'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -191,8 +191,8 @@ class MShop_Order_Item_Default
 	 */
 	public function getPaymentStatus()
 	{
-		if( isset( $this->_values['statuspayment'] ) ) {
-			return (int) $this->_values['statuspayment'];
+		if( isset( $this->values['statuspayment'] ) ) {
+			return (int) $this->values['statuspayment'];
 		}
 
 		return MShop_Order_Item_Abstract::PAY_UNFINISHED;
@@ -206,7 +206,7 @@ class MShop_Order_Item_Default
 	 */
 	public function setPaymentStatus( $status )
 	{
-		$this->_values['statuspayment'] = (int) $status;
+		$this->values['statuspayment'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -218,7 +218,7 @@ class MShop_Order_Item_Default
 	 */
 	public function getRelatedId()
 	{
-		return ( isset( $this->_values['relatedid'] ) ? (int) $this->_values['relatedid'] : null );
+		return ( isset( $this->values['relatedid'] ) ? (int) $this->values['relatedid'] : null );
 	}
 
 
@@ -232,7 +232,7 @@ class MShop_Order_Item_Default
 	{
 		if( $id === $this->getRelatedId() ) { return; }
 		$id = (int) $id;
-		$this->_values['relatedid'] = $id;
+		$this->values['relatedid'] = $id;
 		$this->setModified();
 	}
 
@@ -293,9 +293,9 @@ class MShop_Order_Item_Default
 		switch( $name )
 		{
 			case 'oldPaymentStatus':
-				return $this->_oldPaymentStatus;
+				return $this->oldPaymentStatus;
 			case 'oldDeliveryStatus':
-				return $this->_oldDeliveryStatus;
+				return $this->oldDeliveryStatus;
 			default:
 				throw new MShop_Order_Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
 		}

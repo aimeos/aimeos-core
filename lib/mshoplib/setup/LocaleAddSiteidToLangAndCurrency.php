@@ -12,7 +12,7 @@
 class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstract
 {
 
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_locale_currency' => array(
 			'ALTER TABLE "mshop_locale_currency" ADD "siteid" INT NULL AFTER "id"',
 		),
@@ -44,9 +44,9 @@ class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstr
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -54,20 +54,20 @@ class MW_Setup_Task_LocaleAddSiteidToLangAndCurrency extends MW_Setup_Task_Abstr
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding siteid to locale tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Adding siteid to locale tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
-			if( $this->_schema->tableExists( $table ) && !$this->_schema->columnExists( $table, 'siteid' ) )
+			$this->msg( sprintf( 'Changing table "%1$s": ', $table ), 1 );
+			if( $this->schema->tableExists( $table ) && !$this->schema->columnExists( $table, 'siteid' ) )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'added' );
+				$this->executeList( $stmtList );
+				$this->status( 'added' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

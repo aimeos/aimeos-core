@@ -36,12 +36,12 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Insert price data and product/price relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product price performance data', 0 );
+		$this->msg( 'Adding product price performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 
 		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
@@ -101,7 +101,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$price = 100;
 		$value = +1;
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		do
 		{
@@ -141,9 +141,9 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

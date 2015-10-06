@@ -22,11 +22,11 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/order/cleanup/unfinished/name
 		 * Class name of the used order cleanup unfinished scheduler controller implementation
@@ -74,7 +74,7 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Order_Cleanup_Unfinished_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/order/cleanup/unfinished/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order cleanup unfinished controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Order_Cleanup_Unfinished_Factory
 		 * @see controller/jobs/order/cleanup/unfinished/decorators/excludes
 		 * @see controller/jobs/order/cleanup/unfinished/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/cleanup/unfinished' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'order/cleanup/unfinished' );
 	}
 }

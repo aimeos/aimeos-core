@@ -11,7 +11,7 @@
  */
 class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,8 +28,8 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->_object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PostPay' )
-			->setMethods( array( '_getOrder', '_getOrderBase', '_saveOrder', '_saveOrderBase' ) )
+		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PostPay' )
+			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 	}
@@ -43,19 +43,19 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( 4, count( $this->_object->getConfigBE() ) );
+		$this->assertEquals( 4, count( $this->object->getConfigBE() ) );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$result = $this->_object->checkConfigBE( array( 'payment.url-success' => 'testurl' ) );
+		$result = $this->object->checkConfigBE( array( 'payment.url-success' => 'testurl' ) );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( null, $result['payment.url-success'] );
@@ -67,14 +67,14 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 		// Currently does nothing.
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 
-		$this->_object->process( $manager->createItem() );
+		$this->object->process( $manager->createItem() );
 	}
 
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
 	}
 }

@@ -25,7 +25,7 @@ class Controller_Jobs_Product_Export_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product export' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Product export' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Product_Export_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Exports all available products' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Exports all available products' );
 	}
 
 
@@ -47,8 +47,8 @@ class Controller_Jobs_Product_Export_Default
 	 */
 	public function run()
 	{
-		$container = $this->_createContainer();
-		$this->_export( $container );
+		$container = $this->createContainer();
+		$this->export( $container );
 		$container->close();
 	}
 
@@ -59,9 +59,9 @@ class Controller_Jobs_Product_Export_Default
 	 * @param MW_Container_Content_Interface $content File content object
 	 * @param MShop_Product_Item_Interface[] $items List of product items
 	 */
-	protected function _addItems( MW_Container_Content_Interface $content, array $items )
+	protected function addItems( MW_Container_Content_Interface $content, array $items )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/jobs/product/export/default/template-items
 		 * Relative path to the XML items template of the product site map job controller.
@@ -88,11 +88,11 @@ class Controller_Jobs_Product_Export_Default
 		$tplconf = 'controller/jobs/product/export/default/template-items';
 		$default = 'product/export/items-body-default.xml';
 
-		$view = $this->_getContext()->getView();
+		$view = $this->getContext()->getView();
 
 		$view->exportItems = $items;
 
-		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
 	}
 
 
@@ -101,9 +101,9 @@ class Controller_Jobs_Product_Export_Default
 	 *
 	 * @return MW_Container_Interface Container object
 	 */
-	protected function _createContainer()
+	protected function createContainer()
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/jobs/product/export/location
 		 * Directory where the generated site maps should be placed into
@@ -185,9 +185,9 @@ class Controller_Jobs_Product_Export_Default
 	 * @param integer $filenum New file number
 	 * @return MW_Container_Content_Interface New content object
 	 */
-	protected function _createContent( MW_Container_Interface $container, $filenum )
+	protected function createContent( MW_Container_Interface $container, $filenum )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/jobs/product/export/default/template-header
 		 * Relative path to the XML site map header template of the product site map job controller.
@@ -214,10 +214,10 @@ class Controller_Jobs_Product_Export_Default
 		$tplconf = 'controller/jobs/product/export/default/template-header';
 		$default = 'product/export/items-header-default.xml';
 
-		$view = $this->_getContext()->getView();
+		$view = $this->getContext()->getView();
 
-		$content = $container->create( $this->_getFilename( $filenum ) );
-		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+		$content = $container->create( $this->getFilename( $filenum ) );
+		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
 		$container->add( $content );
 
 		return $content;
@@ -229,9 +229,9 @@ class Controller_Jobs_Product_Export_Default
 	 *
 	 * @param MW_Container_Content_Interface $content
 	 */
-	protected function _closeContent( MW_Container_Content_Interface $content )
+	protected function closeContent( MW_Container_Content_Interface $content )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		/** controller/jobs/product/export/default/template-footer
 		 * Relative path to the XML site map footer template of the product site map job controller.
@@ -258,9 +258,9 @@ class Controller_Jobs_Product_Export_Default
 		$tplconf = 'controller/jobs/product/export/default/template-footer';
 		$default = 'product/export/items-footer-default.xml';
 
-		$view = $this->_getContext()->getView();
+		$view = $this->getContext()->getView();
 
-		$content->add( $view->render( $this->_getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
 	}
 
 
@@ -270,30 +270,30 @@ class Controller_Jobs_Product_Export_Default
 	 * @param MW_Container_Interface $container Container object
 	 * @return array List of content (file) names
 	 */
-	protected function _export( MW_Container_Interface $container )
+	protected function export( MW_Container_Interface $container )
 	{
 		$default = array( 'attribute', 'media', 'price', 'product', 'text' );
 
-		$domains = $this->_getConfig( 'domains', $default );
-		$maxItems = $this->_getConfig( 'max-items', 10000 );
-		$maxQuery = $this->_getConfig( 'max-query', 1000 );
+		$domains = $this->getConfig( 'domains', $default );
+		$maxItems = $this->getConfig( 'max-items', 10000 );
+		$maxQuery = $this->getConfig( 'max-query', 1000 );
 
 		$start = 0; $filenum = 1;
 		$names = array();
 
-		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$search->setSlice( 0, $maxQuery );
 
-		$content = $this->_createContent( $container, $filenum );
+		$content = $this->createContent( $container, $filenum );
 		$names[] = $content->getResource();
 
 		do
 		{
 			$items = $productManager->searchItems( $search, $domains );
-			$this->_addItems( $content, $items );
+			$this->addItems( $content, $items );
 
 			$count = count( $items );
 			$start += $count;
@@ -301,14 +301,14 @@ class Controller_Jobs_Product_Export_Default
 
 			if( $start + $maxQuery > $maxItems * $filenum )
 			{
-				$this->_closeContent( $content );
-				$content = $this->_createContent( $container, ++$filenum );
+				$this->closeContent( $content );
+				$content = $this->createContent( $container, ++$filenum );
 				$names[] = $content->getResource();
 			}
 		}
 		while( $count >= $search->getSliceSize() );
 
-		$this->_closeContent( $content );
+		$this->closeContent( $content );
 
 		return $names;
 	}
@@ -321,9 +321,9 @@ class Controller_Jobs_Product_Export_Default
 	 * @param mixed $default Default value if name is unknown
 	 * @return mixed Configuration value
 	 */
-	protected function _getConfig( $name, $default = null )
+	protected function getConfig( $name, $default = null )
 	{
-		$config = $this->_getContext()->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		switch( $name )
 		{
@@ -404,7 +404,7 @@ class Controller_Jobs_Product_Export_Default
 	 * @param integer $number Current file number
 	 * @return string New file name
 	 */
-	protected function _getFilename( $number )
+	protected function getFilename( $number )
 	{
 		return sprintf( 'aimeos-products-%d.xml', $number );
 	}

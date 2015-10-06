@@ -17,9 +17,9 @@
  */
 class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_stream;
-	private $_loglevel;
-	private $_facilities;
+	private $stream;
+	private $loglevel;
+	private $facilities;
 
 
 	/**
@@ -31,12 +31,12 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function __construct( $filename, $priority = MW_Logger_Abstract::ERR, array $facilities = null )
 	{
-		if ( !$this->_stream = fopen( $filename, 'a', false ) ) {
+		if ( !$this->stream = fopen( $filename, 'a', false ) ) {
 			throw new MW_Logger_Exception( sprintf( 'Unable to open file "%1$s" for appending' ), $filename );
 		}
 
-		$this->_loglevel = $priority;
-		$this->_facilities = $facilities;
+		$this->loglevel = $priority;
+		$this->facilities = $facilities;
 	}
 
 
@@ -51,10 +51,10 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->_loglevel
-			&& ( $this->_facilities === null || in_array( $facility, $this->_facilities ) ) )
+		if( $priority <= $this->loglevel
+			&& ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
-			$this->_checkLogLevel( $priority );
+			$this->checkLogLevel( $priority );
 
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
@@ -62,7 +62,7 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 
 			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message;
 
-			if ( false === fwrite( $this->_stream, $message ) ) {
+			if ( false === fwrite( $this->stream, $message ) ) {
 				throw new MW_Logger_Exception( 'Unable to write to stream' );
 			}
 		}

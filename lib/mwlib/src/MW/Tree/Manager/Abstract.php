@@ -32,7 +32,7 @@ abstract class MW_Tree_Manager_Abstract extends MW_Common_Manager_Abstract imple
 	const LEVEL_TREE = 3;
 
 
-	private $_readOnly = false;
+	private $readOnly = false;
 
 
 	/**
@@ -42,7 +42,7 @@ abstract class MW_Tree_Manager_Abstract extends MW_Common_Manager_Abstract imple
 	 */
 	public function isReadOnly()
 	{
-		return $this->_readOnly;
+		return $this->readOnly;
 	}
 
 
@@ -51,8 +51,8 @@ abstract class MW_Tree_Manager_Abstract extends MW_Common_Manager_Abstract imple
 	 *
 	 * @param boolean $flag True if tree is read-only, false if not
 	 */
-	protected function _setReadOnly( $flag = true )
+	protected function setReadOnly( $flag = true )
 	{
-		$this->_readOnly = (bool) $flag;
+		$this->readOnly = (bool) $flag;
 	}
 }

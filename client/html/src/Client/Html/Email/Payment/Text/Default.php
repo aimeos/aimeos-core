@@ -51,7 +51,7 @@ class Client_Html_Email_Payment_Text_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/email/payment/text/default/subparts';
+	private $subPartPath = 'client/html/email/payment/text/default/subparts';
 
 	/** client/html/email/payment/text/salutation/name
 	 * Name of the salutation part used by the email payment text client implementation
@@ -107,7 +107,7 @@ class Client_Html_Email_Payment_Text_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'salutation', 'intro', 'summary', 'outro', 'legal' );
+	private $subPartNames = array( 'salutation', 'intro', 'summary', 'outro', 'legal' );
 
 
 	/**
@@ -120,10 +120,10 @@ class Client_Html_Email_Payment_Text_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->textBody = $content;
@@ -160,7 +160,7 @@ class Client_Html_Email_Payment_Text_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/text-body-default.html', 'email/common/text-body-default.html' );
 
-		$text = $view->render( $this->_getTemplate( $tplconf, $default ) );
+		$text = $view->render( $this->getTemplate( $tplconf, $default ) );
 		$view->mail()->setBody( $text );
 		return $text;
 	}
@@ -176,10 +176,10 @@ class Client_Html_Email_Payment_Text_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$content = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$content .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->textHeader = $content;
@@ -217,7 +217,7 @@ class Client_Html_Email_Payment_Text_Default
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/text-header-default.html', 'email/common/text-header-default.html' );
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -304,7 +304,7 @@ class Client_Html_Email_Payment_Text_Default
 		 * @see client/html/email/payment/text/decorators/global
 		 */
 
-		return $this->_createSubClient( 'email/payment/text/' . $type, $name );
+		return $this->createSubClient( 'email/payment/text/' . $type, $name );
 	}
 
 
@@ -313,8 +313,8 @@ class Client_Html_Email_Payment_Text_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 }

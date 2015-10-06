@@ -36,12 +36,12 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Inserts customer items.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding customer performance data', 0 );
+		$this->msg( 'Adding customer performance data', 0 );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
 
 		$customerItem = $customerManager->createItem();
@@ -66,6 +66,6 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 
 		$customerManager->saveItem( $customerItem );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

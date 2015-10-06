@@ -18,9 +18,9 @@ class MW_Container_Content_Gzip
 	extends MW_Container_Content_Abstract
 	implements MW_Container_Content_Interface
 {
-	private $_fh;
-	private $_data;
-	private $_position = 0;
+	private $fh;
+	private $data;
+	private $position = 0;
 
 
 	/**
@@ -43,17 +43,17 @@ class MW_Container_Content_Gzip
 			$name .= '.gz';
 		}
 
-		$level = $this->_getOption( 'gzip-level', 5 );
+		$level = $this->getOption( 'gzip-level', 5 );
 
-		if( ( $this->_fh = @gzopen( $resource, 'rb' . $level ) ) === false
-			&& ( $this->_fh = gzopen( $resource, 'wb' ) ) === false
+		if( ( $this->fh = @gzopen( $resource, 'rb' . $level ) ) === false
+			&& ( $this->fh = gzopen( $resource, 'wb' ) ) === false
 		) {
 			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
 
-		$this->_data = $this->_getData();
+		$this->data = $this->getData();
 	}
 
 
@@ -64,7 +64,7 @@ class MW_Container_Content_Gzip
 	 */
 	public function close()
 	{
-		if( gzclose( $this->_fh ) === false ) {
+		if( gzclose( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
@@ -77,7 +77,7 @@ class MW_Container_Content_Gzip
 	 */
 	public function add( $data )
 	{
-		if( gzwrite( $this->_fh, $data ) === false ) {
+		if( gzwrite( $this->fh, $data ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
@@ -90,7 +90,7 @@ class MW_Container_Content_Gzip
 	 */
 	function current()
 	{
-		return $this->_data;
+		return $this->data;
 	}
 
 
@@ -101,8 +101,8 @@ class MW_Container_Content_Gzip
 	 */
 	function key()
 	{
-		if( $this->_data !== null ) {
-			return $this->_position;
+		if( $this->data !== null ) {
+			return $this->position;
 		}
 
 		return null;
@@ -114,8 +114,8 @@ class MW_Container_Content_Gzip
 	 */
 	function next()
 	{
-		$this->_position++;
-		$this->_data = $this->_getData();
+		$this->position++;
+		$this->data = $this->getData();
 	}
 
 
@@ -124,12 +124,12 @@ class MW_Container_Content_Gzip
 	 */
 	function rewind()
 	{
-		if( gzrewind( $this->_fh ) === false ) {
+		if( gzrewind( $this->fh ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to rewind file "%1$s"', $this->getResource() ) );
 		}
 
-		$this->_position = 0;
-		$this->_data = $this->_getData();
+		$this->position = 0;
+		$this->data = $this->getData();
 	}
 
 
@@ -140,7 +140,7 @@ class MW_Container_Content_Gzip
 	 */
 	function valid()
 	{
-		return ( $this->_data === null ? !gzeof( $this->_fh ) : true );
+		return ( $this->data === null ? !gzeof( $this->fh ) : true );
 	}
 
 
@@ -149,9 +149,9 @@ class MW_Container_Content_Gzip
 	 *
 	 * @return String Content
 	 */
-	protected function _getData()
+	protected function getData()
 	{
-		if( ( $data = gzgets( $this->_fh, 0x100000 ) ) === false ) {
+		if( ( $data = gzgets( $this->fh, 0x100000 ) ) === false ) {
 			return null;
 		}
 

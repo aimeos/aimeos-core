@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_List_Pagination_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends PHPUnit_Framework_
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Pagination_Default( $context, $paths );
+		$this->object = new Client_Html_Catalog_List_Pagination_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -40,7 +40,7 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends PHPUnit_Framework_
 		$view->listParams = array();
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
-		$this->_object->setView( $view );
+		$this->object->setView( $view );
 	}
 
 
@@ -52,13 +52,13 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends PHPUnit_Framework_
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 
 		$this->assertContains( '<link rel="prev"', $output );
 		$this->assertContains( '<link rel="next prefetch"', $output );
@@ -67,13 +67,13 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends PHPUnit_Framework_
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="catalog-list-pagination', $output );
 	}
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 }

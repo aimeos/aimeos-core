@@ -51,8 +51,8 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/order/account/default/subparts';
-	private $_subPartNames = array();
+	private $subPartPath = 'client/html/checkout/standard/order/account/default/subparts';
+	private $subPartNames = array();
 
 
 	/**
@@ -65,10 +65,10 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->accountBody = $html;
@@ -96,7 +96,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 		$tplconf = 'client/html/checkout/standard/order/account/default/template-body';
 		$default = 'checkout/standard/order-account-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -110,10 +110,10 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->accountHeader = $html;
@@ -142,7 +142,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 		$tplconf = 'client/html/checkout/standard/order/account/default/template-header';
 		$default = 'checkout/standard/order-account-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -229,7 +229,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 		 * @see client/html/checkout/standard/order/account/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/order/account/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/order/account/' . $type, $name );
 	}
 
 
@@ -246,7 +246,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 		if( $basket->getCustomerId() == '' )
 		{
 			$email = '<unknown>';
-			$context = $this->_getContext();
+			$context = $this->getContext();
 
 			try
 			{
@@ -264,7 +264,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 					$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 
 					$password = substr( md5( microtime( true ) . /*getpid() .*/ rand() ), -8 );
-					$item = $this->_addCustomerData( $manager->createItem(), $addr, $addr->getEmail(), $password );
+					$item = $this->addCustomerData( $manager->createItem(), $addr, $addr->getEmail(), $password );
 					$manager->saveItem( $item );
 
 					$context->setUserId( $item->getId() );
@@ -272,7 +272,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 
 					$orderBaseManager->saveItem( $basket, false );
 
-					$this->_sendEmail( $addr, $addr->getEmail(), $password );
+					$this->sendEmail( $addr, $addr->getEmail(), $password );
 				}
 			}
 			catch( Exception $e )
@@ -291,9 +291,9 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -304,7 +304,7 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 * @param MShop_Common_Item_Address_Interface $address Billing address object
 	 * @return MShop_Customer_Item_Interface Customer object filled with data
 	 */
-	protected function _addCustomerData( MShop_Customer_Item_Interface $customer,
+	protected function addCustomerData( MShop_Customer_Item_Interface $customer,
 		MShop_Common_Item_Address_Interface $address, $code, $password )
 	{
 		$label = $address->getLastname();
@@ -334,10 +334,10 @@ class Client_Html_Checkout_Standard_Order_Account_Default
 	 * @param string $code Customer login name
 	 * @param string $password Customer clear text password
 	 */
-	protected function _sendEmail( MShop_Common_Item_Address_Interface $address, $code, $password )
+	protected function sendEmail( MShop_Common_Item_Address_Interface $address, $code, $password )
 	{
-		$context = $this->_getContext();
-		$client = Client_Html_Email_Account_Factory::createClient( $context, $this->_getTemplatePaths() );
+		$context = $this->getContext();
+		$client = Client_Html_Email_Account_Factory::createClient( $context, $this->getTemplatePaths() );
 
 		$view = $context->getView();
 		$view->extAccountCode = $code;

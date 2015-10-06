@@ -8,7 +8,7 @@
 
 class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,9 +20,9 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
+		$this->object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
 	}
 
 
@@ -34,27 +34,27 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Capture authorized payments', $this->_object->getName() );
+		$this->assertEquals( 'Capture authorized payments', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Authorized payments of orders will be captured after dispatching or after a configurable amount of time';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -100,7 +100,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 		$serviceProviderStub->expects( $this->once() )->method( 'capture' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -108,7 +108,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 	public function testRunExceptionProcess()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -157,7 +157,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
 		$object->run();
 	}
 
@@ -165,7 +165,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 	public function testRunExceptionProvider()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
@@ -198,7 +198,7 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends PHPUnit_Framewor
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
 
-		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $aimeos );
 		$object->run();
 	}
 }

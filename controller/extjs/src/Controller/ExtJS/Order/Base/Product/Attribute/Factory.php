@@ -66,7 +66,7 @@ class Controller_ExtJS_Order_Base_Product_Attribute_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Order_Base_Product_Attribute_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/order/base/product/attribute/decorators/excludes
 		 * Excludes decorators added by the "common" option from the order base product attribute ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Order_Base_Product_Attribute_Factory
 		 * @see controller/extjs/order/base/product/attribute/decorators/excludes
 		 * @see controller/extjs/order/base/product/attribute/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'order/base/product/attribute' );
+		return self::addControllerDecorators( $context, $controller, 'order/base/product/attribute' );
 	}
 }

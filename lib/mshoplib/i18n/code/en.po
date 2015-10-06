@@ -1,11 +1,11 @@
 # English translations for codes.
 # Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
+# This file is distributed under the same license as the aimeos-core package.
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: arcavias-core 2013-07\n"
+"Project-Id-Version: aimeos-core 2013-07\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-07-28 13:03+0100\n"

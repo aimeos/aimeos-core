@@ -18,8 +18,8 @@ class MW_Media_Application_Default
 	extends MW_Media_Abstract
 	implements MW_Media_Application_Interface
 {
-	private $_options;
-	private $_filename;
+	private $options;
+	private $filename;
 
 
 	/**
@@ -34,8 +34,8 @@ class MW_Media_Application_Default
 	{
 		parent::__construct( $mimetype );
 
-		$this->_filename = $filename;
-		$this->_options = $options;
+		$this->filename = $filename;
+		$this->options = $options;
 	}
 
 
@@ -48,8 +48,8 @@ class MW_Media_Application_Default
 	 */
 	public function save( $filename, $mimetype )
 	{
-		if( $this->_filename != $filename && copy( $this->_filename, $filename ) !== true ) {
-			throw new MW_Media_Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $this->_filename, $filename ) );
+		if( $this->filename != $filename && copy( $this->filename, $filename ) !== true ) {
+			throw new MW_Media_Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $this->filename, $filename ) );
 		}
 	}
 }

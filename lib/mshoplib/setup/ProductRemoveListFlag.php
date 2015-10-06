@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'column' => array(
 			'listflag' => 'ALTER TABLE "mshop_product" DROP "listflag"',
 		),
@@ -47,9 +47,9 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -58,38 +58,38 @@ class MW_Setup_Task_ProductRemoveListFlag extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Remove listflag from mshop_product table', 0 ); $this->_status( '' );
+		$this->msg( 'Remove listflag from mshop_product table', 0 ); $this->status( '' );
 
 		$table = 'mshop_product';
 
-		if( $this->_schema->tableExists( $table ) === true )
+		if( $this->schema->tableExists( $table ) === true )
 		{
 			foreach( $stmts['column'] as $column => $stmt )
 			{
-				$this->_msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
+				$this->msg( sprintf( 'Checking column "%1$s": ', $column ), 1 );
 
-				if( $this->_schema->columnExists( $table, $column ) === true )
+				if( $this->schema->columnExists( $table, $column ) === true )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'removed' );
+					$this->execute( $stmt );
+					$this->status( 'removed' );
 				}
 				else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 
 			foreach( $stmts['index'] as $index => $stmt )
 			{
-				$this->_msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
+				$this->msg( sprintf( 'Checking index "%1$s": ', $index ), 1 );
 
-				if( $this->_schema->indexExists( $table, $index ) === true )
+				if( $this->schema->indexExists( $table, $index ) === true )
 				{
-					$this->_execute( $stmt );
-					$this->_status( 'removed' );
+					$this->execute( $stmt );
+					$this->status( 'removed' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

@@ -25,7 +25,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index rebuild' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index rebuild' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Rebuilds the catalog index for searching products' );
+		return $this->getContext()->getI18n()->dt( 'controller/jobs', 'Rebuilds the catalog index for searching products' );
 	}
 
 
@@ -48,7 +48,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	public function run()
 	{
 		$timestamp = date( 'Y-m-d H:i:s' );
-		$context = clone $this->_getContext();
+		$context = clone $this->getContext();
 
 		$context->getLocale()->setLanguageId( null );
 		$context->getLocale()->setCurrencyId( null );

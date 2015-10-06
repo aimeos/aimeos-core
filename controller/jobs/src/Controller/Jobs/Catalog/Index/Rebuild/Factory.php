@@ -22,11 +22,11 @@ class Controller_Jobs_Catalog_Index_Rebuild_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
+	 * @param Aimeos $aimeos Aimeos object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Jobs_Interface New controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
+	public static function createController( MShop_Context_Item_Interface $context, Aimeos $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/catalog/index/rebuild/name
 		 * Class name of the used catalog index rebuild scheduler controller implementation
@@ -74,7 +74,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Factory
 		$iface = 'Controller_Jobs_Interface';
 		$classname = 'Controller_Jobs_Catalog_Index_Rebuild_' . $name;
 
-		$controller = self::_createController( $context, $arcavias, $classname, $iface );
+		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
 		/** controller/jobs/catalog/index/rebuild/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog index rebuild controllers
@@ -150,6 +150,6 @@ class Controller_Jobs_Catalog_Index_Rebuild_Factory
 		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
 		 * @see controller/jobs/catalog/index/rebuild/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'catalog/index/rebuild' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/rebuild' );
 	}
 }

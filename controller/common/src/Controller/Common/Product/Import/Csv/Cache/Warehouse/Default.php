@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Abstract
 	implements Controller_Common_Product_Import_Csv_Cache_Interface
 {
-	private $_warehouses = array();
+	private $warehouses = array();
 
 
 	/**
@@ -35,7 +35,7 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Default
 		$search->setSlice( 0, 1000 );
 
 		foreach( $manager->searchItems( $search ) as $id => $item ) {
-			$this->_warehouses[ $item->getCode() ] = $id;
+			$this->warehouses[ $item->getCode() ] = $id;
 		}
 	}
 
@@ -49,8 +49,8 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Default
 	 */
 	public function get( $code, $type = null )
 	{
-		if( isset( $this->_warehouses[$code] ) ) {
-			return $this->_warehouses[$code];
+		if( isset( $this->warehouses[$code] ) ) {
+			return $this->warehouses[$code];
 		}
 	}
 
@@ -62,6 +62,6 @@ class Controller_Common_Product_Import_Csv_Cache_Warehouse_Default
 	 */
 	public function set( MShop_Common_Item_Interface $item )
 	{
-		$this->_warehouses[ $item->getCode() ] = $item->getId();
+		$this->warehouses[ $item->getCode() ] = $item->getId();
 	}
 }

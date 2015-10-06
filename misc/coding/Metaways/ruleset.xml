@@ -27,7 +27,6 @@
 	<rule ref="PEAR.NamingConventions.ValidClassName"/>
 	<rule ref="Squiz.Functions.GlobalFunction"/>
 	<rule ref="Zend.Files.ClosingTag"/>
-	<rule ref="Zend.NamingConventions.ValidVariableName"/>
 
 	<rule ref="PEAR.Classes.ClassDeclaration">
 		<properties>

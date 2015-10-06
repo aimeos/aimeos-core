@@ -36,18 +36,18 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds coupon test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding coupon test data', 0 );
+		$this->msg( 'Adding coupon test data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'coupon.php';
@@ -56,10 +56,10 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for coupon test data', $path ) );
 		}
 
-		$this->_addCouponData( $testdata );
-		$this->_addOrderCouponTestData( $testdata );
+		$this->addCouponData( $testdata );
+		$this->addOrderCouponTestData( $testdata );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -69,9 +69,9 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addCouponData( array $testdata )
+	private function addCouponData( array $testdata )
 	{
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$couponManager = MShop_Coupon_Manager_Factory::createManager( $this->additional, 'Default' );
 		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
 		$couponIds = array();
@@ -116,9 +116,9 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addOrderCouponTestData( array $testdata )
+	private function addOrderCouponTestData( array $testdata )
 	{
-		$order = MShop_Order_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$order = MShop_Order_Manager_Factory::createManager( $this->additional, 'Default' );
 		$orderBase = $order->getSubManager( 'base', 'Default' );
 		$orderBaseProd = $orderBase->getSubManager( 'product', 'Default' );
 		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Default' );

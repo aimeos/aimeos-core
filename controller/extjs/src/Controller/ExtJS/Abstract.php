@@ -16,9 +16,9 @@
  */
 abstract class Controller_ExtJS_Abstract
 {
-	private $_name = '';
-	private $_sort = null;
-	private $_context = null;
+	private $name = '';
+	private $sort = null;
+	private $context = null;
 
 
 	/**
@@ -30,9 +30,9 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, $name, $sort = null )
 	{
-		$this->_context = $context;
-		$this->_name = $name;
-		$this->_sort = $sort;
+		$this->context = $context;
+		$this->name = $name;
+		$this->sort = $sort;
 	}
 
 
@@ -72,11 +72,11 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function deleteItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
-		$this->_getManager()->deleteItems( (array) $params->items );
-		$this->_clearCache( (array) $params->items );
+		$this->getManager()->deleteItems( (array) $params->items );
+		$this->clearCache( (array) $params->items );
 
 		return array(
 			'items' => $params->items,
@@ -93,16 +93,16 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function searchItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site' ) );
+		$this->setLocale( $params->site );
 
 		$total = 0;
-		$manager = $this->_getManager();
-		$search = $this->_initCriteria( $manager->createSearch(), $params );
+		$manager = $this->getManager();
+		$search = $this->initCriteria( $manager->createSearch(), $params );
 		$items = $manager->searchItems( $search, array(), $total );
 
 		return array(
-			'items' => $this->_toArray( $items ),
+			'items' => $this->toArray( $items ),
 			'total' => $total,
 			'success' => true,
 		);
@@ -118,35 +118,35 @@ abstract class Controller_ExtJS_Abstract
 	public function getServiceDescription()
 	{
 		return array(
-			$this->_name . '.init' => array(
+			$this->name . '.init' => array(
 				"parameters" => array(
 					array( "type" => "string", "name" => "site", "optional" => false ),
 					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
-			$this->_name . '.finish' => array(
+			$this->name . '.finish' => array(
 				"parameters" => array(
 					array( "type" => "string", "name" => "site", "optional" => false ),
 					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
-			$this->_name . '.deleteItems' => array(
+			$this->name . '.deleteItems' => array(
 				"parameters" => array(
 					array( "type" => "string", "name" => "site", "optional" => false ),
 					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
-			$this->_name . '.saveItems' => array(
+			$this->name . '.saveItems' => array(
 				"parameters" => array(
 					array( "type" => "string", "name" => "site", "optional" => false ),
 					array( "type" => "array", "name" => "items", "optional" => false ),
 				),
 				"returns" => "array",
 			),
-			$this->_name . '.searchItems' => array(
+			$this->name . '.searchItems' => array(
 				"parameters" => array(
 					array( "type" => "string", "name" => "site", "optional" => false ),
 					array( "type" => "array", "name" => "condition", "optional" => true ),
@@ -169,10 +169,10 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function getItemSchema()
 	{
-		$attributes = $this->_getManager()->getSearchAttributes( false );
+		$attributes = $this->getManager()->getSearchAttributes( false );
 		return array(
-			'name' => $this->_name,
-			'properties' => $this->_getAttributeSchema( $attributes ),
+			'name' => $this->name,
+			'properties' => $this->getAttributeSchema( $attributes ),
 		);
 	}
 
@@ -184,10 +184,10 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function getSearchSchema()
 	{
-		$attributes = $this->_getManager()->getSearchAttributes();
+		$attributes = $this->getManager()->getSearchAttributes();
 
 		return array(
-			'criteria' => $this->_getAttributeSchema( $attributes, false ),
+			'criteria' => $this->getAttributeSchema( $attributes, false ),
 		);
 	}
 
@@ -200,25 +200,25 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function saveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
+		$this->checkParams( $params, array( 'site', 'items' ) );
+		$this->setLocale( $params->site );
 
 		$ids = array();
-		$manager = $this->_getManager();
+		$manager = $this->getManager();
 		$entries = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $entries as $entry )
 		{
 			$item = $manager->createItem();
-			$item->fromArray( (array) $this->_transformValues( $entry ) );
+			$item->fromArray( (array) $this->transformValues( $entry ) );
 
 			$manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
 
-		$this->_clearCache( $ids );
+		$this->clearCache( $ids );
 
-		return $this->_getItems( $ids, $this->_getPrefix() );
+		return $this->getItems( $ids, $this->getPrefix() );
 	}
 
 
@@ -226,7 +226,7 @@ abstract class Controller_ExtJS_Abstract
 	 * Template method for returning the manager object used by the controller.
 	 * This method has to be implemented in the derived classes
 	 */
-	abstract protected function _getManager();
+	abstract protected function getManager();
 
 
 	/**
@@ -234,12 +234,8 @@ abstract class Controller_ExtJS_Abstract
 	 * This method has to be implemented in the derived classes
 	 *
 	 * @return MShop_Common_Manager_Interface Manager object
-	 * @todo 2015.10 Make abstract
 	 */
-	protected function _getPrefix()
-	{
-		return '';
-	}
+	abstract protected function getPrefix();
 
 
 	/**
@@ -249,7 +245,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param integer $errcode Status code of the uploaded file
 	 * @throws Controller_ExtJS_Exception If file upload is invalid
 	 */
-	protected function _checkFileUpload( $filename, $errcode )
+	protected function checkFileUpload( $filename, $errcode )
 	{
 		switch( $errcode )
 		{
@@ -285,7 +281,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param string[] $names List of names of the required parameter
 	 * @throws Controller_ExtJS_Exception if a required parameter is missing
 	 */
-	protected function _checkParams( stdClass $params, array $names )
+	protected function checkParams( stdClass $params, array $names )
 	{
 		foreach( $names as $name )
 		{
@@ -302,16 +298,16 @@ abstract class Controller_ExtJS_Abstract
 	 * @param array $ids List of domain IDs
 	 * @param string|null $domain Domain of the IDs, null for current domain
 	 */
-	protected function _clearCache( array $ids, $domain = null )
+	protected function clearCache( array $ids, $domain = null )
 	{
-		$domain = ( $domain !== null ? $domain : strtolower( $this->_name ) );
+		$domain = ( $domain !== null ? $domain : strtolower( $this->name ) );
 		$tags = array( $domain );
 
 		foreach( $ids as $id ) {
 			$tags[] = $domain . '-' . $id;
 		}
 
-		$this->_context->getCache()->deleteByTags( $tags );
+		$this->context->getCache()->deleteByTags( $tags );
 	}
 
 
@@ -322,7 +318,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param boolean $all True if all search attributes should be returned or false for only public ones
 	 * @throws Controller_ExtJS_Exception if list item doesn't implement MW_Common_Criteria_Attribute_Interface
 	 */
-	protected function _getAttributeSchema( array $attributes, $all = true )
+	protected function getAttributeSchema( array $attributes, $all = true )
 	{
 		$properties = array();
 		$iface = 'MW_Common_Criteria_Attribute_Interface';
@@ -353,12 +349,12 @@ abstract class Controller_ExtJS_Abstract
 	 * @param string $prefix Search key prefix
 	 * @return array Associative array including items and status for ExtJS
 	 */
-	protected function _getItems( array $ids, $prefix )
+	protected function getItems( array $ids, $prefix )
 	{
-		$search = $this->_getManager()->createSearch();
+		$search = $this->getManager()->createSearch();
 		$search->setConditions( $search->compare( '==', $prefix . '.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
-		$items = $this->_toArray( $this->_getManager()->searchItems( $search ) );
+		$items = $this->toArray( $this->getManager()->searchItems( $search ) );
 
 		return array(
 			'items' => ( count( $ids ) === 1 ? reset( $items ) : $items ),
@@ -374,11 +370,11 @@ abstract class Controller_ExtJS_Abstract
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 * @return MW_Common_Criteria_Interface Initialized criteria object
 	 */
-	protected function _initCriteria( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	protected function initCriteria( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
-		$this->_initCriteriaConditions( $criteria, $params );
-		$this->_initCriteriaSortations( $criteria, $params );
-		$this->_initCriteriaSlice( $criteria, $params );
+		$this->initCriteriaConditions( $criteria, $params );
+		$this->initCriteriaSortations( $criteria, $params );
+		$this->initCriteriaSlice( $criteria, $params );
 
 		return $criteria;
 	}
@@ -390,7 +386,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param MW_Common_Criteria_Interface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function _initCriteriaConditions( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaConditions( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
 		if( isset( $params->condition ) && is_object( $params->condition ) )
 		{
@@ -412,7 +408,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param MW_Common_Criteria_Interface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function _initCriteriaSlice( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaSlice( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
 		if( isset( $params->start ) && isset( $params->limit ) )
 		{
@@ -430,7 +426,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param MW_Common_Criteria_Interface $criteria Criteria object
 	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function _initCriteriaSortations( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	private function initCriteriaSortations( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
 		if( isset( $params->sort ) && isset( $params->dir ) )
 		{
@@ -450,10 +446,10 @@ abstract class Controller_ExtJS_Abstract
 		}
 
 
-		if( $this->_sort !== null )
+		if( $this->sort !== null )
 		{
 			$sort = $criteria->getSortations();
-			$sort[] = $criteria->sort( '+', $this->_sort );
+			$sort[] = $criteria->sort( '+', $this->sort );
 			$criteria->setSortations( $sort );
 		}
 	}
@@ -466,9 +462,9 @@ abstract class Controller_ExtJS_Abstract
 	 * @param string|null $langid Two letter ISO code for language
 	 * @param string|null $currencyid Three letter ISO code for currency
 	 */
-	protected function _setLocale( $site, $langid = null, $currencyid = null )
+	protected function setLocale( $site, $langid = null, $currencyid = null )
 	{
-		$siteManager = MShop_Locale_Manager_Factory::createManager( $this->_context )->getSubManager( 'site' );
+		$siteManager = MShop_Locale_Manager_Factory::createManager( $this->context )->getSubManager( 'site' );
 
 		$search = $siteManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', $site ) );
@@ -480,13 +476,13 @@ abstract class Controller_ExtJS_Abstract
 
 		$values = array( 'siteid' => $siteItem->getId() );
 		$sitepath = array_keys( $siteManager->getPath( $siteItem->getId() ) );
-		$sitetree = $this->_getSiteIdsFromTree( $siteManager->getTree( $siteItem->getId() ) );
+		$sitetree = $this->getSiteIdsFromTree( $siteManager->getTree( $siteItem->getId() ) );
 
 		$localeItem = new MShop_Locale_Item_Default( $values, $siteItem, $sitepath, $sitetree );
 		$localeItem->setLanguageId( $langid );
 		$localeItem->setCurrencyId( $currencyid );
 
-		$this->_context->setLocale( $localeItem );
+		$this->context->setLocale( $localeItem );
 	}
 
 
@@ -496,7 +492,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param array $list List of item objects
 	 * @return array List of stdClass objects containing the properties of the item objects
 	 */
-	protected function _toArray( array $list )
+	protected function toArray( array $list )
 	{
 		$result = array();
 
@@ -514,7 +510,7 @@ abstract class Controller_ExtJS_Abstract
 	 * @param stdClass $entry Entry object from ExtJS
 	 * @return stdClass Modified object
 	 */
-	protected function _transformValues( stdClass $entry )
+	protected function transformValues( stdClass $entry )
 	{
 		return $entry;
 	}
@@ -530,13 +526,13 @@ abstract class Controller_ExtJS_Abstract
 	 * 	list of pairs. Each list of pairs contains the key "items" with the list of object properties and the key
 	 * 	"total" with the total number of items that are available in the storage
 	 */
-	protected function _getDomainItems( array $lists )
+	protected function getDomainItems( array $lists )
 	{
 		$result = array();
 
 		foreach( $lists as $domain => $ids )
 		{
-			$manager = MShop_Factory::createManager( $this->_context, $domain );
+			$manager = MShop_Factory::createManager( $this->context, $domain );
 
 			$total = 0;
 			$criteria = $manager->createSearch();
@@ -550,7 +546,7 @@ abstract class Controller_ExtJS_Abstract
 			}
 
 			$result[implode( '_', $parts )] = array(
-				'items' => $this->_toArray( $items ),
+				'items' => $this->toArray( $items ),
 				'total' => $total,
 			);
 		}
@@ -564,9 +560,9 @@ abstract class Controller_ExtJS_Abstract
 	 *
 	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getContext()
+	protected function getContext()
 	{
-		return $this->_context;
+		return $this->context;
 	}
 
 
@@ -576,12 +572,12 @@ abstract class Controller_ExtJS_Abstract
 	 * @param MShop_Locale_Item_Site_Interface $item Locale item, maybe with children
 	 * @return array List of site IDs
 	 */
-	private function _getSiteIdsFromTree( MShop_Locale_Item_Site_Interface $item )
+	private function getSiteIdsFromTree( MShop_Locale_Item_Site_Interface $item )
 	{
 		$list = array( $item->getId() );
 
 		foreach( $item->getChildren() as $child ) {
-			$list = array_merge( $list, $this->_getSiteIdsFromTree( $child ) );
+			$list = array_merge( $list, $this->getSiteIdsFromTree( $child ) );
 		}
 
 		return $list;

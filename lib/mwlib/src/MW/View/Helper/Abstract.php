@@ -26,7 +26,7 @@
  */
 abstract class MW_View_Helper_Abstract
 {
-	private $_view;
+	private $view;
 
 
 	/**
@@ -36,7 +36,7 @@ abstract class MW_View_Helper_Abstract
 	 */
 	public function __construct( MW_View_Interface $view )
 	{
-		$this->_view = $view;
+		$this->view = $view;
 	}
 
 
@@ -49,7 +49,7 @@ abstract class MW_View_Helper_Abstract
 	 */
 	public function __call( $name, array $args )
 	{
-		return call_user_func_array( array( $this->_view, $name ), $args );
+		return call_user_func_array( array( $this->view, $name ), $args );
 	}
 
 
@@ -60,7 +60,7 @@ abstract class MW_View_Helper_Abstract
 	 */
 	public function setView( MW_View_Interface $view )
 	{
-		$this->_view = $view;
+		$this->view = $view;
 	}
 
 
@@ -69,8 +69,8 @@ abstract class MW_View_Helper_Abstract
 	 *
 	 * @return MW_View_Interface View object
 	 */
-	protected function _getView()
+	protected function getView()
 	{
-		return $this->_view;
+		return $this->view;
 	}
 }

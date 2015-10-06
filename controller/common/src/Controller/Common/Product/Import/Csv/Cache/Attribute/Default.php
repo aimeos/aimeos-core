@@ -18,7 +18,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	extends Controller_Common_Product_Import_Csv_Cache_Abstract
 	implements Controller_Common_Product_Import_Csv_Cache_Interface
 {
-	private $_attributes = array();
+	private $attributes = array();
 
 
 	/**
@@ -34,7 +34,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 		$result = $manager->searchItems( $manager->createSearch() );
 
 		foreach( $result as $id => $item ) {
-			$this->_attributes[ $item->getCode() ][ $item->getType() ] = $item;
+			$this->attributes[ $item->getCode() ][ $item->getType() ] = $item;
 		}
 	}
 
@@ -48,11 +48,11 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	 */
 	public function get( $code, $type = null )
 	{
-		if( isset( $this->_attributes[$code] ) && isset( $this->_attributes[$code][$type] ) ) {
-			return $this->_attributes[$code][$type];
+		if( isset( $this->attributes[$code] ) && isset( $this->attributes[$code][$type] ) ) {
+			return $this->attributes[$code][$type];
 		}
 
-		$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+		$manager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -65,7 +65,7 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 
 		if( ( $item = reset( $result ) ) !== false )
 		{
-			$this->_attributes[$code][$type] = $item;
+			$this->attributes[$code][$type] = $item;
 			return $item;
 		}
 	}
@@ -80,10 +80,10 @@ class Controller_Common_Product_Import_Csv_Cache_Attribute_Default
 	{
 		$code = $item->getCode();
 
-		if( !isset( $this->_attributes[$code] ) || !is_array( $this->_attributes[$code] ) ) {
-			$this->_attributes[$code] = array();
+		if( !isset( $this->attributes[$code] ) || !is_array( $this->attributes[$code] ) ) {
+			$this->attributes[$code] = array();
 		}
 
-		$this->_attributes[$code][ $item->getType() ] = $item;
+		$this->attributes[$code][ $item->getType() ] = $item;
 	}
 }

@@ -51,11 +51,11 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/filter/tree/default/subparts';
-	private $_subPartNames = array();
-	private $_tags = array();
-	private $_expire;
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/filter/tree/default/subparts';
+	private $subPartNames = array();
+	private $tags = array();
+	private $expire;
+	private $cache;
 
 
 	/**
@@ -68,13 +68,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
-
-		$navHelper = new MW_View_Helper_NavTree_Default( $view );
-		$view->addHelper( 'navtree', $navHelper );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->treeBody = $html;
@@ -102,7 +99,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		$tplconf = 'client/html/catalog/filter/tree/default/template-body';
 		$default = 'catalog/filter/tree-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -116,10 +113,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->treeHeader = $html;
@@ -148,7 +145,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		$tplconf = 'client/html/catalog/filter/tree/default/template-header';
 		$default = 'catalog/filter/tree-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -235,7 +232,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		 * @see client/html/catalog/filter/tree/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/filter/tree/' . $type, $name );
+		return $this->createSubClient( 'catalog/filter/tree/' . $type, $name );
 	}
 
 
@@ -244,9 +241,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -256,12 +253,12 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * @param MW_View_Interface $view The view object which generates the HTML output
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			$catItems = array();
-			$context = $this->_getContext();
+			$context = $this->getContext();
 			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 			$currentid = (string) $view->param( 'f_catid', '' );
@@ -396,18 +393,18 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$view->treeCatalogPath = $catItems;
 			$view->treeCatalogTree = $controller->getCatalogTree( $startid, $ref, $level, $search );
-			$view->treeCatalogIds = $this->_getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
-			$view->treeFilterParams = $this->_getClientParams( $view->param(), array( 'f' ) );
+			$view->treeCatalogIds = $this->getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
+			$view->treeFilterParams = $this->getClientParams( $view->param(), array( 'f' ) );
 
-			$this->_addMetaItemCatalog( $view->treeCatalogTree, $this->_expire, $this->_tags );
+			$this->addMetaItemCatalog( $view->treeCatalogTree, $this->expire, $this->tags );
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 
 
@@ -422,7 +419,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * @param string $currentId Currently selected category
 	 * @return array List of category IDs
 	 */
-	protected function _getCatalogIds( MShop_Catalog_Item_Interface $tree, array $path, $currentId )
+	protected function getCatalogIds( MShop_Catalog_Item_Interface $tree, array $path, $currentId )
 	{
 		if( $tree->getId() == $currentId )
 		{
@@ -437,7 +434,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		foreach( $tree->getChildren() as $child )
 		{
 			if( isset( $path[$child->getId()] ) ) {
-				return $this->_getCatalogIds( $child, $path, $currentId );
+				return $this->getCatalogIds( $child, $path, $currentId );
 			}
 		}
 
@@ -452,12 +449,12 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function _addMetaItemCatalog( MShop_Catalog_Item_Interface $tree, &$expire, array &$tags = array() )
+	protected function addMetaItemCatalog( MShop_Catalog_Item_Interface $tree, &$expire, array &$tags = array() )
 	{
-		$this->_addMetaItem( $tree, 'catalog', $expire, $tags );
+		$this->addMetaItem( $tree, 'catalog', $expire, $tags );
 
 		foreach( $tree->getChildren() as $child ) {
-			$this->_addMetaItemCatalog( $child, $expire, $tags );
+			$this->addMetaItemCatalog( $child, $expire, $tags );
 		}
 	}
 }

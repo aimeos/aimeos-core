@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogListNodeidToParentid extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_catalog_list' => array(
 			'ALTER TABLE "mshop_catalog_list" DROP FOREIGN KEY "fk_mscatli_nodeid"',
 			'ALTER TABLE "mshop_catalog_list" CHANGE "nodeid" "parentid" INT( 11 ) NOT NULL',
@@ -48,9 +48,9 @@ class MW_Setup_Task_CatalogListNodeidToParentid extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -59,23 +59,23 @@ class MW_Setup_Task_CatalogListNodeidToParentid extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Renaming column nodeid of catalog list table', 0 ); $this->_status( '' );
+		$this->msg( 'Renaming column nodeid of catalog list table', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, 'nodeid' ) === true )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, 'nodeid' ) === true )
 			{
-				$this->_executeList( $stmtList );
-				$this->_status( 'renamed' );
+				$this->executeList( $stmtList );
+				$this->status( 'renamed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

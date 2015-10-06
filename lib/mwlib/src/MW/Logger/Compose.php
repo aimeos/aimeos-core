@@ -16,7 +16,7 @@
  */
 class MW_Logger_Compose extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_loggers;
+	private $loggers;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_Logger_Compose extends MW_Logger_Abstract implements MW_Logger_Interfac
 	 */
 	public function __construct( array $loggers )
 	{
-		$this->_loggers = $loggers;
+		$this->loggers = $loggers;
 	}
 
 
@@ -41,7 +41,7 @@ class MW_Logger_Compose extends MW_Logger_Abstract implements MW_Logger_Interfac
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		foreach( $this->_loggers as $logger ) {
+		foreach( $this->loggers as $logger ) {
 			$logger->log( $message, $priority, $facility );
 		}
 	}

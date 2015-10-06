@@ -9,7 +9,7 @@
 class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 	extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -21,9 +21,9 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$this->_object = new Controller_Jobs_Order_Cleanup_Unpaid_Default( $context, $arcavias );
+		$this->object = new Controller_Jobs_Order_Cleanup_Unpaid_Default( $context, $aimeos );
 	}
 
 
@@ -35,27 +35,27 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Removes unpaid orders', $this->_object->getName() );
+		$this->assertEquals( 'Removes unpaid orders', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
 		$text = 'Deletes unpaid orders to keep the database clean';
-		$this->assertEquals( $text, $this->_object->getDescription() );
+		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 
 		$name = 'ControllerJobsOrderCleanupUnpaidDefaultRun';
@@ -99,7 +99,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_DefaultTest
 		$orderCntlStub->expects( $this->once() )->method( 'unblock' );
 
 
-		$object = new Controller_Jobs_Order_Cleanup_Unpaid_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Cleanup_Unpaid_Default( $context, $aimeos );
 		$object->run();
 	}
 }

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Abstract
 {
-	private $_mysql = 'ALTER TABLE "mshop_customer" MODIFY "countryid" CHAR(2) NULL';
+	private $mysql = 'ALTER TABLE "mshop_customer" MODIFY "countryid" CHAR(2) NULL';
 
 
 	/**
@@ -39,9 +39,9 @@ class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -50,21 +50,21 @@ class MW_Setup_Task_CustomerChangeCountryidNull extends MW_Setup_Task_Abstract
 	 *
 	 * @param string $stmt SQL statement to execute for changing column
 	 */
-	protected function _process( $stmt )
+	protected function process( $stmt )
 	{
 		$column = 'countryid';
 		$table = 'mshop_customer';
 
-		$this->_msg( sprintf( 'Allow NULL for "%2$s" in table "%1$s"', $table, $column ), 0 );
+		$this->msg( sprintf( 'Allow NULL for "%2$s" in table "%1$s"', $table, $column ), 0 );
 
-		if( $this->_schema->tableExists( $table )
-			&& $this->_schema->columnExists( $table, $column ) === true
-			&& $this->_schema->getColumnDetails( $table, $column )->isNullable() === false
+		if( $this->schema->tableExists( $table )
+			&& $this->schema->columnExists( $table, $column ) === true
+			&& $this->schema->getColumnDetails( $table, $column )->isNullable() === false
 		) {
-			$this->_execute( $stmt );
-			$this->_status( 'changed' );
+			$this->execute( $stmt );
+			$this->status( 'changed' );
 		} else {
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

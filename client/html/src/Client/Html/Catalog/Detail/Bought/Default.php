@@ -50,11 +50,11 @@ class Client_Html_Catalog_Detail_Bought_Default
 	 * @since 2014.09
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/catalog/detail/bought/default/subparts';
-	private $_subPartNames = array();
-	private $_tags = array();
-	private $_expire;
-	private $_cache;
+	private $subPartPath = 'client/html/catalog/detail/bought/default/subparts';
+	private $subPartNames = array();
+	private $tags = array();
+	private $expire;
+	private $cache;
 
 
 	/**
@@ -67,10 +67,10 @@ class Client_Html_Catalog_Detail_Bought_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->boughtBody = $html;
@@ -98,7 +98,7 @@ class Client_Html_Catalog_Detail_Bought_Default
 		$tplconf = 'client/html/catalog/detail/bought/default/template-body';
 		$default = 'catalog/detail/bought-body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -112,10 +112,10 @@ class Client_Html_Catalog_Detail_Bought_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
+		foreach( $this->getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->boughtHeader = $html;
@@ -144,7 +144,7 @@ class Client_Html_Catalog_Detail_Bought_Default
 		$tplconf = 'client/html/catalog/detail/bought/default/template-header';
 		$default = 'catalog/detail/bought-header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -231,7 +231,7 @@ class Client_Html_Catalog_Detail_Bought_Default
 		 * @see client/html/catalog/detail/bought/decorators/global
 		 */
 
-		return $this->_createSubClient( 'catalog/detail/bought/' . $type, $name );
+		return $this->createSubClient( 'catalog/detail/bought/' . $type, $name );
 	}
 
 
@@ -240,9 +240,9 @@ class Client_Html_Catalog_Detail_Bought_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -254,13 +254,13 @@ class Client_Html_Catalog_Detail_Bought_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
 			if( isset( $view->detailProductItem ) )
 			{
-				$context = $this->_getContext();
+				$context = $this->getContext();
 				$config = $context->getConfig();
 				$domains = array( 'text', 'price', 'media' );
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'bought-together' );
@@ -300,16 +300,16 @@ class Client_Html_Catalog_Detail_Bought_Default
 				$view->boughtItems = $controller->getProductItems( array_keys( $products ), $domains );
 				$view->boughtPosItems = $products;
 
-				$this->_addMetaItem( $view->boughtItems, 'product', $this->_expire, $this->_tags );
-				$this->_addMetaList( array_keys( $view->boughtItems ), 'product', $this->_expire );
+				$this->addMetaItem( $view->boughtItems, 'product', $this->expire, $this->tags );
+				$this->addMetaList( array_keys( $view->boughtItems ), 'product', $this->expire );
 			}
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		$expire = $this->_expires( $this->_expire, $expire );
-		$tags = array_merge( $tags, $this->_tags );
+		$expire = $this->expires( $this->expire, $expire );
+		$tags = array_merge( $tags, $this->tags );
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

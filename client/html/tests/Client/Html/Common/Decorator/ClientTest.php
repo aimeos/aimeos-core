@@ -8,21 +8,21 @@
 
 class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 {
-	private $_context;
+	private $context;
 
 
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		$this->context = TestHelper::getContext();
 	}
 
 
 	public function testDecorateFactoryClientCommon()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/common/decorators/default', array( 'Example' ) );
 
-		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array() );
+		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() );
 
 		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
 	}
@@ -30,10 +30,10 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 	public function testDecorateFactoryClientGlobal()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/catalog/filter/decorators/global', array( 'Example' ) );
 
-		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array() );
+		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() );
 
 		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
 	}
@@ -41,10 +41,10 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 	public function testDecorateSubClientCommon()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/common/decorators/default', array( 'Example' ) );
 
-		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array() )->getSubClient( 'tree' );
+		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() )->getSubClient( 'tree' );
 
 		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
 	}
@@ -52,10 +52,10 @@ class Client_Html_Common_Decorator_ClientTest extends PHPUnit_Framework_TestCase
 
 	public function testDecorateSubClientGlobal()
 	{
-		$config = $this->_context->getConfig();
+		$config = $this->context->getConfig();
 		$config->set( 'client/html/catalog/filter/tree/decorators/global', array( 'Example' ) );
 
-		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, array() )->getSubClient( 'tree' );
+		$object = Client_Html_Catalog_Filter_Factory::createClient( $this->context, array() )->getSubClient( 'tree' );
 
 		$this->assertInstanceOf( 'Client_Html_Common_Decorator_Interface', $object );
 	}

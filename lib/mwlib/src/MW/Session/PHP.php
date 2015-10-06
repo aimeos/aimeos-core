@@ -34,8 +34,8 @@ class MW_Session_PHP implements MW_Session_Interface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( isset( $_SESSION[$name] ) ) {
-			return $_SESSION[$name];
+		if( isset( $SESSION[$name] ) ) {
+			return $SESSION[$name];
 		}
 
 		return $default;
@@ -54,6 +54,6 @@ class MW_Session_PHP implements MW_Session_Interface
 	 */
 	public function set( $name, $value )
 	{
-		$_SESSION[$name] = $value;
+		$SESSION[$name] = $value;
 	}
 }

@@ -51,7 +51,7 @@ class Client_Html_Basket_Standard_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/basket/standard/default/subparts';
+	private $subPartPath = 'client/html/basket/standard/default/subparts';
 
 	/** client/html/basket/standard/detail/name
 	 * Name of the detail part used by the basket standard detail client implementation
@@ -74,8 +74,8 @@ class Client_Html_Basket_Standard_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'detail', 'coupon' );
-	private $_cache;
+	private $subPartNames = array( 'detail', 'coupon' );
+	private $cache;
 
 
 	/**
@@ -88,32 +88,32 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->standardBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -147,7 +147,7 @@ class Client_Html_Basket_Standard_Default
 		$tplconf = 'client/html/basket/standard/default/template-body';
 		$default = 'basket/standard/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -163,17 +163,17 @@ class Client_Html_Basket_Standard_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->standardHeader = $html;
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return '';
 		}
 
@@ -201,7 +201,7 @@ class Client_Html_Basket_Standard_Default
 		$tplconf = 'client/html/basket/standard/default/template-header';
 		$default = 'basket/standard/header-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -288,7 +288,7 @@ class Client_Html_Basket_Standard_Default
 		 * @see client/html/basket/standard/decorators/global
 		 */
 
-		return $this->_createSubClient( 'basket/standard/' . $type, $name );
+		return $this->createSubClient( 'basket/standard/' . $type, $name );
 	}
 
 
@@ -298,26 +298,10 @@ class Client_Html_Basket_Standard_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		try
 		{
-			/** client/html/basket/standard/require-stock
-			 * Customers can order products only if there are enough products in stock
-			 *
-			 * @deprecated Use "client/html/basket/require-stock" instead
-			 * @see client/html/basket/require-stock
-			 */
-			$reqstock = $view->config( 'client/html/basket/standard/require-stock', true );
-
-			/** client/html/basket/standard/require-variant
-			 * A variant of a selection product must be chosen
-			 *
-			 * @deprecated Use "client/html/basket/require-variant" instead
-			 * @see client/html/basket/require-variant
-			 */
-			$reqvariant = $view->config( 'client/html/basket/standard/require-variant', true );
-
 			$options = array(
 
 				/** client/html/basket/require-stock
@@ -332,7 +316,7 @@ class Client_Html_Basket_Standard_Default
 				 * @category Developer
 				 * @category User
 				 */
-				'stock' => $view->config( 'client/html/basket/require-stock', $reqstock ),
+				'stock' => $view->config( 'client/html/basket/require-stock', true ),
 
 				/** client/html/basket/require-variant
 				 * A variant of a selection product must be chosen
@@ -350,19 +334,19 @@ class Client_Html_Basket_Standard_Default
 				 * @category Developer
 				 * @category User
 				 */
-				'variant' => $view->config( 'client/html/basket/require-variant', $reqvariant ),
+				'variant' => $view->config( 'client/html/basket/require-variant', true ),
 			);
 
 			switch( $view->param( 'b_action' ) )
 			{
 				case 'add':
-					$this->_addProducts( $view, $options );
+					$this->addProducts( $view, $options );
 					break;
 				case 'delete':
-					$this->_deleteProducts( $view );
+					$this->deleteProducts( $view );
 					break;
 				default:
-					$this->_editProducts( $view, $options );
+					$this->editProducts( $view, $options );
 			}
 
 			parent::process();
@@ -383,7 +367,7 @@ class Client_Html_Basket_Standard_Default
 		catch( MShop_Plugin_Provider_Exception $e )
 		{
 			$errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
+			$errors = array_merge( $errors, $this->translatePluginErrorCodes( $e->getErrorCodes() ) );
 
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
@@ -408,9 +392,9 @@ class Client_Html_Basket_Standard_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -422,26 +406,26 @@ class Client_Html_Basket_Standard_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
-			$params = $context->getSession()->get( 'arcavias/catalog/detail/params/last', array() );
+			$context = $this->getContext();
+			$params = $context->getSession()->get( 'aimeos/catalog/detail/params/last', array() );
 
 			$target = $view->config( 'client/html/catalog/detail/url/target' );
 			$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 			$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
 			$config = $view->config( 'client/html/catalog/detail/url/config', array() );
 
-			$view->standardParams = $this->_getClientParams( $view->param() );
+			$view->standardParams = $this->getClientParams( $view->param() );
 			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
 			$view->standardBasket = Controller_Frontend_Factory::createController( $context, 'basket' )->get();
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 
 
@@ -451,11 +435,11 @@ class Client_Html_Basket_Standard_Default
 	 * @param MW_View_Interface $view View object
 	 * @param array $options List of options for addProducts() in basket controller
 	 */
-	protected function _addProducts( MW_View_Interface $view, array $options )
+	protected function addProducts( MW_View_Interface $view, array $options )
 	{
-		$this->_clearCached();
+		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 
 		if( ( $prodid = $view->param( 'b_prodid', '' ) ) !== '' )
 		{
@@ -471,7 +455,7 @@ class Client_Html_Basket_Standard_Default
 		}
 
 		foreach( $products as $values ) {
-			$this->_addProduct( $controller, $values, $options );
+			$this->addProduct( $controller, $values, $options );
 		}
 	}
 
@@ -483,7 +467,7 @@ class Client_Html_Basket_Standard_Default
 	 * @param array $values Associative list of key/value pairs from the view specifying the product
 	 * @param array $options List of options for addProducts() in basket frontend controller
 	 */
-	protected function _addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
+	protected function addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
 	{
 		$controller->addProduct(
 			( isset( $values['prodid'] ) ? (string) $values['prodid'] : '' ),
@@ -503,11 +487,11 @@ class Client_Html_Basket_Standard_Default
 	 *
 	 * @param MW_View_Interface $view View object
 	 */
-	protected function _deleteProducts( MW_View_Interface $view )
+	protected function deleteProducts( MW_View_Interface $view )
 	{
-		$this->_clearCached();
+		$this->clearCached();
 		$products = (array) $view->param( 'b_position', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 
 		foreach( $products as $position ) {
 			$controller->deleteProduct( $position );
@@ -521,11 +505,11 @@ class Client_Html_Basket_Standard_Default
 	 * @param MW_View_Interface $view View object
 	 * @param array $options List of options for editProducts() in basket controller
 	 */
-	protected function _editProducts( MW_View_Interface $view, array $options )
+	protected function editProducts( MW_View_Interface $view, array $options )
 	{
-		$this->_clearCached();
+		$this->clearCached();
 		$products = (array) $view->param( 'b_prod', array() );
-		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 
 		if( ( $position = $view->param( 'b_position', '' ) ) !== '' )
 		{

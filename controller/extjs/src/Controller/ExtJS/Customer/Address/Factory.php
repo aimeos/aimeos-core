@@ -66,7 +66,7 @@ class Controller_ExtJS_Customer_Address_Factory
 		$iface = 'Controller_ExtJS_Common_Interface';
 		$classname = 'Controller_ExtJS_Customer_Address_' . $name;
 
-		$controller = self::_createController( $context, $classname, $iface );
+		$controller = self::createControllerBase( $context, $classname, $iface );
 
 		/** controller/extjs/customer/address/decorators/excludes
 		 * Excludes decorators added by the "common" option from the customer address ExtJS controllers
@@ -142,6 +142,6 @@ class Controller_ExtJS_Customer_Address_Factory
 		 * @see controller/extjs/customer/address/decorators/excludes
 		 * @see controller/extjs/customer/address/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $controller, 'customer/address' );
+		return self::addControllerDecorators( $context, $controller, 'customer/address' );
 	}
 }

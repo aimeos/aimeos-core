@@ -18,7 +18,7 @@ class MW_View_Helper_Date_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_format;
+	private $format;
 
 
 	/**
@@ -32,7 +32,7 @@ class MW_View_Helper_Date_Default
 	{
 		parent::__construct( $view );
 
-		$this->_format = $format;
+		$this->format = $format;
 	}
 
 
@@ -44,6 +44,6 @@ class MW_View_Helper_Date_Default
 	 */
 	public function transform( $date )
 	{
-		return DateTime::createFromFormat( 'Y-m-d H:i:s', $date )->format( $this->_format );
+		return DateTime::createFromFormat( 'Y-m-d H:i:s', $date )->format( $this->format );
 	}
 }

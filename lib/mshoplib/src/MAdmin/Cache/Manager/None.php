@@ -18,7 +18,7 @@ class MAdmin_Cache_Manager_None
 	extends MAdmin_Common_Manager_Abstract
 	implements MAdmin_Cache_Manager_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'cache.id' => array(
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
@@ -47,7 +47,7 @@ class MAdmin_Cache_Manager_None
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 
 		return new MAdmin_Cache_Item_Default( $values );
 	}
@@ -112,7 +112,7 @@ class MAdmin_Cache_Manager_None
 	{
 		$path = 'classes/cache/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -125,6 +125,6 @@ class MAdmin_Cache_Manager_None
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'cache', $manager, $name );
+		return $this->getSubManagerBase( 'cache', $manager, $name );
 	}
 }

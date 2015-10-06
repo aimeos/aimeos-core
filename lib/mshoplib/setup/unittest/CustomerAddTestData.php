@@ -36,24 +36,24 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Adds customer test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding customer test data', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
+		$this->msg( 'Adding customer test data', 0 );
+		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer.php';
@@ -62,19 +62,19 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Default' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Default' );
 		$customerGroupManager = $customerManager->getSubManager( 'group', 'Default' );
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
-		$parentIds = $this->_addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
-		$this->_addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
-		$this->_addCustomerGroupData( $testdata, $customerGroupManager, $parentIds );
+		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
+		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
+		$this->addCustomerGroupData( $testdata, $customerGroupManager, $parentIds );
 
-		$this->_conn->commit();
+		$this->conn->commit();
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 
 	}
 
@@ -87,7 +87,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	 * @param MShop_Common_Item_Address_Interface $address Customer address item
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function _addCustomerData( array $testdata, MShop_Common_Manager_Interface $customerManager,
+	protected function addCustomerData( array $testdata, MShop_Common_Manager_Interface $customerManager,
 		MShop_Common_Item_Address_Interface $address )
 	{
 		$parentIds = array();
@@ -138,7 +138,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function _addCustomerAddressData( array $testdata, MShop_Common_Manager_Interface $customerAddressManager,
+	protected function addCustomerAddressData( array $testdata, MShop_Common_Manager_Interface $customerAddressManager,
 		array $parentIds )
 	{
 		$address = $customerAddressManager->createItem();
@@ -185,7 +185,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	protected function _addCustomerGroupData( array $testdata, MShop_Common_Manager_Interface $customerGroupManager,
+	protected function addCustomerGroupData( array $testdata, MShop_Common_Manager_Interface $customerGroupManager,
 		array $parentIds )
 	{
 		$group = $customerGroupManager->createItem();

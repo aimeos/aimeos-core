@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'ALTER TABLE "mshop_catalog" DROP "domain"',
 	);
 
@@ -41,9 +41,9 @@ class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -52,20 +52,20 @@ class MW_Setup_Task_CatalogRemoveDomain extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of table name and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Removing catalog "domain" column', 0 ); $this->_status( '' );
-		$this->_msg( sprintf( 'Checking table "%1$s": ', 'mshop_catalog' ), 1 );
+		$this->msg( 'Removing catalog "domain" column', 0 ); $this->status( '' );
+		$this->msg( sprintf( 'Checking table "%1$s": ', 'mshop_catalog' ), 1 );
 
-		if( $this->_schema->tableExists( 'mshop_catalog' ) === true
-			&& $this->_schema->columnExists( 'mshop_catalog', 'domain' ) === true )
+		if( $this->schema->tableExists( 'mshop_catalog' ) === true
+			&& $this->schema->columnExists( 'mshop_catalog', 'domain' ) === true )
 		{
-			$this->_executeList( $stmts );
-			$this->_status( 'removed' );
+			$this->executeList( $stmts );
+			$this->status( 'removed' );
 		}
 		else
 		{
-			$this->_status( 'OK' );
+			$this->status( 'OK' );
 		}
 	}
 }

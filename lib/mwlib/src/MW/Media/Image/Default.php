@@ -18,9 +18,9 @@ class MW_Media_Image_Default
 	extends MW_Media_Image_Abstract
 	implements MW_Media_Image_Interface
 {
-	private $_image;
-	private $_options;
-	private $_filename;
+	private $image;
+	private $options;
+	private $filename;
 
 
 	/**
@@ -39,12 +39,12 @@ class MW_Media_Image_Default
 			throw new MW_Media_Exception( sprintf( 'Unable to read from file "%1$s"', $filename ) );
 		}
 
-		if( ( $this->_image = @imagecreatefromstring( $content ) ) === false ) {
+		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
 			throw new MW_Media_Exception( sprintf( 'Unknown image type in "%1$s"', $filename ) );
 		}
 
-		$this->_filename = $filename;
-		$this->_options = $options;
+		$this->filename = $filename;
+		$this->options = $options;
 	}
 
 
@@ -53,8 +53,8 @@ class MW_Media_Image_Default
 	 */
 	public function __destruct()
 	{
-		if( $this->_image ) {
-			imagedestroy( $this->_image );
+		if( $this->image ) {
+			imagedestroy( $this->image );
 		}
 	}
 
@@ -72,7 +72,7 @@ class MW_Media_Image_Default
 		{
 			case 'image/gif':
 
-				if( @imagegif( $this->_image, $filename ) === false ) {
+				if( @imagegif( $this->image, $filename ) === false ) {
 					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
@@ -81,11 +81,11 @@ class MW_Media_Image_Default
 			case 'image/jpeg':
 
 				$quality = 75;
-				if( isset( $this->_options['image']['jpeg']['quality'] ) ) {
-					$quality = (int) $this->_options['image']['jpeg']['quality'];
+				if( isset( $this->options['image']['jpeg']['quality'] ) ) {
+					$quality = (int) $this->options['image']['jpeg']['quality'];
 				}
 
-				if( @imagejpeg( $this->_image, $filename, $quality ) === false ) {
+				if( @imagejpeg( $this->image, $filename, $quality ) === false ) {
 					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
@@ -94,11 +94,11 @@ class MW_Media_Image_Default
 			case 'image/png':
 
 				$quality = 9;
-				if( isset( $this->_options['image']['png']['quality'] ) ) {
-					$quality = (int) $this->_options['image']['png']['quality'];
+				if( isset( $this->options['image']['png']['quality'] ) ) {
+					$quality = (int) $this->options['image']['png']['quality'];
 				}
 
-				if( @imagepng( $this->_image, $filename, $quality ) === false ) {
+				if( @imagepng( $this->image, $filename, $quality ) === false ) {
 					throw new MW_Media_Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
 
@@ -119,13 +119,13 @@ class MW_Media_Image_Default
 	 */
 	public function scale( $width, $height, $fit = true )
 	{
-		if( ( $info = getimagesize( $this->_filename ) ) === false ) {
+		if( ( $info = getimagesize( $this->filename ) ) === false ) {
 			throw new MW_Media_Exception( 'Unable to retrive image size' );
 		}
 
 		if( $fit === true )
 		{
-			list( $width, $height ) = $this->_getSizeFitted( $info[0], $info[1], $width, $height );
+			list( $width, $height ) = $this->getSizeFitted( $info[0], $info[1], $width, $height );
 
 			if( $info[0] <= $width && $info[1] <= $height ) {
 				return;
@@ -136,11 +136,11 @@ class MW_Media_Image_Default
 			throw new MW_Media_Exception( 'Unable to create new image' );
 		}
 
-		if( imagecopyresampled( $image, $this->_image, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
+		if( imagecopyresampled( $image, $this->image, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
 			throw new MW_Media_Exception( 'Unable to resize image' );
 		}
 
-		imagedestroy( $this->_image );
-		$this->_image = $image;
+		imagedestroy( $this->image );
+		$this->image = $image;
 	}
 }

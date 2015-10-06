@@ -51,7 +51,7 @@ class Client_Html_Basket_Mini_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/basket/mini/default/subparts';
+	private $subPartPath = 'client/html/basket/mini/default/subparts';
 
 	/** client/html/basket/mini/main/name
 	 * Name of the main part used by the basket mini client implementation
@@ -74,9 +74,9 @@ class Client_Html_Basket_Mini_Default
 	 * @since 2015.09
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'main', 'product' );
+	private $subPartNames = array( 'main', 'product' );
 
-	private $_cache;
+	private $cache;
 
 
 	/**
@@ -89,7 +89,7 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
@@ -104,16 +104,16 @@ class Client_Html_Basket_Mini_Default
 		 * @see client/html/basket#mini
 		 */
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
-		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
+		$key = $this->getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 
-		if( ( $html = $this->_getBasketCached( $key ) ) === null )
+		if( ( $html = $this->getBasketCached( $key ) ) === null )
 		{
 			try
 			{
-				$view = $this->_setViewParams( $view, $tags, $expire );
+				$view = $this->setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->miniBody = $output;
@@ -164,8 +164,8 @@ class Client_Html_Basket_Mini_Default
 			$tplconf = 'client/html/basket/mini/default/template-body';
 			$default = 'basket/mini/body-default.html';
 
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-			$this->_setBasketCached( $key, $html );
+			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$this->setBasketCached( $key, $html );
 		}
 		else
 		{
@@ -186,21 +186,21 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
-		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
+		$key = $this->getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
 
-		if( ( $html = $this->_getBasketCached( $key ) ) === null )
+		if( ( $html = $this->getBasketCached( $key ) ) === null )
 		{
 			try
 			{
-				$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+				$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients() as $subclient ) {
+				foreach( $this->getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->miniHeader = $output;
@@ -229,12 +229,12 @@ class Client_Html_Basket_Mini_Default
 				$tplconf = 'client/html/basket/mini/default/template-header';
 				$default = 'basket/mini/header-default.html';
 
-				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-				$this->_setBasketCached( $key, $html );
+				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+				$this->setBasketCached( $key, $html );
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
@@ -329,7 +329,7 @@ class Client_Html_Basket_Mini_Default
 		 * @see client/html/basket/mini/decorators/global
 		 */
 
-		return $this->_createSubClient( 'basket/mini/' . $type, $name );
+		return $this->createSubClient( 'basket/mini/' . $type, $name );
 	}
 
 
@@ -338,9 +338,9 @@ class Client_Html_Basket_Mini_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -352,16 +352,16 @@ class Client_Html_Basket_Mini_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+			$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'basket' );
 			$view->miniBasket = $controller->get();
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

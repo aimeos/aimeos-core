@@ -18,7 +18,7 @@ class MW_View_Helper_Translate_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_translator;
+	private $translator;
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_View_Helper_Translate_Default
 	{
 		parent::__construct( $view );
 
-		$this->_translator = $translator;
+		$this->translator = $translator;
 	}
 
 
@@ -47,9 +47,9 @@ class MW_View_Helper_Translate_Default
 	public function transform( $domain, $singular, $plural = '', $number = 1 )
 	{
 		if( $plural !== '' ) {
-			return $this->_translator->dn( $domain, $singular, $plural, $number );
+			return $this->translator->dn( $domain, $singular, $plural, $number );
 		}
 
-		return $this->_translator->dt( $domain, $singular );
+		return $this->translator->dt( $domain, $singular );
 	}
 }

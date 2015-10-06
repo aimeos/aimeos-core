@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -19,12 +19,12 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
-		$this->_context->setEditor( 'UTC001' );
+		$this->context = TestHelper::getContext();
+		$this->context->setEditor( 'UTC001' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Confirm_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
+		$this->object = new Client_Html_Checkout_Confirm_Default( $this->context, $paths );
+		$this->object->setView( TestHelper::getView() );
 	}
 
 
@@ -36,24 +36,24 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetHeader()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->context->getSession()->set( 'aimeos/orderid', $this->getOrder( '2011-09-17 16:14:32' )->getId() );
 
-		$output = $this->_object->getHeader();
+		$output = $this->object->getHeader();
 		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->context->getSession()->set( 'aimeos/orderid', $this->getOrder( '2011-09-17 16:14:32' )->getId() );
 
-		$output = $this->_object->getBody();
+		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos checkout-confirm">', $output );
 	}
 
@@ -61,41 +61,41 @@ class Client_Html_Checkout_Confirm_DefaultTest extends PHPUnit_Framework_TestCas
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( 'invalid', 'invalid' );
+		$this->object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
 	public function testGetSubClientInvalidName()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		$this->_object->getSubClient( '$$$', '$$$' );
+		$this->object->getSubClient( '$$$', '$$$' );
 	}
 
 
 	public function testProcess()
 	{
-		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrder( '2011-09-17 16:14:32' )->getId() );
+		$this->context->getSession()->set( 'aimeos/orderid', $this->getOrder( '2011-09-17 16:14:32' )->getId() );
 
-		$view = $this->_object->getView();
+		$view = $this->object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'code' => 'paypalexpress' ) );
 		$view->addHelper( 'param', $helper );
 
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	public function testProcessNoCode()
 	{
-		$this->_object->process();
+		$this->object->process();
 	}
 
 
 	/**
 	 * @param string $date
 	 */
-	protected function _getOrder( $date )
+	protected function getOrder( $date )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $date ) );

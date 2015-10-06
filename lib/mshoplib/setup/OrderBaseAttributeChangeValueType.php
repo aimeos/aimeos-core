@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base_product_attr' => array(
 			'index' => array(
 				'idx_msordbaprat_si_oi_ty_cd_va' => 'DROP INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr"',
@@ -51,9 +51,9 @@ class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abst
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 	/**
@@ -61,32 +61,32 @@ class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abst
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Changing attribute value type in order domain', 0 );
-		$this->_status( '' );
+		$this->msg( 'Changing attribute value type in order domain', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmts )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true &&
-				$this->_schema->columnExists( $table, 'value' ) === true &&
-				$this->_schema->getColumnDetails( $table, 'value' )->getDataType() === 'varchar'
+			if( $this->schema->tableExists( $table ) === true &&
+				$this->schema->columnExists( $table, 'value' ) === true &&
+				$this->schema->getColumnDetails( $table, 'value' )->getDataType() === 'varchar'
 			) {
 				foreach( $stmts['index'] as $index => $sql )
 				{
-					if( $this->_schema->indexExists( $table, $index ) === true ) {
-						$this->_execute( $sql );
+					if( $this->schema->indexExists( $table, $index ) === true ) {
+						$this->execute( $sql );
 					}
 				}
 
-				$this->_execute( $stmts['column'] );
-				$this->_status( 'changed' );
+				$this->execute( $stmts['column'] );
+				$this->status( 'changed' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

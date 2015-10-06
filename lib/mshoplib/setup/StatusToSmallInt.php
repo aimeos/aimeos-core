@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_attribute' => 'ALTER TABLE "mshop_attribute" CHANGE "status" "status" SMALLINT NOT NULL DEFAULT 0',
 		'mshop_catalog' => 'ALTER TABLE "mshop_catalog" CHANGE "status" "status" SMALLINT NOT NULL DEFAULT 0',
 		'mshop_customer' => 'ALTER TABLE "mshop_customer" CHANGE "status" "status" SMALLINT NOT NULL DEFAULT 0',
@@ -54,9 +54,9 @@ class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -65,25 +65,25 @@ class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
 		$column = 'status';
-		$this->_msg( 'Changing status columns', 0 ); $this->_status( '' );
+		$this->msg( 'Changing status columns', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table=>$stmt )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, $column ) === true
-				&& $this->_schema->getColumnDetails( $table, $column )->getDataType() !== "smallint" )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, $column ) === true
+				&& $this->schema->getColumnDetails( $table, $column )->getDataType() !== "smallint" )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'migrated' );
+				$this->execute( $stmt );
+				$this->status( 'migrated' );
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

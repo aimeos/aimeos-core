@@ -8,8 +8,8 @@
  */
 class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_config;
+	private $object;
+	private $config;
 
 
 	/**
@@ -20,14 +20,14 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->_config = TestHelper::getConfig();
+		$this->config = TestHelper::getConfig();
 
-		if( ( $adapter = $this->_config->get( 'resource/db/adapter', false ) ) === false ) {
+		if( ( $adapter = $this->config->get( 'resource/db/adapter', false ) ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->_object = new MW_DB_Manager_PDO( $this->_config );
+		$this->object = new MW_DB_Manager_PDO( $this->config );
 
 		if( $adapter == 'mysql' ) {
 			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL ) ENGINE=InnoDB';
@@ -35,9 +35,9 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL )';
 		}
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 		$conn->create( $sql )->execute()->finish();
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 	}
 
 	/**
@@ -48,12 +48,12 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = new MW_DB_Manager_PDO( $this->_config );
+		$this->object = new MW_DB_Manager_PDO( $this->config );
 		$sql = 'DROP TABLE "mw_unit_test"';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 		$conn->create( $sql )->execute()->finish();
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 	}
 
 	public function testTransactionCommit()
@@ -61,7 +61,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$conn->begin();
 		$stmt = $conn->create( $sqlinsert );
@@ -78,7 +78,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 2, count( $rows ) );
 	}
@@ -88,7 +88,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert );
 
@@ -109,7 +109,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 2, count( $rows ) );
 	}
@@ -119,7 +119,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$conn->begin();
 		$stmt = $conn->create( $sqlinsert );
@@ -136,7 +136,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 0, count( $rows ) );
 	}
@@ -146,7 +146,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$conn->begin();
 		$conn->begin();
@@ -166,7 +166,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 1, count( $rows ) );
 	}
@@ -176,7 +176,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$conn->begin();
 		$conn->begin();
@@ -196,7 +196,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 0, count( $rows ) );
 	}
@@ -205,13 +205,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$result = $conn->create( $sqlinsert )->execute();
 		$rows = $result->affectedRows();
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 1, $rows );
 	}
@@ -220,14 +220,14 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (:value)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$value = "(\\')";
 		$sqlinsert = str_replace( ':value', '\'' . $conn->escape( $value ) . '\'', $sqlinsert );
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'(\\\\\'\')\')', strval( $stmt ) );
 	}
@@ -236,13 +236,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 'test' );
 		$stmt->execute()->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'test\')', strval( $stmt ) );
 	}
@@ -251,14 +251,14 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
 		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
 		$stmt2->bind( 2, 0.12, MW_DB_Statement_Abstract::PARAM_FLOAT);
 		$stmt2->execute()->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (NULL, 0.12)', strval( $stmt2 ) );
 	}
@@ -267,13 +267,13 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert3 =  'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert3 );
 		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
 		$stmt2->execute()->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', NULL)', strval( $stmt2 ) );
 	}
@@ -282,7 +282,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
 		$stmt2->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_NULL);
@@ -299,17 +299,17 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		try {
 			$stmt = $conn->create( $sqlinsert );
 			$stmt->execute();
 		} catch ( MW_DB_Exception $de ) {
-			$this->_object->release( $conn );
+			$this->object->release( $conn );
 			return;
 		}
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 		$this->fail('An expected exception has not been raised');
 	}
 
@@ -317,7 +317,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, 'test' );
@@ -325,7 +325,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$rows = $result->affectedRows();
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 1, $rows );
 	}
@@ -334,7 +334,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert2, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, null );
@@ -342,7 +342,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$rows = $result->affectedRows();
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( 1, $rows );
 	}
@@ -352,7 +352,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 		$sqlselect = 'SELECT * FROM "mw_unit_test"';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, 1 );
@@ -364,7 +364,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$row = $result->fetch();
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 		$this->assertEquals( array( 'id' => 1, 'name' => 'test' ), $row );
 	}
@@ -374,7 +374,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 		$sqlselect = 'SELECT * FROM "mw_unit_test"; SELECT * FROM "mw_unit_test"';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, 1 );
@@ -401,7 +401,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 
 		$result->finish();
 
-		$this->_object->release( $conn );
+		$this->object->release( $conn );
 
 
 		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
@@ -420,7 +420,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('MW_DB_Exception');
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		try
 		{
@@ -430,7 +430,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		}
 		catch ( MW_DB_Exception $e )
 		{
-			$this->_object->release( $conn );
+			$this->object->release( $conn );
 			throw $e;
 		}
 	}
@@ -439,7 +439,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sql = 'SELECT * FROM "mw_non_existing"';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$this->setExpectedException('MW_DB_Exception');
 
@@ -449,14 +449,14 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		}
 		catch ( MW_DB_Exception $e )
 		{
-			$this->_object->release( $conn );
+			$this->object->release( $conn );
 			throw $e;
 		}
 	}
 
 	public function testSqlError()
 	{
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$this->setExpectedException('MW_DB_Exception');
 
@@ -466,7 +466,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		}
 		catch ( MW_DB_Exception $e )
 		{
-			$this->_object->release( $conn );
+			$this->object->release( $conn );
 			throw $e;
 		}
 	}
@@ -475,7 +475,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$sql = 'SELECT * FROM "mw_unit_test"';
 
-		$conn = $this->_object->acquire();
+		$conn = $this->object->acquire();
 
 		$this->setExpectedException('MW_DB_Exception');
 
@@ -485,7 +485,7 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 		}
 		catch (MW_DB_Exception $e)
 		{
-			$this->_object->release( $conn );
+			$this->object->release( $conn );
 			throw $e;
 		}
 	}
@@ -494,12 +494,12 @@ class MW_DB_PDOTest extends PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException('MW_DB_Exception');
 		$conn = new MW_DB_Connection_TestForPDOException();
-		$this->_object->release($conn);
+		$this->object->release($conn);
 	}
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf('MW_DB_Manager_Interface', $this->_object);
+		$this->assertInstanceOf('MW_DB_Manager_Interface', $this->object);
 	}
 
 	public function testFactoryFail()

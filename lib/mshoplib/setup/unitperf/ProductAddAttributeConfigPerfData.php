@@ -36,28 +36,28 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process();
+		$this->process();
 	}
 
 
 	/**
 	 * Insert attribute items and product/attribute relations.
 	 */
-	protected function _process()
+	protected function process()
 	{
-		$this->_msg( 'Adding product config attribute performance data', 0 );
+		$this->msg( 'Adding product config attribute performance data', 0 );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
-		$attrList = $this->_getAttributeList();
+		$attrList = $this->getAttributeList();
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$productListManager = $productManager->getSubManager( 'list' );
@@ -83,7 +83,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$listItem->setDomain( 'attribute' );
 
 
-		$this->_txBegin();
+		$this->txBegin();
 
 		$start = 0;
 
@@ -111,16 +111,16 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		}
 		while( $count == $search->getSliceSize() );
 
-		$this->_txCommit();
+		$this->txCommit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
-	protected function _getAttributeList()
+	protected function getAttributeList()
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );

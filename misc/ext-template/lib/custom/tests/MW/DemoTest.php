@@ -7,7 +7,7 @@
 
 class MW_DemoTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -18,7 +18,7 @@ class MW_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->_object = new MW_View_Helper_Test_Default();
+		// $this->object = new MW_View_Helper_Test_Default();
 	}
 
 
@@ -30,7 +30,7 @@ class MW_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 

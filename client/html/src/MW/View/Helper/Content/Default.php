@@ -18,8 +18,8 @@ class MW_View_Helper_Content_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_baseurl;
-	private $_enc;
+	private $baseurl;
+	private $enc;
 
 
 	/**
@@ -36,8 +36,8 @@ class MW_View_Helper_Content_Default
 			$baseurl = $view->config( 'client/html/common/content/baseurl' );
 		}
 
-		$this->_baseurl = rtrim( $baseurl, '/' );
-		$this->_enc = $view->encoder();
+		$this->baseurl = rtrim( $baseurl, '/' );
+		$this->enc = $view->encoder();
 	}
 
 
@@ -50,9 +50,9 @@ class MW_View_Helper_Content_Default
 	public function transform( $url )
 	{
 		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data', 4 ) !== 0 ) {
-			$url = $this->_baseurl . ( $url && $url[0] === '/' ? $url : '/' . $url );
+			$url = $this->baseurl . ( $url && $url[0] === '/' ? $url : '/' . $url );
 		}
 
-		return $this->_enc->attr( $url );
+		return $this->enc->attr( $url );
 	}
 }

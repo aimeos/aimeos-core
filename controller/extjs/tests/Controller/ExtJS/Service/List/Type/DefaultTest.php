@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Service_List_Type_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Service_List_Type_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Service_List_Type_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Service_List_Type_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Service_List_Type_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Service_List_Type_DefaultTest extends PHPUnit_Framework_T
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -72,12 +72,12 @@ class Controller_ExtJS_Service_List_Type_DefaultTest extends PHPUnit_Framework_T
 		);
 
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'service.list.type.id'} );
-		$this->_object->deleteItems( $params );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $params );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'service.list.type.id'} );

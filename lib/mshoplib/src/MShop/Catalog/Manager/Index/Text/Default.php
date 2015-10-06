@@ -17,7 +17,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	extends MShop_Catalog_Manager_Index_DBBase
 	implements MShop_Catalog_Manager_Index_Text_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'catalog.index.text.id' => array(
 			'code'=>'catalog.index.text.id',
 			'internalcode'=>'mcatinte."textid"',
@@ -67,8 +67,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		)
 	);
 
-	private $_langIds;
-	private $_subManagers;
+	private $langIds;
+	private $subManagers;
 
 
 	/**
@@ -82,9 +82,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
-		$this->_replaceSiteMarker( $this->_searchConfig['sort:catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['sort:catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
 	}
 
 
@@ -97,7 +97,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
-		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
+		return $this->aggregateBase( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
 
 
@@ -110,7 +110,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	{
 		parent::cleanup( $siteids );
 
-		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/text/default/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/catalog/manager/index/text/default/item/delete' );
 	}
 
 
@@ -147,7 +147,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 * @see mshop/catalog/manager/index/text/default/item/search
 		 * @see mshop/catalog/manager/index/text/default/text/search
 		 */
-		$this->_doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/text/default/cleanup' );
+		$this->doCleanupIndex( $timestamp, 'mshop/catalog/manager/index/text/default/cleanup' );
 	}
 
 
@@ -182,7 +182,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 * @see mshop/catalog/manager/index/text/default/item/search
 		 * @see mshop/catalog/manager/index/text/default/text/search
 		 */
-		$this->_doDeleteItems( $ids, 'mshop/catalog/manager/index/text/default/item/delete' );
+		$this->doDeleteItems( $ids, 'mshop/catalog/manager/index/text/default/item/delete' );
 	}
 
 
@@ -215,7 +215,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 */
 		$path = 'classes/catalog/manager/index/text/submanagers';
 
-		$list += $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 
 		return $list;
 	}
@@ -339,7 +339,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 * @see mshop/catalog/manager/index/text/decorators/global
 		 */
 
-		return $this->_getSubManager( 'catalog', 'index/text/' . $manager, $name );
+		return $this->getSubManagerBase( 'catalog', 'index/text/' . $manager, $name );
 	}
 
 
@@ -372,7 +372,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 * @see mshop/catalog/manager/index/text/default/item/search
 		 * @see mshop/catalog/manager/index/text/default/text/search
 		 */
-		$this->_doOptimize( 'mshop/catalog/manager/index/text/default/optimize' );
+		$this->doOptimize( 'mshop/catalog/manager/index/text/default/optimize' );
 	}
 
 
@@ -388,16 +388,16 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$sites = $context->getLocale()->getSitePath();
 		$siteid = $context->getLocale()->getSiteId();
-		$langIds = $this->_getLanguageIds( $sites );
+		$langIds = $this->getLanguageIds( $sites );
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -441,7 +441,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				 * @see mshop/catalog/manager/index/text/default/item/search
 				 * @see mshop/catalog/manager/index/text/default/text/search
 				 */
-				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+				$stmt = $this->getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
 
 				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
 				{
@@ -452,7 +452,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 					foreach( $listTypes[$refId] as $listType )
 					{
-						$this->_saveText(
+						$this->saveText(
 							$stmt, $parentId, $siteid, $refId, $refItem->getLanguageId(), $listType,
 							$refItem->getType(), 'product', $refItem->getContent(), $date, $editor
 						);
@@ -468,7 +468,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				{
 					if( !isset( $nameList[$langId] ) )
 					{
-						$this->_saveText(
+						$this->saveText(
 							$stmt, $parentId, $siteid, null, $langId, 'default',
 							'name', 'product', $item->getLabel(), $date, $editor
 						);
@@ -485,9 +485,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 			throw $e;
 		}
 
-		$this->_saveAttributeTexts( $items );
+		$this->saveAttributeTexts( $items );
 
-		foreach( $this->_getSubManagers() as $submanager ) {
+		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
 	}
@@ -605,7 +605,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		 */
 		$cfgPathCount = 'mshop/catalog/manager/index/text/default/item/count';
 
-		return $this->_doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 
@@ -618,10 +618,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function searchTexts( MW_Common_Criteria_Interface $search )
 	{
 		$list = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -676,7 +676,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/text/search';
 
 			$total = null;
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[$row['prodid']] = $row['value'];
@@ -699,7 +699,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 *
 	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
-	protected function _saveAttributeTexts( array $items )
+	protected function saveAttributeTexts( array $items )
 	{
 		$prodIds = array();
 
@@ -713,7 +713,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		if( empty( $prodIds ) ) { return; }
 
 
-		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+		$attrManager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
 		$search = $attrManager->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),
@@ -725,7 +725,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$attributeItems = $attrManager->searchItems( $search, array( 'text' ) );
 
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$locale = $context->getLocale();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
@@ -733,7 +733,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -769,7 +769,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			 * @see mshop/catalog/manager/index/text/default/item/search
 			 * @see mshop/catalog/manager/index/text/default/text/search
 			 */
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+			$stmt = $this->getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
 
 			foreach( $attributeItems as $id => $item )
 			{
@@ -789,7 +789,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 					{
 						foreach( $prodIds[$id] as $productId )
 						{
-							$this->_saveText(
+							$this->saveText(
 								$stmt, $productId, $siteid, $refId, $refItem->getLanguageId(), $listType,
 								$refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor
 							);
@@ -801,7 +801,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 				if( empty( $names ) )
 				{
-					$this->_saveText(
+					$this->saveText(
 						$stmt, $prodIds[$id], $siteid, null, $locale->getLanguageId(), 'default',
 						'name', 'attribute', $item->getLabel(), $date, $editor
 					);
@@ -833,7 +833,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
 	 * @param string $editor Name of the editor who stored the product
 	 */
-	protected function _saveText( MW_DB_Statement_Interface $stmt, $id, $siteid, $refid, $lang, $listtype,
+	protected function saveText( MW_DB_Statement_Interface $stmt, $id, $siteid, $refid, $lang, $listtype,
 		$reftype, $domain, $content, $date, $editor )
 	{
 		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
@@ -859,11 +859,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 *
 	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
-	protected function _getSubManagers()
+	protected function getSubManagers()
 	{
-		if( $this->_subManagers === null )
+		if( $this->subManagers === null )
 		{
-			$this->_subManagers = array();
+			$this->subManagers = array();
 
 			/** mshop/catalog/manager/index/text/submanagers
 			 * A list of sub-manager names used for indexing associated items to texts
@@ -885,14 +885,14 @@ class MShop_Catalog_Manager_Index_Text_Default
 			 */
 			$path = 'classes/catalog/manager/index/text/submanagers';
 
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$this->_subManagers[$domain] = $this->getSubManager( $domain );
+			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+				$this->subManagers[$domain] = $this->getSubManager( $domain );
 			}
 
-			return $this->_subManagers;
+			return $this->subManagers;
 		}
 
-		return $this->_subManagers;
+		return $this->subManagers;
 	}
 
 
@@ -902,12 +902,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * @param array $siteIds List of site IDs
 	 * @return array List of language IDs
 	 */
-	protected function _getLanguageIds( array $siteIds )
+	protected function getLanguageIds( array $siteIds )
 	{
-		if( !isset( $this->_langIds ) )
+		if( !isset( $this->langIds ) )
 		{
 			$list = array();
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'locale' );
+			$manager = MShop_Factory::createManager( $this->getContext(), 'locale' );
 
 			$search = $manager->createSearch( true );
 			$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
@@ -916,9 +916,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 				$list[$item->getLanguageId()] = null;
 			}
 
-			$this->_langIds = array_keys( $list );
+			$this->langIds = array_keys( $list );
 		}
 
-		return $this->_langIds;
+		return $this->langIds;
 	}
 }

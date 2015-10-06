@@ -17,8 +17,8 @@
 abstract class Client_Html_Catalog_Abstract
 	extends Client_Html_Common_Client_Factory_Abstract
 {
-	private $_productList;
-	private $_productTotal = 0;
+	private $productList;
+	private $productTotal = 0;
 
 
 	/**
@@ -27,7 +27,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param array $params Associative list of parameters that should be used for filtering
 	 * @param MW_Common_Criteria_Interface $filter Criteria object for searching
 	 */
-	protected function _addAttributeFilterByParam( array $params, MW_Common_Criteria_Interface $filter )
+	protected function addAttributeFilterByParam( array $params, MW_Common_Criteria_Interface $filter )
 	{
 		$attrids = ( isset( $params['f_attrid'] ) ? (array) $params['f_attrid'] : array() );
 
@@ -49,9 +49,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @param MW_Common_Criteria_Interface $filter Criteria object for searching
 	 */
-	protected function _addAttributeFilter( MW_View_Interface $view, MW_Common_Criteria_Interface $filter )
+	protected function addAttributeFilter( MW_View_Interface $view, MW_Common_Criteria_Interface $filter )
 	{
-		$this->_addAttributeFilterByParam( $view->param(), $filter );
+		$this->addAttributeFilterByParam( $view->param(), $filter );
 	}
 
 
@@ -61,13 +61,13 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return array List of products implementing MShop_Product_Item_Interface
 	 */
-	protected function _getProductList( MW_View_Interface $view )
+	protected function getProductList( MW_View_Interface $view )
 	{
-		if( $this->_productList === null ) {
-			$this->_searchProducts( $view );
+		if( $this->productList === null ) {
+			$this->searchProducts( $view );
 		}
 
-		return $this->_productList;
+		return $this->productList;
 	}
 
 
@@ -80,10 +80,10 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
 	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
-	protected function _getProductListFilterByParam( array $params, $catfilter = true, $textfilter = true, $attrfilter = true )
+	protected function getProductListFilterByParam( array $params, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
 		$sortdir = '+';
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$text = ( isset( $params['f_search'] ) ? (string) $params['f_search'] : '' );
@@ -111,14 +111,14 @@ abstract class Client_Html_Catalog_Abstract
 			$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
 		}
 
-		$page = $this->_getProductListPageByParam( $params );
-		$size = $this->_getProductListSizeByParam( $params );
-		$sort = $this->_getProductListSortByParam( $params, $sortdir );
+		$page = $this->getProductListPageByParam( $params );
+		$size = $this->getProductListSizeByParam( $params );
+		$sort = $this->getProductListSortByParam( $params, $sortdir );
 
-		$filter = $this->_createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter );
+		$filter = $this->createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter );
 
 		if( $attrfilter === true ) {
-			$this->_addAttributeFilterByParam( $params, $filter );
+			$this->addAttributeFilterByParam( $params, $filter );
 		}
 
 
@@ -139,9 +139,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
-	private function _createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
+	private function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
 	{
-		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
+		$controller = Controller_Frontend_Factory::createController( $this->getContext(), 'catalog' );
 
 		if( $text !== '' && $textfilter === true )
 		{
@@ -173,9 +173,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
 	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
-	protected function _getProductListFilter( MW_View_Interface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
+	protected function getProductListFilter( MW_View_Interface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
-		return $this->_getProductListFilterByParam( $view->param(), $catfilter, $textfilter, $attrfilter );
+		return $this->getProductListFilterByParam( $view->param(), $catfilter, $textfilter, $attrfilter );
 	}
 
 
@@ -185,13 +185,13 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return integer Total number of products
 	 */
-	protected function _getProductListTotal( MW_View_Interface $view )
+	protected function getProductListTotal( MW_View_Interface $view )
 	{
-		if( $this->_productList === null ) {
-			$this->_searchProducts( $view );
+		if( $this->productList === null ) {
+			$this->searchProducts( $view );
 		}
 
-		return $this->_productTotal;
+		return $this->productTotal;
 	}
 
 
@@ -201,7 +201,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param array $params Associative list of parameters that should be used for filtering
 	 * @return integer Page number starting from 1
 	 */
-	protected function _getProductListPageByParam( array $params )
+	protected function getProductListPageByParam( array $params )
 	{
 		return ( isset( $params['l_page'] ) && $params['l_page'] > 0 ? (int) $params['l_page'] : 1 );
 	}
@@ -213,9 +213,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page number starting from 1
 	 */
-	protected function _getProductListPage( MW_View_Interface $view )
+	protected function getProductListPage( MW_View_Interface $view )
 	{
-		return $this->_getProductListPageByParam( $view->param() );
+		return $this->getProductListPageByParam( $view->param() );
 	}
 
 
@@ -225,7 +225,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param array $params Associative list of parameters that should be used for filtering
 	 * @return integer Page size
 	 */
-	protected function _getProductListSizeByParam( array $params )
+	protected function getProductListSizeByParam( array $params )
 	{
 		/** client/html/catalog/list/size
 		 * The number of products shown in a list page
@@ -247,7 +247,7 @@ abstract class Client_Html_Catalog_Abstract
 		 * @see client/html/catalog/list/catid-default
 		 * @see client/html/catalog/list/domains
 		 */
-		$defaultSize = $this->_getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
+		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
 
 		$size = ( isset( $params['l_size'] ) ? (int) $params['l_size'] : $defaultSize );
 		return ( $size < 1 || $size > 100 ? $defaultSize : $size );
@@ -260,9 +260,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 * @return integer Page size
 	 */
-	protected function _getProductListSize( MW_View_Interface $view )
+	protected function getProductListSize( MW_View_Interface $view )
 	{
-		return $this->_getProductListSizeByParam( $view->param() );
+		return $this->getProductListSizeByParam( $view->param() );
 	}
 
 
@@ -273,7 +273,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param string &$sortdir Value-result parameter where the sort direction will be stored
 	 * @return string Sortation string (relevance, name, price)
 	 */
-	protected function _getProductListSortByParam( array $params, &$sortdir )
+	protected function getProductListSortByParam( array $params, &$sortdir )
 	{
 		$sortation = ( isset( $params['f_sort'] ) ? (string) $params['f_sort'] : 'relevance' );
 
@@ -291,9 +291,9 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param string &$sortdir Value-result parameter where the sort direction will be stored
 	 * @return string Sortation string (relevance, name, price)
 	 */
-	protected function _getProductListSort( MW_View_Interface $view, &$sortdir )
+	protected function getProductListSort( MW_View_Interface $view, &$sortdir )
 	{
-		return $this->_getProductListSortByParam( $view->param(), $sortdir );
+		return $this->getProductListSortByParam( $view->param(), $sortdir );
 	}
 
 
@@ -305,9 +305,9 @@ abstract class Client_Html_Catalog_Abstract
 	 *
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
 	 */
-	protected function _searchProducts( MW_View_Interface $view )
+	protected function searchProducts( MW_View_Interface $view )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		/** client/html/catalog/domains
@@ -360,9 +360,9 @@ abstract class Client_Html_Catalog_Abstract
 		 */
 		$domains = $config->get( 'client/html/catalog/list/domains', $domains );
 
-		$productFilter = $this->_getProductListFilter( $view );
+		$productFilter = $this->getProductListFilter( $view );
 		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
-		$this->_productList = $controller->getIndexItems( $productFilter, $domains, $this->_productTotal );
+		$this->productList = $controller->getIndexItems( $productFilter, $domains, $this->productTotal );
 	}
 }

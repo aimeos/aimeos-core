@@ -14,9 +14,9 @@ class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateController()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$controller = Controller_Jobs_Factory::createController( $context, $arcavias, 'admin/job' );
+		$controller = Controller_Jobs_Factory::createController( $context, $aimeos, 'admin/job' );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $controller );
 	}
 
@@ -24,39 +24,39 @@ class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
 	public function testCreateControllerEmpty()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $arcavias, "\t\n" );
+		Controller_Jobs_Factory::createController( $context, $aimeos, "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $arcavias, '%^' );
+		Controller_Jobs_Factory::createController( $context, $aimeos, '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $arcavias, 'notexist' );
+		Controller_Jobs_Factory::createController( $context, $aimeos, 'notexist' );
 	}
 
 
 	public function testGetControllers()
 	{
 		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
+		$aimeos = TestHelper::getAimeos();
 
-		$list = Controller_Jobs_Factory::getControllers( $context, $arcavias, TestHelper::getControllerPaths() );
+		$list = Controller_Jobs_Factory::getControllers( $context, $aimeos, TestHelper::getControllerPaths() );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 

@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_AddressAddFlag extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_customer_address' => 'ALTER TABLE "mshop_customer_address" ADD "flag" INTEGER NOT NULL AFTER "website"',
 		'mshop_supplier_address' => 'ALTER TABLE "mshop_supplier_address" ADD "flag" INTEGER NOT NULL AFTER "website"',
 		'mshop_order_base_address' => 'ALTER TABLE "mshop_order_base_address" ADD "flag" INTEGER NOT NULL AFTER "website"',
@@ -45,9 +45,9 @@ class MW_Setup_Task_AddressAddFlag extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -56,21 +56,21 @@ class MW_Setup_Task_AddressAddFlag extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Adding "flag" column to address tables', 0 ); $this->_status( '' );
+		$this->msg( 'Adding "flag" column to address tables', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmt )
 		{
-			$this->_msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
+			$this->msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true
-				&& $this->_schema->columnExists( $table, 'flag' ) === false )
+			if( $this->schema->tableExists( $table ) === true
+				&& $this->schema->columnExists( $table, 'flag' ) === false )
 			{
-				$this->_execute( $stmt );
-				$this->_status( 'added' );
+				$this->execute( $stmt );
+				$this->status( 'added' );
 			} else {
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

@@ -16,9 +16,9 @@ class MW_Setup_Task_TwoTask extends MW_Setup_Task_Abstract
 	}
 
 
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Executing TwoTask' );
-		$this->_status( 'OK' );
+		$this->msg( 'Executing TwoTask' );
+		$this->status( 'OK' );
 	}
 }

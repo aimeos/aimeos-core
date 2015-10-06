@@ -11,8 +11,8 @@
  */
 class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
-	private $_order;
+	private $object;
+	private $order;
 
 
 	/**
@@ -31,9 +31,9 @@ class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 		$provider = new MShop_Plugin_Provider_Order_Example( $context, $item );
 
 		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$this->_order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
+		$this->order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
 
-		$this->_object = new MShop_Plugin_Provider_Decorator_Log( $context, $item, $provider );
+		$this->object = new MShop_Plugin_Provider_Decorator_Log( $context, $item, $provider );
 	}
 
 
@@ -45,37 +45,37 @@ class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
-		unset( $this->_order );
+		unset( $this->object );
+		unset( $this->order );
 	}
 
 
 	public function testRegister()
 	{
-		$this->_object->register( $this->_order );
+		$this->object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'test', 'value' ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test', 'value' ) );
 	}
 
 
 	public function testUpdateNull()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'test' ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test' ) );
 	}
 
 
 	public function testUpdateArray()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'test', array() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test', array() ) );
 	}
 
 
 	public function testUpdateObject()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'test', new stdClass() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test', new stdClass() ) );
 	}
 }

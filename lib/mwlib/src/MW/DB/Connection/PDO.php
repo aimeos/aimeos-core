@@ -16,8 +16,8 @@
  */
 class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Connection_Interface
 {
-	private $_connection = null;
-	private $_txnumber = 0;
+	private $connection = null;
+	private $txnumber = 0;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function __construct( PDO $connection )
 	{
-		$this->_connection = $connection;
+		$this->connection = $connection;
 	}
 
 
@@ -45,9 +45,9 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 			switch ($type)
 			{
 				case MW_DB_Connection_Abstract::TYPE_SIMPLE:
-					return new MW_DB_Statement_PDO_Simple($this->_connection, $sql);
+					return new MW_DB_Statement_PDO_Simple($this->connection, $sql);
 				case MW_DB_Connection_Abstract::TYPE_PREP:
-					return new MW_DB_Statement_PDO_Prepared($this->_connection->prepare($sql));
+					return new MW_DB_Statement_PDO_Prepared($this->connection->prepare($sql));
 				default:
 					throw new MW_DB_Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
@@ -64,9 +64,9 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function begin()
 	{
-		if( $this->_txnumber++ === 0 )
+		if( $this->txnumber++ === 0 )
 		{
-			if( $this->_connection->beginTransaction() === false ) {
+			if( $this->connection->beginTransaction() === false ) {
 				throw new MW_DB_Exception( 'Unable to start new transaction' );
 			}
 		}
@@ -78,9 +78,9 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function commit()
 	{
-		if( --$this->_txnumber === 0 )
+		if( --$this->txnumber === 0 )
 		{
-			if( $this->_connection->commit() === false ) {
+			if( $this->connection->commit() === false ) {
 				throw new MW_DB_Exception( 'Failed to commit transaction' );
 			}
 		}
@@ -94,9 +94,9 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	{
 		try
 		{
-			if( --$this->_txnumber === 0 )
+			if( --$this->txnumber === 0 )
 			{
-				if( $this->_connection->rollBack() === false ) {
+				if( $this->connection->rollBack() === false ) {
 					throw new MW_DB_Exception( 'Failed to roll back transaction' );
 				}
 			}

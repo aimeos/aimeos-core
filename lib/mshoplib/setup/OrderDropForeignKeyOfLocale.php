@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_order_base' => array(
 			'fk_msordba_langid' => 'ALTER TABLE "mshop_order_base" DROP FOREIGN KEY "fk_msordba_langid"',
 			'fk_msordba_curid' => 'ALTER TABLE "mshop_order_base" DROP FOREIGN KEY "fk_msordba_curid"',
@@ -66,9 +66,9 @@ class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -77,37 +77,37 @@ class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Delete foreign keys to locale domain in mshop order tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Delete foreign keys to locale domain in mshop order tables', 0 );
+		$this->status( '' );
 
 		foreach( $stmts as $table => $stmtList )
 		{
-			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $this->_schema->tableExists( $table ) === true )
+			if( $this->schema->tableExists( $table ) === true )
 			{
-				$this->_status( '' );
+				$this->status( '' );
 
 				foreach( $stmtList as $constraint => $stmt )
 				{
-					$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 2 );
+					$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 2 );
 
-					if( $this->_schema->constraintExists( $table, $constraint ) === true )
+					if( $this->schema->constraintExists( $table, $constraint ) === true )
 					{
-						$this->_execute( $stmt );
-						$this->_status( 'deleted' );
+						$this->execute( $stmt );
+						$this->status( 'deleted' );
 					}
 					else
 					{
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 			}
 			else
 			{
-				$this->_status( 'OK' );
+				$this->status( 'OK' );
 			}
 		}
 	}

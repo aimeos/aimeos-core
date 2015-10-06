@@ -16,7 +16,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
      */
     defaultImage : 'mimeicons/unknown.png',
 
-    cls : 'arcavias-admin-media-item-preview',
+    cls : 'aimeos-admin-media-item-preview',
 
     defaultAutoCreate : {
         tag : 'input',

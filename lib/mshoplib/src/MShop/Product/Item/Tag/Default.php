@@ -18,7 +18,7 @@ class MShop_Product_Item_Tag_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Product_Item_Tag_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the tag item object with the given values
@@ -27,7 +27,7 @@ class MShop_Product_Item_Tag_Default
 	{
 		parent::__construct( 'product.tag.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -38,7 +38,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : null );
+		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
 	}
 
 
@@ -51,8 +51,8 @@ class MShop_Product_Item_Tag_Default
 	{
 		if( $id === $this->getLanguageId() ) { return; }
 
-		$this->_checkLanguageId( $id );
-		$this->_values['langid'] = $id;
+		$this->checkLanguageId( $id );
+		$this->values['langid'] = $id;
 		$this->setModified();
 	}
 
@@ -64,7 +64,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->_values['typeid'] ) ? (int) $this->_values['typeid'] : null );
+		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
 	}
 
 
@@ -78,7 +78,7 @@ class MShop_Product_Item_Tag_Default
 		$id = (int) $id;
 		if( $id === $this->getTypeId() ) { return; }
 
-		$this->_values['typeid'] = (int) $id;
+		$this->values['typeid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -90,7 +90,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
+		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
 
 
@@ -103,7 +103,7 @@ class MShop_Product_Item_Tag_Default
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->_values['label'] = (string) $label;
+		$this->values['label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -115,7 +115,7 @@ class MShop_Product_Item_Tag_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : null );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 

@@ -8,7 +8,7 @@
 
 class Controller_ExtJS_Order_Base_Coupon_DefaultTest extends PHPUnit_Framework_TestCase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class Controller_ExtJS_Order_Base_Coupon_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Order_Base_Coupon_Default( TestHelper::getContext() );
+		$this->object = new Controller_ExtJS_Order_Base_Coupon_Default( TestHelper::getContext() );
 	}
 
 
@@ -31,7 +31,7 @@ class Controller_ExtJS_Order_Base_Coupon_DefaultTest extends PHPUnit_Framework_T
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Order_Base_Coupon_DefaultTest extends PHPUnit_Framework_T
 			'limit' => 1,
 		);
 
-		$result = $this->_object->searchItems( $params );
+		$result = $this->object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 2, $result['total'] );
@@ -84,12 +84,12 @@ class Controller_ExtJS_Order_Base_Coupon_DefaultTest extends PHPUnit_Framework_T
 				1 => array( '==' => (object) array( 'order.base.coupon.code' => 'EFGH22' ) ) )
 		);
 
-		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$saved = $this->object->saveItems( $saveParams );
+		$searched = $this->object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'order.base.coupon.id'} );
-		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->object->deleteItems( $deleteParams );
+		$result = $this->object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'order.base.coupon.id'} );

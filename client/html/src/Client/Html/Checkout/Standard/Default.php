@@ -51,7 +51,7 @@ class Client_Html_Checkout_Standard_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
+	private $subPartPath = 'client/html/checkout/standard/default/subparts';
 
 	/** client/html/checkout/standard/address/name
 	 * Name of the address part used by the checkout standard client implementation
@@ -118,8 +118,8 @@ class Client_Html_Checkout_Standard_Default
 	 * @since 2015.07
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order', 'process' );
-	private $_cache;
+	private $subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order', 'process' );
+	private $cache;
 
 
 	/**
@@ -132,32 +132,32 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view = $this->_setViewParams( $view, $tags, $expire );
+			$view = $this->setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->standardBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -191,7 +191,7 @@ class Client_Html_Checkout_Standard_Default
 		$tplconf = 'client/html/checkout/standard/default/template-body';
 		$default = 'checkout/standard/body-default.html';
 
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -207,10 +207,10 @@ class Client_Html_Checkout_Standard_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+			$view = $this->setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
+			foreach( $this->getSubClients() as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->standardHeader = $html;
@@ -239,11 +239,11 @@ class Client_Html_Checkout_Standard_Default
 			$tplconf = 'client/html/checkout/standard/default/template-header';
 			$default = 'checkout/standard/header-default.html';
 
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
 
@@ -331,7 +331,7 @@ class Client_Html_Checkout_Standard_Default
 		 * @see client/html/checkout/standard/decorators/global
 		 */
 
-		return $this->_createSubClient( 'checkout/standard/' . $type, $name );
+		return $this->createSubClient( 'checkout/standard/' . $type, $name );
 	}
 
 
@@ -343,7 +343,7 @@ class Client_Html_Checkout_Standard_Default
 	public function process()
 	{
 		$view = $this->getView();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		try
 		{
@@ -351,25 +351,25 @@ class Client_Html_Checkout_Standard_Default
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Plugin_Provider_Exception $e )
 		{
-			$errors = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
+			$errors = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$errors = array_merge( $errors, $this->translatePluginErrorCodes( $e->getErrorCodes() ) );
 
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -387,9 +387,9 @@ class Client_Html_Checkout_Standard_Default
 	 *
 	 * @return array List of HTML client names
 	 */
-	protected function _getSubClientNames()
+	protected function getSubClientNames()
 	{
-		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
 	}
 
 
@@ -401,11 +401,11 @@ class Client_Html_Checkout_Standard_Default
 	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->cache ) )
 		{
-			$context = $this->_getContext();
+			$context = $this->getContext();
 
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$view->standardBasket = $basketCntl->get();
@@ -546,7 +546,7 @@ class Client_Html_Checkout_Standard_Default
 			$onepage = $view->config( 'client/html/checkout/standard/onepage', array() );
 			$onestep = array_shift( $onepage ); // keep the first one page step
 
-			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+			$steps = (array) $context->getConfig()->get( $this->subPartPath, $this->subPartNames );
 			$steps = array_diff( $steps, $onepage ); // remove all remaining steps in $onepage
 
 			// use first step if default step isn't available
@@ -590,9 +590,9 @@ class Client_Html_Checkout_Standard_Default
 			// don't overwrite $view->standardUrlNext so order step URL is used
 
 
-			$this->_cache = $view;
+			$this->cache = $view;
 		}
 
-		return $this->_cache;
+		return $this->cache;
 	}
 }

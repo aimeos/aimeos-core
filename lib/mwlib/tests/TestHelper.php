@@ -8,8 +8,8 @@
 
 class TestHelper
 {
-	private static $_config;
-	private static $_dbm;
+	private static $config;
+	private static $dbm;
 
 
 	public static function autoload( $classname )
@@ -31,25 +31,25 @@ class TestHelper
 
 	public static function getConfig()
 	{
-		if( !isset( self::$_config ) ) {
-			self::$_config = self::_createConfig();
+		if( !isset( self::$config ) ) {
+			self::$config = self::createConfig();
 		}
 
-		return self::$_config;
+		return self::$config;
 	}
 
 
 	public static function getDBManager()
 	{
-		if( !isset( self::$_dbm ) ) {
-			self::$_dbm = self::_createDBManager();
+		if( !isset( self::$dbm ) ) {
+			self::$dbm = self::createDBManager();
 		}
 
-		return self::$_dbm;
+		return self::$dbm;
 	}
 
 
-	private static function _createConfig()
+	private static function createConfig()
 	{
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
@@ -61,7 +61,7 @@ class TestHelper
 	}
 
 
-	private static function _createDBManager()
+	private static function createDBManager()
 	{
 		return MW_DB_Factory::createManager( self::getConfig(), 'PDO' );
 	}

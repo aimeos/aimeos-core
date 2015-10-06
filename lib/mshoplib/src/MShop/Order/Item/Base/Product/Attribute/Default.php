@@ -18,7 +18,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	extends MShop_Common_Item_Abstract
 	implements MShop_Order_Item_Base_Product_Attribute_Interface
 {
-	private $_values;
+	private $values;
 
 	/**
 	 * Initializes the order product attribute instance.
@@ -30,7 +30,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		parent::__construct( 'order.base.product.attribute.', $values );
 
-		$this->_values = $values;
+		$this->values = $values;
 	}
 
 
@@ -41,7 +41,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getAttributeId()
 	{
-		return ( isset( $this->_values['attrid'] ) ? (string) $this->_values['attrid'] : '' );
+		return ( isset( $this->values['attrid'] ) ? (string) $this->values['attrid'] : '' );
 	}
 
 
@@ -54,7 +54,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		if( $id == $this->getAttributeId() ) { return; }
 
-		$this->_values['attrid'] = (string) $id;
+		$this->values['attrid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -66,7 +66,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->_values['ordprodid'] ) ? (string) $this->_values['ordprodid'] : null );
+		return ( isset( $this->values['ordprodid'] ) ? (string) $this->values['ordprodid'] : null );
 	}
 
 
@@ -79,7 +79,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		if( $id == $this->getProductId() ) { return; }
 
-		$this->_values['ordprodid'] = (string) $id;
+		$this->values['ordprodid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -91,7 +91,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getType()
 	{
-		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : '' );
+		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
 	}
 
 
@@ -104,7 +104,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->_values['type'] = (string) $type;
+		$this->values['type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -116,7 +116,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
+		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
 
 
@@ -127,11 +127,11 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		$this->checkCode( $code );
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->_values['code'] = (string) $code;
+		$this->values['code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -143,7 +143,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->_values['value'] ) ? (string) $this->_values['value'] : '' );
+		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
 	}
 
 
@@ -156,7 +156,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		if( $value == $this->getValue() ) { return; }
 
-		$this->_values['value'] = $value;
+		$this->values['value'] = $value;
 		$this->setModified();
 	}
 
@@ -168,7 +168,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function getName()
 	{
-		return ( isset( $this->_values['name'] ) ? (string) $this->_values['name'] : '' );
+		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
 	}
 
 
@@ -181,7 +181,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		if( $name == $this->getName() ) { return; }
 
-		$this->_values['name'] = (string) $name;
+		$this->values['name'] = (string) $name;
 		$this->setModified();
 	}
 

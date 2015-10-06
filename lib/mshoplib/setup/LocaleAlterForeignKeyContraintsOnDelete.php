@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'mshop_locale_currency' => array(
 			'fk_msloccu_siteid' => array(
 				'column' =>	'ALTER TABLE "mshop_locale_currency" CHANGE COLUMN "siteid" "siteid" INTEGER NULL',
@@ -60,9 +60,9 @@ class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Tas
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -71,39 +71,39 @@ class MW_Setup_Task_LocaleAlterForeignKeyContraintsOnDelete extends MW_Setup_Tas
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Change locale siteid foreign key constraints', 0 ); $this->_status( '' );
+		$this->msg( 'Change locale siteid foreign key constraints', 0 ); $this->status( '' );
 
 		foreach( $stmts as $table => $stmtLists )
 		{
 			foreach( $stmtLists as $constraint=>$stmtList )
 			{
-				$this->_msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
-				if( $this->_schema->tableExists( $table ) )
+				$this->msg( sprintf( 'Checking constraint "%1$s": ', $constraint ), 1 );
+				if( $this->schema->tableExists( $table ) )
 				{
-					if( $this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() === false )
+					if( $this->schema->getColumnDetails( $table, 'siteid' )->isNullable() === false )
 					{
-						$this->_execute( $stmtList['column'] );
+						$this->execute( $stmtList['column'] );
 
-						if( $this->_schema->constraintExists( $table, $constraint ) === true ) {
-							$this->_execute( $stmtList['drop'] );
+						if( $this->schema->constraintExists( $table, $constraint ) === true ) {
+							$this->execute( $stmtList['drop'] );
 						}
 					}
 
-					if( $this->_schema->constraintExists( $table, $constraint ) !== true )
+					if( $this->schema->constraintExists( $table, $constraint ) !== true )
 					{
-						$this->_execute( $stmtList['add'] );
-						$this->_status( 'changed' );
+						$this->execute( $stmtList['add'] );
+						$this->status( 'changed' );
 					}
 					else
 					{
-						$this->_status( 'OK' );
+						$this->status( 'OK' );
 					}
 				}
 				else
 				{
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}
