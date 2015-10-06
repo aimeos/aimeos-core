@@ -40,16 +40,17 @@
 		"phpdocumentor/phpdocumentor": "Required for generating the API documentation"
 	},
 	"autoload": {
-		"psr-0": {
-			"MShop": "lib/mshoplib/src",
-			"MAdmin": "lib/mshoplib/src",
-			"MW": "lib/mwlib/src",
-			"Client_Html": "client/html/src",
-			"Controller_Common": "controller/common/src",
-			"Controller_Frontend": "controller/frontend/src",
-			"Controller_ExtJS": "controller/extjs/src",
-			"Controller_Jobs": "controller/jobs/src",
-			"": ["lib/mwlib/lib", "."]
+		"psr-4": {
+			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
+			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
+			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
+			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
+			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
+			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
+			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
+			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
+			"Aimeos\\": ".",
+			"\\": "lib/mwlib/lib/"
 		},
 		"classmap": [
 			"lib/mshoplib/src",
